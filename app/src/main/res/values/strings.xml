@@ -321,6 +321,8 @@
     <string name="home_adventurer">Adventurer</string>
     <!-- Translator note: %1$d = queue size (always 3 max) -->
     <string name="home_up_next">Up Next (%1$d/3)</string>
+    <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
+    <string name="home_queue_ends_in">Queue ends in %1$s</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Collect %1$d Session\'s Rewards</item>
@@ -331,6 +333,8 @@
     <string name="combat_level_label">Combat Lvl</string>
     <string name="combat_log_label">Combat Log</string>
     <string name="combat_solo_bosses">Solo Bosses</string>
+    <!-- Translator note: %1$d = number of completed dungeon runs -->
+    <string name="combat_dungeon_runs">%1$d runs</string>
     <string name="combat_atk">ATK</string>
     <string name="combat_str">STR</string>
     <string name="combat_def">DEF</string>
@@ -456,6 +460,8 @@
     <string name="crafting_increase">Increase</string>
     <!-- Translator note: %1$d = needed, %2$d = have -->
     <string name="crafting_needed_have">%1$d (have %2$d)</string>
+    <!-- Translator note: %1$d = quantity in inventory -->
+    <string name="crafting_in_inventory">In inventory: ×%1$d</string>
 
     <!-- ===== FarmingScreen ===== -->
     <!-- Translator note: %1$s = crop name -->
