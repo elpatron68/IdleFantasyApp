@@ -174,9 +174,16 @@ Builds:
     gradle:
       - yes
 
+  - versionName: '1.2.7'
+    versionCode: 24
+    commit: 2af4305408de2c7eb3e29f0ce63f05428ccf5cb5
+    subdir: app
+    gradle:
+      - yes
+
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.2.6
-CurrentVersionCode: 23
+CurrentVersion: 1.2.7
+CurrentVersionCode: 24
