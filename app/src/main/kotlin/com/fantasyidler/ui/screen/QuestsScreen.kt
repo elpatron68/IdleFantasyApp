@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
+import com.fantasyidler.repository.DailyQuestWithProgress
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.QuestWithProgress
 import com.fantasyidler.ui.viewmodel.QuestsViewModel
@@ -50,7 +51,7 @@ import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 
-private val TAB_GROUPS = listOf("Gathering", "Crafting", "Combat", "Special")
+private val TAB_GROUPS = listOf("Gathering", "Crafting", "Combat", "Special", "Daily")
 
 @Composable
 private fun tabGroupLabel(group: String): String = when (group) {
@@ -58,6 +59,7 @@ private fun tabGroupLabel(group: String): String = when (group) {
     "Crafting"  -> stringResource(R.string.label_crafting_skills)
     "Combat"    -> stringResource(R.string.label_combat)
     "Special"   -> stringResource(R.string.label_special)
+    "Daily"     -> stringResource(R.string.label_daily)
     else        -> group
 }
 
@@ -104,14 +106,17 @@ fun QuestsScreen(
             // ------------------------------------------------------------------
             TabRow(selectedTabIndex = selectedTab) {
                 TAB_GROUPS.forEachIndexed { index, group ->
-                    val groupQuests = state.questsByGroup[group] ?: emptyList()
-                    val claimableInGroup = groupQuests.count { it.isClaimable }
+                    val claimableInGroup = if (group == "Daily") {
+                        state.dailyQuests.count { it.progress >= it.template.amount && !it.claimed }
+                    } else {
+                        (state.questsByGroup[group] ?: emptyList()).count { it.isClaimable }
+                    }
                     Tab(
                         selected = selectedTab == index,
                         onClick  = { selectedTab = index },
                         text = {
                             val baseLabel = tabGroupLabel(group)
-                        val label = if (claimableInGroup > 0) "$baseLabel ($claimableInGroup)" else baseLabel
+                            val label = if (claimableInGroup > 0) "$baseLabel ($claimableInGroup)" else baseLabel
                             Text(
                                 text  = label,
                                 style = MaterialTheme.typography.labelMedium,
@@ -122,15 +127,64 @@ fun QuestsScreen(
             }
 
             // ------------------------------------------------------------------
-            // Quest list for the selected tab
+            // Content for the selected tab
             // ------------------------------------------------------------------
             val currentGroup = TAB_GROUPS[selectedTab]
-            val quests = state.questsByGroup[currentGroup] ?: emptyList()
 
-            if (quests.isEmpty()) {
+            if (currentGroup == "Daily") {
+                DailyQuestsContent(
+                    quests      = state.dailyQuests,
+                    nextReset   = state.nextDailyReset,
+                    onClaimQuest = { viewModel.claimDailyQuest(it) },
+                )
+            } else {
+                val quests = state.questsByGroup[currentGroup] ?: emptyList()
+                if (quests.isEmpty()) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(32.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            text  = stringResource(R.string.quests_none_in_category),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                } else {
+                    LazyColumn(Modifier.fillMaxSize()) {
+                        items(quests, key = { it.quest.id }) { questWithProgress ->
+                            QuestRow(
+                                questWithProgress = questWithProgress,
+                                onClaimReward     = { viewModel.claimReward(questWithProgress.quest.id) },
+                            )
+                            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                        }
+                        item { Spacer(Modifier.height(16.dp)) }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Daily quests content
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun DailyQuestsContent(
+    quests: List<DailyQuestWithProgress>,
+    nextReset: Long,
+    onClaimQuest: (String) -> Unit,
+) {
+    LazyColumn(Modifier.fillMaxSize()) {
+        if (quests.isEmpty()) {
+            item {
                 Box(
                     Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(32.dp),
                     contentAlignment = Alignment.Center,
                 ) {
@@ -140,17 +194,100 @@ fun QuestsScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-            } else {
-                LazyColumn(Modifier.fillMaxSize()) {
-                    items(quests, key = { it.quest.id }) { questWithProgress ->
-                        QuestRow(
-                            questWithProgress = questWithProgress,
-                            onClaimReward     = { viewModel.claimReward(questWithProgress.quest.id) },
-                        )
-                        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                    }
-                    item { Spacer(Modifier.height(16.dp)) }
-                }
+            }
+        } else {
+            items(quests, key = { it.template.id }) { q ->
+                DailyQuestCard(quest = q, onClaim = { onClaimQuest(q.template.id) })
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+            }
+        }
+        item {
+            Text(
+                text     = stringResource(R.string.label_daily_reset),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun DailyQuestCard(
+    quest: DailyQuestWithProgress,
+    onClaim: () -> Unit,
+) {
+    val isComplete = quest.progress >= quest.template.amount
+    val isClaimed  = quest.claimed
+
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        Text(
+            text       = quest.template.displayName,
+            style      = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text  = quest.template.description,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+
+        if (!isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            val fraction = (quest.progress.toFloat() / quest.template.amount.toFloat()).coerceIn(0f, 1f)
+            LinearProgressIndicator(
+                progress = { fraction },
+                modifier = Modifier.fillMaxWidth(),
+                color    = GoldPrimary,
+            )
+            Spacer(Modifier.height(4.dp))
+            val displayProgress = quest.progress.coerceAtMost(quest.template.amount)
+            Text(
+                text  = "$displayProgress / ${quest.template.amount}",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+
+        if (isClaimed) {
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector        = Icons.Filled.CheckCircle,
+                    contentDescription = stringResource(R.string.label_completed),
+                    tint               = Color(0xFF4CAF50),
+                    modifier           = Modifier
+                        .height(18.dp)
+                        .width(18.dp),
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text       = stringResource(R.string.label_completed),
+                    style      = MaterialTheme.typography.labelMedium,
+                    color      = Color(0xFF4CAF50),
+                    fontWeight = FontWeight.SemiBold,
+                )
+            }
+        } else if (isComplete) {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text  = stringResource(R.string.label_daily_reward),
+                style = MaterialTheme.typography.labelSmall,
+                color = GoldPrimary,
+            )
+            Spacer(Modifier.height(6.dp))
+            Button(
+                onClick  = onClaim,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.label_claim_reward))
             }
         }
     }

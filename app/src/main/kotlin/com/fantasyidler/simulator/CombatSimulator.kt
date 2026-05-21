@@ -1,5 +1,6 @@
 package com.fantasyidler.simulator
 
+import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.model.SessionFrame
@@ -226,6 +227,171 @@ object CombatSimulator {
             Skills.HITPOINTS to hp,
             Skills.DEFENSE   to def,
         )
+    }
+
+    /**
+     * Tick-by-tick boss simulation. Returns one [SessionFrame] per simulated minute
+     * (up to [BossData.durationMinutes] frames). Each frame has [SessionFrame.playerHits]
+     * and [SessionFrame.enemyHits] populated for live combat-log animation. Loot and XP
+     * are attached to the final frame on a win.
+     */
+    fun simulateBoss(
+        boss: BossData,
+        bossKey: String,
+        playerAttack: Int,
+        playerStrength: Int,
+        playerDefence: Int,
+        playerHp: Int,
+        weaponAttackBonus: Int,
+        weaponStrBonus: Int,
+        equippedFood: Map<String, Int> = emptyMap(),
+        foodHealValues: Map<String, Int> = emptyMap(),
+    ): List<SessionFrame> {
+        val effStr      = playerStrength + weaponStrBonus
+        val playerMax   = max(1, 1 + effStr * (weaponStrBonus + 64) / 640)
+        val effAtk      = playerAttack + weaponAttackBonus
+        val bossDefence = boss.defensiveStats.attackDefense
+        val playerHitChance = when {
+            effAtk > bossDefence -> 1.0 - bossDefence / (2.0 * effAtk.coerceAtLeast(1))
+            else                 -> effAtk / (2.0 * bossDefence.coerceAtLeast(1))
+        }.coerceIn(0.10, 0.95)
+
+        val bossEffStr = boss.combatStats.strengthLevel + boss.combatStats.strengthBonus
+        val bossMax    = max(1, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640)
+        val bossEffAtk = boss.combatStats.attackLevel + boss.combatStats.attackBonus
+        val bossHitChance = when {
+            bossEffAtk > playerDefence -> 1.0 - playerDefence / (2.0 * bossEffAtk.coerceAtLeast(1))
+            else                       -> bossEffAtk / (2.0 * playerDefence.coerceAtLeast(1))
+        }.coerceIn(0.10, 0.95)
+
+        val maxHp         = playerHp * 10
+        var currentHp     = maxHp
+        var currentBossHp = boss.hp
+        val maxFrames     = boss.durationMinutes
+        val frames        = mutableListOf<SessionFrame>()
+        var won           = false
+
+        val foodSupply = equippedFood.toMutableMap()
+        val foodOrder: List<String> = foodHealValues.entries
+            .filter { (k, _) -> k in foodSupply }
+            .sortedByDescending { it.value }
+            .map { it.key }
+
+        outer@ while (frames.size < maxFrames) {
+            val pHits     = mutableListOf<Int>()
+            val eHits     = mutableListOf<Int>()
+            val frameFood = mutableMapOf<String, Int>()
+
+            for (tick in 0 until TICKS_PER_FRAME) {
+                val pDmg = if (Random.nextDouble() < playerHitChance) Random.nextInt(0, playerMax + 1) else 0
+                currentBossHp -= pDmg
+                pHits.add(pDmg)
+
+                if (currentBossHp <= 0) {
+                    won = true
+                    repeat(TICKS_PER_FRAME - tick - 1) { pHits.add(0); eHits.add(0) }
+                    frames.add(SessionFrame(
+                        minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
+                        levelBefore = 0, levelAfter = 0,
+                        kills = 1, enemyKey = bossKey,
+                        playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
+                        foodConsumed = frameFood,
+                    ))
+                    break@outer
+                }
+
+                val bDmg = if (Random.nextDouble() < bossHitChance) Random.nextInt(0, bossMax + 1) else 0
+                currentHp = (currentHp - bDmg).coerceAtLeast(0)
+                eHits.add(bDmg)
+
+                // Eat food after taking damage if a full heal fits (same logic as dungeons)
+                var ate = true
+                while (ate) {
+                    ate = false
+                    for (foodKey in foodOrder) {
+                        val qty  = foodSupply[foodKey] ?: 0
+                        if (qty <= 0) continue
+                        val heal = foodHealValues[foodKey] ?: continue
+                        if (currentHp + heal <= maxHp) {
+                            currentHp           += heal
+                            foodSupply[foodKey]  = qty - 1
+                            frameFood[foodKey]   = (frameFood[foodKey] ?: 0) + 1
+                            ate = true
+                            break
+                        }
+                    }
+                }
+
+                if (currentHp <= 0) {
+                    repeat(TICKS_PER_FRAME - tick - 1) { pHits.add(0); eHits.add(0) }
+                    frames.add(SessionFrame(
+                        minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
+                        levelBefore = 0, levelAfter = 0,
+                        kills = 0, enemyKey = bossKey,
+                        playerHits = pHits, enemyHits = eHits, hpAfter = 0,
+                        foodConsumed = frameFood,
+                    ))
+                    break@outer
+                }
+            }
+
+            if (frames.size < maxFrames && currentHp > 0 && currentBossHp > 0) {
+                frames.add(SessionFrame(
+                    minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
+                    levelBefore = 0, levelAfter = 0,
+                    kills = 0, enemyKey = bossKey,
+                    playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
+                    foodConsumed = frameFood,
+                ))
+            }
+        }
+
+        // DPS fallback if the frame cap was hit with neither side dead.
+        if (frames.isEmpty() || (frames.last().kills == 0 && currentBossHp > 0 && currentHp > 0)) {
+            val playerDps = (playerMax / 2.0) * playerHitChance / 2.4
+            val bossDps   = (bossMax / 2.0) * bossHitChance / 2.4
+            won = if (playerDps > 0 && bossDps > 0) {
+                (boss.hp / playerDps) <= (maxHp / bossDps)
+            } else playerDps >= bossDps
+            val stub = SessionFrame(
+                minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
+                levelBefore = 0, levelAfter = 0,
+                kills = if (won) 1 else 0, enemyKey = bossKey, hpAfter = if (won) 1 else 0,
+            )
+            if (frames.isEmpty()) frames.add(stub) else frames[frames.lastIndex] = stub
+        }
+
+        // Attach loot and XP to the final frame.
+        val items     = mutableMapOf<String, Int>()
+        val xpBySkill = mutableMapOf<String, Long>()
+        if (won) {
+            items["coins"] = Random.nextInt(boss.commonLoot.coinsMin, boss.commonLoot.coinsMax + 1)
+            for ((item, range) in boss.commonLoot.items) {
+                items[item] = if (range.min >= range.max) range.min
+                              else Random.nextInt(range.min, range.max + 1)
+            }
+            for (rare in boss.rareDrops)
+                if (Random.nextDouble() < rare.chance) items[rare.item] = (items[rare.item] ?: 0) + 1
+            boss.pet?.let { pet -> if (Random.nextDouble() < pet.chance) items[pet.id] = 1 }
+            for ((skill, xp) in boss.xpRewards) xpBySkill[skill] = xp.toLong()
+        }
+
+        if (!won) {
+            for ((skill, xp) in boss.xpRewards) xpBySkill[skill] = maxOf(1L, (xp * 0.1).toLong())
+            items["coins"] = maxOf(1, ((boss.commonLoot.coinsMin + boss.commonLoot.coinsMax) / 2 * 0.1).toInt())
+        }
+
+        val totalXp = xpBySkill.values.sum()
+        val last = frames.last()
+        frames[frames.lastIndex] = last.copy(
+            xpGain       = totalXp.toInt(),
+            xpAfter      = totalXp,
+            items        = items,
+            xpBySkill    = xpBySkill,
+            killsByEnemy = if (won) mapOf(bossKey to 1) else emptyMap(),
+        )
+
+        return frames
     }
 
     /** Ticks per 60-second frame (one attack every 2.4 s). */

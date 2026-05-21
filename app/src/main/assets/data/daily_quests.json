@@ -1,0 +1,218 @@
+[
+  {
+    "id": "daily_mine_iron",
+    "display_name": "Iron Miner",
+    "skill": "mining",
+    "type": "gather",
+    "target": "iron_ore",
+    "amount": 150,
+    "description": "Mine 150 iron ore."
+  },
+  {
+    "id": "daily_mine_coal",
+    "display_name": "Coal Hauler",
+    "skill": "mining",
+    "type": "gather",
+    "target": "coal_ore",
+    "amount": 300,
+    "description": "Mine 300 coal."
+  },
+  {
+    "id": "daily_mine_mithril",
+    "display_name": "Mithril Prospector",
+    "skill": "mining",
+    "type": "gather",
+    "target": "mithril_ore",
+    "amount": 50,
+    "description": "Mine 50 mithril ore."
+  },
+  {
+    "id": "daily_mine_runite",
+    "display_name": "Runite Rush",
+    "skill": "mining",
+    "type": "gather",
+    "target": "runite_ore",
+    "amount": 20,
+    "description": "Mine 20 runite ore."
+  },
+  {
+    "id": "daily_fish_salmon",
+    "display_name": "Salmon Run",
+    "skill": "fishing",
+    "type": "gather",
+    "target": "raw_salmon",
+    "amount": 120,
+    "description": "Catch 120 salmon."
+  },
+  {
+    "id": "daily_fish_lobster",
+    "display_name": "Lobster Haul",
+    "skill": "fishing",
+    "type": "gather",
+    "target": "raw_lobster",
+    "amount": 60,
+    "description": "Catch 60 lobsters."
+  },
+  {
+    "id": "daily_fish_swordfish",
+    "display_name": "Swordfish Hunter",
+    "skill": "fishing",
+    "type": "gather",
+    "target": "raw_swordfish",
+    "amount": 30,
+    "description": "Catch 30 swordfish."
+  },
+  {
+    "id": "daily_fish_shark",
+    "display_name": "Shark Wrangler",
+    "skill": "fishing",
+    "type": "gather",
+    "target": "raw_shark",
+    "amount": 15,
+    "description": "Catch 15 sharks."
+  },
+  {
+    "id": "daily_wc_oak",
+    "display_name": "Oak Chopper",
+    "skill": "woodcutting",
+    "type": "gather",
+    "target": "oak_log",
+    "amount": 100,
+    "description": "Chop 100 oak logs."
+  },
+  {
+    "id": "daily_wc_willow",
+    "display_name": "Willow Worker",
+    "skill": "woodcutting",
+    "type": "gather",
+    "target": "willow_log",
+    "amount": 70,
+    "description": "Chop 70 willow logs."
+  },
+  {
+    "id": "daily_wc_yew",
+    "display_name": "Yew Logger",
+    "skill": "woodcutting",
+    "type": "gather",
+    "target": "yew_log",
+    "amount": 25,
+    "description": "Chop 25 yew logs."
+  },
+  {
+    "id": "daily_wc_magic",
+    "display_name": "Magic Lumberjack",
+    "skill": "woodcutting",
+    "type": "gather",
+    "target": "magic_log",
+    "amount": 10,
+    "description": "Chop 10 magic logs."
+  },
+  {
+    "id": "daily_smith_iron",
+    "display_name": "Iron Smith",
+    "skill": "smithing",
+    "type": "craft",
+    "target": "iron_bar",
+    "amount": 40,
+    "description": "Smith 40 iron bars."
+  },
+  {
+    "id": "daily_smith_mithril",
+    "display_name": "Mithril Forger",
+    "skill": "smithing",
+    "type": "craft",
+    "target": "mithril_bar",
+    "amount": 15,
+    "description": "Smith 15 mithril bars."
+  },
+  {
+    "id": "daily_smith_adamantite",
+    "display_name": "Adamantite Artisan",
+    "skill": "smithing",
+    "type": "craft",
+    "target": "adamantite_bar",
+    "amount": 10,
+    "description": "Smith 10 adamantite bars."
+  },
+  {
+    "id": "daily_smith_runite",
+    "display_name": "Runite Smelter",
+    "skill": "smithing",
+    "type": "craft",
+    "target": "runite_bar",
+    "amount": 5,
+    "description": "Smith 5 runite bars."
+  },
+  {
+    "id": "daily_cook_trout",
+    "display_name": "Trout Chef",
+    "skill": "cooking",
+    "type": "craft",
+    "target": "cooked_trout",
+    "amount": 100,
+    "description": "Cook 100 trout."
+  },
+  {
+    "id": "daily_cook_salmon",
+    "display_name": "Salmon Griller",
+    "skill": "cooking",
+    "type": "craft",
+    "target": "cooked_salmon",
+    "amount": 80,
+    "description": "Cook 80 salmon."
+  },
+  {
+    "id": "daily_cook_lobster",
+    "display_name": "Lobster Cook",
+    "skill": "cooking",
+    "type": "craft",
+    "target": "cooked_lobster",
+    "amount": 40,
+    "description": "Cook 40 lobsters."
+  },
+  {
+    "id": "daily_cook_swordfish",
+    "display_name": "Swordfish Cook",
+    "skill": "cooking",
+    "type": "craft",
+    "target": "cooked_swordfish",
+    "amount": 20,
+    "description": "Cook 20 swordfish."
+  },
+  {
+    "id": "daily_kill_goblin",
+    "display_name": "Goblin Slayer",
+    "skill": "combat",
+    "type": "kill_enemy",
+    "target": "goblin",
+    "amount": 80,
+    "description": "Defeat 80 goblins."
+  },
+  {
+    "id": "daily_kill_bandit",
+    "display_name": "Bandit Buster",
+    "skill": "combat",
+    "type": "kill_enemy",
+    "target": "bandit",
+    "amount": 50,
+    "description": "Defeat 50 bandits."
+  },
+  {
+    "id": "daily_kill_demon",
+    "display_name": "Demon Hunter",
+    "skill": "combat",
+    "type": "kill_enemy",
+    "target": "demon",
+    "amount": 20,
+    "description": "Defeat 20 demons."
+  },
+  {
+    "id": "daily_kill_dragon",
+    "display_name": "Dragon Slayer",
+    "skill": "combat",
+    "type": "kill_enemy",
+    "target": "dragon",
+    "amount": 10,
+    "description": "Defeat 10 dragons."
+  }
+]

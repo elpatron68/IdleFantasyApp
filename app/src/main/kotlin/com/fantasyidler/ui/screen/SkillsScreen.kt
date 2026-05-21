@@ -326,6 +326,7 @@ private fun ActiveSessionBanner(
 ) {
     // Tick every second so the countdown stays live.
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var showAbandonConfirm by remember { mutableStateOf(false) }
     LaunchedEffect(endsAt) {
         while (System.currentTimeMillis() < endsAt) {
             delay(1_000L)
@@ -369,8 +370,26 @@ private fun ActiveSessionBanner(
                 )
                 Spacer(Modifier.height(8.dp))
                 Row {
-                    TextButton(onClick = onAbandon) {
+                    TextButton(onClick = { showAbandonConfirm = true }) {
                         Text(stringResource(R.string.btn_abandon_session))
+                    }
+
+                    if (showAbandonConfirm) {
+                        AlertDialog(
+                            onDismissRequest = { showAbandonConfirm = false },
+                            title = { Text(stringResource(R.string.session_abandon_title)) },
+                            text  = { Text(stringResource(R.string.session_abandon_body)) },
+                            confirmButton = {
+                                TextButton(onClick = { showAbandonConfirm = false; onAbandon() }) {
+                                    Text(stringResource(R.string.btn_confirm))
+                                }
+                            },
+                            dismissButton = {
+                                TextButton(onClick = { showAbandonConfirm = false }) {
+                                    Text(stringResource(R.string.btn_cancel))
+                                }
+                            },
+                        )
                     }
                     if (BuildConfig.DEBUG) {
                         TextButton(onClick = onDebugFinish) {

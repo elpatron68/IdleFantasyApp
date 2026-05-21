@@ -1,6 +1,5 @@
 package com.fantasyidler.repository
 
-import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.CookingRecipe
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.OwnedPet
@@ -13,8 +12,6 @@ import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import kotlin.math.max
-import kotlin.random.Random
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -242,23 +239,27 @@ class QueuedSessionStarter @Inject constructor(
             "boss" -> {
                 val bossKey = action.activityKey
                 val boss    = gameData.bosses[bossKey] ?: return
-                val totalAtkBonus = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 }
-                val totalStrBonus = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 }
-                val totalDefBonus = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 }
-                val frame = simulateBoss(
+                val totalAtkBonus    = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 }
+                val totalStrBonus    = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 }
+                val totalDefBonus    = EquipSlot.COMBAT_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 }
+                val equippedFoodKeys = flags.equippedFood.keys
+                val availableFood    = inventory.filterKeys { it in equippedFoodKeys }
+                val bossFrames = CombatSimulator.simulateBoss(
                     boss              = boss,
+                    bossKey           = bossKey,
                     playerAttack      = levels[Skills.ATTACK]    ?: 1,
                     playerStrength    = levels[Skills.STRENGTH]  ?: 1,
                     playerDefence     = (levels[Skills.DEFENSE]  ?: 1) + totalDefBonus,
                     playerHp          = levels[Skills.HITPOINTS] ?: 1,
                     weaponAttackBonus = totalAtkBonus,
                     weaponStrBonus    = totalStrBonus,
+                    equippedFood      = availableFood,
+                    foodHealValues    = gameData.foodHealValues,
                 )
-                val framesJson = encodeFrames(listOf(frame))
                 sessionRepo.startSession(
                     skillName        = "boss",
                     activityKey      = bossKey,
-                    frames           = framesJson,
+                    frames           = encodeFrames(bossFrames),
                     durationMs       = boss.durationMinutes * 60_000L,
                     skillDisplayName = action.skillDisplayName,
                 )
@@ -312,53 +313,6 @@ class QueuedSessionStarter @Inject constructor(
                 startSession(action, result)
             }
         }
-    }
-
-    private fun simulateBoss(
-        boss: BossData,
-        playerAttack: Int,
-        playerStrength: Int,
-        playerDefence: Int,
-        playerHp: Int,
-        weaponAttackBonus: Int,
-        weaponStrBonus: Int,
-    ): SessionFrame {
-        val effStr    = playerStrength + weaponStrBonus
-        val playerMax = max(1, 1 + effStr * (weaponStrBonus + 64) / 640)
-        val effAtk    = playerAttack + weaponAttackBonus
-        val bossDef   = boss.defensiveStats.attackDefense
-        val playerHit = (if (effAtk > bossDef) 1.0 - bossDef / (2.0 * effAtk.coerceAtLeast(1))
-                         else effAtk / (2.0 * bossDef.coerceAtLeast(1))).coerceIn(0.10, 0.95)
-        val playerDps = (playerMax / 2.0) * playerHit / 2.4
-
-        val bossEffStr = boss.combatStats.strengthLevel + boss.combatStats.strengthBonus
-        val bossMax    = max(1, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640)
-        val bossEffAtk = boss.combatStats.attackLevel + boss.combatStats.attackBonus
-        val bossHit    = (if (bossEffAtk > playerDefence) 1.0 - playerDefence / (2.0 * bossEffAtk.coerceAtLeast(1))
-                          else bossEffAtk / (2.0 * playerDefence.coerceAtLeast(1))).coerceIn(0.10, 0.95)
-        val bossDps    = (bossMax / 2.0) * bossHit / 2.4
-
-        val playerTtk = if (playerDps > 0) boss.hp / playerDps else Double.MAX_VALUE
-        val bossTtk   = if (bossDps > 0) playerHp * 10.0 / bossDps else Double.MAX_VALUE
-        val won       = playerTtk <= bossTtk
-
-        val items     = mutableMapOf<String, Int>()
-        val xpBySkill = mutableMapOf<String, Long>()
-        if (won) {
-            items["coins"] = Random.nextInt(boss.commonLoot.coinsMin, boss.commonLoot.coinsMax + 1)
-            for ((item, range) in boss.commonLoot.items)
-                items[item] = if (range.min >= range.max) range.min else Random.nextInt(range.min, range.max + 1)
-            for (rare in boss.rareDrops)
-                if (Random.nextDouble() < rare.chance) items[rare.item] = (items[rare.item] ?: 0) + 1
-            boss.pet?.let { pet -> if (Random.nextDouble() < pet.chance) items[pet.id] = 1 }
-            for ((skill, xp) in boss.xpRewards) xpBySkill[skill] = xp.toLong()
-        }
-        val totalXp = xpBySkill.values.sum()
-        return SessionFrame(
-            minute = 1, xpGain = totalXp.toInt(), xpBefore = 0L, xpAfter = totalXp,
-            levelBefore = 0, levelAfter = 0, items = items, xpBySkill = xpBySkill,
-            kills = if (won) 1 else 0, killsByEnemy = emptyMap(),
-        )
     }
 
     private suspend fun startSession(action: QueuedAction, result: SkillSimulator.Result) {

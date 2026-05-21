@@ -127,6 +127,9 @@ class QuestRepository @Inject constructor(
                     val count = loot[quest.target] ?: continue
                     if (count > 0) addProgress(questId, quest.amount, count, quest.requiresPrevious)
                 }
+                "boss" -> {
+                    if (quest.target == dungeonKey) addProgress(questId, quest.amount, 1, quest.requiresPrevious)
+                }
             }
         }
     }

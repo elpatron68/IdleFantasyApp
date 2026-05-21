@@ -1,0 +1,12 @@
+• New: Boss fights now show a live combat log and HP bar, just like dungeons
+• New: Food heals you during boss fights (uses the same food equipped for dungeons)
+• New: 12 boss quests — Dragon Slayer, Demon Slayer, Kraken Killer, Balrog Bane (1/5/25 kills each)
+• New: Daily quest system — 3 rotating quests each day, rewards 2,000 coins (rare: dwarven gear)
+• New: Dwarven Fishing Rod, Dwarven Hoe, and Dwarven Boots added
+• New: 3 new dungeon enemies — Fire Giant (Infernal Stronghold), Ancient Guardian and Lich (Ancient Temple)
+• New: Confirm dialog before abandoning a session
+• Fix: Boss stats rebalanced so they can be defeated solo at the required combat level
+• Fix: Arrows and runes are now consumed per attack attempt, not per kill
+• Translation: Spanish improvements (whyhuron)
+• Translation: French — corrected Undead Crypt name (Tathar)
+• Translation: German — ProfileScreen and SkillsScreen fully translated (selki-latah)

@@ -615,6 +615,7 @@ private fun CombatSessionBanner(
         ?: session.activityKey
 
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var showAbandonConfirm by remember { mutableStateOf(false) }
     val endsAt = session.endsAt
     LaunchedEffect(endsAt) {
         while (System.currentTimeMillis() < endsAt) {
@@ -690,8 +691,10 @@ private fun CombatSessionBanner(
                 color      = MaterialTheme.colorScheme.primary,
             )
 
-            if (session.skillName == "combat") {
+            if (session.skillName == "combat" || session.skillName == "boss") {
                 val context = LocalContext.current
+                val isBoss = session.skillName == "boss"
+                val currentBoss = if (isBoss) bosses.firstOrNull { it.id == session.activityKey } else null
                 val divColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.2f)
 
                 // Per-tick state
@@ -710,29 +713,39 @@ private fun CombatSessionBanner(
                     frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
                 }
 
-                // Live enemy HP (replay player hits to track kills within frame)
-                val currentEnemyHp = if (currentEnemy != null && currentFrame?.playerHits?.isNotEmpty() == true) {
-                    var hp = currentEnemy.hp
-                    for (dmg in currentFrame.playerHits.take(tickInFrame + 1)) {
-                        hp -= dmg
-                        if (hp <= 0) hp = currentEnemy.hp
+                // Live enemy HP (cumulative for boss, per-enemy reset for dungeon)
+                val currentEnemyHp = when {
+                    currentBoss != null -> {
+                        val prevDmg = frames.take(currentFrameIdx).sumOf { it.playerHits.sum() }
+                        val curDmg = currentFrame?.playerHits?.take(tickInFrame + 1)?.sum() ?: 0
+                        (currentBoss.hp - prevDmg - curDmg).coerceAtLeast(0)
                     }
-                    hp.coerceAtLeast(0)
-                } else currentEnemy?.hp ?: 0
+                    currentEnemy != null && currentFrame?.playerHits?.isNotEmpty() == true -> {
+                        var hp = currentEnemy.hp
+                        for (dmg in currentFrame.playerHits.take(tickInFrame + 1)) {
+                            hp -= dmg
+                            if (hp <= 0) hp = currentEnemy.hp
+                        }
+                        hp.coerceAtLeast(0)
+                    }
+                    else -> currentEnemy?.hp ?: 0
+                }
 
                 // Combat log: last 8 entries (interleaved per tick)
                 val combatLog = remember(currentFrameIdx, tickInFrame) {
                     buildList<CombatLogEntry> {
                         for (i in 0 until currentFrameIdx) {
                             val f = frames.getOrNull(i) ?: break
-                            val eName = enemies[f.enemyKey]?.displayName ?: f.enemyKey
+                            val eName = bosses.firstOrNull { it.id == f.enemyKey }?.displayName
+                                ?: enemies[f.enemyKey]?.displayName ?: f.enemyKey
                             for (t in 0 until maxOf(f.playerHits.size, f.enemyHits.size)) {
                                 f.playerHits.getOrNull(t)?.let { add(CombatLogEntry(true, it, eName)) }
                                 f.enemyHits.getOrNull(t)?.let { add(CombatLogEntry(false, it, eName)) }
                             }
                         }
                         val f = frames.getOrNull(currentFrameIdx) ?: return@buildList
-                        val eName = enemies[f.enemyKey]?.displayName ?: f.enemyKey
+                        val eName = bosses.firstOrNull { it.id == f.enemyKey }?.displayName
+                            ?: enemies[f.enemyKey]?.displayName ?: f.enemyKey
                         for (t in 0..tickInFrame) {
                             f.playerHits.getOrNull(t)?.let { add(CombatLogEntry(true, it, eName)) }
                             f.enemyHits.getOrNull(t)?.let { add(CombatLogEntry(false, it, eName)) }
@@ -768,7 +781,27 @@ private fun CombatSessionBanner(
                     Column(Modifier.padding(12.dp)) {
 
                         // ── Enemy ──────────────────────────────────────────
-                        if (currentEnemy != null) {
+                        if (currentBoss != null) {
+                            Text(
+                                text       = "${currentBoss.emoji} ${currentBoss.displayName}",
+                                style      = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color      = MaterialTheme.colorScheme.onSecondaryContainer,
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            LinearProgressIndicator(
+                                progress  = { if (currentBoss.hp > 0) currentEnemyHp / currentBoss.hp.toFloat() else 0f },
+                                modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                                color     = MaterialTheme.colorScheme.error,
+                                trackColor = MaterialTheme.colorScheme.errorContainer,
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                text  = "${stringResource(R.string.label_hp)} $currentEnemyHp/${currentBoss.hp}  ${stringResource(R.string.combat_atk)} ${currentBoss.combatStats.attackLevel}  ${stringResource(R.string.combat_str)} ${currentBoss.combatStats.strengthLevel}  ${stringResource(R.string.combat_def)} ${currentBoss.combatStats.defenseLevel}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            )
+                        } else if (currentEnemy != null) {
                             Text(
                                 text       = currentEnemy.displayName,
                                 style      = MaterialTheme.typography.titleSmall,
@@ -871,7 +904,9 @@ private fun CombatSessionBanner(
                             Text(
                                 text  = killsSoFar.entries
                                     .sortedByDescending { it.value }
-                                    .joinToString(", ") { (k, v) -> "$v ${enemies[k]?.displayName ?: k}" }
+                                    .joinToString(", ") { (k, v) ->
+                                        "$v ${bosses.firstOrNull { it.id == k }?.displayName ?: enemies[k]?.displayName ?: k}"
+                                    }
                                     + " $defeatedSoFar",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -984,11 +1019,29 @@ private fun CombatSessionBanner(
 
         if (!isDone) {
             OutlinedButton(
-                onClick  = onAbandon,
+                onClick  = { showAbandonConfirm = true },
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(stringResource(R.string.btn_abandon_session))
             }
+        }
+
+        if (showAbandonConfirm) {
+            AlertDialog(
+                onDismissRequest = { showAbandonConfirm = false },
+                title = { Text(stringResource(R.string.session_abandon_title)) },
+                text  = { Text(stringResource(R.string.session_abandon_body)) },
+                confirmButton = {
+                    TextButton(onClick = { showAbandonConfirm = false; onAbandon() }) {
+                        Text(stringResource(R.string.btn_confirm))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showAbandonConfirm = false }) {
+                        Text(stringResource(R.string.btn_cancel))
+                    }
+                },
+            )
         }
 
         if (BuildConfig.DEBUG && !isDone) {
@@ -1492,6 +1545,58 @@ private fun CombatResultSheet(
                 ) {
                     Text(
                         text  = GameStrings.itemName(context, item),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    Text(
+                        text  = "×$qty",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+        }
+
+        // Kills
+        if (result.killsByEnemy.isNotEmpty()) {
+            Text(
+                text  = stringResource(R.string.label_kills),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            for ((enemy, qty) in result.killsByEnemy.entries.sortedByDescending { it.value }) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text  = GameStrings.enemyName(context, enemy),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    Text(
+                        text  = "×$qty",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+        }
+
+        // Food consumed
+        if (result.foodConsumed.isNotEmpty()) {
+            Text(
+                text  = stringResource(R.string.label_food),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            for ((food, qty) in result.foodConsumed) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text  = GameStrings.itemName(context, food),
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(

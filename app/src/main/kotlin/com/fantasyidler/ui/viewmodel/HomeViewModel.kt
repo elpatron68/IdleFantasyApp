@@ -221,6 +221,7 @@ class HomeViewModel @Inject constructor(
                                 foodConsumedTotal  = food.values.sum(),
                             )
                             playerRepo.incrementDungeonRun(session.activityKey)
+                            if (kills.isNotEmpty()) playerRepo.recordDailyKills(kills)
                         }
                         if (food.isNotEmpty()) playerRepo.consumeItems(food)
                         for ((skill, xp) in xpPerSkill) combinedXpBySkill[skill] = (combinedXpBySkill[skill] ?: 0L) + xp
@@ -237,9 +238,19 @@ class HomeViewModel @Inject constructor(
                         val regular = its.filterKeys { it !in petIds }
                         awardedCapes += playerRepo.applySessionResults(session.skillName, totalXp, regular)
                         when (session.skillName) {
-                            in gatheringSkills -> questRepo.recordGathering(session.skillName, regular)
-                            in craftingSkills  -> questRepo.recordCrafting(session.skillName, regular)
-                            Skills.PRAYER      -> questRepo.recordBuried(frames.sumOf { it.kills })
+                            in gatheringSkills -> {
+                                questRepo.recordGathering(session.skillName, regular)
+                                playerRepo.recordDailyGathering(regular)
+                            }
+                            in craftingSkills  -> {
+                                questRepo.recordCrafting(session.skillName, regular)
+                                playerRepo.recordDailyCrafting(regular)
+                            }
+                            Skills.PRAYER      -> {
+                                val buried = frames.sumOf { it.kills }
+                                questRepo.recordBuried(buried)
+                                playerRepo.recordDailyPrayer(buried)
+                            }
                         }
                         // Consume input materials at collect time (best-effort, like food)
                         when (session.skillName) {

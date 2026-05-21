@@ -4,7 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.QuestData
 import com.fantasyidler.data.json.QuestRewards
+import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.DailyQuestRepository
+import com.fantasyidler.repository.DailyQuestWithProgress
+import com.fantasyidler.repository.DailyReward
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
@@ -41,6 +45,8 @@ data class QuestsUiState(
     val questsByGroup: Map<String, List<QuestWithProgress>> = emptyMap(),
     val claimableCount: Int = 0,
     val completedCount: Int = 0,
+    val dailyQuests: List<DailyQuestWithProgress> = emptyList(),
+    val nextDailyReset: Long = 0L,
     val snackbarMessage: String? = null,
 )
 
@@ -53,15 +59,25 @@ class QuestsViewModel @Inject constructor(
     private val questRepo: QuestRepository,
     private val gameData: GameDataRepository,
     private val playerRepo: PlayerRepository,
+    private val dailyQuestRepo: DailyQuestRepository,
     private val json: Json,
 ) : ViewModel() {
 
     private val _extra = MutableStateFlow(QuestsUiState())
 
+    init {
+        // Trigger a DB refresh if daily quests have rolled over, and seed nextDailyReset.
+        viewModelScope.launch {
+            playerRepo.getRefreshedDailyFlags()
+            _extra.update { it.copy(nextDailyReset = dailyQuestRepo.nextResetMs()) }
+        }
+    }
+
     val uiState: StateFlow<QuestsUiState> = combine(
         questRepo.observeProgress(),
+        playerRepo.playerFlow,
         _extra,
-    ) { progressList, extra ->
+    ) { progressList, player, extra ->
         val progressMap = progressList.associateBy { it.questId }
 
         val questsWithProgress = gameData.quests.values.map { quest ->
@@ -81,11 +97,19 @@ class QuestsViewModel @Inject constructor(
         val claimable = visibleQuests.count { it.isClaimable }
         val completed = visibleQuests.count { it.completed }
 
+        val dailyQuests = if (player != null) {
+            val flags: PlayerFlags = json.decodeFromString(player.flags)
+            dailyQuestRepo.getActiveDailyQuests(flags)
+        } else {
+            extra.dailyQuests
+        }
+
         extra.copy(
             isLoading      = false,
             questsByGroup  = questsByGroup,
             claimableCount = claimable,
             completedCount = completed,
+            dailyQuests    = dailyQuests,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuestsUiState())
 
@@ -151,6 +175,26 @@ class QuestsViewModel @Inject constructor(
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
 
+    fun claimDailyQuest(templateId: String) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            val (newFlags, reward) = dailyQuestRepo.claimQuest(flags, templateId)
+            playerRepo.updateFlags(newFlags)
+
+            val message = when (reward) {
+                is DailyReward.CoinsReward -> {
+                    playerRepo.addCoins(reward.amount.toLong())
+                    "Daily quest complete! +${reward.amount.toLong().formatCoins()} coins"
+                }
+                is DailyReward.DwarvenItemReward -> {
+                    playerRepo.addItem(reward.itemKey, 1)
+                    "Daily quest complete! You found dwarven gear!"
+                }
+            }
+            _extra.update { it.copy(snackbarMessage = message) }
+        }
+    }
+
     // ---------------------------------------------------------------------------
     // Group helpers
     // ---------------------------------------------------------------------------
@@ -162,7 +206,7 @@ class QuestsViewModel @Inject constructor(
     private val craftingSkills = setOf(
         Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.PRAYER,
     )
-    private val combatTypes = setOf("kill", "kill_enemy", "dungeon")
+    private val combatTypes = setOf("kill", "kill_enemy", "dungeon", "boss")
     private val specialTypes = setOf(
         "dungeon_melee_only", "dungeon_ranged_only", "dungeon_magic_only",
         "dungeon_no_food", "collect",

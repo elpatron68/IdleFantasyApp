@@ -39,6 +39,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -363,6 +364,7 @@ private fun HomeSessionCard(
     onDebugFinish: () -> Unit,
 ) {
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var showAbandonConfirm by remember { mutableStateOf(false) }
     val endsAt = session.endsAt
     LaunchedEffect(endsAt) {
         while (System.currentTimeMillis() < endsAt) {
@@ -426,8 +428,26 @@ private fun HomeSessionCard(
 
             if (!isDone) {
                 Row {
-                    OutlinedButton(onClick = onAbandon) {
+                    OutlinedButton(onClick = { showAbandonConfirm = true }) {
                         Text(stringResource(R.string.btn_abandon))
+                    }
+
+                    if (showAbandonConfirm) {
+                        AlertDialog(
+                            onDismissRequest = { showAbandonConfirm = false },
+                            title = { Text(stringResource(R.string.session_abandon_title)) },
+                            text  = { Text(stringResource(R.string.session_abandon_body)) },
+                            confirmButton = {
+                                TextButton(onClick = { showAbandonConfirm = false; onAbandon() }) {
+                                    Text(stringResource(R.string.btn_confirm))
+                                }
+                            },
+                            dismissButton = {
+                                TextButton(onClick = { showAbandonConfirm = false }) {
+                                    Text(stringResource(R.string.btn_cancel))
+                                }
+                            },
+                        )
                     }
                     if (BuildConfig.DEBUG) {
                         Spacer(Modifier.width(8.dp))

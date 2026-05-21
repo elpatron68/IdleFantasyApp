@@ -29,8 +29,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.max
-import kotlin.random.Random
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import javax.inject.Inject
@@ -45,6 +43,8 @@ data class CombatSessionResult(
     val itemsGained: Map<String, Int>,
     val coinsGained: Long,
     val won: Boolean = true,
+    val killsByEnemy: Map<String, Int> = emptyMap(),
+    val foodConsumed: Map<String, Int> = emptyMap(),
 )
 
 data class CombatUiState(
@@ -297,18 +297,19 @@ class CombatViewModel @Inject constructor(
                 )
 
                 val totalKills = result.frames.sumOf { it.kills }
+                val totalAttacks = result.frames.size * CombatSimulator.TICKS_PER_FRAME
 
-                // Consume ranged ammo (best effort — no arrows = no bonus, not a block)
-                if (combatStyle == "ranged" && bestArrow != null && totalKills > 0) {
-                    val toConsume = minOf(totalKills, inventory[bestArrow] ?: 0)
+                // Consume ranged ammo: 1 arrow per attack attempt (hit or miss)
+                if (combatStyle == "ranged" && bestArrow != null && totalAttacks > 0) {
+                    val toConsume = minOf(totalAttacks, inventory[bestArrow] ?: 0)
                     if (toConsume > 0) playerRepo.consumeItems(mapOf(bestArrow to toConsume))
                 }
 
-                // Consume magic runes (blocks if insufficient; skip if staff provides infinite runes)
-                if (combatStyle == "magic" && selectedSpell != null && totalKills > 0) {
+                // Consume magic runes: 1 cast per attack attempt (hit or miss)
+                if (combatStyle == "magic" && selectedSpell != null && totalAttacks > 0) {
                     val staffCoversRune = weapon?.infiniteRunes == selectedSpell.runeType
                     if (!staffCoversRune) {
-                        val runesNeeded = totalKills * selectedSpell.runeCost
+                        val runesNeeded = totalAttacks * selectedSpell.runeCost
                         val ok = playerRepo.consumeItems(mapOf(selectedSpell.runeType to runesNeeded))
                         if (!ok) {
                             _extra.update {
@@ -385,18 +386,25 @@ class CombatViewModel @Inject constructor(
                     gameData.potionEffects[potionKey] ?: emptyMap()
                 } else emptyMap()
 
-                val frame = simulateBoss(
+                val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val equippedFoodKeys  = flags.equippedFood.keys
+                val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
+
+                val bossFrames = simulateBoss(
                     boss              = boss,
+                    bossKey           = bossKey,
                     playerAttack      = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0),
                     playerStrength    = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0),
                     playerDefence     = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0),
                     playerHp          = levels[Skills.HITPOINTS] ?: 1,
                     weaponAttackBonus = totalAtkBonus,
                     weaponStrBonus    = totalStrBonus,
+                    equippedFood      = availableFood,
+                    foodHealValues    = gameData.foodHealValues,
                 )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
-                    listOf(frame),
+                    bossFrames,
                 )
                 sessionRepo.startSession(
                     skillName        = "boss",
@@ -434,62 +442,46 @@ class CombatViewModel @Inject constructor(
 
     private suspend fun collectBossSession(session: com.fantasyidler.data.model.SkillSession) {
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
-        val frame = frames.firstOrNull() ?: run { sessionRepo.deleteSession(session.sessionId); return }
-        val won  = frame.kills > 0
+        val last = frames.lastOrNull() ?: run { sessionRepo.deleteSession(session.sessionId); return }
+        val won  = last.kills > 0
         val boss = gameData.bosses[session.activityKey]
 
+        val allItems    = last.items.toMutableMap()
+        val coinsGained = allItems.remove("coins")?.toLong() ?: 0L
+        val petIds      = gameData.pets.keys
+        val petDrops    = allItems.filterKeys { it in petIds }
+        val loot        = allItems.filterKeys { it !in petIds }
+        val allFoodConsumed = mutableMapOf<String, Int>()
+        for (frame in frames) frame.foodConsumed.forEach { (k, v) -> allFoodConsumed[k] = (allFoodConsumed[k] ?: 0) + v }
+
+        val capes = playerRepo.applyMultiSkillResults(last.xpBySkill, loot, coinsGained)
+        if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+        for ((petId, _) in petDrops) {
+            val petData = gameData.pets[petId] ?: continue
+            playerRepo.addPetIfNew(petId, petData.boostPercent)
+        }
         if (won) {
-            val allItems    = frame.items.toMutableMap()
-            val coinsGained = allItems.remove("coins")?.toLong() ?: 0L
-            val petIds      = gameData.pets.keys
-            val petDrops    = allItems.filterKeys { it in petIds }
-            val loot        = allItems.filterKeys { it !in petIds }
-            val capes = playerRepo.applyMultiSkillResults(frame.xpBySkill, loot, coinsGained)
-            for ((petId, _) in petDrops) {
-                val petData = gameData.pets[petId] ?: continue
-                playerRepo.addPetIfNew(petId, petData.boostPercent)
-            }
-            val allItemsDisplay = frame.items.toMutableMap()
-            val coinsDisplay    = allItemsDisplay.remove("coins")?.toLong() ?: 0L
-            sessionRepo.deleteSession(session.sessionId)
-            val capeMsg = buildCapeMessage(capes)
-            _extra.update {
-                it.copy(
-                    combatResult = CombatSessionResult(
-                        dungeonDisplayName = boss?.let { b -> "${b.emoji} ${b.displayName}" } ?: session.activityKey,
-                        xpPerSkill  = frame.xpBySkill,
-                        itemsGained = allItemsDisplay,
-                        coinsGained = coinsDisplay,
-                        won         = true,
-                    ),
-                    snackbarMessage = capeMsg,
-                )
-            }
-        } else {
-            // Consolation: 10% of base XP rewards, 10% of average coin drop
-            val consolationXp = boss?.xpRewards
-                ?.mapValues { (_, xp) -> maxOf(1L, (xp * 0.1).toLong()) }
-                ?: emptyMap()
-            val consolationCoins = boss?.commonLoot?.let {
-                maxOf(1L, ((it.coinsMin + it.coinsMax) / 2 * 0.1).toLong())
-            } ?: 0L
-            val capes = if (consolationXp.isNotEmpty() || consolationCoins > 0) {
-                playerRepo.applyMultiSkillResults(consolationXp, emptyMap(), consolationCoins)
-            } else emptyList()
-            sessionRepo.deleteSession(session.sessionId)
-            val capeMsg = buildCapeMessage(capes)
-            _extra.update {
-                it.copy(
-                    combatResult = CombatSessionResult(
-                        dungeonDisplayName = boss?.let { b -> "${b.emoji} ${b.displayName}" } ?: session.activityKey,
-                        xpPerSkill  = consolationXp,
-                        itemsGained = emptyMap(),
-                        coinsGained = consolationCoins,
-                        won         = false,
-                    ),
-                    snackbarMessage = capeMsg,
-                )
-            }
+            questRepo.recordCombat(
+                dungeonKey   = session.activityKey,
+                killsByEnemy = mapOf(session.activityKey to 1),
+                loot         = loot,
+            )
+            playerRepo.recordDailyKills(mapOf(session.activityKey to 1))
+        }
+        val itemsDisplay = last.items.toMutableMap().also { it.remove("coins") }
+        sessionRepo.deleteSession(session.sessionId)
+        _extra.update {
+            it.copy(
+                combatResult = CombatSessionResult(
+                    dungeonDisplayName = boss?.let { b -> "${b.emoji} ${b.displayName}" } ?: session.activityKey,
+                    xpPerSkill   = last.xpBySkill,
+                    itemsGained  = itemsDisplay,
+                    coinsGained  = coinsGained,
+                    won          = won,
+                    killsByEnemy = if (won) mapOf(session.activityKey to 1) else emptyMap(),
+                ),
+                snackbarMessage = buildCapeMessage(capes),
+            )
         }
     }
 
@@ -532,6 +524,7 @@ class CombatViewModel @Inject constructor(
                 combatStyle        = combatStyle,
                 foodConsumedTotal  = allFoodConsumed.values.sum(),
             )
+            if (allKillsByEnemy.isNotEmpty()) playerRepo.recordDailyKills(allKillsByEnemy)
             playerRepo.incrementDungeonRun(session.activityKey)
         }
         sessionRepo.deleteSession(session.sessionId)
@@ -544,6 +537,8 @@ class CombatViewModel @Inject constructor(
                     itemsGained        = allItems,
                     coinsGained        = coinsGained,
                     won                = !playerDied,
+                    killsByEnemy       = allKillsByEnemy,
+                    foodConsumed       = allFoodConsumed,
                 ),
                 snackbarMessage = buildCapeMessage(capes),
             )
@@ -594,77 +589,29 @@ class CombatViewModel @Inject constructor(
     // Boss simulation
     // ------------------------------------------------------------------
 
-    /**
-     * Determines win/loss via a DPS race and rolls loot on victory.
-     * Result is stored as a single [SessionFrame]; kills=1 means won, kills=0 means lost.
-     */
     private fun simulateBoss(
         boss: BossData,
+        bossKey: String,
         playerAttack: Int,
         playerStrength: Int,
         playerDefence: Int,
         playerHp: Int,
         weaponAttackBonus: Int,
         weaponStrBonus: Int,
-    ): SessionFrame {
-        // Player DPS
-        val effStr      = playerStrength + weaponStrBonus
-        val playerMax   = max(1, 1 + effStr * (weaponStrBonus + 64) / 640)
-        val effAtk      = playerAttack + weaponAttackBonus
-        val bossDefence = boss.defensiveStats.attackDefense
-        val playerHit   = when {
-            effAtk > bossDefence -> 1.0 - bossDefence / (2.0 * effAtk.coerceAtLeast(1))
-            else                 -> effAtk / (2.0 * bossDefence.coerceAtLeast(1))
-        }.coerceIn(0.10, 0.95)
-        val playerDps = (playerMax / 2.0) * playerHit / 2.4
-
-        // Boss DPS
-        val bossEffStr = boss.combatStats.strengthLevel + boss.combatStats.strengthBonus
-        val bossMax    = max(1, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640)
-        val bossEffAtk = boss.combatStats.attackLevel + boss.combatStats.attackBonus
-        val bossHit    = when {
-            bossEffAtk > playerDefence -> 1.0 - playerDefence / (2.0 * bossEffAtk.coerceAtLeast(1))
-            else                       -> bossEffAtk / (2.0 * playerDefence.coerceAtLeast(1))
-        }.coerceIn(0.10, 0.95)
-        val bossDps = (bossMax / 2.0) * bossHit / 2.4
-
-        val playerEffHp = playerHp * 10.0
-        val playerTtk   = if (playerDps > 0) boss.hp / playerDps else Double.MAX_VALUE
-        val bossTtk     = if (bossDps   > 0) playerEffHp / bossDps else Double.MAX_VALUE
-        val won         = playerTtk <= bossTtk
-
-        val items     = mutableMapOf<String, Int>()
-        val xpBySkill = mutableMapOf<String, Long>()
-
-        if (won) {
-            items["coins"] = Random.nextInt(boss.commonLoot.coinsMin, boss.commonLoot.coinsMax + 1)
-            for ((item, range) in boss.commonLoot.items) {
-                items[item] = if (range.min >= range.max) range.min
-                              else Random.nextInt(range.min, range.max + 1)
-            }
-            for (rare in boss.rareDrops) {
-                if (Random.nextDouble() < rare.chance) items[rare.item] = (items[rare.item] ?: 0) + 1
-            }
-            boss.pet?.let { pet ->
-                if (Random.nextDouble() < pet.chance) items[pet.id] = 1
-            }
-            for ((skill, xp) in boss.xpRewards) xpBySkill[skill] = xp.toLong()
-        }
-
-        val totalXp = xpBySkill.values.sum()
-        return SessionFrame(
-            minute       = 1,
-            xpGain       = totalXp.toInt(),
-            xpBefore     = 0L,
-            xpAfter      = totalXp,
-            levelBefore  = 0,
-            levelAfter   = 0,
-            items        = items,
-            xpBySkill    = xpBySkill,
-            kills        = if (won) 1 else 0,
-            killsByEnemy = emptyMap(),
-        )
-    }
+        equippedFood: Map<String, Int> = emptyMap(),
+        foodHealValues: Map<String, Int> = emptyMap(),
+    ): List<SessionFrame> = CombatSimulator.simulateBoss(
+        boss              = boss,
+        bossKey           = bossKey,
+        playerAttack      = playerAttack,
+        playerStrength    = playerStrength,
+        playerDefence     = playerDefence,
+        playerHp          = playerHp,
+        weaponAttackBonus = weaponAttackBonus,
+        weaponStrBonus    = weaponStrBonus,
+        equippedFood      = equippedFood,
+        foodHealValues    = foodHealValues,
+    )
 
     // ------------------------------------------------------------------
     // Arrow tables

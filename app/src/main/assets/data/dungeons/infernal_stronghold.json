@@ -6,16 +6,16 @@
   "encounter_rate": 0.42,
   "enemy_spawns": [
     {
-      "enemy": "demon",
-      "weight": 5
-    },
-    {
-      "enemy": "hellhound",
+      "enemy": "fire_giant",
       "weight": 4
     },
     {
-      "enemy": "dragon",
-      "weight": 1
+      "enemy": "demon",
+      "weight": 4
+    },
+    {
+      "enemy": "hellhound",
+      "weight": 2
     }
   ]
 }

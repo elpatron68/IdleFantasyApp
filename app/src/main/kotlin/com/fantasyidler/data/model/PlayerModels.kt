@@ -31,6 +31,14 @@ data class PlayerFlags(
     @SerialName("dungeon_runs") val dungeonRuns: Map<String, Int> = emptyMap(),
     /** App-wide font scale multiplier: 1.0 = Normal, 1.25 = Large, 1.5 = Huge. */
     @SerialName("font_scale") val fontScale: Float = 1.0f,
+    /** IDs of the 3 active daily quest templates for today. */
+    @SerialName("daily_quest_ids") val dailyQuestIds: List<String> = emptyList(),
+    /** Progress map: templateId -> count accumulated today. */
+    @SerialName("daily_quest_progress") val dailyQuestProgress: Map<String, Int> = emptyMap(),
+    /** Template IDs whose reward has already been claimed today. */
+    @SerialName("daily_quest_claimed") val dailyQuestClaimed: List<String> = emptyList(),
+    /** Epoch ms when today's daily quests were generated (used to detect 6am rollover). */
+    @SerialName("daily_quest_generated_at") val dailyQuestGeneratedAt: Long = 0L,
 )
 
 /** A session to be started when the current one completes. */

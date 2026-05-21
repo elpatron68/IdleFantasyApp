@@ -2117,6 +2117,47 @@
       "defense": 60
     }
   },
+  "dwarven_boots": {
+    "name": "dwarven_boots",
+    "display_name": "Dwarven Boots",
+    "slot": "boots",
+    "combat_style": null,
+    "description": "Masterwork dwarven boots, heavier than steel but nearly indestructible.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 50,
+    "requirements": {
+      "defense": 60
+    }
+  },
+  "dwarven_fishing_rod": {
+    "name": "dwarven_fishing_rod",
+    "display_name": "Dwarven Fishing Rod",
+    "slot": "fishing_rod",
+    "combat_style": null,
+    "description": "A dwarven-crafted fishing rod. Practically hauls fish out of the water.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "fishing_efficiency": 3.0,
+    "requirements": {
+      "fishing": 60
+    }
+  },
+  "dwarven_hoe": {
+    "name": "dwarven_hoe",
+    "display_name": "Dwarven Hoe",
+    "slot": "hoe",
+    "combat_style": null,
+    "description": "A legendary dwarven hoe. Doubles the harvest of any crop.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "farming_efficiency": 1.75,
+    "requirements": {
+      "farming": 60
+    }
+  },
   "balrog_whip": {
     "name": "balrog_whip",
     "display_name": "Balrog's Flaming Whip",

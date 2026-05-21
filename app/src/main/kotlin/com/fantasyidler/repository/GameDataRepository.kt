@@ -19,6 +19,7 @@ import com.fantasyidler.data.json.LogData
 import com.fantasyidler.data.json.MarketplaceJson
 import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.PetData
+import com.fantasyidler.data.json.DailyQuestTemplate
 import com.fantasyidler.data.json.QuestData
 import com.fantasyidler.data.json.RuneData
 import com.fantasyidler.data.json.SkillData
@@ -78,6 +79,10 @@ class GameDataRepository @Inject constructor(
 
     val quests: Map<String, QuestData> by lazy {
         asset("data/quests.json")
+    }
+
+    val dailyQuestPool: List<DailyQuestTemplate> by lazy {
+        asset("data/daily_quests.json")
     }
 
     // ------------------------------------------------------------------ skills

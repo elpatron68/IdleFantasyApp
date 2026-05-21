@@ -30,6 +30,7 @@ class PlayerRepository @Inject constructor(
     private val playerDao: PlayerDao,
     private val questProgressDao: QuestProgressDao,
     private val json: Json,
+    private val dailyQuestRepo: DailyQuestRepository,
 ) {
     /**
      * Emits the raw [Player] entity whenever the DB row changes.
@@ -493,6 +494,62 @@ class PlayerRepository @Inject constructor(
 
     suspend fun resetProgression() {
         playerDao.upsert(createDefaultPlayer())
+    }
+
+    // ------------------------------------------------------------------
+    // Daily quest helpers
+    // ------------------------------------------------------------------
+
+    /** Refresh daily quests if past 6am, then record progress for a gather session. */
+    suspend fun recordDailyGathering(items: Map<String, Int>) {
+        var flags = getRefreshedDailyFlags()
+        for ((target, amount) in items) {
+            flags = dailyQuestRepo.recordProgress(flags, "gather", target, amount)
+        }
+        updateFlags(flags)
+    }
+
+    /** Refresh daily quests if past 6am, then record progress for a crafting session. */
+    suspend fun recordDailyCrafting(items: Map<String, Int>) {
+        var flags = getRefreshedDailyFlags()
+        for ((target, amount) in items) {
+            flags = dailyQuestRepo.recordProgress(flags, "craft", target, amount)
+        }
+        updateFlags(flags)
+    }
+
+    /** Refresh daily quests if past 6am, then record progress for combat kills. */
+    suspend fun recordDailyKills(killsByEnemy: Map<String, Int>) {
+        var flags = getRefreshedDailyFlags()
+        for ((enemy, count) in killsByEnemy) {
+            flags = dailyQuestRepo.recordProgress(flags, "kill_enemy", enemy, count)
+        }
+        updateFlags(flags)
+    }
+
+    /** Refresh daily quests if past 6am, then record bones buried. */
+    suspend fun recordDailyPrayer(amount: Int) {
+        var flags = getRefreshedDailyFlags()
+        flags = dailyQuestRepo.recordPrayerProgress(flags, amount)
+        updateFlags(flags)
+    }
+
+    /** Returns current flags after refreshing daily quests if the 6am boundary has passed. */
+    suspend fun getRefreshedDailyFlags(): PlayerFlags {
+        val flags = getFlags()
+        return if (dailyQuestRepo.shouldRefresh(flags.dailyQuestGeneratedAt)) {
+            val refreshed = dailyQuestRepo.refreshFlags(flags)
+            updateFlags(refreshed)
+            refreshed
+        } else flags
+    }
+
+    /** Adds [qty] of [itemKey] to inventory. */
+    suspend fun addItem(itemKey: String, qty: Int) {
+        val player = getOrCreatePlayer()
+        val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        inventory[itemKey] = (inventory[itemKey] ?: 0) + qty
+        playerDao.upsert(player.copy(inventory = json.encode<Map<String, Int>>(inventory)))
     }
 
     // ------------------------------------------------------------------

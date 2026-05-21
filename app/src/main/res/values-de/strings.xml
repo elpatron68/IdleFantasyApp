@@ -248,6 +248,12 @@
 
     <!-- ===== QuestsScreen ===== -->
     <string name="label_claim_reward">Prämie einlösen</string>
+    <string name="label_daily">Daily</string>
+    <string name="label_daily_quests">Tagesaufgaben</string>
+    <string name="label_daily_reset">Reset um 6:00 Uhr</string>
+    <string name="label_daily_reward">2.000 Münzen (1/500: Zwergengear)</string>
+    <string name="msg_daily_claimed_coins">Tagesaufgabe abgeschlossen! +2.000 Münzen.</string>
+    <string name="msg_daily_claimed_dwarven">Tagesaufgabe abgeschlossen! Du hast %1$s gefunden!</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_lets_go">Los geht\'s!</string>
@@ -283,7 +289,7 @@
     <!-- Translator note: %1$d = total hole depth in metres -->
     <string name="dig_depth_format">Das Loch ist %1$d Meter tief.</string>
 
-    <!-- ===== TODO: translate — Settings ===== -->
+    <!-- ===== translate — Settings ===== -->
     <string name="settings_appearance">Aussehen</string>
     <string name="settings_theme">Design</string>
     <string name="settings_theme_desc">Wähle dein bevorzugtes Farbschema</string>
@@ -314,7 +320,7 @@
     <string name="settings_imported_ok">Import erfolgreich gespeichert</string>
     <string name="settings_imported_fail">Import fehlgeschlagen – ungültige Datei</string>
 
-    <!-- ===== TODO: translate — HomeScreen ===== -->
+    <!-- ===== translate — HomeScreen ===== -->
     <string name="home_died_message">Du bist gestorben und hast den Großteil deiner Gewinne verloren.</string>
     <string name="home_xp_boost_was_active">2× XP Boost war aktiv</string>
     <string name="home_loot">Beute</string>
@@ -331,7 +337,7 @@
         <item quantity="other">%1$d Belohnungen der Sitzung sammeln</item>
     </plurals>
 
-    <!-- ===== TODO: translate — CombatScreen ===== -->
+    <!-- ===== translate — CombatScreen ===== -->
     <string name="combat_level_label">Kampflevel</string>
     <string name="combat_log_label">Kampfprotokoll</string>
     <string name="combat_solo_bosses">Einzelbosse</string>
@@ -364,54 +370,54 @@
     <string name="combat_died_reward">Du hast 10 % der Prämien erhalten.</string>
     <string name="combat_gear_bonus">+%1$d Ausrüstung</string>
 
-    <!-- ===== TODO: translate — ProfileScreen ===== -->
-    <string name="profile_unnamed">Unnamed Adventurer</string>
-    <string name="profile_no_pets">No pets available</string>
-    <string name="profile_pet_collected">Collected</string>
-    <string name="profile_pet_not_found">Not Yet Found</string>
-    <string name="profile_equip_best">Equip Best Gear</string>
-    <string name="profile_combat_gear">Combat Gear</string>
-    <string name="profile_gathering_tools">Gathering Tools</string>
-    <string name="profile_food_dungeon">Food (Dungeon)</string>
-    <string name="profile_no_food">No cooked food in inventory</string>
-    <string name="profile_food_desc">×%1$d  •  heals %2$d HP</string>
-    <string name="profile_choose_slot">Choose %1$s</string>
-    <string name="profile_no_items">No eligible items in inventory</string>
+    <!-- ===== translate — ProfileScreen ===== -->
+    <string name="profile_unnamed">Unbekannter Abenteurer</string>
+    <string name="profile_no_pets">Haustiere sind nicht verfügbar</string>
+    <string name="profile_pet_collected">Gesammelt</string>
+    <string name="profile_pet_not_found">Noch nicht gefunden</string>
+    <string name="profile_equip_best">Mit der besten Ausrüstung ausstatten</string>
+    <string name="profile_combat_gear">Kampfausrüstung</string>
+    <string name="profile_gathering_tools">Werkzeuge</string>
+    <string name="profile_food_dungeon">Essen (Dungeon)</string>
+    <string name="profile_no_food">Keine gekochten Lebensmittel im Inventar</string>
+    <string name="profile_food_desc">×%1$d  •  heilt %2$d HP</string>
+    <string name="profile_choose_slot">%1$s auswählen</string>
+    <string name="profile_no_items">Keine passenden Artikel im Inventar</string>
     <string name="profile_stat_atk">Atk</string>
     <string name="profile_stat_str">Str</string>
-    <string name="profile_stat_ranged">Ranged</string>
-    <string name="profile_stat_magic">Magic</string>
-    <string name="profile_stat_mining">Mining</string>
+    <string name="profile_stat_ranged">Fernkampf</string>
+    <string name="profile_stat_magic">Magie</string>
+    <string name="profile_stat_mining">Bergbau</string>
     <string name="profile_stat_wc">WC</string>
-    <string name="profile_stat_fishing">Fishing</string>
-    <string name="profile_stat_farming">Farming</string>
+    <string name="profile_stat_fishing">Angeln</string>
+    <string name="profile_stat_farming">Landwirtschaft</string>
     <string name="profile_stat_def">Def</string>
-    <string name="profile_req_lv">Req lv.</string>
+    <string name="profile_req_lv">Benötigtes Level</string>
 
-    <!-- ===== TODO: translate — SkillsScreen ===== -->
-    <string name="skills_session_duration">Session: %1$dm</string>
-    <string name="skills_only_craftable">Only craftable</string>
-    <string name="skills_filter_all">All</string>
-    <string name="skills_add_to_queue">Add to Session Queue</string>
-    <string name="skills_add_queue_short">Add to Queue</string>
-    <string name="skills_level_req_xp">Lv. %1$d  •  %2$s XP/ore</string>
-    <string name="skills_tool_bonus">×%1$s tool bonus</string>
-    <string name="skills_fishing_desc">Level %1$d  •  Level-appropriate catches</string>
-    <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/catch</string>
-    <string name="skills_prayer_desc">Level %1$d  •  Bury bones or scatter ashes for Prayer XP</string>
-    <string name="skills_no_bones">No bones or ashes in inventory</string>
-    <string name="skills_bone_qty">%1$d XP each  •  %2$d in inventory</string>
-    <string name="skills_bone_selected">%1$d XP each  •  %2$d available</string>
-    <string name="skills_xp_total">+%1$d XP total</string>
-    <string name="skills_no_essence">No Rune Essence in inventory — mine some first</string>
-    <string name="skills_no_runes">No rune types unlocked yet</string>
-    <string name="skills_essence_qty">%1$d Rune Essence in inventory</string>
-    <string name="skills_rune_desc">%1$d XP/rune  •  Lv. %2$d</string>
-    <string name="skills_rune_selected">%1$d XP/rune  •  %2$d essence available</string>
-    <string name="skills_level_reached">Level %1$d reached!</string>
-    <string name="skills_no_logs">No logs in inventory</string>
-    <string name="skills_log_desc">Lv. %1$d  •  %2$s XP/log</string>
-    <string name="skills_req_with_have">Requires %1$d %2$s (You have %3$d %4$s)</string>
+    <!-- ===== translate — SkillsScreen ===== -->
+    <string name="skills_session_duration">Dauer: %1$dm</string>
+    <string name="skills_only_craftable">Nur herstellbare</string>
+    <string name="skills_filter_all">Alle</string>
+    <string name="skills_add_to_queue">Zur Sitzungswarteschlange hinzufügen</string>
+    <string name="skills_add_queue_short">Zur Warteschlange hinzufügen</string>
+    <string name="skills_level_req_xp">Lv. %1$d  •  %2$s XP/Erz</string>
+    <string name="skills_tool_bonus">×%1$s Werkzeugbonus</string>
+    <string name="skills_fishing_desc">Level %1$d  •  Dem Level entsprechende Beute</string>
+    <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/Fang</string>
+    <string name="skills_prayer_desc">Level %1$d  •  Knochen begraben oder Asche verstreuen für Gebet-XP</string>
+    <string name="skills_no_bones">Keine Knochen oder Asche im Inventar</string>
+    <string name="skills_bone_qty">%1$d XP je  •  %2$d im Inventar</string>
+    <string name="skills_bone_selected">%1$d XP je  •  %2$d verfügbar</string>
+    <string name="skills_xp_total">+%1$d XP gesamt</string>
+    <string name="skills_no_essence">Keine Runenessenz im Inventar – schürfe erst welche</string>
+    <string name="skills_no_runes">Es sind noch keine Runentypen freigeschaltet</string>
+    <string name="skills_essence_qty">%1$d Runenessenz im Inventar</string>
+    <string name="skills_rune_desc">%1$d XP/Rune  •  Lv. %2$d</string>
+    <string name="skills_rune_selected">%1$d XP/Rune  •  %2$d Essenz verfügbar</string>
+    <string name="skills_level_reached">Level %1$d erreicht!</string>
+    <string name="skills_no_logs">Keine Holzscheite im Inventar</string>
+    <string name="skills_log_desc">Lv. %1$d  •  %2$s XP/Holz</string>
+    <string name="skills_req_with_have">Benötigt %1$d %2$s (Du hast %3$d %4$s)</string>
 
     <!-- ===== TODO: translate — ShopScreen ===== -->
     <string name="shop_active">ACTIVE</string>

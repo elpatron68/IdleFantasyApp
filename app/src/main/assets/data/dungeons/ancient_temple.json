@@ -6,16 +6,16 @@
   "encounter_rate": 0.48,
   "enemy_spawns": [
     {
-      "enemy": "dragon",
-      "weight": 6
+      "enemy": "ancient_guardian",
+      "weight": 5
     },
     {
-      "enemy": "demon",
+      "enemy": "lich",
       "weight": 3
     },
     {
-      "enemy": "knight",
-      "weight": 1
+      "enemy": "dragon",
+      "weight": 2
     }
   ]
 }

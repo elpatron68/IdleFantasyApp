@@ -1646,5 +1646,197 @@
       "xp": 15000,
       "items": {}
     }
+  },
+  "dragon_slayer_1": {
+    "id": "dragon_slayer_1",
+    "name": "Dragon Slayer I",
+    "skill": "combat",
+    "tier": 6,
+    "requires_previous": null,
+    "type": "boss",
+    "target": "king_black_dragon",
+    "amount": 1,
+    "description": "Defeat the King Black Dragon",
+    "rewards": {
+      "coins": 50000,
+      "xp": 50000,
+      "items": {}
+    }
+  },
+  "dragon_slayer_2": {
+    "id": "dragon_slayer_2",
+    "name": "Dragon Slayer II",
+    "skill": "combat",
+    "tier": 7,
+    "requires_previous": "dragon_slayer_1",
+    "type": "boss",
+    "target": "king_black_dragon",
+    "amount": 5,
+    "description": "Defeat the King Black Dragon 5 times",
+    "rewards": {
+      "coins": 100000,
+      "xp": 100000,
+      "items": {}
+    }
+  },
+  "dragon_slayer_3": {
+    "id": "dragon_slayer_3",
+    "name": "Dragon Slayer III",
+    "skill": "combat",
+    "tier": 8,
+    "requires_previous": "dragon_slayer_2",
+    "type": "boss",
+    "target": "king_black_dragon",
+    "amount": 25,
+    "description": "Defeat the King Black Dragon 25 times",
+    "rewards": {
+      "coins": 250000,
+      "xp": 300000,
+      "items": {"dragon_bone": 25}
+    }
+  },
+  "demon_slayer_1": {
+    "id": "demon_slayer_1",
+    "name": "Demon Slayer I",
+    "skill": "combat",
+    "tier": 7,
+    "requires_previous": null,
+    "type": "boss",
+    "target": "demon_lord",
+    "amount": 1,
+    "description": "Defeat the Demon Lord",
+    "rewards": {
+      "coins": 75000,
+      "xp": 75000,
+      "items": {}
+    }
+  },
+  "demon_slayer_2": {
+    "id": "demon_slayer_2",
+    "name": "Demon Slayer II",
+    "skill": "combat",
+    "tier": 8,
+    "requires_previous": "demon_slayer_1",
+    "type": "boss",
+    "target": "demon_lord",
+    "amount": 5,
+    "description": "Defeat the Demon Lord 5 times",
+    "rewards": {
+      "coins": 150000,
+      "xp": 150000,
+      "items": {}
+    }
+  },
+  "demon_slayer_3": {
+    "id": "demon_slayer_3",
+    "name": "Demon Slayer III",
+    "skill": "combat",
+    "tier": 9,
+    "requires_previous": "demon_slayer_2",
+    "type": "boss",
+    "target": "demon_lord",
+    "amount": 25,
+    "description": "Defeat the Demon Lord 25 times",
+    "rewards": {
+      "coins": 400000,
+      "xp": 500000,
+      "items": {"demon_horn": 10}
+    }
+  },
+  "kraken_killer_1": {
+    "id": "kraken_killer_1",
+    "name": "Kraken Killer I",
+    "skill": "combat",
+    "tier": 8,
+    "requires_previous": null,
+    "type": "boss",
+    "target": "kraken",
+    "amount": 1,
+    "description": "Defeat the Kraken",
+    "rewards": {
+      "coins": 100000,
+      "xp": 100000,
+      "items": {}
+    }
+  },
+  "kraken_killer_2": {
+    "id": "kraken_killer_2",
+    "name": "Kraken Killer II",
+    "skill": "combat",
+    "tier": 9,
+    "requires_previous": "kraken_killer_1",
+    "type": "boss",
+    "target": "kraken",
+    "amount": 5,
+    "description": "Defeat the Kraken 5 times",
+    "rewards": {
+      "coins": 200000,
+      "xp": 200000,
+      "items": {}
+    }
+  },
+  "kraken_killer_3": {
+    "id": "kraken_killer_3",
+    "name": "Kraken Killer III",
+    "skill": "combat",
+    "tier": 10,
+    "requires_previous": "kraken_killer_2",
+    "type": "boss",
+    "target": "kraken",
+    "amount": 25,
+    "description": "Defeat the Kraken 25 times",
+    "rewards": {
+      "coins": 500000,
+      "xp": 750000,
+      "items": {}
+    }
+  },
+  "balrog_bane_1": {
+    "id": "balrog_bane_1",
+    "name": "Balrog Bane I",
+    "skill": "combat",
+    "tier": 9,
+    "requires_previous": null,
+    "type": "boss",
+    "target": "balrog",
+    "amount": 1,
+    "description": "Defeat the Balrog",
+    "rewards": {
+      "coins": 150000,
+      "xp": 150000,
+      "items": {}
+    }
+  },
+  "balrog_bane_2": {
+    "id": "balrog_bane_2",
+    "name": "Balrog Bane II",
+    "skill": "combat",
+    "tier": 10,
+    "requires_previous": "balrog_bane_1",
+    "type": "boss",
+    "target": "balrog",
+    "amount": 5,
+    "description": "Defeat the Balrog 5 times",
+    "rewards": {
+      "coins": 300000,
+      "xp": 400000,
+      "items": {}
+    }
+  },
+  "balrog_bane_3": {
+    "id": "balrog_bane_3",
+    "name": "Balrog Bane III",
+    "skill": "combat",
+    "tier": 11,
+    "requires_previous": "balrog_bane_2",
+    "type": "boss",
+    "target": "balrog",
+    "amount": 25,
+    "description": "Defeat the Balrog 25 times",
+    "rewards": {
+      "coins": 750000,
+      "xp": 1000000,
+      "items": {}
+    }
   }
 }
