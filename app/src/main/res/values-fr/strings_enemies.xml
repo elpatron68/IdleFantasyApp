@@ -31,7 +31,7 @@
     <string name="dungeon_spider_den_desc">Une caverne remplie de toiles d\'araignées, grouillant d\'araignées venimeuses. N\'oubliez pas l\'antivenin !</string>
     <string name="dungeon_bandit_camp_name">Camp de Bandits</string>
     <string name="dungeon_bandit_camp_desc">Un repaire de voleurs et de brigands en pleine nature. Gardez bien votre bourse !</string>
-    <string name="dungeon_undead_crypt_name">Cryptes des Non-Morts</string>
+    <string name="dungeon_undead_crypt_name">Cryptes des Mort-vivants</string>
     <string name="dungeon_undead_crypt_desc">Une ancienne nécropole où les morts refusent de reposer en paix. Méfiez-vous de la magie noire !</string>
     <string name="dungeon_fortress_ruins_name">Ruines de la Forteresse</string>
     <string name="dungeon_fortress_ruins_desc">Les ruines délabrées d\'un ancien château, maintenant gardé par des chevaliers et des soldats.</string>
