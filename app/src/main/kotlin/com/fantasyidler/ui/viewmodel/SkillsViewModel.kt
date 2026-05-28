@@ -492,6 +492,7 @@ class SkillsViewModel @Inject constructor(
             rodEfficiency    = toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired),
             petDropKey       = petKey,
             petDropChance    = petChance,
+            fishingSkillData = gameData.fishingSkillData,
         )
     }
 

@@ -268,11 +268,19 @@ class GuildRepository @Inject constructor(
 
     private suspend fun getRefreshedGuildDailyFlags(): PlayerFlags {
         val flags = playerRepo.getFlags()
-        return if (shouldRefreshGuildDailies(flags.guildDailyGeneratedAt)) {
+        return if (shouldRefreshGuildDailies(flags.guildDailyGeneratedAt) || hasNewlyUnlockedGuild(flags)) {
             val refreshed = buildRefreshedGuildDailyFlags(flags)
             playerRepo.updateFlags(refreshed)
             refreshed
         } else flags
+    }
+
+    private fun hasNewlyUnlockedGuild(flags: PlayerFlags): Boolean {
+        val pool = gameData.guildDailyPool.associateBy { it.id }
+        return ALL_GUILDS.any { guild ->
+            guildLevelFromRep(flags.guildReputation[guild] ?: 0L) >= 1 &&
+                flags.guildDailyIds.none { pool[it]?.guild == guild }
+        }
     }
 
     private suspend fun addQuestProgress(questId: String, delta: Int) {

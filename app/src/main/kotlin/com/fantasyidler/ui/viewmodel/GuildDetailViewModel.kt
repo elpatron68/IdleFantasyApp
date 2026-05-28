@@ -106,6 +106,7 @@ class GuildDetailViewModel @Inject constructor(
                         playerRepo.addItems(rewards.items)
                     }
                     if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
+                    guildRepo.ensureGuildDailiesRefreshed()
                     val questName = gameData.guildQuests[questId]?.name ?: questId
                     val parts = buildList {
                         if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")

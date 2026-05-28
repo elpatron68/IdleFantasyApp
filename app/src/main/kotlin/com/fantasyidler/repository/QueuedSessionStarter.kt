@@ -97,14 +97,18 @@ class QueuedSessionStarter @Inject constructor(
                 startSession(action, result)
             }
             Skills.FISHING -> {
-                val result = SkillSimulator.simulateGathering(
-                    skillData       = gameData.fishingSkillData,
-                    startXp         = xpMap[Skills.FISHING] ?: 0L,
-                    agilityLevel    = agilityLevel,
-                    petBoostPct     = gatheringPetBoost(player.pets, Skills.FISHING),
-                    toolEfficiency  = toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, levels[Skills.FISHING] ?: 1),
-                    petDropKey      = petDropKey(Skills.FISHING),
-                    petDropChance   = petDropChance(Skills.FISHING),
+                val fishKey  = action.activityKey
+                val fishData = gameData.fish[fishKey] ?: return
+                val result   = SkillSimulator.simulateFishing(
+                    fishKey          = fishKey,
+                    fishData         = fishData,
+                    startXp          = xpMap[Skills.FISHING] ?: 0L,
+                    agilityLevel     = agilityLevel,
+                    petBoostPct      = gatheringPetBoost(player.pets, Skills.FISHING),
+                    rodEfficiency    = toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired),
+                    petDropKey       = petDropKey(Skills.FISHING),
+                    petDropChance    = petDropChance(Skills.FISHING),
+                    fishingSkillData = gameData.fishingSkillData,
                 )
                 startSession(action, result)
             }
