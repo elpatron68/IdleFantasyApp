@@ -702,7 +702,7 @@
     <!-- Church -->
     <string name="church_title">Église</string>
     <string name="church_desc">Bénédictions de prière</string>
-    <string name="church_no_active_blessing">Pas de bénédiction active — visitez l'église pour prier.</string>
+    <string name="church_no_active_blessing">Pas de bénédiction active — visitez l\'église pour prier.</string>
     <string name="church_active_label">Bénédiction Active</string>
     <string name="church_expires_in">Expire dans %1$s</string>
     <string name="church_blessing_active_fmt">%1$s • %2$s restants</string>
@@ -768,7 +768,7 @@
     <string name="settings_backup_failed">Échec de la sauvegarde.</string>
     <string name="settings_backup_folder_set">Dossier de sauvegarde défini.</string>
     <string name="home_town_title">Ville</string>
-    <string name="home_town_desc">Visitez la boutique, l'auberge, la guilde et l'église</string>
+    <string name="home_town_desc">Visitez la boutique, l\'auberge, la guilde et l\'église</string>
     <string name="guild_dailies_available">Quêtes quotidiennes disponibles</string>
     <string name="guild_do_dailies_hint">Faites des quêtes pour augmenter votre réputation</string>
     <string name="guild_name_mercantile">Guilde des Marchands</string>
@@ -781,5 +781,5 @@
     <string name="mercantile_cost_label">Coût : %1$s</string>
     <string name="mercantile_return_range">Retour : %1$s – %2$s</string>
     <string name="mercantile_dispatch_label">Expédier</string>
-    <string name="mercantile_queue_label">Ajouter à la file d'attente</string>
+    <string name="mercantile_queue_label">Ajouter à la file d\'attente</string>
 </resources>
