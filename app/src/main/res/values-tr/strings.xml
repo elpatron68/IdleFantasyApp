@@ -591,6 +591,7 @@
     <string name="settings_font_small">Small</string>
     <string name="settings_lang_español_españa">Español (España)</string>
     <string name="settings_lang_turkish">Türkçe</string>
+    <string name="settings_lang_italiano">Italiano</string>
     <string name="profile_weapons">Weapons</string>
     <string-array name="worker_names">
         <item>Aldric</item>

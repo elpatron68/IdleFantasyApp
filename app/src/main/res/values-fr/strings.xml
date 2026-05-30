@@ -307,6 +307,7 @@
     <string name="settings_lang_français">Français</string>
     <string name="settings_lang_español">Espagnol</string>
     <string name="settings_lang_turkish">Turc</string>
+    <string name="settings_lang_italiano">Italiano</string>
     <string name="settings_lang_system">Système</string>
     <string name="settings_save_data">Sauvegarder les données</string>
     <string name="settings_export">Exporter la sauvegarde</string>
