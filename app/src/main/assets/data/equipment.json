@@ -3079,5 +3079,27 @@
     "requirements": {
       "magic": 85
     }
+  },
+  "ring_of_recoil": {
+    "name": "ring_of_recoil",
+    "display_name": "Ring of Recoil",
+    "slot": "ring",
+    "combat_style": null,
+    "description": "Returns a portion of damage taken to attackers.",
+    "attack_bonus": 2,
+    "strength_bonus": 2,
+    "defense_bonus": 4,
+    "requirements": {}
+  },
+  "amulet_of_strength": {
+    "name": "amulet_of_strength",
+    "display_name": "Amulet of Strength",
+    "slot": "necklace",
+    "combat_style": null,
+    "description": "Increases melee strength bonus.",
+    "attack_bonus": 6,
+    "strength_bonus": 10,
+    "defense_bonus": 2,
+    "requirements": {}
   }
 }

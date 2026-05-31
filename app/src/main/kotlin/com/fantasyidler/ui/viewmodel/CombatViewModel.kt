@@ -445,8 +445,10 @@ class CombatViewModel @Inject constructor(
                 val levels: Map<String, Int>       = json.decodeFromString(player.skillLevels)
                 val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
                 val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
-                val bossWeapon = (EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null } ?: EquipSlot.WEAPON)
-                    .let { equipped[it] }.let { gameData.equipment[it] }
+                val activeWeaponSlot = _extra.value.selectedWeaponSlot
+                    ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
+                    ?: EquipSlot.WEAPON
+                val bossWeapon = equipped[activeWeaponSlot]?.let { gameData.equipment[it] }
                 val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 } + (bossWeapon?.attackBonus  ?: 0)
                 val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
                 val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
@@ -458,6 +460,7 @@ class CombatViewModel @Inject constructor(
                 } else emptyMap()
 
                 val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                playerRepo.updateFlags(flags.copy(activeWeaponSlot = activeWeaponSlot))
                 val equippedFoodKeys  = flags.equippedFood.keys
                 val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
 

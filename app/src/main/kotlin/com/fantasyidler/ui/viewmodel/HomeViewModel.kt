@@ -632,8 +632,9 @@ class HomeViewModel @Inject constructor(
                 }
             }
 
-            val sessions = (sessionRepo.getAllCompletedWorkerSessions(1) +
-                            sessionRepo.getAllCompletedWorkerSessions(2))
+            val slot1Sessions = sessionRepo.getAllCompletedWorkerSessions(1)
+            val slot2Sessions = sessionRepo.getAllCompletedWorkerSessions(2)
+            val sessions = slot1Sessions + slot2Sessions
             if (sessions.isEmpty()) return@launch
 
             val petIds = gameData.pets.keys
@@ -767,8 +768,8 @@ class HomeViewModel @Inject constructor(
             }
 
             for (session in sessions) sessionRepo.deleteSession(session.sessionId)
-            playerRepo.clearHiredWorker(1)
-            playerRepo.clearHiredWorker(2)
+            if (slot1Sessions.isNotEmpty()) playerRepo.clearHiredWorker(1)
+            if (slot2Sessions.isNotEmpty()) playerRepo.clearHiredWorker(2)
 
             val n    = sessions.size
             val last = sessions.last()

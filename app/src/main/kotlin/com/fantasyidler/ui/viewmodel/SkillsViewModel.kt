@@ -16,6 +16,7 @@ import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.GameDataRepository
+import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
@@ -100,6 +101,7 @@ class SkillsViewModel @Inject constructor(
     private val sessionRepo: SessionRepository,
     private val gameData: GameDataRepository,
     private val questRepo: QuestRepository,
+    private val guildRepo: GuildRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val json: Json,
 ) : ViewModel() {
@@ -587,14 +589,34 @@ class SkillsViewModel @Inject constructor(
                 itemsGained = regularItems,
             )
 
-            // Record quest progress
+            // Record quest / daily / guild progress
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING,
                 Skills.AGILITY, Skills.FIREMAKING, Skills.RUNECRAFTING)
             val craftingSkills = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE)
             when (session.skillName) {
-                in gatheringSkills -> questRepo.recordGathering(session.skillName, regularItems)
-                in craftingSkills  -> questRepo.recordCrafting(session.skillName, regularItems)
-                Skills.PRAYER      -> questRepo.recordBuried(frames.sumOf { it.kills })
+                in gatheringSkills -> {
+                    questRepo.recordGathering(session.skillName, regularItems)
+                    playerRepo.recordDailyGathering(regularItems)
+                    when (session.skillName) {
+                        Skills.AGILITY      -> guildRepo.recordGuildSessions()
+                        Skills.RUNECRAFTING -> guildRepo.recordGuildCrafting(session.skillName, regularItems)
+                        else                -> guildRepo.recordGuildGathering(session.skillName, regularItems)
+                    }
+                }
+                in craftingSkills -> {
+                    questRepo.recordCrafting(session.skillName, regularItems)
+                    playerRepo.recordDailyCrafting(regularItems)
+                    guildRepo.recordGuildCrafting(session.skillName, regularItems)
+                }
+                Skills.PRAYER -> {
+                    val buried = frames.sumOf { it.kills }
+                    questRepo.recordBuried(buried)
+                    playerRepo.recordDailyPrayer(buried)
+                    guildRepo.recordGuildPrayer(buried)
+                }
+            }
+            if (session.skillName == Skills.FIREMAKING) {
+                playerRepo.consumeItems(mapOf(session.activityKey to frames.size))
             }
 
             // Handle pet drops

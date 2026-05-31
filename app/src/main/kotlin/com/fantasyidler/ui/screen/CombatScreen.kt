@@ -297,15 +297,20 @@ fun CombatScreen(
             dragHandle       = { BottomSheetDefaults.DragHandle() },
         ) {
             BossInfoSheet(
-                boss              = boss,
-                skillLevels       = state.skillLevels,
-                availablePotions  = state.availablePotions,
-                potionEffects     = viewModel.potionEffects,
-                selectedPotionKey = state.selectedPotionKey,
-                isStarting        = state.startingSession,
-                onPotionSelected  = viewModel::selectPotion,
-                onStart           = { viewModel.startBossSession(boss.id) },
-                onDismiss         = { viewModel.selectBoss(null) },
+                boss                 = boss,
+                skillLevels          = state.skillLevels,
+                equippedWeapon       = state.equippedWeapon,
+                equippedWeapons      = state.equippedWeapons,
+                selectedWeaponSlot   = state.selectedWeaponSlot,
+                inventory            = state.inventory,
+                availablePotions     = state.availablePotions,
+                potionEffects        = viewModel.potionEffects,
+                selectedPotionKey    = state.selectedPotionKey,
+                isStarting           = state.startingSession,
+                onWeaponSlotSelected = viewModel::selectWeaponSlot,
+                onPotionSelected     = viewModel::selectPotion,
+                onStart              = { viewModel.startBossSession(boss.id) },
+                onDismiss            = { viewModel.selectBoss(null) },
             )
         }
     }
@@ -1572,20 +1577,35 @@ private fun StatRow(
 // Boss info / start sheet
 // ---------------------------------------------------------------------------
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun BossInfoSheet(
     boss: BossData,
     skillLevels: Map<String, Int>,
+    equippedWeapon: EquipmentData?,
+    equippedWeapons: Map<String, EquipmentData>,
+    selectedWeaponSlot: String?,
+    inventory: Map<String, Int>,
     availablePotions: Map<String, Int>,
     potionEffects: Map<String, Map<String, Int>>,
     selectedPotionKey: String?,
     isStarting: Boolean,
+    onWeaponSlotSelected: (String) -> Unit,
     onPotionSelected: (String?) -> Unit,
     onStart: () -> Unit,
     onDismiss: () -> Unit,
 ) {
+    val context   = LocalContext.current
     val combatLvl = combatLevel(skillLevels)
     val canFight  = combatLvl >= boss.combatLevelRequired
+    val combatStyle = when (equippedWeapon?.combatStyle) {
+        "ranged"   -> "ranged"
+        "magic"    -> "magic"
+        "strength" -> "strength"
+        else       -> "attack"
+    }
+    val styleLabel = combatStyle.replaceFirstChar { it.titlecase() }
+    val bestArrow = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
 
     Column(
         modifier = Modifier
@@ -1636,12 +1656,54 @@ private fun BossInfoSheet(
             Text(stringResource(R.string.combat_duration_min, boss.durationMinutes), style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold)
         }
+        StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = GoldPrimary)
+        if (combatStyle == "ranged") {
+            val arrowText = if (bestArrow != null)
+                "${GameStrings.itemName(context, bestArrow)} ×${inventory[bestArrow]}"
+            else stringResource(R.string.combat_no_strength_bonus)
+            StatRow(label = stringResource(R.string.combat_best_arrow), value = arrowText)
+        }
+
+        // Weapon picker
+        if (equippedWeapons.isNotEmpty()) {
+            Spacer(Modifier.height(12.dp))
+            Text(
+                text  = "Weapon",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(4.dp))
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                equippedWeapons.forEach { (slot, weaponData) ->
+                    val isSelected = slot == (selectedWeaponSlot
+                        ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equippedWeapons.containsKey(it) })
+                    FilterChip(
+                        selected = isSelected,
+                        onClick  = { onWeaponSlotSelected(slot) },
+                        label    = {
+                            Column {
+                                Text(
+                                    text  = GameStrings.itemName(context, weaponData.name),
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                                weaponData.combatStyle?.let { style ->
+                                    Text(
+                                        text  = style.replaceFirstChar { it.titlecase() },
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
+                            }
+                        },
+                    )
+                }
+            }
+        }
 
         if (boss.xpRewards.isNotEmpty()) {
             Spacer(Modifier.height(12.dp))
             Text(stringResource(R.string.combat_xp_on_victory), style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
-            val context = LocalContext.current
             for ((skill, xp) in boss.xpRewards) {
                 Row(
                     modifier              = Modifier.fillMaxWidth(),
