@@ -261,7 +261,7 @@
     <string name="label_daily">Giornaliere</string>
     <string name="label_daily_quests">Quest Giornaliere</string>
     <string name="label_daily_reset">Nuove questa alle 06:00</string>
-    <string name="label_daily_reward">2000 monete (1/500: equipaggiamento Nanico)</string>
+    <string name="label_daily_reward">2000 monete (1/100: equipaggiamento Nanico)</string>
     <string name="msg_daily_claimed_coins">Quest giornaliera completata! +2000 coins.</string>
     <string name="msg_daily_claimed_dwarven">Quest giornaliera completata! Hai trovato %1$s!</string>
     <string name="label_hide_completed">Nascondi completate</string>

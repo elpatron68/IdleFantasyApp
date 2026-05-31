@@ -261,7 +261,7 @@
     <string name="label_daily">Per Dag</string>
     <string name="label_daily_quests">Dagelijkse Quests</string>
     <string name="label_daily_reset">Reset om 06:00</string>
-    <string name="label_daily_reward">2000 ducaten (1/500: Dwergenuitrusting)</string>
+    <string name="label_daily_reward">2000 ducaten (1/100: Dwergenuitrusting)</string>
     <string name="msg_daily_claimed_coins">Dagelijkse quest voltooid! +2000 ducaten.</string>
     <string name="msg_daily_claimed_dwarven">Dagelijkse quest voltooid! Je hebt %1$s gevonden!</string>
     <string name="label_hide_completed">Verberg Voltooid</string>

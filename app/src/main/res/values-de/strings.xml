@@ -261,7 +261,7 @@
     <string name="label_daily">Daily</string>
     <string name="label_daily_quests">Tagesaufgaben</string>
     <string name="label_daily_reset">Reset um 6:00 Uhr</string>
-    <string name="label_daily_reward">2.000 Münzen (1/500: Zwergengear)</string>
+    <string name="label_daily_reward">2.000 Münzen (1/100: Zwergengear)</string>
     <string name="msg_daily_claimed_coins">Tagesaufgabe abgeschlossen! +2.000 Münzen.</string>
     <string name="msg_daily_claimed_dwarven">Tagesaufgabe abgeschlossen! Du hast %1$s gefunden!</string>
 

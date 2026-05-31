@@ -252,7 +252,7 @@
     <string name="label_daily">Quotidien</string>
     <string name="label_daily_quests">Quêtes quotidiennes</string>
     <string name="label_daily_reset">Se réinitialise à 6 heures</string>
-    <string name="label_daily_reward">2 000 pièces (1/500 : équipement nanique)</string>
+    <string name="label_daily_reward">2 000 pièces (1/100 : équipement nanique)</string>
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
 
