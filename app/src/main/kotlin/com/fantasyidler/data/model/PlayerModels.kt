@@ -80,6 +80,8 @@ data class PlayerFlags(
     @SerialName("recent_sessions") val recentSessions: List<RecentSession> = emptyList(),
     /** Whether to show the recent activity log FAB on the home screen. */
     @SerialName("show_recent_activity_log") val showRecentActivityLog: Boolean = true,
+    /** Prestige level per skill: skill key → 0–3. */
+    @SerialName("skill_prestige") val skillPrestige: Map<String, Int> = emptyMap(),
 )
 
 /** A single entry in the recent sessions log. */

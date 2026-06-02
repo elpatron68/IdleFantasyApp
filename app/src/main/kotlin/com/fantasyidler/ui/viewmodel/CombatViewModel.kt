@@ -83,6 +83,7 @@ data class CombatUiState(
     val availablePotions: Map<String, Int> = emptyMap(),
     val dungeonRuns: Map<String, Int> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
+    val skillPrestige: Map<String, Int> = emptyMap(),
 )
 
 // ---------------------------------------------------------------------------
@@ -169,6 +170,7 @@ class CombatViewModel @Inject constructor(
                 dungeonRuns             = flags.dungeonRuns,
                 unlockedDungeons        = flags.unlockedDungeons,
                 selectedArrowKey        = if (extra.selectedArrowKey == null) flags.equippedArrows else extra.selectedArrowKey,
+                skillPrestige           = flags.skillPrestige,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
@@ -361,19 +363,20 @@ class CombatViewModel @Inject constructor(
                     gameData.potionEffects[potionKey] ?: emptyMap()
                 } else emptyMap()
 
+                val prestigeMap = flags.skillPrestige
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = gameData.enemies,
-                    playerAttack        = levels[Skills.ATTACK]    ?: 1,
-                    playerStrength      = levels[Skills.STRENGTH]  ?: 1,
-                    playerDefence       = (levels[Skills.DEFENSE]  ?: 1) + totalDefenseBonus,
+                    playerAttack        = (levels[Skills.ATTACK]    ?: 1) + (prestigeMap[Skills.ATTACK]    ?: 0) * 5,
+                    playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + (prestigeMap[Skills.STRENGTH]  ?: 0) * 5,
+                    playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + (prestigeMap[Skills.DEFENSE] ?: 0) * 5,
                     blessingDefBonus    = ChurchRepository.defBonus(flags),
-                    playerHp            = levels[Skills.HITPOINTS] ?: 1,
+                    playerHp            = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMap[Skills.HITPOINTS] ?: 0) * 5,
                     weaponAttackBonus   = totalAttackBonus,
                     weaponStrengthBonus = totalStrengthBonus,
                     combatStyle         = combatStyle,
-                    playerRanged        = levels[Skills.RANGED]    ?: 1,
-                    playerMagic         = levels[Skills.MAGIC]     ?: 1,
+                    playerRanged        = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5,
+                    playerMagic         = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5,
                     arrowStrengthBonus  = arrowStrengthBonus,
                     spellMaxHit         = selectedSpell?.maxHit    ?: 0,
                     agilityLevel        = levels[Skills.AGILITY]   ?: 1,
@@ -500,18 +503,19 @@ class CombatViewModel @Inject constructor(
                 val equippedFoodKeys  = flags.equippedFood.keys
                 val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
 
+                val prestigeMapBoss = flags.skillPrestige
                 val bossFrames = simulateBoss(
                     boss               = boss,
                     bossKey            = bossKey,
-                    playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0),
-                    playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0),
-                    playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0),
-                    playerHp           = levels[Skills.HITPOINTS] ?: 1,
+                    playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + (prestigeMapBoss[Skills.ATTACK]    ?: 0) * 5,
+                    playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0) + (prestigeMapBoss[Skills.STRENGTH]  ?: 0) * 5,
+                    playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0) + (prestigeMapBoss[Skills.DEFENSE] ?: 0) * 5,
+                    playerHp           = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMapBoss[Skills.HITPOINTS] ?: 0) * 5,
                     weaponAttackBonus  = totalAtkBonus,
                     weaponStrBonus     = totalStrBonus,
                     combatStyle        = combatStyle,
-                    playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0),
-                    playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0),
+                    playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + (prestigeMapBoss[Skills.RANGED] ?: 0) * 5,
+                    playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + (prestigeMapBoss[Skills.MAGIC] ?: 0) * 5,
                     arrowStrengthBonus = arrowStrengthBonus,
                     spellMaxHit        = selectedSpell?.maxHit ?: 0,
                     availableArrows    = availableArrows,
@@ -766,6 +770,10 @@ class CombatViewModel @Inject constructor(
 
     fun resultConsumed()   = _extra.update { it.copy(combatResult = null) }
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
+
+    fun prestigeSkill(skillName: String) {
+        viewModelScope.launch { playerRepo.prestigeSkill(skillName) }
+    }
 
     fun confirmStartWithoutFood() {
         val key = _extra.value.pendingDungeonKey ?: return

@@ -263,6 +263,8 @@ fun CombatScreen(
                             totalAttackBonus   = state.totalAttackBonus,
                             totalStrengthBonus = state.totalStrengthBonus,
                             totalDefenseBonus  = state.totalDefenseBonus,
+                            skillPrestige      = state.skillPrestige,
+                            onPrestige         = viewModel::prestigeSkill,
                         )
                     }
                 }
@@ -532,6 +534,8 @@ private fun CombatSkillsTab(
     totalAttackBonus: Int,
     totalStrengthBonus: Int,
     totalDefenseBonus: Int,
+    skillPrestige: Map<String, Int> = emptyMap(),
+    onPrestige: (String) -> Unit = {},
 ) {
     val context = LocalContext.current
     var tappedSkill by remember { mutableStateOf<String?>(null) }
@@ -558,11 +562,13 @@ private fun CombatSkillsTab(
                 else            -> 0
             }
             CombatSkillRow(
-                skillKey  = key,
-                level     = skillLevels[key] ?: 1,
-                xp        = skillXp[key]     ?: 0L,
-                gearBonus = gearBonus,
-                onClick   = { tappedSkill = key },
+                skillKey      = key,
+                level         = skillLevels[key] ?: 1,
+                xp            = skillXp[key]     ?: 0L,
+                gearBonus     = gearBonus,
+                prestigeLevel = skillPrestige[key] ?: 0,
+                onPrestige    = if (key != Skills.PRAYER) ({ onPrestige(key) }) else null,
+                onClick       = { tappedSkill = key },
             )
         }
         item { Spacer(Modifier.height(16.dp)) }
@@ -575,14 +581,38 @@ private fun CombatSkillRow(
     level: Int,
     xp: Long,
     gearBonus: Int = 0,
+    prestigeLevel: Int = 0,
+    onPrestige: (() -> Unit)? = null,
     onClick: () -> Unit = {},
 ) {
     val context  = LocalContext.current
     val name     = GameStrings.skillName(context, skillKey)
     val emoji    = GameStrings.skillEmoji(skillKey)
     val progress = xpProgressFraction(xp)
+    var showPrestigeConfirm by remember { mutableStateOf(false) }
 
-    Row(
+    if (showPrestigeConfirm) {
+        val nextPrestige = prestigeLevel + 1
+        AlertDialog(
+            onDismissRequest = { showPrestigeConfirm = false },
+            title = { Text(stringResource(R.string.prestige_confirm_title, name)) },
+            text  = { Text(stringResource(R.string.prestige_confirm_message_stat, name, nextPrestige * 5)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showPrestigeConfirm = false
+                    onPrestige?.invoke()
+                }) { Text(stringResource(R.string.prestige)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showPrestigeConfirm = false }) {
+                    Text(stringResource(R.string.btn_cancel))
+                }
+            },
+        )
+    }
+
+    Column(Modifier.fillMaxWidth()) {
+        Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
@@ -649,6 +679,42 @@ private fun CombatSkillRow(
                 color            = GoldPrimary,
                 trackColor       = MaterialTheme.colorScheme.surfaceVariant,
             )
+        }
+    }
+
+        // Prestige section: stars and button, outside the clickable row
+        if (prestigeLevel > 0 || (onPrestige != null && level >= 99)) {
+            Row(
+                modifier              = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 72.dp, end = 16.dp, bottom = 6.dp),
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = GoldPrimary,
+                )
+                when {
+                    onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
+                        TextButton(onClick = { showPrestigeConfirm = true }) {
+                            Text(
+                                text  = stringResource(R.string.prestige),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = GoldPrimary,
+                            )
+                        }
+                    }
+                    prestigeLevel >= 3 -> {
+                        Text(
+                            text  = stringResource(R.string.prestige_max),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            }
         }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))

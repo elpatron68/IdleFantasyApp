@@ -216,9 +216,11 @@ class GuildRepository @Inject constructor(
         questProgressDao.upsert(row.copy(completed = true, completedAt = System.currentTimeMillis()))
 
         val flags = playerRepo.getFlags()
-        // Read completedIds AFTER marking the quest complete so this quest counts toward the gate.
+        // completedIds includes the just-claimed quest (needed for newLevel gate).
         val completedIds = loadCompletedQuestIds()
-        val oldLevel = guildLevel(quest.guild, flags.guildReputation[quest.guild] ?: 0L, completedIds)
+        // oldLevel must reflect the state BEFORE this quest was counted, so exclude it.
+        val preCompleteIds = completedIds - questId
+        val oldLevel = guildLevel(quest.guild, flags.guildReputation[quest.guild] ?: 0L, preCompleteIds)
         val newRep = (flags.guildReputation[quest.guild] ?: 0L) + quest.rewards.reputation
         val newLevel = guildLevel(quest.guild, newRep, completedIds)
 
