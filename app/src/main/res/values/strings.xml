@@ -766,7 +766,7 @@
     <string name="church_effect_coins">+%1$d%% coin drops for 24 hours</string>
     <string name="church_cost_bones">Costs %1$d bones</string>
     <string name="church_confirm_title">Activate Blessing?</string>
-    <string name="church_bones_available">You have %1$d bones</string>
+    <string name="church_bones_available">You have %1$d bones (all types)</string>
     <string name="church_not_enough_bones">Not enough bones (need %1$d)</string>
     <string name="church_already_active">A blessing is already active</string>
 

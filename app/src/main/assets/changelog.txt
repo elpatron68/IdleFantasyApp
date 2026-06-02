@@ -1,3 +1,8 @@
+v1.7.7
+• New: Basic Staff added to the Equipment shop for 500 coins, so magic builds no longer require combat drops to get started
+• Fix: Prestiging a skill now cancels any active session and evicts queued actions for that skill, refunding materials and coins; previously queued high-XP actions could complete after the reset and slingshot the skill back up from level 1
+• New: Church now accepts all bone types (Big Bones, Giant Bones, Dragon Bones) in addition to regular bones; cheaper bones are consumed first, and the confirmation dialog shows your total bone equivalent across all types
+
 v1.7.6
 • Fix: Guild progression quests now correctly track activity after claiming a progression quest while already above the reputation threshold; previously guildQuestResetLevels was not set at claim time, causing the retroactive-reset check to re-run on every guild screen visit
 • Fix: Expeditions screen is now fully translated — skill section headers, dungeon names, dungeon descriptions, lore note counter, and lock reasons are all localised in German, Spanish, French, Italian, Dutch, and Turkish

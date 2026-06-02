@@ -745,7 +745,7 @@
     <string name="church_effect_coins">+%1$d%% de drops de pièces pendant 24 heures</string>
     <string name="church_cost_bones">Coûte %1$d os</string>
     <string name="church_confirm_title">Activer la bénédiction ?</string>
-    <string name="church_bones_available">Vous avez %1$d os</string>
+    <string name="church_bones_available">Vous avez %1$d os (tous types)</string>
     <string name="church_not_enough_bones">Os insuffisants (besoin de %1$d)</string>
     <string name="church_already_active">Une bénédiction est déjà active</string>
     <string name="blessing_blessed_focus_name">Concentration bénie</string>

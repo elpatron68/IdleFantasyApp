@@ -750,7 +750,7 @@
     <string name="church_effect_coins">+%1$d%% monete raccolte per 24 ore</string>
     <string name="church_cost_bones">Costo %1$d ossa</string>
     <string name="church_confirm_title">Attivare Benedizione?</string>
-    <string name="church_bones_available">Hai %1$d ossa</string>
+    <string name="church_bones_available">Hai %1$d ossa (tutti i tipi)</string>
     <string name="church_not_enough_bones">Non hai abbastanza ossa (ne servono %1$d)</string>
     <string name="church_already_active">Una benedizione è già attiva</string>
 

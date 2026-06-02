@@ -76,7 +76,7 @@ fun ChurchScreen(
             )
             val name      = if (nameResId != 0) stringResource(nameResId) else blessing.key
             val cost      = ChurchRepository.boneCostFor(blessing)
-            val hasEnough = state.bonesInInventory >= cost
+            val hasEnough = state.totalBoneEquivalent >= cost
             AlertDialog(
                 onDismissRequest = viewModel::dismissConfirm,
                 title = { Text(stringResource(R.string.church_confirm_title), fontWeight = FontWeight.Bold) },
@@ -90,7 +90,7 @@ fun ChurchScreen(
                             style = MaterialTheme.typography.bodyMedium,
                         )
                         Text(
-                            text  = stringResource(R.string.church_bones_available, state.bonesInInventory),
+                            text  = stringResource(R.string.church_bones_available, state.totalBoneEquivalent),
                             style = MaterialTheme.typography.bodySmall,
                             color = if (hasEnough) MaterialTheme.colorScheme.onSurfaceVariant
                                     else MaterialTheme.colorScheme.error,

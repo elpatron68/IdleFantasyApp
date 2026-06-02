@@ -258,6 +258,13 @@ class PlayerRepository @Inject constructor(
         updateFlags(flags.copy(sessionQueue = queue.toMutableList().apply { removeAt(index) }))
     }
 
+    suspend fun evictQueueForSkill(skillName: String): List<QueuedAction> {
+        val flags = getFlags()
+        val (evicted, remaining) = flags.sessionQueue.partition { it.skillName == skillName }
+        if (evicted.isNotEmpty()) updateFlags(flags.copy(sessionQueue = remaining))
+        return evicted
+    }
+
     suspend fun moveQueueItem(fromIndex: Int, toIndex: Int) {
         val flags = getFlags()
         val queue = flags.sessionQueue.toMutableList()

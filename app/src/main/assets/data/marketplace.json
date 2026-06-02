@@ -311,5 +311,17 @@
         "mercantile_level_required": 99
       }
     }
+  },
+  "equipment": {
+    "category_name": "Equipment",
+    "description": "Weapons and gear for adventurers",
+    "items": {
+      "basic_staff": {
+        "display_name": "Basic Staff",
+        "description": "A simple wooden staff. Good for training magic.",
+        "price": 500,
+        "stock": "unlimited"
+      }
+    }
   }
 }

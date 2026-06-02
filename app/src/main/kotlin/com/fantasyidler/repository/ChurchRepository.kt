@@ -88,20 +88,51 @@ class ChurchRepository @Inject constructor(
             blessing.prayerLevelRequired >= 10 -> 20
             else                               -> 10
         }
+
+        // xp_per_bone values for each accepted bone type
+        private val BONE_XP = mapOf(
+            "dragon_bone" to 80,
+            "giant_bones" to 40,
+            "big_bones"   to 20,
+            "bones"       to 10,
+        )
+        private val BONE_TYPES_ORDERED = listOf("bones", "big_bones", "giant_bones", "dragon_bone")
+        private const val BASE_BONE_XP = 10  // xp_per_bone for regular bones
+
+        /** Total bone budget expressed in regular-bone equivalents (floor division). */
+        fun totalBoneEquivalent(inventory: Map<String, Int>): Int =
+            BONE_XP.entries.sumOf { (key, xp) -> (inventory[key] ?: 0) * xp } / BASE_BONE_XP
+
+        private fun totalBoneXp(inventory: Map<String, Int>): Int =
+            BONE_XP.entries.sumOf { (key, xp) -> (inventory[key] ?: 0) * xp }
     }
 
     fun blessingsForLevel(prayerLevel: Int): List<BlessingData> =
         ALL_BLESSINGS.filter { it.prayerLevelRequired <= prayerLevel }
 
     suspend fun activateBlessing(key: String): BlessingActivateResult {
-        val flags   = playerRepo.getFlags()
+        val flags     = playerRepo.getFlags()
         if (activeBlessing(flags) != null) return BlessingActivateResult.AlreadyActive
-        val blessing = BY_KEY[key] ?: return BlessingActivateResult.AlreadyActive
-        val cost     = boneCostFor(blessing)
+        val blessing  = BY_KEY[key] ?: return BlessingActivateResult.AlreadyActive
+        val cost      = boneCostFor(blessing)
         val inventory = playerRepo.getInventory()
-        val bonesHave = inventory["bones"] ?: 0
-        if (bonesHave < cost) return BlessingActivateResult.NotEnoughBones(cost)
-        playerRepo.consumeItems(mapOf("bones" to cost))
+        if (totalBoneXp(inventory) < cost * BASE_BONE_XP) return BlessingActivateResult.NotEnoughBones(cost)
+
+        // Consume bone types greedily from most to least valuable
+        val toConsume = mutableMapOf<String, Int>()
+        var remainingXp = cost * BASE_BONE_XP
+        for (boneKey in BONE_TYPES_ORDERED) {
+            if (remainingXp <= 0) break
+            val xp   = BONE_XP[boneKey] ?: continue
+            val have = inventory[boneKey] ?: 0
+            if (have == 0) continue
+            val needed  = (remainingXp + xp - 1) / xp
+            val consume = minOf(have, needed)
+            toConsume[boneKey] = consume
+            remainingXp -= consume * xp
+        }
+        playerRepo.consumeItems(toConsume)
+
         val now = System.currentTimeMillis()
         playerRepo.updateFlags(
             flags.copy(

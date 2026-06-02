@@ -1,0 +1,3 @@
+• New: Basic Staff added to the Equipment shop for 500 coins, so magic builds no longer require combat drops to get started
+• Fix: Prestiging a skill now cancels any active session and evicts queued actions for that skill, refunding materials and coins; previously queued high-XP actions could complete after the reset and slingshot the skill back up from level 1
+• New: Church now accepts all bone types (Big Bones, Giant Bones, Dragon Bones) in addition to regular bones; cheaper bones are consumed first, and the confirmation dialog shows your total bone equivalent across all types

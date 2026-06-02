@@ -29,7 +29,7 @@ data class ChurchUiState(
     val unlockedBlessingKeys: Set<String> = emptySet(),
     val activeBlessing: BlessingData? = null,
     val activeBlessingRemainingMs: Long = 0L,
-    val bonesInInventory: Int = 0,
+    val totalBoneEquivalent: Int = 0,
     val pendingBlessingKey: String? = null,
     val snackbarMessage: String? = null,
 )
@@ -62,7 +62,7 @@ class ChurchViewModel @Inject constructor(
             unlockedBlessingKeys      = churchRepo.blessingsForLevel(prayerLevel).map { it.key }.toSet(),
             activeBlessing            = active,
             activeBlessingRemainingMs = remaining,
-            bonesInInventory          = inventory["bones"] ?: 0,
+            totalBoneEquivalent       = ChurchRepository.totalBoneEquivalent(inventory),
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ChurchUiState())
 

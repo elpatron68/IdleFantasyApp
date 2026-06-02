@@ -772,7 +772,24 @@ class CombatViewModel @Inject constructor(
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
 
     fun prestigeSkill(skillName: String) {
-        viewModelScope.launch { playerRepo.prestigeSkill(skillName) }
+        viewModelScope.launch {
+            val activeSession = sessionRepo.getActiveSession()
+            val abandonedSession = activeSession?.takeIf { it.skillName == skillName }
+            if (abandonedSession != null) {
+                val frames: List<SessionFrame> = json.decodeFromString(abandonedSession.frames)
+                playerSessionMaterials(abandonedSession.skillName, abandonedSession.activityKey, frames.sumOf { it.kills }, gameData)
+                    ?.let { playerRepo.addItems(it) }
+                sessionRepo.abandonSession(abandonedSession.sessionId)
+            }
+            val evicted = playerRepo.evictQueueForSkill(skillName)
+            for (action in evicted) {
+                if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
+                playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)
+                    ?.let { playerRepo.addItems(it) }
+            }
+            playerRepo.prestigeSkill(skillName)
+            if (abandonedSession != null) queuedSessionStarter.startNextQueued()
+        }
     }
 
     fun confirmStartWithoutFood() {
