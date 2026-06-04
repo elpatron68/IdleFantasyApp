@@ -75,27 +75,27 @@
 
     <!-- Cooking - Beef -->
     <string name="quest_cooking_beef_1_name">Kochen - Rindfleisch I</string>
-    <string name="quest_cooking_beef_1_objective">Kocht 100x Rindfleisch</string>
+    <string name="quest_cooking_beef_1_objective">Kocht 100 Rindfleisch</string>
     <string name="quest_cooking_beef_2_name">Kochen - Rindfleisch II</string>
-    <string name="quest_cooking_beef_2_objective">Kocht 250x Rindfleisch</string>
+    <string name="quest_cooking_beef_2_objective">Kocht 250 Rindfleisch</string>
     <string name="quest_cooking_beef_3_name">Kochen - Rindfleisch III</string>
-    <string name="quest_cooking_beef_3_objective">Kocht 500x Rindfleisch</string>
+    <string name="quest_cooking_beef_3_objective">Kocht 500 Rindfleisch</string>
 
     <!-- Cooking - Chicken -->
     <string name="quest_cooking_chicken_1_name">Kochen — Hähnchen I</string>
-    <string name="quest_cooking_chicken_1_objective">Kocht 100x Hähnchen</string>
+    <string name="quest_cooking_chicken_1_objective">Kocht 100 Hähnchen</string>
     <string name="quest_cooking_chicken_2_name">Kochen — Hähnchen II</string>
-    <string name="quest_cooking_chicken_2_objective">Kocht 250x Hähnchen</string>
+    <string name="quest_cooking_chicken_2_objective">Kocht 250 Hähnchen</string>
     <string name="quest_cooking_chicken_3_name">Kochen — Hähnchen III</string>
-    <string name="quest_cooking_chicken_3_objective">Kocht 500x Hähnchen</string>
+    <string name="quest_cooking_chicken_3_objective">Kocht 500 Hähnchen</string>
 
     <!-- Cooking - Mutton -->
     <string name="quest_cooking_mutton_1_name">Kochen – Lammfleisch I</string>
-    <string name="quest_cooking_mutton_1_objective">Kocht 100x Lammfleisch</string>
+    <string name="quest_cooking_mutton_1_objective">Kocht 100 Lammfleisch</string>
     <string name="quest_cooking_mutton_2_name">Kochen – Lammfleisch II</string>
-    <string name="quest_cooking_mutton_2_objective">Kocht 250x Lammfleisch</string>
+    <string name="quest_cooking_mutton_2_objective">Kocht 250 Lammfleisch</string>
     <string name="quest_cooking_mutton_3_name">Kochen – Lammfleisch III</string>
-    <string name="quest_cooking_mutton_3_objective">Kocht 500x Lammfleisch</string>
+    <string name="quest_cooking_mutton_3_objective">Kocht 500 Lammfleisch</string>
 
     <!-- Fletching -->
     <string name="quest_fletching_1_name">Herstellung I</string>

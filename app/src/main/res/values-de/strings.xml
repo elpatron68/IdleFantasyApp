@@ -153,7 +153,7 @@
     <!-- Translator note: %1$d = coin amount -->
     <string name="format_price_coins">%1$d Münzen</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
-    <string name="format_level_requirement">Benötigtes Level %1$d %2$s</string>
+    <string name="format_level_requirement">Benötigt Level %1$d %2$s</string>
     <!-- Translator note: %1$s = formatted XP amount -->
     <string name="format_xp_per_action">%1$s XP pro Aktion</string>
     <!-- Translator note: %1$d = patch number -->
@@ -424,16 +424,16 @@
     <string name="profile_food_desc">×%1$d  •  heilt %2$d LP</string>
     <string name="profile_choose_slot">%1$s auswählen</string>
     <string name="profile_no_items">Keine passenden Gegenstände im Inventar</string>
-    <string name="profile_stat_atk">Atk</string>
-    <string name="profile_stat_str">Str</string>
+    <string name="profile_stat_atk">ANG</string>
+    <string name="profile_stat_str">STÄ</string>
     <string name="profile_stat_ranged">Fernkampf</string>
     <string name="profile_stat_magic">Magie</string>
     <string name="profile_stat_mining">Bergbau</string>
-    <string name="profile_stat_wc">WC</string>
+    <string name="profile_stat_wc">Holzfällen</string>
     <string name="profile_stat_fishing">Angeln</string>
     <string name="profile_stat_farming">Landwirtschaft</string>
-    <string name="profile_stat_def">Def</string>
-    <string name="profile_req_lv">Benötigtes Level</string>
+    <string name="profile_stat_def">VER</string>
+    <string name="profile_req_lv">Benötigt Level </string>
 
     <!-- ===== translate — SkillsScreen ===== -->
     <string name="skills_session_duration">Dauer: %1$dm</string>
@@ -834,6 +834,7 @@
     <string name="settings_lang_dutch">Nederlands</string>
 
     <!-- Prestige system -->
+    <!-- TODO -->
     <string name="prestige">Prestige</string>
     <string name="prestige_max">Max Prestige</string>
     <string name="prestige_confirm_title">Prestige %s?</string>
