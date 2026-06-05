@@ -1,3 +1,14 @@
+v1.7.12
+• Fix: Runecrafting ash catalyst now shows the total runes you will receive per essence (base level multiplier + ash bonus) instead of only the ash bonus, so the displayed amount matches what is actually collected
+• Fix: Firemaking and Runecrafting sessions now correctly advance all quests and guild requests; the quest type mismatch that caused progress to be silently ignored has been resolved
+• New: Arrows and runes are no longer fully lost after a combat session; your Ranged or Magic level gives you a 25% to 75% chance to reclaim each arrow or rune used
+• New: The session completion screen now shows Arrows Consumed, Arrows Reclaimed, Runes Consumed, and Runes Reclaimed so you can see exactly what was spent and recovered
+• Fix: Boss sessions now correctly deduct arrows from your inventory on completion, matching the behaviour of dungeon sessions
+• Fix: XP bonus display when both a 2x boost and tithe blessing are active now shows the full multiplier chain (e.g. "232 x 2 x 1.25") instead of a misleading "(+116)" annotation
+• Fix: Recent Activity button moved from a floating action button to the top bar (next to Settings), so it no longer overlaps queued session cancel buttons when multiple sessions are queued
+• Fix: XP estimates in the Skills sheet for Mining, Woodcutting, Fishing, and Agility now correctly factor in the active 2x XP boost and prayer blessing multiplier
+• Fix: Archer's Ring and Seers' Ring now correctly display their Ranged/Magic attack bonuses, and those bonuses are now applied in combat (they were parsed from equipment data but silently ignored)
+
 v1.7.11
 • Fix: Guild quest and daily request names and descriptions are now localised; names use string resources with English placeholders ready for translators, descriptions are generated from localised templates
 • Fix: Agility course detail ("Lv. X • Y XP/lap") and crafting level requirement are now localised

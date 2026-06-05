@@ -315,7 +315,7 @@ fun SettingsScreen(
 
             SettingsRow(
                 title    = "Recent Activity Log",
-                subtitle = "Show clipboard button on the home screen",
+                subtitle = stringResource(R.string.settings_recent_activity_desc),
                 trailing = {
                     Switch(
                         checked         = showRecentActivityLog,

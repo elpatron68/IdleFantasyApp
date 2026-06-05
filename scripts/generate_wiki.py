@@ -143,8 +143,18 @@ There are {len(courses)} courses. Success rate scales with how far your level ex
 
 {table(['Course', 'Level Required', 'XP / Lap', 'XP / Min (est.)', 'XP / Session (est.)'], course_rows)}
 
-> XP estimates assume ~90% success rate. At the exact level requirement success rate is 60%; it reaches 95% when your level is 17+ above the requirement.
+> XP estimates assume ~90% success rate. At the exact level requirement success rate is 80%; it reaches 95% when your level is 8 above the requirement.
 """
+
+
+def _tool_table(slot: str, efficiency_key: str) -> str:
+    equipment = load("equipment.json")
+    tools = sorted(
+        [v for v in equipment.values() if v.get("slot") == slot and efficiency_key in v],
+        key=lambda v: (list(v.get("requirements", {}).values() or [0])[0], v[efficiency_key])
+    )
+    rows = [[t["display_name"], list(t.get("requirements", {}).values() or [1])[0], f"{t[efficiency_key]:.2f}×"] for t in tools]
+    return table(["Tool", "Level Required", "Efficiency"], rows)
 
 
 def gen_mining() -> str:
@@ -154,7 +164,19 @@ def gen_mining() -> str:
          for o in ores.values()],
         key=lambda r: r[1]
     )
-    return f"# Mining\n\nMine ores from the earth. Gems have a small chance to drop alongside any ore.\n\n{table(['Ore','Level Required','XP / Ore'], rows)}\n\nTools: equip a **Pickaxe** (bronze through runite) to increase ore yield.\n"
+    tool_rows = _tool_table("pickaxe", "mining_efficiency")
+    return f"""# Mining
+
+Mine ores from the earth. Gems have a small chance to drop alongside any ore.
+
+{table(['Ore','Level Required','XP / Ore'], rows)}
+
+## Pickaxes
+
+Equip a pickaxe to multiply how many ores you gather per session. Higher-tier pickaxes require a higher Mining level.
+
+{tool_rows}
+"""
 
 
 def gen_woodcutting() -> str:
@@ -164,7 +186,19 @@ def gen_woodcutting() -> str:
          for t in trees.values()],
         key=lambda r: r[1]
     )
-    return f"# Woodcutting\n\nChop trees to gather logs used in Fletching and Firemaking.\n\n{table(['Tree','Level Required','XP / Log','Log'], rows)}\n\nTools: equip an **Axe** (bronze through runite) to increase log yield.\n"
+    tool_rows = _tool_table("axe", "woodcutting_efficiency")
+    return f"""# Woodcutting
+
+Chop trees to gather logs used in Fletching and Firemaking.
+
+{table(['Tree','Level Required','XP / Log','Log'], rows)}
+
+## Axes
+
+Equip an axe to multiply how many logs you gather per session. Higher-tier axes require a higher Woodcutting level.
+
+{tool_rows}
+"""
 
 
 def gen_firemaking() -> str:
@@ -185,7 +219,19 @@ def gen_fishing() -> str:
          for k, v in xp_ranges.items()],
         key=lambda r: int(r[0].split()[1].rstrip("+"))
     )
-    return f"# Fishing\n\nFish from the waters. XP and drops scale with your Fishing level.\n\n{table(['Level Tier','Min XP / Min','Max XP / Min','Avg XP / Session'], rows)}\n\nTools: equip a **Fishing Rod** (bronze through runite) to increase catch rate.\n"
+    tool_rows = _tool_table("fishing_rod", "fishing_efficiency")
+    return f"""# Fishing
+
+Fish from the waters. XP and drops scale with your Fishing level.
+
+{table(['Level Tier','Min XP / Min','Max XP / Min','Avg XP / Session'], rows)}
+
+## Fishing Rods
+
+Equip a fishing rod to multiply how many fish you catch per session. Higher-tier rods require a higher Fishing level.
+
+{tool_rows}
+"""
 
 
 def gen_farming() -> str:
@@ -203,13 +249,25 @@ def gen_farming() -> str:
         ] for c in crops.values()],
         key=lambda r: r[1]
     )
+    equipment = load("equipment.json")
+    hoes = sorted(
+        [v for v in equipment.values() if v.get("slot") == "hoe" and "farming_efficiency" in v],
+        key=lambda v: list(v.get("requirements", {}).values() or [0])[0]
+    )
+    hoe_rows = [[h["display_name"], list(h.get("requirements", {}).values() or [1])[0], f"+{int(h['farming_efficiency']*100)}%"] for h in hoes]
     return f"""# Farming
 
 Plant seeds in up to **5 patches** and return after the growth time to harvest.
 
 {table(['Crop','Level','Seed','Seed Cost','Growth Time','Planting XP','Harvest XP','Yield'], rows)}
 
-Seeds can be purchased from the **Shop** under Seeds & Farming. Equip a **Hoe** to increase harvest yield.
+Seeds can be purchased from the **Shop** under Seeds & Farming.
+
+## Hoes
+
+Equip a hoe to increase your harvest yield. The bonus is applied on top of the base yield.
+
+{table(['Hoe','Level Required','Yield Bonus'], hoe_rows)}
 """
 
 

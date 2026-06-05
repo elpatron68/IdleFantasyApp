@@ -15,6 +15,7 @@ import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
@@ -66,6 +67,7 @@ data class SkillsUiState(
     val woodcuttingEfficiency: Float = 1.0f,
     val fishingEfficiency: Float = 1.0f,
     val farmingEfficiency: Float = 1.0f,
+    val xpBonusMult: Float = 1.0f,
     val sessionDurationMs: Long = 0L,
     val skillPrestige: Map<String, Int> = emptyMap(),
     val inventory: Map<String, Int> = emptyMap(),
@@ -136,6 +138,7 @@ class SkillsViewModel @Inject constructor(
                 woodcuttingEfficiency = toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         0),
                 fishingEfficiency     = toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, 0),
                 farmingEfficiency     = toolEfficiency(equipped[EquipSlot.HOE],         EquipSlot.HOE,         0),
+                xpBonusMult           = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags),
                 sessionDurationMs     = SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1),
                 skillPrestige         = flags.skillPrestige,
                 inventory             = inv,

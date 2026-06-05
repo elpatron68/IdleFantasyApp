@@ -115,6 +115,10 @@
     <string name="label_weapon">Waffe</string>
     <string name="label_armour">Rüstung</string>
     <string name="label_food">Essen</string>
+    <string name="label_arrows_consumed">Pfeile verbraucht</string>
+    <string name="label_arrows_reclaimed">Pfeile zurückgewonnen</string>
+    <string name="label_runes_consumed">Runen verbraucht</string>
+    <string name="label_runes_reclaimed">Runen zurückgewonnen</string>
     <string name="label_arrows">Pfeile</string>
     <string name="label_runes">Runen</string>
     <string name="label_spell">Zauber</string>
@@ -245,6 +249,7 @@
     <string name="label_shop_desc">Artikel kaufen und verkaufen</string>
     <string name="label_no_session_hint">Begebt Euch zu Fähigkeiten oder Kampf, um mit dem Training zu beginnen.</string>
     <string name="label_recent_activity">Letzte Aktivität</string>
+    <string name="settings_recent_activity_desc">Schaltfläche „Letzte Aktivität" in der Kopfzeile der Startseite anzeigen</string>
     <string name="label_no_sessions_yet">Noch keine Aktivitäten abgeschlossen.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -931,6 +936,6 @@
     <string name="farming_fertilized">Gedüngt</string>
     <string name="catalyst_optional">Aschen-Katalysator (opt.)</string>
     <string name="catalyst_enhanced_output">Produziert verbesserten Trank</string>
-    <string name="catalyst_rune_bonus">+%1$d Rune pro Essenz</string>
+    <string name="catalyst_rune_bonus">%1$d Runen pro Essenz</string>
     <string name="catalyst_none">Kein Katalysator</string>
 </resources>

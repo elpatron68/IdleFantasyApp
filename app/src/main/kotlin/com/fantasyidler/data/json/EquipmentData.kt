@@ -13,6 +13,10 @@ data class EquipmentData(
     @SerialName("attack_bonus")           val attackBonus: Int = 0,
     @SerialName("strength_bonus")         val strengthBonus: Int = 0,
     @SerialName("defense_bonus")          val defenseBonus: Int = 0,
+    @SerialName("ranged_attack_bonus")    val rangedAttackBonus: Int? = null,
+    @SerialName("ranged_strength_bonus")  val rangedStrengthBonus: Int? = null,
+    @SerialName("magic_attack_bonus")     val magicAttackBonus: Int? = null,
+    @SerialName("magic_damage_bonus")     val magicDamageBonus: Int? = null,
     val requirements: Map<String, Int> = emptyMap(),
     @SerialName("infinite_runes")          val infiniteRunes: String? = null,
     // Gathering tool efficiency fields (null for combat gear)

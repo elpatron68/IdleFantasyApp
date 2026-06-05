@@ -105,6 +105,10 @@
     <string name="label_weapon">Weapon</string>
     <string name="label_armour">Armour</string>
     <string name="label_food">Comida</string>
+    <string name="label_arrows_consumed">Flechas consumidas</string>
+    <string name="label_arrows_reclaimed">Flechas recuperadas</string>
+    <string name="label_runes_consumed">Runas consumidas</string>
+    <string name="label_runes_reclaimed">Runas recuperadas</string>
     <string name="label_arrows">Flechas</string>
     <string name="label_runes">Runas</string>
     <string name="label_spell">Hechizo</string>
@@ -234,6 +238,7 @@
     <string name="label_shop_desc">Compra y vende artículos</string>
     <string name="label_no_session_hint">Dirígete a Habilidades o Combate para comenzar a entrenar.</string>
     <string name="label_recent_activity">Actividad Reciente</string>
+    <string name="settings_recent_activity_desc">Mostrar el botón de Actividad Reciente en el encabezado de la pantalla de inicio</string>
     <string name="label_no_sessions_yet">Aún no se han completado sesiones.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -952,6 +957,6 @@
     <string name="farming_fertilized">Fertilizado</string>
     <string name="catalyst_optional">Catalizador de ceniza (opc.)</string>
     <string name="catalyst_enhanced_output">Produce poción mejorada</string>
-    <string name="catalyst_rune_bonus">+%1$d runa por esencia</string>
+    <string name="catalyst_rune_bonus">%1$d runas por esencia</string>
     <string name="catalyst_none">Sin catalizador</string>
 </resources>

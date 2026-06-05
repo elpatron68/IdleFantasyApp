@@ -213,6 +213,7 @@ fun SkillsScreen(
                     sessionDurationMs = state.sessionDurationMs,
                     currentXp         = state.skillXp[Skills.MINING] ?: 0L,
                     efficiency        = state.miningEfficiency,
+                    xpBonusMult       = state.xpBonusMult,
                     onSelect          = { oreKey -> viewModel.startMiningSession(oreKey) },
                 )
                 is SheetState.Woodcutting -> WoodcuttingSheet(
@@ -223,6 +224,7 @@ fun SkillsScreen(
                     sessionDurationMs = state.sessionDurationMs,
                     currentXp         = state.skillXp[Skills.WOODCUTTING] ?: 0L,
                     efficiency        = state.woodcuttingEfficiency,
+                    xpBonusMult       = state.xpBonusMult,
                     onSelect          = { treeKey -> viewModel.startWoodcuttingSession(treeKey) },
                 )
                 is SheetState.Fishing -> FishingSheet(
@@ -233,6 +235,7 @@ fun SkillsScreen(
                     sessionDurationMs = state.sessionDurationMs,
                     currentXp         = state.skillXp[Skills.FISHING] ?: 0L,
                     efficiency        = state.fishingEfficiency,
+                    xpBonusMult       = state.xpBonusMult,
                     onSelect          = { fishKey -> viewModel.startFishingSession(fishKey) },
                 )
                 is SheetState.Agility -> AgilitySheet(
@@ -242,6 +245,7 @@ fun SkillsScreen(
                     isQueueFull       = state.queueSize >= 3,
                     sessionDurationMs = state.sessionDurationMs,
                     currentXp         = state.skillXp[Skills.AGILITY] ?: 0L,
+                    xpBonusMult       = state.xpBonusMult,
                     onSelect          = { courseKey -> viewModel.startAgilitySession(courseKey) },
                 )
                 is SheetState.Firemaking -> FiremakingSheet(
@@ -692,6 +696,7 @@ internal fun MiningSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    xpBonusMult: Float = 1f,
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -721,7 +726,7 @@ internal fun MiningSheet(
             ores.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, ore) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(ore.xpPerOre, efficiency)
+                    val xpGain = SkillSimulator.estimateGatheringXp(ore.xpPerOre, efficiency * xpBonusMult)
                     ActivityRow(
                         name             = GameStrings.itemName(context, key),
                         detail           = stringResource(R.string.skills_level_req_xp, ore.levelRequired, ore.xpPerOre),
@@ -757,6 +762,7 @@ internal fun WoodcuttingSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    xpBonusMult: Float = 1f,
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -786,7 +792,7 @@ internal fun WoodcuttingSheet(
             trees.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, tree) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(tree.xpPerLog, efficiency)
+                    val xpGain = SkillSimulator.estimateGatheringXp(tree.xpPerLog, efficiency * xpBonusMult)
                     ActivityRow(
                         name             = GameStrings.itemName(context, tree.logName),
                         detail           = stringResource(R.string.skills_log_desc, tree.levelRequired, tree.xpPerLog),
@@ -822,6 +828,7 @@ internal fun FishingSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    xpBonusMult: Float = 1f,
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -851,7 +858,7 @@ internal fun FishingSheet(
             fish.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, f) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(f.xpPerCatch, efficiency)
+                    val xpGain = SkillSimulator.estimateGatheringXp(f.xpPerCatch, efficiency * xpBonusMult)
                     ActivityRow(
                         name             = GameStrings.itemName(context, key),
                         detail           = stringResource(R.string.skills_fish_desc, f.levelRequired, f.xpPerCatch),
@@ -999,6 +1006,7 @@ internal fun AgilitySheet(
     isQueueFull: Boolean,
     sessionDurationMs: Long,
     currentXp: Long = 0L,
+    xpBonusMult: Float = 1f,
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -1029,7 +1037,7 @@ internal fun AgilitySheet(
             courses.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, course) ->
-                    val xpGain = SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel)
+                    val xpGain = (SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel) * xpBonusMult).toLong()
                     ActivityRow(
                         name             = course.displayName,
                         detail           = context.getString(R.string.skills_agility_course_detail, course.levelRequired, course.xpPerSuccess),
@@ -1571,8 +1579,14 @@ internal fun RunecraftingSheet(
                 Spacer(Modifier.height(8.dp))
                 Text(stringResource(R.string.catalyst_optional), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
                 Spacer(Modifier.height(4.dp))
+                val rcLevel = XpTable.levelForXp(currentXp)
+                val rcBase = when {
+                    rcLevel >= 75 -> 3
+                    rcLevel >= 50 -> 2
+                    else          -> 1
+                }
                 (listOf(null) + availableAshes).forEach { ashKey ->
-                    val bonus = when (ashKey) {
+                    val totalRunes = rcBase + when (ashKey) {
                         "ashes","oak_ashes","willow_ashes" -> 1
                         "maple_ashes","yew_ashes"         -> 2
                         "magic_ashes"                     -> 3
@@ -1590,7 +1604,7 @@ internal fun RunecraftingSheet(
                             color = if (selectedAshKey == ashKey) GoldPrimary else MaterialTheme.colorScheme.onSurface,
                             fontWeight = if (selectedAshKey == ashKey) FontWeight.SemiBold else FontWeight.Normal,
                         )
-                        if (ashKey != null) Text(stringResource(R.string.catalyst_rune_bonus, bonus), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        if (ashKey != null) Text(stringResource(R.string.catalyst_rune_bonus, totalRunes), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }

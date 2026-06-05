@@ -105,6 +105,10 @@
     <string name="label_weapon">Silah</string>
     <string name="label_armour">Zırh</string>
     <string name="label_food">Yiyecek</string>
+    <string name="label_arrows_consumed">Harcanan oklar</string>
+    <string name="label_arrows_reclaimed">Geri alınan oklar</string>
+    <string name="label_runes_consumed">Harcanan runlar</string>
+    <string name="label_runes_reclaimed">Geri alınan runlar</string>
     <string name="label_arrows">Oklar</string>
     <string name="label_runes">Rünler</string>
     <string name="label_spell">Büyü</string>
@@ -235,6 +239,7 @@
     <string name="label_shop_desc">Eşyaları al ve sat</string>
     <string name="label_no_session_hint">Eğitime başlamak için Yeteneklere veya Savaşa git.</string>
     <string name="label_recent_activity">Son Aktivite</string>
+    <string name="settings_recent_activity_desc">Ana ekran başlığında Son Aktivite düğmesini göster</string>
     <string name="label_no_sessions_yet">Henüz tamamlanan oturum yok.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -957,6 +962,6 @@
     <string name="farming_fertilized">Gübrelenmiş</string>
     <string name="catalyst_optional">Kül katalizörü (opsiyonel)</string>
     <string name="catalyst_enhanced_output">Güçlendirilmiş iksir üretir</string>
-    <string name="catalyst_rune_bonus">Esans başına +%1$d rün</string>
+    <string name="catalyst_rune_bonus">Esans başına %1$d rün</string>
     <string name="catalyst_none">Katalizör yok</string>
 </resources>

@@ -96,6 +96,17 @@ import kotlinx.coroutines.delay
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
+private fun xpBreakdownText(total: Long, bonus: Long, boostWasActive: Boolean): String? {
+    if (bonus <= 0L) return null
+    val afterBoost = total - bonus
+    if (afterBoost <= 0L) return null
+    val base = afterBoost / (if (boostWasActive) 2L else 1L)
+    val blessMult = total.toDouble() / afterBoost
+    val blessStr = "%.2f".format(blessMult).trimEnd('0').trimEnd('.')
+    return if (boostWasActive) "(${base.formatXp()} × 2 × $blessStr)"
+           else "(${base.formatXp()} × $blessStr)"
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CombatScreen(
@@ -2068,6 +2079,7 @@ private fun CombatResultSheet(
                 val xp = result.xpPerSkill[skill] ?: continue
                 if (xp <= 0L) continue
                 val bonus = result.xpBlessingBonusBySkill[skill] ?: 0L
+                val breakdown = xpBreakdownText(xp, bonus, result.boostWasActive)
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -2083,10 +2095,10 @@ private fun CombatResultSheet(
                             fontWeight = FontWeight.SemiBold,
                             color      = GoldPrimary,
                         )
-                        if (bonus > 0L) {
+                        if (breakdown != null) {
                             Spacer(Modifier.width(4.dp))
                             Text(
-                                text  = "(+${bonus.formatXp()})",
+                                text  = breakdown,
                                 style = MaterialTheme.typography.labelSmall,
                                 color = GoldPrimary,
                             )
@@ -2196,15 +2208,52 @@ private fun CombatResultSheet(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Text(
-                        text  = GameStrings.itemName(context, food),
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                    Text(
-                        text  = "×$qty",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    Text(text = GameStrings.itemName(context, food), style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "×$qty", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+        }
+
+        // Arrows consumed / reclaimed
+        if (result.arrowsConsumed.isNotEmpty()) {
+            Text(text = stringResource(R.string.label_arrows_consumed), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            for ((arrow, qty) in result.arrowsConsumed) {
+                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(text = GameStrings.itemName(context, arrow), style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "×$qty", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+            if (result.arrowsReclaimed.isNotEmpty()) {
+                Spacer(Modifier.height(4.dp))
+                Text(text = stringResource(R.string.label_arrows_reclaimed), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                for ((arrow, qty) in result.arrowsReclaimed) {
+                    Row(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(text = GameStrings.itemName(context, arrow), style = MaterialTheme.typography.bodyMedium)
+                        Text(text = "+$qty", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+            }
+            Spacer(Modifier.height(16.dp))
+        }
+
+        // Runes consumed / reclaimed
+        if (result.runesConsumed.isNotEmpty()) {
+            Text(text = stringResource(R.string.label_runes_consumed), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            for ((rune, qty) in result.runesConsumed) {
+                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(text = GameStrings.itemName(context, rune), style = MaterialTheme.typography.bodyMedium)
+                    Text(text = "×$qty", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+            if (result.runesReclaimed.isNotEmpty()) {
+                Spacer(Modifier.height(4.dp))
+                Text(text = stringResource(R.string.label_runes_reclaimed), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                for ((rune, qty) in result.runesReclaimed) {
+                    Row(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(text = GameStrings.itemName(context, rune), style = MaterialTheme.typography.bodyMedium)
+                        Text(text = "+$qty", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+                    }
                 }
             }
             Spacer(Modifier.height(16.dp))

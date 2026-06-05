@@ -115,6 +115,10 @@
     <string name="label_weapon">Wapen</string>
     <string name="label_armour">Uitrusting</string>
     <string name="label_food">Voedsel</string>
+    <string name="label_arrows_consumed">Pijlen verbruikt</string>
+    <string name="label_arrows_reclaimed">Pijlen teruggewonnen</string>
+    <string name="label_runes_consumed">Runen verbruikt</string>
+    <string name="label_runes_reclaimed">Runen teruggewonnen</string>
     <string name="label_arrows">Pijlen</string>
     <string name="label_runes">Runen</string>
     <string name="label_spell">Spreuk</string>
@@ -245,6 +249,7 @@
     <string name="label_shop_desc">Koop uitrusting en verkoop buit</string>
     <string name="label_no_session_hint">Ga naar Vaardigheden of Gevecht om te beginnen met trainen.</string>
     <string name="label_recent_activity">Recente activiteit</string>
+    <string name="settings_recent_activity_desc">Knop Recente activiteit weergeven in de koptekst van het startscherm</string>
     <string name="label_no_sessions_yet">Nog geen sessies voltooid.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -918,6 +923,6 @@
     <string name="farming_fertilized">Bemest</string>
     <string name="catalyst_optional">Askatalisator (opt.)</string>
     <string name="catalyst_enhanced_output">Produceert verbeterd drankje</string>
-    <string name="catalyst_rune_bonus">+%1$d rune per essence</string>
+    <string name="catalyst_rune_bonus">%1$d runen per essentie</string>
     <string name="catalyst_none">Geen katalysator</string>
 </resources>

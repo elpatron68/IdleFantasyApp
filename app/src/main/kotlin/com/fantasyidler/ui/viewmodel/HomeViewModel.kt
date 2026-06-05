@@ -52,14 +52,26 @@ data class SessionSummary(
     val killLines: List<Pair<String, String>> = emptyList(),
     /** Food display name → "×qty" label — combat only */
     val foodConsumedLines: List<Pair<String, String>> = emptyList(),
+    /** Arrow display name → "×qty" label — ranged combat only */
+    val arrowsConsumedLines: List<Pair<String, String>> = emptyList(),
+    /** Arrow display name → "+qty" label — ranged combat only */
+    val arrowsReclaimedLines: List<Pair<String, String>> = emptyList(),
+    /** Rune display name → "×qty" label — magic combat only */
+    val runesConsumedLines: List<Pair<String, String>> = emptyList(),
+    /** Rune display name → "+qty" label — magic combat only */
+    val runesReclaimedLines: List<Pair<String, String>> = emptyList(),
     /** Bone type display name + count per type — prayer only */
     val boneBuriedLines: List<Pair<String, String>> = emptyList(),
     /** Whether the 2× XP boost was active during this session. */
     val boostWasActive: Boolean = false,
     /** Per-row XP bonus from active prayer blessing — parallel to xpLines, 0 if no blessing. */
     val xpLineBonuses: List<Long> = emptyList(),
+    /** Per-row total XP (after boost + blessing) as Long — parallel to xpLines, for breakdown display. */
+    val xpLineValues: List<Long> = emptyList(),
     /** XP bonus for the single-skill totalXpLabel case — 0 if no blessing. */
     val totalXpLabelBonus: Long = 0L,
+    /** Total XP for the single-skill totalXpLabel case as Long — for breakdown display. */
+    val totalXpValue: Long = 0L,
     /** Extra coins granted by active prayer blessing — 0 if no blessing. */
     val coinBlessingBonus: Long = 0L,
     /** Expedition: highlighted lore note lines found during the session. */
@@ -220,10 +232,14 @@ class HomeViewModel @Inject constructor(
             val blessingCoinMult = ChurchRepository.coinMultiplier(flags) * prayerCapeMult
 
             // ── Accumulators ──────────────────────────────────────────────
-            val combinedXpBySkill = mutableMapOf<String, Long>()
-            val combinedItems     = mutableMapOf<String, Int>()
-            val combinedKills     = mutableMapOf<String, Int>()
-            val combinedFood      = mutableMapOf<String, Int>()
+            val combinedXpBySkill       = mutableMapOf<String, Long>()
+            val combinedItems           = mutableMapOf<String, Int>()
+            val combinedKills           = mutableMapOf<String, Int>()
+            val combinedFood            = mutableMapOf<String, Int>()
+            val combinedArrows          = mutableMapOf<String, Int>()
+            val combinedArrowsReclaimed = mutableMapOf<String, Int>()
+            val combinedRunes           = mutableMapOf<String, Int>()
+            val combinedRunesReclaimed  = mutableMapOf<String, Int>()
             var combinedCoins     = 0L
             var anyDied           = false
             val combinedBones     = mutableMapOf<String, Int>() // boneName → count
@@ -245,10 +261,22 @@ class HomeViewModel @Inject constructor(
                         val coins = if (won) its.remove("coins")?.toLong() ?: 0L else 0L
                         val pets  = its.filterKeys { it in petIds }
                         val loot  = if (won) its.filterKeys { it !in petIds } else emptyMap()
-                        val allFoodConsumed = mutableMapOf<String, Int>()
-                        for (f in frames) f.foodConsumed.forEach { (k, v) -> allFoodConsumed[k] = (allFoodConsumed[k] ?: 0) + v }
+                        val allFoodConsumed   = mutableMapOf<String, Int>()
+                        val allArrowsConsumed = mutableMapOf<String, Int>()
+                        val allRunesConsumed  = mutableMapOf<String, Int>()
+                        for (f in frames) {
+                            f.foodConsumed.forEach   { (k, v) -> allFoodConsumed[k]   = (allFoodConsumed[k] ?: 0) + v }
+                            f.arrowsConsumed.forEach { (k, v) -> allArrowsConsumed[k] = (allArrowsConsumed[k] ?: 0) + v }
+                            f.runesConsumed.forEach  { (k, v) -> allRunesConsumed[k]  = (allRunesConsumed[k] ?: 0) + v }
+                        }
+                        val bossSkillLvls    = playerRepo.getSkillLevels()
+                        val bossArrowsRec    = allArrowsConsumed.mapValues { (_, qty) -> (qty * reclaimChance(bossSkillLvls[Skills.RANGED] ?: 1)).toInt() }.filterValues { it > 0 }
+                        val bossRunesRec     = allRunesConsumed.mapValues  { (_, qty) -> (qty * reclaimChance(bossSkillLvls[Skills.MAGIC]  ?: 1)).toInt() }.filterValues { it > 0 }
                         awardedCapes += playerRepo.applyMultiSkillResults(frame.xpBySkill, loot, coins)
-                        if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+                        if (allFoodConsumed.isNotEmpty())   playerRepo.consumeItems(allFoodConsumed)
+                        if (allArrowsConsumed.isNotEmpty()) playerRepo.consumeItems(allArrowsConsumed)
+                        if (bossArrowsRec.isNotEmpty())     playerRepo.addItems(bossArrowsRec)
+                        if (bossRunesRec.isNotEmpty())      playerRepo.addItems(bossRunesRec)
                         if (won) {
                             for ((id, _) in pets) {
                                 val pd = gameData.pets[id] ?: continue
@@ -271,9 +299,10 @@ class HomeViewModel @Inject constructor(
                         val xpPerSkill = mutableMapOf<String, Long>()
                         val its        = mutableMapOf<String, Int>()
                         val kills      = mutableMapOf<String, Int>()
-                        val food       = mutableMapOf<String, Int>()
-                        val arrows     = mutableMapOf<String, Int>()
-                        val died       = frames.any { it.died }
+                        val food   = mutableMapOf<String, Int>()
+                        val arrows = mutableMapOf<String, Int>()
+                        val runes  = mutableMapOf<String, Int>()
+                        val died   = frames.any { it.died }
                         if (died) anyDied = true
                         for (frame in frames) {
                             for ((skill, xp) in frame.xpBySkill)      xpPerSkill[skill] = (xpPerSkill[skill] ?: 0L) + xp
@@ -281,6 +310,7 @@ class HomeViewModel @Inject constructor(
                             for ((e, k) in frame.killsByEnemy)         kills[e]          = (kills[e] ?: 0) + k
                             for ((f, q) in frame.foodConsumed)         food[f]           = (food[f] ?: 0) + q
                             for ((a, q) in frame.arrowsConsumed)       arrows[a]         = (arrows[a] ?: 0) + q
+                            for ((r, q) in frame.runesConsumed)        runes[r]          = (runes[r] ?: 0) + q
                         }
                         if (died) {
                             xpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * 0.1).toLong()) }
@@ -316,12 +346,21 @@ class HomeViewModel @Inject constructor(
                                 guildRepo.recordGuildCombat(kills, style)
                             }
                         }
-                        if (food.isNotEmpty())   playerRepo.consumeItems(food)
-                        if (arrows.isNotEmpty()) playerRepo.consumeItems(arrows)
+                        val skillLvls      = playerRepo.getSkillLevels()
+                        val arrowsReclaimed = arrows.mapValues { (_, qty) -> (qty * reclaimChance(skillLvls[Skills.RANGED] ?: 1)).toInt() }.filterValues { it > 0 }
+                        val runesReclaimed  = runes.mapValues  { (_, qty) -> (qty * reclaimChance(skillLvls[Skills.MAGIC]  ?: 1)).toInt() }.filterValues { it > 0 }
+                        if (food.isNotEmpty())          playerRepo.consumeItems(food)
+                        if (arrows.isNotEmpty())        playerRepo.consumeItems(arrows)
+                        if (arrowsReclaimed.isNotEmpty()) playerRepo.addItems(arrowsReclaimed)
+                        if (runesReclaimed.isNotEmpty())  playerRepo.addItems(runesReclaimed)
                         for ((skill, xp) in xpPerSkill) combinedXpBySkill[skill] = (combinedXpBySkill[skill] ?: 0L) + xp
                         for ((item, qty) in loot)        combinedItems[item]      = (combinedItems[item] ?: 0) + qty
                         for ((e, k) in kills)            combinedKills[e]         = (combinedKills[e] ?: 0) + k
                         for ((f, q) in food)             combinedFood[f]          = (combinedFood[f] ?: 0) + q
+                        for ((a, q) in arrows)           combinedArrows[a]         = (combinedArrows[a] ?: 0) + q
+                        for ((a, q) in arrowsReclaimed)  combinedArrowsReclaimed[a] = (combinedArrowsReclaimed[a] ?: 0) + q
+                        for ((r, q) in runes)            combinedRunes[r]          = (combinedRunes[r] ?: 0) + q
+                        for ((r, q) in runesReclaimed)   combinedRunesReclaimed[r] = (combinedRunesReclaimed[r] ?: 0) + q
                         combinedCoins += coins
                     }
                     "expedition" -> {
@@ -522,8 +561,12 @@ class HomeViewModel @Inject constructor(
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
                                      .map { (skill, xp) -> Pair(skill.toTitleCase(), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                xpLineValues   = if (useTotalLabel) emptyList()
+                                 else sortedXpEntries
+                                     .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
                 totalXpLabel      = if (useTotalLabel) "+${((singleXp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
+                totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = combinedItems.entries.sortedByDescending { it.value }
                                      .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
                 coinsGained    = displayedCoins,
@@ -531,6 +574,14 @@ class HomeViewModel @Inject constructor(
                                      .map { (enemy, kills) -> Pair(gameData.enemies[enemy]?.displayName ?: enemy.toTitleCase(), "×$kills") },
                 foodConsumedLines = combinedFood.entries.sortedByDescending { it.value }
                                      .map { (food, qty) -> Pair(gameData.itemDisplayName(food), "×$qty") },
+                arrowsConsumedLines  = combinedArrows.entries.sortedByDescending { it.value }
+                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                arrowsReclaimedLines = combinedArrowsReclaimed.entries.sortedByDescending { it.value }
+                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "+$qty") },
+                runesConsumedLines   = combinedRunes.entries.sortedByDescending { it.value }
+                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                runesReclaimedLines  = combinedRunesReclaimed.entries.sortedByDescending { it.value }
+                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "+$qty") },
                 boneBuriedLines  = boneBuriedLines,
                 boostWasActive   = boostActive,
                 xpLineBonuses    = xpLineBonuses,
@@ -829,8 +880,12 @@ class HomeViewModel @Inject constructor(
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
                                      .map { (skill, xp) -> Pair(skill.toTitleCase(), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                xpLineValues   = if (useTotalLabel) emptyList()
+                                 else sortedXpEntries
+                                     .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
                 totalXpLabel      = if (useTotalLabel) "+${((singleXp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
+                totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = combinedItems.entries.sortedByDescending { it.value }
                                      .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
                 coinsGained    = displayedCoins,
@@ -960,3 +1015,6 @@ fun playerSessionMaterials(
         else                -> null
     }
 }
+
+/** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */
+private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50

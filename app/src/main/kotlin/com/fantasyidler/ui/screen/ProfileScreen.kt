@@ -1169,6 +1169,10 @@ internal fun buildEquipDetail(item: com.fantasyidler.data.json.EquipmentData, co
         if (item.strengthBonus != 0) parts.add("${context.getString(R.string.profile_stat_str)} +${item.strengthBonus}")
         if (item.defenseBonus  != 0) parts.add("${context.getString(R.string.profile_stat_def)} +${item.defenseBonus}")
     }
+    if ((item.rangedAttackBonus   ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_ranged)} ${context.getString(R.string.profile_stat_atk)} +${item.rangedAttackBonus}")
+    if ((item.rangedStrengthBonus ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_ranged)} ${context.getString(R.string.profile_stat_str)} +${item.rangedStrengthBonus}")
+    if ((item.magicAttackBonus    ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_magic)} ${context.getString(R.string.profile_stat_atk)} +${item.magicAttackBonus}")
+    if ((item.magicDamageBonus    ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_magic)} Dmg +${item.magicDamageBonus}")
     val req = item.requirements.entries.firstOrNull()
     if (req != null) parts.add("${context.getString(R.string.profile_req_lv)}${req.value} ${req.key}")
     return parts.joinToString("  •  ")

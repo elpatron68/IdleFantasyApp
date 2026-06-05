@@ -115,6 +115,10 @@
     <string name="label_weapon">Weapon</string>
     <string name="label_armour">Armour</string>
     <string name="label_food">Food</string>
+    <string name="label_arrows_consumed">Arrows Consumed</string>
+    <string name="label_arrows_reclaimed">Arrows Reclaimed</string>
+    <string name="label_runes_consumed">Runes Consumed</string>
+    <string name="label_runes_reclaimed">Runes Reclaimed</string>
     <string name="label_arrows">Arrows</string>
     <string name="label_runes">Runes</string>
     <string name="label_spell">Spell</string>
@@ -245,6 +249,7 @@
     <string name="label_shop_desc">Buy equipment and sell loot</string>
     <string name="label_no_session_hint">Head to Skills or Combat to start training.</string>
     <string name="label_recent_activity">Recent Activity</string>
+    <string name="settings_recent_activity_desc">Show Recent Activity button in the home screen header</string>
     <string name="label_no_sessions_yet">No sessions completed yet.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -979,6 +984,6 @@
     <string name="farming_fertilized">Fertilized</string>
     <string name="catalyst_optional">Ash catalyst (optional)</string>
     <string name="catalyst_enhanced_output">Produces enhanced potion</string>
-    <string name="catalyst_rune_bonus">+%1$d rune per essence</string>
+    <string name="catalyst_rune_bonus">%1$d runes per essence</string>
     <string name="catalyst_none">No catalyst</string>
 </resources>

@@ -115,6 +115,10 @@
     <string name="label_weapon">Arma</string>
     <string name="label_armour">Armatura</string>
     <string name="label_food">Cibo</string>
+    <string name="label_arrows_consumed">Frecce consumate</string>
+    <string name="label_arrows_reclaimed">Frecce recuperate</string>
+    <string name="label_runes_consumed">Rune consumate</string>
+    <string name="label_runes_reclaimed">Rune recuperate</string>
     <string name="label_arrows">Frecce</string>
     <string name="label_runes">Rune</string>
     <string name="label_spell">Incantesimo</string>
@@ -245,6 +249,7 @@
     <string name="label_shop_desc">Acquista equipaggiamento e vendi il tuo bottino</string>
     <string name="label_no_session_hint">Tocca Abilità o Combattimento per iniziare l\'addestramento.</string>
     <string name="label_recent_activity">Attività Recente</string>
+    <string name="settings_recent_activity_desc">Mostra il pulsante Attività Recente nell\'intestazione della schermata principale</string>
     <string name="label_no_sessions_yet">Nessuna sessione completata ancora.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -915,6 +920,6 @@
     <string name="farming_fertilized">Fertilizzato</string>
     <string name="catalyst_optional">Catalizzatore cenere</string>
     <string name="catalyst_enhanced_output">Produce pozione potenziata</string>
-    <string name="catalyst_rune_bonus">+%1$d runa per essenza</string>
+    <string name="catalyst_rune_bonus">%1$d rune per essenza</string>
     <string name="catalyst_none">Nessun catalizzatore</string>
 </resources>

@@ -85,6 +85,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import kotlinx.coroutines.delay
 import kotlinx.serialization.decodeFromString
 
+private fun xpBreakdownText(total: Long, bonus: Long, boostWasActive: Boolean): String? {
+    if (bonus <= 0L) return null
+    val afterBoost = total - bonus
+    if (afterBoost <= 0L) return null
+    val base = afterBoost / (if (boostWasActive) 2L else 1L)
+    val blessMult = total.toDouble() / afterBoost
+    val blessStr = "%.2f".format(blessMult).trimEnd('0').trimEnd('.')
+    return if (boostWasActive) "(${base.formatXp()} × 2 × $blessStr)"
+           else "(${base.formatXp()} × $blessStr)"
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -145,6 +156,8 @@ fun HomeScreen(
                         SummarySection(stringResource(R.string.label_xp_gained))
                         summary.xpLines.forEachIndexed { i, (skill, label) ->
                             val bonus = summary.xpLineBonuses.getOrNull(i) ?: 0L
+                            val total = summary.xpLineValues.getOrNull(i) ?: 0L
+                            val breakdown = xpBreakdownText(total, bonus, summary.boostWasActive)
                             Row(
                                 modifier              = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -152,10 +165,10 @@ fun HomeScreen(
                                 Text(skill, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                    if (bonus > 0L) {
+                                    if (breakdown != null) {
                                         Spacer(Modifier.width(4.dp))
                                         Text(
-                                            text  = "(+${bonus.formatXp()})",
+                                            text  = breakdown,
                                             style = MaterialTheme.typography.labelSmall,
                                             color = GoldPrimary,
                                         )
@@ -175,10 +188,11 @@ fun HomeScreen(
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(summary.totalXpLabel, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                if (summary.totalXpLabelBonus > 0L) {
+                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.boostWasActive)
+                                if (breakdown != null) {
                                     Spacer(Modifier.width(4.dp))
                                     Text(
-                                        text  = "(+${summary.totalXpLabelBonus.formatXp()})",
+                                        text  = breakdown,
                                         style = MaterialTheme.typography.labelSmall,
                                         color = GoldPrimary,
                                     )
@@ -210,6 +224,24 @@ fun HomeScreen(
                         Spacer(Modifier.height(4.dp))
                         SummarySection(stringResource(R.string.home_food_consumed))
                         summary.foodConsumedLines.forEach { (food, qty) -> SummaryRow(food, qty) }
+                    }
+                    if (summary.arrowsConsumedLines.isNotEmpty()) {
+                        Spacer(Modifier.height(4.dp))
+                        SummarySection(stringResource(R.string.label_arrows_consumed))
+                        summary.arrowsConsumedLines.forEach { (name, qty) -> SummaryRow(name, qty) }
+                    }
+                    if (summary.arrowsReclaimedLines.isNotEmpty()) {
+                        SummarySection(stringResource(R.string.label_arrows_reclaimed))
+                        summary.arrowsReclaimedLines.forEach { (name, qty) -> SummaryRow(name, qty) }
+                    }
+                    if (summary.runesConsumedLines.isNotEmpty()) {
+                        Spacer(Modifier.height(4.dp))
+                        SummarySection(stringResource(R.string.label_runes_consumed))
+                        summary.runesConsumedLines.forEach { (name, qty) -> SummaryRow(name, qty) }
+                    }
+                    if (summary.runesReclaimedLines.isNotEmpty()) {
+                        SummarySection(stringResource(R.string.label_runes_reclaimed))
+                        summary.runesReclaimedLines.forEach { (name, qty) -> SummaryRow(name, qty) }
                     }
                     if (summary.boneBuriedLines.isNotEmpty()) {
                         summary.boneBuriedLines.forEach { (label, qty) -> SummaryRow(label, qty) }
@@ -271,6 +303,8 @@ fun HomeScreen(
                         SummarySection(stringResource(R.string.label_xp_gained))
                         summary.xpLines.forEachIndexed { i, (skill, label) ->
                             val bonus = summary.xpLineBonuses.getOrNull(i) ?: 0L
+                            val total = summary.xpLineValues.getOrNull(i) ?: 0L
+                            val breakdown = xpBreakdownText(total, bonus, summary.boostWasActive)
                             Row(
                                 modifier              = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -278,10 +312,10 @@ fun HomeScreen(
                                 Text(skill, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                    if (bonus > 0L) {
+                                    if (breakdown != null) {
                                         Spacer(Modifier.width(4.dp))
                                         Text(
-                                            text  = "(+${bonus.formatXp()})",
+                                            text  = breakdown,
                                             style = MaterialTheme.typography.labelSmall,
                                             color = GoldPrimary,
                                         )
@@ -301,10 +335,11 @@ fun HomeScreen(
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(summary.totalXpLabel, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                if (summary.totalXpLabelBonus > 0L) {
+                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.boostWasActive)
+                                if (breakdown != null) {
                                     Spacer(Modifier.width(4.dp))
                                     Text(
-                                        text  = "(+${summary.totalXpLabelBonus.formatXp()})",
+                                        text  = breakdown,
                                         style = MaterialTheme.typography.labelSmall,
                                         color = GoldPrimary,
                                     )
@@ -417,18 +452,16 @@ fun HomeScreen(
             TopAppBar(
                 title   = { Text(stringResource(R.string.app_name)) },
                 actions = {
+                    if (!state.isLoading && state.showRecentActivityLog) {
+                        TextButton(onClick = { showRecentLog = true }) {
+                            Text(stringResource(R.string.label_recent_activity))
+                        }
+                    }
                     IconButton(onClick = onNavigateToSettings) {
                         Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings_title))
                     }
                 },
             )
-        },
-        floatingActionButton = {
-            if (!state.isLoading && state.showRecentActivityLog) {
-                FloatingActionButton(onClick = { showRecentLog = true }) {
-                    Icon(Icons.Filled.Assignment, contentDescription = "Recent activity")
-                }
-            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->

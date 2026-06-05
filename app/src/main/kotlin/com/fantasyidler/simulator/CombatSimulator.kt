@@ -39,6 +39,8 @@ object CombatSimulator {
         foodHealValues: Map<String, Int> = emptyMap(),
         potionBonuses: Map<String, Int> = emptyMap(),
         availableArrows: Map<String, Int> = emptyMap(),
+        runeKey: String? = null,
+        runeCostPerAttack: Int = 1,
     ): SkillSimulator.Result {
         val effAttack   = playerAttack   + (potionBonuses["attack"]   ?: 0)
         val effStrength = playerStrength + (potionBonuses["strength"] ?: 0)
@@ -76,6 +78,7 @@ object CombatSimulator {
             var frameXp        = 0L
             val frameFood      = mutableMapOf<String, Int>()
             var frameArrowsUsed = 0
+            var frameRunesUsed  = 0
 
             val enemyKey = carryoverEnemyKey ?: spawnPool[rnd.nextInt(spawnPool.size)]
             carryoverEnemyKey = null
@@ -140,6 +143,10 @@ object CombatSimulator {
                         if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
                     }
                     combatStyle == "ranged" -> 0
+                    combatStyle == "magic" -> {
+                        if (runeKey != null) frameRunesUsed++
+                        if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
+                    }
                     else -> if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
                 }
                 framePlayerHits += pDmg
@@ -215,6 +222,7 @@ object CombatSimulator {
                     died           = diedThisMinute,
                     foodConsumed   = frameFood,
                     arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                    runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     enemyKey       = enemyKey,
                     hpAfter      = currentHp.coerceAtLeast(0),
                     playerHits   = framePlayerHits,
@@ -289,6 +297,8 @@ object CombatSimulator {
         equippedFood: Map<String, Int> = emptyMap(),
         foodHealValues: Map<String, Int> = emptyMap(),
         blessingDefBonus: Int = 0,
+        runeKey: String? = null,
+        runeCostPerAttack: Int = 1,
     ): List<SessionFrame> {
         val playerMax: Int
         val effAtk: Int
@@ -348,6 +358,7 @@ object CombatSimulator {
             val eHits          = mutableListOf<Int>()
             val frameFood      = mutableMapOf<String, Int>()
             var frameArrowsUsed = 0
+            var frameRunesUsed  = 0
 
             for (tick in 0 until TICKS_PER_FRAME) {
                 val pDmg = when {
@@ -357,6 +368,10 @@ object CombatSimulator {
                         if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
                     }
                     combatStyle == "ranged" -> 0
+                    combatStyle == "magic" -> {
+                        if (runeKey != null) frameRunesUsed++
+                        if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
+                    }
                     else -> if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
                 }
                 currentBossHp -= pDmg
@@ -370,8 +385,9 @@ object CombatSimulator {
                         levelBefore = 0, levelAfter = 0,
                         kills = 1, enemyKey = bossKey,
                         playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
-                        foodConsumed = frameFood,
+                        foodConsumed  = frameFood,
                         arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                        runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     ))
                     break@outer
                 }
@@ -405,8 +421,9 @@ object CombatSimulator {
                         levelBefore = 0, levelAfter = 0,
                         kills = 0, enemyKey = bossKey,
                         playerHits = pHits, enemyHits = eHits, hpAfter = 0,
-                        foodConsumed = frameFood,
+                        foodConsumed  = frameFood,
                         arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                        runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     ))
                     break@outer
                 }
@@ -418,8 +435,9 @@ object CombatSimulator {
                     levelBefore = 0, levelAfter = 0,
                     kills = 0, enemyKey = bossKey,
                     playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
-                    foodConsumed = frameFood,
+                    foodConsumed  = frameFood,
                     arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                    runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                 ))
             }
         }

@@ -48,6 +48,10 @@ data class CombatSessionResult(
     val won: Boolean = true,
     val killsByEnemy: Map<String, Int> = emptyMap(),
     val foodConsumed: Map<String, Int> = emptyMap(),
+    val arrowsConsumed: Map<String, Int> = emptyMap(),
+    val arrowsReclaimed: Map<String, Int> = emptyMap(),
+    val runesConsumed: Map<String, Int> = emptyMap(),
+    val runesReclaimed: Map<String, Int> = emptyMap(),
     val xpBlessingBonusBySkill: Map<String, Long> = emptyMap(),
     val coinBlessingBonus: Long = 0L,
     val boostWasActive: Boolean = false,
@@ -313,9 +317,26 @@ class CombatViewModel @Inject constructor(
                     else       -> "attack"
                 }
 
-                val totalAttackBonus   = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 } + (weapon?.attackBonus  ?: 0)
+                val totalAttackBonus   = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
+                    val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
+                    eq.attackBonus + when (combatStyle) {
+                        "ranged" -> eq.rangedAttackBonus ?: 0
+                        "magic"  -> eq.magicAttackBonus  ?: 0
+                        else     -> 0
+                    }
+                } + (weapon?.attackBonus ?: 0) + when (combatStyle) {
+                    "ranged" -> weapon?.rangedAttackBonus ?: 0
+                    "magic"  -> weapon?.magicAttackBonus  ?: 0
+                    else     -> 0
+                }
                 val totalStrengthBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
                 val totalDefenseBonus  = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
+                val totalRangedStrBonus = if (combatStyle == "ranged") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
+                } else 0
+                val totalMagicDmgBonus = if (combatStyle == "magic") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
+                } else 0
 
                 // Ranged: use player's chosen arrow if available, else fall back to best in inventory
                 val preferredArrow = _extra.value.selectedArrowKey?.takeIf { (inventory[it] ?: 0) > 0 }
@@ -356,6 +377,11 @@ class CombatViewModel @Inject constructor(
                 // Arrows: pass current supply to simulator; consumed at collect time from frames
                 val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
 
+                // Runes: determine key and cost for simulator tracking; consumed upfront below
+                val staffCoversRune = combatStyle == "magic" && selectedSpell != null && weapon?.infiniteRunes == selectedSpell.runeType
+                val simulatorRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
+                val simulatorRuneCost = selectedSpell?.runeCost ?: 1
+
                 // Potion: consume immediately on dungeon start, pass bonuses to simulator
                 val potionKey     = _extra.value.selectedPotionKey
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
@@ -377,26 +403,25 @@ class CombatViewModel @Inject constructor(
                     combatStyle         = combatStyle,
                     playerRanged        = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5,
                     playerMagic         = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5,
-                    arrowStrengthBonus  = arrowStrengthBonus,
-                    spellMaxHit         = selectedSpell?.maxHit    ?: 0,
+                    arrowStrengthBonus  = arrowStrengthBonus + totalRangedStrBonus,
+                    spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = levels[Skills.AGILITY]   ?: 1,
                     petBoostPct         = petBoostFor(player.pets),
                     equippedFood        = availableFood,
                     foodHealValues      = foodHealValues,
                     potionBonuses       = potionBonuses,
                     availableArrows     = availableArrows,
+                    runeKey             = simulatorRuneKey,
+                    runeCostPerAttack   = simulatorRuneCost,
                 )
 
                 val totalAttacks = result.frames.size * CombatSimulator.TICKS_PER_FRAME
 
-                // Consume magic runes: 1 cast per attack attempt (hit or miss); consume what's available
-                if (combatStyle == "magic" && selectedSpell != null && totalAttacks > 0) {
-                    val staffCoversRune = weapon?.infiniteRunes == selectedSpell.runeType
-                    if (!staffCoversRune) {
-                        val runesNeeded = totalAttacks * selectedSpell.runeCost
-                        val runesToConsume = minOf(runesNeeded, inventory[selectedSpell.runeType] ?: 0)
-                        if (runesToConsume > 0) playerRepo.consumeItems(mapOf(selectedSpell.runeType to runesToConsume))
-                    }
+                // Consume magic runes upfront; reclaim is applied at collect time from frame data
+                if (simulatorRuneKey != null && totalAttacks > 0) {
+                    val runesNeeded    = totalAttacks * simulatorRuneCost
+                    val runesToConsume = minOf(runesNeeded, inventory[simulatorRuneKey] ?: 0)
+                    if (runesToConsume > 0) playerRepo.consumeItems(mapOf(simulatorRuneKey to runesToConsume))
                 }
 
                 val framesJson = json.encodeToString(
@@ -456,8 +481,6 @@ class CombatViewModel @Inject constructor(
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                     ?: EquipSlot.WEAPON
                 val bossWeapon = equipped[activeWeaponSlot]?.let { gameData.equipment[it] }
-                val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 } + (bossWeapon?.attackBonus  ?: 0)
-                val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
                 val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
 
                 val potionKey     = _extra.value.selectedPotionKey
@@ -472,6 +495,25 @@ class CombatViewModel @Inject constructor(
                     "strength" -> "strength"
                     else       -> "melee"
                 }
+                val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
+                    val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
+                    eq.attackBonus + when (combatStyle) {
+                        "ranged" -> eq.rangedAttackBonus ?: 0
+                        "magic"  -> eq.magicAttackBonus  ?: 0
+                        else     -> 0
+                    }
+                } + (bossWeapon?.attackBonus ?: 0) + when (combatStyle) {
+                    "ranged" -> bossWeapon?.rangedAttackBonus ?: 0
+                    "magic"  -> bossWeapon?.magicAttackBonus  ?: 0
+                    else     -> 0
+                }
+                val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
+                val bossRangedStrBonus = if (combatStyle == "ranged") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 } + (bossWeapon?.rangedStrengthBonus ?: 0)
+                } else 0
+                val bossMagicDmgBonus = if (combatStyle == "magic") {
+                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0)
+                } else 0
                 val selectedSpell = _extra.value.selectedSpell
                 if (combatStyle == "magic" && selectedSpell == null) {
                     _extra.update { it.copy(snackbarMessage = "Select a spell before entering.", startingSession = false) }
@@ -486,6 +528,10 @@ class CombatViewModel @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowStrengthBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+
+                val bossStaffCoversRune = combatStyle == "magic" && selectedSpell != null && bossWeapon?.infiniteRunes == selectedSpell.runeType
+                val bossRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !bossStaffCoversRune) selectedSpell.runeType else null
+                val bossRuneCost = selectedSpell?.runeCost ?: 1
 
                 val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
                 playerRepo.updateFlags(flags.copy(
@@ -508,22 +554,21 @@ class CombatViewModel @Inject constructor(
                     combatStyle        = combatStyle,
                     playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + (prestigeMapBoss[Skills.RANGED] ?: 0) * 5,
                     playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + (prestigeMapBoss[Skills.MAGIC] ?: 0) * 5,
-                    arrowStrengthBonus = arrowStrengthBonus,
-                    spellMaxHit        = selectedSpell?.maxHit ?: 0,
+                    arrowStrengthBonus = arrowStrengthBonus + bossRangedStrBonus,
+                    spellMaxHit        = (selectedSpell?.maxHit ?: 0) + bossMagicDmgBonus,
                     availableArrows    = availableArrows,
                     equippedFood       = availableFood,
                     foodHealValues     = gameData.foodHealValues,
                     blessingDefBonus   = ChurchRepository.defBonus(flags),
+                    runeKey            = bossRuneKey,
+                    runeCostPerAttack  = bossRuneCost,
                 )
 
                 val totalAttacks = bossFrames.size * CombatSimulator.TICKS_PER_FRAME
-                if (combatStyle == "magic" && selectedSpell != null && totalAttacks > 0) {
-                    val staffCoversRune = bossWeapon?.infiniteRunes == selectedSpell.runeType
-                    if (!staffCoversRune) {
-                        val runesNeeded = totalAttacks * selectedSpell.runeCost
-                        val runesToConsume = minOf(runesNeeded, inventory[selectedSpell.runeType] ?: 0)
-                        if (runesToConsume > 0) playerRepo.consumeItems(mapOf(selectedSpell.runeType to runesToConsume))
-                    }
+                if (bossRuneKey != null && totalAttacks > 0) {
+                    val runesNeeded    = totalAttacks * bossRuneCost
+                    val runesToConsume = minOf(runesNeeded, inventory[bossRuneKey] ?: 0)
+                    if (runesToConsume > 0) playerRepo.consumeItems(mapOf(bossRuneKey to runesToConsume))
                 }
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
@@ -581,16 +626,30 @@ class CombatViewModel @Inject constructor(
         val petIds      = gameData.pets.keys
         val petDrops    = allItems.filterKeys { it in petIds }
         val loot        = allItems.filterKeys { it !in petIds }
-        val allFoodConsumed = mutableMapOf<String, Int>()
-        for (frame in frames) frame.foodConsumed.forEach { (k, v) -> allFoodConsumed[k] = (allFoodConsumed[k] ?: 0) + v }
+        val allFoodConsumed   = mutableMapOf<String, Int>()
+        val allArrowsConsumed = mutableMapOf<String, Int>()
+        val allRunesConsumed  = mutableMapOf<String, Int>()
+        for (frame in frames) {
+            frame.foodConsumed.forEach   { (k, v) -> allFoodConsumed[k]   = (allFoodConsumed[k] ?: 0) + v }
+            frame.arrowsConsumed.forEach { (k, v) -> allArrowsConsumed[k] = (allArrowsConsumed[k] ?: 0) + v }
+            frame.runesConsumed.forEach  { (k, v) -> allRunesConsumed[k]  = (allRunesConsumed[k] ?: 0) + v }
+        }
 
         val bossFlags         = playerRepo.getFlags()
         val blessingXpMult    = ChurchRepository.xpMultiplier(bossFlags)
         val blessingCoinMult  = ChurchRepository.coinMultiplier(bossFlags)
         val boostActive       = bossFlags.xpBoostExpiresAt > System.currentTimeMillis()
         val boostMult         = if (boostActive) 2L else 1L
+        val bossSkillLevels  = playerRepo.getSkillLevels()
+        val bossRangedLevel  = bossSkillLevels[Skills.RANGED] ?: 1
+        val bossMagicLevel   = bossSkillLevels[Skills.MAGIC]  ?: 1
+        val arrowsReclaimed  = allArrowsConsumed.mapValues { (_, qty) -> (qty * reclaimChance(bossRangedLevel)).toInt() }.filterValues { it > 0 }
+        val runesReclaimed   = allRunesConsumed.mapValues  { (_, qty) -> (qty * reclaimChance(bossMagicLevel)).toInt()  }.filterValues { it > 0 }
         val capes = playerRepo.applyMultiSkillResults(last.xpBySkill, loot, coinsGained)
-        if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+        if (allFoodConsumed.isNotEmpty())   playerRepo.consumeItems(allFoodConsumed)
+        if (allArrowsConsumed.isNotEmpty()) playerRepo.consumeItems(allArrowsConsumed)
+        if (arrowsReclaimed.isNotEmpty())   playerRepo.addItems(arrowsReclaimed)
+        if (runesReclaimed.isNotEmpty())    playerRepo.addItems(runesReclaimed)
         for ((petId, _) in petDrops) {
             val petData = gameData.pets[petId] ?: continue
             playerRepo.addPetIfNew(petId, petData.boostPercent)
@@ -628,6 +687,10 @@ class CombatViewModel @Inject constructor(
                     coinsGained            = coinsGained,
                     won                    = won,
                     killsByEnemy           = if (won) mapOf(session.activityKey to 1) else emptyMap(),
+                    arrowsConsumed         = allArrowsConsumed,
+                    arrowsReclaimed        = arrowsReclaimed,
+                    runesConsumed          = allRunesConsumed,
+                    runesReclaimed         = runesReclaimed,
                     xpBlessingBonusBySkill = xpBlessingBonusBySkill,
                     coinBlessingBonus      = coinBlessingBonus,
                     boostWasActive         = boostActive,
@@ -641,17 +704,19 @@ class CombatViewModel @Inject constructor(
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
         val playerDied = frames.any { it.died }
 
-        val totalXpPerSkill = mutableMapOf<String, Long>()
-        val allItems        = mutableMapOf<String, Int>()
-        val allKillsByEnemy = mutableMapOf<String, Int>()
+        val totalXpPerSkill   = mutableMapOf<String, Long>()
+        val allItems          = mutableMapOf<String, Int>()
+        val allKillsByEnemy   = mutableMapOf<String, Int>()
         val allFoodConsumed   = mutableMapOf<String, Int>()
         val allArrowsConsumed = mutableMapOf<String, Int>()
+        val allRunesConsumed  = mutableMapOf<String, Int>()
         for (frame in frames) {
             for ((skill, xp) in frame.xpBySkill)      totalXpPerSkill[skill] = (totalXpPerSkill[skill] ?: 0L) + xp
             for ((item, qty) in frame.items)           allItems[item]         = (allItems[item] ?: 0) + qty
             for ((enemy, kills) in frame.killsByEnemy) allKillsByEnemy[enemy] = (allKillsByEnemy[enemy] ?: 0) + kills
             for ((food, qty) in frame.foodConsumed)    allFoodConsumed[food]  = (allFoodConsumed[food] ?: 0) + qty
             for ((arrow, qty) in frame.arrowsConsumed) allArrowsConsumed[arrow] = (allArrowsConsumed[arrow] ?: 0) + qty
+            for ((rune, qty) in frame.runesConsumed)   allRunesConsumed[rune] = (allRunesConsumed[rune] ?: 0) + qty
         }
 
         // On death, scale everything down to 10%
@@ -680,9 +745,16 @@ class CombatViewModel @Inject constructor(
         val blessingCoinMult  = ChurchRepository.coinMultiplier(dungeonFlags)
         val boostActive       = dungeonFlags.xpBoostExpiresAt > System.currentTimeMillis()
         val boostMult         = if (boostActive) 2L else 1L
+        val skillLevels      = playerRepo.getSkillLevels()
+        val rangedLevel      = skillLevels[Skills.RANGED] ?: 1
+        val magicLevel       = skillLevels[Skills.MAGIC]  ?: 1
+        val arrowsReclaimed  = allArrowsConsumed.mapValues { (_, qty) -> (qty * reclaimChance(rangedLevel)).toInt() }.filterValues { it > 0 }
+        val runesReclaimed   = allRunesConsumed.mapValues  { (_, qty) -> (qty * reclaimChance(magicLevel)).toInt()  }.filterValues { it > 0 }
         val capes = playerRepo.applyMultiSkillResults(totalXpPerSkill, allItems, coinsGained)
         if (allFoodConsumed.isNotEmpty())   playerRepo.consumeItems(allFoodConsumed)
         if (allArrowsConsumed.isNotEmpty()) playerRepo.consumeItems(allArrowsConsumed)
+        if (arrowsReclaimed.isNotEmpty())   playerRepo.addItems(arrowsReclaimed)
+        if (runesReclaimed.isNotEmpty())    playerRepo.addItems(runesReclaimed)
         if (!playerDied) {
             val combatStyle = detectCombatStyle(totalXpPerSkill)
             questRepo.recordCombat(
@@ -723,6 +795,10 @@ class CombatViewModel @Inject constructor(
                     won                    = !playerDied,
                     killsByEnemy           = allKillsByEnemy,
                     foodConsumed           = allFoodConsumed,
+                    arrowsConsumed         = allArrowsConsumed,
+                    arrowsReclaimed        = arrowsReclaimed,
+                    runesConsumed          = allRunesConsumed,
+                    runesReclaimed         = runesReclaimed,
                     xpBlessingBonusBySkill = xpBlessingBonusBySkill,
                     coinBlessingBonus      = coinBlessingBonus,
                     boostWasActive         = boostActive,
@@ -825,6 +901,8 @@ class CombatViewModel @Inject constructor(
         equippedFood: Map<String, Int> = emptyMap(),
         foodHealValues: Map<String, Int> = emptyMap(),
         blessingDefBonus: Int = 0,
+        runeKey: String? = null,
+        runeCostPerAttack: Int = 1,
     ): List<SessionFrame> = CombatSimulator.simulateBoss(
         boss               = boss,
         bossKey            = bossKey,
@@ -842,7 +920,9 @@ class CombatViewModel @Inject constructor(
         availableArrows    = availableArrows,
         equippedFood       = equippedFood,
         foodHealValues     = foodHealValues,
-        blessingDefBonus  = blessingDefBonus,
+        blessingDefBonus   = blessingDefBonus,
+        runeKey            = runeKey,
+        runeCostPerAttack  = runeCostPerAttack,
     )
 
     // ------------------------------------------------------------------
@@ -876,3 +956,6 @@ class CombatViewModel @Inject constructor(
         return gameData.pets[petId.id]?.boostPercent ?: 0
     }
 }
+
+/** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */
+private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50
