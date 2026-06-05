@@ -63,7 +63,7 @@
     <string name="label_session_complete">Sessione Completata!</string>
     <string name="label_training">Addestramento</string>
     <string name="label_gathering_skills">Raccolta</string>
-    <string name="label_crafting_skills">Mestiere</string>
+    <string name="label_crafting_skills">Oreficeria</string>
     <string name="label_choose_activity">Scegli Attività</string>
     <string name="label_coming_soon">In arrivo</string>
     <string name="label_time_remaining">Tempo rimanente</string>
@@ -127,7 +127,7 @@
     <string name="label_ranged_style">A Distanza</string>
     <string name="label_magic_style">Magia</string>
     <string name="label_gathering">Raccolta</string>
-    <string name="label_crafting">Crafting</string>
+    <string name="label_crafting">Oreficeria</string>
     <string name="label_jewellery">Gioielli</string>
     <string name="label_combat">Combattimento</string>
     <string name="label_recipe">Ricetta</string>
@@ -459,7 +459,7 @@
     <!-- ===== SkillsScreen ===== -->
     <!-- Translator note: %1$d = session duration in minutes -->
     <string name="skills_session_duration">Sessione: %1$dm</string>
-    <string name="skills_only_craftable">Solo elaborabili</string>
+    <string name="skills_only_craftable">Solo realizzabili</string>
     <string name="skills_filter_all">Tutti</string>
     <string name="skills_add_to_queue">Aggiungi alla Coda delle Sessioni</string>
     <string name="skills_add_queue_short">Aggiungi alla Coda</string>
@@ -617,11 +617,11 @@
     <string name="worker_journeyman">Artigiano</string>
     <string name="worker_master">Maestro</string>
     <string name="inn_long_laborer_desc">8 ore di lavoro, 0.5x efficienza. Nessun limite di mestiere, preghiera, o incisione di rune. Accoda quanto vuoi. Non è veloce, ma è in grado di fare di tutto.</string>
-    <string name="inn_apprentice_desc">8 ore di lavoro, 1x efficienza. Mestieri, preghiera e incisione di rune limitati a 480 oggetti per sessione.</string>
-    <string name="inn_journeyman_desc">6 ore di lavoro, 1.25x efficienza. Mestieri, preghiera e incisione di rune limitati a 360 oggetti per sessione.</string>
-    <string name="inn_master_desc">4 ore di lavoro, 2x efficienza. Mestieri, preghiera e incisione di rune limitati a 240 oggetti per sessione.</string>
+    <string name="inn_apprentice_desc">8 ore di lavoro, 1x efficienza. Oreficeria, preghiera e incisione di rune limitati a 480 oggetti per sessione.</string>
+    <string name="inn_journeyman_desc">6 ore di lavoro, 1.25x efficienza. Oreficeria, preghiera e incisione di rune limitati a 360 oggetti per sessione.</string>
+    <string name="inn_master_desc">4 ore di lavoro, 2x efficienza. Oreficeria, preghiera e incisione di rune limitati a 240 oggetti per sessione.</string>
     <string name="inn_gathering_note">Lavoro: ore sessione x moltiplicatore di efficienza applicati a bottino e XP</string>
-    <string name="inn_crafting_note">Mestieri/preghiera/incisione di rune: quantità limitata per livello di qualità; i manovali non hanno un limite</string>
+    <string name="inn_crafting_note">Oreficeria/preghiera/incisione di rune: quantità limitata per livello di qualità; i manovali non hanno un limite</string>
     <string name="worker_skills_title">Lavoratore: %1$s</string>
     <string name="worker_session_active">Sessione Lavoratore Attiva</string>
     <string name="worker_session_complete">Sessione Lavoratore Completata</string>
@@ -743,7 +743,7 @@
     <string name="guild_name_smithing">Gilda dei Fabbri</string>
     <string name="guild_name_cooking">Gilda degli Chef</string>
     <string name="guild_name_fletching">Gilda dei Frecciai</string>
-    <string name="guild_name_crafting">Gilda degli Artigiani</string>
+    <string name="guild_name_crafting">Gilda degli Orefici</string>
     <string name="guild_name_runecrafting">Gilda degli Incisori</string>
     <string name="guild_name_herblore">Gilda degli Erboristi</string>
     <string name="guild_name_warriors">Gilda dei Guerrieri</string>

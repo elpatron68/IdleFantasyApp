@@ -4,18 +4,18 @@
     <!-- Translator note: quest names are short titles; objectives are action sentences. -->
 
     <!-- Mining -->
-    <string name="quest_mining_1_name">Miniera I</string>
-    <string name="quest_mining_1_objective">Raccogli 500 Minerali di Rame</string>
-    <string name="quest_mining_2_name">Miniera II</string>
-    <string name="quest_mining_2_objective">Raccogli 750 Minerali Ferrosi</string>
-    <string name="quest_mining_3_name">Miniera III</string>
-    <string name="quest_mining_3_objective">Raccogli 1100 Carboni</string>
-    <string name="quest_mining_4_name">Miniera IV</string>
-    <string name="quest_mining_4_objective">Raccogli 1650 Minerali di Mithril</string>
-    <string name="quest_mining_5_name">Miniera V</string>
-    <string name="quest_mining_5_objective">Raccogli 2450 Minerali di Adamantite</string>
-    <string name="quest_mining_6_name">Miniera VI</string>
-    <string name="quest_mining_6_objective">Raccogli 3650 Minerali di Runite</string>
+    <string name="quest_mining_1_name">Estrazione I</string>
+    <string name="quest_mining_1_objective">Estrai 500 Minerali di Rame</string>
+    <string name="quest_mining_2_name">Estrazione II</string>
+    <string name="quest_mining_2_objective">Raccogli 750 Minerali di Ferro</string>
+    <string name="quest_mining_3_name">Estrazione III</string>
+    <string name="quest_mining_3_objective">Estrai 1100 blocchi di Carbone</string>
+    <string name="quest_mining_4_name">Estrazione IV</string>
+    <string name="quest_mining_4_objective">Estrai 1650 Minerali di Mithril</string>
+    <string name="quest_mining_5_name">Estrazione V</string>
+    <string name="quest_mining_5_objective">Estrai 2450 Minerali di Adamantio</string>
+    <string name="quest_mining_6_name">Estrazione VI</string>
+    <string name="quest_mining_6_objective">Estrai 3650 Minerali di Runite</string>
 
     <!-- Woodcutting -->
     <string name="quest_woodcutting_1_name">Taglialegna I</string>
@@ -90,25 +90,25 @@
     <string name="quest_cooking_chicken_3_objective">Cucina 500 Polli</string>
 
     <!-- Cooking - Mutton -->
-    <string name="quest_cooking_mutton_1_name">Cucina — Pecora I</string>
-    <string name="quest_cooking_mutton_1_objective">Cucina 100 Pecore</string>
-    <string name="quest_cooking_mutton_2_name">Cucina — Pecora II</string>
-    <string name="quest_cooking_mutton_2_objective">Cucina 250 Pecore</string>
-    <string name="quest_cooking_mutton_3_name">Cucina — Pecora III</string>
-    <string name="quest_cooking_mutton_3_objective">Cucina 500 Pecore</string>
+    <string name="quest_cooking_mutton_1_name">Cucina — Montone I</string>
+    <string name="quest_cooking_mutton_1_objective">Cucina 100 Montoni</string>
+    <string name="quest_cooking_mutton_2_name">Cucina — Montone II</string>
+    <string name="quest_cooking_mutton_2_objective">Cucina 250 Montoni</string>
+    <string name="quest_cooking_mutton_3_name">Cucina — Montone III</string>
+    <string name="quest_cooking_mutton_3_objective">Cucina 500 Montoni</string>
 
     <!-- Fletching -->
-    <string name="quest_fletching_1_name">Fletching I</string>
+    <string name="quest_fletching_1_name">Frecciaio I</string>
     <string name="quest_fletching_1_objective">Costruisci 500 Frecce di Bronzo</string>
-    <string name="quest_fletching_2_name">Fletching II</string>
+    <string name="quest_fletching_2_name">Frecciaio II</string>
     <string name="quest_fletching_2_objective">Costruisci 750 Frecce di Ferro</string>
-    <string name="quest_fletching_3_name">Fletching III</string>
+    <string name="quest_fletching_3_name">Frecciaio III</string>
     <string name="quest_fletching_3_objective">Costruisci 1100 Frecce d\'Acciaio</string>
-    <string name="quest_fletching_4_name">Fletching IV</string>
+    <string name="quest_fletching_4_name">Frecciaio IV</string>
     <string name="quest_fletching_4_objective">Costruisci 1650 Frecce di Mithril</string>
-    <string name="quest_fletching_5_name">Fletching V</string>
+    <string name="quest_fletching_5_name">Frecciaio V</string>
     <string name="quest_fletching_5_objective">Costruisci 2450 Frecce di Adamantite</string>
-    <string name="quest_fletching_6_name">Fletching VI</string>
+    <string name="quest_fletching_6_name">Frecciaio VI</string>
     <string name="quest_fletching_6_objective">Costruisci 3650 Frecce di Runite</string>
 
     <!-- Prayer -->
@@ -126,7 +126,7 @@
     <string name="quest_prayer_6_objective">Seppellisci 3650 ossa</string>
 
     <!-- Slayer -->
-    <string name="quest_combat_kills_1_name">Cacciatore I</string>
+    <string name="quest_combat_kills_1_name">Sicario I</string>
     <string name="quest_combat_kills_1_objective">Sconfiggi 100 nemici</string>
     <string name="quest_combat_kills_2_name">Cacciatore II</string>
     <string name="quest_combat_kills_2_objective">Sconfiggi 150 nemici</string>
@@ -152,26 +152,26 @@
     <string name="quest_dungeon_undead_1_objective">Completa il dungeon Cripta di Non Morti 5 volte</string>
     <string name="quest_dungeon_fortress_1_name">Esploratore di Dungeon VI</string>
     <string name="quest_dungeon_fortress_1_objective">Completa il dungeon Fortezza in Rovina 5 volte</string>
-    <string name="quest_dungeon_orc_1_name">Dungeon Master I</string>
+    <string name="quest_dungeon_orc_1_name">Esperto dei Dungeon I</string>
     <string name="quest_dungeon_orc_1_objective">Completa il dungeon Fortificazione degli Orchi 5 volte</string>
-    <string name="quest_dungeon_volcanic_1_name">Dungeon Master II</string>
+    <string name="quest_dungeon_volcanic_1_name">Esperto dei Dungeon II</string>
     <string name="quest_dungeon_volcanic_1_objective">Completa il dungeon Profondità Vulcaniche 5 volte</string>
-    <string name="quest_dungeon_dragon_1_name">Dungeon Master III</string>
+    <string name="quest_dungeon_dragon_1_name">Esperto dei Dungeon III</string>
     <string name="quest_dungeon_dragon_1_objective">Completa il dungeon Covo di Draghi 5 volte</string>
 
     <!-- Crafting -->
-    <string name="quest_crafting_1_name">Crafting I</string>
-    <string name="quest_crafting_1_objective">Costruisci 100 Anelli d\'Argento</string>
-    <string name="quest_crafting_2_name">Crafting II</string>
-    <string name="quest_crafting_2_objective">Costruisci 250 Anelli d\'Oro</string>
-    <string name="quest_crafting_3_name">Crafting III</string>
-    <string name="quest_crafting_3_objective">Costruisci 500 Anelli di Platino</string>
-    <string name="quest_crafting_4_name">Crafting IV</string>
-    <string name="quest_crafting_4_objective">Costruisci 750 Anelli d\'Argento con Zaffiro</string>
-    <string name="quest_crafting_5_name">Crafting V</string>
-    <string name="quest_crafting_5_objective">Costruisci 1000 Anelli d\'Oro con Zaffiro</string>
-    <string name="quest_crafting_6_name">Crafting VI</string>
-    <string name="quest_crafting_6_objective">Costruisci 1500 Anelli di Platino con Diamante</string>
+    <string name="quest_crafting_1_name">Orefice I</string>
+    <string name="quest_crafting_1_objective">Realizza 100 Anelli d\'Argento</string>
+    <string name="quest_crafting_2_name">Orefice II</string>
+    <string name="quest_crafting_2_objective">Realizza 250 Anelli d\'Oro</string>
+    <string name="quest_crafting_3_name">Orefice III</string>
+    <string name="quest_crafting_3_objective">Realizza 500 Anelli di Platino</string>
+    <string name="quest_crafting_4_name">Orefice IV</string>
+    <string name="quest_crafting_4_objective">Realizza 750 Anelli d\'Argento con Zaffiro</string>
+    <string name="quest_crafting_5_name">Orefice V</string>
+    <string name="quest_crafting_5_objective">Realizza 1000 Anelli d\'Oro con Zaffiro</string>
+    <string name="quest_crafting_6_name">Orefice VI</string>
+    <string name="quest_crafting_6_objective">Realizza 1500 Anelli di Platino con Diamante</string>
 
     <!-- Monster slayer chains -->
     <string name="quest_goblin_slayer_1_name">Cacciatore di Goblin I</string>
@@ -275,17 +275,17 @@
 
     <!-- Herblore -->
     <string name="quest_herblore_1_name">Erboristeria I</string>
-    <string name="quest_herblore_1_objective">Brew 100 Miscele Attacco</string>
+    <string name="quest_herblore_1_objective">Mischia 100 Miscele Attacco</string>
     <string name="quest_herblore_2_name">Erboristeria II</string>
-    <string name="quest_herblore_2_objective">Mix 250 Pozioni Difesa</string>
+    <string name="quest_herblore_2_objective">Mischia 250 Pozioni Difesa</string>
     <string name="quest_herblore_3_name">Erboristeria III</string>
-    <string name="quest_herblore_3_objective">Mix 500 Pozioni Forza</string>
+    <string name="quest_herblore_3_objective">Mischia 500 Pozioni Forza</string>
     <string name="quest_herblore_4_name">Erboristeria IV</string>
-    <string name="quest_herblore_4_objective">Mix 750 Pozioni Attacco a Distanza</string>
+    <string name="quest_herblore_4_objective">Mischia 750 Pozioni Mira</string>
     <string name="quest_herblore_5_name">Erboristeria V</string>
-    <string name="quest_herblore_5_objective">Mix 1000 Pozioni Magia</string>
+    <string name="quest_herblore_5_objective">Mischia 1000 Pozioni Magia</string>
     <string name="quest_herblore_6_name">Erboristeria VI</string>
-    <string name="quest_herblore_6_objective">Mix 1500 Pozioni Super Forza</string>
+    <string name="quest_herblore_6_objective">Mischia 1500 Pozioni Super Forza</string>
 
     <!-- Slayer extended -->
     <string name="quest_combat_kills_7_name">Cacciatore VII</string>
@@ -330,9 +330,9 @@
     <!-- Dungeon exploration extended -->
     <string name="quest_dungeon_imp_1_name">Esploratore di Dungeon VII</string>
     <string name="quest_dungeon_imp_1_objective">Completa la Caverna di Imp 5 volte</string>
-    <string name="quest_dungeon_infernal_1_name">Dungeon Master IV</string>
+    <string name="quest_dungeon_infernal_1_name">Esperto dei Dungeon IV</string>
     <string name="quest_dungeon_infernal_1_objective">Completa il Forte Infernale 5 volte</string>
-    <string name="quest_dungeon_ancient_1_name">Dungeon Master V</string>
+    <string name="quest_dungeon_ancient_1_name">Esperto dei Dungeon V</string>
     <string name="quest_dungeon_ancient_1_objective">Completa l\'Antico Tempio 5 volte</string>
 
     <!-- Boss extended -->
@@ -400,8 +400,8 @@
     <string name="quest_daily_mine_mithril_name">Prospettore di Mithril</string>
     <string name="quest_daily_mine_runite_name">Corsa al Runite</string>
     <string name="quest_daily_fish_salmon_name">Risalita del Salmone</string>
-    <string name="quest_daily_fish_lobster_name">Pescata di Aragoste</string>
-    <string name="quest_daily_fish_swordfish_name">Cacciatore di Pesci Spada</string>
+    <string name="quest_daily_fish_lobster_name">Pescata di Astici</string>
+    <string name="quest_daily_fish_swordfish_name">Cacciatore di Pescespada</string>
     <string name="quest_daily_fish_shark_name">Addestratore di Squali</string>
     <string name="quest_daily_wc_oak_name">Taglialegna di Quercia</string>
     <string name="quest_daily_wc_willow_name">Lavoratore del Salice</string>
@@ -413,8 +413,8 @@
     <string name="quest_daily_smith_runite_name">Fonditore di Runite</string>
     <string name="quest_daily_cook_trout_name">Chef della Trota</string>
     <string name="quest_daily_cook_salmon_name">Grigliatore di Salmone</string>
-    <string name="quest_daily_cook_lobster_name">Cuoco dell\'Aragosta</string>
-    <string name="quest_daily_cook_swordfish_name">Cuoco del Pesce Spada</string>
+    <string name="quest_daily_cook_lobster_name">Cuoco dell\'Astice</string>
+    <string name="quest_daily_cook_swordfish_name">Cuoco del Pescespada</string>
     <string name="quest_daily_kill_goblin_name">Ammazza Goblin</string>
     <string name="quest_daily_kill_bandit_name">Sgominatore di Banditi</string>
     <string name="quest_daily_kill_demon_name">Cacciatore di Demoni</string>
