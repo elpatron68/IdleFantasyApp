@@ -23,24 +23,24 @@
     <string name="item_rune_essence_desc">Pierre magique brute utilisée pour fabriquer tous types de runes.</string>
 
     <!-- ===== Metal bars ===== -->
-    <string name="item_bronze_bar_name">Barre de bronze</string>
-    <string name="item_bronze_bar_desc">Fondue à partir de minerai de cuivre et d’étain. La barre de métal la plus basique.</string>
-    <string name="item_iron_bar_name">Barre de fer</string>
-    <string name="item_iron_bar_desc">Une barre de fer robuste utilisée pour fabriquer du matériel en fer.</string>
-    <string name="item_silver_bar_name">Barre d’argent</string>
-    <string name="item_silver_bar_desc">Barre d’argent raffinée utilisée pour la fabrication de bijoux.</string>
-    <string name="item_steel_bar_name">Barre d’acier</string>
+    <string name="item_bronze_bar_name">Lingot de bronze</string>
+    <string name="item_bronze_bar_desc">Fondue à partir de minerai de cuivre et d’étain. Le lingot de métal la plus basique.</string>
+    <string name="item_iron_bar_name">Lingot de fer</string>
+    <string name="item_iron_bar_desc">Un lingot de fer robuste utilisée pour fabriquer du matériel en fer.</string>
+    <string name="item_silver_bar_name">Lingot d’argent</string>
+    <string name="item_silver_bar_desc">Lingot d’argent raffinée utilisée pour la fabrication de bijoux.</string>
+    <string name="item_steel_bar_name">Lingot d’acier</string>
     <string name="item_steel_bar_desc">Plus résistante que le fer. Utilisée pour fabriquer du matériel en acier.</string>
-    <string name="item_gold_bar_name">Barre d’or</string>
-    <string name="item_gold_bar_desc">Barre d’or raffinée utilisée pour fabriquer des bijoux et du matériel en or.</string>
-    <string name="item_mithril_bar_name">Barre de mithril</string>
-    <string name="item_mithril_bar_desc">Une barre de métal magique légère.</string>
-    <string name="item_adamantite_bar_name">Barre d’adamantite</string>
-    <string name="item_adamantite_bar_desc">Une barre de métal exceptionnellement dure.</string>
-    <string name="item_platinum_bar_name">Barre de platine</string>
-    <string name="item_platinum_bar_desc">Une barre de platine rare et brillante pour les bijoux de haut niveau.</string>
-    <string name="item_runite_bar_name">Barre de runite</string>
-    <string name="item_runite_bar_desc">La barre de métal fondable la plus forte.</string>
+    <string name="item_gold_bar_name">Lingot d’or</string>
+    <string name="item_gold_bar_desc">Lingot d’or raffinée utilisée pour fabriquer des bijoux et du matériel en or.</string>
+    <string name="item_mithril_bar_name">Lingot de mithril</string>
+    <string name="item_mithril_bar_desc">Un lingot de métal magique légère.</string>
+    <string name="item_adamantite_bar_name">Lingot d’adamantite</string>
+    <string name="item_adamantite_bar_desc">Un lingot de métal exceptionnellement dure.</string>
+    <string name="item_platinum_bar_name">Lingot de platine</string>
+    <string name="item_platinum_bar_desc">Un lingot de platine rare et brillante pour les bijoux de haut niveau.</string>
+    <string name="item_runite_bar_name">Lingot de runite</string>
+    <string name="item_runite_bar_desc">Le lingot de métal fondable la plus forte.</string>
 
     <!-- ===== Gems ===== -->
     <string name="item_sapphire_name">Saphir</string>
@@ -367,8 +367,8 @@
     <string name="item_runite_arrow_desc">Les meilleures flèches disponibles.</string>
 
     <!-- Composants de flèches -->
-    <string name="item_arrow_shaft_name">Fût de flèche</string>
-    <string name="item_arrow_shaft_desc">Tige en bois utilisés pour fabriquer des flèches.</string>
+    <string name="item_arrow_shaft_name">Fûts de flèche</string>
+    <string name="item_arrow_shaft_desc">Tiges en bois utilisés pour fabriquer des flèches.</string>
     <string name="item_bronze_arrow_tips_name">Pointes de flèche en bronze</string>
     <string name="item_bronze_arrow_tips_desc">Pointes en bronze pour fabriquer des flèches en bronze.</string>
     <string name="item_iron_arrow_tips_name">Pointes de flèche en fer</string>
@@ -590,11 +590,11 @@
     <string name="item_overload_potion_name">Potion de surchage</string>
 
     <!-- Enhanced potions -->
-    <string name="item_enhanced_attack_brew_name">Bière d\'attaque améliorée</string>
+    <string name="item_enhanced_attack_brew_name">Bière d’attaque améliorée</string>
     <string name="item_enhanced_defense_brew_name">Bière de défense améliorée</string>
-    <string name="item_enhanced_attack_potion_name">Potion d\'attaque améliorée</string>
+    <string name="item_enhanced_attack_potion_name">Potion d’attaque améliorée</string>
     <string name="item_enhanced_defense_potion_name">Potion de défense améliorée</string>
-    <string name="item_enhanced_onion_brew_name">Bière d\'oignon améliorée</string>
+    <string name="item_enhanced_onion_brew_name">Bière d’oignon améliorée</string>
     <string name="item_enhanced_carrot_brew_name">Bière de carotte améliorée</string>
     <string name="item_enhanced_strength_brew_name">Bière de force améliorée</string>
     <string name="item_enhanced_strength_potion_name">Potion de force améliorée</string>
