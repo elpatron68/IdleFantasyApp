@@ -863,7 +863,7 @@
     <string name="prestige">Prestige</string>
     <string name="prestige_max">Max Prestige</string>
     <string name="prestige_confirm_title">Prestige %s?</string>
-    <string name="prestige_confirm_message_xp">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings dauerhaft +%2$d% XP-Bonus für diese Fähigkeit erhalten.</string>
+    <string name="prestige_confirm_message_xp">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings dauerhaft +%2$d%% XP-Bonus für diese Fähigkeit erhalten.</string>
     <string name="prestige_confirm_message_stat">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings einen dauerhaften Bonus von +%2$d.</string>
     <string name="achievement_prestige_first_name">Erster Neustart</string>
     <string name="achievement_prestige_first_desc">Erhöht das Prestige einer beliebigen Fähigkeit zum ersten Mal</string>
