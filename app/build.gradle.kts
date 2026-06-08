@@ -66,6 +66,11 @@ android {
         baseline = file("lint-baseline.xml")
         warningsAsErrors = false
     }
+
+    testOptions {
+        // Let Robolectric (Room migration tests) access Android resources.
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 // Export Room schema files so migrations can be verified and reviewed in version control.
@@ -115,4 +120,9 @@ dependencies {
     // Unit testing (JVM, no device required)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test.junit)
+
+    // Room migration testing under Robolectric (runs on the JVM, no emulator)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.ext.junit)
 }

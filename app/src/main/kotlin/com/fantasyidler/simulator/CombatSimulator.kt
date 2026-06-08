@@ -41,6 +41,7 @@ object CombatSimulator {
         availableArrows: Map<String, Int> = emptyMap(),
         runeKey: String? = null,
         runeCostPerAttack: Int = 1,
+        random: Random = Random.Default,
     ): SkillSimulator.Result {
         val effAttack   = playerAttack   + (potionBonuses["attack"]   ?: 0)
         val effStrength = playerStrength + (potionBonuses["strength"] ?: 0)
@@ -70,7 +71,7 @@ object CombatSimulator {
         var carryoverEnemyKey: String? = null
         var carryoverEnemyHp = 0
 
-        val rnd = Random(System.nanoTime())
+        val rnd = random
 
         for (minute in 1..60) {
             val frameItems     = mutableMapOf<String, Int>()
@@ -299,6 +300,7 @@ object CombatSimulator {
         blessingDefBonus: Int = 0,
         runeKey: String? = null,
         runeCostPerAttack: Int = 1,
+        random: Random = Random.Default,
     ): List<SessionFrame> {
         val playerMax: Int
         val effAtk: Int
@@ -351,7 +353,7 @@ object CombatSimulator {
             .sortedByDescending { it.value }
             .map { it.key }
 
-        val rnd = Random(System.nanoTime())
+        val rnd = random
 
         outer@ while (frames.size < maxFrames) {
             val pHits          = mutableListOf<Int>()
