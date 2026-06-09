@@ -2702,7 +2702,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 1.25,
+    "farming_efficiency": 2.25,
     "requirements": {
       "farming": 65
     }

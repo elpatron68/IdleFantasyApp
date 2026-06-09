@@ -1,0 +1,5 @@
+• Fixed prayer "Start Burying" button being hidden behind the keyboard
+• Fixed construction sessions disappearing from the queue without starting
+• Fixed iron, steel, and mithril nails not appearing under the Components filter in Smithing
+• Fixed wooden racks and other constructed items not counting toward Construction quests when collected from the home screen
+• Fixed agility sessions not counting toward agility guild quests when collected from the skills screen

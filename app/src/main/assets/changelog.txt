@@ -1,3 +1,9 @@
+v1.8.1
+• Fixed prayer "Start Burying" button being hidden behind the keyboard
+• Fixed construction sessions disappearing from the queue without starting
+• Fixed iron, steel, and mithril nails not appearing under the Components filter in Smithing
+• Fixed wooden racks and other constructed items not counting toward Construction quests when collected from the home screen
+• Fixed agility sessions not counting toward agility guild quests when collected from the skills screen
 v1.8.0
 • New skill: Construction (Crafting) — build furniture from planks and nails to train up
 • New skill: Thieving (Gathering) — pickpocket NPCs each session; success rate scales with your level

@@ -69,7 +69,7 @@ class QueuedSessionStarter @Inject constructor(
             Skills.AGILITY, "expedition", "combat" -> base
             Skills.SMITHING, Skills.COOKING, Skills.FLETCHING,
             Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING,
-            Skills.RUNECRAFTING, Skills.PRAYER -> action.qty.toLong() * perItem
+            Skills.RUNECRAFTING, Skills.PRAYER, Skills.CONSTRUCTION -> action.qty.toLong() * perItem
             "boss" -> gameData.bosses[action.activityKey]
                           ?.durationMinutes?.let { it * (base / 60L) } ?: base
             Skills.MERCANTILE -> action.estimatedDurationMs.takeIf { it > 0 } ?: base
@@ -291,6 +291,13 @@ class QueuedSessionStarter @Inject constructor(
                 val frames = buildCraftFrames(xpMap[Skills.CRAFTING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey)
                 val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel) / 60
                 sessionRepo.startSession(Skills.CRAFTING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs)
+            }
+            Skills.CONSTRUCTION -> {
+                val r   = gameData.constructionRecipes[action.activityKey] ?: return
+                val qty = action.qty.takeIf { it > 0 } ?: return
+                val frames = buildCraftFrames(xpMap[Skills.CONSTRUCTION] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey)
+                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel) / 60
+                sessionRepo.startSession(Skills.CONSTRUCTION, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs)
             }
             Skills.HERBLORE -> {
                 val r   = gameData.herbloreRecipes[action.activityKey] ?: return

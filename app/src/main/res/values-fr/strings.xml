@@ -987,7 +987,7 @@
     <string name="bone_altar_tap">Appuyer pour Enterrer</string>
     <string name="bone_altar_change_bone">Changer</string>
     <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active">+50% bonus XP !</string>
+    <string name="bone_altar_bonus_active">+50%% bonus XP !</string>
     <string name="bone_altar_session_xp">+%s XP cette session</string>
     <string name="bone_altar_buried_count">%d enterrés</string>
     <string name="bone_altar_no_bones">Aucun os dans l\'inventaire</string>

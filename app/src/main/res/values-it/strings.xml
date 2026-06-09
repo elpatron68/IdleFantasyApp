@@ -1005,7 +1005,7 @@
     <string name="bone_altar_tap">Tocca per Seppellire</string>
     <string name="bone_altar_change_bone">Cambia</string>
     <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active">+50% bonus XP!</string>
+    <string name="bone_altar_bonus_active">+50%% bonus XP!</string>
     <string name="bone_altar_session_xp">+%s XP questa sessione</string>
     <string name="bone_altar_buried_count">%d sepolti</string>
     <string name="bone_altar_no_bones">Non hai ossa con te</string>

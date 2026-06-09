@@ -1249,6 +1249,7 @@ internal fun PrayerSheet(
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
             .imePadding()
             .padding(bottom = 32.dp),
     ) {

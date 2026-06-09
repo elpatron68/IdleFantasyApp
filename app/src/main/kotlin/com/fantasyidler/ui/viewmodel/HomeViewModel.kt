@@ -273,7 +273,7 @@ class HomeViewModel @Inject constructor(
             var pendingExpeditionSummary: SessionSummary? = null
 
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
-            val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING)
+            val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.CONSTRUCTION)
 
             for (session in sessions) {
                 val frames: List<SessionFrame> = json.decodeFromString(session.frames)

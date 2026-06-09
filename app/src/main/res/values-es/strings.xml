@@ -989,7 +989,7 @@
     <string name="bone_altar_tap">Toca para Enterrar</string>
     <string name="bone_altar_change_bone">Cambiar</string>
     <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active">+50% bono de XP!</string>
+    <string name="bone_altar_bonus_active">+50%% bono de XP!</string>
     <string name="bone_altar_session_xp">+%s XP esta sesión</string>
     <string name="bone_altar_buried_count">%d enterrados</string>
     <string name="bone_altar_no_bones">No hay huesos en el inventario</string>
