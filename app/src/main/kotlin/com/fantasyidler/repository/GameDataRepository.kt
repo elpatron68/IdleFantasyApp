@@ -28,6 +28,8 @@ import com.fantasyidler.data.json.QuestData
 import com.fantasyidler.data.json.RuneData
 import com.fantasyidler.data.json.SkillData
 import com.fantasyidler.data.json.SmithingRecipe
+import com.fantasyidler.data.json.ConstructionRecipe
+import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.TreeData
@@ -181,6 +183,14 @@ class GameDataRepository @Inject constructor(
 
     val herbloreRecipes: Map<String, HerbloreRecipe> by lazy {
         asset("data/recipes/herblore.json")
+    }
+
+    val constructionRecipes: Map<String, ConstructionRecipe> by lazy {
+        asset("data/recipes/construction.json")
+    }
+
+    val thievingNpcs: Map<String, ThievingNpcData> by lazy {
+        asset<List<ThievingNpcData>>("data/thieving_npcs.json").associateBy { it.key }
     }
 
     /** Potion key → map of stat name → flat bonus value. Includes enhanced_* variants at 2× base. */

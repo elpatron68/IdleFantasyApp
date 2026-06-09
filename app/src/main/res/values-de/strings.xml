@@ -360,7 +360,7 @@
 
     <!-- ===== translate — HomeScreen ===== -->
     <string name="home_town_title">Stadt</string>
-    <string name="home_town_desc">Besucht den Krämer, die Schänke, die Gilde, die Kirche und den Slayer Master</string>
+    <string name="home_town_desc">Besuche den Laden, die Herberge, die Gilde, die Kirche, die Bauwerkstatt und den Slayer-Meister</string>
     <string name="guild_dailies_available">Tagesaufgaben verfügbar</string>
     <string name="guild_do_dailies_hint">Erledigt Tagesaufgaben, um Euer Ansehen zu verbessern</string>
     <string name="guild_quest_gate_blocked">Schließt Missionen ab, um im Rang aufzusteigen</string>
@@ -826,6 +826,8 @@
     <!-- Slayer -->
     <string name="skill_slayer_name">Slayer</string>
     <string name="skill_slayer_desc">Erhaltet in der Stadt Aufgaben vom Slayer Master.</string>
+        <string name="builder_title">Werkstatt des Bauers</string>
+    <string name="builder_card_desc">Gasthaus, Gildenhaus und Kirche ausbauen</string>
     <string name="slayer_title">Slayer Master</string>
     <string name="slayer_card_desc">Aufgaben und Belohnungen für Slayer</string>
     <string name="slayer_desc">Beendet Aufgaben, um Slayer XP und Punkte zu verdienen. Kauft euch dafür exklusive Ausrüstung im Kontor des Slayers.</string>
@@ -966,4 +968,66 @@
     <string name="bone_altar_buried_count">%d vergraben</string>
     <string name="bone_altar_no_bones">Keine Knochen im Inventar</string>
     <string name="bone_altar_cape_awarded">Gebetsumhang erhalten!</string>
+
+    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <string name="skill_construction_name">Bauen</string>
+    <string name="skill_construction_desc">Baue Möbel aus Brettern und Nägeln für XP. Höhere Baustufen ermöglichen Gebäudeupgrades für dauerhafte Boni.</string>
+    <string name="skill_thieving_name">Stehlen</string>
+    <string name="skill_thieving_desc">Bestehle NSCs in jeder Session. Erfolgschance hängt von deiner Stufe ab. Fehlschläge betäuben dich für einen Frame.</string>
+    <string name="thieving_npc_detail">Lv. %1$d • %2$d EP • %3$d%% Erfolg</string>
+    <string name="thieving_npc_coins">%1$d–%2$d Münzen pro Erfolg</string>
+    <string name="thieving_npc_peasant_name">Bauer</string>
+    <string name="thieving_npc_merchant_name">Händler</string>
+    <string name="thieving_npc_guardsman_name">Wächter</string>
+    <string name="thieving_npc_artisan_name">Handwerker</string>
+    <string name="thieving_npc_noble_name">Adeliger</string>
+    <string name="thieving_npc_city_guard_name">Stadtgarde</string>
+    <string name="thieving_npc_knight_name">Ritter</string>
+    <string name="thieving_npc_high_priest_name">Hohepriester</string>
+    <string name="item_plank_name">Bohle</string>
+    <string name="item_oak_plank_name">Eichenbohle</string>
+    <string name="item_willow_plank_name">Weidenbohle</string>
+    <string name="item_maple_plank_name">Ahornbohle</string>
+    <string name="item_yew_plank_name">Eibenholzbohle</string>
+    <string name="item_magic_plank_name">Magische Bohle</string>
+    <string name="item_iron_nail_name">Eisennagel</string>
+    <string name="item_steel_nail_name">Stahlnagel</string>
+    <string name="item_mithril_nail_name">Mithrilnagel</string>
+    <string name="item_stone_name">Stein</string>
+    <string name="item_carved_stone_name">Gemeißelter Stein</string>
+    <string name="item_stone_block_name">Steinblock</string>
+    <string name="item_wooden_rack_name">Holzgestell</string>
+    <string name="item_wooden_shelf_name">Holzregal</string>
+    <string name="item_oak_table_name">Eichentisch</string>
+    <string name="item_oak_bookshelf_name">Eichenregal</string>
+    <string name="item_willow_cabinet_name">Weidenschrank</string>
+    <string name="item_maple_dresser_name">Ahornkommode</string>
+    <string name="item_yew_wardrobe_name">Eibenholzschrank</string>
+    <string name="item_magic_throne_name">Magischer Thron</string>
+    <string name="town_upgrade_section_title">Stadtgebäude</string>
+    <string name="town_building_current_tier">Stufe %1$d / 3</string>
+    <string name="town_building_maxed_label">Vollständig ausgebaut</string>
+    <string name="town_upgrade_next_label">Nächstes Upgrade</string>
+    <string name="town_upgrade_constr_req">Bauen Lv. %1$d erforderlich</string>
+    <string name="town_upgrade_cost">Kosten: %1$s Münzen</string>
+    <string name="town_upgrade_materials_header">Materialien:</string>
+    <string name="town_upgrade_btn">Upgraden</string>
+    <string name="town_upgrade_success">Gebäude ausgebaut!</string>
+    <string name="town_upgrade_fail_level">Bauen Lv. %1$d erforderlich</string>
+    <string name="town_upgrade_fail_coins">Nicht genug Münzen</string>
+    <string name="town_upgrade_fail_mats">Zu wenig Materialien</string>
+    <string name="town_inn_active_bonus">+%1$d%% Arbeiter-EP pro Session</string>
+    <string name="town_inn_no_bonus">Upgraden für Arbeiter-EP-Bonus</string>
+    <string name="town_guild_active_bonus">-%1$d%% Gilden-Questanforderungen</string>
+    <string name="town_guild_no_bonus">Upgraden für reduzierte Questziele</string>
+    <string name="town_church_active_bonus">Segnungen dauern %1$dh (Standard: 24h)</string>
+    <string name="town_church_no_bonus">Upgraden für längere Segnungsdauer</string>
+    <string name="achievement_town_first_upgrade_name">Erste Renovierung</string>
+    <string name="achievement_town_first_upgrade_desc">Baue ein Stadtgebäude zum ersten Mal aus</string>
+    <string name="achievement_town_all_tier1_name">Stadtverbesserer</string>
+    <string name="achievement_town_all_tier1_desc">Baue alle drei Stadtgebäude auf mindestens Stufe 1 aus</string>
+    <string name="achievement_town_one_maxed_name">Meisterbaumeister</string>
+    <string name="achievement_town_one_maxed_desc">Baue ein Stadtgebäude auf die maximale Stufe aus</string>
+    <string name="achievement_town_all_maxed_name">Stadt der Legenden</string>
+    <string name="achievement_town_all_maxed_desc">Baue alle drei Stadtgebäude auf die maximale Stufe aus</string>
 </resources>

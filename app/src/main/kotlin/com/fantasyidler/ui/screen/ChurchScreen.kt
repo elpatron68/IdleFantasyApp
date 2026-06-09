@@ -183,6 +183,7 @@ fun ChurchScreen(
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
+
         }
     }
 }

@@ -101,6 +101,19 @@ class AchievementsViewModel @Inject constructor(
             ach("prestige_all_3",   R.string.achievement_prestige_all_3_name,   R.string.achievement_prestige_all_3_desc,   "👑", Skills.ALL.all { (prestigeMap[it] ?: 0) >= 3 }),
         )
 
+        val townTiers = flags.townBuildingTiers
+        val allBuildingKeys = listOf("inn", "guild_hall", "church")
+        groups["Town"] = listOf(
+            ach("town_first_upgrade", R.string.achievement_town_first_upgrade_name, R.string.achievement_town_first_upgrade_desc, "🏗️",
+                allBuildingKeys.any { (townTiers[it] ?: 0) >= 1 }),
+            ach("town_all_tier1", R.string.achievement_town_all_tier1_name, R.string.achievement_town_all_tier1_desc, "🏘️",
+                allBuildingKeys.all { (townTiers[it] ?: 0) >= 1 }),
+            ach("town_one_maxed", R.string.achievement_town_one_maxed_name, R.string.achievement_town_one_maxed_desc, "🏰",
+                allBuildingKeys.any { (townTiers[it] ?: 0) >= 3 }),
+            ach("town_all_maxed", R.string.achievement_town_all_maxed_name, R.string.achievement_town_all_maxed_desc, "👑",
+                allBuildingKeys.all { (townTiers[it] ?: 0) >= 3 }),
+        )
+
         val all = groups.values.flatten()
         AchievementsUiState(
             isLoading     = false,

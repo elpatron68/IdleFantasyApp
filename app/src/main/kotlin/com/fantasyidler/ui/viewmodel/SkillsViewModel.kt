@@ -8,6 +8,7 @@ import com.fantasyidler.data.json.FishData
 import com.fantasyidler.data.json.LogData
 import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.RuneData
+import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
@@ -23,6 +24,7 @@ import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -91,6 +93,8 @@ sealed class SheetState {
     ) : SheetState()
     /** Opens the inline craft sheet for one of the instant-craft skills. */
     data class Crafting(val skillName: String) : SheetState()
+    /** NPCs available to pickpocket, filtered to player's thieving level. */
+    data class Thieving(val npcs: Map<String, ThievingNpcData>) : SheetState()
     data object Mercantile : SheetState()
     data object Farming : SheetState()
     data object ComingSoon : SheetState()
@@ -225,7 +229,14 @@ class SkillsViewModel @Inject constructor(
             Skills.COOKING,
             Skills.FLETCHING,
             Skills.CRAFTING,
-            Skills.HERBLORE  -> SheetState.Crafting(skillKey)
+            Skills.HERBLORE,
+            Skills.CONSTRUCTION -> SheetState.Crafting(skillKey)
+            Skills.THIEVING -> {
+                val thievingLevel = state.skillLevels[Skills.THIEVING] ?: 1
+                SheetState.Thieving(
+                    npcs = gameData.thievingNpcs.filter { (_, npc) -> npc.levelRequired <= thievingLevel }
+                )
+            }
             Skills.MERCANTILE -> SheetState.Mercantile
             Skills.FARMING    -> SheetState.Farming
             else             -> SheetState.ComingSoon
@@ -543,6 +554,65 @@ class SkillsViewModel @Inject constructor(
         )
     }
 
+    fun startThievingSession(npcKey: String) {
+        val npc = gameData.thievingNpcs[npcKey] ?: return
+        val (petKey, petChance) = petDropParams(Skills.THIEVING)
+        viewModelScope.launch {
+            if (sessionRepo.getActiveSession() != null) {
+                val player = playerRepo.getOrCreatePlayer()
+                val agility = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+                val enqueued = playerRepo.enqueueAction(
+                    QueuedAction(
+                        skillName           = Skills.THIEVING,
+                        activityKey         = npcKey,
+                        skillDisplayName    = "Thieving",
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility),
+                    )
+                )
+                _uiState.update {
+                    it.copy(
+                        snackbarMessage = if (enqueued)
+                            "Added to queue: Thieving — ${npc.displayName}."
+                        else
+                            "Queue is full (3/3).",
+                    )
+                }
+                return@launch
+            }
+            _uiState.update { it.copy(startingSession = true, sheetSkill = null) }
+            try {
+                val player = playerRepo.getOrCreatePlayer()
+                val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+                val xpMap: Map<String, Long> = json.decodeFromString(player.skillXp)
+                val result = ThievingSimulator.simulate(
+                    npcKey         = npcKey,
+                    npc            = npc,
+                    startXp        = xpMap[Skills.THIEVING] ?: 0L,
+                    thievingLevel  = levels[Skills.THIEVING] ?: 1,
+                    agilityLevel   = levels[Skills.AGILITY] ?: 1,
+                    petBoostPct    = petBoostFor(player.pets, Skills.THIEVING),
+                    petDropKey     = petKey,
+                    petDropChance  = petChance,
+                )
+                val framesJson = json.encodeToString(
+                    json.serializersModule.serializer<List<SessionFrame>>(),
+                    result.frames,
+                )
+                sessionRepo.startSession(
+                    skillName        = Skills.THIEVING,
+                    activityKey      = npcKey,
+                    frames           = framesJson,
+                    durationMs       = result.durationMs,
+                    skillDisplayName = "Thieving",
+                )
+            } catch (e: Exception) {
+                _uiState.update { it.copy(snackbarMessage = "Failed to start session: ${e.message}") }
+            } finally {
+                _uiState.update { it.copy(startingSession = false) }
+            }
+        }
+    }
+
     private fun startSession(
         skillName: String,
         activityKey: String,
@@ -622,16 +692,23 @@ class SkillsViewModel @Inject constructor(
             val petDrops   = allItems.filterKeys { it in petIds }
             val regularItems = allItems.filterKeys { it !in petIds }
 
+            // Thieving coins go to balance rather than inventory
+            val thievingCoins = if (session.skillName == Skills.THIEVING)
+                (regularItems["coins"] ?: 0).toLong() else 0L
+            val inventoryItems = if (session.skillName == Skills.THIEVING)
+                regularItems.filterKeys { it != "coins" } else regularItems
+
             playerRepo.applySessionResults(
                 skillName   = session.skillName,
                 xpGained    = totalXp,
-                itemsGained = regularItems,
+                itemsGained = inventoryItems,
             )
+            if (thievingCoins > 0) playerRepo.addCoins(thievingCoins)
 
             // Record quest / daily / guild progress
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
             val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING,
-                Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING)
+                Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.CONSTRUCTION)
             when (session.skillName) {
                 in gatheringSkills -> {
                     questRepo.recordGathering(session.skillName, regularItems)
@@ -642,6 +719,10 @@ class SkillsViewModel @Inject constructor(
                     questRepo.recordCrafting(session.skillName, regularItems)
                     playerRepo.recordDailyCrafting(regularItems)
                     guildRepo.recordGuildCrafting(session.skillName, regularItems)
+                }
+                Skills.THIEVING -> {
+                    val successCount = frames.count { it.success }
+                    questRepo.recordThieving(session.activityKey, successCount, inventoryItems)
                 }
                 Skills.PRAYER -> {
                     val buried = frames.sumOf { it.kills }

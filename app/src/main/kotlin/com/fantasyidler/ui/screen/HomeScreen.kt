@@ -107,6 +107,7 @@ fun HomeScreen(
     onNavigateToGuildHall: () -> Unit = {},
     onNavigateToChurch: () -> Unit = {},
     onNavigateToSlayer: () -> Unit = {},
+    onNavigateToBuilder: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state            by viewModel.uiState.collectAsState()
@@ -618,6 +619,7 @@ fun HomeScreen(
                         Triple(Icons.Filled.Person, stringResource(R.string.inn_title), stringResource(R.string.inn_card_desc)) to onNavigateToInn,
                         Triple(Icons.Filled.Group, stringResource(R.string.guild_hall_title), stringResource(R.string.guild_hall_desc)) to onNavigateToGuildHall,
                         Triple(Icons.Filled.Star, stringResource(R.string.church_title), stringResource(R.string.church_desc)) to onNavigateToChurch,
+                        Triple(Icons.Filled.Assignment, stringResource(R.string.builder_title), stringResource(R.string.builder_card_desc)) to onNavigateToBuilder,
                         Triple(Icons.Filled.Shield, stringResource(R.string.slayer_title), stringResource(R.string.slayer_card_desc)) to onNavigateToSlayer,
                     ).forEachIndexed { i, (info, action) ->
                         val (icon, title, desc) = info

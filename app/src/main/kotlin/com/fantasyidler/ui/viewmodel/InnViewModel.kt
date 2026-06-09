@@ -64,14 +64,14 @@ class InnViewModel @Inject constructor(
         else {
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             extra.copy(
-                isLoading        = false,
-                coins            = player.coins,
-                hiredWorker      = flags.hiredWorker,
-                hiredWorker2     = flags.hiredWorker2,
-                longLaborerName  = workerName(WorkerTier.LONG_LABORER),
-                apprenticeName   = workerName(WorkerTier.APPRENTICE),
-                journeymanName   = workerName(WorkerTier.JOURNEYMAN),
-                masterName       = workerName(WorkerTier.MASTER),
+                isLoading       = false,
+                coins           = player.coins,
+                hiredWorker     = flags.hiredWorker,
+                hiredWorker2    = flags.hiredWorker2,
+                longLaborerName = workerName(WorkerTier.LONG_LABORER),
+                apprenticeName  = workerName(WorkerTier.APPRENTICE),
+                journeymanName  = workerName(WorkerTier.JOURNEYMAN),
+                masterName      = workerName(WorkerTier.MASTER),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), InnUiState())

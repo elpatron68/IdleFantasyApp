@@ -58,7 +58,8 @@ class GuildHallViewModel @Inject constructor(
                 .filter { it.guild == guild && level >= it.guildLevelRequired }
                 .count { quest ->
                     val row = progressMap[quest.id]
-                    row != null && !row.completed && row.progress >= quest.amount
+                    val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+                    row != null && !row.completed && row.progress >= effectiveAmount
                 }
 
             val dailies = guildRepo.getGuildDailiesWithProgress(guild, flags)

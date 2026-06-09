@@ -378,7 +378,7 @@
 
     <!-- ===== HomeScreen (continued) ===== -->
     <string name="home_town_title">Город</string>
-    <string name="home_town_desc">Посетите магазин, таверну, гильдию, церковь и мастера убийств</string>
+    <string name="home_town_desc">Посетите магазин, таверну, гильдию, церковь, мастерскую строителя и мастера охотника</string>
     <string name="guild_dailies_available">Ежедневные доступны</string>
     <string name="guild_do_dailies_hint">Выполняйте ежедневные квесты для роста репутации</string>
     <string name="guild_quest_gate_blocked">Завершите квесты для повышения ранга</string>
@@ -876,6 +876,8 @@
     <!-- Slayer -->
     <string name="skill_slayer_name">Убийца</string>
     <string name="skill_slayer_desc">Получайте задания от Мастера убийц в Городе.</string>
+        <string name="builder_title">Мастерская строителя</string>
+    <string name="builder_card_desc">Улучшите Таверну, Гильдхолл и Церковь</string>
     <string name="slayer_title">Мастер убийств</string>
     <string name="slayer_card_desc">Задания и награды для убийц</string>
     <string name="slayer_desc">Выполняйте задания для опыта Убийцы и очков. Тратьте очки в магазине за эксклюзивное снаряжение.</string>
@@ -1021,4 +1023,66 @@
     <string name="bone_altar_buried_count">%d захоронено</string>
     <string name="bone_altar_no_bones">Нет костей в инвентаре</string>
     <string name="bone_altar_cape_awarded">Накидка молитвы получена!</string>
+
+    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <string name="skill_construction_name">Строительство</string>
+    <string name="skill_construction_desc">Стройте мебель из досок и гвоздей для получения опыта. Высокие уровни позволяют улучшать здания города.</string>
+    <string name="skill_thieving_name">Воровство</string>
+    <string name="skill_thieving_desc">Обворовывайте НПС в каждой сессии. Шанс успеха зависит от вашего уровня. Провалы оглушают вас на один кадр.</string>
+    <string name="thieving_npc_detail">Ур. %1$d • %2$d XP • %3$d%% успех</string>
+    <string name="thieving_npc_coins">%1$d–%2$d монет за успех</string>
+    <string name="thieving_npc_peasant_name">Крестьянин</string>
+    <string name="thieving_npc_merchant_name">Торговец</string>
+    <string name="thieving_npc_guardsman_name">Стражник</string>
+    <string name="thieving_npc_artisan_name">Ремесленник</string>
+    <string name="thieving_npc_noble_name">Дворянин</string>
+    <string name="thieving_npc_city_guard_name">Городской Страж</string>
+    <string name="thieving_npc_knight_name">Рыцарь</string>
+    <string name="thieving_npc_high_priest_name">Верховный Жрец</string>
+    <string name="item_plank_name">Доска</string>
+    <string name="item_oak_plank_name">Дубовая Доска</string>
+    <string name="item_willow_plank_name">Ивовая Доска</string>
+    <string name="item_maple_plank_name">Кленовая Доска</string>
+    <string name="item_yew_plank_name">Тисовая Доска</string>
+    <string name="item_magic_plank_name">Магическая Доска</string>
+    <string name="item_iron_nail_name">Железный Гвоздь</string>
+    <string name="item_steel_nail_name">Стальной Гвоздь</string>
+    <string name="item_mithril_nail_name">Гвоздь из Мифрила</string>
+    <string name="item_stone_name">Камень</string>
+    <string name="item_carved_stone_name">Резной Камень</string>
+    <string name="item_stone_block_name">Каменный Блок</string>
+    <string name="item_wooden_rack_name">Деревянная Стойка</string>
+    <string name="item_wooden_shelf_name">Деревянная Полка</string>
+    <string name="item_oak_table_name">Дубовый Стол</string>
+    <string name="item_oak_bookshelf_name">Дубовый Книжный Шкаф</string>
+    <string name="item_willow_cabinet_name">Ивовый Шкаф</string>
+    <string name="item_maple_dresser_name">Кленовый Комод</string>
+    <string name="item_yew_wardrobe_name">Тисовый Гардероб</string>
+    <string name="item_magic_throne_name">Магический Трон</string>
+    <string name="town_upgrade_section_title">Городское Здание</string>
+    <string name="town_building_current_tier">Уровень %1$d / 3</string>
+    <string name="town_building_maxed_label">Полностью Улучшено</string>
+    <string name="town_upgrade_next_label">Следующее Улучшение</string>
+    <string name="town_upgrade_constr_req">Строительство Ур. %1$d требуется</string>
+    <string name="town_upgrade_cost">Стоимость: %1$s монет</string>
+    <string name="town_upgrade_materials_header">Материалы:</string>
+    <string name="town_upgrade_btn">Улучшить</string>
+    <string name="town_upgrade_success">Здание улучшено!</string>
+    <string name="town_upgrade_fail_level">Нужно Строительство Ур. %1$d</string>
+    <string name="town_upgrade_fail_coins">Недостаточно монет</string>
+    <string name="town_upgrade_fail_mats">Недостаточно материалов</string>
+    <string name="town_inn_active_bonus">+%1$d%% XP работника за сессию</string>
+    <string name="town_inn_no_bonus">Улучшите для бонуса XP работникам</string>
+    <string name="town_guild_active_bonus">-%1$d%% требований квестов гильдии</string>
+    <string name="town_guild_no_bonus">Улучшите для снижения требований квестов</string>
+    <string name="town_church_active_bonus">Благословения длятся %1$dh (по умолчанию: 24ч)</string>
+    <string name="town_church_no_bonus">Улучшите для продления благословений</string>
+    <string name="achievement_town_first_upgrade_name">Первая Реновация</string>
+    <string name="achievement_town_first_upgrade_desc">Улучшите любое здание города впервые</string>
+    <string name="achievement_town_all_tier1_name">Улучшатель Города</string>
+    <string name="achievement_town_all_tier1_desc">Улучшите все три здания минимум до 1-го уровня</string>
+    <string name="achievement_town_one_maxed_name">Мастер Строитель</string>
+    <string name="achievement_town_one_maxed_desc">Улучшите любое здание до максимального уровня</string>
+    <string name="achievement_town_all_maxed_name">Легендарный Город</string>
+    <string name="achievement_town_all_maxed_desc">Улучшите все три здания до максимального уровня</string>
 </resources>

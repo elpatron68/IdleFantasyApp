@@ -364,7 +364,7 @@
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Town</string>
-    <string name="home_town_desc">Visit the shop, inn, guild, church, and slayer master</string>
+    <string name="home_town_desc">Visit the shop, inn, guild, church, builder\'s workshop, and slayer master</string>
     <string name="guild_dailies_available">Dailies available</string>
     <string name="guild_do_dailies_hint">Do dailies to increase your reputation</string>
     <string name="guild_quest_gate_blocked">Complete quests to advance your rank</string>
@@ -874,6 +874,8 @@
     <!-- Slayer -->
     <string name="skill_slayer_name">Slayer</string>
     <string name="skill_slayer_desc">Receive tasks from the Slayer Master in Town.</string>
+    <string name="builder_title">Builder\'s Workshop</string>
+    <string name="builder_card_desc">Upgrade the Inn, Guild Hall, and Church</string>
     <string name="slayer_title">Slayer Master</string>
     <string name="slayer_card_desc">Tasks and rewards for slayers</string>
     <string name="slayer_desc">Complete tasks to earn Slayer XP and points. Spend points in the shop for exclusive gear.</string>
@@ -1022,4 +1024,78 @@
     <string name="catalyst_enhanced_output">Produces enhanced potion</string>
     <string name="catalyst_rune_bonus">%1$d runes per essence</string>
     <string name="catalyst_none">No catalyst</string>
+
+    <!-- Construction skill -->
+    <string name="skill_construction_name">Construction</string>
+    <string name="skill_construction_desc">Build furniture using planks and nails to gain XP. Higher Construction levels let you upgrade the town\'s buildings for permanent bonuses.</string>
+
+    <!-- Thieving skill -->
+    <string name="skill_thieving_name">Thieving</string>
+    <string name="skill_thieving_desc">Pickpocket NPCs each session. Success chance depends on your level vs the target. Failed attempts stun you for a frame. Higher tiers drop rare items and large coin purses.</string>
+    <string name="thieving_npc_detail">Lv. %1$d • %2$d XP • %3$d%% success</string>
+    <string name="thieving_npc_coins">%1$d–%2$d coins per success</string>
+
+    <!-- Thieving NPC names -->
+    <string name="thieving_npc_peasant_name">Peasant</string>
+    <string name="thieving_npc_merchant_name">Merchant</string>
+    <string name="thieving_npc_guardsman_name">Guardsman</string>
+    <string name="thieving_npc_artisan_name">Artisan</string>
+    <string name="thieving_npc_noble_name">Noble</string>
+    <string name="thieving_npc_city_guard_name">City Guard</string>
+    <string name="thieving_npc_knight_name">Knight</string>
+    <string name="thieving_npc_high_priest_name">High Priest</string>
+
+    <!-- Construction item names (planks, nails, stone) -->
+    <string name="item_plank_name">Plank</string>
+    <string name="item_oak_plank_name">Oak Plank</string>
+    <string name="item_willow_plank_name">Willow Plank</string>
+    <string name="item_maple_plank_name">Maple Plank</string>
+    <string name="item_yew_plank_name">Yew Plank</string>
+    <string name="item_magic_plank_name">Magic Plank</string>
+    <string name="item_iron_nail_name">Iron Nail</string>
+    <string name="item_steel_nail_name">Steel Nail</string>
+    <string name="item_mithril_nail_name">Mithril Nail</string>
+    <string name="item_stone_name">Stone</string>
+    <string name="item_carved_stone_name">Carved Stone</string>
+    <string name="item_stone_block_name">Stone Block</string>
+
+    <!-- Construction furniture names -->
+    <string name="item_wooden_rack_name">Wooden Rack</string>
+    <string name="item_wooden_shelf_name">Wooden Shelf</string>
+    <string name="item_oak_table_name">Oak Table</string>
+    <string name="item_oak_bookshelf_name">Oak Bookshelf</string>
+    <string name="item_willow_cabinet_name">Willow Cabinet</string>
+    <string name="item_maple_dresser_name">Maple Dresser</string>
+    <string name="item_yew_wardrobe_name">Yew Wardrobe</string>
+    <string name="item_magic_throne_name">Magic Throne</string>
+
+    <!-- Town building upgrade UI -->
+    <string name="town_upgrade_section_title">Town Building</string>
+    <string name="town_building_current_tier">Tier %1$d / 3</string>
+    <string name="town_building_maxed_label">Fully Upgraded</string>
+    <string name="town_upgrade_next_label">Next Upgrade</string>
+    <string name="town_upgrade_constr_req">Construction Lv. %1$d required</string>
+    <string name="town_upgrade_cost">Cost: %1$s coins</string>
+    <string name="town_upgrade_materials_header">Materials:</string>
+    <string name="town_upgrade_btn">Upgrade</string>
+    <string name="town_upgrade_success">Building upgraded!</string>
+    <string name="town_upgrade_fail_level">Need Construction Lv. %1$d</string>
+    <string name="town_upgrade_fail_coins">Not enough coins</string>
+    <string name="town_upgrade_fail_mats">Missing materials</string>
+    <string name="town_inn_active_bonus">+%1$d%% Worker XP per session</string>
+    <string name="town_inn_no_bonus">Upgrade to grant workers an XP bonus</string>
+    <string name="town_guild_active_bonus">-%1$d%% guild quest requirements</string>
+    <string name="town_guild_no_bonus">Upgrade to reduce quest requirements</string>
+    <string name="town_church_active_bonus">Blessings last %1$dh (default: 24h)</string>
+    <string name="town_church_no_bonus">Upgrade to extend blessing duration</string>
+
+    <!-- Town achievements -->
+    <string name="achievement_town_first_upgrade_name">First Renovation</string>
+    <string name="achievement_town_first_upgrade_desc">Upgrade any town building for the first time</string>
+    <string name="achievement_town_all_tier1_name">Town Improver</string>
+    <string name="achievement_town_all_tier1_desc">Upgrade all three town buildings to at least Tier 1</string>
+    <string name="achievement_town_one_maxed_name">Master Builder</string>
+    <string name="achievement_town_one_maxed_desc">Upgrade any single town building to the maximum tier</string>
+    <string name="achievement_town_all_maxed_name">Town of Legend</string>
+    <string name="achievement_town_all_maxed_desc">Upgrade all three town buildings to the maximum tier</string>
 </resources>

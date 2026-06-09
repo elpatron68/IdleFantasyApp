@@ -332,6 +332,7 @@ fun WorkerSkillsScreen(
                 }
                 SheetState.Mercantile -> {}
                 SheetState.Farming   -> {}
+                is SheetState.Thieving -> {}
                 SheetState.ComingSoon -> ComingSoonSheet()
             }
         }

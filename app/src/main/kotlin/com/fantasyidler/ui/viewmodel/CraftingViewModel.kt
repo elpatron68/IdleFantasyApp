@@ -69,12 +69,13 @@ private val ARMOUR_SLOTS = setOf(
 // ---------------------------------------------------------------------------
 
 data class CraftingUiState(
-    val smithingLevel:  Int = 1,
-    val cookingLevel:   Int = 1,
-    val fletchingLevel: Int = 1,
-    val craftingLevel:  Int = 1,
-    val herbloreLevel:  Int = 1,
-    val skillLevels:    Map<String, Int> = emptyMap(),
+    val smithingLevel:      Int = 1,
+    val cookingLevel:       Int = 1,
+    val fletchingLevel:     Int = 1,
+    val craftingLevel:      Int = 1,
+    val herbloreLevel:      Int = 1,
+    val constructionLevel:  Int = 1,
+    val skillLevels:        Map<String, Int> = emptyMap(),
     val skillXp:        Map<String, Long> = emptyMap(),
     val inventory:      Map<String, Int> = emptyMap(),
     /** Inventory minus materials already reserved by active session + queue. */
@@ -97,12 +98,13 @@ data class CraftingUiState(
 
     /** True if the player meets the level requirement for [recipe]. */
     fun meetsLevel(recipe: CraftableRecipe): Boolean = when (recipe.skillName) {
-        Skills.SMITHING  -> smithingLevel  >= recipe.levelRequired
-        Skills.COOKING   -> cookingLevel   >= recipe.levelRequired
-        Skills.FLETCHING -> fletchingLevel >= recipe.levelRequired
-        Skills.CRAFTING  -> craftingLevel  >= recipe.levelRequired
-        Skills.HERBLORE  -> herbloreLevel  >= recipe.levelRequired
-        else             -> false
+        Skills.SMITHING      -> smithingLevel      >= recipe.levelRequired
+        Skills.COOKING       -> cookingLevel       >= recipe.levelRequired
+        Skills.FLETCHING     -> fletchingLevel     >= recipe.levelRequired
+        Skills.CRAFTING      -> craftingLevel      >= recipe.levelRequired
+        Skills.HERBLORE      -> herbloreLevel      >= recipe.levelRequired
+        Skills.CONSTRUCTION  -> constructionLevel  >= recipe.levelRequired
+        else                 -> false
     }
 }
 
@@ -137,11 +139,12 @@ class CraftingViewModel @Inject constructor(
             val xp: Map<String, Long> = json.decodeFromString(player.skillXp)
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             extra.copy(
-                smithingLevel      = levels[Skills.SMITHING]  ?: 1,
-                cookingLevel       = levels[Skills.COOKING]   ?: 1,
-                fletchingLevel     = levels[Skills.FLETCHING] ?: 1,
-                craftingLevel      = levels[Skills.CRAFTING]  ?: 1,
-                herbloreLevel      = levels[Skills.HERBLORE]  ?: 1,
+                smithingLevel      = levels[Skills.SMITHING]      ?: 1,
+                cookingLevel       = levels[Skills.COOKING]       ?: 1,
+                fletchingLevel     = levels[Skills.FLETCHING]     ?: 1,
+                craftingLevel      = levels[Skills.CRAFTING]      ?: 1,
+                herbloreLevel      = levels[Skills.HERBLORE]      ?: 1,
+                constructionLevel  = levels[Skills.CONSTRUCTION]  ?: 1,
                 skillLevels        = levels,
                 skillXp            = xp,
                 inventory          = inventory,
@@ -273,6 +276,22 @@ class CraftingViewModel @Inject constructor(
         }.sortedBy { it.levelRequired }
     }
 
+    val constructionRecipes: List<CraftableRecipe> by lazy {
+        gameData.constructionRecipes.map { (key, r) ->
+            CraftableRecipe(
+                key           = key,
+                displayName   = r.displayName,
+                levelRequired = r.levelRequired,
+                materials     = r.materials,
+                outputKey     = key,
+                outputQty     = r.outputQuantity,
+                xpPerItem     = r.xpPerItem,
+                skillName     = Skills.CONSTRUCTION,
+                category      = "Furniture",
+            )
+        }.sortedBy { it.levelRequired }
+    }
+
     // ------------------------------------------------------------------
     // Craft sheet
     // ------------------------------------------------------------------
@@ -375,7 +394,7 @@ class CraftingViewModel @Inject constructor(
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
 
-    private val craftingSkills = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE)
+    private val craftingSkills = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.CONSTRUCTION)
 
     private fun computeEffectiveInventory(inventory: Map<String, Int>): Map<String, Int> {
         // Materials are now consumed from inventory at session start/queue time,

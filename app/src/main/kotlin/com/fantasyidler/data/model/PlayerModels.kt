@@ -86,6 +86,8 @@ data class PlayerFlags(
     @SerialName("farming_fertilizer") val farmingFertilizer: Map<String, String> = emptyMap(),
     /** Last-used potion key for combat sessions; persisted across app restarts. */
     @SerialName("active_potion_key") val activePotionKey: String? = null,
+    /** Town building upgrade tiers: building key ("inn"|"guild_hall"|"church") → tier (1-3). Absent = tier 0 (not upgraded). */
+    @SerialName("town_building_tiers") val townBuildingTiers: Map<String, Int> = emptyMap(),
 )
 
 /** A single entry in the recent sessions log. */
@@ -318,12 +320,16 @@ object Skills {
     const val AGILITY     = "agility"
 
     // Crafting
-    const val SMITHING     = "smithing"
-    const val COOKING      = "cooking"
-    const val FLETCHING    = "fletching"
-    const val CRAFTING     = "crafting"
-    const val RUNECRAFTING = "runecrafting"
-    const val HERBLORE     = "herblore"
+    const val SMITHING      = "smithing"
+    const val COOKING       = "cooking"
+    const val FLETCHING     = "fletching"
+    const val CRAFTING      = "crafting"
+    const val RUNECRAFTING  = "runecrafting"
+    const val HERBLORE      = "herblore"
+    const val CONSTRUCTION  = "construction"
+
+    // Gathering / Stealth
+    const val THIEVING      = "thieving"
 
     // Combat
     const val ATTACK    = "attack"
@@ -336,8 +342,8 @@ object Skills {
     const val MERCANTILE  = "mercantile"
     const val SLAYER      = "slayer"
 
-    val GATHERING = listOf(MINING, FISHING, WOODCUTTING, FARMING, AGILITY)
-    val CRAFTING_SKILLS = listOf(SMITHING, COOKING, FLETCHING, CRAFTING, FIREMAKING, RUNECRAFTING, HERBLORE)
+    val GATHERING = listOf(MINING, FISHING, WOODCUTTING, FARMING, AGILITY, THIEVING)
+    val CRAFTING_SKILLS = listOf(SMITHING, COOKING, FLETCHING, CRAFTING, FIREMAKING, RUNECRAFTING, HERBLORE, CONSTRUCTION)
     val COMBAT = listOf(ATTACK, STRENGTH, DEFENSE, RANGED, MAGIC, HITPOINTS, PRAYER)
     val SUPPORT = listOf(PRAYER, MERCANTILE)
     val ALL = GATHERING + CRAFTING_SKILLS + COMBAT + listOf(MERCANTILE, SLAYER)

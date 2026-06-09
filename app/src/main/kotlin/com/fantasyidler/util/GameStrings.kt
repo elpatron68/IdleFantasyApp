@@ -103,6 +103,9 @@ object GameStrings {
     fun agilityCourseDesc(context: Context, key: String): String =
         context.stringByName("agility_${key}_desc") ?: ""
 
+    fun thievingNpcName(context: Context, key: String): String =
+        context.stringByName("thieving_npc_${key}_name") ?: key.toTitleCase()
+
     fun skillEmoji(key: String): String = when (key) {
         "mining"      -> "⛏️"
         "fishing"     -> "🎣"
@@ -124,9 +127,11 @@ object GameStrings {
         "prayer"      -> "🙏"
         "mercantile"  -> "💰"
         "slayer"      -> "💀"
-        "herblore"    -> "🌿"
-        "combat"      -> "⚔️"
-        else          -> "🎮"
+        "herblore"     -> "🌿"
+        "construction" -> "🏗️"
+        "thieving"     -> "🥷"
+        "combat"       -> "⚔️"
+        else           -> "🎮"
     }
 }
 

@@ -364,7 +364,7 @@
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Villaggio</string>
-    <string name="home_town_desc">Visita negozio, locanda, gilde e chiesa</string>
+    <string name="home_town_desc">Visita il negozio, la locanda, la gilda, la chiesa, l\'officina del costruttore e il maestro cacciatore</string>
     <string name="guild_dailies_available">Giornaliere disponibili</string>
     <string name="guild_do_dailies_hint">Completa missioni del giorno per migliorare la tua reputazione</string>
     <string name="guild_quest_gate_blocked">Avanza di rango completando missioni</string>
@@ -873,6 +873,8 @@
     <!-- Slayer -->
     <string name="skill_slayer_name">Sicario</string>
     <string name="skill_slayer_desc">Ricevi incarichi dal Sicario Specialista del villaggio.</string>
+        <string name="builder_title">Officina del Costruttore</string>
+    <string name="builder_card_desc">Potenzia la Locanda, la Gilda e la Chiesa</string>
     <string name="slayer_title">Sicario</string>
     <string name="slayer_card_desc">Incarichi e ricompense per i sicari</string>
     <string name="slayer_desc">Completa gli incarichi per ottenere XP e punti. Puoi ottenere armamenti unici spendendo i punti accumulati.</string>
@@ -1021,4 +1023,66 @@
     <string name="catalyst_enhanced_output">Produce pozione potenziata</string>
     <string name="catalyst_rune_bonus">%1$d rune per essenza</string>
     <string name="catalyst_none">Nessun catalizzatore</string>
+
+    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <string name="skill_construction_name">Costruzione</string>
+    <string name="skill_construction_desc">Costruisci mobili con assi e chiodi per guadagnare XP. Livelli più alti permettono di migliorare gli edifici della città.</string>
+    <string name="skill_thieving_name">Furto</string>
+    <string name="skill_thieving_desc">Borseggia i PNG ad ogni sessione. La probabilità di successo dipende dal tuo livello. I fallimenti ti stordiscono per un frame.</string>
+    <string name="thieving_npc_detail">Lv. %1$d • %2$d XP • %3$d%% successo</string>
+    <string name="thieving_npc_coins">%1$d–%2$d monete per successo</string>
+    <string name="thieving_npc_peasant_name">Contadino</string>
+    <string name="thieving_npc_merchant_name">Mercante</string>
+    <string name="thieving_npc_guardsman_name">Guardia</string>
+    <string name="thieving_npc_artisan_name">Artigiano</string>
+    <string name="thieving_npc_noble_name">Nobile</string>
+    <string name="thieving_npc_city_guard_name">Guardia Cittadina</string>
+    <string name="thieving_npc_knight_name">Cavaliere</string>
+    <string name="thieving_npc_high_priest_name">Sommo Sacerdote</string>
+    <string name="item_plank_name">Asse</string>
+    <string name="item_oak_plank_name">Asse di Quercia</string>
+    <string name="item_willow_plank_name">Asse di Salice</string>
+    <string name="item_maple_plank_name">Asse di Acero</string>
+    <string name="item_yew_plank_name">Asse di Tasso</string>
+    <string name="item_magic_plank_name">Asse Magica</string>
+    <string name="item_iron_nail_name">Chiodo di Ferro</string>
+    <string name="item_steel_nail_name">Chiodo di Acciaio</string>
+    <string name="item_mithril_nail_name">Chiodo di Mithril</string>
+    <string name="item_stone_name">Pietra</string>
+    <string name="item_carved_stone_name">Pietra Scolpita</string>
+    <string name="item_stone_block_name">Blocco di Pietra</string>
+    <string name="item_wooden_rack_name">Rastrelliera di Legno</string>
+    <string name="item_wooden_shelf_name">Ripiano di Legno</string>
+    <string name="item_oak_table_name">Tavolo di Quercia</string>
+    <string name="item_oak_bookshelf_name">Libreria di Quercia</string>
+    <string name="item_willow_cabinet_name">Armadio di Salice</string>
+    <string name="item_maple_dresser_name">Cassettiera di Acero</string>
+    <string name="item_yew_wardrobe_name">Armadio di Tasso</string>
+    <string name="item_magic_throne_name">Trono Magico</string>
+    <string name="town_upgrade_section_title">Edificio della Città</string>
+    <string name="town_building_current_tier">Livello %1$d / 3</string>
+    <string name="town_building_maxed_label">Completamente Potenziato</string>
+    <string name="town_upgrade_next_label">Prossimo Potenziamento</string>
+    <string name="town_upgrade_constr_req">Costruzione Lv. %1$d richiesto</string>
+    <string name="town_upgrade_cost">Costo: %1$s monete</string>
+    <string name="town_upgrade_materials_header">Materiali:</string>
+    <string name="town_upgrade_btn">Potenzia</string>
+    <string name="town_upgrade_success">Edificio potenziato!</string>
+    <string name="town_upgrade_fail_level">Richiede Costruzione Lv. %1$d</string>
+    <string name="town_upgrade_fail_coins">Monete insufficienti</string>
+    <string name="town_upgrade_fail_mats">Materiali insufficienti</string>
+    <string name="town_inn_active_bonus">+%1$d%% XP lavoratore per sessione</string>
+    <string name="town_inn_no_bonus">Potenzia per bonus XP ai lavoratori</string>
+    <string name="town_guild_active_bonus">-%1$d%% requisiti missioni gilda</string>
+    <string name="town_guild_no_bonus">Potenzia per ridurre i requisiti delle missioni</string>
+    <string name="town_church_active_bonus">Le benedizioni durano %1$dh (predefinito: 24h)</string>
+    <string name="town_church_no_bonus">Potenzia per estendere la durata delle benedizioni</string>
+    <string name="achievement_town_first_upgrade_name">Prima Ristrutturazione</string>
+    <string name="achievement_town_first_upgrade_desc">Potenzia qualsiasi edificio della città per la prima volta</string>
+    <string name="achievement_town_all_tier1_name">Miglioratore della Città</string>
+    <string name="achievement_town_all_tier1_desc">Potenzia tutti e tre gli edifici almeno al Livello 1</string>
+    <string name="achievement_town_one_maxed_name">Maestro Costruttore</string>
+    <string name="achievement_town_one_maxed_desc">Potenzia qualsiasi edificio al livello massimo</string>
+    <string name="achievement_town_all_maxed_name">Città Leggendaria</string>
+    <string name="achievement_town_all_maxed_desc">Potenzia tutti e tre gli edifici al livello massimo</string>
 </resources>

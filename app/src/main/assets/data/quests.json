@@ -2842,5 +2842,200 @@
       "coins": 150000,
       "xp": 250000
     }
+  },
+  "construction_1": {
+    "id": "construction_1",
+    "name": "Construction I",
+    "skill": "construction",
+    "tier": 1,
+    "requires_previous": null,
+    "type": "craft",
+    "target": "wooden_rack",
+    "amount": 50,
+    "description": "Build 50 Wooden Racks",
+    "rewards": {
+      "coins": 2000,
+      "xp": 3000
+    }
+  },
+  "construction_2": {
+    "id": "construction_2",
+    "name": "Construction II",
+    "skill": "construction",
+    "tier": 2,
+    "requires_previous": "construction_1",
+    "type": "craft",
+    "target": "oak_table",
+    "amount": 50,
+    "description": "Build 50 Oak Tables",
+    "rewards": {
+      "coins": 8000,
+      "xp": 12000
+    }
+  },
+  "construction_3": {
+    "id": "construction_3",
+    "name": "Construction III",
+    "skill": "construction",
+    "tier": 3,
+    "requires_previous": "construction_2",
+    "type": "craft",
+    "target": "willow_cabinet",
+    "amount": 50,
+    "description": "Build 50 Willow Cabinets",
+    "rewards": {
+      "coins": 20000,
+      "xp": 35000
+    }
+  },
+  "construction_4": {
+    "id": "construction_4",
+    "name": "Construction IV",
+    "skill": "construction",
+    "tier": 4,
+    "requires_previous": "construction_3",
+    "type": "craft",
+    "target": "maple_dresser",
+    "amount": 50,
+    "description": "Build 50 Maple Dressers",
+    "rewards": {
+      "coins": 45000,
+      "xp": 80000
+    }
+  },
+  "construction_5": {
+    "id": "construction_5",
+    "name": "Construction V",
+    "skill": "construction",
+    "tier": 5,
+    "requires_previous": "construction_4",
+    "type": "craft",
+    "target": "magic_throne",
+    "amount": 25,
+    "description": "Build 25 Magic Thrones",
+    "rewards": {
+      "coins": 100000,
+      "xp": 200000
+    }
+  },
+  "construction_upgrade_inn": {
+    "id": "construction_upgrade_inn",
+    "name": "Renovate the Inn",
+    "skill": "construction",
+    "tier": 2,
+    "requires_previous": "construction_1",
+    "type": "upgrade_building",
+    "target": "inn",
+    "amount": 1,
+    "description": "Upgrade the Inn at least once",
+    "rewards": {
+      "coins": 5000,
+      "xp": 5000
+    }
+  },
+  "construction_upgrade_guild": {
+    "id": "construction_upgrade_guild",
+    "name": "Expand the Guild Hall",
+    "skill": "construction",
+    "tier": 2,
+    "requires_previous": "construction_1",
+    "type": "upgrade_building",
+    "target": "guild_hall",
+    "amount": 1,
+    "description": "Upgrade the Guild Hall at least once",
+    "rewards": {
+      "coins": 8000,
+      "xp": 8000
+    }
+  },
+  "construction_upgrade_church": {
+    "id": "construction_upgrade_church",
+    "name": "Restore the Church",
+    "skill": "construction",
+    "tier": 2,
+    "requires_previous": "construction_1",
+    "type": "upgrade_building",
+    "target": "church",
+    "amount": 1,
+    "description": "Upgrade the Church at least once",
+    "rewards": {
+      "coins": 10000,
+      "xp": 10000
+    }
+  },
+  "thieving_1": {
+    "id": "thieving_1",
+    "name": "Thieving I",
+    "skill": "thieving",
+    "tier": 1,
+    "requires_previous": null,
+    "type": "pickpocket",
+    "target": "peasant",
+    "amount": 100,
+    "description": "Pickpocket 100 Peasants",
+    "rewards": {
+      "coins": 1500,
+      "xp": 2000
+    }
+  },
+  "thieving_2": {
+    "id": "thieving_2",
+    "name": "Thieving II",
+    "skill": "thieving",
+    "tier": 2,
+    "requires_previous": "thieving_1",
+    "type": "pickpocket",
+    "target": "merchant",
+    "amount": 100,
+    "description": "Pickpocket 100 Merchants",
+    "rewards": {
+      "coins": 5000,
+      "xp": 8000
+    }
+  },
+  "thieving_3": {
+    "id": "thieving_3",
+    "name": "Thieving III",
+    "skill": "thieving",
+    "tier": 3,
+    "requires_previous": "thieving_2",
+    "type": "pickpocket",
+    "target": "noble",
+    "amount": 100,
+    "description": "Pickpocket 100 Nobles",
+    "rewards": {
+      "coins": 20000,
+      "xp": 40000
+    }
+  },
+  "thieving_4": {
+    "id": "thieving_4",
+    "name": "Thieving IV",
+    "skill": "thieving",
+    "tier": 4,
+    "requires_previous": "thieving_3",
+    "type": "steal",
+    "target": "gold_necklace",
+    "amount": 5,
+    "description": "Steal 5 Gold Necklaces",
+    "rewards": {
+      "coins": 35000,
+      "xp": 60000
+    }
+  },
+  "thieving_5": {
+    "id": "thieving_5",
+    "name": "Thieving V",
+    "skill": "thieving",
+    "tier": 5,
+    "requires_previous": "thieving_4",
+    "type": "pickpocket",
+    "target": "high_priest",
+    "amount": 50,
+    "description": "Pickpocket 50 High Priests",
+    "rewards": {
+      "coins": 100000,
+      "xp": 150000
+    }
   }
 }

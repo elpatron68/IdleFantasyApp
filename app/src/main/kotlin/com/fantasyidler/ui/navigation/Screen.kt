@@ -133,6 +133,12 @@ sealed class Screen(
         icon     = Icons.Filled.Shield,
     )
 
+    object Builder : Screen(
+        route    = "builder",
+        labelRes = R.string.builder_title,
+        icon     = Icons.Filled.Star,
+    )
+
     object BoneAltar : Screen(
         route    = "bone_altar",
         labelRes = R.string.bone_altar_title,

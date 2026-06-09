@@ -5,6 +5,7 @@ import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.data.model.PlayerFlags
 import javax.inject.Inject
 import javax.inject.Singleton
+import javax.inject.Provider
 
 sealed class BlessingActivateResult {
     object Success : BlessingActivateResult()
@@ -15,6 +16,7 @@ sealed class BlessingActivateResult {
 @Singleton
 class ChurchRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
+    private val townRepoProvider: Provider<TownRepository>,
 ) {
     companion object {
         const val BLESSING_DURATION_MS = 24L * 3_600_000L
@@ -134,10 +136,11 @@ class ChurchRepository @Inject constructor(
         playerRepo.consumeItems(toConsume)
 
         val now = System.currentTimeMillis()
+        val durationMs = townRepoProvider.get().blessingDurationMs(flags)
         playerRepo.updateFlags(
             flags.copy(
                 activeBlessingKey       = key,
-                activeBlessingExpiresAt = now + BLESSING_DURATION_MS,
+                activeBlessingExpiresAt = now + durationMs,
             )
         )
         return BlessingActivateResult.Success

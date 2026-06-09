@@ -1,0 +1,8 @@
+• New skill: Construction (Crafting) — build furniture from planks and nails to train up
+• New skill: Thieving (Gathering) — pickpocket NPCs each session; success rate scales with your level
+• Town building upgrades: spend Construction levels, coins, and materials to upgrade the Inn, Guild Hall, and Church
+• Inn upgrades (3 tiers): workers gain up to +30% XP per session
+• Guild Hall upgrades (3 tiers): guild quest requirements reduced by up to 30%
+• Church upgrades (3 tiers): blessings last up to 48h instead of 24h
+• New Construction and Thieving quests
+• New Town achievements for upgrading buildings

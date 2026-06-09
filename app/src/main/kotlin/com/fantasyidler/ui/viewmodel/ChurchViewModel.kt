@@ -49,8 +49,8 @@ class ChurchViewModel @Inject constructor(
         _extra,
     ) { player, extra ->
         if (player == null) return@combine extra.copy(isLoading = true)
-        val flags: PlayerFlags       = json.decodeFromString(player.flags)
-        val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+        val flags: PlayerFlags          = json.decodeFromString(player.flags)
+        val levels: Map<String, Int>    = json.decodeFromString(player.skillLevels)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
         val prayerLevel = levels[Skills.PRAYER] ?: 1
         val active      = ChurchRepository.activeBlessing(flags)

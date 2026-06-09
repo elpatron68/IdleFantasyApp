@@ -1476,5 +1476,32 @@
     "output_quantity": 1,
     "xp_per_item": 60,
     "time_per_item": 60
+  },
+  "iron_nail": {
+    "type": "material",
+    "display_name": "Iron Nails",
+    "level_required": 5,
+    "materials": { "iron_bar": 1 },
+    "output_quantity": 15,
+    "xp_per_item": 5.0,
+    "time_per_item": 60
+  },
+  "steel_nail": {
+    "type": "material",
+    "display_name": "Steel Nails",
+    "level_required": 30,
+    "materials": { "steel_bar": 1 },
+    "output_quantity": 20,
+    "xp_per_item": 12.0,
+    "time_per_item": 60
+  },
+  "mithril_nail": {
+    "type": "material",
+    "display_name": "Mithril Nails",
+    "level_required": 55,
+    "materials": { "mithril_bar": 1 },
+    "output_quantity": 25,
+    "xp_per_item": 25.0,
+    "time_per_item": 60
   }
 }

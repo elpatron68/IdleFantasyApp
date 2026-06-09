@@ -64,5 +64,11 @@
     "level_required": 80,
     "xp_per_ore": 100,
     "time_per_ore": 1
+  },
+  "stone": {
+    "display_name": "Stone",
+    "level_required": 10,
+    "xp_per_ore": 12,
+    "time_per_ore": 1
   }
 }

@@ -55,3 +55,14 @@ data class CraftingRecipe(
     @SerialName("xp_per_item") val xpPerItem: Double,
     @SerialName("time_per_item") val timePerItem: Int,
 )
+
+/** Construction recipe — furniture and structures built from planks, nails, and stone. */
+@Serializable
+data class ConstructionRecipe(
+    @SerialName("display_name") val displayName: String,
+    @SerialName("level_required") val levelRequired: Int,
+    val materials: Map<String, Int>,
+    @SerialName("output_quantity") val outputQuantity: Int,
+    @SerialName("xp_per_item") val xpPerItem: Double,
+    @SerialName("time_per_item") val timePerItem: Int,
+)

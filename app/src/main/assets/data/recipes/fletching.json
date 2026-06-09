@@ -394,5 +394,65 @@
     "requirements": {
       "magic": 65
     }
+  },
+  "plank": {
+    "item_name": "plank",
+    "display_name": "Plank",
+    "type": "component",
+    "level_required": 1,
+    "xp_per_item": 20,
+    "materials": { "log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
+  },
+  "oak_plank": {
+    "item_name": "oak_plank",
+    "display_name": "Oak Plank",
+    "type": "component",
+    "level_required": 15,
+    "xp_per_item": 40,
+    "materials": { "oak_log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
+  },
+  "willow_plank": {
+    "item_name": "willow_plank",
+    "display_name": "Willow Plank",
+    "type": "component",
+    "level_required": 30,
+    "xp_per_item": 60,
+    "materials": { "willow_log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
+  },
+  "maple_plank": {
+    "item_name": "maple_plank",
+    "display_name": "Maple Plank",
+    "type": "component",
+    "level_required": 45,
+    "xp_per_item": 90,
+    "materials": { "maple_log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
+  },
+  "yew_plank": {
+    "item_name": "yew_plank",
+    "display_name": "Yew Plank",
+    "type": "component",
+    "level_required": 60,
+    "xp_per_item": 130,
+    "materials": { "yew_log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
+  },
+  "magic_plank": {
+    "item_name": "magic_plank",
+    "display_name": "Magic Plank",
+    "type": "component",
+    "level_required": 75,
+    "xp_per_item": 175,
+    "materials": { "magic_log": 1 },
+    "output_quantity": 1,
+    "time_per_batch": 1
   }
 }

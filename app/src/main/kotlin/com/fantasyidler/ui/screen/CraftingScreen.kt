@@ -103,6 +103,7 @@ fun CraftingScreen(
                     stringResource(R.string.skill_fletching_name),
                     stringResource(R.string.label_jewellery),
                     stringResource(R.string.skill_herblore_name),
+                    stringResource(R.string.skill_construction_name),
                 ).forEachIndexed { index, title ->
                     Tab(
                         selected = selectedTab == index,
@@ -117,7 +118,8 @@ fun CraftingScreen(
                 1 -> viewModel.cookingRecipes
                 2 -> viewModel.fletchingRecipes
                 3 -> viewModel.jewelleryRecipes
-                else -> viewModel.herbloreRecipes
+                4 -> viewModel.herbloreRecipes
+                else -> viewModel.constructionRecipes
             }
 
             val scrollState = rememberLazyListState()

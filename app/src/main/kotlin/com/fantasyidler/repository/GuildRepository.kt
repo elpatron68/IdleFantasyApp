@@ -8,6 +8,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QuestProgress
 import java.util.Calendar
 import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
 import kotlin.random.Random
 import kotlinx.coroutines.flow.Flow
@@ -35,7 +36,21 @@ class GuildRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val questProgressDao: QuestProgressDao,
     private val gameData: GameDataRepository,
+    private val townRepoProvider: Provider<TownRepository>,
 ) {
+
+    /** Returns the effective quest target amount after applying the Guild Hall upgrade reduction. */
+    suspend fun effectiveQuestAmount(quest: GuildQuestData): Int {
+        val flags = playerRepo.getFlags()
+        val factor = townRepoProvider.get().guildQuestRequirementFactor(flags)
+        return (quest.amount * factor).toInt().coerceAtLeast(1)
+    }
+
+    /** Same as effectiveQuestAmount but for use in display contexts where flags are already loaded. */
+    fun effectiveQuestAmountFromFlags(quest: GuildQuestData, flags: PlayerFlags): Int {
+        val factor = townRepoProvider.get().guildQuestRequirementFactor(flags)
+        return (quest.amount * factor).toInt().coerceAtLeast(1)
+    }
 
     companion object {
         val REP_THRESHOLDS = longArrayOf(
@@ -227,7 +242,7 @@ class GuildRepository @Inject constructor(
         val quest = gameData.guildQuests[questId] ?: return GuildQuestClaimResult.NotReady
         val row = questProgressDao.getQuestProgress(questId) ?: return GuildQuestClaimResult.NotReady
         if (row.completed) return GuildQuestClaimResult.AlreadyClaimed
-        if (row.progress < quest.amount) return GuildQuestClaimResult.NotReady
+        if (row.progress < effectiveQuestAmount(quest)) return GuildQuestClaimResult.NotReady
 
         questProgressDao.upsert(row.copy(completed = true, completedAt = System.currentTimeMillis()))
 

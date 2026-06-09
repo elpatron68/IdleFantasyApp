@@ -361,7 +361,7 @@
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Dorp</string>
-    <string name="home_town_desc">Bezoek de winkel, herberg, gilde en kerk</string>
+    <string name="home_town_desc">Bezoek de winkel, herberg, gilde, kerk, bouwersatelier en de slagersmeester</string>
     <string name="guild_dailies_available">Dagelijkse opdrachten beschikbaar</string>
     <string name="guild_do_dailies_hint">Doe dagelijkse opdrachten om je reputatie te verhogen</string>
     <string name="home_died_message">Je bent dood en hebt het grootste deel van je voortgang verloren.</string>
@@ -958,4 +958,68 @@
     <string name="slayer_add_dungeon_to_queue">Kerker aan wachtrij toevoegen</string>
     <string name="slayer_queue_added">Toegevoegd aan wachtrij: %1$s.</string>
     <string name="slayer_queue_full">Wachtrij is vol (3/3).</string>
+
+    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <string name="skill_construction_name">Constructie</string>
+    <string name="skill_construction_desc">Bouw meubels met planken en spijkers voor XP. Hogere niveaus laten je stadsgebouwen upgraden voor permanente bonussen.</string>
+    <string name="skill_thieving_name">Stelen</string>
+    <string name="skill_thieving_desc">Zakkenrol NPC\'s elke sessie. Slagingskans hangt af van je niveau. Mislukkingen verdoven je voor één frame.</string>
+    <string name="thieving_npc_detail">Nv. %1$d • %2$d XP • %3$d%% succes</string>
+    <string name="thieving_npc_coins">%1$d–%2$d munten per succes</string>
+    <string name="thieving_npc_peasant_name">Boer</string>
+    <string name="thieving_npc_merchant_name">Koopman</string>
+    <string name="thieving_npc_guardsman_name">Bewaker</string>
+    <string name="thieving_npc_artisan_name">Ambachtsman</string>
+    <string name="thieving_npc_noble_name">Edelman</string>
+    <string name="thieving_npc_city_guard_name">Stadswacht</string>
+    <string name="thieving_npc_knight_name">Ridder</string>
+    <string name="thieving_npc_high_priest_name">Hogepriester</string>
+    <string name="item_plank_name">Plank</string>
+    <string name="item_oak_plank_name">Eikenplank</string>
+    <string name="item_willow_plank_name">Wilgeplank</string>
+    <string name="item_maple_plank_name">Ahornnplank</string>
+    <string name="item_yew_plank_name">Taxusplank</string>
+    <string name="item_magic_plank_name">Magische Plank</string>
+    <string name="item_iron_nail_name">IJzeren Spijker</string>
+    <string name="item_steel_nail_name">Stalen Spijker</string>
+    <string name="item_mithril_nail_name">Mithrillen Spijker</string>
+    <string name="item_stone_name">Steen</string>
+    <string name="item_carved_stone_name">Gebeeldhouwde Steen</string>
+    <string name="item_stone_block_name">Steenblok</string>
+    <string name="item_wooden_rack_name">Houten Rek</string>
+    <string name="item_wooden_shelf_name">Houten Plank</string>
+    <string name="item_oak_table_name">Eikenhouten Tafel</string>
+    <string name="item_oak_bookshelf_name">Eikenhouten Boekenkast</string>
+    <string name="item_willow_cabinet_name">Wilgehouten Kast</string>
+    <string name="item_maple_dresser_name">Ahornhouten Dressoir</string>
+    <string name="item_yew_wardrobe_name">Taxushouten Kledingkast</string>
+    <string name="item_magic_throne_name">Magische Troon</string>
+    <string name="town_upgrade_section_title">Stadsgebouw</string>
+    <string name="town_building_current_tier">Rang %1$d / 3</string>
+    <string name="town_building_maxed_label">Volledig Verbeterd</string>
+    <string name="town_upgrade_next_label">Volgende Upgrade</string>
+    <string name="town_upgrade_constr_req">Constructie Nv. %1$d vereist</string>
+    <string name="town_upgrade_cost">Kosten: %1$s munten</string>
+    <string name="town_upgrade_materials_header">Materialen:</string>
+    <string name="town_upgrade_btn">Upgraden</string>
+    <string name="town_upgrade_success">Gebouw verbeterd!</string>
+    <string name="town_upgrade_fail_level">Vereist Constructie Nv. %1$d</string>
+    <string name="town_upgrade_fail_coins">Onvoldoende munten</string>
+    <string name="town_upgrade_fail_mats">Onvoldoende materialen</string>
+    <string name="town_inn_active_bonus">+%1$d%% werker XP per sessie</string>
+    <string name="town_inn_no_bonus">Verbeter voor werker XP-bonus</string>
+    <string name="town_guild_active_bonus">-%1$d%% gilden-questvereisten</string>
+    <string name="town_guild_no_bonus">Verbeter om questvereisten te verlagen</string>
+    <string name="town_church_active_bonus">Zegeningen duren %1$dh (standaard: 24h)</string>
+    <string name="town_church_no_bonus">Verbeter om zegeningsduur te verlengen</string>
+    <string name="achievement_town_first_upgrade_name">Eerste Renovatie</string>
+    <string name="achievement_town_first_upgrade_desc">Verbeter een stadsgebouw voor de eerste keer</string>
+    <string name="achievement_town_all_tier1_name">Stadsverbeteraar</string>
+    <string name="achievement_town_all_tier1_desc">Verbeter alle drie stadsgebouwen naar minimaal Rang 1</string>
+    <string name="achievement_town_one_maxed_name">Meesterbouwer</string>
+    <string name="achievement_town_one_maxed_desc">Verbeter een stadsgebouw naar het maximum</string>
+    <string name="achievement_town_all_maxed_name">Legendarische Stad</string>
+    <string name="achievement_town_all_maxed_desc">Verbeter alle drie stadsgebouwen naar het maximum</string>
+    <string name="builder_title">Bouwersatelier</string>
+    <string name="builder_card_desc">Verbeter de Herberg, Gildehuis en Kerk</string>
 </resources>

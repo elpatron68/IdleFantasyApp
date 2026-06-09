@@ -220,11 +220,11 @@ class QuestsViewModel @Inject constructor(
     // ---------------------------------------------------------------------------
 
     private val gatheringSkills = setOf(
-        Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY,
+        Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY, Skills.THIEVING,
     )
     private val craftingSkills = setOf(
         Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING,
-        Skills.HERBLORE, Skills.PRAYER, Skills.FIREMAKING, Skills.RUNECRAFTING,
+        Skills.HERBLORE, Skills.PRAYER, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.CONSTRUCTION,
     )
     private val combatTypes = setOf("kill", "kill_enemy", "dungeon", "boss")
     private val specialTypes = setOf(

@@ -17,6 +17,7 @@ import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.simulator.SkillSimulator
@@ -122,6 +123,7 @@ class HomeViewModel @Inject constructor(
     private val gameData: GameDataRepository,
     private val questRepo: QuestRepository,
     private val guildRepo: GuildRepository,
+    private val townRepo: TownRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val workerStarter: WorkerQueuedSessionStarter,
     private val slayerRepo: SlayerRepository,
@@ -743,6 +745,7 @@ class HomeViewModel @Inject constructor(
             val xpMult           = if (boostActive) 2L else 1L
             val blessingXpMult   = ChurchRepository.xpMultiplier(flags)
             val blessingCoinMult = ChurchRepository.coinMultiplier(flags)
+            val innXpMult        = townRepo.workerXpMultiplier(flags)
 
             val combinedXpBySkill = mutableMapOf<String, Long>()
             val combinedItems     = mutableMapOf<String, Int>()
@@ -835,7 +838,8 @@ class HomeViewModel @Inject constructor(
                         for ((item, qty) in scaledRegular) combinedItems[item] = (combinedItems[item] ?: 0) + qty
                     }
                     else -> {
-                        val totalXp = frames.sumOf { it.xpGain.toLong() }
+                        val baseXp  = frames.sumOf { it.xpGain.toLong() }
+                        val totalXp = (baseXp * innXpMult).toLong()
                         val its     = mutableMapOf<String, Int>()
                         for (frame in frames) for ((item, qty) in frame.items) its[item] = (its[item] ?: 0) + qty
                         val pets    = its.filterKeys { it in petIds }
