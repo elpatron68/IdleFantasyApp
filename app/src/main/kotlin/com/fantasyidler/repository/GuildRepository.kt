@@ -357,12 +357,13 @@ class GuildRepository @Inject constructor(
 
     /** Selects up to 2 daily templates per guild for today, filtered by current guild level.
      *  Uses a date-seeded RNG so the same dailies are shown all day. */
-    fun buildRefreshedGuildDailyFlags(flags: PlayerFlags, completedQuestIds: Set<String>): PlayerFlags {
+    fun buildRefreshedGuildDailyFlags(flags: PlayerFlags, completedQuestIds: Set<String>, skillLevels: Map<String, Int> = emptyMap()): PlayerFlags {
         val today = Calendar.getInstance().let {
             it.get(Calendar.YEAR) * 10000 + it.get(Calendar.MONTH) * 100 + it.get(Calendar.DAY_OF_MONTH)
         }
         val rng = Random(today.toLong())
         val selectedIds = mutableListOf<String>()
+        val farmingLevel = skillLevels["farming"] ?: 1
 
         for (guild in ALL_GUILDS) {
             val guildRep = flags.guildReputation[guild] ?: 0L
@@ -371,6 +372,12 @@ class GuildRepository @Inject constructor(
             val effectiveLevel = maxOf(guildLevel, 1)
             val eligible = gameData.guildDailyPool
                 .filter { it.guild == guild && effectiveLevel >= it.guildLevelMin && effectiveLevel <= it.guildLevelMax }
+                .filter { template ->
+                    if (template.guild == "farming" && template.type == "gather") {
+                        val cropLevel = gameData.crops[template.target]?.levelRequired ?: 1
+                        farmingLevel >= cropLevel
+                    } else true
+                }
                 .shuffled(rng)
             selectedIds.addAll(eligible.take(2).map { it.id })
         }
@@ -406,7 +413,8 @@ class GuildRepository @Inject constructor(
             .map { it.questId }
             .toSet()
         return if (shouldRefreshGuildDailies(flags.guildDailyGeneratedAt) || hasNewlyUnlockedGuild(flags, completedQuestIds)) {
-            val refreshed = buildRefreshedGuildDailyFlags(flags, completedQuestIds)
+            val skillLevels = playerRepo.getSkillLevels()
+            val refreshed = buildRefreshedGuildDailyFlags(flags, completedQuestIds, skillLevels)
             playerRepo.updateFlags(refreshed)
             refreshed
         } else flags

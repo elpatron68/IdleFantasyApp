@@ -491,6 +491,10 @@ class HomeViewModel @Inject constructor(
                                 playerRepo.recordDailyCrafting(regular)
                                 guildRepo.recordGuildCrafting(session.skillName, regular)
                             }
+                            Skills.THIEVING    -> {
+                                val successCount = frames.count { it.success }
+                                questRepo.recordThieving(session.activityKey, successCount, regular.filterKeys { it != "coins" })
+                            }
                             Skills.PRAYER      -> {
                                 val buried = frames.sumOf { it.kills }
                                 val isAshSession = gameData.bones[session.activityKey]?.isAsh == true
@@ -1029,9 +1033,10 @@ fun playerSessionMaterials(
         Skills.COOKING      -> gameData.cookingRecipes[activityKey]?.let { mapOf(it.rawItem to qty) }
         Skills.FLETCHING    -> gameData.fletchingRecipes[activityKey]?.materials?.mapValues { it.value * qty }
         Skills.CRAFTING     -> gameData.craftingRecipes[activityKey]?.materials?.mapValues { it.value * qty }
-        Skills.HERBLORE     -> gameData.herbloreRecipes[activityKey]?.materials?.mapValues { it.value * qty }
-        Skills.FIREMAKING   -> mapOf(activityKey to qty)
-        else                -> null
+        Skills.HERBLORE      -> gameData.herbloreRecipes[activityKey]?.materials?.mapValues { it.value * qty }
+        Skills.FIREMAKING    -> mapOf(activityKey to qty)
+        Skills.CONSTRUCTION  -> gameData.constructionRecipes[activityKey]?.materials?.mapValues { it.value * qty }
+        else                 -> null
     }
 }
 

@@ -158,7 +158,7 @@ fun CombatScreen(
 
         val combatSession = state.combatSession
         if (combatSession != null) {
-            val pagerState = rememberPagerState(initialPage = if (startOnGear) 2 else 0, pageCount = { 3 })
+            val pagerState = rememberPagerState(initialPage = if (startOnGear) 2 else 0, pageCount = { 4 })
             val scope = rememberCoroutineScope()
             Column(Modifier.padding(padding).fillMaxSize()) {
                 TabRow(selectedTabIndex = pagerState.currentPage) {
@@ -176,6 +176,11 @@ fun CombatScreen(
                         selected = pagerState.currentPage == 2,
                         onClick  = { scope.launch { pagerState.animateScrollToPage(2) } },
                         text     = { Text(stringResource(R.string.label_equipment)) },
+                    )
+                    Tab(
+                        selected = pagerState.currentPage == 3,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(3) } },
+                        text     = { Text(stringResource(R.string.label_skills)) },
                     )
                 }
                 HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
@@ -205,7 +210,7 @@ fun CombatScreen(
                             onDungeon        = viewModel::selectDungeon,
                             onBoss           = viewModel::selectBoss,
                         )
-                        else -> CombatGearTab(
+                        2 -> CombatGearTab(
                             equipped       = invState.equipped,
                             inventory      = invState.inventory,
                             equippedFood   = invState.equippedFood,
@@ -218,6 +223,15 @@ fun CombatScreen(
                             onEquipBest    = inventoryVm::equipBestGear,
                             onEquipFood    = inventoryVm::equipFood,
                             onUnequipFood  = inventoryVm::unequipFood,
+                        )
+                        else -> CombatSkillsTab(
+                            skillLevels        = state.skillLevels,
+                            skillXp            = state.skillXp,
+                            totalAttackBonus   = state.totalAttackBonus,
+                            totalStrengthBonus = state.totalStrengthBonus,
+                            totalDefenseBonus  = state.totalDefenseBonus,
+                            skillPrestige      = state.skillPrestige,
+                            onPrestige         = viewModel::prestigeSkill,
                         )
                     }
                 }

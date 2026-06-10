@@ -307,7 +307,21 @@ def gen_skills() -> str:
     ]
     rows = [[link(skill.lower()) if skill.lower() in PAGE_DIRECTORY else skill, cat, desc] for skill, cat, desc
             in skill_list]
-    return get_template("skills/skills").format(skills_table=table(["Skill", "Category", "Description"], rows))
+
+    prestige_rows = [
+        ["Attack",    "+5 Attack per prestige level (up to +15 at prestige 3)"],
+        ["Strength",  "+5 Strength per prestige level (up to +15 at prestige 3)"],
+        ["Defense",   "+5 Defense per prestige level (up to +15 at prestige 3)"],
+        ["Ranged",    "+5 Ranged per prestige level (up to +15 at prestige 3)"],
+        ["Magic",     "+5 Magic per prestige level (up to +15 at prestige 3)"],
+        ["Hitpoints", "+5 Hitpoints per prestige level (+50 max HP per level, up to +150 at prestige 3)"],
+        ["All other skills", "XP bonus only"],
+    ]
+
+    return get_template("skills/skills").format(
+        skills_table=table(["Skill", "Category", "Description"], rows),
+        prestige_table=table(["Skill", "Bonus (in addition to +10% XP)"], prestige_rows),
+    )
 
 
 def gen_mining() -> str:

@@ -1,3 +1,8 @@
+v1.8.3
+• Fixed farming guild daily quests generating crops above the player's current farming level
+• Fixed the Skills tab disappearing from the combat screen during an active session
+• Fixed construction materials not being returned when cancelling a queued or active construction session
+• Fixed thieving sessions collected from the home screen not counting toward pickpocket quests
 v1.8.2
 • Fixed Firemaking appearing under Gathering instead of Crafting in the Guild Hall
 • Fixed guild daily quest progress being silently dropped when a daily refresh triggered during session collection
