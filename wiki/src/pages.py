@@ -44,6 +44,7 @@ PAGE_DIRECTORY: dict[str, PageInfo] = {
     "firemaking": PageInfo("Firemaking", "Firemaking.md"),
     "runecrafting": PageInfo("Runecrafting", "Runecrafting.md"),
     "herblore": PageInfo("Herblore", "Herblore.md"),
+    "construction": PageInfo("Construction", "Construction.md"),
     "prayer": PageInfo("Prayer", "Prayer.md"),
     "mercantile": PageInfo("Mercantile", "Mercantile.md"),
     "slayer": PageInfo("Slayer", "Slayer.md"),
@@ -84,6 +85,7 @@ PAGE_HIERARCHY = (
             "firemaking",
             "runecrafting",
             "herblore",
+            "construction",
         )),
         ("Support", (
             "prayer",
@@ -134,6 +136,7 @@ def _get_page_to_content() -> dict[str, str]:
         "firemaking": gen_firemaking(),
         "runecrafting": gen_runecrafting(),
         "herblore": gen_herblore(),
+        "construction": gen_construction(),
         "prayer": gen_prayer(),
         "mercantile": gen_mercantile(),
         "slayer": gen_slayer(),
@@ -365,6 +368,7 @@ def gen_skills() -> str:
         ("Crafting", "crafting", "Make jewellery and other items."),
         ("Runecrafting", "crafting", "Craft runes from rune essence."),
         ("Herblore", "crafting", "Brew potions for combat stat boosts."),
+        ("Construction", "crafting", "Build furniture used to upgrade town buildings (Inn, Guild Hall, Church)."),
         ("Attack", "combat", "Increases melee accuracy."),
         ("Strength", "combat", "Increases max melee damage."),
         ("Defense", "combat", "Reduces damage taken."),
@@ -593,6 +597,20 @@ def gen_herblore() -> str:
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/herblore").format(potion_table=table(['Potion','Level','Ingredients','Effect','XP'], rows))
+
+
+def gen_construction() -> str:
+    recipes = load("recipes/construction.json")
+    rows = sorted(
+        [
+            [r["display_name"], r["level_required"], fmt_materials(r["materials"]), int(r["xp_per_item"])]
+            for r in recipes.values()
+        ],
+        key=lambda r: r[1],
+    )
+    return get_template("skills/crafting/construction").format(
+        item_table=table(["Item", "Level", "Materials", "XP / Item"], rows)
+    )
 
 
 def gen_prayer() -> str:
