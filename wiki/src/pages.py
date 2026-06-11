@@ -646,7 +646,7 @@ def gen_slayer() -> str:
     tasks = load("slayer_tasks.json")
     rows = sorted(
         [
-            [title(enemy), t["slayer_level"], f"{t['min_kills']}–{t['max_kills']}", t["xp_per_kill"]]
+            [f"[{title(enemy)}](Enemies)", t["slayer_level"], f"{t['min_kills']}–{t['max_kills']}", t["xp_per_kill"]]
             for enemy, t in tasks.items()
         ],
         key=lambda r: r[1],
