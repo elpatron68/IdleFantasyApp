@@ -119,8 +119,12 @@ data class QueuedAction(
     @SerialName("skill_name") val skillName: String,
     @SerialName("activity_key") val activityKey: String,
     @SerialName("skill_display_name") val skillDisplayName: String,
-    /** Quantity — used for prayer (bones), runecrafting (essence), and firemaking (logs). 0 = not applicable. */
+    /** Quantity — number of crafts/items to process. 0 = not applicable. */
     val qty: Int = 0,
+    /** Total output items when a recipe yields more than 1 per craft (e.g. iron nails = 15 per craft). 0 = same as qty. */
+    @SerialName("output_qty") val outputQty: Int = 0,
+    /** Estimated XP this session will grant. 0 = unknown (combat, boss, expedition). */
+    @SerialName("estimated_xp_gain") val estimatedXpGain: Long = 0L,
     /** Pre-computed session duration in ms, used to display accurate queue end time. */
     @SerialName("estimated_duration_ms") val estimatedDurationMs: Long = 0L,
     /** Coins to refund if this action is cancelled (mercantile trade route cost). */

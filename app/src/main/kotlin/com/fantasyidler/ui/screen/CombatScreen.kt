@@ -1591,6 +1591,16 @@ private fun DungeonInfoSheet(
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+                            val infinite = equippedWeapon?.infiniteRunes == spell.runeType
+                            if (!infinite) {
+                                val held = inventory[spell.runeType] ?: 0
+                                Text(
+                                    text  = stringResource(R.string.combat_you_have_runes, held, GameStrings.itemName(context, spell.runeType)),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
+                                            else MaterialTheme.colorScheme.error,
+                                )
+                            }
                         }
                         if (isSelected) {
                             Text(
@@ -1926,6 +1936,16 @@ private fun BossInfoSheet(
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+                            val infinite = equippedWeapon?.infiniteRunes == spell.runeType
+                            if (!infinite) {
+                                val held = inventory[spell.runeType] ?: 0
+                                Text(
+                                    text  = stringResource(R.string.combat_you_have_runes, held, GameStrings.itemName(context, spell.runeType)),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
+                                            else MaterialTheme.colorScheme.error,
+                                )
+                            }
                         }
                         if (isSelected) {
                             Text("✓", style = MaterialTheme.typography.bodyMedium,

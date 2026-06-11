@@ -326,6 +326,7 @@
     <string name="settings_import_btn">Importer</string>
     <string name="settings_source_code">Code source</string>
     <string name="settings_source_open">Ouvrir</string>
+    <string name="settings_wiki">Wiki</string>
     <string name="settings_exported_ok">Sauvegarde exportée</string>
     <string name="settings_imported_ok">Sauvegarde importée avec succès</string>
     <string name="settings_imported_fail">Échec de l’importation — fichier invalide</string>
@@ -348,6 +349,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">La file d’attente se termine dans %1$s</string>
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d objets</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <!-- No need to include %1$d, it’s in “la” -->
@@ -386,6 +388,7 @@
     <string name="combat_no_spells">Aucun sort disponible à votre niveau de magie.</string>
     <string name="combat_only_castable">Seulement lançables</string>
     <string name="combat_max_hit">dégâts max</string>
+    <string name="combat_you_have_runes">(vous avez %1$d %2$s)</string>
     <string name="combat_no_potion">Pas de potion</string>
     <string name="combat_req_level">Niveau de combat requis</string>
     <string name="combat_duration">Durée</string>
@@ -778,9 +781,9 @@
     <string name="church_activate">Activer</string>
     <string name="church_blessing_bonus">+%1$s de la bénédiction</string>
     <string name="church_blessing_suffix">de la bénédiction</string>
-    <string name="church_effect_xp">×%1$.2f XP pendant 24 heures</string>
-    <string name="church_effect_def">+%1$d Défense pendant 24 heures</string>
-    <string name="church_effect_coins">+%1$d%% de butin de pièces pendant 24 heures</string>
+    <string name="church_effect_xp">×%1$.2f XP pendant %2$d heures</string>
+    <string name="church_effect_def">+%1$d Défense pendant %2$d heures</string>
+    <string name="church_effect_coins">+%1$d%% de butin de pièces pendant %2$d heures</string>
     <string name="church_cost_bones">Coûte %1$d os</string>
     <string name="church_confirm_title">Activer la bénédiction ?</string>
     <string name="church_bones_available">Vous avez %1$d os (tous types)</string>

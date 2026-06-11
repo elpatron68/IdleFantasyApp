@@ -341,6 +341,7 @@
     <string name="settings_source_code">Broncode</string>
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Open</string>
+    <string name="settings_wiki">Wiki</string>
     <string name="settings_exported_ok">Opslag geëxporteerd</string>
     <string name="settings_imported_ok">Opslag succesvol geïmporteerd</string>
     <string name="settings_imported_fail">Importeren mislukt — ongeldig bestand</string>
@@ -379,6 +380,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Wachtrij eindigt over %1$s</string>
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d items</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Verzamel de beloningen van %1$d sessie</item>
@@ -416,6 +418,7 @@
     <string name="combat_no_spells">Geen spreuken beschikbaar op jouw magielevel.</string>
     <string name="combat_only_castable">Alleen bruikbare spreuken</string>
     <string name="combat_max_hit">maximale hit</string>
+    <string name="combat_you_have_runes">(je hebt %1$d %2$s)</string>
     <string name="combat_no_potion">Geen drank</string>
     <string name="combat_req_level">Vereist gevechtslevel</string>
     <string name="combat_duration">Duur</string>
@@ -786,9 +789,9 @@
     <string name="church_activate">Activeren</string>
     <string name="church_blessing_bonus">+%1$s van zegen</string>
     <string name="church_blessing_suffix">van zegen</string>
-    <string name="church_effect_xp">×%1$.2f XP voor 24 uur</string>
-    <string name="church_effect_def">+%1$d Verdediging voor 24 uur</string>
-    <string name="church_effect_coins">+%1$d%% Ducatenopbrengst voor 24 uur</string>
+    <string name="church_effect_xp">×%1$.2f XP voor %2$d uur</string>
+    <string name="church_effect_def">+%1$d Verdediging voor %2$d uur</string>
+    <string name="church_effect_coins">+%1$d%% Ducatenopbrengst voor %2$d uur</string>
     <string name="church_cost_bones">Kost %1$d botten</string>
     <string name="church_confirm_title">Zegen activeren?</string>
     <string name="church_bones_available">Je hebt %1$d botten (alle soorten)</string>

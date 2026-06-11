@@ -83,7 +83,7 @@ fun ChurchScreen(
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(text = name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text(text = blessingEffectText(blessing), style = MaterialTheme.typography.bodyMedium)
+                        Text(text = blessingEffectText(blessing, state.churchTier), style = MaterialTheme.typography.bodyMedium)
                         Spacer(Modifier.height(4.dp))
                         Text(
                             text  = stringResource(R.string.church_cost_bones, cost),
@@ -143,6 +143,7 @@ fun ChurchScreen(
                     ActiveBlessingBanner(
                         blessing    = state.activeBlessing!!,
                         remainingMs = state.activeBlessingRemainingMs,
+                        churchTier  = state.churchTier,
                     )
                 } else {
                     Text(
@@ -178,6 +179,7 @@ fun ChurchScreen(
                         isActive          = blessing.key == state.activeBlessing?.key && state.activeBlessingRemainingMs > 0,
                         anyBlessingActive = anyBlessingActive,
                         boneCost          = ChurchRepository.boneCostFor(blessing),
+                        churchTier        = state.churchTier,
                         onActivate        = { viewModel.activateBlessing(blessing.key) },
                     )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -189,13 +191,13 @@ fun ChurchScreen(
 }
 
 @Composable
-private fun ActiveBlessingBanner(blessing: BlessingData, remainingMs: Long) {
+private fun ActiveBlessingBanner(blessing: BlessingData, remainingMs: Long, churchTier: Int) {
     val context   = LocalContext.current
     val nameResId = context.resources.getIdentifier(
         "blessing_${blessing.key}_name", "string", context.packageName,
     )
     val name = if (nameResId != 0) stringResource(nameResId) else blessing.key
-    val effectText = blessingEffectText(blessing)
+    val effectText = blessingEffectText(blessing, churchTier)
 
     Column(
         modifier = Modifier
@@ -235,6 +237,7 @@ private fun BlessingRow(
     isActive: Boolean,
     anyBlessingActive: Boolean,
     boneCost: Int,
+    churchTier: Int,
     onActivate: () -> Unit,
 ) {
     val context   = LocalContext.current
@@ -261,7 +264,7 @@ private fun BlessingRow(
                 color      = nameColor,
             )
             Text(
-                text  = blessingEffectText(blessing),
+                text  = blessingEffectText(blessing, churchTier),
                 style = MaterialTheme.typography.bodySmall,
                 color = descColor,
             )
@@ -293,8 +296,11 @@ private fun BlessingRow(
 }
 
 @Composable
-private fun blessingEffectText(blessing: BlessingData): String = when (blessing.type) {
-    BlessingType.XP      -> stringResource(R.string.church_effect_xp,     blessing.magnitude)
-    BlessingType.DEFENSE -> stringResource(R.string.church_effect_def,     blessing.magnitude.roundToInt())
-    BlessingType.COINS   -> stringResource(R.string.church_effect_coins,   (blessing.magnitude * 100).roundToInt())
+private fun blessingEffectText(blessing: BlessingData, churchTier: Int): String {
+    val hours = when (churchTier) { 1 -> 30; 2 -> 36; 3 -> 48; else -> 24 }
+    return when (blessing.type) {
+        BlessingType.XP      -> stringResource(R.string.church_effect_xp,   blessing.magnitude, hours)
+        BlessingType.DEFENSE -> stringResource(R.string.church_effect_def,   blessing.magnitude.roundToInt(), hours)
+        BlessingType.COINS   -> stringResource(R.string.church_effect_coins, (blessing.magnitude * 100).roundToInt(), hours)
+    }
 }

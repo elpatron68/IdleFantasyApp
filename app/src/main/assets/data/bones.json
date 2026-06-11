@@ -76,6 +76,13 @@
     "xp_per_bone": 40,
     "time_per_bone": 60
   },
+  "troll_bone": {
+    "name": "troll_bone",
+    "display_name": "Troll Bone",
+    "description": "A thick, gnarled bone from a Mountain Troll. Grant good Prayer XP.",
+    "xp_per_bone": 30,
+    "time_per_bone": 60
+  },
   "dragon_bone": {
     "name": "dragon_bone",
     "display_name": "Dragon Bone",

@@ -315,6 +315,7 @@
     <string name="settings_import_btn">İçe Aktar</string>
     <string name="settings_source_code">Kaynak Kodu</string>
     <string name="settings_source_open">Aç</string>
+    <string name="settings_wiki">Wiki</string>
     <string name="settings_exported_ok">Kayıt dosyası dışa aktarıldı</string>
     <string name="settings_imported_ok">Kayıt dosyası başarıyla içe aktarıldı</string>
     <string name="settings_imported_fail">İçe aktarma başarısız — geçersiz dosya</string>
@@ -335,6 +336,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Kuyruk %1$s içinde bitiyor</string>
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d öğe</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">%1$d Oturumun Ödüllerini Topla</item>
@@ -372,6 +374,7 @@
     <string name="combat_no_spells">Büyü seviyene uygun büyü yok.</string>
     <string name="combat_only_castable">Sadece Kullanılabilir</string>
     <string name="combat_max_hit">Maksimum vuruş</string>
+    <string name="combat_you_have_runes">(%1$d %2$s var)</string>
     <string name="combat_no_potion">İksir Yok</string>
     <string name="combat_req_level">Gereken savaş seviyesi</string>
     <string name="combat_duration">Süre</string>
@@ -743,9 +746,9 @@
     <string name="church_activate">Activate</string>
     <string name="church_blessing_bonus">+%1$s from blessing</string>
     <string name="church_blessing_suffix">from blessing</string>
-    <string name="church_effect_xp">×%1$.2f XP for 24 hours</string>
-    <string name="church_effect_def">+%1$d Defense for 24 hours</string>
-    <string name="church_effect_coins">+%1$d%% coin drops for 24 hours</string>
+    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string>
+    <string name="church_effect_def">+%1$d Defense for %2$d hours</string>
+    <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string>
     <string name="church_cost_bones">Costs %1$d bones</string>
     <string name="church_confirm_title">Activate Blessing?</string>
     <string name="church_bones_available">You have %1$d bones (all types)</string>

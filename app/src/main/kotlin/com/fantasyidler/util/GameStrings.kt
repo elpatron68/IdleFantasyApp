@@ -1,6 +1,8 @@
 package com.fantasyidler.util
 
 import android.content.Context
+import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
 
 /**
  * Central resolver for game-content display strings.
@@ -133,6 +135,21 @@ object GameStrings {
         "combat"       -> "⚔️"
         else           -> "🎮"
     }
+}
+
+// ---------------------------------------------------------------------------
+// Returns a context whose locale matches the app's in-app language setting.
+// Use this instead of a raw ApplicationContext when looking up game strings
+// from non-Activity code (ViewModels, notification receivers, etc.).
+// ---------------------------------------------------------------------------
+
+fun Context.withAppLocale(): Context {
+    val locales = AppCompatDelegate.getApplicationLocales()
+    if (locales.isEmpty) return this
+    val locale = locales[0] ?: return this
+    val config = Configuration(resources.configuration)
+    config.setLocale(locale)
+    return createConfigurationContext(config)
 }
 
 // ---------------------------------------------------------------------------

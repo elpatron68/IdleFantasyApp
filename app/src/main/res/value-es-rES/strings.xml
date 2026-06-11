@@ -309,6 +309,7 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_url">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Abrir</string>
+    <string name="settings_wiki">Wiki</string>
     <string name="settings_exported_ok">Save exported</string>
     <string name="settings_imported_ok">Save imported successfully</string>
     <string name="settings_imported_fail">Failed to import — invalid file</string>
@@ -356,6 +357,7 @@
     <string name="combat_no_spells">No tienes hechizos disponibles con tu nivel de magia.</string>
     <string name="combat_only_castable">Only Castable</string>
     <string name="combat_max_hit">max hit</string>
+    <string name="combat_you_have_runes">(tienes %1$d %2$s)</string>
     <string name="combat_no_potion">Sin poción</string>
     <string name="combat_req_level">Nivel de combate requerido</string>
     <string name="combat_duration">Duracion</string>
@@ -734,9 +736,9 @@
     <string name="church_activate">Activate</string>
     <string name="church_blessing_bonus">+%1$s from blessing</string>
     <string name="church_blessing_suffix">from blessing</string>
-    <string name="church_effect_xp">×%1$.2f XP for 24 hours</string>
-    <string name="church_effect_def">+%1$d Defense for 24 hours</string>
-    <string name="church_effect_coins">+%1$d%% coin drops for 24 hours</string>
+    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string>
+    <string name="church_effect_def">+%1$d Defense for %2$d hours</string>
+    <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string>
     <string name="church_cost_bones">Costs %1$d bones</string>
     <string name="church_confirm_title">Activate Blessing?</string>
     <string name="church_bones_available">You have %1$d bones</string>
@@ -1050,4 +1052,5 @@
     <string name="town_building_guild_hall_name">Guild Hall</string>
     <string name="town_building_church_name">Church</string>
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d objetos</string>
 </resources>

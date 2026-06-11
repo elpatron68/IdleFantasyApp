@@ -25,6 +25,7 @@ import javax.inject.Inject
 data class ChurchUiState(
     val isLoading: Boolean = true,
     val prayerLevel: Int = 1,
+    val churchTier: Int = 0,
     val allBlessings: List<BlessingData> = emptyList(),
     val unlockedBlessingKeys: Set<String> = emptySet(),
     val activeBlessing: BlessingData? = null,
@@ -53,11 +54,13 @@ class ChurchViewModel @Inject constructor(
         val levels: Map<String, Int>    = json.decodeFromString(player.skillLevels)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
         val prayerLevel = levels[Skills.PRAYER] ?: 1
+        val churchTier  = flags.townBuildingTiers["church"] ?: 0
         val active      = ChurchRepository.activeBlessing(flags)
         val remaining   = if (active != null) (flags.activeBlessingExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L) else 0L
         extra.copy(
             isLoading                 = false,
             prayerLevel               = prayerLevel,
+            churchTier                = churchTier,
             allBlessings              = ChurchRepository.ALL_BLESSINGS,
             unlockedBlessingKeys      = churchRepo.blessingsForLevel(prayerLevel).map { it.key }.toSet(),
             activeBlessing            = active,

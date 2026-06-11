@@ -321,11 +321,14 @@ class CraftingViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val agility   = state.skillLevels[Skills.AGILITY] ?: 1
                 val perItemMs = SkillSimulator.sessionDurationMs(agility) / 60
+                val totalOutput = qty * recipe.outputQty
                 val action = QueuedAction(
                     skillName           = recipe.skillName,
                     activityKey         = recipe.key,
                     skillDisplayName    = recipe.skillName.replaceFirstChar { it.uppercase() },
                     qty                 = qty,
+                    outputQty           = if (totalOutput != qty) totalOutput else 0,
+                    estimatedXpGain     = (qty * recipe.xpPerItem).toLong(),
                     estimatedDurationMs = qty.toLong() * perItemMs,
                     catalystKey         = ashKey,
                 )

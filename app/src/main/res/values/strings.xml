@@ -344,6 +344,8 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Open</string>
+    <string name="settings_wiki">Wiki</string>
+    <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
     <string name="settings_exported_ok">Save exported</string>
     <string name="settings_imported_ok">Save imported successfully</string>
     <string name="settings_imported_fail">Failed to import — invalid file</string>
@@ -386,6 +388,7 @@
     <string name="home_queue_ends_in">Queue ends in %1$s</string>
     <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d items</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Collect %1$d Session\'s Rewards</item>
@@ -425,6 +428,7 @@
     <string name="combat_no_spells">No spells available at your magic level.</string>
     <string name="combat_only_castable">Only Castable</string>
     <string name="combat_max_hit">max hit</string>
+    <string name="combat_you_have_runes">(you have %1$d %2$s)</string>
     <string name="combat_no_potion">No Potion</string>
     <string name="combat_req_level">Required combat level</string>
     <string name="combat_duration">Duration</string>
@@ -801,9 +805,9 @@
     <string name="church_activate">Activate</string>
     <string name="church_blessing_bonus">+%1$s from blessing</string>
     <string name="church_blessing_suffix">from blessing</string>
-    <string name="church_effect_xp">×%1$.2f XP for 24 hours</string>
-    <string name="church_effect_def">+%1$d Defense for 24 hours</string>
-    <string name="church_effect_coins">+%1$d%% coin drops for 24 hours</string>
+    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string>
+    <string name="church_effect_def">+%1$d Defense for %2$d hours</string>
+    <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string>
     <string name="church_cost_bones">Costs %1$d bones</string>
     <string name="church_confirm_title">Activate Blessing?</string>
     <string name="church_bones_available">You have %1$d bones (all types)</string>

@@ -358,6 +358,7 @@
     <string name="settings_source_code">Исходный код</string>
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Открыть</string>
+    <string name="settings_wiki">Вики</string>
     <string name="settings_exported_ok">Сохранение экспортировано</string>
     <string name="settings_imported_ok">Сохранение успешно импортировано</string>
     <string name="settings_imported_fail">Ошибка импорта — недействительный файл</string>
@@ -399,6 +400,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Очередь завершится через %1$s</string>
     <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty_with_output">×%1$d → %2$d предм.</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Собрать награды за %1$d сессию</item>
@@ -440,6 +442,7 @@
     <string name="combat_no_spells">Нет доступных заклинаний на вашем уровне магии.</string>
     <string name="combat_only_castable">Только доступные</string>
     <string name="combat_max_hit">макс. удар</string>
+    <string name="combat_you_have_runes">(у вас %1$d %2$s)</string>
     <string name="combat_no_potion">Без зелья</string>
     <string name="combat_req_level">Требуемый боевой уровень</string>
     <string name="combat_duration">Длительность</string>
@@ -802,9 +805,9 @@
     <string name="church_activate">Активировать</string>
     <string name="church_blessing_bonus">+%1$s от благословения</string>
     <string name="church_blessing_suffix">от благословения</string>
-    <string name="church_effect_xp">×%1$.2f опыта на 24 часа</string>
-    <string name="church_effect_def">+%1$d Защиты на 24 часа</string>
-    <string name="church_effect_coins">+%1$d%% монет с добычи на 24 часа</string>
+    <string name="church_effect_xp">×%1$.2f опыта на %2$d ч.</string>
+    <string name="church_effect_def">+%1$d Защиты на %2$d ч.</string>
+    <string name="church_effect_coins">+%1$d%% монет с добычи на %2$d ч.</string>
     <string name="church_cost_bones">Стоимость: %1$d костей</string>
     <string name="church_confirm_title">Активировать благословение?</string>
     <string name="church_bones_available">У вас %1$d костей (все виды)</string>

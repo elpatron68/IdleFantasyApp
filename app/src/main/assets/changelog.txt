@@ -1,3 +1,13 @@
+v1.8.5
+• Fixed dungeon names in the Slayer screen showing in the device's system language instead of the app's selected language
+• Church blessing duration now correctly shows the upgraded hours (30h/36h/48h) based on church level instead of always showing 24h
+• Added Wiki link to Settings > About section
+• Troll Bones can now be buried for Prayer XP (30 XP each)
+• Queue list now shows crafting quantities; multi-yield recipes (e.g. Iron Nails) also show total output (×100 → 1,500 items)
+• Active session card, worker card, and queue rows now show estimated XP gain and projected level after each session completes (e.g. +2,450 XP → Lv 34 (+1, 67%))
+• Magic spell selection on the dungeon and boss prep screens now shows how many runes you currently hold for each spell, highlighted red if you don't have enough to cast
+• Fixed the home screen guild claimable badge not lighting up for quests that became claimable due to a Guild Hall upgrade reducing the required amount
+
 v1.8.4
 • Fix: Guild Hall discount now correctly applies to the "Claim Reward" button and progress display on guild quests
 • Fix: Daily fishing quests for lobster and swordfish now only appear when you have the required fishing level to catch them

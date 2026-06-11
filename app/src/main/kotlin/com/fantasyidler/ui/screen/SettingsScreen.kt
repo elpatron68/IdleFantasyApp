@@ -511,6 +511,22 @@ fun SettingsScreen(
                 }
             )
 
+            SettingsRow(
+                title    = stringResource(R.string.settings_wiki),
+                subtitle = stringResource(R.string.settings_wiki_url),
+                trailing = {
+                    OutlinedButton(
+                        onClick = {
+                            context.startActivity(
+                                Intent(Intent.ACTION_VIEW, Uri.parse("https://idlefantasy.tristinbaker.xyz"))
+                            )
+                        }
+                    ) {
+                        Text(stringResource(R.string.settings_source_open))
+                    }
+                }
+            )
+
             Text(
                 text = stringResource(R.string.settings_foss_desc),
                 style = MaterialTheme.typography.bodySmall,

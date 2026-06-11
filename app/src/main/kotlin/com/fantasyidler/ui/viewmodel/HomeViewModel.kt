@@ -114,6 +114,12 @@ data class HomeUiState(
     val guildClaimableCount: Int = 0,
     /** Whether the Town section in the home screen is expanded. Survives recomposition. */
     val townExpanded: Boolean = false,
+    /** Total XP the active session will grant (single-skill only; 0 for combat/boss/expedition). */
+    val activeSessionXpGain: Long = 0L,
+    /** Total XP the first worker's active session will grant. */
+    val workerSessionXpGain: Long = 0L,
+    /** Total XP the second worker's active session will grant. */
+    val workerSession2XpGain: Long = 0L,
 )
 
 @HiltViewModel
@@ -182,6 +188,15 @@ class HomeViewModel @Inject constructor(
                                        else                       -> sessionMs
                                    }
                                }
+            val sessionXpGain: (SkillSession?) -> Long = { s ->
+                if (s == null || s.skillName in listOf("combat", "boss", "expedition", "farming")) 0L
+                else try {
+                    json.decodeFromString<List<SessionFrame>>(s.frames).sumOf { it.xpGain.toLong() }
+                } catch (_: Exception) { 0L }
+            }
+            val activeSessionXpGain   = sessionXpGain(session)
+            val workerSessionXpGain   = sessionXpGain(workerSession)
+            val workerSession2XpGain  = sessionXpGain(workerSession2)
             val progressMap      = guildProgress.associateBy { it.questId }
             val completedQuestIds = guildProgress.filter { it.completed }.map { it.questId }.toSet()
             val guildClaimableCount = GuildRepository.ALL_GUILDS.sumOf { guild ->
@@ -191,7 +206,7 @@ class HomeViewModel @Inject constructor(
                     .filter { it.guild == guild && level >= it.guildLevelRequired }
                     .count { quest ->
                         val row = progressMap[quest.id]
-                        row != null && !row.completed && row.progress >= quest.amount
+                        row != null && !row.completed && row.progress >= guildRepo.effectiveQuestAmountFromFlags(quest, flags)
                     }
                 val dailies = guildRepo.getGuildDailiesWithProgress(guild, flags)
                 claimableQuests + dailies.count { it.progress >= it.template.amount && !it.claimed }
@@ -222,6 +237,9 @@ class HomeViewModel @Inject constructor(
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
                 guildClaimableCount        = guildClaimableCount,
+                activeSessionXpGain        = activeSessionXpGain,
+                workerSessionXpGain        = workerSessionXpGain,
+                workerSession2XpGain       = workerSession2XpGain,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
