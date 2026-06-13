@@ -87,7 +87,6 @@ def add_static_pages():
             ("workers", PageInfo("Workers", "Workers.md", gen_workers)),
             ("guilds", PageInfo("Guilds", "Guilds.md", gen_guilds)),
             ("buildings", PageInfo("Buildings", "Buildings.md", gen_buildings)),
-            ("game_corner", PageInfo("Game Corner", "Game-Corner.md", gen_game_corner)),
         ]],
         ["Miscellaneous", False, [
             ("expeditions", PageInfo("Expeditions", "Expeditions.md", gen_expeditions)),
@@ -1237,67 +1236,6 @@ def gen_buildings() -> str:
         inn_table=building_table(inn_tiers, "Bonus", []),
         guild_hall_table=building_table(guild_hall_tiers, "Bonus", []),
         church_table=building_table(church_tiers, "Bonus", []),
-    )
-
-
-def gen_game_corner() -> str:
-    exclusive_rows = [
-        ["Ring of Fortune",    "Ring",     "Atk +20, Str +24, Def +16", "None", "1-in-1,000 on any win"],
-        ["Amulet of Fortune",  "Necklace", "Atk +25, Str +32, Def +20", "None", "1-in-1,000 on any win"],
-    ]
-    slots_rows = [
-        ["🍒 Cherry",   "8",  "2×"],
-        ["🍋 Lemon",    "6",  "3×"],
-        ["🍊 Orange",   "5",  "4×"],
-        ["🔔 Bell",     "4",  "8×"],
-        ["BAR",         "3", "10×"],
-        ["7️⃣ Seven",    "2", "20×"],
-        ["💎 Diamond",  "1", "50×"],
-    ]
-    lottery_rows = [
-        ["75%", "No win"],
-        ["15%", "1,500 coins"],
-        ["8%",  "5,000 coins"],
-        ["2%",  "20,000 coins"],
-    ]
-    blackjack_rows = [
-        ["Blackjack (A + 10-value on deal)", "2.5×"],
-        ["Win",                              "2×"],
-        ["Push",                             "Bet returned"],
-        ["Lose / Bust",                      "Bet lost"],
-    ]
-    roulette_rows = [
-        ["Red / Black",    "~48.6%", "2×"],
-        ["Odd / Even",     "~48.6%", "2×"],
-        ["Dozen (1-12 / 13-24 / 25-36)", "~32.4%", "3×"],
-        ["Single Number",  "2.7%",   "36×"],
-    ]
-    scratch_rows = [
-        ["🍒 Cherry",  "30", "2×  price"],
-        ["💰 Coin Bag","25", "5×  price"],
-        ["⭐ Star",    "20", "10× price"],
-        ["🔔 Bell",    "15", "20× price"],
-        ["💎 Diamond", "10", "50× price"],
-    ]
-    poker_rows = [
-        ["Royal Flush",      "800×"],
-        ["Straight Flush",    "50×"],
-        ["Four of a Kind",    "25×"],
-        ["Full House",         "9×"],
-        ["Flush",              "6×"],
-        ["Straight",           "4×"],
-        ["Three of a Kind",    "3×"],
-        ["Two Pair",           "2×"],
-        ["Jacks or Better",    "1×"],
-    ]
-    return get_template("town/game_corner").format(
-        exclusive_table=table(["Item", "Slot", "Bonuses", "Requirements", "Source"], exclusive_rows),
-        slots_table=table(["Symbol", "Reel Weight", "3-Match Payout"], slots_rows),
-        lottery_table=table(["Chance", "Prize"], lottery_rows),
-        blackjack_table=table(["Outcome", "Payout"], blackjack_rows),
-        roulette_table=table(["Bet Type", "Win Chance", "Payout"], roulette_rows),
-        scratch_table=table(["Symbol", "Cell Weight", "Row Payout"], scratch_rows),
-        poker_table=table(["Hand", "Payout"], poker_rows),
     )
 
 

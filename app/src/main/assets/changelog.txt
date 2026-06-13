@@ -1,3 +1,7 @@
+v1.8.10
+• Pet migration fix: pets earned before v1.8.6 that were incorrectly stored as inventory items now correctly appear as collected in the Pets section
+• Removed the Game Corner
+
 v1.8.9
 • Scratch Card: diagonal matches now pay out in addition to rows and columns
 • Slayer Master no longer hints at dungeon locations the player hasn't unlocked yet

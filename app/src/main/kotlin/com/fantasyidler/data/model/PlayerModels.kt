@@ -90,10 +90,6 @@ data class PlayerFlags(
     @SerialName("town_building_tiers") val townBuildingTiers: Map<String, Int> = emptyMap(),
     /** Ash item key last used as fertilizer when planting crops; pre-selected in the plant sheet. */
     @SerialName("last_fertilizer_key") val lastFertilizerKey: String? = null,
-    /** Number of lottery tickets currently held. */
-    @SerialName("lottery_tickets") val lotteryTickets: Int = 0,
-    /** Epoch ms of the last lottery draw; 0 = never drawn. */
-    @SerialName("lottery_last_draw_at") val lotteryLastDrawAt: Long = 0L,
 )
 
 /** A single entry in the recent sessions log. */

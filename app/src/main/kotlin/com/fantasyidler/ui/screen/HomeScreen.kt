@@ -22,7 +22,6 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Assignment
-import androidx.compose.material.icons.filled.Casino
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.BottomSheetDefaults
@@ -111,7 +110,6 @@ fun HomeScreen(
     onNavigateToChurch: () -> Unit = {},
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBuilder: () -> Unit = {},
-    onNavigateToGameCorner: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state            by viewModel.uiState.collectAsState()
@@ -625,7 +623,6 @@ fun HomeScreen(
                         Triple(Icons.Filled.Star, stringResource(R.string.church_title), stringResource(R.string.church_desc)) to onNavigateToChurch,
                         Triple(Icons.Filled.Assignment, stringResource(R.string.builder_title), stringResource(R.string.builder_card_desc)) to onNavigateToBuilder,
                         Triple(Icons.Filled.Shield, stringResource(R.string.slayer_title), stringResource(R.string.slayer_card_desc)) to onNavigateToSlayer,
-                        Triple(Icons.Filled.Casino, stringResource(R.string.game_corner_title), stringResource(R.string.game_corner_desc)) to onNavigateToGameCorner,
                     ).forEachIndexed { i, (info, action) ->
                         val (icon, title, desc) = info
                         val iconTint = if (i == 3 && state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0)

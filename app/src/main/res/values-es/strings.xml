@@ -1066,43 +1066,8 @@
     <string name="achievement_town_all_maxed_name">Pueblo Legendario</string>
     <string name="achievement_town_all_maxed_desc">Mejora los tres edificios del pueblo al nivel máximo</string>
 
-    <string name="item_ring_of_fortune_name">Ring of Fortune</string>
-    <string name="item_ring_of_fortune_desc">A ring imbued with pure luck. Only found at the Game Corner.</string>
-    <string name="item_amulet_of_fortune_name">Amulet of Fortune</string>
-    <string name="item_amulet_of_fortune_desc">Said to bring fortune to those who wear it. Only found at the Game Corner.</string>
 
-    <string name="game_roulette_title">Roulette</string>
-    <string name="game_scratch_title">Scratch Card</string>
-    <string name="game_video_poker_title">Video Poker</string>
-    <string name="game_spin_wheel">Spin Wheel</string>
-    <string name="game_buy_card">Buy Scratch Card</string>
-    <string name="game_reveal_all">Reveal All</string>
-    <string name="game_draw_cards">Draw</string>
 
-    <!-- Game Corner -->
-    <string name="game_corner_title">Game Corner</string>
-    <string name="game_corner_desc">Try your luck at the tables</string>
-    <string name="game_slots_title">Slots</string>
-    <string name="game_dice_title">High-Low</string>
-    <string name="game_lottery_title">Lottery</string>
-    <string name="game_cards_title">Card Flip</string>
-    <string name="game_blackjack_title">Blackjack</string>
-    <string name="game_spin">Spin</string>
-    <string name="game_deal">Deal</string>
-    <string name="game_hit">Hit</string>
-    <string name="game_stand">Stand</string>
-    <string name="game_double_down">Double</string>
-    <string name="game_higher">Higher</string>
-    <string name="game_lower">Lower</string>
-    <string name="game_cash_out">Cash Out</string>
-    <string name="game_buy_tickets">Buy Tickets</string>
-    <string name="game_draw_lottery">Draw Now</string>
-    <string name="game_bet_label">Bet: %s coins</string>
-    <string name="game_win">You won %s coins!</string>
-    <string name="game_loss">You lost %s coins.</string>
-    <string name="game_push">Push — bet returned.</string>
-    <string name="game_no_tickets">No tickets to draw.</string>
-    <string name="game_next_draw">Next draw in %s</string>
 
     <string name="skilling_dungeon_thieves_den_name">Guarida de Ladrones</string>
     <string name="skilling_dungeon_thieves_den_desc">Un laberinto de túneles bajo las calles de la ciudad, usado por una banda organizada de ladrones.</string>

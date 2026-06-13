@@ -583,6 +583,28 @@ class PlayerRepository @Inject constructor(
     }
 
     /**
+     * Pre-1.8.6 bug: pet drops went into inventory instead of the pet list because
+     * pet keys were absent from pets.json. Moves any matching inventory items into
+     * the OwnedPet list and removes them from inventory.
+     */
+    suspend fun migratePetsFromInventory(petKeys: Set<String>) {
+        val player = getOrCreatePlayer()
+        val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        val pets: MutableList<OwnedPet> = json.decodeFromString(player.pets)
+        val ownedIds = pets.map { it.id }.toSet()
+        val toMigrate = petKeys.filter { it in inventory && it !in ownedIds }
+        if (toMigrate.isEmpty()) return
+        toMigrate.forEach { key ->
+            inventory.remove(key)
+            pets.add(OwnedPet(id = key, boostPercent = 0))
+        }
+        playerDao.upsert(player.copy(
+            inventory = json.encode<Map<String, Int>>(inventory),
+            pets      = json.encode<List<OwnedPet>>(pets),
+        ))
+    }
+
+    /**
      * Adds [petId] to the player's pet list if not already owned.
      * Returns true if the pet was newly added, false if already owned.
      */

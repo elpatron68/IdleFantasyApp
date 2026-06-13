@@ -36,7 +36,6 @@ import com.fantasyidler.notification.SessionNotificationManager
 import com.fantasyidler.ui.screen.BoneAltarScreen
 import com.fantasyidler.ui.screen.ChurchScreen
 import com.fantasyidler.ui.screen.BuilderScreen
-import com.fantasyidler.ui.screen.GameCornerScreen
 import com.fantasyidler.ui.screen.CombatScreen
 import com.fantasyidler.ui.screen.FarmingScreen
 import com.fantasyidler.ui.screen.GuildDetailScreen
@@ -86,7 +85,7 @@ fun AppNavigation(
     val currentDestination = backStackEntry?.destination
 
     val tabSubScreens: Map<String, Set<String>> = mapOf(
-        "home"   to setOf("shop", "settings", "inn", Screen.WorkerSkills.route, "guild_hall", "guild_detail/{guild}", "church", "slayer", Screen.GameCorner.route),
+        "home"   to setOf("shop", "settings", "inn", Screen.WorkerSkills.route, "guild_hall", "guild_detail/{guild}", "church", "slayer"),
         "skills" to setOf("farming", "mercantile", Screen.Slayer.route, Screen.BoneAltar.route),
     )
 
@@ -174,7 +173,6 @@ fun AppNavigation(
                     onNavigateToChurch       = { navController.navigate(Screen.Church.route) },
                     onNavigateToSlayer       = { navController.navigate(Screen.Slayer.route) },
                     onNavigateToBuilder      = { navController.navigate(Screen.Builder.route) },
-                    onNavigateToGameCorner   = { navController.navigate(Screen.GameCorner.route) },
                 )
             }
             composable(Screen.Quests.route)   { QuestsScreen() }
@@ -236,11 +234,6 @@ fun AppNavigation(
             }
             composable(Screen.Builder.route) { entry ->
                 BuilderScreen(
-                    onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
-                )
-            }
-            composable(Screen.GameCorner.route) { entry ->
-                GameCornerScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }

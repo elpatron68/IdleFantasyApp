@@ -143,6 +143,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { sessionRepo.recoverActiveWorkerSession(1, workerStarter) }
         viewModelScope.launch { sessionRepo.recoverActiveWorkerSession(2, workerStarter) }
         viewModelScope.launch { playerRepo.awardMissingCapes() }
+        viewModelScope.launch { playerRepo.migratePetsFromInventory(gameData.pets.keys) }
         // AlarmManager delivery can be deferred by Doze for hours (issue 517: overnight
         // sessions frozen until their late alarms fire). While the app is open this
         // ticker completes overdue sessions and workers within a second.

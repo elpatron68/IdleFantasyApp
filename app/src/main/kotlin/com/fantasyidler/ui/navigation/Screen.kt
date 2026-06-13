@@ -145,12 +145,6 @@ sealed class Screen(
         icon     = Icons.Filled.Star,
     )
 
-    object GameCorner : Screen(
-        route    = "game_corner",
-        labelRes = R.string.game_corner_title,
-        icon     = Icons.Filled.Star,
-    )
-
     companion object {
         val bottomNavItems = listOf(Skills, Combat, Home, Quests, Profile)
     }

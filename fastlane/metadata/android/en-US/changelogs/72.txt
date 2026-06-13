@@ -1,0 +1,2 @@
+• Pet migration fix: pets earned before v1.8.6 that were incorrectly stored as inventory items now correctly appear as collected in the Pets section
+• Removed the Game Corner
