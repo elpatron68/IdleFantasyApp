@@ -25,6 +25,8 @@ METADATA_FILE="$REPO_DIR/metadata/com.tristinbaker.idlefantasy.yml"
 FDROID_DIR="$REPO_DIR/docs/fdroid"
 CHANGELOG_ASSET="$REPO_DIR/app/src/main/assets/changelog.txt"
 CLONE_DIR="/tmp/FantasyIdler-release"
+CUSTOM_METADATA_FILE="$FDROID_DIR/metadata/com.tristinbaker.idlefantasy.yml"
+FASTLANE_DIR="$REPO_DIR/fastlane/metadata/android"
 
 # ---------------------------------------------------------------------------
 # Argument
@@ -226,9 +228,14 @@ cd "$REPO_DIR"
 # Copy APK named by versionCode so old versions remain available
 cp "$APK" "$FDROID_DIR/repo/com.tristinbaker.idlefantasy_${VERSION_CODE}.apk"
 
+# Sync main repo info to custom repository
+cp "$METADATA_FILE" "$CUSTOM_METADATA_FILE"
+rsync -a --delete "$FASTLANE_DIR/" "$FDROID_DIR/metadata/com.tristinbaker.idlefantasy/"
+cp "$FASTLANE_DIR/en-US/images/icon.png" "$FDROID_DIR/icon.png"
+
 # Regenerate signed index
 cd "$FDROID_DIR"
-fdroid update
+fdroid update --clean --pretty
 
 # Deploy generated index + APKs to gh-pages so GitHub Pages (custom domain) serves them
 GH_PAGES_WORK="/tmp/gh-pages-fdroid-deploy"

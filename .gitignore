@@ -13,6 +13,10 @@ local.properties
 *.keystore
 CLAUDE.md
 docs/fdroid/config.yml
-docs/fdroid/tmp/
+docs/fdroid/*
+!docs/fdroid/*.apk
 __pycache__
 out
+.venv
+keystore.p12
+scripts/release_apk.sh
