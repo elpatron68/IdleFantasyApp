@@ -88,6 +88,11 @@ import com.fantasyidler.util.toCountdown
 import androidx.compose.ui.text.style.TextOverflow
 import kotlinx.coroutines.delay
 import kotlinx.serialization.decodeFromString
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 
 private fun xpBreakdownText(total: Long, bonus: Long, boostWasActive: Boolean): String? {
     if (bonus <= 0L) return null
@@ -587,87 +592,28 @@ fun HomeScreen(
                 }
             }
 
-            // ── Town card ───────────────────────────────────────────────
-            Surface(
-                shape    = RoundedCornerShape(16.dp),
-                color    = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.fillMaxWidth().clickable { viewModel.toggleTownExpanded() },
-            ) {
+            // ── Town grid ───────────────────────────────────────────────
+            val churchTint = if (state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0)
+                GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Row(
-                    modifier          = Modifier.padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
+                    modifier              = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text       = stringResource(R.string.home_town_title),
-                            style      = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Medium,
-                        )
-                        Text(
-                            text  = stringResource(R.string.home_town_desc),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                    Icon(
-                        imageVector        = if (state.townExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
-                        contentDescription = null,
-                        tint               = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
+                    TownGridCard(Icons.Filled.ShoppingCart, stringResource(R.string.label_shop),       onClick = onNavigateToShop,      modifier = Modifier.weight(1f))
+                    TownGridCard(Icons.Filled.Person,        stringResource(R.string.inn_title),        onClick = onNavigateToInn,       modifier = Modifier.weight(1f))
+                    TownGridCard(Icons.Filled.Group,         stringResource(R.string.guild_hall_title), onClick = onNavigateToGuildHall, modifier = Modifier.weight(1f), badgeCount = state.guildClaimableCount)
+                    TownGridCard(Icons.Filled.Star,          stringResource(R.string.church_title),     onClick = onNavigateToChurch,    modifier = Modifier.weight(1f), iconTint = churchTint)
                 }
-            }
-            if (state.townExpanded) {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf(
-                        Triple(Icons.Filled.ShoppingCart, stringResource(R.string.label_shop), stringResource(R.string.label_shop_desc)) to onNavigateToShop,
-                        Triple(Icons.Filled.Person, stringResource(R.string.inn_title), stringResource(R.string.inn_card_desc)) to onNavigateToInn,
-                        Triple(Icons.Filled.Group, stringResource(R.string.guild_hall_title), stringResource(R.string.guild_hall_desc)) to onNavigateToGuildHall,
-                        Triple(Icons.Filled.Star, stringResource(R.string.church_title), stringResource(R.string.church_desc)) to onNavigateToChurch,
-                        Triple(Icons.Filled.Assignment, stringResource(R.string.builder_title), stringResource(R.string.builder_card_desc)) to onNavigateToBuilder,
-                        Triple(Icons.Filled.Shield, stringResource(R.string.slayer_title), stringResource(R.string.slayer_card_desc)) to onNavigateToSlayer,
-                        Triple(Icons.Filled.Celebration, stringResource(R.string.carnival_title), stringResource(R.string.carnival_desc)) to onNavigateToCarnival,
-                    ).forEachIndexed { i, (info, action) ->
-                        val (icon, title, desc) = info
-                        val iconTint = if (i == 3 && state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0)
-                            GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-                        Surface(
-                            shape    = RoundedCornerShape(12.dp),
-                            color    = MaterialTheme.colorScheme.surfaceVariant,
-                            modifier = Modifier.fillMaxWidth().clickable { action() },
-                        ) {
-                            Row(
-                                modifier          = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Icon(
-                                    imageVector        = icon,
-                                    contentDescription = null,
-                                    tint               = iconTint,
-                                    modifier           = Modifier.size(20.dp),
-                                )
-                                Spacer(Modifier.width(12.dp))
-                                Text(
-                                    text       = title,
-                                    style      = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium,
-                                    modifier   = Modifier.weight(1f),
-                                    maxLines   = 1,
-                                    overflow   = TextOverflow.Ellipsis,
-                                )
-                                Text(
-                                    text     = desc,
-                                    style    = MaterialTheme.typography.bodySmall,
-                                    color    = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                )
-                                if (i == 2 && state.guildClaimableCount > 0) {
-                                    Spacer(Modifier.width(8.dp))
-                                    Badge { Text("${state.guildClaimableCount}") }
-                                }
-                            }
-                        }
-                    }
+                Row(
+                    modifier              = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Spacer(Modifier.weight(0.5f))
+                    TownGridCard(Icons.Filled.Assignment,  stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
+                    TownGridCard(Icons.Filled.Shield,      stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
+                    TownGridCard(Icons.Filled.Celebration, stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
+                    Spacer(Modifier.weight(0.5f))
                 }
             }
 
@@ -1392,6 +1338,39 @@ private fun RecentSessionsSheet(
         Spacer(Modifier.height(16.dp))
         OutlinedButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(R.string.btn_cancel))
+        }
+    }
+}
+
+@Composable
+private fun TownGridCard(
+    icon: ImageVector,
+    name: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    badgeCount: Int = 0,
+) {
+    ElevatedCard(modifier = modifier.clickable { onClick() }) {
+        Column(
+            modifier            = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            if (badgeCount > 0) {
+                BadgedBox(badge = { Badge { Text("$badgeCount") } }) {
+                    Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
+                }
+            } else {
+                Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
+            }
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text      = name,
+                style     = MaterialTheme.typography.labelSmall,
+                textAlign = TextAlign.Center,
+                maxLines  = 1,
+                overflow  = TextOverflow.Ellipsis,
+            )
         }
     }
 }

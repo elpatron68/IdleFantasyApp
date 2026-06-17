@@ -115,8 +115,6 @@ data class HomeUiState(
     val showRecentActivityLog: Boolean = true,
     /** Total claimable guild quests + dailies across all guilds. Drives the badge on the town menu button. */
     val guildClaimableCount: Int = 0,
-    /** Whether the Town section in the home screen is expanded. Survives recomposition. */
-    val townExpanded: Boolean = false,
     /** Total XP the active session will grant (single-skill only; 0 for combat/boss/expedition). */
     val activeSessionXpGain: Long = 0L,
     /** Total XP the first worker's active session will grant. */
@@ -1045,8 +1043,6 @@ class HomeViewModel @Inject constructor(
 
     fun summaryConsumed() = _extra.update { it.copy(sessionSummary = null) }
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
-
-    fun toggleTownExpanded() = _extra.update { it.copy(townExpanded = !it.townExpanded) }
 
     fun dismissWhatsNew() {
         viewModelScope.launch {

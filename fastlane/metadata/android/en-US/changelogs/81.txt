@@ -1,0 +1,1 @@
+• Replaced the collapsible Town menu on the home screen with an always-visible grid: four equal-width buttons (Shop, Inn, Guild Hall, Church) on the top row, three centre-aligned buttons (Builder, Slayer, Carnival) on the bottom row.
