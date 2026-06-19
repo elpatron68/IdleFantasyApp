@@ -86,7 +86,7 @@ fun QuestsScreen(
 
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }
@@ -169,6 +169,7 @@ fun QuestsScreen(
                         nextDailyReset      = state.nextDailyReset,
                         nextWeeklyReset     = state.nextWeeklyReset,
                         hideCompleted       = state.hideCompleted,
+                        weeklyBonusClaimed  = state.weeklyBonusClaimed,
                         onClaimDailyQuest   = { viewModel.claimDailyQuest(it) },
                         onClaimWeeklyQuest  = { viewModel.claimWeeklyQuest(it) },
                         onClaimWeeklyBonus  = { viewModel.claimWeeklyBonus() },
@@ -217,6 +218,7 @@ private fun TimedQuestsContent(
     nextDailyReset: Long,
     nextWeeklyReset: Long,
     hideCompleted: Boolean,
+    weeklyBonusClaimed: Boolean = false,
     onClaimDailyQuest: (String) -> Unit,
     onClaimWeeklyQuest: (String) -> Unit,
     onClaimWeeklyBonus: () -> Unit,
@@ -251,11 +253,12 @@ private fun TimedQuestsContent(
                 onClaimQuest  = onClaimDailyQuest,
             )
             1 -> WeeklyQuestsContent(
-                quests        = weeklyQuests,
-                nextReset     = nextWeeklyReset,
-                hideCompleted = hideCompleted,
-                onClaimQuest  = onClaimWeeklyQuest,
-                onClaimBonus  = onClaimWeeklyBonus,
+                quests             = weeklyQuests,
+                nextReset          = nextWeeklyReset,
+                hideCompleted      = hideCompleted,
+                weeklyBonusClaimed = weeklyBonusClaimed,
+                onClaimQuest       = onClaimWeeklyQuest,
+                onClaimBonus       = onClaimWeeklyBonus,
             )
         }
     }
@@ -326,6 +329,7 @@ private fun WeeklyQuestsContent(
     quests: List<WeeklyQuestWithProgress>,
     nextReset: Long,
     hideCompleted: Boolean = false,
+    weeklyBonusClaimed: Boolean = false,
     onClaimQuest: (String) -> Unit,
     onClaimBonus: () -> Unit,
 ) {
@@ -363,7 +367,7 @@ private fun WeeklyQuestsContent(
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             }
         }
-        if (allQuestsClaimed) {
+        if (allQuestsClaimed && !weeklyBonusClaimed) {
             item {
                 Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                     Text(

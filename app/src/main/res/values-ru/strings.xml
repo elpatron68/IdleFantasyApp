@@ -448,6 +448,8 @@
     <string name="combat_solo_bosses">Одиночные боссы</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d заходов</string>
+    <string name="combat_last_run">Последний: %1$d убийств, %2$d еды</string>
+    <string name="combat_last_run_died">Последний: погиб (%1$d убийств)</string>
     <string name="combat_atk">АТК</string>
     <string name="combat_str">СИЛ</string>
     <string name="combat_def">ЗАЩ</string>
@@ -1333,6 +1335,7 @@
     <string name="mercantile_added_to_queue">Добавлено в очередь: Торговля — %1$s.</string>
     <string name="inventory_requires_to_equip">Для экипировки требуется %1$s.</string>
     <string name="home_found_pet">Вы нашли питомца: %1$s!</string>
+    <string name="pet_found_title">Новый питомец!</string>
     <string name="home_congratulations_received">Поздравляем! Вы получили: %1$s</string>
     <string name="combat_no_food_title">Еда не экипирована</string>
     <string name="combat_no_food_body">У вас нет еды. Без еды вы можете быстро погибнуть и потерять большинство наград. Всё равно начать?</string>

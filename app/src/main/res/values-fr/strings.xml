@@ -390,6 +390,8 @@
     <string name="combat_solo_bosses">Boss en solo</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d parties</string>
+    <string name="combat_last_run">Dernier: %1$d kills, %2$d nourriture</string>
+    <string name="combat_last_run_died">Dernier: mort (%1$d kills)</string>
     <string name="combat_atk">ATQ</string>
     <string name="combat_str">FOR</string>
     <string name="combat_def">DÉF</string>
@@ -1301,6 +1303,7 @@
     <string name="mercantile_added_to_queue">Ajouté à la file: Mercantile — %1$s.</string>
     <string name="inventory_requires_to_equip">Nécessite %1$s pour équiper.</string>
     <string name="home_found_pet">Vous avez trouvé un familier: %1$s!</string>
+    <string name="pet_found_title">Nouvel animal !</string>
     <string name="home_congratulations_received">Félicitations! Vous avez reçu: %1$s</string>
     <string name="combat_no_food_title">Pas de nourriture équipée</string>
     <string name="combat_no_food_body">Vous n\'avez pas de nourriture équipée. Sans nourriture, vous risquez de mourir rapidement et de perdre la plupart de vos récompenses. Commencer quand même?</string>

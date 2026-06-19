@@ -95,7 +95,7 @@ fun CarnivalScreen(
     LaunchedEffect(state.snackbarMessage) {
         val msg = state.snackbarMessage
         if (!msg.isNullOrBlank()) {
-            snackbarHostState.showSnackbar(msg)
+            snackbarHostState.showSnackbar(msg, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }
@@ -141,8 +141,12 @@ fun CarnivalScreen(
             return@Scaffold
         }
 
-        val pagerState    = rememberPagerState(pageCount = { 3 })
+        val pagerState    = rememberPagerState(pageCount = { 3 }, initialPage = state.selectedTab)
         val coroutineScope = rememberCoroutineScope()
+
+        LaunchedEffect(pagerState.currentPage) {
+            viewModel.selectTab(pagerState.currentPage)
+        }
 
         Column(modifier = Modifier.padding(innerPadding)) {
             TabRow(selectedTabIndex = pagerState.currentPage) {

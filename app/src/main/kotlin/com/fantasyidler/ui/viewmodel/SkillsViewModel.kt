@@ -65,6 +65,8 @@ data class SkillsUiState(
     val startingSession: Boolean = false,
     /** One-shot event message to display as a snackbar. Consumed by the UI. */
     val snackbarMessage: String? = null,
+    /** Non-null when a new pet was found; drives the pet-found dialog. Consumed by the UI. */
+    val petFoundName: String? = null,
     /** Non-null after a session is collected — drives the result sheet. Consumed by the UI. */
     val sessionResult: SessionResult? = null,
     val anySessionActive: Boolean = false,
@@ -596,6 +598,7 @@ class SkillsViewModel @Inject constructor(
                 )
                 _uiState.update {
                     it.copy(
+                        sheetSkill = null,
                         snackbarMessage = if (enqueued)
                             context.getString(R.string.skill_added_to_queue_activity, "Thieving", npc.displayName)
                         else
@@ -682,6 +685,7 @@ class SkillsViewModel @Inject constructor(
                 )
                 _uiState.update {
                     it.copy(
+                        sheetSkill = null,
                         snackbarMessage = if (enqueued) {
                             if (activityKey.isNotEmpty())
                                 context.getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
@@ -796,11 +800,11 @@ class SkillsViewModel @Inject constructor(
             }
 
             // Handle pet drops
-            var petMessage: String? = null
+            var petFoundName: String? = null
             for ((petId, _) in petDrops) {
                 val petData = gameData.pets[petId] ?: continue
                 val added = playerRepo.addPetIfNew(petId, petData.boostPercent)
-                if (added) petMessage = context.getString(R.string.home_found_pet, petData.displayName)
+                if (added) petFoundName = petData.displayName
             }
 
             sessionRepo.deleteSession(session.sessionId)
@@ -813,7 +817,7 @@ class SkillsViewModel @Inject constructor(
                         itemsGained = regularItems,
                         levelUps    = levelUps,
                     ),
-                    snackbarMessage = petMessage,
+                    petFoundName = petFoundName,
                 )
             }
 
@@ -848,6 +852,7 @@ class SkillsViewModel @Inject constructor(
     }
 
     fun snackbarConsumed() = _uiState.update { it.copy(snackbarMessage = null) }
+    fun petDialogConsumed() = _uiState.update { it.copy(petFoundName = null) }
 
     fun prestigeSkill(skillName: String) {
         viewModelScope.launch {

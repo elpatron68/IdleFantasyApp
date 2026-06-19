@@ -58,6 +58,17 @@ android {
         buildConfig = true
     }
 
+    applicationVariants.all {
+        val vName = versionName
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.BaseVariantOutputImpl &&
+                buildType.name == "release"
+            ) {
+                outputFileName = "IdleFantasy-v$vName.apk"
+            }
+        }
+    }
+
     lint {
         // Existing issues are captured in lint-baseline.xml so CI fails only on
         // NEW problems introduced by future changes, without forcing a cleanup of

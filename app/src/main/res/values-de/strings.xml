@@ -423,6 +423,8 @@
     <string name="combat_log_label">Kampfprotokoll</string>
     <string name="combat_solo_bosses">Einzelbosse</string>
     <string name="combat_dungeon_runs">%1$d Mal abgeschlossen</string>
+    <string name="combat_last_run">Last: %1$d Kills, %2$d Essen</string>
+    <string name="combat_last_run_died">Last: gestorben (%1$d Kills)</string>
     <string name="combat_atk">ANG</string>
     <string name="combat_str">STÄ</string>
     <string name="combat_def">VER</string>
@@ -1277,6 +1279,7 @@
     <string name="mercantile_added_to_queue">Zur Warteschlange hinzugefügt: Handelsvaardig — %1$s.</string>
     <string name="inventory_requires_to_equip">Zum Ausrüsten wird %1$s benötigt.</string>
     <string name="home_found_pet">Du hast ein Haustier gefunden: %1$s!</string>
+    <string name="pet_found_title">Neues Haustier!</string>
     <string name="home_congratulations_received">Glückwunsch! Du hast erhalten: %1$s</string>
     <string name="combat_no_food_title">Keine Nahrung ausgerüstet</string>
     <string name="combat_no_food_body">Du hast keine Nahrung ausgerüstet. Ohne Nahrung kannst du schnell sterben und die meisten Belohnungen verlieren. Trotzdem starten?</string>

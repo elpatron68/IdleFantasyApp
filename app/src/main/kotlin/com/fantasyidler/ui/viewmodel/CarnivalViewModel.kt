@@ -41,6 +41,7 @@ data class CarnivalUiState(
     val isLoading: Boolean = true,
     val ticketBalance: Int = 0,
     val selectedTab: Int = 0,
+    val tabInitialized: Boolean = false,
     val skillLevels: Map<String, Int> = emptyMap(),
     val queueSize: Int = 0,
     val ownedPrizeKeys: Set<String> = emptySet(),
@@ -109,6 +110,8 @@ class CarnivalViewModel @Inject constructor(
                 skillLevels         = levels,
                 queueSize           = flags.sessionQueue.size,
                 ownedPrizeKeys      = ownedPrizeKeys,
+                selectedTab         = if (!extra.tabInitialized) flags.carnivalTab else extra.selectedTab,
+                tabInitialized      = true,
                 ringTossState       = resolveState(extra.ringTossState, flags.carnivalRingTossCooldownAt),
                 hammerStrikeState   = resolveState(extra.hammerStrikeState, flags.carnivalHammerStrikeCooldownAt),
                 potionSequenceState = resolveState(extra.potionSequenceState, flags.carnivalPotionSequenceCooldownAt),
@@ -117,7 +120,13 @@ class CarnivalViewModel @Inject constructor(
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CarnivalUiState())
 
-    fun selectTab(index: Int) = _extra.update { it.copy(selectedTab = index) }
+    fun selectTab(index: Int) {
+        _extra.update { it.copy(selectedTab = index, tabInitialized = true) }
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(carnivalTab = index))
+        }
+    }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
 

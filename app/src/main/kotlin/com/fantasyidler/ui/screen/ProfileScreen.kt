@@ -116,7 +116,7 @@ fun ProfileScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }
@@ -1148,9 +1148,11 @@ internal fun EquipSlotRow(
     slotName: String,
     itemKey: String?,
     xpLabel: String? = null,
+    equipment: com.fantasyidler.data.json.EquipmentData? = null,
     onTap: () -> Unit,
     onUnequip: () -> Unit,
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1168,14 +1170,31 @@ internal fun EquipSlotRow(
             val baseName = itemKey.replace('_', ' ').split(' ')
                 .joinToString(" ") { it.replaceFirstChar(Char::uppercase) }
             val displayName = if (xpLabel != null) "$baseName ($xpLabel)" else baseName
-            Text(
-                text       = displayName,
-                style      = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                modifier   = Modifier.weight(1f),
-                maxLines   = 1,
-                overflow   = TextOverflow.Ellipsis,
-            )
+            Column(Modifier.weight(1f)) {
+                Text(
+                    text       = displayName,
+                    style      = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    maxLines   = 1,
+                    overflow   = TextOverflow.Ellipsis,
+                )
+                if (equipment != null) {
+                    val parts = buildList {
+                        if (equipment.attackBonus        != 0) add("+${equipment.attackBonus} ${context.getString(R.string.profile_stat_atk)}")
+                        if (equipment.strengthBonus      != 0) add("+${equipment.strengthBonus} ${context.getString(R.string.profile_stat_str)}")
+                        if (equipment.defenseBonus       != 0) add("+${equipment.defenseBonus} ${context.getString(R.string.profile_stat_def)}")
+                        (equipment.rangedAttackBonus ?: 0).takeIf { it != 0 }?.let { add("+$it ${context.getString(R.string.profile_stat_ranged)}") }
+                        (equipment.magicAttackBonus  ?: 0).takeIf { it != 0 }?.let { add("+$it ${context.getString(R.string.profile_stat_magic)}") }
+                    }
+                    if (parts.isNotEmpty()) {
+                        Text(
+                            text  = parts.joinToString("  "),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            }
             IconButton(onClick = onUnequip) {
                 Icon(
                     imageVector        = Icons.Filled.Clear,

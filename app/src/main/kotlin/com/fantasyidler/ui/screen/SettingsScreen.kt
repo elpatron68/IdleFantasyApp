@@ -93,7 +93,7 @@ fun SettingsScreen(
         val permFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
         context.contentResolver.takePersistableUriPermission(uri, permFlags)
         viewModel.setBackupFolder(uri.toString())
-        scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_backup_folder_set)) }
+        scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_backup_folder_set), withDismissAction = true) }
     }
 
     val exportLauncher = rememberLauncherForActivityResult(
@@ -102,7 +102,7 @@ fun SettingsScreen(
         uri ?: return@rememberLauncherForActivityResult
         viewModel.exportSave { jsonString ->
             context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(jsonString.toByteArray()) }
-            scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_exported_ok)) }
+            scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_exported_ok), withDismissAction = true) }
         }
     }
 
@@ -115,7 +115,8 @@ fun SettingsScreen(
         viewModel.importSave(jsonString) { success ->
             scope.launch {
                 snackbarHostState.showSnackbar(
-                    if (success) context.getString(R.string.settings_imported_ok) else context.getString(R.string.settings_imported_fail)
+                    message         = if (success) context.getString(R.string.settings_imported_ok) else context.getString(R.string.settings_imported_fail),
+                    withDismissAction = true,
                 )
             }
         }
@@ -517,8 +518,9 @@ fun SettingsScreen(
                     viewModel.backupNow { success ->
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                if (success) context.getString(R.string.settings_backup_success)
-                                else context.getString(R.string.settings_backup_failed)
+                                message           = if (success) context.getString(R.string.settings_backup_success)
+                                                    else context.getString(R.string.settings_backup_failed),
+                                withDismissAction = true,
                             )
                         }
                     }

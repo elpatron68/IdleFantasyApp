@@ -10,6 +10,7 @@ import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.model.EquipSlot
+import com.fantasyidler.data.model.DungeonRunStats
 import com.fantasyidler.data.model.OwnedPet
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
@@ -79,6 +80,8 @@ data class CombatUiState(
     val selectedBoss: BossData? = null,
     val startingSession: Boolean = false,
     val snackbarMessage: String? = null,
+    /** Non-null when a new pet was found; drives the pet-found dialog. Consumed by the UI. */
+    val petFoundName: String? = null,
     val combatResult: CombatSessionResult? = null,
     val totalAttackBonus: Int = 0,
     val totalStrengthBonus: Int = 0,
@@ -90,6 +93,7 @@ data class CombatUiState(
     val selectedPotionKey: String? = null,
     val availablePotions: Map<String, Int> = emptyMap(),
     val dungeonRuns: Map<String, Int> = emptyMap(),
+    val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
     val skillPrestige: Map<String, Int> = emptyMap(),
 )
@@ -206,6 +210,7 @@ class CombatViewModel @Inject constructor(
                 availablePotions        = inventory.filterKeys { it in gameData.potionEffects }
                     .filter { (_, qty) -> qty > 0 },
                 dungeonRuns             = flags.dungeonRuns,
+                dungeonLastRunStats     = flags.dungeonLastRunStats,
                 unlockedDungeons        = flags.unlockedDungeons,
                 selectedArrowKey        = if (extra.selectedArrowKey == null) flags.equippedArrows else extra.selectedArrowKey,
                 skillPrestige           = flags.skillPrestige,
@@ -722,9 +727,10 @@ class CombatViewModel @Inject constructor(
         if (allArrowsConsumed.isNotEmpty()) playerRepo.consumeItems(allArrowsConsumed)
         if (arrowsReclaimed.isNotEmpty())   playerRepo.addItems(arrowsReclaimed)
         if (runesReclaimed.isNotEmpty())    playerRepo.addItems(runesReclaimed)
+        var petFoundName: String? = null
         for ((petId, _) in petDrops) {
             val petData = gameData.pets[petId] ?: continue
-            playerRepo.addPetIfNew(petId, petData.boostPercent)
+            if (playerRepo.addPetIfNew(petId, petData.boostPercent)) petFoundName = petData.displayName
         }
         if (won) {
             questRepo.recordCombat(
@@ -770,6 +776,7 @@ class CombatViewModel @Inject constructor(
                     boostWasActive         = boostActive,
                 ),
                 snackbarMessage = buildCapeMessage(capes),
+                petFoundName    = petFoundName,
             )
         }
     }
@@ -850,12 +857,18 @@ class CombatViewModel @Inject constructor(
         val coinBlessingBonus = (coinsGained.toDouble() * (blessingCoinMult - 1)).toLong()
         sessionRepo.deleteSession(session.sessionId)
         val dungeonRecentFlags = playerRepo.getFlags()
+        val runStats = DungeonRunStats(
+            foodConsumed = allFoodConsumed.values.sum(),
+            killCount    = allKillsByEnemy.values.sum(),
+            survived     = !playerDied,
+        )
         playerRepo.updateFlags(dungeonRecentFlags.copy(
             recentSessions = (listOf(com.fantasyidler.data.model.RecentSession(
                 skillName = session.skillName,
                 activityDisplayName = dungeon?.displayName ?: session.activityKey,
                 activityKey = session.activityKey,
             )) + dungeonRecentFlags.recentSessions).take(10),
+            dungeonLastRunStats = dungeonRecentFlags.dungeonLastRunStats + (session.activityKey to runStats),
         ))
 
         _extra.update {
@@ -908,8 +921,9 @@ class CombatViewModel @Inject constructor(
         }
     }
 
-    fun resultConsumed()   = _extra.update { it.copy(combatResult = null) }
-    fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
+    fun resultConsumed()    = _extra.update { it.copy(combatResult = null) }
+    fun snackbarConsumed()  = _extra.update { it.copy(snackbarMessage = null) }
+    fun petDialogConsumed() = _extra.update { it.copy(petFoundName = null) }
 
     fun prestigeSkill(skillName: String) {
         viewModelScope.launch {

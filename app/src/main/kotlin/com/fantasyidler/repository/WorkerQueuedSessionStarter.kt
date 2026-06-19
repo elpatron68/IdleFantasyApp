@@ -8,6 +8,7 @@ import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 
 private val GATHERING_SKILLS = setOf(
     Skills.MINING, Skills.WOODCUTTING, Skills.FISHING,
-    Skills.AGILITY, "combat", "boss",
+    Skills.AGILITY, Skills.THIEVING, "combat", "boss",
 )
 
 /**
@@ -204,6 +205,24 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val frames = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey)
                 startSession(slot, action, frames, durationMs, efficiencyMultiplier)
+            }
+            Skills.CONSTRUCTION -> {
+                val r   = gameData.constructionRecipes[action.activityKey] ?: return
+                val qty = action.qty.takeIf { it > 0 } ?: return
+                val frames = buildCraftFrames(xpMap[Skills.CONSTRUCTION] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey)
+                startSession(slot, action, frames, durationMs, efficiencyMultiplier)
+            }
+            Skills.THIEVING -> {
+                val npcKey  = action.activityKey
+                val npc     = gameData.thievingNpcs[npcKey] ?: return
+                val result  = ThievingSimulator.simulate(
+                    npcKey         = npcKey,
+                    npc            = npc,
+                    startXp        = xpMap[Skills.THIEVING] ?: 0L,
+                    thievingLevel  = levels[Skills.THIEVING] ?: 1,
+                    agilityLevel   = agilityLevel,
+                )
+                startSession(slot, action, result.frames, durationMs, efficiencyMultiplier)
             }
             "boss" -> {
                 val bossKey = action.activityKey

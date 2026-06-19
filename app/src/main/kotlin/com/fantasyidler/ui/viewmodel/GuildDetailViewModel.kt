@@ -41,6 +41,7 @@ data class GuildDetailUiState(
     val questGateBlocked: Boolean = false,
     val snackbarMessage: String? = null,
     val inventory: Map<String, Int> = emptyMap(),
+    val hideCompleted: Boolean = false,
 )
 
 @HiltViewModel
@@ -110,6 +111,7 @@ class GuildDetailViewModel @Inject constructor(
             allCurrentLevelQuestsDone = allCurrentLevelQuestsDone,
             questGateBlocked          = questGateBlocked,
             inventory                 = inventory,
+            hideCompleted             = extra.hideCompleted,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), GuildDetailUiState(guildKey = guild))
 
@@ -172,4 +174,13 @@ class GuildDetailViewModel @Inject constructor(
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
+
+    fun toggleHideCompleted() {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            val newValue = !_extra.value.hideCompleted
+            playerRepo.updateFlags(flags.copy(hideCompletedQuests = newValue))
+            _extra.update { it.copy(hideCompleted = newValue) }
+        }
+    }
 }

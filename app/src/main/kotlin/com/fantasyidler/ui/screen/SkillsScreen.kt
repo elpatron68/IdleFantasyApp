@@ -122,16 +122,16 @@ fun SkillsScreen(
     val context = LocalContext.current
 
     LaunchedEffect(state.snackbarMessage) {
-        state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.snackbarConsumed()
+        state.snackbarMessage?.let { msg ->
+            try { snackbarHostState.showSnackbar(msg) }
+            finally { viewModel.snackbarConsumed() }
         }
     }
 
     LaunchedEffect(craftSnackState.snackbarMessage) {
-        craftSnackState.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
-            craftingViewModel.snackbarConsumed()
+        craftSnackState.snackbarMessage?.let { msg ->
+            try { snackbarHostState.showSnackbar(msg) }
+            finally { craftingViewModel.snackbarConsumed() }
         }
     }
 
@@ -319,6 +319,19 @@ fun SkillsScreen(
             }
         }
     }
+
+    state.petFoundName?.let { petName ->
+        AlertDialog(
+            onDismissRequest = viewModel::petDialogConsumed,
+            title = { Text(stringResource(R.string.pet_found_title)) },
+            text  = { Text(stringResource(R.string.home_found_pet, petName)) },
+            confirmButton = {
+                TextButton(onClick = viewModel::petDialogConsumed) {
+                    Text(stringResource(R.string.btn_close))
+                }
+            },
+        )
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -354,7 +367,7 @@ private fun SkillsTabContent(
         }
 
         item { SectionHeader(stringResource(R.string.label_gathering_skills)) }
-        items(Skills.GATHERING) { key ->
+        items(Skills.GATHERING.filter { it != Skills.AGILITY }) { key ->
             val efficiency = when (key) {
                 Skills.MINING      -> state.miningEfficiency
                 Skills.WOODCUTTING -> state.woodcuttingEfficiency
@@ -389,7 +402,7 @@ private fun SkillsTabContent(
         }
 
         item { SectionHeader(stringResource(R.string.label_support_skills)) }
-        items(Skills.SUPPORT) { key ->
+        items(Skills.SUPPORT + listOf(Skills.AGILITY)) { key ->
             SkillRow(
                 skillKey      = key,
                 level         = state.skillLevels[key] ?: 1,

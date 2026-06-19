@@ -97,6 +97,8 @@ data class HomeUiState(
     val activeSession: SkillSession? = null,
     val pendingCollectCount: Int = 0,
     val snackbarMessage: String? = null,
+    /** Non-null when a new pet was found; drives the pet-found dialog. Consumed by the UI. */
+    val petFoundName: String? = null,
     val sessionSummary: SessionSummary? = null,
     val characterSetupDone: Boolean = false,
     val characterName: String = "",
@@ -311,7 +313,7 @@ class HomeViewModel @Inject constructor(
             var combinedCoins     = 0L
             var anyDied           = false
             val combinedBones     = mutableMapOf<String, Int>() // boneName → count
-            var petMessage: String? = null
+            var petFoundName: String? = null
             var bossWon: Boolean? = null  // set when session is a boss fight
             val awardedCapes = mutableListOf<String>()
             var pendingExpeditionSummary: SessionSummary? = null
@@ -352,7 +354,7 @@ class HomeViewModel @Inject constructor(
                             for ((id, _) in pets) {
                                 val pd = gameData.pets[id] ?: continue
                                 if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                    petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                    petFoundName = pd.displayName
                             }
                             questRepo.recordCombat(
                                 dungeonKey   = session.activityKey,
@@ -399,7 +401,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         if (!died) {
                             val style = detectCombatStyle(xpPerSkill)
@@ -449,7 +451,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         combinedXpBySkill[skillName] = (combinedXpBySkill[skillName] ?: 0L) + totalXp
                         for ((item, qty) in regular) combinedItems[item] = (combinedItems[item] ?: 0) + qty
@@ -562,7 +564,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         combinedXpBySkill[session.skillName] = (combinedXpBySkill[session.skillName] ?: 0L) + totalXp
                         for ((item, qty) in regular) combinedItems[item] = (combinedItems[item] ?: 0) + qty
@@ -675,8 +677,11 @@ class HomeViewModel @Inject constructor(
                 val names = awardedCapes.joinToString(", ") { gameData.itemDisplayName(it) }
                 context.getString(R.string.home_congratulations_received, names)
             } else null
-            val snackbar = listOfNotNull(petMessage, capeMessage).joinToString(" • ").ifEmpty { null }
-            _extra.update { it.copy(sessionSummary = pendingExpeditionSummary ?: summary, snackbarMessage = snackbar) }
+            _extra.update { it.copy(
+                sessionSummary  = pendingExpeditionSummary ?: summary,
+                snackbarMessage = capeMessage,
+                petFoundName    = petFoundName,
+            ) }
             queuedSessionStarter.startNextQueued()
         }
     }
@@ -827,7 +832,7 @@ class HomeViewModel @Inject constructor(
             val combinedKills     = mutableMapOf<String, Int>()
             var combinedCoins     = 0L
             var anyDied           = false
-            var petMessage: String? = null
+            var petFoundName: String? = null
             val awardedCapes = mutableListOf<String>()
 
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
@@ -852,7 +857,7 @@ class HomeViewModel @Inject constructor(
                             for ((id, _) in pets) {
                                 val pd = gameData.pets[id] ?: continue
                                 if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                    petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                    petFoundName = pd.displayName
                             }
                             for ((skill, xp) in workerBossXp) combinedXpBySkill[skill] = (combinedXpBySkill[skill] ?: 0L) + xp
                             for ((item, qty) in loot) combinedItems[item] = (combinedItems[item] ?: 0) + qty
@@ -882,7 +887,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         if (!died) {
                             playerRepo.incrementDungeonRun(session.activityKey)
@@ -904,7 +909,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         val scaledXp      = if (mult == 1.0f) totalXp else (totalXp * mult).toLong()
                         val scaledRegular = if (mult == 1.0f) regular
@@ -923,7 +928,7 @@ class HomeViewModel @Inject constructor(
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
-                                petMessage = context.getString(R.string.home_found_pet, pd.displayName)
+                                petFoundName = pd.displayName
                         }
                         val scaledXp      = if (mult == 1.0f) totalXp else (totalXp * mult).toLong()
                         val scaledRegular = if (mult == 1.0f) regular
@@ -994,8 +999,11 @@ class HomeViewModel @Inject constructor(
                 val names = awardedCapes.joinToString(", ") { gameData.itemDisplayName(it) }
                 context.getString(R.string.home_congratulations_received, names)
             } else null
-            val snackbar = listOfNotNull(petMessage, capeMessage).joinToString(" • ").ifEmpty { null }
-            _extra.update { it.copy(workerSummary = summary, snackbarMessage = snackbar) }
+            _extra.update { it.copy(
+                workerSummary   = summary,
+                snackbarMessage = capeMessage,
+                petFoundName    = petFoundName,
+            ) }
         }
     }
 
@@ -1052,6 +1060,7 @@ class HomeViewModel @Inject constructor(
 
     fun summaryConsumed() = _extra.update { it.copy(sessionSummary = null) }
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
+    fun petDialogConsumed() = _extra.update { it.copy(petFoundName = null) }
 
     fun dismissWhatsNew() {
         viewModelScope.launch {

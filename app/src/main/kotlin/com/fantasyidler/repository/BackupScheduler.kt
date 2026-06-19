@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.DocumentsContract
 import android.net.Uri
+import com.fantasyidler.data.model.toExport
 import com.fantasyidler.receiver.BackupAlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Calendar
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 @Singleton
 class BackupScheduler @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val sessionRepo: SessionRepository,
 ) {
     private val alarmManager = context.getSystemService(AlarmManager::class.java)
 
@@ -42,7 +44,15 @@ class BackupScheduler @Inject constructor(
         val flags = playerRepo.getFlags()
         if (flags.backupFolderUri.isEmpty()) return false
         return try {
-            val jsonBytes = playerRepo.exportSave().toByteArray()
+            val sessions = buildList {
+                sessionRepo.getActiveSession()?.let { add(it.toExport()) }
+                addAll(sessionRepo.getAllCompletedSessions().map { it.toExport() })
+                for (slot in 1..2) {
+                    sessionRepo.getActiveWorkerSession(slot)?.let { add(it.toExport()) }
+                    addAll(sessionRepo.getAllCompletedWorkerSessions(slot).map { it.toExport() })
+                }
+            }
+            val jsonBytes = playerRepo.exportSave(sessions).toByteArray()
             val treeUri   = Uri.parse(flags.backupFolderUri)
             val treeDocId = DocumentsContract.getTreeDocumentId(treeUri)
             val cr        = context.contentResolver
@@ -63,13 +73,14 @@ class BackupScheduler @Inject constructor(
                 }
             }
 
-            val fileUri = if (existingDocId != null) {
-                DocumentsContract.buildDocumentUriUsingTree(treeUri, existingDocId!!)
-            } else {
-                val docUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, treeDocId)
-                DocumentsContract.createDocument(cr, docUri, "application/json", "fantasyidler_auto")
+            // Delete the existing file before creating a fresh one to avoid SAF truncation issues
+            // that leave old bytes after the new JSON on some devices.
+            existingDocId?.let { docId ->
+                DocumentsContract.deleteDocument(cr, DocumentsContract.buildDocumentUriUsingTree(treeUri, docId))
             }
-            fileUri?.let { cr.openOutputStream(it, "wt")?.use { s -> s.write(jsonBytes) } }
+            val docUri  = DocumentsContract.buildDocumentUriUsingTree(treeUri, treeDocId)
+            val fileUri = DocumentsContract.createDocument(cr, docUri, "application/json", "fantasyidler_auto")
+            fileUri?.let { cr.openOutputStream(it, "w")?.use { s -> s.write(jsonBytes) } }
             true
         } catch (_: Exception) { false }
     }

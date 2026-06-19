@@ -51,6 +51,12 @@ data class SlayerUiState(
     /** Non-null when the player has tapped Buy on a lamp and needs to choose a skill. */
     val pendingLamp: PendingLamp? = null,
     val snackbarMessage: String? = null,
+    /** Non-null while the weapon-picker sheet is open before queuing a slayer dungeon. */
+    val pendingSlayerDungeonKey: String? = null,
+    /** Weapons currently equipped: slot key -> EquipmentData. Used by the weapon picker sheet. */
+    val slayerEquippedWeapons: Map<String, EquipmentData> = emptyMap(),
+    /** The weapon slot selected in the slayer weapon picker sheet. */
+    val slayerSelectedWeaponSlot: String? = null,
 )
 
 @HiltViewModel
@@ -97,19 +103,24 @@ class SlayerViewModel @Inject constructor(
                 dungeonKeys.isNotEmpty() &&
                     dungeonKeys.all { it in gameData.expeditionLockedDungeons && it !in unlockedDungeons }
             } ?: false
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val equippedWeapons = EquipSlot.WEAPON_SLOTS
+                .mapNotNull { slot -> equipped[slot]?.let { key -> gameData.equipment[key]?.let { slot to it } } }
+                .toMap()
             extra.copy(
-                isLoading        = false,
-                slayerLevel      = levels[Skills.SLAYER] ?: 1,
-                slayerXp         = xpMap[Skills.SLAYER] ?: 0L,
-                slayerPoints     = flags.slayerPoints,
-                activeTask       = flags.activeSlayerTask,
-                taskDungeons     = taskDungeons,
-                taskDungeonKeys  = taskDungeonKeys,
-                taskIsStuck      = taskIsStuck,
-                queueSize        = flags.sessionQueue.size,
-                unlockedDungeons = unlockedDungeons,
-                inventory        = inventory,
-                skillLevels      = levels,
+                isLoading             = false,
+                slayerLevel           = levels[Skills.SLAYER] ?: 1,
+                slayerXp              = xpMap[Skills.SLAYER] ?: 0L,
+                slayerPoints          = flags.slayerPoints,
+                activeTask            = flags.activeSlayerTask,
+                taskDungeons          = taskDungeons,
+                taskDungeonKeys       = taskDungeonKeys,
+                taskIsStuck           = taskIsStuck,
+                queueSize             = flags.sessionQueue.size,
+                unlockedDungeons      = unlockedDungeons,
+                inventory             = inventory,
+                skillLevels           = levels,
+                slayerEquippedWeapons = equippedWeapons,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SlayerUiState())
@@ -191,17 +202,40 @@ class SlayerViewModel @Inject constructor(
     }
 
     fun queueTaskDungeon() {
+        val state = uiState.value
+        val dungeonKey = state.taskDungeonKeys.firstOrNull { it in state.unlockedDungeons }
+            ?: state.taskDungeonKeys.firstOrNull()
+            ?: return
+        if (state.slayerEquippedWeapons.size > 1) {
+            _extra.update { it.copy(pendingSlayerDungeonKey = dungeonKey, slayerSelectedWeaponSlot = null) }
+        } else {
+            doQueueTaskDungeon(dungeonKey, weaponSlot = null)
+        }
+    }
+
+    fun selectSlayerWeapon(slot: String) =
+        _extra.update { it.copy(slayerSelectedWeaponSlot = slot) }
+
+    fun confirmSlayerDungeonQueue() {
+        val state = _extra.value
+        val dungeonKey = state.pendingSlayerDungeonKey ?: return
+        _extra.update { it.copy(pendingSlayerDungeonKey = null, slayerSelectedWeaponSlot = null) }
+        doQueueTaskDungeon(dungeonKey, state.slayerSelectedWeaponSlot)
+    }
+
+    fun dismissSlayerDungeonPicker() =
+        _extra.update { it.copy(pendingSlayerDungeonKey = null, slayerSelectedWeaponSlot = null) }
+
+    private fun doQueueTaskDungeon(dungeonKey: String, weaponSlot: String?) {
         viewModelScope.launch {
             val state = uiState.value
-            val dungeonKey = state.taskDungeonKeys.firstOrNull { it in state.unlockedDungeons }
-                ?: state.taskDungeonKeys.firstOrNull()
-                ?: return@launch
             val dungeonName = gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
             val player   = playerRepo.getOrCreatePlayer()
             val agility  = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
-            val flags: PlayerFlags          = json.decodeFromString(player.flags)
+            val flags: PlayerFlags             = json.decodeFromString(player.flags)
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-            val weaponSlot = flags.activeWeaponSlot
+            val resolvedWeaponSlot = weaponSlot
+                ?: flags.activeWeaponSlot
                 ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                 ?: EquipSlot.WEAPON_ATK
             val enqueued = playerRepo.enqueueAction(
@@ -214,7 +248,7 @@ class SlayerViewModel @Inject constructor(
                     arrowsKey           = flags.equippedArrows,
                     spellName           = flags.activeSpell,
                     potionKey           = flags.activePotionKey,
-                    weaponSlot          = weaponSlot,
+                    weaponSlot          = resolvedWeaponSlot,
                 )
             )
             if (enqueued) queuedSessionStarter.startNextQueued()

@@ -646,6 +646,8 @@
     <string name="queue_item_qty">×%1$d</string>
     <string name="queue_item_qty_with_output">×%1$d → %2$d objetos</string>
     <string name="combat_dungeon_runs">%1$d runs</string>
+    <string name="combat_last_run">Última: %1$d kills, %2$d comida</string>
+    <string name="combat_last_run_died">Última: muerto (%1$d kills)</string>
     <string name="profile_weapons">Weapons</string>
     <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/catch</string>
     <string name="crafting_in_inventory">In inventory: ×%1$d</string>
@@ -1303,6 +1305,7 @@
     <string name="mercantile_added_to_queue">Añadido a la cola: Mercantil — %1$s.</string>
     <string name="inventory_requires_to_equip">Requiere %1$s para equipar.</string>
     <string name="home_found_pet">¡Has encontrado una mascota: %1$s!</string>
+    <string name="pet_found_title">¡Nueva mascota!</string>
     <string name="home_congratulations_received">¡Felicidades! Has recibido: %1$s</string>
     <string name="combat_no_food_title">Sin comida equipada</string>
     <string name="combat_no_food_body">No tienes comida equipada. Sin comida podrías morir rápidamente y perder la mayoría de tus recompensas. ¿Empezar de todas formas?</string>

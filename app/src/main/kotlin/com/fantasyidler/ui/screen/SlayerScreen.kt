@@ -13,15 +13,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -30,6 +35,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -82,8 +88,30 @@ fun SlayerScreen(
 
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
+        }
+    }
+
+    state.pendingSlayerDungeonKey?.let { dungeonKey ->
+        val context = LocalContext.current
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        val dungeonName = viewModel.gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
+        ModalBottomSheet(
+            onDismissRequest = viewModel::dismissSlayerDungeonPicker,
+            sheetState       = sheetState,
+            dragHandle       = { BottomSheetDefaults.DragHandle() },
+        ) {
+            SlayerWeaponPickerSheet(
+                dungeonName      = dungeonName,
+                equippedWeapons  = state.slayerEquippedWeapons,
+                selectedSlot     = state.slayerSelectedWeaponSlot
+                    ?: state.slayerEquippedWeapons.keys.firstOrNull(),
+                onWeaponSelected = viewModel::selectSlayerWeapon,
+                onConfirm        = viewModel::confirmSlayerDungeonQueue,
+                onDismiss        = viewModel::dismissSlayerDungeonPicker,
+                context          = context,
+            )
         }
     }
 
@@ -489,4 +517,67 @@ private fun LampSkillPickerDialog(
             }
         },
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@Composable
+private fun SlayerWeaponPickerSheet(
+    dungeonName: String,
+    equippedWeapons: Map<String, EquipmentData>,
+    selectedSlot: String?,
+    onWeaponSelected: (String) -> Unit,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+    context: android.content.Context,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
+            .padding(bottom = 40.dp),
+    ) {
+        Text(
+            text     = stringResource(R.string.label_weapon),
+            style    = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(bottom = 12.dp),
+        )
+        Text(
+            text  = stringResource(R.string.slayer_add_dungeon_to_queue) + ": $dungeonName",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = 12.dp),
+        )
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            equippedWeapons.forEach { (slot, weaponData) ->
+                val isSelected = slot == selectedSlot
+                FilterChip(
+                    selected = isSelected,
+                    onClick  = { onWeaponSelected(slot) },
+                    label    = {
+                        Column {
+                            Text(
+                                text  = GameStrings.itemName(context, weaponData.name),
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            weaponData.combatStyle?.let { style ->
+                                Text(
+                                    text  = style.replaceFirstChar { it.titlecase() },
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
+                        }
+                    },
+                )
+            }
+        }
+        Spacer(Modifier.height(16.dp))
+        Button(onClick = onConfirm, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.slayer_add_dungeon_to_queue))
+        }
+        Spacer(Modifier.height(4.dp))
+        TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.btn_cancel))
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,12 +17,13 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -93,7 +95,7 @@ fun GuildDetailScreen(
 
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }
@@ -107,6 +109,24 @@ fun GuildDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    }
+                },
+                actions = {
+                    Row(
+                        modifier = Modifier
+                            .clickable { viewModel.toggleHideCompleted() }
+                            .padding(end = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text  = stringResource(R.string.label_hide_completed),
+                            style = MaterialTheme.typography.labelSmall,
+                        )
+                        Spacer(Modifier.width(4.dp))
+                        Switch(
+                            checked         = state.hideCompleted,
+                            onCheckedChange = { viewModel.toggleHideCompleted() },
+                        )
                     }
                 },
             )
@@ -159,16 +179,18 @@ fun GuildDetailScreen(
             HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
                 when (page) {
                     0 -> GuildQuestsTab(
-                        quests     = state.quests,
-                        guildLevel = state.guildLevel,
-                        onClaim    = { viewModel.claimGuildQuest(it) },
+                        quests        = state.quests,
+                        guildLevel    = state.guildLevel,
+                        hideCompleted = state.hideCompleted,
+                        onClaim       = { viewModel.claimGuildQuest(it) },
                     )
                     else -> GuildDailiesTab(
-                        dailies      = state.dailies,
-                        nextResetMs  = state.nextResetMs,
-                        inventory    = state.inventory,
-                        onClaim      = { viewModel.claimGuildDaily(it) },
-                        onContribute = { viewModel.contributeFarmingDaily(it) },
+                        dailies       = state.dailies,
+                        nextResetMs   = state.nextResetMs,
+                        inventory     = state.inventory,
+                        hideCompleted = state.hideCompleted,
+                        onClaim       = { viewModel.claimGuildDaily(it) },
+                        onContribute  = { viewModel.contributeFarmingDaily(it) },
                     )
                 }
             }
@@ -236,10 +258,12 @@ private fun GuildRepHeader(
 private fun GuildQuestsTab(
     quests: List<GuildQuestWithProgress>,
     guildLevel: Int,
+    hideCompleted: Boolean = false,
     onClaim: (String) -> Unit,
 ) {
+    val visibleQuests = if (hideCompleted) quests.filter { !it.completed } else quests
     LazyColumn(Modifier.fillMaxSize()) {
-        if (quests.isEmpty()) {
+        if (visibleQuests.isEmpty()) {
             item {
                 Box(
                     Modifier.fillMaxWidth().padding(32.dp),
@@ -253,7 +277,7 @@ private fun GuildQuestsTab(
                 }
             }
         } else {
-            items(quests, key = { it.quest.id }) { qwp ->
+            items(visibleQuests, key = { it.quest.id }) { qwp ->
                 GuildQuestRow(
                     qwp        = qwp,
                     guildLevel = guildLevel,
@@ -359,11 +383,13 @@ private fun GuildDailiesTab(
     dailies: List<GuildDailyWithProgress>,
     nextResetMs: Long,
     inventory: Map<String, Int>,
+    hideCompleted: Boolean = false,
     onClaim: (String) -> Unit,
     onContribute: (String) -> Unit,
 ) {
+    val visibleDailies = if (hideCompleted) dailies.filter { !it.claimed } else dailies
     LazyColumn(Modifier.fillMaxSize()) {
-        if (dailies.isEmpty()) {
+        if (visibleDailies.isEmpty()) {
             item {
                 Box(
                     Modifier.fillMaxWidth().padding(32.dp),
@@ -377,7 +403,7 @@ private fun GuildDailiesTab(
                 }
             }
         } else {
-            items(dailies, key = { it.template.id }) { dwp ->
+            items(visibleDailies, key = { it.template.id }) { dwp ->
                 GuildDailyCard(
                     dwp          = dwp,
                     inventoryQty = if (dwp.template.guild == "farming" && dwp.template.type == "gather")

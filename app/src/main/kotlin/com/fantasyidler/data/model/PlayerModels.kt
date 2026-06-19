@@ -58,6 +58,8 @@ data class PlayerFlags(
     @SerialName("hired_worker_2") val hiredWorker2: HiredWorker? = null,
     /** Persists the "hide completed quests" toggle across sessions. */
     @SerialName("hide_completed_quests") val hideCompletedQuests: Boolean = false,
+    /** Last-visited Carnival tab index (0=Idle, 1=Active, 2=Prize Shop). */
+    @SerialName("carnival_tab") val carnivalTab: Int = 0,
     /** Guild reputation totals: guild key → total rep earned (guild level is derived from this). */
     @SerialName("guild_reputation") val guildReputation: Map<String, Long> = emptyMap(),
     /** IDs of today's active guild daily request templates. */
@@ -115,6 +117,16 @@ data class PlayerFlags(
     @SerialName("carnival_item_appraisal_cooldown_at") val carnivalItemAppraisalCooldownAt: Long = 0L,
     /** All equipment item keys ever obtained; used by the Armory to show items even after they are sold. */
     @SerialName("seen_item_keys") val seenItemKeys: Set<String> = emptySet(),
+    /** Last run stats per dungeon key (food consumed, kills, survived). */
+    @SerialName("dungeon_last_run_stats") val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
+)
+
+/** Stats saved after each dungeon run; keyed by dungeon name in PlayerFlags. */
+@Serializable
+data class DungeonRunStats(
+    @SerialName("food_consumed") val foodConsumed: Int = 0,
+    @SerialName("kill_count") val killCount: Int = 0,
+    @SerialName("survived") val survived: Boolean = true,
 )
 
 /** A single entry in the recent sessions log. */

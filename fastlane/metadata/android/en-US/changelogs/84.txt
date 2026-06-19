@@ -1,0 +1,15 @@
+• Workers can now be assigned Construction and Thieving tasks (previously showed Coming Soon or did nothing)
+• Agility moved to the Support Skills section in the Skills tab, consistent with the Profile and Guild Hall screens
+• Automatic backup now includes active sessions (same as manual Export) and no longer writes corrupted files when overwriting an existing backup
+• Release APK is now named IdleFantasy-v[version].apk so downloaded copies are easier to identify and archive
+• Fix toast for adding a session to the queue disappearing behind the open skill sheet; the sheet now closes first so the message is visible
+• Fix stale queue toast appearing when navigating back to the Skills screen after the message was never shown
+• Pet discoveries now show a closable dialog instead of a toast so they are harder to miss; boss pets that were previously silent also now show the dialog
+• Guild Hall quests and dailies now have a filter toggle (top-right) to hide completed entries, shared with the main Quests screen hide-completed setting
+• All notification banners can now be dismissed by tapping the X instead of waiting for them to expire
+• Fix "Claim Weekly Bonus" button remaining visible after the reward has already been claimed
+• Carnival remembers the last-viewed tab when you navigate away and return
+• Queueing a dungeon from the Slayer screen now shows a weapon picker sheet when you have more than one weapon equipped, matching the Combat screen behaviour
+• Tap any enemy name in a dungeon's info sheet to see its HP, combat stats, and drop table
+• Combat Gear tab now shows stat bonuses (Atk, Str, Def, etc.) under each equipped item name
+• Dungeon list now shows a summary of your last run (kills and food used, or "died" if you didn't survive)

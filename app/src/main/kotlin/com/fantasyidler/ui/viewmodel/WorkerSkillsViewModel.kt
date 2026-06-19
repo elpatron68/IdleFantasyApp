@@ -260,6 +260,21 @@ class WorkerSkillsViewModel @Inject constructor(
         }.sortedBy { it.levelRequired }
     }
 
+    val constructionRecipes: List<CraftableRecipe> by lazy {
+        gameData.constructionRecipes.map { (key, r) ->
+            CraftableRecipe(
+                key           = key,
+                displayName   = r.displayName,
+                levelRequired = r.levelRequired,
+                materials     = r.materials,
+                outputKey     = key,
+                outputQty     = r.outputQuantity,
+                xpPerItem     = r.xpPerItem,
+                skillName     = Skills.CONSTRUCTION,
+            )
+        }.sortedBy { it.levelRequired }
+    }
+
     // ------------------------------------------------------------------
     // Activity sheet dispatch
     // ------------------------------------------------------------------
@@ -319,7 +334,14 @@ class WorkerSkillsViewModel @Inject constructor(
             Skills.COOKING,
             Skills.FLETCHING,
             Skills.CRAFTING,
-            Skills.HERBLORE -> SheetState.Crafting(skillKey)
+            Skills.HERBLORE,
+            Skills.CONSTRUCTION -> SheetState.Crafting(skillKey)
+            Skills.THIEVING -> {
+                val thievingLevel = state.skillLevels[Skills.THIEVING] ?: 1
+                SheetState.Thieving(
+                    npcs = gameData.thievingNpcs.filter { (_, npc) -> npc.levelRequired <= thievingLevel }
+                )
+            }
             else             -> SheetState.ComingSoon
         }
         _uiState.update { it.copy(sheetSkill = sheet) }
@@ -335,6 +357,7 @@ class WorkerSkillsViewModel @Inject constructor(
     fun startWoodcuttingSession(treeKey: String)    = enqueueGathering(Skills.WOODCUTTING, "Woodcutting", treeKey)
     fun startFishingSession(fishKey: String)        = enqueueGathering(Skills.FISHING,    "Fishing",    fishKey)
     fun startAgilitySession(courseKey: String)      = enqueueGathering(Skills.AGILITY,    "Agility",    courseKey)
+    fun startThievingSession(npcKey: String)        = enqueueGathering(Skills.THIEVING,   "Thieving",   npcKey)
 
     private fun enqueueGathering(skillName: String, displayName: String, activityKey: String) {
         viewModelScope.launch {

@@ -125,10 +125,23 @@ fun HomeScreen(
     val context           = LocalContext.current
 
     LaunchedEffect(state.snackbarMessage) {
-        state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.snackbarConsumed()
+        state.snackbarMessage?.let { msg ->
+            try { snackbarHostState.showSnackbar(msg) }
+            finally { viewModel.snackbarConsumed() }
         }
+    }
+
+    state.petFoundName?.let { petName ->
+        AlertDialog(
+            onDismissRequest = viewModel::petDialogConsumed,
+            title = { Text(stringResource(R.string.pet_found_title)) },
+            text  = { Text(stringResource(R.string.home_found_pet, petName)) },
+            confirmButton = {
+                TextButton(onClick = viewModel::petDialogConsumed) {
+                    Text(stringResource(R.string.btn_close))
+                }
+            },
+        )
     }
 
     // Session summary dialog

@@ -37,7 +37,7 @@ fun BuilderScreen(
 
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }

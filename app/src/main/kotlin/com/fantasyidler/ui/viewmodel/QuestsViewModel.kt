@@ -57,6 +57,7 @@ data class QuestsUiState(
     val nextWeeklyReset: Long = 0L,
     val snackbarMessage: String? = null,
     val hideCompleted: Boolean = false,
+    val weeklyBonusClaimed: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------
@@ -135,12 +136,13 @@ class QuestsViewModel @Inject constructor(
         }
 
         extra.copy(
-            isLoading      = false,
-            questsByGroup  = questsByGroup,
-            claimableCount = claimable,
-            completedCount = completed,
-            dailyQuests    = dailyQuests,
-            weeklyQuests   = weeklyQuests,
+            isLoading          = false,
+            questsByGroup      = questsByGroup,
+            claimableCount     = claimable,
+            completedCount     = completed,
+            dailyQuests        = dailyQuests,
+            weeklyQuests       = weeklyQuests,
+            weeklyBonusClaimed = flags.weeklyBonusClaimed,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuestsUiState())
 

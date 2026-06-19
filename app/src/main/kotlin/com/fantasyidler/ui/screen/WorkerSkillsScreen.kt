@@ -96,7 +96,7 @@ fun WorkerSkillsScreen(
 
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
-            snackbarHostState.showSnackbar(it)
+            snackbarHostState.showSnackbar(it, withDismissAction = true)
             viewModel.snackbarConsumed()
         }
     }
@@ -334,7 +334,17 @@ fun WorkerSkillsScreen(
                 }
                 SheetState.Mercantile -> {}
                 SheetState.Farming   -> {}
-                is SheetState.Thieving -> {}
+                is SheetState.Thieving -> ThievingSheet(
+                    npcs              = sheet.npcs,
+                    thievingLevel     = state.skillLevels[Skills.THIEVING] ?: 1,
+                    currentXp         = state.skillXp[Skills.THIEVING] ?: 0L,
+                    isStarting        = false,
+                    hasActiveSession  = true,
+                    isQueueFull       = isQueueFull,
+                    sessionDurationMs = state.gatheringDurationMs,
+                    context           = context,
+                    onSelect          = { viewModel.startThievingSession(it) },
+                )
                 SheetState.ComingSoon -> ComingSoonSheet()
             }
         }
@@ -429,11 +439,12 @@ private fun WorkerCraftSkillSheet(
     onDismiss: () -> Unit,
 ) {
     val allRecipes: List<CraftableRecipe> = when (skillName) {
-        Skills.SMITHING  -> viewModel.smithingRecipes
-        Skills.COOKING   -> viewModel.cookingRecipes
-        Skills.FLETCHING -> viewModel.fletchingRecipes
-        Skills.HERBLORE  -> viewModel.herbloreRecipes
-        else             -> viewModel.jewelleryRecipes
+        Skills.SMITHING      -> viewModel.smithingRecipes
+        Skills.COOKING       -> viewModel.cookingRecipes
+        Skills.FLETCHING     -> viewModel.fletchingRecipes
+        Skills.HERBLORE      -> viewModel.herbloreRecipes
+        Skills.CONSTRUCTION  -> viewModel.constructionRecipes
+        else                 -> viewModel.jewelleryRecipes
     }
 
     var onlyCraftable    by remember { mutableStateOf(false) }

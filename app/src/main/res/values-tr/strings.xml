@@ -369,6 +369,8 @@
     <string name="combat_solo_bosses">Solo Patronlar</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d koşu</string>
+    <string name="combat_last_run">Son: %1$d öldürme, %2$d yiyecek</string>
+    <string name="combat_last_run_died">Son: öldü (%1$d öldürme)</string>
     <string name="combat_atk">SAL</string>
     <string name="combat_str">GÜÇ</string>
     <string name="combat_def">SAV</string>
@@ -1308,6 +1310,7 @@
     <string name="mercantile_added_to_queue">Sıraya eklendi: Ticaret — %1$s.</string>
     <string name="inventory_requires_to_equip">Ekipman için %1$s gerekli.</string>
     <string name="home_found_pet">Bir evcil hayvan buldunuz: %1$s!</string>
+    <string name="pet_found_title">Yeni evcil hayvan!</string>
     <string name="home_congratulations_received">Tebrikler! Aldığınız: %1$s</string>
     <string name="combat_no_food_title">Yiyecek Takılı Değil</string>
     <string name="combat_no_food_body">Yiyecek takılı değil. Yiyecek olmadan çabuk ölebilir ve ödüllerin çoğunu kaybedebilirsiniz. Yine de başlansın mı?</string>

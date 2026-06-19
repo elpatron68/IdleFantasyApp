@@ -426,6 +426,8 @@
     <string name="combat_solo_bosses">Solo Bazen</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d runs</string>
+    <string name="combat_last_run">Laatste: %1$d kills, %2$d voedsel</string>
+    <string name="combat_last_run_died">Laatste: gestorven (%1$d kills)</string>
     <string name="combat_atk">ATK</string>
     <string name="combat_str">STR</string>
     <string name="combat_def">DEF</string>
@@ -1339,6 +1341,7 @@
     <string name="mercantile_added_to_queue">Toegevoegd aan wachtrij: Handelsvaardig — %1$s.</string>
     <string name="inventory_requires_to_equip">Vereist %1$s om uit te rusten.</string>
     <string name="home_found_pet">Je hebt een huisdier gevonden: %1$s!</string>
+    <string name="pet_found_title">Nieuw huisdier!</string>
     <string name="home_congratulations_received">Gefeliciteerd! Je hebt ontvangen: %1$s</string>
     <string name="combat_no_food_title">Geen voedsel uitgerust</string>
     <string name="combat_no_food_body">Je hebt geen voedsel uitgerust. Zonder voedsel kun je snel sterven en de meeste beloningen verliezen. Toch starten?</string>

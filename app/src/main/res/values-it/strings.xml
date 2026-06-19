@@ -434,6 +434,8 @@
     <string name="combat_solo_bosses">Boss Assoluti</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d iter</string>
+    <string name="combat_last_run">Ultimo: %1$d uccisioni, %2$d cibo</string>
+    <string name="combat_last_run_died">Ultimo: morto (%1$d uccisioni)</string>
     <string name="combat_atk">ATT</string>
     <string name="combat_str">FRZ</string>
     <string name="combat_def">DIF</string>
@@ -1353,6 +1355,7 @@
     <string name="mercantile_added_to_queue">Aggiunto alla coda: Commercio — %1$s.</string>
     <string name="inventory_requires_to_equip">Richiede %1$s per equipaggiare.</string>
     <string name="home_found_pet">Hai trovato un animale: %1$s!</string>
+    <string name="pet_found_title">Nuovo animale!</string>
     <string name="home_congratulations_received">Congratulazioni! Hai ricevuto: %1$s</string>
     <string name="combat_no_food_title">Nessun cibo equipaggiato</string>
     <string name="combat_no_food_body">Non hai cibo equipaggiato. Senza cibo potresti morire rapidamente e perdere la maggior parte delle ricompense. Iniziare comunque?</string>
