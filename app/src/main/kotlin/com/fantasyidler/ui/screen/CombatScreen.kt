@@ -205,6 +205,7 @@ fun CombatScreen(
                             bosses         = viewModel.bossList,
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
+                            skillPrestige  = state.skillPrestige,
                             attackBonus    = state.totalAttackBonus,
                             strengthBonus  = state.totalStrengthBonus,
                             defenseBonus   = state.totalDefenseBonus,
@@ -933,6 +934,7 @@ private fun CombatSessionBanner(
     bosses: List<BossData>,
     enemies: Map<String, EnemyData>,
     skillLevels: Map<String, Int>,
+    skillPrestige: Map<String, Int> = emptyMap(),
     attackBonus: Int,
     strengthBonus: Int,
     defenseBonus: Int,
@@ -1055,7 +1057,7 @@ private fun CombatSessionBanner(
                 val divColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.2f)
 
                 // Live player HP (per-tick if hit data exists, else per-frame fallback)
-                val maxHp = (skillLevels[Skills.HITPOINTS] ?: 1) * 10
+                val maxHp = ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5) * 10
                 val currentPlayerHp = if (currentFrame?.enemyHits?.isNotEmpty() == true) {
                     val base = frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
                     (base - currentFrame.enemyHits.take(tickInFrame + 1).sum()).coerceAtLeast(0)

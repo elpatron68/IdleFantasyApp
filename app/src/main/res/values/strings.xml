@@ -78,7 +78,7 @@
     <string name="label_session_complete">Session Complete!</string>
     <string name="label_training">Training</string>
     <string name="label_gathering_skills">Gathering</string>
-    <string name="label_crafting_skills">Crafting</string>
+    <string name="label_crafting_skills">Crafting Skills</string>
     <string name="label_choose_activity">Choose Activity</string>
     <string name="label_coming_soon">Coming soon</string>
     <string name="label_time_remaining">Time remaining</string>

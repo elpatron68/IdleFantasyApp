@@ -78,7 +78,7 @@
     <string name="label_session_complete">Aktivität abgeschlossen!</string>
     <string name="label_training">In Ausbildung</string>
     <string name="label_gathering_skills">Sammeln</string>
-    <string name="label_crafting_skills">Herstellung</string>
+    <string name="label_crafting_skills">Herstellungsberufe</string>
     <string name="label_choose_activity">Aktivität auswählen</string>
     <string name="label_coming_soon">Bald verfügbar</string>
     <string name="label_time_remaining">Verbleibende Zeit</string>

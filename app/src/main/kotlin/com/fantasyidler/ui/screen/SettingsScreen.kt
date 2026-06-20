@@ -448,7 +448,7 @@ fun SettingsScreen(
             } else {
                 try {
                     val docId = DocumentsContract.getTreeDocumentId(Uri.parse(backupFolderUri))
-                    docId.substringAfterLast(':').substringAfterLast('/').ifEmpty { noFolderStr }
+                    docId.substringAfterLast(':').ifEmpty { noFolderStr }
                 } catch (_: Exception) {
                     noFolderStr
                 }

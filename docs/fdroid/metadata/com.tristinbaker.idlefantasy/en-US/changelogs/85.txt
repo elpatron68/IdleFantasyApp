@@ -1,0 +1,9 @@
+• Fix pet XP bonuses and prestige bonuses not applying to boss session rewards; both are now correctly applied when collecting a completed boss fight
+• Fix prestige XP bonus not applying to dungeon session rewards when collecting from either the Home or Combat screen
+• Fix "combat" pets (Dragon Whelp, Void Wisp) not counting toward the XP bonus applied during dungeon sessions; multiple combat pets now stack correctly
+• Fix worker cooking/crafting sheet showing English item names instead of the device language; now uses the same localized lookup as the regular skill sheets
+• Fix French translation of Builder's Workshop truncating to an offensive word on the Home screen; shortened to "Atelier"
+• Fix Farm dungeon enemy list showing "Cooked Chicken" instead of "Chicken"; dungeon info sheet now uses the correct enemy name lookup
+• Fix Thieving Guild daily quests being generated for NPCs the player cannot yet pickpocket; quests are now filtered to the player's current Thieving level
+• Fix dungeon last-run stats (kill count, food used, survived) not being saved when collecting sessions from the Home screen
+• Fix Fletching "Plank" filter showing only one item; all plank types now share a Plank category filter

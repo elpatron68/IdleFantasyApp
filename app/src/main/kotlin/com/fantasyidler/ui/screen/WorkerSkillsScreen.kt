@@ -191,9 +191,9 @@ fun WorkerSkillsScreen(
                 }
             }
 
-            // Gathering skills (no farming)
+            // Gathering skills (no farming, no agility)
             item { SectionHeader(stringResource(R.string.label_gathering_skills)) }
-            items(Skills.GATHERING.filter { it != Skills.FARMING }) { key ->
+            items(Skills.GATHERING.filter { it != Skills.FARMING && it != Skills.AGILITY }) { key ->
                 val efficiency = when (key) {
                     Skills.MINING      -> state.miningEfficiency
                     Skills.WOODCUTTING -> state.woodcuttingEfficiency
@@ -219,6 +219,18 @@ fun WorkerSkillsScreen(
                     xp       = state.skillXp[key] ?: 0L,
                     isActive = state.currentSession?.skillName == key && state.currentSession?.completed == false,
                     onClick  = { viewModel.onSkillTapped(key) },
+                )
+            }
+
+            // Support skills
+            item { SectionHeader(stringResource(R.string.label_support_skills)) }
+            item {
+                SkillRow(
+                    skillKey = Skills.AGILITY,
+                    level    = state.skillLevels[Skills.AGILITY] ?: 1,
+                    xp       = state.skillXp[Skills.AGILITY] ?: 0L,
+                    isActive = state.currentSession?.skillName == Skills.AGILITY && state.currentSession?.completed == false,
+                    onClick  = { viewModel.onSkillTapped(Skills.AGILITY) },
                 )
             }
 

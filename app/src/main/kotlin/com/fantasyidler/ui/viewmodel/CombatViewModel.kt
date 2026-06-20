@@ -12,6 +12,7 @@ import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.DungeonRunStats
 import com.fantasyidler.data.model.OwnedPet
+import com.fantasyidler.data.model.Player
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
@@ -29,6 +30,8 @@ import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -39,6 +42,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.random.Random
 import javax.inject.Inject
 
 // ---------------------------------------------------------------------------
@@ -118,6 +122,9 @@ class CombatViewModel @Inject constructor(
     val potionEffects: Map<String, Map<String, Int>> = gameData.potionEffects
 
     private val _extra = MutableStateFlow(CombatUiState())
+    private val _simulatedRatings = MutableStateFlow<Map<String, CombatSimulator.SurvivalRating>>(emptyMap())
+    private var simJob: Job? = null
+    private var lastSimFingerprint = ""
 
     init {
         // AlarmManager delivery can be deferred by Doze; while the app is open this
@@ -130,11 +137,27 @@ class CombatViewModel @Inject constructor(
         }
     }
 
+    init {
+        viewModelScope.launch {
+            playerRepo.playerFlow.collect { player ->
+                if (player == null) return@collect
+                val fp = buildCombatFingerprint(player)
+                if (fp == lastSimFingerprint) return@collect
+                lastSimFingerprint = fp
+                simJob?.cancel()
+                simJob = viewModelScope.launch(Dispatchers.Default) {
+                    _simulatedRatings.value = simulateAllDungeons(player)
+                }
+            }
+        }
+    }
+
     val uiState: StateFlow<CombatUiState> = combine(
         playerRepo.playerFlow,
         sessionRepo.activeSessionFlow,
         _extra,
-    ) { player, session, extra ->
+        _simulatedRatings,
+    ) { player, session, extra, simRatings ->
         val combatSession = session?.takeIf { it.skillName == "combat" || it.skillName == "boss" }
         if (player == null) {
             extra.copy(combatSession = combatSession)
@@ -177,20 +200,6 @@ class CombatViewModel @Inject constructor(
                 else     -> equippedWeapon?.strengthBonus ?: 0
             }
             val totalDef = armorDef + (equippedWeapon?.defenseBonus  ?: 0)
-            val defenceLevel  = levels[Skills.DEFENSE]   ?: 1
-            val hpLevel       = levels[Skills.HITPOINTS] ?: 1
-            val totalFoodHeal = flags.equippedFood.keys.sumOf { key ->
-                (inventory[key] ?: 0) * (gameData.foodHealValues[key] ?: 0)
-            }
-            val survivalRatings = gameData.dungeons.mapValues { (_, dungeon) ->
-                CombatSimulator.estimateSurvival(
-                    dungeon       = dungeon,
-                    enemies       = gameData.enemies,
-                    playerDefence = defenceLevel + totalDef,
-                    playerHp      = hpLevel,
-                    totalFoodHeal = totalFoodHeal,
-                )
-            }
             extra.copy(
                 isLoading               = false,
                 skillLevels             = levels,
@@ -203,7 +212,7 @@ class CombatViewModel @Inject constructor(
                 totalAttackBonus        = totalAtk,
                 totalStrengthBonus      = totalStr,
                 totalDefenseBonus       = totalDef,
-                dungeonSurvivalRatings  = survivalRatings,
+                dungeonSurvivalRatings  = simRatings,
                 equippedFood            = flags.equippedFood.keys
                     .associateWith { inventory[it] ?: 0 }
                     .filter { (_, qty) -> qty > 0 },
@@ -987,6 +996,105 @@ class CombatViewModel @Inject constructor(
         if (capes.isEmpty()) return null
         val names = capes.joinToString(", ") { gameData.itemDisplayName(it) }
         return context.getString(R.string.home_congratulations_received, names)
+    }
+
+    // ------------------------------------------------------------------
+    // Dungeon survival simulation
+    // ------------------------------------------------------------------
+
+    private fun buildCombatFingerprint(player: Player): String {
+        val levels    = try { json.decodeFromString<Map<String, Int>>(player.skillLevels) } catch (_: Exception) { emptyMap() }
+        val flags     = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+        val inventory = try { json.decodeFromString<Map<String, Int>>(player.inventory) } catch (_: Exception) { emptyMap() }
+        val foodQtys  = flags.equippedFood.keys.sorted().joinToString(",") { "$it=${inventory[it] ?: 0}" }
+        val combatLevels = listOf(
+            Skills.ATTACK, Skills.STRENGTH, Skills.DEFENSE,
+            Skills.HITPOINTS, Skills.RANGED, Skills.MAGIC, Skills.AGILITY,
+        ).joinToString(",") { "${it}=${levels[it] ?: 1}" }
+        return "$combatLevels|${player.equipped}|${flags.equippedFood}|$foodQtys|${flags.skillPrestige}|${flags.activeWeaponSlot}|${flags.activeSpell}"
+    }
+
+    private fun simulateAllDungeons(player: Player): Map<String, CombatSimulator.SurvivalRating> {
+        val levels    = try { json.decodeFromString<Map<String, Int>>(player.skillLevels) } catch (_: Exception) { emptyMap() }
+        val equipped  = try { json.decodeFromString<Map<String, String?>>(player.equipped) } catch (_: Exception) { emptyMap() }
+        val flags     = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+        val inventory = try { json.decodeFromString<Map<String, Int>>(player.inventory) } catch (_: Exception) { emptyMap() }
+
+        val activeWeaponSlot = flags.activeWeaponSlot
+            ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
+            ?: EquipSlot.WEAPON_ATK
+        val weapon       = equipped[activeWeaponSlot]?.let { gameData.equipment[it] }
+        val combatStyle  = when (weapon?.combatStyle) {
+            "ranged" -> "ranged"; "magic" -> "magic"; "strength" -> "strength"; else -> "attack"
+        }
+        val prestigeMap  = flags.skillPrestige
+
+        val armorAtk = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
+            val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
+            eq.attackBonus + when (combatStyle) {
+                "ranged" -> eq.rangedAttackBonus ?: 0; "magic" -> eq.magicAttackBonus ?: 0; else -> 0
+            }
+        }
+        val armorStr = when (combatStyle) {
+            "ranged" -> EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 }
+            else     -> EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 }
+        }
+        val armorDef = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus ?: 0 }
+
+        val totalAtk = armorAtk + (weapon?.attackBonus ?: 0) + when (combatStyle) {
+            "ranged" -> weapon?.rangedAttackBonus ?: 0; "magic" -> weapon?.magicAttackBonus ?: 0; else -> 0
+        }
+        val totalStr = armorStr + when (combatStyle) {
+            "ranged" -> weapon?.rangedStrengthBonus ?: 0; else -> weapon?.strengthBonus ?: 0
+        }
+        val totalDef = armorDef + (weapon?.defenseBonus ?: 0)
+
+        val bestArrow      = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
+        val arrowStrBonus  = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
+        val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+
+        val activeSpell = flags.activeSpell?.let { gameData.spells[it] }
+        val spellMaxHit = if (combatStyle == "magic") activeSpell?.maxHit ?: 0 else 0
+
+        val foodQtys = flags.equippedFood.keys.associateWith { inventory[it] ?: 0 }
+
+        val atk     = (levels[Skills.ATTACK]    ?: 1) + (prestigeMap[Skills.ATTACK]    ?: 0) * 5
+        val str     = (levels[Skills.STRENGTH]  ?: 1) + (prestigeMap[Skills.STRENGTH]  ?: 0) * 5
+        val def     = (levels[Skills.DEFENSE]   ?: 1) + totalDef + (prestigeMap[Skills.DEFENSE] ?: 0) * 5
+        val hp      = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMap[Skills.HITPOINTS] ?: 0) * 5
+        val rng     = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5
+        val mgc     = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5
+        val agility = levels[Skills.AGILITY]    ?: 1
+
+        return gameData.dungeons.mapValues { (_, dungeon) ->
+            val result = CombatSimulator.simulateDungeon(
+                dungeon             = dungeon,
+                enemies             = gameData.enemies,
+                playerAttack        = atk,
+                playerStrength      = str,
+                playerDefence       = def,
+                blessingDefBonus    = ChurchRepository.defBonus(flags),
+                playerHp            = hp,
+                weaponAttackBonus   = totalAtk,
+                weaponStrengthBonus = totalStr,
+                combatStyle         = combatStyle,
+                playerRanged        = rng,
+                playerMagic         = mgc,
+                arrowStrengthBonus  = arrowStrBonus,
+                spellMaxHit         = spellMaxHit,
+                agilityLevel        = agility,
+                equippedFood        = foodQtys,
+                foodHealValues      = gameData.foodHealValues,
+                availableArrows     = availableArrows,
+                random              = Random(42),
+            )
+            val deathFrame = result.frames.indexOfFirst { it.died }
+            when {
+                deathFrame < 0   -> CombatSimulator.SurvivalRating.LIKELY
+                deathFrame >= 45 -> CombatSimulator.SurvivalRating.RISKY
+                else             -> CombatSimulator.SurvivalRating.UNLIKELY
+            }
+        }
     }
 
     // ------------------------------------------------------------------

@@ -78,7 +78,7 @@
     <string name="label_session_complete">Сессия завершена!</string>
     <string name="label_training">Тренировка</string>
     <string name="label_gathering_skills">Добыча</string>
-    <string name="label_crafting_skills">Крафт</string>
+    <string name="label_crafting_skills">Навыки крафта</string>
     <string name="label_choose_activity">Выберите занятие</string>
     <string name="label_coming_soon">Скоро</string>
     <string name="label_time_remaining">Осталось времени</string>

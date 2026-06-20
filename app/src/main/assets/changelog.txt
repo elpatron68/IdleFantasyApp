@@ -1,3 +1,14 @@
+v1.9.10
+• Fix food overhealing display for prestiged Hitpoints players (simulator max HP now matches the HP bar)
+• Dungeons and boss fights now cap food consumption at 200 items per session (best-healing food used first); the difficulty indicator now runs the actual combat simulation for each dungeon (accounting for your attack and kill speed) instead of a defence-only estimate, so ratings reflect real survivability
+• Fix queue XP estimate from Skills tab not including pet bonuses, causing it to show less XP than the Repeat button
+• Fix active session XP display on Home screen ignoring 2x XP boost and Church blessing
+• Worker skill list: Agility moved to Support section to match the main Skills tab layout
+• Skills tab: "Crafting" section header renamed to "Crafting Skills" to distinguish it from the Crafting skill row
+• F-Droid: fix APK filename in metadata so the build server can locate the release APK
+• Settings: backup folder subtitle now shows the full folder path (e.g. Download/Backup) instead of just the last folder name, avoiding the appearance of the word "Backup" repeating
+• Fix Farming sheet opening at partial height when first tapped from the Skills tab; the sheet now always opens to full size regardless of whether data has loaded yet
+
 v1.9.9
 • Fix pet XP bonuses and prestige bonuses not applying to boss session rewards; both are now correctly applied when collecting a completed boss fight
 • Fix prestige XP bonus not applying to dungeon session rewards when collecting from either the Home or Combat screen

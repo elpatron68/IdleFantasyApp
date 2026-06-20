@@ -78,7 +78,7 @@
     <string name="label_session_complete">Sessione Completata!</string>
     <string name="label_training">Addestramento</string>
     <string name="label_gathering_skills">Raccolta</string>
-    <string name="label_crafting_skills">Mestieri</string>
+    <string name="label_crafting_skills">Abilità artigianali</string>
     <string name="label_choose_activity">Scegli Attività</string>
     <string name="label_coming_soon">In arrivo</string>
     <string name="label_time_remaining">Tempo rimanente</string>

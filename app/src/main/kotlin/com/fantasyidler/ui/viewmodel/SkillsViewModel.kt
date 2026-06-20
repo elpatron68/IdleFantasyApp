@@ -655,7 +655,8 @@ class SkillsViewModel @Inject constructor(
                 val gatherFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
                 val xpQueueMult = (if (gatherFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(gatherFlags)
                 val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-                val estimatedXpGain = (when (skillName) {
+                val petBoostPct = petBoostFor(player.pets, skillName)
+                val rawXp = when (skillName) {
                     Skills.MINING      -> SkillSimulator.estimateGatheringXp(
                         gameData.ores[activityKey]?.xpPerOre ?: 0,
                         toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE),
@@ -673,7 +674,9 @@ class SkillsViewModel @Inject constructor(
                         SkillSimulator.estimateAgilityXp(course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility)
                     }
                     else               -> 0L
-                } * xpQueueMult).toLong()
+                }
+                val petBoostedXp = if (petBoostPct > 0) (rawXp * (1.0 + petBoostPct / 100.0)).toLong() else rawXp
+                val estimatedXpGain = (petBoostedXp * xpQueueMult).toLong()
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = skillName,

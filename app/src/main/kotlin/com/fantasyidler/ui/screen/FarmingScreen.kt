@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -221,18 +222,12 @@ fun FarmingSheetContent(
         }
     }
 
-    if (state.isLoading) {
-        Box(
-            Modifier.fillMaxWidth().height(200.dp),
-            contentAlignment = Alignment.Center,
-        ) { CircularProgressIndicator() }
-        return
-    }
-
-    Box(Modifier.fillMaxWidth()) {
-        LazyColumn(
+    Box(Modifier.fillMaxWidth().fillMaxHeight(0.85f)) {
+        if (state.isLoading) {
+            CircularProgressIndicator(Modifier.align(Alignment.Center))
+        } else LazyColumn(
             contentPadding = PaddingValues(bottom = 32.dp),
-            modifier        = Modifier.fillMaxWidth(),
+            modifier        = Modifier.fillMaxSize(),
         ) {
             item { FarmingXpBar(state) }
             item {

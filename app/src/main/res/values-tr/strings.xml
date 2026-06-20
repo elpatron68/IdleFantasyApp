@@ -77,7 +77,7 @@
     <string name="label_session_complete">Oturum Tamamlandı!</string>
     <string name="label_training">Eğitim</string>
     <string name="label_gathering_skills">Toplayıcılık</string>
-    <string name="label_crafting_skills">Zanaatkârlık</string>
+    <string name="label_crafting_skills">Zanaat Becerileri</string>
     <string name="label_choose_activity">Aktivite Seç</string>
     <string name="label_coming_soon">Çok yakında</string>
     <string name="label_time_remaining">Kalan süre</string>

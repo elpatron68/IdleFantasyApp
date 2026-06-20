@@ -63,6 +63,7 @@ object CombatSimulator {
             .filter { (k, _) -> k in foodSupply }
             .sortedByDescending { it.value }
             .map { it.key }
+        var totalFoodEaten = 0
 
         val arrowKey   = availableArrows.keys.firstOrNull()
         var arrowsLeft = if (arrowKey != null) availableArrows[arrowKey] ?: 0 else Int.MAX_VALUE
@@ -179,9 +180,9 @@ object CombatSimulator {
                 frameEnemyHits += eDmg
                 currentHp      -= eDmg
 
-                // Eat food immediately if a full-heal fits (no waste)
+                // Eat food immediately if a full-heal fits (no waste), up to 50 items total
                 var ate = true
-                while (ate) {
+                while (ate && totalFoodEaten < 200) {
                     ate = false
                     for (foodKey in foodOrder) {
                         val qty  = foodSupply[foodKey] ?: 0
@@ -191,6 +192,7 @@ object CombatSimulator {
                             currentHp          += heal
                             foodSupply[foodKey] = qty - 1
                             frameFood[foodKey]  = (frameFood[foodKey] ?: 0) + 1
+                            totalFoodEaten++
                             ate = true
                             break
                         }
@@ -354,6 +356,7 @@ object CombatSimulator {
             .filter { (k, _) -> k in foodSupply }
             .sortedByDescending { it.value }
             .map { it.key }
+        var totalFoodEaten = 0
 
         val rnd = random
 
@@ -399,9 +402,9 @@ object CombatSimulator {
                 currentHp = (currentHp - bDmg).coerceAtLeast(0)
                 eHits.add(bDmg)
 
-                // Eat food after taking damage if a full heal fits (same logic as dungeons)
+                // Eat food after taking damage if a full heal fits (same logic as dungeons), up to 50 items total
                 var ate = true
-                while (ate) {
+                while (ate && totalFoodEaten < 200) {
                     ate = false
                     for (foodKey in foodOrder) {
                         val qty  = foodSupply[foodKey] ?: 0
@@ -411,6 +414,7 @@ object CombatSimulator {
                             currentHp           += heal
                             foodSupply[foodKey]  = qty - 1
                             frameFood[foodKey]   = (frameFood[foodKey] ?: 0) + 1
+                            totalFoodEaten++
                             ate = true
                             break
                         }
