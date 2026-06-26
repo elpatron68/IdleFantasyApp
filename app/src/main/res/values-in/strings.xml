@@ -1166,4 +1166,31 @@
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string>
     <string name="tower_collect_prompt">Collect your tower run</string>
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string>
+
+    <!-- ===== Plurals ===== -->
+    <!-- Indonesian has no grammatical plural distinction; only 'other' is needed -->
+    <plurals name="plural_level_ups">
+        <item quantity="other">%1$d kenaikan level</item>
+    </plurals>
+    <plurals name="plural_items">
+        <item quantity="other">%1$d item</item>
+    </plurals>
+    <plurals name="plural_minutes">
+        <item quantity="other">%1$d menit</item>
+    </plurals>
+    <plurals name="plural_hours">
+        <item quantity="other">%1$d jam</item>
+    </plurals>
+    <plurals name="plural_patches">
+        <item quantity="other">%1$d petak</item>
+    </plurals>
+    <plurals name="plural_kills">
+        <item quantity="other">%1$d pembunuhan</item>
+    </plurals>
+    <plurals name="plural_quests_completed">
+        <item quantity="other">%1$d misi selesai</item>
+    </plurals>
+    <plurals name="plural_collect_sessions">
+        <item quantity="other">Kumpulkan Hadiah %1$d Sesi</item>
+    </plurals>
 </resources>
