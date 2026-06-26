@@ -223,7 +223,11 @@ class QuestsViewModel @Inject constructor(
             val ownedItems = playerRepo.getInventory().keys +
                 playerRepo.getEquipped().values.filterNotNull()
             val (newFlags, reward) = dailyQuestRepo.claimQuest(flags, templateId, ownedItems.toSet())
-            playerRepo.updateFlags(newFlags)
+
+            // Atomically write the updated flags (quest marked claimed) + any item grant in one
+            // DB upsert. Previously these were two separate writes; if anything interrupted between
+            // them the item was silently lost even though the notification had already fired.
+            playerRepo.claimDailyReward(newFlags, reward)
 
             val message = when (reward) {
                 is DailyReward.CoinsReward -> {
@@ -231,13 +235,13 @@ class QuestsViewModel @Inject constructor(
                     context.getString(R.string.quest_daily_complete_coins, reward.amount.toLong().formatCoins())
                 }
                 is DailyReward.DwarvenItemReward -> {
-                    playerRepo.addItem(reward.itemKey, 1)
                     context.getString(R.string.quest_daily_complete_dwarven)
                 }
             }
             _extra.update { it.copy(snackbarMessage = message) }
         }
     }
+
 
     fun claimWeeklyQuest(templateId: String) {
         viewModelScope.launch {
@@ -257,7 +261,12 @@ class QuestsViewModel @Inject constructor(
             val ownedItems = playerRepo.getInventory().keys +
                 playerRepo.getEquipped().values.filterNotNull()
             val (newFlags, reward) = weeklyQuestRepo.claimWeeklyBonus(flags, ownedItems.toSet())
-            playerRepo.updateFlags(newFlags)
+
+            // Atomically write the updated flags (weeklyBonusClaimed = true) + any item grant in
+            // one DB upsert. Previously these were two separate writes; if anything interrupted
+            // between them the divine item was silently lost even though the notification had
+            // already fired — the same bug as the dwarven gear drop in daily quests.
+            playerRepo.claimWeeklyBonusReward(newFlags, reward)
 
             val message = when (reward) {
                 is WeeklyBonusReward.CoinsReward -> {
@@ -265,13 +274,13 @@ class QuestsViewModel @Inject constructor(
                     context.getString(R.string.quest_weekly_bonus_complete_coins, reward.amount.formatCoins())
                 }
                 is WeeklyBonusReward.DivineItemReward -> {
-                    playerRepo.addItem(reward.itemKey, 1)
                     context.getString(R.string.quest_weekly_bonus_complete_divine)
                 }
             }
             _extra.update { it.copy(snackbarMessage = message) }
         }
     }
+
 
     // ---------------------------------------------------------------------------
     // Group helpers

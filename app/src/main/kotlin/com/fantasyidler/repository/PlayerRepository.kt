@@ -826,6 +826,69 @@ class PlayerRepository @Inject constructor(
         return flags
     }
 
+    /**
+     * Atomically applies a claimed daily quest reward:
+     * - Updates [PlayerFlags] with the new [newFlags] (which includes the quest marked as claimed).
+     * - If [reward] is [DailyReward.DwarvenItemReward], adds the item to inventory in the SAME write.
+     *
+     * This prevents the silent item loss that occurred when [updateFlags] and [addItem] were two
+     * separate DB writes — if anything interrupted between them (crash, concurrent write), the
+     * item was lost even though the notification had already fired.
+     *
+     * Returns the item key that was granted, or null for a coins reward (coins are handled by the
+     * caller since they don't touch the inventory/flags row).
+     */
+    suspend fun claimDailyReward(newFlags: PlayerFlags, reward: DailyReward): String? {
+        val player = getOrCreatePlayer()
+        val flags = newFlags.let { it.plusSeen(
+            if (reward is DailyReward.DwarvenItemReward) listOf(reward.itemKey) else emptyList()
+        ) }
+        val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        val grantedKey: String? = if (reward is DailyReward.DwarvenItemReward) {
+            inventory[reward.itemKey] = (inventory[reward.itemKey] ?: 0) + 1
+            reward.itemKey
+        } else null
+
+        playerDao.upsert(
+            player.copy(
+                flags     = json.encode<PlayerFlags>(flags),
+                inventory = json.encode<Map<String, Int>>(inventory),
+            )
+        )
+        return grantedKey
+    }
+
+    /**
+     * Atomically applies a claimed weekly bonus reward:
+     * - Updates [PlayerFlags] with [newFlags] (weeklyBonusClaimed = true).
+     * - If [reward] is [WeeklyBonusReward.DivineItemReward], adds the item to inventory in the SAME write.
+     *
+     * Mirrors [claimDailyReward]: prevents the silent divine-item loss that occurred when
+     * [updateFlags] and [addItem] were two separate DB writes in [claimWeeklyBonus].
+     *
+     * Returns the item key that was granted, or null for a coins reward (coins are handled by the
+     * caller since they don't touch the inventory/flags row).
+     */
+    suspend fun claimWeeklyBonusReward(newFlags: PlayerFlags, reward: WeeklyBonusReward): String? {
+        val player = getOrCreatePlayer()
+        val flags = newFlags.let { it.plusSeen(
+            if (reward is WeeklyBonusReward.DivineItemReward) listOf(reward.itemKey) else emptyList()
+        ) }
+        val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        val grantedKey: String? = if (reward is WeeklyBonusReward.DivineItemReward) {
+            inventory[reward.itemKey] = (inventory[reward.itemKey] ?: 0) + 1
+            reward.itemKey
+        } else null
+
+        playerDao.upsert(
+            player.copy(
+                flags     = json.encode<PlayerFlags>(flags),
+                inventory = json.encode<Map<String, Int>>(inventory),
+            )
+        )
+        return grantedKey
+    }
+
     /** Adds [qty] of [itemKey] to inventory. */
     suspend fun addItem(itemKey: String, qty: Int) {
         val player = getOrCreatePlayer()
