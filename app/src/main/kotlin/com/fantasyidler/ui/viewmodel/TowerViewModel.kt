@@ -7,6 +7,7 @@ import com.fantasyidler.R
 import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.json.EnemySpawn
+import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.OwnedPet
 import com.fantasyidler.data.model.SkillSession
@@ -42,6 +43,8 @@ data class TowerUiState(
     val claimedMilestones: List<Int> = emptyList(),
     val snackbarMessage: String? = null,
     val startingSession: Boolean = false,
+    val selectedWeaponSlot: String? = null,
+    val equippedWeapons: Map<String, EquipmentData> = emptyMap(),
 )
 
 data class TowerMilestone(
@@ -83,31 +86,31 @@ class TowerViewModel @Inject constructor(
         )
 
         val MILESTONES: List<TowerMilestone> = listOf(
-            TowerMilestone(10,  "Tower Ring (attack +5, strength +3)"),
+            TowerMilestone(10,  "Tower Ring (attack +6, strength +6)"),
             TowerMilestone(20,  "+1% XP all skills"),
             TowerMilestone(30,  "5,000 coins"),
-            TowerMilestone(40,  "Tower Shield (defense +18)"),
-            TowerMilestone(50,  "Tower Amulet (strength +8, attack +5)"),
+            TowerMilestone(40,  "Tower Shield (defense +80)"),
+            TowerMilestone(50,  "Tower Amulet (attack +15, strength +15, defense +10, all styles)"),
             TowerMilestone(60,  "+5 max HP"),
             TowerMilestone(70,  "+2% XP all skills"),
             TowerMilestone(80,  "25,000 coins"),
-            TowerMilestone(90,  "Tower Helm (defense +14, strength +4)"),
+            TowerMilestone(90,  "Tower Helm (defense +82, strength +8)"),
             TowerMilestone(100, "Tower Pet (5% combat XP)"),
             TowerMilestone(110, "+1% coin drops"),
-            TowerMilestone(120, "Tower Body (defense +28)"),
+            TowerMilestone(120, "Tower Plate (defense +132)"),
             TowerMilestone(130, "+2% XP all skills"),
             TowerMilestone(140, "100,000 coins"),
-            TowerMilestone(150, "Tower Legs (defense +22)"),
+            TowerMilestone(150, "Tower Legs (defense +125)"),
             TowerMilestone(160, "+5 max HP"),
             TowerMilestone(170, "+1% coin drops"),
-            TowerMilestone(180, "Tower Sword (attack +28, strength +22)"),
+            TowerMilestone(180, "Tower Sword (attack +72, strength +75)"),
             TowerMilestone(190, "+2% XP all skills"),
-            TowerMilestone(200, "Tower Cape (all stats +6) + 500,000 coins"),
+            TowerMilestone(200, "Tower Cape (attack/str/def +14, ranged/magic +12) + 500,000 coins"),
             TowerMilestone(210, "+5 max HP"),
-            TowerMilestone(220, "Tower Crossbow (ranged attack +28)"),
+            TowerMilestone(220, "Tower Crossbow (ranged attack +78, ranged strength +52)"),
             TowerMilestone(230, "+1% coin drops"),
             TowerMilestone(240, "+2% XP all skills"),
-            TowerMilestone(250, "Void Staff (magic attack +30, infinite runes) + 1,000,000 coins"),
+            TowerMilestone(250, "Void Staff (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins"),
         )
     }
 
@@ -123,6 +126,12 @@ class TowerViewModel @Inject constructor(
             extra.copy(towerSession = towerSession)
         } else {
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val equipped: Map<String, String?> = try { json.decodeFromString(player.equipped) } catch (_: Exception) { emptyMap() }
+            val equippedWeapons = EquipSlot.WEAPON_SLOTS.mapNotNull { slot ->
+                val key = equipped[slot] ?: return@mapNotNull null
+                val data = gameData.equipment[key] ?: return@mapNotNull null
+                slot to data
+            }.toMap()
             val claimable = MILESTONES.map { it.floor }.filter { floor ->
                 floor <= flags.towerBestFloor && floor !in flags.towerMilestonesClaimed
             }
@@ -133,6 +142,7 @@ class TowerViewModel @Inject constructor(
                 towerSession        = towerSession,
                 claimableMilestones = claimable,
                 claimedMilestones   = flags.towerMilestonesClaimed,
+                equippedWeapons     = equippedWeapons,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), TowerUiState())
@@ -165,11 +175,16 @@ class TowerViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val player  = playerRepo.getOrCreatePlayer()
                 val agility = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+                val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val activeSession = sessionRepo.getActiveSession()
+                val runningFloor = activeSession?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+                    ?: flags.towerCurrentFloor
+                val nextFloor = runningFloor + 1
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = "tower",
-                        activityKey         = "tower",
-                        skillDisplayName    = "Infinite Tower",
+                        activityKey         = "tower_floor_$nextFloor",
+                        skillDisplayName    = "Infinite Tower: Floor $nextFloor",
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agility),
                     )
                 )
@@ -194,7 +209,8 @@ class TowerViewModel @Inject constructor(
 
                 val floor = flags.towerCurrentFloor + 1
 
-                val activeWeaponSlot = flags.activeWeaponSlot
+                val activeWeaponSlot = _extra.value.selectedWeaponSlot
+                    ?: flags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                     ?: EquipSlot.WEAPON
                 val weaponKey = equipped[activeWeaponSlot]
@@ -228,8 +244,8 @@ class TowerViewModel @Inject constructor(
                 } else 0
 
                 val selectedSpell = flags.activeSpell?.let { gameData.spells[it] }
-                val bestArrow     = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
-                val arrowStrBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
+                val bestArrow       = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
+                val arrowStrBonus   = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
 
                 val prestigeMap  = flags.skillPrestige
                 val towerHpBonus = flags.towerHpBonus
@@ -238,7 +254,7 @@ class TowerViewModel @Inject constructor(
                 val enemies    = scaledEnemies()
                 val foodHeal   = gameData.foodHealValues
                 val availableFood   = inventory.filterKeys { it in flags.equippedFood.keys }
-                val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
 
                 val staffCoversRune = combatStyle == "magic" && selectedSpell != null &&
                     (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
@@ -300,6 +316,15 @@ class TowerViewModel @Inject constructor(
             } finally {
                 _extra.update { it.copy(startingSession = false) }
             }
+        }
+    }
+
+    fun selectWeaponSlot(slot: String) {
+        _extra.update { it.copy(selectedWeaponSlot = slot) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            playerRepo.updateFlags(flags.copy(activeWeaponSlot = slot))
         }
     }
 

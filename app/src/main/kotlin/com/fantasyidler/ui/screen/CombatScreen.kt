@@ -1003,7 +1003,12 @@ private fun CombatSessionBanner(
     val dungeonName = dungeons.firstOrNull { it.name == session.activityKey }
         ?.let { GameStrings.dungeonName(context, it.name) }
         ?: bosses.firstOrNull { it.id == session.activityKey }?.let { "${it.emoji} ${GameStrings.bossName(context, it.id)}" }
-        ?: session.activityKey
+        ?: run {
+            if (session.skillName == "tower") {
+                val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull()
+                if (floor != null) context.getString(R.string.tower_floor_label, floor) else session.activityKey
+            } else session.activityKey
+        }
 
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var showAbandonConfirm by remember { mutableStateOf(false) }
@@ -1105,7 +1110,7 @@ private fun CombatSessionBanner(
                 color      = MaterialTheme.colorScheme.primary,
             )
 
-            if (session.skillName == "combat" || session.skillName == "boss") {
+            if (session.skillName == "combat" || session.skillName == "boss" || session.skillName == "tower") {
                 val context = LocalContext.current
                 val currentBoss = if (isBoss) bosses.firstOrNull { it.id == session.activityKey } else null
                 val divColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.2f)

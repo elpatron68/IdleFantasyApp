@@ -1,0 +1,7 @@
+• Fix Sell Old Equipment excluding weapons and not suggesting extra copies of currently equipped items; fix ring comparisons ignoring ranged/magic bonuses (e.g. Archer's Ring and Seer's Ring were incorrectly treated as inferior to Ring of Recoil)
+• Fix queued sessions not starting automatically when the previous session completes (affected Skills, Combat, and Boss queue paths)
+• Fix tower sessions being silently deleted without granting XP or loot when collected from the Home screen alongside other sessions
+• Fix coins taking a double 10% death penalty in combat and Tower sessions (players were receiving 1% of coins instead of 10%)
+• Fix Infinite Tower not supporting the session queue (it now queues like any other activity when a session is already running)
+• Fix worker herblore not passing the selected ash catalyst, so workers were always crafting the unenhanced potion
+• Fix daily and weekly quest reward items sometimes not appearing in inventory due to a race condition with session collection

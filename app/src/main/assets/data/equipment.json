@@ -3535,8 +3535,8 @@
     "display_name": "Tower Ring",
     "slot": "ring",
     "description": "A band forged from the stone of the infinite tower.",
-    "attack_bonus": 5,
-    "strength_bonus": 3,
+    "attack_bonus": 6,
+    "strength_bonus": 6,
     "defense_bonus": 0,
     "requirements": {
       "attack": 30
@@ -3549,7 +3549,7 @@
     "description": "A massive shield hewn from tower stone.",
     "attack_bonus": 0,
     "strength_bonus": 0,
-    "defense_bonus": 18,
+    "defense_bonus": 80,
     "requirements": {
       "defense": 50
     }
@@ -3559,12 +3559,16 @@
     "display_name": "Tower Amulet",
     "slot": "necklace",
     "description": "An amulet pulsing with the tower's ancient power.",
-    "attack_bonus": 5,
-    "strength_bonus": 8,
-    "defense_bonus": 0,
+    "attack_bonus": 15,
+    "strength_bonus": 15,
+    "defense_bonus": 10,
     "requirements": {
       "attack": 50
-    }
+    },
+    "ranged_attack_bonus": 10,
+    "ranged_strength_bonus": 4,
+    "magic_attack_bonus": 10,
+    "magic_damage_bonus": 3
   },
   "tower_helm": {
     "name": "tower_helm",
@@ -3572,8 +3576,8 @@
     "slot": "head",
     "description": "A helmet carved from the tower's upper floors.",
     "attack_bonus": 0,
-    "strength_bonus": 4,
-    "defense_bonus": 14,
+    "strength_bonus": 8,
+    "defense_bonus": 82,
     "requirements": {
       "defense": 60
     }
@@ -3585,7 +3589,7 @@
     "description": "Impenetrable armour from the tower's inner sanctum.",
     "attack_bonus": 0,
     "strength_bonus": 0,
-    "defense_bonus": 28,
+    "defense_bonus": 132,
     "requirements": {
       "defense": 70
     }
@@ -3597,7 +3601,7 @@
     "description": "Greaves forged in the tower's deepest forge.",
     "attack_bonus": 0,
     "strength_bonus": 0,
-    "defense_bonus": 22,
+    "defense_bonus": 125,
     "requirements": {
       "defense": 70
     }
@@ -3608,8 +3612,8 @@
     "slot": "weapon",
     "combat_style": "attack",
     "description": "A blade that has cleaved through countless tower floors.",
-    "attack_bonus": 28,
-    "strength_bonus": 22,
+    "attack_bonus": 72,
+    "strength_bonus": 75,
     "defense_bonus": 0,
     "requirements": {
       "attack": 70
@@ -3624,22 +3628,27 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "ranged_attack_bonus": 28,
+    "ranged_attack_bonus": 78,
     "requirements": {
       "ranged": 70
-    }
+    },
+    "ranged_strength_bonus": 52
   },
   "tower_cape": {
     "name": "tower_cape",
     "display_name": "Tower Cape",
     "slot": "cape",
     "description": "A flowing cape that radiates the tower's energy.",
-    "attack_bonus": 6,
-    "strength_bonus": 6,
-    "defense_bonus": 6,
+    "attack_bonus": 14,
+    "strength_bonus": 14,
+    "defense_bonus": 14,
     "requirements": {
       "attack": 70
-    }
+    },
+    "ranged_attack_bonus": 12,
+    "ranged_strength_bonus": 10,
+    "magic_attack_bonus": 12,
+    "magic_damage_bonus": 5
   },
   "void_staff": {
     "name": "void_staff",
@@ -3650,8 +3659,8 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "magic_attack_bonus": 30,
-    "magic_damage_bonus": 8,
+    "magic_attack_bonus": 68,
+    "magic_damage_bonus": 18,
     "infinite_runes": "all",
     "requirements": {
       "magic": 75

@@ -121,7 +121,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when a gathering or firemaking session is collected. */
     suspend fun recordGuildGathering(skillName: String, items: Map<String, Int>) {
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         val completedIds = loadCompletedQuestIds()
         val currentLevel = guildLevel(skillName, flags.guildReputation[skillName] ?: 0L, completedIds)
         for ((questId, quest) in gameData.guildQuests) {
@@ -136,7 +136,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when a crafting session is collected (smithing, cooking, fletching, crafting, runecrafting, herblore). */
     suspend fun recordGuildCrafting(skillName: String, items: Map<String, Int>) {
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         val completedIds = loadCompletedQuestIds()
         val currentLevel = guildLevel(skillName, flags.guildReputation[skillName] ?: 0L, completedIds)
         for ((questId, quest) in gameData.guildQuests) {
@@ -153,7 +153,7 @@ class GuildRepository @Inject constructor(
     suspend fun recordGuildCombat(killsByEnemy: Map<String, Int>, combatStyle: String) {
         val guild = combatStyleToGuild(combatStyle)
         val totalKills = killsByEnemy.values.sum()
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         if (totalKills > 0) {
             val completedIds = loadCompletedQuestIds()
             val currentLevel = guildLevel(guild, flags.guildReputation[guild] ?: 0L, completedIds)
@@ -169,7 +169,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when a prayer session is collected. */
     suspend fun recordGuildPrayer(totalBuried: Int) {
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         if (totalBuried > 0) {
             val completedIds = loadCompletedQuestIds()
             val currentLevel = guildLevel("prayer", flags.guildReputation["prayer"] ?: 0L, completedIds)
@@ -209,7 +209,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when a mercantile trade route session is collected. */
     suspend fun recordGuildTrade(coinsEarned: Long = 0L) {
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         val completedIds = loadCompletedQuestIds()
         val currentLevel = guildLevel("mercantile", flags.guildReputation["mercantile"] ?: 0L, completedIds)
         for ((questId, quest) in gameData.guildQuests) {
@@ -225,7 +225,7 @@ class GuildRepository @Inject constructor(
     /** Called when a thieving session is collected. Tracks pickpocket count per NPC. */
     suspend fun recordGuildThieving(npcKey: String, successCount: Int) {
         if (successCount <= 0) return
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         val completedIds = loadCompletedQuestIds()
         val currentLevel = guildLevel("thieving", flags.guildReputation["thieving"] ?: 0L, completedIds)
         for ((questId, quest) in gameData.guildQuests) {
@@ -240,7 +240,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when an agility session is collected (counts completed sessions, not items). */
     suspend fun recordGuildSessions() {
-        var flags = playerRepo.getFlags()
+        var flags = ensureGuildDailiesRefreshed()
         val completedIds = loadCompletedQuestIds()
         val currentLevel = guildLevel("agility", flags.guildReputation["agility"] ?: 0L, completedIds)
         for ((questId, quest) in gameData.guildQuests) {
@@ -449,7 +449,7 @@ class GuildRepository @Inject constructor(
             .filter { it.completed }
             .map { it.questId }
             .toSet()
-        val skillLevels by lazy { runCatching { playerRepo.getSkillLevels() }.getOrDefault(emptyMap()) }
+        val skillLevels = try { playerRepo.getSkillLevels() } catch (_: Exception) { emptyMap<String, Int>() }
         return when {
             shouldRefreshGuildDailies(flags.guildDailyGeneratedAt) -> {
                 val refreshed = buildRefreshedGuildDailyFlags(flags, completedQuestIds, skillLevels)

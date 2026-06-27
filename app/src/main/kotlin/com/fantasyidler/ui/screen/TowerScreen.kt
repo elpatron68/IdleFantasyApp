@@ -3,6 +3,8 @@ package com.fantasyidler.ui.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +21,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,14 +40,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
+import com.fantasyidler.data.json.EquipmentData
+import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.ui.viewmodel.TowerMilestone
 import com.fantasyidler.ui.viewmodel.TowerViewModel
 import com.fantasyidler.ui.theme.GoldPrimary
+import com.fantasyidler.util.GameStrings
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,29 +91,32 @@ fun TowerScreen(
         }
 
         LazyColumn(
-            modifier            = Modifier
+            modifier       = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            contentPadding      = PaddingValues(bottom = 24.dp),
+            contentPadding = PaddingValues(bottom = 24.dp),
         ) {
             item {
                 TowerHeaderCard(
-                    currentFloor   = state.currentFloor,
-                    bestFloor      = state.bestFloor,
-                    hasSession     = state.towerSession != null,
-                    sessionDone    = state.towerSession?.completed == true,
-                    startingSession = state.startingSession,
-                    onStart        = viewModel::startFloor,
-                    onCollect      = viewModel::collectFloor,
+                    currentFloor         = state.currentFloor,
+                    bestFloor            = state.bestFloor,
+                    hasSession           = state.towerSession != null,
+                    sessionDone          = state.towerSession?.completed == true,
+                    startingSession      = state.startingSession,
+                    equippedWeapons      = state.equippedWeapons,
+                    selectedWeaponSlot   = state.selectedWeaponSlot,
+                    onWeaponSlotSelected = viewModel::selectWeaponSlot,
+                    onStart              = viewModel::startFloor,
+                    onCollect            = viewModel::collectFloor,
                 )
             }
 
             item {
                 Text(
-                    text     = stringResource(R.string.tower_milestones),
-                    style    = MaterialTheme.typography.titleMedium,
+                    text       = stringResource(R.string.tower_milestones),
+                    style      = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier   = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             }
 
@@ -123,16 +133,21 @@ fun TowerScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun TowerHeaderCard(
-    currentFloor:    Int,
-    bestFloor:       Int,
-    hasSession:      Boolean,
-    sessionDone:     Boolean,
-    startingSession: Boolean,
-    onStart:         () -> Unit,
-    onCollect:       () -> Unit,
+    currentFloor:         Int,
+    bestFloor:            Int,
+    hasSession:           Boolean,
+    sessionDone:          Boolean,
+    startingSession:      Boolean,
+    equippedWeapons:      Map<String, EquipmentData>,
+    selectedWeaponSlot:   String?,
+    onWeaponSlotSelected: (String) -> Unit,
+    onStart:              () -> Unit,
+    onCollect:            () -> Unit,
 ) {
+    val context = LocalContext.current
     Card(
         modifier  = Modifier
             .fillMaxWidth()
@@ -141,14 +156,14 @@ private fun TowerHeaderCard(
     ) {
         Column(Modifier.padding(16.dp)) {
             Row(
-                modifier            = Modifier.fillMaxWidth(),
+                modifier              = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment   = Alignment.CenterVertically,
+                verticalAlignment     = Alignment.CenterVertically,
             ) {
                 Column {
                     Text(
-                        text  = stringResource(R.string.tower_floor_label, currentFloor + 1),
-                        style = MaterialTheme.typography.headlineSmall,
+                        text       = stringResource(R.string.tower_floor_label, currentFloor + 1),
+                        style      = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                     )
                     if (bestFloor > 0) {
@@ -164,41 +179,72 @@ private fun TowerHeaderCard(
                 if (currentFloor > 0) {
                     SuggestionChip(
                         onClick = {},
-                        label   = {
-                            Text(stringResource(R.string.tower_enemy_strength, "+$pct"))
-                        },
+                        label   = { Text(stringResource(R.string.tower_enemy_strength, "+$pct")) },
                     )
+                }
+            }
+
+            // Weapon picker — only when no active session
+            if (!hasSession && equippedWeapons.isNotEmpty()) {
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    text  = stringResource(R.string.label_weapon),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(Modifier.height(4.dp))
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement   = Arrangement.spacedBy(4.dp),
+                ) {
+                    equippedWeapons.forEach { (slot, weaponData) ->
+                        val effectiveSelected = selectedWeaponSlot
+                            ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equippedWeapons.containsKey(it) }
+                        FilterChip(
+                            selected = slot == effectiveSelected,
+                            onClick  = { onWeaponSlotSelected(slot) },
+                            label    = {
+                                Column {
+                                    Text(
+                                        text  = GameStrings.itemName(context, weaponData.name),
+                                        style = MaterialTheme.typography.bodySmall,
+                                    )
+                                    weaponData.combatStyle?.let { style ->
+                                        Text(
+                                            text  = style.replaceFirstChar { it.titlecase() },
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        )
+                                    }
+                                }
+                            },
+                        )
+                    }
                 }
             }
 
             Spacer(Modifier.height(12.dp))
 
             when {
-                sessionDone -> {
-                    Button(
-                        onClick  = onCollect,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text(stringResource(R.string.tower_collect_prompt))
-                    }
+                sessionDone -> Button(
+                    onClick  = onCollect,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.tower_collect_prompt))
                 }
-                hasSession -> {
-                    OutlinedButton(
-                        onClick  = {},
-                        enabled  = false,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text(stringResource(R.string.tower_floor_label, currentFloor + 1))
-                    }
+                hasSession  -> OutlinedButton(
+                    onClick  = {},
+                    enabled  = false,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.tower_floor_label, currentFloor + 1))
                 }
-                else -> {
-                    Button(
-                        onClick  = onStart,
-                        enabled  = !startingSession,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text(stringResource(R.string.tower_start_btn, currentFloor + 1))
-                    }
+                else        -> Button(
+                    onClick  = onStart,
+                    enabled  = !startingSession,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.tower_start_btn, currentFloor + 1))
                 }
             }
         }
@@ -217,10 +263,10 @@ private fun MilestoneRow(
     val dimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
     Row(
-        modifier            = Modifier
+        modifier              = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalAlignment   = Alignment.CenterVertically,
+        verticalAlignment     = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Column(Modifier.weight(1f)) {

@@ -159,7 +159,7 @@ class CombatViewModel @Inject constructor(
         _extra,
         _simulatedRatings,
     ) { player, session, extra, simRatings ->
-        val combatSession = session?.takeIf { it.skillName == "combat" || it.skillName == "boss" }
+        val combatSession = session?.takeIf { it.skillName == "combat" || it.skillName == "boss" || it.skillName == "tower" }
         if (player == null) {
             extra.copy(combatSession = combatSession)
         } else {
@@ -445,8 +445,8 @@ class CombatViewModel @Inject constructor(
                 val availableFood      = inventory.filterKeys { it in equippedFoodKeys }
                 val foodHealValues     = gameData.foodHealValues
 
-                // Arrows: pass current supply to simulator; consumed at collect time from frames
-                val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+                // Arrows: pass all owned tiers so simulator can fall back when one tier runs out
+                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
 
                 // Runes: determine key and cost for simulator tracking; consumed upfront below
                 val staffCoversRune = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
@@ -614,7 +614,7 @@ class CombatViewModel @Inject constructor(
                 val preferredArrow = _extra.value.selectedArrowKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowStrengthBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
-                val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
 
                 val bossStaffCoversRune = combatStyle == "magic" && selectedSpell != null && (bossWeapon?.infiniteRunes == "all" || bossWeapon?.infiniteRunes == selectedSpell.runeType)
                 val bossRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !bossStaffCoversRune) selectedSpell.runeType else null
@@ -696,8 +696,9 @@ class CombatViewModel @Inject constructor(
             if (!session.completed && System.currentTimeMillis() < session.endsAt) return@launch
 
             when (session.skillName) {
-                "boss" -> collectBossSession(session)
+                "boss"   -> collectBossSession(session)
                 "combat" -> collectDungeonSession(session)
+                "tower"  -> collectTowerFloor(session)
             }
 
             // Auto-start next queued session, if any
@@ -930,6 +931,51 @@ class CombatViewModel @Inject constructor(
         }
     }
 
+    private suspend fun collectTowerFloor(session: com.fantasyidler.data.model.SkillSession) {
+        val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+        val playerDied = frames.any { it.died }
+
+        val totalXpPerSkill = mutableMapOf<String, Long>()
+        val allItems        = mutableMapOf<String, Int>()
+        val allFoodConsumed = mutableMapOf<String, Int>()
+        for (frame in frames) {
+            for ((skill, xp) in frame.xpBySkill)    totalXpPerSkill[skill] = (totalXpPerSkill[skill] ?: 0L) + xp
+            for ((item,  qty) in frame.items)        allItems[item]         = (allItems[item] ?: 0) + qty
+            for ((food,  qty) in frame.foodConsumed) allFoodConsumed[food]  = (allFoodConsumed[food] ?: 0) + qty
+        }
+        if (playerDied) {
+            totalXpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * 0.1).toLong()) }
+            allItems.replaceAll { _, qty -> maxOf(0, (qty * 0.1).toInt()) }
+            allItems.entries.removeIf { it.value == 0 }
+        }
+        var coinsGained = allItems.remove("coins")?.toLong() ?: 0L
+
+        val flags         = playerRepo.getFlags()
+        val towerXpMult   = 1.0 + flags.towerXpBonusPct / 100.0
+        val towerCoinMult = 1.0 + flags.towerCoinBonusPct / 100.0
+        val xpForRepo     = totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
+        coinsGained       = (coinsGained * towerCoinMult).toLong()
+
+        playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
+        if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+
+        val floor        = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
+        val updatedFlags = playerRepo.getFlags()
+        if (playerDied) {
+            playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = 0))
+            sessionRepo.deleteSession(session.sessionId)
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.tower_death_reset, floor)) }
+        } else {
+            val newBest   = maxOf(updatedFlags.towerBestFloor, floor)
+            val isNewBest = floor > updatedFlags.towerBestFloor
+            val msg = if (isNewBest) context.getString(R.string.tower_new_best, floor)
+                      else           context.getString(R.string.tower_floor_cleared, floor)
+            playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = floor, towerBestFloor = newBest))
+            sessionRepo.deleteSession(session.sessionId)
+            _extra.update { it.copy(snackbarMessage = msg) }
+        }
+    }
+
     fun abandonSession() {
         viewModelScope.launch {
             val session = sessionRepo.getActiveSession() ?: return@launch
@@ -1055,7 +1101,7 @@ class CombatViewModel @Inject constructor(
 
         val bestArrow      = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
         val arrowStrBonus  = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
-        val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
+        val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
 
         val activeSpell = flags.activeSpell?.let { gameData.spells[it] }
         val spellMaxHit = if (combatStyle == "magic") activeSpell?.maxHit ?: 0 else 0

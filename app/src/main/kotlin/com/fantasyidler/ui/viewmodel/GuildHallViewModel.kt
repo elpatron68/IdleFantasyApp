@@ -7,6 +7,7 @@ import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -38,6 +39,10 @@ class GuildHallViewModel @Inject constructor(
     private val gameData: GameDataRepository,
     private val json: Json,
 ) : ViewModel() {
+
+    init {
+        viewModelScope.launch { guildRepo.ensureGuildDailiesRefreshed() }
+    }
 
     val uiState: StateFlow<GuildHallUiState> = combine(
         playerRepo.playerFlow,

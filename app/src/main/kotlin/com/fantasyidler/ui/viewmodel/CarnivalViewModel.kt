@@ -14,6 +14,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.util.withAppLocale
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -218,9 +219,9 @@ class CarnivalViewModel @Inject constructor(
             if (enqueued) queuedSessionStarter.startNextQueued()
             _extra.update {
                 it.copy(snackbarMessage = if (enqueued)
-                    context.getString(R.string.carnival_queue_added, displayName)
+                    context.withAppLocale().getString(R.string.carnival_queue_added, displayName)
                 else
-                    context.getString(R.string.carnival_queue_full))
+                    context.withAppLocale().getString(R.string.carnival_queue_full))
             }
         }
     }
@@ -246,9 +247,9 @@ class CarnivalViewModel @Inject constructor(
                 it.copy(
                     ringTossState   = ActiveGameState.OnCooldown(resumesAt),
                     snackbarMessage = if (won)
-                        context.getString(R.string.carnival_ring_won, tickets)
+                        context.withAppLocale().getString(R.string.carnival_ring_won, tickets)
                     else
-                        context.getString(R.string.carnival_ring_missed),
+                        context.withAppLocale().getString(R.string.carnival_ring_missed),
                 )
             }
         }
@@ -286,9 +287,9 @@ class CarnivalViewModel @Inject constructor(
                 it.copy(
                     hammerStrikeState = ActiveGameState.OnCooldown(resumesAt),
                     snackbarMessage   = when {
-                        tickets >= 6 -> context.getString(R.string.carnival_hammer_perfect, tickets)
-                        tickets > 0  -> context.getString(R.string.carnival_hammer_good, tickets)
-                        else         -> context.getString(R.string.carnival_hammer_miss)
+                        tickets >= 6 -> context.withAppLocale().getString(R.string.carnival_hammer_perfect, tickets)
+                        tickets > 0  -> context.withAppLocale().getString(R.string.carnival_hammer_good, tickets)
+                        else         -> context.withAppLocale().getString(R.string.carnival_hammer_miss)
                     },
                 )
             }
@@ -331,7 +332,7 @@ class CarnivalViewModel @Inject constructor(
                 _extra.update {
                     it.copy(
                         potionSequenceState = ActiveGameState.OnCooldown(resumesAt),
-                        snackbarMessage     = context.getString(R.string.carnival_sequence_wrong),
+                        snackbarMessage     = context.withAppLocale().getString(R.string.carnival_sequence_wrong),
                     )
                 }
             }
@@ -348,7 +349,7 @@ class CarnivalViewModel @Inject constructor(
                 _extra.update {
                     it.copy(
                         potionSequenceState = ActiveGameState.OnCooldown(resumesAt),
-                        snackbarMessage     = context.getString(R.string.carnival_sequence_correct, tickets),
+                        snackbarMessage     = context.withAppLocale().getString(R.string.carnival_sequence_correct, tickets),
                     )
                 }
             }
@@ -412,9 +413,9 @@ class CarnivalViewModel @Inject constructor(
                 it.copy(
                     itemAppraisalState  = ActiveGameState.OnCooldown(resumesAt),
                     snackbarMessage     = if (won)
-                        context.getString(R.string.carnival_appraisal_correct, tickets)
+                        context.withAppLocale().getString(R.string.carnival_appraisal_correct, tickets)
                     else
-                        context.getString(R.string.carnival_appraisal_wrong, correctName),
+                        context.withAppLocale().getString(R.string.carnival_appraisal_wrong, correctName),
                 )
             }
         }
@@ -459,9 +460,9 @@ class CarnivalViewModel @Inject constructor(
                 it.copy(
                     shellGameState  = ActiveGameState.OnCooldown(resumesAt),
                     snackbarMessage = if (won)
-                        context.getString(R.string.carnival_shell_won, tickets)
+                        context.withAppLocale().getString(R.string.carnival_shell_won, tickets)
                     else
-                        context.getString(R.string.carnival_shell_missed, s.gemPos + 1),
+                        context.withAppLocale().getString(R.string.carnival_shell_missed, s.gemPos + 1),
                 )
             }
         }
@@ -514,7 +515,7 @@ class CarnivalViewModel @Inject constructor(
                 _extra.update {
                     it.copy(
                         higherLowerState = ActiveGameState.OnCooldown(resumesAt),
-                        snackbarMessage  = context.getString(R.string.carnival_higher_lower_result, newCorrect, totalRounds, tickets),
+                        snackbarMessage  = context.withAppLocale().getString(R.string.carnival_higher_lower_result, newCorrect, totalRounds, tickets),
                     )
                 }
             }
@@ -569,9 +570,9 @@ class CarnivalViewModel @Inject constructor(
                     val success = carnivalRepo.redeemForItem(prizeKey, prize.ticketCost)
                     _extra.update {
                         it.copy(snackbarMessage = if (success)
-                            context.getString(R.string.carnival_redeemed, prize.displayName)
+                            context.withAppLocale().getString(R.string.carnival_redeemed, prize.displayName)
                         else
-                            context.getString(R.string.carnival_not_enough_tickets))
+                            context.withAppLocale().getString(R.string.carnival_not_enough_tickets))
                     }
                 }
                 "xp_lamp" -> _extra.update { it.copy(pendingLampPrizeKey = prizeKey) }
@@ -587,9 +588,9 @@ class CarnivalViewModel @Inject constructor(
             val success = carnivalRepo.redeemForXp(skillKey, prize.xpAmount, prize.ticketCost)
             _extra.update {
                 it.copy(snackbarMessage = if (success)
-                    context.getString(R.string.carnival_lamp_redeemed, prize.xpAmount, skillKey)
+                    context.withAppLocale().getString(R.string.carnival_lamp_redeemed, prize.xpAmount, skillKey)
                 else
-                    context.getString(R.string.carnival_not_enough_tickets))
+                    context.withAppLocale().getString(R.string.carnival_not_enough_tickets))
             }
         }
     }

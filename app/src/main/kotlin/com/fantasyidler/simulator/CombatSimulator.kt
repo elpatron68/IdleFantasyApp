@@ -65,8 +65,9 @@ object CombatSimulator {
             .map { it.key }
         var totalFoodEaten = 0
 
-        val arrowKey   = availableArrows.keys.firstOrNull()
-        var arrowsLeft = if (arrowKey != null) availableArrows[arrowKey] ?: 0 else Int.MAX_VALUE
+        val arrowTiers   = availableArrows.entries.map { it.key to it.value }.toMutableList()
+        var arrowTierIdx = 0
+        var arrowsLeft   = arrowTiers.getOrNull(0)?.second ?: if (combatStyle == "ranged") 0 else Int.MAX_VALUE
 
         var runningTotal = 0L
         var carryoverEnemyKey: String? = null
@@ -78,9 +79,9 @@ object CombatSimulator {
             val frameItems     = mutableMapOf<String, Int>()
             val frameXpBySkill = mutableMapOf<String, Long>()
             var frameXp        = 0L
-            val frameFood      = mutableMapOf<String, Int>()
-            var frameArrowsUsed = 0
-            var frameRunesUsed  = 0
+            val frameFood   = mutableMapOf<String, Int>()
+            val frameArrows = mutableMapOf<String, Int>()
+            var frameRunesUsed = 0
 
             val enemyKey = carryoverEnemyKey ?: spawnPool[rnd.nextInt(spawnPool.size)]
             carryoverEnemyKey = null
@@ -140,12 +141,18 @@ object CombatSimulator {
             repeat(TICKS_PER_FRAME) {
                 // Player attacks (ranged is capped by arrow supply)
                 val pDmg = when {
-                    combatStyle == "ranged" && arrowsLeft > 0 -> {
-                        arrowsLeft--
-                        frameArrowsUsed++
-                        if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
+                    combatStyle == "ranged" -> {
+                        while (arrowsLeft == 0 && arrowTierIdx + 1 < arrowTiers.size) {
+                            arrowTierIdx++
+                            arrowsLeft = arrowTiers[arrowTierIdx].second
+                        }
+                        if (arrowsLeft > 0) {
+                            val key = arrowTiers[arrowTierIdx].first
+                            arrowsLeft--
+                            frameArrows[key] = (frameArrows[key] ?: 0) + 1
+                            if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
+                        } else 0
                     }
-                    combatStyle == "ranged" -> 0
                     combatStyle == "magic" -> {
                         if (runeKey != null) frameRunesUsed++
                         if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMaxHit + 1) else 0
@@ -225,7 +232,7 @@ object CombatSimulator {
                     killsByEnemy = if (kills > 0) mapOf(enemyKey to kills) else emptyMap(),
                     died           = diedThisMinute,
                     foodConsumed   = frameFood,
-                    arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                    arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     enemyKey       = enemyKey,
                     hpAfter      = currentHp.coerceAtLeast(0),
@@ -328,8 +335,9 @@ object CombatSimulator {
                               else boss.defensiveStats.attackDefense
             }
         }
-        val arrowKey   = availableArrows.keys.firstOrNull()
-        var arrowsLeft = if (arrowKey != null) availableArrows[arrowKey] ?: 0 else Int.MAX_VALUE
+        val arrowTiers   = availableArrows.entries.map { it.key to it.value }.toMutableList()
+        var arrowTierIdx = 0
+        var arrowsLeft   = arrowTiers.getOrNull(0)?.second ?: if (combatStyle == "ranged") 0 else Int.MAX_VALUE
         val playerHitChance = when {
             effAtk > bossDefence -> 1.0 - bossDefence / (2.0 * effAtk.coerceAtLeast(1))
             else                 -> effAtk / (2.0 * bossDefence.coerceAtLeast(1))
@@ -361,20 +369,26 @@ object CombatSimulator {
         val rnd = random
 
         outer@ while (frames.size < maxFrames) {
-            val pHits          = mutableListOf<Int>()
-            val eHits          = mutableListOf<Int>()
-            val frameFood      = mutableMapOf<String, Int>()
-            var frameArrowsUsed = 0
-            var frameRunesUsed  = 0
+            val pHits       = mutableListOf<Int>()
+            val eHits       = mutableListOf<Int>()
+            val frameFood   = mutableMapOf<String, Int>()
+            val frameArrows = mutableMapOf<String, Int>()
+            var frameRunesUsed = 0
 
             for (tick in 0 until TICKS_PER_FRAME) {
                 val pDmg = when {
-                    combatStyle == "ranged" && arrowsLeft > 0 -> {
-                        arrowsLeft--
-                        frameArrowsUsed++
-                        if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
+                    combatStyle == "ranged" -> {
+                        while (arrowsLeft == 0 && arrowTierIdx + 1 < arrowTiers.size) {
+                            arrowTierIdx++
+                            arrowsLeft = arrowTiers[arrowTierIdx].second
+                        }
+                        if (arrowsLeft > 0) {
+                            val key = arrowTiers[arrowTierIdx].first
+                            arrowsLeft--
+                            frameArrows[key] = (frameArrows[key] ?: 0) + 1
+                            if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
+                        } else 0
                     }
-                    combatStyle == "ranged" -> 0
                     combatStyle == "magic" -> {
                         if (runeKey != null) frameRunesUsed++
                         if (rnd.nextDouble() < playerHitChance) rnd.nextInt(0, playerMax + 1) else 0
@@ -392,7 +406,7 @@ object CombatSimulator {
                         kills = 1, enemyKey = bossKey,
                         playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
                         foodConsumed  = frameFood,
-                        arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                        arrowsConsumed = frameArrows,
                         runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     ))
                     break@outer
@@ -428,7 +442,7 @@ object CombatSimulator {
                         kills = 0, enemyKey = bossKey,
                         playerHits = pHits, enemyHits = eHits, hpAfter = 0,
                         foodConsumed  = frameFood,
-                        arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                        arrowsConsumed = frameArrows,
                         runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     ))
                     break@outer
@@ -442,7 +456,7 @@ object CombatSimulator {
                     kills = 0, enemyKey = bossKey,
                     playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
                     foodConsumed  = frameFood,
-                    arrowsConsumed = if (arrowKey != null && frameArrowsUsed > 0) mapOf(arrowKey to frameArrowsUsed) else emptyMap(),
+                    arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                 ))
             }

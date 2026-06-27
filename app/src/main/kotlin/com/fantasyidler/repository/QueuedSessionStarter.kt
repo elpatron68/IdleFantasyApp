@@ -549,7 +549,8 @@ class QueuedSessionStarter @Inject constructor(
                 startSession(action, result, offline, backdateMs)
             }
             "tower" -> {
-                val floor   = flags.towerCurrentFloor + 1
+                val floor = action.activityKey.removePrefix("tower_floor_").toIntOrNull()
+                    ?: (flags.towerCurrentFloor + 1)
                 val dungeon = buildTowerFloorDungeon(floor)
                 val activeWeaponSlot = flags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }

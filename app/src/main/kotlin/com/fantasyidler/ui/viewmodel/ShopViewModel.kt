@@ -22,6 +22,7 @@ import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.withAppLocale
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 // ---------------------------------------------------------------------------
@@ -333,7 +334,7 @@ class ShopViewModel @Inject constructor(
                 return@launch
             }
             val items = junk.map { (key, qty) ->
-                BulkSellItem(key, GameStrings.itemName(context, key), qty, sellPriceFor(key))
+                BulkSellItem(key, GameStrings.itemName(context.withAppLocale(), key), qty, sellPriceFor(key))
             }.sortedBy { it.displayName }
             _extra.update { it.copy(pendingBulkSell = BulkSellPreview(R.string.shop_sell_junk, R.string.shop_sold_junk, items)) }
         }
@@ -388,7 +389,7 @@ class ShopViewModel @Inject constructor(
                 return@launch
             }
             val items = toSell.map { (key, qty) ->
-                BulkSellItem(key, GameStrings.itemName(context, key), qty, sellPriceFor(key))
+                BulkSellItem(key, GameStrings.itemName(context.withAppLocale(), key), qty, sellPriceFor(key))
             }.sortedBy { it.displayName }
             _extra.update { it.copy(pendingBulkSell = BulkSellPreview(R.string.shop_sell_old_gear, R.string.shop_sold_old_equipment, items)) }
         }
