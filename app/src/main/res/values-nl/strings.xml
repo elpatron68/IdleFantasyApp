@@ -663,7 +663,7 @@
         <item>Yara</item>
     </string-array>
     <string name="inn_title">Herberg</string>
-    <string name="inn_desc">Huur een werknemer om vaardigheden voor je te trainen, of koop voedsel van het dagelijkse menu.</string>
+    <string name="inn_desc">Huur een werknemer om vaardigheden voor je te trainen, of koop voedsel van het dagelijkse menu. Werknemers tellen niet mee voor je quests.</string>
     <string name="inn_worker_already_hired">Er is al een werknemer ingehuurd.</string>
     <string name="inn_not_enough_coins">Niet genoeg Ducaten.</string>
     <string name="inn_hire">Huur</string>

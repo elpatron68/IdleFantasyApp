@@ -17,10 +17,12 @@ import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
+import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,6 +63,8 @@ class TowerViewModel @Inject constructor(
     private val gameData: GameDataRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val questRepo: QuestRepository,
+    private val slayerRepo: SlayerRepository,
+    private val guildRepo: GuildRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -370,22 +374,26 @@ class TowerViewModel @Inject constructor(
             val xpForRepo = totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
             coinsGained   = (coinsGained * towerCoinMult).toLong()
 
-            playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
-            if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
-
-            val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
-
-            if (allKillsByEnemy.isNotEmpty()) {
+            if (!playerDied && allKillsByEnemy.isNotEmpty()) {
+                var slayerXp = 0L
+                for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
+                if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
                 val combatStyle = detectCombatStyle(totalXpPerSkill)
-                val foodConsumedTotal = allFoodConsumed.values.sum()
                 questRepo.recordCombat(
                     dungeonKey        = session.activityKey,
                     killsByEnemy      = allKillsByEnemy,
                     loot              = allItems,
                     combatStyle       = combatStyle,
-                    foodConsumedTotal = foodConsumedTotal,
+                    foodConsumedTotal = allFoodConsumed.values.sum(),
                 )
+                playerRepo.recordDailyKills(allKillsByEnemy)
+                guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
             }
+
+            playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
+            if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+
+            val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
 
             val updatedFlags = playerRepo.getFlags()
             if (playerDied) {

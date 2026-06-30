@@ -675,7 +675,7 @@
         <item>Yara</item>
     </string-array>
     <string name="inn_title">Таверна</string>
-    <string name="inn_desc">Наймите работника для тренировки навыков или купите еду из ежедневного меню.</string>
+    <string name="inn_desc">Наймите работника для тренировки навыков или купите еду из ежедневного меню. Работники не засчитываются в ваших заданиях.</string>
     <string name="inn_worker_already_hired">Работник уже нанят.</string>
     <string name="inn_not_enough_coins">Недостаточно монет.</string>
     <string name="inn_hire">Нанять</string>

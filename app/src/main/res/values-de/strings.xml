@@ -624,7 +624,7 @@
         <item>Yara</item>
     </string-array>
     <string name="inn_title">Schänke</string>
-    <string name="inn_desc">Heuert einen Arbeiter an, der an Eurer statt Fähigkeiten trainiert. Oder kauft Speisen vom Tagesmenü.</string>
+    <string name="inn_desc">Heuert einen Arbeiter an, der an Eurer statt Fähigkeiten trainiert. Oder kauft Speisen vom Tagesmenü. Arbeiter zählen nicht für Eure Quests.</string>
     <string name="inn_worker_already_hired">Ihr habt bereits einen Arbeiter angeheuert.</string>
     <string name="inn_not_enough_coins">Nicht genug Münzen.</string>
     <string name="inn_hire">Anheuern</string>

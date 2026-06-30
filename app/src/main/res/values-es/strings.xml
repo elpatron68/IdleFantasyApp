@@ -691,7 +691,7 @@
         <item>Yara</item>
     </string-array>
     <string name="inn_title">Inn</string>
-    <string name="inn_desc">Hire a worker to train skills for you, or buy food from the daily menu.</string>
+    <string name="inn_desc">Hire a worker to train skills for you, or buy food from the daily menu. Workers do not count toward your quests.</string>
     <string name="inn_worker_already_hired">A worker is already hired.</string>
     <string name="inn_not_enough_coins">Not enough coins.</string>
     <string name="inn_hire">Hire</string>

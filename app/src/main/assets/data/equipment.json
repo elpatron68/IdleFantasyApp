@@ -2963,6 +2963,18 @@
     "cape_bonus": 0.05,
     "requirements": {}
   },
+  "mercantile_cape": {
+    "name": "mercantile_cape",
+    "display_name": "Mercantile Cape",
+    "slot": "cape",
+    "description": "Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 5,
+    "cape_skill": "mercantile",
+    "cape_bonus": 0.1,
+    "requirements": {}
+  },
   "mercantile_guild_cape": {
     "name": "mercantile_guild_cape",
     "display_name": "Merchants Guild Cape",

@@ -701,7 +701,7 @@
         <item>Yara</item>
     </string-array>
     <string name="inn_title">Auberge</string>
-    <string name="inn_desc">Engagez un travailleur pour entraîner ses compétences ou achetez de la nourriture au menu du jour.</string>
+    <string name="inn_desc">Engagez un travailleur pour entraîner ses compétences ou achetez de la nourriture au menu du jour. Les travailleurs ne comptent pas pour vos quêtes.</string>
     <string name="inn_worker_already_hired">Un travailleur est déjà engagé.</string>
     <string name="inn_not_enough_coins">Pas assez de pièces.</string>
     <string name="inn_hire">Engager</string>

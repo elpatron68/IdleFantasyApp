@@ -333,10 +333,12 @@ class HomeViewModel @Inject constructor(
                         val towerXpPerSkill = mutableMapOf<String, Long>()
                         val towerAllItems   = mutableMapOf<String, Int>()
                         val towerFood       = mutableMapOf<String, Int>()
+                        val towerKills      = mutableMapOf<String, Int>()
                         for (frame in frames) {
                             for ((skill, xp) in frame.xpBySkill)    towerXpPerSkill[skill] = (towerXpPerSkill[skill] ?: 0L) + xp
                             for ((item,  qty) in frame.items)        towerAllItems[item]     = (towerAllItems[item] ?: 0) + qty
                             for ((food,  qty) in frame.foodConsumed) towerFood[food]         = (towerFood[food] ?: 0) + qty
+                            for ((e,     k)   in frame.killsByEnemy) towerKills[e]           = (towerKills[e] ?: 0) + k
                         }
                         if (playerDied) {
                             towerXpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * 0.1).toLong()) }
@@ -349,6 +351,21 @@ class HomeViewModel @Inject constructor(
                         val towerCoinMult    = 1.0 + towerFlags.towerCoinBonusPct / 100.0
                         val towerXpForRepo   = towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
                         val towerCoinsGained = (towerCoinsRaw * towerCoinMult).toLong()
+                        if (!playerDied && towerKills.isNotEmpty()) {
+                            var slayerXp = 0L
+                            for ((enemy, k) in towerKills) slayerXp += slayerRepo.recordKills(enemy, k)
+                            if (slayerXp > 0L) towerXpPerSkill[Skills.SLAYER] = (towerXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
+                            val style = detectCombatStyle(towerXpPerSkill)
+                            questRepo.recordCombat(
+                                dungeonKey        = session.activityKey,
+                                killsByEnemy      = towerKills,
+                                loot              = towerAllItems,
+                                combatStyle       = style,
+                                foodConsumedTotal = towerFood.values.sum(),
+                            )
+                            for ((e, k) in towerKills) dailyKills[e] = (dailyKills[e] ?: 0) + k
+                            guildRepo.recordGuildCombat(towerKills, style)
+                        }
                         playerRepo.applyMultiSkillResults(towerXpForRepo, towerAllItems, towerCoinsGained)
                         if (towerFood.isNotEmpty()) playerRepo.consumeItems(towerFood)
                         val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1

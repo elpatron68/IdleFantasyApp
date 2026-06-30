@@ -483,7 +483,7 @@
     <string name="onboarding_welcome_desc">Sebuah RPG santai yang terinspirasi oleh MMORPG klasik. Latih Keahlian, lawan dungeon, dan buat perlengkapan. Sepenuhnya offline, tanpa akun, tanpa iklan.</string>
     <string name="qty_max">Maksimum</string>
     <string name="inn_title">Penginapan</string>
-    <string name="inn_desc">Pekerjakan seorang pekerja untuk melatih keahlian Anda, atau beli makanan dari menu harian.</string>
+    <string name="inn_desc">Pekerjakan seorang pekerja untuk melatih keahlian Anda, atau beli makanan dari menu harian. Pekerja tidak dihitung dalam misi Anda.</string>
     <string name="inn_worker_already_hired">Pekerja sudah dipekerjakan.</string>
     <string name="inn_not_enough_coins">Uang koin tidak cukup.</string>
     <string name="inn_hire">Rekrut</string>
