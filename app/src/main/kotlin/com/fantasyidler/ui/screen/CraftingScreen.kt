@@ -290,6 +290,15 @@ private fun RecipeRow(
 // Craft quantity sheet
 // ---------------------------------------------------------------------------
 
+private fun projectedXpLabel(currentXp: Long, xpGain: Long): String {
+    val currentLevel   = XpTable.levelForXp(currentXp)
+    val projectedLevel = XpTable.levelForXp(currentXp + xpGain)
+    return if (projectedLevel > currentLevel)
+        "+${xpGain.formatXp()} XP → Level $projectedLevel"
+    else
+        "+${xpGain.formatXp()} XP"
+}
+
 @Composable
 private fun CraftSheet(
     recipe: CraftableRecipe,

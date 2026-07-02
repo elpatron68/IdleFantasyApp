@@ -1300,7 +1300,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Correct! +%1$d tickets</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1332,7 +1332,7 @@
     <string name="farming_bean_note_8">Sei quasi arrivato. L\'aria si fa rarefatta. La destinazione è quasi in vista.</string>
     <string name="farming_bean_ready">Il fagiolo magico si estende oltre le nuvole. Pronto a scalare?</string>
     <string name="farming_bean_climb">Scala la pianta</string>
-    <string name="farming_bean_climbed">Hai scalato il fagiolo magico. Qualcosa ti aspetta…</string>
+    <string name="farming_bean_climbed">Hai scalato il fagiolo magico. Qualcosa ti aspetta...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">I fagioli magici possono essere piantati solo in un appezzamento</string>
 

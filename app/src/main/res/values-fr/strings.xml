@@ -1246,7 +1246,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Correct! +%1$d tickets</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1271,14 +1271,14 @@
     <string name="farming_bean_note_1">Une minuscule pousse a percé le sol.</string>
     <string name="farming_bean_note_2">La tige pousse à une vitesse surnaturelle.</string>
     <string name="farming_bean_note_3">Les feuilles sont énormes — comme rien de ce que vous avez vu.</string>
-    <string name="farming_bean_note_4">Des nuages ont commencé à se rassembler autour de la tige supérieure…</string>
+    <string name="farming_bean_note_4">Des nuages ont commencé à se rassembler autour de la tige supérieure...</string>
     <string name="farming_bean_note_5">D\'étranges sons descendent de quelque part là-haut.</string>
     <string name="farming_bean_note_6">Un grondement lointain. Quelque chose s\'agite dans les hauteurs.</string>
     <string name="farming_bean_note_7">Le haricot magique frémit. Quelque chose attend au sommet.</string>
     <string name="farming_bean_note_8">Presque là. L\'air se raréfie. Vous pouvez presque voir le sommet.</string>
     <string name="farming_bean_ready">Le haricot magique s\'étend au-delà des nuages. Prêt à grimper?</string>
     <string name="farming_bean_climb">Grimper</string>
-    <string name="farming_bean_climbed">Vous avez grimpé le haricot magique. Quelque chose vous attend…</string>
+    <string name="farming_bean_climbed">Vous avez grimpé le haricot magique. Quelque chose vous attend...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Les haricots magiques ne peuvent être plantés que sur une parcelle</string>
 

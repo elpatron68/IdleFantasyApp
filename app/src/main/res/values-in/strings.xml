@@ -345,7 +345,7 @@
     <string name="combat_def">DEF</string>
     <string name="combat_heals_hp">menyembuhkan %1$d HP</string>
     <string name="combat_defeated_so_far">telah dikalahkan sejauh ini.</string>
-    <string name="combat_fighting">Bertarung…</string>
+    <string name="combat_fighting">Bertarung...</string>
     <string name="combat_log_you_hit">Anda mengenai</string>
     <string name="combat_log_hit_you">mengenai anda</string>
     <string name="combat_log_dmg">dmg</string>
@@ -1031,7 +1031,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Benar! +%1$d tiket</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1054,14 +1054,14 @@
     <string name="farming_bean_note_1">Sebuah tunas kecil telah muncul dari tanah.</string>
     <string name="farming_bean_note_2">Batang tanaman itu tumbuh dengan kecepatan yang tidak wajar.</string>
     <string name="farming_bean_note_3">Daun-daunnya sangat besar — tidak seperti apa pun yang pernah Anda lihat sebelumnya.</string>
-    <string name="farming_bean_note_4">Awan mulai berkumpul di sekitar batang bagian atas…</string>
+    <string name="farming_bean_note_4">Awan mulai berkumpul di sekitar batang bagian atas...</string>
     <string name="farming_bean_note_5">Suara-suara aneh terdengar dari suatu tempat yang jauh di atas.</string>
     <string name="farming_bean_note_6">Gemuruh dari kejauhan. Sesuatu bergerak di ketinggian.</string>
     <string name="farming_bean_note_7">Pohon kacang raksasa itu bergetar. Sesuatu menanti di puncaknya.</string>
     <string name="farming_bean_note_8">Hampir sampai. Udara semakin menipis. Puncaknya hampir terlihat.</string>
     <string name="farming_bean_ready">Pohon kacang raksasa itu menjulang hingga melampaui awan. Siap mendaki?</string>
     <string name="farming_bean_climb">Mendaki</string>
-    <string name="farming_bean_climbed">Kau telah mendaki pohon kacang raksasa. Sesuatu menanti…</string>
+    <string name="farming_bean_climbed">Kau telah mendaki pohon kacang raksasa. Sesuatu menanti...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Kacang Ajaib hanya dapat ditanam di satu petak saja.</string>
     <string name="armory_tab">Persenjataan</string>
@@ -1206,5 +1206,4 @@
     <plurals name="plural_collect_sessions">
         <item quantity="other">Kumpulkan Hadiah %1$d Sesi</item>
     </plurals>
-    <string name="daily_verb_farming">Panen</string>
 </resources>

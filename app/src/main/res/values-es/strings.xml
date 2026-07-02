@@ -1248,7 +1248,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Correct! +%1$d tickets</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1273,14 +1273,14 @@
     <string name="farming_bean_note_1">Un pequeño brote ha empujado a través de la tierra.</string>
     <string name="farming_bean_note_2">El tallo crece a un ritmo sobrenatural.</string>
     <string name="farming_bean_note_3">Las hojas son enormes — como nada que hayas visto antes.</string>
-    <string name="farming_bean_note_4">Las nubes han comenzado a reunirse alrededor del tallo superior…</string>
+    <string name="farming_bean_note_4">Las nubes han comenzado a reunirse alrededor del tallo superior...</string>
     <string name="farming_bean_note_5">Sonidos extraños se filtran desde algún lugar muy arriba.</string>
     <string name="farming_bean_note_6">Retumbo distante. Algo se agita en las alturas.</string>
     <string name="farming_bean_note_7">La planta de frijol tiembla. Algo aguarda en la cima.</string>
     <string name="farming_bean_note_8">Casi ahí. El aire se enrarece. Casi puedes ver la cima.</string>
     <string name="farming_bean_ready">La planta llega más allá de las nubes. ¿Listo para trepar?</string>
     <string name="farming_bean_climb">Trepar</string>
-    <string name="farming_bean_climbed">Has trepado la planta de frijol. Algo te aguarda…</string>
+    <string name="farming_bean_climbed">Has trepado la planta de frijol. Algo te aguarda...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Los frijoles mágicos solo pueden plantarse en un único campo</string>
 

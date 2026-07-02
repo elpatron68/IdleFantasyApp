@@ -475,7 +475,7 @@
     <string name="combat_duration_min">%1$d min</string>
     <string name="combat_xp_on_victory">XP on victory</string>
     <string name="combat_you_died">You Died!</string>
-    <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
+    <string name="combat_died_reward">You received 10% of the rewards.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d gear</string>
 
@@ -1072,7 +1072,7 @@
     <string name="bone_altar_tap">Tap to Bury</string>
     <string name="bone_altar_change_bone">Change</string>
     <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active" formatted="false">+50% XP bonus!</string>
+    <string name="bone_altar_bonus_active">+50% XP bonus!</string>
     <string name="bone_altar_session_xp">+%s XP this session</string>
     <string name="bone_altar_buried_count">%d buried</string>
     <string name="bone_altar_no_bones">No bones in inventory</string>
@@ -1300,7 +1300,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Correct! +%1$d tickets</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1325,14 +1325,14 @@
     <string name="farming_bean_note_1">A tiny sprout has pushed through the soil.</string>
     <string name="farming_bean_note_2">The stalk is growing at an unnatural pace.</string>
     <string name="farming_bean_note_3">The leaves are enormous — unlike anything you\'ve seen before.</string>
-    <string name="farming_bean_note_4">Clouds have begun to gather around the upper stalk…</string>
+    <string name="farming_bean_note_4">Clouds have begun to gather around the upper stalk...</string>
     <string name="farming_bean_note_5">Strange sounds drift down from somewhere far above.</string>
     <string name="farming_bean_note_6">Distant rumbling. Something stirs in the heights.</string>
     <string name="farming_bean_note_7">The beanstalk shudders. Something awaits at the top.</string>
     <string name="farming_bean_note_8">Almost there. The air grows thin. You can nearly see the top.</string>
     <string name="farming_bean_ready">The beanstalk reaches beyond the clouds. Ready to climb?</string>
     <string name="farming_bean_climb">Climb</string>
-    <string name="farming_bean_climbed">You have climbed the beanstalk. Something awaits…</string>
+    <string name="farming_bean_climbed">You have climbed the beanstalk. Something awaits...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Magic Beans can only be planted in one plot</string>
 

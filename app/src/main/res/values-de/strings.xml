@@ -460,7 +460,7 @@
     <string name="combat_duration_min">%1$d min</string>
     <string name="combat_xp_on_victory">EP bei Sieg</string>
     <string name="combat_you_died">Ihr seid gestorben!</string>
-    <string name="combat_died_reward" formatted="false">Ihr habt 10% der Belohnung erhalten.</string>
+    <string name="combat_died_reward">Ihr habt 10%% der Belohnung erhalten.</string>
     <string name="combat_gear_bonus">+%1$d Ausrüstung</string>
 
     <!-- ===== translate — ProfileScreen ===== -->
@@ -1025,7 +1025,7 @@
     <string name="bone_altar_tap">Zum Vergraben tippen</string>
     <string name="bone_altar_change_bone">Ändern</string>
     <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active" formatted="false">+50% EP-Bonus!</string>
+    <string name="bone_altar_bonus_active">+50%% EP-Bonus!</string>
     <string name="bone_altar_session_xp">+%s EP diese Sitzung</string>
     <string name="bone_altar_buried_count">%d vergraben</string>
     <string name="bone_altar_no_bones">Keine Knochen im Inventar</string>
@@ -1222,7 +1222,7 @@
     <string name="carnival_shell_game">Hüttchenspiel</string>
     <string name="carnival_active_shell_desc">Beobachtet genau unter welchem Becher sich der Edelstein befindet!</string>
     <string name="carnival_shell_showing">Beobachtet genau — Edelstein befindet sich unter Becher %1$d</string>
-    <string name="carnival_shell_watch">Schaut genau hin…</string>
+    <string name="carnival_shell_watch">Schaut genau hin...</string>
     <string name="carnival_shell_pick">Unter welchem Becher befindet er sich?</string>
     <string name="carnival_shell_won">Richtig! +%1$d Lose</string>
     <string name="carnival_shell_missed">Falsch! Der Edelstein ist unter Becher %1$d.</string>
@@ -1247,14 +1247,14 @@
     <string name="farming_bean_note_1">Ein kleiner Spross hat sich durch die Erde gedrückt.</string>
     <string name="farming_bean_note_2">Der Stängel wächst auf unnatürliche Weise.</string>
     <string name="farming_bean_note_3">Die Blätter sind riesig — so etwas habt Ihr noch nie gesehen.</string>
-    <string name="farming_bean_note_4">Wolken beginnen sich um den oberen Stängel zu sammeln…</string>
+    <string name="farming_bean_note_4">Wolken beginnen sich um den oberen Stängel zu sammeln...</string>
     <string name="farming_bean_note_5">Seltsame Geräusche klingen von irgendwo weit oben herab.</string>
     <string name="farming_bean_note_6">Fernes Grollen. Etwas regt sich in der Höhe.</string>
     <string name="farming_bean_note_7">Der Bohnenstängel zittert. Etwas wartet an der Spitze.</string>
     <string name="farming_bean_note_8">Fast da. Die Luft wird dünner. Ihr könnt die Spitze fast sehen.</string>
     <string name="farming_bean_ready">Der Bohnenstängel reicht über die Wolken hinaus. Bereit zu klettern?</string>
     <string name="farming_bean_climb">Klettern</string>
-    <string name="farming_bean_climbed">Ihr habt den Bohnenstängel erklommen. Etwas wartet…</string>
+    <string name="farming_bean_climbed">Ihr habt den Bohnenstängel erklommen. Etwas wartet...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Magische Bohnen können nur auf einem Feld gepflanzt werden</string>
 

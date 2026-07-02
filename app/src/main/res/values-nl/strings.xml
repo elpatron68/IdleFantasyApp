@@ -1214,7 +1214,7 @@
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
+    <string name="carnival_shell_watch">Watch closely...</string>
     <string name="carnival_shell_pick">Which cup is it under?</string>
     <string name="carnival_shell_won">Correct! +%1$d tickets</string>
     <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
@@ -1239,14 +1239,14 @@
     <string name="farming_bean_note_1">Een klein spruitje heeft door de grond geduwd.</string>
     <string name="farming_bean_note_2">De stengel groeit op een bovennatuurlijke manier.</string>
     <string name="farming_bean_note_3">De bladeren zijn enorm — zoals je nog nooit hebt gezien.</string>
-    <string name="farming_bean_note_4">Wolken zijn begonnen zich rond de bovenste stengel te verzamelen…</string>
+    <string name="farming_bean_note_4">Wolken zijn begonnen zich rond de bovenste stengel te verzamelen...</string>
     <string name="farming_bean_note_5">Vreemde geluiden driften neer van ergens ver boven.</string>
     <string name="farming_bean_note_6">Ver gerommel. Iets roert in de hoogten.</string>
     <string name="farming_bean_note_7">De bonenrank trilt. Iets wacht aan de top.</string>
     <string name="farming_bean_note_8">Bijna daar. De lucht wordt dunner. Je kunt de top bijna zien.</string>
     <string name="farming_bean_ready">De bonenrank reikt tot voorbij de wolken. Klaar om te klimmen?</string>
     <string name="farming_bean_climb">Klimmen</string>
-    <string name="farming_bean_climbed">Je hebt de bonenrank beklommen. Iets wacht je…</string>
+    <string name="farming_bean_climbed">Je hebt de bonenrank beklommen. Iets wacht je...</string>
     <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Magische bonen kunnen slechts op één veld worden geplant</string>
 
