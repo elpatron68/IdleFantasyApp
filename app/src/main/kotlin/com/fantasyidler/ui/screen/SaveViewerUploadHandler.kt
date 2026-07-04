@@ -13,6 +13,43 @@ import com.fantasyidler.util.SaveViewerError
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+fun openSaveViewer(
+    viewerUrl: String,
+    context: Context,
+    scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
+    onNavigateToSettings: () -> Unit = {},
+) {
+    if (viewerUrl.isBlank()) {
+        scope.launch {
+            when (
+                snackbarHostState.showSnackbar(
+                    message = context.getString(R.string.settings_viewer_upload_empty),
+                    actionLabel = context.getString(R.string.settings_title),
+                    duration = SnackbarDuration.Long,
+                    withDismissAction = true,
+                )
+            ) {
+                SnackbarResult.ActionPerformed -> onNavigateToSettings()
+                else -> {}
+            }
+        }
+        return
+    }
+    val target = SaveViewerClient.parseViewerUrl(viewerUrl).getOrElse {
+        scope.launch {
+            snackbarHostState.showSnackbar(
+                message = context.getString(R.string.settings_viewer_upload_invalid),
+                withDismissAction = true,
+            )
+        }
+        return
+    }
+    CustomTabsIntent.Builder()
+        .build()
+        .launchUrl(context, Uri.parse(target.viewerUrl))
+}
+
 fun triggerSaveViewerUpload(
     viewerUrl: String,
     context: Context,

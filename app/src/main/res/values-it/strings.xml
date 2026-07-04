@@ -431,6 +431,7 @@
     <!-- Translator note: %1$d = queue size (always 3 max) -->
     <string name="home_up_next">Prossime (%1$d/3)</string>
     <string name="home_sync_title">Sync</string>
+    <string name="home_sync_content_desc">Open Save Viewer. Long press to upload save.</string>
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">La coda termina tra %1$s</string>
     <!-- Translator note: %1$d = item quantity (e.g. ×40) -->

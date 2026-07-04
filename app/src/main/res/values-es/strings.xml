@@ -360,6 +360,7 @@
     <!-- Translator note: %1$d = queue size (always 3 max) -->
     <string name="home_up_next">A continuación (%1$d/3)</string>
     <string name="home_sync_title">Sync</string>
+    <string name="home_sync_content_desc">Open Save Viewer. Long press to upload save.</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Recoge las recompensas de la sesión %1$d</item>
