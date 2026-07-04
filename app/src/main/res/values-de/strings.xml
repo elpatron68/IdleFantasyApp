@@ -423,6 +423,7 @@
     <string name="home_welcome">Willkommen zurück, %1$s!</string>
     <string name="home_adventurer">Abenteurer</string>
     <string name="home_up_next">Als Nächstes (%1$d/3)</string>
+    <string name="home_sync_title">Sync</string>
     <string name="home_queue_ends_in">Alles erledigt in %1$s</string>
     <string name="queue_item_qty">×%1$d</string>
     <string name="queue_item_qty_with_output">×%1$d → %2$d Gegenstände</string>

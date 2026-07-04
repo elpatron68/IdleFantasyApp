@@ -22,10 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -66,8 +63,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
-import com.fantasyidler.util.SaveViewerClient
-import com.fantasyidler.util.SaveViewerError
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -464,81 +459,14 @@ fun SettingsScreen(
             )
             OutlinedButton(
                 onClick = {
-                    if (viewerUrl.isBlank()) {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = context.getString(R.string.settings_viewer_upload_empty),
-                                withDismissAction = true,
-                            )
-                        }
-                        return@OutlinedButton
-                    }
-                    if (SaveViewerClient.parseViewerUrl(viewerUrl).isFailure) {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = context.getString(R.string.settings_viewer_upload_invalid),
-                                withDismissAction = true,
-                            )
-                        }
-                        return@OutlinedButton
-                    }
-                    isViewerUploading = true
-                    viewModel.uploadToViewer { result ->
-                        isViewerUploading = false
-                        scope.launch {
-                            result.fold(
-                                onSuccess = { response ->
-                                    if (response.imported) {
-                                        val openLabel = context.getString(R.string.settings_viewer_open)
-                                        when (
-                                            snackbarHostState.showSnackbar(
-                                                message = context.getString(R.string.settings_viewer_upload_success),
-                                                actionLabel = openLabel,
-                                                duration = SnackbarDuration.Long,
-                                                withDismissAction = true,
-                                            )
-                                        ) {
-                                            SnackbarResult.ActionPerformed -> {
-                                                SaveViewerClient.parseViewerUrl(viewerUrl)
-                                                    .getOrNull()
-                                                    ?.viewerUrl
-                                                    ?.let { url ->
-                                                        CustomTabsIntent.Builder()
-                                                            .build()
-                                                            .launchUrl(context, Uri.parse(url))
-                                                    }
-                                            }
-                                            else -> {}
-                                        }
-                                    } else {
-                                        snackbarHostState.showSnackbar(
-                                            message = context.getString(R.string.settings_viewer_upload_duplicate),
-                                            withDismissAction = true,
-                                        )
-                                    }
-                                },
-                                onFailure = { error ->
-                                    val message = when (error) {
-                                        is SaveViewerError.InvalidUrl ->
-                                            context.getString(R.string.settings_viewer_upload_invalid)
-                                        is SaveViewerError.Network ->
-                                            context.getString(R.string.settings_viewer_upload_network)
-                                        is SaveViewerError.NotFound ->
-                                            context.getString(R.string.settings_viewer_upload_not_found)
-                                        is SaveViewerError.ParseError ->
-                                            context.getString(R.string.settings_viewer_upload_parse)
-                                        is SaveViewerError.RateLimit ->
-                                            context.getString(R.string.settings_viewer_upload_rate_limit)
-                                        is SaveViewerError.ServerError ->
-                                            context.getString(R.string.settings_viewer_upload_parse)
-                                        else ->
-                                            context.getString(R.string.settings_viewer_upload_network)
-                                    }
-                                    snackbarHostState.showSnackbar(message, withDismissAction = true)
-                                },
-                            )
-                        }
-                    }
+                    triggerSaveViewerUpload(
+                        viewerUrl         = viewerUrl,
+                        context           = context,
+                        scope             = scope,
+                        snackbarHostState = snackbarHostState,
+                        settingsViewModel = viewModel,
+                        onUploadingChange = { isViewerUploading = it },
+                    )
                 },
                 enabled = !isViewerUploading,
                 modifier = Modifier.fillMaxWidth(),
