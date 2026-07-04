@@ -26,7 +26,7 @@ This fork can upload your in-game export JSON to the **[Idle Fantasy Save Viewer
 
 1. Open the viewer in a browser → create a personal link → **Copy link**
 2. In the app: **Settings → Save Data → Save Viewer URL** → paste the link
-3. Upload via **Send to Save Viewer** in settings, or tap **Sync** on the home screen (town grid, next to Builder / Slayer / Carnival)
+3. **Tap Sync** on the home screen to open the viewer, or **long-press Sync** to upload; alternatively use **Send to Save Viewer** in settings
 
 Upload uses `INTERNET` only for this optional feature. Offline play is unchanged. The viewer URL is stored in your local save; no account is required.
 

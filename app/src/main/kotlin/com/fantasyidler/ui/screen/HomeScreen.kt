@@ -1,6 +1,8 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -623,9 +625,19 @@ fun HomeScreen(
                     TownGridCard(Icons.Filled.Shield,      stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
                     TownGridCard(Icons.Filled.Celebration, stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
                     TownGridCard(
-                        icon      = Icons.Filled.CloudUpload,
-                        name      = stringResource(R.string.home_sync_title),
-                        onClick   = {
+                        icon        = Icons.Filled.CloudUpload,
+                        name        = stringResource(R.string.home_sync_title),
+                        contentDesc = stringResource(R.string.home_sync_content_desc),
+                        onClick     = {
+                            openSaveViewer(
+                                viewerUrl           = viewerUrl,
+                                context             = context,
+                                scope               = scope,
+                                snackbarHostState   = snackbarHostState,
+                                onNavigateToSettings = onNavigateToSettings,
+                            )
+                        },
+                        onLongClick = {
                             triggerSaveViewerUpload(
                                 viewerUrl           = viewerUrl,
                                 context             = context,
@@ -636,9 +648,9 @@ fun HomeScreen(
                                 onNavigateToSettings = onNavigateToSettings,
                             )
                         },
-                        modifier  = Modifier.weight(1f),
-                        isLoading = isViewerUploading,
-                        enabled   = !isViewerUploading,
+                        modifier    = Modifier.weight(1f),
+                        isLoading   = isViewerUploading,
+                        enabled     = !isViewerUploading,
                     )
                 }
             }
@@ -763,6 +775,7 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TownGridCard(
     icon: ImageVector,
@@ -773,10 +786,19 @@ private fun TownGridCard(
     badgeCount: Int = 0,
     enabled: Boolean = true,
     isLoading: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
+    contentDesc: String? = null,
 ) {
-    ElevatedCard(
-        modifier = modifier.clickable(enabled = enabled && !isLoading) { onClick() },
-    ) {
+    val interactionModifier = if (onLongClick != null) {
+        Modifier.combinedClickable(
+            enabled = enabled && !isLoading,
+            onClick = onClick,
+            onLongClick = onLongClick,
+        )
+    } else {
+        Modifier.clickable(enabled = enabled && !isLoading, onClick = onClick)
+    }
+    ElevatedCard(modifier = modifier.then(interactionModifier)) {
         Column(
             modifier            = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -789,10 +811,10 @@ private fun TownGridCard(
                 )
             } else if (badgeCount > 0) {
                 BadgedBox(badge = { Badge { Text("$badgeCount") } }) {
-                    Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
+                    Icon(imageVector = icon, contentDescription = contentDesc, tint = iconTint, modifier = Modifier.size(28.dp))
                 }
             } else {
-                Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
+                Icon(imageVector = icon, contentDescription = contentDesc, tint = iconTint, modifier = Modifier.size(28.dp))
             }
             Spacer(Modifier.height(4.dp))
             Text(
