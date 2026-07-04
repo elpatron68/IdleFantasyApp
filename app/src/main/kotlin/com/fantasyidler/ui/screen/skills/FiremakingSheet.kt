@@ -224,7 +224,7 @@ internal fun FiremakingSheet(
                 }
             }
             QtyQuickButtons(qty, maxQty) { qty = it; textValue = it.toString() }
-            QuestFillRow(questFills[key] ?: emptyList(), qty, maxQty) { qty = it; textValue = it.toString() }
+            QuestFillRow(questFills[key] ?: emptyList(), qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { qty = it; textValue = it.toString() }
             Spacer(Modifier.height(8.dp))
             Text(
                 text       = projectedXpLabel(currentXp, totalXp.toLong()),

@@ -123,6 +123,7 @@ internal fun PrayerSheet(
     onStart: (boneKey: String, qty: Int) -> Unit,
     onNavigateToBoneAltar: () -> Unit = {},
     tierMaxQty: Int = Int.MAX_VALUE,
+    questFills: List<QuestFillSuggestion> = emptyList(),
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
@@ -271,6 +272,7 @@ internal fun PrayerSheet(
             }
             Spacer(Modifier.height(8.dp))
             QtyQuickButtons(qty, maxQty) { v -> qty = v; textValue = v.toString() }
+            QuestFillRow(questFills, qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { v -> qty = v; textValue = v.toString() }
             Spacer(Modifier.height(8.dp))
 
             Text(

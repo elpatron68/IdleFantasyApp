@@ -288,6 +288,7 @@ fun SkillsScreen(
                         viewModel.dismissSheet()
                         onNavigateToBoneAltar()
                     },
+                    questFills            = sheet.questFills,
                 )
                 is SheetState.Crafting -> {
                     val craftState by craftingViewModel.uiState.collectAsState()

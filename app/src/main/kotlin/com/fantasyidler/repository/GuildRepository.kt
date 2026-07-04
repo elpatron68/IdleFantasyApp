@@ -201,10 +201,34 @@ class GuildRepository @Inject constructor(
         val available = inventory[t.target] ?: 0
         if (available == 0) return 0
         val toConsume = minOf(needed, available)
-        playerRepo.consumeItemsUnlocked(mapOf(t.target to toConsume))
+        if (!playerRepo.consumeItemsUnlocked(mapOf(t.target to toConsume))) return 0
         val newProgress = flags.guildDailyProgress.toMutableMap()
         newProgress[templateId] = current + toConsume
         playerRepo.updateFlagsUnlocked(flags.copy(guildDailyProgress = newProgress))
+        return toConsume
+    }
+
+    /**
+     * Lets the player submit crops from their inventory toward a regular farming gather quest.
+     * Returns the number of items actually consumed.
+     */
+    suspend fun contributeFarmingQuest(questId: String, inventory: Map<String, Int>): Int = playerRepo.playerMutex.withLock {
+        val quest = gameData.guildQuests[questId] ?: return 0
+        if (quest.guild != "farming" || quest.type != "gather") return 0
+        val row = questProgressDao.getQuestProgress(questId) ?: QuestProgress(questId)
+        if (row.completed) return 0
+        
+        val effectiveAmt = effectiveQuestAmount(quest)
+        val needed = (effectiveAmt - row.progress).coerceAtLeast(0)
+        if (needed == 0) return 0
+        
+        val available = inventory[quest.target] ?: 0
+        if (available == 0) return 0
+        
+        val toConsume = minOf(needed, available)
+        if (!playerRepo.consumeItemsUnlocked(mapOf(quest.target to toConsume))) return 0
+        
+        questProgressDao.upsert(row.copy(progress = row.progress + toConsume))
         return toConsume
     }
 

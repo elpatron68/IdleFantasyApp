@@ -272,7 +272,7 @@ internal fun RunecraftingSheet(
             }
             Spacer(Modifier.height(8.dp))
             QtyQuickButtons(qty, maxQty) { v -> qty = v; textValue = v.toString() }
-            QuestFillRow(questFills[selectedKey ?: ""] ?: emptyList(), qty, maxQty) { v -> qty = v; textValue = v.toString() }
+            QuestFillRow(questFills[selectedKey ?: ""] ?: emptyList(), qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { v -> qty = v; textValue = v.toString() }
             Spacer(Modifier.height(8.dp))
 
             Text(

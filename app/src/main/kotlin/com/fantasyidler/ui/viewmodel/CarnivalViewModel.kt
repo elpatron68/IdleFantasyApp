@@ -150,9 +150,11 @@ class CarnivalViewModel @Inject constructor(
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val pets: List<com.fantasyidler.data.model.OwnedPet> = try { json.decodeFromString(player.pets) } catch (_: Exception) { emptyList() }
+            val ownedPetIds = pets.map { it.id }.toSet()
             val ownedPrizeKeys = prizes
                 .filter { it.type == "equipment" || it.type == "pet" }
-                .filter { (inventory[it.key] ?: 0) > 0 }
+                .filter { (inventory[it.key] ?: 0) > 0 || it.key in ownedPetIds }
                 .map { it.key }
                 .toSet()
             val now = System.currentTimeMillis()

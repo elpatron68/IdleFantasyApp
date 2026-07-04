@@ -102,6 +102,7 @@ sealed class SheetState {
     data class Prayer(
         val availableBones: Map<String, BoneData>,
         val inventory: Map<String, Int>,
+        val questFills: List<QuestFillSuggestion> = emptyList(),
     ) : SheetState()
     /** Opens the inline craft sheet for one of the instant-craft skills. */
     data class Crafting(val skillName: String) : SheetState()
@@ -256,8 +257,10 @@ class SkillsViewModel @Inject constructor(
                         .filter { (key, _) -> (effectiveCounts[key] ?: 0) > 0 }
                         .entries.sortedBy { it.value.xpPerBone }
                         .associate { it.key to it.value }
+                    val questProgress = questRepo.observeProgress().first().associateBy { it.questId }
+                    val questFills = computePrayerFills(questProgress, flags)
                     _uiState.update {
-                        it.copy(sheetSkill = SheetState.Prayer(available, effectiveCounts.filterKeys { k -> k in gameData.bones }))
+                        it.copy(sheetSkill = SheetState.Prayer(available, effectiveCounts.filterKeys { k -> k in gameData.bones }, questFills))
                     }
                 }
                 return
@@ -1055,6 +1058,19 @@ class SkillsViewModel @Inject constructor(
             if (prereqDone) fills += QuestFillSuggestion(quest.name, remaining)
         }
 
+        val completedIds = questProgress.entries.filter { it.value.completed }.map { it.key }.toSet()
+        for ((id, quest) in gameData.guildQuests) {
+            if (quest.type != "craft") continue
+            if (quest.target != itemKey) continue
+            val prog = questProgress[id]
+            if (prog?.completed == true) continue
+            val rep = flags.guildReputation[quest.guild] ?: 0L
+            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            val remaining = effectiveAmount - (prog?.progress ?: 0)
+            if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
+        }
+
         for (daily in dailyQuestRepo.getActiveDailyQuests(flags)) {
             if (daily.claimed) continue
             if (daily.template.type != "craft") continue
@@ -1069,6 +1085,73 @@ class SkillsViewModel @Inject constructor(
             if (weekly.template.target != itemKey) continue
             val remaining = weekly.template.amount - weekly.progress
             if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_weekly), remaining)
+        }
+
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        for (id in activeGuildIds) {
+            val template = guildPool[id] ?: continue
+            if (template.type != "craft") continue
+            if (template.target != itemKey) continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            val remaining = template.amount - progress
+            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_guild), remaining)
+        }
+
+        return fills.sortedBy { it.qty }
+    }
+
+    private fun computePrayerFills(
+        questProgress: Map<String, com.fantasyidler.data.model.QuestProgress>,
+        flags: PlayerFlags,
+    ): List<QuestFillSuggestion> {
+        val fills = mutableListOf<QuestFillSuggestion>()
+
+        for ((id, quest) in gameData.quests) {
+            if (quest.type != "prayer") continue
+            val prog = questProgress[id]
+            if (prog?.completed == true) continue
+            val remaining = quest.amount - (prog?.progress ?: 0)
+            if (remaining <= 0) continue
+            val prereqDone = quest.requiresPrevious == null ||
+                    questProgress[quest.requiresPrevious]?.completed == true
+            if (prereqDone) fills += QuestFillSuggestion(quest.name, remaining)
+        }
+
+        val completedIds = questProgress.entries.filter { it.value.completed }.map { it.key }.toSet()
+        for ((id, quest) in gameData.guildQuests) {
+            if (quest.type != "prayer") continue
+            val prog = questProgress[id]
+            if (prog?.completed == true) continue
+            val rep = flags.guildReputation[quest.guild] ?: 0L
+            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            val remaining = effectiveAmount - (prog?.progress ?: 0)
+            if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
+        }
+
+        for (daily in dailyQuestRepo.getActiveDailyQuests(flags)) {
+            if (daily.claimed) continue
+            if (daily.template.type != "prayer") continue
+            val remaining = daily.template.amount - daily.progress
+            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_daily), remaining)
+        }
+
+        for (weekly in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
+            if (weekly.claimed) continue
+            if (weekly.template.type != "prayer") continue
+            val remaining = weekly.template.amount - weekly.progress
+            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_weekly), remaining)
+        }
+
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        for (id in activeGuildIds) {
+            val template = guildPool[id] ?: continue
+            if (template.type != "prayer") continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            val remaining = template.amount - progress
+            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_guild), remaining)
         }
 
         return fills.sortedBy { it.qty }

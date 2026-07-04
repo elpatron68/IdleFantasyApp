@@ -401,8 +401,26 @@ class PlayerRepository @Inject constructor(
         val queue = flags.sessionQueue
         if (index < 0 || index >= queue.size) return null
         val removed = queue[index]
-        updateFlags(flags.copy(sessionQueue = queue.toMutableList().apply { removeAt(index) }))
+        val newQueue = queue.toMutableList().apply { removeAt(index) }
+        updateFlags(flags.copy(sessionQueue = renumberTowerQueue(newQueue, flags.towerCurrentFloor)))
         return removed
+    }
+
+    /**
+     * Keeps queued Infinite Tower floors contiguous after a cancellation, so a player can't
+     * skip floors by cancelling low entries while a higher one survives in the queue.
+     */
+    private fun renumberTowerQueue(queue: List<QueuedAction>, currentFloor: Int): List<QueuedAction> {
+        var nextFloor = currentFloor + 1
+        return queue.map { action ->
+            if (action.skillName != "tower") return@map action
+            val renumbered = action.copy(
+                activityKey      = "tower_floor_$nextFloor",
+                skillDisplayName = "Infinite Tower: Floor $nextFloor",
+            )
+            nextFloor++
+            renumbered
+        }
     }
 
     suspend fun evictQueueForSkill(skillName: String): List<QueuedAction> {
