@@ -4,6 +4,8 @@
 
 A free, open-source offline idle RPG for Android. No internet connection, no account, no ads.
 
+> **Fork:** This repository ([elpatron68/IdleFantasyApp](https://github.com/elpatron68/IdleFantasyApp)) tracks [tristinbaker/IdleFantasy](https://github.com/tristinbaker/IdleFantasy) and adds optional Save Viewer sync. See **[FORK.md](FORK.md)** for releases, setup, and CI.
+
 <p align="center">
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="170" alt="Home screen">
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="170" alt="Dungeons">
@@ -74,6 +76,8 @@ Visit the traveling Carnival to play idle minigames, the Archery Range, Strongma
 
 Or grab the latest APK from the [Releases page](https://github.com/tristinbaker/IdleFantasy/releases).
 
+For **this fork's builds** (Save Viewer sync), see **[FORK.md](FORK.md)**.
+
 ## Translating
 
 The game is available in English, German, French, Spanish, and Turkish. Translations live in standard Android string resource files and are Weblate-compatible. See [TRANSLATING.md](TRANSLATING.md) to add a new language or improve an existing one.
@@ -83,6 +87,8 @@ The game is available in English, German, French, Spanish, and Turkish. Translat
 Bug reports and pull requests are welcome. Open an issue before starting large changes so the approach can be discussed first.
 
 See the [contributors graph](https://github.com/tristinbaker/IdleFantasy/graphs/contributors) for a full list of contributors.
+
+Fork-specific contributions: see **[FORK.md](FORK.md)**.
 
 ---
 
