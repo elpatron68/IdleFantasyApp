@@ -1,0 +1,243 @@
+# Build a signed release APK and publish a GitHub Release when tristinbaker/IdleFantasy
+# ships a new release. GitHub cannot subscribe to release webhooks on third-party repos,
+# so this workflow polls the upstream Releases API (hourly + after upstream sync).
+#
+# Required repository secrets:
+#   RELEASE_KEYSTORE_BASE64  — base64-encoded defide-release.jks
+#   DEFIDE_STORE_PASSWORD
+#   DEFIDE_KEY_PASSWORD
+name: Upstream Release
+
+on:
+  schedule:
+    # Hourly — upstream typically publishes one release per day
+    - cron: "15 * * * *"
+  workflow_dispatch:
+    inputs:
+      upstream_tag:
+        description: "Upstream tag to build (e.g. v1.10.11). Empty = latest upstream release."
+        required: false
+        type: string
+      force:
+        description: "Rebuild even if this fork already has the release"
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: upstream-release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  UPSTREAM_REPO: tristinbaker/IdleFantasy
+
+jobs:
+  release:
+    name: Sync, sign, publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve upstream release
+        id: upstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n "${{ inputs.upstream_tag }}" ]]; then
+            TAG="${{ inputs.upstream_tag }}"
+            if ! gh release view "$TAG" --repo "${UPSTREAM_REPO}" >/dev/null 2>&1; then
+              echo "::error::Upstream release $TAG not found on ${UPSTREAM_REPO}"
+              exit 1
+            fi
+          else
+            TAG="$(gh release view --repo "${UPSTREAM_REPO}" --json tagName -q .tagName)"
+          fi
+          VERSION="${TAG#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Upstream release: $TAG (versionName $VERSION)"
+
+      - name: Skip if fork release already exists
+        id: skip
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ "${{ inputs.force }}" == "true" ]]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Force rebuild requested"
+            exit 0
+          fi
+          TAG="${{ steps.upstream.outputs.tag }}"
+          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Fork already has release $TAG — nothing to do"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Fork missing release $TAG — will build"
+          fi
+
+      - name: Checkout
+        if: steps.skip.outputs.skip != 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync fork with upstream
+        if: steps.skip.outputs.skip != 'true'
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          upstream_sync_repo: tristinbaker/IdleFantasy
+          upstream_sync_branch: main
+          target_sync_branch: main
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          test_mode: false
+
+      - name: Verify version matches upstream release
+        if: steps.skip.outputs.skip != 'true'
+        id: gradle_version
+        run: |
+          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')"
+          EXPECTED="${{ steps.upstream.outputs.version }}"
+          if [[ "$VERSION_NAME" != "$EXPECTED" ]]; then
+            echo "::error::versionName '$VERSION_NAME' != upstream release '$EXPECTED' — sync may be incomplete"
+            exit 1
+          fi
+          VERSION_CODE="$(grep '^\s*versionCode\s*=' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)"
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "version_code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+          echo "release_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Open issue on sync failure
+        if: failure() && steps.skip.outputs.skip != 'true' && steps.sync.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "Upstream release blocked — sync failed";
+            const body = [
+              `Workflow run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              "",
+              `Target upstream release: **${{ steps.upstream.outputs.tag }}**`,
+              "",
+              "Merge [tristinbaker/IdleFantasy](https://github.com/tristinbaker/IdleFantasy) into `main`, resolve conflicts, push, then re-run **Upstream Release**.",
+            ].join("\n");
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+            });
+            if (!issues.some(i => i.title === title)) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+            }
+
+      - name: Set up JDK 17
+        if: steps.skip.outputs.skip != 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        if: steps.skip.outputs.skip != 'true'
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Unit tests
+        if: steps.skip.outputs.skip != 'true'
+        run: ./gradlew testDebugUnitTest --stacktrace
+
+      - name: Set up release keystore
+        if: steps.skip.outputs.skip != 'true'
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          DEFIDE_STORE_PASSWORD: ${{ secrets.DEFIDE_STORE_PASSWORD }}
+          DEFIDE_KEY_PASSWORD: ${{ secrets.DEFIDE_KEY_PASSWORD }}
+        run: |
+          if [[ -z "$RELEASE_KEYSTORE_BASE64" || -z "$DEFIDE_STORE_PASSWORD" || -z "$DEFIDE_KEY_PASSWORD" ]]; then
+            echo "::error::Set repository secrets RELEASE_KEYSTORE_BASE64, DEFIDE_STORE_PASSWORD, DEFIDE_KEY_PASSWORD"
+            exit 1
+          fi
+          mkdir -p "$HOME/.android"
+          echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > "$HOME/.android/defide-release.jks"
+          echo "RELEASE_KEYSTORE_PATH=$HOME/.android/defide-release.jks" >> "$GITHUB_ENV"
+
+      - name: Assemble release APK
+        if: steps.skip.outputs.skip != 'true'
+        env:
+          DEFIDE_STORE_PASSWORD: ${{ secrets.DEFIDE_STORE_PASSWORD }}
+          DEFIDE_KEY_PASSWORD: ${{ secrets.DEFIDE_KEY_PASSWORD }}
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Prepare release notes
+        if: steps.skip.outputs.skip != 'true'
+        id: notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NOTES_FILE="$(mktemp)"
+          UPSTREAM_BODY="$(gh release view "${{ steps.upstream.outputs.tag }}" --repo "${UPSTREAM_REPO}" --json body -q .body || true)"
+          {
+            echo "**Fork build** of [${UPSTREAM_REPO} ${{ steps.upstream.outputs.tag }}](https://github.com/${UPSTREAM_REPO}/releases/tag/${{ steps.upstream.outputs.tag }})."
+            echo ""
+            echo "Includes fork-specific changes (Save Viewer upload, CI automation)."
+            echo ""
+            if [[ -n "$UPSTREAM_BODY" && "$UPSTREAM_BODY" != "null" ]]; then
+              echo "---"
+              echo ""
+              echo "$UPSTREAM_BODY"
+            fi
+          } > "$NOTES_FILE"
+          echo "file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Delete existing release (force rebuild)
+        if: steps.skip.outputs.skip != 'true' && inputs.force == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete "${{ steps.upstream.outputs.tag }}" --repo "${{ github.repository }}" --yes || true
+          git push origin ":refs/tags/${{ steps.upstream.outputs.tag }}" || true
+
+      - name: Create GitHub release
+        if: steps.skip.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.upstream.outputs.tag }}"
+          VERSION="${{ steps.gradle_version.outputs.version_name }}"
+          APK="app/build/outputs/apk/release/IdleFantasy-v${VERSION}.apk"
+          if [[ ! -f "$APK" ]]; then
+            APK="$(find app/build/outputs/apk/release -name '*.apk' | head -1)"
+          fi
+          if [[ -z "$APK" || ! -f "$APK" ]]; then
+            echo "::error::Release APK not found under app/build/outputs/apk/release/"
+            exit 1
+          fi
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --notes-file "${{ steps.notes.outputs.file }}" \
+            --target "${{ steps.gradle_version.outputs.release_sha }}" \
+            "$APK#IdleFantasy-v${VERSION}.apk"
+
+      - name: Trigger Save Viewer sync (optional)
+        if: steps.skip.outputs.skip != 'true' && vars.SAVE_VIEWER_SYNC_ENABLED == 'true'
+        env:
+          GITEA_TOKEN: ${{ secrets.GITEA_TOKEN }}
+          GITEA_URL: ${{ vars.GITEA_URL }}
+          GITEA_REPO: ${{ vars.GITEA_REPO }}
+        run: |
+          if [[ -z "$GITEA_TOKEN" || -z "$GITEA_URL" || -z "$GITEA_REPO" ]]; then
+            echo "Save Viewer trigger skipped (set vars SAVE_VIEWER_SYNC_ENABLED, GITEA_URL, GITEA_REPO and secret GITEA_TOKEN)"
+            exit 0
+          fi
+          curl -fsS -X POST \
+            -H "Authorization: token ${GITEA_TOKEN}" \
+            -H "Content-Type: application/json" \
+            "${GITEA_URL}/api/v1/repos/${GITEA_REPO}/actions/workflows/sync-upstream.yml/dispatches" \
+            -d '{"ref":"master","inputs":{"reason":"android-upstream-release"}}'

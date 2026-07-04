@@ -108,6 +108,14 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 30
 
+      - name: Trigger upstream release workflow
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Upstream moved — checking whether a signed release is needed..."
+          gh workflow run upstream-release.yml --ref main
+
       - name: Trigger Save Viewer sync (optional)
         if: steps.changes.outputs.changed == 'true' && vars.SAVE_VIEWER_SYNC_ENABLED == 'true'
         env:
