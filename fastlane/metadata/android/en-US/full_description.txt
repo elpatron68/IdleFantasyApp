@@ -22,7 +22,7 @@ Idle Fantasy is a free and open source offline idle RPG inspired by classic MMOR
 
 • <b>NPC Shop</b>: Buy supplies and sell your gathered resources for coins.
 
-• <b>No ads. No accounts. No internet required.</b> Your save data stays on your device.
+• <b>No ads. No accounts. No internet required.</b> Your save data stays on your device. Optional: upload saves to the web Save Viewer (Settings → Save Data) — requires internet only for that feature.
 
 Idle Fantasy is free software released under the GPL-3.0 licence. Source code is available on the project repository.
 

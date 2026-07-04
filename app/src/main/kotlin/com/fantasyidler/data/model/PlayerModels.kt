@@ -84,6 +84,8 @@ data class PlayerFlags(
     @SerialName("expedition_pity_runs") val expeditionPityRuns: Map<String, Int> = emptyMap(),
     /** Tree URI string for the automatic backup destination folder; empty = disabled. */
     @SerialName("backup_folder_uri") val backupFolderUri: String = "",
+    /** Personal Save Viewer URL for direct upload; empty = not configured. */
+    @SerialName("viewer_url") val viewerUrl: String = "",
     /** Automatic backup frequency: ""|"hourly"|"daily"|"weekly". */
     @SerialName("backup_frequency") val backupFrequency: String = "",
     /** Currently assigned Slayer task, or null if none. */

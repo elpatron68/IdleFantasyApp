@@ -22,6 +22,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -62,6 +66,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.util.SaveViewerClient
+import com.fantasyidler.util.SaveViewerError
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,7 +87,9 @@ fun SettingsScreen(
     val profileLayout          by viewModel.profileLayout.collectAsState()
     val backupFolderUri  by viewModel.backupFolderUri.collectAsState()
     val backupFrequency  by viewModel.backupFrequency.collectAsState()
+    val viewerUrl        by viewModel.viewerUrl.collectAsState()
     var notificationsEnabled by remember { mutableStateOf(false) }
+    var isViewerUploading  by remember { mutableStateOf(false) }
     var showResetConfirm1    by remember { mutableStateOf(false) }
     var showResetConfirm2    by remember { mutableStateOf(false) }
     var showChangelogDialog  by remember { mutableStateOf(false) }
@@ -436,6 +444,114 @@ fun SettingsScreen(
                     }
                 }
             )
+
+            Text(
+                text = stringResource(R.string.settings_viewer_url),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = stringResource(R.string.settings_viewer_url_desc),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            OutlinedTextField(
+                value = viewerUrl,
+                onValueChange = { viewModel.setViewerUrl(it) },
+                placeholder = { Text(stringResource(R.string.settings_viewer_url_placeholder)) },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+            )
+            OutlinedButton(
+                onClick = {
+                    if (viewerUrl.isBlank()) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = context.getString(R.string.settings_viewer_upload_empty),
+                                withDismissAction = true,
+                            )
+                        }
+                        return@OutlinedButton
+                    }
+                    if (SaveViewerClient.parseViewerUrl(viewerUrl).isFailure) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = context.getString(R.string.settings_viewer_upload_invalid),
+                                withDismissAction = true,
+                            )
+                        }
+                        return@OutlinedButton
+                    }
+                    isViewerUploading = true
+                    viewModel.uploadToViewer { result ->
+                        isViewerUploading = false
+                        scope.launch {
+                            result.fold(
+                                onSuccess = { response ->
+                                    if (response.imported) {
+                                        val openLabel = context.getString(R.string.settings_viewer_open)
+                                        when (
+                                            snackbarHostState.showSnackbar(
+                                                message = context.getString(R.string.settings_viewer_upload_success),
+                                                actionLabel = openLabel,
+                                                duration = SnackbarDuration.Long,
+                                                withDismissAction = true,
+                                            )
+                                        ) {
+                                            SnackbarResult.ActionPerformed -> {
+                                                SaveViewerClient.parseViewerUrl(viewerUrl)
+                                                    .getOrNull()
+                                                    ?.viewerUrl
+                                                    ?.let { url ->
+                                                        CustomTabsIntent.Builder()
+                                                            .build()
+                                                            .launchUrl(context, Uri.parse(url))
+                                                    }
+                                            }
+                                            else -> {}
+                                        }
+                                    } else {
+                                        snackbarHostState.showSnackbar(
+                                            message = context.getString(R.string.settings_viewer_upload_duplicate),
+                                            withDismissAction = true,
+                                        )
+                                    }
+                                },
+                                onFailure = { error ->
+                                    val message = when (error) {
+                                        is SaveViewerError.InvalidUrl ->
+                                            context.getString(R.string.settings_viewer_upload_invalid)
+                                        is SaveViewerError.Network ->
+                                            context.getString(R.string.settings_viewer_upload_network)
+                                        is SaveViewerError.NotFound ->
+                                            context.getString(R.string.settings_viewer_upload_not_found)
+                                        is SaveViewerError.ParseError ->
+                                            context.getString(R.string.settings_viewer_upload_parse)
+                                        is SaveViewerError.RateLimit ->
+                                            context.getString(R.string.settings_viewer_upload_rate_limit)
+                                        is SaveViewerError.ServerError ->
+                                            context.getString(R.string.settings_viewer_upload_parse)
+                                        else ->
+                                            context.getString(R.string.settings_viewer_upload_network)
+                                    }
+                                    snackbarHostState.showSnackbar(message, withDismissAction = true)
+                                },
+                            )
+                        }
+                    }
+                },
+                enabled = !isViewerUploading,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                if (isViewerUploading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.height(18.dp).width(18.dp),
+                        strokeWidth = 2.dp,
+                    )
+                } else {
+                    Text(stringResource(R.string.settings_viewer_upload_btn))
+                }
+            }
 
             // Automatic Backup section
             HorizontalDivider()
