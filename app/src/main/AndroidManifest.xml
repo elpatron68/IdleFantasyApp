@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Upload saves to the web Save Viewer -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Session completion notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Reschedule session alarms after device reboot -->

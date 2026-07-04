@@ -14,13 +14,17 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
+import com.fantasyidler.util.SaveViewerClient
+import com.fantasyidler.util.UploadResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
@@ -56,6 +60,14 @@ class SettingsViewModel @Inject constructor(
         .map { player ->
             if (player == null) return@map ""
             try { json.decodeFromString<PlayerFlags>(player.flags).backupFolderUri }
+            catch (_: Exception) { "" }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), "")
+
+    val viewerUrl: StateFlow<String> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map ""
+            try { json.decodeFromString<PlayerFlags>(player.flags).viewerUrl }
             catch (_: Exception) { "" }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), "")
@@ -136,6 +148,36 @@ class SettingsViewModel @Inject constructor(
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(backupFrequency = frequency))
             backupScheduler.schedule(frequency)
+        }
+    }
+
+    fun setViewerUrl(url: String) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(viewerUrl = url.trim()))
+        }
+    }
+
+    fun uploadToViewer(onDone: (Result<UploadResponse>) -> Unit) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            val target = SaveViewerClient.parseViewerUrl(flags.viewerUrl).getOrElse {
+                onDone(Result.failure(it))
+                return@launch
+            }
+            val sessions = buildList {
+                sessionRepo.getActiveSession()?.let { add(it.toExport()) }
+                addAll(sessionRepo.getAllCompletedSessions().map { it.toExport() })
+                for (slot in 1..2) {
+                    sessionRepo.getActiveWorkerSession(slot)?.let { add(it.toExport()) }
+                    addAll(sessionRepo.getAllCompletedWorkerSessions(slot).map { it.toExport() })
+                }
+            }
+            val jsonString = playerRepo.exportSave(sessions)
+            val result = withContext(Dispatchers.IO) {
+                SaveViewerClient.uploadSave(target, jsonString)
+            }
+            onDone(result)
         }
     }
 

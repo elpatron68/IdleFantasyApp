@@ -128,6 +128,10 @@ dependencies {
     // kotlinx.serialization
     implementation(libs.kotlinx.serialization.json)
 
+    // Save Viewer upload
+    implementation(libs.okhttp)
+    implementation(libs.androidx.browser)
+
     // Unit testing (JVM, no device required)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test.junit)
