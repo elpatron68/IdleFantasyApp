@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.Celebration
+import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.BottomSheetDefaults
@@ -56,6 +57,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -76,6 +78,7 @@ import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.HomeViewModel
+import com.fantasyidler.ui.viewmodel.SettingsViewModel
 import com.fantasyidler.ui.viewmodel.SessionSummary
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.ui.viewmodel.totalLevelFrom
@@ -93,6 +96,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -107,9 +111,13 @@ fun HomeScreen(
     onNavigateToBuilder: () -> Unit = {},
     onNavigateToCarnival: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state            by viewModel.uiState.collectAsState()
+    val viewerUrl        by settingsViewModel.viewerUrl.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val scope             = rememberCoroutineScope()
+    var isViewerUploading by remember { mutableStateOf(false) }
     var showRecentLog by remember { mutableStateOf(false) }
     val context           = LocalContext.current
 
@@ -611,11 +619,27 @@ fun HomeScreen(
                     modifier              = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Spacer(Modifier.weight(0.5f))
                     TownGridCard(Icons.Filled.Assignment,  stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
                     TownGridCard(Icons.Filled.Shield,      stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
                     TownGridCard(Icons.Filled.Celebration, stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
-                    Spacer(Modifier.weight(0.5f))
+                    TownGridCard(
+                        icon      = Icons.Filled.CloudUpload,
+                        name      = stringResource(R.string.home_sync_title),
+                        onClick   = {
+                            triggerSaveViewerUpload(
+                                viewerUrl           = viewerUrl,
+                                context             = context,
+                                scope               = scope,
+                                snackbarHostState   = snackbarHostState,
+                                settingsViewModel   = settingsViewModel,
+                                onUploadingChange   = { isViewerUploading = it },
+                                onNavigateToSettings = onNavigateToSettings,
+                            )
+                        },
+                        modifier  = Modifier.weight(1f),
+                        isLoading = isViewerUploading,
+                        enabled   = !isViewerUploading,
+                    )
                 }
             }
 
@@ -747,13 +771,23 @@ private fun TownGridCard(
     modifier: Modifier = Modifier,
     iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     badgeCount: Int = 0,
+    enabled: Boolean = true,
+    isLoading: Boolean = false,
 ) {
-    ElevatedCard(modifier = modifier.clickable { onClick() }) {
+    ElevatedCard(
+        modifier = modifier.clickable(enabled = enabled && !isLoading) { onClick() },
+    ) {
         Column(
             modifier            = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (badgeCount > 0) {
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier    = Modifier.size(28.dp),
+                    strokeWidth = 2.dp,
+                    color       = iconTint,
+                )
+            } else if (badgeCount > 0) {
                 BadgedBox(badge = { Badge { Text("$badgeCount") } }) {
                     Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
                 }
