@@ -196,21 +196,15 @@ jobs:
           } > "$NOTES_FILE"
           echo "file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
 
-      - name: Delete existing release (force rebuild)
-        if: steps.skip.outputs.skip != 'true' && inputs.force == true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release delete "${{ steps.upstream.outputs.tag }}" --repo "${{ github.repository }}" --yes || true
-          git push origin ":refs/tags/${{ steps.upstream.outputs.tag }}" || true
-
-      - name: Create GitHub release
+      - name: Publish GitHub release
         if: steps.skip.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ steps.upstream.outputs.tag }}"
           VERSION="${{ steps.gradle_version.outputs.version_name }}"
+          REPO="${{ github.repository }}"
+          TARGET_SHA="${{ steps.gradle_version.outputs.release_sha }}"
           APK="app/build/outputs/apk/release/IdleFantasy-v${VERSION}.apk"
           if [[ ! -f "$APK" ]]; then
             APK="$(find app/build/outputs/apk/release -name '*.apk' | head -1)"
@@ -219,10 +213,36 @@ jobs:
             echo "::error::Release APK not found under app/build/outputs/apk/release/"
             exit 1
           fi
+
+          # Fork-Sync may push upstream tags that point to upstream SHAs, not our fork HEAD.
+          REMOTE_TAG_SHA="$(gh api "repos/${REPO}/git/ref/tags/${TAG}" --jq '.object.sha' 2>/dev/null || true)"
+          if [[ -n "$REMOTE_TAG_SHA" && "$REMOTE_TAG_SHA" != "$TARGET_SHA" ]]; then
+            echo "Removing stale tag ${TAG} (${REMOTE_TAG_SHA} != fork HEAD ${TARGET_SHA})"
+            gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+          fi
+
+          if gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1; then
+            if [[ "${{ inputs.force }}" == "true" ]]; then
+              echo "Force rebuild — deleting existing release ${TAG}"
+              gh release delete "$TAG" --repo "$REPO" --yes
+              gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+            else
+              ASSET_COUNT="$(gh release view "$TAG" --repo "$REPO" --json assets -q '.assets | length')"
+              if [[ "$ASSET_COUNT" -gt 0 ]]; then
+                echo "Release ${TAG} already published on ${REPO} — nothing to do"
+                exit 0
+              fi
+              echo "Release ${TAG} exists without assets — recreating"
+              gh release delete "$TAG" --repo "$REPO" --yes
+              gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+            fi
+          fi
+
           gh release create "$TAG" \
+            --repo "$REPO" \
             --title "$TAG" \
             --notes-file "${{ steps.notes.outputs.file }}" \
-            --target "${{ steps.gradle_version.outputs.release_sha }}" \
+            --target "$TARGET_SHA" \
             "$APK#IdleFantasy-v${VERSION}.apk"
 
       - name: Trigger Save Viewer sync (optional)
