@@ -22,13 +22,27 @@ This fork can upload your in-game export JSON to the **[Idle Fantasy Save Viewer
 - **Live demo:** [if-viewer.elpatron.me](https://if-viewer.elpatron.me/)
 - **Viewer source:** [gitea.elpatron.me/elpatron/Idle-Fantasy-Save-Viewer](https://gitea.elpatron.me/elpatron/Idle-Fantasy-Save-Viewer)
 
-**Setup (one-time):**
+### Setup (one-time)
 
 1. Open the viewer in a browser → create a personal link → **Copy link**
 2. In the app: **Settings → Save Data → Save Viewer URL** → paste the link
-3. **Tap Sync** on the home screen to open the viewer, or **long-press Sync** to upload; alternatively use **Send to Save Viewer** in settings
 
-Upload uses `INTERNET` only for this optional feature. Offline play is unchanged. The viewer URL is stored in your local save; no account is required.
+### Home screen — Sync button
+
+The **Sync** button sits in the town grid on the home screen (bottom row, next to Builder / Slayer / Carnival):
+
+| Gesture | Action |
+|---|---|
+| **Tap** | Open your Save Viewer in the browser (Custom Tab) |
+| **Long press** | Upload the current save to the viewer |
+
+If no viewer URL is configured, both gestures show a hint with a shortcut to **Settings**. While an upload is running, the button shows a spinner and ignores input.
+
+### Settings
+
+**Send to Save Viewer** (under **Settings → Save Data**) uploads the save — same action as a long press on the home-screen Sync button.
+
+`INTERNET` is used only for this optional feature (upload and opening the viewer link). Offline play is unchanged. The viewer URL is stored in your local save; no account is required.
 
 ## Getting the app (this fork)
 
