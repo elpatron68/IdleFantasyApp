@@ -900,6 +900,7 @@ class HomeViewModel @Inject constructor(
             }
             sessionRepo.abandonSession(session.sessionId)
             queuedSessionStarter.startNextQueued()
+            reconcileTowerQueue()
         }
     }
 
@@ -1196,11 +1197,15 @@ class HomeViewModel @Inject constructor(
             if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
             playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)
                 ?.let { playerRepo.addItems(it) }
+            reconcileTowerQueue()
         }
     }
 
     fun moveQueueItem(fromIndex: Int, toIndex: Int) {
-        viewModelScope.launch { playerRepo.moveQueueItem(fromIndex, toIndex) }
+        viewModelScope.launch { 
+            playerRepo.moveQueueItem(fromIndex, toIndex) 
+            reconcileTowerQueue()
+        }
     }
 
     fun saveCharacterProfile(name: String, gender: String, race: String) {
@@ -1218,6 +1223,34 @@ class HomeViewModel @Inject constructor(
     fun dismissWhatsNew() {
         viewModelScope.launch {
             playerRepo.markWhatsNewSeen(BuildConfig.VERSION_CODE)
+        }
+    }
+
+    private suspend fun reconcileTowerQueue() {
+        val activeSession = sessionRepo.getActiveSession()
+        val runningFloor = if (activeSession?.skillName == "tower") {
+            activeSession.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
+        } else {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            flags.towerCurrentFloor
+        }
+
+        playerRepo.updateFlagsAtomically { flags ->
+            var nextFloor = runningFloor + 1
+            var changed = false
+            val newQueue = flags.sessionQueue.map { action ->
+                if (action.skillName == "tower") {
+                    val expectedKey = "tower_floor_$nextFloor"
+                    val expectedName = "Infinite Tower: Floor $nextFloor"
+                    nextFloor++
+                    if (action.activityKey != expectedKey || action.skillDisplayName != expectedName) {
+                        changed = true
+                        action.copy(activityKey = expectedKey, skillDisplayName = expectedName)
+                    } else action
+                } else action
+            }
+            if (changed) flags.copy(sessionQueue = newQueue) else flags
         }
     }
 }
