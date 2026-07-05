@@ -34,6 +34,7 @@ import javax.inject.Singleton
 class QueuedSessionStarter @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
+    private val townRepo: TownRepository,
     private val gameData: GameDataRepository,
     private val json: Json,
 ) {
@@ -638,7 +639,7 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct        = gatheringPetBoost(player.pets, CarnivalSimulator.relevantSkill(action.activityKey)),
                     agilityLevel       = agilityLevel,
                     agilityPrestige    = flags.skillPrestige[Skills.AGILITY] ?: 0,
-                    fairgroundsTier    = flags.townBuildingTiers["fairgrounds"] ?: 0,
+                    tierBonus          = townRepo.idleTicketBonusChance(flags)
                 )
                 startSession(action, result, offline, backdateMs)
             }

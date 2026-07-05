@@ -99,6 +99,21 @@ class TownRepository @Inject constructor(
         return (multiplier * 10).toLong() * 600_000L
     }
 
+    /** Calculates the multiplier for the idle tickets in the fairgrounds */
+    fun idleTicketBonusChance(building: String, tier: Int): Float {
+        val bonuses = gameData.townBuildings[building]?.tiers?.getOrNull(tier - 1)?.bonuses
+        return (bonuses?.get("idle_ticket_bonus_chance")?.toFloat() ?: 0f)
+    }
+
+    /** Calculates the multiplier for the idle tickets in the fairgrounds */
+    fun idleTicketBonusChance(flags: PlayerFlags): Float {
+        var bonusChance = 0.0f
+        flags.townBuildingTiers.forEach { buildingName, tier ->
+            bonusChance += idleTicketBonusChance(buildingName, tier)
+        }
+        return bonusChance
+    }
+
     /** Blessing duration in ms */
     fun extraBlessingDuration(building: String, tier: Int): Long {
         val hoursMs = 3_600_000L

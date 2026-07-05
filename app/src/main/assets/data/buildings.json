@@ -35,7 +35,6 @@
           "mithril_nail": 3000
         },
         "bonuses": {
-          "guild_quest_reduction": 0.1,
           "worker_xp": 0.3
         }
       }
@@ -134,7 +133,8 @@
         },
         "bonuses": {
           "extra_carnival_games": 1,
-          "carnival_cooldown_mult": 0.75
+          "carnival_cooldown_mult": 0.75,
+          "idle_ticket_bonus_chance": 0.05
         }
       },
       {
@@ -147,7 +147,8 @@
         },
         "bonuses": {
           "extra_carnival_games": 1,
-          "carnival_cooldown_mult": 0.75
+          "carnival_cooldown_mult": 0.75,
+          "idle_ticket_bonus_chance": 0.1
         }
       },
       {
@@ -160,7 +161,8 @@
         },
         "bonuses": {
           "extra_carnival_games": 2,
-          "carnival_cooldown_mult": 0.5
+          "carnival_cooldown_mult": 0.5,
+          "idle_ticket_bonus_chance": 0.15
         }
       }
     ]

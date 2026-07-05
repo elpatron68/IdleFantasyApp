@@ -85,6 +85,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
+import com.fantasyidler.simulator.CarnivalSimulator
 
 private val POTION_COLORS = listOf(
     Color(0xFF4CAF50), // green
@@ -186,7 +187,7 @@ fun CarnivalScreen(
                 modifier = Modifier.fillMaxSize(),
             ) { page ->
                 when (page) {
-                    0 -> IdleGamesTab(state.skillLevels, state.queueSize, viewModel)
+                    0 -> IdleGamesTab(state.skillLevels, state.tierBonus, state.queueSize, viewModel)
                     1 -> ActiveGamesTab(state, viewModel)
                     2 -> PrizeShopTab(state, viewModel)
                 }
@@ -214,6 +215,7 @@ private val IDLE_GAMES = listOf(
 @Composable
 private fun IdleGamesTab(
     skillLevels: Map<String, Int>,
+    tierBonus: Float,
     queueSize: Int,
     viewModel: CarnivalViewModel,
 ) {
@@ -232,7 +234,7 @@ private fun IdleGamesTab(
         )
         IDLE_GAMES.forEach { game ->
             val skillLevel  = skillLevels[game.skillKey] ?: 1
-            val myTickets   = (60 * (0.15 + (skillLevel - 1) * (0.20 / 98.0))).toInt()
+            val myTickets = CarnivalSimulator.estimateTickets(skillLevel, tierBonus)
             Surface(
                 shape    = RoundedCornerShape(12.dp),
                 color    = MaterialTheme.colorScheme.surfaceVariant,
