@@ -334,23 +334,22 @@ class HomeViewModel @Inject constructor(
                         val towerAllItems   = mutableMapOf<String, Int>()
                         val towerFood       = mutableMapOf<String, Int>()
                         val towerKills      = mutableMapOf<String, Int>()
+                        val towerArrows     = mutableMapOf<String, Int>()
+                        val towerRunes      = mutableMapOf<String, Int>()
                         for (frame in frames) {
                             for ((skill, xp) in frame.xpBySkill)    towerXpPerSkill[skill] = (towerXpPerSkill[skill] ?: 0L) + xp
                             for ((item,  qty) in frame.items)        towerAllItems[item]     = (towerAllItems[item] ?: 0) + qty
                             for ((food,  qty) in frame.foodConsumed) towerFood[food]         = (towerFood[food] ?: 0) + qty
                             for ((e,     k)   in frame.killsByEnemy) towerKills[e]           = (towerKills[e] ?: 0) + k
+                            for ((arrow, qty) in frame.arrowsConsumed) towerArrows[arrow]    = (towerArrows[arrow] ?: 0) + qty
+                            for ((rune,  qty) in frame.runesConsumed) towerRunes[rune]       = (towerRunes[rune] ?: 0) + qty
                         }
                         if (playerDied) {
                             towerXpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * 0.1).toLong()) }
                             towerAllItems.replaceAll { _, qty -> maxOf(0, (qty * 0.1).toInt()) }
                             towerAllItems.entries.removeIf { it.value == 0 }
                         }
-                        val towerCoinsRaw    = towerAllItems.remove("coins")?.toLong() ?: 0L
-                        val towerFlags       = playerRepo.getFlags()
-                        val towerXpMult      = 1.0 + towerFlags.towerXpBonusPct / 100.0
-                        val towerCoinMult    = 1.0 + towerFlags.towerCoinBonusPct / 100.0
-                        val towerXpForRepo   = towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
-                        val towerCoinsGained = (towerCoinsRaw * towerCoinMult).toLong()
+                        
                         if (!playerDied && towerKills.isNotEmpty()) {
                             var slayerXp = 0L
                             for ((enemy, k) in towerKills) slayerXp += slayerRepo.recordKills(enemy, k)
@@ -366,8 +365,24 @@ class HomeViewModel @Inject constructor(
                             for ((e, k) in towerKills) dailyKills[e] = (dailyKills[e] ?: 0) + k
                             guildRepo.recordGuildCombat(towerKills, style)
                         }
+
+                        val towerCoinsRaw    = towerAllItems.remove("coins")?.toLong() ?: 0L
+                        val towerFlags       = playerRepo.getFlags()
+                        val towerXpMult      = 1.0 + towerFlags.towerXpBonusPct / 100.0
+                        val towerCoinMult    = 1.0 + towerFlags.towerCoinBonusPct / 100.0
+                        val towerXpForRepo   = towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
+                        val towerCoinsGained = (towerCoinsRaw * towerCoinMult).toLong()
+
                         playerRepo.applyMultiSkillResults(towerXpForRepo, towerAllItems, towerCoinsGained)
-                        if (towerFood.isNotEmpty()) playerRepo.consumeItems(towerFood)
+
+                        val skillLvls = playerRepo.getSkillLevels()
+                        val arrowsReclaimed = towerArrows.mapValues { (_, qty) -> (qty * reclaimChance(skillLvls[Skills.RANGED] ?: 1)).toInt() }.filterValues { it > 0 }
+                        val runesReclaimed  = towerRunes.mapValues { (_, qty) -> (qty * reclaimChance(skillLvls[Skills.MAGIC] ?: 1)).toInt() }.filterValues { it > 0 }
+                        val finalTowerArrows = towerArrows.mapValues { (k, v) -> v - (arrowsReclaimed[k] ?: 0) }.filterValues { it > 0 }
+                        val finalTowerRunes  = towerRunes.mapValues { (k, v) -> v - (runesReclaimed[k] ?: 0) }.filterValues { it > 0 }
+
+                        val totalConsumables = towerFood + finalTowerArrows + finalTowerRunes
+                        if (totalConsumables.isNotEmpty()) playerRepo.consumeItems(totalConsumables)
                         val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
                         val updatedTowerFlags = playerRepo.getFlags()
                         if (playerDied) {
