@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buildings — Idle Fantasy Wiki</title>
+  <link rel="stylesheet" href="assets/style.css?v=3">
+  <script data-goatcounter="https://idlefantasy.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+  <script>
+    (function() {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+    <a class="site-title" href="index.html">
+      <span class="site-icon">&#9876;&#65039;</span>
+      Idle Fantasy Wiki
+    </a>
+    <span class="site-tagline">Community reference for all skills, combat, and crafting</span>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+  </header>
+
+  <div id="nav-backdrop" class="nav-backdrop"></div>
+
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Wiki navigation">
+      <ul>
+<li><a href="Home.html">Home</a></li>
+<li class="nav-section"><span class="nav-label">Contributing</span><ul>
+<li><a href="getting_started_game.html">Getting Started - Game Contributions</a></li>
+<li><a href="getting_started_wiki.html">Getting Started - Wiki Contributions</a></li>
+<li><a href="wiki_page_types.html">Types of Wiki Pages</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Skills</span><ul>
+<li><a href="Skills.html">Skills</a></li>
+<li class="nav-section"><span class="nav-label">Gathering</span><ul>
+<li><a href="Mining.html">Mining</a></li>
+<li><a href="Fishing.html">Fishing</a></li>
+<li><a href="Woodcutting.html">Woodcutting</a></li>
+<li><a href="Farming.html">Farming</a></li>
+<li><a href="Agility.html">Agility</a></li>
+<li><a href="Thieving.html">Thieving</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Crafting</span><ul>
+<li><a href="Smithing.html">Smithing</a></li>
+<li><a href="Cooking.html">Cooking</a></li>
+<li><a href="Fletching.html">Fletching</a></li>
+<li><a href="Crafting.html">Crafting</a></li>
+<li><a href="Firemaking.html">Firemaking</a></li>
+<li><a href="Runecrafting.html">Runecrafting</a></li>
+<li><a href="Herblore.html">Herblore</a></li>
+<li><a href="Construction.html">Construction</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Support</span><ul>
+<li><a href="Prayer.html">Prayer</a></li>
+<li><a href="Mercantile.html">Mercantile</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Combat</span><ul>
+<li><a href="Slayer.html">Slayer</a></li>
+</ul></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Inventory</span><ul>
+<li><a href="Equipment.html">Equipment</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Combat</span><ul>
+<li><a href="Bosses.html">Bosses</a></li>
+<li><a href="Dungeons.html">Dungeons</a></li>
+<li><a href="Enemies.html">Enemies</a></li>
+<li><a href="Spells.html">Spells</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Town</span><ul>
+<li><a href="Shop.html">Shop</a></li>
+<li><a href="Workers.html">Workers</a></li>
+<li><a href="Guilds.html">Guilds</a></li>
+<li><a href="Buildings.html" class="active">Buildings</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Miscellaneous</span><ul>
+<li><a href="Expeditions.html">Expeditions</a></li>
+<li><a href="Pets.html">Pets</a></li>
+<li><a href="Quests.html">Quests</a></li>
+</ul></li>
+</ul>
+    </nav>
+
+    <main class="content">
+      <h1 id="buildings">Buildings</h1>
+<p>The <strong>Building Master</strong> in the Town screen lets you upgrade five permanent town buildings. Each building provides a passive bonus that scales with its tier. Upgrades require coins and Construction materials crafted at the <a href="Construction.html">Construction</a> skill.</p>
+<p>Buildings start at Tier 0 (no bonus) and can be upgraded to Tier 2 or 3. Higher tiers require a higher Construction level.</p>
+<hr />
+<h2 id="inn">Inn</h2>
+<p>Increases the XP gained by both workers each session.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Construction Level</th>
+<th>Coin Cost</th>
+<th>Materials</th>
+<th>Bonuses</th>
+</tr>
+</thead>
+<tbody>
+<tr id="0">
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>No bonus</td>
+</tr>
+<tr id="1">
+<td>1</td>
+<td>20</td>
+<td>50,000</td>
+<td>200× <a href="Fletching.html#plank">Plank</a>, 100× <a href="Fletching.html#oak_plank">Oak Plank</a>, 500× <a href="Smithing.html#iron_nail">Iron Nail</a></td>
+<td>+10% Worker XP Multiplier</td>
+</tr>
+<tr id="2">
+<td>2</td>
+<td>45</td>
+<td>250,000</td>
+<td>500× <a href="Fletching.html#oak_plank">Oak Plank</a>, 200× <a href="Fletching.html#willow_plank">Willow Plank</a>, 1500× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>+20% Worker XP Multiplier</td>
+</tr>
+<tr id="3">
+<td>3</td>
+<td>70</td>
+<td>1,000,000</td>
+<td>1000× <a href="Fletching.html#willow_plank">Willow Plank</a>, 1000× <a href="Fletching.html#maple_plank">Maple Plank</a>, 3000× <a href="Smithing.html#mithril_nail">Mithril Nail</a></td>
+<td>+30% Worker XP Multiplier</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="guild-hall">Guild Hall</h2>
+<p>Reduces the quantity required for all guild quest targets.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Construction Level</th>
+<th>Coin Cost</th>
+<th>Materials</th>
+<th>Bonuses</th>
+</tr>
+</thead>
+<tbody>
+<tr id="0">
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>No bonus</td>
+</tr>
+<tr id="1">
+<td>1</td>
+<td>25</td>
+<td>75,000</td>
+<td>300× <a href="Fletching.html#oak_plank">Oak Plank</a>, 600× <a href="Smithing.html#iron_nail">Iron Nail</a></td>
+<td>Quest req. -10%</td>
+</tr>
+<tr id="2">
+<td>2</td>
+<td>50</td>
+<td>350,000</td>
+<td>600× <a href="Fletching.html#willow_plank">Willow Plank</a>, 1500× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>Quest req. -20%</td>
+</tr>
+<tr id="3">
+<td>3</td>
+<td>75</td>
+<td>1,500,000</td>
+<td>1500× <a href="Fletching.html#maple_plank">Maple Plank</a>, 500× <a href="Fletching.html#yew_plank">Yew Plank</a>, 3000× <a href="Smithing.html#mithril_nail">Mithril Nail</a></td>
+<td>Quest req. -30%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="church">Church</h2>
+<p>Extends the duration of the Prayer blessing activated from the <a href="Prayer.html">Prayer</a> skill.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Construction Level</th>
+<th>Coin Cost</th>
+<th>Materials</th>
+<th>Bonuses</th>
+</tr>
+</thead>
+<tbody>
+<tr id="0">
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>No bonus</td>
+</tr>
+<tr id="1">
+<td>1</td>
+<td>30</td>
+<td>100,000</td>
+<td>200× <a href="Fletching.html#oak_plank">Oak Plank</a>, 400× Carved Stone, 500× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>Blessing: 30h</td>
+</tr>
+<tr id="2">
+<td>2</td>
+<td>55</td>
+<td>500,000</td>
+<td>500× <a href="Fletching.html#willow_plank">Willow Plank</a>, 600× Stone Block, 1500× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>Blessing: 36h</td>
+</tr>
+<tr id="3">
+<td>3</td>
+<td>80</td>
+<td>2,000,000</td>
+<td>800× <a href="Fletching.html#yew_plank">Yew Plank</a>, 1000× Stone Block, 3000× <a href="Smithing.html#mithril_nail">Mithril Nail</a></td>
+<td>Blessing: 48h</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fairgrounds">Fairgrounds</h2>
+<p>Unlocks additional Carnival minigames, reduces minigame cooldowns, and increases idle ticket drop chance.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Construction Level</th>
+<th>Coin Cost</th>
+<th>Materials</th>
+<th>Bonuses</th>
+</tr>
+</thead>
+<tbody>
+<tr id="0">
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>No bonus</td>
+</tr>
+<tr id="1">
+<td>1</td>
+<td>35</td>
+<td>150,000</td>
+<td>250× <a href="Fletching.html#oak_plank">Oak Plank</a>, 100× <a href="Fletching.html#willow_plank">Willow Plank</a>, 600× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>Pick-a-Cup, 7.5 min cooldown, +5% idle ticket chance</td>
+</tr>
+<tr id="2">
+<td>2</td>
+<td>55</td>
+<td>600,000</td>
+<td>600× <a href="Fletching.html#willow_plank">Willow Plank</a>, 200× <a href="Fletching.html#maple_plank">Maple Plank</a>, 1500× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>Higher or Lower, +10% idle ticket chance</td>
+</tr>
+<tr id="3">
+<td>3</td>
+<td>75</td>
+<td>1,500,000</td>
+<td>800× <a href="Fletching.html#maple_plank">Maple Plank</a>, 400× <a href="Fletching.html#yew_plank">Yew Plank</a>, 2500× <a href="Smithing.html#mithril_nail">Mithril Nail</a></td>
+<td>5 min cooldown, +15% idle ticket chance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="garden">Garden</h2>
+<p>Grants extra <a href="Farming.html">Farming</a> plots for growing crops.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Construction Level</th>
+<th>Coin Cost</th>
+<th>Materials</th>
+<th>Bonuses</th>
+</tr>
+</thead>
+<tbody>
+<tr id="0">
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>No bonus</td>
+</tr>
+<tr id="1">
+<td>1</td>
+<td>30</td>
+<td>80,000</td>
+<td>100× <a href="Fletching.html#plank">Plank</a>, 200× <a href="Fletching.html#oak_plank">Oak Plank</a>, 400× <a href="Smithing.html#iron_nail">Iron Nail</a></td>
+<td>+1 extra farming plot</td>
+</tr>
+<tr id="2">
+<td>2</td>
+<td>55</td>
+<td>400,000</td>
+<td>400× <a href="Fletching.html#oak_plank">Oak Plank</a>, 200× <a href="Fletching.html#willow_plank">Willow Plank</a>, 1000× <a href="Smithing.html#steel_nail">Steel Nail</a></td>
+<td>+2 extra farming plots</td>
+</tr>
+</tbody>
+</table>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <span>All data is auto-generated from game files and stays up to date with the latest release.</span>
+    <span>·</span>
+    <a href="https://github.com/tristinbaker/IdleFantasy/issues" target="_blank" rel="noopener">Report an issue</a>
+    <span>·</span>
+    <a href="https://github.com/tristinbaker/IdleFantasy" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script>
+    (function() {
+      // ---- Dark mode ----
+      var themeBtn = document.getElementById('theme-toggle');
+      function updateThemeIcon() {
+        themeBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+      }
+      updateThemeIcon();
+      themeBtn.addEventListener('click', function() {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon();
+      });
+
+      // ---- Hamburger nav ----
+      var navToggle = document.getElementById('nav-toggle');
+      var sidebar   = document.getElementById('sidebar');
+      var backdrop  = document.getElementById('nav-backdrop');
+      function openNav() {
+        sidebar.classList.add('open');
+        backdrop.classList.add('visible');
+        navToggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeNav() {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('visible');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+      navToggle.addEventListener('click', function() {
+        sidebar.classList.contains('open') ? closeNav() : openNav();
+      });
+      backdrop.addEventListener('click', closeNav);
+      sidebar.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') closeNav();
+      });
+    })();
+  </script>
+</body>
+</html>
