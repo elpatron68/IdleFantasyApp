@@ -42,6 +42,9 @@ jobs:
           target_sync_branch: main
           target_repo_token: ${{ secrets.GITHUB_TOKEN }}
           test_mode: false
+          # Avoid false "No new commits" when histories diverged longer than
+          # the action's default shallow window.
+          shallow_since: "2000-01-01T00:00:00Z"
 
       - name: Detect new commits
         id: changes
