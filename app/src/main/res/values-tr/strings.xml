@@ -1117,7 +1117,7 @@
     <string name="town_building_inn_name">Inn</string>
     <string name="town_building_guild_hall_name">Guild Hall</string>
     <string name="town_building_church_name">Church</string>
-    <string name="town_building_current_tier">Kademe %1$d / 3</string>
+    <string name="town_building_current_tier">Kademe %1$d / %2$d</string>
     <string name="town_building_maxed_label">Tamamen Geliştirildi</string>
     <string name="town_upgrade_next_label">Sonraki Yükseltme</string>
     <string name="town_upgrade_constr_req">İnşaat Sv. %1$d gerekli</string>
@@ -1140,9 +1140,11 @@
     <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10% idle ticket chance</string>
     <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string>
     <string name="town_building_garden_name">Garden</string>
-    <string name="town_garden_no_bonus">No extra farm plots yet</string>
-    <string name="town_garden_t1_bonus">+1 extra farm plot</string>
-    <string name="town_garden_t2_bonus">+2 extra farm plots</string>
+    <plurals name="town_garden_bonus">
+        <item quantity="zero">Henüz ekstra çiftlik parseli yok</item>
+        <item quantity="one">+%1$d ekstra çiftlik parseli</item>
+        <item quantity="other">+%1$d ekstra çiftlik parseli</item>
+    </plurals>
     <string name="achievement_town_first_upgrade_name">İlk Tadilat</string>
     <string name="achievement_town_first_upgrade_desc">Herhangi bir kasaba binasını ilk kez yükselt</string>
     <string name="achievement_town_all_tier1_name">Kasaba Geliştirici</string>
@@ -1247,7 +1249,7 @@
     <string name="carnival_active_appraisal_desc">Hangi eşya açık pazarda daha değerlidir?</string>
     <string name="carnival_appraisal_which">Hangisi daha değerli?</string>
     <string name="carnival_play">Oyna</string>
-    <string name="carnival_cooldown">%1$ds %2$dd içinde hazır</string>
+    <string name="carnival_cooldown">%1$ddk %2$dsn içinde hazır</string>
     <string name="carnival_ticket_cost">%1$d bilet</string>
     <string name="carnival_redeem">Kullan</string>
     <string name="carnival_queue_added">Sıraya eklendi: %1$s.</string>
@@ -1416,6 +1418,7 @@
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
     <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_not_enough_runes">Maksimum saldırı sayısı için yeterli %1$s yok.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
     <string name="tower_enemies_this_floor">Enemies</string>

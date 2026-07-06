@@ -22,9 +22,9 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
-import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -66,7 +66,6 @@ class TowerViewModel @Inject constructor(
     private val gameData: GameDataRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val questRepo: QuestRepository,
-    private val slayerRepo: SlayerRepository,
     private val guildRepo: GuildRepository,
     private val json: Json,
 ) : ViewModel() {
@@ -323,6 +322,15 @@ class TowerViewModel @Inject constructor(
                 val runeKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
                 val runeCost = selectedSpell?.runeCost ?: 1
 
+                val neededRunes = 60 * CombatSimulator.TICKS_PER_FRAME * runeCost
+                if (runeKey != null && (inventory[runeKey] ?: 0) < neededRunes) {
+                    _extra.update { it.copy(
+                        snackbarMessage = context.getString(R.string.tower_not_enough_runes, GameStrings.itemName(context, runeKey)),
+                        startingSession = false,
+                    ) }
+                    return@launch
+                }
+
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = enemies,
@@ -349,13 +357,7 @@ class TowerViewModel @Inject constructor(
                     runeCostPerAttack   = runeCost,
                 )
 
-                if (runeKey != null) {
-                    val totalAttacks = result.frames.size * CombatSimulator.TICKS_PER_FRAME
-                    val needed = totalAttacks * runeCost
-                    val toConsume = minOf(needed, inventory[runeKey] ?: 0)
-                    if (toConsume > 0) playerRepo.consumeItems(mapOf(runeKey to toConsume))
-                }
-
+                // Runes are consumed after the session, not upfront.
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
                     result.frames,
@@ -407,11 +409,28 @@ class TowerViewModel @Inject constructor(
             val allItems        = mutableMapOf<String, Int>()
             val allFoodConsumed = mutableMapOf<String, Int>()
             val allKillsByEnemy = mutableMapOf<String, Int>()
+            val allArrowsConsumed = mutableMapOf<String, Int>()
+            val allRunesConsumed  = mutableMapOf<String, Int>()
             for (frame in frames) {
                 for ((skill, xp) in frame.xpBySkill)      totalXpPerSkill[skill] = (totalXpPerSkill[skill] ?: 0L) + xp
                 for ((item,  qty) in frame.items)          allItems[item]         = (allItems[item] ?: 0) + qty
                 for ((food,  qty) in frame.foodConsumed)   allFoodConsumed[food]  = (allFoodConsumed[food] ?: 0) + qty
                 for ((enemy, qty) in frame.killsByEnemy)   allKillsByEnemy[enemy] = (allKillsByEnemy[enemy] ?: 0) + qty
+                for ((arrow, qty) in frame.arrowsConsumed) allArrowsConsumed[arrow] = (allArrowsConsumed[arrow] ?: 0) + qty
+                for ((rune,  qty) in frame.runesConsumed)  allRunesConsumed[rune]   = (allRunesConsumed[rune] ?: 0) + qty
+            }
+
+            if (!playerDied && allKillsByEnemy.isNotEmpty()) {
+                val combatStyle = detectCombatStyle(totalXpPerSkill)
+                questRepo.recordCombat(
+                    dungeonKey        = session.activityKey,
+                    killsByEnemy      = allKillsByEnemy,
+                    loot              = allItems,
+                    combatStyle       = combatStyle,
+                    foodConsumedTotal = allFoodConsumed.values.sum(),
+                )
+                playerRepo.recordDailyKills(allKillsByEnemy)
+                guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
             }
 
             if (playerDied) {
@@ -430,24 +449,20 @@ class TowerViewModel @Inject constructor(
             val xpForRepo = totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
             coinsGained   = (coinsGained * towerCoinMult).toLong()
 
-            if (!playerDied && allKillsByEnemy.isNotEmpty()) {
-                var slayerXp = 0L
-                for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
-                if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
-                val combatStyle = detectCombatStyle(totalXpPerSkill)
-                questRepo.recordCombat(
-                    dungeonKey        = session.activityKey,
-                    killsByEnemy      = allKillsByEnemy,
-                    loot              = allItems,
-                    combatStyle       = combatStyle,
-                    foodConsumedTotal = allFoodConsumed.values.sum(),
-                )
-                playerRepo.recordDailyKills(allKillsByEnemy)
-                guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
-            }
-
             playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
-            if (allFoodConsumed.isNotEmpty()) playerRepo.consumeItems(allFoodConsumed)
+
+            val skillLevels = json.decodeFromString<Map<String, Int>>(playerRepo.getOrCreatePlayer().skillLevels)
+            val rangedLevel = skillLevels[Skills.RANGED] ?: 1
+            val magicLevel  = skillLevels[Skills.MAGIC] ?: 1
+
+            val arrowsReclaimed = allArrowsConsumed.mapValues { (_, qty) -> (qty * reclaimChance(rangedLevel)).toInt() }.filterValues { it > 0 }
+            val runesReclaimed  = allRunesConsumed.mapValues { (_, qty) -> (qty * reclaimChance(magicLevel)).toInt() }.filterValues { it > 0 }
+
+            val finalArrowsConsumed = allArrowsConsumed.mapValues { (k, v) -> v - (arrowsReclaimed[k] ?: 0) }.filterValues { it > 0 }
+            val finalRunesConsumed  = allRunesConsumed.mapValues { (k, v) -> v - (runesReclaimed[k] ?: 0) }.filterValues { it > 0 }
+
+            val totalConsumables = allFoodConsumed + finalArrowsConsumed + finalRunesConsumed
+            if (totalConsumables.isNotEmpty()) playerRepo.consumeItems(totalConsumables)
 
             val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
 
@@ -528,4 +543,7 @@ class TowerViewModel @Inject constructor(
     fun snackbarConsumed() {
         _extra.update { it.copy(snackbarMessage = null) }
     }
+
+    /** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */
+    private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50
 }

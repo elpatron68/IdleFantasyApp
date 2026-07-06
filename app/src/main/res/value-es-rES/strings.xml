@@ -1396,4 +1396,5 @@
     <string name="armory_sort_strength">Strength</string>
     <string name="armory_sort_defense">Defense</string>
     <string name="armory_sort_requirement">Requirement</string>
+    <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string>
 </resources>

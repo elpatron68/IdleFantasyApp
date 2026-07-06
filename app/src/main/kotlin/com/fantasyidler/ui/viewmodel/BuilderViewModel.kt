@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.data.model.TownBuildings
+import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.repository.UpgradeBuildingResult
@@ -37,8 +37,9 @@ data class BuilderUiState(
 
 @HiltViewModel
 class BuilderViewModel @Inject constructor(
+    val gameData: GameDataRepository,
+    val townRepo: TownRepository,
     private val playerRepo: PlayerRepository,
-    private val townRepo: TownRepository,
     @ApplicationContext private val context: Context,
     private val json: Json,
 ) : ViewModel() {
@@ -75,7 +76,7 @@ class BuilderViewModel @Inject constructor(
                 "garden"       -> uiState.value.gardenTier
                 else           -> uiState.value.churchTier
             }
-            val def = TownBuildings.byKey(buildingKey)
+            val def = gameData.townBuildings[buildingKey]
             when (townRepo.upgradeBuilding(buildingKey)) {
                 UpgradeBuildingResult.Success ->
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.town_upgrade_success)) }

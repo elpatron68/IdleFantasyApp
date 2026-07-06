@@ -907,7 +907,7 @@
     <string name="town_building_inn_name">Penginapan</string>
     <string name="town_building_guild_hall_name">Balai Serikat</string>
     <string name="town_building_church_name">Gereja</string>
-    <string name="town_building_current_tier">Tingkat %1$d / 3</string>
+    <string name="town_building_current_tier">Tingkat %1$d / %2$d</string>
     <string name="town_building_maxed_label">Sepenuhnya Diupgrade</string>
     <string name="town_upgrade_next_label">Peningkatan Berikutnya</string>
     <string name="town_upgrade_constr_req">Konstruksi Lv. %1$d diperlukan</string>
@@ -930,9 +930,11 @@
     <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower</string>
     <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes</string>
     <string name="town_building_garden_name">Garden</string>
-    <string name="town_garden_no_bonus">No extra farm plots yet</string>
-    <string name="town_garden_t1_bonus">+1 extra farm plot</string>
-    <string name="town_garden_t2_bonus">+2 extra farm plots</string>
+    <plurals name="town_garden_bonus">
+        <item quantity="zero">Belum ada plot pertanian tambahan</item>
+        <item quantity="one">+%1$d plot pertanian tambahan</item>
+        <item quantity="other">+%1$d plot pertanian tambahan</item>
+    </plurals>
     <string name="achievement_town_first_upgrade_name">Renovasi Pertama</string>
     <string name="achievement_town_first_upgrade_desc">Tingkatkan bangunan kota mana pun untuk pertama kalinya.</string>
     <string name="achievement_town_all_tier1_name">Pengembang Kota</string>
@@ -1025,7 +1027,7 @@
     <string name="carnival_active_appraisal_desc">item mana yang lebih berharga di pasar terbuka?</string>
     <string name="carnival_appraisal_which">Mana yang lebih berharga?</string>
     <string name="carnival_play">Main</string>
-    <string name="carnival_cooldown">Siap dalam %1$dh %2$dm</string>
+    <string name="carnival_cooldown">Siap dalam %1$dm %2$ds</string>
     <string name="carnival_ticket_cost">tiket %1$d</string>
     <string name="carnival_redeem">Penukaran</string>
     <string name="carnival_queue_added">Ditambahkan ke antrian: %1$s.</string>
@@ -1186,6 +1188,7 @@
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
     <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_not_enough_runes">%1$s tidak cukup untuk jumlah serangan maksimal.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
     <string name="tower_enemies_this_floor">Enemies</string>

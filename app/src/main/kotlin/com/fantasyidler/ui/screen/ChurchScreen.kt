@@ -26,7 +26,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -83,7 +82,10 @@ fun ChurchScreen(
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(text = name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text(text = blessingEffectText(blessing, state.churchTier), style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            text = blessingEffectText(blessing, state.blessingDuration),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                         Spacer(Modifier.height(4.dp))
                         Text(
                             text  = stringResource(R.string.church_cost_bones, cost),
@@ -161,7 +163,7 @@ fun ChurchScreen(
                     ActiveBlessingBanner(
                         blessing     = state.activeBlessing!!,
                         remainingMs  = state.activeBlessingRemainingMs,
-                        churchTier   = state.churchTier,
+                        totalMs      = state.blessingDuration,
                         onDeactivate = viewModel::deactivateBlessing,
                     )
                 } else {
@@ -198,7 +200,7 @@ fun ChurchScreen(
                         isActive          = blessing.key == state.activeBlessing?.key && state.activeBlessingRemainingMs > 0,
                         anyBlessingActive = anyBlessingActive,
                         boneCost          = ChurchRepository.boneCostFor(blessing),
-                        churchTier        = state.churchTier,
+                        blessingTimeMs    = state.blessingDuration,
                         onActivate        = { viewModel.activateBlessing(blessing.key) },
                     )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -213,7 +215,7 @@ fun ChurchScreen(
 private fun ActiveBlessingBanner(
     blessing: BlessingData,
     remainingMs: Long,
-    churchTier: Int,
+    totalMs: Long,
     onDeactivate: () -> Unit,
 ) {
     val context   = LocalContext.current
@@ -221,7 +223,7 @@ private fun ActiveBlessingBanner(
         "blessing_${blessing.key}_name", "string", context.packageName,
     )
     val name = if (nameResId != 0) stringResource(nameResId) else blessing.key
-    val effectText = blessingEffectText(blessing, churchTier)
+    val effectText = blessingEffectText(blessing, totalMs)
 
     Row(
         modifier = Modifier
@@ -268,7 +270,7 @@ private fun BlessingRow(
     isActive: Boolean,
     anyBlessingActive: Boolean,
     boneCost: Int,
-    churchTier: Int,
+    blessingTimeMs: Long,
     onActivate: () -> Unit,
 ) {
     val context   = LocalContext.current
@@ -295,7 +297,7 @@ private fun BlessingRow(
                 color      = nameColor,
             )
             Text(
-                text  = blessingEffectText(blessing, churchTier),
+                text  = blessingEffectText(blessing, blessingTimeMs),
                 style = MaterialTheme.typography.bodySmall,
                 color = descColor,
             )
@@ -327,8 +329,8 @@ private fun BlessingRow(
 }
 
 @Composable
-private fun blessingEffectText(blessing: BlessingData, churchTier: Int): String {
-    val hours = when (churchTier) { 1 -> 30; 2 -> 36; 3 -> 48; else -> 24 }
+private fun blessingEffectText(blessing: BlessingData, blessingTimeMs: Long): String {
+    val hours = blessingTimeMs / 3_600_000
     return when (blessing.type) {
         BlessingType.XP      -> stringResource(R.string.church_effect_xp,   blessing.magnitude, hours)
         BlessingType.DEFENSE -> stringResource(R.string.church_effect_def,   blessing.magnitude.roundToInt(), hours)
