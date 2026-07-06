@@ -10,8 +10,9 @@ name: Upstream Release
 
 on:
   schedule:
-    # Hourly — upstream typically publishes one release per day
-    - cron: "15 * * * *"
+    # Poll every 15 minutes. GitHub scheduled runs can be delayed/dropped,
+    # so multiple slots per hour reduce release detection lag.
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
     inputs:
       upstream_tag:
@@ -95,6 +96,9 @@ jobs:
           target_sync_branch: main
           target_repo_token: ${{ secrets.GITHUB_TOKEN }}
           test_mode: false
+          # Keep history deep enough to detect/merge when fork and upstream
+          # have diverged for longer than the action's default 1 month window.
+          shallow_since: "2000-01-01T00:00:00Z"
 
       - name: Verify version matches upstream release
         if: steps.skip.outputs.skip != 'true'

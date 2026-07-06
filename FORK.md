@@ -59,7 +59,7 @@ The fork stays close to upstream through GitHub Actions:
 | Workflow | Trigger | What it does |
 |---|---|---|
 | **Upstream Sync** | Daily + manual | Merges [tristinbaker/IdleFantasy](https://github.com/tristinbaker/IdleFantasy) `main` into this fork; runs tests and builds a debug APK |
-| **Upstream Release** | Hourly + manual | When upstream publishes a new GitHub Release, syncs, builds a **signed release APK**, and publishes a matching release on this fork |
+| **Upstream Release** | Every 15 min + manual | When upstream publishes a new GitHub Release, syncs, builds a **signed release APK**, and publishes a matching release on this fork |
 
 To **manually trigger a release build** (requires repository secrets for the fork signing key):
 
