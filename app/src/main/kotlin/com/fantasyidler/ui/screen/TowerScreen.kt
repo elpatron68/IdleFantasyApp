@@ -233,13 +233,7 @@ private fun TowerHeaderCard(
                 ) {
                     Text(stringResource(R.string.tower_collect_prompt))
                 }
-                hasSession  -> OutlinedButton(
-                    onClick  = {},
-                    enabled  = false,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.tower_floor_label, currentFloor + 1))
-                }
+
                 else        -> Button(
                     onClick  = onStart,
                     enabled  = !startingSession,

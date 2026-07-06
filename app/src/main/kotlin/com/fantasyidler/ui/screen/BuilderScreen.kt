@@ -61,6 +61,8 @@ fun BuilderScreen(
                 BuildingUpgradeCard(
                     buildingKey       = "inn",
                     currentTier       = state.innTier,
+                    buildingDef       = viewModel.gameData.townBuildings["inn"],
+                    townRepository    = viewModel.townRepo,
                     constructionLevel = state.constructionLevel,
                     coins             = state.coins,
                     inventory         = state.inventory,
@@ -72,6 +74,8 @@ fun BuilderScreen(
                 BuildingUpgradeCard(
                     buildingKey       = "guild_hall",
                     currentTier       = state.guildHallTier,
+                    buildingDef       = viewModel.gameData.townBuildings["guild_hall"],
+                    townRepository    = viewModel.townRepo,
                     constructionLevel = state.constructionLevel,
                     coins             = state.coins,
                     inventory         = state.inventory,
@@ -83,6 +87,8 @@ fun BuilderScreen(
                 BuildingUpgradeCard(
                     buildingKey       = "church",
                     currentTier       = state.churchTier,
+                    buildingDef       = viewModel.gameData.townBuildings["church"],
+                    townRepository    = viewModel.townRepo,
                     constructionLevel = state.constructionLevel,
                     coins             = state.coins,
                     inventory         = state.inventory,
@@ -94,6 +100,8 @@ fun BuilderScreen(
                 BuildingUpgradeCard(
                     buildingKey       = "fairgrounds",
                     currentTier       = state.fairgroundsTier,
+                    buildingDef       = viewModel.gameData.townBuildings["fairgrounds"],
+                    townRepository    = viewModel.townRepo,
                     constructionLevel = state.constructionLevel,
                     coins             = state.coins,
                     inventory         = state.inventory,
@@ -105,6 +113,8 @@ fun BuilderScreen(
                 BuildingUpgradeCard(
                     buildingKey       = "garden",
                     currentTier       = state.gardenTier,
+                    buildingDef       = viewModel.gameData.townBuildings["garden"],
+                    townRepository    = viewModel.townRepo,
                     constructionLevel = state.constructionLevel,
                     coins             = state.coins,
                     inventory         = state.inventory,

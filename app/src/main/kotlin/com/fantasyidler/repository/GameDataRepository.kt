@@ -32,6 +32,7 @@ import com.fantasyidler.data.json.SmithingRecipe
 import com.fantasyidler.data.json.ConstructionRecipe
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.SpellData
+import com.fantasyidler.data.json.TownBuildingData
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.TreeData
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -222,6 +223,12 @@ class GameDataRepository @Inject constructor(
 
     val marketplace: MarketplaceJson by lazy {
         asset("data/marketplace.json")
+    }
+
+    // ------------------------------------------------------------------ building tiers
+
+    val townBuildings: Map<String, TownBuildingData> by lazy {
+        asset("data/buildings.json")
     }
 
     // ------------------------------------------------------------------ gathering activities

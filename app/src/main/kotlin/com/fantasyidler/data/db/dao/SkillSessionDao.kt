@@ -54,7 +54,7 @@ interface SkillSessionDao {
     @Query("SELECT * FROM skill_sessions WHERE session_id = :sessionId")
     suspend fun getSession(sessionId: String): SkillSession?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(session: SkillSession)
 
     @Update

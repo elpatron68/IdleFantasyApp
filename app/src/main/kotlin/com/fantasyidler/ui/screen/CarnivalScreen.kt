@@ -1,9 +1,6 @@
 package com.fantasyidler.ui.screen
 
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -78,13 +75,13 @@ import com.fantasyidler.ui.viewmodel.CarnivalViewModel
 import com.fantasyidler.ui.viewmodel.Difficulty
 import com.fantasyidler.util.GameStrings
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
+import com.fantasyidler.simulator.CarnivalSimulator
 
 private val POTION_COLORS = listOf(
     Color(0xFF4CAF50), // green
@@ -186,7 +183,7 @@ fun CarnivalScreen(
                 modifier = Modifier.fillMaxSize(),
             ) { page ->
                 when (page) {
-                    0 -> IdleGamesTab(state.skillLevels, state.queueSize, viewModel)
+                    0 -> IdleGamesTab(state.skillLevels, state.tierBonus, state.queueSize, viewModel)
                     1 -> ActiveGamesTab(state, viewModel)
                     2 -> PrizeShopTab(state, viewModel)
                 }
@@ -214,6 +211,7 @@ private val IDLE_GAMES = listOf(
 @Composable
 private fun IdleGamesTab(
     skillLevels: Map<String, Int>,
+    tierBonus: Float,
     queueSize: Int,
     viewModel: CarnivalViewModel,
 ) {
@@ -232,7 +230,7 @@ private fun IdleGamesTab(
         )
         IDLE_GAMES.forEach { game ->
             val skillLevel  = skillLevels[game.skillKey] ?: 1
-            val myTickets   = (60 * (0.15 + (skillLevel - 1) * (0.20 / 98.0))).toInt()
+            val myTickets = CarnivalSimulator.estimateTickets(skillLevel, tierBonus)
             Surface(
                 shape    = RoundedCornerShape(12.dp),
                 color    = MaterialTheme.colorScheme.surfaceVariant,
@@ -394,16 +392,14 @@ private fun CooldownRow(gameKey: String, resumesAtMs: Long, viewModel: CarnivalV
         while (remainingMs > 0) {
             delay(1_000L)
             remainingMs = resumesAtMs - System.currentTimeMillis()
-            if (remainingMs <= 0) {
-                viewModel.clearCooldownIfExpired(gameKey)
-            }
         }
+        viewModel.clearCooldownIfExpired(gameKey)
     }
-    val totalMinutes = (remainingMs / 60_000L).coerceAtLeast(0L)
-    val hours   = totalMinutes / 60L
-    val minutes = totalMinutes % 60L
+    val totalSeconds = (remainingMs / 1_000L).coerceAtLeast(0L)
+    val minutes   = totalSeconds / 60L
+    val seconds = totalSeconds % 60L
     Text(
-        text  = stringResource(R.string.carnival_cooldown, hours, minutes),
+        text  = stringResource(R.string.carnival_cooldown, minutes, seconds),
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )

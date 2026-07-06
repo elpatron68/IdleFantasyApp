@@ -1271,46 +1271,67 @@ def gen_guilds() -> str:
 
 
 def gen_buildings() -> str:
-    # Building tiers mirrored from TownBuildingDef / TownRepository
-    def building_table(tiers: list, bonus_col: str, bonuses: list[str]) -> str:
-        rows = []
-        rows.append([0, "—", "—", "—", "No bonus"])
-        for i, (con_lvl, coins, mats, bonus) in enumerate(tiers, start=1):
-            mat_str = ", ".join(f"{qty:,}x {title(item)}" for item, qty in mats.items())
-            rows.append([i, con_lvl, f"{coins:,}", mat_str, bonus])
-        return table(["Tier", "Construction Level", "Coin Cost", "Materials", bonus_col], rows)
+    def bonus_string(bonus: str, amount: float) -> str:
+        match bonus:
+            case "worker_xp":
+                return f"+{round(amount * 100)}% Worker XP Multiplier"
+            case "guild_quest_reduction":
+                return f"Quest req. -{round(amount * 100)}%"
+            case "extra_blessing_hrs":
+                return f"Blessing: {round(amount + 24)}h"
+            case "farm_plots":
+                return f"+{amount} extra farming plot{"s" if amount > 1 else ""}"
+            case _:
+                return f"+{amount} {bonus.replace("_", "").title()}"
 
-    inn_tiers = [
-        (20,   50_000,  {"plank": 200, "oak_plank": 100, "iron_nail": 500},        "Worker XP x1.10"),
-        (45,  250_000,  {"oak_plank": 500, "willow_plank": 200, "steel_nail": 1500}, "Worker XP x1.20"),
-        (70, 1_000_000, {"willow_plank": 1000, "maple_plank": 1000, "mithril_nail": 3000}, "Worker XP x1.30"),
-    ]
-    guild_hall_tiers = [
-        (25,    75_000, {"oak_plank": 300, "iron_nail": 600},                          "Quest req. -10%"),
-        (50,   350_000, {"willow_plank": 600, "steel_nail": 1500},                     "Quest req. -20%"),
-        (75, 1_500_000, {"maple_plank": 1500, "yew_plank": 500, "mithril_nail": 3000}, "Quest req. -30%"),
-    ]
-    church_tiers = [
-        (30,   100_000, {"oak_plank": 200, "carved_stone": 400, "steel_nail": 500},        "Blessing 30h"),
-        (55,   500_000, {"willow_plank": 500, "stone_block": 600, "steel_nail": 1500},     "Blessing 36h"),
-        (80, 2_000_000, {"yew_plank": 800, "stone_block": 1000, "mithril_nail": 3000},     "Blessing 48h"),
-    ]
-    fairgrounds_tiers = [
-        (35,   150_000, {"oak_plank": 250, "willow_plank": 100, "steel_nail": 600},         "Pick-a-Cup, 7.5 min cooldown, +5% idle tickets"),
-        (55,   600_000, {"willow_plank": 600, "maple_plank": 200, "steel_nail": 1500},      "Higher or Lower, +10% idle tickets"),
-        (75, 1_500_000, {"maple_plank": 800, "yew_plank": 400, "mithril_nail": 2500},       "5 min cooldown, +15% idle tickets"),
-    ]
-    garden_tiers = [
-        (30,    80_000, {"plank": 100, "oak_plank": 200, "iron_nail": 400},                  "+1 extra farm plot"),
-        (55,   400_000, {"oak_plank": 400, "willow_plank": 200, "steel_nail": 1000},         "+2 extra farm plots"),
-    ]
+    # Building tiers mirrored from TownBuildingDef / TownRepository
+    def building_section(building: dict) -> str:
+        rows = [[0, "—", "—", "—", "No bonus"]]
+        for i, tier_data in enumerate(building["tiers"], start=1):
+            if building["key"] == "fairgrounds":
+                match i:
+                    case 1:
+                        bonus_str = "Pick-a-Cup, 7.5 min cooldown, +5% idle ticket chance"
+                    case 2:
+                        bonus_str = "Higher or Lower, +10% idle ticket chance"
+                    case 3:
+                        bonus_str = "5 min cooldown, +15% idle ticket chance"
+                    case _:
+                        raise NotImplemented
+            else:
+                bonus_str = ", ".join([bonus_string(bonus, amount) for bonus, amount in tier_data["bonuses"].items()])
+            rows.append([i, tier_data["construction_level_required"], f"{tier_data["coin_cost"]:,}",
+                         fmt_materials(tier_data["materials"]), bonus_str])
+        # Return filled section
+        return get_template("town/building_section").format(
+            title=building["title"],
+            description=building["description"],
+            stat_table=table(["Tier", "Construction Level", "Coin Cost", "Materials", "Bonuses"], rows)
+        )
+
+    # Add more information such as wiki-specific names and descriptions to the buildings
+    buildings = load("buildings.json")
+    assert isinstance(buildings, dict)
+    additional_info = {
+        "inn": ("Inn", "Increases the XP gained by both workers each session."),
+        "guild_hall": ("Guild Hall", "Reduces the quantity required for all guild quest targets."),
+        "church": ("Church", f"Extends the duration of the Prayer blessing activated from the {link("prayer")} skill."),
+        "fairgrounds": ("Fairgrounds", "Unlocks additional Carnival minigames, reduces minigame cooldowns, and increases idle ticket drop chance."),
+        "garden": ("Garden", f"Grants extra {link("farming")} plots for growing crops.")
+    }
+    # Add title/description to buildings dictionary
+    for building_key, data in buildings.items():
+        building_key: str = building_key
+        data["title"] = additional_info.get(building_key, (building_key.replace("_", " ").title(),))[0]
+        data["description"] = additional_info.get(building_key, ("","No description provided"))[1]
+
+    sections = []
+    for _, data in buildings.items():
+        sections.append(building_section(data))
 
     return get_template("town/buildings").format(
-        inn_table=building_table(inn_tiers, "Bonus", []),
-        guild_hall_table=building_table(guild_hall_tiers, "Bonus", []),
-        church_table=building_table(church_tiers, "Bonus", []),
-        fairgrounds_table=building_table(fairgrounds_tiers, "Bonus", []),
-        garden_table=building_table(garden_tiers, "Bonus", []),
+        construction_link=link("construction"),
+        buildings_tables="\n\n---\n\n".join(sections)
     )
 
 

@@ -1141,7 +1141,7 @@
     <string name="town_building_guild_hall_name">Guild Hall</string>
     <string name="town_building_church_name">Church</string>
     <string name="town_upgrade_section_title">Городское Здание</string>
-    <string name="town_building_current_tier">Уровень %1$d / 3</string>
+    <string name="town_building_current_tier">Уровень %1$d / %2$d</string>
     <string name="town_building_maxed_label">Полностью Улучшено</string>
     <string name="town_upgrade_next_label">Следующее Улучшение</string>
     <string name="town_upgrade_constr_req">Строительство Ур. %1$d требуется</string>
@@ -1164,9 +1164,13 @@
     <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10% idle ticket chance</string>
     <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string>
     <string name="town_building_garden_name">Garden</string>
-    <string name="town_garden_no_bonus">No extra farm plots yet</string>
-    <string name="town_garden_t1_bonus">+1 extra farm plot</string>
-    <string name="town_garden_t2_bonus">+2 extra farm plots</string>
+    <plurals name="town_garden_bonus">
+        <item quantity="zero">Пока нет дополнительных грядок</item>
+        <item quantity="one">+%1$d дополнительная грядка</item>
+        <item quantity="few">+%1$d дополнительные грядки</item>
+        <item quantity="many">+%1$d дополнительных грядок</item>
+        <item quantity="other">+%1$d дополнительных грядок</item>
+    </plurals>
     <string name="achievement_town_first_upgrade_name">Первая Реновация</string>
     <string name="achievement_town_first_upgrade_desc">Улучшите любое здание города впервые</string>
     <string name="achievement_town_all_tier1_name">Улучшатель Города</string>
@@ -1272,7 +1276,7 @@
     <string name="carnival_active_appraisal_desc">Какой предмет стоит дороже на открытом рынке?</string>
     <string name="carnival_appraisal_which">Что дороже?</string>
     <string name="carnival_play">Играть</string>
-    <string name="carnival_cooldown">Готово через %1$dч %2$dм</string>
+    <string name="carnival_cooldown">Готово через %1$dм %2$dс</string>
     <string name="carnival_ticket_cost">%1$d билетов</string>
     <string name="carnival_redeem">Обменять</string>
     <string name="carnival_queue_added">Добавлено в очередь: %1$s.</string>
@@ -1441,6 +1445,7 @@
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
     <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_not_enough_runes">Недостаточно %1$s для максимального количества атак.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
     <string name="tower_enemies_this_floor">Enemies</string>

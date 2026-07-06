@@ -1086,7 +1086,7 @@
     <string name="town_building_inn_name">Inn</string>
     <string name="town_building_guild_hall_name">Guild Hall</string>
     <string name="town_building_church_name">Church</string>
-    <string name="town_building_current_tier">Stufe %1$d / 3</string>
+    <string name="town_building_current_tier">Stufe %1$d / %2$d</string>
     <string name="town_building_maxed_label">Vollständig ausgebaut</string>
     <string name="town_upgrade_next_label">Nächstes Upgrade</string>
     <string name="town_upgrade_constr_req">Bauen Lv. %1$d erforderlich</string>
@@ -1109,9 +1109,11 @@
     <string name="town_fairgrounds_t2_bonus">Eröffnet den Drüber-und-Drunter-Stand, +10%% Los-Chance</string>
     <string name="town_fairgrounds_t3_bonus">Ein Besuch ist alle 5 Minuten möglich, +15%% Los-Chance</string>
     <string name="town_building_garden_name">Garten</string>
-    <string name="town_garden_no_bonus">Kein Extra-Acker bisher</string>
-    <string name="town_garden_t1_bonus">+1 Extra-Acker</string>
-    <string name="town_garden_t2_bonus">+2 Extra-Acker</string>
+    <plurals name="town_garden_bonus">
+        <item quantity="zero">Kein Extra-Acker bisher</item>
+        <item quantity="one">+%1$d Extra-Acker</item>
+        <item quantity="other">+%1$d Extra-Acker</item>
+    </plurals>
     <string name="achievement_town_first_upgrade_name">Erste Renovierung</string>
     <string name="achievement_town_first_upgrade_desc">Baue ein Stadtgebäude zum ersten Mal aus</string>
     <string name="achievement_town_all_tier1_name">Stadtverbesserer</string>
@@ -1216,7 +1218,7 @@
     <string name="carnival_active_appraisal_desc">Welcher Gegenstand ist auf dem freien Markt mehr wert?</string>
     <string name="carnival_appraisal_which">Was ist mehr wert?</string>
     <string name="carnival_play">Spielen</string>
-    <string name="carnival_cooldown">Bereit in %1$dh %2$dm</string>
+    <string name="carnival_cooldown">Bereit in %1$dm %2$ds</string>
     <string name="carnival_ticket_cost">%1$d Lose</string>
     <string name="carnival_redeem">Einlösen</string>
     <string name="carnival_queue_added">Zur Warteschlange hinzugefügt: %1$s.</string>
@@ -1385,6 +1387,7 @@
     <string name="tower_floor_cleared">Etage %d gesäubert!</string>
     <string name="tower_new_best">Neuer Höchstwert: Etage %d!</string>
     <string name="tower_death_reset">Ihr seid auf Etage %d gestorben. Ihr kehrt zurück zur untersten Etage.</string>
+    <string name="tower_not_enough_runes">Nicht genug %1$s für die maximale Anzahl an Angriffen.</string>
     <string name="tower_milestone_claim">Einfordern</string>
     <string name="tower_milestone_claimed">Eingefordert</string>
     <string name="tower_enemies_this_floor">Gegner</string>
