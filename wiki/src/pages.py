@@ -615,17 +615,21 @@ def gen_agility() -> str:
 def gen_smithing() -> str:
     recipes = load("recipes/smithing.json")
     assert isinstance(recipes, dict)
+    equip = load("equipment.json")
+    assert isinstance(equip, dict)
     groups = {"bar": [], "weapon": [], "armour": [], "tool": [], "component": [], "other": []}
     for key, r in recipes.items():
         t = r.get("type", "other")
-        g = t if t in groups else "other"
+        if t == "equipment":
+            g = "weapon" if equip.get(key, {}).get("slot") == "weapon" else "armour"
+        else:
+            g = t if t in groups else "other"
         groups[g].append([r["display_name"], r["level_required"], fmt_materials(r["materials"]), r["xp_per_item"]])
 
     if len(groups["other"]) > 0:
         log(logging.WARNING, "Some smithing items were in the 'other' group which are not shown on the page")
 
     sections = []
-    # Todo: Fix missing armour and weapons sections
     order = [("armour", "Armour"), ("bar", "Bars"), ("component", "Components"), ("tool", "Tools"), ("weapon", "Weapons")]
     for group_key, group_name in order:
         rows = sorted(groups[group_key], key=lambda x: x[1])
@@ -884,12 +888,15 @@ def gen_equipment() -> str:
     equip = load("equipment.json")
     assert isinstance(equip, dict)
     slot_order = ["weapon", "head", "body", "legs", "boots", "cape", "ring", "necklace",
-                  "shield", "pickaxe", "axe", "fishing_rod", "hoe"]
+                  "shield", "pickaxe", "axe", "fishing_rod", "hoe",
+                  "hammer", "tinderbox", "grappling_hook", "frying_pan"]
     slot_names = {
         "weapon": "Weapons", "head": "Helmets", "body": "Chestplates", "legs": "Legs",
         "boots": "Boots", "cape": "Capes", "ring": "Rings", "necklace": "Necklaces",
         "shield": "Shields", "pickaxe": "Pickaxes", "axe": "Axes",
         "fishing_rod": "Fishing Rods", "hoe": "Hoes",
+        "hammer": "Hammers", "tinderbox": "Tinderboxes",
+        "grappling_hook": "Grappling Hooks", "frying_pan": "Frying Pans",
     }
     by_slot: dict[str, list] = {s: [] for s in slot_order}
     for item in equip.values():
@@ -902,7 +909,9 @@ def gen_equipment() -> str:
                 item.get("strength_bonus", 0) or 0,
                 item.get("defense_bonus", 0) or 0,
                 item.get("mining_efficiency") or item.get("woodcutting_efficiency") or
-                item.get("fishing_efficiency") or item.get("farming_efficiency") or "—",
+                item.get("fishing_efficiency") or item.get("farming_efficiency") or
+                item.get("smithing_efficiency") or item.get("firemaking_efficiency") or
+                item.get("agility_efficiency") or item.get("cooking_efficiency") or "—",
                 reqs,
             ])
 

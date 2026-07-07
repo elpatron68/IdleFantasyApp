@@ -44,6 +44,15 @@ import javax.inject.Inject
 import com.fantasyidler.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 
+/** One row on the Profile Banners tab — either an earned banner or a locked placeholder for a known event. */
+data class SeasonalBannerDisplay(
+    val eventId: String,
+    val label: String,
+    val bannerIcon: String?,
+    val earned: Boolean,
+    val earnedAtMs: Long?,
+)
+
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -78,6 +87,7 @@ class InventoryViewModel @Inject constructor(
         val activeBlessingExpiresAt: Long = 0L,
         val activeBlessingXpPct: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
+        val seasonalBanners: List<SeasonalBannerDisplay> = emptyList(),
     ) {
         val totalLevel: Int get() = skillLevels.values.sum()
 
@@ -148,10 +158,38 @@ class InventoryViewModel @Inject constructor(
                     if (b.type == BlessingType.XP) ((b.magnitude - 1f) * 100 + 0.5f).toInt() else 0
                 },
                 skillPrestige           = flags.skillPrestige,
+                seasonalBanners         = buildSeasonalBannerDisplays(flags),
                 isLoading   = false,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), UiState())
+
+    /**
+     * One row per event ever known to the game (from [GameDataRepository.seasonalEvents]) plus any
+     * already-earned banner whose event data has since been removed. Earned banners use their frozen
+     * snapshot (so they still render after the event is gone); events not yet earned show as locked.
+     */
+    private fun buildSeasonalBannerDisplays(flags: PlayerFlags): List<SeasonalBannerDisplay> {
+        val earnedById = flags.seasonalBannersEarned.associateBy { it.eventId }
+        val yearFormat = java.text.SimpleDateFormat("yyyy", java.util.Locale.getDefault())
+        val allIds = gameData.seasonalEvents.keys + earnedById.keys
+        return allIds.distinct().mapNotNull { id ->
+            val earned = earnedById[id]
+            val event = gameData.seasonalEvents[id]
+            val label = when {
+                event  != null -> "${event.displayName} ${yearFormat.format(java.util.Date(event.startMs))}"
+                earned != null -> earned.displayText
+                else            -> return@mapNotNull null
+            }
+            SeasonalBannerDisplay(
+                eventId    = id,
+                label      = label,
+                bannerIcon = earned?.bannerIcon ?: event?.bannerIcon,
+                earned     = earned != null,
+                earnedAtMs = earned?.completedAtMs,
+            )
+        }.sortedByDescending { gameData.seasonalEvents[it.eventId]?.startMs ?: it.earnedAtMs ?: 0L }
+    }
 
     // ------------------------------------------------------------------
 
