@@ -24,6 +24,7 @@ import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
@@ -116,6 +117,7 @@ class CombatViewModel @Inject constructor(
     private val questRepo: QuestRepository,
     private val guildRepo: GuildRepository,
     private val slayerRepo: SlayerRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val json: Json,
 ) : ViewModel() {
@@ -232,11 +234,17 @@ class CombatViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
 
     val dungeonList: List<DungeonData> by lazy {
-        gameData.dungeons.values.sortedBy { it.recommendedLevel }
+        val activeEventId = seasonalEventRepo.activeEvent()?.id
+        gameData.dungeons.values
+            .filter { it.eventKey == null || it.eventKey == activeEventId }
+            .sortedBy { it.recommendedLevel }
     }
 
     val bossList: List<BossData> by lazy {
-        gameData.bosses.values.sortedBy { it.combatLevelRequired }
+        val activeEventId = seasonalEventRepo.activeEvent()?.id
+        gameData.bosses.values
+            .filter { it.eventKey == null || it.eventKey == activeEventId }
+            .sortedBy { it.combatLevelRequired }
     }
 
     val enemyMap: Map<String, EnemyData> by lazy { gameData.enemies }
@@ -757,6 +765,8 @@ class CombatViewModel @Inject constructor(
             playerRepo.recordDailyKills(mapOf(session.activityKey to 1))
             playerRepo.recordWeeklyProgress("boss", session.activityKey, 1)
             guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), last.combatStyle.ifEmpty { "melee" })
+            seasonalEventRepo.recordCombat(mapOf(session.activityKey to 1))
+            seasonalEventRepo.recordBossDefeat(session.activityKey)
         }
         val xpDisplayBySkill = last.xpBySkill.mapValues { (skill, xp) ->
             val petPct = perSkillPetBoostPct[skill] ?: 0
@@ -869,7 +879,9 @@ class CombatViewModel @Inject constructor(
             if (allKillsByEnemy.isNotEmpty()) {
                 playerRepo.recordDailyKills(allKillsByEnemy)
                 guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
+                seasonalEventRepo.recordCombat(allKillsByEnemy)
             }
+            seasonalEventRepo.recordExpeditionCompletion(session.activityKey)
             playerRepo.incrementDungeonRun(session.activityKey)
         }
         val xpDisplayBySkill = totalXpPerSkill.mapValues { (skill, xp) ->
@@ -1126,7 +1138,7 @@ class CombatViewModel @Inject constructor(
                 combatStyle         = combatStyle,
                 playerRanged        = rng,
                 playerMagic         = mgc,
-                arrowStrengthBonus  = arrowStrBonus,
+                arrowStrengthBonus  = arrowStrBonus + (if (combatStyle == "ranged") totalStr else 0),
                 spellMaxHit         = spellMaxHit,
                 agilityLevel        = agility,
                 agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,

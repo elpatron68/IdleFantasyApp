@@ -19,6 +19,7 @@ import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.repository.TownRepository
@@ -39,6 +40,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+
+/** Summary of the currently active Seasonal Event, shown as a row on the Home screen. Null between events. */
+data class SeasonalEventSummary(
+    val id: String,
+    val displayName: String,
+    val tokens: Int,
+    val goal: Int,
+    val bannerIcon: String? = null,
+)
 
 private val COMBAT_CAPE_SKILLS = setOf(
     "attack", "strength", "defense", "ranged", "magic", "hp",
@@ -105,6 +115,7 @@ data class HomeUiState(
     val characterSetupDone: Boolean = false,
     val characterName: String = "",
     val sessionQueue: List<QueuedAction> = emptyList(),
+    val maxQueueSize: Int = 3,
     val showWhatsNew: Boolean = false,
     /** Epoch ms when the last queued task will finish; 0 if queue is empty. */
     val queueEndsAt: Long = 0L,
@@ -122,8 +133,13 @@ data class HomeUiState(
     val xpBoostRemainingMs: Long = 0L,
     val recentSessions: List<com.fantasyidler.data.model.RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
+    val showJournalButton: Boolean = true,
+    val playerNotes: String = "",
+    val journalSheetOpen: Boolean = false,
     /** Total claimable guild quests + dailies across all guilds. Drives the badge on the town menu button. */
     val guildClaimableCount: Int = 0,
+    /** The currently active Seasonal Event, or null if no event is running right now. */
+    val activeSeasonalEvent: SeasonalEventSummary? = null,
     /** Total XP the active session will grant (single-skill only; 0 for combat/boss/expedition). */
     val activeSessionXpGain: Long = 0L,
     /** Total XP the first worker's active session will grant. */
@@ -144,6 +160,7 @@ class HomeViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     private val workerStarter: WorkerQueuedSessionStarter,
     private val slayerRepo: SlayerRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -237,6 +254,15 @@ class HomeViewModel @Inject constructor(
                 val dailies = guildRepo.getGuildDailiesWithProgress(guild, flags)
                 claimableQuests + dailies.count { it.progress >= it.template.amount && !it.claimed }
             }
+            val activeSeasonalEvent = seasonalEventRepo.activeEvent()?.let { event ->
+                SeasonalEventSummary(
+                    id          = event.id,
+                    displayName = event.displayName,
+                    tokens      = flags.seasonalTokensByEvent[event.id] ?: 0,
+                    goal        = event.tokenGoal,
+                    bannerIcon  = event.bannerIcon,
+                )
+            }
             extra.copy(
                 isLoading           = false,
                 coins               = player.coins,
@@ -247,6 +273,7 @@ class HomeViewModel @Inject constructor(
                 characterSetupDone  = flags.characterSetupDone,
                 characterName       = flags.characterName,
                 sessionQueue        = flags.sessionQueue,
+                maxQueueSize        = townRepo.maxQueueSize(flags),
                 showWhatsNew        = flags.lastSeenVersionCode < BuildConfig.VERSION_CODE,
                 queueEndsAt         = queueEndsAt,
                 workerSession        = workerSession,
@@ -262,7 +289,10 @@ class HomeViewModel @Inject constructor(
                 xpBoostRemainingMs         = (flags.xpBoostExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
+                showJournalButton          = flags.showJournalButton,
+                playerNotes                = flags.playerNotes,
                 guildClaimableCount        = guildClaimableCount,
+                activeSeasonalEvent        = activeSeasonalEvent,
                 activeSessionXpGain        = activeSessionXpGain,
                 workerSessionXpGain        = workerSessionXpGain,
                 workerSession2XpGain       = workerSession2XpGain,
@@ -452,6 +482,8 @@ class HomeViewModel @Inject constructor(
                             dailyKills[session.activityKey] = (dailyKills[session.activityKey] ?: 0) + 1
                             playerRepo.recordWeeklyProgress("boss", session.activityKey, 1)
                             guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), frames.lastOrNull()?.combatStyle?.ifEmpty { "melee" } ?: "melee")
+                            seasonalEventRepo.recordCombat(mapOf(session.activityKey to 1))
+                            seasonalEventRepo.recordBossDefeat(session.activityKey)
                             for ((item, qty) in loot) combinedItems[item] = (combinedItems[item] ?: 0) + qty
                             combinedCoins += coins
                         }
@@ -510,7 +542,9 @@ class HomeViewModel @Inject constructor(
                             if (kills.isNotEmpty()) {
                                 for ((e, k) in kills) dailyKills[e] = (dailyKills[e] ?: 0) + k
                                 guildRepo.recordGuildCombat(kills, style)
+                                seasonalEventRepo.recordCombat(kills)
                             }
+                            seasonalEventRepo.recordExpeditionCompletion(session.activityKey)
                         }
                         val skillLvls      = playerRepo.getSkillLevels()
                         val arrowsReclaimed = arrows.mapValues { (_, qty) -> (qty * reclaimChance(skillLvls[Skills.RANGED] ?: 1)).toInt() }.filterValues { it > 0 }
@@ -650,6 +684,7 @@ class HomeViewModel @Inject constructor(
                             in gatheringSkills -> {
                                 questRepo.recordGathering(session.skillName, regular)
                                 playerRepo.recordDailyGathering(regular)
+                                seasonalEventRepo.recordGathering(regular)
                                 when (session.skillName) {
                                     Skills.AGILITY      -> {
                                         guildRepo.recordGuildSessions()
@@ -663,6 +698,7 @@ class HomeViewModel @Inject constructor(
                                 questRepo.recordCrafting(session.skillName, regular)
                                 playerRepo.recordDailyCrafting(regular)
                                 guildRepo.recordGuildCrafting(session.skillName, regular)
+                                seasonalEventRepo.recordCrafting(regular)
                             }
                             Skills.THIEVING    -> {
                                 val successCount = frames.count { it.success }
@@ -1228,6 +1264,15 @@ class HomeViewModel @Inject constructor(
     fun summaryConsumed() = _extra.update { it.copy(sessionSummary = null) }
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
     fun petDialogConsumed() = _extra.update { it.copy(petFoundName = null) }
+
+    fun openJournal() = _extra.update { it.copy(journalSheetOpen = true) }
+    fun dismissJournal() = _extra.update { it.copy(journalSheetOpen = false) }
+
+    fun updateNotes(text: String) {
+        viewModelScope.launch {
+            playerRepo.updateFlags(playerRepo.getFlags().copy(playerNotes = text))
+        }
+    }
 
     fun dismissWhatsNew() {
         viewModelScope.launch {
