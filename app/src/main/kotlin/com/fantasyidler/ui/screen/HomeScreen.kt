@@ -537,11 +537,27 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             // ── Greeting ────────────────────────────────────────────────
-            Text(
-                text       = stringResource(R.string.home_welcome, state.characterName.ifBlank { stringResource(R.string.home_adventurer) }),
-                style      = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(
+                    text  = stringResource(R.string.home_welcome_greeting),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                val baseName = state.characterName.ifBlank { stringResource(R.string.home_adventurer) }
+                val titleName = state.titleName
+                Text(
+                    text       = if (titleName == null) stringResource(R.string.home_welcome_name, baseName) else baseName,
+                    style      = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                )
+                if (titleName != null) {
+                    Text(
+                        text       = stringResource(R.string.home_welcome_title, titleName),
+                        style      = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
 
             // ── Stats card ──────────────────────────────────────────────
             Surface(

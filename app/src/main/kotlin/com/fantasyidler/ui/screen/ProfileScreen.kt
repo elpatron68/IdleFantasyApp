@@ -92,6 +92,7 @@ import com.fantasyidler.ui.viewmodel.ArmoryViewModel
 import com.fantasyidler.ui.viewmodel.BestiaryViewModel
 import com.fantasyidler.ui.viewmodel.InventoryCategory
 import com.fantasyidler.ui.viewmodel.SeasonalBannerDisplay
+import com.fantasyidler.ui.viewmodel.TitleCatalog
 import com.fantasyidler.util.drawableByName
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
@@ -176,7 +177,7 @@ fun ProfileScreen(
                 ) {
                     Column(Modifier.weight(1f)) {
                         Text(
-                            text       = state.characterName.ifBlank { stringResource(R.string.profile_unnamed) },
+                            text       = state.displayName.ifBlank { stringResource(R.string.profile_unnamed) },
                             style      = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                         )
@@ -236,6 +237,7 @@ fun ProfileScreen(
                         context            = context,
                         onSlotTap          = viewModel::openSlotPicker,
                         onUnequip          = viewModel::unequip,
+                        onEquipBestTools   = viewModel::equipBestTools,
                         onNavigateToCombat = onNavigateToCombat,
                     )
                     3    -> PetsTab(allPets = viewModel.allPets, ownedPetIds = state.ownedPetIds)
@@ -292,11 +294,30 @@ fun ProfileScreen(
 
     // Character edit sheet
     if (showEditSheet) {
+        val staticTitleOptions = TitleCatalog.ALL.map { t ->
+            TitleOption(
+                id          = t.id,
+                name        = stringResource(t.nameRes),
+                requirement = stringResource(t.requirementRes),
+                unlocked    = t.id in state.unlockedTitles,
+            )
+        }
+        val seasonalTitleOptions = state.seasonalBanners.map { b ->
+            TitleOption(
+                id          = "seasonal_${b.eventId}",
+                name        = stringResource(R.string.title_seasonal_champion_of, b.titleName),
+                requirement = stringResource(R.string.title_seasonal_requirement, b.titleName),
+                unlocked    = b.earned,
+            )
+        }
         CharacterSetupSheet(
-            isFirstTime   = false,
-            initialName   = state.characterName,
-            initialGender = state.characterGender,
-            initialRace   = state.characterRace,
+            isFirstTime      = false,
+            initialName      = state.characterName,
+            initialGender    = state.characterGender,
+            initialRace      = state.characterRace,
+            titles           = staticTitleOptions + seasonalTitleOptions,
+            equippedTitleId  = state.equippedTitle,
+            onEquipTitle     = viewModel::equipTitle,
             onSave        = { name, gender, race ->
                 viewModel.saveCharacterProfile(name, gender, race)
                 showEditSheet = false

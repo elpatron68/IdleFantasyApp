@@ -131,6 +131,7 @@ internal fun RunecraftingSheet(
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
             .padding(bottom = 32.dp),
     ) {
         if (selectedRune == null) {

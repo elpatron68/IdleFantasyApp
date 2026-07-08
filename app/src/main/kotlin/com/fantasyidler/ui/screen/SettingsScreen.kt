@@ -634,6 +634,34 @@ fun SettingsScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 4.dp)
             )
+
+            // Art credits section
+            HorizontalDivider()
+
+            SectionHeader(title = stringResource(R.string.settings_art_credits))
+
+            val artCredits = listOf(
+                Triple(
+                    stringResource(R.string.settings_credit_banners_title),
+                    stringResource(R.string.settings_credit_banners_subtitle),
+                    "https://wenrexa.itch.io/banners-kingdoms",
+                ),
+            )
+            artCredits.forEach { (title, subtitle, url) ->
+                SettingsRow(
+                    title    = title,
+                    subtitle = subtitle,
+                    trailing = {
+                        OutlinedButton(
+                            onClick = {
+                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                            }
+                        ) {
+                            Text(stringResource(R.string.settings_source_open))
+                        }
+                    }
+                )
+            }
         }
     }
 }
