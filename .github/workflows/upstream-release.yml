@@ -33,6 +33,7 @@ concurrency:
 
 permissions:
   contents: write
+  issues: write
 
 env:
   UPSTREAM_REPO: tristinbaker/IdleFantasy

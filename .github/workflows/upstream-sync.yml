@@ -16,6 +16,9 @@ concurrency:
 
 permissions:
   contents: write
+  # Required for `gh workflow run upstream-release.yml` after a successful sync.
+  # Pushes made with GITHUB_TOKEN do not trigger other workflows on their own.
+  actions: write
 
 jobs:
   sync-and-build:
