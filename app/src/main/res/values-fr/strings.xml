@@ -373,7 +373,6 @@
     <string name="home_got_it">Compris</string>
 
     <!-- Translator note: %1$s = player name or "Adventurer" -->
-    <string name="home_welcome">Bon retour, %1$s !</string>
     <string name="home_adventurer">Aventurier</string>
     <!-- Translator note: %1$d = queue size (always 3 max) -->
     <string name="home_up_next">À venir (%1$d/%2$d)</string>
@@ -452,6 +451,7 @@
         <item>%1$s promet de continuer à travailler dur pour vous.</item>
     </string-array>
     <string name="profile_equip_best">Équiper le meilleur équipement</string>
+    <string name="profile_equip_best_tools">Équiper les meilleurs outils</string>
     <string name="profile_combat_gear">Équipement de combat</string>
     <string name="profile_gathering_tools">Outils de récolte</string>
     <string name="profile_food_dungeon">Nourriture (Donjon)</string>
@@ -716,8 +716,8 @@
     <string name="worker_master">Maître</string>
     <string name="inn_long_laborer_desc">Un emploi par embauche, renvoyé après la collecte. 8h de collecte, efficacité 0,5x, quantité d’artisanat illimitée. Il est lent, mais il fait tout.</string>
     <string name="inn_apprentice_desc">8h de collecte, efficacité 1x. artisanat, prière et fabrication de runes plafonnés à 480 objets par session.</string>
-    <string name="inn_journeyman_desc">6h de collecte, efficacité 1.25x. artisanat, prière et fabrication de runes plafonnés à 360 objets par session.</string>
-    <string name="inn_master_desc">4h de collecte, efficacité 2x. artisanat, prière et fabrication de runes plafonnés à 240 objets par session.</string>
+    <string name="inn_journeyman_desc">6h de collecte, efficacité 1.5x. artisanat, prière et fabrication de runes plafonnés à 540 objets par session.</string>
+    <string name="inn_master_desc">4h de collecte, efficacité 2x. artisanat, prière et fabrication de runes plafonnés à 480 objets par session.</string>
     <string name="inn_gathering_note">Collecte : heures de session x multiplicateur d’efficacité appliqué au butin et à l’XP</string>
     <string name="inn_crafting_note">artisanat, prière, fabrication de runes : quantité plafonnée par niveau ; Ouvrier Long sans limite</string>
     <string name="worker_skills_title">Ouvrier : %1$s</string>
@@ -757,7 +757,6 @@
     <string name="guild_no_dailies">Terminez des quêtes de guilde pour gagner de la réputation et débloquer les demandes quotidiennes.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l’inventaire (%1$d disponible)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
-    <string name="guild_quest_desc_craft">Fabriquez %1$d %2$s pour la %3$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
     <string name="guild_quest_desc_prayer">Enterrez %1$d os pour la %2$s.</string>
     <string name="guild_quest_desc_sessions">Terminez %1$d sessions d’%2$s pour la %3$s.</string>
@@ -1439,4 +1438,57 @@
     <string name="profile_banners_empty">Aucune bannière obtenue pour le moment. Terminez un évènement saisonnier pour en obtenir une !</string>
     <string name="profile_banners_earned_on">Obtenue le %s</string>
     <string name="profile_banners_unobtained">(Non obtenue)</string>
+    <string name="character_title_label">Titre</string>
+    <string name="character_title_none">Aucun Titre</string>
+    <string name="character_name_with_title">%1$s, %2$s</string>
+    <string name="title_master_smith_name">Maître Forgeron</string>
+    <string name="title_master_smith_requirement">Terminer toutes les quêtes de Forge</string>
+    <string name="title_head_chef_name">Chef Cuisinier</string>
+    <string name="title_head_chef_requirement">Terminer toutes les quêtes de Cuisine</string>
+    <string name="title_master_miner_name">Maître Mineur</string>
+    <string name="title_master_miner_requirement">Terminer toutes les quêtes de Minage</string>
+    <string name="title_master_angler_name">Maître Pêcheur</string>
+    <string name="title_master_angler_requirement">Terminer toutes les quêtes de Pêche</string>
+    <string name="title_master_woodcutter_name">Maître Bûcheron</string>
+    <string name="title_master_woodcutter_requirement">Terminer toutes les quêtes de Bûcheronnage</string>
+    <string name="title_master_fletcher_name">Maître Fléchier</string>
+    <string name="title_master_fletcher_requirement">Terminer toutes les quêtes de Fabrication de Flèches</string>
+    <string name="title_master_artisan_name">Maître Artisan</string>
+    <string name="title_master_artisan_requirement">Terminer toutes les quêtes d\'Artisanat</string>
+    <string name="title_runemaster_name">Maître des Runes</string>
+    <string name="title_runemaster_requirement">Terminer toutes les quêtes de Runes</string>
+    <string name="title_master_herbalist_name">Maître Herboriste</string>
+    <string name="title_master_herbalist_requirement">Terminer toutes les quêtes d\'Herboristerie</string>
+    <string name="title_master_builder_name">Maître Bâtisseur</string>
+    <string name="title_master_builder_requirement">Terminer toutes les quêtes de Construction</string>
+    <string name="title_devout_name">Dévot</string>
+    <string name="title_devout_requirement">Terminer toutes les quêtes de Prière</string>
+    <string name="title_master_thief_name">Maître Voleur</string>
+    <string name="title_master_thief_requirement">Terminer toutes les quêtes de Vol</string>
+    <string name="title_flamekeeper_name">Gardien des Flammes</string>
+    <string name="title_flamekeeper_requirement">Terminer toutes les quêtes de Feu</string>
+    <string name="title_slayer_name">Pourfendeur</string>
+    <string name="title_slayer_requirement">Terminer toutes les quêtes de Traque</string>
+    <string name="title_godslayer_name">Pourfendeur de Dieux</string>
+    <string name="title_godslayer_requirement">Vaincre chaque boss de raid au moins une fois</string>
+    <string name="title_warlord_name">Seigneur de Guerre</string>
+    <string name="title_warlord_requirement">Atteindre le niveau max de la Guilde des Guerriers</string>
+    <string name="title_marksman_name">Tireur d\'Élite</string>
+    <string name="title_marksman_requirement">Atteindre le niveau max de la Guilde des Archers</string>
+    <string name="title_archmage_name">Archimage</string>
+    <string name="title_archmage_requirement">Atteindre le niveau max de la Guilde des Mages</string>
+    <string name="title_merchant_prince_name">Prince Marchand</string>
+    <string name="title_merchant_prince_requirement">Atteindre le niveau max de la Guilde Marchande</string>
+    <string name="title_pathfinder_name">Éclaireur</string>
+    <string name="title_pathfinder_requirement">Atteindre le niveau max de la Guilde d\'Agilité</string>
+    <string name="title_master_farmer_name">Maître Fermier</string>
+    <string name="title_master_farmer_requirement">Atteindre le niveau max de la Guilde des Fermiers</string>
+    <string name="settings_art_credits">Crédits artistiques</string>
+    <string name="settings_credit_banners_title">Bannières saisonnières</string>
+    <string name="settings_credit_banners_subtitle">Illustrations de Wenrexa</string>
+    <string name="title_seasonal_champion_of">Champion de %1$s</string>
+    <string name="title_seasonal_requirement">Terminez l\'Événement Saisonnier %1$s</string>
+    <string name="home_welcome_greeting">Bon retour,</string>
+    <string name="home_welcome_name">%1$s !</string>
+    <string name="home_welcome_title">Le %1$s !</string>
 </resources>

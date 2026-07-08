@@ -22,6 +22,7 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
@@ -114,6 +115,9 @@ data class HomeUiState(
     val sessionSummary: SessionSummary? = null,
     val characterSetupDone: Boolean = false,
     val characterName: String = "",
+    val equippedTitle: String? = null,
+    /** Resolved, localized title name (e.g. "Master Smith"), or null if none equipped. */
+    val titleName: String? = null,
     val sessionQueue: List<QueuedAction> = emptyList(),
     val maxQueueSize: Int = 3,
     val showWhatsNew: Boolean = false,
@@ -161,6 +165,7 @@ class HomeViewModel @Inject constructor(
     private val workerStarter: WorkerQueuedSessionStarter,
     private val slayerRepo: SlayerRepository,
     private val seasonalEventRepo: SeasonalEventRepository,
+    private val titleRepo: TitleRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -272,6 +277,8 @@ class HomeViewModel @Inject constructor(
                 pendingCollectCount = completedCount,
                 characterSetupDone  = flags.characterSetupDone,
                 characterName       = flags.characterName,
+                equippedTitle       = flags.equippedTitle,
+                titleName           = titleRepo.displayName(context, flags.equippedTitle, flags),
                 sessionQueue        = flags.sessionQueue,
                 maxQueueSize        = townRepo.maxQueueSize(flags),
                 showWhatsNew        = flags.lastSeenVersionCode < BuildConfig.VERSION_CODE,

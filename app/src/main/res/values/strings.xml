@@ -417,7 +417,6 @@
     <string name="home_whats_new">What\'s New</string>
     <string name="home_got_it">Got it</string>
     <!-- Translator note: %1$s = player name or "Adventurer" -->
-    <string name="home_welcome">Welcome back, %1$s!</string>
     <string name="home_adventurer">Adventurer</string>
     <!-- Translator note: %1$d = current queue size, %2$d = max queue size (base 3, +1 per Queue Master tier) -->
     <string name="home_up_next">Up Next (%1$d/%2$d)</string>
@@ -500,6 +499,7 @@
         <item>%1$s promises to keep working hard for you.</item>
     </string-array>
     <string name="profile_equip_best">Equip Best Gear</string>
+    <string name="profile_equip_best_tools">Equip Best Tools</string>
     <string name="profile_weapons">Weapons</string>
     <string name="profile_combat_gear">Combat Gear</string>
     <string name="profile_view_combat_gear">View Combat Gear</string>
@@ -692,8 +692,8 @@
     <string name="worker_master">Master</string>
     <string name="inn_long_laborer_desc">One job per hire, dismissed after collecting. 8h gathering, 0.5x efficiency, unlimited crafting qty. He\'s slow, but he\'ll do anything.</string>
     <string name="inn_apprentice_desc">8h gathering, 1x efficiency. Crafting, prayer, and runecrafting capped at 480 items per session.</string>
-    <string name="inn_journeyman_desc">6h gathering, 1.25x efficiency. Crafting, prayer, and runecrafting capped at 360 items per session.</string>
-    <string name="inn_master_desc">4h gathering, 2x efficiency. Crafting, prayer, and runecrafting capped at 240 items per session.</string>
+    <string name="inn_journeyman_desc">6h gathering, 1.5x efficiency. Crafting, prayer, and runecrafting capped at 540 items per session.</string>
+    <string name="inn_master_desc">4h gathering, 2x efficiency. Crafting, prayer, and runecrafting capped at 480 items per session.</string>
     <string name="inn_gathering_note">Gathering: session hours x efficiency multiplier applied to loot and XP</string>
     <string name="inn_crafting_note">Crafting/prayer/runecrafting: quantity capped per tier; Long Laborer has no cap</string>
     <string name="worker_skills_title">Worker: %1$s</string>
@@ -798,7 +798,6 @@
     <string name="guild_no_dailies">Complete guild quests to earn reputation and unlock daily requests.</string>
     <string name="guild_contribute_inventory">Contribute from inventory (%1$d available)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s for the %4$s.</string>
-    <string name="guild_quest_desc_craft">Craft %1$d %2$s for the %3$s.</string>
     <string name="guild_quest_desc_kill">Defeat %1$d enemies using %2$s combat.</string>
     <string name="guild_quest_desc_prayer">Bury %1$d bones for the %2$s.</string>
     <string name="guild_quest_desc_sessions">Complete %1$d %2$s sessions for the %3$s.</string>
@@ -1493,4 +1492,57 @@
     <string name="profile_banners_empty">No banners earned yet. Complete a Seasonal Event to earn one!</string>
     <string name="profile_banners_earned_on">Earned %s</string>
     <string name="profile_banners_unobtained">(Unobtained)</string>
+    <string name="character_title_label">Title</string>
+    <string name="character_title_none">No Title</string>
+    <string name="character_name_with_title">%1$s the %2$s</string>
+    <string name="title_master_smith_name">Master Smith</string>
+    <string name="title_master_smith_requirement">Complete all Smithing quests</string>
+    <string name="title_head_chef_name">Head Chef</string>
+    <string name="title_head_chef_requirement">Complete all Cooking quests</string>
+    <string name="title_master_miner_name">Master Miner</string>
+    <string name="title_master_miner_requirement">Complete all Mining quests</string>
+    <string name="title_master_angler_name">Master Angler</string>
+    <string name="title_master_angler_requirement">Complete all Fishing quests</string>
+    <string name="title_master_woodcutter_name">Master Woodcutter</string>
+    <string name="title_master_woodcutter_requirement">Complete all Woodcutting quests</string>
+    <string name="title_master_fletcher_name">Master Fletcher</string>
+    <string name="title_master_fletcher_requirement">Complete all Fletching quests</string>
+    <string name="title_master_artisan_name">Master Artisan</string>
+    <string name="title_master_artisan_requirement">Complete all Crafting quests</string>
+    <string name="title_runemaster_name">Runemaster</string>
+    <string name="title_runemaster_requirement">Complete all Runecrafting quests</string>
+    <string name="title_master_herbalist_name">Master Herbalist</string>
+    <string name="title_master_herbalist_requirement">Complete all Herblore quests</string>
+    <string name="title_master_builder_name">Master Builder</string>
+    <string name="title_master_builder_requirement">Complete all Construction quests</string>
+    <string name="title_devout_name">Devout</string>
+    <string name="title_devout_requirement">Complete all Prayer quests</string>
+    <string name="title_master_thief_name">Master Thief</string>
+    <string name="title_master_thief_requirement">Complete all Thieving quests</string>
+    <string name="title_flamekeeper_name">Flamekeeper</string>
+    <string name="title_flamekeeper_requirement">Complete all Firemaking quests</string>
+    <string name="title_slayer_name">Slayer</string>
+    <string name="title_slayer_requirement">Complete all Slayer quests</string>
+    <string name="title_godslayer_name">Godslayer</string>
+    <string name="title_godslayer_requirement">Defeat every raid boss at least once</string>
+    <string name="title_warlord_name">Warlord</string>
+    <string name="title_warlord_requirement">Reach max level in the Warriors Guild</string>
+    <string name="title_marksman_name">Marksman</string>
+    <string name="title_marksman_requirement">Reach max level in the Archers Guild</string>
+    <string name="title_archmage_name">Archmage</string>
+    <string name="title_archmage_requirement">Reach max level in the Mages Guild</string>
+    <string name="title_merchant_prince_name">Merchant Prince</string>
+    <string name="title_merchant_prince_requirement">Reach max level in the Mercantile Guild</string>
+    <string name="title_pathfinder_name">Pathfinder</string>
+    <string name="title_pathfinder_requirement">Reach max level in the Agility Guild</string>
+    <string name="title_master_farmer_name">Master Farmer</string>
+    <string name="title_master_farmer_requirement">Reach max level in the Farming Guild</string>
+    <string name="settings_art_credits">Art Credits</string>
+    <string name="settings_credit_banners_title">Seasonal Banners</string>
+    <string name="settings_credit_banners_subtitle">Art by Wenrexa</string>
+    <string name="title_seasonal_champion_of">Champion of %1$s</string>
+    <string name="title_seasonal_requirement">Complete the %1$s Seasonal Event</string>
+    <string name="home_welcome_greeting">Welcome back,</string>
+    <string name="home_welcome_name">%1$s!</string>
+    <string name="home_welcome_title">The %1$s!</string>
 </resources>

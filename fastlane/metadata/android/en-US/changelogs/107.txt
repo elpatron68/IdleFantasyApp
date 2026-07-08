@@ -1,0 +1,11 @@
+• Fix: Infinite Tower could land you on the wrong floor after queuing several floors and letting them finish while the app was closed, since offline catch-up could mis-order which completed floor counted as current and some floors could be skipped entirely; collection now correctly drains every backlogged floor in order
+• Fix: Equip Best Gear could equip a lower-tier gathering/crafting tool (like a bronze hammer) over a higher-tier one you owned (like an iron hammer), since the four newest tool types weren't being scored by their actual efficiency
+• New: added a separate Equip Best Tools button to the Equipment tab on the Profile screen, so you can optimize just your gathering/crafting tools without touching your combat gear
+• Fix: the Runecrafting card could not be scrolled on some screen sizes, hiding the Start/Queue button once you had enough ash types to make the ash-catalyst list too tall to fit
+• Fix: crafting guild quests (cooking, smithing, fletching, etc.) always said "Craft" instead of the correct verb for that guild, now matching the wording used in regular quests
+• Fix: the four newest tools (Hammer, Tinderbox, Grappling Hook, Frying Pan) showed up under Armour instead of Tools in the Inventory tab
+• Fix: the Carnival's Higher/Lower game result (last card and tickets won) flashed and disappeared instantly instead of staying up until you tapped Continue
+• Fix: the Inn's hiring screen could show a hired worker's name as a generic daily preview name instead of their actual assigned name, occasionally making two different hired workers appear to share the same name
+• New: Titles added — earn a title for milestones like completing a skill's full quest chain, defeating every raid boss, completing a Seasonal Event, or mastering a guild, then equip one from the character edit sheet on the Profile screen to display as "Name the Title"
+• New: added an Art Credits section to the bottom of Settings, crediting the source of the Seasonal Banner artwork
+• Tweak: Journeyman and Master workers now craft faster (not just with a lower item cap) in proportion to their efficiency, and Journeyman's efficiency was raised from 1.25x to 1.5x, so both are now clearly worth their higher hire cost instead of matching or losing to the Apprentice

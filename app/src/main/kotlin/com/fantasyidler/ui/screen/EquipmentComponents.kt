@@ -100,6 +100,7 @@ internal fun EquipmentTab(
     context: android.content.Context,
     onSlotTap: (String) -> Unit,
     onUnequip: (String) -> Unit,
+    onEquipBestTools: () -> Unit = {},
     onNavigateToCombat: () -> Unit = {},
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -114,6 +115,14 @@ internal fun EquipmentTab(
             }
         }
         item { SlotSectionHeader(stringResource(R.string.profile_gathering_tools)) }
+        item {
+            Button(
+                onClick  = onEquipBestTools,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            ) {
+                Text(stringResource(R.string.profile_equip_best_tools))
+            }
+        }
         items(EquipSlot.TOOL_SLOTS) { slot ->
             EquipSlotRow(
                 slotName  = slotDisplayName(context, slot),

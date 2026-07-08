@@ -694,7 +694,16 @@ class CombatViewModel @Inject constructor(
             when (session.skillName) {
                 "boss"   -> collectBossSession(session)
                 "combat" -> collectDungeonSession(session)
-                "tower"  -> collectTowerFloor(session)
+                "tower"  -> {
+                    // Drain every backlogged floor (oldest first), not just the one
+                    // getActiveSession() happened to return, so floors that finished
+                    // offline while multiple were queued don't get silently skipped.
+                    var towerSession = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+                    while (towerSession != null) {
+                        collectTowerFloor(towerSession)
+                        towerSession = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+                    }
+                }
             }
 
             // Auto-start next queued session, if any

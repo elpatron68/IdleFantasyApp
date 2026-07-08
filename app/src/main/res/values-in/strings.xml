@@ -331,7 +331,6 @@
     <string name="home_bones_buried">Tulang-tulang yang terkubur</string>
     <string name="home_whats_new">Apa yang Baru</string>
     <string name="home_got_it">Mengerti</string>
-    <string name="home_welcome">Selamat datang kembali, %1$s!</string>
     <string name="home_adventurer">Petualang</string>
     <string name="home_up_next">Berikutnya (%1$d/%2$d)</string>
     <string name="home_queue_ends_in">Antrian berakhir %1$s</string>
@@ -592,7 +591,6 @@
     <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk mendapatkan reputasi dan membuka permintaan harian.</string>
     <string name="guild_contribute_inventory">Kontribusi di inventaris (%1$d tersedia)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s untuk %4$s.</string>
-    <string name="guild_quest_desc_craft">Buat %1$d %2$s untuk %3$s.</string>
     <string name="guild_quest_desc_kill">Kalahkan %1$d musuh menggunakan %2$s pertempuran.</string>
     <string name="guild_quest_desc_prayer">Kubur tulang %1$d untuk %2$s.</string>
     <string name="guild_quest_desc_sessions">Selesaikan %1$d %2$s sesi untuk %3$s.</string>

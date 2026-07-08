@@ -30,6 +30,7 @@ import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -51,6 +52,8 @@ data class SeasonalBannerDisplay(
     val bannerIcon: String?,
     val earned: Boolean,
     val earnedAtMs: Long?,
+    /** Short event name (e.g. "Sunspire Solstice"), used to build this event's Title. */
+    val titleName: String,
 )
 
 @HiltViewModel
@@ -58,6 +61,7 @@ class InventoryViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    private val titleRepo: TitleRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -88,6 +92,9 @@ class InventoryViewModel @Inject constructor(
         val activeBlessingXpPct: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
         val seasonalBanners: List<SeasonalBannerDisplay> = emptyList(),
+        val unlockedTitles: Set<String> = emptySet(),
+        val equippedTitle: String? = null,
+        val displayName: String = "",
     ) {
         val totalLevel: Int get() = skillLevels.values.sum()
 
@@ -105,6 +112,7 @@ class InventoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch { migrateWeaponSlots() }
+        viewModelScope.launch { titleRepo.syncUnlockedTitles() }
     }
 
     private suspend fun migrateWeaponSlots() {
@@ -159,6 +167,13 @@ class InventoryViewModel @Inject constructor(
                 },
                 skillPrestige           = flags.skillPrestige,
                 seasonalBanners         = buildSeasonalBannerDisplays(flags),
+                unlockedTitles          = flags.unlockedTitles,
+                equippedTitle           = flags.equippedTitle,
+                displayName             = run {
+                    val baseName = flags.characterName.ifBlank { context.getString(R.string.profile_unnamed) }
+                    val titleName = titleRepo.displayName(context, flags.equippedTitle, flags)
+                    if (titleName != null) context.getString(R.string.character_name_with_title, baseName, titleName) else baseName
+                },
                 isLoading   = false,
             )
         }
@@ -187,6 +202,7 @@ class InventoryViewModel @Inject constructor(
                 bannerIcon = earned?.bannerIcon ?: event?.bannerIcon,
                 earned     = earned != null,
                 earnedAtMs = earned?.completedAtMs,
+                titleName  = event?.displayName ?: earned?.eventDisplayName?.ifBlank { null } ?: label,
             )
         }.sortedByDescending { gameData.seasonalEvents[it.eventId]?.startMs ?: it.earnedAtMs ?: 0L }
     }
@@ -234,35 +250,47 @@ class InventoryViewModel @Inject constructor(
         }
     }
 
-    fun equipBestGear() {
+    private fun bestItemForSlot(
+        slot: String,
+        skillLevels: Map<String, Int>,
+        inventory: Map<String, Int>,
+        equipment: Map<String, EquipmentData>,
+    ): EquipmentData? {
+        val style = EquipSlot.combatStyleForSlot(slot)
+        return inventory.keys
+            .mapNotNull { equipment[it] }
+            .filter { item ->
+                if (style != null) item.slot == EquipSlot.WEAPON && item.combatStyle == style
+                else item.slot == slot
+            }
+            .filter { item -> item.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl } }
+            .maxByOrNull { item ->
+                when (slot) {
+                    EquipSlot.PICKAXE        -> item.miningEfficiency ?: 0f
+                    EquipSlot.AXE            -> item.woodcuttingEfficiency ?: 0f
+                    EquipSlot.FISHING_ROD    -> item.fishingEfficiency ?: 0f
+                    EquipSlot.HOE            -> item.farmingEfficiency ?: 0f
+                    EquipSlot.HAMMER         -> item.smithingEfficiency ?: 0f
+                    EquipSlot.TINDERBOX      -> item.firemakingEfficiency ?: 0f
+                    EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
+                    EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
+                    else -> if (slot in EquipSlot.WEAPON_SLOTS)
+                        item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
+                    else
+                        item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
+                }
+            }
+    }
+
+    private fun equipBestForSlots(slots: List<String>) {
         viewModelScope.launch {
             val state = uiState.value
             val equipment = allEquipment
             val newEquipped = playerRepo.getEquipped().toMutableMap()
-
             val skillLevels = state.skillLevels
-            for (slot in EquipSlot.ALL) {
-                val style = EquipSlot.combatStyleForSlot(slot)
-                val best = state.inventory.keys
-                    .mapNotNull { equipment[it] }
-                    .filter { item ->
-                        if (style != null) item.slot == EquipSlot.WEAPON && item.combatStyle == style
-                        else item.slot == slot
-                    }
-                    .filter { item -> item.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl } }
-                    .maxByOrNull { item ->
-                        when (slot) {
-                            EquipSlot.PICKAXE     -> item.miningEfficiency ?: 0f
-                            EquipSlot.AXE         -> item.woodcuttingEfficiency ?: 0f
-                            EquipSlot.FISHING_ROD -> item.fishingEfficiency ?: 0f
-                            EquipSlot.HOE         -> item.farmingEfficiency ?: 0f
-                            else -> if (slot in EquipSlot.WEAPON_SLOTS)
-                            item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
-                        else
-                            item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
-                        }
-                    }
 
+            for (slot in slots) {
+                val best = bestItemForSlot(slot, skillLevels, state.inventory, equipment)
                 val currentItemKey = newEquipped[slot]
                 val currentItemValid = currentItemKey == null || run {
                     val it = equipment[currentItemKey]
@@ -277,6 +305,10 @@ class InventoryViewModel @Inject constructor(
             playerRepo.updateEquipped(newEquipped)
         }
     }
+
+    fun equipBestGear() = equipBestForSlots(EquipSlot.ALL)
+
+    fun equipBestTools() = equipBestForSlots(EquipSlot.TOOL_SLOTS)
 
     fun equipFood(itemKey: String) {
         viewModelScope.launch {
@@ -294,6 +326,10 @@ class InventoryViewModel @Inject constructor(
 
     fun saveCharacterProfile(name: String, gender: String, race: String) {
         viewModelScope.launch { playerRepo.updateCharacterProfile(name, gender, race) }
+    }
+
+    fun equipTitle(id: String?) {
+        viewModelScope.launch { titleRepo.equipTitle(id) }
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
@@ -323,9 +359,10 @@ class InventoryViewModel @Inject constructor(
     fun categoryFor(key: String): InventoryCategory {
         val equip = gameData.equipment[key]
         if (equip != null) return when (equip.slot) {
-            EquipSlot.WEAPON                                                         -> InventoryCategory.WEAPONS
-            EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE -> InventoryCategory.TOOLS
-            else                                                                     -> InventoryCategory.ARMOUR
+            EquipSlot.WEAPON -> InventoryCategory.WEAPONS
+            EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
+            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN -> InventoryCategory.TOOLS
+            else -> InventoryCategory.ARMOUR
         }
         if (key in gameData.foodHealValues)  return InventoryCategory.FOOD
         if (key in gameData.potionEffects)   return InventoryCategory.POTIONS

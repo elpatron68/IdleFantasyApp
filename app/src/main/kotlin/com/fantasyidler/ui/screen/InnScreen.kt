@@ -163,7 +163,7 @@ fun InnScreen(
 
             TierCard(
                 tierLabel    = stringResource(R.string.worker_long_laborer),
-                workerName   = state.longLaborerName,
+                workerName   = state.hiredWorker?.dailyName ?: state.longLaborerName,
                 description  = stringResource(R.string.inn_long_laborer_desc),
                 cost         = WorkerTier.LONG_LABORER.hireCost,
                 playerCoins  = state.coins,
@@ -197,7 +197,7 @@ fun InnScreen(
 
             TierCard(
                 tierLabel    = stringResource(R.string.worker_apprentice),
-                workerName   = state.apprenticeName,
+                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.APPRENTICE } ?: state.apprenticeName,
                 description  = stringResource(R.string.inn_apprentice_desc),
                 cost         = WorkerTier.APPRENTICE.hireCost,
                 playerCoins  = state.coins,
@@ -207,7 +207,7 @@ fun InnScreen(
 
             TierCard(
                 tierLabel    = stringResource(R.string.worker_journeyman),
-                workerName   = state.journeymanName,
+                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.JOURNEYMAN } ?: state.journeymanName,
                 description  = stringResource(R.string.inn_journeyman_desc),
                 cost         = WorkerTier.JOURNEYMAN.hireCost,
                 playerCoins  = state.coins,
@@ -217,7 +217,7 @@ fun InnScreen(
 
             TierCard(
                 tierLabel    = stringResource(R.string.worker_master),
-                workerName   = state.masterName,
+                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.MASTER } ?: state.masterName,
                 description  = stringResource(R.string.inn_master_desc),
                 cost         = WorkerTier.MASTER.hireCost,
                 playerCoins  = state.coins,
