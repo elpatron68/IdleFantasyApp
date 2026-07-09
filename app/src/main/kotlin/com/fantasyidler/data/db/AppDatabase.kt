@@ -21,6 +21,13 @@ val MIGRATION_2_3 = object : Migration(2, 3) {
     }
 }
 
+val MIGRATION_3_4 = object : Migration(3, 4) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE skill_sessions ADD COLUMN catalyst_key TEXT")
+        db.execSQL("ALTER TABLE skill_sessions ADD COLUMN catalyst_qty INTEGER NOT NULL DEFAULT 0")
+    }
+}
+
 @Database(
     entities = [
         Player::class,
@@ -30,7 +37,7 @@ val MIGRATION_2_3 = object : Migration(2, 3) {
         GlobalState::class,
         ArenaRecord::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {

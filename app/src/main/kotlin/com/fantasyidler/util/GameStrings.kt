@@ -108,6 +108,24 @@ object GameStrings {
     fun thievingNpcName(context: Context, key: String): String =
         context.stringByName("thieving_npc_${key}_name") ?: key.toTitleCase()
 
+    fun seasonalEventName(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_event_${id}_name") ?: fallback
+
+    fun seasonalEventBanner(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_event_${id}_banner") ?: fallback
+
+    fun seasonalBountyName(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_bounty_${id}_name") ?: fallback
+
+    fun seasonalBountyHint(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_bounty_${id}_hint") ?: fallback
+
+    fun seasonalMinigameName(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_minigame_${id}_name") ?: fallback
+
+    fun seasonalRewardDesc(context: Context, eventId: String, tokens: Int, fallback: String): String =
+        context.stringByName("seasonal_reward_${eventId}_${tokens}_desc") ?: fallback
+
     fun skillEmoji(key: String): String = when (key) {
         "mining"      -> "⛏️"
         "fishing"     -> "🎣"

@@ -44,6 +44,8 @@ data class SeasonalBountyTaskData(
  * A whack-a-mole style reflex minigame: over [rounds] rounds, an ember lights up in a random
  * hole (of [holeCount]) for [visibleMs] and the player must tap it before it goes out.
  * Landing at least [hitsRequired] hits wins a token; falling short is a real failure.
+ * Easy mode ([visibleMsEasy]/[cooldownMsEasy]) trades a longer reaction window for a longer
+ * cooldown between attempts; defaults to the normal values if not set in data.
  */
 @Serializable
 data class SeasonalMinigameConfig(
@@ -54,6 +56,8 @@ data class SeasonalMinigameConfig(
     @SerialName("hits_required") val hitsRequired: Int,
     @SerialName("visible_ms") val visibleMs: Long,
     @SerialName("cooldown_ms") val cooldownMs: Long,
+    @SerialName("visible_ms_easy") val visibleMsEasy: Long = visibleMs,
+    @SerialName("cooldown_ms_easy") val cooldownMsEasy: Long = cooldownMs,
 )
 
 @Serializable

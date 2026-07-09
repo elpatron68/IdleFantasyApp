@@ -32,6 +32,7 @@ data class ChurchUiState(
     val activeBlessing: BlessingData? = null,
     val activeBlessingRemainingMs: Long = 0L,
     val totalBoneEquivalent: Int = 0,
+    val totalBoneCount: Int = 0,
     val pendingBlessingKey: String? = null,
     val showDeactivateConfirm: Boolean = false,
     val snackbarMessage: String? = null,
@@ -68,6 +69,7 @@ class ChurchViewModel @Inject constructor(
             activeBlessing            = active,
             activeBlessingRemainingMs = remaining,
             totalBoneEquivalent       = ChurchRepository.totalBoneEquivalent(inventory),
+            totalBoneCount            = ChurchRepository.totalBoneCount(inventory),
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ChurchUiState())
 

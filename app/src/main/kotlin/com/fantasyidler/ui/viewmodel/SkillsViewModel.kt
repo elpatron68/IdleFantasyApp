@@ -378,15 +378,18 @@ class SkillsViewModel @Inject constructor(
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val agility = levels[Skills.AGILITY] ?: 1
             val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
-            val perLogMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60L
-            val logXp = gameData.logs[logKey]?.xpPerLog?.toLong() ?: 0L
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val logData = gameData.logs[logKey]
+            val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData?.levelRequired ?: 0)
+            val perLogMs = (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60L / toolEff).toLong()
+            val logXp = logData?.xpPerLog?.toLong() ?: 0L
             val xpQueueMult = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
             val action = QueuedAction(
                 skillName           = Skills.FIREMAKING,
                 activityKey         = logKey,
                 skillDisplayName    = "Firemaking",
                 qty                 = actualQty,
-                estimatedXpGain     = (actualQty.toLong() * logXp * xpQueueMult).toLong(),
+                estimatedXpGain     = (actualQty.toLong() * logXp * xpQueueMult * toolEff).toLong(),
                 estimatedDurationMs = actualQty.toLong() * perLogMs,
             )
 
@@ -436,6 +439,7 @@ class SkillsViewModel @Inject constructor(
                 val ashBon     = catalystKey?.let { ashRuneBonusForKey(it) } ?: 0
                 val mult       = when { rcLevel >= 75 -> 3; rcLevel >= 50 -> 2; else -> 1 } + ashBon
                 val xpQueueMult = (if (rcFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(rcFlags)
+                val ashCost = if (catalystKey != null) (qty + 9) / 10 else 0
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = Skills.RUNECRAFTING,
@@ -445,12 +449,12 @@ class SkillsViewModel @Inject constructor(
                         estimatedXpGain     = (qty.toLong() * (runeData.xpPerRune * mult).toLong() * xpQueueMult).toLong(),
                         estimatedDurationMs = qty.toLong() * perItemMs,
                         catalystKey         = catalystKey,
+                        catalystQty         = ashCost,
                     )
                 )
                 if (enqueued) {
                     playerRepo.consumeItems(mapOf("rune_essence" to runeData.essenceCost * qty))
                     if (catalystKey != null) {
-                        val ashCost = (qty + 9) / 10
                         playerRepo.consumeItems(mapOf(catalystKey to ashCost))
                     }
                     queuedSessionStarter.startNextQueued()
@@ -509,8 +513,8 @@ class SkillsViewModel @Inject constructor(
                     frames,
                 )
                 playerRepo.consumeItems(mapOf("rune_essence" to runeData.essenceCost * qty))
+                val ashCost = if (catalystKey != null) (qty + 9) / 10 else 0
                 if (catalystKey != null) {
-                    val ashCost = (qty + 9) / 10
                     playerRepo.consumeItems(mapOf(catalystKey to ashCost))
                 }
                 sessionRepo.startSession(
@@ -519,6 +523,8 @@ class SkillsViewModel @Inject constructor(
                     frames           = framesJson,
                     durationMs       = qty.toLong() * perEssenceMs,
                     skillDisplayName = "Runecrafting",
+                    catalystKey      = catalystKey,
+                    catalystQty      = ashCost,
                 )
             } catch (e: Exception) {
                 _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
@@ -796,6 +802,14 @@ class SkillsViewModel @Inject constructor(
             val frames: List<com.fantasyidler.data.model.SessionFrame> =
                 json.decodeFromString(session.frames)
             val totalXp  = frames.sumOf { it.xpGain.toLong() }
+            // Display value only — mirrors the boost/blessing/prestige math applySessionResults()
+            // already applies internally when crediting the player's actual skill XP below.
+            val flags: PlayerFlags = json.decodeFromString(playerRepo.getOrCreatePlayer().flags)
+            val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
+            val blessingMult = ChurchRepository.xpMultiplier(flags)
+            val prestigeLevel = flags.skillPrestige[session.skillName] ?: 0
+            val baseDisplayXp = ((if (boostActive) totalXp * 2 else totalXp) * blessingMult).toLong()
+            val displayXp = if (prestigeLevel > 0) (baseDisplayXp * (1.0 + prestigeLevel * 0.10)).toLong() else baseDisplayXp
             val allItems = mutableMapOf<String, Int>()
             val levelUps = mutableListOf<Int>()
             for (frame in frames) {
@@ -875,7 +889,7 @@ class SkillsViewModel @Inject constructor(
                 it.copy(
                     sessionResult = SessionResult(
                         skillName   = session.skillName,
-                        xpGained    = totalXp,
+                        xpGained    = displayXp,
                         itemsGained = regularItems,
                         levelUps    = levelUps,
                     ),
@@ -901,6 +915,9 @@ class SkillsViewModel @Inject constructor(
                 playerSessionMaterials(session.skillName, session.activityKey, frames.sumOf { it.kills }, gameData)
                     ?.let { playerRepo.addItems(it) }
             }
+            if (session.catalystKey != null && session.catalystQty > 0) {
+                playerRepo.addItem(session.catalystKey, session.catalystQty)
+            }
             sessionRepo.abandonSession(session.sessionId)
             queuedSessionStarter.startNextQueued()
         }
@@ -924,6 +941,9 @@ class SkillsViewModel @Inject constructor(
                 val frames: List<SessionFrame> = json.decodeFromString(abandonedSession.frames)
                 playerSessionMaterials(abandonedSession.skillName, abandonedSession.activityKey, frames.sumOf { it.kills }, gameData)
                     ?.let { playerRepo.addItems(it) }
+                if (abandonedSession.catalystKey != null && abandonedSession.catalystQty > 0) {
+                    playerRepo.addItem(abandonedSession.catalystKey, abandonedSession.catalystQty)
+                }
                 sessionRepo.abandonSession(abandonedSession.sessionId)
             }
             val evicted = playerRepo.evictQueueForSkill(skillName)
@@ -931,6 +951,9 @@ class SkillsViewModel @Inject constructor(
                 if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
                 playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)
                     ?.let { playerRepo.addItems(it) }
+                if (action.catalystKey != null && action.catalystQty > 0) {
+                    playerRepo.addItem(action.catalystKey, action.catalystQty)
+                }
             }
             playerRepo.prestigeSkill(skillName)
             if (abandonedSession != null) queuedSessionStarter.startNextQueued()

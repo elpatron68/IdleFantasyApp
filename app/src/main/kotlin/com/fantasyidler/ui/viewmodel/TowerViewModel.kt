@@ -305,7 +305,8 @@ class TowerViewModel @Inject constructor(
                 } else 0
 
                 val selectedSpell = flags.activeSpell?.let { gameData.spells[it] }
-                val bestArrow       = ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
+                val preferredArrow  = flags.equippedArrows?.takeIf { (inventory[it] ?: 0) > 0 }
+                val bestArrow       = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowStrBonus   = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
 
                 val prestigeMap  = flags.skillPrestige
@@ -315,7 +316,10 @@ class TowerViewModel @Inject constructor(
                 val enemies    = scaledEnemies(floor)
                 val foodHeal   = gameData.foodHealValues
                 val availableFood   = inventory.filterKeys { it in flags.equippedFood.keys }
-                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
+                val orderedTowerArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedTowerArrowKeys.associateWith { inventory[it] ?: 0 }
 
                 val staffCoversRune = combatStyle == "magic" && selectedSpell != null &&
                     (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)

@@ -1,9 +1,13 @@
 package com.fantasyidler.repository
 
+import android.content.Context
 import com.fantasyidler.data.json.SeasonalBountyTaskData
 import com.fantasyidler.data.json.SeasonalEventData
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.SeasonalBannerEarned
+import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.withAppLocale
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.sync.withLock
@@ -26,6 +30,7 @@ sealed class SeasonalMinigameResult {
 class SeasonalEventRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    @ApplicationContext private val context: Context,
 ) {
 
     /** Returns the event whose date window currently contains "now", or null between events. */
@@ -176,7 +181,7 @@ class SeasonalEventRepository @Inject constructor(
         val flags = playerRepo.getFlags()
         val now = System.currentTimeMillis()
         if (flags.seasonalMinigameCooldownAt > now) return@withLock SeasonalMinigameResult.OnCooldown(flags.seasonalMinigameCooldownAt)
-        val resumesAt = now + minigame.cooldownMs
+        val resumesAt = now + (if (flags.seasonalMinigameEasyMode) minigame.cooldownMsEasy else minigame.cooldownMs)
         val flagsWithCooldown = flags.copy(seasonalMinigameCooldownAt = resumesAt)
         if (won) {
             playerRepo.updateFlagsUnlocked(awardTokenUnlocked(flagsWithCooldown, event))
@@ -195,13 +200,14 @@ class SeasonalEventRepository @Inject constructor(
         val newCount = (flags.seasonalTokensByEvent[event.id] ?: 0) + 1
         var updated = flags.copy(seasonalTokensByEvent = flags.seasonalTokensByEvent + (event.id to newCount))
         if (newCount >= event.tokenGoal && event.id !in flags.seasonalBannersEarned.map { it.eventId }) {
+            val localeContext = context.withAppLocale()
             updated = updated.copy(
                 seasonalBannersEarned = updated.seasonalBannersEarned + SeasonalBannerEarned(
                     eventId          = event.id,
-                    displayText      = event.bannerText,
+                    displayText      = GameStrings.seasonalEventBanner(localeContext, event.id, event.bannerText),
                     completedAtMs    = System.currentTimeMillis(),
                     bannerIcon       = event.bannerIcon,
-                    eventDisplayName = event.displayName,
+                    eventDisplayName = GameStrings.seasonalEventName(localeContext, event.id, event.displayName),
                 )
             )
         }

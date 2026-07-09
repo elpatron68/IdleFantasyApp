@@ -156,6 +156,8 @@ data class PlayerFlags(
     @SerialName("seasonal_bounty_slot_cooldown") val seasonalBountySlotCooldownUntil: Map<String, Long> = emptyMap(),
     /** Seasonal Events: epoch ms when the minigame cooldown expires; 0 = not on cooldown. */
     @SerialName("seasonal_minigame_cooldown_at") val seasonalMinigameCooldownAt: Long = 0L,
+    /** Seasonal Events: persistent player choice — longer reaction window, longer cooldown. */
+    @SerialName("seasonal_minigame_easy_mode") val seasonalMinigameEasyMode: Boolean = false,
     /** Seasonal Events: permanent record of every event completed, kept even after the event's data is removed. */
     @SerialName("seasonal_banners_earned") val seasonalBannersEarned: List<SeasonalBannerEarned> = emptyList(),
     /** Free-text notes the player jots down for themselves (e.g. what to queue next). */
@@ -225,6 +227,8 @@ data class QueuedAction(
     @SerialName("coin_refund") val coinRefund: Long = 0L,
     /** Ash item key used as a catalyst for herblore or runecrafting. Null = no catalyst. */
     @SerialName("catalyst_key") val catalystKey: String? = null,
+    /** Quantity of [catalystKey] already consumed for this action, refunded if cancelled before it runs. */
+    @SerialName("catalyst_qty") val catalystQty: Int = 0,
     /** Potion item key to consume and apply when this queued combat session starts. */
     @SerialName("potion_key") val potionKey: String? = null,
     /** JSON snapshot of Map<String,String?> (equipped gear) captured at queue time for combat/boss sessions. */

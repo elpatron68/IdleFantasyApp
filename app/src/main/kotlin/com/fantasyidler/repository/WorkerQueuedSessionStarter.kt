@@ -143,7 +143,8 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val qty      = action.qty.takeIf { it > 0 } ?: return
                 val startXp  = xpMap[Skills.RUNECRAFTING] ?: 0L
                 val level    = XpTable.levelForXp(startXp)
-                val mult     = when { level >= 75 -> 3; level >= 50 -> 2; else -> 1 }
+                val ashBonus = action.catalystKey?.let { ashRuneBonus(it) } ?: 0
+                val mult     = (when { level >= 75 -> 3; level >= 50 -> 2; else -> 1 }) + ashBonus
                 val totalRunes   = mult * qty
                 val totalXpGain  = (runeData.xpPerRune * totalRunes).toInt()
                 val xpAfter      = startXp + totalXpGain
@@ -257,7 +258,10 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val preferredArrow = flags.equippedArrows?.takeIf { (inventory[it] ?: 0) > 0 }
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
-                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associateWith { inventory[it] ?: 0 }
+                val orderedWorkerBossArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedWorkerBossArrowKeys.associateWith { inventory[it] ?: 0 }
                 val bossFrames = CombatSimulator.simulateBoss(
                     boss               = boss,
                     bossKey            = bossKey,
@@ -306,7 +310,10 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val preferredArrow = flags.equippedArrows?.takeIf { (inventory[it] ?: 0) > 0 }
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
-                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associateWith { inventory[it] ?: 0 }
+                val orderedWorkerCombatArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedWorkerCombatArrowKeys.associateWith { inventory[it] ?: 0 }
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = gameData.enemies,
@@ -365,6 +372,17 @@ class WorkerQueuedSessionStarter @Inject constructor(
         else          -> "ashes"
     }
 
+
+    private fun ashRuneBonus(ashKey: String): Int = when (ashKey) {
+        "ashes"         -> 1
+        "oak_ashes"     -> 2
+        "willow_ashes"  -> 3
+        "maple_ashes"   -> 4
+        "yew_ashes"     -> 5
+        "magic_ashes"   -> 6
+        "redwood_ashes" -> 7
+        else            -> 0
+    }
 
     private fun buildCraftFrames(startXp: Long, qty: Int, xpPerItem: Double, outputQty: Int, outputKey: String, efficiency: Float = 1.0f): List<SessionFrame> {
         val totalXpGain = (xpPerItem * qty * efficiency).toInt()

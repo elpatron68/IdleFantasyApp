@@ -29,6 +29,7 @@ data class SeasonalEventUiState(
     val tokens: Int = 0,
     val bountyTasks: List<SeasonalBountyTaskWithProgress> = emptyList(),
     val minigameCooldownAt: Long = 0L,
+    val minigameEasyMode: Boolean = false,
     val snackbarMessage: String? = null,
 )
 
@@ -62,6 +63,7 @@ class SeasonalEventViewModel @Inject constructor(
                 tokens             = flags.seasonalTokensByEvent[event.id] ?: 0,
                 bountyTasks        = seasonalEventRepo.bountyTasksWithProgress(event, flags),
                 minigameCooldownAt = flags.seasonalMinigameCooldownAt,
+                minigameEasyMode   = flags.seasonalMinigameEasyMode,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SeasonalEventUiState())
@@ -73,6 +75,12 @@ class SeasonalEventViewModel @Inject constructor(
     fun debugStopMinigameCooldown() {
         viewModelScope.launch {
             playerRepo.updateFlags(playerRepo.getFlags().copy(seasonalMinigameCooldownAt = 0L))
+        }
+    }
+
+    fun setMinigameEasyMode(enabled: Boolean) {
+        viewModelScope.launch {
+            playerRepo.updateFlags(playerRepo.getFlags().copy(seasonalMinigameEasyMode = enabled))
         }
     }
 

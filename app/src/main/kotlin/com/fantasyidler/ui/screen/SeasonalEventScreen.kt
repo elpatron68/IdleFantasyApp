@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,6 +28,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -45,6 +49,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -57,6 +64,8 @@ import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
 import com.fantasyidler.ui.viewmodel.SeasonalEventViewModel
 import com.fantasyidler.ui.viewmodel.SkillsViewModel
+import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatDurationMs
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,6 +79,7 @@ fun SeasonalEventScreen(
     onNavigateToBoss: (String) -> Unit = {},
 ) {
     val state by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(state.snackbarMessage) {
         state.snackbarMessage?.let {
@@ -81,7 +91,13 @@ fun SeasonalEventScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(state.event?.displayName ?: stringResource(R.string.seasonal_event_title)) },
+                title = {
+                    val event = state.event
+                    Text(
+                        if (event != null) GameStrings.seasonalEventName(context, event.id, event.displayName)
+                        else stringResource(R.string.seasonal_event_title)
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = null)
@@ -165,7 +181,14 @@ fun SeasonalEventScreen(
 
             val minigame = event.minigame
             if ("minigame" in event.pillars && minigame != null) {
-                SectionCard(title = minigame.displayName) {
+                SectionCard(title = GameStrings.seasonalMinigameName(context, minigame.id, minigame.displayName)) {
+                    MinigameModeSelector(
+                        easyMode      = state.minigameEasyMode,
+                        onModeChange  = viewModel::setMinigameEasyMode,
+                        visibleMs     = if (state.minigameEasyMode) minigame.visibleMsEasy else minigame.visibleMs,
+                        cooldownMs    = if (state.minigameEasyMode) minigame.cooldownMsEasy else minigame.cooldownMs,
+                    )
+                    Spacer(Modifier.height(8.dp))
                     val now = System.currentTimeMillis()
                     if (state.minigameCooldownAt > now) {
                         MinigameCooldownRow(
@@ -175,6 +198,7 @@ fun SeasonalEventScreen(
                     } else {
                         BonfireRhythmGame(
                             config   = minigame,
+                            easyMode = state.minigameEasyMode,
                             onSubmit = viewModel::submitMinigameAttempt,
                         )
                     }
@@ -187,6 +211,46 @@ fun SeasonalEventScreen(
         viewModel         = skillsViewModel,
         craftingViewModel = craftingViewModel,
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MinigameModeSelector(
+    easyMode: Boolean,
+    onModeChange: (Boolean) -> Unit,
+    visibleMs: Long,
+    cooldownMs: Long,
+) {
+    Column {
+        Row(
+            modifier              = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment     = Alignment.CenterVertically,
+        ) {
+            Text(
+                text  = stringResource(R.string.seasonal_minigame_mode_label),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            SingleChoiceSegmentedButtonRow(modifier = Modifier.width(200.dp)) {
+                SegmentedButton(
+                    selected = !easyMode,
+                    onClick  = { onModeChange(false) },
+                    shape    = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
+                ) { Text(stringResource(R.string.seasonal_minigame_mode_normal)) }
+                SegmentedButton(
+                    selected = easyMode,
+                    onClick  = { onModeChange(true) },
+                    shape    = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
+                ) { Text(stringResource(R.string.seasonal_minigame_mode_easy)) }
+            }
+        }
+        Text(
+            text  = stringResource(R.string.seasonal_minigame_mode_caption, visibleMs, cooldownMs.formatDurationMs()),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
 }
 
 @Composable
@@ -208,15 +272,16 @@ private fun BountyTaskRow(
     onCooldownExpired: () -> Unit,
 ) {
     val task = taskProgress.task
+    val context = LocalContext.current
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
-            Text(task.displayName, style = MaterialTheme.typography.bodyMedium)
+            Text(GameStrings.seasonalBountyName(context, task.id, task.displayName), style = MaterialTheme.typography.bodyMedium)
             Text(
-                text  = task.hint,
+                text  = GameStrings.seasonalBountyHint(context, task.id, task.hint),
                 style = MaterialTheme.typography.labelSmall,
                 color = GoldPrimary,
             )
@@ -281,19 +346,22 @@ private fun MinigameCooldownRow(resumesAtMs: Long, onDebugFinish: () -> Unit) {
 
 /**
  * A whack-a-mole reflex minigame: over [SeasonalMinigameConfig.rounds] rounds, an ember lights
- * up in a random hole and the player must tap it before [SeasonalMinigameConfig.visibleMs]
- * elapses. Landing enough hits wins a token; falling short is a real failure — either way the
- * cooldown starts once the round set finishes.
+ * up in a random hole and the player must tap it before the reaction window elapses ([easyMode]
+ * swaps in the longer, easier window and cooldown). Landing enough hits wins a token; falling
+ * short is a real failure — either way the cooldown starts once the round set finishes.
  */
 @Composable
 private fun BonfireRhythmGame(
     config: SeasonalMinigameConfig,
+    easyMode: Boolean,
     onSubmit: (Boolean) -> Unit,
 ) {
     var isPlaying by remember { mutableStateOf(false) }
     var round by remember { mutableIntStateOf(0) }
     var hits by remember { mutableIntStateOf(0) }
     var litHole by remember { mutableIntStateOf(-1) }
+    val haptic = LocalHapticFeedback.current
+    val visibleMs = if (easyMode) config.visibleMsEasy else config.visibleMs
 
     Text(
         text  = stringResource(R.string.seasonal_minigame_hint, config.hitsRequired, config.rounds),
@@ -324,7 +392,12 @@ private fun BonfireRhythmGame(
                             .size(56.dp)
                             .clip(CircleShape)
                             .background(if (isLit) GoldPrimary else MaterialTheme.colorScheme.surface)
-                            .clickable(enabled = isPlaying) { if (litHole == index) litHole = -1 },
+                            .clickable(enabled = isPlaying) {
+                                if (litHole == index) {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    litHole = -1
+                                }
+                            },
                         contentAlignment = Alignment.Center,
                     ) {
                         if (isLit) Text("🔥", style = MaterialTheme.typography.titleLarge)
@@ -351,7 +424,7 @@ private fun BonfireRhythmGame(
             litHole = kotlin.random.Random.nextInt(config.holeCount)
             var elapsed = 0L
             var hitThisRound = false
-            while (elapsed < config.visibleMs) {
+            while (elapsed < visibleMs) {
                 delay(30L)
                 elapsed += 30L
                 if (litHole == -1) { hitThisRound = true; break }

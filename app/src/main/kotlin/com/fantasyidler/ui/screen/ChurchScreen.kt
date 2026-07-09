@@ -92,7 +92,7 @@ fun ChurchScreen(
                             style = MaterialTheme.typography.bodyMedium,
                         )
                         Text(
-                            text  = stringResource(R.string.church_bones_available, state.totalBoneEquivalent),
+                            text  = stringResource(R.string.church_bones_available, state.totalBoneCount, state.totalBoneEquivalent),
                             style = MaterialTheme.typography.bodySmall,
                             color = if (hasEnough) MaterialTheme.colorScheme.onSurfaceVariant
                                     else MaterialTheme.colorScheme.error,

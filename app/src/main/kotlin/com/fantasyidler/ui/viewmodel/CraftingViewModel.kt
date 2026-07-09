@@ -356,10 +356,10 @@ class CraftingViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val craftFlags = playerRepo.getFlags()
                 val agility   = state.skillLevels[Skills.AGILITY] ?: 1
-                val perItemMs = SkillSimulator.sessionDurationMs(agility, craftFlags.skillPrestige[Skills.AGILITY] ?: 0) / 60
+                val toolEff   = craftToolEfficiency(recipe, json.decodeFromString(playerRepo.getOrCreatePlayer().equipped))
+                val perItemMs = (SkillSimulator.sessionDurationMs(agility, craftFlags.skillPrestige[Skills.AGILITY] ?: 0) / 60 / toolEff).toLong()
                 val totalOutput = qty * recipe.outputQty
                 val xpQueueMult = (if (craftFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(craftFlags)
-                val toolEff = craftToolEfficiency(recipe, json.decodeFromString(playerRepo.getOrCreatePlayer().equipped))
                 val action = QueuedAction(
                     skillName           = recipe.skillName,
                     activityKey         = recipe.key,
@@ -416,8 +416,8 @@ class CraftingViewModel @Inject constructor(
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
             val agilityLevel = levels[Skills.AGILITY] ?: 1
-            // 1 item per minute, reduced by agility (same formula as gathering skills)
-            val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60
+            // 1 item per minute, reduced by agility (same formula as gathering skills) and by tool efficiency
+            val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60 / efficiency).toLong()
 
             val framesJson = json.encodeToString(
                 json.serializersModule.serializer<List<SessionFrame>>(),
@@ -431,6 +431,8 @@ class CraftingViewModel @Inject constructor(
                 frames           = framesJson,
                 durationMs       = qty * perItemMs,
                 skillDisplayName = recipe.skillName,
+                catalystKey      = ashKey,
+                catalystQty      = if (ashKey != null) qty else 0,
             )
             _extra.update { it.copy(selectedRecipe = null, herbloreAshKey = null) }
         }
