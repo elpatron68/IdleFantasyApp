@@ -16,7 +16,7 @@ Each worker has a daily name that changes at 6 AM. Firing and rehiring on the sa
 {tier_table}
 
 > **Gathering output** = session hours × efficiency multiplier, applied to all gathering loot and XP at collect time.
-> **Crafting output** shows the maximum number of items processed per session (Long Laborer takes 2 min/item; all others take 1 min/item).
+> **Crafting output** shows the maximum number of items processed per session. Per-item time scales with efficiency (1 min/item at 1.0× efficiency; faster above, slower below) — the per-item rate is noted where it differs from that 1 min/item baseline.
 
 ## Skills Available
 

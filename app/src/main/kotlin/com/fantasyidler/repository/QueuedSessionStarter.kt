@@ -111,7 +111,10 @@ class QueuedSessionStarter @Inject constructor(
                 return 0L
             }
             return try {
-                startQueuedAction(next, offline = true)
+                // backdateMs = remainingMs so each fast-forwarded session in the same
+                // catch-up burst gets a distinct startedAt (now - remainingMs), staying
+                // strictly ordered by queue position instead of all colliding on "now".
+                startQueuedAction(next, offline = true, backdateMs = remainingMs)
                 duration
             } catch (_: Exception) {
                 playerRepo.requeueActionAtFrontUnlocked(next)

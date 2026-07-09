@@ -399,9 +399,13 @@ class TowerViewModel @Inject constructor(
             if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt) {
                 sessionRepo.markCompleted(latest.sessionId)
             }
-            val session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
-                ?: return@launch
+            var session: com.fantasyidler.data.model.SkillSession? =
+                sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+                    ?: return@launch
 
+            // Drain every backlogged floor (oldest first) in one call, so floors that
+            // finished offline while multiple were queued don't get silently skipped.
+            while (session != null) {
             val frames: List<SessionFrame> = json.decodeFromString(session.frames)
             val playerDied = frames.any { it.died }
 
@@ -484,6 +488,8 @@ class TowerViewModel @Inject constructor(
                 ))
                 sessionRepo.deleteSession(session.sessionId)
                 _extra.update { it.copy(snackbarMessage = msg) }
+            }
+            session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
             }
             queuedSessionStarter.startNextQueued()
         }

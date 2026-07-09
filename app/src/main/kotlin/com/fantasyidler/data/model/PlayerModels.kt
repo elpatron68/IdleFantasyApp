@@ -160,6 +160,10 @@ data class PlayerFlags(
     @SerialName("seasonal_banners_earned") val seasonalBannersEarned: List<SeasonalBannerEarned> = emptyList(),
     /** Free-text notes the player jots down for themselves (e.g. what to queue next). */
     @SerialName("player_notes") val playerNotes: String = "",
+    /** Titles: ids of every title ever earned. A title, once unlocked, is never revoked. */
+    @SerialName("unlocked_titles") val unlockedTitles: Set<String> = emptySet(),
+    /** Titles: id of the currently equipped title, or null for none. */
+    @SerialName("equipped_title") val equippedTitle: String? = null,
 )
 
 /** A permanent snapshot of a completed Seasonal Event, shown in the Profile Banners tab. */
@@ -170,6 +174,8 @@ data class SeasonalBannerEarned(
     @SerialName("completed_at_ms") val completedAtMs: Long,
     /** Drawable resource name captured at completion time, so the banner still renders after the event's data is removed. */
     @SerialName("banner_icon")    val bannerIcon: String? = null,
+    /** Short event name (e.g. "Sunspire Solstice") captured at completion time, used to build this event's Title even after the event's data is removed. */
+    @SerialName("event_display_name") val eventDisplayName: String = "",
 )
 
 /** Stats saved after each dungeon run; keyed by dungeon name in PlayerFlags. */
@@ -251,7 +257,7 @@ enum class WorkerTier {
     val efficiencyMultiplier: Float get() = when (this) {
         LONG_LABORER -> 0.5f
         APPRENTICE   -> 1.0f
-        JOURNEYMAN   -> 1.25f
+        JOURNEYMAN   -> 1.5f
         MASTER       -> 2.0f
     }
 
@@ -262,23 +268,16 @@ enum class WorkerTier {
         MASTER       -> 50_000L
     }
 
-    /** Per-item time for crafting/prayer/runecrafting sessions.
-     *  Long Laborer is 2x the player's base rate; all others match the player (1 min/item). */
-    val craftingPerItemMs: Long get() = when (this) {
-        LONG_LABORER -> 2L * 60_000L
-        else         -> 60_000L
-    }
+    /** Per-item time for crafting/prayer/runecrafting sessions, scaled by efficiencyMultiplier
+     *  (1 min/item at 1.0x, faster above, slower below) so higher tiers craft faster, not just longer. */
+    val craftingPerItemMs: Long get() = (60_000L / efficiencyMultiplier).toLong()
 
     /** Effective session duration for the crafting estimate display formula (perItemMs * 60). */
     val craftingSessionMs: Long get() = craftingPerItemMs * 60L
 
-    /** Maximum qty for crafting/prayer/runecrafting sessions; LONG_LABORER is uncapped. */
-    val maxCraftQty: Int get() = when (this) {
-        LONG_LABORER -> Int.MAX_VALUE
-        APPRENTICE   -> 480
-        JOURNEYMAN   -> 360
-        MASTER       -> 240
-    }
+    /** Maximum qty for crafting/prayer/runecrafting sessions; LONG_LABORER is uncapped.
+     *  = session hours × efficiencyMultiplier × 60, so a full-cap session takes about as long as [durationMs]. */
+    val maxCraftQty: Int get() = if (this == LONG_LABORER) Int.MAX_VALUE else (combinedGatheringMultiplier * 60).toInt()
 
     /** Combined multiplier applied to gathering/combat loot and XP at collect time.
      *  = (session hours) × efficiencyMultiplier */

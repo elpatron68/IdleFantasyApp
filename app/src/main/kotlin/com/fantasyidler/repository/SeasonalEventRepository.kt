@@ -197,10 +197,11 @@ class SeasonalEventRepository @Inject constructor(
         if (newCount >= event.tokenGoal && event.id !in flags.seasonalBannersEarned.map { it.eventId }) {
             updated = updated.copy(
                 seasonalBannersEarned = updated.seasonalBannersEarned + SeasonalBannerEarned(
-                    eventId       = event.id,
-                    displayText   = event.bannerText,
-                    completedAtMs = System.currentTimeMillis(),
-                    bannerIcon    = event.bannerIcon,
+                    eventId          = event.id,
+                    displayText      = event.bannerText,
+                    completedAtMs    = System.currentTimeMillis(),
+                    bannerIcon       = event.bannerIcon,
+                    eventDisplayName = event.displayName,
                 )
             )
         }

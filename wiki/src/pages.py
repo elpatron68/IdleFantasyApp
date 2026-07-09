@@ -98,6 +98,7 @@ def add_static_pages():
             ("expeditions", PageInfo("Expeditions", "Expeditions.md", gen_expeditions)),
             ("pets", PageInfo("Pets", "Pets.md", gen_pets)),
             ("quests", PageInfo("Quests", "Quests.md", gen_quests)),
+            ("titles", PageInfo("Titles", "Titles.md", gen_titles)),
         ]],
     ]
 
@@ -1183,8 +1184,8 @@ def gen_workers() -> str:
     tiers = [
         ("Long Laborer", 8,  0.5,  5_000,  4.0,  "Uncapped (2 min/item)"),
         ("Apprentice",   8,  1.0,  10_000, 8.0,  "480 items"),
-        ("Journeyman",   6,  1.25, 20_000, 7.5,  "360 items"),
-        ("Master",       4,  2.0,  50_000, 8.0,  "240 items"),
+        ("Journeyman",   6,  1.5,  20_000, 9.0,  "540 items (40 sec/item)"),
+        ("Master",       4,  2.0,  50_000, 8.0,  "480 items (30 sec/item)"),
     ]
     tier_rows = [
         [name, f"{dur}h", f"{eff:.2f}×", f"{cost:,}", f"{gather:.1f}×", craft]
@@ -1372,6 +1373,51 @@ def gen_quests() -> str:
         sections.append(f"## {title(skill)}\n\n{quest_table}")
 
     return get_template("miscellaneous/quests").format(quest_sections="\n\n".join(sections))
+
+
+def gen_titles() -> str:
+    # Skill quest-chain titles (mirrored from TitleRepository.SKILL_TITLES)
+    skill_titles = [
+        ("Smithing",     "Master Smith"),
+        ("Cooking",      "Head Chef"),
+        ("Mining",       "Master Miner"),
+        ("Fishing",      "Master Angler"),
+        ("Woodcutting",  "Master Woodcutter"),
+        ("Fletching",    "Master Fletcher"),
+        ("Crafting",     "Master Artisan"),
+        ("Runecrafting", "Runemaster"),
+        ("Herblore",     "Master Herbalist"),
+        ("Construction", "Master Builder"),
+        ("Prayer",       "Devout"),
+        ("Thieving",     "Master Thief"),
+        ("Firemaking",   "Flamekeeper"),
+        ("Slayer",       "Slayer"),
+    ]
+    skill_rows = [[t_name, f"Complete all {skill} quests"] for skill, t_name in skill_titles]
+    skill_table = table(["Title", "Requirement"], skill_rows)
+
+    # Guild mastery titles (mirrored from TitleRepository.GUILD_TITLES) — for guilds with no quest chain of their own
+    guild_titles = [
+        ("Warriors",   "Warlord"),
+        ("Archers",    "Marksman"),
+        ("Mages",      "Archmage"),
+        ("Mercantile", "Merchant Prince"),
+        ("Agility",    "Pathfinder"),
+        ("Farming",    "Master Farmer"),
+    ]
+    guild_rows = [[t_name, f"Reach max level (10) in the {guild} Guild"] for guild, t_name in guild_titles]
+    guild_table = table(["Title", "Requirement"], guild_rows)
+
+    other_rows = [
+        ["Godslayer", "Defeat every raid boss at least once"],
+    ]
+    other_table = table(["Title", "Requirement"], other_rows)
+
+    return get_template("miscellaneous/titles").format(
+        skill_table=skill_table,
+        guild_table=guild_table,
+        other_table=other_table,
+    )
 
 
 def gen_boss(boss: dict) -> str:

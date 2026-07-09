@@ -177,7 +177,8 @@ class CarnivalViewModel @Inject constructor(
                 potionSequenceState = resolveState(extra.potionSequenceState, flags.carnivalPotionSequenceCooldownAt),
                 itemAppraisalState  = resolveState(extra.itemAppraisalState, flags.carnivalItemAppraisalCooldownAt),
                 shellGameState      = resolveState(extra.shellGameState, flags.carnivalShellGameCooldownAt),
-                higherLowerState    = resolveState(extra.higherLowerState, flags.carnivalHigherLowerCooldownAt),
+                higherLowerState    = if (extra.higherLowerState is ActiveGameState.HigherOrLowerResult) extra.higherLowerState
+                                      else resolveState(extra.higherLowerState, flags.carnivalHigherLowerCooldownAt),
                 carnivalGameCount   = townRepo.carnivalGameCount(flags),
                 carnivalCooldownMs  = townRepo.carnivalCooldownMs(flags),
             )

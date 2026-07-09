@@ -9,9 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -27,11 +32,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
+import com.fantasyidler.ui.theme.GoldPrimary
 
 internal val CHARACTER_GENDERS = listOf("Male", "Female", "Other")
 internal val CHARACTER_RACES   = listOf("Human", "Elf", "Dwarf", "Orc", "Halfling", "Gnome")
+
+/** A title option ready to render — display strings already resolved, whether static or seasonal. */
+data class TitleOption(
+    val id: String,
+    val name: String,
+    val requirement: String,
+    val unlocked: Boolean,
+)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -40,6 +55,9 @@ fun CharacterSetupSheet(
     initialName: String = "",
     initialGender: String = "",
     initialRace: String = "",
+    titles: List<TitleOption> = emptyList(),
+    equippedTitleId: String? = null,
+    onEquipTitle: (String?) -> Unit = {},
     onSave: (name: String, gender: String, race: String) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -58,6 +76,7 @@ fun CharacterSetupSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
                 .padding(bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -124,6 +143,80 @@ fun CharacterSetupSheet(
                             onClick  = { draftRace = if (draftRace == race) "" else race },
                             label    = { Text(raceLabels[race] ?: race) },
                         )
+                    }
+                }
+            }
+
+            if (!isFirstTime && titles.isNotEmpty()) {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(stringResource(R.string.character_title_label),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+                    val currentLabel = if (equippedTitleId == null) stringResource(R.string.character_title_none)
+                        else titles.firstOrNull { it.id == equippedTitleId }?.name ?: stringResource(R.string.character_title_none)
+                    var titleExpanded by remember { mutableStateOf(false) }
+
+                    ExposedDropdownMenuBox(
+                        expanded         = titleExpanded,
+                        onExpandedChange = { titleExpanded = it },
+                    ) {
+                        OutlinedTextField(
+                            value         = currentLabel,
+                            onValueChange = {},
+                            readOnly      = true,
+                            trailingIcon  = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = titleExpanded) },
+                            modifier      = Modifier.menuAnchor().fillMaxWidth(),
+                            textStyle     = MaterialTheme.typography.bodyMedium,
+                            singleLine    = true,
+                        )
+                        ExposedDropdownMenu(
+                            expanded         = titleExpanded,
+                            onDismissRequest = { titleExpanded = false },
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text       = stringResource(R.string.character_title_none),
+                                        fontWeight = if (equippedTitleId == null) FontWeight.SemiBold else FontWeight.Normal,
+                                        color      = if (equippedTitleId == null) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                                    )
+                                },
+                                onClick = {
+                                    onEquipTitle(null)
+                                    titleExpanded = false
+                                },
+                            )
+                            titles.forEach { option ->
+                                DropdownMenuItem(
+                                    text = {
+                                        Column {
+                                            Text(
+                                                text       = option.name,
+                                                fontWeight = if (option.id == equippedTitleId) FontWeight.SemiBold else FontWeight.Normal,
+                                                color      = when {
+                                                    !option.unlocked            -> MaterialTheme.colorScheme.onSurfaceVariant
+                                                    option.id == equippedTitleId -> GoldPrimary
+                                                    else                         -> MaterialTheme.colorScheme.onSurface
+                                                },
+                                            )
+                                            if (!option.unlocked) {
+                                                Text(
+                                                    text  = option.requirement,
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                )
+                                            }
+                                        }
+                                    },
+                                    enabled = option.unlocked,
+                                    onClick = {
+                                        onEquipTitle(option.id)
+                                        titleExpanded = false
+                                    },
+                                )
+                            }
+                        }
                     }
                 }
             }
