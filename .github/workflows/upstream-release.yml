@@ -12,9 +12,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # Poll every 15 minutes. GitHub scheduled runs can be delayed/dropped,
-    # so multiple slots per hour reduce release detection lag.
-    - cron: "7,22,37,52 * * * *"
+    # Poll every 10 minutes (GitHub minimum interval). Scheduled runs can be
+    # delayed or dropped on forks, so Upstream Sync also dispatches this workflow
+    # when the fork is missing the latest upstream release tag.
+    - cron: "*/10 * * * *"
   workflow_dispatch:
     inputs:
       upstream_tag:

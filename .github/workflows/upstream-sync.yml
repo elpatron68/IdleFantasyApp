@@ -130,9 +130,23 @@ jobs:
         run: |
           echo "Upstream moved — dispatching Upstream Release (also auto-triggered via workflow_run on success)."
           if ! gh workflow run upstream-release.yml --ref main; then
-            echo "::warning::Could not dispatch upstream-release.yml; Upstream Release still runs via workflow_run or the 15-minute schedule."
+            echo "::warning::Could not dispatch upstream-release.yml; Upstream Release still runs via workflow_run or the 10-minute schedule."
             exit 1
           fi
+
+      - name: Trigger release if fork is behind upstream tag
+        if: success()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          UPSTREAM_TAG="$(gh release view --repo tristinbaker/IdleFantasy --json tagName -q .tagName)"
+          if gh release view "$UPSTREAM_TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Fork already has upstream release $UPSTREAM_TAG"
+            exit 0
+          fi
+          echo "Fork missing upstream release $UPSTREAM_TAG — dispatching Upstream Release"
+          gh workflow run upstream-release.yml --ref main
 
       - name: Trigger Save Viewer sync (optional)
         if: steps.changes.outputs.changed == 'true' && vars.SAVE_VIEWER_SYNC_ENABLED == 'true'
