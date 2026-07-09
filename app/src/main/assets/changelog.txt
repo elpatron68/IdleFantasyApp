@@ -1,3 +1,20 @@
+v1.11.2
+• New: added Brazilian Portuguese as a selectable language
+• Fix: the seasonal bounty to "Fletch arrows to hold back the wisps" didn't say which arrow type it needed, now clarifies it requires Mithril arrows
+• Updated Italian translation for v1.11.1 strings
+• Updated French translation for improved clarity
+• Fix: the Church blessing confirmation showed a "bones available" number that looked inflated because it was a weighted total (bigger bones count for more) rather than a plain item count; now shows both your raw bone count and what it's worth toward the blessing cost
+• Fix: the Sunspire Solstice seasonal event's bounty tasks, minigame name, and event banner were not translatable into other languages; they're now proper localized strings
+• Fix: collecting several finished sessions at once could show only the expedition's results (and its lore note) in the popup, hiding the other sessions' rewards from the summary — all collected sessions now show together
+• Fix: the Hammer, Tinderbox, and Frying Pan tools were only speeding up XP gain in Smithing, Firemaking, and Cooking, not crafting time, so better tools didn't visibly speed up production; they now reduce crafting time too, matching how Pickaxe/Axe/Fishing Rod/Grappling Hook already work
+• Fix: collecting a session from the Skills screen showed the XP gained without your active XP boost, blessing, or prestige bonus applied, even though you were actually credited the correct (higher) amount; the popup now shows the true total, matching what collecting from the Home screen already showed
+• Fix: sending a hired worker to Runecraft with an ash catalyst equipped produced the same output as having no ash at all; workers now get the same ash bonus you do when crafting runes yourself
+• Fix: cancelling a Runecrafting or Herblore session (or removing one from the queue, or prestiging its skill) never returned the ash catalyst you'd used, even though every other material was refunded; ash is now returned along with everything else
+• Fix: queuing a Runecrafting session with an ash catalyst while another session was already running consumed the ash twice, once when queued and again when it actually started
+• Fix: ranged combat could burn through better arrow types you weren't using before touching your actually-selected arrows, since the fallback order always started from your best tier owned instead of your selection; your selected arrow (or equipped arrow for workers and the Infinite Tower) is now used up first
+• New: added haptic feedback to the Bonfire Rhythm minigame, matching the other Carnival minigames
+• New: added an Easy mode to Bonfire Rhythm with a longer reaction window, trading a longer cooldown between attempts for it
+
 v1.11.1
 • Fix: Infinite Tower could land you on the wrong floor after queuing several floors and letting them finish while the app was closed, since offline catch-up could mis-order which completed floor counted as current and some floors could be skipped entirely; collection now correctly drains every backlogged floor in order
 • Fix: Equip Best Gear could equip a lower-tier gathering/crafting tool (like a bronze hammer) over a higher-tier one you owned (like an iron hammer), since the four newest tool types weren't being scored by their actual efficiency

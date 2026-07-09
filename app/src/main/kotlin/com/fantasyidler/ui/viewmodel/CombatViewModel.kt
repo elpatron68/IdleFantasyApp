@@ -453,8 +453,11 @@ class CombatViewModel @Inject constructor(
                 val availableFood      = inventory.filterKeys { it in equippedFoodKeys }
                 val foodHealValues     = gameData.foodHealValues
 
-                // Arrows: pass all owned tiers so simulator can fall back when one tier runs out
-                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
+                // Arrows: preferred type drains first, then the simulator falls back to other owned tiers
+                val orderedArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedArrowKeys.associateWith { inventory[it] ?: 0 }
 
                 // Runes: determine key and cost for simulator tracking; consumed upfront below
                 val staffCoversRune = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
@@ -615,7 +618,10 @@ class CombatViewModel @Inject constructor(
                 val preferredArrow = _extra.value.selectedArrowKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowStrengthBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
-                val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }.associate { it to (inventory[it] ?: 0) }
+                val orderedArrowKeys = if (preferredArrow != null)
+                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
+                val availableArrows = orderedArrowKeys.associateWith { inventory[it] ?: 0 }
 
                 val bossStaffCoversRune = combatStyle == "magic" && selectedSpell != null && (bossWeapon?.infiniteRunes == "all" || bossWeapon?.infiniteRunes == selectedSpell.runeType)
                 val bossRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !bossStaffCoversRune) selectedSpell.runeType else null

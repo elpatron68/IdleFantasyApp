@@ -356,7 +356,8 @@ class HomeViewModel @Inject constructor(
             var petFoundName: String? = null
             var bossWon: Boolean? = null  // set when session is a boss fight
             val awardedCapes = mutableListOf<String>()
-            var pendingExpeditionSummary: SessionSummary? = null
+            var expeditionNoteLines: List<String> = emptyList()
+            var expeditionUnlockMessage: String? = null
 
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
             val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.CONSTRUCTION)
@@ -640,19 +641,8 @@ class HomeViewModel @Inject constructor(
                         if (localNotesFound > 0 && dungeonData != null) {
                             val revealed = dungeonData.noteTexts.take(localNewCount.coerceAtMost(dungeonData.noteTexts.size))
                             val newlyRevealedTexts = revealed.drop(localOldCount.coerceAtMost(revealed.size))
-                            val noteLabels = newlyRevealedTexts.map { it }
-                            val expDisplayXp  = ((totalXp * xpMult).toDouble() * blessingXpMult).toLong()
-                            val expXpBonus    = (expDisplayXp - totalXp * xpMult).coerceAtLeast(0L)
-                            pendingExpeditionSummary = SessionSummary(
-                                title = "${dungeonData.displayName} Expedition Complete",
-                                totalXpLabel      = "+${expDisplayXp.formatXp()} XP",
-                                totalXpLabelBonus = expXpBonus,
-                                itemLines      = regular.entries.sortedByDescending { it.value }
-                                    .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
-                                noteLines      = noteLabels,
-                                unlockMessage  = localUnlockMsg,
-                                boostWasActive = boostActive,
-                            )
+                            expeditionNoteLines = newlyRevealedTexts
+                            expeditionUnlockMessage = localUnlockMsg
                         }
                     }
                     Skills.MERCANTILE -> {
@@ -833,6 +823,8 @@ class HomeViewModel @Inject constructor(
                 boostWasActive   = boostActive,
                 xpLineBonuses    = xpLineBonuses,
                 coinBlessingBonus = coinBlessingBonus,
+                noteLines        = expeditionNoteLines,
+                unlockMessage    = expeditionUnlockMessage,
             )
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
@@ -840,7 +832,7 @@ class HomeViewModel @Inject constructor(
                 context.getString(R.string.home_congratulations_received, names)
             } else null
             _extra.update { it.copy(
-                sessionSummary  = pendingExpeditionSummary ?: summary,
+                sessionSummary  = summary,
                 snackbarMessage = capeMessage,
                 petFoundName    = petFoundName,
             ) }
@@ -949,6 +941,9 @@ class HomeViewModel @Inject constructor(
             } else {
                 playerSessionMaterials(session.skillName, session.activityKey, frames.sumOf { it.kills }, gameData)
                     ?.let { playerRepo.addItems(it) }
+            }
+            if (session.catalystKey != null && session.catalystQty > 0) {
+                playerRepo.addItem(session.catalystKey, session.catalystQty)
             }
             sessionRepo.abandonSession(session.sessionId)
             queuedSessionStarter.startNextQueued()
@@ -1249,6 +1244,9 @@ class HomeViewModel @Inject constructor(
             if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
             playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)
                 ?.let { playerRepo.addItems(it) }
+            if (action.catalystKey != null && action.catalystQty > 0) {
+                playerRepo.addItem(action.catalystKey, action.catalystQty)
+            }
             reconcileTowerQueue()
         }
     }

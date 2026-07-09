@@ -422,7 +422,7 @@ class WorkerSkillsViewModel @Inject constructor(
     // Runecrafting (consumes rune essence at queue time)
     // ------------------------------------------------------------------
 
-    fun startRunecraftingSession(runeKey: String, qty: Int) {
+    fun startRunecraftingSession(runeKey: String, qty: Int, catalystKey: String? = null) {
         viewModelScope.launch {
             val slot     = _uiState.value.selectedSlot
             val runeData = gameData.runes[runeKey] ?: return@launch
@@ -435,6 +435,8 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_not_enough_rune_essence), sheetSkill = null) }
                 return@launch
             }
+            val ashCost = if (catalystKey != null) (qty + 9) / 10 else 0
+            if (catalystKey != null) playerRepo.consumeItems(mapOf(catalystKey to ashCost))
             val enqueued = playerRepo.enqueueWorkerAction(
                 slot,
                 QueuedAction(
@@ -443,6 +445,7 @@ class WorkerSkillsViewModel @Inject constructor(
                     skillDisplayName    = "Runecrafting",
                     qty                 = qty,
                     estimatedDurationMs = qty.toLong() * perItemMs,
+                    catalystKey         = catalystKey,
                 )
             )
             if (enqueued) {
@@ -450,6 +453,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(sheetSkill = null) }
             } else {
                 playerRepo.addItem("rune_essence", totalEssence)
+                if (catalystKey != null) playerRepo.addItem(catalystKey, ashCost)
                 _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), sheetSkill = null) }
             }
         }

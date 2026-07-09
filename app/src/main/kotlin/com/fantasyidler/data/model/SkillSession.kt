@@ -55,4 +55,11 @@ data class SkillSession(
      */
     @ColumnInfo(name = "worker_slot", defaultValue = "0")
     val workerSlot: Int = 0,
+
+    /** Catalyst item consumed at start (e.g. rune ash, herblore enhancer), so it can be refunded on abandon. */
+    @ColumnInfo(name = "catalyst_key")
+    val catalystKey: String? = null,
+
+    @ColumnInfo(name = "catalyst_qty", defaultValue = "0")
+    val catalystQty: Int = 0,
 )

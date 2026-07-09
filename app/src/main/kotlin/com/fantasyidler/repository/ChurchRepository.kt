@@ -104,6 +104,10 @@ class ChurchRepository @Inject constructor(
         fun totalBoneEquivalent(inventory: Map<String, Int>): Int =
             BONE_XP.entries.sumOf { (key, xp) -> (inventory[key] ?: 0) * xp } / BASE_BONE_XP
 
+        /** Raw count of bone items on hand, unweighted by tier. */
+        fun totalBoneCount(inventory: Map<String, Int>): Int =
+            BONE_TYPES_ORDERED.sumOf { inventory[it] ?: 0 }
+
         private fun totalBoneXp(inventory: Map<String, Int>): Int =
             BONE_XP.entries.sumOf { (key, xp) -> (inventory[key] ?: 0) * xp }
     }

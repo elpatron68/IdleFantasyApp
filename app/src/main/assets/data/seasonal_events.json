@@ -96,7 +96,9 @@
       "hole_count": 9,
       "hits_required": 7,
       "visible_ms": 500,
-      "cooldown_ms": 3600000
+      "cooldown_ms": 3600000,
+      "visible_ms_easy": 800,
+      "cooldown_ms_easy": 7200000
     },
     "reward_tiers": [
       {

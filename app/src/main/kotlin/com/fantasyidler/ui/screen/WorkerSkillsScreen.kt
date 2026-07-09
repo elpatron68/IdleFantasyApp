@@ -318,7 +318,7 @@ fun WorkerSkillsScreen(
                     hasActiveSession  = true,
                     isQueueFull       = isQueueFull,
                     sessionDurationMs = state.sessionDurationMs,
-                    onStart           = { runeKey, qty, _ -> viewModel.startRunecraftingSession(runeKey, qty) },
+                    onStart           = { runeKey, qty, ashKey -> viewModel.startRunecraftingSession(runeKey, qty, ashKey) },
                     currentXp         = state.skillXp[Skills.RUNECRAFTING] ?: 0L,
                     tierMaxQty        = state.maxCraftQty,
                 )
