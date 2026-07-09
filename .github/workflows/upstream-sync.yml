@@ -1,7 +1,7 @@
 # Sync this fork with tristinbaker/IdleFantasy and build a debug APK when upstream moved.
 #
-# Requires: fork default branch "main", write permission for GITHUB_TOKEN (contents: write).
-# On merge conflicts the job fails — resolve manually, then re-run workflow_dispatch.
+# Requires: fork default branch "main"; GITHUB_TOKEN needs contents:write and actions:write.
+# On merge conflicts the sync step fails — resolve manually, then re-run workflow_dispatch.
 name: Upstream Sync
 
 on:
@@ -124,11 +124,15 @@ jobs:
 
       - name: Trigger upstream release workflow
         if: steps.changes.outputs.changed == 'true'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Upstream moved — checking whether a signed release is needed..."
-          gh workflow run upstream-release.yml --ref main
+          echo "Upstream moved — dispatching Upstream Release (also auto-triggered via workflow_run on success)."
+          if ! gh workflow run upstream-release.yml --ref main; then
+            echo "::warning::Could not dispatch upstream-release.yml; Upstream Release still runs via workflow_run or the 15-minute schedule."
+            exit 1
+          fi
 
       - name: Trigger Save Viewer sync (optional)
         if: steps.changes.outputs.changed == 'true' && vars.SAVE_VIEWER_SYNC_ENABLED == 'true'
