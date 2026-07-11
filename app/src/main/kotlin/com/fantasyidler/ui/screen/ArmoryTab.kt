@@ -344,6 +344,7 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
         if ((item.rangedStrengthBonus?: 0) != 0) rows.add(stringResource(R.string.armory_stat_ranged_str) to "+${item.rangedStrengthBonus}")
         if ((item.magicAttackBonus   ?: 0) != 0) rows.add(stringResource(R.string.armory_stat_magic_atk) to "+${item.magicAttackBonus}")
         if ((item.magicDamageBonus   ?: 0) != 0) rows.add(stringResource(R.string.armory_stat_magic_dmg) to "+${item.magicDamageBonus}")
+        item.attackSpeed?.let { rows.add(stringResource(R.string.armory_stat_attack_speed) to "%.1fs".format(it)) }
         if (item.capeBonus != 0f) {
             val label = if (item.capeSkill in COMBAT_CAPE_SKILLS) stringResource(R.string.armory_stat_cape)
                         else stringResource(R.string.armory_stat_cape_yield)

@@ -956,7 +956,7 @@
     <string name="slayer_already_owned">Já possui este item.</string>
     <string name="slayer_purchased">Adicionado ao inventário.</string>
     <string name="slayer_owned">Possuído</string>
-    <string name="slayer_lamp_purchased">XP adicionado a %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP adicionado a %2$s!</string>
     <string name="slayer_lamp_pick_skill">Escolha uma habilidade</string>
     <string name="slayer_lamp_small">Lâmpada de XP (Pequena)</string>
     <string name="slayer_lamp_large">Lâmpada de XP (Grande)</string>
@@ -1302,7 +1302,7 @@
     <string name="carnival_appraisal_wrong">Errado! O item mais valioso era %1$s.</string>
     <string name="carnival_redeemed">Trocado: %1$s!</string>
     <string name="carnival_not_enough_tickets">Bilhetes insuficientes.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP em %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP em %2$s!</string>
     <string name="carnival_shell_game">Escolha o Copo</string>
     <string name="carnival_active_shell_desc">Observe qual copo esconde a gema e escolha-o depois da embaralhada!</string>
     <string name="carnival_shell_showing">Observe com atenção — a gema está sob o copo %1$d</string>
@@ -1373,6 +1373,7 @@
     <string name="armory_stat_ranged_str">Força à Distância</string>
     <string name="armory_stat_magic_atk">Ataque Mágico</string>
     <string name="armory_stat_magic_dmg">Dano Mágico</string>
+    <string name="armory_stat_attack_speed">Velocidade de Ataque</string>
     <string name="armory_stat_cape">Bônus de XP</string>
     <string name="armory_stat_cape_yield">Bônus de Rendimento</string>
     <string name="armory_source_carnival">Loja de Prêmios do Carnaval</string>
@@ -1435,6 +1436,8 @@
     <string name="snackbar_added_to_queue">Adicionado à fila: %1$s.</string>
     <string name="snackbar_queue_full">A fila está cheia.</string>
     <string name="combat_start_failed">Não foi possível iniciar: %1$s</string>
+    <string name="skill_session_voided_prestige">Seu nível de %1$s não atende mais ao requisito desta sessão (provavelmente por prestígio) — as recompensas foram anuladas e os materiais usados foram reembolsados.</string>
+    <string name="combat_session_voided_prestige">Seu nível de combate não atende mais ao requisito deste combate (provavelmente por prestígio) — as recompensas foram anuladas.</string>
     <string name="combat_select_spell">Selecione um feitiço antes de entrar.</string>
     <string name="combat_spell_level_required">Necessário Magia %1$d para %2$s.</string>
     <string name="guild_daily_reward_claimed">Recompensa diária recebida!</string>

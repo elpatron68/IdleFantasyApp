@@ -82,6 +82,55 @@ class CombatSimulatorTest {
     }
 
     @Test
+    fun `the default attack speed still yields 25-tick frames`() {
+        assertTrue(runStrongPlayer(seed = 5).frames.all { it.playerHits.size == 25 })
+    }
+
+    @Test
+    fun `a fast ranged weapon consumes more than the legacy 1500-arrow cap`() {
+        val result = CombatSimulator.simulateDungeon(
+            dungeon = dungeon(listOf(EnemySpawn("rat", 1))),
+            enemies = mapOf("rat" to weakEnemy()),
+            playerAttack = 99,
+            playerStrength = 99,
+            playerDefence = 99,
+            playerHp = 999,
+            combatStyle = "ranged",
+            playerRanged = 99,
+            availableArrows = mapOf("bronze_arrow" to 10_000),
+            attackSpeedSec = 1.5,
+            random = Random(1),
+        )
+        assertEquals(60, result.frames.size)
+        assertTrue(result.frames.all { it.playerHits.size == 40 })
+        val totalArrows = result.frames.sumOf { it.arrowsConsumed.values.sum() }
+        assertEquals(2_400, totalArrows)
+    }
+
+    @Test
+    fun `a fast magic weapon consumes runes at the scaled tick rate`() {
+        val result = CombatSimulator.simulateDungeon(
+            dungeon = dungeon(listOf(EnemySpawn("rat", 1))),
+            enemies = mapOf("rat" to weakEnemy()),
+            playerAttack = 99,
+            playerStrength = 99,
+            playerDefence = 99,
+            playerHp = 999,
+            combatStyle = "magic",
+            playerMagic = 99,
+            spellMaxHit = 10,
+            runeKey = "fire_rune",
+            runeCostPerAttack = 2,
+            availableRunes = 1_000_000,
+            attackSpeedSec = 1.5,
+            random = Random(2),
+        )
+        assertEquals(60, result.frames.size)
+        val totalRunes = result.frames.sumOf { it.runesConsumed.values.sum() }
+        assertEquals(60 * 40 * 2, totalRunes)
+    }
+
+    @Test
     fun `an empty spawn pool yields no frames but a valid duration`() {
         val result = CombatSimulator.simulateDungeon(
             dungeon = dungeon(emptyList()),

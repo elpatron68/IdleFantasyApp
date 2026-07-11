@@ -971,7 +971,7 @@
     <string name="slayer_already_owned">Уже приобретено.</string>
     <string name="slayer_purchased">Добавлено в инвентарь.</string>
     <string name="slayer_owned">Куплено</string>
-    <string name="slayer_lamp_purchased">Опыт добавлен в %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s опыта добавлено в %2$s!</string>
     <string name="slayer_lamp_pick_skill">Выберите навык</string>
     <string name="slayer_lamp_small">Лампа опыта (малая)</string>
     <string name="slayer_lamp_large">Лампа опыта (большая)</string>
@@ -1303,7 +1303,7 @@
     <string name="carnival_appraisal_wrong">Неверно! Более ценный предмет — %1$s.</string>
     <string name="carnival_redeemed">Обменяно: %1$s!</string>
     <string name="carnival_not_enough_tickets">Недостаточно билетов.</string>
-    <string name="carnival_lamp_redeemed">+%1$d ОП в %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s ОП в %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1358,6 +1358,8 @@
     <string name="home_not_enough_coins_repeat">Недостаточно монет для повтора %1$s.</string>
     <string name="home_not_enough_materials_repeat">Недостаточно материалов для повтора %1$s.</string>
     <string name="combat_start_failed">Не удалось запустить: %1$s</string>
+    <string name="skill_session_voided_prestige">Ваш уровень %1$s больше не соответствует требованию этой сессии (вероятно, из-за престижа) — награды были аннулированы, а использованные материалы возвращены.</string>
+    <string name="combat_session_voided_prestige">Ваш боевой уровень больше не соответствует требованию этой встречи (вероятно, из-за престижа) — награды были аннулированы.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1386,6 +1388,7 @@
     <string name="armory_stat_ranged_str">Дальняя сила</string>
     <string name="armory_stat_magic_atk">Магическая атака</string>
     <string name="armory_stat_magic_dmg">Магический урон</string>
+    <string name="armory_stat_attack_speed">Скорость атаки</string>
     <string name="armory_stat_cape">Бонус опыта</string>
     <string name="armory_stat_cape_yield">Бонус урожайности</string>
     <string name="armory_source_carnival">Магазин призов карнавала</string>

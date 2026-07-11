@@ -933,7 +933,7 @@
     <string name="slayer_already_owned">Already owned.</string>
     <string name="slayer_purchased">Added to inventory.</string>
     <string name="slayer_owned">Owned</string>
-    <string name="slayer_lamp_purchased">XP added to %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP añadida a %2$s!</string>
     <string name="slayer_lamp_pick_skill">Choose a skill</string>
     <string name="slayer_lamp_small">XP Lamp (Small)</string>
     <string name="slayer_lamp_large">XP Lamp (Large)</string>
@@ -1269,7 +1269,7 @@
     <string name="carnival_appraisal_wrong">¡Incorrecto! El objeto más valioso era %1$s.</string>
     <string name="carnival_redeemed">¡Canjeado: %1$s!</string>
     <string name="carnival_not_enough_tickets">No hay suficientes entradas.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP en %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP en %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1324,6 +1324,8 @@
     <string name="home_not_enough_coins_repeat">No hay suficientes monedas para repetir %1$s.</string>
     <string name="home_not_enough_materials_repeat">No hay suficientes materiales para repetir %1$s.</string>
     <string name="combat_start_failed">No se pudo iniciar: %1$s</string>
+    <string name="skill_session_voided_prestige">Tu nivel de %1$s ya no cumple con el requisito de esta sesión (probablemente por prestigiar) — sus recompensas fueron anuladas y los materiales usados fueron reembolsados.</string>
+    <string name="combat_session_voided_prestige">Tu nivel de combate ya no cumple con el requisito de este encuentro (probablemente por prestigiar) — sus recompensas fueron anuladas.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1352,6 +1354,7 @@
     <string name="armory_stat_ranged_str">Fuerza a distancia</string>
     <string name="armory_stat_magic_atk">Ataque mágico</string>
     <string name="armory_stat_magic_dmg">Daño mágico</string>
+    <string name="armory_stat_attack_speed">Velocidad de ataque</string>
     <string name="armory_stat_cape">Bono XP</string>
     <string name="armory_stat_cape_yield">Bono de rendimiento</string>
     <string name="armory_source_carnival">Tienda de premios del carnaval</string>

@@ -252,6 +252,7 @@ internal fun QueueCard(
     skillXp: Map<String, Long>,
     activeSessionSkill: String,
     activeSessionXpGain: Long,
+    towerCurrentFloor: Int,
     onRemove: (Int) -> Unit,
     onMove: (Int, Int) -> Unit,
 ) {
@@ -289,6 +290,13 @@ internal fun QueueCard(
                     }
                 }
             }
+            // Tower queue labels are never trusted as-stored (the real floor is always
+            // recomputed at execution time), so predict them live from current progress
+            // instead of showing whatever floor number was guessed when each was queued.
+            val towerFloorLabels: List<Int?> = remember(queue, towerCurrentFloor, activeSessionSkill) {
+                var next = towerCurrentFloor + if (activeSessionSkill == "tower") 1 else 0
+                queue.map { a -> if (a.skillName != "tower") null else { next += 1; next } }
+            }
             queue.forEachIndexed { index, action ->
                 if (index > 0) HorizontalDivider(
                     modifier = Modifier.padding(vertical = 4.dp),
@@ -307,6 +315,7 @@ internal fun QueueCard(
                         "combat"     -> labelDungeon    to GameStrings.dungeonName(context, action.activityKey)
                         "boss"       -> labelBoss       to GameStrings.bossName(context, action.activityKey)
                         "farming"    -> action.skillDisplayName to null
+                        "tower"      -> GameStrings.skillName(context, "tower") to "Tower Floor ${towerFloorLabels.getOrNull(index)}"
                         else         -> GameStrings.skillName(context, action.skillName) to
                             GameStrings.itemName(context, action.activityKey)
                                 .takeIf { action.activityKey.isNotEmpty() }

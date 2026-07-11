@@ -16,7 +16,9 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.withAppLocale
+import com.fantasyidler.util.xpMultiplierBreakdown
 import android.content.Context
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -184,13 +186,15 @@ class SlayerViewModel @Inject constructor(
         val lamp = _extra.value.pendingLamp ?: return
         _extra.update { it.copy(pendingLamp = null) }
         viewModelScope.launch {
-            val success = slayerRepo.spendPointsForXp(skillKey, lamp.xpAmount, lamp.cost)
+            val result = slayerRepo.spendPointsForXp(skillKey, lamp.xpAmount, lamp.cost)
             _extra.update {
-                val skillName = skillKey.split('_')
-                    .joinToString(" ") { it.replaceFirstChar { c -> c.uppercase() } }
                 it.copy(
-                    snackbarMessage = if (success) context.getString(R.string.slayer_lamp_purchased, skillName)
-                                      else context.getString(R.string.slayer_not_enough_points)
+                    snackbarMessage = if (result.success) {
+                        val b = result.breakdown!!
+                        val skillDisplay = GameStrings.skillName(context, skillKey)
+                        val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { s -> " $s" } ?: ""
+                        context.getString(R.string.slayer_lamp_purchased, b.finalXp.formatXp(), skillDisplay) + suffix
+                    } else context.getString(R.string.slayer_not_enough_points)
                 )
             }
         }

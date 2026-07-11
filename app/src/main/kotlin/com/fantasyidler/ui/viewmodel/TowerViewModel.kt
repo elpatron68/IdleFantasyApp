@@ -22,6 +22,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.util.GameStrings
@@ -67,6 +68,7 @@ class TowerViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     private val questRepo: QuestRepository,
     private val guildRepo: GuildRepository,
+    private val slayerRepo: SlayerRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -317,7 +319,7 @@ class TowerViewModel @Inject constructor(
                 val foodHeal   = gameData.foodHealValues
                 val availableFood   = inventory.filterKeys { it in flags.equippedFood.keys }
                 val orderedTowerArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedTowerArrowKeys.associateWith { inventory[it] ?: 0 }
 
@@ -326,7 +328,8 @@ class TowerViewModel @Inject constructor(
                 val runeKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
                 val runeCost = selectedSpell?.runeCost ?: 1
 
-                val neededRunes = 60 * CombatSimulator.TICKS_PER_FRAME * runeCost
+                val weaponAttackSpeed = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC
+                val neededRunes = 60 * CombatSimulator.playerTicksPerFrame(weaponAttackSpeed) * runeCost
                 if (runeKey != null && (inventory[runeKey] ?: 0) < neededRunes) {
                     _extra.update { it.copy(
                         snackbarMessage = context.getString(R.string.tower_not_enough_runes, GameStrings.itemName(context, runeKey)),
@@ -359,6 +362,7 @@ class TowerViewModel @Inject constructor(
                     availableArrows     = availableArrows,
                     runeKey             = runeKey,
                     runeCostPerAttack   = runeCost,
+                    attackSpeedSec      = weaponAttackSpeed,
                 )
 
                 // Runes are consumed after the session, not upfront.
@@ -411,6 +415,15 @@ class TowerViewModel @Inject constructor(
             // finished offline while multiple were queued don't get silently skipped.
             while (session != null) {
             val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+
+            val currentLevels = playerRepo.getSkillLevels()
+            if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+                sessionRepo.deleteSession(session.sessionId)
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
+                session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
+                continue
+            }
+
             val playerDied = frames.any { it.died }
 
             val totalXpPerSkill = mutableMapOf<String, Long>()
@@ -439,6 +452,9 @@ class TowerViewModel @Inject constructor(
                 )
                 playerRepo.recordDailyKills(allKillsByEnemy)
                 guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
+                var slayerXp = 0L
+                for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
+                if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
             }
 
             if (playerDied) {

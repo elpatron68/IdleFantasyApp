@@ -25,6 +25,7 @@ import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.ThievingSimulator
@@ -44,6 +45,7 @@ import kotlinx.serialization.serializer
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 // ---------------------------------------------------------------------------
@@ -135,6 +137,7 @@ class SkillsViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     private val dailyQuestRepo: DailyQuestRepository,
     private val weeklyQuestRepo: WeeklyQuestRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -801,6 +804,21 @@ class SkillsViewModel @Inject constructor(
 
             val frames: List<com.fantasyidler.data.model.SessionFrame> =
                 json.decodeFromString(session.frames)
+
+            val currentLevels = playerRepo.getSkillLevels()
+            if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+                refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
+                sessionRepo.abandonSession(session.sessionId)
+                _uiState.update {
+                    it.copy(snackbarMessage = context.getString(
+                        R.string.skill_session_voided_prestige,
+                        GameStrings.skillName(context, session.skillName),
+                    ))
+                }
+                queuedSessionStarter.startNextQueued()
+                return@launch
+            }
+
             val totalXp  = frames.sumOf { it.xpGain.toLong() }
             // Display value only — mirrors the boost/blessing/prestige math applySessionResults()
             // already applies internally when crediting the player's actual skill XP below.
@@ -845,6 +863,7 @@ class SkillsViewModel @Inject constructor(
                 in gatheringSkills -> {
                     questRepo.recordGathering(session.skillName, regularItems)
                     playerRepo.recordDailyGathering(regularItems)
+                    seasonalEventRepo.recordGathering(regularItems)
                     when (session.skillName) {
                         Skills.AGILITY -> guildRepo.recordGuildSessions()
                         else           -> guildRepo.recordGuildGathering(session.skillName, regularItems)
@@ -854,6 +873,7 @@ class SkillsViewModel @Inject constructor(
                     questRepo.recordCrafting(session.skillName, regularItems)
                     playerRepo.recordDailyCrafting(regularItems)
                     guildRepo.recordGuildCrafting(session.skillName, regularItems)
+                    seasonalEventRepo.recordCrafting(regularItems)
                 }
                 Skills.THIEVING -> {
                     val successCount = frames.count { it.success }

@@ -1235,7 +1235,7 @@
     <string name="carnival_appraisal_wrong">Fout! Het meest waardevolle item was %1$s.</string>
     <string name="carnival_redeemed">Ingewisseld: %1$s!</string>
     <string name="carnival_not_enough_tickets">Niet genoeg loten.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP in %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP in %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1290,6 +1290,8 @@
     <string name="home_not_enough_coins_repeat">Niet genoeg munten om %1$s te herhalen.</string>
     <string name="home_not_enough_materials_repeat">Niet genoeg materialen om %1$s te herhalen.</string>
     <string name="combat_start_failed">Kon niet starten: %1$s</string>
+    <string name="skill_session_voided_prestige">Je %1$s-niveau voldoet niet meer aan de vereiste voor deze sessie (waarschijnlijk door prestige) — de beloningen zijn geannuleerd en gebruikte materialen zijn terugbetaald.</string>
+    <string name="combat_session_voided_prestige">Je gevechtsniveau voldoet niet meer aan de vereiste voor dit gevecht (waarschijnlijk door prestige) — de beloningen zijn geannuleerd.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1318,6 +1320,7 @@
     <string name="armory_stat_ranged_str">Afstandskracht</string>
     <string name="armory_stat_magic_atk">Magische aanval</string>
     <string name="armory_stat_magic_dmg">Magische schade</string>
+    <string name="armory_stat_attack_speed">Aanvalssnelheid</string>
     <string name="armory_stat_cape">XP-bonus</string>
     <string name="armory_stat_cape_yield">Opbrengstbonus</string>
     <string name="armory_source_carnival">Carnavalsprijswinkel</string>
@@ -1397,7 +1400,7 @@
     <string name="slayer_lamp_large">XP Lamp (Groot)</string>
     <string name="slayer_lamp_large_desc">+50.000 XP aan elke vaardigheid</string>
     <string name="slayer_lamp_pick_skill">Kies een vaardigheid</string>
-    <string name="slayer_lamp_purchased">XP toegevoegd aan %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP toegevoegd aan %2$s!</string>
 
     <!-- Session / queue messages (issue #596) -->
     <string name="skill_no_logs">Geen stammen in inventaris</string>

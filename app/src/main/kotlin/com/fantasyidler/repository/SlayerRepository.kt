@@ -231,15 +231,18 @@ class SlayerRepository @Inject constructor(
      * Deduct [cost] Slayer points and add [xpAmount] XP to [skillKey].
      * Returns false if insufficient points.
      */
-    suspend fun spendPointsForXp(skillKey: String, xpAmount: Long, cost: Int): Boolean = playerRepo.withLock {
+    data class SpendXpResult(val success: Boolean, val breakdown: PlayerRepository.FlatXpBreakdown? = null)
+
+    suspend fun spendPointsForXp(skillKey: String, xpAmount: Long, cost: Int): SpendXpResult = playerRepo.withLock {
         val flags = playerRepo.getFlagsUnlocked()
-        if (flags.slayerPoints < cost) return@withLock false
+        if (flags.slayerPoints < cost) return@withLock SpendXpResult(false)
         playerRepo.updateFlagsUnlocked(flags.copy(slayerPoints = flags.slayerPoints - cost))
+        val breakdown = playerRepo.previewFlatXpGrant(skillKey, xpAmount)
         playerRepo.applyMultiSkillResultsUnlocked(
             mapOf(skillKey to xpAmount),
             emptyMap(),
             0L,
         )
-        true
+        SpendXpResult(true, breakdown)
     }
 }

@@ -14,7 +14,10 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.withAppLocale
+import com.fantasyidler.util.xpMultiplierBreakdown
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -609,11 +612,14 @@ class CarnivalViewModel @Inject constructor(
         val prize    = prizesMap[prizeKey] ?: return
         _extra.update { it.copy(pendingLampPrizeKey = null) }
         viewModelScope.launch {
-            val success = carnivalRepo.redeemForXp(skillKey, prize.xpAmount, prize.ticketCost)
+            val result = carnivalRepo.redeemForXp(skillKey, prize.xpAmount, prize.ticketCost)
             _extra.update {
-                it.copy(snackbarMessage = if (success)
-                    context.withAppLocale().getString(R.string.carnival_lamp_redeemed, prize.xpAmount, skillKey)
-                else
+                it.copy(snackbarMessage = if (result.success) {
+                    val b = result.breakdown!!
+                    val skillDisplay = GameStrings.skillName(context, skillKey)
+                    val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { s -> " $s" } ?: ""
+                    context.withAppLocale().getString(R.string.carnival_lamp_redeemed, b.finalXp.formatXp(), skillDisplay) + suffix
+                } else
                     context.withAppLocale().getString(R.string.carnival_not_enough_tickets))
             }
         }

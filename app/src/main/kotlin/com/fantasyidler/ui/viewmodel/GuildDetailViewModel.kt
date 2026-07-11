@@ -13,6 +13,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toTitleCase
+import com.fantasyidler.util.xpMultiplierBreakdown
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -120,7 +121,12 @@ class GuildDetailViewModel @Inject constructor(
             when (val result = guildRepo.claimGuildQuestReward(questId)) {
                 is GuildQuestClaimResult.Success -> {
                     val rewards = result.rewards
+                    var xpSuffix = ""
+                    var finalXp = 0L
                     if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
+                        val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
+                        finalXp = b.finalXp
+                        xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                         playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
                     } else if (rewards.items.isNotEmpty()) {
                         playerRepo.addItems(rewards.items)
@@ -129,7 +135,7 @@ class GuildDetailViewModel @Inject constructor(
                     guildRepo.ensureGuildDailiesRefreshed()
                     val questName = gameData.guildQuests[questId]?.name ?: questId
                     val parts = buildList {
-                        if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
+                        if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
                         if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
                         rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
                     }
@@ -147,14 +153,19 @@ class GuildDetailViewModel @Inject constructor(
             val (newFlags, rewards) = guildRepo.claimGuildDaily(flags, templateId) ?: return@launch
             playerRepo.updateFlags(newFlags)
             playerRepo.recordWeeklyProgress("guild_daily", "any", 1)
+            var xpSuffix = ""
+            var finalXp = 0L
             if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
+                val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
+                finalXp = b.finalXp
+                xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                 playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
             } else if (rewards.items.isNotEmpty()) {
                 playerRepo.addItems(rewards.items)
             }
             if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
             val parts = buildList {
-                if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
+                if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
                 if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
                 rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
             }

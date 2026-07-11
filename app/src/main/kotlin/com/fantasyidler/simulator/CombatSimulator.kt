@@ -6,15 +6,18 @@ import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
 import kotlin.math.max
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 /**
  * Pre-simulates all 60 frames of a dungeon combat session.
  *
- * Uses a tick-by-tick simulation (25 ticks/frame at 2.4 s each). Each tick both
- * the player and enemy attack; food is eaten immediately after enemy damage if a
- * full-heal fits. Per-tick damage values are stored in [SessionFrame.playerHits]
- * and [SessionFrame.enemyHits] so the UI can animate live HP changes.
+ * Uses a tick-by-tick simulation. The player attacks once per tick at their weapon's
+ * attack speed (default 2.4 s, faster for some ranged/magic weapons); the enemy attacks
+ * on its own fixed 2.4 s cadence via an accumulator, so a faster player weapon raises the
+ * player's attack count without changing incoming damage. Food is eaten immediately after
+ * enemy damage if a full-heal fits. Per-tick damage values are stored in
+ * [SessionFrame.playerHits] and [SessionFrame.enemyHits] so the UI can animate live HP changes.
  */
 object CombatSimulator {
 
@@ -43,8 +46,11 @@ object CombatSimulator {
         runeKey: String? = null,
         runeCostPerAttack: Int = 1,
         availableRunes: Int = Int.MAX_VALUE,
+        attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
         random: Random = Random.Default,
     ): SkillSimulator.Result {
+        val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
+        val ticksPerFrame = playerTicksPerFrame(speed)
         val effAttack   = playerAttack   + (potionBonuses["attack"]   ?: 0)
         val effStrength = playerStrength + (potionBonuses["strength"] ?: 0)
         val effDefence  = playerDefence  + (potionBonuses["defense"]  ?: 0) + blessingDefBonus
@@ -75,6 +81,7 @@ object CombatSimulator {
         var runningTotal = 0L
         var carryoverEnemyKey: String? = null
         var carryoverEnemyHp = 0
+        var enemyClock = 0.0
 
         val rnd = random
 
@@ -141,7 +148,7 @@ object CombatSimulator {
             val framePlayerHits = mutableListOf<Int>()
             val frameEnemyHits  = mutableListOf<Int>()
 
-            repeat(TICKS_PER_FRAME) {
+            repeat(ticksPerFrame) {
                 // Player attacks (ranged is capped by arrow supply)
                 val pDmg = when {
                     combatStyle == "ranged" -> {
@@ -188,8 +195,13 @@ object CombatSimulator {
                     enemyHp  = enemy.hp
                 }
 
-                // Enemy attacks
-                val eDmg = if (rnd.nextDouble() < enemyHitChance) rnd.nextInt(0, enemyMaxHit + 1) else 0
+                // Enemy attacks on a fixed 2.4s cadence, independent of player speed
+                enemyClock += speed
+                var eDmg = 0
+                while (enemyClock >= BASE_ATTACK_SPEED_SEC - 1e-9) {
+                    enemyClock -= BASE_ATTACK_SPEED_SEC
+                    if (rnd.nextDouble() < enemyHitChance) eDmg += rnd.nextInt(0, enemyMaxHit + 1)
+                }
                 frameEnemyHits += eDmg
                 currentHp      -= eDmg
 
@@ -317,8 +329,11 @@ object CombatSimulator {
         runeKey: String? = null,
         runeCostPerAttack: Int = 1,
         availableRunes: Int = Int.MAX_VALUE,
+        attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
         random: Random = Random.Default,
     ): List<SessionFrame> {
+        val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
+        val ticksPerFrame = playerTicksPerFrame(speed)
         val playerMax: Int
         val effAtk: Int
         val bossDefence: Int
@@ -373,6 +388,7 @@ object CombatSimulator {
             .sortedByDescending { it.value }
             .map { it.key }
         var totalFoodEaten = 0
+        var bossClock = 0.0
 
         val rnd = random
 
@@ -383,7 +399,7 @@ object CombatSimulator {
             val frameArrows = mutableMapOf<String, Int>()
             var frameRunesUsed = 0
 
-            for (tick in 0 until TICKS_PER_FRAME) {
+            for (tick in 0 until ticksPerFrame) {
                 val pDmg = when {
                     combatStyle == "ranged" -> {
                         while (arrowsLeft == 0 && arrowTierIdx + 1 < arrowTiers.size) {
@@ -423,7 +439,13 @@ object CombatSimulator {
                     break@outer
                 }
 
-                val bDmg = if (rnd.nextDouble() < bossHitChance) rnd.nextInt(0, bossMax + 1) else 0
+                // Boss attacks on a fixed 2.4s cadence, independent of player speed
+                bossClock += speed
+                var bDmg = 0
+                while (bossClock >= BASE_ATTACK_SPEED_SEC - 1e-9) {
+                    bossClock -= BASE_ATTACK_SPEED_SEC
+                    if (rnd.nextDouble() < bossHitChance) bDmg += rnd.nextInt(0, bossMax + 1)
+                }
                 currentHp = (currentHp - bDmg).coerceAtLeast(0)
                 eHits.add(bDmg)
 
@@ -475,8 +497,8 @@ object CombatSimulator {
 
         // DPS fallback if the frame cap was hit with neither side dead.
         if (frames.isEmpty() || (frames.last().kills == 0 && currentBossHp > 0 && currentHp > 0)) {
-            val playerDps = (playerMax / 2.0) * playerHitChance / 2.4
-            val bossDps   = (bossMax / 2.0) * bossHitChance / 2.4
+            val playerDps = (playerMax / 2.0) * playerHitChance / speed
+            val bossDps   = (bossMax / 2.0) * bossHitChance / BASE_ATTACK_SPEED_SEC
             won = if (playerDps > 0 && bossDps > 0) {
                 (boss.hp / playerDps) <= (maxHp / bossDps)
             } else playerDps >= bossDps
@@ -521,11 +543,14 @@ object CombatSimulator {
         return frames
     }
 
-    /** Ticks per 60-second frame (one attack every 2.4 s). */
+    /** Ticks per 60-second frame at the base attack speed (one attack every 2.4 s). */
     const val TICKS_PER_FRAME = 25
 
-    /** Weapon attack speed in seconds. */
-    private const val ATTACK_SPEED_SEC = 2.4
+    /** Default/enemy attack speed in seconds; player weapons may attack faster via their attackSpeed field. */
+    const val BASE_ATTACK_SPEED_SEC = 2.4
+
+    /** Number of player attack ticks in a 60-second frame at the given attack speed. */
+    fun playerTicksPerFrame(attackSpeedSec: Double): Int = (60.0 / attackSpeedSec).roundToInt()
 
     enum class SurvivalRating { LIKELY, RISKY, UNLIKELY }
 
@@ -551,7 +576,7 @@ object CombatSimulator {
                 enemyEffAtk > playerDefence -> 1.0 - playerDefence / (2.0 * enemyEffAtk.coerceAtLeast(1))
                 else                        -> enemyEffAtk / (2.0 * playerDefence.coerceAtLeast(1))
             }.coerceIn(0.10, 0.95)
-            weightedDPM += weight * ((enemyMaxHit / 2.0) * enemyHit / ATTACK_SPEED_SEC * 60.0)
+            weightedDPM += weight * ((enemyMaxHit / 2.0) * enemyHit / BASE_ATTACK_SPEED_SEC * 60.0)
         }
 
         val totalDamage   = weightedDPM * 60.0

@@ -283,7 +283,10 @@ class ShopViewModel @Inject constructor(
 
         val base = if (marketPrice != null) maxOf(basePrice, maxOf(1, marketPrice / 3)) else basePrice
         val result = (base * mercantileSellBonus(uiState.value.mercantileLevel)).toInt().coerceAtLeast(1)
-        return if (marketPrice != null) minOf(result, marketPrice - 1).coerceAtLeast(1) else result
+        // Clamp to the actual current buy price (not the undiscounted list price), so selling
+        // can never turn a profit once Mercantile discounts push the buy price down.
+        val buyPrice = marketPrice?.let { (it * mercantileBuyDiscount()).toInt().coerceAtLeast(1) }
+        return if (buyPrice != null) minOf(result, buyPrice - 1).coerceAtLeast(1) else result
     }
 
     fun discountedPrice(entry: ShopEntry): Int =

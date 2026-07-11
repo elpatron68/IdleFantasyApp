@@ -19,6 +19,7 @@ data class EquipmentData(
     @SerialName("magic_damage_bonus")     val magicDamageBonus: Int? = null,
     val requirements: Map<String, Int> = emptyMap(),
     @SerialName("infinite_runes")          val infiniteRunes: String? = null,
+    @SerialName("attack_speed")            val attackSpeed: Double? = null,
     // Gathering/skilling tool efficiency fields (null for combat gear)
     @SerialName("mining_efficiency")      val miningEfficiency: Float? = null,
     @SerialName("woodcutting_efficiency") val woodcuttingEfficiency: Float? = null,

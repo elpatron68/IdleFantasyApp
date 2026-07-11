@@ -35,17 +35,20 @@ class CarnivalRepository @Inject constructor(
         true
     }
 
-    /** Deduct [ticketCost] tickets and grant [xpAmount] XP in [skillKey]. Returns false if insufficient tickets. */
-    suspend fun redeemForXp(skillKey: String, xpAmount: Long, ticketCost: Int): Boolean = playerRepo.withLock {
+    data class RedeemXpResult(val success: Boolean, val breakdown: PlayerRepository.FlatXpBreakdown? = null)
+
+    /** Deduct [ticketCost] tickets and grant [xpAmount] XP in [skillKey]. Returns failure if insufficient tickets. */
+    suspend fun redeemForXp(skillKey: String, xpAmount: Long, ticketCost: Int): RedeemXpResult = playerRepo.withLock {
         val inventory = playerRepo.getInventoryUnlocked()
-        if ((inventory["carnival_ticket"] ?: 0) < ticketCost) return@withLock false
+        if ((inventory["carnival_ticket"] ?: 0) < ticketCost) return@withLock RedeemXpResult(false)
         playerRepo.consumeItemsUnlocked(mapOf("carnival_ticket" to ticketCost))
+        val breakdown = playerRepo.previewFlatXpGrant(skillKey, xpAmount)
         playerRepo.applyMultiSkillResultsUnlocked(
             mapOf(skillKey to xpAmount),
             emptyMap(),
             0L,
         )
-        true
+        RedeemXpResult(true, breakdown)
     }
 
 

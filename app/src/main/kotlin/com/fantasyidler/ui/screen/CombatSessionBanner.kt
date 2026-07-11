@@ -185,7 +185,8 @@ internal fun CombatSessionBanner(
     val currentEnemy = currentEnemyKey?.let { enemies[it] }
 
     val isBoss = session.skillName == "boss"
-    val attackSpeedMs = 2_400L
+    val frameTickCount = currentFrame?.playerHits?.size ?: 0
+    val attackSpeedMs = if (frameTickCount > 0) perFrameMs / frameTickCount else 2_400L
     val frameStartMs  = session.startedAt + currentFrameIdx.toLong() * perFrameMs
     val maxTick = (currentFrame?.playerHits?.size?.minus(1) ?: 0).coerceAtLeast(0)
     val tickInFrame = if (!isDone) ((now - frameStartMs) / attackSpeedMs).toInt().coerceIn(0, maxTick) else maxTick

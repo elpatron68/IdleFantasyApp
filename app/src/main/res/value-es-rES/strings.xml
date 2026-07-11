@@ -1503,4 +1503,7 @@
     <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string>
     <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
     <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string>
+    <string name="armory_stat_attack_speed">Attack Speed</string>
+    <string name="skill_session_voided_prestige">Your %1$s level no longer meets this session\'s requirement (likely from prestiging) — its rewards were voided and any materials used were refunded.</string>
+    <string name="combat_session_voided_prestige">Your combat level no longer meets this encounter\'s requirement (likely from prestiging) — its rewards were voided.</string>
 </resources>

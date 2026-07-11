@@ -259,7 +259,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedWorkerBossArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedWorkerBossArrowKeys.associateWith { inventory[it] ?: 0 }
                 val bossFrames = CombatSimulator.simulateBoss(
@@ -280,6 +280,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     equippedFood       = availableFood,
                     foodHealValues     = gameData.foodHealValues,
                     blessingDefBonus   = ChurchRepository.defBonus(flags),
+                    attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
                 startSession(slot, action, bossFrames, durationMs, efficiencyMultiplier)
             }
@@ -311,7 +312,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedWorkerCombatArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedWorkerCombatArrowKeys.associateWith { inventory[it] ?: 0 }
                 val result = CombatSimulator.simulateDungeon(
@@ -335,6 +336,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     equippedFood        = availableFood,
                     foodHealValues      = gameData.foodHealValues,
                     availableArrows     = availableArrows,
+                    attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
                 startSession(slot, action, result.frames, durationMs, efficiencyMultiplier)
             }

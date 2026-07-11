@@ -754,7 +754,7 @@
     <string name="slayer_already_owned">Sudah dimiliki.</string>
     <string name="slayer_purchased">Ditambahkan ke inventaris.</string>
     <string name="slayer_owned">Dimiliki</string>
-    <string name="slayer_lamp_purchased">XP ditambahkan ke %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP ditambahkan ke %2$s!</string>
     <string name="slayer_lamp_pick_skill">Pilih Keahlian</string>
     <string name="slayer_lamp_small">Lampu XP (Kecil)</string>
     <string name="slayer_lamp_large">Lampu XP (Besar)</string>
@@ -1051,7 +1051,7 @@
     <string name="carnival_appraisal_wrong">Salah! item yang lebih berharga adalah %1$s.</string>
     <string name="carnival_redeemed">Ditukarkan: %1$s!</string>
     <string name="carnival_not_enough_tickets">Tiket tidak mencukupi.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP dalam %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP dalam %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1118,6 +1118,7 @@
     <string name="armory_stat_ranged_str">Ranged Strength</string>
     <string name="armory_stat_magic_atk">Magic Attack</string>
     <string name="armory_stat_magic_dmg">Magic Damage</string>
+    <string name="armory_stat_attack_speed">Kecepatan Serangan</string>
     <string name="armory_stat_cape">XP Bonus</string>
     <string name="armory_stat_cape_yield">Yield Bonus</string>
     <string name="armory_source_carnival">Carnival Prize Shop</string>
@@ -1178,6 +1179,8 @@
     <string name="snackbar_added_to_queue">Ditambahkan ke antrian: %1$s.</string>
     <string name="snackbar_queue_full">Antrian penuh.</string>
     <string name="combat_start_failed">Tak dapat memulai: %1$s</string>
+    <string name="skill_session_voided_prestige">Level %1$s Anda tidak lagi memenuhi persyaratan sesi ini (kemungkinan karena prestise) — hadiahnya dibatalkan dan bahan yang digunakan telah dikembalikan.</string>
+    <string name="combat_session_voided_prestige">Level combat Anda tidak lagi memenuhi persyaratan pertarungan ini (kemungkinan karena prestise) — hadiahnya dibatalkan.</string>
     <string name="combat_select_spell">Pilih mantra sebelum masuk.</string>
     <string name="combat_spell_level_required">Butuh Magic %1$d untuk %2$s.</string>
     <string name="guild_daily_reward_claimed">Hadiah harian telah diklaim!</string>

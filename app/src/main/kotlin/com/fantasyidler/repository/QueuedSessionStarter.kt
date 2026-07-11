@@ -442,7 +442,7 @@ class QueuedSessionStarter @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedBossArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedBossArrowKeys.associateWith { inventory[it] ?: 0 }
                 val pmBoss = flags.skillPrestige
@@ -464,6 +464,7 @@ class QueuedSessionStarter @Inject constructor(
                     equippedFood       = availableFood,
                     foodHealValues     = gameData.foodHealValues,
                     blessingDefBonus   = (ChurchRepository.defBonus(flags) * prayerCapeMult).toInt(),
+                    attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
                 val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -477,7 +478,8 @@ class QueuedSessionStarter @Inject constructor(
                     // ends the session at the exact death tick within the final frame.
                     alarmOffsetMs     = if (bossFrames.size < boss.durationMinutes) {
                         val lastTicks   = bossFrames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * 2_400L, frameMs) else frameMs
+                        val tickMs      = if (lastTicks > 0) frameMs / lastTicks else 2_400L
+                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, frameMs) else frameMs
                         (bossFrames.size - 1).coerceAtLeast(0) * frameMs + lastFrameMs + 2_000L
                     } else null,
                     insertAsCompleted = offline,
@@ -529,7 +531,7 @@ class QueuedSessionStarter @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedCombatArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedCombatArrowKeys.associateWith { inventory[it] ?: 0 }
                 val equippedFoodKeys  = flags.equippedFood.keys
@@ -576,10 +578,19 @@ class QueuedSessionStarter @Inject constructor(
                     runeKey             = queueRuneKey,
                     runeCostPerAttack   = queueRuneCost,
                     availableRunes      = if (queueRuneKey != null) inventory[queueRuneKey] ?: 0 else Int.MAX_VALUE,
+                    attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
                 startSession(action, result, offline, backdateMs)
             }
             "tower" -> {
+                // towerCurrentFloor only advances on collection, not completion, so starting
+                // another floor while one is still sitting completed-but-uncollected would
+                // recompute the same floor number below and silently re-run it. Bail out and
+                // let the caller (startNextQueued/insertNextQueuedAsOffline) requeue this action
+                // at the front to retry once the pending floor is collected.
+                if (sessionRepo.getAllCompletedSessions().any { it.skillName == "tower" }) {
+                    throw IllegalStateException("Tower floor pending collection")
+                }
                 // Floors must be attempted contiguously — the queued key is never trusted for
                 // the actual floor number, since queue edits (cancel/reorder) could otherwise
                 // let a player skip ahead without completing intermediate floors.
@@ -610,7 +621,7 @@ class QueuedSessionStarter @Inject constructor(
                 val bestArrow       = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus      = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedTowerArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedTowerArrowKeys.associateWith { inventory[it] ?: 0 }
                 val spell           = gameData.spells[flags.activeSpell]
@@ -647,6 +658,7 @@ class QueuedSessionStarter @Inject constructor(
                     runeKey             = towerRuneKey,
                     runeCostPerAttack   = towerRuneCost,
                     availableRunes      = if (towerRuneKey != null) inventory[towerRuneKey] ?: 0 else Int.MAX_VALUE,
+                    attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
                 sessionRepo.startSession(
                     skillName         = "tower",

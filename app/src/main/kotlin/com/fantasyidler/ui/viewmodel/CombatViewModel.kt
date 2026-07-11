@@ -455,7 +455,7 @@ class CombatViewModel @Inject constructor(
 
                 // Arrows: preferred type drains first, then the simulator falls back to other owned tiers
                 val orderedArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedArrowKeys.associateWith { inventory[it] ?: 0 }
 
@@ -497,6 +497,7 @@ class CombatViewModel @Inject constructor(
                     runeKey             = simulatorRuneKey,
                     runeCostPerAttack   = simulatorRuneCost,
                     availableRunes      = if (simulatorRuneKey != null) inventory[simulatorRuneKey] ?: 0 else Int.MAX_VALUE,
+                    attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
 
                 val framesJson = json.encodeToString(
@@ -619,7 +620,7 @@ class CombatViewModel @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowStrengthBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val orderedArrowKeys = if (preferredArrow != null)
-                    listOf(preferredArrow) + ARROW_TIERS.filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
+                    listOf(preferredArrow) + ARROW_TIERS.reversed().filter { it != preferredArrow && (inventory[it] ?: 0) > 0 }
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedArrowKeys.associateWith { inventory[it] ?: 0 }
 
@@ -657,6 +658,7 @@ class CombatViewModel @Inject constructor(
                     runeKey            = bossRuneKey,
                     runeCostPerAttack  = bossRuneCost,
                     availableRunes     = if (bossRuneKey != null) inventory[bossRuneKey] ?: 0 else Int.MAX_VALUE,
+                    attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 )
 
                 val framesJson = json.encodeToString(
@@ -676,7 +678,8 @@ class CombatViewModel @Inject constructor(
                     // ends the session at the exact death tick within the final frame.
                     alarmOffsetMs    = if (bossFrames.size < boss.durationMinutes) {
                         val lastTicks   = bossFrames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * 2_400L, frameMs) else frameMs
+                        val tickMs      = if (lastTicks > 0) frameMs / lastTicks else 2_400L
+                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, frameMs) else frameMs
                         (bossFrames.size - 1).coerceAtLeast(0) * frameMs + lastFrameMs + 2_000L
                     } else null,
                 )
@@ -719,6 +722,14 @@ class CombatViewModel @Inject constructor(
 
     private suspend fun collectBossSession(session: com.fantasyidler.data.model.SkillSession) {
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+
+        val currentLevels = playerRepo.getSkillLevels()
+        if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+            sessionRepo.deleteSession(session.sessionId)
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
+            return
+        }
+
         val last = frames.lastOrNull() ?: run { sessionRepo.deleteSession(session.sessionId); return }
         val won  = last.kills > 0
         val boss = gameData.bosses[session.activityKey]
@@ -830,6 +841,14 @@ class CombatViewModel @Inject constructor(
 
     private suspend fun collectDungeonSession(session: com.fantasyidler.data.model.SkillSession) {
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+
+        val currentLevels = playerRepo.getSkillLevels()
+        if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+            sessionRepo.deleteSession(session.sessionId)
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
+            return
+        }
+
         val playerDied = frames.any { it.died }
 
         val totalXpPerSkill   = mutableMapOf<String, Long>()
@@ -950,17 +969,42 @@ class CombatViewModel @Inject constructor(
 
     private suspend fun collectTowerFloor(session: com.fantasyidler.data.model.SkillSession) {
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+
+        val currentLevels = playerRepo.getSkillLevels()
+        if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+            sessionRepo.deleteSession(session.sessionId)
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
+            return
+        }
+
         val playerDied = frames.any { it.died }
 
         val totalXpPerSkill  = mutableMapOf<String, Long>()
         val allItems         = mutableMapOf<String, Int>()
         val allFoodConsumed  = mutableMapOf<String, Int>()
         val allRunesConsumed = mutableMapOf<String, Int>()
+        val allKillsByEnemy  = mutableMapOf<String, Int>()
         for (frame in frames) {
             for ((skill, xp) in frame.xpBySkill)     totalXpPerSkill[skill]  = (totalXpPerSkill[skill] ?: 0L) + xp
             for ((item,  qty) in frame.items)         allItems[item]          = (allItems[item] ?: 0) + qty
             for ((food,  qty) in frame.foodConsumed)  allFoodConsumed[food]   = (allFoodConsumed[food] ?: 0) + qty
             for ((rune,  qty) in frame.runesConsumed) allRunesConsumed[rune]  = (allRunesConsumed[rune] ?: 0) + qty
+            for ((enemy, qty) in frame.killsByEnemy)  allKillsByEnemy[enemy]  = (allKillsByEnemy[enemy] ?: 0) + qty
+        }
+        if (!playerDied && allKillsByEnemy.isNotEmpty()) {
+            val combatStyle = detectCombatStyle(totalXpPerSkill)
+            questRepo.recordCombat(
+                dungeonKey        = session.activityKey,
+                killsByEnemy      = allKillsByEnemy,
+                loot              = allItems,
+                combatStyle       = combatStyle,
+                foodConsumedTotal = allFoodConsumed.values.sum(),
+            )
+            playerRepo.recordDailyKills(allKillsByEnemy)
+            guildRepo.recordGuildCombat(allKillsByEnemy, combatStyle)
+            var slayerXp = 0L
+            for ((enemy, k) in allKillsByEnemy) slayerXp += slayerRepo.recordKills(enemy, k)
+            if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
         }
         if (playerDied) {
             totalXpPerSkill.replaceAll { _, xp -> maxOf(1L, (xp * 0.1).toLong()) }
@@ -1160,6 +1204,7 @@ class CombatViewModel @Inject constructor(
                 equippedFood        = foodQtys,
                 foodHealValues      = gameData.foodHealValues,
                 availableArrows     = availableArrows,
+                attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                 random              = Random(42),
             )
             val deathFrame = result.frames.indexOfFirst { it.died }
@@ -1196,6 +1241,7 @@ class CombatViewModel @Inject constructor(
         runeKey: String? = null,
         runeCostPerAttack: Int = 1,
         availableRunes: Int = Int.MAX_VALUE,
+        attackSpeedSec: Double = CombatSimulator.BASE_ATTACK_SPEED_SEC,
     ): List<SessionFrame> = CombatSimulator.simulateBoss(
         boss               = boss,
         bossKey            = bossKey,
@@ -1217,6 +1263,7 @@ class CombatViewModel @Inject constructor(
         runeKey            = runeKey,
         runeCostPerAttack  = runeCostPerAttack,
         availableRunes     = availableRunes,
+        attackSpeedSec     = attackSpeedSec,
     )
 
     // ------------------------------------------------------------------

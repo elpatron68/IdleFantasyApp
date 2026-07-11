@@ -231,6 +231,7 @@ internal fun EquipSlotRow(
                         if (equipment.defenseBonus       != 0) add("+${equipment.defenseBonus} ${context.getString(R.string.profile_stat_def)}")
                         (equipment.rangedAttackBonus ?: 0).takeIf { it != 0 }?.let { add("+$it ${context.getString(R.string.profile_stat_ranged)}") }
                         (equipment.magicAttackBonus  ?: 0).takeIf { it != 0 }?.let { add("+$it ${context.getString(R.string.profile_stat_magic)}") }
+                        equipment.attackSpeed?.let { add("${"%.1f".format(it)}s ${context.getString(R.string.armory_stat_attack_speed)}") }
                     }
                     if (parts.isNotEmpty()) {
                         Text(
@@ -355,6 +356,11 @@ internal fun weaponXpLabel(combatStyle: String?, context: android.content.Contex
     else       -> null
 }
 
+private val COMBAT_CAPE_SKILLS = setOf(
+    "attack", "strength", "defense", "ranged", "magic", "hp",
+    "warriors", "archers", "mages",
+)
+
 internal fun buildEquipDetail(item: com.fantasyidler.data.json.EquipmentData, context: android.content.Context, showReq: Boolean = true): String {
     val parts = mutableListOf<String>()
     item.miningEfficiency?.let      { parts.add("${context.getString(R.string.profile_stat_mining)} ×${"%.2f".format(it)}") }
@@ -370,7 +376,11 @@ internal fun buildEquipDetail(item: com.fantasyidler.data.json.EquipmentData, co
     if ((item.rangedStrengthBonus ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_ranged)} ${context.getString(R.string.profile_stat_str)} +${item.rangedStrengthBonus}")
     if ((item.magicAttackBonus    ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_magic)} ${context.getString(R.string.profile_stat_atk)} +${item.magicAttackBonus}")
     if ((item.magicDamageBonus    ?: 0) != 0) parts.add("${context.getString(R.string.profile_stat_magic)} Dmg +${item.magicDamageBonus}")
-    if (item.capeBonus != 0f) parts.add("${context.getString(R.string.armory_stat_cape)} +${(item.capeBonus * 100).toInt()}%")
+    item.attackSpeed?.let { parts.add("${context.getString(R.string.armory_stat_attack_speed)} ${"%.1f".format(it)}s") }
+    if (item.capeBonus != 0f) {
+        val capeLabelRes = if (item.capeSkill in COMBAT_CAPE_SKILLS) R.string.armory_stat_cape else R.string.armory_stat_cape_yield
+        parts.add("${context.getString(capeLabelRes)} +${(item.capeBonus * 100).toInt()}%")
+    }
     if (showReq) {
         for ((skill, lvl) in item.requirements) {
             parts.add("${context.getString(R.string.profile_req_lv)} $lvl ${skill.replaceFirstChar { it.uppercase() }}")

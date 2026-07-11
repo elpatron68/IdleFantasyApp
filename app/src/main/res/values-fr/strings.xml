@@ -945,7 +945,7 @@
     <string name="slayer_already_owned">Déjà possédé.</string>
     <string name="slayer_purchased">Ajouté à l’inventaire.</string>
     <string name="slayer_owned">Possédé</string>
-    <string name="slayer_lamp_purchased">XP ajouté à %1$s !</string>
+    <string name="slayer_lamp_purchased">+%1$s XP ajoutée à %2$s !</string>
     <string name="slayer_lamp_pick_skill">Choisissez une compétence</string>
     <string name="slayer_lamp_small">Lampe XP (Petite)</string>
     <string name="slayer_lamp_large">Lampe XP (Grande)</string>
@@ -1267,7 +1267,7 @@
     <string name="carnival_appraisal_wrong">Faux! L\'objet le plus précieux était %1$s.</string>
     <string name="carnival_redeemed">Échangé: %1$s!</string>
     <string name="carnival_not_enough_tickets">Pas assez de tickets.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP en %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP en %2$s!</string>
     <string name="carnival_shell_game">Choisis un gobelet</string>
     <string name="carnival_active_shell_desc">Regarde quel gobelet cache la gemme, puis choisis-le après le mélange !</string>
     <string name="carnival_shell_showing">Regarde bien — la pierre précieuse est sous le gobelet %1$d</string>
@@ -1322,6 +1322,8 @@
     <string name="home_not_enough_coins_repeat">Pas assez de pièces pour répéter %1$s.</string>
     <string name="home_not_enough_materials_repeat">Pas assez de matériaux pour répéter %1$s.</string>
     <string name="combat_start_failed">Impossible de démarrer: %1$s</string>
+    <string name="skill_session_voided_prestige">Votre niveau de %1$s ne correspond plus à l\'exigence de cette session (probablement à cause d\'un prestige) — ses récompenses ont été annulées et les matériaux utilisés ont été remboursés.</string>
+    <string name="combat_session_voided_prestige">Votre niveau de combat ne correspond plus à l\'exigence de cette rencontre (probablement à cause d\'un prestige) — ses récompenses ont été annulées.</string>
     <string name="combat_select_spell">Choisis un sort avant d\'entrer.</string>
     <string name="combat_spell_level_required">Besoin de %1$d magie pour %2$s.</string>
     <string name="guild_daily_reward_claimed">Récompense quotidienne récupérée !</string>
@@ -1350,6 +1352,7 @@
     <string name="armory_stat_ranged_str">Distance Force</string>
     <string name="armory_stat_magic_atk">Magique Attaque</string>
     <string name="armory_stat_magic_dmg">Magique Dommage</string>
+    <string name="armory_stat_attack_speed">Vitesse d\'attaque</string>
     <string name="armory_stat_cape">Expérience Bonus</string>
     <string name="armory_stat_cape_yield">Bonus de rendement</string>
     <string name="armory_source_carnival">Boutique des prix du carnaval</string>

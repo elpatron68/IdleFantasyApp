@@ -129,7 +129,10 @@ class MercantileViewModel @Inject constructor(
                 }
 
                 val startXp = xp[Skills.MERCANTILE] ?: 0L
-                val result  = MercantileSimulator.simulate(route, startXp, agilityLevel)
+                val result  = MercantileSimulator.simulate(
+                    route, startXp, agilityLevel,
+                    agilityPrestige = mercFlags.skillPrestige[Skills.AGILITY] ?: 0,
+                )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
                     result.frames,

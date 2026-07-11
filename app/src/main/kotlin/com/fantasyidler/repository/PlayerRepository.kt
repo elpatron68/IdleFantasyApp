@@ -601,6 +601,31 @@ class PlayerRepository @Inject constructor(
         return awardedCapes
     }
 
+    data class FlatXpBreakdown(
+        val baseXp: Long,
+        val finalXp: Long,
+        val boostActive: Boolean,
+        val blessingMult: Float,
+        val prestigeLevel: Int,
+    )
+
+    /**
+     * Read-only preview of what a flat XP grant (quest/guild-quest/XP lamp reward) to [skillName]
+     * will actually total once boost/blessing/prestige are applied, mirroring the math in
+     * [applySessionResults]/[applyMultiSkillResultsUnlocked]. Used so confirmation UI can disclose
+     * the real credited XP instead of the pre-multiplier flat amount.
+     */
+    suspend fun previewFlatXpGrant(skillName: String, baseXp: Long): FlatXpBreakdown {
+        val flags = getFlags()
+        val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
+        val boostMult = if (boostActive) 2L else 1L
+        val blessingMult = ChurchRepository.xpMultiplier(flags)
+        val afterBoostBlessing = ((baseXp * boostMult) * blessingMult).toLong()
+        val prestigeLevel = flags.skillPrestige[skillName] ?: 0
+        val finalXp = if (prestigeLevel > 0) (afterBoostBlessing * (1.0 + prestigeLevel * 0.10)).toLong() else afterBoostBlessing
+        return FlatXpBreakdown(baseXp, finalXp, boostActive, blessingMult, prestigeLevel)
+    }
+
     /**
      * Activates or extends the 2× XP boost for [durationMs] × [qty] milliseconds.
      * Deducts [XP_BOOST_COST] × [qty] coins. Returns false if not enough coins.

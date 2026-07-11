@@ -83,6 +83,11 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import com.fantasyidler.simulator.CarnivalSimulator
 
+private val COMBAT_CAPE_SKILLS = setOf(
+    "attack", "strength", "defense", "ranged", "magic", "hp",
+    "warriors", "archers", "mages",
+)
+
 private val POTION_COLORS = listOf(
     Color(0xFF4CAF50), // green
     Color(0xFF2196F3), // blue
@@ -984,7 +989,10 @@ private fun PrizeRow(
                     if (equipData.attackBonus   > 0) add("ATK +${equipData.attackBonus}")
                     if (equipData.strengthBonus > 0) add("STR +${equipData.strengthBonus}")
                     if (equipData.defenseBonus  > 0) add("DEF +${equipData.defenseBonus}")
-                    if ((equipData.capeBonus) > 0f)  add("XP +${(equipData.capeBonus * 100).toInt()}%")
+                    if ((equipData.capeBonus) > 0f) {
+                        val capeLabel = if (equipData.capeSkill in COMBAT_CAPE_SKILLS) "XP" else "Yield"
+                        add("$capeLabel +${(equipData.capeBonus * 100).toInt()}%")
+                    }
                 }
                 if (statParts.isNotEmpty()) {
                     Text(

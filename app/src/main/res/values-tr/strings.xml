@@ -938,7 +938,7 @@
     <string name="slayer_already_owned">Already owned.</string>
     <string name="slayer_purchased">Added to inventory.</string>
     <string name="slayer_owned">Owned</string>
-    <string name="slayer_lamp_purchased">XP added to %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP %2$s\'e eklendi!</string>
     <string name="slayer_lamp_pick_skill">Choose a skill</string>
     <string name="slayer_lamp_small">XP Lamp (Small)</string>
     <string name="slayer_lamp_large">XP Lamp (Large)</string>
@@ -1274,7 +1274,7 @@
     <string name="carnival_appraisal_wrong">Yanlış! Daha değerli eşya %1$s idi.</string>
     <string name="carnival_redeemed">Kullanıldı: %1$s!</string>
     <string name="carnival_not_enough_tickets">Yeterli bilet yok.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP %2$s\'de!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP %2$s\'de!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1329,6 +1329,8 @@
     <string name="home_not_enough_coins_repeat">%1$s tekrarlamak için yeterli altın yok.</string>
     <string name="home_not_enough_materials_repeat">%1$s tekrarlamak için yeterli malzeme yok.</string>
     <string name="combat_start_failed">Başlatılamadı: %1$s</string>
+    <string name="skill_session_voided_prestige">%1$s seviyeniz artık bu oturumun gereksinimini karşılamıyor (muhtemelen prestij nedeniyle) — ödülleri iptal edildi ve kullanılan malzemeler iade edildi.</string>
+    <string name="combat_session_voided_prestige">Savaş seviyeniz artık bu karşılaşmanın gereksinimini karşılamıyor (muhtemelen prestij nedeniyle) — ödülleri iptal edildi.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1357,6 +1359,7 @@
     <string name="armory_stat_ranged_str">Menzilli güç</string>
     <string name="armory_stat_magic_atk">Sihirli saldırı</string>
     <string name="armory_stat_magic_dmg">Sihirli hasar</string>
+    <string name="armory_stat_attack_speed">Saldırı hızı</string>
     <string name="armory_stat_cape">XP bonusu</string>
     <string name="armory_stat_cape_yield">Verim Bonusu</string>
     <string name="armory_source_carnival">Karnaval ödül mağazası</string>

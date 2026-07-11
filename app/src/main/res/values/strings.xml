@@ -974,7 +974,7 @@
     <string name="slayer_already_owned">Already owned.</string>
     <string name="slayer_purchased">Added to inventory.</string>
     <string name="slayer_owned">Owned</string>
-    <string name="slayer_lamp_purchased">XP added to %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP added to %2$s!</string>
     <string name="slayer_lamp_pick_skill">Choose a skill</string>
     <string name="slayer_lamp_small">XP Lamp (Small)</string>
     <string name="slayer_lamp_large">XP Lamp (Large)</string>
@@ -1322,7 +1322,7 @@
     <string name="carnival_appraisal_wrong">Wrong! The more valuable item was %1$s.</string>
     <string name="carnival_redeemed">Redeemed: %1$s!</string>
     <string name="carnival_not_enough_tickets">Not enough tickets.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP in %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP in %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1393,6 +1393,7 @@
     <string name="armory_stat_ranged_str">Ranged Strength</string>
     <string name="armory_stat_magic_atk">Magic Attack</string>
     <string name="armory_stat_magic_dmg">Magic Damage</string>
+    <string name="armory_stat_attack_speed">Attack Speed</string>
     <string name="armory_stat_cape">XP Bonus</string>
     <string name="armory_stat_cape_yield">Yield Bonus</string>
     <string name="armory_source_carnival">Carnival Prize Shop</string>
@@ -1455,6 +1456,8 @@
     <string name="snackbar_added_to_queue">Added to queue: %1$s.</string>
     <string name="snackbar_queue_full">Queue is full.</string>
     <string name="combat_start_failed">Could not start: %1$s</string>
+    <string name="skill_session_voided_prestige">Your %1$s level no longer meets this session\'s requirement (likely from prestiging) — its rewards were voided and any materials used were refunded.</string>
+    <string name="combat_session_voided_prestige">Your combat level no longer meets this encounter\'s requirement (likely from prestiging) — its rewards were voided.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
