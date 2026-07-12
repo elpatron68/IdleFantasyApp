@@ -75,6 +75,10 @@ import com.fantasyidler.ui.viewmodel.CarnivalViewModel
 import com.fantasyidler.ui.viewmodel.Difficulty
 import com.fantasyidler.util.GameStrings
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.coroutineScope
@@ -129,6 +133,7 @@ fun CarnivalScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
                 title = {

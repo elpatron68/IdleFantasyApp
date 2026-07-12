@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Enemy names ===== -->
+    <string name="enemy_giant_rat_name">Wielki Szczur</string>
+    <string name="enemy_goblin_name">Goblin</string>
+    <string name="enemy_skeleton_name">Szkielet</string>
+    <string name="enemy_zombie_name">Zombie</string>
+    <string name="enemy_bandit_name">Bandyta</string>
+    <string name="enemy_guard_name">Strażnik</string>
+    <string name="enemy_dark_wizard_name">Mroczny Czarodziej</string>
+    <string name="enemy_orc_warrior_name">Wojownik Orków</string>
+    <string name="enemy_spider_name">Wielki Pająk</string>
+    <string name="enemy_wild_monkey_name">Dzika małpa</string>
+    <string name="enemy_rogue_name">Łotrzyk</string>
+    <string name="enemy_knight_name">Rycerz</string>
+    <string name="enemy_hellhound_name">Piekielny Ogar</string>
+    <string name="enemy_troll_name">Górski Troll</string>
+    <string name="enemy_demon_name">Pomniejszy Demon</string>
+    <string name="enemy_dragon_name">Zielony Smok</string>
+    <string name="enemy_imp_name">Chochlik</string>
+    <string name="enemy_chicken_name">Kura</string>
+    <string name="enemy_sheep_name">Owca</string>
+    <string name="enemy_cow_name">Krowa</string>
+
+    <!-- ===== Dungeon names and descriptions ===== -->
+    <string name="dungeon_imp_cavern_name">Jaskinia Chochlików</string>
+    <string name="dungeon_imp_cavern_desc">Płytka jaskinia pełna psotnych chochlików. Idealna dla zupełnie początkujących!</string>
+    <string name="dungeon_goblin_cave_name">Jaskinia Goblinów</string>
+    <string name="dungeon_goblin_cave_desc">Mroczna jaskinia zamieszkana przez gobliny i wielkie szczury. Dobre miejsce treningowe dla nowych poszukiwaczy przygód.</string>
+    <string name="dungeon_spider_den_name">Nora Pająków</string>
+    <string name="dungeon_spider_den_desc">Pełna pajęczyn jaskinia roi się od jadowitych pająków. Zabierz odtrutkę!</string>
+    <string name="dungeon_bandit_camp_name">Obóz Bandytów</string>
+    <string name="dungeon_bandit_camp_desc">Kryjówka złodziei i łotrzyków na pustkowiu. Miej oko na swoją sakiewkę!</string>
+    <string name="dungeon_undead_crypt_name">Krypta Nieumarłych</string>
+    <string name="dungeon_undead_crypt_desc">Starożytne miejsce pochówku, gdzie zmarli nie chcą spocząć w spokoju. Strzeż się mrocznej magii!</string>
+    <string name="dungeon_fortress_ruins_name">Ruiny Fortecy</string>
+    <string name="dungeon_fortress_ruins_desc">Rozpadające się pozostałości starożytnego zamku, strzeżone teraz przez rycerzy i żołnierzy.</string>
+    <string name="dungeon_orc_stronghold_name">Twierdza Orków</string>
+    <string name="dungeon_orc_stronghold_desc">Ufortyfikowana osada orków głęboko w górach. Tylko odważni ważą się tam wejść.</string>
+    <string name="dungeon_volcanic_depths_name">Wulkaniczne Głębiny</string>
+    <string name="dungeon_volcanic_depths_desc">Rozpalona jaskinia zamieszkana przez piekielne ogary i pomniejsze demony. Upał jest nie do zniesienia!</string>
+    <string name="dungeon_dragon_lair_name">Legowisko Smoka</string>
+    <string name="dungeon_dragon_lair_desc">Legendarna siedziba zielonych smoków. Tylko mistrzowie wojownicy przetrwają to wyzwanie.</string>
+    <string name="dungeon_farm_name">Farma</string>
+    <string name="dungeon_farm_desc">Spokojna farma z inwentarzem żywym. Świetna dla początkujących szukających jedzenia!</string>
+    <string name="dungeon_infernal_stronghold_name">Piekielna Twierdza</string>
+    <string name="dungeon_infernal_stronghold_desc">Twierdza ognia i siarki, rządzona przez demony i piekielne ogary. Sam upał może zabić nieprzygotowanych.</string>
+    <string name="dungeon_ancient_temple_name">Starożytna Świątynia</string>
+    <string name="dungeon_ancient_temple_desc">Starożytna świątynia strzeżona przez najpotężniejsze stworzenia w krainie. Tylko najsilniejsi wojownicy ważą się tam wejść.</string>
+
+    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <string name="boss_king_black_dragon_name">Król Czarny Smok</string>
+    <string name="boss_demon_lord_name">Władca Demonów</string>
+    <string name="boss_kraken_name">Kraken</string>
+    <string name="boss_balrog_name">Balrog</string>
+
+    <!-- ===== Pet names and descriptions ===== -->
+    <string name="pet_dragon_whelp_name">Smocze Szczenię</string>
+    <string name="pet_dragon_whelp_desc">Młody smok, który zwiększa twoje doświadczenie bojowe.</string>
+    <string name="pet_imp_pet_name">Chochlik-pupil</string>
+    <string name="pet_imp_pet_desc">Psotny chochlik, który wzmacnia twój trening Modlitwy.</string>
+    <string name="pet_baby_kraken_name">Mały Kraken</string>
+    <string name="pet_baby_kraken_desc">Malutki kraken, który poprawia twoje doświadczenie w Gotowaniu.</string>
+    <string name="pet_rock_golem_name">Golem Skalny</string>
+    <string name="pet_rock_golem_desc">Żywa formacja skalna, która wzmacnia twoje doświadczenie w Górnictwie.</string>
+    <string name="pet_ent_name">Ent</string>
+    <string name="pet_ent_desc">Starożytny duch drzewa, który zwiększa twoje doświadczenie w Drwalstwie.</string>
+    <string name="pet_tiny_templar_name">Mały Templariusz</string>
+    <string name="pet_tiny_templar_desc">Mały rybi towarzysz, który zwiększa twoje doświadczenie w Wędkarstwie.</string>
+    <string name="pet_tangleroot_name">Plątany Korzeń</string>
+    <string name="pet_tangleroot_desc">Magiczne stworzenie roślinne, które wzmacnia twoje doświadczenie w Uprawie.</string>
+
+    <!-- Missing dungeons -->
+    <string name="dungeon_collapsed_mine_name">Zawalona Kopalnia</string>
+    <string name="dungeon_collapsed_mine_desc">Rozległa jaskinia pod kopalniami miedzi. Trolle jaskiniowe i golemy skalne nawiedzają gruzy, a wielkie pająki snują sieci w zawalonych szybach.</string>
+    <string name="dungeon_shadow_den_name">Cieniste Legowisko</string>
+    <string name="dungeon_shadow_den_desc">Sieć podziemnych komnat wykorzystywana przez miejscowy cech złodziei. Łotrzykowie, zabójcy i cieniste stworzenia czają się w każdym kącie.</string>
+    <string name="dungeon_abyssal_ruins_name">Otchłanne Ruiny</string>
+    <string name="dungeon_abyssal_ruins_desc">Starożytne ruiny istniejące jednocześnie nad i pod płaszczyzną śmiertelników. Dziwne otchłanne stworzenia przenikają do i z rzeczywistości.</string>
+    <string name="dungeon_ancient_forest_ruins_name">Ruiny Starożytnego Lasu</string>
+    <string name="dungeon_ancient_forest_ruins_desc">Kamienne ruiny pochłonięte przez pierwotny las, nawiedzane teraz przez dzikie stworzenia i mściwe duchy druidów.</string>
+    <string name="dungeon_ancient_forge_name">Starożytna Kuźnia</string>
+    <string name="dungeon_ancient_forge_desc">Rozległa krasnoludzka kuźnia, która płonie nieprzerwanie od wieków. Żywiołaki ognia i strażnicy kuźni chronią jej sekretów.</string>
+    <string name="dungeon_arcane_ruins_name">Tajemne Ruiny</string>
+    <string name="dungeon_arcane_ruins_desc">Wciąż czynne podziemne komnaty zniszczonej wieży czarodzieja. Magiczne konstrukty i zaklęci strażnicy wciąż patrolują jej korytarze.</string>
+    <string name="dungeon_corrupted_sanctum_name">Skażone Sanktuarium</string>
+    <string name="dungeon_corrupted_sanctum_desc">Spowite cieniem sanktuarium w sercu skażonego baldachimu lasu. Mroczni kapłani i skażone bestie strzegą starożytnego zła.</string>
+    <string name="dungeon_drowned_temple_name">Zatopiona Świątynia</string>
+    <string name="dungeon_drowned_temple_desc">Zatopiona świątynia pod morską grotą, której korytarze wypełnia woda i morskie stworzenia, które uczyniły z niej swój dom.</string>
+</resources>
