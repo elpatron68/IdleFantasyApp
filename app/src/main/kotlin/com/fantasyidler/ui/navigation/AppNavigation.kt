@@ -1,8 +1,12 @@
 package com.fantasyidler.ui.navigation
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Badge
@@ -98,8 +102,11 @@ fun AppNavigation(
     )
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0),
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                windowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom)
+            ) {
                 Screen.bottomNavItems.forEach { screen ->
                     val selected = currentDestination
                         ?.hierarchy

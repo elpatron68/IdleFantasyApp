@@ -50,6 +50,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import android.content.Context
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import com.fantasyidler.R
 import com.fantasyidler.data.json.DailyQuestTemplate
 import com.fantasyidler.data.json.QuestData
@@ -92,6 +96,7 @@ fun QuestsScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.nav_quests)) },
