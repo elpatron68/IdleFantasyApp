@@ -870,7 +870,10 @@ private fun TownGridCard(
     iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     badgeCount: Int = 0,
 ) {
-    ElevatedCard(modifier = modifier, onClick = onClick) {
+    ElevatedCard(
+        modifier = modifier,
+        onClick = onClick
+    ) {
         Column(
             modifier            = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
