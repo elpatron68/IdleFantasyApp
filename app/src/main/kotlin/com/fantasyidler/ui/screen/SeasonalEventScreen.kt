@@ -166,7 +166,7 @@ fun SeasonalEventScreen(
             }
 
             if ("expedition" in event.pillars && event.expeditionDungeonKey != null) {
-                SectionCard(title = stringResource(R.string.seasonal_expedition_title)) {
+                SectionCard(title = stringResource(R.string.label_dungeon)) {
                     Text(viewModel.dungeonDisplayName(event.expeditionDungeonKey), style = MaterialTheme.typography.bodyLarge)
                     Spacer(Modifier.height(8.dp))
                     Button(onClick = { onNavigateToExpedition(event.expeditionDungeonKey) }, modifier = Modifier.fillMaxWidth()) {
