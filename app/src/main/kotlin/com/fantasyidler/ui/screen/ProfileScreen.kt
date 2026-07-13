@@ -557,9 +557,12 @@ private fun SkillGridCard(
     modifier: Modifier = Modifier,
 ) {
     val progress = xpProgressFraction(xp)
-    ElevatedCard(modifier = modifier.clickable { onClick() }) {
+    ElevatedCard(
+        modifier = modifier,
+        onClick = onClick
+    ) {
         Column(
-            modifier            = Modifier.fillMaxWidth().padding(8.dp),
+            modifier = Modifier.fillMaxWidth().padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             val iconRes = GameStrings.skillIconRes(skillKey)
