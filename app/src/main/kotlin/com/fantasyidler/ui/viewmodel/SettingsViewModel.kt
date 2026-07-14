@@ -9,6 +9,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.toExport
 import com.fantasyidler.data.model.toSkillSession
 import com.fantasyidler.repository.BackupScheduler
+import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
@@ -33,6 +34,7 @@ class SettingsViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     private val workerStarter: WorkerQueuedSessionStarter,
     private val backupScheduler: BackupScheduler,
+    private val guildRepo: GuildRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -202,6 +204,10 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val export = playerRepo.importSave(jsonString)
+                // Imported flags may predate the guild-leveling rework (reputation -> daily-count),
+                // and importing overwrites the current save's migration state wholesale, so this
+                // must re-run here rather than relying on the one-time app-startup call.
+                guildRepo.migrateLegacyGuildReputation()
                 sessionRepo.deleteAllSessions()
                 sessionRepo.deleteAllWorkerSessions()
                 val now = System.currentTimeMillis()

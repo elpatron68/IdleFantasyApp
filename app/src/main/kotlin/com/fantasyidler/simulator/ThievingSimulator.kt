@@ -12,7 +12,7 @@ import kotlin.random.Random
  * and loot are awarded. On failure the player is stunned — the following frame
  * is skipped (no XP, no loot) to simulate the stun penalty.
  *
- * success_chance = clamp(0.10, 0.40 + (thievingLevel - npcMinLevel) * 0.02, 0.95)
+ * success_chance = clamp(0.10, 0.40 + (thievingLevel - npcMinLevel) * 0.02 * lockpickEfficiency, 0.95)
  */
 object ThievingSimulator {
 
@@ -31,9 +31,10 @@ object ThievingSimulator {
         petBoostPct: Int = 0,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
+        toolEfficiency: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
-        val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02)
+        val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02 * toolEfficiency)
             .coerceIn(0.10, 0.95)
 
         var currentXp = startXp

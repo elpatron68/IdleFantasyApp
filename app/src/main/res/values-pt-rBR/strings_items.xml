@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Enxada de Adamantita</string>
     <string name="item_runite_hoe_name">Enxada de Runita</string>
 
+    <!-- ===== Gazuas ===== -->
+    <string name="item_bronze_lockpick_name">Gazua de Bronze</string>
+    <string name="item_iron_lockpick_name">Gazua de Ferro</string>
+    <string name="item_steel_lockpick_name">Gazua de Aço</string>
+    <string name="item_mithril_lockpick_name">Gazua de Mithril</string>
+    <string name="item_adamantite_lockpick_name">Gazua de Adamantita</string>
+    <string name="item_runite_lockpick_name">Gazua de Runita</string>
+    <string name="item_divine_hoe_name">Enxada Divina</string>
+    <string name="item_dwarven_hammer_name">Martelo Anão</string>
+    <string name="item_divine_hammer_name">Martelo Divino</string>
+    <string name="item_dwarven_tinderbox_name">Caixa de Isca Anã</string>
+    <string name="item_divine_tinderbox_name">Caixa de Isca Divina</string>
+    <string name="item_dwarven_frying_pan_name">Frigideira Anã</string>
+    <string name="item_divine_frying_pan_name">Frigideira Divina</string>
+    <string name="item_shadow_grappling_hook_name">Gancho de Escalada das Sombras</string>
+    <string name="item_dwarven_grappling_hook_name">Gancho de Escalada Anão</string>
+    <string name="item_arcane_grappling_hook_name">Gancho de Escalada Arcano</string>
+    <string name="item_divine_grappling_hook_name">Gancho de Escalada Divino</string>
+    <string name="item_rogues_lockpick_name">Gazua dos Vigaristas</string>
+    <string name="item_dwarven_lockpick_name">Gazua Anã</string>
+    <string name="item_shadow_lockpick_name">Gazua das Sombras</string>
+    <string name="item_divine_lockpick_name">Gazua Divina</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Cerveja de Ataque</string>
     <string name="item_defense_brew_name">Cerveja de Defesa</string>

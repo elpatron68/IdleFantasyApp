@@ -572,6 +572,14 @@
     <string name="item_adamantite_hoe_name">Adamantite Hoe</string>
     <string name="item_runite_hoe_name">Runite Hoe</string>
 
+    <!-- ===== Lockpicks ===== -->
+    <string name="item_bronze_lockpick_name">Bronze Lockpick</string>
+    <string name="item_iron_lockpick_name">Iron Lockpick</string>
+    <string name="item_steel_lockpick_name">Steel Lockpick</string>
+    <string name="item_mithril_lockpick_name">Mithril Lockpick</string>
+    <string name="item_adamantite_lockpick_name">Adamantite Lockpick</string>
+    <string name="item_runite_lockpick_name">Runite Lockpick</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Attack Brew</string>
     <string name="item_defense_brew_name">Defense Brew</string>
@@ -648,6 +656,7 @@
     <string name="item_amulet_of_fury_name" translatable="false">Amulet Of Fury</string>
     <string name="item_amulet_of_strength_name" translatable="false">Amulet Of Strength</string>
     <string name="item_amulet_of_the_kraken_name" translatable="false">Amulet Of The Kraken</string>
+    <string name="item_arcane_grappling_hook_name">Arcane Grappling Hook</string>
     <string name="item_arcane_staff_name" translatable="false">Arcane Staff</string>
     <string name="item_archers_guild_cape_name" translatable="false">Archers Guild Cape</string>
     <string name="item_archers_ring_name" translatable="false">Archers Ring</string>
@@ -688,6 +697,12 @@
     <string name="item_deep_iron_pickaxe_name" translatable="false">Deep Iron Pickaxe</string>
     <string name="item_defense_cape_name" translatable="false">Defense Cape</string>
     <string name="item_demon_lord_name" translatable="false">Demon Lord</string>
+    <string name="item_divine_frying_pan_name">Divine Frying Pan</string>
+    <string name="item_divine_grappling_hook_name">Divine Grappling Hook</string>
+    <string name="item_divine_hammer_name">Divine Hammer</string>
+    <string name="item_divine_hoe_name">Divine Hoe</string>
+    <string name="item_divine_lockpick_name">Divine Lockpick</string>
+    <string name="item_divine_tinderbox_name">Divine Tinderbox</string>
     <string name="item_dragon_amulet_name" translatable="false">Dragon Amulet</string>
     <string name="item_dragon_boots_name" translatable="false">Dragon Boots</string>
     <string name="item_dragon_longsword_name" translatable="false">Dragon Longsword</string>
@@ -696,14 +711,19 @@
     <string name="item_dwarven_axe_name" translatable="false">Dwarven Axe</string>
     <string name="item_dwarven_boots_name" translatable="false">Dwarven Boots</string>
     <string name="item_dwarven_fishing_rod_name" translatable="false">Dwarven Fishing Rod</string>
+    <string name="item_dwarven_frying_pan_name">Dwarven Frying Pan</string>
+    <string name="item_dwarven_grappling_hook_name">Dwarven Grappling Hook</string>
+    <string name="item_dwarven_hammer_name">Dwarven Hammer</string>
     <string name="item_dwarven_helm_name" translatable="false">Dwarven Helm</string>
     <string name="item_dwarven_hoe_name" translatable="false">Dwarven Hoe</string>
+    <string name="item_dwarven_lockpick_name">Dwarven Lockpick</string>
     <string name="item_dwarven_pickaxe_name" translatable="false">Dwarven Pickaxe</string>
     <string name="item_dwarven_platebody_name" translatable="false">Dwarven Platebody</string>
     <string name="item_dwarven_platelegs_name" translatable="false">Dwarven Platelegs</string>
     <string name="item_dwarven_scimitar_name" translatable="false">Dwarven Scimitar</string>
     <string name="item_dwarven_shield_name" translatable="false">Dwarven Shield</string>
     <string name="item_dwarven_sword_name" translatable="false">Dwarven Sword</string>
+    <string name="item_dwarven_tinderbox_name">Dwarven Tinderbox</string>
     <string name="item_dwarven_warhammer_name" translatable="false">Dwarven Warhammer</string>
     <string name="item_earth_blast_name" translatable="false">Earth Blast</string>
     <string name="item_earth_bolt_name" translatable="false">Earth Bolt</string>
@@ -778,6 +798,7 @@
     <string name="item_ring_of_the_seas_name" translatable="false">Ring Of The Seas</string>
     <string name="item_ring_of_wealth_name" translatable="false">Ring Of Wealth</string>
     <string name="item_rock_golem_name" translatable="false">Rock Golem</string>
+    <string name="item_rogues_lockpick_name">Rogue\'s Lockpick</string>
     <string name="item_runecrafting_cape_name" translatable="false">Runecrafting Cape</string>
     <string name="item_runecrafting_guild_cape_name" translatable="false">Runecrafting Guild Cape</string>
     <string name="item_runite_arrow_tip_name" translatable="false">Runite Arrow Tips</string>
@@ -793,6 +814,8 @@
     <string name="item_sanctum_axe_name" translatable="false">Sanctum Axe</string>
     <string name="item_seers_ring_name" translatable="false">Seers Ring</string>
     <string name="item_shadow_dagger_name" translatable="false">Shadow Dagger</string>
+    <string name="item_shadow_grappling_hook_name">Shadow Grappling Hook</string>
+    <string name="item_shadow_lockpick_name">Shadow Lockpick</string>
     <string name="item_shortbow_name" translatable="false">Shortbow</string>
     <string name="item_silver_diamond_necklace_name" translatable="false">Silver Diamond Necklace</string>
     <string name="item_silver_diamond_ring_name" translatable="false">Silver Diamond Ring</string>

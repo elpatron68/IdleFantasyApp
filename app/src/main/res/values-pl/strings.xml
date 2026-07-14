@@ -422,7 +422,7 @@
     <string name="home_town_title">Miasto</string>
     <string name="home_town_desc">Odwiedź sklep, gospodę, gildię, kościół, warsztat budowniczego, mistrza łowców i karnawał</string>
     <string name="guild_dailies_available">Dostępne dzienne zadania</string>
-    <string name="guild_do_dailies_hint">Wykonuj dzienne zadania, aby zwiększyć swoją reputację</string>
+    <string name="guild_do_dailies_hint">Wykonuj dzienne zadania, aby awansować na kolejny stopień</string>
     <string name="guild_quest_gate_blocked">Ukończ zadania, aby awansować w randze</string>
     <string name="guild_quest_required">Zadanie wymagane do awansu</string>
     <string name="home_died_message">Zginąłeś i straciłeś większość zdobyczy.</string>
@@ -657,6 +657,14 @@
     <string name="character_race_orc">Ork</string>
     <string name="character_race_halfling">Niziołek</string>
     <string name="character_race_gnome">Gnom</string>
+    <string name="appearance_title">Dostosuj wygląd</string>
+    <string name="appearance_skin_tone">Odcień skóry</string>
+    <string name="appearance_eyes">Oczy</string>
+    <string name="appearance_hair_style">Fryzura</string>
+    <string name="appearance_hair_color">Kolor włosów</string>
+    <string name="appearance_beard">Broda</string>
+    <string name="appearance_beard_color">Kolor brody</string>
+    <string name="appearance_save">Zapisz wygląd</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Sesje</string>
@@ -806,7 +814,7 @@
 
     <!-- Sala Gildii -->
     <string name="guild_hall_title">Sala Gildii</string>
-    <string name="guild_hall_desc">Dołączaj do gildii i zdobywaj nagrody za reputację</string>
+    <string name="guild_hall_desc">Dołączaj do gildii i wykonuj dzienne zadania, aby awansować</string>
     <string name="guild_hall_intro">Gildie nagradzają cię za czynności, które już wykonujesz. Ukończ zadania i codzienne prośby, by zdobyć materiały z innych umiejętności, monety i XP — tak specjaliści wciąż mają dostęp do zasobów z umiejętności, których nie trenują.</string>
     <string name="guild_level_label">Poziom %1$d</string>
     <string name="guild_level_max">Poziom 10 (Maks.)</string>
@@ -814,7 +822,7 @@
     <string name="guild_tab_dailies">Codzienne prośby</string>
     <string name="guild_daily_resets_in">Odnawia się codziennie o 6:00</string>
     <string name="guild_locked_hint">Wymaga poziomu gildii %1$d</string>
-    <string name="guild_no_dailies">Ukończ zadania gildii, by zdobyć reputację i odblokować codzienne prośby.</string>
+    <string name="guild_no_dailies">Ukończ zadania gildii, by odblokować codzienne prośby.</string>
     <string name="guild_contribute_inventory">Wnieś z ekwipunku (dostępnych: %1$d)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s dla %4$s.</string>
     <string name="guild_quest_desc_kill">Pokonaj %1$d wrogów, używając walki %2$s.</string>
@@ -826,7 +834,7 @@
     <string name="guild_combat_melee">wręcz</string>
     <string name="guild_combat_ranged">strzelająca</string>
     <string name="guild_combat_magic">magiczną</string>
-    <string name="guild_rep_label">%1$d / %2$d rep.</string>
+    <string name="guild_rep_label">%1$d / %2$d zadań dziennych</string>
     <string name="guild_quest_complete">Zadanie ukończone: %1$s!</string>
     <string name="guild_daily_complete">Odebrano dzienną nagrodę!</string>
     <string name="guild_name_mining">Gildia Górników</string>

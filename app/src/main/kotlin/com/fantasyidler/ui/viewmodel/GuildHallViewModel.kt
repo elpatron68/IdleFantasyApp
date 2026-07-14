@@ -18,9 +18,8 @@ import javax.inject.Inject
 data class GuildSummary(
     val guildKey: String,
     val level: Int,
-    val rep: Long,
-    val repInLevel: Long,
-    val repForLevel: Long,
+    val dailiesCompletedThisTier: Int,
+    val dailiesRequiredThisTier: Int,
     val claimableQuestCount: Int,
     val claimableDailyCount: Int,
     val hasDailiesAvailable: Boolean,
@@ -55,9 +54,10 @@ class GuildHallViewModel @Inject constructor(
         val completedQuestIds = progressList.filter { it.completed }.map { it.questId }.toSet()
 
         val summaries = GuildRepository.ALL_GUILDS.map { guild ->
-            val rep   = flags.guildReputation[guild] ?: 0L
-            val level = guildRepo.guildLevel(guild, rep, completedQuestIds)
-            val (repInLevel, repForLevel) = repProgressForLevel(rep, level)
+            val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds)
+            val dailiesCompletedThisTier = if (level >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size) 0
+                else flags.guildDailyTierCounts["$guild:$level"] ?: 0
+            val dailiesRequiredThisTier = GuildRepository.DAILIES_REQUIRED_PER_TIER.getOrElse(level) { 1 }
 
             val claimableQuests = gameData.guildQuests.values
                 .filter { it.guild == guild && level >= it.guildLevelRequired }
@@ -71,29 +71,22 @@ class GuildHallViewModel @Inject constructor(
             val claimableDailies = dailies.count { it.progress >= it.template.amount && !it.claimed }
             val hasDailiesAvailable = dailies.isNotEmpty() && dailies.any { !it.claimed }
 
+            val guildUnlocked = gameData.guildQuests.values.any { it.guild == guild && it.id in completedQuestIds }
             val tierQuests = gameData.guildQuests.values.filter { it.guild == guild && it.guildLevelRequired == level }
-            val questGateBlocked = rep > 0L && level < 10 && tierQuests.isNotEmpty() && tierQuests.any { it.id !in completedQuestIds }
+            val questGateBlocked = guildUnlocked && level < 10 && tierQuests.isNotEmpty() && tierQuests.any { it.id !in completedQuestIds }
 
             GuildSummary(
-                guildKey            = guild,
-                level               = level,
-                rep                 = rep,
-                repInLevel          = repInLevel,
-                repForLevel         = repForLevel,
-                claimableQuestCount = claimableQuests,
-                claimableDailyCount = claimableDailies,
-                hasDailiesAvailable = hasDailiesAvailable,
-                questGateBlocked    = questGateBlocked,
+                guildKey                 = guild,
+                level                    = level,
+                dailiesCompletedThisTier = dailiesCompletedThisTier,
+                dailiesRequiredThisTier  = dailiesRequiredThisTier,
+                claimableQuestCount      = claimableQuests,
+                claimableDailyCount      = claimableDailies,
+                hasDailiesAvailable      = hasDailiesAvailable,
+                questGateBlocked         = questGateBlocked,
             )
         }
 
         GuildHallUiState(isLoading = false, guilds = summaries)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), GuildHallUiState())
-}
-
-internal fun repProgressForLevel(rep: Long, level: Int): Pair<Long, Long> {
-    if (level >= 10) return 1L to 1L
-    val lo = if (level == 0) 0L else GuildRepository.REP_THRESHOLDS[level - 1]
-    val hi = GuildRepository.REP_THRESHOLDS[level]
-    return (rep - lo).coerceAtLeast(0L) to (hi - lo)
 }

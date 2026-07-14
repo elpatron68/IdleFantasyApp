@@ -1496,4 +1496,12 @@
     <string name="settings_seasonal_events_desc">Show the active Seasonal Event banner on the home screen</string>
     <string name="settings_credit_skill_icons_title">Skill Icons</string>
     <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+    <string name="appearance_title">Customise Appearance</string>
+    <string name="appearance_skin_tone">Skin Tone</string>
+    <string name="appearance_eyes">Eyes</string>
+    <string name="appearance_hair_style">Hair Style</string>
+    <string name="appearance_hair_color">Hair Colour</string>
+    <string name="appearance_beard">Beard</string>
+    <string name="appearance_beard_color">Beard Colour</string>
+    <string name="appearance_save">Save Appearance</string>
 </resources>

@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Adamantiet Hark</string>
     <string name="item_runite_hoe_name">Runiet Hark</string>
 
+    <!-- ===== Lopers ===== -->
+    <string name="item_bronze_lockpick_name">Bronzen Loper</string>
+    <string name="item_iron_lockpick_name">IJzeren Loper</string>
+    <string name="item_steel_lockpick_name">Stalen Loper</string>
+    <string name="item_mithril_lockpick_name">Mithril Loper</string>
+    <string name="item_adamantite_lockpick_name">Adamantiet Loper</string>
+    <string name="item_runite_lockpick_name">Runiet Loper</string>
+    <string name="item_divine_hoe_name">Goddelijke Hark</string>
+    <string name="item_dwarven_hammer_name">Dwergenhamer</string>
+    <string name="item_divine_hammer_name">Goddelijke Hamer</string>
+    <string name="item_dwarven_tinderbox_name">Dwergentondeldoos</string>
+    <string name="item_divine_tinderbox_name">Goddelijke Tondeldoos</string>
+    <string name="item_dwarven_frying_pan_name">Dwergenkoekenpan</string>
+    <string name="item_divine_frying_pan_name">Goddelijke Koekenpan</string>
+    <string name="item_shadow_grappling_hook_name">Schaduwgrijphaak</string>
+    <string name="item_dwarven_grappling_hook_name">Dwergengrijphaak</string>
+    <string name="item_arcane_grappling_hook_name">Arcane Grijphaak</string>
+    <string name="item_divine_grappling_hook_name">Goddelijke Grijphaak</string>
+    <string name="item_rogues_lockpick_name">Schurkenloper</string>
+    <string name="item_dwarven_lockpick_name">Dwergenloper</string>
+    <string name="item_shadow_lockpick_name">Schaduwloper</string>
+    <string name="item_divine_lockpick_name">Goddelijke Loper</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Aanvalsbrouwsel</string>
     <string name="item_defense_brew_name">Verdedigingsbrouwsel</string>

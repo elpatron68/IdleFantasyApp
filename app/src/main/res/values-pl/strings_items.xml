@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Adamantytowa Motyka</string>
     <string name="item_runite_hoe_name">Runitowa Motyka</string>
 
+    <!-- ===== Wytrychy ===== -->
+    <string name="item_bronze_lockpick_name">Brązowy Wytrych</string>
+    <string name="item_iron_lockpick_name">Żelazny Wytrych</string>
+    <string name="item_steel_lockpick_name">Stalowy Wytrych</string>
+    <string name="item_mithril_lockpick_name">Mithrilowy Wytrych</string>
+    <string name="item_adamantite_lockpick_name">Adamantytowy Wytrych</string>
+    <string name="item_runite_lockpick_name">Runitowy Wytrych</string>
+    <string name="item_divine_hoe_name">Boska Motyka</string>
+    <string name="item_dwarven_hammer_name">Krasnoludzki Młot</string>
+    <string name="item_divine_hammer_name">Boski Młot</string>
+    <string name="item_dwarven_tinderbox_name">Krasnoludzkie Krzesiwo</string>
+    <string name="item_divine_tinderbox_name">Boskie Krzesiwo</string>
+    <string name="item_dwarven_frying_pan_name">Krasnoludzka Patelnia</string>
+    <string name="item_divine_frying_pan_name">Boska Patelnia</string>
+    <string name="item_shadow_grappling_hook_name">Cienisty Hak Wspinaczkowy</string>
+    <string name="item_dwarven_grappling_hook_name">Krasnoludzki Hak Wspinaczkowy</string>
+    <string name="item_arcane_grappling_hook_name">Arkanowy Hak Wspinaczkowy</string>
+    <string name="item_divine_grappling_hook_name">Boski Hak Wspinaczkowy</string>
+    <string name="item_rogues_lockpick_name">Wytrych Łotrów</string>
+    <string name="item_dwarven_lockpick_name">Krasnoludzki Wytrych</string>
+    <string name="item_shadow_lockpick_name">Cienisty Wytrych</string>
+    <string name="item_divine_lockpick_name">Boski Wytrych</string>
+
     <!-- Mikstury alchemiczne -->
     <string name="item_attack_brew_name">Wywar Ataku</string>
     <string name="item_defense_brew_name">Wywar Obrony</string>

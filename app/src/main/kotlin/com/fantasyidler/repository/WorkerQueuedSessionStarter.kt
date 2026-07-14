@@ -230,6 +230,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     startXp        = xpMap[Skills.THIEVING] ?: 0L,
                     thievingLevel  = levels[Skills.THIEVING] ?: 1,
                     agilityLevel   = agilityLevel,
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
                 )
                 startSession(slot, action, result.frames, durationMs, efficiencyMultiplier)
             }

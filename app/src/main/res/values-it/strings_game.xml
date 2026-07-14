@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Rampino</string>
     <string name="equip_slot_hammer">Martello</string>
     <string name="equip_slot_tinderbox">Scatola per l\'esca</string>
+    <string name="equip_slot_lockpick">Grimaldello</string>
 </resources>

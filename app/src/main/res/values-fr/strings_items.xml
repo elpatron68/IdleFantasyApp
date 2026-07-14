@@ -571,6 +571,29 @@
     <string name="item_adamantite_hoe_name">Houe en adamantite</string>
     <string name="item_runite_hoe_name">Houe en runite</string>
 
+    <!-- Crochets de serrurier -->
+    <string name="item_bronze_lockpick_name">Rossignol en bronze</string>
+    <string name="item_iron_lockpick_name">Rossignol en fer</string>
+    <string name="item_steel_lockpick_name">Rossignol en acier</string>
+    <string name="item_mithril_lockpick_name">Rossignol en mithril</string>
+    <string name="item_adamantite_lockpick_name">Rossignol en adamantite</string>
+    <string name="item_runite_lockpick_name">Rossignol en runite</string>
+    <string name="item_divine_hoe_name">Houe divine</string>
+    <string name="item_dwarven_hammer_name">Marteau nain</string>
+    <string name="item_divine_hammer_name">Marteau divin</string>
+    <string name="item_dwarven_tinderbox_name">Briquet à amadou nain</string>
+    <string name="item_divine_tinderbox_name">Briquet à amadou divin</string>
+    <string name="item_dwarven_frying_pan_name">Poêle à frire naine</string>
+    <string name="item_divine_frying_pan_name">Poêle à frire divine</string>
+    <string name="item_shadow_grappling_hook_name">Grappin des ombres</string>
+    <string name="item_dwarven_grappling_hook_name">Grappin nain</string>
+    <string name="item_arcane_grappling_hook_name">Grappin arcanique</string>
+    <string name="item_divine_grappling_hook_name">Grappin divin</string>
+    <string name="item_rogues_lockpick_name">Rossignol des malfrats</string>
+    <string name="item_dwarven_lockpick_name">Rossignol nain</string>
+    <string name="item_shadow_lockpick_name">Rossignol des ombres</string>
+    <string name="item_divine_lockpick_name">Rossignol divin</string>
+
     <!-- Potions d'Herblore -->
     <string name="item_attack_brew_name">Bière d’attaque</string>
     <string name="item_defense_brew_name">Bière de défense</string>

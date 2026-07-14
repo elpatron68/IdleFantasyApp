@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Cangkul Adamantit</string>
     <string name="item_runite_hoe_name">Cangkul Runit</string>
 
+    <!-- ===== Lockpicks ===== -->
+    <string name="item_bronze_lockpick_name">Pembuka Kunci Perunggu</string>
+    <string name="item_iron_lockpick_name">Pembuka Kunci Besi</string>
+    <string name="item_steel_lockpick_name">Pembuka Kunci Baja</string>
+    <string name="item_mithril_lockpick_name">Pembuka Kunci Mithril</string>
+    <string name="item_adamantite_lockpick_name">Pembuka Kunci Adamantit</string>
+    <string name="item_runite_lockpick_name">Pembuka Kunci Runit</string>
+    <string name="item_divine_hoe_name">Cangkul Ilahi</string>
+    <string name="item_dwarven_hammer_name">Palu Kurcaci</string>
+    <string name="item_divine_hammer_name">Palu Ilahi</string>
+    <string name="item_dwarven_tinderbox_name">Kotak Api Kurcaci</string>
+    <string name="item_divine_tinderbox_name">Kotak Api Ilahi</string>
+    <string name="item_dwarven_frying_pan_name">Wajan Kurcaci</string>
+    <string name="item_divine_frying_pan_name">Wajan Ilahi</string>
+    <string name="item_shadow_grappling_hook_name">Kait Bergulat Bayangan</string>
+    <string name="item_dwarven_grappling_hook_name">Kait Bergulat Kurcaci</string>
+    <string name="item_arcane_grappling_hook_name">Kait Bergulat Arkana</string>
+    <string name="item_divine_grappling_hook_name">Kait Bergulat Ilahi</string>
+    <string name="item_rogues_lockpick_name">Pembuka Kunci Bandit</string>
+    <string name="item_dwarven_lockpick_name">Pembuka Kunci Kurcaci</string>
+    <string name="item_shadow_lockpick_name">Pembuka Kunci Bayangan</string>
+    <string name="item_divine_lockpick_name">Pembuka Kunci Ilahi</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Bir Serangan</string>
     <string name="item_defense_brew_name">Bir Pertahanan</string>

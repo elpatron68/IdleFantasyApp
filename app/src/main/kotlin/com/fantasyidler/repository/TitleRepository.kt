@@ -54,8 +54,7 @@ class TitleRepository @Inject constructor(
         }
         for (banner in flags.seasonalBannersEarned) unlocked += "seasonal_${banner.eventId}"
         for ((guild, titleId) in GUILD_TITLES) {
-            val rep = flags.guildReputation[guild] ?: 0L
-            if (guildRepo.guildLevel(guild, rep, completedQuestIds) >= GuildRepository.REP_THRESHOLDS.size) {
+            if (guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds) >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size) {
                 unlocked += titleId
             }
         }

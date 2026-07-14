@@ -403,7 +403,7 @@
     <string name="home_town_title">Stadt</string>
     <string name="home_town_desc">Besuche den Laden, die Herberge, die Gilde, die Kirche, die Bauwerkstatt, den Slayer-Meister und den Jahrmarkt</string>
     <string name="guild_dailies_available">Tagesaufgaben verfügbar</string>
-    <string name="guild_do_dailies_hint">Erledigt Tagesaufgaben, um Euer Ansehen zu verbessern</string>
+    <string name="guild_do_dailies_hint">Erledigt Tagesaufgaben, um in den nächsten Rang aufzusteigen</string>
     <string name="guild_quest_gate_blocked">Schließt Missionen ab, um im Rang aufzusteigen</string>
     <string name="guild_quest_required">Mission benötigt, um voranzukommen</string>
     <string name="home_died_message">Ihr seid verstorben und habt daher den Großteil Eurer Gewinne verloren.</string>
@@ -588,6 +588,14 @@
     <string name="character_race_orc">Ork</string>
     <string name="character_race_halfling">Halbling</string>
     <string name="character_race_gnome">Gnom</string>
+    <string name="appearance_title">Aussehen anpassen</string>
+    <string name="appearance_skin_tone">Hautfarbe</string>
+    <string name="appearance_eyes">Augen</string>
+    <string name="appearance_hair_style">Frisur</string>
+    <string name="appearance_hair_color">Haarfarbe</string>
+    <string name="appearance_beard">Bart</string>
+    <string name="appearance_beard_color">Bartfarbe</string>
+    <string name="appearance_save">Aussehen speichern</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Aktivitäten</string>
@@ -731,7 +739,7 @@
 
     <!-- Guild Hall -->
     <string name="guild_hall_title">Zunfthaus</string>
-    <string name="guild_hall_desc">Tretet Gilden bei und verdient Euch Euren Ruf</string>
+    <string name="guild_hall_desc">Tretet Gilden bei und erledigt Tagesaufgaben, um aufzusteigen</string>
     <string name="guild_hall_intro">Gilden belohnen Euch für Aktivitäten, die Ihr sowieso erledigt. Erledigt Missionen und Tagesaufgaben, um auch fähigkeitenübergreifend Materialien, Münzen und EP zu erhalten. So können selbst Spezialisten Ressourcen erhalten, in denen sie wenig bewandert sind.</string>
     <string name="guild_level_label">Level %1$d</string>
     <string name="guild_level_max">Level 10 (Max)</string>
@@ -739,7 +747,7 @@
     <string name="guild_tab_dailies">Tagesaufgaben</string>
     <string name="guild_daily_resets_in">Wird um 06:00 Uhr zurückgesetzt</string>
     <string name="guild_locked_hint">Erfordert Gildenlevel %1$d</string>
-    <string name="guild_no_dailies">Schließt Gildenmissionen ab, um Euren Ruf zu verbessern und Tagesaufgaben freizuschalten. (Oder Ihr habt eure Tagesaufgaben schon erfüllt.)</string>
+    <string name="guild_no_dailies">Schließt Gildenmissionen ab, um Tagesaufgaben freizuschalten. (Oder Ihr habt eure Tagesaufgaben schon erfüllt.)</string>
     <string name="guild_contribute_inventory">Aus Inventar beisteuern (%1$d verfügbar)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s für die %4$s.</string>
     <string name="guild_quest_desc_kill">Besiegt %1$d Feinde im %2$s-Kampf.</string>
@@ -751,7 +759,7 @@
     <string name="guild_combat_melee">Nahkampf</string>
     <string name="guild_combat_ranged">Fernkampf</string>
     <string name="guild_combat_magic">Magie</string>
-    <string name="guild_rep_label">%1$d / %2$d Ruf</string>
+    <string name="guild_rep_label">%1$d / %2$d Tagesaufgaben</string>
     <string name="guild_quest_complete">Mission abgeschlossen: %1$s</string>
     <string name="guild_daily_complete">Tägliche Belohnung beansprucht!</string>
     <string name="guild_name_mining">Bergbaugilde</string>

@@ -215,6 +215,7 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct   = gatheringPetBoost(player.pets, Skills.THIEVING),
                     petDropKey    = petDropKey(Skills.THIEVING),
                     petDropChance = petDropChance(Skills.THIEVING),
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
                 )
                 sessionRepo.startSession(
                     skillName         = Skills.THIEVING,

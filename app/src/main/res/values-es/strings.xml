@@ -538,6 +538,14 @@
     <string name="character_race_orc">Orc</string>
     <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnome</string>
+    <string name="appearance_title">Personalizar apariencia</string>
+    <string name="appearance_skin_tone">Tono de piel</string>
+    <string name="appearance_eyes">Ojos</string>
+    <string name="appearance_hair_style">Estilo de pelo</string>
+    <string name="appearance_hair_color">Color de pelo</string>
+    <string name="appearance_beard">Barba</string>
+    <string name="appearance_beard_color">Color de barba</string>
+    <string name="appearance_save">Guardar apariencia</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Actividades</string>
@@ -737,7 +745,7 @@
     <string name="inn_worker_tier">%1$s worker</string>
     <string name="worker_skills_title_nav">Worker Skills</string>
     <string name="guild_hall_title">Guild Hall</string>
-    <string name="guild_hall_desc">Guilds and rep rewards</string>
+    <string name="guild_hall_desc">Únete a gremios y completa solicitudes diarias para subir de rango</string>
     <string name="guild_hall_intro">Guilds reward you for activities you already do. Complete quests and daily requests to earn cross-skill materials, coins, and XP, so specialists can still access resources from skills they don\'t train.</string>
     <string name="guild_level_label">Level %1$d</string>
     <string name="guild_level_max">Level 10 (Max)</string>
@@ -745,7 +753,7 @@
     <string name="guild_tab_dailies">Daily Requests</string>
     <string name="guild_daily_resets_in">Resets daily at 6am</string>
     <string name="guild_locked_hint">Requires Guild Level %1$d</string>
-    <string name="guild_no_dailies">Completa misiones de gremio para ganar reputación y desbloquear solicitudes diarias.</string>
+    <string name="guild_no_dailies">Completa misiones de gremio para desbloquear solicitudes diarias.</string>
     <string name="guild_contribute_inventory">Contribuir desde el inventario (%1$d disponible)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s para el %4$s.</string>
     <string name="guild_quest_desc_kill">Derrota %1$d enemigos usando combate %2$s.</string>
@@ -757,7 +765,7 @@
     <string name="guild_combat_melee">cuerpo a cuerpo</string>
     <string name="guild_combat_ranged">a distancia</string>
     <string name="guild_combat_magic">mágico</string>
-    <string name="guild_rep_label">%1$d / %2$d rep</string>
+    <string name="guild_rep_label">%1$d / %2$d diarias</string>
     <string name="guild_quest_complete">Quest complete: %1$s</string>
     <string name="guild_daily_complete">Daily reward claimed!</string>
     <string name="guild_name_mining">Mining Guild</string>
@@ -879,7 +887,7 @@
     <string name="home_town_title">Town</string>
     <string name="home_town_desc">Visita la tienda, la posada, el gremio, la iglesia, el taller del constructor, el maestro cazador y el carnaval</string>
     <string name="guild_dailies_available">Dailies available</string>
-    <string name="guild_do_dailies_hint">Do dailies to increase your reputation</string>
+    <string name="guild_do_dailies_hint">Completa misiones diarias para avanzar al siguiente rango</string>
     <string name="guild_name_thieving">Gremio de Ladrones</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
     <string name="skill_mercantile">Mercantile</string>

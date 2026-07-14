@@ -29,6 +29,7 @@ data class EquipmentData(
     @SerialName("firemaking_efficiency")  val firemakingEfficiency: Float? = null,
     @SerialName("agility_efficiency")     val agilityEfficiency: Float? = null,
     @SerialName("cooking_efficiency")     val cookingEfficiency: Float? = null,
+    @SerialName("thieving_efficiency")    val thievingEfficiency: Float? = null,
     @SerialName("cape_skill")             val capeSkill: String? = null,
     @SerialName("cape_bonus")             val capeBonus: Float = 0f,
     @SerialName("two_handed")             val twoHanded: Boolean = false,

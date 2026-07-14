@@ -27,6 +27,10 @@
     {
       "item": "shadow_signet",
       "chance": 0.002
+    },
+    {
+      "item": "shadow_lockpick",
+      "chance": 0.002
     }
   ]
 }

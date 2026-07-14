@@ -408,7 +408,7 @@
     <string name="home_town_title">Villaggio</string>
     <string name="home_town_desc">Visita l\'emporio, la locanda, la gilda, la chiesa, l\'officina del costruttore, il Sicario Specialista e la fiera.</string>
     <string name="guild_dailies_available">Giornaliere disponibili</string>
-    <string name="guild_do_dailies_hint">Completa missioni del giorno per migliorare la tua reputazione</string>
+    <string name="guild_do_dailies_hint">Completa missioni del giorno per avanzare al rango successivo</string>
     <string name="guild_quest_gate_blocked">Avanza di rango completando missioni</string>
     <string name="guild_quest_required">Missione richiesta per avanzare di rango</string>
     <string name="home_died_message">Sei morto e hai perso la maggior parte dei tuoi guadagni.</string>
@@ -641,6 +641,14 @@
     <string name="character_race_orc">Orco</string>
     <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnomo</string>
+    <string name="appearance_title">Personalizza aspetto</string>
+    <string name="appearance_skin_tone">Tono della pelle</string>
+    <string name="appearance_eyes">Occhi</string>
+    <string name="appearance_hair_style">Stile capelli</string>
+    <string name="appearance_hair_color">Colore capelli</string>
+    <string name="appearance_beard">Barba</string>
+    <string name="appearance_beard_color">Colore barba</string>
+    <string name="appearance_save">Salva aspetto</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Sessioni</string>
@@ -790,7 +798,7 @@
 
     <!-- Guild Hall -->
     <string name="guild_hall_title">Sala della Gilda</string>
-    <string name="guild_hall_desc">Unisciti a gilde e ottieni reputazione</string>
+    <string name="guild_hall_desc">Unisciti a gilde e completa le richieste del giorno per avanzare</string>
     <string name="guild_hall_intro">Le gilde ti ricompensano per le attività che svolgeresti comunque. Completa missioni e richieste giornaliere per guadagnare materiali, monete, e XP, così che gli specializzati possano accedere a tutti i tipi di risorsa.</string>
     <string name="guild_level_label">Livello %1$d</string>
     <string name="guild_level_max">Livello 10 (Max)</string>
@@ -798,7 +806,7 @@
     <string name="guild_tab_dailies">Richieste del Giorno</string>
     <string name="guild_daily_resets_in">Si aggiornano quotidianamente alle 06:00</string>
     <string name="guild_locked_hint">Richiede Livello Gilda %1$d</string>
-    <string name="guild_no_dailies">Completa missioni della gilda per guadagnare reputazione e sbloccare le richieste del giorno.</string>
+    <string name="guild_no_dailies">Completa missioni della gilda per sbloccare le richieste del giorno.</string>
     <string name="guild_contribute_inventory">Contribuisci con i tuoi oggetti (%1$d disponibile)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s per la %4$s.</string>
     <string name="guild_quest_desc_kill">Sconfiggi %1$d nemici in combattimento %2$s.</string>
@@ -810,7 +818,7 @@
     <string name="guild_combat_melee">mischia</string>
     <string name="guild_combat_ranged">a distanza</string>
     <string name="guild_combat_magic">magico</string>
-    <string name="guild_rep_label">%1$d / %2$d reputazione</string>
+    <string name="guild_rep_label">%1$d / %2$d giornaliere</string>
     <string name="guild_quest_complete">Missione completata: %1$s</string>
     <string name="guild_daily_complete">Ricompense ricevute!</string>
     <string name="guild_name_mining">Gilda dei Minatori</string>

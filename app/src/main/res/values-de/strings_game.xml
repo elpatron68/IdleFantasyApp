@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Greifhaken</string>
     <string name="equip_slot_hammer">Hammer</string>
     <string name="equip_slot_tinderbox">Zunderbüchse</string>
+    <string name="equip_slot_lockpick">Dietrich</string>
 </resources>

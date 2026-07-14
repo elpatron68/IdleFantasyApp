@@ -27,6 +27,7 @@ fun GameDataRepository.toolEfficiency(itemKey: String?, slot: String, resourceLe
         EquipSlot.TINDERBOX      -> eq.firemakingEfficiency  ?: 1.0f
         EquipSlot.GRAPPLING_HOOK -> eq.agilityEfficiency     ?: 1.0f
         EquipSlot.FRYING_PAN     -> eq.cookingEfficiency     ?: 1.0f
+        EquipSlot.LOCKPICK       -> eq.thievingEfficiency    ?: 1.0f
         else                     -> 1.0f
     }
     if (resourceLevelRequired <= 0) return base
@@ -38,9 +39,26 @@ fun GameDataRepository.toolEfficiency(itemKey: String?, slot: String, resourceLe
         EquipSlot.TINDERBOX      -> Skills.FIREMAKING
         EquipSlot.GRAPPLING_HOOK -> Skills.AGILITY
         EquipSlot.FRYING_PAN     -> Skills.COOKING
+        EquipSlot.LOCKPICK       -> Skills.THIEVING
         else                     -> return base
     }
     val toolReqLevel = eq.requirements[skillKey] ?: 1
     val tierDiff = tierIndex(toolReqLevel) - tierIndex(resourceLevelRequired)
     return if (tierDiff > 0) base * (1.0f + 0.25f * tierDiff) else base
 }
+
+/**
+ * Tool efficiency multiplier that shortens a crafting session's duration, keyed by
+ * [skillName]/[activityKey] rather than a full recipe object. Only smithing (hammer) and
+ * cooking (frying pan) affect duration; other crafting skills return 1.0.
+ */
+fun GameDataRepository.craftDurationEfficiency(skillName: String, activityKey: String, equipped: Map<String, String?>): Float =
+    when (skillName) {
+        Skills.SMITHING -> smithingRecipes[activityKey]?.levelRequired?.let {
+            toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, it)
+        } ?: 1.0f
+        Skills.COOKING -> cookingRecipes[activityKey]?.levelRequired?.let {
+            toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, it)
+        } ?: 1.0f
+        else -> 1.0f
+    }

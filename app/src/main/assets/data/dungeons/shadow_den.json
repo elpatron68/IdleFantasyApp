@@ -11,6 +11,7 @@
     {"enemy": "dark_wizard", "weight": 3}
   ],
   "rare_drops": [
-    {"item": "shadow_dagger", "chance": 0.02}
+    {"item": "shadow_dagger", "chance": 0.02},
+    {"item": "shadow_grappling_hook", "chance": 0.02}
   ]
 }

@@ -624,4 +624,25 @@
     <string name="item_celestial_bloom_seed_name">Celestial Bloom Seed</string>
     <string name="item_starfruit_seed_name">Starfruit Seed</string>
     <string name="item_void_lotus_seed_name">Void Lotus Seed</string>
+    <string name="item_bronze_lockpick_name">Bronze Lockpick</string>
+    <string name="item_iron_lockpick_name">Iron Lockpick</string>
+    <string name="item_steel_lockpick_name">Steel Lockpick</string>
+    <string name="item_mithril_lockpick_name">Mithril Lockpick</string>
+    <string name="item_adamantite_lockpick_name">Adamantite Lockpick</string>
+    <string name="item_runite_lockpick_name">Runite Lockpick</string>
+    <string name="item_arcane_grappling_hook_name">Arcane Grappling Hook</string>
+    <string name="item_divine_frying_pan_name">Divine Frying Pan</string>
+    <string name="item_divine_grappling_hook_name">Divine Grappling Hook</string>
+    <string name="item_divine_hammer_name">Divine Hammer</string>
+    <string name="item_divine_hoe_name">Divine Hoe</string>
+    <string name="item_divine_lockpick_name">Divine Lockpick</string>
+    <string name="item_divine_tinderbox_name">Divine Tinderbox</string>
+    <string name="item_dwarven_frying_pan_name">Dwarven Frying Pan</string>
+    <string name="item_dwarven_grappling_hook_name">Dwarven Grappling Hook</string>
+    <string name="item_dwarven_hammer_name">Dwarven Hammer</string>
+    <string name="item_dwarven_lockpick_name">Dwarven Lockpick</string>
+    <string name="item_dwarven_tinderbox_name">Dwarven Tinderbox</string>
+    <string name="item_rogues_lockpick_name">Rogue\'s Lockpick</string>
+    <string name="item_shadow_grappling_hook_name">Shadow Grappling Hook</string>
+    <string name="item_shadow_lockpick_name">Shadow Lockpick</string>
 </resources>

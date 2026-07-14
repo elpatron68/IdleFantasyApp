@@ -31,6 +31,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -151,6 +152,7 @@ fun ProfileScreen(
     )
     var selectedTab  by remember { mutableIntStateOf(0) }
     var showEditSheet by remember { mutableStateOf(false) }
+    var showAppearanceSheet by remember { mutableStateOf(false) }
 
     Scaffold(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
@@ -198,6 +200,13 @@ fun ProfileScreen(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
+                    }
+                    IconButton(onClick = { showAppearanceSheet = true }) {
+                        Icon(
+                            imageVector        = Icons.Filled.Person,
+                            contentDescription = stringResource(R.string.appearance_title),
+                            tint               = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                     IconButton(onClick = { showEditSheet = true }) {
                         Icon(
@@ -295,6 +304,24 @@ fun ProfileScreen(
                 onDismiss = viewModel::dismissSlotPicker,
             )
         }
+    }
+
+    // Character appearance sheet
+    if (showAppearanceSheet) {
+        CharacterCustomizationSheet(
+            race              = state.characterRace,
+            initialSkin       = state.characterSkinTone,
+            initialHair       = state.characterHairStyle,
+            initialHairColor  = state.characterHairColor,
+            initialEye        = state.characterEyeStyle,
+            initialBeard      = state.characterBeardStyle,
+            initialBeardColor = state.characterBeardColor,
+            onSave            = { skin, hair, hairColor, eye, beard, beardColor, race ->
+                viewModel.saveAppearance(skin, hair, hairColor, eye, beard, beardColor, race)
+                showAppearanceSheet = false
+            },
+            onDismiss         = { showAppearanceSheet = false },
+        )
     }
 
     // Character edit sheet

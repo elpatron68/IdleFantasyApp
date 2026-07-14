@@ -28,6 +28,8 @@ class DailyQuestRepository @Inject constructor(
         "dwarven_pickaxe", "dwarven_axe", "dwarven_fishing_rod", "dwarven_hoe",
         "dwarven_helm", "dwarven_platebody", "dwarven_platelegs",
         "dwarven_shield", "dwarven_boots",
+        "dwarven_hammer", "dwarven_tinderbox", "dwarven_frying_pan", "dwarven_grappling_hook",
+        "dwarven_lockpick",
     )
 
     /** Returns epoch ms of the next 6am in local time after [fromMs]. */

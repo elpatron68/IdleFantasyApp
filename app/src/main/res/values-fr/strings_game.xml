@@ -111,4 +111,5 @@
     <string name="equip_slot_grappling_hook">Grappin</string>
     <string name="equip_slot_hammer">Marteau</string>
     <string name="equip_slot_tinderbox">Briquet à amadou</string>
+    <string name="equip_slot_lockpick">Rossignol</string>
 </resources>

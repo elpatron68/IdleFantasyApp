@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Kanca</string>
     <string name="equip_slot_hammer">Çekiç</string>
     <string name="equip_slot_tinderbox">Çakmaktaşı</string>
+    <string name="equip_slot_lockpick">Maymuncuk</string>
 </resources>

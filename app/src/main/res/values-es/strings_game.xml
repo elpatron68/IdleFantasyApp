@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Garfio de escalada</string>
     <string name="equip_slot_hammer">Martillo</string>
     <string name="equip_slot_tinderbox">Yesquero</string>
+    <string name="equip_slot_lockpick">Ganzúa</string>
 </resources>

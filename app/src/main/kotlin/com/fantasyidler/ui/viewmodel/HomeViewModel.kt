@@ -28,6 +28,7 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.simulator.SkillSimulator
 import kotlin.math.roundToInt
+import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toTitleCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -116,6 +117,13 @@ data class HomeUiState(
     val sessionSummary: SessionSummary? = null,
     val characterSetupDone: Boolean = false,
     val characterName: String = "",
+    val characterRace: String = "",
+    val characterSkinTone: Int = 1,
+    val characterHairStyle: Int = 1,
+    val characterHairColor: String = "a",
+    val characterEyeStyle: Int = 1,
+    val characterBeardStyle: Int = 0,
+    val characterBeardColor: String = "a",
     val equippedTitle: String? = null,
     /** Resolved, localized title name (e.g. "Master Smith"), or null if none equipped. */
     val titleName: String? = null,
@@ -181,6 +189,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { sessionRepo.recoverActiveWorkerSession(2, workerStarter) }
         viewModelScope.launch { playerRepo.awardMissingCapes() }
         viewModelScope.launch { playerRepo.migratePetsFromInventory(gameData.pets.keys) }
+        viewModelScope.launch { guildRepo.migrateLegacyGuildReputation() }
         // AlarmManager delivery can be deferred by Doze for hours (issue 517: overnight
         // sessions frozen until their late alarms fire). While the app is open this
         // ticker completes overdue sessions and workers within a second.
@@ -223,17 +232,24 @@ class HomeViewModel @Inject constructor(
         else {
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
             val sessionMs       = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)
             val perItemMs    = sessionMs / 60
             val queueStart   = session?.endsAt ?: System.currentTimeMillis()
+            // Recomputed live from current agility/gear rather than the frozen value stored at
+            // queue time, so the countdown reacts to level-ups and tool swaps (issues #938, #940).
+            // Boss fights alone use a fixed wall-clock duration unrelated to agility or gear.
             val queueEndsAt  = if (flags.sessionQueue.isEmpty()) 0L
                                else queueStart + flags.sessionQueue.sumOf {
                                    when {
-                                       it.estimatedDurationMs > 0 -> it.estimatedDurationMs
-                                       it.qty > 0                 -> it.qty.toLong() * perItemMs
-                                       else                       -> sessionMs
+                                       it.skillName == "boss" -> it.estimatedDurationMs
+                                       it.qty > 0 -> {
+                                           val eff = gameData.craftDurationEfficiency(it.skillName, it.activityKey, equipped)
+                                           it.qty.toLong() * (perItemMs / eff).toLong()
+                                       }
+                                       else -> sessionMs
                                    }
                                }
             val innXpMult = townRepo.workerXpMultiplier(flags)
@@ -252,8 +268,7 @@ class HomeViewModel @Inject constructor(
             val progressMap      = guildProgress.associateBy { it.questId }
             val completedQuestIds = guildProgress.filter { it.completed }.map { it.questId }.toSet()
             val guildClaimableCount = GuildRepository.ALL_GUILDS.sumOf { guild ->
-                val rep   = flags.guildReputation[guild] ?: 0L
-                val level = guildRepo.guildLevel(guild, rep, completedQuestIds)
+                val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds)
                 val claimableQuests = gameData.guildQuests.values
                     .filter { it.guild == guild && level >= it.guildLevelRequired }
                     .count { quest ->
@@ -281,6 +296,13 @@ class HomeViewModel @Inject constructor(
                 pendingCollectCount = completedCount,
                 characterSetupDone  = flags.characterSetupDone,
                 characterName       = flags.characterName,
+                characterRace       = flags.characterRace,
+                characterSkinTone   = flags.characterSkinTone,
+                characterHairStyle  = flags.characterHairStyle,
+                characterHairColor  = flags.characterHairColor,
+                characterEyeStyle   = flags.characterEyeStyle,
+                characterBeardStyle = flags.characterBeardStyle,
+                characterBeardColor = flags.characterBeardColor,
                 equippedTitle       = flags.equippedTitle,
                 titleName           = titleRepo.displayName(context, flags.equippedTitle, flags),
                 sessionQueue        = flags.sessionQueue,
