@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Nazwy i cele questów ===== -->
+    <!-- Translator note: nazwy questów to krótkie tytuły; cele to zdania opisujące czynność do wykonania. -->
+
+    <!-- Górnictwo -->
+    <string name="quest_mining_1_name">Górnictwo I</string>
+    <string name="quest_mining_1_objective">Wydobądź 500 Rudy Miedzi</string>
+    <string name="quest_mining_2_name">Górnictwo II</string>
+    <string name="quest_mining_2_objective">Wydobądź 750 Rudy Żelaza</string>
+    <string name="quest_mining_3_name">Górnictwo III</string>
+    <string name="quest_mining_3_objective">Wydobądź 1100 Węgla</string>
+    <string name="quest_mining_4_name">Górnictwo IV</string>
+    <string name="quest_mining_4_objective">Wydobądź 1650 Rudy Mithrilu</string>
+    <string name="quest_mining_5_name">Górnictwo V</string>
+    <string name="quest_mining_5_objective">Wydobądź 2450 Rudy Adamantytu</string>
+    <string name="quest_mining_6_name">Górnictwo VI</string>
+    <string name="quest_mining_6_objective">Wydobądź 3650 Rudy Runitu</string>
+
+    <!-- Drwalstwo -->
+    <string name="quest_woodcutting_1_name">Drwalstwo I</string>
+    <string name="quest_woodcutting_1_objective">Zetnij 500 Kłód</string>
+    <string name="quest_woodcutting_2_name">Drwalstwo II</string>
+    <string name="quest_woodcutting_2_objective">Zetnij 750 Dębowych Kłód</string>
+    <string name="quest_woodcutting_3_name">Drwalstwo III</string>
+    <string name="quest_woodcutting_3_objective">Zetnij 1100 Wierzbowych Kłód</string>
+    <string name="quest_woodcutting_4_name">Drwalstwo IV</string>
+    <string name="quest_woodcutting_4_objective">Zetnij 1650 Klonowych Kłód</string>
+    <string name="quest_woodcutting_5_name">Drwalstwo V</string>
+    <string name="quest_woodcutting_5_objective">Zetnij 2450 Cisowych Kłód</string>
+    <string name="quest_woodcutting_6_name">Drwalstwo VI</string>
+    <string name="quest_woodcutting_6_objective">Zetnij 3650 Magicznych Kłód</string>
+
+    <!-- Wędkarstwo -->
+    <string name="quest_fishing_1_name">Wędkarstwo I</string>
+    <string name="quest_fishing_1_objective">Złów 500 ryb</string>
+    <string name="quest_fishing_2_name">Wędkarstwo II</string>
+    <string name="quest_fishing_2_objective">Złów 750 ryb</string>
+    <string name="quest_fishing_3_name">Wędkarstwo III</string>
+    <string name="quest_fishing_3_objective">Złów 1100 ryb</string>
+    <string name="quest_fishing_4_name">Wędkarstwo IV</string>
+    <string name="quest_fishing_4_objective">Złów 1650 ryb</string>
+    <string name="quest_fishing_5_name">Wędkarstwo V</string>
+    <string name="quest_fishing_5_objective">Złów 2450 ryb</string>
+    <string name="quest_fishing_6_name">Wędkarstwo VI</string>
+    <string name="quest_fishing_6_objective">Złów 3650 ryb</string>
+
+    <!-- Kowalstwo -->
+    <string name="quest_smithing_1_name">Kowalstwo I</string>
+    <string name="quest_smithing_1_objective">Przetop 500 Sztabek Brązu</string>
+    <string name="quest_smithing_2_name">Kowalstwo II</string>
+    <string name="quest_smithing_2_objective">Przetop 750 Sztabek Żelaza</string>
+    <string name="quest_smithing_3_name">Kowalstwo III</string>
+    <string name="quest_smithing_3_objective">Przetop 1100 Sztabek Stali</string>
+    <string name="quest_smithing_4_name">Kowalstwo IV</string>
+    <string name="quest_smithing_4_objective">Przetop 1650 Sztabek Mithrilu</string>
+    <string name="quest_smithing_5_name">Kowalstwo V</string>
+    <string name="quest_smithing_5_objective">Przetop 2450 Sztabek Adamantytu</string>
+    <string name="quest_smithing_6_name">Kowalstwo VI</string>
+    <string name="quest_smithing_6_objective">Przetop 3650 Sztabek Runitu</string>
+
+    <!-- Gotowanie - Ryby -->
+    <string name="quest_cooking_fish_1_name">Gotowanie — Ryby I</string>
+    <string name="quest_cooking_fish_1_objective">Ugotuj 500 ryb</string>
+    <string name="quest_cooking_fish_2_name">Gotowanie — Ryby II</string>
+    <string name="quest_cooking_fish_2_objective">Ugotuj 750 ryb</string>
+    <string name="quest_cooking_fish_3_name">Gotowanie — Ryby III</string>
+    <string name="quest_cooking_fish_3_objective">Ugotuj 1100 ryb</string>
+    <string name="quest_cooking_fish_4_name">Gotowanie — Ryby IV</string>
+    <string name="quest_cooking_fish_4_objective">Ugotuj 1650 ryb</string>
+    <string name="quest_cooking_fish_5_name">Gotowanie — Ryby V</string>
+    <string name="quest_cooking_fish_5_objective">Ugotuj 2450 ryb</string>
+    <string name="quest_cooking_fish_6_name">Gotowanie — Ryby VI</string>
+    <string name="quest_cooking_fish_6_objective">Ugotuj 3650 ryb</string>
+
+    <!-- Gotowanie - Wołowina -->
+    <string name="quest_cooking_beef_1_name">Gotowanie — Wołowina I</string>
+    <string name="quest_cooking_beef_1_objective">Ugotuj 100 Wołowiny</string>
+    <string name="quest_cooking_beef_2_name">Gotowanie — Wołowina II</string>
+    <string name="quest_cooking_beef_2_objective">Ugotuj 250 Wołowiny</string>
+    <string name="quest_cooking_beef_3_name">Gotowanie — Wołowina III</string>
+    <string name="quest_cooking_beef_3_objective">Ugotuj 500 Wołowiny</string>
+
+    <!-- Gotowanie - Kurczak -->
+    <string name="quest_cooking_chicken_1_name">Gotowanie — Kurczak I</string>
+    <string name="quest_cooking_chicken_1_objective">Ugotuj 100 Kurczaka</string>
+    <string name="quest_cooking_chicken_2_name">Gotowanie — Kurczak II</string>
+    <string name="quest_cooking_chicken_2_objective">Ugotuj 250 Kurczaka</string>
+    <string name="quest_cooking_chicken_3_name">Gotowanie — Kurczak III</string>
+    <string name="quest_cooking_chicken_3_objective">Ugotuj 500 Kurczaka</string>
+
+    <!-- Gotowanie - Baranina -->
+    <string name="quest_cooking_mutton_1_name">Gotowanie — Baranina I</string>
+    <string name="quest_cooking_mutton_1_objective">Ugotuj 100 Baraniny</string>
+    <string name="quest_cooking_mutton_2_name">Gotowanie — Baranina II</string>
+    <string name="quest_cooking_mutton_2_objective">Ugotuj 250 Baraniny</string>
+    <string name="quest_cooking_mutton_3_name">Gotowanie — Baranina III</string>
+    <string name="quest_cooking_mutton_3_objective">Ugotuj 500 Baraniny</string>
+
+    <!-- Strzelarstwo -->
+    <string name="quest_fletching_1_name">Strzelarstwo I</string>
+    <string name="quest_fletching_1_objective">Wykonaj 500 Brązowych Strzał</string>
+    <string name="quest_fletching_2_name">Strzelarstwo II</string>
+    <string name="quest_fletching_2_objective">Wykonaj 750 Żelaznych Strzał</string>
+    <string name="quest_fletching_3_name">Strzelarstwo III</string>
+    <string name="quest_fletching_3_objective">Wykonaj 1100 Stalowych Strzał</string>
+    <string name="quest_fletching_4_name">Strzelarstwo IV</string>
+    <string name="quest_fletching_4_objective">Wykonaj 1650 Mithrilowych Strzał</string>
+    <string name="quest_fletching_5_name">Strzelarstwo V</string>
+    <string name="quest_fletching_5_objective">Wykonaj 2450 Adamantytowych Strzał</string>
+    <string name="quest_fletching_6_name">Strzelarstwo VI</string>
+    <string name="quest_fletching_6_objective">Wykonaj 3650 Runitowych Strzał</string>
+
+    <!-- Modlitwa -->
+    <string name="quest_prayer_1_name">Modlitwa I</string>
+    <string name="quest_prayer_1_objective">Pochowaj 500 kości</string>
+    <string name="quest_prayer_2_name">Modlitwa II</string>
+    <string name="quest_prayer_2_objective">Pochowaj 750 kości</string>
+    <string name="quest_prayer_3_name">Modlitwa III</string>
+    <string name="quest_prayer_3_objective">Pochowaj 1100 kości</string>
+    <string name="quest_prayer_4_name">Modlitwa IV</string>
+    <string name="quest_prayer_4_objective">Pochowaj 1650 kości</string>
+    <string name="quest_prayer_5_name">Modlitwa V</string>
+    <string name="quest_prayer_5_objective">Pochowaj 2450 kości</string>
+    <string name="quest_prayer_6_name">Modlitwa VI</string>
+    <string name="quest_prayer_6_objective">Pochowaj 3650 kości</string>
+
+    <!-- Zabijanie potworów -->
+    <string name="quest_combat_kills_1_name">Łowca Potworów I</string>
+    <string name="quest_combat_kills_1_objective">Pokonaj 100 wrogów</string>
+    <string name="quest_combat_kills_2_name">Łowca Potworów II</string>
+    <string name="quest_combat_kills_2_objective">Pokonaj 150 wrogów</string>
+    <string name="quest_combat_kills_3_name">Łowca Potworów III</string>
+    <string name="quest_combat_kills_3_objective">Pokonaj 200 wrogów</string>
+    <string name="quest_combat_kills_4_name">Łowca Potworów IV</string>
+    <string name="quest_combat_kills_4_objective">Pokonaj 300 wrogów</string>
+    <string name="quest_combat_kills_5_name">Łowca Potworów V</string>
+    <string name="quest_combat_kills_5_objective">Pokonaj 450 wrogów</string>
+    <string name="quest_combat_kills_6_name">Łowca Potworów VI</string>
+    <string name="quest_combat_kills_6_objective">Pokonaj 650 wrogów</string>
+
+    <!-- Eksploracja lochów -->
+    <string name="quest_dungeon_farm_1_name">Odkrywca Lochów I</string>
+    <string name="quest_dungeon_farm_1_objective">Ukończ Farmę 5 razy</string>
+    <string name="quest_dungeon_goblin_1_name">Odkrywca Lochów II</string>
+    <string name="quest_dungeon_goblin_1_objective">Ukończ Jaskinię Goblinów 5 razy</string>
+    <string name="quest_dungeon_spider_1_name">Odkrywca Lochów III</string>
+    <string name="quest_dungeon_spider_1_objective">Ukończ Legowisko Pająków 5 razy</string>
+    <string name="quest_dungeon_bandit_1_name">Odkrywca Lochów IV</string>
+    <string name="quest_dungeon_bandit_1_objective">Ukończ Obóz Bandytów 5 razy</string>
+    <string name="quest_dungeon_undead_1_name">Odkrywca Lochów V</string>
+    <string name="quest_dungeon_undead_1_objective">Ukończ Kryptę Nieumarłych 5 razy</string>
+    <string name="quest_dungeon_fortress_1_name">Odkrywca Lochów VI</string>
+    <string name="quest_dungeon_fortress_1_objective">Ukończ Ruiny Fortecy 5 razy</string>
+    <string name="quest_dungeon_orc_1_name">Mistrz Lochów I</string>
+    <string name="quest_dungeon_orc_1_objective">Ukończ Twierdzę Orków 5 razy</string>
+    <string name="quest_dungeon_volcanic_1_name">Mistrz Lochów II</string>
+    <string name="quest_dungeon_volcanic_1_objective">Ukończ Wulkaniczne Głębiny 5 razy</string>
+    <string name="quest_dungeon_dragon_1_name">Mistrz Lochów III</string>
+    <string name="quest_dungeon_dragon_1_objective">Ukończ Legowisko Smoka 5 razy</string>
+
+    <!-- Rzemiosło -->
+    <string name="quest_crafting_1_name">Rzemiosło I</string>
+    <string name="quest_crafting_1_objective">Wykonaj 100 Srebrnych Pierścieni</string>
+    <string name="quest_crafting_2_name">Rzemiosło II</string>
+    <string name="quest_crafting_2_objective">Wykonaj 250 Złotych Pierścieni</string>
+    <string name="quest_crafting_3_name">Rzemiosło III</string>
+    <string name="quest_crafting_3_objective">Wykonaj 500 Platynowych Pierścieni</string>
+    <string name="quest_crafting_4_name">Rzemiosło IV</string>
+    <string name="quest_crafting_4_objective">Wykonaj 750 Srebrnych Pierścieni z Szafirem</string>
+    <string name="quest_crafting_5_name">Rzemiosło V</string>
+    <string name="quest_crafting_5_objective">Wykonaj 1000 Złotych Pierścieni z Szafirem</string>
+    <string name="quest_crafting_6_name">Rzemiosło VI</string>
+    <string name="quest_crafting_6_objective">Wykonaj 1500 Platynowych Pierścieni z Diamentem</string>
+
+    <!-- Łańcuchy zadań łowcy potworów -->
+    <string name="quest_goblin_slayer_1_name">Pogromca Goblinów I</string>
+    <string name="quest_goblin_slayer_1_objective">Pokonaj 50 Goblinów</string>
+    <string name="quest_goblin_slayer_2_name">Pogromca Goblinów II</string>
+    <string name="quest_goblin_slayer_2_objective">Pokonaj 100 Goblinów</string>
+    <string name="quest_spider_slayer_1_name">Pogromca Pająków I</string>
+    <string name="quest_spider_slayer_1_objective">Pokonaj 40 Olbrzymich Pająków</string>
+    <string name="quest_spider_slayer_2_name">Pogromca Pająków II</string>
+    <string name="quest_spider_slayer_2_objective">Pokonaj 80 Olbrzymich Pająków</string>
+    <string name="quest_skeleton_slayer_1_name">Pogromca Szkieletów I</string>
+    <string name="quest_skeleton_slayer_1_objective">Pokonaj 35 Szkieletów</string>
+    <string name="quest_skeleton_slayer_2_name">Pogromca Szkieletów II</string>
+    <string name="quest_skeleton_slayer_2_objective">Pokonaj 70 Szkieletów</string>
+    <string name="quest_bandit_hunter_1_name">Łowca Bandytów I</string>
+    <string name="quest_bandit_hunter_1_objective">Pokonaj 30 Bandytów</string>
+    <string name="quest_bandit_hunter_2_name">Łowca Bandytów II</string>
+    <string name="quest_bandit_hunter_2_objective">Pokonaj 60 Bandytów</string>
+    <string name="quest_orc_slayer_1_name">Pogromca Orków I</string>
+    <string name="quest_orc_slayer_1_objective">Pokonaj 25 Wojowników Orków</string>
+    <string name="quest_orc_slayer_2_name">Pogromca Orków II</string>
+    <string name="quest_orc_slayer_2_objective">Pokonaj 50 Wojowników Orków</string>
+    <string name="quest_demon_slayer_1_name">Pogromca Demonów I</string>
+    <string name="quest_demon_slayer_1_objective">Pokonaj Władcę Demonów</string>
+    <string name="quest_demon_slayer_2_name">Pogromca Demonów II</string>
+    <string name="quest_demon_slayer_2_objective">Pokonaj Władcę Demonów 5 razy</string>
+    <string name="quest_demon_slayer_3_name">Pogromca Demonów III</string>
+    <string name="quest_demon_slayer_3_objective">Pokonaj Władcę Demonów 25 razy</string>
+    <string name="quest_dragon_slayer_1_name">Pogromca Smoków I</string>
+    <string name="quest_dragon_slayer_1_objective">Pokonaj 10 Zielonych Smoków</string>
+    <string name="quest_dragon_slayer_2_name">Pogromca Smoków II</string>
+    <string name="quest_dragon_slayer_2_objective">Pokonaj 25 Zielonych Smoków</string>
+
+    <!-- Wyzwania stylu walki -->
+    <string name="quest_melee_warrior_1_name">Wojownik Walki Wręcz I</string>
+    <string name="quest_melee_warrior_1_objective">Ukończ Jaskinię Goblinów, używając wyłącznie walki wręcz</string>
+    <string name="quest_melee_warrior_2_name">Wojownik Walki Wręcz II</string>
+    <string name="quest_melee_warrior_2_objective">Ukończ Obóz Bandytów, używając wyłącznie walki wręcz</string>
+    <string name="quest_melee_warrior_3_name">Wojownik Walki Wręcz III</string>
+    <string name="quest_melee_warrior_3_objective">Ukończ Ruiny Fortecy, używając wyłącznie walki wręcz</string>
+    <string name="quest_ranger_elite_1_name">Elitarny Łucznik I</string>
+    <string name="quest_ranger_elite_1_objective">Ukończ Jaskinię Goblinów, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_ranger_elite_2_name">Elitarny Łucznik II</string>
+    <string name="quest_ranger_elite_2_objective">Ukończ Obóz Bandytów, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_ranger_elite_3_name">Elitarny Łucznik III</string>
+    <string name="quest_ranger_elite_3_objective">Ukończ Ruiny Fortecy, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_mage_master_1_name">Mistrz Magii I</string>
+    <string name="quest_mage_master_1_objective">Ukończ Jaskinię Goblinów, używając wyłącznie magii</string>
+    <string name="quest_mage_master_2_name">Mistrz Magii II</string>
+    <string name="quest_mage_master_2_objective">Ukończ Obóz Bandytów, używając wyłącznie magii</string>
+    <string name="quest_mage_master_3_name">Mistrz Magii III</string>
+    <string name="quest_mage_master_3_objective">Ukończ Ruiny Fortecy, używając wyłącznie magii</string>
+
+    <!-- Wyzwania Żelaznego Żołądka (bez jedzenia) -->
+    <string name="quest_iron_stomach_1_name">Żelazny Żołądek I</string>
+    <string name="quest_iron_stomach_1_objective">Ukończ Legowisko Pająków bez użycia jedzenia</string>
+    <string name="quest_iron_stomach_2_name">Żelazny Żołądek II</string>
+    <string name="quest_iron_stomach_2_objective">Ukończ Kryptę Nieumarłych bez użycia jedzenia</string>
+    <string name="quest_iron_stomach_3_name">Żelazny Żołądek III</string>
+    <string name="quest_iron_stomach_3_objective">Ukończ Twierdzę Orków bez użycia jedzenia</string>
+    <string name="quest_iron_stomach_4_name">Żelazny Żołądek IV</string>
+    <string name="quest_iron_stomach_4_objective">Ukończ Legowisko Smoka bez użycia jedzenia</string>
+
+    <!-- Poszukiwacz Skarbów -->
+    <string name="quest_treasure_hunter_1_name">Poszukiwacz Skarbów I</string>
+    <string name="quest_treasure_hunter_1_objective">Zdobądź 20 Pajęczego Jedwabiu w walce</string>
+    <string name="quest_treasure_hunter_2_name">Poszukiwacz Skarbów II</string>
+    <string name="quest_treasure_hunter_2_objective">Zdobądź 10 Kolczug Goblinów w walce</string>
+    <string name="quest_treasure_hunter_3_name">Poszukiwacz Skarbów III</string>
+    <string name="quest_treasure_hunter_3_objective">Zdobądź 5 Rogów Demona w walce</string>
+    <string name="quest_treasure_hunter_4_name">Poszukiwacz Skarbów IV</string>
+    <string name="quest_treasure_hunter_4_objective">Zdobądź 3 Smocze Łuski w walce</string>
+
+    <!-- Rozpalanie Ognia -->
+    <string name="quest_firemaking_1_name">Rozpalanie Ognia I</string>
+    <string name="quest_firemaking_1_objective">Spal 500 Kłód</string>
+    <string name="quest_firemaking_2_name">Rozpalanie Ognia II</string>
+    <string name="quest_firemaking_2_objective">Spal 750 Dębowych Kłód</string>
+    <string name="quest_firemaking_3_name">Rozpalanie Ognia III</string>
+    <string name="quest_firemaking_3_objective">Spal 1100 Wierzbowych Kłód</string>
+    <string name="quest_firemaking_4_name">Rozpalanie Ognia IV</string>
+    <string name="quest_firemaking_4_objective">Spal 1650 Klonowych Kłód</string>
+    <string name="quest_firemaking_5_name">Rozpalanie Ognia V</string>
+    <string name="quest_firemaking_5_objective">Spal 2450 Cisowych Kłód</string>
+    <string name="quest_firemaking_6_name">Rozpalanie Ognia VI</string>
+    <string name="quest_firemaking_6_objective">Spal 3650 Magicznych Kłód</string>
+
+    <!-- Tworzenie Run -->
+    <string name="quest_runecrafting_1_name">Tworzenie Run I</string>
+    <string name="quest_runecrafting_1_objective">Stwórz 500 Run Powietrza</string>
+    <string name="quest_runecrafting_2_name">Tworzenie Run II</string>
+    <string name="quest_runecrafting_2_objective">Stwórz 750 Run Wody</string>
+    <string name="quest_runecrafting_3_name">Tworzenie Run III</string>
+    <string name="quest_runecrafting_3_objective">Stwórz 1100 Run Ziemi</string>
+    <string name="quest_runecrafting_4_name">Tworzenie Run IV</string>
+    <string name="quest_runecrafting_4_objective">Stwórz 1650 Run Ognia</string>
+    <string name="quest_runecrafting_5_name">Tworzenie Run V</string>
+    <string name="quest_runecrafting_5_objective">Stwórz 2450 Run Umysłu</string>
+    <string name="quest_runecrafting_6_name">Tworzenie Run VI</string>
+    <string name="quest_runecrafting_6_objective">Stwórz 3650 Run Chaosu</string>
+
+    <!-- Zielarstwo -->
+    <string name="quest_herblore_1_name">Zielarstwo I</string>
+    <string name="quest_herblore_1_objective">Uwarz 100 Mikstur Ataku</string>
+    <string name="quest_herblore_2_name">Zielarstwo II</string>
+    <string name="quest_herblore_2_objective">Zmieszaj 250 Mikstur Obrony</string>
+    <string name="quest_herblore_3_name">Zielarstwo III</string>
+    <string name="quest_herblore_3_objective">Zmieszaj 500 Mikstur Siły</string>
+    <string name="quest_herblore_4_name">Zielarstwo IV</string>
+    <string name="quest_herblore_4_objective">Zmieszaj 750 Mikstur Ataku Dystansowego</string>
+    <string name="quest_herblore_5_name">Zielarstwo V</string>
+    <string name="quest_herblore_5_objective">Zmieszaj 1000 Mikstur Magii</string>
+    <string name="quest_herblore_6_name">Zielarstwo VI</string>
+    <string name="quest_herblore_6_objective">Zmieszaj 1500 Mikstur Super Siły</string>
+
+    <!-- Zabijanie potworów - rozszerzenie -->
+    <string name="quest_combat_kills_7_name">Łowca Potworów VII</string>
+    <string name="quest_combat_kills_7_objective">Pokonaj 1000 wrogów</string>
+    <string name="quest_combat_kills_8_name">Łowca Potworów VIII</string>
+    <string name="quest_combat_kills_8_objective">Pokonaj 1500 wrogów</string>
+    <string name="quest_combat_kills_9_name">Łowca Potworów IX</string>
+    <string name="quest_combat_kills_9_objective">Pokonaj 2250 wrogów</string>
+    <string name="quest_combat_kills_10_name">Łowca Potworów X</string>
+    <string name="quest_combat_kills_10_objective">Pokonaj 3400 wrogów</string>
+    <string name="quest_combat_kills_11_name">Łowca Potworów XI</string>
+    <string name="quest_combat_kills_11_objective">Pokonaj 5100 wrogów</string>
+    <string name="quest_combat_kills_12_name">Łowca Potworów XII</string>
+    <string name="quest_combat_kills_12_objective">Pokonaj 7650 wrogów</string>
+
+    <!-- Nowe łańcuchy zadań łowcy potworów -->
+    <string name="quest_zombie_slayer_1_name">Pogromca Zombie I</string>
+    <string name="quest_zombie_slayer_1_objective">Pokonaj 35 Zombie</string>
+    <string name="quest_zombie_slayer_2_name">Pogromca Zombie II</string>
+    <string name="quest_zombie_slayer_2_objective">Pokonaj 70 Zombie</string>
+    <string name="quest_hellhound_slayer_1_name">Pogromca Piekielnych Psów I</string>
+    <string name="quest_hellhound_slayer_1_objective">Pokonaj 25 Piekielnych Psów</string>
+    <string name="quest_hellhound_slayer_2_name">Pogromca Piekielnych Psów II</string>
+    <string name="quest_hellhound_slayer_2_objective">Pokonaj 50 Piekielnych Psów</string>
+    <string name="quest_troll_slayer_1_name">Pogromca Trolli I</string>
+    <string name="quest_troll_slayer_1_objective">Pokonaj 20 Górskich Trolli</string>
+    <string name="quest_troll_slayer_2_name">Pogromca Trolli II</string>
+    <string name="quest_troll_slayer_2_objective">Pokonaj 40 Górskich Trolli</string>
+    <string name="quest_fire_giant_slayer_1_name">Pogromca Ognistych Olbrzymów I</string>
+    <string name="quest_fire_giant_slayer_1_objective">Pokonaj 15 Ognistych Olbrzymów</string>
+    <string name="quest_fire_giant_slayer_2_name">Pogromca Ognistych Olbrzymów II</string>
+    <string name="quest_fire_giant_slayer_2_objective">Pokonaj 30 Ognistych Olbrzymów</string>
+    <string name="quest_ancient_guardian_slayer_1_name">Pogromca Pradawnych Strażników I</string>
+    <string name="quest_ancient_guardian_slayer_1_objective">Pokonaj 10 Pradawnych Strażników</string>
+    <string name="quest_ancient_guardian_slayer_2_name">Pogromca Pradawnych Strażników II</string>
+    <string name="quest_ancient_guardian_slayer_2_objective">Pokonaj 20 Pradawnych Strażników</string>
+    <string name="quest_lich_slayer_1_name">Pogromca Liczów I</string>
+    <string name="quest_lich_slayer_1_objective">Pokonaj 10 Liczów</string>
+    <string name="quest_lich_slayer_2_name">Pogromca Liczów II</string>
+    <string name="quest_lich_slayer_2_objective">Pokonaj 20 Liczów</string>
+
+    <!-- Eksploracja lochów - rozszerzenie -->
+    <string name="quest_dungeon_imp_1_name">Odkrywca Lochów VII</string>
+    <string name="quest_dungeon_imp_1_objective">Ukończ Jaskinię Chochlików 5 razy</string>
+    <string name="quest_dungeon_infernal_1_name">Mistrz Lochów IV</string>
+    <string name="quest_dungeon_infernal_1_objective">Ukończ Piekielną Twierdzę 5 razy</string>
+    <string name="quest_dungeon_ancient_1_name">Mistrz Lochów V</string>
+    <string name="quest_dungeon_ancient_1_objective">Ukończ Pradawną Świątynię 5 razy</string>
+
+    <!-- Bossowie - rozszerzenie -->
+    <string name="quest_kbd_slayer_1_objective">Pokonaj Czarnego Króla Smoków</string>
+    <string name="quest_kbd_slayer_2_objective">Pokonaj Czarnego Króla Smoków 5 razy</string>
+    <string name="quest_kbd_slayer_3_objective">Pokonaj Czarnego Króla Smoków 25 razy</string>
+    <string name="quest_kbd_slayer_4_name">Pogromca Czarnego Króla Smoków IV</string>
+    <string name="quest_kbd_slayer_4_objective">Pokonaj Czarnego Króla Smoków 50 razy</string>
+    <string name="quest_demon_slayer_4_name">Pogromca Demonów IV</string>
+    <string name="quest_demon_slayer_4_objective">Pokonaj Władcę Demonów 50 razy</string>
+    <string name="quest_kraken_killer_1_name">Pogromca Krakena I</string>
+    <string name="quest_kraken_killer_1_objective">Pokonaj Krakena</string>
+    <string name="quest_kraken_killer_2_name">Pogromca Krakena II</string>
+    <string name="quest_kraken_killer_2_objective">Pokonaj Krakena 5 razy</string>
+    <string name="quest_kraken_killer_3_name">Pogromca Krakena III</string>
+    <string name="quest_kraken_killer_3_objective">Pokonaj Krakena 25 razy</string>
+    <string name="quest_kraken_killer_4_name">Pogromca Krakena IV</string>
+    <string name="quest_kraken_killer_4_objective">Pokonaj Krakena 50 razy</string>
+    <string name="quest_balrog_bane_1_name">Postrach Balroga I</string>
+    <string name="quest_balrog_bane_1_objective">Pokonaj Balroga</string>
+    <string name="quest_balrog_bane_2_name">Postrach Balroga II</string>
+    <string name="quest_balrog_bane_2_objective">Pokonaj Balroga 5 razy</string>
+    <string name="quest_balrog_bane_3_name">Postrach Balroga III</string>
+    <string name="quest_balrog_bane_3_objective">Pokonaj Balroga 25 razy</string>
+    <string name="quest_balrog_bane_4_name">Postrach Balroga IV</string>
+    <string name="quest_balrog_bane_4_objective">Pokonaj Balroga 50 razy</string>
+
+    <!-- Wyzwania stylu walki - rozszerzenie -->
+    <string name="quest_melee_warrior_4_name">Wojownik Walki Wręcz IV</string>
+    <string name="quest_melee_warrior_4_objective">Ukończ Twierdzę Orków, używając wyłącznie walki wręcz</string>
+    <string name="quest_melee_warrior_5_name">Wojownik Walki Wręcz V</string>
+    <string name="quest_melee_warrior_5_objective">Ukończ Legowisko Smoka, używając wyłącznie walki wręcz</string>
+    <string name="quest_ranger_elite_4_name">Elitarny Łucznik IV</string>
+    <string name="quest_ranger_elite_4_objective">Ukończ Twierdzę Orków, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_ranger_elite_5_name">Elitarny Łucznik V</string>
+    <string name="quest_ranger_elite_5_objective">Ukończ Legowisko Smoka, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_mage_master_4_name">Mistrz Magii IV</string>
+    <string name="quest_mage_master_4_objective">Ukończ Twierdzę Orków, używając wyłącznie magii</string>
+    <string name="quest_mage_master_5_name">Mistrz Magii V</string>
+    <string name="quest_mage_master_5_objective">Ukończ Legowisko Smoka, używając wyłącznie magii</string>
+
+    <!-- Żelazny Żołądek - rozszerzenie -->
+    <string name="quest_iron_stomach_5_name">Żelazny Żołądek V</string>
+    <string name="quest_iron_stomach_5_objective">Ukończ Piekielną Twierdzę bez użycia jedzenia</string>
+    <string name="quest_iron_stomach_6_name">Żelazny Żołądek VI</string>
+    <string name="quest_iron_stomach_6_objective">Ukończ Pradawną Świątynię bez użycia jedzenia</string>
+
+    <!-- Poszukiwacz Skarbów - rozszerzenie -->
+    <string name="quest_treasure_hunter_5_name">Poszukiwacz Skarbów V</string>
+    <string name="quest_treasure_hunter_5_objective">Zdobądź 10 Kłów Piekielnego Psa w walce</string>
+    <string name="quest_treasure_hunter_6_name">Poszukiwacz Skarbów VI</string>
+    <string name="quest_treasure_hunter_6_objective">Zdobądź 15 Kości Trolla w walce</string>
+
+    <!-- Czasowniki codziennych questów -->
+    <string name="daily_verb_mining">Wydobądź</string>
+    <string name="daily_verb_fishing">Złów</string>
+    <string name="daily_verb_woodcutting">Zetnij</string>
+    <string name="daily_verb_smithing">Przetop</string>
+    <string name="daily_verb_cooking">Ugotuj</string>
+    <string name="daily_verb_combat">Pokonaj</string>
+
+    <!-- Nazwy codziennych questów -->
+    <string name="quest_daily_mine_iron_name">Górnik Żelaza</string>
+    <string name="quest_daily_mine_coal_name">Transporter Węgla</string>
+    <string name="quest_daily_mine_mithril_name">Poszukiwacz Mithrilu</string>
+    <string name="quest_daily_mine_runite_name">Gorączka Runitu</string>
+    <string name="quest_daily_fish_salmon_name">Tarło Łososia</string>
+    <string name="quest_daily_fish_lobster_name">Połów Homarów</string>
+    <string name="quest_daily_fish_swordfish_name">Łowca Mieczników</string>
+    <string name="quest_daily_fish_shark_name">Poskramiacz Rekinów</string>
+    <string name="quest_daily_wc_oak_name">Rębacz Dębu</string>
+    <string name="quest_daily_wc_willow_name">Wierzbowy Drwal</string>
+    <string name="quest_daily_wc_yew_name">Drwal Cisowy</string>
+    <string name="quest_daily_wc_magic_name">Magiczny Drwal</string>
+    <string name="quest_daily_smith_iron_name">Kowal Żelaza</string>
+    <string name="quest_daily_smith_mithril_name">Kowal Mithrilu</string>
+    <string name="quest_daily_smith_adamantite_name">Rzemieślnik Adamantytu</string>
+    <string name="quest_daily_smith_runite_name">Hutnik Runitu</string>
+    <string name="quest_daily_cook_trout_name">Kucharz Pstrągów</string>
+    <string name="quest_daily_cook_salmon_name">Grillmistrz Łososia</string>
+    <string name="quest_daily_cook_lobster_name">Kucharz Homarów</string>
+    <string name="quest_daily_cook_swordfish_name">Kucharz Mieczników</string>
+    <string name="quest_daily_kill_goblin_name">Pogromca Goblinów</string>
+    <string name="quest_daily_kill_bandit_name">Postrach Bandytów</string>
+    <string name="quest_daily_kill_demon_name">Łowca Demonów</string>
+    <string name="quest_daily_kill_dragon_name">Pogromca Smoków</string>
+
+    <!-- Czasowniki celów questów dla umiejętności rzemieślniczych -->
+    <string name="daily_verb_crafting">Wykonaj</string>
+    <string name="daily_verb_firemaking">Spal</string>
+    <string name="daily_verb_fletching">Wykonaj</string>
+    <string name="daily_verb_herblore">Uwarz</string>
+    <string name="daily_verb_runecrafting">Stwórz</string>
+    <string name="daily_verb_prayer">Pochowaj</string>
+    <string name="daily_verb_construction">Zbuduj</string>
+    <string name="daily_verb_farming">Zbierz</string>
+
+    <!-- Formaty tekstów celów questów -->
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
+    <string name="quest_obj_prayer">Pochowaj %1$d kości dowolnego typu</string>
+    <string name="quest_obj_kill">Pokonaj %1$d wrogów</string>
+    <string name="quest_obj_kill_enemy">Pokonaj %1$d %2$s</string>
+    <string name="quest_obj_dungeon">Ukończ %1$s %2$d razy</string>
+    <string name="quest_obj_dungeon_once">Ukończ %1$s</string>
+    <string name="quest_obj_boss">Pokonaj %1$s %2$d razy</string>
+    <string name="quest_obj_boss_once">Pokonaj %1$s</string>
+    <string name="quest_obj_dungeon_melee_only">Ukończ %1$s, używając wyłącznie walki wręcz</string>
+    <string name="quest_obj_dungeon_ranged_only">Ukończ %1$s, używając wyłącznie ataków dystansowych</string>
+    <string name="quest_obj_dungeon_magic_only">Ukończ %1$s, używając wyłącznie magii</string>
+    <string name="quest_obj_dungeon_no_food">Ukończ %1$s bez użycia jedzenia</string>
+    <string name="quest_obj_collect">Zdobądź %1$d %2$s w walce</string>
+    <string name="quest_obj_slayer_task">Ukończ %1$d zadań pogromcy potworów</string>
+
+</resources>

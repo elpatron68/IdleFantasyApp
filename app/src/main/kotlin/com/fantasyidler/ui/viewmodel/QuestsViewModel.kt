@@ -17,6 +17,7 @@ import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.repository.WeeklyQuestWithProgress
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
+import com.fantasyidler.util.xpMultiplierBreakdown
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -185,6 +186,10 @@ class QuestsViewModel @Inject constructor(
             mapOf(quest.skill to rewards.xp.toLong())
         }
 
+        // Preview the ACTUAL XP that will be credited (boost/blessing/prestige) before crediting
+        // it, so the confirmation snackbar discloses the real total instead of the flat reward.
+        val breakdowns = xpPerSkill.mapValues { (skill, xp) -> playerRepo.previewFlatXpGrant(skill, xp) }
+
         playerRepo.applyMultiSkillResults(
             xpPerSkill  = xpPerSkill,
             itemsGained = rewards.items,
@@ -194,9 +199,12 @@ class QuestsViewModel @Inject constructor(
         val parts = buildList {
             if (rewards.xp > 0) {
                 if (quest.skill == "combat") {
-                    add("+${rewards.xp.toLong().formatXp()} combat XP (split across 7 skills)")
+                    val totalFinalXp = breakdowns.values.sumOf { it.finalXp }
+                    add("+${totalFinalXp.formatXp()} combat XP (split across 7 skills)")
                 } else {
-                    add("+${rewards.xp.toLong().formatXp()} XP")
+                    val b = breakdowns.getValue(quest.skill)
+                    val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
+                    add("+${b.finalXp.formatXp()} XP$suffix")
                 }
             }
             if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")

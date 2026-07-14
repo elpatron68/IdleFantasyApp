@@ -26,7 +26,8 @@ class WeeklyQuestRepository @Inject constructor(
     private val divineDropPool = listOf(
         "divine_sword", "divine_greatblade",
         "divine_helm", "divine_platebody", "divine_platelegs", "divine_shield", "divine_boots",
-        "divine_pickaxe", "divine_axe", "divine_fishing_rod",
+        "divine_pickaxe", "divine_axe", "divine_fishing_rod", "divine_hoe", "divine_hammer",
+        "divine_tinderbox", "divine_frying_pan", "divine_grappling_hook", "divine_lockpick",
     )
 
     /** Returns epoch ms of the next Monday 6am in local time after [fromMs]. */

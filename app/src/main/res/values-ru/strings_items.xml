@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Адамантитовая мотыга</string>
     <string name="item_runite_hoe_name">Рунитовая мотыга</string>
 
+    <!-- ===== Отмычки ===== -->
+    <string name="item_bronze_lockpick_name">Бронзовая отмычка</string>
+    <string name="item_iron_lockpick_name">Железная отмычка</string>
+    <string name="item_steel_lockpick_name">Стальная отмычка</string>
+    <string name="item_mithril_lockpick_name">Мифриловая отмычка</string>
+    <string name="item_adamantite_lockpick_name">Адамантитовая отмычка</string>
+    <string name="item_runite_lockpick_name">Рунитовая отмычка</string>
+    <string name="item_divine_hoe_name">Божественная мотыга</string>
+    <string name="item_dwarven_hammer_name">Гномий молот</string>
+    <string name="item_divine_hammer_name">Божественный молот</string>
+    <string name="item_dwarven_tinderbox_name">Гномье огниво</string>
+    <string name="item_divine_tinderbox_name">Божественное огниво</string>
+    <string name="item_dwarven_frying_pan_name">Гномья сковорода</string>
+    <string name="item_divine_frying_pan_name">Божественная сковорода</string>
+    <string name="item_shadow_grappling_hook_name">Теневой крюк-кошка</string>
+    <string name="item_dwarven_grappling_hook_name">Гномий крюк-кошка</string>
+    <string name="item_arcane_grappling_hook_name">Тайный крюк-кошка</string>
+    <string name="item_divine_grappling_hook_name">Божественный крюк-кошка</string>
+    <string name="item_rogues_lockpick_name">Разбойничья отмычка</string>
+    <string name="item_dwarven_lockpick_name">Гномья отмычка</string>
+    <string name="item_shadow_lockpick_name">Теневая отмычка</string>
+    <string name="item_divine_lockpick_name">Божественная отмычка</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Отвар атаки</string>
     <string name="item_defense_brew_name">Отвар защиты</string>

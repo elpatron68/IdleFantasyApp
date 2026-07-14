@@ -11,6 +11,7 @@
     {"enemy": "void_guardian", "weight": 3}
   ],
   "rare_drops": [
-    {"item": "arcane_staff", "chance": 0.002}
+    {"item": "arcane_staff", "chance": 0.002},
+    {"item": "arcane_grappling_hook", "chance": 0.002}
   ]
 }

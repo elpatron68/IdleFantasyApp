@@ -293,6 +293,8 @@
     <string name="settings_recent_activity_desc">Показывать кнопку «Последняя активность» на главном экране</string>
     <string name="settings_journal_button">Кнопка журнала</string>
     <string name="settings_journal_button_desc">Показывать плавающую кнопку журнала на главном экране для заметок</string>
+    <string name="settings_seasonal_events">Сезонные события</string>
+    <string name="settings_seasonal_events_desc">Показывать баннер активного сезонного события на главном экране</string>
     <string name="label_no_sessions_yet">Сессий ещё не завершено.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -419,7 +421,7 @@
     <string name="home_town_title">Город</string>
     <string name="home_town_desc">Посетите магазин, таверну, гильдию, церковь, мастерскую строителя, мастера охотника и ярмарку</string>
     <string name="guild_dailies_available">Ежедневные доступны</string>
-    <string name="guild_do_dailies_hint">Выполняйте ежедневные квесты для роста репутации</string>
+    <string name="guild_do_dailies_hint">Выполняйте ежедневные квесты, чтобы перейти на следующий ранг</string>
     <string name="guild_quest_gate_blocked">Завершите квесты для повышения ранга</string>
     <string name="guild_quest_required">Квест необходим для повышения</string>
     <string name="home_died_message">Вы погибли и потеряли большую часть добычи.</string>
@@ -637,6 +639,14 @@
     <string name="character_race_orc">Орк</string>
     <string name="character_race_halfling">Полурослик</string>
     <string name="character_race_gnome">Гном</string>
+    <string name="appearance_title">Настроить внешность</string>
+    <string name="appearance_skin_tone">Тон кожи</string>
+    <string name="appearance_eyes">Глаза</string>
+    <string name="appearance_hair_style">Причёска</string>
+    <string name="appearance_hair_color">Цвет волос</string>
+    <string name="appearance_beard">Борода</string>
+    <string name="appearance_beard_color">Цвет бороды</string>
+    <string name="appearance_save">Сохранить внешность</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Сессии</string>
@@ -786,7 +796,7 @@
 
     <!-- Guild Hall -->
     <string name="guild_hall_title">Зал гильдий</string>
-    <string name="guild_hall_desc">Вступайте в гильдии и получайте награды за репутацию</string>
+    <string name="guild_hall_desc">Вступайте в гильдии и выполняйте ежедневные поручения, чтобы повышать ранг</string>
     <string name="guild_hall_intro">Гильдии награждают за действия, которые вы уже выполняете. Завершайте квесты и ежедневные поручения, чтобы получать межнавыковые материалы, монеты и опыт — специалисты получат ресурсы даже от навыков, которые не тренируют.</string>
     <string name="guild_level_label">Уровень %1$d</string>
     <string name="guild_level_max">Уровень 10 (Макс.)</string>
@@ -794,7 +804,7 @@
     <string name="guild_tab_dailies">Ежедневные поручения</string>
     <string name="guild_daily_resets_in">Обновляется ежедневно в 6:00</string>
     <string name="guild_locked_hint">Требуется уровень гильдии %1$d</string>
-    <string name="guild_no_dailies">Завершайте квесты гильдии, чтобы зарабатывать репутацию и открывать ежедневные поручения.</string>
+    <string name="guild_no_dailies">Завершайте квесты гильдии, чтобы открывать ежедневные поручения.</string>
     <string name="guild_contribute_inventory">Передать из инвентаря (%1$d доступно)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s для %4$s.</string>
     <string name="guild_quest_desc_kill">Победить %1$d врагов в ближнем бою (%2$s).</string>
@@ -806,7 +816,7 @@
     <string name="guild_combat_melee">ближний бой</string>
     <string name="guild_combat_ranged">дальний бой</string>
     <string name="guild_combat_magic">магия</string>
-    <string name="guild_rep_label">%1$d / %2$d реп.</string>
+    <string name="guild_rep_label">%1$d / %2$d поручений</string>
     <string name="guild_quest_complete">Квест завершён: %1$s</string>
     <string name="guild_daily_complete">Награда за ежедневное поручение получена!</string>
     <string name="guild_name_mining">Гильдия рудокопов</string>
@@ -957,7 +967,7 @@
     <string name="slayer_already_owned">Уже приобретено.</string>
     <string name="slayer_purchased">Добавлено в инвентарь.</string>
     <string name="slayer_owned">Куплено</string>
-    <string name="slayer_lamp_purchased">Опыт добавлен в %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s опыта добавлено в %2$s!</string>
     <string name="slayer_lamp_pick_skill">Выберите навык</string>
     <string name="slayer_lamp_small">Лампа опыта (малая)</string>
     <string name="slayer_lamp_large">Лампа опыта (большая)</string>
@@ -1289,7 +1299,7 @@
     <string name="carnival_appraisal_wrong">Неверно! Более ценный предмет — %1$s.</string>
     <string name="carnival_redeemed">Обменяно: %1$s!</string>
     <string name="carnival_not_enough_tickets">Недостаточно билетов.</string>
-    <string name="carnival_lamp_redeemed">+%1$d ОП в %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s ОП в %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1344,6 +1354,8 @@
     <string name="home_not_enough_coins_repeat">Недостаточно монет для повтора %1$s.</string>
     <string name="home_not_enough_materials_repeat">Недостаточно материалов для повтора %1$s.</string>
     <string name="combat_start_failed">Не удалось запустить: %1$s</string>
+    <string name="skill_session_voided_prestige">Ваш уровень %1$s больше не соответствует требованию этой сессии (вероятно, из-за престижа) — награды были аннулированы, а использованные материалы возвращены.</string>
+    <string name="combat_session_voided_prestige">Ваш боевой уровень больше не соответствует требованию этой встречи (вероятно, из-за престижа) — награды были аннулированы.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1372,6 +1384,7 @@
     <string name="armory_stat_ranged_str">Дальняя сила</string>
     <string name="armory_stat_magic_atk">Магическая атака</string>
     <string name="armory_stat_magic_dmg">Магический урон</string>
+    <string name="armory_stat_attack_speed">Скорость атаки</string>
     <string name="armory_stat_cape">Бонус опыта</string>
     <string name="armory_stat_cape_yield">Бонус урожайности</string>
     <string name="armory_source_carnival">Магазин призов карнавала</string>
@@ -1549,6 +1562,8 @@
     <string name="settings_art_credits">Авторы графики</string>
     <string name="settings_credit_banners_title">Сезонные баннеры</string>
     <string name="settings_credit_banners_subtitle">Графика: Wenrexa</string>
+    <string name="settings_credit_skill_icons_title">Иконки навыков</string>
+    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
     <string name="title_seasonal_champion_of">Чемпион %1$s</string>
     <string name="title_seasonal_requirement">Завершите Сезонное событие %1$s</string>
     <string name="home_welcome_greeting">С возвращением,</string>

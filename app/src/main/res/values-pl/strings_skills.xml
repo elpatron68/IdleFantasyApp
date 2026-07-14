@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Skill names and descriptions ===== -->
+
+    <!-- Gathering skills -->
+    <string name="skill_mining_name">Górnictwo</string>
+    <string name="skill_mining_desc">Wydobywaj cenne rudy i klejnoty z ziemi.</string>
+    <string name="skill_fishing_name">Wędkarstwo</string>
+    <string name="skill_fishing_desc">Łów ryby i wodne skarby z wód.</string>
+    <string name="skill_woodcutting_name">Drwalstwo</string>
+    <string name="skill_woodcutting_desc">Ścinaj drzewa i zbieraj różne rodzaje drewna.</string>
+    <string name="skill_farming_name">Uprawa</string>
+    <string name="skill_farming_desc">Sadź i zbieraj plony ze swoich grządek uprawnych.</string>
+    <string name="skill_firemaking_name">Rozniecanie Ognia</string>
+    <string name="skill_firemaking_desc">Spalaj kłody z ekwipunku, aby zdobywać XP Rozniecania Ognia. Każda spalona kłoda daje też popiół, który można rozsypać w umiejętności Modlitwy dla dodatkowego XP Modlitwy.</string>
+    <string name="skill_agility_name">Zwinność</string>
+    <string name="skill_agility_desc">Trenuj Zwinność, aby skrócić czas sesji we wszystkich umiejętnościach. Poziom 99 skraca godzinę o 20 minut (60 min → 40 min), z płynną liniową redukcją wraz ze wzrostem poziomu.</string>
+
+    <!-- Crafting skills -->
+    <string name="skill_smithing_name">Kowalstwo</string>
+    <string name="skill_smithing_desc">Wytapiaj rudy w sztabki i wykuwaj potężny sprzęt metalowy.</string>
+    <string name="skill_cooking_name">Gotowanie</string>
+    <string name="skill_cooking_desc">Gotuj surowe składniki na jedzenie, które przywraca HP w walce.</string>
+    <string name="skill_fletching_name">Płatnerstwo</string>
+    <string name="skill_fletching_desc">Wytwarzaj łuki i strzały z kłód i elementów metalowych.</string>
+    <string name="skill_crafting_name">Rzemiosło</string>
+    <string name="skill_crafting_desc">Twórz biżuterię i inne wyroby z cennych materiałów.</string>
+    <string name="skill_runecrafting_name">Tworzenie Run</string>
+    <string name="skill_runecrafting_desc">Twórz magiczne runy z esencji run do wykorzystania w rzucaniu zaklęć.</string>
+    <string name="skill_herblore_name">Zielarstwo</string>
+    <string name="skill_herblore_desc">Warz mikstury z ziół uprawnych i składników z lochów, aby wzmocnić swoje statystyki bojowe.</string>
+
+    <!-- Combat skills -->
+    <string name="skill_attack_name">Atak</string>
+    <string name="skill_attack_desc">Zwiększa twoją celność w walce wręcz, podnosząc szansę na trafienie.</string>
+    <string name="skill_strength_name">Siła</string>
+    <string name="skill_strength_desc">Zwiększa maksymalne obrażenia zadawane w walce wręcz na trafienie.</string>
+    <string name="skill_defense_name">Obrona</string>
+    <string name="skill_defense_desc">Zmniejsza obrażenia otrzymywane z ataków wrogów.</string>
+    <string name="skill_ranged_name">Strzelec</string>
+    <string name="skill_ranged_desc">Atakuj wrogów z bezpiecznej odległości, używając łuku i strzał.</string>
+    <string name="skill_magic_name">Magia</string>
+    <string name="skill_magic_desc">Rzucaj potężne zaklęcia, używając run. Wyższe poziomy odblokowują silniejsze zaklęcia.</string>
+    <string name="skill_hitpoints_name">Punkty Życia</string>
+    <string name="skill_hitpoints_desc">Twoje całkowite zdrowie. Wyższe poziomy pozwalają przetrwać dłużej w walce.</string>
+    <string name="skill_prayer_name">Modlitwa</string>
+    <string name="skill_prayer_desc">Zakopuj kości zdobyte w walce, aby zdobywać XP Modlitwy. Wyższe poziomy zwiększają twój poziom bojowy.</string>
+
+    <!-- ===== Skill unlock sheet labels ===== -->
+    <string name="label_lv">Poz. %1$d</string>
+    <string name="skills_agility_course_detail">Poz. %1$d  •  %2$d XP/okrążenie</string>
+    <string name="label_hp_passive">Pasywne — zwiększa maks. HP</string>
+    <string name="label_hp_scales">Maks. HP rośnie z każdym poziomem</string>
+    <string name="label_hp_max">Maks. HP: %1$d</string>
+    <string name="label_xp_per_bone">%1$s (%2$d XP/kość)</string>
+    <string name="label_xp_per_kill">%1$s (%2$d XP/zabójstwo)</string>
+
+    <!-- ===== Agility course names and descriptions ===== -->
+    <string name="agility_beginner_course_name">Trasa dla Początkujących</string>
+    <string name="agility_beginner_course_desc">Prosty tor przeszkód dla tych, którzy dopiero zaczynają trening zwinności.</string>
+    <string name="agility_novice_course_name">Trasa dla Nowicjuszy</string>
+    <string name="agility_novice_course_desc">Nieco trudniejsza trasa z podstawowymi przeszkodami.</string>
+    <string name="agility_apprentice_course_name">Trasa dla Adeptów</string>
+    <string name="agility_apprentice_course_desc">Trasa średniozaawansowana wymagająca pewnej wprawy.</string>
+    <string name="agility_intermediate_course_name">Trasa Średniozaawansowana</string>
+    <string name="agility_intermediate_course_desc">Umiarkowanie trudna trasa z podchwytliwymi przeszkodami.</string>
+    <string name="agility_advanced_course_name">Trasa Zaawansowana</string>
+    <string name="agility_advanced_course_desc">Wymagająca trasa, która sprawdza twoją biegłość w zwinności.</string>
+    <string name="agility_expert_course_name">Trasa Ekspercka</string>
+    <string name="agility_expert_course_desc">Trasa na poziomie eksperckim z niebezpiecznymi przeszkodami.</string>
+    <string name="agility_elite_course_name">Trasa Elitarna</string>
+    <string name="agility_elite_course_desc">Tylko najbardziej zwinni mogą opanować tę elitarną trasę.</string>
+    <string name="agility_master_course_name">Trasa Mistrzowska</string>
+    <string name="agility_master_course_desc">Trasa na poziomie mistrzowskim z ekstremalnymi przeszkodami.</string>
+    <string name="agility_veteran_course_name">Trasa Weteranów</string>
+    <string name="agility_veteran_course_desc">Teren treningowy weteranów z bezlitosnymi wyzwaniami.</string>
+    <string name="agility_champion_course_name">Trasa Czempionów</string>
+    <string name="agility_champion_course_desc">Trasa na poziomie czempiona, która wystawia cię na granicę możliwości.</string>
+    <string name="agility_heroic_course_name">Trasa Heroiczna</string>
+    <string name="agility_heroic_course_desc">Heroiczna trasa, na którą odważą się wejść tylko najlepsi.</string>
+    <string name="agility_legendary_course_name">Trasa Legendarna</string>
+    <string name="agility_legendary_course_desc">Legendarna trasa, o której szeptem mówi się wśród elity zwinności.</string>
+    <string name="agility_mythic_course_name">Trasa Mityczna</string>
+    <string name="agility_mythic_course_desc">Mityczna trasa łamiąca prawa fizyki.</string>
+    <string name="agility_divine_course_name">Trasa Boska</string>
+    <string name="agility_divine_course_desc">Boska trasa błogosławiona przez bogów zwinności.</string>
+    <string name="agility_transcendent_course_name">Trasa Transcendentna</string>
+    <string name="agility_transcendent_course_desc">Ostateczny sprawdzian zwinności, wykraczający poza granice śmiertelników.</string>
+
+    <!-- ===== Session skill type labels ===== -->
+    <string name="skill_expedition_name">Wyprawa</string>
+    <string name="skill_boss_name">Boss</string>
+    <string name="skill_mercantile_name">Handel</string>
+</resources>

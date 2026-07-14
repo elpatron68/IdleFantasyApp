@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Level-up messages ===== -->
+    <!-- Translator note: %1$d = new level number, %2$s = skill display name -->
+    <string name="game_level_up">Awans! %1$s ma teraz poziom %2$d!</string>
+    <!-- Translator note: %1$s = skill display name, %2$d = new level number -->
+    <string name="game_level_up_short">%1$s → %2$d</string>
+    <string name="game_max_level">Osiągnięto maksymalny poziom!</string>
+
+    <!-- ===== Session result summaries ===== -->
+    <string name="game_session_results_title">Wyniki sesji</string>
+    <!-- Translator note: %1$s = skill display name -->
+    <string name="game_session_summary_header">Sesja %1$s zakończona</string>
+    <!-- Translator note: %1$s = formatted XP amount (e.g. "1,234") -->
+    <string name="game_session_xp_total">Zdobyto +%1$s XP</string>
+    <string name="game_session_no_items">Nie zebrano żadnych przedmiotów</string>
+    <string name="game_session_no_level_ups">Brak awansów poziomu w tej sesji</string>
+    <!-- Translator note: %1$d = number of level ups -->
+    <string name="game_session_level_up_count">%1$d awans poziomu!</string>
+
+    <!-- ===== Combat messages ===== -->
+    <!-- Translator note: %1$s = player or enemy name, %2$d = damage amount -->
+    <string name="game_combat_hit">%1$s zadaje %2$d obrażeń.</string>
+    <string name="game_combat_miss">%1$s chybia!</string>
+    <!-- Translator note: %1$s = enemy display name -->
+    <string name="game_combat_enemy_defeated">%1$s pokonany!</string>
+    <!-- Translator note: %1$d = HP restored -->
+    <string name="game_combat_food_eaten">Zjedzono jedzenie — przywrócono %1$d HP.</string>
+    <string name="game_combat_player_died">Zostałeś pokonany.</string>
+    <string name="game_dungeon_cleared">Loch oczyszczony!</string>
+    <!-- Translator note: %1$s = dungeon display name -->
+    <string name="game_dungeon_summary">%1$s ukończony.</string>
+
+    <!-- ===== Farming messages ===== -->
+    <!-- Translator note: %1$s = crop display name -->
+    <string name="game_farming_planted">%1$s zasadzono.</string>
+    <!-- Translator note: %1$s = crop display name, %2$d = yield quantity -->
+    <string name="game_farming_harvested">Zebrano %2$d %1$s.</string>
+    <string name="game_farming_all_harvested">Zebrano wszystkie gotowe grządki.</string>
+    <string name="game_farming_patch_cleared">Grządka oczyszczona.</string>
+    <string name="game_farming_not_ready">Ta uprawa nie jest jeszcze gotowa.</string>
+    <!-- Translator note: %1$s = crop display name, %2$s = time remaining -->
+    <string name="game_farming_ready_in">%1$s będzie gotowe za %2$s.</string>
+
+    <!-- ===== Crafting messages ===== -->
+    <!-- Translator note: %1$d = quantity crafted, %2$s = item display name -->
+    <string name="game_crafted">Wytworzono %1$d %2$s.</string>
+    <!-- Translator note: %1$s = item display name -->
+    <string name="game_missing_ingredient">Brakujący składnik: %1$s.</string>
+
+    <!-- ===== Shop messages ===== -->
+    <!-- Translator note: %1$d = quantity, %2$s = item display name, %3$d = total cost -->
+    <string name="game_shop_purchased">Kupiono %1$d %2$s za %3$d monet.</string>
+    <!-- Translator note: %1$d = quantity, %2$s = item display name, %3$d = coins received -->
+    <string name="game_shop_sold">Sprzedano %1$d %2$s za %3$d monet.</string>
+
+    <!-- ===== Prayer / burying ===== -->
+    <!-- Translator note: %1$s = bone display name, %2$s = formatted XP gained -->
+    <string name="game_bones_buried">Zakopano %1$s — +%2$s XP Modlitwy.</string>
+
+    <!-- ===== Quest messages ===== -->
+    <!-- Translator note: %1$s = quest display name -->
+    <string name="game_quest_started">Rozpoczęto zadanie: %1$s</string>
+    <string name="game_quest_completed">Zadanie ukończone: %1$s</string>
+    <string name="game_quest_abandoned">Zadanie porzucone.</string>
+    <!-- Translator note: %1$d = current progress, %2$d = target amount -->
+    <string name="game_quest_progress">Postęp: %1$d / %2$d</string>
+
+    <!-- ===== XP gain messages (shown in session frame log) ===== -->
+    <!-- Translator note: %1$s = formatted XP gained this minute -->
+    <string name="game_xp_gained">+%1$s XP</string>
+    <!-- Translator note: %1$s = item display name, %2$d = quantity -->
+    <string name="game_item_received">+%2$d %1$s</string>
+
+    <!-- ===== Arena messages ===== -->
+    <!-- Translator note: %1$s = opponent display name -->
+    <string name="game_arena_challenged">Wyzwanie od %1$s!</string>
+    <string name="game_arena_victory">Zwycięstwo!</string>
+    <string name="game_arena_defeat">Porażka.</string>
+    <!-- Translator note: %1$d = coins won -->
+    <string name="game_arena_coins_won">Wygrano %1$d monet.</string>
+
+    <!-- ===== Easter egg / dig ===== -->
+    <string name="game_dig_you_dig">Kopiesz w ziemi…</string>
+    <string name="game_dig_nothing">Nie znajdujesz nic poza ziemią.</string>
+    <!-- Translator note: %1$s = item display name -->
+    <string name="game_dig_found">Odkrywasz %1$s!</string>
+    <!-- Translator note: %1$d = current hole depth in metres -->
+    <string name="game_dig_depth">Dziura ma %1$d metrów głębokości.</string>
+    <string name="game_dig_cooldown">Dzisiaj już kopałeś. Wróć jutro.</string>
+
+    <!-- ===== Equipment slot names ===== -->
+    <string name="equip_slot_weapon_atk">Broń (Atak)</string>
+    <string name="equip_slot_weapon_str">Broń (Siła)</string>
+    <string name="equip_slot_weapon_ranged">Broń (Strzelec)</string>
+    <string name="equip_slot_weapon_magic">Broń (Magia)</string>
+    <string name="equip_slot_head">Głowa</string>
+    <string name="equip_slot_body">Ciało</string>
+    <string name="equip_slot_legs">Nogi</string>
+    <string name="equip_slot_boots">Buty</string>
+    <string name="equip_slot_cape">Peleryna</string>
+    <string name="equip_slot_ring">Pierścień</string>
+    <string name="equip_slot_necklace">Naszyjnik</string>
+    <string name="equip_slot_shield">Tarcza</string>
+    <string name="equip_slot_pickaxe">Kilof</string>
+    <string name="equip_slot_axe">Siekiera</string>
+    <string name="equip_slot_fishing_rod">Wędka</string>
+    <string name="equip_slot_hoe">Motyka</string>
+    <string name="equip_slot_frying_pan">Patelnia</string>
+    <string name="equip_slot_grappling_hook">Hak wspinaczkowy</string>
+    <string name="equip_slot_hammer">Młot</string>
+    <string name="equip_slot_tinderbox">Krzesiwo</string>
+    <string name="equip_slot_lockpick">Wytrych</string>
+</resources>

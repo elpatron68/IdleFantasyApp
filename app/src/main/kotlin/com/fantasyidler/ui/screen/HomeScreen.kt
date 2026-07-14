@@ -6,15 +6,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Person
@@ -25,7 +31,6 @@ import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.Celebration
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -228,7 +233,16 @@ fun HomeScreen(
                     if (summary.itemLines.isNotEmpty()) {
                         Spacer(Modifier.height(4.dp))
                         SummarySection(stringResource(R.string.home_loot))
-                        summary.itemLines.forEach { (item, qty) -> SummaryRow(item, qty) }
+                        summary.itemLines.forEach { (item, qty) ->
+                            val isRare = item in summary.rareItems
+                            SummaryRow(
+                                label = if (isRare) "🌟 $item" else item,
+                                value = qty,
+                                labelColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                                valueColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontWeight = if (isRare) FontWeight.Bold else FontWeight.Normal,
+                            )
+                        }
                     }
                     if (summary.coinsGained > 0) {
                         SummaryRow(stringResource(R.string.label_coins), "+${summary.coinsGained.formatCoins()}")
@@ -375,7 +389,16 @@ fun HomeScreen(
                     if (summary.itemLines.isNotEmpty()) {
                         Spacer(Modifier.height(4.dp))
                         SummarySection(stringResource(R.string.home_loot))
-                        summary.itemLines.forEach { (item, qty) -> SummaryRow(item, qty) }
+                        summary.itemLines.forEach { (item, qty) ->
+                            val isRare = item in summary.rareItems
+                            SummaryRow(
+                                label = if (isRare) "🌟 $item" else item,
+                                value = qty,
+                                labelColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                                valueColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontWeight = if (isRare) FontWeight.Bold else FontWeight.Normal,
+                            )
+                        }
                     }
                     if (summary.coinsGained > 0) {
                         SummaryRow(stringResource(R.string.label_coins), "+${summary.coinsGained.formatCoins()}")
@@ -485,13 +508,19 @@ fun HomeScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top), // Responsible for top bar padding
         topBar = {
             TopAppBar(
                 title   = { Text(stringResource(R.string.app_name)) },
                 actions = {
                     if (!state.isLoading && state.showRecentActivityLog) {
-                        TextButton(onClick = { showRecentLog = true }) {
-                            Text(stringResource(R.string.label_recent_activity))
+                        IconButton(onClick = { showRecentLog = true }) {
+                            Icon(Icons.Filled.History, contentDescription = stringResource(R.string.label_recent_activity))
+                        }
+                    }
+                    if (!state.isLoading && state.showJournalButton) {
+                        IconButton(onClick = viewModel::openJournal) {
+                            Icon(Icons.Filled.EditNote, contentDescription = stringResource(R.string.label_journal))
                         }
                     }
                     IconButton(onClick = onNavigateToSettings) {
@@ -501,13 +530,6 @@ fun HomeScreen(
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
-        floatingActionButton = {
-            if (!state.isLoading && state.showJournalButton) {
-                FloatingActionButton(onClick = viewModel::openJournal) {
-                    Icon(Icons.Filled.EditNote, contentDescription = stringResource(R.string.label_journal))
-                }
-            }
-        },
     ) { padding ->
         if (state.isLoading) {
             Column(
@@ -527,26 +549,41 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             // ── Greeting ────────────────────────────────────────────────
-            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text(
-                    text  = stringResource(R.string.home_welcome_greeting),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                val baseName = state.characterName.ifBlank { stringResource(R.string.home_adventurer) }
-                val titleName = state.titleName
-                Text(
-                    text       = if (titleName == null) stringResource(R.string.home_welcome_name, baseName) else baseName,
-                    style      = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                )
-                if (titleName != null) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
                     Text(
-                        text       = stringResource(R.string.home_welcome_title, titleName),
-                        style      = MaterialTheme.typography.titleLarge,
+                        text  = stringResource(R.string.home_welcome_greeting),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    val baseName = state.characterName.ifBlank { stringResource(R.string.home_adventurer) }
+                    val titleName = state.titleName
+                    Text(
+                        text       = if (titleName == null) stringResource(R.string.home_welcome_name, baseName) else baseName,
+                        style      = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                     )
+                    if (titleName != null) {
+                        Text(
+                            text       = stringResource(R.string.home_welcome_title, titleName),
+                            style      = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                 }
+                CharacterSprite(
+                    race       = state.characterRace.ifBlank { "human" },
+                    skinTone   = state.characterSkinTone,
+                    hairStyle  = state.characterHairStyle,
+                    hairColor  = state.characterHairColor,
+                    eyeStyle   = state.characterEyeStyle,
+                    beardStyle = state.characterBeardStyle,
+                    beardColor = state.characterBeardColor,
+                    modifier   = Modifier.height(100.dp).aspectRatio(64f / 36f),
+                )
             }
 
             // ── Stats card ──────────────────────────────────────────────
@@ -667,13 +704,14 @@ fun HomeScreen(
             }
 
             // ── Seasonal Event row ────────────────────────────────────────
-            state.activeSeasonalEvent?.let { event ->
+            if (state.showSeasonalEvents) state.activeSeasonalEvent?.let { event ->
                 val eventComplete = event.tokens >= event.goal
                 Surface(
                     shape    = RoundedCornerShape(16.dp),
                     color    = MaterialTheme.colorScheme.surfaceVariant,
-                    modifier = if (eventComplete) Modifier.fillMaxWidth()
-                               else Modifier.fillMaxWidth().clickable { onNavigateToSeasonalEvent() },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled  = !eventComplete,
+                    onClick  = onNavigateToSeasonalEvent,
                 ) {
                     Row(
                         modifier = Modifier.padding(12.dp),
@@ -780,6 +818,7 @@ fun HomeScreen(
                     skillXp             = state.skillXp,
                     activeSessionSkill  = state.activeSession?.skillName ?: "",
                     activeSessionXpGain = state.activeSessionXpGain,
+                    towerCurrentFloor   = state.towerCurrentFloor,
                     onRemove            = viewModel::removeFromQueue,
                     onMove              = viewModel::moveQueueItem,
                 )
@@ -847,7 +886,10 @@ private fun TownGridCard(
     iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     badgeCount: Int = 0,
 ) {
-    ElevatedCard(modifier = modifier.clickable { onClick() }) {
+    ElevatedCard(
+        modifier = modifier,
+        onClick = onClick
+    ) {
         Column(
             modifier            = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,

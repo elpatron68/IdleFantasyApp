@@ -13,6 +13,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toTitleCase
+import com.fantasyidler.util.xpMultiplierBreakdown
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,9 +32,8 @@ data class GuildDetailUiState(
     val isLoading: Boolean = true,
     val guildKey: String = "",
     val guildLevel: Int = 0,
-    val guildRep: Long = 0L,
-    val repInLevel: Long = 0L,
-    val repForLevel: Long = 1L,
+    val dailiesCompletedThisTier: Int = 0,
+    val dailiesRequiredThisTier: Int = 1,
     val quests: List<GuildQuestWithProgress> = emptyList(),
     val dailies: List<GuildDailyWithProgress> = emptyList(),
     val nextResetMs: Long = 0L,
@@ -74,10 +74,11 @@ class GuildDetailViewModel @Inject constructor(
 
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
-        val rep   = flags.guildReputation[guild] ?: 0L
         val completedQuestIds = progressList.filter { it.completed }.map { it.questId }.toSet()
-        val level = guildRepo.guildLevel(guild, rep, completedQuestIds)
-        val (repInLevel, repForLevel) = repProgressForLevel(rep, level)
+        val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds)
+        val dailiesCompletedThisTier = if (level >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size) 0
+            else flags.guildDailyTierCounts["$guild:$level"] ?: 0
+        val dailiesRequiredThisTier = GuildRepository.DAILIES_REQUIRED_PER_TIER.getOrElse(level) { 1 }
 
         val progressMap = progressList.associateBy { it.questId }
         val quests = gameData.guildQuests.values
@@ -103,9 +104,8 @@ class GuildDetailViewModel @Inject constructor(
             isLoading                 = false,
             guildKey                  = guild,
             guildLevel                = level,
-            guildRep                  = rep,
-            repInLevel                = repInLevel,
-            repForLevel               = repForLevel,
+            dailiesCompletedThisTier  = dailiesCompletedThisTier,
+            dailiesRequiredThisTier   = dailiesRequiredThisTier,
             quests                    = quests,
             dailies                   = dailies,
             allCurrentLevelQuestsDone = allCurrentLevelQuestsDone,
@@ -120,7 +120,12 @@ class GuildDetailViewModel @Inject constructor(
             when (val result = guildRepo.claimGuildQuestReward(questId)) {
                 is GuildQuestClaimResult.Success -> {
                     val rewards = result.rewards
+                    var xpSuffix = ""
+                    var finalXp = 0L
                     if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
+                        val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
+                        finalXp = b.finalXp
+                        xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                         playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
                     } else if (rewards.items.isNotEmpty()) {
                         playerRepo.addItems(rewards.items)
@@ -129,7 +134,7 @@ class GuildDetailViewModel @Inject constructor(
                     guildRepo.ensureGuildDailiesRefreshed()
                     val questName = gameData.guildQuests[questId]?.name ?: questId
                     val parts = buildList {
-                        if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
+                        if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
                         if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
                         rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
                     }
@@ -147,14 +152,19 @@ class GuildDetailViewModel @Inject constructor(
             val (newFlags, rewards) = guildRepo.claimGuildDaily(flags, templateId) ?: return@launch
             playerRepo.updateFlags(newFlags)
             playerRepo.recordWeeklyProgress("guild_daily", "any", 1)
+            var xpSuffix = ""
+            var finalXp = 0L
             if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
+                val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
+                finalXp = b.finalXp
+                xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                 playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
             } else if (rewards.items.isNotEmpty()) {
                 playerRepo.addItems(rewards.items)
             }
             if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
             val parts = buildList {
-                if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
+                if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
                 if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
                 rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
             }

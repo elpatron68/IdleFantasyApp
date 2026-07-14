@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Azada de Adamantita</string>
     <string name="item_runite_hoe_name">Azada de Runite</string>
 
+    <!-- ===== Lockpicks ===== -->
+    <string name="item_bronze_lockpick_name">Ganzúa de Bronce</string>
+    <string name="item_iron_lockpick_name">Ganzúa de Hierro</string>
+    <string name="item_steel_lockpick_name">Ganzúa de Acero</string>
+    <string name="item_mithril_lockpick_name">Ganzúa de Mithril</string>
+    <string name="item_adamantite_lockpick_name">Ganzúa de Adamantita</string>
+    <string name="item_runite_lockpick_name">Ganzúa de Runite</string>
+    <string name="item_divine_hoe_name">Azada Divina</string>
+    <string name="item_dwarven_hammer_name">Martillo Enano</string>
+    <string name="item_divine_hammer_name">Martillo Divino</string>
+    <string name="item_dwarven_tinderbox_name">Yesquero Enano</string>
+    <string name="item_divine_tinderbox_name">Yesquero Divino</string>
+    <string name="item_dwarven_frying_pan_name">Sartén Enana</string>
+    <string name="item_divine_frying_pan_name">Sartén Divina</string>
+    <string name="item_shadow_grappling_hook_name">Garfio de las Sombras</string>
+    <string name="item_dwarven_grappling_hook_name">Garfio de Escalada Enano</string>
+    <string name="item_arcane_grappling_hook_name">Garfio de Escalada Arcano</string>
+    <string name="item_divine_grappling_hook_name">Garfio de Escalada Divino</string>
+    <string name="item_rogues_lockpick_name">Ganzúa del Pícaro</string>
+    <string name="item_dwarven_lockpick_name">Ganzúa Enana</string>
+    <string name="item_shadow_lockpick_name">Ganzúa de las Sombras</string>
+    <string name="item_divine_lockpick_name">Ganzúa Divina</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Brebaje de Ataque</string>
     <string name="item_defense_brew_name">Brebaje de Defensa</string>

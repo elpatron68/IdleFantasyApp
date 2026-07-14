@@ -22,6 +22,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -79,6 +83,7 @@ fun SettingsScreen(
     val fontScale              by viewModel.fontScale.collectAsState()
     val showRecentActivityLog  by viewModel.showRecentActivityLog.collectAsState()
     val showJournalButton      by viewModel.showJournalButton.collectAsState()
+    val showSeasonalEvents     by viewModel.showSeasonalEvents.collectAsState()
     val profileLayout          by viewModel.profileLayout.collectAsState()
     val backupFolderUri  by viewModel.backupFolderUri.collectAsState()
     val backupFrequency  by viewModel.backupFrequency.collectAsState()
@@ -223,6 +228,7 @@ fun SettingsScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.settings_title)) },
@@ -242,8 +248,8 @@ fun SettingsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Appearance section
@@ -333,6 +339,16 @@ fun SettingsScreen(
                     Switch(
                         checked         = showJournalButton,
                         onCheckedChange = { viewModel.setShowJournalButton(it) },
+                    )
+                }
+            )
+            SettingsRow(
+                title    = stringResource(R.string.settings_seasonal_events),
+                subtitle = stringResource(R.string.settings_seasonal_events_desc),
+                trailing = {
+                    Switch(
+                        checked         = showSeasonalEvents,
+                        onCheckedChange = { viewModel.setShowSeasonalEvents(it) },
                     )
                 }
             )
@@ -601,6 +617,11 @@ fun SettingsScreen(
                     stringResource(R.string.settings_credit_banners_title),
                     stringResource(R.string.settings_credit_banners_subtitle),
                     "https://wenrexa.itch.io/banners-kingdoms",
+                ),
+                Triple(
+                    stringResource(R.string.settings_credit_skill_icons_title),
+                    stringResource(R.string.settings_credit_skill_icons_subtitle),
+                    "https://shikashipx.itch.io/shikashis-fantasy-icons-pack",
                 ),
             )
             artCredits.forEach { (title, subtitle, url) ->

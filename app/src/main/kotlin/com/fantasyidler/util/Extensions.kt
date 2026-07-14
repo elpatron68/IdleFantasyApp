@@ -7,6 +7,17 @@ fun Long.formatXp(): String = when {
     else               -> toString()
 }
 
+/** Parenthetical multiplier breakdown for a flat XP grant, e.g. "(50,000 × 2 × 1.28)", or null if no bonus applied. */
+fun xpMultiplierBreakdown(baseXp: Long, boostActive: Boolean, blessingMult: Float, prestigeLevel: Int = 0): String? {
+    if (!boostActive && blessingMult <= 1f && prestigeLevel <= 0) return null
+    val factors = buildList {
+        if (boostActive) add("2")
+        if (blessingMult > 1f) add("%.2f".format(blessingMult).trimEnd('0').trimEnd('.'))
+        if (prestigeLevel > 0) add("%.2f".format(1.0 + prestigeLevel * 0.10).trimEnd('0').trimEnd('.'))
+    }
+    return "(${baseXp.formatXp()} × ${factors.joinToString(" × ")})"
+}
+
 /** Format a coin amount with thousands separators. */
 fun Long.formatCoins(): String = when {
     this >= 1_000_000L -> "%.1fM".format(this / 1_000_000.0)

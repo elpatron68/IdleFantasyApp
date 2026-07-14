@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -65,6 +70,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -137,6 +143,7 @@ fun SkillsScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(title = { Text(stringResource(R.string.nav_skills)) })
         },
@@ -251,6 +258,7 @@ fun SkillActivitySheet(
                     currentXp         = state.skillXp[Skills.MINING] ?: 0L,
                     efficiency        = state.miningEfficiency,
                     xpBonusMult       = state.xpBonusMult,
+                    activeQuests      = state.activeQuests,
                     onSelect          = { oreKey -> viewModel.startMiningSession(oreKey) },
                 )
                 is SheetState.Woodcutting -> WoodcuttingSheet(
@@ -262,6 +270,7 @@ fun SkillActivitySheet(
                     currentXp         = state.skillXp[Skills.WOODCUTTING] ?: 0L,
                     efficiency        = state.woodcuttingEfficiency,
                     xpBonusMult       = state.xpBonusMult,
+                    activeQuests      = state.activeQuests,
                     onSelect          = { treeKey -> viewModel.startWoodcuttingSession(treeKey) },
                 )
                 is SheetState.Fishing -> FishingSheet(
@@ -273,6 +282,7 @@ fun SkillActivitySheet(
                     currentXp         = state.skillXp[Skills.FISHING] ?: 0L,
                     efficiency        = state.fishingEfficiency,
                     xpBonusMult       = state.xpBonusMult,
+                    activeQuests      = state.activeQuests,
                     onSelect          = { fishKey -> viewModel.startFishingSession(fishKey) },
                 )
                 is SheetState.Agility -> AgilitySheet(
@@ -283,6 +293,7 @@ fun SkillActivitySheet(
                     sessionDurationMs = state.sessionDurationMs,
                     currentXp         = state.skillXp[Skills.AGILITY] ?: 0L,
                     xpBonusMult       = state.xpBonusMult,
+                    activeQuests      = state.activeQuests,
                     onSelect          = { courseKey -> viewModel.startAgilitySession(courseKey) },
                 )
                 is SheetState.Firemaking -> FiremakingSheet(
@@ -293,9 +304,11 @@ fun SkillActivitySheet(
                     hasActiveSession  = state.anySessionActive,
                     isQueueFull       = state.queueSize >= state.maxQueueSize,
                     sessionDurationMs = state.sessionDurationMs,
+                    perLogMs          = state.firemakingPerLogMs,
                     onStart           = { logKey, qty -> viewModel.startFiremakingSession(logKey, qty) },
                     context           = context,
                     questFills        = sheet.questFills,
+                    activeQuests      = state.activeQuests,
                 )
                 is SheetState.Runecrafting -> RunecraftingSheet(
                     sheet             = sheet,
@@ -307,6 +320,7 @@ fun SkillActivitySheet(
                     onStart           = { runeKey, qty, ashKey -> viewModel.startRunecraftingSession(runeKey, qty, ashKey) },
                     currentXp         = state.skillXp[Skills.RUNECRAFTING] ?: 0L,
                     questFills        = sheet.questFills,
+                    activeQuests      = state.activeQuests,
                 )
                 is SheetState.Prayer -> PrayerSheet(
                     availableBones        = sheet.availableBones,
@@ -323,6 +337,7 @@ fun SkillActivitySheet(
                         onNavigateToBoneAltar()
                     },
                     questFills            = sheet.questFills,
+                    activeQuests          = state.activeQuests,
                 )
                 is SheetState.Crafting -> {
                     val craftState by craftingViewModel.uiState.collectAsState()
@@ -349,6 +364,7 @@ fun SkillActivitySheet(
                     isQueueFull       = state.queueSize >= state.maxQueueSize,
                     sessionDurationMs = state.sessionDurationMs,
                     context           = context,
+                    activeQuests      = state.activeQuests,
                     onSelect          = { npcKey -> viewModel.startThievingSession(npcKey) },
                 )
                 SheetState.Mercantile -> MercantileSheetContent(onDismiss = viewModel::dismissSheet)
@@ -613,7 +629,7 @@ internal fun SkillRow(
                 .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Emoji badge with level overlay
+            // Icon badge with level overlay
             Box(modifier = Modifier.size(44.dp)) {
                 Box(
                     modifier = Modifier
@@ -625,10 +641,19 @@ internal fun SkillRow(
                         ),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text(
-                        text  = emoji,
-                        style = MaterialTheme.typography.titleMedium,
-                    )
+                    val iconRes = GameStrings.skillIconRes(skillKey)
+                    if (iconRes != null) {
+                        Image(
+                            painter            = painterResource(iconRes),
+                            contentDescription = null,
+                            modifier           = Modifier.size(28.dp),
+                        )
+                    } else {
+                        Text(
+                            text  = emoji,
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                    }
                 }
                 Text(
                     text       = level.toString(),

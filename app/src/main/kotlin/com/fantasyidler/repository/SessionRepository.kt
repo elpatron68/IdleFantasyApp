@@ -126,7 +126,8 @@ class SessionRepository @Inject constructor(
         val durMin      = (gameData.bosses[session.activityKey]?.durationMinutes ?: 60).coerceAtLeast(1)
         val perFrameMs  = ((session.endsAt - session.startedAt) / durMin).coerceAtLeast(1L)
         val lastTicks   = frames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * 2_400L, perFrameMs) else perFrameMs
+        val tickMs      = if (lastTicks > 0) perFrameMs / lastTicks else 2_400L
+        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, perFrameMs) else perFrameMs
         minOf(session.endsAt, session.startedAt + (frames.size - 1).coerceAtLeast(0) * perFrameMs + lastFrameMs + 2_000L)
     } catch (_: Exception) { session.endsAt }
 

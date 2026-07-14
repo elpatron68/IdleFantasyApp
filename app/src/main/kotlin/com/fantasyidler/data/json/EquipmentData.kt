@@ -19,6 +19,7 @@ data class EquipmentData(
     @SerialName("magic_damage_bonus")     val magicDamageBonus: Int? = null,
     val requirements: Map<String, Int> = emptyMap(),
     @SerialName("infinite_runes")          val infiniteRunes: String? = null,
+    @SerialName("attack_speed")            val attackSpeed: Double? = null,
     // Gathering/skilling tool efficiency fields (null for combat gear)
     @SerialName("mining_efficiency")      val miningEfficiency: Float? = null,
     @SerialName("woodcutting_efficiency") val woodcuttingEfficiency: Float? = null,
@@ -28,6 +29,7 @@ data class EquipmentData(
     @SerialName("firemaking_efficiency")  val firemakingEfficiency: Float? = null,
     @SerialName("agility_efficiency")     val agilityEfficiency: Float? = null,
     @SerialName("cooking_efficiency")     val cookingEfficiency: Float? = null,
+    @SerialName("thieving_efficiency")    val thievingEfficiency: Float? = null,
     @SerialName("cape_skill")             val capeSkill: String? = null,
     @SerialName("cape_bonus")             val capeBonus: Float = 0f,
     @SerialName("two_handed")             val twoHanded: Boolean = false,

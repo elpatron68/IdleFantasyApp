@@ -1489,4 +1489,19 @@
     <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string>
     <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
     <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string>
+    <string name="armory_stat_attack_speed">Attack Speed</string>
+    <string name="skill_session_voided_prestige">Your %1$s level no longer meets this session\'s requirement (likely from prestiging) — its rewards were voided and any materials used were refunded.</string>
+    <string name="combat_session_voided_prestige">Your combat level no longer meets this encounter\'s requirement (likely from prestiging) — its rewards were voided.</string>
+    <string name="settings_seasonal_events">Seasonal Events</string>
+    <string name="settings_seasonal_events_desc">Show the active Seasonal Event banner on the home screen</string>
+    <string name="settings_credit_skill_icons_title">Skill Icons</string>
+    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+    <string name="appearance_title">Customise Appearance</string>
+    <string name="appearance_skin_tone">Skin Tone</string>
+    <string name="appearance_eyes">Eyes</string>
+    <string name="appearance_hair_style">Hair Style</string>
+    <string name="appearance_hair_color">Hair Colour</string>
+    <string name="appearance_beard">Beard</string>
+    <string name="appearance_beard_color">Beard Colour</string>
+    <string name="appearance_save">Save Appearance</string>
 </resources>

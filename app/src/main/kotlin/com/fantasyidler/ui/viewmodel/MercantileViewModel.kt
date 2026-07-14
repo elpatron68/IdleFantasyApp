@@ -3,16 +3,19 @@ package com.fantasyidler.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.TradeRouteData
+import com.fantasyidler.data.json.XpRange
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.simulator.MercantileSimulator
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.simulator.XpTable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -99,11 +102,24 @@ class MercantileViewModel @Inject constructor(
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
                     return@launch
                 }
+                val startXp = xp[Skills.MERCANTILE] ?: 0L
+                val currentLevel = XpTable.levelForXp(startXp)
+                val sortedKeys = route.xpRanges.keys.mapNotNull { it.toIntOrNull() }.sorted()
+                val matchedKey = sortedKeys.lastOrNull { it <= currentLevel } ?: sortedKeys.firstOrNull()
+                val xpRange = matchedKey?.let { route.xpRanges[it.toString()] } ?: XpRange(1, 1)
+
+                val expectedRawXp = (xpRange.min + xpRange.max) * 30L
+                val xpQueueMult = (if (mercFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(mercFlags)
+                val prestigeLevel = mercFlags.skillPrestige[Skills.MERCANTILE] ?: 0
+                val prestigeMult = 1.0 + prestigeLevel * 0.10
+                val estimatedXpGain = (expectedRawXp * xpQueueMult * prestigeMult).toLong()
+
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = Skills.MERCANTILE,
                         activityKey         = routeId,
                         skillDisplayName    = "Mercantile",
+                        estimatedXpGain     = estimatedXpGain,
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, mercFlags.skillPrestige[Skills.AGILITY] ?: 0),
                         coinRefund          = route.coinCost.toLong(),
                     )
@@ -129,7 +145,10 @@ class MercantileViewModel @Inject constructor(
                 }
 
                 val startXp = xp[Skills.MERCANTILE] ?: 0L
-                val result  = MercantileSimulator.simulate(route, startXp, agilityLevel)
+                val result  = MercantileSimulator.simulate(
+                    route, startXp, agilityLevel,
+                    agilityPrestige = mercFlags.skillPrestige[Skills.AGILITY] ?: 0,
+                )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
                     result.frames,

@@ -264,6 +264,8 @@
     <string name="settings_recent_activity_desc">Afficher le bouton Activité Récente dans l’en-tête de l’écran d’accueil</string>
     <string name="settings_journal_button">Bouton Journal</string>
     <string name="settings_journal_button_desc">Afficher un bouton flottant Journal sur l\'écran d\'accueil pour noter des notes</string>
+    <string name="settings_seasonal_events">Événements Saisonniers</string>
+    <string name="settings_seasonal_events_desc">Afficher la bannière de l\'événement saisonnier actif sur l\'écran d\'accueil</string>
     <string name="label_no_sessions_yet">Aucune session terminée pour l’instant.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -588,6 +590,14 @@
     <string name="character_race_orc">Orc</string>
     <string name="character_race_halfling">Halfelin</string>
     <string name="character_race_gnome">Gnome</string>
+    <string name="appearance_title">Personnaliser l\'apparence</string>
+    <string name="appearance_skin_tone">Teint de peau</string>
+    <string name="appearance_eyes">Yeux</string>
+    <string name="appearance_hair_style">Coiffure</string>
+    <string name="appearance_hair_color">Couleur de cheveux</string>
+    <string name="appearance_beard">Barbe</string>
+    <string name="appearance_beard_color">Couleur de barbe</string>
+    <string name="appearance_save">Enregistrer l\'apparence</string>
 
     <!-- Écran d'introduction -->
     <string name="onboarding_sessions_title">Sessions</string>
@@ -747,7 +757,7 @@
     <string name="inn_worker_tier">%1$s ouvrier</string>
     <string name="worker_skills_title_nav">Compétences de l’ouvrier</string>
     <string name="guild_hall_title">Salle de guilde</string>
-    <string name="guild_hall_desc">Guildes et récompenses de réputation</string>
+    <string name="guild_hall_desc">Rejoignez des guildes et complétez des quêtes quotidiennes pour progresser</string>
     <string name="guild_hall_intro">Les guildes vous récompensent pour les activités que vous faites déjà. Terminez des quêtes et des demandes quotidiennes pour gagner des matériaux multi-compétences, des pièces et des XP, afin que les spécialistes puissent toujours accéder aux ressources des compétences qu’ils ne pratiquent pas.</string>
     <string name="guild_level_label">Niveau %1$d</string>
     <string name="guild_level_max">Niveau 10 (Max)</string>
@@ -755,7 +765,7 @@
     <string name="guild_tab_dailies">Demandes quotidiennes</string>
     <string name="guild_daily_resets_in">Réinitialisé chaque jour à 6h</string>
     <string name="guild_locked_hint">Nécessite le niveau de guilde %1$d</string>
-    <string name="guild_no_dailies">Terminez des quêtes de guilde pour gagner de la réputation et débloquer les demandes quotidiennes.</string>
+    <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les demandes quotidiennes.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l’inventaire (%1$d disponible)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
@@ -767,7 +777,7 @@
     <string name="guild_combat_melee">mêlée</string>
     <string name="guild_combat_ranged">distance</string>
     <string name="guild_combat_magic">magique</string>
-    <string name="guild_rep_label">%1$d / %2$d de réputation</string>
+    <string name="guild_rep_label">%1$d / %2$d quêtes quotidiennes</string>
     <string name="guild_quest_complete">Quête terminée : %1$s</string>
     <string name="guild_daily_complete">Récompense quotidienne réclamée !</string>
     <string name="guild_name_mining">Guilde du Minage</string>
@@ -888,7 +898,7 @@
     <string name="home_town_title">Ville</string>
     <string name="home_town_desc">Visitez la boutique, l\'auberge, la guilde, l\'église, l\'atelier du constructeur, le maître chasseur et le carnaval</string>
     <string name="guild_dailies_available">Quêtes quotidiennes disponibles</string>
-    <string name="guild_do_dailies_hint">Faites des quêtes pour augmenter votre réputation</string>
+    <string name="guild_do_dailies_hint">Faites des quêtes quotidiennes pour progresser au rang suivant</string>
     <string name="guild_quest_gate_blocked">Accomplir des quêtes pour monter en grade</string>
     <string name="guild_quest_required">Quête nécessaire pour progresser</string>
     <string name="guild_name_thieving">Guilde des Voleurs</string>
@@ -931,7 +941,7 @@
     <string name="slayer_already_owned">Déjà possédé.</string>
     <string name="slayer_purchased">Ajouté à l’inventaire.</string>
     <string name="slayer_owned">Possédé</string>
-    <string name="slayer_lamp_purchased">XP ajouté à %1$s !</string>
+    <string name="slayer_lamp_purchased">+%1$s XP ajoutée à %2$s !</string>
     <string name="slayer_lamp_pick_skill">Choisissez une compétence</string>
     <string name="slayer_lamp_small">Lampe XP (Petite)</string>
     <string name="slayer_lamp_large">Lampe XP (Grande)</string>
@@ -1253,7 +1263,7 @@
     <string name="carnival_appraisal_wrong">Faux! L\'objet le plus précieux était %1$s.</string>
     <string name="carnival_redeemed">Échangé: %1$s!</string>
     <string name="carnival_not_enough_tickets">Pas assez de tickets.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP en %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP en %2$s!</string>
     <string name="carnival_shell_game">Choisis un gobelet</string>
     <string name="carnival_active_shell_desc">Regarde quel gobelet cache la gemme, puis choisis-le après le mélange !</string>
     <string name="carnival_shell_showing">Regarde bien — la pierre précieuse est sous le gobelet %1$d</string>
@@ -1308,6 +1318,8 @@
     <string name="home_not_enough_coins_repeat">Pas assez de pièces pour répéter %1$s.</string>
     <string name="home_not_enough_materials_repeat">Pas assez de matériaux pour répéter %1$s.</string>
     <string name="combat_start_failed">Impossible de démarrer: %1$s</string>
+    <string name="skill_session_voided_prestige">Votre niveau de %1$s ne correspond plus à l\'exigence de cette session (probablement à cause d\'un prestige) — ses récompenses ont été annulées et les matériaux utilisés ont été remboursés.</string>
+    <string name="combat_session_voided_prestige">Votre niveau de combat ne correspond plus à l\'exigence de cette rencontre (probablement à cause d\'un prestige) — ses récompenses ont été annulées.</string>
     <string name="combat_select_spell">Choisis un sort avant d\'entrer.</string>
     <string name="combat_spell_level_required">Besoin de %1$d magie pour %2$s.</string>
     <string name="guild_daily_reward_claimed">Récompense quotidienne récupérée !</string>
@@ -1336,6 +1348,7 @@
     <string name="armory_stat_ranged_str">Distance Force</string>
     <string name="armory_stat_magic_atk">Magique Attaque</string>
     <string name="armory_stat_magic_dmg">Magique Dommage</string>
+    <string name="armory_stat_attack_speed">Vitesse d\'attaque</string>
     <string name="armory_stat_cape">Expérience Bonus</string>
     <string name="armory_stat_cape_yield">Bonus de rendement</string>
     <string name="armory_source_carnival">Boutique des prix du carnaval</string>
@@ -1513,6 +1526,8 @@
     <string name="settings_art_credits">Crédits artistiques</string>
     <string name="settings_credit_banners_title">Bannières saisonnières</string>
     <string name="settings_credit_banners_subtitle">Illustrations de Wenrexa</string>
+    <string name="settings_credit_skill_icons_title">Icônes de Compétences</string>
+    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
     <string name="title_seasonal_champion_of">Champion de %1$s</string>
     <string name="title_seasonal_requirement">Terminez l\'Événement Saisonnier %1$s</string>
     <string name="home_welcome_greeting">Bon retour,</string>

@@ -124,7 +124,7 @@ class SeasonalEventRepository @Inject constructor(
         for (task in event.bountyTasks) {
             if (task.type != type) continue
             if (task.id !in activeTaskIds) continue
-            val count = counts[task.target] ?: continue
+            val count = (counts[task.target] ?: 0) + (counts["enhanced_${task.target}"] ?: 0)
             if (count <= 0) continue
             val cur = updated[task.id] ?: 0
             if (cur >= task.amount) continue

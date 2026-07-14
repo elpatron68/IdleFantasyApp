@@ -23,6 +23,18 @@ data class PlayerFlags(
     @SerialName("character_race") val characterRace: String = "",
     /** False until the player completes or skips the character setup prompt. */
     @SerialName("character_setup_done") val characterSetupDone: Boolean = false,
+    /** Skin tone index (1-9; valid range depends on race). */
+    @SerialName("character_skin_tone") val characterSkinTone: Int = 1,
+    /** Hair style index (1-10; 0 = bald/no hair). */
+    @SerialName("character_hair_style") val characterHairStyle: Int = 1,
+    /** Hair colour letter (a-k). */
+    @SerialName("character_hair_color") val characterHairColor: String = "a",
+    /** Eye style index (1-12). */
+    @SerialName("character_eye_style") val characterEyeStyle: Int = 1,
+    /** Beard style index (1-3; 0 = none). */
+    @SerialName("character_beard_style") val characterBeardStyle: Int = 0,
+    /** Beard colour letter (a-k). */
+    @SerialName("character_beard_color") val characterBeardColor: String = "a",
     /** Up to 3 queued sessions to auto-start after the current one completes. */
     @SerialName("session_queue") val sessionQueue: List<QueuedAction> = emptyList(),
     @SerialName("last_seen_version_code") val lastSeenVersionCode: Int = 0,
@@ -60,8 +72,12 @@ data class PlayerFlags(
     @SerialName("hide_completed_quests") val hideCompletedQuests: Boolean = false,
     /** Last-visited Carnival tab index (0=Idle, 1=Active, 2=Prize Shop). */
     @SerialName("carnival_tab") val carnivalTab: Int = 0,
-    /** Guild reputation totals: guild key → total rep earned (guild level is derived from this). */
+    /** Guild dailies completed this tier: "guild:tier" -> count (guild level is derived from this + step quests). */
+    @SerialName("guild_daily_tier_counts") val guildDailyTierCounts: Map<String, Int> = emptyMap(),
+    /** Legacy guild reputation totals, no longer written. Kept only so [GuildRepository.migrateLegacyGuildReputation] can back-fill [guildDailyTierCounts] once for existing saves without losing earned guild rank. */
     @SerialName("guild_reputation") val guildReputation: Map<String, Long> = emptyMap(),
+    /** Whether [GuildRepository.migrateLegacyGuildReputation] has already run for this save. */
+    @SerialName("guild_daily_migration_done") val guildDailyMigrationDone: Boolean = false,
     /** IDs of today's active guild daily request templates. */
     @SerialName("guild_daily_ids") val guildDailyIds: List<String> = emptyList(),
     /** Progress map: templateId → count accumulated today. */
@@ -98,6 +114,8 @@ data class PlayerFlags(
     @SerialName("show_recent_activity_log") val showRecentActivityLog: Boolean = true,
     /** Whether to show the Journal floating action button on the home screen. */
     @SerialName("show_journal_button") val showJournalButton: Boolean = true,
+    /** Whether to show the active Seasonal Event banner/card on the home screen. */
+    @SerialName("show_seasonal_events") val showSeasonalEvents: Boolean = true,
     /** Profile screen layout: "rail" (sidebar) or "tabs" (horizontal tab bar). */
     @SerialName("profile_layout") val profileLayout: String = "rail",
     /** Prestige level per skill: skill key → 0–3. */
@@ -390,11 +408,12 @@ object EquipSlot {
     const val TINDERBOX      = "tinderbox"
     const val GRAPPLING_HOOK = "grappling_hook"
     const val FRYING_PAN     = "frying_pan"
+    const val LOCKPICK       = "lockpick"
 
     val WEAPON_SLOTS = listOf(WEAPON_ATK, WEAPON_STR, WEAPON_RANGED, WEAPON_MAGIC)
     val ARMOR_SLOTS  = listOf(HEAD, BODY, LEGS, BOOTS, CAPE, RING, NECKLACE, SHIELD)
     val COMBAT_SLOTS = WEAPON_SLOTS + ARMOR_SLOTS
-    val TOOL_SLOTS   = listOf(PICKAXE, AXE, FISHING_ROD, HOE, HAMMER, TINDERBOX, GRAPPLING_HOOK, FRYING_PAN)
+    val TOOL_SLOTS   = listOf(PICKAXE, AXE, FISHING_ROD, HOE, HAMMER, TINDERBOX, GRAPPLING_HOOK, FRYING_PAN, LOCKPICK)
     val ALL          = COMBAT_SLOTS + TOOL_SLOTS
 
     /** Returns the combat style string that belongs in a given weapon slot, or null for non-weapon slots. */

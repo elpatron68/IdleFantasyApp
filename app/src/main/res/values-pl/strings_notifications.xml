@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== Notification channel metadata ===== -->
+    <string name="notif_channel_sessions_name">Powiadomienia o sesjach</string>
+    <string name="notif_channel_sessions_desc">Powiadomienia o zakończeniu sesji treningu umiejętności</string>
+    <string name="notif_channel_farming_name">Powiadomienia o uprawach</string>
+    <string name="notif_channel_farming_desc">Powiadomienia, gdy uprawy są gotowe do zebrania</string>
+
+    <!-- ===== Session complete ===== -->
+    <string name="notif_session_complete_title">Sesja zakończona!</string>
+    <!-- Translator note: %1$s = localised skill name (e.g. "Mining") -->
+    <string name="notif_session_complete_body">Twoja sesja umiejętności %1$s dobiegła końca. Dotknij, aby odebrać nagrody.</string>
+
+    <!-- ===== Buff alerts ===== -->
+    <string name="notif_channel_buffs_name">Powiadomienia o wzmocnieniach</string>
+    <string name="notif_channel_buffs_desc">Powiadomienia o wygaśnięciu aktywnych wzmocnień</string>
+    <string name="notif_xp_boost_expired_title">Wzmocnienie XP wygasło</string>
+    <string name="notif_xp_boost_expired_body">Twoje wzmocnienie 2x XP się skończyło. Odwiedź targowisko, aby je odnowić.</string>
+    <string name="notif_blessing_expired_title">Błogosławieństwo wygasło</string>
+    <string name="notif_blessing_expired_body">Błogosławieństwo kościoła zanikło. Odwiedź kościół, aby je odnowić.</string>
+
+    <!-- ===== Farming ready ===== -->
+    <string name="notif_farming_ready_title">Uprawy gotowe!</string>
+    <!-- Translator note: %1$s = localised crop name (e.g. "Wheat"). Adjust grammar as needed for your language. -->
+    <string name="notif_farming_ready_body">Twoja uprawa: %1$s jest gotowa do zebrania.</string>
+    <!-- Plural variant used when multiple patches are ready -->
+    <!-- Translator note: %1$d = number of patches ready -->
+    <string name="notif_farming_ready_body_multi">%1$d grządek jest gotowych do zebrania.</string>
+</resources>

@@ -630,6 +630,7 @@
     "display_name": "Oak Shortbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 2.0,
     "description": "A shortbow crafted from oak logs.",
     "attack_bonus": 14,
     "strength_bonus": 0,
@@ -644,6 +645,7 @@
     "display_name": "Willow Shortbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 2.0,
     "description": "A shortbow crafted from willow logs.",
     "attack_bonus": 20,
     "strength_bonus": 0,
@@ -658,6 +660,7 @@
     "display_name": "Maple Shortbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 2.0,
     "description": "A shortbow crafted from maple logs.",
     "attack_bonus": 29,
     "strength_bonus": 0,
@@ -672,6 +675,7 @@
     "display_name": "Yew Shortbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 1.5,
     "description": "A shortbow crafted from yew logs.",
     "attack_bonus": 47,
     "strength_bonus": 0,
@@ -686,6 +690,7 @@
     "display_name": "Magic Shortbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 1.5,
     "description": "A shortbow crafted from magic logs.",
     "attack_bonus": 69,
     "strength_bonus": 0,
@@ -700,6 +705,7 @@
     "display_name": "Yew Longbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 2.0,
     "description": "A longbow crafted from yew logs.",
     "attack_bonus": 58,
     "strength_bonus": 0,
@@ -714,6 +720,7 @@
     "display_name": "Magic Longbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 2.0,
     "description": "A longbow crafted from magic logs.",
     "attack_bonus": 80,
     "strength_bonus": 0,
@@ -1499,6 +1506,34 @@
       "smithing": 85
     }
   },
+  "dwarven_hammer": {
+    "name": "dwarven_hammer",
+    "display_name": "Dwarven Hammer",
+    "slot": "hammer",
+    "combat_style": null,
+    "description": "A dwarven-forged hammer. Strikes true every time.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "smithing_efficiency": 2.5,
+    "requirements": {
+      "smithing": 60
+    }
+  },
+  "divine_hammer": {
+    "name": "divine_hammer",
+    "display_name": "Divine Hammer",
+    "slot": "hammer",
+    "combat_style": null,
+    "description": "A hammer touched by divine light. Metal bends to its will.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "smithing_efficiency": 3.0,
+    "requirements": {
+      "smithing": 85
+    }
+  },
   "bronze_tinderbox": {
     "name": "bronze_tinderbox",
     "display_name": "Bronze Tinderbox",
@@ -1579,6 +1614,34 @@
     "strength_bonus": 0,
     "defense_bonus": 0,
     "firemaking_efficiency": 2.25,
+    "requirements": {
+      "firemaking": 85
+    }
+  },
+  "dwarven_tinderbox": {
+    "name": "dwarven_tinderbox",
+    "display_name": "Dwarven Tinderbox",
+    "slot": "tinderbox",
+    "combat_style": null,
+    "description": "A dwarven-forged tinderbox. Sparks a roaring flame instantly.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "firemaking_efficiency": 2.5,
+    "requirements": {
+      "firemaking": 60
+    }
+  },
+  "divine_tinderbox": {
+    "name": "divine_tinderbox",
+    "display_name": "Divine Tinderbox",
+    "slot": "tinderbox",
+    "combat_style": null,
+    "description": "A tinderbox touched by divine light. Kindles flame from the faintest spark.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "firemaking_efficiency": 3.0,
     "requirements": {
       "firemaking": 85
     }
@@ -1667,6 +1730,62 @@
       "agility": 85
     }
   },
+  "shadow_grappling_hook": {
+    "name": "shadow_grappling_hook",
+    "display_name": "Shadow Grappling Hook",
+    "slot": "grappling_hook",
+    "combat_style": null,
+    "description": "A grappling hook woven from shadow. Grips even where there's nothing to grip.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "agility_efficiency": 2.5,
+    "requirements": {
+      "agility": 40
+    }
+  },
+  "dwarven_grappling_hook": {
+    "name": "dwarven_grappling_hook",
+    "display_name": "Dwarven Grappling Hook",
+    "slot": "grappling_hook",
+    "combat_style": null,
+    "description": "A dwarven-forged grappling hook. Never slips.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "agility_efficiency": 2.75,
+    "requirements": {
+      "agility": 60
+    }
+  },
+  "arcane_grappling_hook": {
+    "name": "arcane_grappling_hook",
+    "display_name": "Arcane Grappling Hook",
+    "slot": "grappling_hook",
+    "combat_style": null,
+    "description": "A grappling hook humming with arcane energy. Pulls you across gaps in an instant.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "agility_efficiency": 3.0,
+    "requirements": {
+      "agility": 70
+    }
+  },
+  "divine_grappling_hook": {
+    "name": "divine_grappling_hook",
+    "display_name": "Divine Grappling Hook",
+    "slot": "grappling_hook",
+    "combat_style": null,
+    "description": "A grappling hook touched by divine light. Finds purchase anywhere it's thrown.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "agility_efficiency": 3.5,
+    "requirements": {
+      "agility": 85
+    }
+  },
   "bronze_frying_pan": {
     "name": "bronze_frying_pan",
     "display_name": "Bronze Frying Pan",
@@ -1747,6 +1866,34 @@
     "strength_bonus": 0,
     "defense_bonus": 0,
     "cooking_efficiency": 2.25,
+    "requirements": {
+      "cooking": 85
+    }
+  },
+  "dwarven_frying_pan": {
+    "name": "dwarven_frying_pan",
+    "display_name": "Dwarven Frying Pan",
+    "slot": "frying_pan",
+    "combat_style": null,
+    "description": "A dwarven-forged frying pan. Cooks food to perfection every time.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "cooking_efficiency": 2.5,
+    "requirements": {
+      "cooking": 60
+    }
+  },
+  "divine_frying_pan": {
+    "name": "divine_frying_pan",
+    "display_name": "Divine Frying Pan",
+    "slot": "frying_pan",
+    "combat_style": null,
+    "description": "A frying pan touched by divine light. Never burns a single meal.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "cooking_efficiency": 3.0,
     "requirements": {
       "cooking": 85
     }
@@ -2310,6 +2457,7 @@
     "display_name": "Staff of Earth",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 2.0,
     "description": "A staff infused with earth runes. Provides infinite earth runes.",
     "attack_bonus": 10,
     "strength_bonus": 0,
@@ -2326,6 +2474,7 @@
     "display_name": "Staff of Fire",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 2.0,
     "description": "A staff infused with fire runes. Provides infinite fire runes.",
     "attack_bonus": 14,
     "strength_bonus": 0,
@@ -2342,6 +2491,7 @@
     "display_name": "Staff of Mind",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 2.0,
     "description": "A staff infused with mind runes. Provides infinite mind runes.",
     "attack_bonus": 19,
     "strength_bonus": 0,
@@ -2358,6 +2508,7 @@
     "display_name": "Staff of Chaos",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 2.0,
     "description": "A staff infused with chaos runes. Provides infinite chaos runes.",
     "attack_bonus": 25,
     "strength_bonus": 0,
@@ -2374,6 +2525,7 @@
     "display_name": "Staff of Death",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 2.0,
     "description": "A staff infused with death runes. Provides infinite death runes.",
     "attack_bonus": 32,
     "strength_bonus": 0,
@@ -2390,6 +2542,7 @@
     "display_name": "Staff of Blood",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 1.5,
     "description": "A staff infused with blood runes. Provides infinite blood runes.",
     "attack_bonus": 40,
     "strength_bonus": 0,
@@ -2542,7 +2695,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "fishing_efficiency": 3.0,
+    "fishing_efficiency": 2.75,
     "requirements": {
       "fishing": 60
     }
@@ -3075,6 +3228,20 @@
       "farming": 65
     }
   },
+  "divine_hoe": {
+    "name": "divine_hoe",
+    "display_name": "Divine Hoe",
+    "slot": "hoe",
+    "combat_style": null,
+    "description": "A hoe blessed by divine light. Crops flourish at its touch.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "farming_efficiency": 1.0,
+    "requirements": {
+      "farming": 85
+    }
+  },
   "deep_iron_pickaxe": {
     "name": "deep_iron_pickaxe",
     "display_name": "Deep Iron Pickaxe",
@@ -3112,7 +3279,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "fishing_efficiency": 2.6,
+    "fishing_efficiency": 2.5,
     "requirements": {
       "fishing": 40
     }
@@ -3126,7 +3293,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "fishing_efficiency": 3.5,
+    "fishing_efficiency": 3.25,
     "requirements": {
       "fishing": 70
     }
@@ -3445,6 +3612,7 @@
     "display_name": "Arcane Staff",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 1.5,
     "description": "A staff recovered from the Arcane Ruins, still humming with contained magical energy from the catastrophe that destroyed the spire above.",
     "attack_bonus": 38,
     "strength_bonus": 0,
@@ -3460,6 +3628,7 @@
     "display_name": "Hellfire Staff",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 1.5,
     "description": "A staff wreathed in demonic flame, torn from the Demon Lord's grasp.",
     "attack_bonus": 48,
     "strength_bonus": 0,
@@ -3475,6 +3644,7 @@
     "display_name": "Trident of the Seas",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 1.5,
     "description": "A fearsome trident imbued with the power of the deep, taken from the Kraken's lair.",
     "attack_bonus": 55,
     "strength_bonus": 0,
@@ -3851,7 +4021,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "mining_efficiency": 3.25,
+    "mining_efficiency": 3.5,
     "requirements": {
       "mining": 85
     }
@@ -3865,7 +4035,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "woodcutting_efficiency": 3.25,
+    "woodcutting_efficiency": 3.5,
     "requirements": {
       "woodcutting": 85
     }
@@ -4024,6 +4194,7 @@
     "display_name": "Tower Crossbow",
     "slot": "weapon",
     "combat_style": "ranged",
+    "attack_speed": 1.5,
     "description": "A precision crossbow wrought from tower metal.",
     "attack_bonus": 0,
     "strength_bonus": 0,
@@ -4055,6 +4226,7 @@
     "display_name": "Void Staff",
     "slot": "weapon",
     "combat_style": "magic",
+    "attack_speed": 1.5,
     "description": "A staff of pure void energy. Grants infinite runes for all spells.",
     "attack_bonus": 0,
     "strength_bonus": 0,
@@ -4064,6 +4236,146 @@
     "infinite_runes": "all",
     "requirements": {
       "magic": 75
+    }
+  },
+  "bronze_lockpick": {
+    "name": "bronze_lockpick",
+    "display_name": "Bronze Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A basic bronze lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 1.0,
+    "requirements": {
+      "thieving": 1
+    }
+  },
+  "iron_lockpick": {
+    "name": "iron_lockpick",
+    "display_name": "Iron Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "An iron lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 1.25,
+    "requirements": {
+      "thieving": 15
+    }
+  },
+  "steel_lockpick": {
+    "name": "steel_lockpick",
+    "display_name": "Steel Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A steel lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 1.5,
+    "requirements": {
+      "thieving": 30
+    }
+  },
+  "mithril_lockpick": {
+    "name": "mithril_lockpick",
+    "display_name": "Mithril Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A mithril lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 1.75,
+    "requirements": {
+      "thieving": 55
+    }
+  },
+  "adamantite_lockpick": {
+    "name": "adamantite_lockpick",
+    "display_name": "Adamantite Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "An adamantite lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 2.0,
+    "requirements": {
+      "thieving": 70
+    }
+  },
+  "runite_lockpick": {
+    "name": "runite_lockpick",
+    "display_name": "Runite Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A runite lockpick for thieving.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 2.25,
+    "requirements": {
+      "thieving": 85
+    }
+  },
+  "rogues_lockpick": {
+    "name": "rogues_lockpick",
+    "display_name": "Rogue's Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A well-worn lockpick favored by the guild's rogues. Slips into any lock.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 2.5,
+    "requirements": {
+      "thieving": 40
+    }
+  },
+  "dwarven_lockpick": {
+    "name": "dwarven_lockpick",
+    "display_name": "Dwarven Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A dwarven-forged lockpick. Finds the tumblers instantly.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 2.75,
+    "requirements": {
+      "thieving": 60
+    }
+  },
+  "shadow_lockpick": {
+    "name": "shadow_lockpick",
+    "display_name": "Shadow Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A lockpick forged from shadow. No lock can resist it for long.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 3.0,
+    "requirements": {
+      "thieving": 70
+    }
+  },
+  "divine_lockpick": {
+    "name": "divine_lockpick",
+    "display_name": "Divine Lockpick",
+    "slot": "lockpick",
+    "combat_style": null,
+    "description": "A lockpick touched by divine light. Every lock yields to it.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 0,
+    "thieving_efficiency": 3.5,
+    "requirements": {
+      "thieving": 85
     }
   }
 }

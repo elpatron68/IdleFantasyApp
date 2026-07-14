@@ -6,10 +6,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -95,6 +99,7 @@ fun GuildHallScreen(
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.guild_hall_title)) },
@@ -198,13 +203,13 @@ private fun GuildCard(
             if (summary.level < 10) {
                 Spacer(Modifier.height(6.dp))
                 LinearProgressIndicator(
-                    progress = { (summary.repInLevel.toFloat() / summary.repForLevel.toFloat()).coerceIn(0f, 1f) },
+                    progress = { (summary.dailiesCompletedThisTier.toFloat() / summary.dailiesRequiredThisTier.toFloat()).coerceIn(0f, 1f) },
                     modifier = Modifier.fillMaxWidth(),
                     color    = GoldPrimary,
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text  = stringResource(R.string.guild_rep_label, summary.repInLevel, summary.repForLevel),
+                    text  = stringResource(R.string.guild_rep_label, summary.dailiesCompletedThisTier, summary.dailiesRequiredThisTier),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

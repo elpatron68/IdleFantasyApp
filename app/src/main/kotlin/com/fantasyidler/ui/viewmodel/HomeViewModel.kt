@@ -28,6 +28,7 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.simulator.SkillSimulator
 import kotlin.math.roundToInt
+import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toTitleCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -100,6 +101,7 @@ data class SessionSummary(
     val noteLines: List<String> = emptyList(),
     /** Expedition: set when this collect triggered a new combat dungeon unlock. */
     val unlockMessage: String? = null,
+    val rareItems: Set<String> = emptySet(),
 )
 
 data class HomeUiState(
@@ -115,11 +117,20 @@ data class HomeUiState(
     val sessionSummary: SessionSummary? = null,
     val characterSetupDone: Boolean = false,
     val characterName: String = "",
+    val characterRace: String = "",
+    val characterSkinTone: Int = 1,
+    val characterHairStyle: Int = 1,
+    val characterHairColor: String = "a",
+    val characterEyeStyle: Int = 1,
+    val characterBeardStyle: Int = 0,
+    val characterBeardColor: String = "a",
     val equippedTitle: String? = null,
     /** Resolved, localized title name (e.g. "Master Smith"), or null if none equipped. */
     val titleName: String? = null,
     val sessionQueue: List<QueuedAction> = emptyList(),
     val maxQueueSize: Int = 3,
+    /** Highest Tower floor already cleared; used to preview upcoming queued floor numbers live. */
+    val towerCurrentFloor: Int = 0,
     val showWhatsNew: Boolean = false,
     /** Epoch ms when the last queued task will finish; 0 if queue is empty. */
     val queueEndsAt: Long = 0L,
@@ -138,6 +149,7 @@ data class HomeUiState(
     val recentSessions: List<com.fantasyidler.data.model.RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
     val showJournalButton: Boolean = true,
+    val showSeasonalEvents: Boolean = true,
     val playerNotes: String = "",
     val journalSheetOpen: Boolean = false,
     /** Total claimable guild quests + dailies across all guilds. Drives the badge on the town menu button. */
@@ -177,6 +189,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { sessionRepo.recoverActiveWorkerSession(2, workerStarter) }
         viewModelScope.launch { playerRepo.awardMissingCapes() }
         viewModelScope.launch { playerRepo.migratePetsFromInventory(gameData.pets.keys) }
+        viewModelScope.launch { guildRepo.migrateLegacyGuildReputation() }
         // AlarmManager delivery can be deferred by Doze for hours (issue 517: overnight
         // sessions frozen until their late alarms fire). While the app is open this
         // ticker completes overdue sessions and workers within a second.
@@ -219,17 +232,24 @@ class HomeViewModel @Inject constructor(
         else {
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
             val sessionMs       = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)
             val perItemMs    = sessionMs / 60
             val queueStart   = session?.endsAt ?: System.currentTimeMillis()
+            // Recomputed live from current agility/gear rather than the frozen value stored at
+            // queue time, so the countdown reacts to level-ups and tool swaps (issues #938, #940).
+            // Boss fights alone use a fixed wall-clock duration unrelated to agility or gear.
             val queueEndsAt  = if (flags.sessionQueue.isEmpty()) 0L
                                else queueStart + flags.sessionQueue.sumOf {
                                    when {
-                                       it.estimatedDurationMs > 0 -> it.estimatedDurationMs
-                                       it.qty > 0                 -> it.qty.toLong() * perItemMs
-                                       else                       -> sessionMs
+                                       it.skillName == "boss" -> it.estimatedDurationMs
+                                       it.qty > 0 -> {
+                                           val eff = gameData.craftDurationEfficiency(it.skillName, it.activityKey, equipped)
+                                           it.qty.toLong() * (perItemMs / eff).toLong()
+                                       }
+                                       else -> sessionMs
                                    }
                                }
             val innXpMult = townRepo.workerXpMultiplier(flags)
@@ -248,8 +268,7 @@ class HomeViewModel @Inject constructor(
             val progressMap      = guildProgress.associateBy { it.questId }
             val completedQuestIds = guildProgress.filter { it.completed }.map { it.questId }.toSet()
             val guildClaimableCount = GuildRepository.ALL_GUILDS.sumOf { guild ->
-                val rep   = flags.guildReputation[guild] ?: 0L
-                val level = guildRepo.guildLevel(guild, rep, completedQuestIds)
+                val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds)
                 val claimableQuests = gameData.guildQuests.values
                     .filter { it.guild == guild && level >= it.guildLevelRequired }
                     .count { quest ->
@@ -277,12 +296,20 @@ class HomeViewModel @Inject constructor(
                 pendingCollectCount = completedCount,
                 characterSetupDone  = flags.characterSetupDone,
                 characterName       = flags.characterName,
+                characterRace       = flags.characterRace,
+                characterSkinTone   = flags.characterSkinTone,
+                characterHairStyle  = flags.characterHairStyle,
+                characterHairColor  = flags.characterHairColor,
+                characterEyeStyle   = flags.characterEyeStyle,
+                characterBeardStyle = flags.characterBeardStyle,
+                characterBeardColor = flags.characterBeardColor,
                 equippedTitle       = flags.equippedTitle,
                 titleName           = titleRepo.displayName(context, flags.equippedTitle, flags),
                 sessionQueue        = flags.sessionQueue,
                 maxQueueSize        = townRepo.maxQueueSize(flags),
                 showWhatsNew        = flags.lastSeenVersionCode < BuildConfig.VERSION_CODE,
                 queueEndsAt         = queueEndsAt,
+                towerCurrentFloor   = flags.towerCurrentFloor,
                 workerSession        = workerSession,
                 workerSession2       = workerSession2,
                 workerPendingCollect1 = workerData.completedCount1 > 0,
@@ -297,6 +324,7 @@ class HomeViewModel @Inject constructor(
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
                 showJournalButton          = flags.showJournalButton,
+                showSeasonalEvents         = flags.showSeasonalEvents,
                 playerNotes                = flags.playerNotes,
                 guildClaimableCount        = guildClaimableCount,
                 activeSeasonalEvent        = activeSeasonalEvent,
@@ -362,8 +390,13 @@ class HomeViewModel @Inject constructor(
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
             val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.CONSTRUCTION)
 
+            val currentLevelsForVoidCheck = playerRepo.getSkillLevels()
             for (session in sessions) {
                 val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+                if (!isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)) {
+                    refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
+                    continue
+                }
                 when (session.skillName) {
                     "tower" -> {
                         val playerDied = frames.any { it.died }
@@ -399,6 +432,9 @@ class HomeViewModel @Inject constructor(
                             )
                             for ((e, k) in towerKills) dailyKills[e] = (dailyKills[e] ?: 0) + k
                             guildRepo.recordGuildCombat(towerKills, style)
+                            var towerSlayerXp = 0L
+                            for ((enemy, k) in towerKills) towerSlayerXp += slayerRepo.recordKills(enemy, k)
+                            if (towerSlayerXp > 0L) towerXpPerSkill[Skills.SLAYER] = (towerXpPerSkill[Skills.SLAYER] ?: 0L) + towerSlayerXp
                         }
 
                         val towerCoinsRaw    = towerAllItems.remove("coins")?.toLong() ?: 0L
@@ -732,6 +768,32 @@ class HomeViewModel @Inject constructor(
             for (session in sessions) sessionRepo.deleteSession(session.sessionId)
             if (dailyKills.isNotEmpty()) playerRepo.recordDailyKills(dailyKills)
 
+            val rareItemsDisplayNames = mutableSetOf<String>()
+            for (session in sessions) {
+                if (session.skillName == "boss") {
+                    val boss = gameData.bosses[session.activityKey]
+                    val bossRareKeys = boss?.rareDrops?.map { it.item }?.toSet() ?: emptySet()
+                    val bossPetKey = boss?.pet?.id
+                    val combinedBossRareKeys = bossRareKeys + listOfNotNull(bossPetKey)
+                    combinedBossRareKeys.forEach { key ->
+                        rareItemsDisplayNames.add(gameData.itemDisplayName(key))
+                    }
+                }
+                if (session.skillName == "combat") {
+                    val dungeon = gameData.dungeons[session.activityKey]
+                    dungeon?.rareDrops?.forEach {
+                        rareItemsDisplayNames.add(gameData.itemDisplayName(it.item))
+                    }
+                    dungeon?.enemySpawns?.forEach { spawn ->
+                        gameData.enemies[spawn.enemy]?.dropTable?.forEach { entry ->
+                            if (entry.chance <= 0.005) {
+                                rareItemsDisplayNames.add(gameData.itemDisplayName(entry.item))
+                            }
+                        }
+                    }
+                }
+            }
+
             // ── Recent sessions log ───────────────────────────────────────
             val newEntries = sessions.map { s ->
                 val activityDisplay = when (s.skillName) {
@@ -825,6 +887,7 @@ class HomeViewModel @Inject constructor(
                 coinBlessingBonus = coinBlessingBonus,
                 noteLines        = expeditionNoteLines,
                 unlockMessage    = expeditionUnlockMessage,
+                rareItems        = rareItemsDisplayNames,
             )
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
@@ -1012,9 +1075,15 @@ class HomeViewModel @Inject constructor(
             val gatheringSkills = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
             val craftingSkills  = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING, Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING)
 
+            val currentLevelsForVoidCheck = playerRepo.getSkillLevels()
             for (session in sessions) {
                 val frames: List<SessionFrame> = json.decodeFromString(session.frames)
                 val mult = session.efficiencyMultiplier
+
+                if (!isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)) {
+                    refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
+                    continue
+                }
 
                 when (session.skillName) {
                     "boss" -> {
@@ -1365,3 +1434,78 @@ fun playerSessionMaterials(
 
 /** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */
 private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50
+
+/**
+ * Minimum skill level required to start [activityKey] for [skillName], or null if this
+ * activity type has no per-skill level gate (e.g. Prayer bone burning — always allowed).
+ */
+fun requiredLevelForActivity(skillName: String, activityKey: String, gameData: GameDataRepository): Int? =
+    when (skillName) {
+        Skills.MINING       -> gameData.ores[activityKey]?.levelRequired
+        Skills.WOODCUTTING  -> gameData.trees[activityKey]?.levelRequired
+        Skills.FISHING      -> gameData.fish[activityKey]?.levelRequired
+        Skills.AGILITY      -> gameData.agilityCourses[activityKey]?.levelRequired
+        Skills.THIEVING     -> gameData.thievingNpcs[activityKey]?.levelRequired
+        Skills.FIREMAKING   -> gameData.logs[activityKey]?.levelRequired
+        Skills.RUNECRAFTING -> gameData.runes[activityKey]?.levelRequired
+        Skills.SMITHING     -> gameData.smithingRecipes[activityKey]?.levelRequired
+        Skills.COOKING      -> gameData.cookingRecipes[activityKey]?.levelRequired
+        Skills.FLETCHING    -> gameData.fletchingRecipes[activityKey]?.levelRequired
+        Skills.CRAFTING     -> gameData.craftingRecipes[activityKey]?.levelRequired
+        Skills.HERBLORE     -> gameData.herbloreRecipes[activityKey]?.levelRequired
+        Skills.CONSTRUCTION -> gameData.constructionRecipes[activityKey]?.levelRequired
+        Skills.MERCANTILE   -> gameData.tradeRoutes.firstOrNull { it.id == activityKey }?.levelRequired
+        else                -> null
+    }
+
+/**
+ * True if [session]'s own skill still meets the activity's level requirement, given
+ * [currentLevels] (read fresh at collect time). False means the skill's level dropped below
+ * what it had when this session's rewards were pre-simulated — almost certainly via a
+ * prestige — and the session must be voided instead of paid out.
+ */
+fun isSkillSessionStillEligible(
+    session: SkillSession,
+    currentLevels: Map<String, Int>,
+    gameData: GameDataRepository,
+): Boolean = when (session.skillName) {
+    "boss" -> {
+        val required = gameData.bosses[session.activityKey]?.combatLevelRequired
+        required == null || combatLevelFrom(currentLevels) >= required
+    }
+    "combat" -> {
+        val required = gameData.dungeons[session.activityKey]?.recommendedLevel
+        required == null || combatLevelFrom(currentLevels) >= required
+    }
+    "tower" -> {
+        val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull()
+        floor == null || combatLevelFrom(currentLevels) >= (floor * 2).coerceAtMost(200)
+    }
+    "expedition" -> {
+        val dungeonData = gameData.skillingDungeons[session.activityKey]
+        dungeonData == null || (currentLevels[dungeonData.skill] ?: 1) >= dungeonData.levelRequired
+    }
+    else -> {
+        val required = requiredLevelForActivity(session.skillName, session.activityKey, gameData)
+        required == null || (currentLevels[session.skillName] ?: 1) >= required
+    }
+}
+
+/** Refunds whatever [session] consumed up front at start time (materials/catalyst/trade coin cost). */
+suspend fun refundVoidedSessionMaterials(
+    session: SkillSession,
+    frames: List<SessionFrame>,
+    playerRepo: PlayerRepository,
+    gameData: GameDataRepository,
+) {
+    if (session.skillName == Skills.MERCANTILE) {
+        val coinCost = gameData.tradeRoutes.firstOrNull { it.id == session.activityKey }?.coinCost?.toLong() ?: 0L
+        if (coinCost > 0) playerRepo.addCoins(coinCost)
+    } else {
+        playerSessionMaterials(session.skillName, session.activityKey, frames.sumOf { it.kills }, gameData)
+            ?.let { playerRepo.addItems(it) }
+    }
+    if (session.catalystKey != null && session.catalystQty > 0) {
+        playerRepo.addItem(session.catalystKey, session.catalystQty)
+    }
+}

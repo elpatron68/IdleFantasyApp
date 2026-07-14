@@ -213,6 +213,8 @@
     <string name="settings_recent_activity_desc">Tampilkan tombol Aktivitas Terbaru di header layar beranda</string>
     <string name="settings_journal_button">Tombol Jurnal</string>
     <string name="settings_journal_button_desc">Tampilkan tombol Jurnal melayang di layar beranda untuk menulis catatan</string>
+    <string name="settings_seasonal_events">Acara Musiman</string>
+    <string name="settings_seasonal_events_desc">Tampilkan banner Acara Musiman yang aktif di layar beranda</string>
     <string name="label_no_sessions_yet">Belum ada sesi yang selesai.</string>
     <string name="label_dungeons_tab">Dungeon</string>
     <string name="btn_fight">Bertarung!</string>
@@ -321,7 +323,7 @@
     <string name="home_town_title">Kota</string>
     <string name="home_town_desc">Kunjungi toko, Penginapan, Serikat, Toko Bangunan, Penumpasan, dan Karnaval</string>
     <string name="guild_dailies_available">Tersedia harian</string>
-    <string name="guild_do_dailies_hint">Lakukan tugas harian untuk meningkatkan reputasimu</string>
+    <string name="guild_do_dailies_hint">Lakukan tugas harian untuk naik ke tingkat berikutnya</string>
     <string name="guild_quest_gate_blocked">Selesaikan Tugas untuk meningkatkan peringkatmu.</string>
     <string name="guild_quest_required">Quest diperlukan untuk melanjutkan</string>
     <string name="home_died_message">Anda meninggal dan kehilangan sebagian besar keuntungan Anda.</string>
@@ -477,6 +479,14 @@
     <string name="character_race_orc">Orc</string>
     <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnome</string>
+    <string name="appearance_title">Sesuaikan Penampilan</string>
+    <string name="appearance_skin_tone">Warna Kulit</string>
+    <string name="appearance_eyes">Mata</string>
+    <string name="appearance_hair_style">Gaya Rambut</string>
+    <string name="appearance_hair_color">Warna Rambut</string>
+    <string name="appearance_beard">Janggut</string>
+    <string name="appearance_beard_color">Warna Janggut</string>
+    <string name="appearance_save">Simpan Penampilan</string>
     <string name="onboarding_sessions_title">Sesi</string>
     <string name="onboarding_sessions_desc">Ketuk keahlian apa pun dan mulai sesi pelatihan. Sesi berjalan di latar belakang, bahkan saat aplikasi ditutup. Kembali lagi untuk mengumpulkan hadiah dan XP Anda.</string>
     <string name="onboarding_progress_title">Berusahalah dari Bawah Menuju Puncak</string>
@@ -581,7 +591,7 @@
     <string name="inn_worker_tier">pekerja %1$s</string>
     <string name="worker_skills_title_nav">Keahlian Pekerja</string>
     <string name="guild_hall_title">Balai Serikat</string>
-    <string name="guild_hall_desc">Dapatkan hadiah dari serikat</string>
+    <string name="guild_hall_desc">Gabung serikat dan selesaikan permintaan harian untuk naik tingkat</string>
     <string name="guild_hall_intro">Serikat memberikan hadiah untuk aktivitas yang sudah Anda lakukan. Selesaikan quest dan permintaan harian untuk mendapatkan material lintas skill, koin, dan XP, sehingga spesialis masih dapat mengakses sumber daya dari skill yang tidak mereka latih.</string>
     <string name="guild_level_label">Level %1$d</string>
     <string name="guild_level_max">Level 10 (Max)</string>
@@ -589,7 +599,7 @@
     <string name="guild_tab_dailies">Permintaan Harian</string>
     <string name="guild_daily_resets_in">Direset setiap hari pukul 6 pagi</string>
     <string name="guild_locked_hint">Membutuhkan Level Serikat %1$d</string>
-    <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk mendapatkan reputasi dan membuka permintaan harian.</string>
+    <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk membuka permintaan harian.</string>
     <string name="guild_contribute_inventory">Kontribusi di inventaris (%1$d tersedia)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s untuk %4$s.</string>
     <string name="guild_quest_desc_kill">Kalahkan %1$d musuh menggunakan %2$s pertempuran.</string>
@@ -601,7 +611,7 @@
     <string name="guild_combat_melee">Melee</string>
     <string name="guild_combat_ranged">Ranged</string>
     <string name="guild_combat_magic">sihir</string>
-    <string name="guild_rep_label">%1$d / %2$d reputasi</string>
+    <string name="guild_rep_label">%1$d / %2$d harian</string>
     <string name="guild_quest_complete">Misi selesai: %1$s!</string>
     <string name="guild_daily_complete">Hadiah harian telah diklaim!</string>
     <string name="guild_name_mining">Serikat Menambang</string>
@@ -740,7 +750,7 @@
     <string name="slayer_already_owned">Sudah dimiliki.</string>
     <string name="slayer_purchased">Ditambahkan ke inventaris.</string>
     <string name="slayer_owned">Dimiliki</string>
-    <string name="slayer_lamp_purchased">XP ditambahkan ke %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP ditambahkan ke %2$s!</string>
     <string name="slayer_lamp_pick_skill">Pilih Keahlian</string>
     <string name="slayer_lamp_small">Lampu XP (Kecil)</string>
     <string name="slayer_lamp_large">Lampu XP (Besar)</string>
@@ -1037,7 +1047,7 @@
     <string name="carnival_appraisal_wrong">Salah! item yang lebih berharga adalah %1$s.</string>
     <string name="carnival_redeemed">Ditukarkan: %1$s!</string>
     <string name="carnival_not_enough_tickets">Tiket tidak mencukupi.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP dalam %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP dalam %2$s!</string>
     <string name="carnival_shell_game">Pick-a-Cup</string>
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
@@ -1104,6 +1114,7 @@
     <string name="armory_stat_ranged_str">Ranged Strength</string>
     <string name="armory_stat_magic_atk">Magic Attack</string>
     <string name="armory_stat_magic_dmg">Magic Damage</string>
+    <string name="armory_stat_attack_speed">Kecepatan Serangan</string>
     <string name="armory_stat_cape">XP Bonus</string>
     <string name="armory_stat_cape_yield">Yield Bonus</string>
     <string name="armory_source_carnival">Carnival Prize Shop</string>
@@ -1164,6 +1175,8 @@
     <string name="snackbar_added_to_queue">Ditambahkan ke antrian: %1$s.</string>
     <string name="snackbar_queue_full">Antrian penuh.</string>
     <string name="combat_start_failed">Tak dapat memulai: %1$s</string>
+    <string name="skill_session_voided_prestige">Level %1$s Anda tidak lagi memenuhi persyaratan sesi ini (kemungkinan karena prestise) — hadiahnya dibatalkan dan bahan yang digunakan telah dikembalikan.</string>
+    <string name="combat_session_voided_prestige">Level combat Anda tidak lagi memenuhi persyaratan pertarungan ini (kemungkinan karena prestise) — hadiahnya dibatalkan.</string>
     <string name="combat_select_spell">Pilih mantra sebelum masuk.</string>
     <string name="combat_spell_level_required">Butuh Magic %1$d untuk %2$s.</string>
     <string name="guild_daily_reward_claimed">Hadiah harian telah diklaim!</string>
@@ -1217,7 +1230,6 @@
     <plurals name="plural_collect_sessions">
         <item quantity="other">Kumpulkan Hadiah %1$d Sesi</item>
     </plurals>
-    <string name="daily_verb_farming">Panen</string>
 
     <!-- ===== Seasonal Events ===== -->
     <string name="seasonal_event_title">Acara Musiman</string>
@@ -1269,4 +1281,9 @@
     <string name="profile_banners_empty">Belum ada spanduk yang didapat. Selesaikan Acara Musiman untuk mendapatkannya!</string>
     <string name="profile_banners_earned_on">Didapat %s</string>
     <string name="profile_banners_unobtained">(Belum didapat)</string>
+    <string name="settings_art_credits">Kredit Seni</string>
+    <string name="settings_credit_banners_title">Spanduk Musiman</string>
+    <string name="settings_credit_banners_subtitle">Seni oleh Wenrexa</string>
+    <string name="settings_credit_skill_icons_title">Ikon Keahlian</string>
+    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
 </resources>

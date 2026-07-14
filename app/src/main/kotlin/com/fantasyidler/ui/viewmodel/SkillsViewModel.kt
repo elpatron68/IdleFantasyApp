@@ -25,6 +25,7 @@ import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.ThievingSimulator
@@ -44,11 +45,14 @@ import kotlinx.serialization.serializer
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 // ---------------------------------------------------------------------------
 // UI State
 // ---------------------------------------------------------------------------
+
+
 
 data class SessionResult(
     val skillName: String,
@@ -87,9 +91,12 @@ data class SkillsUiState(
     val cropsReadyCount: Int = 0,
     val xpBonusMult: Float = 1.0f,
     val sessionDurationMs: Long = 0L,
+    /** Actual per-log burn duration, tinderbox tier bonus applied. Keyed by log key. */
+    val firemakingPerLogMs: Map<String, Long> = emptyMap(),
     val skillPrestige: Map<String, Int> = emptyMap(),
     val inventory: Map<String, Int> = emptyMap(),
     val petBoostBySkill: Map<String, Int> = emptyMap(),
+    val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
 )
 
 sealed class SheetState {
@@ -135,6 +142,7 @@ class SkillsViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     private val dailyQuestRepo: DailyQuestRepository,
     private val weeklyQuestRepo: WeeklyQuestRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -145,8 +153,8 @@ class SkillsViewModel @Inject constructor(
         sessionRepo.activeSessionFlow,
         _uiState,
         farmingRepo.observePatches(),
-    ) { player, session, extra, patches ->
-        // Combat sessions are managed by CombatViewModel; hide them here.
+        questRepo.observeProgress(),
+    ) { player, session, extra, patches, questProgress ->
         val nonCombatSession = session?.takeIf { it.skillName != "combat" }
         val now = System.currentTimeMillis()
         val cropsReady = patches.count { it.remainingMs(gameData.crops, now) <= 0 }
@@ -176,12 +184,17 @@ class SkillsViewModel @Inject constructor(
                 cookingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0),
                 xpBonusMult           = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags),
                 sessionDurationMs     = SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, flags.skillPrestige[Skills.AGILITY] ?: 0),
+                firemakingPerLogMs    = gameData.logs.mapValues { (_, log) ->
+                    val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, log.levelRequired)
+                    (SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60L / toolEff).toLong()
+                },
                 skillPrestige         = flags.skillPrestige,
                 inventory             = inv,
                 cropsReadyCount       = cropsReady,
                 petBoostBySkill       = (Skills.GATHERING + Skills.CRAFTING_SKILLS + Skills.SUPPORT + listOf(Skills.AGILITY, Skills.SLAYER))
                     .associateWith { key -> petBoostFor(player.pets, key) }
                     .filterValues { it > 0 },
+                activeQuests          = computeActiveQuests(questProgress, flags, inv),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SkillsUiState())
@@ -648,11 +661,25 @@ class SkillsViewModel @Inject constructor(
                 val player = playerRepo.getOrCreatePlayer()
                 val agility = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
                 val thievingFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val levels = json.decodeFromString<Map<String, Int>>(player.skillLevels)
+                val thievingLevel = levels[Skills.THIEVING] ?: 1
+                val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+                val lockpickEff = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired)
+                val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02 * lockpickEff).coerceIn(0.10, 0.95)
+                val petBoostPct = petBoostFor(player.pets, Skills.THIEVING)
+                val petBoostedXp = if (petBoostPct > 0) (npc.baseXp * (1.0 + petBoostPct / 100.0)).toInt() else npc.baseXp
+                val expectedXp = 60.0 * (successChance / (2.0 - successChance)) * petBoostedXp
+                val xpQueueMult = (if (thievingFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(thievingFlags)
+                val prestigeLevel = thievingFlags.skillPrestige[Skills.THIEVING] ?: 0
+                val prestigeMult = 1.0 + prestigeLevel * 0.10
+                val estimatedXpGain = (expectedXp * xpQueueMult * prestigeMult).toLong()
+
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = Skills.THIEVING,
                         activityKey         = npcKey,
                         skillDisplayName    = "Thieving",
+                        estimatedXpGain     = estimatedXpGain,
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, thievingFlags.skillPrestige[Skills.AGILITY] ?: 0),
                     )
                 )
@@ -674,6 +701,7 @@ class SkillsViewModel @Inject constructor(
                 val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
                 val xpMap: Map<String, Long> = json.decodeFromString(player.skillXp)
                 val flags: PlayerFlags = json.decodeFromString(player.flags)
+                val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
                 val result = ThievingSimulator.simulate(
                     npcKey          = npcKey,
                     npc             = npc,
@@ -684,6 +712,7 @@ class SkillsViewModel @Inject constructor(
                     petBoostPct     = petBoostFor(player.pets, Skills.THIEVING),
                     petDropKey      = petKey,
                     petDropChance   = petChance,
+                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
                 )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
@@ -801,6 +830,21 @@ class SkillsViewModel @Inject constructor(
 
             val frames: List<com.fantasyidler.data.model.SessionFrame> =
                 json.decodeFromString(session.frames)
+
+            val currentLevels = playerRepo.getSkillLevels()
+            if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
+                refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
+                sessionRepo.abandonSession(session.sessionId)
+                _uiState.update {
+                    it.copy(snackbarMessage = context.getString(
+                        R.string.skill_session_voided_prestige,
+                        GameStrings.skillName(context, session.skillName),
+                    ))
+                }
+                queuedSessionStarter.startNextQueued()
+                return@launch
+            }
+
             val totalXp  = frames.sumOf { it.xpGain.toLong() }
             // Display value only — mirrors the boost/blessing/prestige math applySessionResults()
             // already applies internally when crediting the player's actual skill XP below.
@@ -845,6 +889,7 @@ class SkillsViewModel @Inject constructor(
                 in gatheringSkills -> {
                     questRepo.recordGathering(session.skillName, regularItems)
                     playerRepo.recordDailyGathering(regularItems)
+                    seasonalEventRepo.recordGathering(regularItems)
                     when (session.skillName) {
                         Skills.AGILITY -> guildRepo.recordGuildSessions()
                         else           -> guildRepo.recordGuildGathering(session.skillName, regularItems)
@@ -854,6 +899,7 @@ class SkillsViewModel @Inject constructor(
                     questRepo.recordCrafting(session.skillName, regularItems)
                     playerRepo.recordDailyCrafting(regularItems)
                     guildRepo.recordGuildCrafting(session.skillName, regularItems)
+                    seasonalEventRepo.recordCrafting(regularItems)
                 }
                 Skills.THIEVING -> {
                     val successCount = frames.count { it.success }
@@ -1016,8 +1062,7 @@ class SkillsViewModel @Inject constructor(
             if (quest.target != itemKey) continue
             val prog = questProgress[id]
             if (prog?.completed == true) continue
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
             if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
@@ -1075,8 +1120,7 @@ class SkillsViewModel @Inject constructor(
             if (quest.type != "prayer") continue
             val prog = questProgress[id]
             if (prog?.completed == true) continue
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
             if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
@@ -1107,6 +1151,157 @@ class SkillsViewModel @Inject constructor(
         }
 
         return fills.sortedBy { it.qty }
+    }
+
+    private fun computeActiveQuests(
+        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        flags: PlayerFlags,
+        inventory: Map<String, Int>,
+    ): Map<String, List<QuestIndicator>> {
+        val result = mutableMapOf<String, MutableList<QuestIndicator>>()
+        val progressById = questProgress.associateBy { it.questId }
+
+        val activeDailies = dailyQuestRepo.getActiveDailyQuests(flags).filter { !it.claimed }
+        val activeWeeklies = weeklyQuestRepo.getActiveWeeklyQuests(flags).filter { !it.claimed }
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
+
+        fun addIndicator(key: String, skill: String, category: QuestCategory, remaining: Int) {
+            val isCompletable = when (skill) {
+                Skills.RUNECRAFTING -> {
+                    val rune = gameData.runes[key]
+                    val cost = rune?.essenceCost ?: 1
+                    val essence = inventory["rune_essence"] ?: 0
+                    (essence / cost) >= remaining
+                }
+                Skills.FIREMAKING -> {
+                    val logKey = when (key) {
+                        "ashes" -> "log"
+                        "oak_ashes" -> "oak_log"
+                        "willow_ashes" -> "willow_log"
+                        "maple_ashes" -> "maple_log"
+                        "yew_ashes" -> "yew_log"
+                        "magic_ashes" -> "magic_log"
+                        "redwood_ashes" -> "redwood_log"
+                        else -> key
+                    }
+                    val logs = inventory[logKey] ?: 0
+                    logs >= remaining
+                }
+                Skills.PRAYER -> {
+                    val bones = inventory[key] ?: 0
+                    bones >= remaining
+                }
+                else -> true
+            }
+            result.getOrPut(key) { mutableListOf() }.add(QuestIndicator(category, isCompletable))
+        }
+
+        fun checkAndAdd(questType: String, questSkill: String, questTarget: String, questAmount: Int, questProgressVal: Int, category: QuestCategory) {
+            val remaining = questAmount - questProgressVal
+            if (remaining <= 0) return
+
+            when (questType) {
+                "gather" -> {
+                    addIndicator(questTarget, questSkill, category, remaining)
+                }
+                "gather_any" -> {
+                    when (questSkill) {
+                        Skills.MINING -> gameData.ores.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                        Skills.WOODCUTTING -> gameData.trees.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                        Skills.FISHING -> gameData.fish.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                    }
+                }
+                "pickpocket" -> {
+                    addIndicator(questTarget, questSkill, category, remaining)
+                }
+                "pickpocket_any" -> {
+                    gameData.thievingNpcs.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                }
+                "sessions" -> {
+                    if (questSkill == Skills.AGILITY) {
+                        addIndicator(questTarget, questSkill, category, remaining)
+                    }
+                }
+                "burn" -> {
+                    val logToAsh = mapOf(
+                        "log" to "ashes", "oak_log" to "oak_ashes", "willow_log" to "willow_ashes",
+                        "maple_log" to "maple_ashes", "yew_log" to "yew_ashes",
+                        "magic_log" to "magic_ashes", "redwood_log" to "redwood_ashes"
+                    )
+                    val ashKey = logToAsh[questTarget] ?: questTarget
+                    addIndicator(ashKey, questSkill, category, remaining)
+                }
+                "burn_any" -> {
+                    if (questSkill == Skills.FIREMAKING) {
+                        gameData.logs.keys.forEach { logKey ->
+                            val logToAsh = mapOf(
+                                "log" to "ashes", "oak_log" to "oak_ashes", "willow_log" to "willow_ashes",
+                                "maple_log" to "maple_ashes", "yew_log" to "yew_ashes",
+                                "magic_log" to "magic_ashes", "redwood_log" to "redwood_ashes"
+                            )
+                            val ashKey = logToAsh[logKey] ?: logKey
+                            addIndicator(ashKey, questSkill, category, remaining)
+                        }
+                    }
+                }
+                "craft" -> {
+                    if (questSkill == Skills.RUNECRAFTING) {
+                        addIndicator(questTarget, questSkill, category, remaining)
+                    }
+                }
+                "craft_any" -> {
+                    if (questSkill == Skills.RUNECRAFTING) {
+                        gameData.runes.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                    }
+                }
+                "prayer" -> {
+                    if (questSkill == Skills.PRAYER) {
+                        if (questTarget.isNotEmpty()) {
+                            addIndicator(questTarget, questSkill, category, remaining)
+                        } else {
+                            gameData.bones.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                        }
+                    }
+                }
+            }
+        }
+
+        for ((id, quest) in gameData.quests) {
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            val prereqDone = quest.requiresPrevious == null ||
+                    progressById[quest.requiresPrevious]?.completed == true
+            if (!prereqDone) continue
+
+            checkAndAdd(quest.type, quest.skill, quest.target, quest.amount, prog?.progress ?: 0, QuestCategory.MAIN)
+        }
+
+        for ((id, quest) in gameData.guildQuests) {
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
+
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.MAIN)
+        }
+
+        for (daily in activeDailies) {
+            checkAndAdd(daily.template.type, daily.template.skill, daily.template.target, daily.template.amount, daily.progress, QuestCategory.DAILY)
+        }
+
+        for (weekly in activeWeeklies) {
+            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.DAILY)
+        }
+
+        for (id in activeGuildDailyIds) {
+            val template = guildPool[id] ?: continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.DAILY)
+        }
+
+        return result
     }
 
     private fun petBoostFor(petsJson: String, skillKey: String): Int {

@@ -75,6 +75,10 @@ import com.fantasyidler.ui.viewmodel.CarnivalViewModel
 import com.fantasyidler.ui.viewmodel.Difficulty
 import com.fantasyidler.util.GameStrings
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.coroutineScope
@@ -82,6 +86,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import com.fantasyidler.simulator.CarnivalSimulator
+
+private val COMBAT_CAPE_SKILLS = setOf(
+    "attack", "strength", "defense", "ranged", "magic", "hp",
+    "warriors", "archers", "mages",
+)
 
 private val POTION_COLORS = listOf(
     Color(0xFF4CAF50), // green
@@ -124,6 +133,7 @@ fun CarnivalScreen(
     }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
                 title = {
@@ -559,10 +569,11 @@ private fun PotionSequenceCard(gameState: ActiveGameState, difficulty: Difficult
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Text(stringResource(R.string.carnival_sequence_watch), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                    seq.chunked(6).forEachIndexed { rowIdx, chunk ->
+                    val chunkSize = 4
+                    seq.chunked(chunkSize).forEachIndexed { rowIdx, chunk ->
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             chunk.forEachIndexed { localIdx, colorIdx ->
-                                val i = rowIdx * 6 + localIdx
+                                val i = rowIdx * chunkSize + localIdx
                                 Box(
                                     modifier = Modifier
                                         .size(48.dp)
@@ -984,7 +995,10 @@ private fun PrizeRow(
                     if (equipData.attackBonus   > 0) add("ATK +${equipData.attackBonus}")
                     if (equipData.strengthBonus > 0) add("STR +${equipData.strengthBonus}")
                     if (equipData.defenseBonus  > 0) add("DEF +${equipData.defenseBonus}")
-                    if ((equipData.capeBonus) > 0f)  add("XP +${(equipData.capeBonus * 100).toInt()}%")
+                    if ((equipData.capeBonus) > 0f) {
+                        val capeLabel = if (equipData.capeSkill in COMBAT_CAPE_SKILLS) "XP" else "Yield"
+                        add("$capeLabel +${(equipData.capeBonus * 100).toInt()}%")
+                    }
                 }
                 if (statParts.isNotEmpty()) {
                     Text(

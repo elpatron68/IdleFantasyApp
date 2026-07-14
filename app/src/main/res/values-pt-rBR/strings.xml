@@ -278,6 +278,8 @@
     <string name="settings_recent_activity_desc">Mostrar o botão Atividade Recente no cabeçalho da tela inicial</string>
     <string name="settings_journal_button">Botão de Diário</string>
     <string name="settings_journal_button_desc">Mostrar um botão flutuante de Diário na tela inicial para anotar suas notas</string>
+    <string name="settings_seasonal_events">Eventos Sazonais</string>
+    <string name="settings_seasonal_events_desc">Mostrar o banner do Evento Sazonal ativo na tela inicial</string>
     <string name="label_no_sessions_yet">Nenhuma sessão concluída ainda.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -405,7 +407,7 @@
     <string name="home_town_title">Cidade</string>
     <string name="home_town_desc">Visite a loja, a hospedaria, a guilda, a igreja, a oficina do construtor, o mestre caçador e o carnaval</string>
     <string name="guild_dailies_available">Diárias disponíveis</string>
-    <string name="guild_do_dailies_hint">Faça as diárias para aumentar sua reputação</string>
+    <string name="guild_do_dailies_hint">Faça as diárias para avançar para o próximo nível</string>
     <string name="guild_quest_gate_blocked">Complete missões para avançar seu ranking</string>
     <string name="guild_quest_required">Missão necessária para avançar</string>
     <string name="home_died_message">Você morreu e perdeu a maior parte dos seus ganhos.</string>
@@ -637,6 +639,14 @@
     <string name="character_race_orc">Orc</string>
     <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnomo</string>
+    <string name="appearance_title">Personalizar aparência</string>
+    <string name="appearance_skin_tone">Tom de pele</string>
+    <string name="appearance_eyes">Olhos</string>
+    <string name="appearance_hair_style">Estilo de cabelo</string>
+    <string name="appearance_hair_color">Cor do cabelo</string>
+    <string name="appearance_beard">Barba</string>
+    <string name="appearance_beard_color">Cor da barba</string>
+    <string name="appearance_save">Salvar aparência</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_sessions_title">Sessões</string>
@@ -785,7 +795,7 @@
 
     <!-- Guild Hall -->
     <string name="guild_hall_title">Salão das Guildas</string>
-    <string name="guild_hall_desc">Entre em guildas e ganhe recompensas de reputação</string>
+    <string name="guild_hall_desc">Entre em guildas e complete pedidos diários para subir de nível</string>
     <string name="guild_hall_intro">As guildas recompensam você por atividades que já faz. Complete missões e pedidos diários para ganhar materiais de outras habilidades, moedas e XP, assim especialistas ainda podem obter recursos de habilidades que não treinam.</string>
     <string name="guild_level_label">Nível %1$d</string>
     <string name="guild_level_max">Nível 10 (Máx)</string>
@@ -793,7 +803,7 @@
     <string name="guild_tab_dailies">Pedidos Diários</string>
     <string name="guild_daily_resets_in">Reinicia diariamente às 6h</string>
     <string name="guild_locked_hint">Requer Nível de Guilda %1$d</string>
-    <string name="guild_no_dailies">Complete missões da guilda para ganhar reputação e desbloquear pedidos diários.</string>
+    <string name="guild_no_dailies">Complete missões da guilda para desbloquear pedidos diários.</string>
     <string name="guild_contribute_inventory">Contribuir do inventário (%1$d disponível)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s para a %4$s.</string>
     <string name="guild_quest_desc_kill">Derrote %1$d inimigos usando combate %2$s.</string>
@@ -805,7 +815,7 @@
     <string name="guild_combat_melee">corpo a corpo</string>
     <string name="guild_combat_ranged">à distância</string>
     <string name="guild_combat_magic">magia</string>
-    <string name="guild_rep_label">%1$d / %2$d rep</string>
+    <string name="guild_rep_label">%1$d / %2$d diárias</string>
     <string name="guild_quest_complete">Missão completa: %1$s!</string>
     <string name="guild_daily_complete">Recompensa diária resgatada!</string>
     <string name="guild_name_mining">Guilda de Mineração</string>
@@ -956,7 +966,7 @@
     <string name="slayer_already_owned">Já possui este item.</string>
     <string name="slayer_purchased">Adicionado ao inventário.</string>
     <string name="slayer_owned">Possuído</string>
-    <string name="slayer_lamp_purchased">XP adicionado a %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP adicionado a %2$s!</string>
     <string name="slayer_lamp_pick_skill">Escolha uma habilidade</string>
     <string name="slayer_lamp_small">Lâmpada de XP (Pequena)</string>
     <string name="slayer_lamp_large">Lâmpada de XP (Grande)</string>
@@ -1302,7 +1312,7 @@
     <string name="carnival_appraisal_wrong">Errado! O item mais valioso era %1$s.</string>
     <string name="carnival_redeemed">Trocado: %1$s!</string>
     <string name="carnival_not_enough_tickets">Bilhetes insuficientes.</string>
-    <string name="carnival_lamp_redeemed">+%1$d XP em %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP em %2$s!</string>
     <string name="carnival_shell_game">Escolha o Copo</string>
     <string name="carnival_active_shell_desc">Observe qual copo esconde a gema e escolha-o depois da embaralhada!</string>
     <string name="carnival_shell_showing">Observe com atenção — a gema está sob o copo %1$d</string>
@@ -1373,6 +1383,7 @@
     <string name="armory_stat_ranged_str">Força à Distância</string>
     <string name="armory_stat_magic_atk">Ataque Mágico</string>
     <string name="armory_stat_magic_dmg">Dano Mágico</string>
+    <string name="armory_stat_attack_speed">Velocidade de Ataque</string>
     <string name="armory_stat_cape">Bônus de XP</string>
     <string name="armory_stat_cape_yield">Bônus de Rendimento</string>
     <string name="armory_source_carnival">Loja de Prêmios do Carnaval</string>
@@ -1435,6 +1446,8 @@
     <string name="snackbar_added_to_queue">Adicionado à fila: %1$s.</string>
     <string name="snackbar_queue_full">A fila está cheia.</string>
     <string name="combat_start_failed">Não foi possível iniciar: %1$s</string>
+    <string name="skill_session_voided_prestige">Seu nível de %1$s não atende mais ao requisito desta sessão (provavelmente por prestígio) — as recompensas foram anuladas e os materiais usados foram reembolsados.</string>
+    <string name="combat_session_voided_prestige">Seu nível de combate não atende mais ao requisito deste combate (provavelmente por prestígio) — as recompensas foram anuladas.</string>
     <string name="combat_select_spell">Selecione um feitiço antes de entrar.</string>
     <string name="combat_spell_level_required">Necessário Magia %1$d para %2$s.</string>
     <string name="guild_daily_reward_claimed">Recompensa diária recebida!</string>
@@ -1562,6 +1575,8 @@
     <string name="settings_art_credits">Créditos de Arte</string>
     <string name="settings_credit_banners_title">Bandeiras Sazonais</string>
     <string name="settings_credit_banners_subtitle">Arte por Wenrexa</string>
+    <string name="settings_credit_skill_icons_title">Ícones de Habilidades</string>
+    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
     <string name="title_seasonal_champion_of">Campeão de %1$s</string>
     <string name="title_seasonal_requirement">Complete o Evento Sazonal de %1$s</string>
     <string name="home_welcome_greeting">Bem-vindo de volta,</string>

@@ -31,7 +31,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.FilterChip
@@ -147,8 +152,10 @@ fun ProfileScreen(
     )
     var selectedTab  by remember { mutableIntStateOf(0) }
     var showEditSheet by remember { mutableStateOf(false) }
+    var showAppearanceSheet by remember { mutableStateOf(false) }
 
     Scaffold(
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar       = { TopAppBar(title = { Text(stringResource(R.string.nav_profile)) }) },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->
@@ -193,6 +200,13 @@ fun ProfileScreen(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
+                    }
+                    IconButton(onClick = { showAppearanceSheet = true }) {
+                        Icon(
+                            imageVector        = Icons.Filled.Person,
+                            contentDescription = stringResource(R.string.appearance_title),
+                            tint               = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                     IconButton(onClick = { showEditSheet = true }) {
                         Icon(
@@ -290,6 +304,24 @@ fun ProfileScreen(
                 onDismiss = viewModel::dismissSlotPicker,
             )
         }
+    }
+
+    // Character appearance sheet
+    if (showAppearanceSheet) {
+        CharacterCustomizationSheet(
+            race              = state.characterRace,
+            initialSkin       = state.characterSkinTone,
+            initialHair       = state.characterHairStyle,
+            initialHairColor  = state.characterHairColor,
+            initialEye        = state.characterEyeStyle,
+            initialBeard      = state.characterBeardStyle,
+            initialBeardColor = state.characterBeardColor,
+            onSave            = { skin, hair, hairColor, eye, beard, beardColor, race ->
+                viewModel.saveAppearance(skin, hair, hairColor, eye, beard, beardColor, race)
+                showAppearanceSheet = false
+            },
+            onDismiss         = { showAppearanceSheet = false },
+        )
     }
 
     // Character edit sheet
@@ -552,15 +584,27 @@ private fun SkillGridCard(
     modifier: Modifier = Modifier,
 ) {
     val progress = xpProgressFraction(xp)
-    ElevatedCard(modifier = modifier.clickable { onClick() }) {
+    ElevatedCard(
+        modifier = modifier,
+        onClick = onClick
+    ) {
         Column(
-            modifier            = Modifier.fillMaxWidth().padding(8.dp),
+            modifier = Modifier.fillMaxWidth().padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text  = GameStrings.skillEmoji(skillKey),
-                style = MaterialTheme.typography.headlineMedium,
-            )
+            val iconRes = GameStrings.skillIconRes(skillKey)
+            if (iconRes != null) {
+                Image(
+                    painter            = painterResource(iconRes),
+                    contentDescription = null,
+                    modifier           = Modifier.size(32.dp),
+                )
+            } else {
+                Text(
+                    text  = GameStrings.skillEmoji(skillKey),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+            }
             Spacer(Modifier.height(2.dp))
             Text(
                 text     = GameStrings.skillName(context, skillKey),
@@ -590,10 +634,19 @@ private fun SkillUnlockSheet(
             .padding(bottom = 24.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text  = GameStrings.skillEmoji(skillKey),
-                style = MaterialTheme.typography.headlineMedium,
-            )
+            val iconRes = GameStrings.skillIconRes(skillKey)
+            if (iconRes != null) {
+                Image(
+                    painter            = painterResource(iconRes),
+                    contentDescription = null,
+                    modifier           = Modifier.size(32.dp),
+                )
+            } else {
+                Text(
+                    text  = GameStrings.skillEmoji(skillKey),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+            }
             Spacer(Modifier.width(8.dp))
             Column {
                 Text(

@@ -20,7 +20,7 @@ import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.util.toolEfficiency
+import com.fantasyidler.util.craftDurationEfficiency
 import kotlinx.serialization.serializer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +41,16 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 // ---------------------------------------------------------------------------
 
 data class QuestFillSuggestion(val label: String, val qty: Int)
+
+enum class QuestCategory {
+    DAILY,
+    MAIN
+}
+
+data class QuestIndicator(
+    val category: QuestCategory,
+    val isCompletable: Boolean
+)
 
 // ---------------------------------------------------------------------------
 // Unified recipe model (normalises all 4 recipe types for display + crafting)
@@ -105,6 +115,9 @@ data class CraftingUiState(
     val snackbarMessage: String? = null,
     val isLoading: Boolean = true,
     val questFills: List<QuestFillSuggestion> = emptyList(),
+    val recipeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    /** Actual per-item craft duration for [selectedRecipe], tool efficiency applied. 0 if nothing selected. */
+    val craftPerItemMs: Long = 0L,
 ) {
     /** Returns how many times [recipe] can be crafted given [effectiveInventory]. */
     fun maxCraftable(recipe: CraftableRecipe): Int {
@@ -162,7 +175,15 @@ class CraftingViewModel @Inject constructor(
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val xp: Map<String, Long> = json.decodeFromString(player.skillXp)
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val flags: PlayerFlags = json.decodeFromString(player.flags)
+            val effInv = computeEffectiveInventory(inventory)
+            val selectedRecipe = extra.selectedRecipe
+            val perItemMs = if (selectedRecipe != null) {
+                val agility = levels[Skills.AGILITY] ?: 1
+                val eff = craftToolEfficiency(selectedRecipe, equipped)
+                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60 / eff).toLong()
+            } else 0L
             extra.copy(
                 smithingLevel      = levels[Skills.SMITHING]      ?: 1,
                 cookingLevel       = levels[Skills.COOKING]       ?: 1,
@@ -173,9 +194,11 @@ class CraftingViewModel @Inject constructor(
                 skillLevels        = levels,
                 skillXp            = xp,
                 inventory          = inventory,
-                effectiveInventory = computeEffectiveInventory(inventory),
+                effectiveInventory = effInv,
                 isLoading          = false,
                 questFills         = computeQuestFills(extra.selectedRecipe, questProgress, flags),
+                recipeQuests       = computeRecipeQuests(allRecipes, questProgress, flags, effInv),
+                craftPerItemMs     = perItemMs,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CraftingUiState())
@@ -338,11 +361,7 @@ class CraftingViewModel @Inject constructor(
         _extra.update { it.copy(craftQuantity = qty.coerceIn(1, max.coerceAtLeast(1))) }
 
     private fun craftToolEfficiency(recipe: CraftableRecipe, equipped: Map<String, String?>): Float =
-        when (recipe.skillName) {
-            Skills.SMITHING -> gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, recipe.levelRequired)
-            Skills.COOKING  -> gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, recipe.levelRequired)
-            else            -> 1.0f
-        }
+        gameData.craftDurationEfficiency(recipe.skillName, recipe.key, equipped)
 
     fun craft() {
         val state  = uiState.value          // combined state — has inventory
@@ -484,8 +503,7 @@ class CraftingViewModel @Inject constructor(
             val prog = progressById[id]
             if (prog?.completed == true) continue
             // Skip if the player's current guild level is below the quest's requirement
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val progress = prog?.progress ?: 0
             val matches = when (quest.type) {
                 "craft"     -> quest.target == recipe.outputKey
@@ -558,6 +576,136 @@ class CraftingViewModel @Inject constructor(
         }
 
         return fills.sortedBy { it.qty }
+    }
+
+    private val allRecipes: List<CraftableRecipe> by lazy {
+        smithingRecipes + cookingRecipes + fletchingRecipes + herbloreRecipes + constructionRecipes + jewelleryRecipes
+    }
+
+    private fun computeRecipeQuests(
+        allRecipes: List<CraftableRecipe>,
+        questProgress: List<QuestProgress>,
+        flags: PlayerFlags,
+        effectiveInventory: Map<String, Int>,
+    ): Map<String, List<QuestIndicator>> {
+        val result = mutableMapOf<String, MutableList<QuestIndicator>>()
+        val progressById = questProgress.associateBy { it.questId }
+
+        val activeDailies = dailyQuestRepo.getActiveDailyQuests(flags).filter { !it.claimed }
+        val activeWeeklies = weeklyQuestRepo.getActiveWeeklyQuests(flags).filter { !it.claimed }
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
+
+        for (recipe in allRecipes) {
+            val key = recipe.outputKey
+            val skill = recipe.skillName
+
+            val max = if (recipe.materials.isEmpty()) 0
+                      else recipe.materials.minOf { (item, needed) ->
+                          (effectiveInventory[item] ?: 0) / needed
+                      }
+
+            val indicators = mutableListOf<QuestIndicator>()
+
+            // 1. Regular Quests
+            for ((id, quest) in gameData.quests) {
+                if (quest.type != "craft" && quest.type != "craft_any") continue
+                val prog = progressById[id]
+                if (prog?.completed == true) continue
+                val progress = prog?.progress ?: 0
+                val remaining = quest.amount - progress
+                if (remaining <= 0) continue
+
+                val matches = when (quest.type) {
+                    "craft"     -> quest.target == key
+                    "craft_any" -> quest.skill == skill && craftAnyTargetMatches(quest.target, recipe)
+                    else        -> false
+                }
+                if (matches) {
+                    val prereqDone = quest.requiresPrevious == null ||
+                            progressById[quest.requiresPrevious]?.completed == true
+                    if (prereqDone) {
+                        val neededCrafts = ceilDiv(remaining, recipe.outputQty)
+                        indicators.add(QuestIndicator(QuestCategory.MAIN, max >= neededCrafts))
+                    }
+                }
+            }
+
+            // 2. Guild Progression Quests
+            for ((id, quest) in gameData.guildQuests) {
+                if (quest.type != "craft" && quest.type != "craft_any") continue
+                val prog = progressById[id]
+                if (prog?.completed == true) continue
+                if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
+                val progress = prog?.progress ?: 0
+                val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+                val remaining = effectiveAmount - progress
+                if (remaining <= 0) continue
+
+                val matches = when (quest.type) {
+                    "craft"     -> quest.target == key
+                    "craft_any" -> quest.guild  == skill
+                    else        -> false
+                }
+                if (matches) {
+                    val neededCrafts = ceilDiv(remaining, recipe.outputQty)
+                    indicators.add(QuestIndicator(QuestCategory.MAIN, max >= neededCrafts))
+                }
+            }
+
+            // 3. Daily Quests
+            for (daily in activeDailies) {
+                val remaining = daily.template.amount - daily.progress
+                if (remaining <= 0) continue
+                val matches = when (daily.template.type) {
+                    "craft"     -> daily.template.target == key
+                    "craft_any" -> daily.template.skill  == skill
+                    else        -> false
+                }
+                if (matches) {
+                    val neededCrafts = ceilDiv(remaining, recipe.outputQty)
+                    indicators.add(QuestIndicator(QuestCategory.DAILY, max >= neededCrafts))
+                }
+            }
+
+            // 4. Weekly Quests
+            for (weekly in activeWeeklies) {
+                val remaining = weekly.template.amount - weekly.progress
+                if (remaining <= 0) continue
+                val matches = when (weekly.template.type) {
+                    "craft"     -> weekly.template.target == key
+                    "craft_any" -> weekly.template.skill  == skill
+                    else        -> false
+                }
+                if (matches) {
+                    val neededCrafts = ceilDiv(remaining, recipe.outputQty)
+                    indicators.add(QuestIndicator(QuestCategory.DAILY, max >= neededCrafts))
+                }
+            }
+
+            // 5. Guild Daily Quests
+            for (id in activeGuildDailyIds) {
+                val template = guildPool[id] ?: continue
+                val progress = flags.guildDailyProgress[id] ?: 0
+                val remaining = template.amount - progress
+                if (remaining <= 0) continue
+                val matches = when (template.type) {
+                    "craft"     -> template.target == key
+                    "craft_any" -> template.guild  == skill
+                    else        -> false
+                }
+                if (matches) {
+                    val neededCrafts = ceilDiv(remaining, recipe.outputQty)
+                    indicators.add(QuestIndicator(QuestCategory.DAILY, max >= neededCrafts))
+                }
+            }
+
+            if (indicators.isNotEmpty()) {
+                result[key] = indicators
+            }
+        }
+        return result
     }
 
     private fun craftAnyTargetMatches(target: String, recipe: CraftableRecipe): Boolean = when (target) {
