@@ -661,11 +661,23 @@ class SkillsViewModel @Inject constructor(
                 val player = playerRepo.getOrCreatePlayer()
                 val agility = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
                 val thievingFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val levels = json.decodeFromString<Map<String, Int>>(player.skillLevels)
+                val thievingLevel = levels[Skills.THIEVING] ?: 1
+                val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02).coerceIn(0.10, 0.95)
+                val petBoostPct = petBoostFor(player.pets, Skills.THIEVING)
+                val petBoostedXp = if (petBoostPct > 0) (npc.baseXp * (1.0 + petBoostPct / 100.0)).toInt() else npc.baseXp
+                val expectedXp = 60.0 * (successChance / (2.0 - successChance)) * petBoostedXp
+                val xpQueueMult = (if (thievingFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(thievingFlags)
+                val prestigeLevel = thievingFlags.skillPrestige[Skills.THIEVING] ?: 0
+                val prestigeMult = 1.0 + prestigeLevel * 0.10
+                val estimatedXpGain = (expectedXp * xpQueueMult * prestigeMult).toLong()
+
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = Skills.THIEVING,
                         activityKey         = npcKey,
                         skillDisplayName    = "Thieving",
+                        estimatedXpGain     = estimatedXpGain,
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, thievingFlags.skillPrestige[Skills.AGILITY] ?: 0),
                     )
                 )

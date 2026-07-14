@@ -15,6 +15,12 @@
         "price": 5,
         "stock": "unlimited"
       },
+      "stone": {
+        "display_name": "Stone",
+        "description": "A block of stone. Used for construction.",
+        "price": 8,
+        "stock": "unlimited"
+      },
       "rune_essence": {
         "display_name": "Rune Essence",
         "description": "Raw magical essence used to craft runes.",
