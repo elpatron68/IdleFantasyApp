@@ -158,10 +158,10 @@ fun GuildDetailScreen(
         val claimableDailies = state.dailies.count { !it.claimed && it.progress >= it.template.amount }
 
         Column(Modifier.fillMaxSize().padding(padding)) {
-            GuildRepHeader(
+            GuildProgressHeader(
                 level                     = state.guildLevel,
-                repInLevel                = state.repInLevel,
-                repForLevel               = state.repForLevel,
+                dailiesCompleted          = state.dailiesCompletedThisTier,
+                dailiesRequired           = state.dailiesRequiredThisTier,
                 allCurrentLevelQuestsDone = state.allCurrentLevelQuestsDone,
                 questGateBlocked          = state.questGateBlocked,
             )
@@ -210,10 +210,10 @@ fun GuildDetailScreen(
 }
 
 @Composable
-private fun GuildRepHeader(
+private fun GuildProgressHeader(
     level: Int,
-    repInLevel: Long,
-    repForLevel: Long,
+    dailiesCompleted: Int,
+    dailiesRequired: Int,
     allCurrentLevelQuestsDone: Boolean,
     questGateBlocked: Boolean,
 ) {
@@ -232,13 +232,13 @@ private fun GuildRepHeader(
         if (level < 10) {
             Spacer(Modifier.height(6.dp))
             LinearProgressIndicator(
-                progress = { (repInLevel.toFloat() / repForLevel.toFloat()).coerceIn(0f, 1f) },
+                progress = { (dailiesCompleted.toFloat() / dailiesRequired.toFloat()).coerceIn(0f, 1f) },
                 modifier = Modifier.fillMaxWidth(),
                 color    = if (questGateBlocked) MaterialTheme.colorScheme.error else GoldPrimary,
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text  = stringResource(R.string.guild_rep_label, repInLevel, repForLevel),
+                text  = stringResource(R.string.guild_rep_label, dailiesCompleted, dailiesRequired),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -251,7 +251,7 @@ private fun GuildRepHeader(
                         color = MaterialTheme.colorScheme.error,
                     )
                 }
-                allCurrentLevelQuestsDone && repInLevel < repForLevel -> {
+                allCurrentLevelQuestsDone && dailiesCompleted < dailiesRequired -> {
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text  = stringResource(R.string.guild_do_dailies_hint),

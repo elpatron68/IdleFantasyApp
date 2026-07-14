@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var playerRepository: PlayerRepository
     @Inject lateinit var backupScheduler: BackupScheduler
+    @Inject lateinit var sessionNotificationManager: SessionNotificationManager
 
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -84,6 +85,16 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         pendingNavigateTo.value = intent.getStringExtra(SessionNotificationManager.EXTRA_NAVIGATE_TO)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        sessionNotificationManager.setAppInForeground(true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        sessionNotificationManager.setAppInForeground(false)
     }
 
     private fun requestNotificationPermissionIfNeeded() {

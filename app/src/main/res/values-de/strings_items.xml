@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Adamantithacke</string>
     <string name="item_runite_hoe_name">Runitehacke</string>
 
+    <!-- ===== Lockpicks ===== -->
+    <string name="item_bronze_lockpick_name">Bronzedietrich</string>
+    <string name="item_iron_lockpick_name">Eisendietrich</string>
+    <string name="item_steel_lockpick_name">Stahldietrich</string>
+    <string name="item_mithril_lockpick_name">Mithrildietrich</string>
+    <string name="item_adamantite_lockpick_name">Adamantitdietrich</string>
+    <string name="item_runite_lockpick_name">Runitedietrich</string>
+    <string name="item_divine_hoe_name">Göttliche Hacke</string>
+    <string name="item_dwarven_hammer_name">Zwergenhammer</string>
+    <string name="item_divine_hammer_name">Göttlicher Hammer</string>
+    <string name="item_dwarven_tinderbox_name">Zwergen-Zunderbüchse</string>
+    <string name="item_divine_tinderbox_name">Göttliche Zunderbüchse</string>
+    <string name="item_dwarven_frying_pan_name">Zwergenbratpfanne</string>
+    <string name="item_divine_frying_pan_name">Göttliche Bratpfanne</string>
+    <string name="item_shadow_grappling_hook_name">Schattengreifhaken</string>
+    <string name="item_dwarven_grappling_hook_name">Zwergengreifhaken</string>
+    <string name="item_arcane_grappling_hook_name">Arkaner Greifhaken</string>
+    <string name="item_divine_grappling_hook_name">Göttlicher Greifhaken</string>
+    <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
+    <string name="item_dwarven_lockpick_name">Zwergendietrich</string>
+    <string name="item_shadow_lockpick_name">Schattendietrich</string>
+    <string name="item_divine_lockpick_name">Göttlicher Dietrich</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Angriffs-Gebräu</string>
     <string name="item_defense_brew_name">Verteidigungs-Gebräu</string>

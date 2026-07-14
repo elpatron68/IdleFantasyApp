@@ -23,6 +23,10 @@
     {
       "item": "shadow_dagger",
       "chance": 0.015
+    },
+    {
+      "item": "rogues_lockpick",
+      "chance": 0.02
     }
   ]
 }

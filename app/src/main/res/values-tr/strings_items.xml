@@ -572,6 +572,29 @@
     <string name="item_adamantite_hoe_name">Adamantite Çapası</string>
     <string name="item_runite_hoe_name">Runit Çapası</string>
 
+    <!-- ===== Maymuncuklar ===== -->
+    <string name="item_bronze_lockpick_name">Bronz Maymuncuk</string>
+    <string name="item_iron_lockpick_name">Demir Maymuncuk</string>
+    <string name="item_steel_lockpick_name">Çelik Maymuncuk</string>
+    <string name="item_mithril_lockpick_name">Mithril Maymuncuğu</string>
+    <string name="item_adamantite_lockpick_name">Adamantite Maymuncuğu</string>
+    <string name="item_runite_lockpick_name">Runit Maymuncuğu</string>
+    <string name="item_divine_hoe_name">İlahi Çapa</string>
+    <string name="item_dwarven_hammer_name">Cüce Çekici</string>
+    <string name="item_divine_hammer_name">İlahi Çekiç</string>
+    <string name="item_dwarven_tinderbox_name">Cüce Çakmaktaşı</string>
+    <string name="item_divine_tinderbox_name">İlahi Çakmaktaşı</string>
+    <string name="item_dwarven_frying_pan_name">Cüce Tavası</string>
+    <string name="item_divine_frying_pan_name">İlahi Tava</string>
+    <string name="item_shadow_grappling_hook_name">Gölge Kancası</string>
+    <string name="item_dwarven_grappling_hook_name">Cüce Kancası</string>
+    <string name="item_arcane_grappling_hook_name">Ezoterik Kancası</string>
+    <string name="item_divine_grappling_hook_name">İlahi Kanca</string>
+    <string name="item_rogues_lockpick_name">Haydut Maymuncuğu</string>
+    <string name="item_dwarven_lockpick_name">Cüce Maymuncuğu</string>
+    <string name="item_shadow_lockpick_name">Gölge Maymuncuğu</string>
+    <string name="item_divine_lockpick_name">İlahi Maymuncuk</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Saldırı Karışımı</string>
     <string name="item_defense_brew_name">Savunma Karışımı</string>

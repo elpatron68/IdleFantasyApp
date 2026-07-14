@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Grijphaak</string>
     <string name="equip_slot_hammer">Hamer</string>
     <string name="equip_slot_tinderbox">Tondeldoos</string>
+    <string name="equip_slot_lockpick">Loper</string>
 </resources>

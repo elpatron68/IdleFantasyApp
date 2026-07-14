@@ -663,7 +663,9 @@ class SkillsViewModel @Inject constructor(
                 val thievingFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
                 val levels = json.decodeFromString<Map<String, Int>>(player.skillLevels)
                 val thievingLevel = levels[Skills.THIEVING] ?: 1
-                val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02).coerceIn(0.10, 0.95)
+                val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+                val lockpickEff = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired)
+                val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02 * lockpickEff).coerceIn(0.10, 0.95)
                 val petBoostPct = petBoostFor(player.pets, Skills.THIEVING)
                 val petBoostedXp = if (petBoostPct > 0) (npc.baseXp * (1.0 + petBoostPct / 100.0)).toInt() else npc.baseXp
                 val expectedXp = 60.0 * (successChance / (2.0 - successChance)) * petBoostedXp
@@ -699,6 +701,7 @@ class SkillsViewModel @Inject constructor(
                 val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
                 val xpMap: Map<String, Long> = json.decodeFromString(player.skillXp)
                 val flags: PlayerFlags = json.decodeFromString(player.flags)
+                val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
                 val result = ThievingSimulator.simulate(
                     npcKey          = npcKey,
                     npc             = npc,
@@ -709,6 +712,7 @@ class SkillsViewModel @Inject constructor(
                     petBoostPct     = petBoostFor(player.pets, Skills.THIEVING),
                     petDropKey      = petKey,
                     petDropChance   = petChance,
+                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
                 )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),
@@ -1058,8 +1062,7 @@ class SkillsViewModel @Inject constructor(
             if (quest.target != itemKey) continue
             val prog = questProgress[id]
             if (prog?.completed == true) continue
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
             if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
@@ -1117,8 +1120,7 @@ class SkillsViewModel @Inject constructor(
             if (quest.type != "prayer") continue
             val prog = questProgress[id]
             if (prog?.completed == true) continue
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
             if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
@@ -1279,8 +1281,7 @@ class SkillsViewModel @Inject constructor(
         for ((id, quest) in gameData.guildQuests) {
             val prog = progressById[id]
             if (prog?.completed == true) continue
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
 
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.MAIN)

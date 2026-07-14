@@ -32,9 +32,8 @@ data class GuildDetailUiState(
     val isLoading: Boolean = true,
     val guildKey: String = "",
     val guildLevel: Int = 0,
-    val guildRep: Long = 0L,
-    val repInLevel: Long = 0L,
-    val repForLevel: Long = 1L,
+    val dailiesCompletedThisTier: Int = 0,
+    val dailiesRequiredThisTier: Int = 1,
     val quests: List<GuildQuestWithProgress> = emptyList(),
     val dailies: List<GuildDailyWithProgress> = emptyList(),
     val nextResetMs: Long = 0L,
@@ -75,10 +74,11 @@ class GuildDetailViewModel @Inject constructor(
 
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
-        val rep   = flags.guildReputation[guild] ?: 0L
         val completedQuestIds = progressList.filter { it.completed }.map { it.questId }.toSet()
-        val level = guildRepo.guildLevel(guild, rep, completedQuestIds)
-        val (repInLevel, repForLevel) = repProgressForLevel(rep, level)
+        val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds)
+        val dailiesCompletedThisTier = if (level >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size) 0
+            else flags.guildDailyTierCounts["$guild:$level"] ?: 0
+        val dailiesRequiredThisTier = GuildRepository.DAILIES_REQUIRED_PER_TIER.getOrElse(level) { 1 }
 
         val progressMap = progressList.associateBy { it.questId }
         val quests = gameData.guildQuests.values
@@ -104,9 +104,8 @@ class GuildDetailViewModel @Inject constructor(
             isLoading                 = false,
             guildKey                  = guild,
             guildLevel                = level,
-            guildRep                  = rep,
-            repInLevel                = repInLevel,
-            repForLevel               = repForLevel,
+            dailiesCompletedThisTier  = dailiesCompletedThisTier,
+            dailiesRequiredThisTier   = dailiesRequiredThisTier,
             quests                    = quests,
             dailies                   = dailies,
             allCurrentLevelQuestsDone = allCurrentLevelQuestsDone,

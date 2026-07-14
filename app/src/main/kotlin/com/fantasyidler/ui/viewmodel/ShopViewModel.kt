@@ -485,7 +485,7 @@ class ShopViewModel @Inject constructor(
                 EquipSlot.WEAPON                                      -> "Weapons"
                 EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
                 EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK,
-                EquipSlot.FRYING_PAN                                                   -> "Tools"
+                EquipSlot.FRYING_PAN, EquipSlot.LOCKPICK                               -> "Tools"
                 else                                                  -> "Armor"
             }
         }
@@ -511,6 +511,7 @@ class ShopViewModel @Inject constructor(
         private val TOOL_SLOTS = setOf(
             EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
             EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN,
+            EquipSlot.LOCKPICK,
         )
 
         /**
@@ -574,6 +575,7 @@ class ShopViewModel @Inject constructor(
             EquipSlot.AXE         -> item.woodcuttingEfficiency ?: 0f
             EquipSlot.FISHING_ROD -> item.fishingEfficiency ?: 0f
             EquipSlot.HOE         -> item.farmingEfficiency ?: 0f
+            EquipSlot.LOCKPICK    -> item.thievingEfficiency ?: 0f
             else                  -> (item.attackBonus + item.strengthBonus + item.defenseBonus).toFloat()
         }
 

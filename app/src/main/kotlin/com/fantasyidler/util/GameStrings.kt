@@ -182,6 +182,7 @@ object GameStrings {
         "construction" -> R.drawable.skill_construction
         "thieving"     -> R.drawable.skill_thieving
         "combat"       -> R.drawable.skill_combat
+        "expedition"   -> R.drawable.skill_expedition
         else           -> null
     }
 }

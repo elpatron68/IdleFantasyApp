@@ -110,4 +110,5 @@
     <string name="equip_slot_grappling_hook">Hak wspinaczkowy</string>
     <string name="equip_slot_hammer">Młot</string>
     <string name="equip_slot_tinderbox">Krzesiwo</string>
+    <string name="equip_slot_lockpick">Wytrych</string>
 </resources>

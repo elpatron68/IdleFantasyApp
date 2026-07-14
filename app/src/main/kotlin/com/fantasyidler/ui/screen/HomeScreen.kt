@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -558,26 +559,41 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             // ── Greeting ────────────────────────────────────────────────
-            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text(
-                    text  = stringResource(R.string.home_welcome_greeting),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                val baseName = state.characterName.ifBlank { stringResource(R.string.home_adventurer) }
-                val titleName = state.titleName
-                Text(
-                    text       = if (titleName == null) stringResource(R.string.home_welcome_name, baseName) else baseName,
-                    style      = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                )
-                if (titleName != null) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
                     Text(
-                        text       = stringResource(R.string.home_welcome_title, titleName),
-                        style      = MaterialTheme.typography.titleLarge,
+                        text  = stringResource(R.string.home_welcome_greeting),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    val baseName = state.characterName.ifBlank { stringResource(R.string.home_adventurer) }
+                    val titleName = state.titleName
+                    Text(
+                        text       = if (titleName == null) stringResource(R.string.home_welcome_name, baseName) else baseName,
+                        style      = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                     )
+                    if (titleName != null) {
+                        Text(
+                            text       = stringResource(R.string.home_welcome_title, titleName),
+                            style      = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                 }
+                CharacterSprite(
+                    race       = state.characterRace.ifBlank { "human" },
+                    skinTone   = state.characterSkinTone,
+                    hairStyle  = state.characterHairStyle,
+                    hairColor  = state.characterHairColor,
+                    eyeStyle   = state.characterEyeStyle,
+                    beardStyle = state.characterBeardStyle,
+                    beardColor = state.characterBeardColor,
+                    modifier   = Modifier.height(100.dp).aspectRatio(64f / 36f),
+                )
             }
 
             // ── Stats card ──────────────────────────────────────────────
@@ -729,9 +745,9 @@ fun HomeScreen(
                 Surface(
                     shape    = RoundedCornerShape(16.dp),
                     color    = MaterialTheme.colorScheme.surfaceVariant,
-                    modifier = if (eventComplete) Modifier.fillMaxWidth()
-                               else Modifier.fillMaxWidth(),
-                    onClick = onNavigateToSeasonalEvent,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled  = !eventComplete,
+                    onClick  = onNavigateToSeasonalEvent,
                 ) {
                     Row(
                         modifier = Modifier.padding(12.dp),

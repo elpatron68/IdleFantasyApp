@@ -34,6 +34,19 @@ class SessionNotificationManager @Inject constructor(
         private const val NOTIF_ID_BLESSING_EXPIRED  = 3002
     }
 
+    @Volatile
+    private var appInForeground = false
+
+    /** Call from the activity's onStart/onStop to track foreground state. */
+    fun setAppInForeground(inForeground: Boolean) {
+        appInForeground = inForeground
+        if (inForeground) cancelAll()
+    }
+
+    fun cancelAll() {
+        NotificationManagerCompat.from(context).cancelAll()
+    }
+
     fun localizedContext(): Context = context.withAppLocale()
 
     /** Call once on app startup to register notification channels (idempotent). */
@@ -142,6 +155,7 @@ class SessionNotificationManager @Inject constructor(
     }
 
     private fun postIfPermitted(id: Int, notification: android.app.Notification) {
+        if (appInForeground) return
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
             == PackageManager.PERMISSION_GRANTED
         ) {

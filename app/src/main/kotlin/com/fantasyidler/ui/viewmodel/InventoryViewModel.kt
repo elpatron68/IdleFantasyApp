@@ -83,6 +83,12 @@ class InventoryViewModel @Inject constructor(
         val characterName: String = "",
         val characterGender: String = "",
         val characterRace: String = "",
+        val characterSkinTone: Int = 1,
+        val characterHairStyle: Int = 1,
+        val characterHairColor: String = "a",
+        val characterEyeStyle: Int = 1,
+        val characterBeardStyle: Int = 0,
+        val characterBeardColor: String = "a",
         val snackbarMessage: String? = null,
         val skillingDungeonNotes: Map<String, Int> = emptyMap(),
         val unlockedDungeons: List<String> = emptyList(),
@@ -156,6 +162,12 @@ class InventoryViewModel @Inject constructor(
                 characterName         = flags.characterName,
                 characterGender       = flags.characterGender,
                 characterRace         = flags.characterRace,
+                characterSkinTone     = flags.characterSkinTone,
+                characterHairStyle    = flags.characterHairStyle,
+                characterHairColor    = flags.characterHairColor,
+                characterEyeStyle     = flags.characterEyeStyle,
+                characterBeardStyle   = flags.characterBeardStyle,
+                characterBeardColor   = flags.characterBeardColor,
                 skillingDungeonNotes  = flags.skillingDungeonNotes,
                 unlockedDungeons      = flags.unlockedDungeons,
                 xpBoostExpiresAt        = flags.xpBoostExpiresAt,
@@ -274,6 +286,7 @@ class InventoryViewModel @Inject constructor(
                     EquipSlot.TINDERBOX      -> item.firemakingEfficiency ?: 0f
                     EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
                     EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
+                    EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
                     else -> if (slot in EquipSlot.WEAPON_SLOTS)
                         item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                     else
@@ -328,6 +341,29 @@ class InventoryViewModel @Inject constructor(
         viewModelScope.launch { playerRepo.updateCharacterProfile(name, gender, race) }
     }
 
+    fun saveAppearance(
+        skinTone: Int,
+        hairStyle: Int,
+        hairColor: String,
+        eyeStyle: Int,
+        beardStyle: Int,
+        beardColor: String,
+        race: String,
+    ) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(
+                characterSkinTone   = skinTone,
+                characterHairStyle  = hairStyle,
+                characterHairColor  = hairColor,
+                characterEyeStyle   = eyeStyle,
+                characterBeardStyle = beardStyle,
+                characterBeardColor = beardColor,
+                characterRace       = race,
+            ))
+        }
+    }
+
     fun equipTitle(id: String?) {
         viewModelScope.launch { titleRepo.equipTitle(id) }
     }
@@ -361,7 +397,8 @@ class InventoryViewModel @Inject constructor(
         if (equip != null) return when (equip.slot) {
             EquipSlot.WEAPON -> InventoryCategory.WEAPONS
             EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
-            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN -> InventoryCategory.TOOLS
+            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN,
+            EquipSlot.LOCKPICK -> InventoryCategory.TOOLS
             else -> InventoryCategory.ARMOUR
         }
         if (key in gameData.foodHealValues)  return InventoryCategory.FOOD

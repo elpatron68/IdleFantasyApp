@@ -20,7 +20,7 @@ import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.util.toolEfficiency
+import com.fantasyidler.util.craftDurationEfficiency
 import kotlinx.serialization.serializer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -361,11 +361,7 @@ class CraftingViewModel @Inject constructor(
         _extra.update { it.copy(craftQuantity = qty.coerceIn(1, max.coerceAtLeast(1))) }
 
     private fun craftToolEfficiency(recipe: CraftableRecipe, equipped: Map<String, String?>): Float =
-        when (recipe.skillName) {
-            Skills.SMITHING -> gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, recipe.levelRequired)
-            Skills.COOKING  -> gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, recipe.levelRequired)
-            else            -> 1.0f
-        }
+        gameData.craftDurationEfficiency(recipe.skillName, recipe.key, equipped)
 
     fun craft() {
         val state  = uiState.value          // combined state — has inventory
@@ -507,8 +503,7 @@ class CraftingViewModel @Inject constructor(
             val prog = progressById[id]
             if (prog?.completed == true) continue
             // Skip if the player's current guild level is below the quest's requirement
-            val rep = flags.guildReputation[quest.guild] ?: 0L
-            if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val progress = prog?.progress ?: 0
             val matches = when (quest.type) {
                 "craft"     -> quest.target == recipe.outputKey
@@ -642,8 +637,7 @@ class CraftingViewModel @Inject constructor(
                 if (quest.type != "craft" && quest.type != "craft_any") continue
                 val prog = progressById[id]
                 if (prog?.completed == true) continue
-                val rep = flags.guildReputation[quest.guild] ?: 0L
-                if (guildRepo.guildLevel(quest.guild, rep, completedIds) < quest.guildLevelRequired) continue
+                if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
                 val progress = prog?.progress ?: 0
                 val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
                 val remaining = effectiveAmount - progress

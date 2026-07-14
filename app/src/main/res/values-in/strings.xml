@@ -335,7 +335,7 @@
     <string name="home_town_title">Kota</string>
     <string name="home_town_desc">Kunjungi toko, Penginapan, Serikat, Toko Bangunan, Penumpasan, dan Karnaval</string>
     <string name="guild_dailies_available">Tersedia harian</string>
-    <string name="guild_do_dailies_hint">Lakukan tugas harian untuk meningkatkan reputasimu</string>
+    <string name="guild_do_dailies_hint">Lakukan tugas harian untuk naik ke tingkat berikutnya</string>
     <string name="guild_quest_gate_blocked">Selesaikan Tugas untuk meningkatkan peringkatmu.</string>
     <string name="guild_quest_required">Quest diperlukan untuk melanjutkan</string>
     <string name="home_died_message">Anda meninggal dan kehilangan sebagian besar keuntungan Anda.</string>
@@ -493,6 +493,14 @@
     <string name="character_race_orc">Orc</string>
     <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnome</string>
+    <string name="appearance_title">Sesuaikan Penampilan</string>
+    <string name="appearance_skin_tone">Warna Kulit</string>
+    <string name="appearance_eyes">Mata</string>
+    <string name="appearance_hair_style">Gaya Rambut</string>
+    <string name="appearance_hair_color">Warna Rambut</string>
+    <string name="appearance_beard">Janggut</string>
+    <string name="appearance_beard_color">Warna Janggut</string>
+    <string name="appearance_save">Simpan Penampilan</string>
     <string name="onboarding_sessions_title">Sesi</string>
     <string name="onboarding_sessions_desc">Ketuk keahlian apa pun dan mulai sesi pelatihan. Sesi berjalan di latar belakang, bahkan saat aplikasi ditutup. Kembali lagi untuk mengumpulkan hadiah dan XP Anda.</string>
     <string name="onboarding_progress_title">Berusahalah dari Bawah Menuju Puncak</string>
@@ -597,7 +605,7 @@
     <string name="inn_worker_tier">pekerja %1$s</string>
     <string name="worker_skills_title_nav">Keahlian Pekerja</string>
     <string name="guild_hall_title">Balai Serikat</string>
-    <string name="guild_hall_desc">Dapatkan hadiah dari serikat</string>
+    <string name="guild_hall_desc">Gabung serikat dan selesaikan permintaan harian untuk naik tingkat</string>
     <string name="guild_hall_intro">Serikat memberikan hadiah untuk aktivitas yang sudah Anda lakukan. Selesaikan quest dan permintaan harian untuk mendapatkan material lintas skill, koin, dan XP, sehingga spesialis masih dapat mengakses sumber daya dari skill yang tidak mereka latih.</string>
     <string name="guild_level_label">Level %1$d</string>
     <string name="guild_level_max">Level 10 (Max)</string>
@@ -605,7 +613,7 @@
     <string name="guild_tab_dailies">Permintaan Harian</string>
     <string name="guild_daily_resets_in">Direset setiap hari pukul 6 pagi</string>
     <string name="guild_locked_hint">Membutuhkan Level Serikat %1$d</string>
-    <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk mendapatkan reputasi dan membuka permintaan harian.</string>
+    <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk membuka permintaan harian.</string>
     <string name="guild_contribute_inventory">Kontribusi di inventaris (%1$d tersedia)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s untuk %4$s.</string>
     <string name="guild_quest_desc_kill">Kalahkan %1$d musuh menggunakan %2$s pertempuran.</string>
@@ -617,7 +625,7 @@
     <string name="guild_combat_melee">Melee</string>
     <string name="guild_combat_ranged">Ranged</string>
     <string name="guild_combat_magic">sihir</string>
-    <string name="guild_rep_label">%1$d / %2$d reputasi</string>
+    <string name="guild_rep_label">%1$d / %2$d harian</string>
     <string name="guild_quest_complete">Misi selesai: %1$s!</string>
     <string name="guild_daily_complete">Hadiah harian telah diklaim!</string>
     <string name="guild_name_mining">Serikat Menambang</string>
