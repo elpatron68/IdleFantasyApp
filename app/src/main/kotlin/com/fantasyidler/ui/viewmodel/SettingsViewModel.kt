@@ -9,6 +9,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.toExport
 import com.fantasyidler.data.model.toSkillSession
 import com.fantasyidler.repository.BackupScheduler
+import com.fantasyidler.repository.FarmingRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
@@ -39,6 +40,7 @@ class SettingsViewModel @Inject constructor(
     private val workerStarter: WorkerQueuedSessionStarter,
     private val backupScheduler: BackupScheduler,
     private val guildRepo: GuildRepository,
+    private val farmingRepo: FarmingRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -106,6 +108,22 @@ class SettingsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
+    val collapsibleTownGrid: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).collapsibleTownGrid }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
+    val showCharacterViewer: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).showCharacterViewer }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
     val profileLayout: StateFlow<String> = playerRepo.playerFlow
         .map { player ->
             if (player == null) return@map "rail"
@@ -139,6 +157,20 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(showSeasonalEvents = enabled))
+        }
+    }
+
+    fun setCollapsibleTownGrid(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(collapsibleTownGrid = enabled))
+        }
+    }
+
+    fun setShowCharacterViewer(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(showCharacterViewer = enabled))
         }
     }
 
@@ -224,6 +256,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             sessionRepo.deleteAllSessions()
             questRepo.resetAllProgress()
+            farmingRepo.resetAllPatches()
             playerRepo.resetProgression()
         }
     }

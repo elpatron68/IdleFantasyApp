@@ -1,6 +1,6 @@
 name: Wiki Error
 description: Something in the wiki is incorrect/needs expanding
-labels: ["wiki"]
+labels: ["documentation"]
 body:
   - type: checkboxes
     id: preflight
