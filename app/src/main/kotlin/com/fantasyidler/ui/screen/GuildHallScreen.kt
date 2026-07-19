@@ -33,6 +33,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.GuildHallViewModel
@@ -138,6 +140,11 @@ fun GuildHallScreen(
                     color    = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
                 )
+                if (BuildConfig.DEBUG) {
+                    TextButton(onClick  = { viewModel.debugResetGuildDailies() }) {
+                        Text("[Debug] Reset dailies")
+                    }
+                }
             }
             for (group in GUILD_GROUPS) {
                 item(key = "header_${group.headerRes}") {

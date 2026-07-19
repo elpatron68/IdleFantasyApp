@@ -95,4 +95,10 @@ class GuildHallViewModel @Inject constructor(
 
         GuildHallUiState(isLoading = false, guilds = summaries)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), GuildHallUiState())
+
+    fun debugResetGuildDailies() {
+        viewModelScope.launch {
+            guildRepo.debugResetGuildDailies()
+        }
+    }
 }

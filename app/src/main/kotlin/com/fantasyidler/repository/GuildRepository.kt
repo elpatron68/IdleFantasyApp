@@ -13,6 +13,8 @@ import javax.inject.Singleton
 import kotlin.random.Random
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.sync.withLock
+import kotlin.random.nextInt
+import kotlin.random.nextLong
 
 data class GuildQuestWithProgress(
     val quest: GuildQuestData,
@@ -501,11 +503,12 @@ class GuildRepository @Inject constructor(
 
     /** Selects up to 4 daily templates per guild for today, filtered by current guild level.
      *  Uses a date-seeded RNG so the same dailies are shown all day. */
-    fun buildRefreshedGuildDailyFlags(flags: PlayerFlags, completedQuestIds: Set<String>, skillLevels: Map<String, Int> = emptyMap()): PlayerFlags {
+    fun buildRefreshedGuildDailyFlags(flags: PlayerFlags, completedQuestIds: Set<String>, skillLevels: Map<String, Int> = emptyMap(), randomSeed: Boolean = false): PlayerFlags {
         val today = Calendar.getInstance().let {
             it.get(Calendar.YEAR) * 10000 + it.get(Calendar.MONTH) * 100 + it.get(Calendar.DAY_OF_MONTH)
         }
-        val rng = Random(today.toLong())
+        val rng = if (randomSeed) Random(Random.nextLong()) else Random(today.toLong())
+   
         val selectedIds = mutableListOf<String>()
 
         for (guild in ALL_GUILDS) {
@@ -529,6 +532,18 @@ class GuildRepository @Inject constructor(
 
     /** Refreshes guild dailies if needed, then retroactively resets any quest progress that pre-accumulated above the current tier. */
     suspend fun ensureGuildDailiesRefreshed(): PlayerFlags = playerRepo.playerMutex.withLock { ensureGuildDailiesRefreshedUnlocked() }
+
+    /**
+     * Debug helper: force-regenerates today's guild dailies and clears progress/claimed state,
+     * as if the 6am daily reset had just fired.
+     */
+    suspend fun debugResetGuildDailies() = playerRepo.playerMutex.withLock {
+        val flags = playerRepo.getFlags()
+        val completedQuestIds = loadCompletedQuestIds()
+        val skillLevels = try { playerRepo.getSkillLevels() } catch (_: Exception) { emptyMap() }
+        val refreshed = buildRefreshedGuildDailyFlags(flags, completedQuestIds, skillLevels, true)
+        playerRepo.updateFlagsUnlocked(refreshed)
+    }
 
     internal suspend fun ensureGuildDailiesRefreshedUnlocked(): PlayerFlags {
         var flags = getRefreshedGuildDailyFlags()
