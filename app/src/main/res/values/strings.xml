@@ -26,7 +26,7 @@
     <string name="btn_buy">Buy</string>
     <string name="btn_sell">Sell</string>
     <string name="btn_plant">Plant</string>
-    <string name="btn_harvest">Harvest</string>
+    <string name="btn_harvest" translatable="false">Harvest</string>
     <string name="btn_harvest_all">Harvest All</string>
     <string name="btn_clear">Clear</string>
     <string name="btn_clear_all">Clear All</string>
@@ -47,7 +47,7 @@
     <string name="label_level">Level</string>
     <string name="label_xp" translatable="false">XP</string>
     <string name="label_coins">Coins</string>
-    <string name="label_hp">HP</string>
+    <string name="label_hp" translatable="false">HP</string>
     <string name="label_attack">Attack</string>
     <string name="label_strength">Strength</string>
     <string name="label_defense">Defense</string>
@@ -310,8 +310,8 @@
     <string name="label_weekly">Weekly</string>
     <string name="label_timed">Timed</string>
     <string name="label_daily_quests">Daily Quests</string>
-    <string name="label_daily_reset">Resets at 6:00 AM</string>
-    <string name="label_weekly_reset">Resets Monday at 6am</string>
+    <string name="label_daily_reset">Resets at %1$s</string>
+    <string name="label_weekly_reset">Resets Monday at %1$s</string>
     <string name="weekly_bonus_title">Weekly Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
@@ -372,18 +372,20 @@
     <string name="settings_font_large">Large</string>
     <string name="settings_font_huge">Huge</string>
     <string name="settings_language_desc">Override the app display language</string>
-    <string name="settings_lang_english">English</string>
-    <string name="settings_lang_deutsch">Deutsch</string>
+    <string name="settings_lang_english" translatable="false">English</string>
+    <string name="settings_lang_deutsch" translatable="false">Deutsch</string>
     <string name="settings_lang_français" translatable="false">Français</string>
-    <string name="settings_lang_dutch">Nederlands</string>
-    <string name="settings_lang_español">Español</string>
-    <string name="settings_lang_español_españa">Español (España)</string>
-    <string name="settings_lang_turkish">Türkçe</string>
-    <string name="settings_lang_italiano">Italiano</string>
-    <string name="settings_lang_russian">Русский</string>
-    <string name="settings_lang_indonesian">Bahasa Indonesia</string>
-    <string name="settings_lang_portugues_brasil">Português (Brasil)</string>
-    <string name="settings_lang_japanese">日本語</string>
+    <string name="settings_lang_dutch" translatable="false">Nederlands</string>
+    <string name="settings_lang_español" translatable="false">Español</string>
+    <string name="settings_lang_español_españa" translatable="false">Español (España)</string>
+    <string name="settings_lang_turkish" translatable="false">Türkçe</string>
+    <string name="settings_lang_italiano" translatable="false">Italiano</string>
+    <string name="settings_lang_russian" translatable="false">Русский</string>
+    <string name="settings_lang_indonesian" translatable="false">Bahasa Indonesia</string>
+    <string name="settings_lang_portugues_brasil" translatable="false">Português (Brasil)</string>
+    <string name="settings_lang_japanese" translatable="false">日本語</string>
+    <string name="settings_lang_irish" translatable="false">Gaeilge</string>
+    <string name="settings_lang_czech" translatable="false">Čeština</string>
     <string name="settings_lang_system">System</string>
     <string name="settings_save_data">Save Data</string>
     <string name="settings_export">Export Save</string>
@@ -455,7 +457,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Queue ends in %1$s</string>
     <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
-    <string name="queue_item_qty">×%1$d</string>
+    <string name="queue_item_qty" translatable="false">×%1$d</string>
     <string name="queue_item_qty_with_output">×%1$d → %2$d items</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
@@ -511,6 +513,8 @@
     <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d gear</string>
+    <!-- Translator note: %1$d = permanent prestige stat bonus value -->
+    <string name="combat_prestige_bonus">+%1$d prestige</string>
 
     <!-- ===== ProfileScreen ===== -->
     <string name="profile_unnamed">Unnamed Adventurer</string>
@@ -821,7 +825,7 @@
     <string name="quest_kbd_slayer_1_name">King Black Dragon Slayer I</string>
     <string name="quest_kbd_slayer_2_name">King Black Dragon Slayer II</string>
     <string name="quest_kbd_slayer_3_name">King Black Dragon Slayer III</string>
-    <string name="inn_daily_resets">Refreshes daily at 6am</string>
+    <string name="inn_daily_resets">Refreshes daily at %1$s</string>
     <string name="inn_food_heal">+%1$d HP</string>
     <string name="inn_food_purchased">Food purchased.</string>
     <string name="inn_buy_qty">Quantity</string>
@@ -840,7 +844,7 @@
     <string name="guild_level_max">Level 10 (Max)</string>
     <string name="guild_tab_quests">Quests</string>
     <string name="guild_tab_dailies">Daily Requests</string>
-    <string name="guild_daily_resets_in">Resets daily at 6am</string>
+    <string name="guild_daily_resets_in">Resets daily at %1$s</string>
     <string name="guild_locked_hint">Requires Guild Level %1$d</string>
     <string name="guild_no_dailies">Complete guild quests to unlock daily requests.</string>
     <string name="guild_contribute_inventory">Contribute from inventory (%1$d available)</string>
