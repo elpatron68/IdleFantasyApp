@@ -229,13 +229,18 @@ jobs:
             gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
           fi
 
+          release_delete() {
+            gh release delete "$TAG" --repo "$REPO" --yes --cleanup-tag 2>/dev/null \
+              || gh release delete "$TAG" --repo "$REPO" --yes 2>/dev/null \
+              || true
+            gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+          }
+
           if gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1; then
             IS_DRAFT="$(gh release view "$TAG" --repo "$REPO" --json isDraft -q .isDraft)"
             if [[ "${{ inputs.force }}" == "true" || "$IS_DRAFT" == "true" ]]; then
               echo "Deleting existing release ${TAG} (force=${{ inputs.force }}, draft=${IS_DRAFT})"
-              gh release delete "$TAG" --repo "$REPO" --yes --cleanup-tag 2>/dev/null \
-                || gh release delete "$TAG" --repo "$REPO" --yes
-              gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+              release_delete
             else
               ASSET_COUNT="$(gh release view "$TAG" --repo "$REPO" --json assets -q '.assets | length')"
               if [[ "$ASSET_COUNT" -gt 0 ]]; then
@@ -243,9 +248,7 @@ jobs:
                 exit 0
               fi
               echo "Release ${TAG} exists without assets — recreating"
-              gh release delete "$TAG" --repo "$REPO" --yes --cleanup-tag 2>/dev/null \
-                || gh release delete "$TAG" --repo "$REPO" --yes
-              gh api -X DELETE "repos/${REPO}/git/refs/tags/${TAG}" 2>/dev/null || true
+              release_delete
             fi
           fi
 
