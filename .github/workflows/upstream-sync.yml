@@ -121,10 +121,16 @@ jobs:
         run: |
           UPSTREAM_TAG="$(gh release view --repo tristinbaker/IdleFantasy --json tagName -q .tagName)"
           if gh release view "$UPSTREAM_TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
-            echo "Fork already has upstream release $UPSTREAM_TAG"
-            exit 0
+            IS_DRAFT="$(gh release view "$UPSTREAM_TAG" --repo "${{ github.repository }}" --json isDraft -q .isDraft)"
+            ASSET_COUNT="$(gh release view "$UPSTREAM_TAG" --repo "${{ github.repository }}" --json assets -q '.assets | length')"
+            if [[ "$IS_DRAFT" != "true" && "$ASSET_COUNT" -gt 0 ]]; then
+              echo "Fork already has upstream release $UPSTREAM_TAG"
+              exit 0
+            fi
+            echo "Fork release $UPSTREAM_TAG is draft or missing APK — dispatching Upstream Release"
+          else
+            echo "Fork missing upstream release $UPSTREAM_TAG — dispatching Upstream Release"
           fi
-          echo "Fork missing upstream release $UPSTREAM_TAG — dispatching Upstream Release"
           gh workflow run upstream-release.yml --ref main
 
       - name: Trigger Save Viewer sync (optional)
