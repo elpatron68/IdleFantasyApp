@@ -307,10 +307,15 @@ internal fun QueueCard(
                         val levelAfter  = XpTable.levelForXp(endXp)
                         val levelGain   = levelAfter - levelBefore
                         val pct         = (XpTable.progressFraction(endXp) * 100).toInt()
-                        buildString {
-                            append("+${a.estimatedXpGain.formatXp()} XP  →  Lv $levelAfter")
-                            if (levelGain > 0) append(" (+$levelGain, $pct%)")
-                            else append(" ($pct%)")
+                        when (a.skillName) {
+                            "combat", "boss" -> buildString {
+                                append("+${a.estimatedXpGain.formatXp()} XP")
+                            }
+                            else -> buildString {
+                                append("+${a.estimatedXpGain.formatXp()} XP  →  Lv $levelAfter")
+                                if (levelGain > 0) append(" (+$levelGain, $pct%)")
+                                else append(" ($pct%)")
+                            }
                         }
                     }
                 }
