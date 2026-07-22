@@ -650,7 +650,7 @@ class CombatViewModel @Inject constructor(
                 val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
 
                 val prestigeMapBoss = flags.skillPrestige
-                val bossFrames = simulateBoss(
+                val bossFrames = CombatSimulator.simulateBoss(
                     boss               = boss,
                     bossKey            = bossKey,
                     playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + (prestigeMapBoss[Skills.ATTACK]    ?: 0) * 5,
@@ -881,58 +881,6 @@ class CombatViewModel @Inject constructor(
     }
 
     // ------------------------------------------------------------------
-    // Boss simulation
-    // ------------------------------------------------------------------
-
-    private fun simulateBoss(
-        boss: BossData,
-        bossKey: String,
-        playerAttack: Int,
-        playerStrength: Int,
-        playerDefence: Int,
-        playerHp: Int,
-        weaponAttackBonus: Int,
-        weaponStrBonus: Int,
-        combatStyle: String = "melee",
-        playerRanged: Int = 1,
-        playerMagic: Int = 1,
-        rangedGearStrengthBonus: Int = 0,
-        spellMaxHit: Int = 0,
-        availableArrows: Map<String, Int> = emptyMap(),
-        arrowStrengthBonuses: Map<String, Int> = emptyMap(),
-        equippedFood: Map<String, Int> = emptyMap(),
-        foodHealValues: Map<String, Int> = emptyMap(),
-        blessingDefBonus: Int = 0,
-        runeKey: String? = null,
-        runeCostPerAttack: Int = 1,
-        availableRunes: Int = Int.MAX_VALUE,
-        attackSpeedSec: Double = CombatSimulator.BASE_ATTACK_SPEED_SEC,
-    ): List<SessionFrame> = CombatSimulator.simulateBoss(
-        boss               = boss,
-        bossKey            = bossKey,
-        playerAttack       = playerAttack,
-        playerStrength     = playerStrength,
-        playerDefence      = playerDefence,
-        playerHp           = playerHp,
-        weaponAttackBonus  = weaponAttackBonus,
-        weaponStrBonus     = weaponStrBonus,
-        combatStyle        = combatStyle,
-        playerRanged       = playerRanged,
-        playerMagic        = playerMagic,
-        rangedGearStrengthBonus = rangedGearStrengthBonus,
-        spellMaxHit        = spellMaxHit,
-        availableArrows    = availableArrows,
-        arrowStrengthBonuses = arrowStrengthBonuses,
-        equippedFood       = equippedFood,
-        foodHealValues     = foodHealValues,
-        blessingDefBonus   = blessingDefBonus,
-        runeKey            = runeKey,
-        runeCostPerAttack  = runeCostPerAttack,
-        availableRunes     = availableRunes,
-        attackSpeedSec     = attackSpeedSec,
-    )
-
-    // ------------------------------------------------------------------
     // Arrow tables
     // ------------------------------------------------------------------
 
@@ -1094,7 +1042,7 @@ class CombatViewModel @Inject constructor(
         val staffCoversRune  = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
         val bossRuneKey      = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
 
-        val bossFrames = simulateBoss(
+        val bossFrames = CombatSimulator.simulateBoss(
             boss               = boss,
             bossKey            = bossKey,
             playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + (prestigeMapBoss[Skills.ATTACK]    ?: 0) * 5,
