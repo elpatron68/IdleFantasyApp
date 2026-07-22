@@ -37,7 +37,6 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -55,7 +54,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
@@ -78,8 +76,6 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
 
     val themePreference        by viewModel.themePreference.collectAsState()
     val fontScale              by viewModel.fontScale.collectAsState()
@@ -458,8 +454,6 @@ fun SettingsScreen(
                     triggerSaveViewerUpload(
                         viewerUrl         = viewerUrl,
                         context           = context,
-                        scope             = scope,
-                        snackbarHostState = snackbarHostState,
                         settingsViewModel = viewModel,
                         onUploadingChange = { isViewerUploading = it },
                     )
