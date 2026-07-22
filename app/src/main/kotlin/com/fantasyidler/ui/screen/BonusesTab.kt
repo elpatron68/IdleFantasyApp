@@ -243,6 +243,33 @@ internal fun BonusesTab(
                     )
                 }
             }
+            if (state.towerXpBonusPct > 0) {
+                item {
+                    BonusRow(
+                        name  = stringResource(R.string.tower_title),
+                        pct   = stringResource(R.string.bonus_xp, state.towerXpBonusPct),
+                        scope = stringResource(R.string.bonus_tower)
+                    )
+                }
+            }
+            if (state.towerCoinBonusPct > 0) {
+                item {
+                    BonusRow(
+                        name  = stringResource(R.string.tower_title),
+                        pct   = stringResource(R.string.bonus_coin_drops, state.towerCoinBonusPct),
+                        scope = stringResource(R.string.bonus_tower)
+                    )
+                }
+            }
+            if (state.towerHpBonus > 0) {
+                item {
+                    BonusRow(
+                        name  = stringResource(R.string.tower_title),
+                        pct   = stringResource(R.string.bonus_hp, state.towerHpBonus),
+                        scope = stringResource(R.string.bonus_tower)
+                    )
+                }
+            }
         }
 
         item { Spacer(Modifier.height(16.dp)) }

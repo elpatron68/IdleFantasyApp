@@ -104,29 +104,29 @@ class TowerViewModel @Inject constructor(
 
         val MILESTONES: List<TowerMilestone> = listOf(
             TowerMilestone(10,  "Tower Ring (attack +6, strength +6)"),
-            TowerMilestone(20,  "+1% XP all skills"),
+            TowerMilestone(20,  "+1% tower XP all skills"),
             TowerMilestone(30,  "5,000 coins"),
             TowerMilestone(40,  "Tower Shield (defense +80)"),
             TowerMilestone(50,  "Tower Amulet (attack +15, strength +15, defense +10, all styles)"),
             TowerMilestone(60,  "+5 max HP"),
-            TowerMilestone(70,  "+2% XP all skills"),
+            TowerMilestone(70,  "+2% tower XP all skills"),
             TowerMilestone(80,  "25,000 coins"),
             TowerMilestone(90,  "Tower Helm (defense +82, strength +8)"),
             TowerMilestone(100, "Tower Pet (5% combat XP)"),
-            TowerMilestone(110, "+1% coin drops"),
+            TowerMilestone(110, "+1% tower coin drops"),
             TowerMilestone(120, "Tower Plate (defense +132)"),
-            TowerMilestone(130, "+2% XP all skills"),
+            TowerMilestone(130, "+2% tower XP all skills"),
             TowerMilestone(140, "100,000 coins"),
             TowerMilestone(150, "Tower Legs (defense +125)"),
             TowerMilestone(160, "+5 max HP"),
-            TowerMilestone(170, "+1% coin drops"),
+            TowerMilestone(170, "+1% tower coin drops"),
             TowerMilestone(180, "Tower Sword (attack +72, strength +75)"),
-            TowerMilestone(190, "+2% XP all skills"),
+            TowerMilestone(190, "+2% tower XP all skills"),
             TowerMilestone(200, "Tower Cape (attack/str/def +14, ranged/magic +12) + 500,000 coins"),
             TowerMilestone(210, "+5 max HP"),
             TowerMilestone(220, "Tower Crossbow (ranged attack +78, ranged strength +52)"),
-            TowerMilestone(230, "+1% coin drops"),
-            TowerMilestone(240, "+2% XP all skills"),
+            TowerMilestone(230, "+1% tower coin drops"),
+            TowerMilestone(240, "+2% tower XP all skills"),
             TowerMilestone(250, "Void Staff (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins"),
         )
     }
@@ -452,7 +452,7 @@ class TowerViewModel @Inject constructor(
             if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt) {
                 sessionRepo.markCompleted(latest.sessionId)
             }
-            var session: com.fantasyidler.data.model.SkillSession? =
+            var session: SkillSession? =
                 sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
                     ?: return@launch
 
@@ -557,6 +557,19 @@ class TowerViewModel @Inject constructor(
             session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
             }
             queuedSessionStarter.startNextQueued()
+        }
+    }
+
+    fun debugAdvanceTower() {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(
+                towerCurrentFloor = flags.towerCurrentFloor + 1,
+                towerBestFloor    = flags.towerBestFloor + 1
+            ))
+            _extra.update {
+                it.copy(snackbarMessage = context.getString(R.string.tower_floor_cleared, flags.towerCurrentFloor))
+            }
         }
     }
 

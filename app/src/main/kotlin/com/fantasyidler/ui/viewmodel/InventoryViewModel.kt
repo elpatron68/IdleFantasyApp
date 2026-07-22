@@ -98,6 +98,9 @@ class InventoryViewModel @Inject constructor(
         val activeBlessingKey: String = "",
         val activeBlessingExpiresAt: Long = 0L,
         val activeBlessingXpPct: Int = 0,
+        val towerXpBonusPct: Int = 0,
+        val towerCoinBonusPct: Int = 0,
+        val towerHpBonus: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
         val seasonalBanners: List<SeasonalBannerDisplay> = emptyList(),
         val unlockedTitles: Set<String> = emptySet(),
@@ -179,6 +182,9 @@ class InventoryViewModel @Inject constructor(
                     val b = ChurchRepository.activeBlessing(flags) ?: return@run 0
                     if (b.type == BlessingType.XP) ((b.magnitude - 1f) * 100 + 0.5f).toInt() else 0
                 },
+                towerXpBonusPct         = flags.towerXpBonusPct,
+                towerCoinBonusPct       = flags.towerCoinBonusPct,
+                towerHpBonus            = flags.towerHpBonus,
                 skillPrestige           = flags.skillPrestige,
                 seasonalBanners         = buildSeasonalBannerDisplays(flags),
                 unlockedTitles          = flags.unlockedTitles,

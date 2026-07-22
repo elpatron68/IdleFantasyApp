@@ -1483,6 +1483,10 @@
     <string name="bonus_yield">yield</string>
     <string name="bonus_session_shorter">%1$d min shorter sessions</string>
     <string name="bonus_coin_return">coin return</string>
+    <string name="bonus_tower">Tower</string>
+    <string name="bonus_xp">+%1$d%% XP</string>
+    <string name="bonus_coin_drops">+%1$d%% coin drops</string>
+    <string name="bonus_hp">+%1$d HP</string>
     <string name="snackbar_added_to_queue">Added to queue: %1$s.</string>
     <string name="snackbar_queue_full">Queue is full.</string>
     <string name="combat_start_failed">Could not start: %1$s</string>

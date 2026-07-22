@@ -30,12 +30,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -49,6 +49,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.EquipSlot
@@ -123,6 +124,7 @@ fun TowerScreen(
                     onPotionSelected     = viewModel::selectPotion,
                     onStart              = viewModel::startFloor,
                     onCollect            = viewModel::collectFloor,
+                    debugOnAdvance       = viewModel::debugAdvanceTower,
                 )
             }
 
@@ -172,6 +174,7 @@ private fun TowerHeaderCard(
     onPotionSelected:     (String?) -> Unit,
     onStart:              () -> Unit,
     onCollect:            () -> Unit,
+    debugOnAdvance:       () -> Unit,
 ) {
     val context = LocalContext.current
     val effectiveWeaponSlot = selectedWeaponSlot
@@ -349,6 +352,12 @@ private fun TowerHeaderCard(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.tower_start_btn, nextFloorToQueue))
+                }
+            }
+
+            if (BuildConfig.DEBUG) {
+                TextButton(onClick = debugOnAdvance) {
+                    Text("[Debug] Advance floor")
                 }
             }
         }
