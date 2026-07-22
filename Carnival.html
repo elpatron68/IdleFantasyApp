@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carnival — Idle Fantasy Wiki</title>
+  <link rel="stylesheet" href="assets/style.css?v=3">
+  <link rel="icon" type="image/x-icon" href="assets/images/default_icon.png">
+  <script data-goatcounter="https://idlefantasy.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+  <script>
+    (function() {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+    <a class="site-title" href="index.html">
+      <span class="site-icon">&#9876;&#65039;</span>
+      Idle Fantasy Wiki
+    </a>
+    <span class="site-tagline">Community reference for all skills, combat, and crafting</span>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+  </header>
+
+  <div id="nav-backdrop" class="nav-backdrop"></div>
+
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Wiki navigation">
+      <ul>
+<li><a href="Home.html">Home</a></li>
+<li class="nav-section"><span class="nav-label">Contributing</span><ul>
+<li><a href="getting_started_game.html">Getting Started - Game Contributions</a></li>
+<li><a href="getting_started_wiki.html">Getting Started - Wiki Contributions</a></li>
+<li><a href="wiki_page_types.html">Types of Wiki Pages</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Skills</span><ul>
+<li><a href="Skills.html">Skills</a></li>
+<li class="nav-section"><span class="nav-label">Gathering</span><ul>
+<li><a href="Mining.html">Mining</a></li>
+<li><a href="Fishing.html">Fishing</a></li>
+<li><a href="Woodcutting.html">Woodcutting</a></li>
+<li><a href="Farming.html">Farming</a></li>
+<li><a href="Thieving.html">Thieving</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Crafting</span><ul>
+<li><a href="Smithing.html">Smithing</a></li>
+<li><a href="Cooking.html">Cooking</a></li>
+<li><a href="Fletching.html">Fletching</a></li>
+<li><a href="Crafting.html">Crafting</a></li>
+<li><a href="Firemaking.html">Firemaking</a></li>
+<li><a href="Runecrafting.html">Runecrafting</a></li>
+<li><a href="Herblore.html">Herblore</a></li>
+<li><a href="Construction.html">Construction</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Support</span><ul>
+<li><a href="Prayer.html">Prayer</a></li>
+<li><a href="Mercantile.html">Mercantile</a></li>
+<li><a href="Agility.html">Agility</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Combat</span><ul>
+<li><a href="Slayer.html">Slayer</a></li>
+</ul></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Inventory</span><ul>
+<li><a href="Equipment.html">Equipment</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Combat</span><ul>
+<li><a href="Combat.html">Combat</a></li>
+<li><a href="Bosses.html">Bosses</a></li>
+<li><a href="Dungeons.html">Dungeons</a></li>
+<li><a href="Enemies.html">Enemies</a></li>
+<li><a href="Spells.html">Spells</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Town</span><ul>
+<li><a href="Shop.html">Shop</a></li>
+<li><a href="Workers.html">Workers</a></li>
+<li><a href="Guilds.html">Guilds</a></li>
+<li><a href="Buildings.html">Buildings</a></li>
+<li><a href="Carnival.html" class="active">Carnival</a></li>
+</ul></li>
+<li class="nav-section"><span class="nav-label">Miscellaneous</span><ul>
+<li><a href="Expeditions.html">Expeditions</a></li>
+<li><a href="Pets.html">Pets</a></li>
+<li><a href="Quests.html">Quests</a></li>
+<li><a href="Titles.html">Titles</a></li>
+<li><a href="SeasonalEvents.html">Seasonal Events</a></li>
+</ul></li>
+</ul>
+    </nav>
+
+    <main class="content">
+      <h1 id="carnival">Carnival</h1>
+<p>The Carnival is a Town minigame hub where you earn Carnival Tickets and spend them on prizes.</p>
+<h2 id="earning-tickets">Earning tickets</h2>
+<p><strong>Idle minigames</strong> run like a skill session — queue one and check back later. Each minute has a chance to earn a ticket, starting at 15% at level 1 and scaling up to 35% at level 99 in the matching skill. Upgrading the Fairgrounds building further increases this chance.</p>
+<table>
+<thead>
+<tr>
+<th>Minigame</th>
+<th>Skill Trained</th>
+</tr>
+</thead>
+<tbody>
+<tr id="archery_range">
+<td>Archery Range</td>
+<td>Ranged</td>
+</tr>
+<tr id="strongman_competition">
+<td>Strongman Competition</td>
+<td>Strength</td>
+</tr>
+<tr id="wizards_duel">
+<td>Wizard's Duel</td>
+<td>Magic</td>
+</tr>
+<tr id="fishing_derby">
+<td>Fishing Derby</td>
+<td>Fishing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Active minigames</strong> are played directly and reward more tickets on Hard difficulty. Each has its own 10-minute cooldown between attempts, so you can rotate between all of them back-to-back.</p>
+<table>
+<thead>
+<tr>
+<th>Minigame</th>
+<th>How to play</th>
+<th>Normal</th>
+<th>Hard</th>
+</tr>
+</thead>
+<tbody>
+<tr id="ring_toss">
+<td>Ring Toss</td>
+<td>Time your throw into the target zone</td>
+<td>2</td>
+<td>7</td>
+</tr>
+<tr id="hammer_strike">
+<td>Hammer Strike</td>
+<td>Time your swing for a strong hit</td>
+<td>1–2</td>
+<td>6–8</td>
+</tr>
+<tr id="potion_sequence">
+<td>Potion Sequence</td>
+<td>Repeat a growing memory sequence of potion colors</td>
+<td>2</td>
+<td>7</td>
+</tr>
+<tr id="item_appraisal">
+<td>Item Appraisal</td>
+<td>Pick the more valuable item</td>
+<td>2</td>
+<td>7</td>
+</tr>
+<tr id="pick_a_cup_fairgrounds_tier_1">
+<td>Pick-a-Cup (<a href="Buildings.html#fairgrounds">Fairgrounds</a> tier 1+)</td>
+<td>Track which cup hides the gem through a shuffle</td>
+<td>4</td>
+<td>7</td>
+</tr>
+<tr id="higher_or_lower_fairgrounds_tier_2">
+<td>Higher or Lower (<a href="Buildings.html#fairgrounds">Fairgrounds</a> tier 2+)</td>
+<td>Guess higher or lower over several rounds — more correct in a row pays more</td>
+<td>up to 5</td>
+<td>up to 8</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prize-shop">Prize Shop</h2>
+<table>
+<thead>
+<tr>
+<th>Prize</th>
+<th>Ticket Cost</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr id="small_xp_lamp">
+<td>Small XP Lamp</td>
+<td>200</td>
+<td>Grants 10,000 XP to a chosen skill.</td>
+</tr>
+<tr id="large_xp_lamp">
+<td>Large XP Lamp</td>
+<td>800</td>
+<td>Grants 50,000 XP to a chosen skill.</td>
+</tr>
+<tr id="tricksters_amulet">
+<td>Trickster's Amulet</td>
+<td>1,000</td>
+<td>A lucky charm worn by carnival performers. Grants a small combat edge.</td>
+</tr>
+<tr id="strongmans_sigil">
+<td>Strongman's Sigil</td>
+<td>1,600</td>
+<td>A heavy iron ring etched with the mark of the strongman champion. Boosts Strength.</td>
+</tr>
+<tr id="carnival_cape">
+<td>Carnival Cape</td>
+<td>2,000</td>
+<td>A vibrant cape worn by carnival champions. Grants 5% more tickets from Carnival sessions.</td>
+</tr>
+<tr id="juggling_imp">
+<td>Juggling Imp</td>
+<td>4,000</td>
+<td>A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</td>
+</tr>
+</tbody>
+</table>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <span>All data is auto-generated from game files and stays up to date with the latest release.</span>
+    <span>·</span>
+    <a href="https://github.com/tristinbaker/IdleFantasy/issues" target="_blank" rel="noopener">Report an issue</a>
+    <span>·</span>
+    <a href="https://github.com/tristinbaker/IdleFantasy" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script>
+    (function() {
+      // ---- Dark mode ----
+      var themeBtn = document.getElementById('theme-toggle');
+      function updateThemeIcon() {
+        themeBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+      }
+      updateThemeIcon();
+      themeBtn.addEventListener('click', function() {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon();
+      });
+
+      // ---- Hamburger nav ----
+      var navToggle = document.getElementById('nav-toggle');
+      var sidebar   = document.getElementById('sidebar');
+      var backdrop  = document.getElementById('nav-backdrop');
+      function openNav() {
+        sidebar.classList.add('open');
+        backdrop.classList.add('visible');
+        navToggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeNav() {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('visible');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+      navToggle.addEventListener('click', function() {
+        sidebar.classList.contains('open') ? closeNav() : openNav();
+      });
+      backdrop.addEventListener('click', closeNav);
+      sidebar.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') closeNav();
+      });
+    })();
+  </script>
+</body>
+</html>
