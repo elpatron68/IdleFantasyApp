@@ -56,7 +56,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -91,6 +90,7 @@ import com.fantasyidler.data.model.WorkerTier
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.ui.theme.GoldPrimary
+import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
 import com.fantasyidler.ui.viewmodel.SessionSummary
@@ -136,12 +136,7 @@ fun HomeScreen(
     var showRecentLog by remember { mutableStateOf(false) }
     val context           = LocalContext.current
 
-    LaunchedEffect(state.snackbarMessage) {
-        state.snackbarMessage?.let { msg ->
-            try { snackbarHostState.showSnackbar(msg) }
-            finally { viewModel.snackbarConsumed() }
-        }
-    }
+    AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
 
     state.petFoundName?.let { petName ->
         AlertDialog(
@@ -494,10 +489,12 @@ fun HomeScreen(
             sheetState       = sheetState,
             dragHandle       = { BottomSheetDefaults.DragHandle() },
         ) {
+            ScaledSheetContent {
             RecentSessionsSheet(
                 sessions  = state.recentSessions,
                 onDismiss = { showRecentLog = false },
             )
+            }
         }
     }
 
@@ -508,6 +505,7 @@ fun HomeScreen(
             sheetState       = journalSheetState,
             dragHandle       = { BottomSheetDefaults.DragHandle() },
         ) {
+            ScaledSheetContent {
             JournalSheet(
                 notes  = state.playerNotes,
                 onSave = { text ->
@@ -515,6 +513,7 @@ fun HomeScreen(
                     viewModel.dismissJournal()
                 },
             )
+            }
         }
     }
 
@@ -540,7 +539,6 @@ fun HomeScreen(
                 },
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->
         if (state.isLoading) {
             Column(

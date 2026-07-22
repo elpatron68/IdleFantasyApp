@@ -37,7 +37,6 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -69,7 +68,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,7 +100,7 @@ fun SettingsScreen(
         val permFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
         context.contentResolver.takePersistableUriPermission(uri, permFlags)
         viewModel.setBackupFolder(uri.toString())
-        scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_backup_folder_set), withDismissAction = true) }
+        AppBannerCenter.enqueue(context.getString(R.string.settings_backup_folder_set))
     }
 
     val exportLauncher = rememberLauncherForActivityResult(
@@ -111,7 +109,7 @@ fun SettingsScreen(
         uri ?: return@rememberLauncherForActivityResult
         viewModel.exportSave { jsonString ->
             context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(jsonString.toByteArray()) }
-            scope.launch { snackbarHostState.showSnackbar(context.getString(R.string.settings_exported_ok), withDismissAction = true) }
+            AppBannerCenter.enqueue(context.getString(R.string.settings_exported_ok))
         }
     }
 
@@ -122,12 +120,9 @@ fun SettingsScreen(
         val jsonString = context.contentResolver.openInputStream(uri)?.bufferedReader()?.readText()
             ?: return@rememberLauncherForActivityResult
         viewModel.importSave(jsonString) { success ->
-            scope.launch {
-                snackbarHostState.showSnackbar(
-                    message         = if (success) context.getString(R.string.settings_imported_ok) else context.getString(R.string.settings_imported_fail),
-                    withDismissAction = true,
-                )
-            }
+            AppBannerCenter.enqueue(
+                if (success) context.getString(R.string.settings_imported_ok) else context.getString(R.string.settings_imported_fail)
+            )
         }
     }
 
@@ -245,7 +240,6 @@ fun SettingsScreen(
                 }
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -562,13 +556,10 @@ fun SettingsScreen(
             OutlinedButton(
                 onClick = {
                     viewModel.backupNow { success ->
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message           = if (success) context.getString(R.string.settings_backup_success)
-                                                    else context.getString(R.string.settings_backup_failed),
-                                withDismissAction = true,
-                            )
-                        }
+                        AppBannerCenter.enqueue(
+                            if (success) context.getString(R.string.settings_backup_success)
+                            else context.getString(R.string.settings_backup_failed)
+                        )
                     }
                 },
                 enabled  = backupFolderUri.isNotEmpty(),

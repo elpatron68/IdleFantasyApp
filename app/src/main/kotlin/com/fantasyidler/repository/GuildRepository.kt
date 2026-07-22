@@ -429,6 +429,10 @@ class GuildRepository @Inject constructor(
                 val logKey = ashToLog[template.target] ?: template.target
                 level("firemaking") >= (gameData.logs[logKey]?.levelRequired ?: 1)
             }
+            template.guild == "mercantile" && template.type == "trade" -> {
+                val tradeRoute = gameData.tradeRoutes.find { it.id == template.target }
+                level("mercantile") >= (tradeRoute?.levelRequired ?: 1)
+            }
             template.guild == "agility" && template.type == "sessions" ->
                 level("agility") >= (gameData.agilityCourses[template.target]?.levelRequired ?: 1)
             else -> true
