@@ -9,6 +9,8 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -18,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -26,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
@@ -37,7 +41,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-data class QueuedBanner(val message: String, val onConsumed: () -> Unit)
+data class QueuedBanner(
+    val message: String,
+    val actionLabel: String? = null,
+    val onAction: (() -> Unit)? = null,
+    val onConsumed: () -> Unit = {},
+)
 
 /**
  * App-wide replacement for both Android Toasts and per-screen Snackbars. Enqueuing is a
@@ -52,7 +61,17 @@ object AppBannerCenter {
 
     @Synchronized
     fun enqueue(message: String, onConsumed: () -> Unit = {}) {
-        pending.addLast(QueuedBanner(message, onConsumed))
+        enqueue(message, actionLabel = null, onAction = null, onConsumed = onConsumed)
+    }
+
+    @Synchronized
+    fun enqueue(
+        message: String,
+        actionLabel: String?,
+        onAction: (() -> Unit)?,
+        onConsumed: () -> Unit = {},
+    ) {
+        pending.addLast(QueuedBanner(message, actionLabel, onAction, onConsumed))
         if (_current.value == null) advance()
     }
 
@@ -76,6 +95,7 @@ fun AppBannerEffect(message: String?, onConsumed: () -> Unit) {
 }
 
 private const val BANNER_DISPLAY_MS = 2_500L
+private const val BANNER_ACTION_DISPLAY_MS = 5_000L
 
 /**
  * Hosted once at the navigation root so banners persist across screen changes. Rendered in
@@ -95,7 +115,8 @@ fun AppBannerHost() {
 
     LaunchedEffect(current) {
         if (current != null) {
-            delay(BANNER_DISPLAY_MS)
+            val duration = if (current?.actionLabel != null) BANNER_ACTION_DISPLAY_MS else BANNER_DISPLAY_MS
+            delay(duration)
             AppBannerCenter.dismissCurrent()
         }
     }
@@ -138,11 +159,29 @@ fun AppBannerHost() {
                 shadowElevation = 8.dp,
                 modifier        = Modifier.padding(horizontal = 16.dp, vertical = 8.dp).fillMaxWidth(),
             ) {
-                Text(
-                    text     = banner.message,
-                    style    = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-                )
+                Row(
+                    modifier              = Modifier
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment     = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text     = banner.message,
+                        style    = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    if (banner.actionLabel != null && banner.onAction != null) {
+                        TextButton(
+                            onClick = {
+                                banner.onAction.invoke()
+                                AppBannerCenter.dismissCurrent()
+                            },
+                        ) {
+                            Text(banner.actionLabel)
+                        }
+                    }
+                }
             }
         }
     }
