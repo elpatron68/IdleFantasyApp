@@ -594,13 +594,13 @@
     <string name="item_divine_tinderbox_name">Göttliche Zunderbüchse</string>
     <string name="item_dwarven_frying_pan_name">Zwergenbratpfanne</string>
     <string name="item_divine_frying_pan_name">Göttliche Bratpfanne</string>
-    <string name="item_shadow_grappling_hook_name">Schattengreifhaken</string>
+    <string name="item_shadow_grappling_hook_name">Greifhaken der Schatten</string>
     <string name="item_dwarven_grappling_hook_name">Zwergengreifhaken</string>
     <string name="item_arcane_grappling_hook_name">Arkaner Greifhaken</string>
     <string name="item_divine_grappling_hook_name">Göttlicher Greifhaken</string>
     <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
     <string name="item_dwarven_lockpick_name">Zwergendietrich</string>
-    <string name="item_shadow_lockpick_name">Schattendietrich</string>
+    <string name="item_shadow_lockpick_name">Dietrich der Schatten</string>
     <string name="item_divine_lockpick_name">Göttlicher Dietrich</string>
 
     <!-- Herblore potions -->

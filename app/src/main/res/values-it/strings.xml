@@ -20,7 +20,7 @@
     <string name="btn_confirm">Conferma</string>
     <string name="btn_abandon">Abbandona</string>
     <string name="btn_repeat_action">Ripeti Azione</string>
-    <string name="btn_collect">Raccogli Ricompense</string>
+    <string name="btn_collect">Ricevi Ricompense</string>
     <string name="btn_equip">Equipaggia</string>
     <string name="btn_unequip">Rimuovi</string>
     <string name="btn_buy">Compra</string>
@@ -31,7 +31,7 @@
     <string name="btn_clear">Reimposta</string>
     <string name="btn_clear_all">Reimposta Tutto</string>
     <string name="btn_inspect">Ispeziona</string>
-    <string name="btn_view_drops">Visualizza Ricompense</string>
+    <string name="btn_view_drops">Mostra Ricompense</string>
     <string name="btn_start_quest">Inizia Missione</string>
     <string name="btn_abandon_quest">Abbandona Missione</string>
     <string name="btn_enter_dungeon">Entra nel Dungeon</string>
@@ -280,7 +280,7 @@
     <string name="settings_recent_activity">Registro delle ultime attività</string>
     <string name="settings_recent_activity_desc">Mostra il pulsante Ultime Attività nell\'intestazione della schermata principale</string>
     <string name="settings_journal_button">Diario</string>
-    <string name="settings_journal_button_desc">Mostra un pulsante Diario nella barra superiore della schermata principale per annotare note</string>
+    <string name="settings_journal_button_desc">Mostra un pulsante Diario nella barra superiore della schermata principale per annotare ciò che vuoi.</string>
     <string name="settings_seasonal_events">Eventi Stagionali</string>
     <string name="settings_seasonal_events_desc">Mostra lo stendardo dell\'evento stagionale in corso nella schermata principale</string>
     <string name="settings_collapsible_town_grid">Griglia Villaggio Comprimibile</string>
@@ -507,6 +507,9 @@
     <string name="combat_duration">Durata</string>
     <!-- Translator note: %1$d = minutes -->
     <string name="combat_duration_min">%1$d min</string>
+    <string name="combat_fight_count_label">Numero di combattimenti</string>
+    <string name="combat_fight_count_suffix">×%1$d combattimenti</string>
+    <string name="combat_fight_progress">Combattimento %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP alla vittoria</string>
     <string name="combat_you_died">Sei Morto!</string>
     <string name="combat_died_reward" formatted="false">Hai ricevuto il 10% delle ricompense.</string>
@@ -533,7 +536,7 @@
         <item>%1$s promette di continuare a lavorare sodo per te.</item>
     </string-array>
     <string name="profile_equip_best">Equipaggia Migliori</string>
-    <string name="profile_equip_best_tools">Equipaggia Strumenti Migliori</string>
+    <string name="profile_equip_best_tools">Equipaggia Utensili Migliori</string>
     <string name="profile_weapons">Armi</string>
     <string name="profile_combat_gear">Armamenti da Battaglia</string>
     <string name="profile_view_combat_gear">Controlla Armamenti</string>
@@ -1068,7 +1071,7 @@
     <string name="shop_cat_special">Speciale</string>
     <string name="shop_cat_weapons">Armi</string>
     <string name="shop_cat_armor">Armatura</string>
-    <string name="shop_cat_tools">Strumenti</string>
+    <string name="shop_cat_tools">Utensili</string>
     <string name="shop_cat_food">Cibo</string>
     <string name="shop_cat_materials">Materiali</string>
     <string name="shop_cat_misc">Varie</string>
@@ -1411,7 +1414,7 @@
     <string name="armory_filter_weapons">Armi</string>
     <string name="armory_filter_armor">Armatura</string>
     <string name="armory_filter_accessories">Accessori</string>
-    <string name="armory_filter_tools">Strumenti</string>
+    <string name="armory_filter_tools">Utensili</string>
     <string name="armory_sort_default">Base</string>
     <string name="armory_sort_attack">Attacco</string>
     <string name="armory_sort_strength">Forza</string>
@@ -1494,7 +1497,7 @@
     <string name="bonus_section_skills">Bonus da Abilità</string>
     <string name="bonus_combat_stat_boost">Potenzia statistiche combattimento</string>
     <string name="bonus_combined_xp">XP combinata</string>
-    <string name="bonus_yield">+%1$d%% resa</string>
+    <string name="bonus_yield">+%1$d%% alla resa</string>
     <string name="bonus_session_shorter">%1$d min in meno per sessione</string>
     <string name="bonus_coin_return">+%1$d%% ritorno in monete</string>
     <string name="snackbar_added_to_queue">Aggiunto alla coda: %1$s.</string>
@@ -1523,7 +1526,7 @@
     <string name="tower_new_best">Nuovo record: Piano %d!</string>
     <string name="tower_death_reset">Hai trovato la tua fine al piano %d. Ritorno al piano 1.</string>
     <string name="tower_not_enough_runes">Non hai abbastanza %1$s per attaccare.</string>
-    <string name="tower_milestone_claim">Ottinei</string>
+    <string name="tower_milestone_claim">Ottieni</string>
     <string name="tower_milestone_claimed">Ottenuto</string>
     <string name="tower_enemies_this_floor">Nemici</string>
     <string name="tower_enemy_strength">Forza nemica: %s%%</string>
@@ -1559,7 +1562,7 @@
     <string name="seasonal_bounty_sunspire_firewood_name">Raccogli legna per il falò</string>
     <string name="seasonal_bounty_sunspire_firewood_hint">Taglia legna di quercia — Taglialegna</string>
     <string name="seasonal_bounty_sunspire_kindling_name">Trova sterpi per il falò</string>
-    <string name="seasonal_bounty_sunspire_kindling_hint">Taglia legna di Salice — Taglialegna</string>
+    <string name="seasonal_bounty_sunspire_kindling_hint">Taglia legna di salice — Taglialegna</string>
     <string name="seasonal_bounty_sunspire_sunore_name">Estrai oro per indorare la torre</string>
     <string name="seasonal_bounty_sunspire_sunore_hint">Estrai minerale d\'oro — Estrazione</string>
     <string name="seasonal_bounty_sunspire_draughts_name">Mescola Pozioni Forza</string>
@@ -1626,14 +1629,16 @@
     <string name="title_pathfinder_requirement">Raggiungi il livello massimo della Gilda dell\'Agilità</string>
     <string name="title_master_farmer_name">Maestro Fattore</string>
     <string name="title_master_farmer_requirement">Raggiungi il livello massimo della Gilda degli Agricoltori</string>
-    <string name="settings_art_credits">Crediti artistici</string>
+    <string name="settings_art_credits">Accreditamenti</string>
     <string name="settings_credit_banners_title">Stendardi stagionali</string>
     <string name="settings_credit_banners_subtitle">Disegni di Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Icone delle Abilità</string>
-    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+    <string name="settings_credit_skill_icons_subtitle">Fantasy Icons Pack di Shikashi</string>
     <string name="title_seasonal_champion_of">Campione di %1$s</string>
     <string name="title_seasonal_requirement">Completa l\'Evento Stagionale %1$s</string>
     <string name="home_welcome_greeting">Bentornato,</string>
     <string name="home_welcome_name">%1$s!</string>
     <string name="home_welcome_title">Il %1$s!</string>
+    <string name="bonus_tower">Torre</string>
+    <string name="bonus_coin_drops">+%1$d%% monete</string>
 </resources>

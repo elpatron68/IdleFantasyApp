@@ -163,7 +163,7 @@
     <string name="label_daily_dig">Daily Dig</string>
     <string name="label_dig_depth">Hole Depth</string>
     <string name="label_version">Version</string>
-    <string name="label_open_source">Open Source</string>
+    <string name="label_open_source" translatable="false">Open Source</string>
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
     <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
@@ -397,7 +397,7 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Open</string>
-    <string name="settings_wiki">Wiki</string>
+    <string name="settings_wiki" translatable="false">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
     <string name="settings_exported_ok">Save exported</string>
     <string name="settings_imported_ok">Save imported successfully</string>
@@ -508,6 +508,11 @@
     <string name="combat_duration">Duration</string>
     <!-- Translator note: %1$d = minutes -->
     <string name="combat_duration_min">%1$d min</string>
+    <string name="combat_fight_count_label">Number of Fights</string>
+    <!-- Translator note: %1$d = number of queued repeat fights, e.g. "×100 fights" -->
+    <string name="combat_fight_count_suffix">×%1$d fights</string>
+    <!-- Translator note: %1$d = current fight number, %2$d = total fights requested, e.g. "Fight 34/100" -->
+    <string name="combat_fight_progress">Fight %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP on victory</string>
     <string name="combat_you_died">You Died!</string>
     <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
@@ -676,7 +681,7 @@
     <string name="character_race_elf">Elf</string>
     <string name="character_race_dwarf">Dwarf</string>
     <string name="character_race_orc">Orc</string>
-    <string name="character_race_halfling">Halfling</string>
+    <string name="character_race_halfling" translatable="false">Halfling</string>
     <string name="character_race_gnome">Gnome</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
