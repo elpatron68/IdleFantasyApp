@@ -215,11 +215,17 @@
     <plurals name="town_garden_bonus">
         <item quantity="zero">Níl aon ceapach breise go fóill</item>
         <item quantity="one">+%1$d ceapacha breise</item>
+        <item quantity="two">+%1$d ceapacha breise</item>
+        <item quantity="few">+%1$d ceapacha breise</item>
+        <item quantity="many">+%1$d ceapacha breise</item>
         <item quantity="other">+%1$d ceapacha breise</item>
     </plurals>
     <plurals name="town_queue_master_bonus">
         <item quantity="zero">Níl aon áit scuaine breise go fóill</item>
         <item quantity="one">+%1$d áiteanna scuaine breise</item>
+        <item quantity="two">+%1$d áiteanna scuaine breise</item>
+        <item quantity="few">+%1$d áiteanna scuaine breise</item>
+        <item quantity="many">+%1$d áiteanna scuaine breise</item>
         <item quantity="other">+%1$d áiteanna scuaine breise</item>
     </plurals>
 </resources>
