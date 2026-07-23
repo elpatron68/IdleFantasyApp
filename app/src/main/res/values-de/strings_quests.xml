@@ -233,7 +233,7 @@
     <string name="quest_iron_stomach_3_name">Eiserner Magen III</string>
     <string name="quest_iron_stomach_3_objective">Schließt die Orkfestung ab, ohne Nahrung zu verbrauchen</string>
     <string name="quest_iron_stomach_4_name">Eiserner Magen IV</string>
-    <string name="quest_iron_stomach_4_objective">Schließt die vulkanischen Tiefen ab, ohne Nahrung zu verbrauchen</string>
+    <string name="quest_iron_stomach_4_objective">Schließt den Drachenhort ab, ohne Nahrung zu verbrauchen</string>
 
     <!-- Treasure Hunter -->
     <string name="quest_treasure_hunter_1_name">Schatzsucher I</string>
