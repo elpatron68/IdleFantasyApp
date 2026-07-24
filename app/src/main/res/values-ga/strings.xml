@@ -254,7 +254,7 @@
     <string name="format_minutes_remaining">%1$d nóim fágtha</string>
     <string name="format_version">Leagan %1$s</string>
     <string name="error_not_enough_coins">Níl dóthain airgead.</string>
-    <string name="error_not_enough_items">But dótháin %1$s.</string>
+    <string name="error_not_enough_items">Níl dóthain %1$s.</string>
     <plurals name="plural_items">
         <item quantity="zero">%1$d earraí</item>
         <item quantity="one">%1$d earra</item>
