@@ -193,6 +193,10 @@ data class HomeUiState(
     val activeBossRepeatIndex: Int = 0,
     /** Total fights requested for the current boss repeat run. */
     val activeBossRepeatTotal: Int = 0,
+    /** 1-based index of the dungeon run currently running within a multi-run repeat request. 0 = not repeating. */
+    val activeDungeonRepeatIndex: Int = 0,
+    /** Total runs requested for the current dungeon repeat run. */
+    val activeDungeonRepeatTotal: Int = 0,
     /** Total XP the first worker's active session will grant. */
     val workerSessionXpGain: Long = 0L,
     /** Total XP the second worker's active session will grant. */
@@ -375,6 +379,8 @@ class HomeViewModel @Inject constructor(
                 activeSessionXpGain        = activeSessionXpGain,
                 activeBossRepeatIndex      = flags.activeBossRepeatIndex,
                 activeBossRepeatTotal      = flags.activeBossRepeatTotal,
+                activeDungeonRepeatIndex   = flags.activeDungeonRepeatIndex,
+                activeDungeonRepeatTotal   = flags.activeDungeonRepeatTotal,
                 workerSessionXpGain        = workerSessionXpGain,
                 workerSession2XpGain       = workerSession2XpGain,
                 workerSessionAssignedItems  = workerSession?.singleBatchItems(json) ?: emptyMap(),
@@ -1030,6 +1036,7 @@ class HomeViewModel @Inject constructor(
             }
             sessionRepo.abandonSession(session.sessionId)
             if (session.skillName == "boss") playerRepo.clearActiveBossRepeat()
+            if (session.skillName == "combat") playerRepo.clearActiveDungeonRepeat()
             queuedSessionStarter.startNextQueued()
             reconcileTowerQueue()
         }

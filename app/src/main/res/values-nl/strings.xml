@@ -483,6 +483,9 @@
     <string name="combat_fight_count_label">Aantal gevechten</string>
     <string name="combat_fight_count_suffix">×%1$d gevechten</string>
     <string name="combat_fight_progress">Gevecht %1$d/%2$d</string>
+    <string name="combat_run_count_label">Aantal runs</string>
+    <string name="combat_run_count_suffix">×%1$d runs</string>
+    <string name="combat_run_progress">Run %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP bij overwinning</string>
     <string name="combat_you_died">Je bent dood!</string>
     <string name="combat_died_reward">Je ontvangt 10% van de beloningen.</string>
@@ -515,6 +518,8 @@
     <string name="profile_gathering_tools">Gereedschap</string>
     <string name="profile_food_dungeon">Eten (Dungeons)</string>
     <string name="profile_no_food">Geen gekookt voedsel in inventaris</string>
+    <string name="profile_food_threshold">Begin met eten bij</string>
+    <string name="profile_combat_style">Gevechtsstijl</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heelt %2$d HP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1369,6 +1374,7 @@
     <!-- ===== Combat arrows ===== -->
     <string name="combat_arrow_auto">Automatisch (beste beschikbare)</string>
     <string name="combat_label_arrow">Pijl</string>
+    <string name="combat_select_loadout">Uitrusting kiezen</string>
 
     <!-- ===== Guild ===== -->
     <string name="guild_quest_gate_blocked">Voltooi quests om je rang te verhogen</string>
@@ -1495,7 +1501,7 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_death_reset">Je bent gevallen op verdieping %1$d. Terug naar verdieping %2$d.</string>
     <string name="tower_not_enough_runes">Niet genoeg %1$s voor het maximale aantal aanvallen.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>

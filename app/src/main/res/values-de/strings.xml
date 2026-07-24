@@ -482,6 +482,7 @@
     <string name="combat_best_arrow">Bester Pfeil</string>
     <string name="combat_arrow_auto">Auto (bester verfügbar)</string>
     <string name="combat_label_arrow">Pfeil</string>
+    <string name="combat_select_loadout">Loadout auswählen</string>
     <string name="combat_enemies">Feinde</string>
     <string name="combat_no_spells">Für Eure Magiestufe sind keine Zauber verfügbar.</string>
     <string name="combat_only_castable">Nur zauberbare</string>
@@ -496,6 +497,9 @@
     <string name="combat_fight_count_label">Anzahl der Kämpfe</string>
     <string name="combat_fight_count_suffix">×%1$d Kämpfe</string>
     <string name="combat_fight_progress">Kampf %1$d/%2$d</string>
+    <string name="combat_run_count_label">Anzahl der Läufe</string>
+    <string name="combat_run_count_suffix">×%1$d Läufe</string>
+    <string name="combat_run_progress">Lauf %1$d/%2$d</string>
     <string name="combat_xp_on_victory">EP bei Sieg</string>
     <string name="combat_you_died">Ihr seid gestorben!</string>
     <string name="combat_died_reward" formatted="false">Ihr habt 10% der Belohnung erhalten.</string>
@@ -529,6 +533,8 @@
     <string name="profile_gathering_tools">Werkzeuge</string>
     <string name="profile_food_dungeon">Essen (Verlies)</string>
     <string name="profile_no_food">Keine gekochten Lebensmittel im Inventar</string>
+    <string name="profile_food_threshold">Beginne zu essen bei</string>
+    <string name="profile_combat_style">Kampfstil</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heilt %2$d LP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1515,7 +1521,7 @@
     <string name="tower_milestones">Meilensteine</string>
     <string name="tower_floor_cleared">Etage %d gesäubert!</string>
     <string name="tower_new_best">Neuer Höchstwert: Etage %d!</string>
-    <string name="tower_death_reset">Ihr seid auf Etage %d gestorben. Ihr kehrt zurück zur untersten Etage.</string>
+    <string name="tower_death_reset">Ihr seid auf Etage %1$d gestorben. Ihr kehrt zurück zu Etage %2$d.</string>
     <string name="tower_not_enough_runes">Nicht genug %1$s für die maximale Anzahl an Angriffen.</string>
     <string name="tower_milestone_claim">Einfordern</string>
     <string name="tower_milestone_claimed">Eingefordert</string>
@@ -1635,4 +1641,7 @@
     <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
     <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
     <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
+    <string name="crafting_owned">Owned: %1$d</string>
+    <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
+    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
 </resources>

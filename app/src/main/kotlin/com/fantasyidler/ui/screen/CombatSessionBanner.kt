@@ -241,10 +241,11 @@ internal fun CombatSessionBanner(
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        if (isBoss && repeatTotal > 1) {
+        if ((isBoss || session.skillName == "combat") && repeatTotal > 1) {
             Spacer(Modifier.height(4.dp))
             Text(
-                text       = stringResource(R.string.combat_fight_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
+                text       = if (isBoss) stringResource(R.string.combat_fight_progress, repeatIndex.coerceAtLeast(1), repeatTotal)
+                             else stringResource(R.string.combat_run_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
                 style      = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold,
                 color      = GoldPrimary,

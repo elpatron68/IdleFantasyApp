@@ -482,6 +482,7 @@
     <string name="combat_best_arrow">Best arrow</string>
     <string name="combat_arrow_auto">Auto (best available)</string>
     <string name="combat_label_arrow">Arrow</string>
+    <string name="combat_select_loadout">Select Loadout</string>
     <string name="combat_enemies">Enemies</string>
     <string name="combat_no_spells">No spells available at your magic level.</string>
     <string name="combat_only_castable">Only Castable</string>
@@ -498,6 +499,11 @@
     <string name="combat_fight_count_suffix">×%1$d fights</string>
     <!-- Translator note: %1$d = current fight number, %2$d = total fights requested, e.g. "Fight 34/100" -->
     <string name="combat_fight_progress">Fight %1$d/%2$d</string>
+    <string name="combat_run_count_label">Number of Runs</string>
+    <!-- Translator note: %1$d = number of queued repeat dungeon runs, e.g. "×24 runs" -->
+    <string name="combat_run_count_suffix">×%1$d runs</string>
+    <!-- Translator note: %1$d = current run number, %2$d = total runs requested, e.g. "Run 12/24" -->
+    <string name="combat_run_progress">Run %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP on victory</string>
     <string name="combat_you_died">You Died!</string>
     <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
@@ -531,6 +537,8 @@
     <string name="profile_gathering_tools">Gathering Tools</string>
     <string name="profile_food_dungeon">Food (Dungeon)</string>
     <string name="profile_no_food">No cooked food in inventory</string>
+    <string name="profile_food_threshold">Start Eating At</string>
+    <string name="profile_combat_style">Combat Style</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heals %2$d HP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1533,7 +1541,8 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
+    <string name="tower_death_reset">You fell on floor %1$d. Resetting to floor %2$d.</string>
     <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>

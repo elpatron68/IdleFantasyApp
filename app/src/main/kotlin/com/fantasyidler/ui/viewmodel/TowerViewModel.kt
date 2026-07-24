@@ -80,6 +80,8 @@ class TowerViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
+        /** Floors between death-recovery checkpoints — see the playerDied branch in collectSession(). */
+        const val TOWER_CHECKPOINT_INTERVAL = 25
         private val ARROW_TIERS = listOf(
             "runite_arrow", "adamantite_arrow", "mithril_arrow",
             "steel_arrow", "iron_arrow", "bronze_arrow",
@@ -381,6 +383,7 @@ class TowerViewModel @Inject constructor(
                     runeKey             = runeKey,
                     runeCostPerAttack   = runeCost,
                     attackSpeedSec      = weaponAttackSpeed,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
 
                 // Runes are consumed after the session, not upfront.
@@ -416,6 +419,7 @@ class TowerViewModel @Inject constructor(
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
             playerRepo.updateFlags(flags.copy(activeWeaponSlot = slot))
+            EquipSlot.combatStyleForSlot(slot)?.let { style -> playerRepo.applyLoadout(style, gameData.equipment) }
         }
     }
 
@@ -424,7 +428,11 @@ class TowerViewModel @Inject constructor(
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
-            playerRepo.updateFlags(flags.copy(equippedArrows = key))
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                equippedArrows = key,
+                rangedLoadoutArrowKey = if (activeStyle == "ranged") key else flags.rangedLoadoutArrowKey,
+            ))
         }
     }
 
@@ -433,7 +441,11 @@ class TowerViewModel @Inject constructor(
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
-            playerRepo.updateFlags(flags.copy(activeSpell = spell?.name))
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                activeSpell = spell?.name,
+                magicLoadoutSpellName = if (activeStyle == "magic") spell?.name else flags.magicLoadoutSpellName,
+            ))
         }
     }
 
@@ -537,9 +549,12 @@ class TowerViewModel @Inject constructor(
 
             val updatedFlags = playerRepo.getFlags()
             if (playerDied) {
-                playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = 0))
+                // Death drops you back to your last checkpoint (every 25 floors of your best-ever
+                // progress) instead of all the way to floor 1, so a bad run doesn't erase everything.
+                val checkpointFloor = (updatedFlags.towerBestFloor / TOWER_CHECKPOINT_INTERVAL) * TOWER_CHECKPOINT_INTERVAL
+                playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = checkpointFloor))
                 sessionRepo.deleteSession(session.sessionId)
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.tower_death_reset, floor)) }
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.tower_death_reset, floor, checkpointFloor + 1)) }
             } else {
                 val newBest  = maxOf(updatedFlags.towerBestFloor, floor)
                 val isNewBest = floor > updatedFlags.towerBestFloor

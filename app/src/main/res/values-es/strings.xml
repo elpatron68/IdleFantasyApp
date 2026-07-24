@@ -407,6 +407,9 @@
     <string name="combat_fight_count_label">Número de combates</string>
     <string name="combat_fight_count_suffix">×%1$d combates</string>
     <string name="combat_fight_progress">Combate %1$d/%2$d</string>
+    <string name="combat_run_count_label">Número de runs</string>
+    <string name="combat_run_count_suffix">×%1$d runs</string>
+    <string name="combat_run_progress">Run %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP on victory</string>
     <string name="combat_you_died">Has muerto!</string>
     <string name="combat_died_reward">Recibiste el 10% de las recompensas.</string>
@@ -438,6 +441,8 @@
     <string name="profile_gathering_tools">Herramientas de recolección</string>
     <string name="profile_food_dungeon">Alimento (Dungeon)</string>
     <string name="profile_no_food">No hay alimentos cocinados en el inventario.</string>
+    <string name="profile_food_threshold">Empezar a comer al</string>
+    <string name="profile_combat_style">Estilo de combate</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heals %2$d HP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -995,6 +1000,7 @@
     <string name="inn_buy_total">Total: %1$s</string>
     <string name="combat_arrow_auto">Auto (best available)</string>
     <string name="combat_label_arrow">Arrow</string>
+    <string name="combat_select_loadout">Seleccionar equipamiento</string>
 
     <!-- Prestige system -->
     <string name="prestige">Prestige</string>
@@ -1459,7 +1465,7 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_death_reset">Caíste en el piso %1$d. Volviendo al piso %2$d.</string>
     <string name="tower_not_enough_runes">No hay suficientes %1$s para el número máximo de ataques posibles.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
@@ -1584,4 +1590,7 @@
     <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
     <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
     <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
+    <string name="crafting_owned">Owned: %1$d</string>
+    <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
+    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
 </resources>

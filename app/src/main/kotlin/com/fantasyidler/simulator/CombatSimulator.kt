@@ -48,10 +48,12 @@ object CombatSimulator {
         runeCostPerAttack: Int = 1,
         availableRunes: Int = Int.MAX_VALUE,
         attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
+        eatThresholdPct: Int = 50,
         random: Random = Random.Default,
     ): SkillSimulator.Result {
         val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
         val ticksPerFrame = playerTicksPerFrame(speed)
+        val eatThresholdFraction = eatThresholdPct.coerceIn(0, 100) / 100.0
         val effAttack   = playerAttack   + (potionBonuses["attack"]   ?: 0)
         val effStrength = playerStrength + (potionBonuses["strength"] ?: 0)
         val effDefence  = playerDefence  + (potionBonuses["defense"]  ?: 0) + blessingDefBonus
@@ -215,7 +217,7 @@ object CombatSimulator {
                     ate = false
                     val foodKey = foodOrder.firstOrNull { (foodSupply[it] ?: 0) > 0 } ?: break
                     val heal = foodHealValues[foodKey] ?: break
-                    if (currentHp + heal <= maxHp || currentHp <= enemyMaxHit || currentHp <= maxHp * 0.5) {
+                    if (currentHp + heal <= maxHp || currentHp <= enemyMaxHit || currentHp <= maxHp * eatThresholdFraction) {
                         currentHp            = minOf(maxHp, currentHp + heal)
                         foodSupply[foodKey]  = (foodSupply[foodKey] ?: 0) - 1
                         frameFood[foodKey]   = (frameFood[foodKey] ?: 0) + 1
@@ -338,10 +340,12 @@ object CombatSimulator {
         runeCostPerAttack: Int = 1,
         availableRunes: Int = Int.MAX_VALUE,
         attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
+        eatThresholdPct: Int = 50,
         random: Random = Random.Default,
     ): List<SessionFrame> {
         val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
         val ticksPerFrame = playerTicksPerFrame(speed)
+        val eatThresholdFraction = eatThresholdPct.coerceIn(0, 100) / 100.0
         // Ranged max hit is recomputed per shot below (not here), since it depends on
         // whichever arrow tier is actually being fired that tick (issue #1018).
         var playerMax: Int
@@ -466,7 +470,7 @@ object CombatSimulator {
                     ate = false
                     val foodKey = foodOrder.firstOrNull { (foodSupply[it] ?: 0) > 0 } ?: break
                     val heal = foodHealValues[foodKey] ?: break
-                    if (currentHp + heal <= maxHp || currentHp <= bossMax || currentHp <= maxHp * 0.5) {
+                    if (currentHp + heal <= maxHp || currentHp <= bossMax || currentHp <= maxHp * eatThresholdFraction) {
                         currentHp            = minOf(maxHp, currentHp + heal)
                         foodSupply[foodKey]  = (foodSupply[foodKey] ?: 0) - 1
                         frameFood[foodKey]   = (frameFood[foodKey] ?: 0) + 1

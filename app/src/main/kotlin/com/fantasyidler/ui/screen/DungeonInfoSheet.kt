@@ -26,6 +26,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -54,6 +56,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -62,6 +67,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -84,6 +90,7 @@ import com.fantasyidler.data.model.Skills
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.SuccessGreen
 import com.fantasyidler.ui.viewmodel.CombatViewModel
+import com.fantasyidler.ui.viewmodel.CombatViewModel.Companion.MAX_DUNGEON_REPEAT_COUNT
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.ui.viewmodel.slotDisplayName
@@ -109,19 +116,16 @@ internal fun DungeonInfoSheet(
     equippedWeapon: EquipmentData?,
     equippedWeapons: Map<String, EquipmentData>,
     selectedWeaponSlot: String?,
-    inventory: Map<String, Int>,
-    availableSpells: List<SpellData>,
     selectedSpell: SpellData?,
     availablePotions: Map<String, Int>,
     potionEffects: Map<String, Map<String, Int>>,
     selectedPotionKey: String?,
-    selectedArrowKey: String?,
     isStarting: Boolean,
+    repeatCount: Int,
     enemies: Map<String, EnemyData> = emptyMap(),
     onWeaponSlotSelected: (String) -> Unit,
-    onSpellSelected: (SpellData) -> Unit,
     onPotionSelected: (String?) -> Unit,
-    onArrowSelected: (String?) -> Unit,
+    onRepeatCountChanged: (Int) -> Unit,
     onStart: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -206,51 +210,6 @@ internal fun DungeonInfoSheet(
         StatRow(label = stringResource(R.string.combat_your_level), value = combatLvl.toString())
         StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = GoldPrimary)
 
-        // Ranged: arrow picker
-        if (combatStyle == "ranged") {
-            val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
-            Text(
-                text  = stringResource(R.string.combat_label_arrow),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(4.dp))
-            val arrowOptions = listOf(null) + availableArrows
-            arrowOptions.forEach { key ->
-                val isSelected = selectedArrowKey == key
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onArrowSelected(key) }
-                        .padding(vertical = 5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text       = if (key == null) stringResource(R.string.combat_arrow_auto)
-                                         else GameStrings.itemName(context, key),
-                            style      = MaterialTheme.typography.bodyMedium,
-                            fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                            color      = if (isSelected) GoldPrimary else MaterialTheme.colorScheme.onSurface,
-                        )
-                    }
-                    if (key != null) {
-                        Text(
-                            text  = "×${inventory[key]}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                    if (isSelected) {
-                        Text("✓", style = MaterialTheme.typography.bodyMedium,
-                            color = GoldPrimary, fontWeight = FontWeight.Bold)
-                    }
-                }
-            }
-            Spacer(Modifier.height(8.dp))
-        }
-
         Spacer(Modifier.height(12.dp))
 
         // Enemy spawn list
@@ -276,7 +235,7 @@ internal fun DungeonInfoSheet(
         // Weapon picker (show when 2+ weapon slots are occupied, or always if any weapon is equipped)
         if (equippedWeapons.isNotEmpty()) {
             Text(
-                text  = "Weapon",
+                text  = stringResource(R.string.combat_select_loadout),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -289,18 +248,11 @@ internal fun DungeonInfoSheet(
                         selected = isSelected,
                         onClick  = { onWeaponSlotSelected(slot) },
                         label    = {
-                            Column {
+                            weaponData.combatStyle?.let { style ->
                                 Text(
-                                    text  = GameStrings.itemName(context, weaponData.name),
+                                    text  = GameStrings.skillName(context, style),
                                     style = MaterialTheme.typography.bodySmall,
                                 )
-                                weaponData.combatStyle?.let { style ->
-                                    Text(
-                                        text  = style.replaceFirstChar { it.titlecase() },
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    )
-                                }
                             }
                         },
                     )
@@ -309,89 +261,6 @@ internal fun DungeonInfoSheet(
             Spacer(Modifier.height(12.dp))
         }
 
-        // Magic: spell picker
-        if (combatStyle == "magic") {
-            Text(
-                text  = stringResource(R.string.label_spell),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(4.dp))
-            if (availableSpells.isEmpty()) {
-                Text(
-                    text  = stringResource(R.string.combat_no_spells),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            } else {
-                var onlyCastable by remember { mutableStateOf(true) }
-                val displaySpells = if (onlyCastable)
-                    availableSpells.filter { spell ->
-                        equippedWeapon?.infiniteRunes == "all" ||
-                        equippedWeapon?.infiniteRunes == spell.runeType ||
-                        (inventory[spell.runeType] ?: 0) >= spell.runeCost
-                    }
-                else
-                    availableSpells
-                Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                    FilterChip(
-                        selected = onlyCastable,
-                        onClick  = { onlyCastable = !onlyCastable },
-                        label    = { Text(stringResource(R.string.combat_only_castable)) },
-                    )
-                }
-                displaySpells.forEach { spell ->
-                    val isSelected = selectedSpell?.name == spell.name
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { onSpellSelected(spell) }
-                            .padding(vertical = 5.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Column(Modifier.weight(1f)) {
-                            Text(
-                                text       = GameStrings.spellName(context, spell.name),
-                                style      = MaterialTheme.typography.bodyMedium,
-                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                                color      = if (isSelected) GoldPrimary else MaterialTheme.colorScheme.onSurface,
-                            )
-                            Text(
-                                text  = "${spell.runeCost}× ${GameStrings.itemName(context, spell.runeType)}  •  ${stringResource(R.string.combat_max_hit)} ${spell.maxHit}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                            val infinite = equippedWeapon?.infiniteRunes == "all" || equippedWeapon?.infiniteRunes == spell.runeType
-                            if (infinite) {
-                                Text(
-                                    text  = stringResource(R.string.combat_infinite_runes, GameStrings.itemName(context, spell.runeType)),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            } else {
-                                val held = inventory[spell.runeType] ?: 0
-                                Text(
-                                    text  = stringResource(R.string.combat_you_have_runes, held, GameStrings.itemName(context, spell.runeType)),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = if (held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
-                                            else MaterialTheme.colorScheme.error,
-                                )
-                            }
-                        }
-                        if (isSelected) {
-                            Text(
-                                text  = "✓",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = GoldPrimary,
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                    }
-                }
-            }
-            Spacer(Modifier.height(12.dp))
-        }
         // Potion picker
         if (availablePotions.isNotEmpty()) {
             Spacer(Modifier.height(12.dp))
@@ -443,6 +312,46 @@ internal fun DungeonInfoSheet(
                         Text("✓", style = MaterialTheme.typography.bodyMedium,
                             color = GoldPrimary, fontWeight = FontWeight.Bold)
                     }
+                }
+            }
+        }
+
+        // Run count picker (queue this dungeon N times in one queue slot)
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text  = stringResource(R.string.combat_run_count_label),
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(Modifier.height(4.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(
+                onClick = { onRepeatCountChanged(repeatCount - 1) },
+                enabled = repeatCount > 1,
+            ) {
+                Icon(Icons.Filled.Remove, contentDescription = null)
+            }
+            Text(
+                text       = repeatCount.toString(),
+                style      = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                textAlign  = TextAlign.Center,
+                modifier   = Modifier.width(48.dp),
+            )
+            IconButton(
+                onClick = { onRepeatCountChanged(repeatCount + 1) },
+                enabled = repeatCount < MAX_DUNGEON_REPEAT_COUNT,
+            ) {
+                Icon(Icons.Filled.Add, contentDescription = null)
+            }
+            Spacer(Modifier.width(8.dp))
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                listOf(1, 5, 10, 20).forEach { n ->
+                    FilterChip(
+                        selected = repeatCount == n,
+                        onClick  = { onRepeatCountChanged(n) },
+                        label    = { Text("×$n") },
+                    )
                 }
             }
         }

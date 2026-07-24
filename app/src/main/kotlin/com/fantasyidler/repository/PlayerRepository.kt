@@ -305,6 +305,29 @@ class PlayerRepository @Inject constructor(
         }
     }
 
+    /** Stops an in-progress dungeon repeat run (e.g. on abandon) so it doesn't leave stale "N/M" progress behind. */
+    suspend fun clearActiveDungeonRepeat() = playerMutex.withLock { clearActiveDungeonRepeatUnlocked() }
+
+    internal suspend fun clearActiveDungeonRepeatUnlocked() {
+        val flags = getFlagsUnlocked()
+        if (flags.activeDungeonRepeatTotal > 0) {
+            updateFlagsUnlocked(flags.copy(activeDungeonRepeatIndex = 0, activeDungeonRepeatTotal = 0, activeDungeonRepeatSnapshot = null))
+        }
+    }
+
+    /** Called after a dungeon [QueuedAction] is freshly dequeued and started, to (re)initialise repeat progress. */
+    internal suspend fun stampDungeonRepeatStartUnlocked(action: QueuedAction) {
+        if (action.repeatCount > 1) {
+            updateFlagsUnlocked(getFlagsUnlocked().copy(
+                activeDungeonRepeatIndex    = 1,
+                activeDungeonRepeatTotal    = action.repeatCount,
+                activeDungeonRepeatSnapshot = action,
+            ))
+        } else {
+            clearActiveDungeonRepeatUnlocked()
+        }
+    }
+
     /** Called after a boss [QueuedAction] is freshly dequeued and started, to (re)initialise repeat progress. */
     internal suspend fun stampBossRepeatStartUnlocked(action: QueuedAction) {
         if (action.repeatCount > 1) {
@@ -506,6 +529,57 @@ class PlayerRepository @Inject constructor(
     suspend fun updateEquipped(equipped: Map<String, String?>) {
         val player = getOrCreatePlayer()
         playerDao.upsert(player.copy(equipped = json.encode<Map<String, String?>>(equipped)))
+    }
+
+    /**
+     * Re-applies [style]'s remembered loadout: armor (EquipSlot.ARMOR_SLOTS; weapons are
+     * untouched, since each style already has its own persistent weapon slot), plus the
+     * remembered arrow (ranged) or spell (magic). Slots/values never recorded for this style are
+     * left exactly as currently equipped. Entries referencing an item the player no longer owns,
+     * or doesn't meet the level requirement for, are skipped silently.
+     */
+    suspend fun applyLoadout(style: String, equipment: Map<String, EquipmentData>) {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val skillLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+        val currentEquipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val newEquipped = currentEquipped.toMutableMap()
+
+        val loadout = flags.armorLoadouts[style]
+        if (!loadout.isNullOrEmpty()) {
+            // If this style's own weapon is two-handed, SHIELD must stay off -- mirrors the existing
+            // two-handed/shield exclusivity rule in InventoryViewModel.equip(), which never fires here
+            // since applying a loadout never touches a weapon slot.
+            val weaponSlotForStyle = EquipSlot.WEAPON_SLOTS.firstOrNull { EquipSlot.combatStyleForSlot(it) == style }
+            val twoHanded = equipment[currentEquipped[weaponSlotForStyle]]?.twoHanded == true
+
+            for (slot in EquipSlot.ARMOR_SLOTS) {
+                if (!loadout.containsKey(slot)) continue
+                if (slot == EquipSlot.SHIELD && twoHanded) continue
+                val configuredKey = loadout[slot]
+                if (configuredKey == null) {
+                    newEquipped[slot] = null
+                } else {
+                    val item = equipment[configuredKey]
+                    val owned = (inventory[configuredKey] ?: 0) > 0
+                    val levelOk = item != null && item.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl }
+                    if (item != null && owned && levelOk) newEquipped[slot] = configuredKey
+                    // else: skip -- leave whatever's currently there
+                }
+            }
+        }
+        if (newEquipped != currentEquipped) updateEquipped(newEquipped)
+
+        var newFlags = flags
+        if (style == "ranged") {
+            val arrowKey = flags.rangedLoadoutArrowKey
+            if (arrowKey != null && (inventory[arrowKey] ?: 0) > 0) newFlags = newFlags.copy(equippedArrows = arrowKey)
+        } else if (style == "magic") {
+            val spellName = flags.magicLoadoutSpellName
+            if (spellName != null) newFlags = newFlags.copy(activeSpell = spellName)
+        }
+        if (newFlags != flags) updateFlags(newFlags)
     }
 
     suspend fun updatePets(pets: List<OwnedPet>) {

@@ -497,6 +497,7 @@
     <string name="combat_best_arrow">Najlepsza strzała</string>
     <string name="combat_arrow_auto">Auto (najlepsza dostępna)</string>
     <string name="combat_label_arrow">Strzała</string>
+    <string name="combat_select_loadout">Wybierz zestaw ekwipunku</string>
     <string name="combat_enemies">Wrogowie</string>
     <string name="combat_no_spells">Brak dostępnych zaklęć na Twoim poziomie magii.</string>
     <string name="combat_only_castable">Tylko możliwe do rzucenia</string>
@@ -511,6 +512,9 @@
     <string name="combat_fight_count_label">Liczba walk</string>
     <string name="combat_fight_count_suffix">×%1$d walk</string>
     <string name="combat_fight_progress">Walka %1$d/%2$d</string>
+    <string name="combat_run_count_label">Liczba przebiegów</string>
+    <string name="combat_run_count_suffix">×%1$d przebiegów</string>
+    <string name="combat_run_progress">Przebieg %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP za zwycięstwo</string>
     <string name="combat_you_died">Zginąłeś!</string>
     <string name="combat_died_reward" formatted="false">Otrzymałeś 10% nagród.</string>
@@ -544,6 +548,8 @@
     <string name="profile_gathering_tools">Narzędzia do zbieractwa</string>
     <string name="profile_food_dungeon">Jedzenie (loch)</string>
     <string name="profile_no_food">Brak ugotowanego jedzenia w ekwipunku</string>
+    <string name="profile_food_threshold">Zacznij jeść przy</string>
+    <string name="profile_combat_style">Styl walki</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  leczy %2$d HP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1531,7 +1537,7 @@
     <string name="tower_milestones">Kamienie milowe</string>
     <string name="tower_floor_cleared">Piętro %d ukończone!</string>
     <string name="tower_new_best">Nowy rekord: piętro %d!</string>
-    <string name="tower_death_reset">Zginąłeś na piętrze %d. Powrót do piętra 1.</string>
+    <string name="tower_death_reset">Zginąłeś na piętrze %1$d. Powrót do piętra %2$d.</string>
     <string name="tower_not_enough_runes">Za mało %1$s na ataki z maksymalnym potencjałem.</string>
     <string name="tower_milestone_claim">Odbierz</string>
     <string name="tower_milestone_claimed">Odebrano</string>

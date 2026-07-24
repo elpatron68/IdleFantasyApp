@@ -83,6 +83,28 @@ class QueuedSessionStarter @Inject constructor(
                     }
                     if (snapshot != null) playerRepo.clearActiveBossRepeatUnlocked()
                 }
+                // Same idea as the boss repeat chain above, but for dungeon runs queued with a
+                // run-count > 1 (CombatViewModel.startDungeonSession). A dungeon run "wins" simply
+                // by not dying, unlike a boss fight's kill count.
+                if (current != null && current.completed && current.skillName == "combat") {
+                    val repeatFlags = playerRepo.getFlagsUnlocked()
+                    val snapshot = repeatFlags.activeDungeonRepeatSnapshot
+                    if (snapshot != null && repeatFlags.activeDungeonRepeatIndex < repeatFlags.activeDungeonRepeatTotal) {
+                        val frames: List<SessionFrame> = json.decodeFromString(current.frames)
+                        val survived = frames.lastOrNull()?.died != true
+                        if (survived) {
+                            try {
+                                playerRepo.updateFlagsUnlocked(repeatFlags.copy(activeDungeonRepeatIndex = repeatFlags.activeDungeonRepeatIndex + 1))
+                                startQueuedAction(snapshot, backdateMs = backdateMs)
+                                return@withLock true
+                            } catch (_: Exception) {
+                                // fall through to clear repeat state below; this run's own reward
+                                // is still collected normally, this only stops the chain.
+                            }
+                        }
+                    }
+                    if (snapshot != null) playerRepo.clearActiveDungeonRepeatUnlocked()
+                }
                 // A Tower floor blocked on pending collection is skipped and stashed rather
                 // than parked at the front — otherwise it would permanently block every other
                 // queued item behind it (issue #977). Bounded by the queue's own size so an
@@ -94,6 +116,7 @@ class QueuedSessionStarter @Inject constructor(
                     try {
                         startQueuedAction(next, backdateMs = backdateMs)
                         if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
+                        if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                         for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
                         return@withLock true
                     } catch (_: TowerPendingCollectionException) {
@@ -157,6 +180,10 @@ class QueuedSessionStarter @Inject constructor(
             if (flags.activeBossRepeatSnapshot != null && flags.activeBossRepeatIndex < flags.activeBossRepeatTotal) {
                 return 0L
             }
+            // Same reasoning as the boss guard above (issue #1167), applied to dungeon repeat runs.
+            if (flags.activeDungeonRepeatSnapshot != null && flags.activeDungeonRepeatIndex < flags.activeDungeonRepeatTotal) {
+                return 0L
+            }
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
             val skippedTowerActions = mutableListOf<QueuedAction>()
@@ -175,6 +202,7 @@ class QueuedSessionStarter @Inject constructor(
                     // strictly ordered by queue position instead of all colliding on "now".
                     startQueuedAction(next, offline = true, backdateMs = remainingMs)
                     if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
+                    if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                     for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
                     return duration
                 } catch (_: TowerPendingCollectionException) {
@@ -546,6 +574,7 @@ class QueuedSessionStarter @Inject constructor(
                     foodHealValues     = gameData.foodHealValues,
                     blessingDefBonus   = (ChurchRepository.defBonus(flags) * prayerCapeMult).toInt(),
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct    = flags.foodEatThresholdPct,
                 )
                 val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -660,6 +689,7 @@ class QueuedSessionStarter @Inject constructor(
                     runeCostPerAttack   = queueRuneCost,
                     availableRunes      = if (queueRuneKey != null) inventory[queueRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -739,6 +769,7 @@ class QueuedSessionStarter @Inject constructor(
                     runeCostPerAttack   = towerRuneCost,
                     availableRunes      = if (towerRuneKey != null) inventory[towerRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
                 sessionRepo.startSession(
                     skillName         = "tower",

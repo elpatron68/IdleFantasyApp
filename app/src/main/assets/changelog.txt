@@ -1,3 +1,9 @@
+v1.12.8
+• Added a run count picker to dungeons, so you can queue up to 24 runs against the same dungeon as a single queue slot, with live "Run 12/24" progress shown while it runs
+• Added per-combat-style gear loadouts (Combat tab, Gear): each style now automatically remembers its own weapon, armor, ranged arrow, and magic spell, so tapping a style chip instantly re-equips whatever you last used with it instead of leaving ranged/magic rings and necklaces on whatever a different style left behind; also added a configurable "start eating" HP percentage instead of the fixed 50% threshold, and Equip Best Gear now picks ranged/magic-appropriate armor instead of always favoring strength
+• Added checkpoints to the Infinite Tower every 25 floors, so dying now drops you back to your last checkpoint instead of all the way to floor 1
+• Fixed the Ring Toss minigame's timing bar never actually changing color inside the target zone (it was swapping between two colors that turned out to be identical); the bar now turns red while inside the target zone, matching Hammer Strike
+
 v1.12.7
 • Added owned item quantity display in skill crafting windows (Smithing, Cooking, Fletching, Crafting, Herblore, Construction, Runecrafting, Firemaking, and Worker Crafting)
 • Fixed collecting a large number of piled-up sessions (e.g. after queueing many boss fights) being slow and unresponsive, and fixed tapping Collect repeatedly during that time awarding the same rewards more than once

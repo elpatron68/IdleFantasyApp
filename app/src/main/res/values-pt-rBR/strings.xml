@@ -480,6 +480,7 @@
     <string name="combat_best_arrow">Melhor flecha</string>
     <string name="combat_arrow_auto">Automático (melhor disponível)</string>
     <string name="combat_label_arrow">Flecha</string>
+    <string name="combat_select_loadout">Selecionar Conjunto</string>
     <string name="combat_enemies">Inimigos</string>
     <string name="combat_no_spells">Nenhuma magia disponível no seu nível de magia.</string>
     <string name="combat_only_castable">Apenas Conjuráveis</string>
@@ -494,6 +495,9 @@
     <string name="combat_fight_count_label">Número de lutas</string>
     <string name="combat_fight_count_suffix">×%1$d lutas</string>
     <string name="combat_fight_progress">Luta %1$d/%2$d</string>
+    <string name="combat_run_count_label">Número de corridas</string>
+    <string name="combat_run_count_suffix">×%1$d corridas</string>
+    <string name="combat_run_progress">Corrida %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP na vitória</string>
     <string name="combat_you_died">Você Morreu!</string>
     <string name="combat_died_reward" formatted="false">Você recebeu 10% das recompensas.</string>
@@ -526,6 +530,8 @@
     <string name="profile_gathering_tools">Ferramentas de Coleta</string>
     <string name="profile_food_dungeon">Comida (Masmorra)</string>
     <string name="profile_no_food">Nenhuma comida cozida no inventário</string>
+    <string name="profile_food_threshold">Começar a Comer em</string>
+    <string name="profile_combat_style">Estilo de Combate</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  cura %2$d HP</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1506,7 +1512,7 @@
     <string name="tower_milestones">Marcos</string>
     <string name="tower_floor_cleared">Andar %d concluído!</string>
     <string name="tower_new_best">Novo melhor: Andar %d!</string>
-    <string name="tower_death_reset">Você caiu no andar %d. Reiniciando para o andar 1.</string>
+    <string name="tower_death_reset">Você caiu no andar %1$d. Reiniciando para o andar %2$d.</string>
     <string name="tower_not_enough_runes">%1$s insuficiente para ataques de potencial máximo.</string>
     <string name="tower_milestone_claim">Coletar</string>
     <string name="tower_milestone_claimed">Coletado</string>

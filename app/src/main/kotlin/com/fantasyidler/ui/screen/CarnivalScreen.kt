@@ -439,12 +439,13 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                 }
                 val targetStart = if (difficulty == Difficulty.HARD) 0.52f else 0.45f
                 val targetEnd   = if (difficulty == Difficulty.HARD) 0.57f else 0.55f
+                val inZone      = position in targetStart..targetEnd
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     BoxWithConstraints(modifier = Modifier.fillMaxWidth().height(24.dp)) {
                         LinearProgressIndicator(
                             progress         = { position },
                             modifier         = Modifier.fillMaxWidth().height(24.dp).clip(RoundedCornerShape(4.dp)),
-                            color            = MaterialTheme.colorScheme.primary,
+                            color            = if (inZone) Color(0xFFF44336) else MaterialTheme.colorScheme.primary,
                             trackColor       = MaterialTheme.colorScheme.surfaceVariant,
                         )
                         // Drawn after the indicator so its opaque track doesn't hide this marker.
