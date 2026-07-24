@@ -92,6 +92,12 @@ data class CombatUiState(
     val activeBossRepeatIndex: Int = 0,
     /** Total fights requested for the current boss repeat run. */
     val activeBossRepeatTotal: Int = 0,
+    /** Run count chosen in the dungeon confirm sheet before starting/queueing. 1 = no repeat. */
+    val selectedDungeonRepeatCount: Int = 1,
+    /** 1-based index of the dungeon run currently running within a multi-run repeat request. 0 = not repeating. */
+    val activeDungeonRepeatIndex: Int = 0,
+    /** Total runs requested for the current dungeon repeat run. */
+    val activeDungeonRepeatTotal: Int = 0,
 )
 
 // ---------------------------------------------------------------------------
@@ -116,6 +122,7 @@ class CombatViewModel @Inject constructor(
 
     companion object {
         const val MAX_BOSS_REPEAT_COUNT = 100
+        const val MAX_DUNGEON_REPEAT_COUNT = 24
     }
 
     private val _extra = MutableStateFlow(CombatUiState())
@@ -228,6 +235,8 @@ class CombatViewModel @Inject constructor(
                 selectedPotionKey       = if (extra.selectedPotionKey == null) flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 } else extra.selectedPotionKey,
                 activeBossRepeatIndex   = flags.activeBossRepeatIndex,
                 activeBossRepeatTotal   = flags.activeBossRepeatTotal,
+                activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex,
+                activeDungeonRepeatTotal = flags.activeDungeonRepeatTotal,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
@@ -275,7 +284,10 @@ class CombatViewModel @Inject constructor(
     // ------------------------------------------------------------------
 
     fun selectDungeon(dungeon: DungeonData?) =
-        _extra.update { it.copy(selectedDungeon = dungeon) }
+        _extra.update { it.copy(selectedDungeon = dungeon, selectedDungeonRepeatCount = 1) }
+
+    fun selectDungeonRepeatCount(count: Int) =
+        _extra.update { it.copy(selectedDungeonRepeatCount = count.coerceIn(1, MAX_DUNGEON_REPEAT_COUNT)) }
 
     fun selectBoss(boss: BossData?) =
         _extra.update { it.copy(selectedBoss = boss, selectedBossRepeatCount = 1) }
@@ -289,6 +301,7 @@ class CombatViewModel @Inject constructor(
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
             playerRepo.updateFlags(flags.copy(activeWeaponSlot = slot))
+            EquipSlot.combatStyleForSlot(slot)?.let { style -> playerRepo.applyLoadout(style, gameData.equipment) }
         }
     }
 
@@ -297,7 +310,11 @@ class CombatViewModel @Inject constructor(
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
-            playerRepo.updateFlags(flags.copy(activeSpell = spell?.name))
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                activeSpell = spell?.name,
+                magicLoadoutSpellName = if (activeStyle == "magic") spell?.name else flags.magicLoadoutSpellName,
+            ))
         }
     }
 
@@ -306,7 +323,11 @@ class CombatViewModel @Inject constructor(
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
-            playerRepo.updateFlags(flags.copy(equippedArrows = key))
+            val activeStyle = EquipSlot.combatStyleForSlot(_extra.value.selectedWeaponSlot ?: flags.activeWeaponSlot ?: "")
+            playerRepo.updateFlags(flags.copy(
+                equippedArrows = key,
+                rangedLoadoutArrowKey = if (activeStyle == "ranged") key else flags.rangedLoadoutArrowKey,
+            ))
         }
     }
 
@@ -333,6 +354,7 @@ class CombatViewModel @Inject constructor(
 
     fun startDungeonSession(dungeonKey: String, bypassFoodWarning: Boolean = false) {
         viewModelScope.launch {
+            val repeatCount = _extra.value.selectedDungeonRepeatCount.coerceIn(1, MAX_DUNGEON_REPEAT_COUNT)
             if (sessionRepo.getActiveSession() != null) {
                 val dungeonName = gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
                 val player      = playerRepo.getOrCreatePlayer()
@@ -368,6 +390,7 @@ class CombatViewModel @Inject constructor(
                         spellName           = queuedSpell?.name ?: dungeonFlags.activeSpell,
                         potionKey           = queuedPotionKey,
                         weaponSlot          = queuedWeaponSlot,
+                        repeatCount         = repeatCount,
                     )
                 )
                 if (enqueued) queuedSessionStarter.startNextQueued()
@@ -377,6 +400,7 @@ class CombatViewModel @Inject constructor(
                         selectedDungeon    = null,
                         selectedArrowKey   = null,
                         selectedPotionKey  = null,
+                        selectedDungeonRepeatCount = 1,
                     )
                 }
                 return@launch
@@ -392,7 +416,7 @@ class CombatViewModel @Inject constructor(
                 }
             }
 
-            _extra.update { it.copy(startingSession = true, selectedDungeon = null) }
+            _extra.update { it.copy(startingSession = true, selectedDungeon = null, selectedDungeonRepeatCount = 1) }
             try {
                 val dungeon   = gameData.dungeons[dungeonKey] ?: error("Unknown dungeon: $dungeonKey")
                 val player    = playerRepo.getOrCreatePlayer()
@@ -514,6 +538,7 @@ class CombatViewModel @Inject constructor(
                     runeCostPerAttack   = simulatorRuneCost,
                     availableRunes      = if (simulatorRuneKey != null) inventory[simulatorRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
 
                 val framesJson = json.encodeToString(
@@ -533,6 +558,26 @@ class CombatViewModel @Inject constructor(
                     skillDisplayName = dungeon.displayName,
                     alarmOffsetMs    = alarmOffsetMs,
                 )
+                if (repeatCount > 1) {
+                    val dungeonSnapshot = QueuedAction(
+                        skillName        = "combat",
+                        activityKey      = dungeonKey,
+                        skillDisplayName = dungeon.displayName,
+                        equippedSnapshot = player.equipped,
+                        arrowsKey        = _extra.value.selectedArrowKey ?: flags.equippedArrows,
+                        spellName        = if (combatStyle == "magic" && selectedSpell != null) selectedSpell.name else flags.activeSpell,
+                        potionKey        = potionKey,
+                        weaponSlot       = activeWeaponSlot,
+                        repeatCount      = repeatCount,
+                    )
+                    playerRepo.updateFlags(playerRepo.getFlags().copy(
+                        activeDungeonRepeatIndex    = 1,
+                        activeDungeonRepeatTotal    = repeatCount,
+                        activeDungeonRepeatSnapshot = dungeonSnapshot,
+                    ))
+                } else {
+                    playerRepo.clearActiveDungeonRepeat()
+                }
             } catch (e: Exception) {
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
@@ -691,6 +736,7 @@ class CombatViewModel @Inject constructor(
                     runeCostPerAttack  = bossRuneCost,
                     availableRunes     = if (bossRuneKey != null) inventory[bossRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct    = flags.foodEatThresholdPct,
                 )
 
                 val framesJson = json.encodeToString(
@@ -777,6 +823,7 @@ class CombatViewModel @Inject constructor(
         if (arrowsUsed.isNotEmpty()) playerRepo.consumeItems(arrowsUsed)
         sessionRepo.abandonSession(session.sessionId)
         if (session.skillName == "boss") playerRepo.clearActiveBossRepeat()
+        if (session.skillName == "combat") playerRepo.clearActiveDungeonRepeat()
     }
 
     fun debugFinishSession() {
@@ -930,6 +977,7 @@ class CombatViewModel @Inject constructor(
                 availableArrows     = availableArrows,
                 arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
                 attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                eatThresholdPct     = flags.foodEatThresholdPct,
                 random              = Random(42),
             )
             val deathFrame = result.frames.indexOfFirst { it.died }
@@ -1052,6 +1100,7 @@ class CombatViewModel @Inject constructor(
             runeCostPerAttack   = selectedSpell?.runeCost ?: 1,
             availableRunes      = Int.MAX_VALUE,
             attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+            eatThresholdPct     = flags.foodEatThresholdPct,
         )
         return result.frames.sumOf { it.xpGain.toLong() }
     }
@@ -1126,6 +1175,7 @@ class CombatViewModel @Inject constructor(
             runeCostPerAttack  = selectedSpell?.runeCost ?: 1,
             availableRunes     = Int.MAX_VALUE,
             attackSpeedSec     = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+            eatThresholdPct    = flags.foodEatThresholdPct,
         )
         return bossFrames.sumOf { it.xpGain.toLong() }
     }

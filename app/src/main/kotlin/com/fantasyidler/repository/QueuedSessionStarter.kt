@@ -83,6 +83,28 @@ class QueuedSessionStarter @Inject constructor(
                     }
                     if (snapshot != null) playerRepo.clearActiveBossRepeatUnlocked()
                 }
+                // Same idea as the boss repeat chain above, but for dungeon runs queued with a
+                // run-count > 1 (CombatViewModel.startDungeonSession). A dungeon run "wins" simply
+                // by not dying, unlike a boss fight's kill count.
+                if (current != null && current.completed && current.skillName == "combat") {
+                    val repeatFlags = playerRepo.getFlagsUnlocked()
+                    val snapshot = repeatFlags.activeDungeonRepeatSnapshot
+                    if (snapshot != null && repeatFlags.activeDungeonRepeatIndex < repeatFlags.activeDungeonRepeatTotal) {
+                        val frames: List<SessionFrame> = json.decodeFromString(current.frames)
+                        val survived = frames.lastOrNull()?.died != true
+                        if (survived) {
+                            try {
+                                playerRepo.updateFlagsUnlocked(repeatFlags.copy(activeDungeonRepeatIndex = repeatFlags.activeDungeonRepeatIndex + 1))
+                                startQueuedAction(snapshot, backdateMs = backdateMs)
+                                return@withLock true
+                            } catch (_: Exception) {
+                                // fall through to clear repeat state below; this run's own reward
+                                // is still collected normally, this only stops the chain.
+                            }
+                        }
+                    }
+                    if (snapshot != null) playerRepo.clearActiveDungeonRepeatUnlocked()
+                }
                 // A Tower floor blocked on pending collection is skipped and stashed rather
                 // than parked at the front — otherwise it would permanently block every other
                 // queued item behind it (issue #977). Bounded by the queue's own size so an
@@ -94,6 +116,7 @@ class QueuedSessionStarter @Inject constructor(
                     try {
                         startQueuedAction(next, backdateMs = backdateMs)
                         if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
+                        if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                         for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
                         return@withLock true
                     } catch (_: TowerPendingCollectionException) {
@@ -157,6 +180,10 @@ class QueuedSessionStarter @Inject constructor(
             if (flags.activeBossRepeatSnapshot != null && flags.activeBossRepeatIndex < flags.activeBossRepeatTotal) {
                 return 0L
             }
+            // Same reasoning as the boss guard above (issue #1167), applied to dungeon repeat runs.
+            if (flags.activeDungeonRepeatSnapshot != null && flags.activeDungeonRepeatIndex < flags.activeDungeonRepeatTotal) {
+                return 0L
+            }
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
             val skippedTowerActions = mutableListOf<QueuedAction>()
@@ -175,6 +202,7 @@ class QueuedSessionStarter @Inject constructor(
                     // strictly ordered by queue position instead of all colliding on "now".
                     startQueuedAction(next, offline = true, backdateMs = remainingMs)
                     if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
+                    if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                     for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
                     return duration
                 } catch (_: TowerPendingCollectionException) {
@@ -200,8 +228,12 @@ class QueuedSessionStarter @Inject constructor(
         val agilityLevel    = levels[Skills.AGILITY] ?: 1
         val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
         val equippedCapeData = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-        val combatCapeMult   = if (equippedCapeData?.capeSkill in COMBAT_CAPE_SKILLS) 1f + (equippedCapeData?.capeBonus ?: 0f) else 1f
-        val prayerCapeMult   = if (equippedCapeData?.capeSkill == "prayer") 1f + (equippedCapeData?.capeBonus ?: 0f) else 1f
+        val attackCapeMult   = resolveCapeMultiplier("attack", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+        val strengthCapeMult = resolveCapeMultiplier("strength", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+        val defenseCapeMult  = resolveCapeMultiplier("defense", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+        val rangedCapeMult   = resolveCapeMultiplier("ranged", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+        val magicCapeMult    = resolveCapeMultiplier("magic", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+        val prayerCapeMult   = resolveCapeMultiplier("prayer", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
         // Recorded on the session so collection can detect a mid-session prestige reset
         // (isSkillSessionStillEligible) instead of gating on an unrelated difficulty formula.
         val levelAtStart = when (action.skillName) {
@@ -525,15 +557,15 @@ class QueuedSessionStarter @Inject constructor(
                 val bossFrames = CombatSimulator.simulateBoss(
                     boss               = boss,
                     bossKey            = bossKey,
-                    playerAttack       = ((levels[Skills.ATTACK]   ?: 1) * combatCapeMult).toInt() + (pmBoss[Skills.ATTACK]    ?: 0) * 5 + (bossPotionBonuses["attack"]   ?: 0),
-                    playerStrength     = ((levels[Skills.STRENGTH] ?: 1) * combatCapeMult).toInt() + (pmBoss[Skills.STRENGTH]  ?: 0) * 5 + (bossPotionBonuses["strength"] ?: 0),
-                    playerDefence      = ((levels[Skills.DEFENSE]  ?: 1) * combatCapeMult).toInt() + totalDefBonus + (pmBoss[Skills.DEFENSE] ?: 0) * 5 + (bossPotionBonuses["defense"] ?: 0),
+                    playerAttack       = ((levels[Skills.ATTACK]   ?: 1) * attackCapeMult).toInt() + (pmBoss[Skills.ATTACK]    ?: 0) * 5 + (bossPotionBonuses["attack"]   ?: 0),
+                    playerStrength     = ((levels[Skills.STRENGTH] ?: 1) * strengthCapeMult).toInt() + (pmBoss[Skills.STRENGTH]  ?: 0) * 5 + (bossPotionBonuses["strength"] ?: 0),
+                    playerDefence      = ((levels[Skills.DEFENSE]  ?: 1) * defenseCapeMult).toInt() + totalDefBonus + (pmBoss[Skills.DEFENSE] ?: 0) * 5 + (bossPotionBonuses["defense"] ?: 0),
                     playerHp           = (levels[Skills.HITPOINTS] ?: 1) + (pmBoss[Skills.HITPOINTS] ?: 0) * 5,
                     weaponAttackBonus  = totalAtkBonus,
                     weaponStrBonus     = totalStrBonus,
                     combatStyle        = combatStyle,
-                    playerRanged       = ((levels[Skills.RANGED] ?: 1) * combatCapeMult).toInt() + (pmBoss[Skills.RANGED] ?: 0) * 5 + (bossPotionBonuses["ranged"] ?: 0),
-                    playerMagic        = ((levels[Skills.MAGIC]  ?: 1) * combatCapeMult).toInt() + (pmBoss[Skills.MAGIC]  ?: 0) * 5 + (bossPotionBonuses["magic"]  ?: 0),
+                    playerRanged       = ((levels[Skills.RANGED] ?: 1) * rangedCapeMult).toInt() + (pmBoss[Skills.RANGED] ?: 0) * 5 + (bossPotionBonuses["ranged"] ?: 0),
+                    playerMagic        = ((levels[Skills.MAGIC]  ?: 1) * magicCapeMult).toInt() + (pmBoss[Skills.MAGIC]  ?: 0) * 5 + (bossPotionBonuses["magic"]  ?: 0),
                     rangedGearStrengthBonus = totalRangedStrBonus,
                     spellMaxHit        = (spell?.maxHit ?: 0) + totalMagicDmgBonus,
                     availableArrows    = availableArrows,
@@ -542,6 +574,7 @@ class QueuedSessionStarter @Inject constructor(
                     foodHealValues     = gameData.foodHealValues,
                     blessingDefBonus   = (ChurchRepository.defBonus(flags) * prayerCapeMult).toInt(),
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct    = flags.foodEatThresholdPct,
                 )
                 val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -633,16 +666,16 @@ class QueuedSessionStarter @Inject constructor(
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = gameData.enemies,
-                    playerAttack        = ((levels[Skills.ATTACK]   ?: 1) * combatCapeMult).toInt() + (pm[Skills.ATTACK]    ?: 0) * 5 + (combatPotBonuses["attack"]   ?: 0),
-                    playerStrength      = ((levels[Skills.STRENGTH] ?: 1) * combatCapeMult).toInt() + (pm[Skills.STRENGTH]  ?: 0) * 5 + (combatPotBonuses["strength"] ?: 0),
-                    playerDefence       = ((levels[Skills.DEFENSE]  ?: 1) * combatCapeMult).toInt() + totalDefBonus + (pm[Skills.DEFENSE] ?: 0) * 5 + (combatPotBonuses["defense"] ?: 0),
+                    playerAttack        = ((levels[Skills.ATTACK]   ?: 1) * attackCapeMult).toInt() + (pm[Skills.ATTACK]    ?: 0) * 5 + (combatPotBonuses["attack"]   ?: 0),
+                    playerStrength      = ((levels[Skills.STRENGTH] ?: 1) * strengthCapeMult).toInt() + (pm[Skills.STRENGTH]  ?: 0) * 5 + (combatPotBonuses["strength"] ?: 0),
+                    playerDefence       = ((levels[Skills.DEFENSE]  ?: 1) * defenseCapeMult).toInt() + totalDefBonus + (pm[Skills.DEFENSE] ?: 0) * 5 + (combatPotBonuses["defense"] ?: 0),
                     playerHp            = (levels[Skills.HITPOINTS] ?: 1) + (pm[Skills.HITPOINTS] ?: 0) * 5,
                     blessingDefBonus    = (ChurchRepository.defBonus(flags) * prayerCapeMult).toInt(),
                     weaponAttackBonus   = totalAtkBonus,
                     weaponStrengthBonus = totalStrBonus,
                     combatStyle         = combatStyle,
-                    playerRanged        = ((levels[Skills.RANGED] ?: 1) * combatCapeMult).toInt() + (pm[Skills.RANGED] ?: 0) * 5 + (combatPotBonuses["ranged"] ?: 0),
-                    playerMagic         = ((levels[Skills.MAGIC]  ?: 1) * combatCapeMult).toInt() + (pm[Skills.MAGIC]  ?: 0) * 5 + (combatPotBonuses["magic"]  ?: 0),
+                    playerRanged        = ((levels[Skills.RANGED] ?: 1) * rangedCapeMult).toInt() + (pm[Skills.RANGED] ?: 0) * 5 + (combatPotBonuses["ranged"] ?: 0),
+                    playerMagic         = ((levels[Skills.MAGIC]  ?: 1) * magicCapeMult).toInt() + (pm[Skills.MAGIC]  ?: 0) * 5 + (combatPotBonuses["magic"]  ?: 0),
                     rangedGearStrengthBonus = totalRangedStrBonus,
                     spellMaxHit         = (spell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = agilityLevel,
@@ -656,6 +689,7 @@ class QueuedSessionStarter @Inject constructor(
                     runeCostPerAttack   = queueRuneCost,
                     availableRunes      = if (queueRuneKey != null) inventory[queueRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -712,16 +746,16 @@ class QueuedSessionStarter @Inject constructor(
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = scaledTowerEnemies(floor),
-                    playerAttack        = ((levels[Skills.ATTACK]   ?: 1) * combatCapeMult).toInt() + (pm[Skills.ATTACK]    ?: 0) * 5,
-                    playerStrength      = ((levels[Skills.STRENGTH] ?: 1) * combatCapeMult).toInt() + (pm[Skills.STRENGTH]  ?: 0) * 5,
-                    playerDefence       = ((levels[Skills.DEFENSE]  ?: 1) * combatCapeMult).toInt() + totalDefBonus + (pm[Skills.DEFENSE] ?: 0) * 5,
+                    playerAttack        = ((levels[Skills.ATTACK]   ?: 1) * attackCapeMult).toInt() + (pm[Skills.ATTACK]    ?: 0) * 5,
+                    playerStrength      = ((levels[Skills.STRENGTH] ?: 1) * strengthCapeMult).toInt() + (pm[Skills.STRENGTH]  ?: 0) * 5,
+                    playerDefence       = ((levels[Skills.DEFENSE]  ?: 1) * defenseCapeMult).toInt() + totalDefBonus + (pm[Skills.DEFENSE] ?: 0) * 5,
                     playerHp            = (levels[Skills.HITPOINTS] ?: 1) + (pm[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus,
                     blessingDefBonus    = (ChurchRepository.defBonus(flags) * prayerCapeMult).toInt(),
                     weaponAttackBonus   = totalAtkBonus,
                     weaponStrengthBonus = totalStrBonus,
                     combatStyle         = combatStyle,
-                    playerRanged        = ((levels[Skills.RANGED] ?: 1) * combatCapeMult).toInt() + (pm[Skills.RANGED] ?: 0) * 5,
-                    playerMagic         = ((levels[Skills.MAGIC]  ?: 1) * combatCapeMult).toInt() + (pm[Skills.MAGIC]  ?: 0) * 5,
+                    playerRanged        = ((levels[Skills.RANGED] ?: 1) * rangedCapeMult).toInt() + (pm[Skills.RANGED] ?: 0) * 5,
+                    playerMagic         = ((levels[Skills.MAGIC]  ?: 1) * magicCapeMult).toInt() + (pm[Skills.MAGIC]  ?: 0) * 5,
                     rangedGearStrengthBonus = totalRangedStrBonus,
                     spellMaxHit         = (spell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = agilityLevel,
@@ -735,6 +769,7 @@ class QueuedSessionStarter @Inject constructor(
                     runeCostPerAttack   = towerRuneCost,
                     availableRunes      = if (towerRuneKey != null) inventory[towerRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
                 )
                 sessionRepo.startSession(
                     skillName         = "tower",

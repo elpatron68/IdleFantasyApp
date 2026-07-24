@@ -119,18 +119,13 @@ internal fun BossInfoSheet(
     equippedWeapon: EquipmentData?,
     equippedWeapons: Map<String, EquipmentData>,
     selectedWeaponSlot: String?,
-    inventory: Map<String, Int>,
-    availableSpells: List<SpellData>,
     selectedSpell: SpellData?,
     availablePotions: Map<String, Int>,
     potionEffects: Map<String, Map<String, Int>>,
     selectedPotionKey: String?,
-    selectedArrowKey: String?,
     isStarting: Boolean,
     repeatCount: Int,
     onWeaponSlotSelected: (String) -> Unit,
-    onSpellSelected: (SpellData) -> Unit,
-    onArrowSelected: (String?) -> Unit,
     onPotionSelected: (String?) -> Unit,
     onRepeatCountChanged: (Int) -> Unit,
     onStart: () -> Unit,
@@ -207,7 +202,7 @@ internal fun BossInfoSheet(
         if (equippedWeapons.isNotEmpty()) {
             Spacer(Modifier.height(12.dp))
             Text(
-                text  = "Weapon",
+                text  = stringResource(R.string.combat_select_loadout),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -220,7 +215,7 @@ internal fun BossInfoSheet(
                 onExpandedChange = { weaponExpanded = it },
             ) {
                 OutlinedTextField(
-                    value         = equippedWeapons[currentWeaponSlot]?.let { GameStrings.itemName(context, it.name) } ?: "",
+                    value         = equippedWeapons[currentWeaponSlot]?.combatStyle?.let { GameStrings.skillName(context, it) } ?: "",
                     onValueChange = {},
                     readOnly      = true,
                     trailingIcon  = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = weaponExpanded) },
@@ -235,18 +230,11 @@ internal fun BossInfoSheet(
                     equippedWeapons.forEach { (slot, weaponData) ->
                         DropdownMenuItem(
                             text = {
-                                Column {
+                                weaponData.combatStyle?.let { style ->
                                     Text(
-                                        text  = GameStrings.itemName(context, weaponData.name),
+                                        text  = GameStrings.skillName(context, style),
                                         style = MaterialTheme.typography.bodyMedium,
                                     )
-                                    weaponData.combatStyle?.let { style ->
-                                        Text(
-                                            text  = style.replaceFirstChar { it.titlecase() },
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        )
-                                    }
                                 }
                             },
                             onClick = {
@@ -254,159 +242,6 @@ internal fun BossInfoSheet(
                                 weaponExpanded = false
                             },
                         )
-                    }
-                }
-            }
-        }
-
-        // Ranged: arrow picker
-        if (combatStyle == "ranged") {
-            val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
-            Spacer(Modifier.height(12.dp))
-            Text(
-                text  = stringResource(R.string.combat_label_arrow),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(4.dp))
-            val arrowOptions = listOf(null) + availableArrows
-            var arrowExpanded by remember { mutableStateOf(false) }
-            ExposedDropdownMenuBox(
-                expanded         = arrowExpanded,
-                onExpandedChange = { arrowExpanded = it },
-            ) {
-                OutlinedTextField(
-                    value         = if (selectedArrowKey == null) stringResource(R.string.combat_arrow_auto)
-                                     else GameStrings.itemName(context, selectedArrowKey),
-                    onValueChange = {},
-                    readOnly      = true,
-                    trailingIcon  = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = arrowExpanded) },
-                    colors        = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                    singleLine    = true,
-                    modifier      = Modifier.menuAnchor().fillMaxWidth(),
-                )
-                ExposedDropdownMenu(
-                    expanded         = arrowExpanded,
-                    onDismissRequest = { arrowExpanded = false },
-                ) {
-                    arrowOptions.forEach { key ->
-                        DropdownMenuItem(
-                            text = {
-                                Row(
-                                    modifier              = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                ) {
-                                    Text(
-                                        text  = if (key == null) stringResource(R.string.combat_arrow_auto)
-                                                 else GameStrings.itemName(context, key),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                    if (key != null) {
-                                        Spacer(Modifier.width(8.dp))
-                                        Text(
-                                            text  = "×${inventory[key]}",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        )
-                                    }
-                                }
-                            },
-                            onClick = {
-                                onArrowSelected(key)
-                                arrowExpanded = false
-                            },
-                        )
-                    }
-                }
-            }
-        }
-
-        // Magic: spell picker
-        if (combatStyle == "magic") {
-            Spacer(Modifier.height(12.dp))
-            Text(
-                text  = stringResource(R.string.label_spell),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(4.dp))
-            if (availableSpells.isEmpty()) {
-                Text(
-                    text  = stringResource(R.string.combat_no_spells),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            } else {
-                var onlyCastable by remember { mutableStateOf(true) }
-                val displaySpells = if (onlyCastable)
-                    availableSpells.filter { spell ->
-                        equippedWeapon?.infiniteRunes == "all" ||
-                        equippedWeapon?.infiniteRunes == spell.runeType ||
-                        (inventory[spell.runeType] ?: 0) >= spell.runeCost
-                    }
-                else availableSpells
-                Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                    FilterChip(
-                        selected = onlyCastable,
-                        onClick  = { onlyCastable = !onlyCastable },
-                        label    = { Text(stringResource(R.string.combat_only_castable)) },
-                    )
-                }
-                var spellExpanded by remember { mutableStateOf(false) }
-                ExposedDropdownMenuBox(
-                    expanded         = spellExpanded,
-                    onExpandedChange = { spellExpanded = it },
-                ) {
-                    OutlinedTextField(
-                        value         = selectedSpell?.let { GameStrings.spellName(context, it.name) } ?: "",
-                        onValueChange = {},
-                        readOnly      = true,
-                        trailingIcon  = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = spellExpanded) },
-                        colors        = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
-                        singleLine    = true,
-                        modifier      = Modifier.menuAnchor().fillMaxWidth(),
-                    )
-                    ExposedDropdownMenu(
-                        expanded         = spellExpanded,
-                        onDismissRequest = { spellExpanded = false },
-                    ) {
-                        displaySpells.forEach { spell ->
-                            DropdownMenuItem(
-                                text = {
-                                    Column {
-                                        Text(
-                                            text  = GameStrings.spellName(context, spell.name),
-                                            style = MaterialTheme.typography.bodyMedium,
-                                        )
-                                        Text(
-                                            text  = "${spell.runeCost}× ${GameStrings.itemName(context, spell.runeType)}  •  ${stringResource(R.string.combat_max_hit)} ${spell.maxHit}",
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        )
-                                        val infinite = equippedWeapon?.infiniteRunes == "all" || equippedWeapon?.infiniteRunes == spell.runeType
-                                        if (infinite) {
-                                            Text(
-                                                text  = stringResource(R.string.combat_infinite_runes, GameStrings.itemName(context, spell.runeType)),
-                                                style = MaterialTheme.typography.labelSmall,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                            )
-                                        } else {
-                                            val held = inventory[spell.runeType] ?: 0
-                                            Text(
-                                                text  = stringResource(R.string.combat_you_have_runes, held, GameStrings.itemName(context, spell.runeType)),
-                                                style = MaterialTheme.typography.labelSmall,
-                                                color = if (held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
-                                                        else MaterialTheme.colorScheme.error,
-                                            )
-                                        }
-                                    }
-                                },
-                                onClick = {
-                                    onSpellSelected(spell)
-                                    spellExpanded = false
-                                },
-                            )
-                        }
                     }
                 }
             }

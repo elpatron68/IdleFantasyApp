@@ -15,6 +15,21 @@ data class PlayerFlags(
     @SerialName("equipped_runes") val equippedRunes: String? = null,
     @SerialName("active_spell") val activeSpell: String? = null,
     @SerialName("active_weapon_slot") val activeWeaponSlot: String? = null,
+    /**
+     * Per-combat-style armor memory, auto-recorded every time gear is equipped/unequipped while
+     * that style is active (mirrors how each style already remembers its own weapon slot).
+     * Outer key = "attack"/"strength"/"ranged"/"magic". Inner key = an EquipSlot.ARMOR_SLOTS
+     * constant. Inner value: key absent = never used this slot in this style yet (leave whatever
+     * is currently equipped alone); key present with null = this style uses nothing in this slot;
+     * key present with an item key = equip it on switch (if still owned + level met).
+     */
+    @SerialName("armor_loadouts") val armorLoadouts: Map<String, Map<String, String?>> = emptyMap(),
+    /** Arrow remembered for the ranged style, auto-recorded/restored the same way as armorLoadouts. */
+    @SerialName("ranged_loadout_arrow_key") val rangedLoadoutArrowKey: String? = null,
+    /** Spell remembered for the magic style, auto-recorded/restored the same way as armorLoadouts. */
+    @SerialName("magic_loadout_spell_name") val magicLoadoutSpellName: String? = null,
+    /** Global "start eating" threshold as % of max HP. Default 50 preserves the prior hardcoded behavior. */
+    @SerialName("food_eat_threshold_pct") val foodEatThresholdPct: Int = 50,
     @SerialName("battery_prompt_shown") val batteryPromptShown: Boolean = false,
     /** Epoch ms when the 2× XP boost expires; 0 = not active. */
     @SerialName("xp_boost_expires_at") val xpBoostExpiresAt: Long = 0L,
@@ -43,6 +58,12 @@ data class PlayerFlags(
     @SerialName("active_boss_repeat_total") val activeBossRepeatTotal: Int = 0,
     /** Frozen loadout/action re-queued after each fight in a boss repeat run. */
     @SerialName("active_boss_repeat_snapshot") val activeBossRepeatSnapshot: QueuedAction? = null,
+    /** 1-based index of the dungeon run currently running within a multi-run repeat request. 0 = not repeating. */
+    @SerialName("active_dungeon_repeat_index") val activeDungeonRepeatIndex: Int = 0,
+    /** Total runs requested for the current dungeon repeat run. */
+    @SerialName("active_dungeon_repeat_total") val activeDungeonRepeatTotal: Int = 0,
+    /** Frozen loadout/action re-queued after each run in a dungeon repeat run. */
+    @SerialName("active_dungeon_repeat_snapshot") val activeDungeonRepeatSnapshot: QueuedAction? = null,
     @SerialName("last_seen_version_code") val lastSeenVersionCode: Int = 0,
     /** "dark" | "light" | "system". Defaults to "dark" to preserve existing behaviour. */
     @SerialName("theme_preference") val themePreference: String = "dark",
@@ -275,7 +296,7 @@ data class QueuedAction(
     @SerialName("spell_name") val spellName: String? = null,
     /** Weapon slot key captured at queue time for combat/boss sessions. */
     @SerialName("weapon_slot") val weaponSlot: String? = null,
-    /** Total boss fights requested in one queue entry (e.g. "fight this boss 100 times"). 1 = no repeat. */
+    /** Total fights/runs requested in one queue entry (e.g. "fight this boss 100 times" or "run this dungeon 24 times"). 1 = no repeat. */
     @SerialName("repeat_count") val repeatCount: Int = 1,
 )
 

@@ -194,10 +194,11 @@ internal fun HomeSessionCard(
                 )
             }
 
-            if (session.skillName == "boss" && repeatTotal > 1) {
+            if ((session.skillName == "boss" || session.skillName == "combat") && repeatTotal > 1) {
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text       = stringResource(R.string.combat_fight_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
+                    text       = if (session.skillName == "boss") stringResource(R.string.combat_fight_progress, repeatIndex.coerceAtLeast(1), repeatTotal)
+                                 else stringResource(R.string.combat_run_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
                     style      = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
                     color      = GoldPrimary,
@@ -389,9 +390,12 @@ internal fun QueueCard(
                                     "magic"    -> stringResource(R.string.label_magic)
                                     else       -> null
                                 }
-                                if (action.skillName == "boss" && action.repeatCount > 1) {
-                                    val fightsLabel = stringResource(R.string.combat_fight_count_suffix, action.repeatCount)
-                                    if (styleLabel != null) "$styleLabel • $fightsLabel" else fightsLabel
+                                if (action.repeatCount > 1) {
+                                    val countLabel = if (action.skillName == "boss")
+                                        stringResource(R.string.combat_fight_count_suffix, action.repeatCount)
+                                    else
+                                        stringResource(R.string.combat_run_count_suffix, action.repeatCount)
+                                    if (styleLabel != null) "$styleLabel • $countLabel" else countLabel
                                 } else styleLabel
                             }
                             action.outputQty > 0 -> stringResource(R.string.queue_item_qty_with_output, action.qty, action.outputQty)

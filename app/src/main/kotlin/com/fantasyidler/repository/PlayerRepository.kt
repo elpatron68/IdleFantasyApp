@@ -3,6 +3,7 @@ package com.fantasyidler.repository
 import com.fantasyidler.data.db.dao.FarmingPatchDao
 import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.QuestProgressDao
+import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.*
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
@@ -304,6 +305,29 @@ class PlayerRepository @Inject constructor(
         }
     }
 
+    /** Stops an in-progress dungeon repeat run (e.g. on abandon) so it doesn't leave stale "N/M" progress behind. */
+    suspend fun clearActiveDungeonRepeat() = playerMutex.withLock { clearActiveDungeonRepeatUnlocked() }
+
+    internal suspend fun clearActiveDungeonRepeatUnlocked() {
+        val flags = getFlagsUnlocked()
+        if (flags.activeDungeonRepeatTotal > 0) {
+            updateFlagsUnlocked(flags.copy(activeDungeonRepeatIndex = 0, activeDungeonRepeatTotal = 0, activeDungeonRepeatSnapshot = null))
+        }
+    }
+
+    /** Called after a dungeon [QueuedAction] is freshly dequeued and started, to (re)initialise repeat progress. */
+    internal suspend fun stampDungeonRepeatStartUnlocked(action: QueuedAction) {
+        if (action.repeatCount > 1) {
+            updateFlagsUnlocked(getFlagsUnlocked().copy(
+                activeDungeonRepeatIndex    = 1,
+                activeDungeonRepeatTotal    = action.repeatCount,
+                activeDungeonRepeatSnapshot = action,
+            ))
+        } else {
+            clearActiveDungeonRepeatUnlocked()
+        }
+    }
+
     /** Called after a boss [QueuedAction] is freshly dequeued and started, to (re)initialise repeat progress. */
     internal suspend fun stampBossRepeatStartUnlocked(action: QueuedAction) {
         if (action.repeatCount > 1) {
@@ -505,6 +529,57 @@ class PlayerRepository @Inject constructor(
     suspend fun updateEquipped(equipped: Map<String, String?>) {
         val player = getOrCreatePlayer()
         playerDao.upsert(player.copy(equipped = json.encode<Map<String, String?>>(equipped)))
+    }
+
+    /**
+     * Re-applies [style]'s remembered loadout: armor (EquipSlot.ARMOR_SLOTS; weapons are
+     * untouched, since each style already has its own persistent weapon slot), plus the
+     * remembered arrow (ranged) or spell (magic). Slots/values never recorded for this style are
+     * left exactly as currently equipped. Entries referencing an item the player no longer owns,
+     * or doesn't meet the level requirement for, are skipped silently.
+     */
+    suspend fun applyLoadout(style: String, equipment: Map<String, EquipmentData>) {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val skillLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+        val currentEquipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val newEquipped = currentEquipped.toMutableMap()
+
+        val loadout = flags.armorLoadouts[style]
+        if (!loadout.isNullOrEmpty()) {
+            // If this style's own weapon is two-handed, SHIELD must stay off -- mirrors the existing
+            // two-handed/shield exclusivity rule in InventoryViewModel.equip(), which never fires here
+            // since applying a loadout never touches a weapon slot.
+            val weaponSlotForStyle = EquipSlot.WEAPON_SLOTS.firstOrNull { EquipSlot.combatStyleForSlot(it) == style }
+            val twoHanded = equipment[currentEquipped[weaponSlotForStyle]]?.twoHanded == true
+
+            for (slot in EquipSlot.ARMOR_SLOTS) {
+                if (!loadout.containsKey(slot)) continue
+                if (slot == EquipSlot.SHIELD && twoHanded) continue
+                val configuredKey = loadout[slot]
+                if (configuredKey == null) {
+                    newEquipped[slot] = null
+                } else {
+                    val item = equipment[configuredKey]
+                    val owned = (inventory[configuredKey] ?: 0) > 0
+                    val levelOk = item != null && item.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl }
+                    if (item != null && owned && levelOk) newEquipped[slot] = configuredKey
+                    // else: skip -- leave whatever's currently there
+                }
+            }
+        }
+        if (newEquipped != currentEquipped) updateEquipped(newEquipped)
+
+        var newFlags = flags
+        if (style == "ranged") {
+            val arrowKey = flags.rangedLoadoutArrowKey
+            if (arrowKey != null && (inventory[arrowKey] ?: 0) > 0) newFlags = newFlags.copy(equippedArrows = arrowKey)
+        } else if (style == "magic") {
+            val spellName = flags.magicLoadoutSpellName
+            if (spellName != null) newFlags = newFlags.copy(activeSpell = spellName)
+        }
+        if (newFlags != flags) updateFlags(newFlags)
     }
 
     suspend fun updatePets(pets: List<OwnedPet>) {
@@ -1156,5 +1231,80 @@ class PlayerRepository @Inject constructor(
             equipped    = json.encode<Map<String, String?>>(defaultEquipped),
             flags       = json.encode<PlayerFlags>(PlayerFlags()),
         )
+    }
+}
+
+internal fun isGuildCapeForSkill(capeSkill: String, skillName: String): Boolean {
+    return when (capeSkill) {
+        "warriors" -> skillName in setOf("attack", "strength", "defense")
+        "archers" -> skillName == "ranged"
+        "mages" -> skillName == "magic"
+        else -> false
+    }
+}
+
+internal fun resolveOwnedCapeKeysForSkill(skillName: String): List<String> {
+    return when (skillName) {
+        "attack" -> listOf("attack_cape", "warriors_guild_cape")
+        "strength" -> listOf("strength_cape", "warriors_guild_cape")
+        "defense" -> listOf("defense_cape", "warriors_guild_cape")
+        "ranged" -> listOf("ranged_cape", "archers_guild_cape")
+        "magic" -> listOf("magic_cape", "mages_guild_cape")
+        "hitpoints", "hp" -> listOf("hp_cape")
+        else -> listOf("${skillName}_cape", "${skillName}_guild_cape")
+    }
+}
+
+fun resolveCapeMultiplier(
+    skillName: String,
+    equippedCape: EquipmentData?,
+    inventoryKeys: Set<String>,
+    townBuildingTiers: Map<String, Int>,
+    skillPrestige: Map<String, Int>,
+    allEquipment: Map<String, EquipmentData>
+): Float {
+    val normSkill = if (skillName == Skills.HITPOINTS) "hp" else skillName
+    val rackTier = townBuildingTiers["cape_rack"] ?: 0
+    val isCategoryUnlocked = when {
+        normSkill in Skills.GATHERING -> rackTier >= 1
+        normSkill in Skills.CRAFTING_SKILLS -> rackTier >= 2
+        else -> rackTier >= 3
+    }
+
+    val eligibleCapeBonuses = mutableListOf<Float>()
+
+    // Check equipped cape
+    val equippedCapeSkill = equippedCape?.capeSkill
+    if (equippedCapeSkill != null) {
+        val isMatch = equippedCapeSkill == normSkill || isGuildCapeForSkill(equippedCapeSkill, normSkill)
+        if (isMatch && equippedCape.capeBonus > 0f) {
+            eligibleCapeBonuses.add(equippedCape.capeBonus)
+        }
+    }
+
+    // Check passive capes in inventory
+    if (isCategoryUnlocked) {
+        val candidateKeys = resolveOwnedCapeKeysForSkill(normSkill)
+        for (key in candidateKeys) {
+            if (inventoryKeys.contains(key)) {
+                val capeDef = allEquipment[key]
+                if (capeDef != null && capeDef.capeBonus > 0f) {
+                    eligibleCapeBonuses.add(capeDef.capeBonus)
+                }
+            }
+        }
+    }
+
+    if (eligibleCapeBonuses.isEmpty()) return 1.0f
+
+    val maxBonus = eligibleCapeBonuses.maxOrNull() ?: 0f
+    if (maxBonus <= 0f) return 1.0f
+
+    val prestigeLevel = skillPrestige[normSkill] ?: 0
+    val isCombatSkill = normSkill in setOf("attack", "strength", "defense", "ranged", "magic", "hp", "slayer")
+    return if (isCombatSkill) {
+        1.0f + maxBonus
+    } else {
+        1.0f + maxBonus * (prestigeLevel + 1)
     }
 }

@@ -507,6 +507,7 @@
     <string name="combat_best_arrow">Лучшая стрела</string>
     <string name="combat_arrow_auto">Авто (лучшая доступная)</string>
     <string name="combat_label_arrow">Стрела</string>
+    <string name="combat_select_loadout">Выбрать комплект</string>
     <string name="combat_enemies">Враги</string>
     <string name="combat_no_spells">Нет доступных заклинаний на вашем уровне магии.</string>
     <string name="combat_only_castable">Только доступные</string>
@@ -521,6 +522,9 @@
     <string name="combat_fight_count_label">Количество боёв</string>
     <string name="combat_fight_count_suffix">×%1$d боёв</string>
     <string name="combat_fight_progress">Бой %1$d/%2$d</string>
+    <string name="combat_run_count_label">Количество заходов</string>
+    <string name="combat_run_count_suffix">×%1$d заходов</string>
+    <string name="combat_run_progress">Заход %1$d/%2$d</string>
     <string name="combat_xp_on_victory">Опыт за победу</string>
     <string name="combat_you_died">Вы погибли!</string>
     <string name="combat_died_reward">Вы получили 10% наград.</string>
@@ -542,6 +546,8 @@
     <string name="profile_gathering_tools">Инструменты добычи</string>
     <string name="profile_food_dungeon">Еда (подземелье)</string>
     <string name="profile_no_food">Нет приготовленной еды в инвентаре</string>
+    <string name="profile_food_threshold">Начинать есть при</string>
+    <string name="profile_combat_style">Стиль боя</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  лечит %2$d здоровья</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1507,7 +1513,7 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Этаж %d пройден!</string>
     <string name="tower_new_best">Новый рекорд: этаж %d!</string>
-    <string name="tower_death_reset">Вы проиграли на этаже %d. Возращение на этаж 1.</string>
+    <string name="tower_death_reset">Вы проиграли на этаже %1$d. Возвращение на этаж %2$d.</string>
     <string name="tower_not_enough_runes">Недостаточно %1$s для максимального количества атак.</string>
     <string name="tower_milestone_claim">Получить</string>
     <string name="tower_milestone_claimed">Получено</string>
@@ -1636,4 +1642,9 @@
         <item>%1$s любит внимание!</item>
         <item>%1$s обещает и дальше усердно работать на вас.</item>
     </string-array>
+    <string name="town_building_cape_rack_name">Cape Rack</string>
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
 </resources>

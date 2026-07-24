@@ -435,6 +435,9 @@
     <string name="combat_fight_count_label">Dövüş Sayısı</string>
     <string name="combat_fight_count_suffix">×%1$d dövüş</string>
     <string name="combat_fight_progress">Dövüş %1$d/%2$d</string>
+    <string name="combat_run_count_label">Koşu Sayısı</string>
+    <string name="combat_run_count_suffix">×%1$d koşu</string>
+    <string name="combat_run_progress">Koşu %1$d/%2$d</string>
     <string name="combat_xp_on_victory">Zaferde kazanılacak XP</string>
     <string name="combat_you_died">Öldün!</string>
     <string name="combat_died_reward">Ödüllerin %10\'unu aldın.</string>
@@ -466,6 +469,8 @@
     <string name="profile_gathering_tools">Toplama Araçları</string>
     <string name="profile_food_dungeon">Yiyecek (Zindan)</string>
     <string name="profile_no_food">Envanterde pişmiş yiyecek yok</string>
+    <string name="profile_food_threshold">Yemeye Başlama Eşiği</string>
+    <string name="profile_combat_style">Dövüş Tarzı</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  %2$d HP iyileştirir</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1014,6 +1019,7 @@
     <string name="inn_buy_total">Total: %1$s</string>
     <string name="combat_arrow_auto">Auto (best available)</string>
     <string name="combat_label_arrow">Arrow</string>
+    <string name="combat_select_loadout">Ekipman Setini Seç</string>
 
     <!-- Prestige system -->
     <string name="prestige">Prestige</string>
@@ -1478,7 +1484,7 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_death_reset">Kat %1$d\'de düştün. Kat %2$d\'e dönülüyor.</string>
     <string name="tower_not_enough_runes">Maksimum saldırı sayısı için yeterli %1$s yok.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
@@ -1598,4 +1604,12 @@
     <string name="bonus_xp">+%1$d%% XP</string>
     <string name="bonus_coin_drops">+%1$d%% coin drops</string>
     <string name="bonus_hp">+%1$d HP</string>
+    <string name="town_building_cape_rack_name">Cape Rack</string>
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
+    <string name="crafting_owned">Owned: %1$d</string>
+    <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
+    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
 </resources>

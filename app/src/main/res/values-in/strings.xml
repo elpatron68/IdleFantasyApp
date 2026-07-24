@@ -395,6 +395,7 @@
     <string name="combat_best_arrow">Anak panah terbaik</string>
     <string name="combat_arrow_auto">Otomatis (pilihan terbaik)</string>
     <string name="combat_label_arrow">Anak panah</string>
+    <string name="combat_select_loadout">Pilih Perlengkapan</string>
     <string name="combat_enemies">Musuh</string>
     <string name="combat_no_spells">Mantra tidak tersedia di level sihir mu</string>
     <string name="combat_only_castable">Yang Bisa Dirapal</string>
@@ -407,6 +408,9 @@
     <string name="combat_fight_count_label">Jumlah Pertarungan</string>
     <string name="combat_fight_count_suffix">×%1$d pertarungan</string>
     <string name="combat_fight_progress">Pertarungan %1$d/%2$d</string>
+    <string name="combat_run_count_label">Jumlah Putaran</string>
+    <string name="combat_run_count_suffix">×%1$d putaran</string>
+    <string name="combat_run_progress">Putaran %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP saat menang</string>
     <string name="combat_you_died">Kamu meninggal!</string>
     <string name="combat_died_reward">Anda menerima 10% dari hadiah.</string>
@@ -423,6 +427,8 @@
     <string name="profile_gathering_tools">Mengumpulkan Alat</string>
     <string name="profile_food_dungeon">Makanan (Penjara Dungeon)</string>
     <string name="profile_no_food">Tidak ada makanan di Inventaris</string>
+    <string name="profile_food_threshold">Mulai Makan Saat</string>
+    <string name="profile_combat_style">Gaya Bertarung</string>
     <string name="profile_food_desc">×%1$d  •  heals %2$d HP</string>
     <string name="profile_choose_slot">Pilih %1$s</string>
     <string name="profile_no_items">Item belum terpenuhi di inventaris</string>
@@ -1245,7 +1251,7 @@
     <string name="tower_milestones">Milestones</string>
     <string name="tower_floor_cleared">Floor %d cleared!</string>
     <string name="tower_new_best">New best: Floor %d!</string>
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_death_reset">Kamu jatuh di lantai %1$d. Kembali ke lantai %2$d.</string>
     <string name="tower_not_enough_runes">%1$s tidak cukup untuk jumlah serangan maksimal.</string>
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
@@ -1337,4 +1343,9 @@
     <string name="settings_credit_banners_subtitle">Seni oleh Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Ikon Keahlian</string>
     <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+    <string name="town_building_cape_rack_name">Cape Rack</string>
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
 </resources>

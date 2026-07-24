@@ -479,6 +479,7 @@
     <string name="combat_best_arrow">最良の矢</string>
     <string name="combat_arrow_auto">自動 (使用可能な最良の矢)</string>
     <string name="combat_label_arrow">矢</string>
+    <string name="combat_select_loadout">装備セットを選択</string>
     <string name="combat_enemies">敵</string>
     <string name="combat_no_spells">あなたの魔法レベルでは使用できるスペルがありません。</string>
     <string name="combat_only_castable">詠唱可能のみ</string>
@@ -493,6 +494,9 @@
     <string name="combat_fight_count_label">戦闘回数</string>
     <string name="combat_fight_count_suffix">×%1$d 戦</string>
     <string name="combat_fight_progress">戦闘 %1$d/%2$d</string>
+    <string name="combat_run_count_label">周回数</string>
+    <string name="combat_run_count_suffix">×%1$d 周</string>
+    <string name="combat_run_progress">周回 %1$d/%2$d</string>
     <string name="combat_xp_on_victory">勝利時の獲得経験値</string>
     <string name="combat_you_died">死亡しました！</string>
     <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
@@ -526,6 +530,8 @@
     <string name="profile_gathering_tools">採集道具</string>
     <string name="profile_food_dungeon">料理 (ダンジョン)</string>
     <string name="profile_no_food">インベントリに調理済みの料理がありません</string>
+    <string name="profile_food_threshold">食事を始めるHP</string>
+    <string name="profile_combat_style">戦闘スタイル</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  HPを %2$d 回復</string>
     <!-- Translator note: %1$s = slot display name (e.g. "Weapon") -->
@@ -1510,7 +1516,7 @@
     <string name="tower_milestones">マイルストーン</string>
     <string name="tower_floor_cleared">%d 階をクリア！</string>
     <string name="tower_new_best">自己ベスト更新: %d 階！</string>
-    <string name="tower_death_reset">%d 階で倒れました。1階にリセットされます。</string>
+    <string name="tower_death_reset">%1$d 階で倒れました。%2$d 階にリセットされます。</string>
     <string name="tower_not_enough_runes">%1$s が不足しているため、最大数での攻撃が行えません。</string>
     <string name="tower_milestone_claim">回収</string>
     <string name="tower_milestone_claimed">回収済み</string>
@@ -1625,4 +1631,9 @@
     <string name="home_welcome_greeting">おかえりなさい、</string>
     <string name="home_welcome_name">%1$s！</string>
     <string name="home_welcome_title">%1$s！</string>
+    <string name="town_building_cape_rack_name">Cape Rack</string>
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
 </resources>

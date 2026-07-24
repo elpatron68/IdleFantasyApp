@@ -102,10 +102,15 @@ class InventoryViewModel @Inject constructor(
         val towerCoinBonusPct: Int = 0,
         val towerHpBonus: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
+        val townBuildingTiers: Map<String, Int> = emptyMap(),
         val seasonalBanners: List<SeasonalBannerDisplay> = emptyList(),
         val unlockedTitles: Set<String> = emptySet(),
         val equippedTitle: String? = null,
         val displayName: String = "",
+        /** The weapon slot driving the currently active combat style. */
+        val activeWeaponSlot: String? = null,
+        /** Global "start eating" threshold as % of max HP. */
+        val foodEatThresholdPct: Int = 50,
     ) {
         val totalLevel: Int get() = skillLevels.values.sum()
 
@@ -186,9 +191,12 @@ class InventoryViewModel @Inject constructor(
                 towerCoinBonusPct       = flags.towerCoinBonusPct,
                 towerHpBonus            = flags.towerHpBonus,
                 skillPrestige           = flags.skillPrestige,
+                townBuildingTiers       = flags.townBuildingTiers,
                 seasonalBanners         = buildSeasonalBannerDisplays(flags),
                 unlockedTitles          = flags.unlockedTitles,
                 equippedTitle           = flags.equippedTitle,
+                activeWeaponSlot        = flags.activeWeaponSlot,
+                foodEatThresholdPct     = flags.foodEatThresholdPct,
                 displayName             = run {
                     val baseName = flags.characterName.ifBlank { context.getString(R.string.profile_unnamed) }
                     val titleName = titleRepo.displayName(context, flags.equippedTitle, flags)
@@ -245,7 +253,8 @@ class InventoryViewModel @Inject constructor(
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.inventory_requires_to_equip, msg)) }
                 return@launch
             }
-            val current = playerRepo.getEquipped().toMutableMap()
+            val before = playerRepo.getEquipped()
+            val current = before.toMutableMap()
             current[slot] = itemKey
             if (slot in EquipSlot.WEAPON_SLOTS && itemData?.twoHanded == true) {
                 current[EquipSlot.SHIELD] = null
@@ -258,16 +267,42 @@ class InventoryViewModel @Inject constructor(
                 }
             }
             playerRepo.updateEquipped(current)
+            recordArmorLoadoutChanges(before, current)
             _extra.update { it.copy(pickingSlot = null) }
         }
     }
 
     fun unequip(slot: String) {
         viewModelScope.launch {
-            val current = playerRepo.getEquipped().toMutableMap()
+            val before = playerRepo.getEquipped()
+            val current = before.toMutableMap()
             current[slot] = null
             playerRepo.updateEquipped(current)
+            recordArmorLoadoutChanges(before, current)
         }
+    }
+
+    /** The combat style whichever weapon slot is currently active belongs to; falls back to "attack". */
+    private fun resolveActiveStyle(flags: PlayerFlags, equipped: Map<String, String?>): String {
+        val slot = flags.activeWeaponSlot
+            ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
+            ?: EquipSlot.WEAPON_ATK
+        return EquipSlot.combatStyleForSlot(slot) ?: "attack"
+    }
+
+    /**
+     * Auto-records any ARMOR_SLOTS that changed between [before] and [after] into the currently
+     * active style's remembered loadout — mirrors how each style already remembers its own weapon
+     * slot, so casually equipping gear while playing a style is all it takes to "save" it (no
+     * separate save step needed). Also catches the two-handed/shield auto-unequip side effect.
+     */
+    private suspend fun recordArmorLoadoutChanges(before: Map<String, String?>, after: Map<String, String?>) {
+        val changedArmorSlots = EquipSlot.ARMOR_SLOTS.filter { before[it] != after[it] }
+        if (changedArmorSlots.isEmpty()) return
+        val flags = playerRepo.getFlags()
+        val style = resolveActiveStyle(flags, after)
+        val updatedStyle = flags.armorLoadouts[style].orEmpty() + changedArmorSlots.associateWith { after[it] }
+        playerRepo.updateFlags(flags.copy(armorLoadouts = flags.armorLoadouts + (style to updatedStyle)))
     }
 
     private fun bestItemForSlot(
@@ -275,6 +310,7 @@ class InventoryViewModel @Inject constructor(
         skillLevels: Map<String, Int>,
         inventory: Map<String, Int>,
         equipment: Map<String, EquipmentData>,
+        activeStyle: String,
     ): EquipmentData? {
         val style = EquipSlot.combatStyleForSlot(slot)
         return inventory.entries
@@ -298,8 +334,11 @@ class InventoryViewModel @Inject constructor(
                     EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
                     else -> if (slot in EquipSlot.WEAPON_SLOTS)
                         item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
-                    else
-                        item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
+                    else when (activeStyle) {
+                        "ranged" -> item.defenseBonus * 2.0f + (item.rangedAttackBonus ?: 0) * 1.0f + (item.rangedStrengthBonus ?: 0) * 0.5f
+                        "magic"  -> item.defenseBonus * 2.0f + (item.magicAttackBonus ?: 0) * 1.0f + (item.magicDamageBonus ?: 0) * 0.5f
+                        else     -> item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
+                    }
                 }
             }
     }
@@ -308,11 +347,13 @@ class InventoryViewModel @Inject constructor(
         viewModelScope.launch {
             val state = uiState.value
             val equipment = allEquipment
-            val newEquipped = playerRepo.getEquipped().toMutableMap()
+            val before = playerRepo.getEquipped()
+            val newEquipped = before.toMutableMap()
             val skillLevels = state.skillLevels
+            val activeStyle = resolveActiveStyle(playerRepo.getFlags(), before)
 
             for (slot in slots) {
-                val best = bestItemForSlot(slot, skillLevels, state.inventory, equipment)
+                val best = bestItemForSlot(slot, skillLevels, state.inventory, equipment, activeStyle)
                 val currentItemKey = newEquipped[slot]
                 val currentItemValid = currentItemKey == null || run {
                     val it = equipment[currentItemKey]
@@ -325,6 +366,7 @@ class InventoryViewModel @Inject constructor(
             }
 
             playerRepo.updateEquipped(newEquipped)
+            recordArmorLoadoutChanges(before, newEquipped)
         }
     }
 
@@ -343,6 +385,13 @@ class InventoryViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(equippedFood = flags.equippedFood - itemKey))
+        }
+    }
+
+    fun setFoodEatThresholdPct(pct: Int) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(foodEatThresholdPct = pct.coerceIn(10, 90)))
         }
     }
 
