@@ -394,6 +394,8 @@
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Open</string>
     <string name="settings_wiki">Wiki</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Opslag geëxporteerd</string>
     <string name="settings_imported_ok">Opslag succesvol geïmporteerd</string>
     <string name="settings_imported_fail">Importeren mislukt — ongeldig bestand</string>
@@ -644,6 +646,7 @@
     <string name="farming_clear_patch">Verwijder Perceel</string>
     <string name="farming_clear_desc">Verwijder het gewas zonder beloning?</string>
     <string name="farming_harvest_and_plant">Oogst en Plant Alles</string>
+    <string name="farming_harvest_all_complete">Alle percelen geoogst!</string>
     <string name="farming_no_crops_ready">Geen gewassen klaar om te oogsten</string>
     <string name="farming_no_empty_patches">Geen lege percelen beschikbaar</string>
     <!-- Translator note: %1$s = seed name -->

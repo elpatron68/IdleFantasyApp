@@ -657,6 +657,7 @@
     <string name="farming_clear_patch">Очистить участок</string>
     <string name="farming_clear_desc">Удалить культуру без награды?</string>
     <string name="farming_harvest_and_plant">Собрать и посадить всё</string>
+    <string name="farming_harvest_all_complete">Все грядки собраны!</string>
     <string name="farming_no_crops_ready">Нет готовых к сбору культур</string>
     <string name="farming_no_empty_patches">Нет свободных участков</string>
     <!-- Translator note: %1$s = seed name -->
@@ -1630,6 +1631,8 @@
     <string name="home_welcome_title">%1$s!</string>
     <!-- ===== translatable="false" + synced from values/ ===== -->
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string-array name="profile_pet_happy_messages">
         <item>%1$s радуется!</item>
         <item>%1$s виляет хвостом!</item>

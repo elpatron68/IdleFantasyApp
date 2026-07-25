@@ -397,6 +397,8 @@
     <string name="settings_source_open">Abrir</string>
     <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Salvamento exportado</string>
     <string name="settings_imported_ok">Salvamento importado com sucesso</string>
     <string name="settings_imported_fail">Falha ao importar — arquivo inválido</string>
@@ -643,6 +645,7 @@
     <string name="farming_clear_patch">Limpar Canteiro</string>
     <string name="farming_clear_desc">Remover a plantação sem nenhuma recompensa?</string>
     <string name="farming_harvest_and_plant">Colher e Plantar Tudo</string>
+    <string name="farming_harvest_all_complete">Todos os canteiros colhidos!</string>
     <string name="farming_no_crops_ready">Nenhuma plantação pronta para colher</string>
     <string name="farming_no_empty_patches">Nenhum canteiro vazio disponível</string>
     <!-- Translator note: %1$s = seed name -->

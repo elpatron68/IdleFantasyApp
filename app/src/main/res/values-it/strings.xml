@@ -398,6 +398,8 @@
     <!-- riga non traducibile; commento aggiunto per allineare questo file e l\'originale -->
     <string name="settings_source_open">Apri</string>
     <string name="settings_wiki">Wiki</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <!-- riga non traducibile; commento aggiunto per allineare questo file e l\'originale -->
     <string name="settings_exported_ok">Salvataggio esportato</string>
     <string name="settings_imported_ok">Salvataggio importato con successo</string>
@@ -660,6 +662,7 @@
     <string name="farming_clear_patch">Estirpa</string>
     <string name="farming_clear_desc">Rimuovere la coltivazione senza alcuna ricompensa?</string>
     <string name="farming_harvest_and_plant">Raccogli e Ripianta Tutti</string>
+    <string name="farming_harvest_all_complete">Tutti gli appezzamenti raccolti!</string>
     <string name="farming_no_crops_ready">Non ci sono coltivazioni pronte per la raccolta</string>
     <string name="farming_no_empty_patches">Nessun appezzamento disponibile</string>
     <!-- Translator note: %1$s = seed name -->

@@ -353,6 +353,8 @@
     <string name="settings_source_code">Kaynak Kodu</string>
     <string name="settings_source_open">Aç</string>
     <string name="settings_wiki">Wiki</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Kayıt dosyası dışa aktarıldı</string>
     <string name="settings_imported_ok">Kayıt dosyası başarıyla içe aktarıldı</string>
     <string name="settings_imported_fail">İçe aktarma başarısız — geçersiz dosya</string>
@@ -581,6 +583,7 @@
     <string name="farming_clear_patch">Tarlayı Temizle</string>
     <string name="farming_clear_desc">Hiçbir ödül almadan ürünü sök?</string>
     <string name="farming_harvest_and_plant">Tümünü Hasat Et ve Ek</string>
+    <string name="farming_harvest_all_complete">Tüm tarlalar hasat edildi!</string>
     <string name="farming_no_crops_ready">Hasat etmeye hazır ürün yok</string>
     <string name="farming_no_empty_patches">Boş tarla yok</string>
     <!-- Translator note: %1$s = seed name -->

@@ -315,6 +315,8 @@
     <string name="settings_source_open">Buka</string>
     <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Simpan yang diekspor</string>
     <string name="settings_imported_ok">Penyimpanan berhasil diimpor.</string>
     <string name="settings_imported_fail">Impor gagal — file tidak valid</string>
@@ -502,6 +504,7 @@
     <string name="farming_clear_patch">Kosongkan Lahan</string>
     <string name="farming_clear_desc">Membuang hasil panen tanpa imbalan apa pun?</string>
     <string name="farming_harvest_and_plant">Panen dan Tanam Semuanya</string>
+    <string name="farming_harvest_all_complete">Semua Petak Dipanen!</string>
     <string name="farming_no_crops_ready">Tidak ada tanaman yang siap panen.</string>
     <string name="farming_no_empty_patches">Tidak ada lahan kosong yang tersedia.</string>
     <string name="farming_no_seeds_inventory">Tidak Cukup %1$s di inventaris</string>

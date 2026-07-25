@@ -347,6 +347,8 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_open">Open</string>
     <string name="settings_wiki">Wiki</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Save exported</string>
     <string name="settings_imported_ok">Save imported successfully</string>
     <string name="settings_imported_fail">Failed to import — invalid file</string>
@@ -713,6 +715,7 @@
     <string name="quest_fill_weekly">Semanal</string>
     <string name="quest_fill_guild">Gremio</string>
     <string name="farming_harvest_and_plant">Harvest and Plant All</string>
+    <string name="farming_harvest_all_complete">¡Todas las parcelas cosechadas!</string>
     <string name="farming_no_crops_ready">No crops ready to harvest</string>
     <string name="farming_no_empty_patches">No empty patches available</string>
     <string name="farming_no_seeds_inventory">Not enough %1$s in inventory</string>

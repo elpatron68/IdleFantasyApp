@@ -335,9 +335,10 @@ class InventoryViewModel @Inject constructor(
                     else -> if (slot in EquipSlot.WEAPON_SLOTS)
                         item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                     else when (activeStyle) {
-                        "ranged" -> item.defenseBonus * 2.0f + (item.rangedAttackBonus ?: 0) * 1.0f + (item.rangedStrengthBonus ?: 0) * 0.5f
-                        "magic"  -> item.defenseBonus * 2.0f + (item.magicAttackBonus ?: 0) * 1.0f + (item.magicDamageBonus ?: 0) * 0.5f
-                        else     -> item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
+                        "ranged"   -> item.defenseBonus * 2.0f + (item.rangedAttackBonus ?: 0) * 1.0f + (item.rangedStrengthBonus ?: 0) * 0.5f
+                        "magic"    -> item.defenseBonus * 2.0f + (item.magicAttackBonus ?: 0) * 1.0f + (item.magicDamageBonus ?: 0) * 0.5f
+                        "strength" -> item.defenseBonus * 2.0f + item.strengthBonus * 1.0f + item.attackBonus * 0.5f
+                        else       -> item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
                     }
                 }
             }

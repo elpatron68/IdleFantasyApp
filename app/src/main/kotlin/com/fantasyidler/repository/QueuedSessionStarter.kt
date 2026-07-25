@@ -440,7 +440,7 @@ class QueuedSessionStarter @Inject constructor(
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val efficiency = gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, r.levelRequired)
                 val frames = buildCraftFrames(xpMap[Skills.SMITHING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
-                    efficiency = efficiency,
+                    efficiency = efficiency, petBoostPct = gatheringPetBoost(player.pets, Skills.SMITHING),
                     petDropKey = petDropKey(Skills.SMITHING), petDropChance = petDropChance(Skills.SMITHING))
                 val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60 / efficiency).toLong()
                 sessionRepo.startSession(Skills.SMITHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
@@ -450,7 +450,7 @@ class QueuedSessionStarter @Inject constructor(
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val efficiency = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired)
                 val frames = buildCraftFrames(xpMap[Skills.COOKING] ?: 0L, qty, r.xpPerItem, 1, r.cookedItem,
-                    efficiency = efficiency)
+                    efficiency = efficiency, petBoostPct = gatheringPetBoost(player.pets, Skills.COOKING))
                 val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60 / efficiency).toLong()
                 sessionRepo.startSession(Skills.COOKING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
@@ -458,6 +458,7 @@ class QueuedSessionStarter @Inject constructor(
                 val r   = gameData.fletchingRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val frames = buildCraftFrames(xpMap[Skills.FLETCHING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, r.itemName,
+                    petBoostPct = gatheringPetBoost(player.pets, Skills.FLETCHING),
                     petDropKey = petDropKey(Skills.FLETCHING), petDropChance = petDropChance(Skills.FLETCHING))
                 val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
                 sessionRepo.startSession(Skills.FLETCHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
@@ -466,6 +467,7 @@ class QueuedSessionStarter @Inject constructor(
                 val r   = gameData.craftingRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val frames = buildCraftFrames(xpMap[Skills.CRAFTING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
+                    petBoostPct = gatheringPetBoost(player.pets, Skills.CRAFTING),
                     petDropKey = petDropKey(Skills.CRAFTING), petDropChance = petDropChance(Skills.CRAFTING))
                 val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
                 sessionRepo.startSession(Skills.CRAFTING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
@@ -474,6 +476,7 @@ class QueuedSessionStarter @Inject constructor(
                 val r   = gameData.constructionRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val frames = buildCraftFrames(xpMap[Skills.CONSTRUCTION] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
+                    petBoostPct = gatheringPetBoost(player.pets, Skills.CONSTRUCTION),
                     petDropKey = petDropKey(Skills.CONSTRUCTION), petDropChance = petDropChance(Skills.CONSTRUCTION))
                 val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
                 sessionRepo.startSession(Skills.CONSTRUCTION, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
@@ -485,6 +488,7 @@ class QueuedSessionStarter @Inject constructor(
                 val outputKey   = if (catalystKey != null) "enhanced_${action.activityKey}" else action.activityKey
                 if (catalystKey != null) playerRepo.consumeItemsUnlocked(mapOf(catalystKey to qty))
                 val frames    = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey,
+                    petBoostPct = gatheringPetBoost(player.pets, Skills.HERBLORE),
                     petDropKey = petDropKey(Skills.HERBLORE), petDropChance = petDropChance(Skills.HERBLORE))
                 val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
                 sessionRepo.startSession(Skills.HERBLORE, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs,
@@ -862,6 +866,7 @@ class QueuedSessionStarter @Inject constructor(
         outputQty: Int,
         outputKey: String,
         efficiency: Float = 1.0f,
+        petBoostPct: Int = 0,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
         random: Random = Random.Default,
@@ -872,7 +877,7 @@ class QueuedSessionStarter @Inject constructor(
         for (bucket in 0 until frameCount) {
             val itemsInBucket = ((bucket.toLong() + 1) * qty / frameCount - bucket.toLong() * qty / frameCount).toInt()
             val levelBefore = XpTable.levelForXp(xp)
-            val gain = (xpPerItem * itemsInBucket * efficiency).toInt()
+            val gain = (xpPerItem * itemsInBucket * efficiency * (1.0 + petBoostPct / 100.0)).toInt()
             xp += gain
             val levelAfter = XpTable.levelForXp(xp)
             frames.add(SessionFrame(

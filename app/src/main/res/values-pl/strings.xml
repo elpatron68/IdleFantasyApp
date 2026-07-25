@@ -412,6 +412,8 @@
     <string name="settings_source_open">Otwórz</string>
     <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Zapis wyeksportowany</string>
     <string name="settings_imported_ok">Zapis zaimportowany pomyślnie</string>
     <string name="settings_imported_fail">Nie udało się zaimportować — nieprawidłowy plik</string>
@@ -661,6 +663,7 @@
     <string name="farming_clear_patch">Wyczyść grządkę</string>
     <string name="farming_clear_desc">Usunąć uprawę bez żadnej nagrody?</string>
     <string name="farming_harvest_and_plant">Zbierz i zasadź wszystko</string>
+    <string name="farming_harvest_all_complete">Zebrano wszystkie poletka!</string>
     <string name="farming_no_crops_ready">Brak upraw gotowych do zbioru</string>
     <string name="farming_no_empty_patches">Brak dostępnych pustych grządek</string>
     <!-- Translator note: %1$s = seed name -->

@@ -363,6 +363,18 @@ class CraftingViewModel @Inject constructor(
     private fun craftToolEfficiency(recipe: CraftableRecipe, equipped: Map<String, String?>): Float =
         gameData.craftDurationEfficiency(recipe.skillName, recipe.key, equipped)
 
+    private fun petBoostFor(petsJson: String, skillKey: String): Int {
+        val pets = try {
+            json.decodeFromString<List<com.fantasyidler.data.model.OwnedPet>>(petsJson)
+        } catch (_: Exception) {
+            return 0
+        }
+        return pets.sumOf { pet ->
+            val pd = gameData.pets[pet.id]
+            if (pd != null && (pd.boostedSkill == skillKey || pd.boostedSkill == "all")) pd.boostPercent else 0
+        }
+    }
+
     fun craft() {
         val state  = uiState.value          // combined state — has inventory
         val recipe = state.selectedRecipe ?: return
@@ -379,13 +391,14 @@ class CraftingViewModel @Inject constructor(
                 val perItemMs = (SkillSimulator.sessionDurationMs(agility, craftFlags.skillPrestige[Skills.AGILITY] ?: 0) / 60 / toolEff).toLong()
                 val totalOutput = qty * recipe.outputQty
                 val xpQueueMult = (if (craftFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(craftFlags)
+                val queuePetPct = petBoostFor(playerRepo.getOrCreatePlayer().pets, recipe.skillName)
                 val action = QueuedAction(
                     skillName           = recipe.skillName,
                     activityKey         = recipe.key,
                     skillDisplayName    = recipe.skillName.replaceFirstChar { it.uppercase() },
                     qty                 = qty,
                     outputQty           = if (totalOutput != qty) totalOutput else 0,
-                    estimatedXpGain     = (qty * recipe.xpPerItem * xpQueueMult * toolEff).toLong(),
+                    estimatedXpGain     = (qty * recipe.xpPerItem * xpQueueMult * toolEff * (1.0 + queuePetPct / 100.0)).toLong(),
                     estimatedDurationMs = qty.toLong() * perItemMs,
                     catalystKey         = ashKey,
                 )
@@ -413,7 +426,8 @@ class CraftingViewModel @Inject constructor(
             val startXp     = xpMap[recipe.skillName] ?: 0L
             val levelBefore = XpTable.levelForXp(startXp)
             val efficiency = craftToolEfficiency(recipe, equipped)
-            val totalXpGain = (qty * recipe.xpPerItem * efficiency).toInt()
+            val petPct = petBoostFor(player.pets, recipe.skillName)
+            val totalXpGain = (qty * recipe.xpPerItem * efficiency * (1.0 + petPct / 100.0)).toInt()
             val xpAfter     = startXp + totalXpGain
             val levelAfter  = XpTable.levelForXp(xpAfter)
             val outputKey = if (ashKey != null && recipe.skillName == Skills.HERBLORE)

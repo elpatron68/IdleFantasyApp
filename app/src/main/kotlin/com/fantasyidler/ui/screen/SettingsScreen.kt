@@ -604,6 +604,22 @@ fun SettingsScreen(
                 }
             )
 
+            SettingsRow(
+                title    = stringResource(R.string.settings_discord),
+                subtitle = stringResource(R.string.settings_discord_url),
+                trailing = {
+                    OutlinedButton(
+                        onClick = {
+                            context.startActivity(
+                                Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/nZVZ67gyH"))
+                            )
+                        }
+                    ) {
+                        Text(stringResource(R.string.settings_source_open))
+                    }
+                }
+            )
+
             Text(
                 text = stringResource(R.string.settings_foss_desc),
                 style = MaterialTheme.typography.bodySmall,

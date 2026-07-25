@@ -123,6 +123,9 @@ class CombatViewModel @Inject constructor(
     companion object {
         const val MAX_BOSS_REPEAT_COUNT = 100
         const val MAX_DUNGEON_REPEAT_COUNT = 24
+
+        /** Randomized runs per dungeon for the safety rating, rated by survival percentage rather than a single fixed-seed pass. */
+        const val SURVIVAL_SIM_RUNS = 30
     }
 
     private val _extra = MutableStateFlow(CombatUiState())
@@ -955,36 +958,40 @@ class CombatViewModel @Inject constructor(
         val agility = levels[Skills.AGILITY]    ?: 1
 
         return gameData.dungeons.mapValues { (_, dungeon) ->
-            val result = CombatSimulator.simulateDungeon(
-                dungeon             = dungeon,
-                enemies             = gameData.enemies,
-                playerAttack        = atk,
-                playerStrength      = str,
-                playerDefence       = def,
-                blessingDefBonus    = ChurchRepository.defBonus(flags),
-                playerHp            = hp,
-                weaponAttackBonus   = totalAtk,
-                weaponStrengthBonus = totalStr,
-                combatStyle         = combatStyle,
-                playerRanged        = rng,
-                playerMagic         = mgc,
-                rangedGearStrengthBonus = if (combatStyle == "ranged") totalStr else 0,
-                spellMaxHit         = spellMaxHit,
-                agilityLevel        = agility,
-                agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
-                equippedFood        = foodQtys,
-                foodHealValues      = gameData.foodHealValues,
-                availableArrows     = availableArrows,
-                arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
-                attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
-                eatThresholdPct     = flags.foodEatThresholdPct,
-                random              = Random(42),
-            )
-            val deathFrame = result.frames.indexOfFirst { it.died }
+            var survived = 0
+            repeat(SURVIVAL_SIM_RUNS) {
+                val result = CombatSimulator.simulateDungeon(
+                    dungeon             = dungeon,
+                    enemies             = gameData.enemies,
+                    playerAttack        = atk,
+                    playerStrength      = str,
+                    playerDefence       = def,
+                    blessingDefBonus    = ChurchRepository.defBonus(flags),
+                    playerHp            = hp,
+                    weaponAttackBonus   = totalAtk,
+                    weaponStrengthBonus = totalStr,
+                    combatStyle         = combatStyle,
+                    playerRanged        = rng,
+                    playerMagic         = mgc,
+                    rangedGearStrengthBonus = if (combatStyle == "ranged") totalStr else 0,
+                    spellMaxHit         = spellMaxHit,
+                    agilityLevel        = agility,
+                    agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
+                    equippedFood        = foodQtys,
+                    foodHealValues      = gameData.foodHealValues,
+                    availableArrows     = availableArrows,
+                    arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
+                    attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
+                    eatThresholdPct     = flags.foodEatThresholdPct,
+                    random              = Random.Default,
+                )
+                if (result.frames.none { it.died }) survived++
+            }
+            val survivalPct = survived.toDouble() / SURVIVAL_SIM_RUNS
             when {
-                deathFrame < 0   -> CombatSimulator.SurvivalRating.LIKELY
-                deathFrame >= 45 -> CombatSimulator.SurvivalRating.RISKY
-                else             -> CombatSimulator.SurvivalRating.UNLIKELY
+                survivalPct >= 0.9 -> CombatSimulator.SurvivalRating.LIKELY
+                survivalPct >= 0.5 -> CombatSimulator.SurvivalRating.RISKY
+                else               -> CombatSimulator.SurvivalRating.UNLIKELY
             }
         }
     }

@@ -373,6 +373,8 @@
     <string name="settings_source_code">Code source</string>
     <string name="settings_source_open">Ouvrir</string>
     <string name="settings_wiki">Wiki</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Sauvegarde exportée</string>
     <string name="settings_imported_ok">Sauvegarde importée avec succès</string>
     <string name="settings_imported_fail">Échec de l’importation — fichier invalide</string>
@@ -604,6 +606,7 @@
     <string name="farming_clear_patch">Arracher la parcelle</string>
     <string name="farming_clear_desc">Enlever la culture sans récompense ?</string>
     <string name="farming_harvest_and_plant">Tout récolter et planter</string>
+    <string name="farming_harvest_all_complete">Toutes les parcelles récoltées !</string>
     <string name="farming_no_crops_ready">Aucune culture prête à récolter</string>
     <string name="farming_no_empty_patches">Aucune parcelle vide disponible</string>
     <!-- Translator note: %1$s = seed name -->

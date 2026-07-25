@@ -1,8 +1,14 @@
 package com.fantasyidler.ui.theme
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 
@@ -14,11 +20,32 @@ import androidx.compose.ui.unit.Density
  */
 val LocalAppFontScale = compositionLocalOf { 1f }
 
+/**
+ * Blocks a scrollable sheet's leftover scroll from reaching the sheet's own drag-to-dismiss
+ * handling only in the exact frame where a drag crosses a list boundary (issue #1123 -- a fast
+ * scroll overshooting the top/bottom shouldn't close the sheet in that same frame). Every frame
+ * after that -- still the same continuous swipe -- has nothing left for the list to consume, so
+ * it's let through immediately, letting one uninterrupted swipe flow from "scroll to the top"
+ * straight into "dismiss" (issue #1174), rather than requiring a second, separate swipe.
+ */
+@Composable
+private fun rememberSheetSwipeConnection(): NestedScrollConnection = remember {
+    object : NestedScrollConnection {
+        override fun onPostScroll(
+            consumed: Offset,
+            available: Offset,
+            source: androidx.compose.ui.input.nestedscroll.NestedScrollSource,
+        ): Offset = if (consumed.y != 0f) available else Offset.Zero
+    }
+}
+
 /** Wraps a dialog/bottom sheet's content so it honours the app's Text Size setting. */
 @Composable
 fun ScaledSheetContent(content: @Composable () -> Unit) {
     val density = LocalDensity.current
     CompositionLocalProvider(LocalDensity provides Density(density.density, LocalAppFontScale.current)) {
-        content()
+        Box(Modifier.nestedScroll(rememberSheetSwipeConnection())) {
+            content()
+        }
     }
 }

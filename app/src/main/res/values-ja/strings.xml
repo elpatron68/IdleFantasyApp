@@ -399,6 +399,8 @@
     <string name="settings_source_open">開く</string>
     <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">セーブデータを書き出しました</string>
     <string name="settings_imported_ok">セーブデータの読み込みに成功しました</string>
     <string name="settings_imported_fail">読み込みに失敗しました — 無効なファイルです</string>
@@ -643,6 +645,7 @@
     <string name="farming_clear_patch">畑をクリア</string>
     <string name="farming_clear_desc">報酬なしで作物を撤去しますか？</string>
     <string name="farming_harvest_and_plant">すべて収穫して植える</string>
+    <string name="farming_harvest_all_complete">すべての畑を収穫しました！</string>
     <string name="farming_no_crops_ready">収穫可能な作物はまだありません</string>
     <string name="farming_no_empty_patches">空いている畑はありません</string>
     <!-- Translator note: %1$s = seed name -->

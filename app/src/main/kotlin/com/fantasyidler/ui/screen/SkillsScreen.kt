@@ -69,10 +69,6 @@ import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -230,16 +226,6 @@ fun SkillActivitySheet(
             dragHandle = { BottomSheetDefaults.DragHandle() },
         ) {
             ScaledSheetContent {
-            // Scrolling a list to its top/bottom and continuing the gesture otherwise leaks
-            // the leftover motion into the sheet's own drag-to-dismiss handling, closing it
-            // mid-scroll (issue #1123). Swallowing that residual delta here still leaves the
-            // drag handle itself free to dismiss the sheet on a deliberate swipe.
-            val swallowResidualScroll = remember {
-                object : NestedScrollConnection {
-                    override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset = available
-                }
-            }
-            Box(Modifier.fillMaxSize().nestedScroll(swallowResidualScroll)) {
                 when (sheet) {
                     is SheetState.Mining -> MiningSheet(
                         ores              = sheet.ores,
@@ -363,7 +349,6 @@ fun SkillActivitySheet(
                     SheetState.Farming   -> FarmingSheetContent(onDismiss = viewModel::dismissSheet)
                     SheetState.ComingSoon -> ComingSoonSheet()
                 }
-            }
             }
         }
     }

@@ -57,56 +57,6 @@
           "whatsNew": {
             "en-US": "• Added a run count picker to dungeons, so you can queue up to 24 runs against the same dungeon as a single queue slot, with live \"Run 12/24\" progress shown while it runs\n• Added per-combat-style gear loadouts (Combat tab, Gear): each style now automatically remembers its own weapon, armor, ranged arrow, and magic spell, so tapping a style chip instantly re-equips whatever you last used with it instead of leaving ranged/magic rings and necklaces on whatever a different style left behind; also ad"
           }
-        },
-        "fcf5e871c81b42de71157dec782d3dc70aab0cd2a5365cda8f6ad603de3c196d": {
-          "added": 1784898659217,
-          "file": {
-            "name": "/com.tristinbaker.idlefantasy_119.apk",
-            "sha256": "fcf5e871c81b42de71157dec782d3dc70aab0cd2a5365cda8f6ad603de3c196d",
-            "size": 7928255
-          },
-          "manifest": {
-            "nativecode": [
-              "arm64-v8a",
-              "armeabi-v7a",
-              "x86",
-              "x86_64"
-            ],
-            "versionName": "1.12.7",
-            "versionCode": 119,
-            "usesSdk": {
-              "minSdkVersion": 26,
-              "targetSdkVersion": 35
-            },
-            "signer": {
-              "sha256": [
-                "99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010"
-              ]
-            },
-            "usesPermission": [
-              {
-                "name": "android.permission.POST_NOTIFICATIONS"
-              },
-              {
-                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
-              },
-              {
-                "name": "android.permission.WAKE_LOCK"
-              },
-              {
-                "name": "android.permission.USE_EXACT_ALARM"
-              },
-              {
-                "name": "android.permission.SCHEDULE_EXACT_ALARM"
-              },
-              {
-                "name": "com.tristinbaker.idlefantasy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-              }
-            ]
-          },
-          "whatsNew": {
-            "en-US": "• Fixed collecting a large number of piled-up sessions (e.g. after queueing many boss fights) being slow and unresponsive, and fixed tapping Collect repeatedly during that time awarding the same rewards more than once\n• Fixed the Armory's \"How to obtain\" info showing an item's flavor text instead of how to get it for Dwarven gear, Divine gear, skill capes, and several dungeon-exclusive items (Shadow/Arcane Grappling Hook, Rogue's Lockpick, and others)\n• Fixed prestiging a combat skill (Attack, S"
-          }
         }
       }
     }

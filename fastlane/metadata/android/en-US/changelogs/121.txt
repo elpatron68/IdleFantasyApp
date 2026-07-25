@@ -1,0 +1,7 @@
+• Fixed swipe-down-to-close not working on the Skills, Farming, and Mercantile sheets when the list didn't need scrolling or you swiped past the top/bottom; a second swipe once you're at the top now consistently closes the sheet
+• Fixed the "Harvest and Plant All" result popup in Farming showing a garbled title instead of a proper "All Patches Harvested!" message
+• Reworked the dungeon safety rating (Likely/Risky/Unlikely to survive) to run many randomized combat simulations instead of a single fixed run, so rare but dangerous enemies and bad-luck streaks are no longer hidden from the rating
+• Fixed the "Start eating at" HP percentage setting being ignored, causing food to be eaten far earlier than the configured threshold
+• Fixed Equip Best Gear favoring higher-defense armor over higher-strength armor when using a Strength combat style loadout
+• Fixed pet XP bonuses not being applied to Smithing, Cooking, Fletching, Crafting, Herblore, and Construction sessions
+• Added a Discord link to Settings > About

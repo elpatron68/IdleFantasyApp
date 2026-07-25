@@ -62,6 +62,7 @@ data class HarvestResult(
     val cropName: String,
     val itemsGained: Map<String, Int>,
     val xpGained: Long,
+    val isBulk: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------
@@ -151,7 +152,7 @@ class FarmingViewModel @Inject constructor(
 
                 val gained = invAfter.mapValues { (k, v) -> v - (invBefore[k] ?: 0) }.filter { it.value > 0 }
                 guildRepo.recordGuildGathering(Skills.FARMING, gained)
-                _extra.update { it.copy(harvestResult = HarvestResult(context.getString(R.string.farming_harvest_and_plant), gained, xpAfter - xpBefore)) }
+                _extra.update { it.copy(harvestResult = HarvestResult(context.getString(R.string.farming_harvest_and_plant), gained, xpAfter - xpBefore, isBulk = true)) }
                 delay(300)
             }
 

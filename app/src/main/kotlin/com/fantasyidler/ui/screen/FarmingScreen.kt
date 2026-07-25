@@ -171,7 +171,12 @@ fun FarmingScreen(
     state.harvestResult?.let { result ->
         AlertDialog(
             onDismissRequest = viewModel::harvestResultConsumed,
-            title = { Text(stringResource(R.string.farming_harvested, result.cropName)) },
+            title = {
+                Text(
+                    if (result.isBulk) stringResource(R.string.farming_harvest_all_complete)
+                    else stringResource(R.string.farming_harvested, result.cropName)
+                )
+            },
             text = {
                 Column {
                     Text(
@@ -270,7 +275,12 @@ fun FarmingSheetContent(
     state.harvestResult?.let { result ->
         AlertDialog(
             onDismissRequest = viewModel::harvestResultConsumed,
-            title = { Text(stringResource(R.string.farming_harvested, result.cropName)) },
+            title = {
+                Text(
+                    if (result.isBulk) stringResource(R.string.farming_harvest_all_complete)
+                    else stringResource(R.string.farming_harvested, result.cropName)
+                )
+            },
             text = {
                 Column {
                     Text(

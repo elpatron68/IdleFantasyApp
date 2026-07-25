@@ -399,6 +399,8 @@
     <string name="settings_source_open">Öffnen</string>
     <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
+    <string name="settings_discord">Discord</string>
+    <string name="settings_discord_url">discord.gg/nZVZ67gyH</string>
     <string name="settings_exported_ok">Erfolgreich exportiert</string>
     <string name="settings_imported_ok">Erfolgreich importiert</string>
     <string name="settings_imported_fail">Import fehlgeschlagen – ungültige Datei</string>
@@ -660,6 +662,7 @@
     <string name="farming_clear_patch">Acker pflügen</string>
     <string name="farming_clear_desc">Wollt Ihr diese Saat wirklich vernichten?</string>
     <string name="farming_harvest_and_plant">Alles ernten und aussähen</string>
+    <string name="farming_harvest_all_complete">Alle Felder abgeerntet!</string>
     <string name="farming_no_crops_ready">Nichts zu ernten</string>
     <string name="farming_no_empty_patches">Kein freier Acker verfügbar</string>
     <!-- Translator note: %1$s = seed name -->
