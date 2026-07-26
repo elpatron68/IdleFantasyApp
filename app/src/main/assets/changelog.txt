@@ -1,3 +1,22 @@
+v1.12.10
+• Fixed the Infinite Tower queue flickering/jumping around when a floor finished while others were still queued behind it
+• Infinite Tower now keeps climbing automatically after each floor you win, instead of stopping to wait for you to collect the reward first
+• Fixed dying in the Infinite Tower and collecting from the home screen resetting you all the way to floor 1 instead of your last checkpoint
+• Fixed the Ranged Cape, Archers Guild Cape, Magic Cape, and Mages Guild Cape not granting their intended ranged/magic combat bonuses (the ranged and archers capes were silently giving unused melee stats instead, and the magic capes were missing their accuracy bonus)
+• Fixed Equip Best Gear still favoring high-defense armor over your combat style's actual offensive stats (e.g. equipping the Defense Cape for an Attack or Strength loadout instead of the Attack/Strength Cape)
+• Fixed Repeat Action always queuing a single boss fight or dungeon run instead of matching the original session's fight/run count
+• Fixed a long chain of repeated boss fights or dungeon runs stalling in the background and only crediting a fraction of the wins toward quests, instead of catching up on all of them when you reopen the app
+• Fixed Mercantile session results showing an inflated coin blessing bonus that was never actually added to your coin balance
+• Fixed the "Queue ends in..." timer on the home screen undercounting queued boss fights and dungeon runs that had a repeat count above 1
+• Fixed the home screen stats bar and the Shop's Sell tab breaking into vertical, one-character-per-line text when using a larger system font size
+• Fixed the Master worker tier's efficiency being too low to beat the Journeyman tier, tying it with the cheaper Apprentice tier instead of being the best; Master's efficiency is now 2.5x and its crafting cap is 600 items per session
+• Added a pity system to the weekly quest Divine gear drop: missing it increases next week's odds by 50%, resetting after a drop; the Quests screen now shows your current odds, and you can never get a duplicate piece
+• Fixed starting a boss or dungeon fight sometimes requiring you to reselect a spell or potion even though it was already remembered from last time
+• Fixed the "Added to queue" message shown by Repeat Action only naming the skill (e.g. "Fishing") instead of the specific activity like the normal queue message does (e.g. "Fishing — Raw Salmon")
+• Fixed two Town achievement descriptions still referencing 6 town buildings instead of 7
+• Fixed the Shop showing a nonsensical "x0 in inventory" line under the 2x XP Boost, which isn't a stockable item
+• Fixed Equip Best Gear for Ranged and Magic loadouts still undervaluing damage-boosting gear in favor of accuracy-only gear that's actually weaker in practice
+
 v1.12.9
 • Fixed swipe-down-to-close not working on the Skills, Farming, and Mercantile sheets when the list didn't need scrolling or you swiped past the top/bottom; a second swipe once you're at the top now consistently closes the sheet
 • Fixed the "Harvest and Plant All" result popup in Farming showing a garbled title instead of a proper "All Patches Harvested!" message

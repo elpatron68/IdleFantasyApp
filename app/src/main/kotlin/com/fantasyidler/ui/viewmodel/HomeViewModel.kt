@@ -29,6 +29,7 @@ import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.simulator.SkillSimulator
 import kotlin.math.roundToInt
+import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.singleBatchItems
@@ -287,12 +288,15 @@ class HomeViewModel @Inject constructor(
             val queueEndsAt  = if (flags.sessionQueue.isEmpty()) 0L
                                else queueStart + flags.sessionQueue.sumOf {
                                    when {
-                                       it.skillName == "boss" -> it.estimatedDurationMs
+                                       // repeatCount defaults to 1 for every non-boss/combat entry,
+                                       // so this only changes anything for repeated boss fights and
+                                       // dungeon runs (issue #1194).
+                                       it.skillName == "boss" -> it.estimatedDurationMs * it.repeatCount
                                        it.qty > 0 -> {
                                            val eff = gameData.craftDurationEfficiency(it.skillName, it.activityKey, equipped)
                                            it.qty.toLong() * (perItemMs / eff).toLong()
                                        }
-                                       else -> sessionMs
+                                       else -> sessionMs * it.repeatCount
                                    }
                                }
             val innXpMult = townRepo.workerXpMultiplier(flags)
@@ -515,7 +519,11 @@ class HomeViewModel @Inject constructor(
                         val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 1
                         val updatedTowerFlags = playerRepo.getFlags()
                         if (playerDied) {
-                            playerRepo.updateFlags(updatedTowerFlags.copy(towerCurrentFloor = 0))
+                            // Death drops you back to your last checkpoint (every 25 floors of
+                            // your best-ever progress), matching TowerViewModel.collectFloor() --
+                            // this path had drifted to a flat reset to 0 (issue #1183).
+                            val checkpointFloor = (updatedTowerFlags.towerBestFloor / TowerViewModel.TOWER_CHECKPOINT_INTERVAL) * TowerViewModel.TOWER_CHECKPOINT_INTERVAL
+                            playerRepo.updateFlags(updatedTowerFlags.copy(towerCurrentFloor = checkpointFloor))
                         } else {
                             playerRepo.updateFlags(updatedTowerFlags.copy(
                                 towerCurrentFloor = floor,
@@ -707,13 +715,18 @@ class HomeViewModel @Inject constructor(
                         val coinReturn = frames.sumOf { (it.items["_coins"] ?: 0).toLong() }
                         val mercantileCapeMult    = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, skillPrestige, gameData.equipment)
                         val mercantilePrestigeMult = 1f + (skillPrestige[Skills.MERCANTILE] ?: 0) * 0.10f
-                        val coinReturnBoosted = (coinReturn.toDouble() * blessingCoinMult * mercantileCapeMult * mercantilePrestigeMult).toLong()
+                        // combinedCoins must stay pre-blessing here, like every other skill's coin
+                        // total below -- the summary popup applies blessingCoinMult to combinedCoins
+                        // once already (see displayedCoins), so baking blessing in twice inflated the
+                        // shown total without it ever landing in the real balance (issue #1192).
+                        val coinReturnPreBlessing = (coinReturn.toDouble() * mercantileCapeMult * mercantilePrestigeMult).toLong()
+                        val coinReturnBoosted = (coinReturnPreBlessing * blessingCoinMult).toLong()
                         awardedCapes += playerRepo.applySessionResults(Skills.MERCANTILE, totalXp, emptyMap())
                         playerRepo.addCoins(coinReturnBoosted)
                         guildRepo.recordGuildTrade(session.activityKey, coinReturnBoosted)
                         playerRepo.recordWeeklyProgress("mercantile", session.activityKey, frames.size)
                         combinedXpBySkill[Skills.MERCANTILE] = (combinedXpBySkill[Skills.MERCANTILE] ?: 0L) + totalXp
-                        combinedCoins += coinReturnBoosted
+                        combinedCoins += coinReturnPreBlessing
                     }
                     else -> {
                         val totalXp = frames.sumOf { it.xpGain.toLong() }
@@ -994,11 +1007,20 @@ class HomeViewModel @Inject constructor(
             } else null
             val xpQueueMult = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
             val rawXpGain = frames.sumOf { it.xpGain }
+            // The original fight/run count isn't stored on the session itself, only in the
+            // repeat-chain flags set when it was first started -- carry it forward so
+            // repeating a 100-fight boss session queues 100 more, not just 1 (issue #1188).
+            val repeatCount = when (session.skillName) {
+                "boss"   -> flags.activeBossRepeatTotal.takeIf { it > 0 } ?: 1
+                "combat" -> flags.activeDungeonRepeatTotal.takeIf { it > 0 } ?: 1
+                else     -> 1
+            }
             val enqueued = playerRepo.enqueueAction(QueuedAction(
                 skillName           = session.skillName,
                 activityKey         = activityKeyForRepeat,
                 skillDisplayName    = displayName,
                 qty                 = qty,
+                repeatCount         = repeatCount,
                 estimatedDurationMs = session.endsAt - session.startedAt,
                 estimatedXpGain     = if (session.skillName in listOf("carnival", "expedition")) 0L
                                       else (rawXpGain * xpQueueMult).toLong(),
@@ -1014,8 +1036,21 @@ class HomeViewModel @Inject constructor(
                 if (coinCostForRepeat > 0) playerRepo.addCoins(coinCostForRepeat)
                 if (materials != null) playerRepo.addItems(materials)
             }
+            // Combat/boss/expedition/tower/carnival already have a specific name baked into
+            // displayName above; every other skill only has its skill name there, so the queued
+            // message would otherwise drop the specific activity (e.g. "Fishing" instead of
+            // "Fishing — Raw Salmon") that the direct-queue path already shows (issue #1168).
+            val queueMessage = when (session.skillName) {
+                "combat", "boss", "expedition", "tower", "carnival" ->
+                    context.getString(R.string.snackbar_added_to_queue, displayName)
+                else -> context.getString(
+                    R.string.skill_added_to_queue_activity,
+                    GameStrings.skillName(context, session.skillName),
+                    GameStrings.itemName(context, session.activityKey),
+                )
+            }
             _extra.update {
-                it.copy(snackbarMessage = if (enqueued) context.getString(R.string.snackbar_added_to_queue, displayName) else context.getString(R.string.snackbar_queue_full))
+                it.copy(snackbarMessage = if (enqueued) queueMessage else context.getString(R.string.snackbar_queue_full))
             }
         }
     }

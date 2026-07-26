@@ -109,25 +109,32 @@ class QueuedSessionStarter @Inject constructor(
                 // than parked at the front — otherwise it would permanently block every other
                 // queued item behind it (issue #977). Bounded by the queue's own size so an
                 // all-tower queue can't loop forever.
+                // The scan runs against a local copy of the queue and persists at most once,
+                // only when something actually starts. Dequeuing/requeuing through individual
+                // DB writes here made the live queue card visibly shrink and rebuild every time
+                // this ran while a Tower floor sat uncollected (issue #1183).
+                val originalQueue = playerRepo.getFlagsUnlocked().sessionQueue
+                var remaining = originalQueue
                 val skippedTowerActions = mutableListOf<QueuedAction>()
-                var maxAttempts = playerRepo.getFlags().sessionQueue.size
+                var maxAttempts = originalQueue.size
                 while (maxAttempts-- >= 0) {
-                    val next = playerRepo.dequeueNextActionUnlocked() ?: break
+                    val next = remaining.firstOrNull() ?: break
+                    remaining = remaining.drop(1)
                     try {
                         startQueuedAction(next, backdateMs = backdateMs)
                         if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
                         if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
-                        for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
+                        val finalQueue = skippedTowerActions + remaining
+                        playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(sessionQueue = finalQueue))
                         return@withLock true
                     } catch (_: TowerPendingCollectionException) {
                         skippedTowerActions += next
                     } catch (_: Exception) {
-                        playerRepo.requeueActionAtFrontUnlocked(next)
-                        for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
+                        // Nothing was ever written to the DB, so the queue is still exactly
+                        // originalQueue -- no requeue needed.
                         return@withLock false
                     }
                 }
-                for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
                 false
             }
         }
@@ -165,6 +172,12 @@ class QueuedSessionStarter @Inject constructor(
      * - the next session wouldn't have finished within [remainingMs]
      * - the session failed to start (re-queued at front)
      *
+     * Also fast-forwards an in-progress boss/dungeon repeat chain fight-by-fight, the same way
+     * a normal queued session is fast-forwarded -- otherwise a long repeat chain left running in
+     * the background could only ever advance one fight per real alarm delivery, which Doze can
+     * defer for hours, silently stalling e.g. a 100-fight chain after just one or two wins
+     * (issue #1189).
+     *
      * Called from [SessionRepository.recoverActiveSession] to reconstruct offline progress.
      */
     suspend fun insertNextQueuedAsOffline(remainingMs: Long): Long {
@@ -172,30 +185,65 @@ class QueuedSessionStarter @Inject constructor(
             val player = playerRepo.getOrCreatePlayer()
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val flags: PlayerFlags       = json.decodeFromString(player.flags)
-            // A boss repeat run (queued as one entry, tracked via PlayerFlags rather than N
-            // separate queue entries) must resume itself through startNextQueued() before this
-            // offline catch-up is allowed to dequeue anything else -- otherwise a late alarm
-            // during a long repeat run can steal a different queued item out from under an
-            // in-progress chain, silently abandoning the rest of it (issue #1167).
-            if (flags.activeBossRepeatSnapshot != null && flags.activeBossRepeatIndex < flags.activeBossRepeatTotal) {
-                return 0L
-            }
-            // Same reasoning as the boss guard above (issue #1167), applied to dungeon repeat runs.
-            if (flags.activeDungeonRepeatSnapshot != null && flags.activeDungeonRepeatIndex < flags.activeDungeonRepeatTotal) {
-                return 0L
-            }
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
-            val skippedTowerActions = mutableListOf<QueuedAction>()
-            var maxAttempts = playerRepo.getFlags().sessionQueue.size
-            while (maxAttempts-- >= 0) {
-                val next = playerRepo.dequeueNextActionUnlocked() ?: break
-                val duration = estimateDuration(next, agilityLevel, agilityPrestige)
-                if (duration > remainingMs) {
-                    playerRepo.requeueActionAtFrontUnlocked(next)
-                    for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
+            // A boss repeat run (queued as one entry, tracked via PlayerFlags rather than N
+            // separate queue entries) is advanced here one fight at a time, same as the live
+            // (non-offline) chain in startNextQueued() -- returning before ever reaching the
+            // sessionQueue scan below preserves the "don't let another queue item jump an
+            // in-progress chain" guarantee from issue #1167.
+            if (flags.activeBossRepeatSnapshot != null && flags.activeBossRepeatIndex < flags.activeBossRepeatTotal) {
+                val current = sessionRepo.getActiveSession()
+                if (current == null || !current.completed || current.skillName != "boss") return 0L
+                val won = (json.decodeFromString<List<SessionFrame>>(current.frames).lastOrNull()?.kills ?: 0) > 0
+                if (!won) {
+                    playerRepo.clearActiveBossRepeatUnlocked()
                     return 0L
                 }
+                val snapshot = flags.activeBossRepeatSnapshot!!
+                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige)
+                if (duration > remainingMs) return 0L
+                return try {
+                    startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
+                    playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(activeBossRepeatIndex = flags.activeBossRepeatIndex + 1))
+                    duration
+                } catch (_: Exception) {
+                    playerRepo.clearActiveBossRepeatUnlocked()
+                    0L
+                }
+            }
+            // Same idea as the boss repeat chain above, but for dungeon runs (issue #1167 / #1189).
+            if (flags.activeDungeonRepeatSnapshot != null && flags.activeDungeonRepeatIndex < flags.activeDungeonRepeatTotal) {
+                val current = sessionRepo.getActiveSession()
+                if (current == null || !current.completed || current.skillName != "combat") return 0L
+                val survived = json.decodeFromString<List<SessionFrame>>(current.frames).lastOrNull()?.died != true
+                if (!survived) {
+                    playerRepo.clearActiveDungeonRepeatUnlocked()
+                    return 0L
+                }
+                val snapshot = flags.activeDungeonRepeatSnapshot!!
+                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige)
+                if (duration > remainingMs) return 0L
+                return try {
+                    startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
+                    playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex + 1))
+                    duration
+                } catch (_: Exception) {
+                    playerRepo.clearActiveDungeonRepeatUnlocked()
+                    0L
+                }
+            }
+            // Same reasoning as startNextQueued(): scan a local copy of the queue and persist
+            // at most once, only when something actually starts (issue #1183).
+            val originalQueue = flags.sessionQueue
+            var remaining = originalQueue
+            val skippedTowerActions = mutableListOf<QueuedAction>()
+            var maxAttempts = originalQueue.size
+            while (maxAttempts-- >= 0) {
+                val next = remaining.firstOrNull() ?: break
+                remaining = remaining.drop(1)
+                val duration = estimateDuration(next, agilityLevel, agilityPrestige)
+                if (duration > remainingMs) return 0L
                 try {
                     // backdateMs = remainingMs so each fast-forwarded session in the same
                     // catch-up burst gets a distinct startedAt (now - remainingMs), staying
@@ -203,17 +251,17 @@ class QueuedSessionStarter @Inject constructor(
                     startQueuedAction(next, offline = true, backdateMs = remainingMs)
                     if (next.skillName == "boss") playerRepo.stampBossRepeatStartUnlocked(next)
                     if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
-                    for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
+                    val finalQueue = skippedTowerActions + remaining
+                    playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(sessionQueue = finalQueue))
                     return duration
                 } catch (_: TowerPendingCollectionException) {
                     skippedTowerActions += next
                 } catch (_: Exception) {
-                    playerRepo.requeueActionAtFrontUnlocked(next)
-                    for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
+                    // Nothing was ever written to the DB, so the queue is still exactly
+                    // originalQueue -- no requeue needed.
                     return 0L
                 }
             }
-            for (skipped in skippedTowerActions.asReversed()) playerRepo.requeueActionAtFrontUnlocked(skipped)
         }
         return 0L
     }
@@ -698,18 +746,22 @@ class QueuedSessionStarter @Inject constructor(
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
             "tower" -> {
-                // towerCurrentFloor only advances on collection, not completion, so starting
-                // another floor while one is still sitting completed-but-uncollected would
-                // recompute the same floor number below and silently re-run it. Bail out and
-                // let the caller (startNextQueued/insertNextQueuedAsOffline) requeue this action
-                // at the front to retry once the pending floor is collected.
-                if (sessionRepo.getAllCompletedSessions().any { it.skillName == "tower" }) {
-                    throw TowerPendingCollectionException()
+                // A won floor sitting uncollected no longer blocks the next attempt -- Tower
+                // was otherwise the only skill where finishing a session wasn't enough to keep
+                // the queue moving (issue #1183). A death still halts the chain so the player
+                // sees it and can decide whether to keep climbing from the checkpoint.
+                val pendingTower = sessionRepo.getAllCompletedSessions().lastOrNull { it.skillName == "tower" }
+                val pendingFloor = pendingTower?.activityKey?.removePrefix("tower_floor_")?.toIntOrNull()
+                if (pendingTower != null) {
+                    val pendingFrames: List<SessionFrame> = json.decodeFromString(pendingTower.frames)
+                    if (pendingFrames.any { it.died }) throw TowerPendingCollectionException()
                 }
                 // Floors must be attempted contiguously — the queued key is never trusted for
                 // the actual floor number, since queue edits (cancel/reorder) could otherwise
-                // let a player skip ahead without completing intermediate floors.
-                val floor = flags.towerCurrentFloor + 1
+                // let a player skip ahead without completing intermediate floors. Taken from the
+                // pending win itself rather than towerCurrentFloor (which only advances at
+                // collection) so consecutive wins keep incrementing correctly.
+                val floor = (pendingFloor ?: flags.towerCurrentFloor) + 1
                 val dungeon = buildTowerFloorDungeon(floor)
                 val activeWeaponSlot = flags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }

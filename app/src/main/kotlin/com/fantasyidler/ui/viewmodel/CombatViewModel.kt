@@ -364,13 +364,17 @@ class CombatViewModel @Inject constructor(
                 val queuedLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
                 val agility     = queuedLevels[Skills.AGILITY] ?: 1
                 val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+                val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
                 val dungeonFlags: PlayerFlags = json.decodeFromString(player.flags)
                 val queuedWeaponSlot = _extra.value.selectedWeaponSlot
                     ?: dungeonFlags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                     ?: EquipSlot.WEAPON
-                val queuedSpell = _extra.value.selectedSpell
-                val queuedPotionKey = _extra.value.selectedPotionKey
+                // Falls back to the remembered spell/potion the same way the picker's displayed
+                // selection does (see uiState combine block) -- otherwise the picker shows a
+                // remembered choice as selected while starting silently ignores it (issue #1186).
+                val queuedSpell = _extra.value.selectedSpell ?: dungeonFlags.activeSpell?.let { gameData.spells[it] }
+                val queuedPotionKey = _extra.value.selectedPotionKey ?: dungeonFlags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val previewXp = estimateDungeonPreviewXp(
                     dungeonKey    = dungeonKey,
                     weaponSlot    = queuedWeaponSlot,
@@ -465,8 +469,9 @@ class CombatViewModel @Inject constructor(
                 // Ranged: use player's chosen arrow if available, else fall back to best in inventory
                 val preferredArrow = _extra.value.selectedArrowKey?.takeIf { (inventory[it] ?: 0) > 0 }
 
-                // Magic: validate spell selection and level
-                val selectedSpell = _extra.value.selectedSpell
+                // Magic: validate spell selection and level. Falls back to the remembered spell,
+                // same as the picker's displayed selection (issue #1186).
+                val selectedSpell = _extra.value.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
                 if (combatStyle == "magic") {
                     if (selectedSpell == null) {
                         _extra.update {
@@ -506,8 +511,9 @@ class CombatViewModel @Inject constructor(
                 val simulatorRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
                 val simulatorRuneCost = selectedSpell?.runeCost ?: 1
 
-                // Potion: consume immediately on dungeon start, pass bonuses to simulator
-                val potionKey     = _extra.value.selectedPotionKey
+                // Potion: consume immediately on dungeon start, pass bonuses to simulator. Falls
+                // back to the remembered potion, same as the picker's displayed selection (issue #1186).
+                val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
                     gameData.potionEffects[potionKey] ?: emptyMap()
@@ -598,13 +604,17 @@ class CombatViewModel @Inject constructor(
                 val queuedPlayer = playerRepo.getOrCreatePlayer()
                 val queuedFlags: PlayerFlags          = json.decodeFromString(queuedPlayer.flags)
                 val queuedEquipped: Map<String, String?> = json.decodeFromString(queuedPlayer.equipped)
+                val queuedInventory: Map<String, Int> = json.decodeFromString(queuedPlayer.inventory)
                 val bossWeaponSlot = _extra.value.selectedWeaponSlot
                     ?: queuedFlags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { queuedEquipped[it] != null }
                     ?: EquipSlot.WEAPON_ATK
-                val bossQueuedSpell = _extra.value.selectedSpell
+                // Falls back to the remembered spell/potion the same way the picker's displayed
+                // selection does (see uiState combine block) -- otherwise the picker shows a
+                // remembered choice as selected while starting silently ignores it (issue #1186).
+                val bossQueuedSpell = _extra.value.selectedSpell ?: queuedFlags.activeSpell?.let { gameData.spells[it] }
                 val bossQueuedWeapon = queuedEquipped[bossWeaponSlot]?.let { gameData.equipment[it] }
-                val bossQueuedPotionKey = _extra.value.selectedPotionKey
+                val bossQueuedPotionKey = _extra.value.selectedPotionKey ?: queuedFlags.activePotionKey?.takeIf { (queuedInventory[it] ?: 0) > 0 }
                 val bossQueuedLevels: Map<String, Int> = json.decodeFromString(queuedPlayer.skillLevels)
                 val bossPreviewXp = estimateBossPreviewXp(
                     bossKey       = bossKey,
@@ -657,7 +667,8 @@ class CombatViewModel @Inject constructor(
                 val bossWeapon = equipped[activeWeaponSlot]?.let { gameData.equipment[it] }
                 val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
 
-                val potionKey     = _extra.value.selectedPotionKey
+                // Falls back to the remembered potion, same as the picker's displayed selection (issue #1186).
+                val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
                     gameData.potionEffects[potionKey] ?: emptyMap()
@@ -688,7 +699,8 @@ class CombatViewModel @Inject constructor(
                 val bossMagicDmgBonus = if (combatStyle == "magic") {
                     EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0)
                 } else 0
-                val selectedSpell = _extra.value.selectedSpell
+                // Falls back to the remembered spell, same as the picker's displayed selection (issue #1186).
+                val selectedSpell = _extra.value.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
                 if (combatStyle == "magic" && selectedSpell == null) {
                     _extra.update { it.copy(snackbarMessage = "Select a spell before entering.", startingSession = false) }
                     return@launch

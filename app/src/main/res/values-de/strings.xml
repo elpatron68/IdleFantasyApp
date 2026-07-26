@@ -315,7 +315,8 @@
     <string name="weekly_bonus_title">Wöchentlicher Bonus!</string>
     <string name="weekly_bonus_claim">Fordere wöchentlichen Bonus ein</string>
     <string name="label_daily_info">Jede tägliche Aufgabe wird mit Münzen entlohnt. Außerdem gibt es dabei immer eine Chance von 1%% ein Teil der Zwergenausrüstung zu erhalten.</string>
-    <string name="label_weekly_info">Jede wöchentliche Herausforderung wird mit Münzen entsprechend der Schwierigkeit entlohnt. Wenn Ihr alle 5 Herausforderungen meistert, erhaltet eine Sonderzulage: 100.000 Münzen oder mit einer Chance von 1 zu 26 ein Teil der göttlichen Ausrüstung.</string>
+    <string name="label_weekly_info">Jede wöchentliche Herausforderung wird mit Münzen entsprechend der Schwierigkeit entlohnt. Wenn Ihr alle 5 Herausforderungen meistert, erhaltet eine Sonderzulage: 100.000 Münzen oder mit einer Chance von %1$s ein Teil der göttlichen Ausrüstung.</string>
+    <string name="label_weekly_info_complete">Jede wöchentliche Herausforderung wird mit Münzen entsprechend der Schwierigkeit entlohnt. Wenn Ihr alle 5 Herausforderungen meistert, erhaltet eine Sonderzulage: 100.000 Münzen. Ihr besitzt bereits die komplette göttliche Ausrüstung!</string>
     <string name="label_daily_reward">2.000 Münzen (1/100: Zwergenausrüstung)</string>
     <string name="msg_daily_claimed_coins">Tagesaufgabe abgeschlossen! +2.000 Münzen.</string>
     <string name="msg_daily_claimed_dwarven">Tagesaufgabe abgeschlossen! Ihr habt %1$s gefunden!</string>
@@ -754,7 +755,7 @@
     <string name="inn_long_laborer_desc">Ein Auftrag pro Einstellung, nach Einsammeln entlassen. 8h Sammeln, 0,5-fache Effizienz, unbegrenzte Handwerksmenge. Er ist langsam, aber er macht alles.</string>
     <string name="inn_apprentice_desc">Ein Auftrag pro Anstellung, wird nach dem Einsammeln entlassen. 8h Sammeln, 1-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 480 Gegenstände pro Aktivität begrenzt.</string>
     <string name="inn_journeyman_desc">Ein Auftrag pro Anstellung, wird nach dem Einsammeln entlassen. 6h Sammeln, 1.5-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 540 Gegenstände pro Aktivität begrenzt.</string>
-    <string name="inn_master_desc">Ein Auftrag pro Anstellung, wird nach dem Einsammeln entlassen. 4h Sammeln, 2-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 480 Gegenstände pro Aktivität begrenzt.</string>
+    <string name="inn_master_desc">Ein Auftrag pro Anstellung, wird nach dem Einsammeln entlassen. 4h Sammeln, 2.5-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 600 Gegenstände pro Aktivität begrenzt.</string>
     <string name="inn_gathering_note">Sammeln: Aktivitätszeit in Stunden x Effizienz wird auf Beute und EP angewendet</string>
     <string name="inn_crafting_note">Herstellen/Gebet/Runenherstellung: Die Menge ist pro Rang begrenzt. Der Erfahrene Arbeiter hat keine Begrenzung</string>
     <string name="worker_skills_title">Arbeiter: %1$s</string>
@@ -1244,11 +1245,11 @@
     <string name="achievement_town_first_upgrade_name">Erste Renovierung</string>
     <string name="achievement_town_first_upgrade_desc">Baue ein Stadtgebäude zum ersten Mal aus</string>
     <string name="achievement_town_all_tier1_name">Stadtverbesserer</string>
-    <string name="achievement_town_all_tier1_desc">Baue alle sechs Stadtgebäude auf mindestens Stufe 1 aus</string>
+    <string name="achievement_town_all_tier1_desc">Baue alle sieben Stadtgebäude auf mindestens Stufe 1 aus</string>
     <string name="achievement_town_one_maxed_name">Meisterbaumeister</string>
     <string name="achievement_town_one_maxed_desc">Baue ein Stadtgebäude auf die maximale Stufe aus</string>
     <string name="achievement_town_all_maxed_name">Stadt der Legenden</string>
-    <string name="achievement_town_all_maxed_desc">Baue alle sechs Stadtgebäude auf die maximale Stufe aus</string>
+    <string name="achievement_town_all_maxed_desc">Baue alle sieben Stadtgebäude auf die maximale Stufe aus</string>
     <string name="achievement_tower_first_floor_name">Erster Schritt</string>
     <string name="achievement_tower_first_floor_desc">Säubere die erste Etage des Unendlichen Turms</string>
     <string name="achievement_tower_floor_10_name">Turmneuling</string>

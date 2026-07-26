@@ -90,6 +90,8 @@ data class PlayerFlags(
     @SerialName("weekly_quest_generated_at") val weeklyQuestGeneratedAt: Long = 0L,
     /** True if the full weekly bonus chest has been claimed this week. */
     @SerialName("weekly_bonus_claimed") val weeklyBonusClaimed: Boolean = false,
+    /** Consecutive weekly bonus claims without a Divine gear drop; resets to 0 on a drop. */
+    @SerialName("divine_pity_misses") val divinePityMisses: Int = 0,
 
     /** Currently hired worker, or null if none. */
     @SerialName("hired_worker") val hiredWorker: HiredWorker? = null,
@@ -319,7 +321,9 @@ enum class WorkerTier {
         LONG_LABORER -> 0.5f
         APPRENTICE   -> 1.0f
         JOURNEYMAN   -> 1.5f
-        MASTER       -> 2.0f
+        // 2.0x tied Master's hours*efficiency (4h*2.0=8) with Apprentice's (8h*1.0=8), leaving
+        // Master no better than the cheapest tier for gathering yield and crafting caps.
+        MASTER       -> 2.5f
     }
 
     val hireCost: Long get() = when (this) {

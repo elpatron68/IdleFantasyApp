@@ -315,7 +315,8 @@
     <string name="weekly_bonus_title">Bonus Settimanale!</string>
     <string name="weekly_bonus_claim">Ricevi Bonus Settimanale</string>
     <string name="label_daily_info">Ogni missione giornaliera ha una ricompensa in monete. Inoltre, puoi ottenere oggetti Nanici con 1/100 di probabilità.</string>
-    <string name="label_weekly_info">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete oppure oggetti Divini con 1/26 di probabilità.</string>
+    <string name="label_weekly_info">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete oppure oggetti Divini con probabilità %1$s.</string>
+    <string name="label_weekly_info_complete">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete. Possiedi già tutti gli oggetti Divini!</string>
     <string name="label_daily_reward">2000 monete (1/100: equipaggiamento Nanico)</string>
     <string name="msg_daily_claimed_coins">Missione completata! +2000 monete.</string>
     <string name="msg_daily_claimed_dwarven">Missione completata! Hai trovato %1$s!</string>
@@ -754,7 +755,7 @@
     <string name="inn_long_laborer_desc">Un lavoro per assunzione, congedato dopo la raccolta. 8 ore di raccolta, efficienza 0,5x, nessun altro limite. Non è veloce, ma fa di tutto.</string>
     <string name="inn_apprentice_desc">Congedato al termine dell\'attività. 8 ore di lavoro, 1x efficienza. Mestieri, preghiera e incisione di rune limitati a 480 oggetti per sessione.</string>
     <string name="inn_journeyman_desc">Congedato al termine dell\'attività. 6 ore di lavoro, 1.5x efficienza. Mestieri, preghiera e incisione di rune limitati a 540 oggetti per sessione.</string>
-    <string name="inn_master_desc">Congedato al termine dell\'attività. 4 ore di lavoro, 2x efficienza. Mestieri, preghiera e incisione di rune limitati a 480 oggetti per sessione.</string>
+    <string name="inn_master_desc">Congedato al termine dell\'attività. 4 ore di lavoro, 2.5x efficienza. Mestieri, preghiera e incisione di rune limitati a 600 oggetti per sessione.</string>
     <string name="inn_gathering_note">Lavoro: ore sessione x moltiplicatore di efficienza applicati a bottino e XP</string>
     <string name="inn_crafting_note">Oreficeria/preghiera/incisione di rune: quantità limitata per livello di qualità; i manovali non hanno un limite</string>
     <string name="worker_skills_title">Lavoratore: %1$s</string>
@@ -1247,11 +1248,11 @@
     <string name="achievement_town_first_upgrade_name">Ristrutturazione</string>
     <string name="achievement_town_first_upgrade_desc">Potenzia qualsiasi edificio del villaggio per la prima volta</string>
     <string name="achievement_town_all_tier1_name">Genio Civile</string>
-    <string name="achievement_town_all_tier1_desc">Potenzia tutti e sei gli edifici almeno una volta</string>
+    <string name="achievement_town_all_tier1_desc">Potenzia tutti e sette gli edifici almeno una volta</string>
     <string name="achievement_town_one_maxed_name">Mastro Costruttore</string>
     <string name="achievement_town_one_maxed_desc">Potenzia qualsiasi edificio al livello massimo</string>
     <string name="achievement_town_all_maxed_name">El Dorado</string>
-    <string name="achievement_town_all_maxed_desc">Potenzia tutti e sei gli edifici al livello massimo</string>
+    <string name="achievement_town_all_maxed_desc">Potenzia tutti e sette gli edifici al livello massimo</string>
     <string name="achievement_tower_first_floor_name">Il Primo Passo</string>
     <string name="achievement_tower_first_floor_desc">Completa il primo piano della Torre dell\'Infinito</string>
     <string name="achievement_tower_floor_10_name">Veterano della Torre</string>

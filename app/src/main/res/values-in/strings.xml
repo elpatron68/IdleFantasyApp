@@ -243,7 +243,8 @@
     <string name="weekly_bonus_title">Bonus Mingguan!</string>
     <string name="weekly_bonus_claim">Klaim Bonus Mingguan</string>
     <string name="label_daily_info">Setiap misi harian memberikan hadiah berupa koin. Setiap misi juga memiliki peluang 1 banding 100 untuk mendapatkan item perlengkapan Dwarf.</string>
-    <string name="label_weekly_info">Tantangan mingguan berhadiah koin sesuai level. Selesaikan semua (5/5) untuk bonus: 100.000 koin, atau peluang 1 banding 26 dapat Perlengkapan Dewa.</string>
+    <string name="label_weekly_info">Tantangan mingguan berhadiah koin sesuai level. Selesaikan semua (5/5) untuk bonus: 100.000 koin, atau peluang %1$s dapat Perlengkapan Dewa.</string>
+    <string name="label_weekly_info_complete">Tantangan mingguan berhadiah koin sesuai level. Selesaikan semua (5/5) untuk bonus: 100.000 koin. Kamu sudah memiliki semua Perlengkapan Dewa!</string>
     <string name="label_daily_reward">2.000 koin (1/100: Perlengkapan Kurcaci)</string>
     <string name="msg_daily_claimed_coins">Tugas harian selesai! +2.000 koin.</string>
     <string name="msg_daily_claimed_dwarven">Tugas harian selesai! Kamu menemukan %1$s!</string>
@@ -555,7 +556,7 @@
     <string name="inn_long_laborer_desc">Satu pekerjaan per perekrutan, dihentikan setelah pengumpulan. Pengumpulan 8 jam, efisiensi 0,5x, jumlah pembuatan tak terbatas. Dia lambat, tapi dia akan melakukan apa saja.</string>
     <string name="inn_apprentice_desc">Satu pekerjaan per perekrutan, diberhentikan setelah dikumpulkan. Perolehan 8 jam, efisiensi 1x. Pembuatan, doa, dan pembuatan rune dibatasi hingga 480 item per sesi.</string>
     <string name="inn_journeyman_desc">Satu pekerjaan per perekrutan, diberhentikan setelah dikumpulkan. Perolehan selama 6 jam, efisiensi 1,25x. Pembuatan barang, doa, dan runecrafting dibatasi hingga 360 item per sesi.</string>
-    <string name="inn_master_desc">Satu pekerjaan per perekrutan, diberhentikan setelah dikumpulkan. Perolehan selama 4 jam, efisiensi 2x. Pembuatan barang, doa, dan pembuatan rune dibatasi hingga 240 item per sesi.</string>
+    <string name="inn_master_desc">Satu pekerjaan per perekrutan, diberhentikan setelah dikumpulkan. Perolehan selama 4 jam, efisiensi 2,5x. Pembuatan barang, doa, dan pembuatan rune dibatasi hingga 600 item per sesi.</string>
     <string name="inn_gathering_note">Perolehan: jam sesi x pengali efisiensi yang diterapkan pada jarahan dan XP</string>
     <string name="inn_crafting_note">Kerajinan/doa/pembuatan rune: jumlah dibatasi per tingkatan; Pekerja Panjang tidak memiliki batasan.</string>
     <string name="worker_skills_title">Pekerja: %1$s</string>
@@ -991,11 +992,11 @@
     <string name="achievement_town_first_upgrade_name">Renovasi Pertama</string>
     <string name="achievement_town_first_upgrade_desc">Tingkatkan bangunan kota mana pun untuk pertama kalinya.</string>
     <string name="achievement_town_all_tier1_name">Pengembang Kota</string>
-    <string name="achievement_town_all_tier1_desc">Tingkatkan keenam bangunan kota setidaknya ke Tingkat 1.</string>
+    <string name="achievement_town_all_tier1_desc">Tingkatkan ketujuh bangunan kota setidaknya ke Tingkat 1.</string>
     <string name="achievement_town_one_maxed_name">Ahli Bangunan</string>
     <string name="achievement_town_one_maxed_desc">Tingkatkan bangunan kota mana pun ke tingkat maksimum.</string>
     <string name="achievement_town_all_maxed_name">Kota Legenda</string>
-    <string name="achievement_town_all_maxed_desc">Tingkatkan keenam bangunan kota ke tingkat maksimum.</string>
+    <string name="achievement_town_all_maxed_desc">Tingkatkan ketujuh bangunan kota ke tingkat maksimum.</string>
     <string name="achievement_tower_first_floor_name">First Step</string>
     <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
     <string name="achievement_tower_floor_10_name">Tower Initiate</string>

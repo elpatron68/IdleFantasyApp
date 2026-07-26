@@ -30,6 +30,19 @@ class WeeklyQuestRepository @Inject constructor(
         "divine_tinderbox", "divine_frying_pan", "divine_grappling_hook", "divine_lockpick",
     )
 
+    private val baseDivineDropChance = 1.0 / 26.0
+
+    /** Pity-adjusted Divine gear drop chance: each consecutive missed week multiplies the odds
+     *  by 1.5x, capped at a guaranteed drop. */
+    fun currentDivineDropChance(pityMisses: Int): Double =
+        (baseDivineDropChance * Math.pow(1.5, pityMisses.toDouble())).coerceAtMost(1.0)
+
+    /** Current drop chance for display, or null once every Divine piece is already owned. */
+    fun currentDivineDropChanceForDisplay(flags: PlayerFlags, ownedItems: Set<String>): Double? {
+        if (divineDropPool.all { it in ownedItems }) return null
+        return currentDivineDropChance(flags.divinePityMisses)
+    }
+
     /** Returns epoch ms of the next Monday 6am in local time after [fromMs]. */
     fun nextResetMs(fromMs: Long = System.currentTimeMillis()): Long {
         val cal = Calendar.getInstance().apply { timeInMillis = fromMs }
@@ -205,10 +218,20 @@ class WeeklyQuestRepository @Inject constructor(
         check(flags.weeklyQuestClaimed.size == 5) { "Not all weekly quests claimed" }
         check(!flags.weeklyBonusClaimed) { "Weekly bonus already claimed" }
 
-        val newFlags = flags.copy(weeklyBonusClaimed = true)
-
         val missingPieces = divineDropPool.filter { it !in ownedItems }
-        val reward: WeeklyBonusReward = if (missingPieces.isNotEmpty() && Random.nextInt(26) == 0) {
+        val dropped = missingPieces.isNotEmpty() && Random.nextDouble() < currentDivineDropChance(flags.divinePityMisses)
+
+        val newFlags = flags.copy(
+            weeklyBonusClaimed = true,
+            // A drop resets the streak; owning every piece freezes it (nothing left to pity toward).
+            divinePityMisses = when {
+                dropped -> 0
+                missingPieces.isEmpty() -> flags.divinePityMisses
+                else -> flags.divinePityMisses + 1
+            },
+        )
+
+        val reward: WeeklyBonusReward = if (dropped) {
             WeeklyBonusReward.DivineItemReward(missingPieces.random())
         } else {
             WeeklyBonusReward.CoinsReward()

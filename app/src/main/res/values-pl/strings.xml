@@ -329,7 +329,8 @@
     <string name="weekly_bonus_title">Tygodniowy bonus!</string>
     <string name="weekly_bonus_claim">Odbierz tygodniowy bonus</string>
     <string name="label_daily_info">Każde zadanie dzienne nagradza monetami. Każde zadanie ma też szansę 1 na 100 na zrzucenie elementu krasnoludzkiego wyposażenia.</string>
-    <string name="label_weekly_info">Każde tygodniowe wyzwanie nagradza monetami w zależności od wymaganego poziomu. Ukończ wszystkie 5, aby zdobyć bonus: 100 000 monet lub szansę 1 na 26 na element boskiego wyposażenia.</string>
+    <string name="label_weekly_info">Każde tygodniowe wyzwanie nagradza monetami w zależności od wymaganego poziomu. Ukończ wszystkie 5, aby zdobyć bonus: 100 000 monet lub szansę %1$s na element boskiego wyposażenia.</string>
+    <string name="label_weekly_info_complete">Każde tygodniowe wyzwanie nagradza monetami w zależności od wymaganego poziomu. Ukończ wszystkie 5, aby zdobyć bonus: 100 000 monet. Posiadasz już cały boski ekwipunek!</string>
     <string name="label_daily_reward">2000 monet (1/100: krasnoludzkie wyposażenie)</string>
     <string name="msg_daily_claimed_coins">Zadanie dzienne ukończone! +2000 monet.</string>
     <string name="msg_daily_claimed_dwarven">Zadanie dzienne ukończone! Znalazłeś %1$s!</string>
@@ -753,7 +754,7 @@
     <string name="inn_long_laborer_desc">Jedno zlecenie na wynajęcie, zwalniany po odbiorze. 8 godz. zbieractwa, wydajność 0,5x, nielimitowana ilość wytwarzania. Jest powolny, ale zrobi wszystko.</string>
     <string name="inn_apprentice_desc">Jedno zlecenie na zatrudnienie, zwolniony po odebraniu. 8 godz. zbieractwa, wydajność 1x. Wytwarzanie, modlitwa i tworzenie run ograniczone do 480 przedmiotów na sesję.</string>
     <string name="inn_journeyman_desc">Jedno zlecenie na zatrudnienie, zwolniony po odebraniu. 6 godz. zbieractwa, wydajność 1,5x. Wytwarzanie, modlitwa i tworzenie run ograniczone do 540 przedmiotów na sesję.</string>
-    <string name="inn_master_desc">Jedno zlecenie na zatrudnienie, zwolniony po odebraniu. 4 godz. zbieractwa, wydajność 2x. Wytwarzanie, modlitwa i tworzenie run ograniczone do 480 przedmiotów na sesję.</string>
+    <string name="inn_master_desc">Jedno zlecenie na zatrudnienie, zwolniony po odebraniu. 4 godz. zbieractwa, wydajność 2,5x. Wytwarzanie, modlitwa i tworzenie run ograniczone do 600 przedmiotów na sesję.</string>
     <string name="inn_gathering_note">Zbieractwo: godziny sesji × mnożnik wydajności zastosowany do łupów i XP</string>
     <string name="inn_crafting_note">Wytwarzanie/modlitwa/tworzenie run: ilość ograniczona wg poziomu; Wytrwały robotnik nie ma limitu</string>
     <string name="worker_skills_title">Pracownik: %1$s</string>
@@ -1250,11 +1251,11 @@
     <string name="achievement_town_first_upgrade_name">Pierwszy remont</string>
     <string name="achievement_town_first_upgrade_desc">Ulepsz dowolny budynek miasta po raz pierwszy</string>
     <string name="achievement_town_all_tier1_name">Ulepszacz miasta</string>
-    <string name="achievement_town_all_tier1_desc">Ulepsz wszystkie sześć budynków miasta do co najmniej poziomu 1</string>
+    <string name="achievement_town_all_tier1_desc">Ulepsz wszystkie siedem budynków miasta do co najmniej poziomu 1</string>
     <string name="achievement_town_one_maxed_name">Mistrz budowniczy</string>
     <string name="achievement_town_one_maxed_desc">Ulepsz dowolny pojedynczy budynek miasta do maksymalnego poziomu</string>
     <string name="achievement_town_all_maxed_name">Miasto legendy</string>
-    <string name="achievement_town_all_maxed_desc">Ulepsz wszystkie sześć budynków miasta do maksymalnego poziomu</string>
+    <string name="achievement_town_all_maxed_desc">Ulepsz wszystkie siedem budynków miasta do maksymalnego poziomu</string>
     <string name="achievement_tower_first_floor_name">Pierwszy krok</string>
     <string name="achievement_tower_first_floor_desc">Ukończ swoje pierwsze piętro Nieskończonej Wieży</string>
     <string name="achievement_tower_floor_10_name">Adept Wieży</string>

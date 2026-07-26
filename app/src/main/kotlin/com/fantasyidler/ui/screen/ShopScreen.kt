@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -288,11 +290,13 @@ private fun BuyList(
                                 ),
                             )
                         }
-                        Text(
-                            text  = stringResource(R.string.shop_qty_in_inv, owned),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                        )
+                        if (!isXpBoost) {
+                            Text(
+                                text  = stringResource(R.string.shop_qty_in_inv, owned),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                            )
+                        }
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
@@ -324,6 +328,7 @@ private fun BuyList(
 
 private val SELL_CATEGORY_ORDER = listOf("Weapons", "Armor", "Tools", "Food", "Materials", "Misc")
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun SellList(
     inventory: Map<String, Int>,
@@ -391,7 +396,7 @@ private fun SellList(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Column(Modifier.weight(1f)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
+                            FlowRow(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                 Text(
                                     text       = GameStrings.itemName(context, key),
                                     style      = MaterialTheme.typography.bodyLarge,

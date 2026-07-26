@@ -315,7 +315,8 @@
     <string name="weekly_bonus_title">ウィークリーボーナス！</string>
     <string name="weekly_bonus_claim">ウィークリーボーナスを受け取る</string>
     <string name="label_daily_info">デイリークエストをクリアするとコインを獲得できます。また、各クエストには 1/100 の確率で「ドワーフ装備」がドロップするチャンスがあります。</string>
-    <string name="label_weekly_info">ウィークリーチャレンジをクリアすると、必要レベルに応じたコインを獲得できます。5つすべてクリアすると、ボーナスとして100,000コイン、または 1/26 の確率で「ディバイン装備」を獲得できます。</string>
+    <string name="label_weekly_info">ウィークリーチャレンジをクリアすると、必要レベルに応じたコインを獲得できます。5つすべてクリアすると、ボーナスとして100,000コイン、または %1$s の確率で「ディバイン装備」を獲得できます。</string>
+    <string name="label_weekly_info_complete">ウィークリーチャレンジをクリアすると、必要レベルに応じたコインを獲得できます。5つすべてクリアすると、ボーナスとして100,000コインを獲得できます。ディバイン装備はすべて入手済みです!</string>
     <string name="label_daily_reward">2,000コイン（1/100：ドワーフ装備）</string>
     <string name="msg_daily_claimed_coins">デイリークエスト完了！ +2,000コイン。</string>
     <string name="msg_daily_claimed_dwarven">デイリークエスト完了！ %1$s を見つけました！</string>
@@ -737,7 +738,7 @@
     <string name="inn_long_laborer_desc">1契約につき1回の仕事、回収後に解雇。8時間の採集、効率0.5倍、クラフト数量無制限。動作は遅いですが、何でもこなします。</string>
     <string name="inn_apprentice_desc">1契約につき1回の仕事、回収後に解雇。8時間の採集、効率1.0倍。クラフト、祈り、ルーン作成は1セッションあたり480個までに制限。</string>
     <string name="inn_journeyman_desc">1契約につき1回の仕事、回収後に解雇. 6時間の採集、効率1.5倍。クラフト、祈り、ルーン作成は1セッションあたり540個までに制限。</string>
-    <string name="inn_master_desc">1契約につき1回の仕事、回収後に解雇。4時間の採集、効率2.0倍。クラフト、祈り、ルーン作成は1セッションあたり480個までに制限。</string>
+    <string name="inn_master_desc">1契約につき1回の仕事、回収後に解雇。4時間の採集、効率2.5倍。クラフト、祈り、ルーン作成は1セッションあたり600個までに制限。</string>
     <string name="inn_gathering_note">採集: セッション時間 × 効率倍率が獲得アイテムと経験値に適用されます</string>
     <string name="inn_crafting_note">生産/祈り/ルーン作成: 各ランクごとに上限あり。雑用係には制限がありません</string>
     <string name="worker_skills_title">労働者: %1$s</string>
@@ -1230,11 +1231,11 @@
     <string name="achievement_town_first_upgrade_name">最初の改築</string>
     <string name="achievement_town_first_upgrade_desc">初めて街の建物をアップグレードする</string>
     <string name="achievement_town_all_tier1_name">街の発展者</string>
-    <string name="achievement_town_all_tier1_desc">街の6つの建物をすべてティア1以上にする</string>
+    <string name="achievement_town_all_tier1_desc">街の7つの建物をすべてティア1以上にする</string>
     <string name="achievement_town_one_maxed_name">マスタービルダー</string>
     <string name="achievement_town_one_maxed_desc">いずれか1つの建物を最大ティアまでアップグレードする</string>
     <string name="achievement_town_all_maxed_name">伝説の街</string>
-    <string name="achievement_town_all_maxed_desc">街の6つの建物をすべて最大ティアまでアップグレードする</string>
+    <string name="achievement_town_all_maxed_desc">街の7つの建物をすべて最大ティアまでアップグレードする</string>
     <string name="achievement_tower_first_floor_name">第一歩</string>
     <string name="achievement_tower_first_floor_desc">無限の塔の最初の階層をクリアする</string>
     <string name="achievement_tower_floor_10_name">塔の初心者</string>

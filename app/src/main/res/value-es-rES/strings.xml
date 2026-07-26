@@ -1574,4 +1574,5 @@
     <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
     <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
     <string name="farming_harvest_all_complete">All Patches Harvested!</string>
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
 </resources>

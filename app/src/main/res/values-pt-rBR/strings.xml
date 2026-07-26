@@ -314,7 +314,8 @@
     <string name="weekly_bonus_title">Bônus Semanal!</string>
     <string name="weekly_bonus_claim">Resgatar Bônus Semanal</string>
     <string name="label_daily_info">Cada missão diária recompensa com moedas. Toda missão também tem 1 chance em 100 de dropar uma peça de equipamento Anão.</string>
-    <string name="label_weekly_info">Cada desafio semanal recompensa com moedas com base no seu requisito de nível. Complete todos os 5 para ganhar um bônus: 100.000 moedas, ou 1 chance em 26 de ganhar uma peça de equipamento Divino.</string>
+    <string name="label_weekly_info">Cada desafio semanal recompensa com moedas com base no seu requisito de nível. Complete todos os 5 para ganhar um bônus: 100.000 moedas, ou uma chance de %1$s de ganhar uma peça de equipamento Divino.</string>
+    <string name="label_weekly_info_complete">Cada desafio semanal recompensa com moedas com base no seu requisito de nível. Complete todos os 5 para ganhar um bônus: 100.000 moedas. Você já possui todas as peças do equipamento Divino!</string>
     <string name="label_daily_reward">2.000 moedas (1/100: equipamento Anão)</string>
     <string name="msg_daily_claimed_coins">Missão diária concluída! +2.000 moedas.</string>
     <string name="msg_daily_claimed_dwarven">Missão diária concluída! Você encontrou %1$s!</string>
@@ -735,7 +736,7 @@
     <string name="inn_long_laborer_desc">Um serviço por contratação, dispensado após a coleta. 8h de coleta, eficiência de 0,5x, quantidade de criação ilimitada. Ele é lento, mas faz qualquer coisa.</string>
     <string name="inn_apprentice_desc">Um trabalho por contratação, dispensado após a coleta. 8h de coleta, eficiência de 1x. Criação, oração e criação de runas limitadas a 480 itens por sessão.</string>
     <string name="inn_journeyman_desc">Um trabalho por contratação, dispensado após a coleta. 6h de coleta, eficiência de 1,5x. Criação, oração e criação de runas limitadas a 540 itens por sessão.</string>
-    <string name="inn_master_desc">Um trabalho por contratação, dispensado após a coleta. 4h de coleta, eficiência de 2x. Criação, oração e criação de runas limitadas a 480 itens por sessão.</string>
+    <string name="inn_master_desc">Um trabalho por contratação, dispensado após a coleta. 4h de coleta, eficiência de 2,5x. Criação, oração e criação de runas limitadas a 600 itens por sessão.</string>
     <string name="inn_gathering_note">Coleta: horas de sessão x multiplicador de eficiência aplicado ao saque e XP</string>
     <string name="inn_crafting_note">Criação/oração/criação de runas: quantidade limitada por nível; o Trabalhador Avulso não tem limite</string>
     <string name="worker_skills_title">Trabalhador: %1$s</string>
@@ -1226,11 +1227,11 @@
     <string name="achievement_town_first_upgrade_name">Primeira Reforma</string>
     <string name="achievement_town_first_upgrade_desc">Melhore qualquer edifício da cidade pela primeira vez</string>
     <string name="achievement_town_all_tier1_name">Melhorador da Cidade</string>
-    <string name="achievement_town_all_tier1_desc">Melhore todos os seis edifícios da cidade para pelo menos o Nível 1</string>
+    <string name="achievement_town_all_tier1_desc">Melhore todos os sete edifícios da cidade para pelo menos o Nível 1</string>
     <string name="achievement_town_one_maxed_name">Mestre Construtor</string>
     <string name="achievement_town_one_maxed_desc">Melhore qualquer edifício da cidade até o nível máximo</string>
     <string name="achievement_town_all_maxed_name">Cidade Lendária</string>
-    <string name="achievement_town_all_maxed_desc">Melhore todos os seis edifícios da cidade até o nível máximo</string>
+    <string name="achievement_town_all_maxed_desc">Melhore todos os sete edifícios da cidade até o nível máximo</string>
     <string name="achievement_tower_first_floor_name">Primeiro Passo</string>
     <string name="achievement_tower_first_floor_desc">Complete seu primeiro andar da Torre Infinita</string>
     <string name="achievement_tower_floor_10_name">Iniciado da Torre</string>

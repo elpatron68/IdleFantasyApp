@@ -315,7 +315,8 @@
     <string name="weekly_bonus_title">Weekly Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a 1 in 26 chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
     <string name="label_daily_reward">2,000 coins (1/100: Dwarven gear)</string>
     <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string>
     <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string>
@@ -764,7 +765,7 @@
     <string name="inn_long_laborer_desc">One job per hire, dismissed after collecting. 8h gathering, 0.5x efficiency, unlimited crafting qty. He\'s slow, but he\'ll do anything.</string>
     <string name="inn_apprentice_desc">One job per hire, dismissed after collecting. 8h gathering, 1x efficiency. Crafting, prayer, and runecrafting capped at 480 items per session.</string>
     <string name="inn_journeyman_desc">One job per hire, dismissed after collecting. 6h gathering, 1.5x efficiency. Crafting, prayer, and runecrafting capped at 540 items per session.</string>
-    <string name="inn_master_desc">One job per hire, dismissed after collecting. 4h gathering, 2x efficiency. Crafting, prayer, and runecrafting capped at 480 items per session.</string>
+    <string name="inn_master_desc">One job per hire, dismissed after collecting. 4h gathering, 2.5x efficiency. Crafting, prayer, and runecrafting capped at 600 items per session.</string>
     <string name="inn_gathering_note">Gathering: session hours x efficiency multiplier applied to loot and XP</string>
     <string name="inn_crafting_note">Crafting/prayer/runecrafting: quantity capped per tier; Long Laborer has no cap</string>
     <string name="worker_skills_title">Worker: %1$s</string>
@@ -1262,11 +1263,11 @@
     <string name="achievement_town_first_upgrade_name">First Renovation</string>
     <string name="achievement_town_first_upgrade_desc">Upgrade any town building for the first time</string>
     <string name="achievement_town_all_tier1_name">Town Improver</string>
-    <string name="achievement_town_all_tier1_desc">Upgrade all six town buildings to at least Tier 1</string>
+    <string name="achievement_town_all_tier1_desc">Upgrade all seven town buildings to at least Tier 1</string>
     <string name="achievement_town_one_maxed_name">Master Builder</string>
     <string name="achievement_town_one_maxed_desc">Upgrade any single town building to the maximum tier</string>
     <string name="achievement_town_all_maxed_name">Town of Legend</string>
-    <string name="achievement_town_all_maxed_desc">Upgrade all six town buildings to the maximum tier</string>
+    <string name="achievement_town_all_maxed_desc">Upgrade all seven town buildings to the maximum tier</string>
     <string name="achievement_tower_first_floor_name">First Step</string>
     <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
     <string name="achievement_tower_floor_10_name">Tower Initiate</string>
@@ -1669,10 +1670,10 @@
     <string name="settings_credit_banners_title">Seasonal Banners</string>
     <string name="settings_credit_banners_subtitle">Art by Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Skill Icons</string>
-    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+    <string name="settings_credit_skill_icons_subtitle" translatable="false">Shikashi\'s Fantasy Icons Pack</string>
     <string name="title_seasonal_champion_of">Champion of %1$s</string>
     <string name="title_seasonal_requirement">Complete the %1$s Seasonal Event</string>
     <string name="home_welcome_greeting">Welcome back,</string>
-    <string name="home_welcome_name">%1$s!</string>
+    <string name="home_welcome_name" translatable="false">%1$s!</string>
     <string name="home_welcome_title">The %1$s!</string>
 </resources>

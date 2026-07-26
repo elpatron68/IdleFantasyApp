@@ -175,6 +175,7 @@ fun QuestsScreen(
                         nextWeeklyReset     = state.nextWeeklyReset,
                         hideCompleted       = state.hideCompleted,
                         weeklyBonusClaimed  = state.weeklyBonusClaimed,
+                        divineDropChance    = state.divineDropChance,
                         onClaimDailyQuest   = { viewModel.claimDailyQuest(it) },
                         onClaimWeeklyQuest  = { viewModel.claimWeeklyQuest(it) },
                         onClaimWeeklyBonus  = { viewModel.claimWeeklyBonus() },
@@ -225,6 +226,7 @@ private fun TimedQuestsContent(
     nextWeeklyReset: Long,
     hideCompleted: Boolean,
     weeklyBonusClaimed: Boolean = false,
+    divineDropChance: Double? = null,
     onClaimDailyQuest: (String) -> Unit,
     onClaimWeeklyQuest: (String) -> Unit,
     onClaimWeeklyBonus: () -> Unit,
@@ -263,6 +265,7 @@ private fun TimedQuestsContent(
                 nextReset          = nextWeeklyReset,
                 hideCompleted      = hideCompleted,
                 weeklyBonusClaimed = weeklyBonusClaimed,
+                divineDropChance   = divineDropChance,
                 onClaimQuest       = onClaimWeeklyQuest,
                 onClaimBonus       = onClaimWeeklyBonus,
             )
@@ -337,17 +340,23 @@ private fun WeeklyQuestsContent(
     nextReset: Long,
     hideCompleted: Boolean = false,
     weeklyBonusClaimed: Boolean = false,
+    divineDropChance: Double? = null,
     onClaimQuest: (String) -> Unit,
     onClaimBonus: () -> Unit,
 ) {
     val visibleQuests = if (hideCompleted) quests.filter { !it.claimed } else quests
     val allQuestsClaimed = quests.isNotEmpty() && quests.all { it.claimed }
     val context = LocalContext.current
+    val infoText = if (divineDropChance != null) {
+        stringResource(R.string.label_weekly_info, "%.1f%%".format(divineDropChance * 100))
+    } else {
+        stringResource(R.string.label_weekly_info_complete)
+    }
 
     LazyColumn(Modifier.fillMaxSize()) {
         item {
             Text(
-                text     = stringResource(R.string.label_weekly_info),
+                text     = infoText,
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),

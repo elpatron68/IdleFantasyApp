@@ -300,7 +300,8 @@
     <string name="weekly_bonus_title">Bonus hebdomadaire !</string>
     <string name="weekly_bonus_claim">Réclamer le bonus hebdomadaire</string>
     <string name="label_daily_info">Chaque quête quotidienne rapporte des pièces. Chaque quête a également 1 chance sur 100 de faire tomber un équipement nanique.</string>
-    <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou 1 chance sur 26 d\'obtenir un équipement divin.</string>
+    <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou %1$s de chance d\'obtenir un équipement divin.</string>
+    <string name="label_weekly_info_complete">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces. Vous possédez déjà tout l\'équipement divin !</string>
     <string name="label_daily_reward">2 000 pièces (1/100 : équipement nanique)</string>
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
@@ -771,7 +772,7 @@
     <string name="inn_long_laborer_desc">Un travail par embauche, renvoyé après la collecte. 8h de collecte, efficacité 0,5x, quantité d’artisanat illimitée. Il est lent, mais il fait tout.</string>
     <string name="inn_apprentice_desc">Un travail par embauche, renvoyé après la collecte. 8h de collecte, efficacité 1x. artisanat, prière et fabrication de runes plafonnés à 480 objets par session.</string>
     <string name="inn_journeyman_desc">Un travail par embauche, renvoyé après la collecte. 6h de collecte, efficacité 1.5x. artisanat, prière et fabrication de runes plafonnés à 540 objets par session.</string>
-    <string name="inn_master_desc">Un travail par embauche, renvoyé après la collecte. 4h de collecte, efficacité 2x. artisanat, prière et fabrication de runes plafonnés à 480 objets par session.</string>
+    <string name="inn_master_desc">Un travail par embauche, renvoyé après la collecte. 4h de collecte, efficacité 2.5x. artisanat, prière et fabrication de runes plafonnés à 600 objets par session.</string>
     <string name="inn_gathering_note">Collecte : heures de session * multiplicateur d’efficacité appliqué au butin et à l’XP</string>
     <string name="inn_crafting_note">Artisanat/Prière/Fabrication de runes ont une quantité plafonnée par niveau d\'ouvrier alors que l\'Ouvrier Experimenté n\'a pas de limites</string>
     <string name="worker_skills_title">Ouvrier : %1$s</string>
@@ -1196,11 +1197,11 @@
     <string name="achievement_town_first_upgrade_name">Première Rénovation</string>
     <string name="achievement_town_first_upgrade_desc">Améliorez n\'importe quel bâtiment de ville pour la première fois</string>
     <string name="achievement_town_all_tier1_name">Améliorateur de Ville</string>
-    <string name="achievement_town_all_tier1_desc">Améliorez les six bâtiments de ville au moins au Niveau 1</string>
+    <string name="achievement_town_all_tier1_desc">Améliorez les sept bâtiments de ville au moins au Niveau 1</string>
     <string name="achievement_town_one_maxed_name">Maître Bâtisseur</string>
     <string name="achievement_town_one_maxed_desc">Améliorez n\'importe quel bâtiment au niveau maximum</string>
     <string name="achievement_town_all_maxed_name">Ville Légendaire</string>
-    <string name="achievement_town_all_maxed_desc">Améliorez les six bâtiments de ville au niveau maximum</string>
+    <string name="achievement_town_all_maxed_desc">Améliorez les sept bâtiments de ville au niveau maximum</string>
     <string name="achievement_tower_first_floor_name">Première étape</string>
     <string name="achievement_tower_first_floor_desc">Termine ton premier étage de la Tour de l\'Infini</string>
     <string name="achievement_tower_floor_10_name">Initié de la Tour</string>
@@ -1600,12 +1601,12 @@
     <string name="bonus_hp">+%1$d PV</string>
     <string name="bonus_tower">Tour</string>
     <string name="bonus_xp">+%1$d%% XP</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="crafting_owned">Owned: %1$d</string>
-    <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
-    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
+    <string name="town_building_cape_rack_name">Rangement à Capes</string>
+    <string name="town_cape_rack_no_bonus">Améliorer pour appliquer passivement les bonus d\'XP et de rendement des aptitudes/capes de guildes possédées</string>
+    <string name="town_cape_rack_t1_bonus">Les bonus passifs des capes Tier 1 (de Collecte) sont actives</string>
+    <string name="town_cape_rack_t2_bonus">Les bonus passifs des capes Tier 1 &amp; 2 (de Collecte, de Façonnage) sont actives</string>
+    <string name="town_cape_rack_t3_bonus">Les bonus passifs de toutes les capes possédées (de Collecte, de Façonnage, de Combat &amp; de Guildes) sont actives</string>
+    <string name="crafting_owned">Possédé: %1$d</string>
+    <string name="crafting_owned_detail">Présent dans l\'inventaire: %1$d</string>
+    <string name="firemaking_ashes_owned">Cendres possédées: %1$d</string>
 </resources>

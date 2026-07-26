@@ -711,7 +711,8 @@
     <string name="weekly_bonus_title">Weekly Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a 1 in 26 chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
     <string name="label_daily_reward">2,000 coins (1/100: Dwarven gear)</string>
     <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string>
     <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string>
@@ -766,7 +767,7 @@
     <string name="inn_long_laborer_desc">One job per hire, dismissed after collecting. 8h gathering, 0.5x efficiency, unlimited crafting qty. He\'s slow, but he\'ll do anything.</string>
     <string name="inn_apprentice_desc">Kiralama başına bir iş, toplama sonrası işten çıkarılır. 8 saat toplama, 1x verimlilik. Zanaat, dua ve rün işçiliği oturum başına 480 eşya ile sınırlıdır.</string>
     <string name="inn_journeyman_desc">Kiralama başına bir iş, toplama sonrası işten çıkarılır. 6 saat toplama, 1.5x verimlilik. Zanaat, dua ve rün işçiliği oturum başına 540 eşya ile sınırlıdır.</string>
-    <string name="inn_master_desc">Kiralama başına bir iş, toplama sonrası işten çıkarılır. 4 saat toplama, 2x verimlilik. Zanaat, dua ve rün işçiliği oturum başına 480 eşya ile sınırlıdır.</string>
+    <string name="inn_master_desc">Kiralama başına bir iş, toplama sonrası işten çıkarılır. 4 saat toplama, 2.5x verimlilik. Zanaat, dua ve rün işçiliği oturum başına 600 eşya ile sınırlıdır.</string>
     <string name="inn_gathering_note">Gathering: session hours x efficiency multiplier applied to loot and XP</string>
     <string name="inn_crafting_note">Crafting/prayer/runecrafting: quantity capped per tier; Long Laborer has no cap</string>
     <string name="worker_skills_title">Worker: %1$s</string>
@@ -1203,11 +1204,11 @@
     <string name="achievement_town_first_upgrade_name">İlk Tadilat</string>
     <string name="achievement_town_first_upgrade_desc">Herhangi bir kasaba binasını ilk kez yükselt</string>
     <string name="achievement_town_all_tier1_name">Kasaba Geliştirici</string>
-    <string name="achievement_town_all_tier1_desc">Altı kasaba binasını en az 1. Kademeye yükselt</string>
+    <string name="achievement_town_all_tier1_desc">Yedi kasaba binasını en az 1. Kademeye yükselt</string>
     <string name="achievement_town_one_maxed_name">Usta İnşaatçı</string>
     <string name="achievement_town_one_maxed_desc">Herhangi bir binayı maksimum kademeye yükselt</string>
     <string name="achievement_town_all_maxed_name">Efsanevi Kasaba</string>
-    <string name="achievement_town_all_maxed_desc">Altı kasaba binasını maksimum kademeye yükselt</string>
+    <string name="achievement_town_all_maxed_desc">Yedi kasaba binasını maksimum kademeye yükselt</string>
     <string name="achievement_tower_first_floor_name">First Step</string>
     <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
     <string name="achievement_tower_floor_10_name">Tower Initiate</string>

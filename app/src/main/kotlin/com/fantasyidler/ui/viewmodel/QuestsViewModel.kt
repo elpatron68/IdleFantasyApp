@@ -59,6 +59,8 @@ data class QuestsUiState(
     val snackbarMessage: String? = null,
     val hideCompleted: Boolean = false,
     val weeklyBonusClaimed: Boolean = false,
+    /** Current pity-adjusted Divine gear drop chance (0-1), or null if every piece is owned. */
+    val divineDropChance: Double? = null,
 )
 
 // ---------------------------------------------------------------------------
@@ -136,6 +138,15 @@ class QuestsViewModel @Inject constructor(
             extra.weeklyQuests
         }
 
+        val divineDropChance = if (player != null) {
+            val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val ownedItems = inventory.keys + equipped.values.filterNotNull()
+            weeklyQuestRepo.currentDivineDropChanceForDisplay(flags, ownedItems.toSet())
+        } else {
+            extra.divineDropChance
+        }
+
         extra.copy(
             isLoading          = false,
             questsByGroup      = questsByGroup,
@@ -143,6 +154,7 @@ class QuestsViewModel @Inject constructor(
             completedCount     = completed,
             dailyQuests        = dailyQuests,
             weeklyQuests       = weeklyQuests,
+            divineDropChance   = divineDropChance,
             weeklyBonusClaimed = flags.weeklyBonusClaimed,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuestsUiState())

@@ -682,7 +682,8 @@
     <string name="weekly_bonus_title">Weekly Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a 1 in 26 chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
     <string name="label_daily_reward">2,000 coins (1/100: Dwarven gear)</string>
     <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string>
     <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string>
@@ -761,7 +762,7 @@
     <string name="inn_long_laborer_desc">One job per hire, dismissed after collecting. 8h gathering, 0.5x efficiency, unlimited crafting qty. He\'s slow, but he\'ll do anything.</string>
     <string name="inn_apprentice_desc">Un trabajo por contratación, despedido después de recoger. 8h de recolección, eficiencia 1x. Artesanía, oración y runecraft limitados a 480 objetos por sesión.</string>
     <string name="inn_journeyman_desc">Un trabajo por contratación, despedido después de recoger. 6h de recolección, eficiencia 1.5x. Artesanía, oración y runecraft limitados a 540 objetos por sesión.</string>
-    <string name="inn_master_desc">Un trabajo por contratación, despedido después de recoger. 4h de recolección, eficiencia 2x. Artesanía, oración y runecraft limitados a 480 objetos por sesión.</string>
+    <string name="inn_master_desc">Un trabajo por contratación, despedido después de recoger. 4h de recolección, eficiencia 2.5x. Artesanía, oración y runecraft limitados a 600 objetos por sesión.</string>
     <string name="inn_gathering_note">Gathering: session hours x efficiency multiplier applied to loot and XP</string>
     <string name="inn_crafting_note">Crafting/prayer/runecrafting: quantity capped per tier; Long Laborer has no cap</string>
     <string name="worker_skills_title">Worker: %1$s</string>
@@ -1198,11 +1199,11 @@
     <string name="achievement_town_first_upgrade_name">Primera Renovación</string>
     <string name="achievement_town_first_upgrade_desc">Mejora cualquier edificio del pueblo por primera vez</string>
     <string name="achievement_town_all_tier1_name">Mejorador del Pueblo</string>
-    <string name="achievement_town_all_tier1_desc">Mejora los seis edificios del pueblo al menos al Nivel 1</string>
+    <string name="achievement_town_all_tier1_desc">Mejora los siete edificios del pueblo al menos al Nivel 1</string>
     <string name="achievement_town_one_maxed_name">Maestro Constructor</string>
     <string name="achievement_town_one_maxed_desc">Mejora cualquier edificio al nivel máximo</string>
     <string name="achievement_town_all_maxed_name">Pueblo Legendario</string>
-    <string name="achievement_town_all_maxed_desc">Mejora los seis edificios del pueblo al nivel máximo</string>
+    <string name="achievement_town_all_maxed_desc">Mejora los siete edificios del pueblo al nivel máximo</string>
     <string name="achievement_tower_first_floor_name">First Step</string>
     <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
     <string name="achievement_tower_floor_10_name">Tower Initiate</string>

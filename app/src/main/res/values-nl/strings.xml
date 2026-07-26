@@ -315,7 +315,8 @@
     <string name="weekly_bonus_title">Weekly Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a 1 in 26 chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
     <string name="label_daily_reward">2000 ducaten (1/100: Dwergenuitrusting)</string>
     <string name="msg_daily_claimed_coins">Dagelijkse quest voltooid! +2000 ducaten.</string>
     <string name="msg_daily_claimed_dwarven">Dagelijkse quest voltooid! Je hebt %1$s gevonden!</string>
@@ -736,7 +737,7 @@
     <string name="inn_long_laborer_desc">Één klus per inhuur, ontslagen na het ophalen. 8u verzamelen, 0,5x efficiëntie, onbeperkte ambachtshoeveelheid. Hij is traag, maar hij doet alles.</string>
     <string name="inn_apprentice_desc">Eén klus per aanwerving, ontslagen na het verzamelen. 8u verzamelen, 1x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 480 items per sessie.</string>
     <string name="inn_journeyman_desc">Eén klus per aanwerving, ontslagen na het verzamelen. 6u verzamelen, 1,5x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 540 items per sessie.</string>
-    <string name="inn_master_desc">Eén klus per aanwerving, ontslagen na het verzamelen. 4u verzamelen, 2x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 480 items per sessie.</string>
+    <string name="inn_master_desc">Eén klus per aanwerving, ontslagen na het verzamelen. 4u verzamelen, 2,5x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 600 items per sessie.</string>
     <string name="inn_gathering_note">Verzamelen: sessie-uren x efficiëntiemultiplicator toegepast op buit en XP</string>
     <string name="inn_crafting_note">Juwelier/Gebed/Runen maken: hoeveelheid beperkt per level; Langdurige werknemer heeft geen limiet</string>
     <string name="worker_skills_title">Werknemer: %1$s</string>
@@ -1161,11 +1162,11 @@
     <string name="achievement_town_first_upgrade_name">Eerste Renovatie</string>
     <string name="achievement_town_first_upgrade_desc">Verbeter een stadsgebouw voor de eerste keer</string>
     <string name="achievement_town_all_tier1_name">Stadsverbeteraar</string>
-    <string name="achievement_town_all_tier1_desc">Verbeter alle zes stadsgebouwen naar minimaal Rang 1</string>
+    <string name="achievement_town_all_tier1_desc">Verbeter alle zeven stadsgebouwen naar minimaal Rang 1</string>
     <string name="achievement_town_one_maxed_name">Meesterbouwer</string>
     <string name="achievement_town_one_maxed_desc">Verbeter een stadsgebouw naar het maximum</string>
     <string name="achievement_town_all_maxed_name">Legendarische Stad</string>
-    <string name="achievement_town_all_maxed_desc">Verbeter alle zes stadsgebouwen naar het maximum</string>
+    <string name="achievement_town_all_maxed_desc">Verbeter alle zeven stadsgebouwen naar het maximum</string>
     <string name="achievement_tower_first_floor_name">First Step</string>
     <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
     <string name="achievement_tower_floor_10_name">Tower Initiate</string>

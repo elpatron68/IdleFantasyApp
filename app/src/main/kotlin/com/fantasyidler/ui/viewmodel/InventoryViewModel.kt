@@ -335,10 +335,16 @@ class InventoryViewModel @Inject constructor(
                     else -> if (slot in EquipSlot.WEAPON_SLOTS)
                         item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                     else when (activeStyle) {
-                        "ranged"   -> item.defenseBonus * 2.0f + (item.rangedAttackBonus ?: 0) * 1.0f + (item.rangedStrengthBonus ?: 0) * 0.5f
-                        "magic"    -> item.defenseBonus * 2.0f + (item.magicAttackBonus ?: 0) * 1.0f + (item.magicDamageBonus ?: 0) * 0.5f
-                        "strength" -> item.defenseBonus * 2.0f + item.strengthBonus * 1.0f + item.attackBonus * 0.5f
-                        else       -> item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
+                        // Accuracy has diminishing returns once effective attack exceeds enemy
+                        // defense (see CombatSimulator's hit-chance curve), while damage bonus
+                        // adds to max hit linearly with no diminishing returns -- so the damage
+                        // stat outweighs the accuracy stat here, unlike melee's attack/strength
+                        // split below (which reflects a real weapon-style choice, not this
+                        // accuracy-vs-damage tradeoff) (issue #1198).
+                        "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                        "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                        "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 1.0f + item.defenseBonus * 0.5f
+                        else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                     }
                 }
             }
