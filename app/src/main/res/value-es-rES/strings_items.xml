@@ -645,4 +645,8 @@
     <string name="item_rogues_lockpick_name">Rogue\'s Lockpick</string>
     <string name="item_shadow_grappling_hook_name">Shadow Grappling Hook</string>
     <string name="item_shadow_lockpick_name">Shadow Lockpick</string>
+    <string name="item_beef_name">Cooked Beef</string>
+    <string name="item_chicken_name">Cooked Chicken</string>
+    <string name="item_mutton_name">Cooked Mutton</string>
+    <string name="item_rat_meat_name">Cooked Rat Meat</string>
 </resources>

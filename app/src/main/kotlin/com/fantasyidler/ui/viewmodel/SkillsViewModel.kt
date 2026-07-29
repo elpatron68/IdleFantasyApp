@@ -1132,7 +1132,9 @@ class SkillsViewModel @Inject constructor(
                         if (questTarget.isNotEmpty()) {
                             addIndicator(questTarget, questSkill, category, remaining)
                         } else {
-                            gameData.bones.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                            // Ashes give Prayer XP but never count toward prayer quests (issue #1207).
+                            gameData.bones.filterValues { !it.isAsh }.keys
+                                .forEach { addIndicator(it, questSkill, category, remaining) }
                         }
                     }
                 }

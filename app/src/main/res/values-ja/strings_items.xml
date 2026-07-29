@@ -665,13 +665,9 @@
     <string name="item_balrog_name" translatable="false">ウドゥンの古き炎、バルログ</string>
     <string name="item_balrog_whip_name" translatable="false">バルログの鞭</string>
     <string name="item_balrog_wings_name" translatable="false">バルログの翼</string>
-    <string name="item_beef_name" translatable="false">牛肉</string>
+    <string name="item_beef_name">牛肉</string>
     <string name="item_berserker_ring_name" translatable="false">バーサーカーリング</string>
     <string name="item_blessed_fishing_rod_name" translatable="false">祝福された釣り竿</string>
-    <string name="item_blood_blast_name" translatable="false">ブラッドブラスト</string>
-    <string name="item_blood_bolt_name" translatable="false">ブラッドボルト</string>
-    <string name="item_blood_strike_name" translatable="false">ブラッドストライク</string>
-    <string name="item_blood_wave_name" translatable="false">ブラッドウェーブ</string>
     <string name="item_bronze_arrow_tip_name" translatable="false">ブロンズの矢尻</string>
     <string name="item_bronze_boots_name" translatable="false">ブロンズのブーツ</string>
     <string name="item_bronze_chainbody_name" translatable="false">ブロンズのチェインメイル</string>
@@ -681,19 +677,11 @@
     <string name="item_bronze_med_helmet_name" translatable="false">ブロンズのハーフヘルム</string>
     <string name="item_bronze_plateskirt_name" translatable="false">ブロンズのプレートスカート</string>
     <string name="item_bronze_square_shield_name" translatable="false">ブロンズのスクエアシールド</string>
-    <string name="item_chaos_blast_name" translatable="false">カオスブラスト</string>
-    <string name="item_chaos_bolt_name" translatable="false">カオスボルト</string>
-    <string name="item_chaos_strike_name" translatable="false">カオスストライク</string>
-    <string name="item_chaos_wave_name" translatable="false">カオスウェーブ</string>
-    <string name="item_chicken_name" translatable="false">鶏肉</string>
+    <string name="item_chicken_name">鶏肉</string>
     <string name="item_cooking_cape_name" translatable="false">料理のマント</string>
     <string name="item_cooking_guild_cape_name" translatable="false">料理ギルドのマント</string>
     <string name="item_crafting_cape_name" translatable="false">工芸のマント</string>
     <string name="item_crafting_guild_cape_name" translatable="false">工芸ギルドのマント</string>
-    <string name="item_death_blast_name" translatable="false">デスブラスト</string>
-    <string name="item_death_bolt_name" translatable="false">デスボルト</string>
-    <string name="item_death_strike_name" translatable="false">デスストライク</string>
-    <string name="item_death_wave_name" translatable="false">デスウェーブ</string>
     <string name="item_deep_iron_pickaxe_name" translatable="false">深部鉄のツルハシ</string>
     <string name="item_defense_cape_name" translatable="false">防御のマント</string>
     <string name="item_demon_lord_name" translatable="false">魔王</string>
@@ -725,17 +713,9 @@
     <string name="item_dwarven_sword_name" translatable="false">ドワーフのソード</string>
     <string name="item_dwarven_tinderbox_name">ドワーフの火打ち石</string>
     <string name="item_dwarven_warhammer_name" translatable="false">ドワーフのウォーハンマー</string>
-    <string name="item_earth_blast_name" translatable="false">アースブラスト</string>
-    <string name="item_earth_bolt_name" translatable="false">アースボルト</string>
-    <string name="item_earth_strike_name" translatable="false">アースストライク</string>
-    <string name="item_earth_wave_name" translatable="false">アースウェーブ</string>
     <string name="item_ent_name" translatable="false">エント</string>
     <string name="item_farming_cape_name" translatable="false">農業のマント</string>
     <string name="item_farming_guild_cape_name" translatable="false">農業ギルドのマント</string>
-    <string name="item_fire_blast_name" translatable="false">ファイアブラスト</string>
-    <string name="item_fire_bolt_name" translatable="false">ファイアボルト</string>
-    <string name="item_fire_strike_name" translatable="false">ファイアストライク</string>
-    <string name="item_fire_wave_name" translatable="false">ファイアウェーブ</string>
     <string name="item_firemaking_cape_name" translatable="false">火起こしのマント</string>
     <string name="item_firemaking_guild_cape_name" translatable="false">火起こしギルドのマント</string>
     <string name="item_fishing_cape_name" translatable="false">釣りのマント</string>
@@ -767,10 +747,6 @@
     <string name="item_magic_shortbow_name" translatable="false">魔法のショートボウ</string>
     <string name="item_maple_shortbow_name" translatable="false">メープルのショートボウ</string>
     <string name="item_mercantile_guild_cape_name" translatable="false">商業ギルドのマント</string>
-    <string name="item_mind_blast_name" translatable="false">マインドブラスト</string>
-    <string name="item_mind_bolt_name" translatable="false">マインドボルト</string>
-    <string name="item_mind_strike_name" translatable="false">マインドストライク</string>
-    <string name="item_mind_wave_name" translatable="false">マインドウェーブ</string>
     <string name="item_mining_cape_name" translatable="false">採掘のマント</string>
     <string name="item_mining_guild_cape_name" translatable="false">採掘ギルドのマント</string>
     <string name="item_mithril_arrow_tip_name" translatable="false">ミスリルの矢尻</string>
@@ -783,14 +759,14 @@
     <string name="item_mithril_med_helmet_name" translatable="false">ミスリルのハーフヘルム</string>
     <string name="item_mithril_plateskirt_name" translatable="false">ミスリルのプレートスカート</string>
     <string name="item_mithril_square_shield_name" translatable="false">ミスリルのスクエアシールド</string>
-    <string name="item_mutton_name" translatable="false">マトン肉</string>
+    <string name="item_mutton_name">マトン肉</string>
     <string name="item_necklace_of_anguish_name" translatable="false">苦悶のネックレス</string>
     <string name="item_oak_shortbow_name" translatable="false">オークのショートボウ</string>
     <string name="item_platinum_ore_name" translatable="false">プラチナの鉱石</string>
     <string name="item_prayer_cape_name" translatable="false">祈りのマント</string>
     <string name="item_prayer_guild_cape_name" translatable="false">祈りギルドのマント</string>
     <string name="item_ranged_cape_name" translatable="false">遠距離のマント</string>
-    <string name="item_rat_meat_name" translatable="false">ネズミ肉</string>
+    <string name="item_rat_meat_name">ネズミ肉</string>
     <string name="item_ring_of_dragons_might_name" translatable="false">竜の力の指輪</string>
     <string name="item_ring_of_flame_name" translatable="false">炎の指輪</string>
     <string name="item_ring_of_recoil_name" translatable="false">反動の指輪</string>
@@ -841,15 +817,7 @@
     <string name="item_tormented_necklace_name" translatable="false">苦悩のネックレス</string>
     <string name="item_trident_of_the_seas_name" translatable="false">海の三叉槍</string>
     <string name="item_warriors_guild_cape_name" translatable="false">戦士ギルドのマント</string>
-    <string name="item_water_blast_name" translatable="false">ウォーターブラスト</string>
-    <string name="item_water_bolt_name" translatable="false">ウォーターボルト</string>
-    <string name="item_water_strike_name" translatable="false">ウォーターストライク</string>
-    <string name="item_water_wave_name" translatable="false">ウォーターウェーブ</string>
     <string name="item_willow_shortbow_name" translatable="false">ヤナギのショートボウ</string>
-    <string name="item_wind_blast_name" translatable="false">ウィンドブラスト</string>
-    <string name="item_wind_bolt_name" translatable="false">ウィンドボルト</string>
-    <string name="item_wind_strike_name" translatable="false">ウィンドストライク</string>
-    <string name="item_wind_wave_name" translatable="false">ウィンドウェーブ</string>
     <string name="item_woodcutting_cape_name" translatable="false">伐採のマント</string>
     <string name="item_woodcutting_guild_cape_name" translatable="false">伐採ギルドのマント</string>
     <string name="item_yew_longbow_name" translatable="false">イチイのロングボウ</string>

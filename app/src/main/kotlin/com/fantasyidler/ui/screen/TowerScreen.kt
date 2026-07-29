@@ -196,7 +196,9 @@ private fun TowerHeaderCard(
                         )
                     }
                 }
-                if (currentFloor > 0) {
+                // Stat scaling only starts past floor 100 (lower floors get harder via
+                // tougher enemy types); a permanent +0% chip reads as a bug (issue #1049).
+                if (currentFloor > 0 && enemyStrengthPct > 0) {
                     SuggestionChip(
                         onClick = {},
                         label   = { Text(stringResource(R.string.tower_enemy_strength, "+$enemyStrengthPct")) },

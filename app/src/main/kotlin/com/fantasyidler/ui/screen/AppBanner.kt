@@ -139,7 +139,12 @@ fun AppBannerHost() {
                 window.setGravity(Gravity.TOP)
                 window.setDimAmount(0f)
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+                // NOT_FOCUSABLE keeps key input (the system back press) routed to the
+                // window below; a focusable banner window swallowed back presses for
+                // its whole display time (issue #1212). Tap-to-dismiss is positional
+                // touch, so it is unaffected.
                 window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
+                window.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
                 window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             }
         }

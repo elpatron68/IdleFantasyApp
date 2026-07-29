@@ -29,6 +29,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
+import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.util.GameStrings
@@ -301,7 +302,10 @@ class InventoryViewModel @Inject constructor(
         if (changedArmorSlots.isEmpty()) return
         val flags = playerRepo.getFlags()
         val style = resolveActiveStyle(flags, after)
-        val updatedStyle = flags.armorLoadouts[style].orEmpty() + changedArmorSlots.associateWith { after[it] }
+        // Full snapshot, not just the changed slots: sparse loadouts left unrecorded slots
+        // inheriting whatever the previous style displayed, so the shown composition
+        // depended on the tab path taken (issue #1224).
+        val updatedStyle = EquipSlot.ARMOR_SLOTS.associateWith { after[it] }
         playerRepo.updateFlags(flags.copy(armorLoadouts = flags.armorLoadouts + (style to updatedStyle)))
     }
 
@@ -332,8 +336,20 @@ class InventoryViewModel @Inject constructor(
                     EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
                     EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
                     EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
-                    else -> if (slot in EquipSlot.WEAPON_SLOTS)
-                        item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
+                    else -> if (slot in EquipSlot.WEAPON_SLOTS) {
+                        // Score by the slot's style with the same stat fallbacks the
+                        // simulator uses, then scale by attacks-per-second: a faster
+                        // weapon lands proportionally more hits (issue #1222).
+                        val base = when (style) {
+                            "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: item.attackBonus) * 1.0f + item.defenseBonus * 0.5f
+                            "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                            "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 1.0f + item.defenseBonus * 0.5f
+                            else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
+                        }
+                        val speed = (item.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC)
+                            .coerceIn(1.2, CombatSimulator.BASE_ATTACK_SPEED_SEC)
+                        base * (CombatSimulator.BASE_ATTACK_SPEED_SEC / speed).toFloat()
+                    }
                     else when (activeStyle) {
                         // Accuracy has diminishing returns once effective attack exceeds enemy
                         // defense (see CombatSimulator's hit-chance curve), while damage bonus

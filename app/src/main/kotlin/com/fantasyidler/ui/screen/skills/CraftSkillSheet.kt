@@ -324,7 +324,10 @@ private fun CraftRecipeRow(
                 style = MaterialTheme.typography.bodySmall,
                 color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant else dim,
             )
-            val ownedQty = craftState.inventory[recipe.outputKey] ?: 0
+            // Ash-catalyst brews produce enhanced_* variants; count them too, same as
+            // quest/guild/event tallies (issue #1201).
+            val ownedQty = (craftState.inventory[recipe.outputKey] ?: 0) +
+                (craftState.inventory["enhanced_${recipe.outputKey}"] ?: 0)
             Text(
                 text  = stringResource(R.string.crafting_owned, ownedQty),
                 style = MaterialTheme.typography.labelSmall,

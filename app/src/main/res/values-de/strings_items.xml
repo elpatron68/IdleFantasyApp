@@ -692,13 +692,9 @@
     <string name="item_balrog_name" translatable="false">Balrog, Ancient Flame of Udûn</string>
     <string name="item_balrog_whip_name" translatable="false">Balrog Whip</string>
     <string name="item_balrog_wings_name" translatable="false">Balrog Wings</string>
-    <string name="item_beef_name" translatable="false">Cooked Beef</string>
+    <string name="item_beef_name">Gekochtes Rindfleisch</string>
     <string name="item_berserker_ring_name" translatable="false">Berserker Ring</string>
     <string name="item_blessed_fishing_rod_name" translatable="false">Blessed Fishing Rod</string>
-    <string name="item_blood_blast_name" translatable="false">Blood Blast</string>
-    <string name="item_blood_bolt_name" translatable="false">Blood Bolt</string>
-    <string name="item_blood_strike_name" translatable="false">Blood Strike</string>
-    <string name="item_blood_wave_name" translatable="false">Blood Wave</string>
     <string name="item_bronze_boots_name" translatable="false">Bronze Boots</string>
     <string name="item_bronze_chainbody_name" translatable="false">Bronze Chainbody</string>
     <string name="item_bronze_full_helmet_name" translatable="false">Bronze Full Helmet</string>
@@ -707,19 +703,11 @@
     <string name="item_bronze_med_helmet_name" translatable="false">Bronze Med Helmet</string>
     <string name="item_bronze_plateskirt_name" translatable="false">Bronze Plateskirt</string>
     <string name="item_bronze_square_shield_name" translatable="false">Bronze Square Shield</string>
-    <string name="item_chaos_blast_name" translatable="false">Chaos Blast</string>
-    <string name="item_chaos_bolt_name" translatable="false">Chaos Bolt</string>
-    <string name="item_chaos_strike_name" translatable="false">Chaos Strike</string>
-    <string name="item_chaos_wave_name" translatable="false">Chaos Wave</string>
-    <string name="item_chicken_name" translatable="false">Cooked Chicken</string>
+    <string name="item_chicken_name">Gekochtes Hühnerfleisch</string>
     <string name="item_cooking_cape_name" translatable="false">Cooking Cape</string>
     <string name="item_cooking_guild_cape_name" translatable="false">Cooking Guild Cape</string>
     <string name="item_crafting_cape_name" translatable="false">Crafting Cape</string>
     <string name="item_crafting_guild_cape_name" translatable="false">Crafting Guild Cape</string>
-    <string name="item_death_blast_name" translatable="false">Death Blast</string>
-    <string name="item_death_bolt_name" translatable="false">Death Bolt</string>
-    <string name="item_death_strike_name" translatable="false">Death Strike</string>
-    <string name="item_death_wave_name" translatable="false">Death Wave</string>
     <string name="item_deep_iron_pickaxe_name" translatable="false">Deep Iron Pickaxe</string>
     <string name="item_defense_cape_name" translatable="false">Defense Cape</string>
     <string name="item_demon_lord_name" translatable="false">Demon Lord</string>
@@ -740,17 +728,9 @@
     <string name="item_dwarven_shield_name" translatable="false">Dwarven Shield</string>
     <string name="item_dwarven_sword_name" translatable="false">Dwarven Sword</string>
     <string name="item_dwarven_warhammer_name" translatable="false">Dwarven Warhammer</string>
-    <string name="item_earth_blast_name" translatable="false">Earth Blast</string>
-    <string name="item_earth_bolt_name" translatable="false">Earth Bolt</string>
-    <string name="item_earth_strike_name" translatable="false">Earth Strike</string>
-    <string name="item_earth_wave_name" translatable="false">Earth Wave</string>
     <string name="item_ent_name" translatable="false">Ent</string>
     <string name="item_farming_cape_name" translatable="false">Farming Cape</string>
     <string name="item_farming_guild_cape_name" translatable="false">Farming Guild Cape</string>
-    <string name="item_fire_blast_name" translatable="false">Fire Blast</string>
-    <string name="item_fire_bolt_name" translatable="false">Fire Bolt</string>
-    <string name="item_fire_strike_name" translatable="false">Fire Strike</string>
-    <string name="item_fire_wave_name" translatable="false">Fire Wave</string>
     <string name="item_firemaking_cape_name" translatable="false">Firemaking Cape</string>
     <string name="item_firemaking_guild_cape_name" translatable="false">Firemaking Guild Cape</string>
     <string name="item_fishing_cape_name" translatable="false">Fishing Cape</string>
@@ -781,10 +761,6 @@
     <string name="item_magic_shortbow_name" translatable="false">Magic Shortbow</string>
     <string name="item_maple_shortbow_name" translatable="false">Maple Shortbow</string>
     <string name="item_mercantile_guild_cape_name" translatable="false">Mercantile Guild Cape</string>
-    <string name="item_mind_blast_name" translatable="false">Mind Blast</string>
-    <string name="item_mind_bolt_name" translatable="false">Mind Bolt</string>
-    <string name="item_mind_strike_name" translatable="false">Mind Strike</string>
-    <string name="item_mind_wave_name" translatable="false">Mind Wave</string>
     <string name="item_mining_cape_name" translatable="false">Mining Cape</string>
     <string name="item_mining_guild_cape_name" translatable="false">Mining Guild Cape</string>
     <string name="item_mithril_boots_name" translatable="false">Mithril Boots</string>
@@ -795,14 +771,14 @@
     <string name="item_mithril_med_helmet_name" translatable="false">Mithril Med Helmet</string>
     <string name="item_mithril_plateskirt_name" translatable="false">Mithril Plateskirt</string>
     <string name="item_mithril_square_shield_name" translatable="false">Mithril Square Shield</string>
-    <string name="item_mutton_name" translatable="false">Cooked Mutton</string>
+    <string name="item_mutton_name">Gekochtes Lammfleisch</string>
     <string name="item_necklace_of_anguish_name" translatable="false">Necklace Of Anguish</string>
     <string name="item_oak_shortbow_name" translatable="false">Oak Shortbow</string>
     <string name="item_platinum_ore_name" translatable="false">Platinum Ore</string>
     <string name="item_prayer_cape_name" translatable="false">Prayer Cape</string>
     <string name="item_prayer_guild_cape_name" translatable="false">Prayer Guild Cape</string>
     <string name="item_ranged_cape_name" translatable="false">Ranged Cape</string>
-    <string name="item_rat_meat_name" translatable="false">Cooked Rat Meat</string>
+    <string name="item_rat_meat_name">Rattenfleisch</string>
     <string name="item_ring_of_dragons_might_name" translatable="false">Ring Of Dragons Might</string>
     <string name="item_ring_of_flame_name" translatable="false">Ring Of Flame</string>
     <string name="item_ring_of_recoil_name" translatable="false">Ring Of Recoil</string>
@@ -845,15 +821,7 @@
     <string name="item_tormented_necklace_name" translatable="false">Tormented Necklace</string>
     <string name="item_trident_of_the_seas_name" translatable="false">Trident Of The Seas</string>
     <string name="item_warriors_guild_cape_name" translatable="false">Warriors Guild Cape</string>
-    <string name="item_water_blast_name" translatable="false">Water Blast</string>
-    <string name="item_water_bolt_name" translatable="false">Water Bolt</string>
-    <string name="item_water_strike_name" translatable="false">Water Strike</string>
-    <string name="item_water_wave_name" translatable="false">Water Wave</string>
     <string name="item_willow_shortbow_name" translatable="false">Willow Shortbow</string>
-    <string name="item_wind_blast_name" translatable="false">Wind Blast</string>
-    <string name="item_wind_bolt_name" translatable="false">Wind Bolt</string>
-    <string name="item_wind_strike_name" translatable="false">Wind Strike</string>
-    <string name="item_wind_wave_name" translatable="false">Wind Wave</string>
     <string name="item_woodcutting_cape_name" translatable="false">Woodcutting Cape</string>
     <string name="item_woodcutting_guild_cape_name" translatable="false">Woodcutting Guild Cape</string>
     <string name="item_yew_longbow_name" translatable="false">Yew Longbow</string>

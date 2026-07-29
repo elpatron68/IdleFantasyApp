@@ -8,6 +8,7 @@ import com.fantasyidler.data.db.dao.SkillSessionDao
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.receiver.SessionAlarmReceiver
+import com.fantasyidler.simulator.CombatSimulator
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.sync.Mutex
@@ -127,12 +128,10 @@ class SessionRepository @Inject constructor(
      */
     fun bossFightEndMs(session: SkillSession): Long = try {
         val frames: List<SessionFrame> = json.decodeFromString(session.frames)
-        val durMin      = (gameData.bosses[session.activityKey]?.durationMinutes ?: 60).coerceAtLeast(1)
-        val perFrameMs  = ((session.endsAt - session.startedAt) / durMin).coerceAtLeast(1L)
-        val lastTicks   = frames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-        val tickMs      = if (lastTicks > 0) perFrameMs / lastTicks else 2_400L
-        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, perFrameMs) else perFrameMs
-        minOf(session.endsAt, session.startedAt + (frames.size - 1).coerceAtLeast(0) * perFrameMs + lastFrameMs + 2_000L)
+        val durMin     = (gameData.bosses[session.activityKey]?.durationMinutes ?: 60).coerceAtLeast(1)
+        val perFrameMs = ((session.endsAt - session.startedAt) / durMin).coerceAtLeast(1L)
+        val offset     = CombatSimulator.bossEndAlarmOffsetMs(frames, durMin, perFrameMs)
+        if (offset != null) minOf(session.endsAt, session.startedAt + offset) else session.endsAt
     } catch (_: Exception) { session.endsAt }
 
     private val watchdogMutex = Mutex()

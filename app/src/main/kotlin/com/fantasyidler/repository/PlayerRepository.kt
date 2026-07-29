@@ -535,8 +535,9 @@ class PlayerRepository @Inject constructor(
      * Re-applies [style]'s remembered loadout: armor (EquipSlot.ARMOR_SLOTS; weapons are
      * untouched, since each style already has its own persistent weapon slot), plus the
      * remembered arrow (ranged) or spell (magic). Slots/values never recorded for this style are
-     * left exactly as currently equipped. Entries referencing an item the player no longer owns,
-     * or doesn't meet the level requirement for, are skipped silently.
+     * left exactly as currently equipped, and the applied result is then snapshotted back as the
+     * style's complete loadout so the next switch is deterministic. Entries referencing an item
+     * the player no longer owns, or doesn't meet the level requirement for, are skipped silently.
      */
     suspend fun applyLoadout(style: String, equipment: Map<String, EquipmentData>) {
         val player = getOrCreatePlayer()
@@ -572,6 +573,13 @@ class PlayerRepository @Inject constructor(
         if (newEquipped != currentEquipped) updateEquipped(newEquipped)
 
         var newFlags = flags
+        // Snapshot the applied result as this style's complete loadout. Legacy sparse
+        // loadouts only pinned explicitly-changed slots, so the rest inherited the
+        // previous tab's gear and switching was path-dependent (issue #1224).
+        val snapshot = EquipSlot.ARMOR_SLOTS.associateWith { newEquipped[it] }
+        if (flags.armorLoadouts[style] != snapshot) {
+            newFlags = newFlags.copy(armorLoadouts = flags.armorLoadouts + (style to snapshot))
+        }
         if (style == "ranged") {
             val arrowKey = flags.rangedLoadoutArrowKey
             if (arrowKey != null && (inventory[arrowKey] ?: 0) > 0) newFlags = newFlags.copy(equippedArrows = arrowKey)
@@ -752,7 +760,7 @@ class PlayerRepository @Inject constructor(
     /** Bronze/starter fallback item granted to a slot if prestige invalidates its gear and nothing else in inventory qualifies. */
     private val prestigeStarterGearForSlot = mapOf(
         EquipSlot.WEAPON_ATK    to "bronze_sword",
-        EquipSlot.WEAPON_STR    to "bronze_scimitar",
+        EquipSlot.WEAPON_STR    to "bronze_warhammer",
         EquipSlot.WEAPON_RANGED to "wooden_bow",
         EquipSlot.WEAPON_MAGIC  to "basic_staff",
         EquipSlot.HEAD          to "bronze_full_helmet",

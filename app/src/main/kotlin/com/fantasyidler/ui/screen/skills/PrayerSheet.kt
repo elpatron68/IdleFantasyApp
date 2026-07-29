@@ -292,7 +292,10 @@ internal fun PrayerSheet(
             }
             Spacer(Modifier.height(8.dp))
             QtyQuickButtons(qty, maxQty) { v -> qty = v; textValue = v.toString() }
-            QuestFillRow(questFills, qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { v -> qty = v; textValue = v.toString() }
+            // Ashes give Prayer XP but never count toward prayer quests (issue #1207).
+            if (!selectedBone.isAsh) {
+                QuestFillRow(questFills, qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { v -> qty = v; textValue = v.toString() }
+            }
             Spacer(Modifier.height(8.dp))
 
             Text(

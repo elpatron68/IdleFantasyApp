@@ -554,11 +554,7 @@ class CombatViewModel @Inject constructor(
                     json.serializersModule.serializer<List<SessionFrame>>(),
                     result.frames,
                 )
-                val deathFrameIdx = result.frames.indexOfFirst { it.died }
-                val alarmOffsetMs = if (deathFrameIdx >= 0) {
-                    val perFrameMs = result.durationMs / 60L
-                    perFrameMs * (deathFrameIdx + 1)
-                } else null
+                val alarmOffsetMs = CombatSimulator.deathAlarmOffsetMs(result.frames, result.durationMs / 60L)
                 sessionRepo.startSession(
                     skillName        = "combat",
                     activityKey      = dungeonKey,
@@ -769,12 +765,7 @@ class CombatViewModel @Inject constructor(
                     skillDisplayName = boss.displayName,
                     // endsAt is cosmetic (full duration, no outcome spoiler); the alarm
                     // ends the session at the exact death tick within the final frame.
-                    alarmOffsetMs    = if (bossFrames.size < boss.durationMinutes) {
-                        val lastTicks   = bossFrames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-                        val tickMs      = if (lastTicks > 0) frameMs / lastTicks else 2_400L
-                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, frameMs) else frameMs
-                        (bossFrames.size - 1).coerceAtLeast(0) * frameMs + lastFrameMs + 2_000L
-                    } else null,
+                    alarmOffsetMs    = CombatSimulator.bossEndAlarmOffsetMs(bossFrames, boss.durationMinutes, frameMs),
                 )
                 if (repeatCount > 1) {
                     val bossSnapshot = QueuedAction(

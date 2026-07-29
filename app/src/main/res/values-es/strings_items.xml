@@ -138,12 +138,16 @@
 
     <!-- ===== Cooked meat ===== -->
     <string name="item_cooked_rat_meat_name">Carne de rata</string>
+    <string name="item_rat_meat_name">Carne de rata</string>
     <string name="item_cooked_rat_meat_desc">Carne de rata cocida. Apenas comestible, pero restaura una pequeña cantidad de puntos de vida.</string>
     <string name="item_cooked_chicken_name">Pollo cocido</string>
+    <string name="item_chicken_name">Pollo cocido</string>
     <string name="item_cooked_chicken_desc">Pollo cocido. Restaura los puntos de vida al consumirlo.</string>
     <string name="item_cooked_mutton_name">Cordero cocido</string>
+    <string name="item_mutton_name">Cordero cocido</string>
     <string name="item_cooked_mutton_desc">Cordero cocido. Restaura los puntos de vida al consumirlo.</string>
     <string name="item_cooked_beef_name">Carne de res cocida</string>
+    <string name="item_beef_name">Carne de res cocida</string>
     <string name="item_cooked_beef_desc">Carne de res cocida. Restaura los puntos de vida al consumirla.</string>
 
     <!-- ===== Melee weapons — bronze ===== -->

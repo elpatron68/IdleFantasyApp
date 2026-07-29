@@ -391,11 +391,7 @@ class TowerViewModel @Inject constructor(
                     json.serializersModule.serializer<List<SessionFrame>>(),
                     result.frames,
                 )
-                val deathFrameIdx = result.frames.indexOfFirst { it.died }
-                val alarmOffsetMs = if (deathFrameIdx >= 0) {
-                    val perFrameMs = result.durationMs / 60L
-                    perFrameMs * (deathFrameIdx + 1)
-                } else null
+                val alarmOffsetMs = CombatSimulator.deathAlarmOffsetMs(result.frames, result.durationMs / 60L)
 
                 sessionRepo.startSession(
                     skillName        = "tower",

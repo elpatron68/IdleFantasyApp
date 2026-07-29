@@ -1,3 +1,22 @@
+v1.12.11
+• Boss fights now end right after the killing blow instead of hanging at 0 HP for up to a minute
+• Final hits of a fight play at normal speed instead of slowing to one hit every 10+ seconds
+• Combat log lines now appear one at a time instead of clumping up every couple of seconds
+• Kill announcements and the defeated-so-far count now show at the moment the kill happens
+• Your character no longer keeps attacking after dropping to 0 HP in a dungeon
+• Dying during a queued dungeon repeat now ends the run at the death instead of waiting out the full timer
+• The Infinite Tower's enemy strength chip is hidden until stat scaling actually begins past floor 100
+• Cooking session labels for rat meat, chicken, mutton, and beef are now translatable and translated in all languages
+• Removed 32 unused duplicate spell name strings so translators no longer see them
+• Herblore recipe lists now count enhanced potions in the Owned tally instead of showing 0
+• Dismiss Worker is hidden while a finished session awaits collection, so rewards can't be discarded by accident
+• Worker card buttons now wrap onto a second line at large font sizes instead of being squashed
+• Ashes no longer show prayer quest targets or quest markers, since only bones count toward those quests
+• The back button works again while a notification banner is on screen instead of being blocked for a few seconds
+• Prestiging Strength now grants a bronze warhammer as the fallback weapon instead of an attack-style scimitar
+• Equip Best now scores ranged and magic weapons by their own stats and factors in attack speed
+• Combat loadouts no longer bleed into each other when switching styles; each style now remembers its full armor set
+
 v1.12.10
 • Fixed the Infinite Tower queue flickering/jumping around when a floor finished while others were still queued behind it
 • Infinite Tower now keeps climbing automatically after each floor you win, instead of stopping to wait for you to collect the reward first

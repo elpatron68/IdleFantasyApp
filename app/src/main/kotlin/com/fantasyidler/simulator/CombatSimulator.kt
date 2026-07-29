@@ -152,7 +152,7 @@ object CombatSimulator {
             val framePlayerHits = mutableListOf<Int>()
             val frameEnemyHits  = mutableListOf<Int>()
 
-            repeat(ticksPerFrame) {
+            for (tick in 0 until ticksPerFrame) {
                 // Player attacks (ranged is capped by arrow supply)
                 val pDmg = when (combatStyle) {
                     "ranged" -> {
@@ -225,6 +225,10 @@ object CombatSimulator {
                         ate = true
                     }
                 }
+
+                // Dead characters stop fighting (issue #935). Safe zones clamp HP back
+                // to 1 after the frame, so death never ends those.
+                if (currentHp <= 0 && !dungeon.safeZone) break
             }
 
             // Carry partial-damage enemy into next frame if still alive.
@@ -562,6 +566,44 @@ object CombatSimulator {
 
     /** Number of player attack ticks in a 60-second frame at the given attack speed. */
     fun playerTicksPerFrame(attackSpeedSec: Double): Int = (60.0 / attackSpeedSec).roundToInt()
+
+    /**
+     * True ticks-per-frame of a simulated session, derived from its largest frame. A fight
+     * that ended mid-minute leaves a partial final frame; pacing playback (or alarms) by
+     * that frame's own tick count would stretch its few hits across the whole minute
+     * (issue #935). Floored at [TICKS_PER_FRAME] for fights shorter than one full frame.
+     */
+    fun fullFrameTicks(frames: List<SessionFrame>): Int =
+        (frames.maxOfOrNull { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0)
+            .coerceAtLeast(TICKS_PER_FRAME)
+
+    /**
+     * Wall-clock offset at which a boss fight is actually decided (boss or player dead),
+     * plus a 2 s buffer so the final blow stays on screen briefly. Null when the fight
+     * ran the full duration, meaning the session should end at its normal endsAt.
+     */
+    fun bossEndAlarmOffsetMs(frames: List<SessionFrame>, durationMinutes: Int, perFrameMs: Long): Long? {
+        if (frames.size >= durationMinutes) return null
+        val lastTicks   = frames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
+        val tickMs      = (perFrameMs / fullFrameTicks(frames)).coerceAtLeast(1L)
+        val lastFrameMs = if (lastTicks > 0) (lastTicks * tickMs).coerceAtMost(perFrameMs) else perFrameMs
+        return (frames.size - 1).coerceAtLeast(0) * perFrameMs + lastFrameMs + 2_000L
+    }
+
+    /**
+     * Wall-clock offset at which the player died mid-session (dungeon/tower), plus a 2 s
+     * buffer, so the session ends at the death tick instead of the end of that minute.
+     * Null when the player survived.
+     */
+    fun deathAlarmOffsetMs(frames: List<SessionFrame>, perFrameMs: Long): Long? {
+        val deathFrameIdx = frames.indexOfFirst { it.died }
+        if (deathFrameIdx < 0) return null
+        val deathFrame = frames[deathFrameIdx]
+        val deathTicks = maxOf(deathFrame.playerHits.size, deathFrame.enemyHits.size)
+        val tickMs     = (perFrameMs / fullFrameTicks(frames)).coerceAtLeast(1L)
+        val deathMs    = if (deathTicks > 0) (deathTicks * tickMs).coerceAtMost(perFrameMs) else perFrameMs
+        return deathFrameIdx * perFrameMs + deathMs + 2_000L
+    }
 
     enum class SurvivalRating { LIKELY, RISKY, UNLIKELY }
 

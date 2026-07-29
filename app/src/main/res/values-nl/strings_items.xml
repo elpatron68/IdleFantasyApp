@@ -138,12 +138,16 @@
 
     <!-- ===== Cooked meat ===== -->
     <string name="item_cooked_rat_meat_name">Gekookt Rattenvlees</string>
+    <string name="item_rat_meat_name">Gekookt Rattenvlees</string>
     <string name="item_cooked_rat_meat_desc">Gekookt rattenvlees. Nauwelijks eetbaar, maar herstelt een kleine hoeveelheid HP.</string>
     <string name="item_cooked_chicken_name">Gekookte Kip</string>
+    <string name="item_chicken_name">Gekookte Kip</string>
     <string name="item_cooked_chicken_desc">Gekookte kip. Herstelt HP zodra je het eet.</string>
     <string name="item_cooked_mutton_name">Gekookt Schapenvlees</string>
+    <string name="item_mutton_name">Gekookt Schapenvlees</string>
     <string name="item_cooked_mutton_desc">Gekookt schapenvlees. Herstelt HP zodra je het eet.</string>
     <string name="item_cooked_beef_name">Gekookt Rundvlees</string>
+    <string name="item_beef_name">Gekookt Rundvlees</string>
     <string name="item_cooked_beef_desc">Gekookt rundvlees. Herstelt HP zodra je het eet.</string>
 
     <!-- ===== Melee weapons — bronze ===== -->

@@ -138,12 +138,16 @@
 
     <!-- ===== Cooked meat ===== -->
     <string name="item_cooked_rat_meat_name">Carne di Ratto</string>
+    <string name="item_rat_meat_name">Carne di Ratto</string>
     <string name="item_cooked_rat_meat_desc">Carne cotta di ratto. A malapena commestibile, ma ripristina una piccolissima quantità di HP.</string>
     <string name="item_cooked_chicken_name">Pollo</string>
+    <string name="item_chicken_name">Pollo</string>
     <string name="item_cooked_chicken_desc">Carne cotta di pollo. Ripristina qualche HP.</string>
     <string name="item_cooked_mutton_name">Carne di Montone</string>
+    <string name="item_mutton_name">Carne di Montone</string>
     <string name="item_cooked_mutton_desc">Carne cotta di pecora. Ripristina qualche HP.</string>
     <string name="item_cooked_beef_name">Bistecca</string>
+    <string name="item_beef_name">Bistecca</string>
     <string name="item_cooked_beef_desc">Bistecca di manzo cotta. Ripristina qualche HP.</string>
 
     <!-- ===== Melee weapons — bronze ===== -->

@@ -638,12 +638,7 @@ class QueuedSessionStarter @Inject constructor(
                     skillDisplayName  = action.skillDisplayName,
                     // endsAt is cosmetic (full duration, no outcome spoiler); the alarm
                     // ends the session at the exact death tick within the final frame.
-                    alarmOffsetMs     = if (bossFrames.size < boss.durationMinutes) {
-                        val lastTicks   = bossFrames.lastOrNull()?.let { maxOf(it.playerHits.size, it.enemyHits.size) } ?: 0
-                        val tickMs      = if (lastTicks > 0) frameMs / lastTicks else 2_400L
-                        val lastFrameMs = if (lastTicks > 0) minOf(lastTicks * tickMs, frameMs) else frameMs
-                        (bossFrames.size - 1).coerceAtLeast(0) * frameMs + lastFrameMs + 2_000L
-                    } else null,
+                    alarmOffsetMs     = CombatSimulator.bossEndAlarmOffsetMs(bossFrames, boss.durationMinutes, frameMs),
                     insertAsCompleted = offline,
                     backdateMs        = backdateMs,
                     levelAtStart      = levelAtStart,
@@ -866,6 +861,10 @@ class QueuedSessionStarter @Inject constructor(
             frames            = encodeFrames(result.frames),
             durationMs        = result.durationMs,
             skillDisplayName  = action.skillDisplayName,
+            // Queued dungeon repeats otherwise ran out their full timer after a death,
+            // unlike first runs started from CombatViewModel (issue #935). Null for the
+            // gathering skills, whose frames never carry a death.
+            alarmOffsetMs     = CombatSimulator.deathAlarmOffsetMs(result.frames, result.durationMs / 60L),
             insertAsCompleted = offline,
             backdateMs        = backdateMs,
             levelAtStart      = levelAtStart,

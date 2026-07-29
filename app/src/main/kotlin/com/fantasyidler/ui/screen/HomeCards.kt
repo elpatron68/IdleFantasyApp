@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -480,6 +482,7 @@ internal fun QueueCard(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun WorkerSessionCard(
     slot: Int,
@@ -662,7 +665,10 @@ internal fun WorkerSessionCard(
             Spacer(Modifier.height(12.dp))
             HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
             Spacer(Modifier.height(8.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement   = Arrangement.spacedBy(4.dp),
+            ) {
                 if (isDone) {
                     Button(onClick = onCollect) {
                         Text(stringResource(R.string.worker_collect_btn))
@@ -673,8 +679,12 @@ internal fun WorkerSessionCard(
                         Text(stringResource(R.string.worker_add_sessions))
                     }
                 }
-                OutlinedButton(onClick = { showDismissConfirm = true }) {
-                    Text(stringResource(R.string.worker_dismiss_btn))
+                // Hidden while a finished session awaits collection: dismissing there
+                // abandons the uncollected rewards on a single confirm (issue #1202).
+                if (!isDone) {
+                    OutlinedButton(onClick = { showDismissConfirm = true }) {
+                        Text(stringResource(R.string.worker_dismiss_btn))
+                    }
                 }
                 if (BuildConfig.DEBUG && session != null && !isDone) {
                     TextButton(onClick = onDebugFinish) {

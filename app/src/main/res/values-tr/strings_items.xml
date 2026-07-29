@@ -138,12 +138,16 @@
 
     <!-- ===== Cooked meat ===== -->
     <string name="item_cooked_rat_meat_name">Sıçan Eti</string>
+    <string name="item_rat_meat_name">Sıçan Eti</string>
     <string name="item_cooked_rat_meat_desc">Pişmiş sıçan eti. Yenilebilir ama çok az HP yeniler.</string>
     <string name="item_cooked_chicken_name">Pişmiş Tavuk</string>
+    <string name="item_chicken_name">Pişmiş Tavuk</string>
     <string name="item_cooked_chicken_desc">Pişmiş tavuk. Yendiğinde HP yeniler.</string>
     <string name="item_cooked_mutton_name">Pişmiş Koyun Eti</string>
+    <string name="item_mutton_name">Pişmiş Koyun Eti</string>
     <string name="item_cooked_mutton_desc">Pişmiş koyun eti. Yendiğinde HP yeniler.</string>
     <string name="item_cooked_beef_name">Pişmiş Sığır Eti</string>
+    <string name="item_beef_name">Pişmiş Sığır Eti</string>
     <string name="item_cooked_beef_desc">Pişmiş sığır eti. Yendiğinde HP yeniler.</string>
 
     <!-- ===== Melee weapons — bronze ===== -->
