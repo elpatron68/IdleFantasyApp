@@ -711,7 +711,7 @@
     <string name="onboarding_welcome_desc">Ein von klassischen MMORPGs inspiriertes Idle-RPG. Trainiert Fähigkeiten, kämpft in Verliesen und stellt Ausrüstung her. Komplett offline, ohne Accounts und ohne Werbung.</string>
 
     <!-- Quantity picker quick buttons -->
-    <string name="qty_max">Max</string>
+    <string name="qty_max">Maximum</string>
 
     <!-- ===== Inn / Worker ===== -->
     <string-array name="worker_names"><!-- Not really translations, but alphabet close ancient German first names, the English original seems mixing surnames and first names; ignored possible gender -->
@@ -775,7 +775,7 @@
     <string name="inn_slot2_header">Facharbeiter</string>
 
     <!-- ===== Combat difficulty ratings ===== -->
-    <string name="combat_difficulty_likely">You\'ve got this</string>
+    <string name="combat_difficulty_likely">Du packst das</string>
     <string name="combat_difficulty_risky">Mit dieser Ausrüstung könnte es knapp werden</string>
     <string name="combat_difficulty_unlikely">Ihr werdet vermutlich den Löffel abgeben</string>
 
@@ -796,7 +796,7 @@
     <string name="achievement_total_750_desc">Erreicht Gesamtlevel 750</string>
     <string name="achievement_total_1000_name">Legende</string>
     <string name="achievement_total_1000_desc">Erreicht Gesamtlevel 1000</string>
-    <string name="achievement_total_1500_name">Champion</string>
+    <string name="achievement_total_1500_name">Meister</string>
     <string name="achievement_total_1500_desc">Erreicht Gesamtlevel 1500</string>
     <string name="achievement_skill_99_name">Erste Meisterung</string>
     <string name="achievement_skill_99_desc">Erreicht Level 99 in einer beliebigen Fähigkeit</string>
@@ -806,11 +806,11 @@
     <string name="achievement_combat_10_desc">Erreicht Kampflevel 10</string>
     <string name="achievement_combat_30_name">Krieger</string>
     <string name="achievement_combat_30_desc">Erreicht Kampflevel 30</string>
-    <string name="achievement_combat_50_name">Champion</string>
+    <string name="achievement_combat_50_name">Meister</string>
     <string name="achievement_combat_50_desc">Erreicht Kampflevel 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Erreicht Kampflevel 75</string>
-    <string name="achievement_combat_99_name">Champion</string>
+    <string name="achievement_combat_99_name">Meister</string>
     <string name="achievement_combat_99_desc">Erreicht Kampflevel 99</string>
     <string name="achievement_combat_113_name">Höchstes Kampflevel</string>
     <string name="achievement_combat_113_desc">Erreicht das maximale Kampflevel von 113</string>
@@ -851,7 +851,7 @@
     <string name="guild_hall_desc">Tretet Gilden bei und erledigt Tagesaufgaben, um aufzusteigen</string>
     <string name="guild_hall_intro">Gilden belohnen Euch für Aktivitäten, die Ihr sowieso erledigt. Erledigt Missionen und Tagesaufgaben, um auch fähigkeitenübergreifend Materialien, Münzen und EP zu erhalten. So können selbst Spezialisten Ressourcen erhalten, in denen sie wenig bewandert sind.</string>
     <string name="guild_level_label">Level %1$d</string>
-    <string name="guild_level_max">Level 10 (Max)</string>
+    <string name="guild_level_max">Level 10 (Maximum)</string>
     <string name="guild_tab_quests">Missionen</string>
     <string name="guild_tab_dailies">Tagesaufgaben</string>
     <string name="guild_daily_resets_in">Wird um %1$s zurückgesetzt</string>
@@ -1136,7 +1136,7 @@
     <string name="bone_altar_select_prompt">Knochen zum Vergraben auswählen</string>
     <string name="bone_altar_tap">Zum Vergraben tippen</string>
     <string name="bone_altar_change_bone">Ändern</string>
-    <string name="bone_altar_combo_count">Combo ×%d</string>
+    <string name="bone_altar_combo_count">Kombo ×%d</string>
     <string name="bone_altar_bonus_active" formatted="false">+50% EP-Bonus!</string>
     <string name="bone_altar_session_xp">+%s EP diese Sitzung</string>
     <string name="bone_altar_buried_count">%d vergraben</string>
@@ -1584,13 +1584,13 @@
     <string name="seasonal_bounty_sunspire_draughts_hint">Kräuterkunde</string>
     <string name="seasonal_bounty_sunspire_embers_brew_name">Braue Angriffs-Zaubertrank für die Sonnenwenden-Wache</string>
     <string name="seasonal_bounty_sunspire_embers_brew_hint">Kräuterkunde</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string>
-    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string>
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Mithrilpfeile herstellen, um die Irrlichter aufzuhalten</string>
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Befiederung</string>
+    <string name="seasonal_bounty_sunspire_wisps_name">Sonnenirrlichter vertreiben</string>
     <string name="seasonal_bounty_sunspire_wisps_hint">Only found in the Sunspire dungeon</string>
-    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string>
+    <string name="seasonal_bounty_sunspire_hounds_name">Gluthunde vertreiben</string>
     <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire dungeon</string>
-    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
+    <string name="seasonal_bounty_sunspire_colossus_name">Aschekolosse stürzen</string>
     <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire dungeon — rare</string>
     <string name="label_banners">Banner</string>
     <string name="label_journal">Notizblock</string>
@@ -1654,12 +1654,12 @@
     <string name="home_welcome_greeting">Willkommen zurück,</string>
     <string name="home_welcome_name">%1$s!</string>
     <string name="home_welcome_title">Der %1$s!</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
+    <string name="town_building_cape_rack_name">Umhangständer</string>
     <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
     <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="crafting_owned">Owned: %1$d</string>
-    <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
-    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
+    <string name="town_cape_rack_t2_bonus">Passive Boni von Tier-1- &amp; Tier-2-Umhängen (Sammeln, Handwerk) sind aktiv</string>
+    <string name="town_cape_rack_t3_bonus">Passive Boni deiner Umhänge sind aktiv</string>
+    <string name="crafting_owned">Besitz: %1$d</string>
+    <string name="crafting_owned_detail">Im Inventar: %1$d</string>
+    <string name="firemaking_ashes_owned">Asche im Besitz: %1$d</string>
 </resources>

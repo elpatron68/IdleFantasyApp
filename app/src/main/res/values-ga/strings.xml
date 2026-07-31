@@ -151,7 +151,7 @@
     <string name="label_session_complete">Seisiún Críochnaithe!</string>
     <string name="label_session_results">Torthaí Na Seisiún</string>
     <string name="label_items_collected">Earraí creicha</string>
-    <string name="label_level_ups">Leibhéil Suas</string>
+    <string name="label_level_ups">Leibhéil suas</string>
     <string name="label_requirements">Riachtanas</string>
     <string name="label_rewards">Creach</string>
     <string name="label_your_level">Do Leibhéal</string>
@@ -408,4 +408,36 @@
     <string name="title_seasonal_requirement">Críochnaigh an Imeacht Shéasúrach an %1$s</string>
     <string name="home_welcome_greeting">Fáilte ar ais,</string>
     <string name="home_welcome_title">An %1$s!</string>
+    <string name="error_no_player">Níor féidir an sonraí imreora a lódáil. Atosaigh an feidhmchlár más é do thoil é.</string>
+    <string name="error_session_already_active">Tá seisiún agatsa cheana féin. Críochnaigh no fág sé ar dtús.</string>
+    <string name="error_patch_occupied">Tá an ceapach seo plandaithe cheana féin.</string>
+    <string name="error_patch_empty">Tá an ceapach seo folamh.</string>
+    <string name="error_crop_not_ready">Níl an barr réidh go fóill.</string>
+    <string name="error_dungeon_level_too_low">Tá do leibhéal comhrac ró-íseal i gcomhair an doinsiún seo.</string>
+    <string name="session_abandon_title">Fág An Seisiún?</string>
+    <string name="onboarding_welcome_body">Tosaigh seisún scile agus breathnaigh ar do carachtar ag fas. Ritheann seisiúin I gchomahir aon uair, fiú má tá an aip dúnta.</string>
+    <string name="onboarding_first_session_hint">Tapáil ar aon scil a tosú.</string>
+    <string name="settings_notifications">Fograí na Seisiún</string>
+    <string name="settings_notifications_desc">Taispeáin fógra nuair atá an seisiún críochnaithe</string>
+    <string name="settings_battery_optimization">Optamú An Cheallra</string>
+    <string name="settings_battery_optimization_btn">Deisigh An Socrú</string>
+    <string name="settings_open_source_licenses">Ceadúinais Foinse Oscailte</string>
+    <string name="label_player_stats">Statistic imreora</string>
+    <string name="label_shop_desc">Ceannaigh trealamh agus díol creach</string>
+    <plurals name="plural_level_ups">
+        <item quantity="zero">%1$d leibhéil suas</item>
+        <item quantity="one">%1$d leibhéal suas</item>
+        <item quantity="two">%1$d leibhéil suas</item>
+        <item quantity="few">%1$d leibhéil suas</item>
+        <item quantity="many">%1$d leibhéil suas</item>
+        <item quantity="other">%1$d leibhéil suas</item>
+    </plurals>
+    <plurals name="plural_quests_completed">
+        <item quantity="zero">%1$d tóraíochtaí críochnaithe</item>
+        <item quantity="one">%1$d tóraíocht críochnaithe</item>
+        <item quantity="two">%1$d tóraíochtaí críochnaithe</item>
+        <item quantity="few">%1$d tóraíochtaí críochnaithe</item>
+        <item quantity="many">%1$d tóraíochtaí críochnaithe</item>
+        <item quantity="other">%1$d tóraíochtaí críochnaithe</item>
+    </plurals>
 </resources>

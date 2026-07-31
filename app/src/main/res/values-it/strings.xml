@@ -315,7 +315,7 @@
     <string name="weekly_bonus_title">Bonus Settimanale!</string>
     <string name="weekly_bonus_claim">Ricevi Bonus Settimanale</string>
     <string name="label_daily_info">Ogni missione giornaliera ha una ricompensa in monete. Inoltre, puoi ottenere oggetti Nanici con 1/100 di probabilità.</string>
-    <string name="label_weekly_info">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete oppure oggetti Divini con probabilità %1$s.</string>
+    <string name="label_weekly_info">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete oppure oggetti Divini con %1$s di probabilità.</string>
     <string name="label_weekly_info_complete">Ogni missione settimanale ha una ricompensa in monete. Completale tutte per ottenere un bonus di 100.000 monete. Possiedi già tutti gli oggetti Divini!</string>
     <string name="label_daily_reward">2000 monete (1/100: equipaggiamento Nanico)</string>
     <string name="msg_daily_claimed_coins">Missione completata! +2000 monete.</string>
@@ -514,9 +514,9 @@
     <string name="combat_fight_count_label">Numero di combattimenti</string>
     <string name="combat_fight_count_suffix">×%1$d combattimenti</string>
     <string name="combat_fight_progress">Combattimento %1$d/%2$d</string>
-    <string name="combat_run_count_label">Numero di run</string>
+    <string name="combat_run_count_label">Numero di tentativi</string>
     <string name="combat_run_count_suffix">×%1$d run</string>
-    <string name="combat_run_progress">Run %1$d/%2$d</string>
+    <string name="combat_run_progress">Iter %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP alla vittoria</string>
     <string name="combat_you_died">Sei Morto!</string>
     <string name="combat_died_reward" formatted="false">Hai ricevuto il 10% delle ricompense.</string>
@@ -1655,9 +1655,12 @@
     <string name="home_welcome_title">Il %1$s!</string>
     <string name="bonus_tower">Torre</string>
     <string name="bonus_coin_drops">+%1$d%% monete</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
+    <string name="town_building_cape_rack_name">Mantelliera</string>
+    <string name="town_cape_rack_no_bonus">Migliora per applicare i bonus derivati dai mantelli in possesso senza indossarli</string>
+    <string name="town_cape_rack_t1_bonus">Attiva i bonus derivati dai mantelli di primo livello (raccolta)</string>
+    <string name="town_cape_rack_t2_bonus">Attiva i bonus derivati dai mantelli di primo e secondo livello (raccolta, mestieri)</string>
+    <string name="town_cape_rack_t3_bonus">Attiva i bonus derivati dai mantelli di qualunque livello (raccolta, mestieri, combattimento e gilda)</string>
+    <string name="crafting_owned">In possesso: %1$d</string>
+    <string name="crafting_owned_detail">In possesso: %1$d</string>
+    <string name="firemaking_ashes_owned">Ceneri disponibili: %1$d</string>
 </resources>

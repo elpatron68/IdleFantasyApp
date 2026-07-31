@@ -59,7 +59,7 @@
     <string name="label_equipment">Uitrusting</string>
     <string name="label_pets">Huisdieren</string>
     <string name="label_achievements">Prestaties</string>
-    <string name="label_locations">Locations</string>
+    <string name="label_locations">Locaties</string>
     <string name="label_bestiary">Bestiarium</string>
     <string name="label_enemies">Vijanden</string>
     <string name="label_bosses">Bazen</string>
@@ -307,12 +307,12 @@
     <!-- ===== QuestsScreen ===== -->
     <string name="label_claim_reward">Beloning claimen</string>
     <string name="label_daily">Per Dag</string>
-    <string name="label_weekly">Weekly</string>
+    <string name="label_weekly">Wekelijks</string>
     <string name="label_timed">Tijdelijk</string>
     <string name="label_daily_quests">Dagelijkse Quests</string>
     <string name="label_daily_reset">Reset om %1$s</string>
     <string name="label_weekly_reset">Resets Monday at %1$s</string>
-    <string name="weekly_bonus_title">Weekly Bonus!</string>
+    <string name="weekly_bonus_title">Wekelijkse Bonus!</string>
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
     <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
     <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
