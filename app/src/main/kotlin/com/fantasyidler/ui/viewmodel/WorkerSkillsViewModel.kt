@@ -210,12 +210,16 @@ class WorkerSkillsViewModel @Inject constructor(
     val fletchingRecipes: List<CraftableRecipe> by lazy {
         gameData.fletchingRecipes.map { (_, r) ->
             val isPlank = r.itemName == "plank" || r.itemName.endsWith("_plank")
+            val isStaff = r.itemName.startsWith("staff_of_")
+            // Base items with no material prefix would leak product words into the tier chips
+            val untiered = isPlank || isStaff || r.itemName == "arrow_shaft" || r.itemName == "shortbow"
             val category = when {
-                isPlank                -> "Plank"
-                r.type == "component"  -> "Component"
-                r.type == "ammunition" -> "Ammunition"
-                r.type == "weapon"     -> "Weapon"
-                else                   -> ""
+                isPlank                                               -> "Plank"
+                isStaff                                               -> "Staff"
+                r.type == "ammunition" || r.itemName == "arrow_shaft" -> "Arrow"
+                r.type == "weapon"                                    -> "Bow"
+                r.type == "component"                                 -> "Component"
+                else                                                  -> ""
             }
             CraftableRecipe(
                 key                 = r.itemName,
@@ -231,7 +235,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 outputStrengthBonus = r.strengthBonus ?: 0,
                 outputCombatStyle   = gameData.equipment[r.itemName]?.combatStyle,
                 category            = category,
-                tier                = tierFromKey(r.itemName),
+                tier                = if (untiered) "" else tierFromKey(r.itemName),
             )
         }.sortedBy { it.levelRequired }
     }

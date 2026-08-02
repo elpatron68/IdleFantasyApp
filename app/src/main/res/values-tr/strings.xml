@@ -943,6 +943,7 @@
     <string name="guild_do_dailies_hint">Bir sonraki rütbeye ilerlemek için günlük görevleri tamamlayın</string>
     <string name="guild_name_thieving">Hirsizlar Loncasi</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
+    <string name="guild_name_construction">İnşaatçılar Loncası</string>
     <string name="skill_mercantile">Mercantile</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Trade Routes</string>
@@ -1082,10 +1083,13 @@
     <string name="crafting_cat_ammunition">Mühimmat</string>
     <string name="crafting_cat_jewellery">Mücevher</string>
     <string name="crafting_cat_potion">İksir</string>
+    <string name="crafting_cat_arrow">Ok</string>
+    <string name="crafting_cat_bow">Yay</string>
+    <string name="crafting_cat_plank">Kalas</string>
+    <string name="crafting_cat_staff">Asa</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantit</string>
-    <string name="crafting_tier_arrow">Ok</string>
     <string name="crafting_tier_bronze">Bronz</string>
     <string name="crafting_tier_gold">Altın</string>
     <string name="crafting_tier_iron">Demir</string>
@@ -1095,9 +1099,7 @@
     <string name="crafting_tier_oak">Meşe</string>
     <string name="crafting_tier_platinum">Platin</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Kısa yay</string>
     <string name="crafting_tier_silver">Gümüş</string>
-    <string name="crafting_tier_staff">Asa</string>
     <string name="crafting_tier_steel">Çelik</string>
     <string name="crafting_tier_willow">Söğüt</string>
     <string name="crafting_tier_yew">Porsuk</string>
@@ -1371,6 +1373,7 @@
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">Birleşik XP</string>
     <string name="bonus_yield">+%1$d%% verim</string>
+    <string name="bonus_boost">+%1$d%% güçlendirme</string>
     <string name="bonus_session_shorter">%1$d dk daha kısa oturumlar</string>
     <string name="bonus_coin_return">+%1$d%% altın getirisi</string>
     <string name="snackbar_added_to_queue">Sıraya eklendi: %1$s.</string>

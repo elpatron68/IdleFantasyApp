@@ -901,6 +901,7 @@
     <string name="guild_name_prayer">Prayer Guild</string>
     <string name="guild_name_thieving">Thieves Guild</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
+    <string name="guild_name_construction">Builders Guild</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Mercantile</string>
@@ -1122,10 +1123,13 @@
     <string name="crafting_cat_ammunition">Ammunition</string>
     <string name="crafting_cat_jewellery">Jewellery</string>
     <string name="crafting_cat_potion">Potion</string>
+    <string name="crafting_cat_arrow">Arrow</string>
+    <string name="crafting_cat_bow">Bow</string>
+    <string name="crafting_cat_plank">Plank</string>
+    <string name="crafting_cat_staff">Staff</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantite</string>
-    <string name="crafting_tier_arrow">Arrow</string>
     <string name="crafting_tier_bronze">Bronze</string>
     <string name="crafting_tier_gold">Gold</string>
     <string name="crafting_tier_iron">Iron</string>
@@ -1135,9 +1139,7 @@
     <string name="crafting_tier_oak">Oak</string>
     <string name="crafting_tier_platinum">Platinum</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Shortbow</string>
     <string name="crafting_tier_silver">Silver</string>
-    <string name="crafting_tier_staff">Staff</string>
     <string name="crafting_tier_steel">Steel</string>
     <string name="crafting_tier_willow">Willow</string>
     <string name="crafting_tier_yew">Yew</string>
@@ -1530,6 +1532,7 @@
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">Combined XP</string>
     <string name="bonus_yield">+%1$d%% yield</string>
+    <string name="bonus_boost">+%1$d%% boost</string>
     <string name="bonus_session_shorter">%1$d min shorter sessions</string>
     <string name="bonus_coin_return">+%1$d%% coin return</string>
     <string name="bonus_tower">Tower</string>

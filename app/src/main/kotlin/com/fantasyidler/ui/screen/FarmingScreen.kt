@@ -220,7 +220,8 @@ fun FarmingSheetContent(
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
 
-    Box(Modifier.fillMaxWidth()) {
+    // Full height even while loading, so the sheet's anchors don't shift when content arrives
+    Box(Modifier.fillMaxSize()) {
         if (state.isLoading) {
             CircularProgressIndicator(Modifier.align(Alignment.Center))
         } else LazyColumn(

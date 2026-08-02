@@ -128,6 +128,7 @@ internal fun CombatSessionBanner(
     skillLevels: Map<String, Int>,
     modifier: Modifier = Modifier,
     skillPrestige: Map<String, Int> = emptyMap(),
+    towerHpBonus: Int = 0,
     attackBonus: Int,
     strengthBonus: Int,
     defenseBonus: Int,
@@ -275,7 +276,7 @@ internal fun CombatSessionBanner(
                 // Live player HP (per-tick if hit data exists, else per-frame fallback).
                 // Enemy hits display half a tick after player hits, so only count the
                 // newest tick's enemy damage once its log line is visible.
-                val maxHp = ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5) * 10
+                val maxHp = ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5 + towerHpBonus) * 10
                 val enemyTicksShown = tickInFrame + if (halfTickInFrame >= 2 * tickInFrame + 1) 1 else 0
                 val currentPlayerHp = if (currentFrame?.enemyHits?.isNotEmpty() == true) {
                     val base = frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp

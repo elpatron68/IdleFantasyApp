@@ -211,6 +211,7 @@ fun CombatScreen(
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
                             skillPrestige  = state.skillPrestige,
+                            towerHpBonus   = state.towerHpBonus,
                             attackBonus    = state.totalAttackBonus,
                             strengthBonus  = state.totalStrengthBonus,
                             defenseBonus   = state.totalDefenseBonus,

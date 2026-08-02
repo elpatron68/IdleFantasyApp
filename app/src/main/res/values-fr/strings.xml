@@ -951,6 +951,7 @@
     <string name="guild_quest_required">Quête nécessaire pour progresser</string>
     <string name="guild_name_thieving">Guilde des Voleurs</string>
     <string name="guild_name_mercantile">Guilde des Marchands</string>
+    <string name="guild_name_construction">Guilde des Bâtisseurs</string>
     <string name="skill_mercantile">Marchandage</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Routes Commerciales</string>
@@ -1079,8 +1080,11 @@
     <string name="crafting_cat_ammunition">Munition</string>
     <string name="crafting_cat_jewellery">Bijou</string>
     <string name="crafting_cat_potion">Potion</string>
+    <string name="crafting_cat_arrow">Flèche</string>
+    <string name="crafting_cat_bow">Arc</string>
+    <string name="crafting_cat_plank">Planche</string>
+    <string name="crafting_cat_staff">Bâton</string>
     <string name="crafting_tier_adamantite">Adamantite</string>
-    <string name="crafting_tier_arrow">Flèche</string>
     <string name="crafting_tier_bronze">Bronze</string>
     <string name="crafting_tier_gold">Or</string>
     <string name="crafting_tier_iron">Fer</string>
@@ -1090,9 +1094,7 @@
     <string name="crafting_tier_oak">Chêne</string>
     <string name="crafting_tier_platinum">Platine</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Arc court</string>
     <string name="crafting_tier_silver">Argent</string>
-    <string name="crafting_tier_staff">Bâton</string>
     <string name="crafting_tier_steel">Acier</string>
     <string name="crafting_tier_willow">Saule</string>
     <string name="crafting_tier_yew">If</string>
@@ -1364,6 +1366,7 @@
     <string name="bonus_combat_stat_boost">Améliore les stats de combat</string>
     <string name="bonus_combined_xp">XP combiné</string>
     <string name="bonus_yield">+%1$d%% rendement</string>
+    <string name="bonus_boost">+%1$d%% renforcement</string>
     <string name="bonus_session_shorter">%1$d min de sessions en moins</string>
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="snackbar_added_to_queue">Ajouté à la file : %1$s.</string>

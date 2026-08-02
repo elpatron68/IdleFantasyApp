@@ -105,7 +105,7 @@ class GuildRepository @Inject constructor(
 
         val ALL_GUILDS = listOf(
             "mining", "fishing", "woodcutting", "farming", "thieving", "firemaking", "agility",
-            "smithing", "cooking", "fletching", "crafting", "runecrafting", "herblore",
+            "smithing", "cooking", "fletching", "crafting", "runecrafting", "herblore", "construction",
             "warriors", "archers", "mages", "prayer", "mercantile",
         )
 
@@ -412,6 +412,8 @@ class GuildRepository @Inject constructor(
                 level("crafting") >= (gameData.craftingRecipes[template.target]?.levelRequired ?: 1)
             template.guild == "runecrafting" && template.type == "craft" ->
                 level("runecrafting") >= (gameData.runes[template.target]?.levelRequired ?: 1)
+            template.guild == "construction" && template.type == "craft" ->
+                level("construction") >= (gameData.constructionRecipes[template.target]?.levelRequired ?: 1)
             template.guild == "mining" && template.type == "gather" ->
                 level("mining") >= (gameData.ores[template.target]?.levelRequired ?: 1)
             template.guild == "fishing" && template.type == "gather" ->

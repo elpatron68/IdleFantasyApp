@@ -3662,5 +3662,197 @@
       },
       "reputation": 100000
     }
+  },
+  "construction_guild_1": {
+    "id": "construction_guild_1",
+    "guild": "construction",
+    "guild_level_required": 0,
+    "name": "Rack and Ruin",
+    "type": "craft",
+    "target": "wooden_rack",
+    "amount": 90,
+    "description": "Build 90 wooden racks for the Builders Guild.",
+    "rewards": {
+      "coins": 1000,
+      "xp": 6000,
+      "xp_skill": "construction",
+      "items": {
+        "plank": 120,
+        "iron_nail": 200
+      }
+    }
+  },
+  "construction_guild_2": {
+    "id": "construction_guild_2",
+    "guild": "construction",
+    "guild_level_required": 1,
+    "name": "Shelf Life",
+    "type": "craft",
+    "target": "wooden_shelf",
+    "amount": 120,
+    "description": "Build 120 wooden shelves for the Builders Guild.",
+    "rewards": {
+      "coins": 2500,
+      "xp": 12000,
+      "xp_skill": "construction",
+      "items": {
+        "plank": 150,
+        "iron_nail": 250
+      }
+    }
+  },
+  "construction_guild_3": {
+    "id": "construction_guild_3",
+    "guild": "construction",
+    "guild_level_required": 2,
+    "name": "Set in Stone",
+    "type": "craft",
+    "target": "carved_stone",
+    "amount": 180,
+    "description": "Build 180 carved stones for the Builders Guild.",
+    "rewards": {
+      "coins": 5000,
+      "xp": 24000,
+      "xp_skill": "construction",
+      "items": {
+        "stone": 200,
+        "iron_nail": 300
+      }
+    }
+  },
+  "construction_guild_4": {
+    "id": "construction_guild_4",
+    "guild": "construction",
+    "guild_level_required": 3,
+    "name": "Table Service",
+    "type": "craft",
+    "target": "oak_table",
+    "amount": 150,
+    "description": "Build 150 oak tables for the Builders Guild.",
+    "rewards": {
+      "coins": 8000,
+      "xp": 40000,
+      "xp_skill": "construction",
+      "items": {
+        "oak_plank": 150,
+        "steel_nail": 200
+      }
+    }
+  },
+  "construction_guild_5": {
+    "id": "construction_guild_5",
+    "guild": "construction",
+    "guild_level_required": 4,
+    "name": "Well Read",
+    "type": "craft",
+    "target": "oak_bookshelf",
+    "amount": 180,
+    "description": "Build 180 oak bookshelves for the Builders Guild.",
+    "rewards": {
+      "coins": 15000,
+      "xp": 70000,
+      "xp_skill": "construction",
+      "items": {
+        "oak_plank": 200,
+        "steel_nail": 250
+      }
+    }
+  },
+  "construction_guild_6": {
+    "id": "construction_guild_6",
+    "guild": "construction",
+    "guild_level_required": 5,
+    "name": "Block by Block",
+    "type": "craft",
+    "target": "stone_block",
+    "amount": 240,
+    "description": "Build 240 stone blocks for the Builders Guild.",
+    "rewards": {
+      "coins": 25000,
+      "xp": 110000,
+      "xp_skill": "construction",
+      "items": {
+        "stone": 300,
+        "steel_nail": 300
+      }
+    }
+  },
+  "construction_guild_7": {
+    "id": "construction_guild_7",
+    "guild": "construction",
+    "guild_level_required": 6,
+    "name": "Cabinet Meeting",
+    "type": "craft",
+    "target": "willow_cabinet",
+    "amount": 240,
+    "description": "Build 240 willow cabinets for the Builders Guild.",
+    "rewards": {
+      "coins": 40000,
+      "xp": 180000,
+      "xp_skill": "construction",
+      "items": {
+        "willow_plank": 250,
+        "steel_nail": 300
+      }
+    }
+  },
+  "construction_guild_8": {
+    "id": "construction_guild_8",
+    "guild": "construction",
+    "guild_level_required": 7,
+    "name": "Dressed to Impress",
+    "type": "craft",
+    "target": "maple_dresser",
+    "amount": 240,
+    "description": "Build 240 maple dressers for the Builders Guild.",
+    "rewards": {
+      "coins": 60000,
+      "xp": 280000,
+      "xp_skill": "construction",
+      "items": {
+        "maple_plank": 250,
+        "mithril_nail": 250
+      }
+    }
+  },
+  "construction_guild_9": {
+    "id": "construction_guild_9",
+    "guild": "construction",
+    "guild_level_required": 8,
+    "name": "Wardrobe Change",
+    "type": "craft",
+    "target": "yew_wardrobe",
+    "amount": 270,
+    "description": "Build 270 yew wardrobes for the Builders Guild.",
+    "rewards": {
+      "coins": 80000,
+      "xp": 400000,
+      "xp_skill": "construction",
+      "items": {
+        "yew_plank": 300,
+        "mithril_nail": 300
+      }
+    }
+  },
+  "construction_guild_10": {
+    "id": "construction_guild_10",
+    "guild": "construction",
+    "guild_level_required": 9,
+    "name": "Fit for a King",
+    "type": "craft",
+    "target": "magic_throne",
+    "amount": 300,
+    "description": "Build 300 magic thrones for the Builders Guild.",
+    "rewards": {
+      "coins": 100000,
+      "xp": 700000,
+      "xp_skill": "construction",
+      "items": {
+        "magic_plank": 300,
+        "mithril_nail": 400,
+        "diamond": 4,
+        "construction_guild_cape": 1
+      }
+    }
   }
 }

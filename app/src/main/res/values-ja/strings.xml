@@ -874,6 +874,7 @@
     <string name="guild_name_prayer">祈りギルド</string>
     <string name="guild_name_thieving">盗賊ギルド</string>
     <string name="guild_name_mercantile">商人ギルド</string>
+    <string name="guild_name_construction">建築ギルド</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">商業</string>
@@ -1095,10 +1096,13 @@
     <string name="crafting_cat_ammunition">弾薬</string>
     <string name="crafting_cat_jewellery">宝飾品</string>
     <string name="crafting_cat_potion">ポーション</string>
+    <string name="crafting_cat_arrow">矢</string>
+    <string name="crafting_cat_bow">弓</string>
+    <string name="crafting_cat_plank">板</string>
+    <string name="crafting_cat_staff">スタッフ</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">アダマンタイト</string>
-    <string name="crafting_tier_arrow">矢</string>
     <string name="crafting_tier_bronze">ブロンズ</string>
     <string name="crafting_tier_gold">金</string>
     <string name="crafting_tier_iron">鉄</string>
@@ -1108,9 +1112,7 @@
     <string name="crafting_tier_oak">オーク</string>
     <string name="crafting_tier_platinum">プラチナ</string>
     <string name="crafting_tier_runite">ルナイト</string>
-    <string name="crafting_tier_shortbow">ショートボウ</string>
     <string name="crafting_tier_silver">銀</string>
-    <string name="crafting_tier_staff">スタッフ</string>
     <string name="crafting_tier_steel">鋼鉄</string>
     <string name="crafting_tier_willow">ヤナギ</string>
     <string name="crafting_tier_yew">イチイ</string>
@@ -1494,6 +1496,7 @@
     <string name="bonus_combat_stat_boost">戦闘ステータス向上</string>
     <string name="bonus_combined_xp">経験値合算</string>
     <string name="bonus_yield">+%1$d%% 収穫量</string>
+    <string name="bonus_boost">+%1$d%% 強化</string>
     <string name="bonus_session_shorter">セッション時間を %1$d 分短縮</string>
     <string name="bonus_coin_return">+%1$d%% コイン獲得</string>
     <string name="snackbar_added_to_queue">キューに追加: %1$s</string>

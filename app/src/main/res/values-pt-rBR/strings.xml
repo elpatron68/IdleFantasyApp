@@ -871,6 +871,7 @@
     <string name="guild_name_prayer">Guilda da Oração</string>
     <string name="guild_name_thieving">Guilda dos Ladrões</string>
     <string name="guild_name_mercantile">Guilda dos Mercadores</string>
+    <string name="guild_name_construction">Guilda dos Construtores</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Mercantil</string>
@@ -1091,10 +1092,13 @@
     <string name="crafting_cat_ammunition">Munição</string>
     <string name="crafting_cat_jewellery">Joias</string>
     <string name="crafting_cat_potion">Poção</string>
+    <string name="crafting_cat_arrow">Flecha</string>
+    <string name="crafting_cat_bow">Arco</string>
+    <string name="crafting_cat_plank">Tábua</string>
+    <string name="crafting_cat_staff">Cajado</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantita</string>
-    <string name="crafting_tier_arrow">Flecha</string>
     <string name="crafting_tier_bronze">Bronze</string>
     <string name="crafting_tier_gold">Ouro</string>
     <string name="crafting_tier_iron">Ferro</string>
@@ -1104,9 +1108,7 @@
     <string name="crafting_tier_oak">Carvalho</string>
     <string name="crafting_tier_platinum">Platina</string>
     <string name="crafting_tier_runite">Runita</string>
-    <string name="crafting_tier_shortbow">Arco Curto</string>
     <string name="crafting_tier_silver">Prata</string>
-    <string name="crafting_tier_staff">Cajado</string>
     <string name="crafting_tier_steel">Aço</string>
     <string name="crafting_tier_willow">Salgueiro</string>
     <string name="crafting_tier_yew">Teixo</string>
@@ -1490,6 +1492,7 @@
     <string name="bonus_combat_stat_boost">Aumenta atributos de combate</string>
     <string name="bonus_combined_xp">XP Combinado</string>
     <string name="bonus_yield">+%1$d%% rendimento</string>
+    <string name="bonus_boost">+%1$d%% reforço</string>
     <string name="bonus_session_shorter">%1$d min de sessões mais curtas</string>
     <string name="bonus_coin_return">+%1$d%% retorno de moedas</string>
     <string name="snackbar_added_to_queue">Adicionado à fila: %1$s.</string>

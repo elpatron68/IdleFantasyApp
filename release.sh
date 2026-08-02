@@ -147,6 +147,15 @@ else
     echo "WARNING: No fastlane changelog found at $FASTLANE_CHANGELOG"
 fi
 
+# ---------------------------------------------------------------------------
+# Update repo documentation (before the commit so the release tag includes it)
+# ---------------------------------------------------------------------------
+
+echo "==> Updating documentation..."
+cd "$REPO_DIR"
+python3 -m docs.gen.repo_docs update
+echo "==> Repository documentation updated"
+
 git add -A
 if ! git diff --cached --quiet; then
     git commit -m "$COMMIT_MSG"

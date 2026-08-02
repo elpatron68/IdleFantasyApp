@@ -4,8 +4,6 @@
 
 A free, open-source offline idle RPG for Android. No internet connection, no account, no ads.
 
-> **Fork:** This repository ([elpatron68/IdleFantasyApp](https://github.com/elpatron68/IdleFantasyApp)) tracks [tristinbaker/IdleFantasy](https://github.com/tristinbaker/IdleFantasy) and adds optional Save Viewer sync. See **[FORK.md](FORK.md)** for releases, setup, and CI.
-
 <p align="center">
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="170" alt="Home screen">
   <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="170" alt="Dungeons">
@@ -21,18 +19,15 @@ Pick a skill or dungeon, start a session, then put your phone down. Your hero ke
 
 ## Skills
 
-Train **24 skills** at your own pace:
+Train **{skill_count} skills** at your own pace:
 
-- **Gathering** (5): Mining, Fishing, Woodcutting, Farming, and Thieving
-- **Crafting** (8): Smithing, Cooking, Fletching, Crafting, Firemaking, Runecrafting, Herblore, and Construction
-- **Support** (3): Prayer, Mercantile, and Agility
-- **Combat** (8): Slayer, Attack, Strength, Defense, Ranged, Magic, Hitpoints, and Prayer
+{skill_list}
 
 Better equipment means faster gathering and surviving tougher dungeons. Craft your own gear or buy it from the Shop. The **Mercantile** skill levels through trade routes and unlocks better prices. **Slayer** tasks are assigned by the Slayer Master in town and are completed by fighting specific enemies in dungeons.
 
 ## Combat and dungeons
 
-Explore **27 dungeons** from the starter Farm all the way to late-game Fortress Ruins and beyond. Each dungeon has its own enemy roster, difficulty rating, and potential drops. Before you go in, the game tells you how your current gear stacks up. Choose from Melee, Ranged, or Magic; each style levels its own combat skills.
+Explore **{dungeon_count} dungeons** from the starter Farm all the way to late-game Fortress Ruins and beyond. Each dungeon has its own enemy roster, difficulty rating, and potential drops. Before you go in, the game tells you how your current gear stacks up. Choose from Melee, Ranged, or Magic; each style levels its own combat skills.
 
 ## Infinite Tower
 
@@ -44,11 +39,11 @@ Explore non-combat skilling dungeons to uncover lore notes. Finding enough notes
 
 ## Quests
 
-Over **189 quests** span all skills. Daily quests reset every morning for a quick goal to aim at. Long-term quests track cumulative progress over many sessions. Completing quests earns XP, coins, and item rewards.
+Over **{quest_count} quests** span all skills. Daily quests reset every morning for a quick goal to aim at. Long-term quests track cumulative progress over many sessions. Completing quests earns XP, coins, and item rewards.
 
 ## Guild System
 
-**19 guilds** cover every skill and combat style (Warriors, Archers, and Mages guilds for combat). Each guild has up to 10 rank levels. Advance by completing progression quests and earning reputation through daily requests. Higher ranks unlock harder dailies and better cross-skill rewards, letting specialists access resources from skills they don't personally train.
+**{guild_count} guilds** cover every skill and combat style (Warriors, Archers, and Mages guilds for combat). Each guild has up to 10 rank levels. Advance by completing progression quests and earning reputation through daily requests. Higher ranks unlock harder dailies and better cross-skill rewards, letting specialists access resources from skills they don't personally train.
 
 ## Builder's Workshop
 
@@ -76,19 +71,15 @@ Visit the traveling Carnival to play idle minigames, the Archery Range, Strongma
 
 Or grab the latest APK from the [Releases page](https://github.com/tristinbaker/IdleFantasy/releases).
 
-For **this fork's builds** (Save Viewer sync), see **[FORK.md](FORK.md)**.
-
 ## Translating
 
-The game is available in 14 languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
+The game is available in {language_count} languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
 
 ## Contributing
 
 Bug reports and pull requests are welcome. Open an issue before starting large changes so the approach can be discussed first.
 
 See the [contributors graph](https://github.com/tristinbaker/IdleFantasy/graphs/contributors) for a full list of contributors.
-
-Fork-specific contributions: see **[FORK.md](FORK.md)**.
 
 ---
 

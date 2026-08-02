@@ -869,6 +869,7 @@
     <string name="guild_name_prayer">Gebed Gilde</string>
     <string name="guild_name_thieving">Dieven Gilde</string>
     <string name="guild_name_mercantile">Kooplieden Gilde</string>
+    <string name="guild_name_construction">Bouwersgilde</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Handel</string>
@@ -1028,10 +1029,13 @@
     <string name="crafting_cat_ammunition">Munitie</string>
     <string name="crafting_cat_jewellery">Sieraden</string>
     <string name="crafting_cat_potion">Drankje</string>
+    <string name="crafting_cat_arrow">Pijl</string>
+    <string name="crafting_cat_bow">Boog</string>
+    <string name="crafting_cat_plank">Plank</string>
+    <string name="crafting_cat_staff">Staf</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantiet</string>
-    <string name="crafting_tier_arrow">Pijl</string>
     <string name="crafting_tier_bronze">Brons</string>
     <string name="crafting_tier_gold">Goud</string>
     <string name="crafting_tier_iron">IJzer</string>
@@ -1041,9 +1045,7 @@
     <string name="crafting_tier_oak">Eiken</string>
     <string name="crafting_tier_platinum">Platina</string>
     <string name="crafting_tier_runite">Runiet</string>
-    <string name="crafting_tier_shortbow">Korte boog</string>
     <string name="crafting_tier_silver">Zilver</string>
-    <string name="crafting_tier_staff">Staf</string>
     <string name="crafting_tier_steel">Staal</string>
     <string name="crafting_tier_willow">Wilg</string>
     <string name="crafting_tier_yew">Taxus</string>
@@ -1331,6 +1333,7 @@
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">Gecombineerde XP</string>
     <string name="bonus_yield">+%1$d%% opbrengst</string>
+    <string name="bonus_boost">+%1$d%% boost</string>
     <string name="bonus_session_shorter">%1$d min kortere sessies</string>
     <string name="bonus_coin_return">+%1$d%% muntteruggave</string>
     <string name="snackbar_added_to_queue">Toegevoegd aan wachtrij: %1$s.</string>
