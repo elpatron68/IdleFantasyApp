@@ -79,4 +79,4 @@ has established equivalents for idle RPG terminology:
 
 ## Questions?
 
-Open an issue on the project repository.
+Open a Q&A discussion on the project repository.

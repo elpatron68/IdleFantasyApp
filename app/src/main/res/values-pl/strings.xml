@@ -890,6 +890,7 @@
     <string name="guild_name_prayer">Gildia Modlitwy</string>
     <string name="guild_name_thieving">Gildia Złodziei</string>
     <string name="guild_name_mercantile">Gildia Kupców</string>
+    <string name="guild_name_construction">Gildia Budowniczych</string>
 
     <!-- Umiejętność Handel -->
     <string name="skill_mercantile">Handel</string>
@@ -1111,10 +1112,13 @@
     <string name="crafting_cat_ammunition">Amunicja</string>
     <string name="crafting_cat_jewellery">Biżuteria</string>
     <string name="crafting_cat_potion">Mikstura</string>
+    <string name="crafting_cat_arrow">Strzała</string>
+    <string name="crafting_cat_bow">Łuk</string>
+    <string name="crafting_cat_plank">Deska</string>
+    <string name="crafting_cat_staff">Kostur</string>
 
     <!-- Filtry poziomów wytwarzania -->
     <string name="crafting_tier_adamantite">Adamantyt</string>
-    <string name="crafting_tier_arrow">Strzała</string>
     <string name="crafting_tier_bronze">Brąz</string>
     <string name="crafting_tier_gold">Złoto</string>
     <string name="crafting_tier_iron">Żelazo</string>
@@ -1124,9 +1128,7 @@
     <string name="crafting_tier_oak">Dąb</string>
     <string name="crafting_tier_platinum">Platyna</string>
     <string name="crafting_tier_runite">Runit</string>
-    <string name="crafting_tier_shortbow">Krótki łuk</string>
     <string name="crafting_tier_silver">Srebro</string>
-    <string name="crafting_tier_staff">Kostur</string>
     <string name="crafting_tier_steel">Stal</string>
     <string name="crafting_tier_willow">Wierzba</string>
     <string name="crafting_tier_yew">Cis</string>
@@ -1515,6 +1517,7 @@
     <string name="bonus_combat_stat_boost">Wzmacnia statystyki bojowe</string>
     <string name="bonus_combined_xp">Łączne XP</string>
     <string name="bonus_yield">+%1$d%% wydajność</string>
+    <string name="bonus_boost">+%1$d%% wzmocnienie</string>
     <string name="bonus_session_shorter">%1$d min krótsze sesje</string>
     <string name="bonus_coin_return">+%1$d%% zwrot monet</string>
     <string name="snackbar_added_to_queue">Dodano do kolejki: %1$s.</string>

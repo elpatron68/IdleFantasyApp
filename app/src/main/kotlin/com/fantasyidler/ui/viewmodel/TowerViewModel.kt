@@ -79,6 +79,20 @@ class TowerViewModel @Inject constructor(
     private val json: Json,
 ) : ViewModel() {
 
+    init {
+        // Tower Boots joined the floor 150 milestone after many players had already
+        // claimed it; grant them once retroactively since milestones can't be re-claimed
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            if (150 in flags.towerMilestonesClaimed) {
+                val inventory: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
+                if ("tower_boots" !in inventory) {
+                    playerRepo.addItems(mapOf("tower_boots" to 1))
+                }
+            }
+        }
+    }
+
     companion object {
         /** Floors between death-recovery checkpoints — see the playerDied branch in collectSession(). */
         const val TOWER_CHECKPOINT_INTERVAL = 25
@@ -110,7 +124,7 @@ class TowerViewModel @Inject constructor(
             TowerMilestone(30,  "5,000 coins"),
             TowerMilestone(40,  "Tower Shield (defense +80)"),
             TowerMilestone(50,  "Tower Amulet (attack +15, strength +15, defense +10, all styles)"),
-            TowerMilestone(60,  "+5 max HP"),
+            TowerMilestone(60,  "+50 max HP"),
             TowerMilestone(70,  "+2% tower XP all skills"),
             TowerMilestone(80,  "25,000 coins"),
             TowerMilestone(90,  "Tower Helm (defense +82, strength +8)"),
@@ -119,13 +133,13 @@ class TowerViewModel @Inject constructor(
             TowerMilestone(120, "Tower Plate (defense +132)"),
             TowerMilestone(130, "+2% tower XP all skills"),
             TowerMilestone(140, "100,000 coins"),
-            TowerMilestone(150, "Tower Legs (defense +125)"),
-            TowerMilestone(160, "+5 max HP"),
+            TowerMilestone(150, "Tower Legs (defense +125) + Tower Boots (defense +58)"),
+            TowerMilestone(160, "+50 max HP"),
             TowerMilestone(170, "+1% tower coin drops"),
             TowerMilestone(180, "Tower Sword (attack +72, strength +75)"),
             TowerMilestone(190, "+2% tower XP all skills"),
             TowerMilestone(200, "Tower Cape (attack/str/def +14, ranged/magic +12) + 500,000 coins"),
-            TowerMilestone(210, "+5 max HP"),
+            TowerMilestone(210, "+50 max HP"),
             TowerMilestone(220, "Tower Crossbow (ranged attack +78, ranged strength +52)"),
             TowerMilestone(230, "+1% tower coin drops"),
             TowerMilestone(240, "+2% tower XP all skills"),
@@ -613,7 +627,7 @@ class TowerViewModel @Inject constructor(
                 120 -> playerRepo.addItems(mapOf("tower_body" to 1))
                 130 -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
                 140 -> playerRepo.addCoins(100_000L)
-                150 -> playerRepo.addItems(mapOf("tower_legs" to 1))
+                150 -> playerRepo.addItems(mapOf("tower_legs" to 1, "tower_boots" to 1))
                 160 -> newFlags = newFlags.copy(towerHpBonus = newFlags.towerHpBonus + 5)
                 170 -> newFlags = newFlags.copy(towerCoinBonusPct = newFlags.towerCoinBonusPct + 1)
                 180 -> playerRepo.addItems(mapOf("tower_sword" to 1))

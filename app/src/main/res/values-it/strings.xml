@@ -891,6 +891,7 @@
     <string name="guild_name_prayer">Gilda degli Adepti</string>
     <string name="guild_name_thieving">Gilda dei Ladri</string>
     <string name="guild_name_mercantile">Gilda dei Mercanti</string>
+    <string name="guild_name_construction">Gilda dei Costruttori</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Mercantile</string>
@@ -1112,10 +1113,13 @@
     <string name="crafting_cat_ammunition">Munizioni</string>
     <string name="crafting_cat_jewellery">Gioielli</string>
     <string name="crafting_cat_potion">Pozione</string>
+    <string name="crafting_cat_arrow">Freccia</string>
+    <string name="crafting_cat_bow">Arco</string>
+    <string name="crafting_cat_plank">Asse</string>
+    <string name="crafting_cat_staff">Bastone</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantio</string>
-    <string name="crafting_tier_arrow">Freccia</string>
     <string name="crafting_tier_bronze">Bronzo</string>
     <string name="crafting_tier_gold">Oro</string>
     <string name="crafting_tier_iron">Ferro</string>
@@ -1125,9 +1129,7 @@
     <string name="crafting_tier_oak">Quercia</string>
     <string name="crafting_tier_platinum">Platino</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Arco corto</string>
     <string name="crafting_tier_silver">Argento</string>
-    <string name="crafting_tier_staff">Bastone</string>
     <string name="crafting_tier_steel">Acciaio</string>
     <string name="crafting_tier_willow">Salice</string>
     <string name="crafting_tier_yew">Tasso</string>
@@ -1512,6 +1514,7 @@
     <string name="bonus_combat_stat_boost">Potenzia statistiche combattimento</string>
     <string name="bonus_combined_xp">XP combinata</string>
     <string name="bonus_yield">+%1$d%% alla resa</string>
+    <string name="bonus_boost">+%1$d%% potenziamento</string>
     <string name="bonus_session_shorter">%1$d min in meno per sessione</string>
     <string name="bonus_coin_return">+%1$d%% ritorno in monete</string>
     <string name="snackbar_added_to_queue">Aggiunto alla coda: %1$s.</string>

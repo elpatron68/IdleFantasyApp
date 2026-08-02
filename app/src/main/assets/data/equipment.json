@@ -1914,6 +1914,18 @@
       "defense": 70
     }
   },
+  "tower_boots": {
+    "name": "tower_boots",
+    "display_name": "Tower Boots",
+    "slot": "boots",
+    "description": "Boots forged in the tower's deepest forge.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 58,
+    "requirements": {
+      "defense": 70
+    }
+  },
   "tower_shield": {
     "name": "tower_shield",
     "display_name": "Tower Shield",
@@ -2730,6 +2742,18 @@
     "cape_skill": "mining",
     "requirements": {},
     "cape_bonus": 0.1
+  },
+  "construction_guild_cape": {
+    "name": "construction_guild_cape",
+    "display_name": "Builders Guild Cape",
+    "slot": "cape",
+    "description": "Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 5,
+    "cape_skill": "construction",
+    "cape_bonus": 0.05,
+    "requirements": {}
   },
   "mining_guild_cape": {
     "name": "mining_guild_cape",

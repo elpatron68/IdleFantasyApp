@@ -255,7 +255,7 @@
     <string name="item_bronze_helmet_desc">Einfacher Kopfschutz aus Bronze.</string>
     <string name="item_bronze_platebody_name">Bronzebrustpanzer</string>
     <string name="item_bronze_platebody_desc">Einfacher Körperpanzer aus Bronze.</string>
-    <string name="item_bronze_platelegs_name">Bronzehose</string>
+    <string name="item_bronze_platelegs_name">Bronzeplattenhose</string>
     <string name="item_bronze_platelegs_desc">Einfacher Beinschutz aus Bronze.</string>
     <string name="item_bronze_shield_name">Bronzeschild</string>
     <string name="item_bronze_shield_desc">Ein einfacher Bronzeschild.</string>
@@ -265,7 +265,7 @@
     <string name="item_iron_helmet_desc">Kopfschutz aus Eisen.</string>
     <string name="item_iron_platebody_name">Eisenbrustpanzer</string>
     <string name="item_iron_platebody_desc">Körperpanzer aus Eisen.</string>
-    <string name="item_iron_platelegs_name">Eisenhose</string>
+    <string name="item_iron_platelegs_name">Eisenplattenhose</string>
     <string name="item_iron_platelegs_desc">Beinschutz aus Eisen.</string>
     <string name="item_iron_shield_name">Eisenschild</string>
     <string name="item_iron_shield_desc">Ein Eisenschild.</string>
@@ -275,7 +275,7 @@
     <string name="item_steel_helmet_desc">Robuster Kopfschutz aus Stahl.</string>
     <string name="item_steel_platebody_name">Stahlbrustpanzer</string>
     <string name="item_steel_platebody_desc">Robuster Körperpanzer aus Stahl.</string>
-    <string name="item_steel_platelegs_name">Stahlhose</string>
+    <string name="item_steel_platelegs_name">Stahlplattenhose</string>
     <string name="item_steel_platelegs_desc">Robuster Beinschutz aus Stahl.</string>
     <string name="item_steel_shield_name">Stahlschild</string>
     <string name="item_steel_shield_desc">Ein robuster Stahlschild.</string>
@@ -285,7 +285,7 @@
     <string name="item_mithril_helmet_desc">Leichter, magischer Kopfschutz.</string>
     <string name="item_mithril_platebody_name">Mithrilbrustpanzer</string>
     <string name="item_mithril_platebody_desc">Leichte magischer Körperpanzer aus Mithril.</string>
-    <string name="item_mithril_platelegs_name">Mithrilhose</string>
+    <string name="item_mithril_platelegs_name">Mithrilplattenhose</string>
     <string name="item_mithril_platelegs_desc">Leichter, magischer Beinschutz aus Mithril.</string>
     <string name="item_mithril_shield_name">Mithrilschild</string>
     <string name="item_mithril_shield_desc">Ein leichter magischer Mithrilschild.</string>
@@ -295,7 +295,7 @@
     <string name="item_adamantite_helmet_desc">Extrem robuster Kopfschutz.</string>
     <string name="item_adamantite_platebody_name">Adamantitbrustpanzer</string>
     <string name="item_adamantite_platebody_desc">Extrem harte Körperpanzerung.</string>
-    <string name="item_adamantite_platelegs_name">Adamantithose</string>
+    <string name="item_adamantite_platelegs_name">Adamantitplattenhose</string>
     <string name="item_adamantite_platelegs_desc">Extrem robuster Beinschutz.</string>
     <string name="item_adamantite_shield_name">Adamantitschild</string>
     <string name="item_adamantite_shield_desc">Ein extrem harter Adamantitschild.</string>
@@ -305,7 +305,7 @@
     <string name="item_runite_helmet_desc">Der beste Kopfschutz, den es gibt.</string>
     <string name="item_runite_platebody_name">Runitbrustpanzer</string>
     <string name="item_runite_platebody_desc">Die beste Schutzausrüstung, die es gibt.</string>
-    <string name="item_runite_platelegs_name">Runithose</string>
+    <string name="item_runite_platelegs_name">Runitplattenhose</string>
     <string name="item_runite_platelegs_desc">Der beste Beinschutz, den es gibt.</string>
     <string name="item_runite_shield_name">Runitschild</string>
     <string name="item_runite_shield_desc">Der beste Schild, den es gibt.</string>
@@ -381,14 +381,6 @@
     <string name="item_adamantite_arrow_tips_desc">Adamantitspitzen zum Bestücken von Pfeilen</string>
     <string name="item_runite_arrow_tips_name">Runitpfeilspitzen</string>
     <string name="item_runite_arrow_tips_desc">Runitspitzen zum Bestücken von Pfeilen</string>
-
-    <!-- todo not clear, wether ...tips ... is used, see #1032, ...tip... is used in skills - smithing -->
-    <string name="item_bronze_arrow_tip_name">Pfeilspitzen aus Bronze</string>
-    <string name="item_iron_arrow_tip_name">Eisenpfeilspitzen</string>
-    <string name="item_steel_arrow_tip_name">Stahlpfeilspitzen</string>
-    <string name="item_mithril_arrow_tip_name">Mithrilpfeilspitzen</string>
-    <string name="item_adamantite_arrow_tip_name">Adamantitpfeilspitzen</string>
-    <string name="item_runite_arrow_tip_name">Runitpfeilspitzen</string>
 
     <!-- ===== Jewellery — plain ===== -->
     <string name="item_silver_ring_name">Silberring</string>
@@ -587,21 +579,6 @@
     <string name="item_mithril_lockpick_name">Mithrildietrich</string>
     <string name="item_adamantite_lockpick_name">Adamantitdietrich</string>
     <string name="item_runite_lockpick_name">Runitdietrich</string>
-    <string name="item_divine_hoe_name">Göttliche Hacke</string>
-    <string name="item_dwarven_hammer_name">Zwergenhammer</string>
-    <string name="item_divine_hammer_name">Göttlicher Hammer</string>
-    <string name="item_dwarven_tinderbox_name">Zwergen-Zunderbüchse</string>
-    <string name="item_divine_tinderbox_name">Göttliche Zunderbüchse</string>
-    <string name="item_dwarven_frying_pan_name">Zwergenbratpfanne</string>
-    <string name="item_divine_frying_pan_name">Göttliche Bratpfanne</string>
-    <string name="item_shadow_grappling_hook_name">Greifhaken der Schatten</string>
-    <string name="item_dwarven_grappling_hook_name">Zwergengreifhaken</string>
-    <string name="item_arcane_grappling_hook_name">Arkaner Greifhaken</string>
-    <string name="item_divine_grappling_hook_name">Göttlicher Greifhaken</string>
-    <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
-    <string name="item_dwarven_lockpick_name">Zwergendietrich</string>
-    <string name="item_shadow_lockpick_name">Dietrich der Schatten</string>
-    <string name="item_divine_lockpick_name">Göttlicher Dietrich</string>
 
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Angriffs-Gebräu</string>
@@ -660,170 +637,189 @@
     <string name="item_starfruit_seed_name">Sternfruchtsamen</string>
     <string name="item_void_lotus_seed_name">Samen des Leeren Lotus</string>
 
-    <!-- translated, not ordered ex English placeholders -->
-    <string name="item_adamantite_boots_name">Adamantitstiefel</string>
-    <string name="item_adamantite_chainbody_name">Adamantitkettenpanzer</string>
-    <string name="item_adamantite_dagger_name">Adamantit-Dolch</string>
-    <string name="item_mithril_dagger_name">Mithril-Dolch</string>
-    <string name="item_runite_dagger_name">Runitdolch</string>
-    <string name="item_shadow_dagger_name">Dolch der Schatten</string>
-    <string name="item_steel_dagger_name">Stahldolch</string>
-
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="boss_void_sovereign_name" translatable="false">The Void Sovereign</string>
-    <string name="item_abyssal_rod_name" translatable="false">Abyssal Rod</string>
-    <string name="item_adamantite_full_helmet_name" translatable="false">Adamantite Full Helmet</string>
-    <string name="item_adamantite_kiteshield_name" translatable="false">Adamantite Kiteshield</string>
-    <string name="item_adamantite_longsword_name" translatable="false">Adamantite Longsword</string>
-    <string name="item_adamantite_med_helmet_name" translatable="false">Adamantite Med Helmet</string>
-    <string name="item_adamantite_plateskirt_name" translatable="false">Adamantite Plateskirt</string>
-    <string name="item_adamantite_square_shield_name" translatable="false">Adamantite Square Shield</string>
-    <string name="item_agility_cape_name" translatable="false">Agility Cape</string>
-    <string name="item_agility_guild_cape_name" translatable="false">Agility Guild Cape</string>
-    <string name="item_amulet_of_fury_name" translatable="false">Amulet Of Fury</string>
-    <string name="item_amulet_of_strength_name" translatable="false">Amulet Of Strength</string>
-    <string name="item_amulet_of_the_kraken_name" translatable="false">Amulet Of The Kraken</string>
-    <string name="item_arcane_staff_name" translatable="false">Arcane Staff</string>
-    <string name="item_archers_guild_cape_name" translatable="false">Archers Guild Cape</string>
-    <string name="item_archers_ring_name" translatable="false">Archers Ring</string>
-    <string name="item_attack_cape_name" translatable="false">Attack Cape</string>
-    <string name="item_baby_kraken_name" translatable="false">Baby Kraken</string>
-    <string name="item_balrog_name" translatable="false">Balrog, Ancient Flame of Udûn</string>
-    <string name="item_balrog_whip_name" translatable="false">Balrog Whip</string>
-    <string name="item_balrog_wings_name" translatable="false">Balrog Wings</string>
-    <string name="item_beef_name">Gekochtes Rindfleisch</string>
-    <string name="item_berserker_ring_name" translatable="false">Berserker Ring</string>
-    <string name="item_blessed_fishing_rod_name" translatable="false">Blessed Fishing Rod</string>
-    <string name="item_bronze_boots_name" translatable="false">Bronze Boots</string>
-    <string name="item_bronze_chainbody_name" translatable="false">Bronze Chainbody</string>
-    <string name="item_bronze_full_helmet_name" translatable="false">Bronze Full Helmet</string>
-    <string name="item_bronze_kiteshield_name" translatable="false">Bronze Kiteshield</string>
-    <string name="item_bronze_longsword_name" translatable="false">Bronze Longsword</string>
-    <string name="item_bronze_med_helmet_name" translatable="false">Bronze Med Helmet</string>
-    <string name="item_bronze_plateskirt_name" translatable="false">Bronze Plateskirt</string>
-    <string name="item_bronze_square_shield_name" translatable="false">Bronze Square Shield</string>
-    <string name="item_chicken_name">Gekochtes Hühnerfleisch</string>
-    <string name="item_cooking_cape_name" translatable="false">Cooking Cape</string>
-    <string name="item_cooking_guild_cape_name" translatable="false">Cooking Guild Cape</string>
-    <string name="item_crafting_cape_name" translatable="false">Crafting Cape</string>
-    <string name="item_crafting_guild_cape_name" translatable="false">Crafting Guild Cape</string>
-    <string name="item_deep_iron_pickaxe_name" translatable="false">Deep Iron Pickaxe</string>
-    <string name="item_defense_cape_name" translatable="false">Defense Cape</string>
-    <string name="item_demon_lord_name" translatable="false">Demon Lord</string>
-    <string name="item_dragon_amulet_name" translatable="false">Dragon Amulet</string>
-    <string name="item_dragon_boots_name" translatable="false">Dragon Boots</string>
-    <string name="item_dragon_longsword_name" translatable="false">Dragon Longsword</string>
-    <string name="item_dragon_scimitar_name" translatable="false">Dragon Scimitar</string>
-    <string name="item_dragon_whelp_name" translatable="false">Dragon Whelp</string>
-    <string name="item_dwarven_axe_name" translatable="false">Dwarven Axe</string>
-    <string name="item_dwarven_boots_name" translatable="false">Dwarven Boots</string>
-    <string name="item_dwarven_fishing_rod_name" translatable="false">Dwarven Fishing Rod</string>
-    <string name="item_dwarven_helm_name" translatable="false">Dwarven Helm</string>
-    <string name="item_dwarven_hoe_name" translatable="false">Dwarven Hoe</string>
-    <string name="item_dwarven_pickaxe_name" translatable="false">Dwarven Pickaxe</string>
-    <string name="item_dwarven_platebody_name" translatable="false">Dwarven Platebody</string>
-    <string name="item_dwarven_platelegs_name" translatable="false">Dwarven Platelegs</string>
-    <string name="item_dwarven_scimitar_name" translatable="false">Dwarven Scimitar</string>
-    <string name="item_dwarven_shield_name" translatable="false">Dwarven Shield</string>
-    <string name="item_dwarven_sword_name" translatable="false">Dwarven Sword</string>
-    <string name="item_dwarven_warhammer_name" translatable="false">Dwarven Warhammer</string>
+    <string name="boss_void_sovereign_name" translatable="false">Der Gebieter der Leere</string>
+    <string name="item_abyssal_rod_name" translatable="false">Angel des Abgrunds</string>
+    <string name="item_adamantite_arrow_tip_name" translatable="false">Adamantitpfeilspitzen</string>
+    <string name="item_adamantite_boots_name" translatable="false">Adamantitstiefel</string>
+    <string name="item_adamantite_chainbody_name" translatable="false">Adamantitkettenpanzer</string>
+    <string name="item_adamantite_dagger_name" translatable="false">Adamantit-Dolch</string>
+    <string name="item_adamantite_full_helmet_name" translatable="false">Adamantit-Vollhelm</string>
+    <string name="item_adamantite_kiteshield_name" translatable="false">Adamantit-Drachenschild</string>
+    <string name="item_adamantite_longsword_name" translatable="false">Adamantit-Langschwert</string>
+    <string name="item_adamantite_med_helmet_name" translatable="false">Adamantit-Helm mit Visier</string>
+    <string name="item_adamantite_plateskirt_name" translatable="false">Adamantit-Plattenrock</string>
+    <string name="item_adamantite_square_shield_name" translatable="false">Adamantit-Langschild</string>
+    <string name="item_agility_cape_name" translatable="false">Geschicklichkeitsumhang</string>
+    <string name="item_agility_guild_cape_name" translatable="false">Gildenumhang der Geschickten</string>
+    <string name="item_amulet_of_fury_name" translatable="false">Amulett der Wut</string>
+    <string name="item_amulet_of_strength_name" translatable="false">Amulett der Stärke</string>
+    <string name="item_amulet_of_the_kraken_name" translatable="false">Amulett des Kraken</string>
+    <string name="item_arcane_grappling_hook_name">Arkaner Greifhaken</string>
+    <string name="item_arcane_staff_name" translatable="false">Arkaner Zauberstab</string>
+    <string name="item_archers_guild_cape_name" translatable="false">Gildenumhang der Bogenschützen</string>
+    <string name="item_archers_ring_name" translatable="false">Ring des Schützen</string>
+    <string name="item_attack_cape_name" translatable="false">Angriffsumhang</string>
+    <string name="item_baby_kraken_name" translatable="false">Krakenjunges</string>
+    <string name="item_balrog_name" translatable="false">Balrog, ewige Flame von Udûn</string>
+    <string name="item_balrog_whip_name" translatable="false">Peitsche des Balrog</string>
+    <string name="item_balrog_wings_name" translatable="false">Flügel des Balrog</string>
+    <string name="item_beef_name">Schnitzel</string>
+    <string name="item_berserker_ring_name" translatable="false">Ring des Berserkers</string>
+    <string name="item_blessed_fishing_rod_name" translatable="false">Gesegnete Angel</string>
+    <string name="item_bronze_arrow_tip_name" translatable="false">Pfeilspitzen aus Bronze</string>
+    <string name="item_bronze_boots_name" translatable="false">Bronze-Stiefel</string>
+    <string name="item_bronze_chainbody_name" translatable="false">Bronze-Kettenhemd</string>
+    <string name="item_bronze_full_helmet_name" translatable="false">Bronze-Vollhelm</string>
+    <string name="item_bronze_kiteshield_name" translatable="false">Bronze-Drachenschild</string>
+    <string name="item_bronze_longsword_name" translatable="false">Bronze-Langschwert</string>
+    <string name="item_bronze_med_helmet_name" translatable="false">Bronze-Helm mit Visier</string>
+    <string name="item_bronze_plateskirt_name" translatable="false">Bronze-Plattenrock</string>
+    <string name="item_bronze_square_shield_name" translatable="false">Bronze-Langschild</string>
+    <string name="item_chicken_name">Broiler</string>
+    <string name="item_cooking_cape_name" translatable="false">Kochschürze</string>
+    <string name="item_cooking_guild_cape_name" translatable="false">Gildenumhang der Köche</string>
+    <string name="item_crafting_cape_name" translatable="false">Kunsthandwerksschürze</string>
+    <string name="item_crafting_guild_cape_name" translatable="false">Gildenumhang der Kunsthandwerker</string>
+    <string name="item_deep_iron_pickaxe_name" translatable="false">Spitzhacke des tiefen Stollens</string>
+    <string name="item_defense_cape_name" translatable="false">Verteidigungsumhang</string>
+    <string name="item_demon_lord_name" translatable="false">Dämonenkönig</string>
+    <string name="item_divine_frying_pan_name">Göttliche Bratpfanne</string>
+    <string name="item_divine_grappling_hook_name">Göttlicher Greifhaken</string>
+    <string name="item_divine_hammer_name">Göttlicher Hammer</string>
+    <string name="item_divine_hoe_name">Göttliche Hacke</string>
+    <string name="item_divine_lockpick_name">Göttlicher Dietrich</string>
+    <string name="item_divine_tinderbox_name">Göttliche Zunderbüchse</string>
+    <string name="item_dragon_amulet_name" translatable="false">Amulett des Drachen</string>
+    <string name="item_dragon_boots_name" translatable="false">Stiefel des Drachen</string>
+    <string name="item_dragon_longsword_name" translatable="false">Langschwert des Drachen</string>
+    <string name="item_dragon_scimitar_name" translatable="false">Säbel des Drachen</string>
+    <string name="item_dragon_whelp_name" translatable="false">Drachenjunges</string>
+    <string name="item_dwarven_axe_name" translatable="false">Zwergische Axt</string>
+    <string name="item_dwarven_boots_name" translatable="false">Zwergische Stiefel</string>
+    <string name="item_dwarven_fishing_rod_name" translatable="false">Zwergische Angel</string>
+    <string name="item_dwarven_frying_pan_name">Zwergenbratpfanne</string>
+    <string name="item_dwarven_grappling_hook_name">Zwergengreifhaken</string>
+    <string name="item_dwarven_hammer_name">Zwergenhammer</string>
+    <string name="item_dwarven_helm_name" translatable="false">Zwergischer Helm</string>
+    <string name="item_dwarven_hoe_name" translatable="false">Zwergische Hacke</string>
+    <string name="item_dwarven_lockpick_name">Zwergendietrich</string>
+    <string name="item_dwarven_pickaxe_name" translatable="false">Zwergenspitzhacke</string>
+    <string name="item_dwarven_platebody_name" translatable="false">Zwergische Platebody</string>
+    <string name="item_dwarven_platelegs_name" translatable="false">Zwergische Platelegs</string>
+    <string name="item_dwarven_scimitar_name" translatable="false">Zwergische Scimitar</string>
+    <string name="item_dwarven_shield_name" translatable="false">Zwergischer Schild</string>
+    <string name="item_dwarven_sword_name" translatable="false">Zwergisches Schwert</string>
+    <string name="item_dwarven_tinderbox_name">Zwergen-Zunderbüchse</string>
+    <string name="item_dwarven_warhammer_name" translatable="false">Zwergischer Kriegshammer</string>
     <string name="item_ent_name" translatable="false">Ent</string>
-    <string name="item_farming_cape_name" translatable="false">Farming Cape</string>
-    <string name="item_farming_guild_cape_name" translatable="false">Farming Guild Cape</string>
-    <string name="item_firemaking_cape_name" translatable="false">Firemaking Cape</string>
-    <string name="item_firemaking_guild_cape_name" translatable="false">Firemaking Guild Cape</string>
-    <string name="item_fishing_cape_name" translatable="false">Fishing Cape</string>
-    <string name="item_fishing_guild_cape_name" translatable="false">Fishing Guild Cape</string>
+    <string name="item_farming_cape_name" translatable="false">Bauern-Umhang</string>
+    <string name="item_farming_guild_cape_name" translatable="false">Gildenumhang der Bauern</string>
+    <string name="item_firemaking_cape_name" translatable="false">Feuermacher-Umhang</string>
+    <string name="item_firemaking_guild_cape_name" translatable="false">Gildenumhang der Feuermacher</string>
+    <string name="item_fishing_cape_name" translatable="false">Angler-Umhang</string>
+    <string name="item_fishing_guild_cape_name" translatable="false">Gildenumhang der Angler</string>
     <string name="item_flame_heart_amulet_name" translatable="false">Flame Heart Amulet</string>
-    <string name="item_fletching_cape_name" translatable="false">Fletching Cape</string>
-    <string name="item_fletching_guild_cape_name" translatable="false">Fletching Guild Cape</string>
-    <string name="item_forge_pickaxe_name" translatable="false">Forge Pickaxe</string>
-    <string name="item_hellfire_staff_name" translatable="false">Hellfire Staff</string>
-    <string name="item_herblore_guild_cape_name" translatable="false">Herblore Guild Cape</string>
-    <string name="item_hp_cape_name" translatable="false">Hp Cape</string>
-    <string name="item_imp_pet_name" translatable="false">Imp Pet</string>
-    <string name="item_iron_boots_name" translatable="false">Iron Boots</string>
-    <string name="item_iron_chainbody_name" translatable="false">Iron Chainbody</string>
-    <string name="item_iron_full_helmet_name" translatable="false">Iron Full Helmet</string>
-    <string name="item_iron_kiteshield_name" translatable="false">Iron Kiteshield</string>
-    <string name="item_iron_longsword_name" translatable="false">Iron Longsword</string>
-    <string name="item_iron_med_helmet_name" translatable="false">Iron Med Helmet</string>
-    <string name="item_iron_plateskirt_name" translatable="false">Iron Plateskirt</string>
-    <string name="item_iron_square_shield_name" translatable="false">Iron Square Shield</string>
-    <string name="item_ironwood_axe_name" translatable="false">Ironwood Axe</string>
-    <string name="item_king_black_dragon_name" translatable="false">King Black Dragon</string>
-    <string name="item_kraken_name" translatable="false">Kraken</string>
-    <string name="item_kraken_tentacle_name" translatable="false">Kraken Tentacle</string>
-    <string name="item_mages_guild_cape_name" translatable="false">Mages Guild Cape</string>
-    <string name="item_magic_cape_name" translatable="false">Magic Cape</string>
-    <string name="item_magic_longbow_name" translatable="false">Magic Longbow</string>
-    <string name="item_magic_shortbow_name" translatable="false">Magic Shortbow</string>
-    <string name="item_maple_shortbow_name" translatable="false">Maple Shortbow</string>
-    <string name="item_mercantile_guild_cape_name" translatable="false">Mercantile Guild Cape</string>
-    <string name="item_mining_cape_name" translatable="false">Mining Cape</string>
-    <string name="item_mining_guild_cape_name" translatable="false">Mining Guild Cape</string>
-    <string name="item_mithril_boots_name" translatable="false">Mithril Boots</string>
-    <string name="item_mithril_chainbody_name" translatable="false">Mithril Chainbody</string>
-    <string name="item_mithril_full_helmet_name" translatable="false">Mithril Full Helmet</string>
-    <string name="item_mithril_kiteshield_name" translatable="false">Mithril Kiteshield</string>
-    <string name="item_mithril_longsword_name" translatable="false">Mithril Longsword</string>
-    <string name="item_mithril_med_helmet_name" translatable="false">Mithril Med Helmet</string>
-    <string name="item_mithril_plateskirt_name" translatable="false">Mithril Plateskirt</string>
-    <string name="item_mithril_square_shield_name" translatable="false">Mithril Square Shield</string>
-    <string name="item_mutton_name">Gekochtes Lammfleisch</string>
-    <string name="item_necklace_of_anguish_name" translatable="false">Necklace Of Anguish</string>
-    <string name="item_oak_shortbow_name" translatable="false">Oak Shortbow</string>
-    <string name="item_platinum_ore_name" translatable="false">Platinum Ore</string>
-    <string name="item_prayer_cape_name" translatable="false">Prayer Cape</string>
-    <string name="item_prayer_guild_cape_name" translatable="false">Prayer Guild Cape</string>
-    <string name="item_ranged_cape_name" translatable="false">Ranged Cape</string>
-    <string name="item_rat_meat_name">Rattenfleisch</string>
-    <string name="item_ring_of_dragons_might_name" translatable="false">Ring Of Dragons Might</string>
-    <string name="item_ring_of_flame_name" translatable="false">Ring Of Flame</string>
-    <string name="item_ring_of_recoil_name" translatable="false">Ring Of Recoil</string>
-    <string name="item_ring_of_suffering_name" translatable="false">Ring Of Suffering</string>
-    <string name="item_ring_of_the_seas_name" translatable="false">Ring Of The Seas</string>
-    <string name="item_ring_of_wealth_name" translatable="false">Ring Of Wealth</string>
-    <string name="item_rock_golem_name" translatable="false">Rock Golem</string>
-    <string name="item_runecrafting_cape_name" translatable="false">Runecrafting Cape</string>
-    <string name="item_runecrafting_guild_cape_name" translatable="false">Runecrafting Guild Cape</string>
-    <string name="item_runite_boots_name" translatable="false">Runite Boots</string>
-    <string name="item_runite_chainbody_name" translatable="false">Runite Chainbody</string>
-    <string name="item_runite_full_helmet_name" translatable="false">Runite Full Helmet</string>
-    <string name="item_runite_kiteshield_name" translatable="false">Runite Kiteshield</string>
-    <string name="item_runite_longsword_name" translatable="false">Runite Longsword</string>
-    <string name="item_runite_med_helmet_name" translatable="false">Runite Med Helmet</string>
-    <string name="item_runite_plateskirt_name" translatable="false">Runite Plateskirt</string>
-    <string name="item_runite_square_shield_name" translatable="false">Runite Square Shield</string>
-    <string name="item_sanctum_axe_name" translatable="false">Sanctum Axe</string>
-    <string name="item_seers_ring_name" translatable="false">Seers Ring</string>
-    <string name="item_shortbow_name" translatable="false">Shortbow</string>
-    <string name="item_silver_diamond_necklace_name" translatable="false">Silver Diamond Necklace</string>
-    <string name="item_silver_diamond_ring_name" translatable="false">Silver Diamond Ring</string>
-    <string name="item_silver_emerald_necklace_name" translatable="false">Silver Emerald Necklace</string>
-    <string name="item_silver_emerald_ring_name" translatable="false">Silver Emerald Ring</string>
-    <string name="item_silver_ruby_necklace_name" translatable="false">Silver Ruby Necklace</string>
-    <string name="item_silver_ruby_ring_name" translatable="false">Silver Ruby Ring</string>
-    <string name="item_smithing_cape_name" translatable="false">Smithing Cape</string>
-    <string name="item_smithing_guild_cape_name" translatable="false">Smithing Guild Cape</string>
-    <string name="item_steel_boots_name" translatable="false">Steel Boots</string>
-    <string name="item_steel_chainbody_name" translatable="false">Steel Chainbody</string>
-    <string name="item_steel_full_helmet_name" translatable="false">Steel Full Helmet</string>
-    <string name="item_steel_kiteshield_name" translatable="false">Steel Kiteshield</string>
-    <string name="item_steel_longsword_name" translatable="false">Steel Longsword</string>
-    <string name="item_steel_med_helmet_name" translatable="false">Steel Med Helmet</string>
-    <string name="item_steel_plateskirt_name" translatable="false">Steel Plateskirt</string>
-    <string name="item_steel_square_shield_name" translatable="false">Steel Square Shield</string>
-    <string name="item_strength_cape_name" translatable="false">Strength Cape</string>
-    <string name="item_tangleroot_name" translatable="false">Tangleroot</string>
-    <string name="item_tiny_templar_name" translatable="false">Tiny Templar</string>
-    <string name="item_tormented_necklace_name" translatable="false">Tormented Necklace</string>
-    <string name="item_trident_of_the_seas_name" translatable="false">Trident Of The Seas</string>
-    <string name="item_warriors_guild_cape_name" translatable="false">Warriors Guild Cape</string>
-    <string name="item_willow_shortbow_name" translatable="false">Willow Shortbow</string>
-    <string name="item_woodcutting_cape_name" translatable="false">Woodcutting Cape</string>
-    <string name="item_woodcutting_guild_cape_name" translatable="false">Woodcutting Guild Cape</string>
-    <string name="item_yew_longbow_name" translatable="false">Yew Longbow</string>
-    <string name="item_yew_shortbow_name" translatable="false">Yew Shortbow</string>
+    <string name="item_fletching_cape_name" translatable="false">Pfeilmacher-Umhang</string>
+    <string name="item_fletching_guild_cape_name" translatable="false">Gildenumhang der Pfeilmacher</string>
+    <string name="item_forge_pickaxe_name" translatable="false">Spitzhacke des Schmiedefeuers</string>
+    <string name="item_hellfire_staff_name" translatable="false">Stab des Höllenfeuers</string>
+    <string name="item_herblore_guild_cape_name" translatable="false">Gildenumhang der Alchemisten</string>
+    <string name="item_hp_cape_name" translatable="false">Lebenspunkte-Umhang</string>
+    <string name="item_imp_pet_name" translatable="false">Anhänglicher Kobold</string>
+    <string name="item_iron_arrow_tip_name" translatable="false">Eisenpfeilspitzen</string>
+    <string name="item_iron_boots_name" translatable="false">Eisen-Stiefel</string>
+    <string name="item_iron_chainbody_name" translatable="false">Eisen-Kettenhemd</string>
+    <string name="item_iron_full_helmet_name" translatable="false">Eisen-Vollhelm</string>
+    <string name="item_iron_kiteshield_name" translatable="false">Eisen-Drachenschild</string>
+    <string name="item_iron_longsword_name" translatable="false">Eisen-Langschwert</string>
+    <string name="item_iron_med_helmet_name" translatable="false">Eisen-Helm mit Visier</string>
+    <string name="item_iron_plateskirt_name" translatable="false">Eisen-Plattenrock</string>
+    <string name="item_iron_square_shield_name" translatable="false">Eisen-Langschild</string>
+    <string name="item_ironwood_axe_name" translatable="false">Eisenwald-Axt</string>
+    <string name="item_king_black_dragon_name" translatable="false">König der Schwarzdrachen</string><!-- duplicate -->
+    <string name="item_kraken_name" translatable="false">Krake</string>
+    <string name="item_kraken_tentacle_name" translatable="false">Greifarm des Kraken</string>
+    <string name="item_mages_guild_cape_name" translatable="false">Gildenumhang der Magier</string>
+    <string name="item_magic_cape_name" translatable="false">Magier-Umhang</string>
+    <string name="item_magic_longbow_name" translatable="false">Magie-Langbogen</string>
+    <string name="item_magic_shortbow_name" translatable="false">Magie-Kurzbogen</string>
+    <string name="item_maple_shortbow_name" translatable="false">Ahorn-Kurzbogen</string>
+    <string name="item_mercantile_guild_cape_name" translatable="false">Gildenumhang der Händler</string>
+    <string name="item_mining_cape_name" translatable="false">Bergbau-Umhang</string>
+    <string name="item_mining_guild_cape_name" translatable="false">Gildenumhang des Bergbaus</string>
+    <string name="item_mithril_arrow_tip_name" translatable="false">Mithrilpfeilspitzen</string>
+    <string name="item_mithril_boots_name" translatable="false">Mithril-Stiefel</string>
+    <string name="item_mithril_chainbody_name" translatable="false">Mithril-Kettenhemd</string>
+    <string name="item_mithril_dagger_name" translatable="false">Mithril-Dolch</string>
+    <string name="item_mithril_full_helmet_name" translatable="false">Mithril-Vollhelm</string>
+    <string name="item_mithril_kiteshield_name" translatable="false">Mithril-Drachenschild</string>
+    <string name="item_mithril_longsword_name" translatable="false">Mithril-Langschwert</string>
+    <string name="item_mithril_med_helmet_name" translatable="false">Mithril-Helm mit Visier</string>
+    <string name="item_mithril_plateskirt_name" translatable="false">Mithril-Plattenrock</string>
+    <string name="item_mithril_square_shield_name" translatable="false">Mithril-Langschild</string>
+    <string name="item_mutton_name">Gekochter Hammel</string>
+    <string name="item_necklace_of_anguish_name" translatable="false">Halskette der Beklemmung</string>
+    <string name="item_oak_shortbow_name" translatable="false">Eichen-Kurzbogen</string>
+    <string name="item_platinum_ore_name" translatable="false">Platinerz</string>
+    <string name="item_prayer_cape_name" translatable="false">Gebetsgewand</string>
+    <string name="item_prayer_guild_cape_name" translatable="false">Gildenumhang der Betenden</string>
+    <string name="item_ranged_cape_name" translatable="false">Schützenmantel</string>
+	<string name="item_rat_meat_name">Rattenfleisch</string>
+    <string name="item_ring_of_dragons_might_name" translatable="false">Ring der Stärke des Drachens</string>
+    <string name="item_ring_of_flame_name" translatable="false">Ring der Flamme</string>
+    <string name="item_ring_of_recoil_name" translatable="false">Ring der Rückstoß</string>
+    <string name="item_ring_of_suffering_name" translatable="false">Ring des Leidens</string>
+    <string name="item_ring_of_the_seas_name" translatable="false">Ring der Meere</string>
+    <string name="item_ring_of_wealth_name" translatable="false">Ring des Wohlstands</string>
+    <string name="item_rock_golem_name" translatable="false">Stein-Golem</string>
+    <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
+    <string name="item_runecrafting_cape_name" translatable="false">Runenmacher-Umhang</string>
+    <string name="item_runecrafting_guild_cape_name" translatable="false">Gildenumhang der Runenmacher</string>
+    <string name="item_runite_arrow_tip_name" translatable="false">Runitpfeilspitzen</string>
+    <string name="item_runite_boots_name" translatable="false">Runit-Stiefel</string>
+    <string name="item_runite_chainbody_name" translatable="false">Runit-Kettenhemd</string>
+    <string name="item_runite_dagger_name" translatable="false">Runitdolch</string>
+    <string name="item_runite_full_helmet_name" translatable="false">Runit-Vollhelm</string>
+    <string name="item_runite_kiteshield_name" translatable="false">Runit-Drachenschild</string>
+    <string name="item_runite_longsword_name" translatable="false">Runit-Langschwert</string>
+    <string name="item_runite_med_helmet_name" translatable="false">Runit-Helm mit Visier</string>
+    <string name="item_runite_plateskirt_name" translatable="false">Runit-Plattenrock</string>
+    <string name="item_runite_square_shield_name" translatable="false">Runit-Langschild</string>
+    <string name="item_sanctum_axe_name" translatable="false">Geheiligte Axt aus dem verdorbenen Wald</string>
+    <string name="item_seers_ring_name" translatable="false">Ring des Sehers</string>
+    <string name="item_shadow_dagger_name">Dolch der Schatten</string>
+    <string name="item_shadow_grappling_hook_name">Greifhaken der Schatten</string>
+    <string name="item_shadow_lockpick_name">Dietrich der Schatten</string>
+    <string name="item_shortbow_name" translatable="false">Kurzbogen</string>
+    <string name="item_silver_diamond_necklace_name" translatable="false">Silber-Diamant-Halskette</string>
+    <string name="item_silver_diamond_ring_name" translatable="false">Silber-Diamantring</string>
+    <string name="item_silver_emerald_necklace_name" translatable="false">Silber-Smaragd-Halskette</string>
+    <string name="item_silver_emerald_ring_name" translatable="false">Silber-Smaragd-Ring</string>
+    <string name="item_silver_ruby_necklace_name" translatable="false">Silber-Rubin-Halskette</string>
+    <string name="item_silver_ruby_ring_name" translatable="false">Silber-Rubin-Ring</string>
+    <string name="item_smithing_cape_name" translatable="false">Schmiedeschürze</string>
+    <string name="item_smithing_guild_cape_name" translatable="false">Gildenumhang der Schmiede</string>
+    <string name="item_steel_arrow_tip_name">Stahlpfeilspitzen</string>
+    <string name="item_steel_boots_name" translatable="false">Stahl-Stiefel</string>
+    <string name="item_steel_chainbody_name" translatable="false">Stahl-Kettenhemd</string>
+    <string name="item_steel_dagger_name">Stahldolch</string>
+    <string name="item_steel_full_helmet_name" translatable="false">Stahl-Vollhelm</string>
+    <string name="item_steel_kiteshield_name" translatable="false">Stahl-Drachenschild</string>
+    <string name="item_steel_longsword_name" translatable="false">Stahl-Langschwert</string>
+    <string name="item_steel_med_helmet_name" translatable="false">Stahl-Helm mit Visier</string>
+    <string name="item_steel_plateskirt_name" translatable="false">Stahl-Plattenrock</string>
+    <string name="item_steel_square_shield_name" translatable="false">Stahl-Langschild</string>
+    <string name="item_strength_cape_name" translatable="false">Stärke-Umhang</string>
+    <string name="item_tangleroot_name" translatable="false">Verwickelte Wurzel</string>
+    <string name="item_tiny_templar_name" translatable="false">Winziger Ritterfisch</string>
+    <string name="item_tormented_necklace_name" translatable="false">Halskette der gequälten Seele</string>
+    <string name="item_trident_of_the_seas_name" translatable="false">Dreizack der Meere</string>
+    <string name="item_warriors_guild_cape_name" translatable="false">Gildenumhang der Krieger</string>
+    <string name="item_willow_shortbow_name" translatable="false">Weiden-Kurzbogen</string>
+    <string name="item_woodcutting_cape_name" translatable="false">Holzfällerei-Umhang</string>
+    <string name="item_woodcutting_guild_cape_name" translatable="false">Gildenumhang der Holzfäller</string>
+    <string name="item_yew_longbow_name" translatable="false">Eiben-Langbogen</string>
+    <string name="item_yew_shortbow_name" translatable="false">Eiben-Kurzbogen</string>
 </resources>

@@ -121,6 +121,7 @@ internal fun MiningSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     onSelect: (String) -> Unit,
@@ -158,7 +159,7 @@ internal fun MiningSheet(
             ores.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, ore) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(ore.xpPerOre, efficiency * xpBonusMult)
+                    val xpGain = (SkillSimulator.estimateGatheringXp(ore.xpPerOre, efficiency * xpBonusMult) * (1 + petBoostPct / 100.0)).toLong()
                     ActivityRow(
                         name             = GameStrings.itemName(context, key),
                         detail           = stringResource(R.string.skills_level_req_xp, ore.levelRequired, ore.xpPerOre),
@@ -195,6 +196,7 @@ internal fun WoodcuttingSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     onSelect: (String) -> Unit,
@@ -226,7 +228,7 @@ internal fun WoodcuttingSheet(
             trees.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, tree) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(tree.xpPerLog, efficiency * xpBonusMult)
+                    val xpGain = (SkillSimulator.estimateGatheringXp(tree.xpPerLog, efficiency * xpBonusMult) * (1 + petBoostPct / 100.0)).toLong()
                     ActivityRow(
                         name             = GameStrings.itemName(context, tree.logName),
                         detail           = stringResource(R.string.skills_log_desc, tree.levelRequired, tree.xpPerLog),
@@ -263,6 +265,7 @@ internal fun FishingSheet(
     sessionDurationMs: Long,
     currentXp: Long = 0L,
     efficiency: Float = 1f,
+    petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     onSelect: (String) -> Unit,
@@ -294,7 +297,7 @@ internal fun FishingSheet(
             fish.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, f) ->
-                    val xpGain = SkillSimulator.estimateGatheringXp(f.xpPerCatch, efficiency * xpBonusMult)
+                    val xpGain = (SkillSimulator.estimateGatheringXp(f.xpPerCatch, efficiency * xpBonusMult) * (1 + petBoostPct / 100.0)).toLong()
                     ActivityRow(
                         name             = GameStrings.itemName(context, key),
                         detail           = stringResource(R.string.skills_fish_desc, f.levelRequired, f.xpPerCatch),

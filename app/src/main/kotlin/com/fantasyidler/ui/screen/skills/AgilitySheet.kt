@@ -118,6 +118,8 @@ internal fun AgilitySheet(
     isQueueFull: Boolean,
     sessionDurationMs: Long,
     currentXp: Long = 0L,
+    efficiency: Float = 1f,
+    petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     onSelect: (String) -> Unit,
@@ -150,7 +152,7 @@ internal fun AgilitySheet(
             courses.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, course) ->
-                    val xpGain = (SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel) * xpBonusMult).toLong()
+                    val xpGain = (SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel, efficiency) * (1 + petBoostPct / 100f) * xpBonusMult).toLong()
                     ActivityRow(
                         name             = course.displayName,
                         detail           = context.getString(R.string.skills_agility_course_detail, course.levelRequired, course.xpPerSuccess),

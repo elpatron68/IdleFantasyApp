@@ -938,6 +938,7 @@
     <string name="guild_do_dailies_hint">Completa misiones diarias para avanzar al siguiente rango</string>
     <string name="guild_name_thieving">Gremio de Ladrones</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
+    <string name="guild_name_construction">Gremio de Constructores</string>
     <string name="skill_mercantile">Mercantile</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Trade Routes</string>
@@ -1077,10 +1078,13 @@
     <string name="crafting_cat_ammunition">Munición</string>
     <string name="crafting_cat_jewellery">Joyería</string>
     <string name="crafting_cat_potion">Poción</string>
+    <string name="crafting_cat_arrow">Flecha</string>
+    <string name="crafting_cat_bow">Arco</string>
+    <string name="crafting_cat_plank">Tablón</string>
+    <string name="crafting_cat_staff">Bastón</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantio</string>
-    <string name="crafting_tier_arrow">Flecha</string>
     <string name="crafting_tier_bronze">Bronce</string>
     <string name="crafting_tier_gold">Oro</string>
     <string name="crafting_tier_iron">Hierro</string>
@@ -1090,9 +1094,7 @@
     <string name="crafting_tier_oak">Roble</string>
     <string name="crafting_tier_platinum">Platino</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Arco corto</string>
     <string name="crafting_tier_silver">Plata</string>
-    <string name="crafting_tier_staff">Bastón</string>
     <string name="crafting_tier_steel">Acero</string>
     <string name="crafting_tier_willow">Sauce</string>
     <string name="crafting_tier_yew">Tejo</string>
@@ -1366,6 +1368,7 @@
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">XP combinado</string>
     <string name="bonus_yield">+%1$d%% rendimiento</string>
+    <string name="bonus_boost">+%1$d%% refuerzo</string>
     <string name="bonus_session_shorter">%1$d min de sesiones más cortas</string>
     <string name="bonus_coin_return">+%1$d%% devolución de monedas</string>
     <string name="snackbar_added_to_queue">Añadido a la cola: %1$s.</string>

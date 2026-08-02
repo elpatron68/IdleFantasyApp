@@ -54,6 +54,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.MotionDurationScale
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -82,6 +83,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import com.fantasyidler.simulator.CarnivalSimulator
@@ -783,19 +785,25 @@ private fun ShellGameCard(gameState: ActiveGameState, difficulty: Difficulty, vi
                 val stepPx    = with(density) { 64.dp.toPx() }
                 val offsets   = remember(gameState) { Array(cupCount) { Animatable(0f) } }
                 LaunchedEffect(swaps) {
-                    var gemSlot = gameState.gemPos
-                    for ((a, b) in swaps) {
-                        val dist = (b - a) * stepPx
-                        coroutineScope {
-                            launch { offsets[a].animateTo( dist, animationSpec = tween(animMs)) }
-                            launch { offsets[b].animateTo(-dist, animationSpec = tween(animMs)) }
+                    // The shuffle is the gameplay itself, so it must ignore the system animator
+                    // duration scale: at 0 the cups never move, at 10x the game is trivial
+                    withContext(object : MotionDurationScale {
+                        override val scaleFactor: Float get() = 1f
+                    }) {
+                        var gemSlot = gameState.gemPos
+                        for ((a, b) in swaps) {
+                            val dist = (b - a) * stepPx
+                            coroutineScope {
+                                launch { offsets[a].animateTo( dist, animationSpec = tween(animMs)) }
+                                launch { offsets[b].animateTo(-dist, animationSpec = tween(animMs)) }
+                            }
+                            offsets[a].snapTo(0f)
+                            offsets[b].snapTo(0f)
+                            if (gemSlot == a) gemSlot = b else if (gemSlot == b) gemSlot = a
+                            delay(pauseMs)
                         }
-                        offsets[a].snapTo(0f)
-                        offsets[b].snapTo(0f)
-                        if (gemSlot == a) gemSlot = b else if (gemSlot == b) gemSlot = a
-                        delay(pauseMs)
+                        viewModel.finishShellGame(gemSlot)
                     }
-                    viewModel.finishShellGame(gemSlot)
                 }
                 Column(
                     modifier            = Modifier.fillMaxWidth(),

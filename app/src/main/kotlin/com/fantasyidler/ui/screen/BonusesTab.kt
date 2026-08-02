@@ -106,8 +106,10 @@ internal fun BonusesTab(
             allEquipment = allEquipment
         )
         val isCombatStat = skillKey in COMBAT_STAT_SKILLS
-        val yieldPct = if (!isCombatStat && skillKey != "slayer") ((capeMult - 1f) * 100 + 0.5f).toInt() else 0
-        val capeXpPct = if (isCombatStat || skillKey == "slayer") ((capeMult - 1f) * 100 + 0.5f).toInt() else 0
+        // Agility's cape boosts XP, not yield (agility produces no items)
+        val isXpCape  = isCombatStat || skillKey == "slayer" || skillKey == "agility"
+        val yieldPct  = if (!isXpCape) ((capeMult - 1f) * 100 + 0.5f).toInt() else 0
+        val capeXpPct = if (isXpCape) ((capeMult - 1f) * 100 + 0.5f).toInt() else 0
 
         val specificPetPct = specificBonusPets.filter { it.boostedSkill == skillKey }.sumOf { it.boostPercent }
         val totalPetPct    = specificPetPct + allPetBoostPct
@@ -242,9 +244,11 @@ internal fun BonusesTab(
                     )
                 }
                 if (entry.yieldPct > 0) {
+                    // Prayer's cape boosts burial XP rather than item yield
+                    val yieldLabelRes = if (entry.skillKey == "prayer") R.string.bonus_boost else R.string.bonus_yield
                     BonusRow(
                         name   = entry.skillName,
-                        pct    = stringResource(R.string.bonus_yield, entry.yieldPct),
+                        pct    = stringResource(yieldLabelRes, entry.yieldPct),
                         scope  = "",
                         detail = entry.yieldSource,
                     )
@@ -265,9 +269,10 @@ internal fun BonusesTab(
                         SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)) / 60_000L).toInt()
                     if (savedMinutes > 0) {
                         BonusRow(
-                            name  = GameStrings.skillName(context, Skills.AGILITY),
-                            pct   = stringResource(R.string.bonus_session_shorter, savedMinutes),
-                            scope = stringResource(R.string.bonus_all_skills),
+                            name   = GameStrings.skillName(context, Skills.AGILITY),
+                            pct    = "-" + stringResource(R.string.combat_duration_min, savedMinutes),
+                            scope  = stringResource(R.string.bonus_all_skills),
+                            detail = stringResource(R.string.bonus_session_shorter, savedMinutes),
                         )
                     }
                 }
@@ -303,7 +308,7 @@ internal fun BonusesTab(
                 item {
                     BonusRow(
                         name  = stringResource(R.string.tower_title),
-                        pct   = stringResource(R.string.bonus_hp, state.towerHpBonus),
+                        pct   = stringResource(R.string.bonus_hp, state.towerHpBonus * 10),
                         scope = stringResource(R.string.bonus_tower)
                     )
                 }

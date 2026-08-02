@@ -680,6 +680,7 @@
     <string name="guild_name_prayer">Serikat Berdoa</string>
     <string name="guild_name_thieving">Serikat Pencuri</string>
     <string name="guild_name_mercantile">Serikat Pedagang</string>
+    <string name="guild_name_construction">Serikat Pembangun</string>
     <string name="skill_mercantile">Perdagangan</string>
     <string name="label_support_skills">Sokongan</string>
     <string name="mercantile_routes_label">Rute Perdagangan</string>
@@ -876,8 +877,11 @@
     <string name="crafting_cat_ammunition">Amunisi</string>
     <string name="crafting_cat_jewellery">Perhiasan</string>
     <string name="crafting_cat_potion">Ramuan</string>
+    <string name="crafting_cat_arrow">Anak panah</string>
+    <string name="crafting_cat_bow">Busur</string>
+    <string name="crafting_cat_plank">Papan</string>
+    <string name="crafting_cat_staff">Tongkat</string>
     <string name="crafting_tier_adamantite">Adamantit</string>
-    <string name="crafting_tier_arrow">Anak panah</string>
     <string name="crafting_tier_bronze">Perunggu</string>
     <string name="crafting_tier_gold">Emas</string>
     <string name="crafting_tier_iron">Besi</string>
@@ -887,9 +891,7 @@
     <string name="crafting_tier_oak">Pohon Ek</string>
     <string name="crafting_tier_platinum">Platinum</string>
     <string name="crafting_tier_runite">Runite</string>
-    <string name="crafting_tier_shortbow">Busur pendek</string>
     <string name="crafting_tier_silver">Perak</string>
-    <string name="crafting_tier_staff">Tongkat</string>
     <string name="crafting_tier_steel">Baja</string>
     <string name="crafting_tier_willow">Pohon Willow</string>
     <string name="crafting_tier_yew">Pohon Yew</string>
@@ -1173,6 +1175,7 @@
     <string name="armory_stat_cape">XP Bonus</string>
     <string name="armory_stat_cape_yield">Yield Bonus</string>
     <string name="armory_stat_cape_boost">Bonus Peningkatan</string>
+    <string name="bonus_boost">+%1$d%% peningkatan</string>
     <string name="armory_source_carnival">Carnival Prize Shop</string>
     <string name="armory_source_smithing">Pandai besi</string>
     <string name="armory_source_crafting">Perhiasan</string>

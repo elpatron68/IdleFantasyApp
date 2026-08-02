@@ -884,6 +884,7 @@
     <string name="guild_name_prayer">Гильдия молитвы</string>
     <string name="guild_name_thieving">Гильдия воров</string>
     <string name="guild_name_mercantile">Гильдия торговцев</string>
+    <string name="guild_name_construction">Гильдия строителей</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Торговля</string>
@@ -1104,10 +1105,13 @@
     <string name="crafting_cat_ammunition">Боеприпасы</string>
     <string name="crafting_cat_jewellery">Ювелирные изделия</string>
     <string name="crafting_cat_potion">Зелье</string>
+    <string name="crafting_cat_arrow">Стрелы</string>
+    <string name="crafting_cat_bow">Лук</string>
+    <string name="crafting_cat_plank">Доска</string>
+    <string name="crafting_cat_staff">Посох</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Адамантит</string>
-    <string name="crafting_tier_arrow">Стрелы</string>
     <string name="crafting_tier_bronze">Бронза</string>
     <string name="crafting_tier_gold">Золото</string>
     <string name="crafting_tier_iron">Железо</string>
@@ -1117,9 +1121,7 @@
     <string name="crafting_tier_oak">Дуб</string>
     <string name="crafting_tier_platinum">Платина</string>
     <string name="crafting_tier_runite">Рунит</string>
-    <string name="crafting_tier_shortbow">Короткий лук</string>
     <string name="crafting_tier_silver">Серебро</string>
-    <string name="crafting_tier_staff">Посох</string>
     <string name="crafting_tier_steel">Сталь</string>
     <string name="crafting_tier_willow">Ива</string>
     <string name="crafting_tier_yew">Тис</string>
@@ -1398,6 +1400,7 @@
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">Суммарный XP</string>
     <string name="bonus_yield">+%1$d%% выход</string>
+    <string name="bonus_boost">+%1$d%% усиление</string>
     <string name="bonus_session_shorter">На %1$d мин короче сессии</string>
     <string name="bonus_coin_return">+%1$d%% возврат монет</string>
     <string name="snackbar_added_to_queue">Добавлено в очередь: %1$s.</string>

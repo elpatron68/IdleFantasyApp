@@ -1575,4 +1575,10 @@
     <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
     <string name="farming_harvest_all_complete">All Patches Harvested!</string>
     <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
+    <string name="guild_name_construction">Builders Guild</string>
+    <string name="crafting_cat_arrow">Arrow</string>
+    <string name="crafting_cat_bow">Bow</string>
+    <string name="crafting_cat_plank">Plank</string>
+    <string name="crafting_cat_staff">Staff</string>
+    <string name="bonus_boost">+%1$d%% boost</string>
 </resources>

@@ -83,6 +83,7 @@ data class SkillsUiState(
     val cookingEfficiency: Float = 1.0f,
     val cropsReadyCount: Int = 0,
     val xpBonusMult: Float = 1.0f,
+    val petBoosts: Map<String, Int> = emptyMap(),
     val sessionDurationMs: Long = 0L,
     /** Actual per-log burn duration, tinderbox tier bonus applied. Keyed by log key. */
     val firemakingPerLogMs: Map<String, Long> = emptyMap(),
@@ -178,6 +179,8 @@ class SkillsViewModel @Inject constructor(
                 thievingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK],       EquipSlot.LOCKPICK,       0),
                 cookingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0),
                 xpBonusMult           = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags),
+                petBoosts             = listOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
+                    .associateWith { petBoostFor(player.pets, it) },
                 sessionDurationMs     = SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, flags.skillPrestige[Skills.AGILITY] ?: 0),
                 firemakingPerLogMs    = gameData.logs.mapValues { (_, log) ->
                     val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, log.levelRequired)
@@ -759,7 +762,10 @@ class SkillsViewModel @Inject constructor(
                     )
                     Skills.AGILITY     -> {
                         val course = gameData.agilityCourses[activityKey]
-                        SkillSimulator.estimateAgilityXp(course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility)
+                        SkillSimulator.estimateAgilityXp(
+                            course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility,
+                            gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK),
+                        )
                     }
                     else               -> 0L
                 }

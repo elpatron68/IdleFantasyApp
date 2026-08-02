@@ -379,9 +379,10 @@ object SkillSimulator {
         max(1, efficiency.roundToInt()) * 60
 
     /** Estimated total XP for a 60-frame agility session. */
-    fun estimateAgilityXp(xpPerSuccess: Int, levelRequired: Int, currentAgilityLevel: Int): Long {
+    fun estimateAgilityXp(xpPerSuccess: Int, levelRequired: Int, currentAgilityLevel: Int, toolEfficiency: Float = 1f): Long {
         val successRate = (0.80 + (currentAgilityLevel - levelRequired) * 0.02).coerceAtMost(0.95)
-        return (2.0 * successRate * xpPerSuccess).toLong() * 60L
+        val lapsPerMinute = (LAPS_PER_MINUTE * toolEfficiency).roundToInt().coerceAtLeast(1)
+        return (lapsPerMinute * successRate * xpPerSuccess).toLong() * 60L
     }
 
     // ------------------------------------------------------------------
