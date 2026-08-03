@@ -1581,4 +1581,7 @@
     <string name="crafting_cat_plank">Plank</string>
     <string name="crafting_cat_staff">Staff</string>
     <string name="bonus_boost">+%1$d%% boost</string>
+    <string name="guild_name_slayer">Slayers Guild</string>
+    <string name="guild_quest_desc_slayer_task">Complete %1$d slayer tasks for the %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Defeat %1$d enemies while on a slayer task.</string>
 </resources>

@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -85,7 +86,16 @@ fun TowerScreen(
             return@Scaffold
         }
 
+        val listState  = rememberLazyListState()
+        val hasSession = state.towerSession != null
+        // Starting a session collapses the pickers in the header card, which would
+        // otherwise strand the scroll position partway down the milestone list (issue #1259).
+        LaunchedEffect(hasSession) {
+            if (hasSession) listState.animateScrollToItem(0)
+        }
+
         LazyColumn(
+            state          = listState,
             modifier       = Modifier
                 .padding(padding)
                 .fillMaxSize(),

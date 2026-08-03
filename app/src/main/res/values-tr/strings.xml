@@ -944,6 +944,9 @@
     <string name="guild_name_thieving">Hirsizlar Loncasi</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
     <string name="guild_name_construction">İnşaatçılar Loncası</string>
+    <string name="guild_name_slayer">Slayers Guild</string>
+    <string name="guild_quest_desc_slayer_task">%2$s için %1$d Slayer görevi tamamlayın.</string>
+    <string name="guild_quest_desc_slayer_kill">Bir Slayer görevindeyken %1$d düşmanı yenin.</string>
     <string name="skill_mercantile">Mercantile</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Trade Routes</string>

@@ -88,6 +88,8 @@ private fun localizedQuestDesc(type: String, target: String, amount: Int, guild:
         "trade"      -> stringResource(R.string.guild_quest_desc_trade, amount, GameStrings.tradeRouteName(context, target), guildName)
         "earn_coins"  -> stringResource(R.string.guild_quest_desc_earn_coins, amount.toLong().formatCoins(), guildName)
         "pickpocket"  -> stringResource(R.string.guild_quest_desc_pickpocket, amount, GameStrings.thievingNpcName(context, target), guildName)
+        "slayer_task" -> stringResource(R.string.guild_quest_desc_slayer_task, amount, guildName)
+        "slayer_kill" -> stringResource(R.string.guild_quest_desc_slayer_kill, amount)
         else          -> ""
     }
 }

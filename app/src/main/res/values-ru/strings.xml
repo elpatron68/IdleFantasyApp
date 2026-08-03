@@ -885,6 +885,9 @@
     <string name="guild_name_thieving">Гильдия воров</string>
     <string name="guild_name_mercantile">Гильдия торговцев</string>
     <string name="guild_name_construction">Гильдия строителей</string>
+    <string name="guild_name_slayer">Гильдия убийц</string>
+    <string name="guild_quest_desc_slayer_task">Выполнить %1$d заданий Убийцы для %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Победить %1$d врагов во время задания Убийцы.</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Торговля</string>

@@ -875,6 +875,9 @@
     <string name="guild_name_thieving">盗賊ギルド</string>
     <string name="guild_name_mercantile">商人ギルド</string>
     <string name="guild_name_construction">建築ギルド</string>
+    <string name="guild_name_slayer">スレイヤーギルド</string>
+    <string name="guild_quest_desc_slayer_task">%2$sのためにスレイヤー任務を%1$d回完了する。</string>
+    <string name="guild_quest_desc_slayer_kill">スレイヤー任務中に敵を%1$d体倒す。</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">商業</string>

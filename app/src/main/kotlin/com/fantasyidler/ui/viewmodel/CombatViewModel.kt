@@ -872,6 +872,9 @@ class CombatViewModel @Inject constructor(
                     ?.let { playerRepo.addItems(it) }
             }
             playerRepo.prestigeSkill(skillName)
+            // The repository resets flags.activeSpell if it now outlevels the player; drop the
+            // in-memory pick too or the Gear tab keeps showing the stale spell (issue #1256).
+            if (skillName == Skills.MAGIC) _extra.update { it.copy(selectedSpell = null) }
             if (abandonedSession != null) queuedSessionStarter.startNextQueued()
         }
     }

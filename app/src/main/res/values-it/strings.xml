@@ -892,6 +892,9 @@
     <string name="guild_name_thieving">Gilda dei Ladri</string>
     <string name="guild_name_mercantile">Gilda dei Mercanti</string>
     <string name="guild_name_construction">Gilda dei Costruttori</string>
+    <string name="guild_name_slayer">Gilda dei Sicari</string>
+    <string name="guild_quest_desc_slayer_task">Completa %1$d incarichi da Sicario per la %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Sconfiggi %1$d nemici durante un incarico da Sicario.</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Mercantile</string>

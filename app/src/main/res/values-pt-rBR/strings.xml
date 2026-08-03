@@ -872,6 +872,9 @@
     <string name="guild_name_thieving">Guilda dos Ladrões</string>
     <string name="guild_name_mercantile">Guilda dos Mercadores</string>
     <string name="guild_name_construction">Guilda dos Construtores</string>
+    <string name="guild_name_slayer">Guilda do Extermínio</string>
+    <string name="guild_quest_desc_slayer_task">Complete %1$d tarefas de Extermínio para a %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Derrote %1$d inimigos durante uma tarefa de Extermínio.</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Mercantil</string>

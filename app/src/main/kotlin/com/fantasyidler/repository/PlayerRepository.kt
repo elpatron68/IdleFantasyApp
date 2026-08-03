@@ -825,11 +825,23 @@ class PlayerRepository @Inject constructor(
             }
         }
 
+        var newFlags = flags.copy(skillPrestige = newPrestige)
+        if (skillName == Skills.MAGIC) {
+            val magicLevel = levels[Skills.MAGIC] ?: 1
+            val activeSpell = newFlags.activeSpell?.let { gameData.spells[it] }
+            if (activeSpell != null && activeSpell.magicLevelRequired > magicLevel) {
+                val fallback = gameData.spells.values
+                    .filter { it.magicLevelRequired <= magicLevel }
+                    .maxByOrNull { it.magicLevelRequired }
+                newFlags = newFlags.copy(activeSpell = fallback?.name)
+            }
+        }
+
         playerDao.upsert(
             player.copy(
                 skillLevels = json.encode<Map<String, Int>>(levels),
                 skillXp     = json.encode<Map<String, Long>>(xpMap),
-                flags       = json.encode<PlayerFlags>(flags.copy(skillPrestige = newPrestige)),
+                flags       = json.encode<PlayerFlags>(newFlags),
                 inventory   = json.encode<Map<String, Int>>(inventory),
                 equipped    = json.encode<Map<String, String?>>(equipped),
             )

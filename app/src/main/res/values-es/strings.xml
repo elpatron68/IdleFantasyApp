@@ -939,6 +939,9 @@
     <string name="guild_name_thieving">Gremio de Ladrones</string>
     <string name="guild_name_mercantile">Merchants Guild</string>
     <string name="guild_name_construction">Gremio de Constructores</string>
+    <string name="guild_name_slayer">Slayers Guild</string>
+    <string name="guild_quest_desc_slayer_task">Completa %1$d tareas de Slayer para %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Derrota %1$d enemigos durante una tarea de Slayer.</string>
     <string name="skill_mercantile">Mercantile</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Trade Routes</string>

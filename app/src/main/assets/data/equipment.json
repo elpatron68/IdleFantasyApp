@@ -3251,6 +3251,18 @@
     "cape_bonus": 0.05,
     "requirements": {}
   },
+  "slayer_guild_cape": {
+    "name": "slayer_guild_cape",
+    "display_name": "Slayers Guild Cape",
+    "slot": "cape",
+    "description": "Awarded for reaching Slayers Guild level 10. Grants 5% bonus Slayer XP.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 5,
+    "cape_skill": "slayer",
+    "cape_bonus": 0.05,
+    "requirements": {}
+  },
   "hp_cape": {
     "name": "hp_cape",
     "display_name": "HP Cape",

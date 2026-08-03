@@ -106,7 +106,7 @@ class GuildRepository @Inject constructor(
         val ALL_GUILDS = listOf(
             "mining", "fishing", "woodcutting", "farming", "thieving", "firemaking", "agility",
             "smithing", "cooking", "fletching", "crafting", "runecrafting", "herblore", "construction",
-            "warriors", "archers", "mages", "prayer", "mercantile",
+            "warriors", "archers", "mages", "slayer", "prayer", "mercantile",
         )
 
         fun combatStyleToGuild(combatStyle: String): String = when (combatStyle) {
@@ -206,6 +206,26 @@ class GuildRepository @Inject constructor(
             }
         }
         flags = applyDailyCombat(flags, guild, totalKills)
+        playerRepo.updateFlagsUnlocked(flags)
+    }
+
+    /** Called when slayer task kills are recorded ([taskKills] on-task kills, [tasksCompleted] tasks finished). */
+    suspend fun recordGuildSlayer(taskKills: Int, tasksCompleted: Int) = playerRepo.playerMutex.withLock {
+        if (taskKills <= 0 && tasksCompleted <= 0) return
+        var flags = ensureGuildDailiesRefreshedUnlocked()
+        val completedIds = loadCompletedQuestIds()
+        val currentLevel = guildLevel("slayer", flags.guildDailyTierCounts, completedIds)
+        for ((questId, quest) in gameData.guildQuests) {
+            if (quest.guild != "slayer") continue
+            if (quest.guildLevelRequired > currentLevel) continue
+            val count = when (quest.type) {
+                "slayer_kill" -> taskKills
+                "slayer_task" -> tasksCompleted
+                else          -> 0
+            }
+            if (count > 0) addQuestProgress(questId, count)
+        }
+        flags = applyDailySlayer(flags, taskKills, tasksCompleted)
         playerRepo.updateFlagsUnlocked(flags)
     }
 
@@ -794,6 +814,29 @@ class GuildRepository @Inject constructor(
             val cur = updated[id] ?: 0
             if (cur >= t.amount) continue
             updated[id] = minOf(cur + 1, t.amount)
+            changed = true
+        }
+        return if (changed) flags.copy(guildDailyProgress = updated) else flags
+    }
+
+    private fun applyDailySlayer(flags: PlayerFlags, taskKills: Int, tasksCompleted: Int): PlayerFlags {
+        val unclaimed = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+        if (unclaimed.isEmpty()) return flags
+        val pool = gameData.guildDailyPool.associateBy { it.id }
+        val updated = flags.guildDailyProgress.toMutableMap()
+        var changed = false
+        for (id in unclaimed) {
+            val t = pool[id] ?: continue
+            if (t.guild != "slayer") continue
+            val count = when (t.type) {
+                "slayer_kill" -> taskKills
+                "slayer_task" -> tasksCompleted
+                else          -> 0
+            }
+            if (count <= 0) continue
+            val cur = updated[id] ?: 0
+            if (cur >= t.amount) continue
+            updated[id] = minOf(cur + count, t.amount)
             changed = true
         }
         return if (changed) flags.copy(guildDailyProgress = updated) else flags

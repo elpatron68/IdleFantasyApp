@@ -566,7 +566,7 @@ private fun WorkerCraftSkillSheet(
                                 selectedCategory = newCat
                                 if (selectedTier != null && selectedTier !in newTiers) selectedTier = null
                             },
-                            label    = { Text(cat) },
+                            label    = { Text(GameStrings.craftingCategory(context, cat)) },
                         )
                     }
                 }
@@ -588,7 +588,7 @@ private fun WorkerCraftSkillSheet(
                         FilterChip(
                             selected = selectedTier == tier,
                             onClick  = { selectedTier = if (selectedTier == tier) null else tier },
-                            label    = { Text(tier) },
+                            label    = { Text(GameStrings.craftingTier(context, tier)) },
                         )
                     }
                 }

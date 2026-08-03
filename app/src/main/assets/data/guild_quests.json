@@ -3854,5 +3854,186 @@
         "construction_guild_cape": 1
       }
     }
+  },
+  "slayer_guild_1": {
+    "id": "slayer_guild_1",
+    "guild": "slayer",
+    "guild_level_required": 0,
+    "name": "First Contract",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 3,
+    "description": "Complete 3 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 1000,
+      "xp": 6000,
+      "xp_skill": "slayer",
+      "items": {
+        "bones": 50
+      }
+    }
+  },
+  "slayer_guild_2": {
+    "id": "slayer_guild_2",
+    "guild": "slayer",
+    "guild_level_required": 1,
+    "name": "Culling Contract",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 150,
+    "description": "Defeat 150 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 2500,
+      "xp": 12000,
+      "xp_skill": "slayer",
+      "items": {
+        "bones": 80
+      }
+    }
+  },
+  "slayer_guild_3": {
+    "id": "slayer_guild_3",
+    "guild": "slayer",
+    "guild_level_required": 2,
+    "name": "Proven Hunter",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 8,
+    "description": "Complete 8 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 5000,
+      "xp": 25000,
+      "xp_skill": "slayer",
+      "items": {
+        "big_bones": 60
+      }
+    }
+  },
+  "slayer_guild_4": {
+    "id": "slayer_guild_4",
+    "guild": "slayer",
+    "guild_level_required": 3,
+    "name": "Bounty Board",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 375,
+    "description": "Defeat 375 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 10000,
+      "xp": 50000,
+      "xp_skill": "slayer",
+      "items": {
+        "big_bones": 100
+      }
+    }
+  },
+  "slayer_guild_5": {
+    "id": "slayer_guild_5",
+    "guild": "slayer",
+    "guild_level_required": 4,
+    "name": "Seasoned Tracker",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 15,
+    "description": "Complete 15 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 18000,
+      "xp": 90000,
+      "xp_skill": "slayer",
+      "items": {
+        "giant_bones": 60
+      }
+    }
+  },
+  "slayer_guild_6": {
+    "id": "slayer_guild_6",
+    "guild": "slayer",
+    "guild_level_required": 5,
+    "name": "Monster Purge",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 750,
+    "description": "Defeat 750 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 30000,
+      "xp": 150000,
+      "xp_skill": "slayer",
+      "items": {
+        "giant_bones": 100
+      }
+    }
+  },
+  "slayer_guild_7": {
+    "id": "slayer_guild_7",
+    "guild": "slayer",
+    "guild_level_required": 6,
+    "name": "Veteran Slayer",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 22,
+    "description": "Complete 22 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 45000,
+      "xp": 250000,
+      "xp_skill": "slayer",
+      "items": {
+        "dragon_bone": 40
+      }
+    }
+  },
+  "slayer_guild_8": {
+    "id": "slayer_guild_8",
+    "guild": "slayer",
+    "guild_level_required": 7,
+    "name": "A Thousand Fangs",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 1500,
+    "description": "Defeat 1500 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 60000,
+      "xp": 400000,
+      "xp_skill": "slayer",
+      "items": {
+        "dragon_bone": 80
+      }
+    }
+  },
+  "slayer_guild_9": {
+    "id": "slayer_guild_9",
+    "guild": "slayer",
+    "guild_level_required": 8,
+    "name": "Master of the Hunt",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 38,
+    "description": "Complete 38 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 80000,
+      "xp": 550000,
+      "xp_skill": "slayer",
+      "items": {
+        "dragon_bone": 120
+      }
+    }
+  },
+  "slayer_guild_10": {
+    "id": "slayer_guild_10",
+    "guild": "slayer",
+    "guild_level_required": 9,
+    "name": "Deathbringer",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 60,
+    "description": "Complete 60 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 100000,
+      "xp": 700000,
+      "xp_skill": "slayer",
+      "items": {
+        "dragon_bone": 200,
+        "slayer_guild_cape": 1
+      }
+    }
   }
 }

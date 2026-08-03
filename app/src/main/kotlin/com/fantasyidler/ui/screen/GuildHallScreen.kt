@@ -64,7 +64,7 @@ private val GUILD_GROUPS = listOf(
     ),
     GuildGroup(
         headerRes = R.string.label_combat,
-        keys = listOf("warriors", "archers", "mages"),
+        keys = listOf("warriors", "archers", "mages", "slayer"),
     ),
     GuildGroup(
         headerRes = R.string.label_support_skills,
@@ -89,6 +89,7 @@ fun guildDisplayName(guildKey: String): String = when (guildKey) {
     "warriors"    -> stringResource(R.string.guild_name_warriors)
     "archers"     -> stringResource(R.string.guild_name_archers)
     "mages"       -> stringResource(R.string.guild_name_mages)
+    "slayer"      -> stringResource(R.string.guild_name_slayer)
     "prayer"      -> stringResource(R.string.guild_name_prayer)
     "mercantile"  -> stringResource(R.string.guild_name_mercantile)
     "thieving"    -> stringResource(R.string.guild_name_thieving)

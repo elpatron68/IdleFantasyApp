@@ -8540,5 +8540,261 @@
       "xp": 120000,
       "xp_skill": "construction"
     }
+  },
+  {
+    "id": "slayer_daily_1a",
+    "guild": "slayer",
+    "guild_level_min": 1,
+    "guild_level_max": 3,
+    "name": "Daily Cull",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 15,
+    "description": "Defeat 15 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 1500,
+      "xp": 8000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_1b",
+    "guild": "slayer",
+    "guild_level_min": 1,
+    "guild_level_max": 3,
+    "name": "Task at Hand",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 1,
+    "description": "Complete 1 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 2500,
+      "xp": 12000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_1c",
+    "guild": "slayer",
+    "guild_level_min": 1,
+    "guild_level_max": 3,
+    "name": "Steady Hunt",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 25,
+    "description": "Defeat 25 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 2250,
+      "xp": 11000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_1d",
+    "guild": "slayer",
+    "guild_level_min": 1,
+    "guild_level_max": 3,
+    "name": "Fresh Trails",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 20,
+    "description": "Defeat 20 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 1800,
+      "xp": 9000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_2a",
+    "guild": "slayer",
+    "guild_level_min": 4,
+    "guild_level_max": 6,
+    "name": "Contract Work",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 1,
+    "description": "Complete 1 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 8000,
+      "xp": 40000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_2b",
+    "guild": "slayer",
+    "guild_level_min": 4,
+    "guild_level_max": 6,
+    "name": "Double Duty",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 2,
+    "description": "Complete 2 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 13000,
+      "xp": 60000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_2c",
+    "guild": "slayer",
+    "guild_level_min": 4,
+    "guild_level_max": 6,
+    "name": "Relentless Hunt",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 40,
+    "description": "Defeat 40 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 10000,
+      "xp": 50000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_2d",
+    "guild": "slayer",
+    "guild_level_min": 4,
+    "guild_level_max": 6,
+    "name": "Bounty Run",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 30,
+    "description": "Defeat 30 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 9000,
+      "xp": 45000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_3a",
+    "guild": "slayer",
+    "guild_level_min": 7,
+    "guild_level_max": 8,
+    "name": "Elite Contract",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 2,
+    "description": "Complete 2 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 15000,
+      "xp": 75000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_3b",
+    "guild": "slayer",
+    "guild_level_min": 7,
+    "guild_level_max": 8,
+    "name": "Apex Predator",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 60,
+    "description": "Defeat 60 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 16000,
+      "xp": 80000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_3c",
+    "guild": "slayer",
+    "guild_level_min": 7,
+    "guild_level_max": 8,
+    "name": "The Long Hunt",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 45,
+    "description": "Defeat 45 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 13000,
+      "xp": 65000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_3d",
+    "guild": "slayer",
+    "guild_level_min": 7,
+    "guild_level_max": 8,
+    "name": "Guild Champion",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 1,
+    "description": "Complete 1 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 12000,
+      "xp": 60000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_4a",
+    "guild": "slayer",
+    "guild_level_min": 9,
+    "guild_level_max": 10,
+    "name": "Masters Orders",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 2,
+    "description": "Complete 2 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 24000,
+      "xp": 120000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_4b",
+    "guild": "slayer",
+    "guild_level_min": 9,
+    "guild_level_max": 10,
+    "name": "Extinction Event",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 80,
+    "description": "Defeat 80 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 28000,
+      "xp": 140000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_4c",
+    "guild": "slayer",
+    "guild_level_min": 9,
+    "guild_level_max": 10,
+    "name": "No Rest for Slayers",
+    "type": "slayer_kill",
+    "target": "any",
+    "amount": 60,
+    "description": "Defeat 60 enemies while on a slayer task.",
+    "rewards": {
+      "coins": 22000,
+      "xp": 110000,
+      "xp_skill": "slayer"
+    }
+  },
+  {
+    "id": "slayer_daily_4d",
+    "guild": "slayer",
+    "guild_level_min": 9,
+    "guild_level_max": 10,
+    "name": "Legend of the Hunt",
+    "type": "slayer_task",
+    "target": "any",
+    "amount": 3,
+    "description": "Complete 3 slayer tasks for the Slayers Guild.",
+    "rewards": {
+      "coins": 30000,
+      "xp": 150000,
+      "xp_skill": "slayer"
+    }
   }
 ]

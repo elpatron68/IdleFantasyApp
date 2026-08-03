@@ -870,6 +870,9 @@
     <string name="guild_name_thieving">Dieven Gilde</string>
     <string name="guild_name_mercantile">Kooplieden Gilde</string>
     <string name="guild_name_construction">Bouwersgilde</string>
+    <string name="guild_name_slayer">Slayers Gilde</string>
+    <string name="guild_quest_desc_slayer_task">Voltooi %1$d Slayer-taken voor de %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Versla %1$d vijanden tijdens een Slayer-taak.</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Handel</string>

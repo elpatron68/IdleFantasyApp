@@ -891,6 +891,9 @@
     <string name="guild_name_thieving">Gildia Złodziei</string>
     <string name="guild_name_mercantile">Gildia Kupców</string>
     <string name="guild_name_construction">Gildia Budowniczych</string>
+    <string name="guild_name_slayer">Gildia Slayerów</string>
+    <string name="guild_quest_desc_slayer_task">Ukończ %1$d zadań Slayer dla %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Pokonaj %1$d wrogów podczas zadania Slayer.</string>
 
     <!-- Umiejętność Handel -->
     <string name="skill_mercantile">Handel</string>

@@ -952,6 +952,9 @@
     <string name="guild_name_thieving">Guilde des Voleurs</string>
     <string name="guild_name_mercantile">Guilde des Marchands</string>
     <string name="guild_name_construction">Guilde des Bâtisseurs</string>
+    <string name="guild_name_slayer">Guilde des Tueurs</string>
+    <string name="guild_quest_desc_slayer_task">Complétez %1$d missions de Tueur pour la %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Éliminez %1$d ennemis pendant une mission de Tueur.</string>
     <string name="skill_mercantile">Marchandage</string>
     <string name="label_support_skills">Support</string>
     <string name="mercantile_routes_label">Routes Commerciales</string>

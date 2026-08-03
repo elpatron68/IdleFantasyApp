@@ -48,7 +48,7 @@ Over **189 quests** span all skills. Daily quests reset every morning for a quic
 
 ## Guild System
 
-**19 guilds** cover every skill and combat style (Warriors, Archers, and Mages guilds for combat). Each guild has up to 10 rank levels. Advance by completing progression quests and earning reputation through daily requests. Higher ranks unlock harder dailies and better cross-skill rewards, letting specialists access resources from skills they don't personally train.
+**20 guilds** cover every skill and combat style (Warriors, Archers, and Mages guilds for combat). Each guild has up to 10 rank levels. Advance by completing progression quests and earning reputation through daily requests. Higher ranks unlock harder dailies and better cross-skill rewards, letting specialists access resources from skills they don't personally train.
 
 ## Builder's Workshop
 

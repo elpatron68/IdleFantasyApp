@@ -1,0 +1,6 @@
+• Fixed Equip Best Gear on a Strength loadout again preferring accuracy-heavy armor like the Sovereign Crown over strength-focused armor like the Tower Helm
+• Fixed starting an Infinite Tower floor leaving the screen scrolled partway down the milestone list after the loadout pickers collapse; the view now returns to the top
+• Fixed the category and tier filter buttons on worker crafting activities (Forge, Fletching, Crafting and others) showing untranslated English instead of the localized names used on the player crafting screens
+• Fixed prestiging Magic leaving a now-too-high spell (e.g. Blood Wave) active and still used in fights; the active spell now resets to the best one available at the new level
+• Added the Slayers Guild to the Guild Hall: rank up by completing slayer tasks and defeating on-task enemies through 10 quest tiers and daily contracts, earning coins, Slayer XP, and bones, with the Slayers Guild Cape (+5% Slayer XP) at rank 10
+• Slayer capes now boost Slayer XP from task kills when equipped (or from the cape rack at tier 3)

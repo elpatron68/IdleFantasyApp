@@ -354,12 +354,14 @@ class InventoryViewModel @Inject constructor(
                         // Accuracy has diminishing returns once effective attack exceeds enemy
                         // defense (see CombatSimulator's hit-chance curve), while damage bonus
                         // adds to max hit linearly with no diminishing returns -- so the damage
-                        // stat outweighs the accuracy stat here, unlike melee's attack/strength
-                        // split below (which reflects a real weapon-style choice, not this
-                        // accuracy-vs-damage tradeoff) (issue #1198).
+                        // stat outweighs the accuracy stat here (issue #1198). For the strength
+                        // style the accuracy stat is weighted below the damage gap too, so e.g.
+                        // +8 atk cannot outscore +3 str and +2 def (issues #1180, #1230). The
+                        // attack style keeps accuracy primary: that split reflects the player's
+                        // weapon-style choice, not this accuracy-vs-damage tradeoff.
                         "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
                         "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
-                        "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 1.0f + item.defenseBonus * 0.5f
+                        "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 0.5f + item.defenseBonus * 0.5f
                         else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                     }
                 }

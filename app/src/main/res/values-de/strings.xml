@@ -894,6 +894,9 @@
     <string name="guild_name_thieving">Diebesgilde</string>
     <string name="guild_name_mercantile">Handelsgilde</string>
     <string name="guild_name_construction">Baumeistergilde</string>
+    <string name="guild_name_slayer">Trophäenjägergilde</string>
+    <string name="guild_quest_desc_slayer_task">Beendet %1$d Trophäenjagd-Aufträge für die %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Besiegt %1$d Feinde während eines Trophäenjagd-Auftrags.</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">Handeln</string>

@@ -681,6 +681,9 @@
     <string name="guild_name_thieving">Serikat Pencuri</string>
     <string name="guild_name_mercantile">Serikat Pedagang</string>
     <string name="guild_name_construction">Serikat Pembangun</string>
+    <string name="guild_name_slayer">Serikat Penumpas</string>
+    <string name="guild_quest_desc_slayer_task">Selesaikan %1$d tugas Penumpas untuk %2$s.</string>
+    <string name="guild_quest_desc_slayer_kill">Kalahkan %1$d musuh saat menjalankan tugas Penumpas.</string>
     <string name="skill_mercantile">Perdagangan</string>
     <string name="label_support_skills">Sokongan</string>
     <string name="mercantile_routes_label">Rute Perdagangan</string>
