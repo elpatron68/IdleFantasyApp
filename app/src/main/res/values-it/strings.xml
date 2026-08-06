@@ -283,8 +283,8 @@
     <string name="settings_journal_button_desc">Mostra un pulsante Diario nella barra superiore della schermata principale per annotare ciò che vuoi.</string>
     <string name="settings_seasonal_events">Eventi Stagionali</string>
     <string name="settings_seasonal_events_desc">Mostra lo stendardo dell\'evento stagionale in corso nella schermata principale</string>
-    <string name="settings_collapsible_town_grid">Griglia Villaggio Comprimibile</string>
-    <string name="settings_collapsible_town_grid_desc">Mostra la sezione Villaggio (Negozio, Locanda, Gilda, ecc.) come una scheda comprimibile nella schermata principale</string>
+    <string name="settings_collapsible_town_grid">Pannello Villaggio Comprimibile</string>
+    <string name="settings_collapsible_town_grid_desc">Mostra il pannello Villaggio (Negozio, Locanda, Gilda, ecc.) come una scheda comprimibile nella schermata principale</string>
     <string name="settings_character_viewer">Icona Personaggio</string>
     <string name="settings_character_viewer_desc">Mostra il tuo personaggio nella schermata principale</string>
     <string name="settings_stats_bar">Barra Statistiche</string>
@@ -463,8 +463,8 @@
     <string name="queue_item_qty_with_output">×%1$d → %2$d oggetti</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
-        <item quantity="one">Ottieni %1$d Ricompensa Dalla Sessione</item>
-        <item quantity="other">Ottieni %1$d Ricompense Dalla Sessione</item>
+        <item quantity="one">Ottieni %1$d Ricompensa dalla Sessione</item>
+        <item quantity="other">Ottieni %1$d Ricompense dalla Sessione</item>
     </plurals>
 
     <!-- ===== CombatScreen ===== -->
@@ -1517,7 +1517,7 @@
     <string name="bonus_combat_stat_boost">Potenzia statistiche combattimento</string>
     <string name="bonus_combined_xp">XP combinata</string>
     <string name="bonus_yield">+%1$d%% alla resa</string>
-    <string name="bonus_boost">+%1$d%% potenziamento</string>
+    <string name="bonus_boost">+%1$d%% bonus</string>
     <string name="bonus_session_shorter">%1$d min in meno per sessione</string>
     <string name="bonus_coin_return">+%1$d%% ritorno in monete</string>
     <string name="snackbar_added_to_queue">Aggiunto alla coda: %1$s.</string>
