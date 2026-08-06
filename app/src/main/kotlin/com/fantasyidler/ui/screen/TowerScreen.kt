@@ -216,8 +216,8 @@ private fun TowerHeaderCard(
                 }
             }
 
-            // Weapon picker — only when no active session
-            if (!hasSession && equippedWeapons.isNotEmpty()) {
+            // Weapon picker — selection applies to the next floor attempt
+            if (equippedWeapons.isNotEmpty()) {
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text  = stringResource(R.string.label_weapon),
@@ -253,8 +253,8 @@ private fun TowerHeaderCard(
                 }
             }
 
-            // Arrow picker — ranged combat style only, no active session
-            if (!hasSession && combatStyle == "ranged" && availableArrows.isNotEmpty()) {
+            // Arrow picker — ranged combat style only
+            if (combatStyle == "ranged" && availableArrows.isNotEmpty()) {
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text  = stringResource(R.string.combat_label_arrow),
@@ -277,8 +277,8 @@ private fun TowerHeaderCard(
                 }
             }
 
-            // Spell picker — magic combat style only, no active session
-            if (!hasSession && combatStyle == "magic") {
+            // Spell picker — magic combat style only
+            if (combatStyle == "magic") {
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text  = stringResource(R.string.label_active_spell),
@@ -309,8 +309,8 @@ private fun TowerHeaderCard(
                 }
             }
 
-            // Potion picker — always available, no active session
-            if (!hasSession && availablePotions.isNotEmpty()) {
+            // Potion picker
+            if (availablePotions.isNotEmpty()) {
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text  = "Potion",
@@ -329,7 +329,8 @@ private fun TowerHeaderCard(
                             onClick  = { onPotionSelected(key) },
                             label    = {
                                 Text(
-                                    text  = if (key == null) stringResource(R.string.combat_no_potion) else GameStrings.itemName(context, key),
+                                    text  = if (key == null) stringResource(R.string.combat_no_potion)
+                                            else "${GameStrings.itemName(context, key)} (${availablePotions[key]})",
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             },

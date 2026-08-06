@@ -20,6 +20,7 @@ object MercantileSimulator {
         agilityPrestige: Int = 0,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -59,7 +60,7 @@ object MercantileSimulator {
 
         return Result(
             frames    = frames,
-            durationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige),
+            durationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier),
         )
     }
 

@@ -14,6 +14,7 @@ import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.SkillingDungeonSimulator
 import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,6 +53,7 @@ class ExpeditionsViewModel @Inject constructor(
     private val sessionRepo: SessionRepository,
     private val gameData: GameDataRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
+    private val townRepo: TownRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -136,7 +138,7 @@ class ExpeditionsViewModel @Inject constructor(
                         skillName           = "expedition",
                         activityKey         = key,
                         skillDisplayName    = dungeon.displayName,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, townRepo.playerSessionDurationMultiplier(flags)),
                     )
                 )
                 _extra.update {
@@ -160,6 +162,7 @@ class ExpeditionsViewModel @Inject constructor(
                 agilityLevel    = agilityLevel,
                 agilityPrestige = agilityPrestige,
                 toolEfficiency  = toolEfficiency,
+                chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
             )
             sessionRepo.startSession(
                 skillName        = "expedition",

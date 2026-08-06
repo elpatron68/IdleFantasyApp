@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Rauwe manta. Moet worden gekookt.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Garnaal</string>
+    <string name="item_shrimp_name">Gekookte Garnaal</string>
     <string name="item_shrimp_desc">Gekookte garnaal. Herstelt een kleine hoeveelheid HP zodra je het eet.</string>
-    <string name="item_sardine_name">Sardine</string>
+    <string name="item_sardine_name">Gekookte Sardine</string>
     <string name="item_sardine_desc">Gekookte sardine. Herstelt HP zodra je het eet.</string>
-    <string name="item_herring_name">Haring</string>
+    <string name="item_herring_name">Gekookte Haring</string>
     <string name="item_herring_desc">Gekookte haring. Herstelt HP zodra je het eet.</string>
-    <string name="item_mackerel_name">Makreel</string>
+    <string name="item_mackerel_name">Gekookte Makreel</string>
     <string name="item_mackerel_desc">Gekookte makreel. Herstelt HP zodra je het eet.</string>
-    <string name="item_trout_name">Forel</string>
+    <string name="item_trout_name">Gekookte Forel</string>
     <string name="item_trout_desc">Gekookte forel. Herstelt HP zodra je het eet.</string>
-    <string name="item_salmon_name">Zalm</string>
+    <string name="item_salmon_name">Gekookte Zalm</string>
     <string name="item_salmon_desc">Gekookte zalm. Herstelt HP zodra je het eet.</string>
-    <string name="item_tuna_name">Tonijn</string>
+    <string name="item_tuna_name">Gekookte Tonijn</string>
     <string name="item_tuna_desc">Gekookte tonijn. Herstelt HP zodra je het eet.</string>
-    <string name="item_lobster_name">Kreeft</string>
+    <string name="item_lobster_name">Gekookte Kreeft</string>
     <string name="item_lobster_desc">Gekookte kreeft. Herstelt een goede hoeveelheid HP zodra je het eet.</string>
-    <string name="item_swordfish_name">Zwaardvis</string>
+    <string name="item_swordfish_name">Gekookte Zwaardvis</string>
     <string name="item_swordfish_desc">Gekookte zwaardvis. Herstelt een aanzienlijke hoeveelheid HP zodra je het eet.</string>
-    <string name="item_monkfish_name">Zeeduivel</string>
+    <string name="item_monkfish_name">Gekookte Zeeduivel</string>
     <string name="item_monkfish_desc">Gekookte zeeduivel. Herstelt een behoorlijke hoeveelheid HP zodra je het eet.</string>
-    <string name="item_shark_name">Haai</string>
+    <string name="item_shark_name">Gekookte Haai</string>
     <string name="item_shark_desc">Gekookte haai. Herstelt een grote hoeveelheid HP zodra je het eet.</string>
-    <string name="item_sea_turtle_name">Zeeschildpad</string>
+    <string name="item_sea_turtle_name">Gekookte Zeeschildpad</string>
     <string name="item_sea_turtle_desc">Gekookte zeeschildpad. Herstelt een zeer grote hoeveelheid HP zodra je het eet.</string>
-    <string name="item_manta_ray_name">Manta</string>
+    <string name="item_manta_ray_name">Gekookte Manta</string>
     <string name="item_manta_ray_desc">Gekookte manta. Een van de beste etenswaren.</string>
 
     <!-- ===== Raw meat ===== -->

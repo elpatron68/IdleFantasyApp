@@ -277,5 +277,87 @@
         }
       }
     ]
+  },
+  "artisans_workshop": {
+    "key": "artisans_workshop",
+    "tiers": [
+      {
+        "construction_level_required": 80,
+        "coin_cost": 2000000,
+        "materials": {
+          "yew_plank": 1000,
+          "stone_block": 800,
+          "mithril_nail": 3000
+        },
+        "bonuses": {
+          "secondary_material_save_chance": 0.05
+        }
+      },
+      {
+        "construction_level_required": 90,
+        "coin_cost": 5000000,
+        "materials": {
+          "magic_plank": 1500,
+          "stone_block": 1500,
+          "mithril_nail": 5000
+        },
+        "bonuses": {
+          "secondary_material_save_chance": 0.10
+        }
+      },
+      {
+        "construction_level_required": 99,
+        "coin_cost": 10000000,
+        "materials": {
+          "magic_plank": 3000,
+          "stone_block": 3000,
+          "mithril_nail": 10000
+        },
+        "bonuses": {
+          "secondary_material_save_chance": 0.15
+        }
+      }
+    ]
+  },
+  "chronos_spire": {
+    "key": "chronos_spire",
+    "tiers": [
+      {
+        "construction_level_required": 82,
+        "coin_cost": 3000000,
+        "materials": {
+          "magic_plank": 800,
+          "stone_block": 1000,
+          "mithril_nail": 3000
+        },
+        "bonuses": {
+          "player_session_speed_reduction": 0.02
+        }
+      },
+      {
+        "construction_level_required": 92,
+        "coin_cost": 7500000,
+        "materials": {
+          "magic_plank": 1800,
+          "stone_block": 2000,
+          "mithril_nail": 6000
+        },
+        "bonuses": {
+          "player_session_speed_reduction": 0.04
+        }
+      },
+      {
+        "construction_level_required": 99,
+        "coin_cost": 15000000,
+        "materials": {
+          "magic_plank": 4000,
+          "stone_block": 4000,
+          "mithril_nail": 12000
+        },
+        "bonuses": {
+          "player_session_speed_reduction": 0.06
+        }
+      }
+    ]
   }
 }

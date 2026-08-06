@@ -27,6 +27,7 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -116,6 +117,7 @@ class CombatViewModel @Inject constructor(
     private val slayerRepo: SlayerRepository,
     private val seasonalEventRepo: SeasonalEventRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
+    private val townRepo: TownRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -392,7 +394,7 @@ class CombatViewModel @Inject constructor(
                         skillName           = "combat",
                         activityKey         = dungeonKey,
                         skillDisplayName    = dungeonName,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, dungeonFlags.skillPrestige[Skills.AGILITY] ?: 0),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, dungeonFlags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(dungeonFlags)),
                         estimatedXpGain     = previewXp,
                         equippedSnapshot    = player.equipped,
                         arrowsKey           = _extra.value.selectedArrowKey ?: dungeonFlags.equippedArrows,
@@ -550,6 +552,7 @@ class CombatViewModel @Inject constructor(
                     availableRunes      = if (simulatorRuneKey != null) inventory[simulatorRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
                 )
 
                 val framesJson = json.encodeToString(
@@ -757,7 +760,7 @@ class CombatViewModel @Inject constructor(
                     bossFrames,
                 )
                 val agilityLevel   = levels[Skills.AGILITY] ?: 1
-                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60L
+                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
                 sessionRepo.startSession(
                     skillName        = "boss",
@@ -991,6 +994,7 @@ class CombatViewModel @Inject constructor(
                     arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
                     random              = Random.Default,
                 )
                 if (result.frames.none { it.died }) survived++
@@ -1116,6 +1120,7 @@ class CombatViewModel @Inject constructor(
             availableRunes      = Int.MAX_VALUE,
             attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
             eatThresholdPct     = flags.foodEatThresholdPct,
+            chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
         )
         return result.frames.sumOf { it.xpGain.toLong() }
     }

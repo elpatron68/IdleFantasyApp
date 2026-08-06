@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Сырой манта. Приготовьте перед употреблением.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Креветка</string>
+    <string name="item_shrimp_name">Жареная креветка</string>
     <string name="item_shrimp_desc">Приготовленная креветка. Восстанавливает немного HP.</string>
-    <string name="item_sardine_name">Сардина</string>
+    <string name="item_sardine_name">Жареная сардина</string>
     <string name="item_sardine_desc">Приготовленная сардина. Восстанавливает HP при употреблении.</string>
-    <string name="item_herring_name">Сельдь</string>
+    <string name="item_herring_name">Жареная сельдь</string>
     <string name="item_herring_desc">Приготовленная сельдь. Восстанавливает HP при употреблении.</string>
-    <string name="item_mackerel_name">Скумбрия</string>
+    <string name="item_mackerel_name">Жареная скумбрия</string>
     <string name="item_mackerel_desc">Приготовленная скумбрия. Восстанавливает HP при употреблении.</string>
-    <string name="item_trout_name">Форель</string>
+    <string name="item_trout_name">Жареная форель</string>
     <string name="item_trout_desc">Приготовленная форель. Восстанавливает HP при употреблении.</string>
-    <string name="item_salmon_name">Лосось</string>
+    <string name="item_salmon_name">Жареный лосось</string>
     <string name="item_salmon_desc">Приготовленный лосось. Восстанавливает HP при употреблении.</string>
-    <string name="item_tuna_name">Тунец</string>
+    <string name="item_tuna_name">Жареный тунец</string>
     <string name="item_tuna_desc">Приготовленный тунец. Восстанавливает HP при употреблении.</string>
-    <string name="item_lobster_name">Омар</string>
+    <string name="item_lobster_name">Жареный омар</string>
     <string name="item_lobster_desc">Приготовленный омар. Восстанавливает хорошее количество HP.</string>
-    <string name="item_swordfish_name">Рыба-меч</string>
+    <string name="item_swordfish_name">Жареная рыба-меч</string>
     <string name="item_swordfish_desc">Приготовленная рыба-меч. Восстанавливает значительное количество HP.</string>
-    <string name="item_monkfish_name">Морской черт</string>
+    <string name="item_monkfish_name">Жареный морской черт</string>
     <string name="item_monkfish_desc">Приготовленный морской черт. Восстанавливает солидное количество HP.</string>
-    <string name="item_shark_name">Акула</string>
+    <string name="item_shark_name">Жареная акула</string>
     <string name="item_shark_desc">Приготовленная акула. Восстанавливает большое количество HP.</string>
-    <string name="item_sea_turtle_name">Морская черепаха</string>
+    <string name="item_sea_turtle_name">Жареная морская черепаха</string>
     <string name="item_sea_turtle_desc">Приготовленная морская черепаха. Восстанавливает очень большое количество HP.</string>
-    <string name="item_manta_ray_name">Манта</string>
+    <string name="item_manta_ray_name">Жареная манта</string>
     <string name="item_manta_ray_desc">Приготовленный манта. Одна из лучших доступных блюд.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,13 +137,13 @@
     <string name="item_raw_meat_desc">Неопознанное сырое мясо. Приготовьте перед употреблением.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Крысиное мясо</string>
+    <string name="item_cooked_rat_meat_name">Жареное крысиное мясо</string>
     <string name="item_cooked_rat_meat_desc">Приготовленное крысиное мясо. Вряд ли съедобно, но восстанавливает крошечное количество HP.</string>
-    <string name="item_cooked_chicken_name">Курица</string>
+    <string name="item_cooked_chicken_name">Жареная курица</string>
     <string name="item_cooked_chicken_desc">Приготовленная курица. Восстанавливает HP при употреблении.</string>
-    <string name="item_cooked_mutton_name">Баранина</string>
+    <string name="item_cooked_mutton_name">Жареная баранина</string>
     <string name="item_cooked_mutton_desc">Приготовленная баранина. Восстанавливает HP при употреблении.</string>
-    <string name="item_cooked_beef_name">Говядина</string>
+    <string name="item_cooked_beef_name">Жареная говядина</string>
     <string name="item_cooked_beef_desc">Приготовленная говядина. Восстанавливает HP при употреблении.</string>
 
     <!-- ===== Melee weapons — bronze ===== -->

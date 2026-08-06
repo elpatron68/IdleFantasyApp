@@ -1657,4 +1657,10 @@
     <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
     <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
     <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
+    <string name="town_building_chronos_spire_name">Chronos Spire</string>
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
 </resources>

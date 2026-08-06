@@ -15,6 +15,7 @@ import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.withAppLocale
@@ -75,6 +76,7 @@ class SlayerViewModel @Inject constructor(
     val gameData: GameDataRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     @ApplicationContext private val context: Context,
+    private val townRepo: TownRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -260,7 +262,7 @@ class SlayerViewModel @Inject constructor(
                     skillName           = "combat",
                     activityKey         = dungeonKey,
                     skillDisplayName    = dungeonName,
-                    estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0),
+                    estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)),
                     equippedSnapshot    = player.equipped,
                     arrowsKey           = flags.equippedArrows,
                     spellName           = flags.activeSpell,

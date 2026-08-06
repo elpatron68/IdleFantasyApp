@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Surowa manta. Ugotuj przed zjedzeniem.</string>
 
     <!-- ===== Ugotowane ryby ===== -->
-    <string name="item_shrimp_name">Krewetka</string>
+    <string name="item_shrimp_name">Ugotowana Krewetka</string>
     <string name="item_shrimp_desc">Ugotowana krewetka. Przywraca niewielką ilość HP.</string>
-    <string name="item_sardine_name">Sardynka</string>
+    <string name="item_sardine_name">Ugotowana Sardynka</string>
     <string name="item_sardine_desc">Ugotowana sardynka. Przywraca HP po zjedzeniu.</string>
-    <string name="item_herring_name">Śledź</string>
+    <string name="item_herring_name">Ugotowany Śledź</string>
     <string name="item_herring_desc">Ugotowany śledź. Przywraca HP po zjedzeniu.</string>
-    <string name="item_mackerel_name">Makrela</string>
+    <string name="item_mackerel_name">Ugotowana Makrela</string>
     <string name="item_mackerel_desc">Ugotowana makrela. Przywraca HP po zjedzeniu.</string>
-    <string name="item_trout_name">Pstrąg</string>
+    <string name="item_trout_name">Ugotowany Pstrąg</string>
     <string name="item_trout_desc">Ugotowany pstrąg. Przywraca HP po zjedzeniu.</string>
-    <string name="item_salmon_name">Łosoś</string>
+    <string name="item_salmon_name">Ugotowany Łosoś</string>
     <string name="item_salmon_desc">Ugotowany łosoś. Przywraca HP po zjedzeniu.</string>
-    <string name="item_tuna_name">Tuńczyk</string>
+    <string name="item_tuna_name">Ugotowany Tuńczyk</string>
     <string name="item_tuna_desc">Ugotowany tuńczyk. Przywraca HP po zjedzeniu.</string>
-    <string name="item_lobster_name">Homar</string>
+    <string name="item_lobster_name">Ugotowany Homar</string>
     <string name="item_lobster_desc">Ugotowany homar. Przywraca sporą ilość HP.</string>
-    <string name="item_swordfish_name">Miecznik</string>
+    <string name="item_swordfish_name">Ugotowany Miecznik</string>
     <string name="item_swordfish_desc">Ugotowany miecznik. Przywraca znaczną ilość HP.</string>
-    <string name="item_monkfish_name">Żabnica</string>
+    <string name="item_monkfish_name">Ugotowana Żabnica</string>
     <string name="item_monkfish_desc">Ugotowana żabnica. Przywraca solidną ilość HP.</string>
-    <string name="item_shark_name">Rekin</string>
+    <string name="item_shark_name">Ugotowany Rekin</string>
     <string name="item_shark_desc">Ugotowany rekin. Przywraca dużą ilość HP.</string>
-    <string name="item_sea_turtle_name">Żółw Morski</string>
+    <string name="item_sea_turtle_name">Ugotowany Żółw Morski</string>
     <string name="item_sea_turtle_desc">Ugotowany żółw morski. Przywraca bardzo dużą ilość HP.</string>
-    <string name="item_manta_ray_name">Manta</string>
+    <string name="item_manta_ray_name">Ugotowana Manta</string>
     <string name="item_manta_ray_desc">Ugotowana manta. Jedno z najlepszych dostępnych jedzeń.</string>
 
     <!-- ===== Surowe mięso ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Niezidentyfikowane surowe mięso. Ugotuj przed zjedzeniem.</string>
 
     <!-- ===== Ugotowane mięso ===== -->
-    <string name="item_cooked_rat_meat_name">Mięso Szczura</string>
+    <string name="item_cooked_rat_meat_name">Ugotowane Mięso Szczura</string>
     <string name="item_cooked_rat_meat_desc">Ugotowane mięso szczura. Ledwo jadalne, ale przywraca znikomą ilość HP.</string>
     <string name="item_cooked_chicken_name">Ugotowany Kurczak</string>
     <string name="item_cooked_chicken_desc">Ugotowany kurczak. Przywraca HP po zjedzeniu.</string>

@@ -15,8 +15,8 @@ android {
         applicationId = "com.tristinbaker.idlefantasy"
         minSdk = 26
         targetSdk = 35
-        versionCode = 125
-        versionName = "1.12.13"
+        versionCode = 126
+        versionName = "1.12.14"
     }
 
     dependenciesInfo {

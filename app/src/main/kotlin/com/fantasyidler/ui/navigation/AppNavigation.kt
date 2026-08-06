@@ -101,6 +101,7 @@ fun AppNavigation(
     val tabSubScreens: Map<String, Set<String>> = mapOf(
         "home"   to setOf("shop", "settings", "inn", Screen.WorkerSkills.route, "guild_hall", "guild_detail/{guild}", "church", "slayer", "carnival", Screen.SeasonalEvent.route),
         "skills" to setOf("farming", "mercantile", Screen.Slayer.route, Screen.BoneAltar.route),
+        "combat" to setOf(Screen.Tower.route),
     )
 
     Scaffold(

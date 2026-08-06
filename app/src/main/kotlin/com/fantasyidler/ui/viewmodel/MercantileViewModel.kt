@@ -17,6 +17,7 @@ import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.MercantileSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
@@ -62,6 +63,7 @@ class MercantileViewModel @Inject constructor(
     private val guildRepo: GuildRepository,
     private val dailyQuestRepo: DailyQuestRepository,
     private val weeklyQuestRepo: WeeklyQuestRepository,
+    private val townRepo: TownRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -134,7 +136,7 @@ class MercantileViewModel @Inject constructor(
                         activityKey         = routeId,
                         skillDisplayName    = "Mercantile",
                         estimatedXpGain     = estimatedXpGain,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, mercFlags.skillPrestige[Skills.AGILITY] ?: 0),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, mercFlags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(mercFlags)),
                         coinRefund          = route.coinCost.toLong(),
                     )
                 )
@@ -162,6 +164,7 @@ class MercantileViewModel @Inject constructor(
                 val result  = MercantileSimulator.simulate(
                     route, startXp, agilityLevel,
                     agilityPrestige = mercFlags.skillPrestige[Skills.AGILITY] ?: 0,
+                    chronosMultiplier = townRepo.playerSessionDurationMultiplier(mercFlags),
                 )
                 val framesJson = json.encodeToString(
                     json.serializersModule.serializer<List<SessionFrame>>(),

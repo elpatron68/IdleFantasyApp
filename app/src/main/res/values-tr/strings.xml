@@ -1622,4 +1622,11 @@
     <string name="crafting_owned">Owned: %1$d</string>
     <string name="crafting_owned_detail">Owned in inventory: %1$d</string>
     <string name="firemaking_ashes_owned">Ashes owned: %1$d</string>
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
+    <string name="town_building_chronos_spire_name">Chronos Spire</string>
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+    <string name="settings_theme_midnight">Midnight</string>
 </resources>

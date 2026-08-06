@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">生のマンタ。食べる前に調理しよう。</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">エビ</string>
+    <string name="item_shrimp_name">焼きエビ</string>
     <string name="item_shrimp_desc">焼きエビ。HPを少し回復する。</string>
-    <string name="item_sardine_name">イワシ</string>
+    <string name="item_sardine_name">焼きイワシ</string>
     <string name="item_sardine_desc">焼きイワシ。食べるとHPを回復する。</string>
-    <string name="item_herring_name">ニシン</string>
+    <string name="item_herring_name">焼きニシン</string>
     <string name="item_herring_desc">焼きニシン。食べるとHPを回復する。</string>
-    <string name="item_mackerel_name">サバ</string>
+    <string name="item_mackerel_name">焼きサバ</string>
     <string name="item_mackerel_desc">焼きサバ。食べるとHPを回復する。</string>
-    <string name="item_trout_name">マス</string>
+    <string name="item_trout_name">焼きマス</string>
     <string name="item_trout_desc">焼きマス。食べるとHPを回復する。</string>
-    <string name="item_salmon_name">サケ</string>
+    <string name="item_salmon_name">焼きサケ</string>
     <string name="item_salmon_desc">焼きサケ。食べるとHPを回復する。</string>
-    <string name="item_tuna_name">マグロ</string>
+    <string name="item_tuna_name">焼きマグロ</string>
     <string name="item_tuna_desc">焼きマグロ。食べるとHPを回復する。</string>
-    <string name="item_lobster_name">ロブスター</string>
+    <string name="item_lobster_name">焼きロブスター</string>
     <string name="item_lobster_desc">焼きロブスター。HPをかなり回復する。</string>
-    <string name="item_swordfish_name">メカジキ</string>
+    <string name="item_swordfish_name">焼きメカジキ</string>
     <string name="item_swordfish_desc">焼きメカジキ。HPを大幅に回復する。</string>
-    <string name="item_monkfish_name">アンコウ</string>
+    <string name="item_monkfish_name">焼きアンコウ</string>
     <string name="item_monkfish_desc">焼きアンコウ。HPをそこそこ回復する。</string>
-    <string name="item_shark_name">サメ</string>
+    <string name="item_shark_name">焼きサメ</string>
     <string name="item_shark_desc">焼きサメ。HPを大量に回復する。</string>
-    <string name="item_sea_turtle_name">ウミガメ</string>
+    <string name="item_sea_turtle_name">焼きウミガメ</string>
     <string name="item_sea_turtle_desc">焼きウミガメ。HPを非常に大量に回復する。</string>
-    <string name="item_manta_ray_name">マンタ</string>
+    <string name="item_manta_ray_name">焼きマンタ</string>
     <string name="item_manta_ray_desc">焼きマンタ。入手可能な中で最高の食べ物の一つ。</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">正体不明の生の肉。食べる前に調理しよう。</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">ネズミ肉</string>
+    <string name="item_cooked_rat_meat_name">焼きネズミ肉</string>
     <string name="item_cooked_rat_meat_desc">焼きネズミ肉。ほとんど食べられないが、HPをごくわずかに回復する。</string>
     <string name="item_cooked_chicken_name">焼きチキン</string>
     <string name="item_cooked_chicken_desc">焼きチキン。食べるとHPを回復する。</string>

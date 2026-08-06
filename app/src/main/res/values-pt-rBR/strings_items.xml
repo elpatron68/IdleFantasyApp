@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Arraia-manta crua. Cozinhe antes de comer.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Camarão</string>
+    <string name="item_shrimp_name">Camarão Cozido</string>
     <string name="item_shrimp_desc">Camarão cozido. Restaura uma pequena quantidade de HP.</string>
-    <string name="item_sardine_name">Sardinha</string>
+    <string name="item_sardine_name">Sardinha Cozida</string>
     <string name="item_sardine_desc">Sardinha cozida. Restaura HP quando consumida.</string>
-    <string name="item_herring_name">Arenque</string>
+    <string name="item_herring_name">Arenque Cozido</string>
     <string name="item_herring_desc">Arenque cozido. Restaura HP quando consumido.</string>
-    <string name="item_mackerel_name">Cavala</string>
+    <string name="item_mackerel_name">Cavala Cozida</string>
     <string name="item_mackerel_desc">Cavala cozida. Restaura HP quando consumida.</string>
-    <string name="item_trout_name">Truta</string>
+    <string name="item_trout_name">Truta Cozida</string>
     <string name="item_trout_desc">Truta cozida. Restaura HP quando consumida.</string>
-    <string name="item_salmon_name">Salmão</string>
+    <string name="item_salmon_name">Salmão Cozido</string>
     <string name="item_salmon_desc">Salmão cozido. Restaura HP quando consumido.</string>
-    <string name="item_tuna_name">Atum</string>
+    <string name="item_tuna_name">Atum Cozido</string>
     <string name="item_tuna_desc">Atum cozido. Restaura HP quando consumido.</string>
-    <string name="item_lobster_name">Lagosta</string>
+    <string name="item_lobster_name">Lagosta Cozida</string>
     <string name="item_lobster_desc">Lagosta cozida. Restaura uma boa quantidade de HP.</string>
-    <string name="item_swordfish_name">Peixe-Espada</string>
+    <string name="item_swordfish_name">Peixe-Espada Cozido</string>
     <string name="item_swordfish_desc">Peixe-espada cozido. Restaura uma quantidade significativa de HP.</string>
-    <string name="item_monkfish_name">Tamboril</string>
+    <string name="item_monkfish_name">Tamboril Cozido</string>
     <string name="item_monkfish_desc">Tamboril cozido. Restaura uma boa quantidade de HP.</string>
-    <string name="item_shark_name">Tubarão</string>
+    <string name="item_shark_name">Tubarão Cozido</string>
     <string name="item_shark_desc">Tubarão cozido. Restaura uma grande quantidade de HP.</string>
-    <string name="item_sea_turtle_name">Tartaruga Marinha</string>
+    <string name="item_sea_turtle_name">Tartaruga Marinha Cozida</string>
     <string name="item_sea_turtle_desc">Tartaruga marinha cozida. Restaura uma quantidade enorme de HP.</string>
-    <string name="item_manta_ray_name">Arraia-Manta</string>
+    <string name="item_manta_ray_name">Arraia-Manta Cozida</string>
     <string name="item_manta_ray_desc">Arraia-manta cozida. Uma das melhores comidas disponíveis.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Carne crua não identificada. Cozinhe antes de comer.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Carne de Rato</string>
+    <string name="item_cooked_rat_meat_name">Carne de Rato Cozida</string>
     <string name="item_cooked_rat_meat_desc">Carne de rato cozida. Mal dá para comer, mas restaura uma pequena quantidade de HP.</string>
     <string name="item_cooked_chicken_name">Frango Cozido</string>
     <string name="item_cooked_chicken_desc">Frango cozido. Restaura HP quando consumido.</string>

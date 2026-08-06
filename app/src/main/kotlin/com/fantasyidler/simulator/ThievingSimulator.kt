@@ -32,6 +32,7 @@ object ThievingSimulator {
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
         toolEfficiency: Float = 1.0f,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02 * toolEfficiency)
@@ -121,6 +122,6 @@ object ThievingSimulator {
             )
         }
 
-        return Result(frames, SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 }

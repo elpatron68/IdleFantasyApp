@@ -24,6 +24,7 @@ object SkillingDungeonSimulator {
         agilityPrestige: Int = 0,
         toolEfficiency: Float = 1.0f,
         petBoostPct: Int = 0,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): SkillSimulator.Result {
         var currentXp = startXp
@@ -68,7 +69,7 @@ object SkillingDungeonSimulator {
             )
         }
 
-        return SkillSimulator.Result(frames, SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige))
+        return SkillSimulator.Result(frames, SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     private fun <T> getTierData(tiers: Map<String, T>, currentLevel: Int): T {

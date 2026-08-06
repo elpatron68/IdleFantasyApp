@@ -142,6 +142,32 @@ fun BuilderScreen(
                     inventory         = state.inventory,
                     onUpgrade         = { viewModel.upgrade("cape_rack") },
                 )
+            }
+            item {
+                Spacer(Modifier.height(16.dp))
+                BuildingUpgradeCard(
+                    buildingKey       = "artisans_workshop",
+                    currentTier       = state.artisansWorkshopTier,
+                    buildingDef       = viewModel.gameData.townBuildings["artisans_workshop"],
+                    townRepository    = viewModel.townRepo,
+                    constructionLevel = state.constructionLevel,
+                    coins             = state.coins,
+                    inventory         = state.inventory,
+                    onUpgrade         = { viewModel.upgrade("artisans_workshop") },
+                )
+            }
+            item {
+                Spacer(Modifier.height(16.dp))
+                BuildingUpgradeCard(
+                    buildingKey       = "chronos_spire",
+                    currentTier       = state.chronosSpireTier,
+                    buildingDef       = viewModel.gameData.townBuildings["chronos_spire"],
+                    townRepository    = viewModel.townRepo,
+                    constructionLevel = state.constructionLevel,
+                    coins             = state.coins,
+                    inventory         = state.inventory,
+                    onUpgrade         = { viewModel.upgrade("chronos_spire") },
+                )
                 Spacer(Modifier.height(16.dp))
             }
         }

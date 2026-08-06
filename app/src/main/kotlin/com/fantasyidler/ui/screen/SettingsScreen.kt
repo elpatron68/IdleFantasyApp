@@ -254,9 +254,10 @@ fun SettingsScreen(
                 trailing = {
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         listOf(
-                            "dark"   to stringResource(R.string.settings_theme_dark),
-                            "light"  to stringResource(R.string.settings_theme_light),
-                            "system" to stringResource(R.string.settings_theme_system),
+                            "dark"     to stringResource(R.string.settings_theme_dark),
+                            "midnight" to stringResource(R.string.settings_theme_midnight),
+                            "light"    to stringResource(R.string.settings_theme_light),
+                            "system"   to stringResource(R.string.settings_theme_system),
                         ).forEach { (key, label) ->
                             FilterChip(
                                 selected = themePreference == key,

@@ -1584,4 +1584,11 @@
     <string name="guild_name_slayer">Slayers Guild</string>
     <string name="guild_quest_desc_slayer_task">Complete %1$d slayer tasks for the %2$s.</string>
     <string name="guild_quest_desc_slayer_kill">Defeat %1$d enemies while on a slayer task.</string>
+    <string name="settings_theme_midnight">Midnight</string>
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
+    <string name="town_building_chronos_spire_name">Chronos Spire</string>
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
 </resources>

@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Raie manta crue. Cuire avant de manger.</string>
     
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Crevettes</string>
+    <string name="item_shrimp_name">Crevettes cuites</string>
     <string name="item_shrimp_desc">Crevettes cuites. Restaure une petite quantité de PV.</string>
-    <string name="item_sardine_name">Sardine</string>
+    <string name="item_sardine_name">Sardine cuite</string>
     <string name="item_sardine_desc">Sardine cuite. Restaure des PV lorsqu’elle est consommée.</string>
-    <string name="item_herring_name">Hareng</string>
+    <string name="item_herring_name">Hareng cuit</string>
     <string name="item_herring_desc">Hareng cuit. Restaure des PV lorsqu’il est consommé.</string>
-    <string name="item_mackerel_name">Maquereau</string>
+    <string name="item_mackerel_name">Maquereau cuit</string>
     <string name="item_mackerel_desc">Maquereau cuit. Restaure des PV lorsqu’il est consommé.</string>
-    <string name="item_trout_name">Truite</string>
+    <string name="item_trout_name">Truite cuite</string>
     <string name="item_trout_desc">Truite cuite. Restaure des PV lorsqu’elle est consommée.</string>
-    <string name="item_salmon_name">Saumon</string>
+    <string name="item_salmon_name">Saumon cuit</string>
     <string name="item_salmon_desc">Saumon cuit. Restaure des PV lorsqu’il est consommé.</string>
-    <string name="item_tuna_name">Thon</string>
+    <string name="item_tuna_name">Thon cuit</string>
     <string name="item_tuna_desc">Thon cuit. Restaure des PV lorsqu’il est consommé.</string>
-    <string name="item_lobster_name">Homard</string>
+    <string name="item_lobster_name">Homard cuit</string>
     <string name="item_lobster_desc">Homard cuit. Restaure une bonne quantité de PV.</string>
-    <string name="item_swordfish_name">Espadon</string>
+    <string name="item_swordfish_name">Espadon cuit</string>
     <string name="item_swordfish_desc">Espadon cuit. Restaure une quantité importante de PV.</string>
-    <string name="item_monkfish_name">Poisson-lune</string>
+    <string name="item_monkfish_name">Poisson-lune cuit</string>
     <string name="item_monkfish_desc">Poisson-lune cuit. Restaure une quantité solide de PV.</string>
-    <string name="item_shark_name">Requin</string>
+    <string name="item_shark_name">Requin cuit</string>
     <string name="item_shark_desc">Requin cuit. Restaure une grande quantité de PV.</string>
-    <string name="item_sea_turtle_name">Tortue de mer</string>
+    <string name="item_sea_turtle_name">Tortue de mer cuite</string>
     <string name="item_sea_turtle_desc">Tortue de mer cuite. Restaure une très grande quantité de PV.</string>
-    <string name="item_manta_ray_name">Raie manta</string>
+    <string name="item_manta_ray_name">Raie manta cuite</string>
     <string name="item_manta_ray_desc">Raie manta cuite. L’un des meilleurs aliments disponibles.</string>
 
     <!-- ===== Raw meat ===== -->

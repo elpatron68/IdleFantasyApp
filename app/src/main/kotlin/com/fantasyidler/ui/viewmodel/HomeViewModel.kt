@@ -775,8 +775,8 @@ class HomeViewModel @Inject constructor(
                                 if (!isAshSession) {
                                     questRepo.recordBuried(buried)
                                     guildRepo.recordGuildPrayer(buried)
+                                    playerRepo.recordDailyPrayer(buried)
                                 }
-                                playerRepo.recordDailyPrayer(buried)
                             }
                             Skills.FARMING     -> guildRepo.recordGuildGathering(Skills.FARMING, regular)
                         }

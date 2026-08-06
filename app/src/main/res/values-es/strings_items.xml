@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Manta raya cruda. Cocinar antes de consumir.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Camarón</string>
+    <string name="item_shrimp_name">Camarón cocido</string>
     <string name="item_shrimp_desc">Camarones cocidos. Restaura una pequeña cantidad de HP.</string>
-    <string name="item_sardine_name">Sardina</string>
+    <string name="item_sardine_name">Sardina cocida</string>
     <string name="item_sardine_desc">Sardina cocida. Restaura los puntos de vida al consumirla.</string>
-    <string name="item_herring_name">Arenque</string>
+    <string name="item_herring_name">Arenque cocido</string>
     <string name="item_herring_desc">Arenque cocido. Restaura los puntos de vida al consumirlo.</string>
-    <string name="item_mackerel_name">Caballa</string>
+    <string name="item_mackerel_name">Caballa cocida</string>
     <string name="item_mackerel_desc">Caballa cocida. Restaura los puntos de vida al consumirla.</string>
-    <string name="item_trout_name">Trucha</string>
+    <string name="item_trout_name">Trucha cocida</string>
     <string name="item_trout_desc">Trucha cocida. Restaura los puntos de vida al consumirla.</string>
-    <string name="item_salmon_name">Salmon</string>
+    <string name="item_salmon_name">Salmón cocido</string>
     <string name="item_salmon_desc">Salmón cocido. Restaura los puntos de vida al consumirlo.</string>
-    <string name="item_tuna_name">Atún</string>
+    <string name="item_tuna_name">Atún cocido</string>
     <string name="item_tuna_desc">Atún cocido. Restaura los puntos de vida al comerlo.</string>
-    <string name="item_lobster_name">Langosta</string>
+    <string name="item_lobster_name">Langosta cocida</string>
     <string name="item_lobster_desc">Langosta cocida. Restaura una buena cantidad de puntos de vida.</string>
-    <string name="item_swordfish_name">Pez espada</string>
+    <string name="item_swordfish_name">Pez espada cocido</string>
     <string name="item_swordfish_desc">Pez espada cocido. Restaura una cantidad significativa de puntos de vida.</string>
-    <string name="item_monkfish_name">Rape</string>
+    <string name="item_monkfish_name">Rape cocido</string>
     <string name="item_monkfish_desc">Rape cocido. Restaura una buena cantidad de puntos de vida.</string>
-    <string name="item_shark_name">Tiburón</string>
+    <string name="item_shark_name">Tiburón cocido</string>
     <string name="item_shark_desc">Tiburón cocinado. Restaura una gran cantidad de puntos de vida.</string>
-    <string name="item_sea_turtle_name">Tortuga marina</string>
+    <string name="item_sea_turtle_name">Tortuga marina cocida</string>
     <string name="item_sea_turtle_desc">Tortuga marina cocinada. Restaura una gran cantidad de puntos de vida.</string>
-    <string name="item_manta_ray_name">Manta raya</string>
+    <string name="item_manta_ray_name">Manta raya cocida</string>
     <string name="item_manta_ray_desc">Manta raya cocinada. Uno de los mejores platos que existen.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Carne cruda no identificada. Cocinar antes de consumir.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Carne de rata</string>
+    <string name="item_cooked_rat_meat_name">Carne de rata cocida</string>
     <string name="item_rat_meat_name">Carne de rata</string>
     <string name="item_cooked_rat_meat_desc">Carne de rata cocida. Apenas comestible, pero restaura una pequeña cantidad de puntos de vida.</string>
     <string name="item_cooked_chicken_name">Pollo cocido</string>

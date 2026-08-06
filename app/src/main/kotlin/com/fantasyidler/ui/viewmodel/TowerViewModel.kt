@@ -24,6 +24,7 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.util.GameStrings
@@ -76,6 +77,7 @@ class TowerViewModel @Inject constructor(
     private val questRepo: QuestRepository,
     private val guildRepo: GuildRepository,
     private val slayerRepo: SlayerRepository,
+    private val townRepo: TownRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -277,7 +279,7 @@ class TowerViewModel @Inject constructor(
                         skillName           = "tower",
                         activityKey         = "tower_floor_$nextFloor",
                         skillDisplayName    = "Infinite Tower: Floor $nextFloor",
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)),
                     )
                 )
                 if (enqueued) queuedSessionStarter.startNextQueued()
@@ -398,6 +400,7 @@ class TowerViewModel @Inject constructor(
                     runeCostPerAttack   = runeCost,
                     attackSpeedSec      = weaponAttackSpeed,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
                 )
 
                 // Runes are consumed after the session, not upfront.

@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Çiğ manta vatozu. Yemeden önce pişirin.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Karides</string>
+    <string name="item_shrimp_name">Pişmiş Karides</string>
     <string name="item_shrimp_desc">Pişmiş karides. Az miktarda HP yeniler.</string>
-    <string name="item_sardine_name">Sardalya</string>
+    <string name="item_sardine_name">Pişmiş Sardalya</string>
     <string name="item_sardine_desc">Pişmiş sardalya. Yendiğinde HP yeniler.</string>
-    <string name="item_herring_name">Ringa Balığı</string>
+    <string name="item_herring_name">Pişmiş Ringa Balığı</string>
     <string name="item_herring_desc">Pişmiş ringa balığı. Yendiğinde HP yeniler.</string>
-    <string name="item_mackerel_name">Uskumru</string>
+    <string name="item_mackerel_name">Pişmiş Uskumru</string>
     <string name="item_mackerel_desc">Pişmiş uskumru. Yendiğinde HP yeniler.</string>
-    <string name="item_trout_name">Alabalık</string>
+    <string name="item_trout_name">Pişmiş Alabalık</string>
     <string name="item_trout_desc">Pişmiş alabalık. Yendiğinde HP yeniler.</string>
-    <string name="item_salmon_name">Somon</string>
+    <string name="item_salmon_name">Pişmiş Somon</string>
     <string name="item_salmon_desc">Pişmiş somon. Yendiğinde HP yeniler.</string>
-    <string name="item_tuna_name">Ton Balığı</string>
+    <string name="item_tuna_name">Pişmiş Ton Balığı</string>
     <string name="item_tuna_desc">Pişmiş ton balığı. Yendiğinde HP yeniler.</string>
-    <string name="item_lobster_name">Istakoz</string>
+    <string name="item_lobster_name">Pişmiş Istakoz</string>
     <string name="item_lobster_desc">Pişmiş ıstakoz. İyi miktarda HP yeniler.</string>
-    <string name="item_swordfish_name">Kılıçbalığı</string>
+    <string name="item_swordfish_name">Pişmiş Kılıçbalığı</string>
     <string name="item_swordfish_desc">Pişmiş kılıçbalığı. Önemli ölçüde HP yeniler.</string>
-    <string name="item_monkfish_name">Fener Balığı</string>
+    <string name="item_monkfish_name">Pişmiş Fener Balığı</string>
     <string name="item_monkfish_desc">Pişmiş fener balığı. Sağlam miktarda HP yeniler.</string>
-    <string name="item_shark_name">Köpekbalığı</string>
+    <string name="item_shark_name">Pişmiş Köpekbalığı</string>
     <string name="item_shark_desc">Pişmiş köpekbalığı. Yüksek miktarda HP yeniler.</string>
-    <string name="item_sea_turtle_name">Deniz Kaplumbağası</string>
+    <string name="item_sea_turtle_name">Pişmiş Deniz Kaplumbağası</string>
     <string name="item_sea_turtle_desc">Pişmiş deniz kaplumbağası. Çok yüksek miktarda HP yeniler.</string>
-    <string name="item_manta_ray_name">Manta Vatozu</string>
+    <string name="item_manta_ray_name">Pişmiş Manta Vatozu</string>
     <string name="item_manta_ray_desc">Pişmiş manta vatozu. En iyi yiyeceklerden biri.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Tanımlanamayan çiğ et. Yemeden önce pişirin.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Sıçan Eti</string>
+    <string name="item_cooked_rat_meat_name">Pişmiş Sıçan Eti</string>
     <string name="item_rat_meat_name">Sıçan Eti</string>
     <string name="item_cooked_rat_meat_desc">Pişmiş sıçan eti. Yenilebilir ama çok az HP yeniler.</string>
     <string name="item_cooked_chicken_name">Pişmiş Tavuk</string>

@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Razza. Consumare previa cottura.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Gamberetto</string>
+    <string name="item_shrimp_name">Gamberetto Cotto</string>
     <string name="item_shrimp_desc">Gamberetto cotto. Ripristina una piccola quantità di HP.</string>
-    <string name="item_sardine_name">Sardina</string>
+    <string name="item_sardine_name">Sardina Cotta</string>
     <string name="item_sardine_desc">Sardina cotta. Ripristina qualche HP.</string>
-    <string name="item_herring_name">Aringa</string>
+    <string name="item_herring_name">Aringa Cotta</string>
     <string name="item_herring_desc">Aringa cotta. Ripristina qualche HP.</string>
-    <string name="item_mackerel_name">Sgombro</string>
+    <string name="item_mackerel_name">Sgombro Cotto</string>
     <string name="item_mackerel_desc">Sgombro cotto. Ripristina qualche HP.</string>
-    <string name="item_trout_name">Trota</string>
+    <string name="item_trout_name">Trota Cotta</string>
     <string name="item_trout_desc">Trota cotta. Ripristina qualche HP.</string>
-    <string name="item_salmon_name">Salmone</string>
+    <string name="item_salmon_name">Salmone Cotto</string>
     <string name="item_salmon_desc">Salmone cotto. Ripristina qualche HP.</string>
-    <string name="item_tuna_name">Tonno</string>
+    <string name="item_tuna_name">Tonno Cotto</string>
     <string name="item_tuna_desc">Tonno cotto. Ripristina qualche HP.</string>
-    <string name="item_lobster_name">Astice</string>
+    <string name="item_lobster_name">Astice Cotto</string>
     <string name="item_lobster_desc">Astice cotto. Ripristina una decente quantità di HP.</string>
-    <string name="item_swordfish_name">Pescespada</string>
+    <string name="item_swordfish_name">Pescespada Cotto</string>
     <string name="item_swordfish_desc">Pescespada cotto. Ripristina una modesta quantità di HP.</string>
-    <string name="item_monkfish_name">Pescatrice</string>
+    <string name="item_monkfish_name">Pescatrice Cotta</string>
     <string name="item_monkfish_desc">Pescatrice cotta. Ripristina una buona quantità di HP.</string>
-    <string name="item_shark_name">Squalo</string>
+    <string name="item_shark_name">Squalo Cotto</string>
     <string name="item_shark_desc">Squalo cotto. Ripristina una considerevole quantità di HP.</string>
-    <string name="item_sea_turtle_name">Tartaruga</string>
+    <string name="item_sea_turtle_name">Tartaruga Cotta</string>
     <string name="item_sea_turtle_desc">Tartaruga di mare cotta. Ripristina un\'ottima quantità di HP.</string>
-    <string name="item_manta_ray_name">Razza</string>
+    <string name="item_manta_ray_name">Razza Cotta</string>
     <string name="item_manta_ray_desc">Razza cotta. Uno dei migliori cibi disponibili.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,16 +137,16 @@
     <string name="item_raw_meat_desc">Carne non identificata. Consumare previa cottura.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Carne di Ratto</string>
+    <string name="item_cooked_rat_meat_name">Carne di Ratto Cotta</string>
     <string name="item_rat_meat_name">Carne di Ratto</string>
     <string name="item_cooked_rat_meat_desc">Carne cotta di ratto. A malapena commestibile, ma ripristina una piccolissima quantità di HP.</string>
-    <string name="item_cooked_chicken_name">Pollo</string>
+    <string name="item_cooked_chicken_name">Pollo Cotto</string>
     <string name="item_chicken_name">Pollo</string>
     <string name="item_cooked_chicken_desc">Carne cotta di pollo. Ripristina qualche HP.</string>
-    <string name="item_cooked_mutton_name">Carne di Montone</string>
+    <string name="item_cooked_mutton_name">Carne di Montone Cotta</string>
     <string name="item_mutton_name">Carne di Montone</string>
     <string name="item_cooked_mutton_desc">Carne cotta di pecora. Ripristina qualche HP.</string>
-    <string name="item_cooked_beef_name">Bistecca</string>
+    <string name="item_cooked_beef_name">Manzo Cotto</string>
     <string name="item_beef_name">Bistecca</string>
     <string name="item_cooked_beef_desc">Bistecca di manzo cotta. Ripristina qualche HP.</string>
 

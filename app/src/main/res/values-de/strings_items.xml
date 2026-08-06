@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Roher Mantarochen. Vor dem Verzehr kochen.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Garnele</string>
+    <string name="item_shrimp_name">Gekochte Garnele</string>
     <string name="item_shrimp_desc">Gekochte Garnele. Stellt eine kleine Menge LP wieder her.</string>
-    <string name="item_sardine_name">Sardine</string>
+    <string name="item_sardine_name">Gekochte Sardine</string>
     <string name="item_sardine_desc">Gekochte Sardine. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_herring_name">Hering</string>
+    <string name="item_herring_name">Gekochter Hering</string>
     <string name="item_herring_desc">Gekochter Hering. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_mackerel_name">Makrele</string>
+    <string name="item_mackerel_name">Gekochte Makrele</string>
     <string name="item_mackerel_desc">Gekochte Makrele. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_trout_name">Forelle</string>
+    <string name="item_trout_name">Gekochte Forelle</string>
     <string name="item_trout_desc">Gekochte Forelle. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_salmon_name">Lachs</string>
+    <string name="item_salmon_name">Gekochter Lachs</string>
     <string name="item_salmon_desc">Gekochter Lachs. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_tuna_name">Thunfisch</string>
+    <string name="item_tuna_name">Gekochter Thunfisch</string>
     <string name="item_tuna_desc">Gekochter Thunfisch. Stellt beim Verzehr einige LP wieder her.</string>
-    <string name="item_lobster_name">Hummer</string>
+    <string name="item_lobster_name">Gekochter Hummer</string>
     <string name="item_lobster_desc">Gekochter Hummer. Stellt eine beträchtliche Menge LP wieder her.</string>
-    <string name="item_swordfish_name">Schwertfisch</string>
+    <string name="item_swordfish_name">Gekochter Schwertfisch</string>
     <string name="item_swordfish_desc">Gekochter Schwertfisch. Stellt eine beträchtliche Menge LP wieder her.</string>
-    <string name="item_monkfish_name">Anglerfisch</string>
+    <string name="item_monkfish_name">Gekochter Anglerfisch</string>
     <string name="item_monkfish_desc">Gekochter Anglerfisch. Stellt eine beträchtliche Menge LP wieder her.</string>
-    <string name="item_shark_name">Hai</string>
+    <string name="item_shark_name">Gekochter Hai</string>
     <string name="item_shark_desc">Gekochter Hai. Stellt eine große Menge LP wieder her.</string>
-    <string name="item_sea_turtle_name">Meeresschildkröte</string>
+    <string name="item_sea_turtle_name">Gekochte Meeresschildkröte</string>
     <string name="item_sea_turtle_desc">Gekochte Meeresschildkröte. Stellt eine sehr große Menge LP wieder her.</string>
-    <string name="item_manta_ray_name">Mantarochen</string>
+    <string name="item_manta_ray_name">Gekochter Mantarochen</string>
     <string name="item_manta_ray_desc">Gekochter Mantarochen. Eines der besten Gerichte, die es gibt.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Unbekanntes rohes Fleisch. Vor dem Verzehr kochen.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Rattenfleisch</string>
+    <string name="item_cooked_rat_meat_name">Gekochtes Rattenfleisch</string>
     <string name="item_cooked_rat_meat_desc">Gekochtes Rattenfleisch. Kaum genießbar, stellt aber eine winzige Menge LP wieder her.</string>
     <string name="item_cooked_chicken_name">Gekochtes Hühnerfleisch</string>
     <string name="item_cooked_chicken_desc">Gekochtes Hühnerfleisch. Stellt beim Verzehr einige LP wieder her.</string>

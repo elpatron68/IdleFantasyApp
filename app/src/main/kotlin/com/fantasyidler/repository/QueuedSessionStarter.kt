@@ -144,8 +144,8 @@ class QueuedSessionStarter @Inject constructor(
      * Estimates how long [action] would take without running the full simulation.
      * Used to decide whether a queued session fits within remaining catch-up time.
      */
-    private fun estimateDuration(action: QueuedAction, agilityLevel: Int, agilityPrestige: Int = 0): Long {
-        val base = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)
+    private fun estimateDuration(action: QueuedAction, agilityLevel: Int, agilityPrestige: Int = 0, chronosMult: Float = 1.0f): Long {
+        val base = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult)
         val perItem = base / 60L
         return when (action.skillName) {
             Skills.MINING, Skills.WOODCUTTING, Skills.FISHING,
@@ -187,6 +187,7 @@ class QueuedSessionStarter @Inject constructor(
             val flags: PlayerFlags       = json.decodeFromString(player.flags)
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
+            val chronosMult     = townRepo.playerSessionDurationMultiplier(flags)
             // A boss repeat run (queued as one entry, tracked via PlayerFlags rather than N
             // separate queue entries) is advanced here one fight at a time, same as the live
             // (non-offline) chain in startNextQueued() -- returning before ever reaching the
@@ -201,7 +202,7 @@ class QueuedSessionStarter @Inject constructor(
                     return 0L
                 }
                 val snapshot = flags.activeBossRepeatSnapshot!!
-                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige)
+                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige, chronosMult)
                 if (duration > remainingMs) return 0L
                 return try {
                     startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
@@ -222,7 +223,7 @@ class QueuedSessionStarter @Inject constructor(
                     return 0L
                 }
                 val snapshot = flags.activeDungeonRepeatSnapshot!!
-                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige)
+                val duration = estimateDuration(snapshot, agilityLevel, agilityPrestige, chronosMult)
                 if (duration > remainingMs) return 0L
                 return try {
                     startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
@@ -242,7 +243,7 @@ class QueuedSessionStarter @Inject constructor(
             while (maxAttempts-- >= 0) {
                 val next = remaining.firstOrNull() ?: break
                 remaining = remaining.drop(1)
-                val duration = estimateDuration(next, agilityLevel, agilityPrestige)
+                val duration = estimateDuration(next, agilityLevel, agilityPrestige, chronosMult)
                 if (duration > remainingMs) return 0L
                 try {
                     // backdateMs = remainingMs so each fast-forwarded session in the same
@@ -275,6 +276,7 @@ class QueuedSessionStarter @Inject constructor(
         val flags: PlayerFlags             = json.decodeFromString(player.flags)
         val agilityLevel    = levels[Skills.AGILITY] ?: 1
         val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
+        val chronosMult     = townRepo.playerSessionDurationMultiplier(flags)
         val equippedCapeData = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
         val attackCapeMult   = resolveCapeMultiplier("attack", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
         val strengthCapeMult = resolveCapeMultiplier("strength", equippedCapeData, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
@@ -305,6 +307,7 @@ class QueuedSessionStarter @Inject constructor(
                     toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired),
                     petDropKey      = petDropKey(Skills.MINING),
                     petDropChance   = petDropChance(Skills.MINING),
+                    chronosMultiplier = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -320,6 +323,7 @@ class QueuedSessionStarter @Inject constructor(
                     toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired),
                     petDropKey      = petDropKey(Skills.WOODCUTTING),
                     petDropChance   = petDropChance(Skills.WOODCUTTING),
+                    chronosMultiplier = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -337,6 +341,7 @@ class QueuedSessionStarter @Inject constructor(
                     petDropKey       = petDropKey(Skills.FISHING),
                     petDropChance    = petDropChance(Skills.FISHING),
                     fishingSkillData = gameData.fishingSkillData,
+                    chronosMultiplier = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -352,6 +357,7 @@ class QueuedSessionStarter @Inject constructor(
                     toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired),
                     petDropKey   = petDropKey(Skills.AGILITY),
                     petDropChance = petDropChance(Skills.AGILITY),
+                    chronosMultiplier = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -369,6 +375,7 @@ class QueuedSessionStarter @Inject constructor(
                     petDropKey    = petDropKey(Skills.THIEVING),
                     petDropChance = petDropChance(Skills.THIEVING),
                     toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
+                    chronosMultiplier = chronosMult,
                 )
                 sessionRepo.startSession(
                     skillName         = Skills.THIEVING,
@@ -390,7 +397,7 @@ class QueuedSessionStarter @Inject constructor(
                 val frames  = buildCraftFrames(xpMap[Skills.FIREMAKING] ?: 0L, qty, logData.xpPerLog.toDouble(), 1, ashKey,
                     efficiency = efficiency,
                     petDropKey = petDropKey(Skills.FIREMAKING), petDropChance = petDropChance(Skills.FIREMAKING))
-                val perLogMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60L / efficiency).toLong()
+                val perLogMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60L / efficiency).toLong()
                 sessionRepo.startSession(
                     skillName         = Skills.FIREMAKING,
                     activityKey       = logKey,
@@ -443,7 +450,7 @@ class QueuedSessionStarter @Inject constructor(
                         frames[frames.size - 1] = last.copy(items = last.items + (rcPetDropKey to 1))
                     }
                 }
-                val perEssenceMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perEssenceMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(Skills.RUNECRAFTING, runeKey, encodeFrames(frames), qty.toLong() * perEssenceMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs,
                     catalystKey = action.catalystKey, catalystQty = ashCost, levelAtStart = levelAtStart)
             }
@@ -471,7 +478,7 @@ class QueuedSessionStarter @Inject constructor(
                         ))
                     }
                 }
-                val perBoneMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perBoneMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(
                     skillName         = Skills.PRAYER,
                     activityKey       = boneKey,
@@ -490,7 +497,7 @@ class QueuedSessionStarter @Inject constructor(
                 val frames = buildCraftFrames(xpMap[Skills.SMITHING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
                     efficiency = efficiency, petBoostPct = gatheringPetBoost(player.pets, Skills.SMITHING),
                     petDropKey = petDropKey(Skills.SMITHING), petDropChance = petDropChance(Skills.SMITHING))
-                val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60 / efficiency).toLong()
+                val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60 / efficiency).toLong()
                 sessionRepo.startSession(Skills.SMITHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
             Skills.COOKING -> {
@@ -499,7 +506,7 @@ class QueuedSessionStarter @Inject constructor(
                 val efficiency = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired)
                 val frames = buildCraftFrames(xpMap[Skills.COOKING] ?: 0L, qty, r.xpPerItem, 1, r.cookedItem,
                     efficiency = efficiency, petBoostPct = gatheringPetBoost(player.pets, Skills.COOKING))
-                val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60 / efficiency).toLong()
+                val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60 / efficiency).toLong()
                 sessionRepo.startSession(Skills.COOKING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
             Skills.FLETCHING -> {
@@ -508,7 +515,7 @@ class QueuedSessionStarter @Inject constructor(
                 val frames = buildCraftFrames(xpMap[Skills.FLETCHING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, r.itemName,
                     petBoostPct = gatheringPetBoost(player.pets, Skills.FLETCHING),
                     petDropKey = petDropKey(Skills.FLETCHING), petDropChance = petDropChance(Skills.FLETCHING))
-                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(Skills.FLETCHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
             Skills.CRAFTING -> {
@@ -517,7 +524,7 @@ class QueuedSessionStarter @Inject constructor(
                 val frames = buildCraftFrames(xpMap[Skills.CRAFTING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
                     petBoostPct = gatheringPetBoost(player.pets, Skills.CRAFTING),
                     petDropKey = petDropKey(Skills.CRAFTING), petDropChance = petDropChance(Skills.CRAFTING))
-                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(Skills.CRAFTING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
             Skills.CONSTRUCTION -> {
@@ -526,7 +533,7 @@ class QueuedSessionStarter @Inject constructor(
                 val frames = buildCraftFrames(xpMap[Skills.CONSTRUCTION] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
                     petBoostPct = gatheringPetBoost(player.pets, Skills.CONSTRUCTION),
                     petDropKey = petDropKey(Skills.CONSTRUCTION), petDropChance = petDropChance(Skills.CONSTRUCTION))
-                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(Skills.CONSTRUCTION, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart)
             }
             Skills.HERBLORE -> {
@@ -534,13 +541,15 @@ class QueuedSessionStarter @Inject constructor(
                 val qty = action.qty.takeIf { it > 0 } ?: return
                 val catalystKey = action.catalystKey
                 val outputKey   = if (catalystKey != null) "enhanced_${action.activityKey}" else action.activityKey
-                if (catalystKey != null) playerRepo.consumeItemsUnlocked(mapOf(catalystKey to qty))
+                // Ash is already consumed at enqueue time (CraftingViewModel);
+                // action.catalystQty carries that amount through for the refund-on-abandon path.
+                val ashCost   = action.catalystQty
                 val frames    = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey,
                     petBoostPct = gatheringPetBoost(player.pets, Skills.HERBLORE),
                     petDropKey = petDropKey(Skills.HERBLORE), petDropChance = petDropChance(Skills.HERBLORE))
-                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60
+                val perItemMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60
                 sessionRepo.startSession(Skills.HERBLORE, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs,
-                    catalystKey = catalystKey, catalystQty = if (catalystKey != null) qty else 0, levelAtStart = levelAtStart)
+                    catalystKey = catalystKey, catalystQty = ashCost, levelAtStart = levelAtStart)
             }
             Skills.MERCANTILE -> {
                 val route = gameData.tradeRoutes.firstOrNull { it.id == action.activityKey } ?: return
@@ -551,6 +560,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityPrestige = agilityPrestige,
                     petDropKey    = petDropKey(Skills.MERCANTILE),
                     petDropChance = petDropChance(Skills.MERCANTILE),
+                    chronosMultiplier = chronosMult,
                 )
                 sessionRepo.startSession(
                     skillName         = action.skillName,
@@ -628,7 +638,7 @@ class QueuedSessionStarter @Inject constructor(
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct    = flags.foodEatThresholdPct,
                 )
-                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60L
+                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
                 sessionRepo.startSession(
                     skillName         = "boss",
@@ -660,6 +670,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityLevel    = agilityLevel,
                     agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0,
                     toolEfficiency  = toolEfficiency,
+                    chronosMultiplier = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -737,6 +748,7 @@ class QueuedSessionStarter @Inject constructor(
                     availableRunes      = if (queueRuneKey != null) inventory[queueRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    chronosMultiplier   = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }
@@ -821,6 +833,7 @@ class QueuedSessionStarter @Inject constructor(
                     availableRunes      = if (towerRuneKey != null) inventory[towerRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    chronosMultiplier   = chronosMult,
                 )
                 sessionRepo.startSession(
                     skillName         = "tower",
@@ -847,7 +860,8 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct        = gatheringPetBoost(player.pets, CarnivalSimulator.relevantSkill(action.activityKey)),
                     agilityLevel       = agilityLevel,
                     agilityPrestige    = flags.skillPrestige[Skills.AGILITY] ?: 0,
-                    tierBonus          = townRepo.idleTicketBonusChance(flags)
+                    tierBonus          = townRepo.idleTicketBonusChance(flags),
+                    chronosMultiplier  = chronosMult,
                 )
                 startSession(action, result, offline, backdateMs, levelAtStart)
             }

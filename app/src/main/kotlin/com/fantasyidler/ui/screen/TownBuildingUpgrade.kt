@@ -62,6 +62,8 @@ fun BuildingUpgradeCard(
                 "garden"       -> R.string.town_building_garden_name
                 "queue_master" -> R.string.town_building_queue_master_name
                 "cape_rack"    -> R.string.town_building_cape_rack_name
+                "artisans_workshop" -> R.string.town_building_artisans_workshop_name
+                "chronos_spire" -> R.string.town_building_chronos_spire_name
                 else           -> R.string.town_upgrade_section_title
             }
             Text(
@@ -183,6 +185,14 @@ fun buildingBonusText(buildingKey: String, tier: Int, townRepo: TownRepository):
         1    -> stringResource(R.string.town_cape_rack_t1_bonus)
         2    -> stringResource(R.string.town_cape_rack_t2_bonus)
         else -> stringResource(R.string.town_cape_rack_t3_bonus)
+    }
+    "artisans_workshop" -> when (tier) {
+        0    -> stringResource(R.string.town_artisans_workshop_no_bonus)
+        else -> stringResource(R.string.town_artisans_workshop_active_bonus, (townRepo.secondaryMaterialSaveChance("artisans_workshop", tier) * 100).roundToInt())
+    }
+    "chronos_spire" -> when (tier) {
+        0    -> stringResource(R.string.town_chronos_spire_no_bonus)
+        else -> stringResource(R.string.town_chronos_spire_active_bonus, (townRepo.playerSessionSpeedReduction("chronos_spire", tier) * 100).roundToInt())
     }
     else -> ""
 }

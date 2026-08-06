@@ -55,6 +55,7 @@ object SkillSimulator {
         toolEfficiency: Float = 1.0f,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -102,7 +103,7 @@ object SkillSimulator {
             )
         }
 
-        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     // ------------------------------------------------------------------
@@ -123,6 +124,7 @@ object SkillSimulator {
         toolEfficiency: Float = 1.0f,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -161,7 +163,7 @@ object SkillSimulator {
             )
         }
 
-        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     // ------------------------------------------------------------------
@@ -179,6 +181,7 @@ object SkillSimulator {
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
         fishingSkillData: GatheringSkillData? = null,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -228,7 +231,7 @@ object SkillSimulator {
             )
         }
 
-        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     // ------------------------------------------------------------------
@@ -250,6 +253,7 @@ object SkillSimulator {
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
         forcedDropPerFrame: String? = null,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -296,7 +300,7 @@ object SkillSimulator {
             )
         }
 
-        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     // ------------------------------------------------------------------
@@ -323,6 +327,7 @@ object SkillSimulator {
         toolEfficiency: Float = 1.0f,
         petDropKey: String? = null,
         petDropChance: Double = 0.0,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): Result {
         var currentXp = startXp
@@ -363,7 +368,7 @@ object SkillSimulator {
             )
         }
 
-        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige))
+        return Result(frames, sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier))
     }
 
     // ------------------------------------------------------------------
@@ -403,11 +408,11 @@ object SkillSimulator {
      *   level 75 → 45 min
      *   level 99 → 40 min
      */
-    fun sessionDurationMs(agilityLevel: Int, agilityPrestige: Int = 0): Long {
+    fun sessionDurationMs(agilityLevel: Int, agilityPrestige: Int = 0, chronosMultiplier: Float = 1.0f): Long {
         val fraction = (agilityLevel - 1).coerceIn(0, 98) / 98.0
         val maxReduction = 20.0 + agilityPrestige.coerceIn(0, 3) * (10.0 / 3.0)
-        val minutes = (60.0 - maxReduction * fraction).roundToInt()
-        return minutes * 60_000L
+        val minutes = (60.0 - maxReduction * fraction) * chronosMultiplier.coerceIn(0.5f, 1.0f)
+        return (minutes.roundToInt() * 60_000L).coerceAtLeast(60_000L)
     }
 
     /**

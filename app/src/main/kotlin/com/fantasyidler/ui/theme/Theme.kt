@@ -25,6 +25,25 @@ private val DarkColorScheme = darkColorScheme(
     onError              = ParchmentText,
 )
 
+private val MidnightColorScheme = darkColorScheme(
+    primary              = GoldPrimary,
+    onPrimary            = MidnightBackground,
+    primaryContainer     = GoldContainer,
+    onPrimaryContainer   = GoldOnContainer,
+    secondary            = BrownSecondary,
+    onSecondary          = ParchmentText,
+    secondaryContainer   = BrownContainer,
+    onSecondaryContainer = BrownOnContainer,
+    background           = MidnightBackground,
+    onBackground         = ParchmentText,
+    surface              = MidnightSurface,
+    onSurface            = ParchmentText,
+    surfaceVariant       = MidnightSurfaceVariant,
+    onSurfaceVariant     = MidnightTextMuted,
+    error                = ErrorRed,
+    onError              = ParchmentText,
+)
+
 private val LightColorScheme = lightColorScheme(
     primary              = GoldPrimary,
     onPrimary            = DarkText,
@@ -49,13 +68,14 @@ fun FantasyIdlerTheme(
     themePreference: String = "dark",
     content: @Composable () -> Unit,
 ) {
-    val useDark = when (themePreference) {
-        "light"  -> false
-        "dark"   -> true
-        else     -> isSystemInDarkTheme()
+    val colorScheme = when (themePreference) {
+        "light"    -> LightColorScheme
+        "dark"     -> DarkColorScheme
+        "midnight" -> MidnightColorScheme
+        else       -> if (isSystemInDarkTheme()) DarkColorScheme else LightColorScheme
     }
     MaterialTheme(
-        colorScheme = if (useDark) DarkColorScheme else LightColorScheme,
+        colorScheme = colorScheme,
         typography  = AppTypography,
         content     = content,
     )

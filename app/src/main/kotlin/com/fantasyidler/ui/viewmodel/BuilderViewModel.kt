@@ -34,6 +34,8 @@ data class BuilderUiState(
     val gardenTier: Int = 0,
     val queueMasterTier: Int = 0,
     val capeRackTier: Int = 0,
+    val artisansWorkshopTier: Int = 0,
+    val chronosSpireTier: Int = 0,
     val snackbarMessage: String? = null,
 )
 
@@ -68,19 +70,23 @@ class BuilderViewModel @Inject constructor(
             gardenTier        = flags.townBuildingTiers["garden"] ?: 0,
             queueMasterTier   = flags.townBuildingTiers["queue_master"] ?: 0,
             capeRackTier      = flags.townBuildingTiers["cape_rack"] ?: 0,
+            artisansWorkshopTier = flags.townBuildingTiers["artisans_workshop"] ?: 0,
+            chronosSpireTier  = flags.townBuildingTiers["chronos_spire"] ?: 0,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), BuilderUiState())
 
     fun upgrade(buildingKey: String) {
         viewModelScope.launch {
             val currentTier = when (buildingKey) {
-                "inn"          -> uiState.value.innTier
-                "guild_hall"   -> uiState.value.guildHallTier
-                "fairgrounds"  -> uiState.value.fairgroundsTier
-                "garden"       -> uiState.value.gardenTier
-                "queue_master" -> uiState.value.queueMasterTier
-                "cape_rack"    -> uiState.value.capeRackTier
-                else           -> uiState.value.churchTier
+                "inn"               -> uiState.value.innTier
+                "guild_hall"        -> uiState.value.guildHallTier
+                "fairgrounds"       -> uiState.value.fairgroundsTier
+                "garden"            -> uiState.value.gardenTier
+                "queue_master"      -> uiState.value.queueMasterTier
+                "cape_rack"         -> uiState.value.capeRackTier
+                "artisans_workshop" -> uiState.value.artisansWorkshopTier
+                "chronos_spire"     -> uiState.value.chronosSpireTier
+                else                -> uiState.value.churchTier
             }
             val def = gameData.townBuildings[buildingKey]
             when (townRepo.upgradeBuilding(buildingKey)) {

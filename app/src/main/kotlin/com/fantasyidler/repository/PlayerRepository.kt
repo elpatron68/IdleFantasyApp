@@ -382,11 +382,15 @@ class PlayerRepository @Inject constructor(
         val weaponSlot = flags.activeWeaponSlot
             ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
             ?: EquipSlot.WEAPON_ATK
+        val chronosReduction = flags.townBuildingTiers.entries.sumOf { (b, t) ->
+            gameData.townBuildings[b]?.tiers?.getOrNull(t - 1)?.bonuses?.get("player_session_speed_reduction")?.toDouble() ?: 0.0
+        }.toFloat()
+        val chronosMult = (1.0f - chronosReduction).coerceAtLeast(0.5f)
         enqueueActionUnlocked(QueuedAction(
             skillName           = "combat",
             activityKey         = dungeonKey,
             skillDisplayName    = dungeonDisplayName,
-            estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige),
+            estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige, chronosMult),
             equippedSnapshot    = player.equipped,
             arrowsKey           = flags.equippedArrows,
             spellName           = flags.activeSpell,

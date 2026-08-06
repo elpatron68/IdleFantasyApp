@@ -66,8 +66,14 @@ internal fun ArrowLoadoutPicker(
             onDismissRequest = { expanded = false },
         ) {
             arrowOptions.forEach { key ->
+                val label = if (key == null) {
+                    stringResource(R.string.combat_arrow_auto)
+                } else {
+                    val qty = inventory[key] ?: 0
+                    "${GameStrings.itemName(context, key)} ($qty)"
+                }
                 DropdownMenuItem(
-                    text    = { Text(if (key == null) stringResource(R.string.combat_arrow_auto) else GameStrings.itemName(context, key)) },
+                    text    = { Text(label) },
                     onClick = { onArrowSelected(key); expanded = false },
                 )
             }

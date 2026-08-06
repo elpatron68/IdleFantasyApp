@@ -36,6 +36,7 @@ object CarnivalSimulator {
         agilityLevel: Int,
         agilityPrestige: Int = 0,
         tierBonus: Float = 0f,
+        chronosMultiplier: Float = 1.0f,
     ): SkillSimulator.Result {
         val chance = ticketChance(relevantSkillLevel) + tierBonus
         val baseXpFrame = xpPerFrame(activityKey)
@@ -60,7 +61,7 @@ object CarnivalSimulator {
 
         return SkillSimulator.Result(
             frames     = frames,
-            durationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige),
+            durationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier),
         )
     }
 

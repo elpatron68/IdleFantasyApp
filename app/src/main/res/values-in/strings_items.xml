@@ -97,31 +97,31 @@
     <string name="item_raw_manta_ray_desc">Pari manta mentah. Masak sebelum dimakan.</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">Udang</string>
+    <string name="item_shrimp_name">Udang Panggang</string>
     <string name="item_shrimp_desc">Udang matang. Memulihkan sedikit HP.</string>
-    <string name="item_sardine_name">Sarden</string>
+    <string name="item_sardine_name">Sarden Panggang</string>
     <string name="item_sardine_desc">Sarden matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_herring_name">Haring</string>
+    <string name="item_herring_name">Haring Panggang</string>
     <string name="item_herring_desc">Haring matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_mackerel_name">Makerel</string>
+    <string name="item_mackerel_name">Makerel Panggang</string>
     <string name="item_mackerel_desc">Makerel matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_trout_name">Trout</string>
+    <string name="item_trout_name">Trout Panggang</string>
     <string name="item_trout_desc">Trout matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_salmon_name">Salmon</string>
+    <string name="item_salmon_name">Salmon Panggang</string>
     <string name="item_salmon_desc">Salmon matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_tuna_name">Tuna</string>
+    <string name="item_tuna_name">Tuna Panggang</string>
     <string name="item_tuna_desc">Tuna matang. Memulihkan HP saat dimakan.</string>
-    <string name="item_lobster_name">Lobster</string>
+    <string name="item_lobster_name">Lobster Panggang</string>
     <string name="item_lobster_desc">Lobster matang. Memulihkan HP dalam jumlah cukup banyak.</string>
-    <string name="item_swordfish_name">Ikan Todak</string>
+    <string name="item_swordfish_name">Ikan Todak Panggang</string>
     <string name="item_swordfish_desc">Ikan todak matang. Memulihkan HP dalam jumlah besar.</string>
-    <string name="item_monkfish_name">Monkfish</string>
+    <string name="item_monkfish_name">Monkfish Panggang</string>
     <string name="item_monkfish_desc">Monkfish matang. Memulihkan HP dalam jumlah lumayan besar.</string>
-    <string name="item_shark_name">Hiu</string>
+    <string name="item_shark_name">Hiu Panggang</string>
     <string name="item_shark_desc">Hiu matang. Memulihkan HP dalam jumlah besar.</string>
-    <string name="item_sea_turtle_name">Penyu Laut</string>
+    <string name="item_sea_turtle_name">Penyu Laut Panggang</string>
     <string name="item_sea_turtle_desc">Penyu laut matang. Memulihkan HP dalam jumlah sangat besar.</string>
-    <string name="item_manta_ray_name">Pari Manta</string>
+    <string name="item_manta_ray_name">Pari Manta Panggang</string>
     <string name="item_manta_ray_desc">Pari manta matang. Salah satu makanan terbaik yang tersedia.</string>
 
     <!-- ===== Raw meat ===== -->
@@ -137,7 +137,7 @@
     <string name="item_raw_meat_desc">Daging mentah tak dikenal. Masak sebelum dimakan.</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">Daging Tikus</string>
+    <string name="item_cooked_rat_meat_name">Daging Tikus Panggang</string>
     <string name="item_cooked_rat_meat_desc">Daging tikus matang. Nyaris tak layak makan, tapi memulihkan sedikit HP.</string>
     <string name="item_cooked_chicken_name">Ayam Panggang</string>
     <string name="item_cooked_chicken_desc">Ayam panggang. Memulihkan HP saat dimakan.</string>

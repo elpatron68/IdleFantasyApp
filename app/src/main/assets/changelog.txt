@@ -1,3 +1,14 @@
+v1.12.14
+• Added the Artisan's Workshop town building (Construction 80/90/99): grants a 5/10/15% chance to preserve secondary crafting materials such as herblore and runecrafting ashes
+• Added the Chronos Spire town building (Construction 82/92/99): reduces player session durations by 2/4/6% (worker sessions unaffected)
+• Added a Midnight theme with a higher-contrast AMOLED palette so dark mode stays readable under Night Light
+• Rebalanced Agility Guild quests and dailies to use higher-level courses at higher tiers, and fixed quest descriptions that listed the wrong number of courses
+• Arrow options in the combat loadout picker now show how many you have in your inventory
+• Fixed the bottom Combat button not returning to the combat screen while in the Infinite Tower
+• Fixed the Infinite Tower weapon, arrow, spell, and potion setup disappearing while a tower session is active; selections now stay visible and apply to the next floor, and potions show owned quantities
+• Fixed scattering ashes counting toward the weekly "Bury 450 bones" quest
+• Renamed cooked fish and rat meat so all cooking outputs consistently read as cooked (e.g. "Cooked Shrimp"), in every language
+
 v1.12.13
 • Fixed Equip Best Gear on a Strength loadout again preferring accuracy-heavy armor like the Sovereign Crown over strength-focused armor like the Tower Helm
 • Fixed starting an Infinite Tower floor leaving the screen scrolled partway down the milestone list after the loadout pickers collapse; the view now returns to the top

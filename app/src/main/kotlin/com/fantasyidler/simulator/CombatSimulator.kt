@@ -49,6 +49,7 @@ object CombatSimulator {
         availableRunes: Int = Int.MAX_VALUE,
         attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
         eatThresholdPct: Int = 50,
+        chronosMultiplier: Float = 1.0f,
         random: Random = Random.Default,
     ): SkillSimulator.Result {
         val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
@@ -64,7 +65,7 @@ object CombatSimulator {
 
         val spawnPool = dungeon.enemySpawns.flatMap { spawn ->
             List(spawn.weight) { spawn.enemy }
-        }.ifEmpty { return SkillSimulator.Result(emptyList(), SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)) }
+        }.ifEmpty { return SkillSimulator.Result(emptyList(), SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier)) }
 
         val maxHp = playerHp * 10
         var currentHp = maxHp
@@ -283,7 +284,7 @@ object CombatSimulator {
             }
         }
 
-        val fullDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)
+        val fullDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMultiplier)
         return SkillSimulator.Result(frames, fullDurationMs)
     }
 
