@@ -420,26 +420,37 @@ class QueuedSessionStarter @Inject constructor(
                 val currentXp = xpMap[Skills.RUNECRAFTING] ?: 0L
                 val rcPetDropKey = petDropKey(Skills.RUNECRAFTING)
                 val rcPetDropChance = petDropChance(Skills.RUNECRAFTING)
+                val frameCount = minOf(qty, 60)
                 val frames = mutableListOf<SessionFrame>().also { list ->
                     var xp = currentXp
-                    for (i in 1..qty) {
-                        val before = XpTable.levelForXp(xp)
-                        val multiplier = when {
-                            before >= 75 -> 3
-                            before >= 50 -> 2
-                            else         -> 1
-                        } + ashBonus
-                        val gain = (runeData.xpPerRune * multiplier).toInt()
-                        xp += gain
+                    for (bucket in 0 until frameCount) {
+                        val itemsInBucket = ((bucket.toLong() + 1) * qty / frameCount - bucket.toLong() * qty / frameCount).toInt()
+                        val levelBefore = XpTable.levelForXp(xp)
+                        var bucketGain = 0
+                        var bucketRunes = 0
+                        repeat(itemsInBucket) {
+                            val level = XpTable.levelForXp(xp)
+                            val multiplier = when {
+                                level >= 75 -> 3
+                                level >= 50 -> 2
+                                else         -> 1
+                            } + ashBonus
+                            val gain = (runeData.xpPerRune * multiplier).toInt()
+                            xp += gain
+                            bucketGain += gain
+                            bucketRunes += multiplier
+                        }
+                        val levelAfter = XpTable.levelForXp(xp)
                         list.add(SessionFrame(
-                            minute      = i,
-                            xpGain      = gain,
-                            xpBefore    = xp - gain,
+                            minute      = bucket + 1,
+                            xpGain      = bucketGain,
+                            xpBefore    = xp - bucketGain,
                             xpAfter     = xp,
-                            levelBefore = before,
-                            levelAfter  = XpTable.levelForXp(xp),
-                            items       = mapOf(runeKey to multiplier),
-                            kills       = 1,
+                            levelBefore = levelBefore,
+                            levelAfter  = levelAfter,
+                            items       = mapOf(runeKey to bucketRunes),
+                            leveledUp   = levelAfter > levelBefore,
+                            kills       = itemsInBucket,
                         ))
                     }
                 }

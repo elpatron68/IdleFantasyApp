@@ -279,7 +279,8 @@ class HomeViewModel @Inject constructor(
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val agilityLevel    = levels[Skills.AGILITY] ?: 1
             val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
-            val sessionMs       = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)
+            val chronosMult     = townRepo.playerSessionDurationMultiplier(flags)
+            val sessionMs       = SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige, chronosMult)
             val perItemMs    = sessionMs / 60
             val queueStart   = session?.takeIf { !it.completed }?.endsAt ?: System.currentTimeMillis()
             // Recomputed live from current agility/gear rather than the frozen value stored at

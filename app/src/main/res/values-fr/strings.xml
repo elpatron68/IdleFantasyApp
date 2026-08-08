@@ -1608,18 +1608,18 @@
     <string name="bonus_tower">Tour</string>
     <string name="bonus_xp">+%1$d%% XP</string>
     <string name="town_building_cape_rack_name">Rangement à Capes</string>
-    <string name="town_cape_rack_no_bonus">Améliorer pour appliquer passivement les bonus d\'XP et de rendement des aptitudes/capes de guildes possédées</string>
+    <string name="town_cape_rack_no_bonus">Améliorez pour appliquer passivement les bonus d\'XP et de rendement des aptitudes/capes de guildes possédées</string>
     <string name="town_cape_rack_t1_bonus">Les bonus passifs des capes Tier 1 (de Collecte) sont actives</string>
     <string name="town_cape_rack_t2_bonus">Les bonus passifs des capes Tier 1 &amp; 2 (de Collecte, de Façonnage) sont actives</string>
     <string name="town_cape_rack_t3_bonus">Les bonus passifs de toutes les capes possédées (de Collecte, de Façonnage, de Combat &amp; de Guildes) sont actives</string>
     <string name="crafting_owned">Possédé: %1$d</string>
     <string name="crafting_owned_detail">Présent dans l\'inventaire: %1$d</string>
     <string name="firemaking_ashes_owned">Cendres possédées: %1$d</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
-    <string name="town_building_chronos_spire_name">Chronos Spire</string>
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
-    <string name="settings_theme_midnight">Midnight</string>
+    <string name="town_building_artisans_workshop_name">Atelier de l\'Artisan</string>
+    <string name="town_artisans_workshop_no_bonus">Améliorez pour avoir une chance de préserver des matériaux de fabrication secondaires</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance de préserver des matériaux de fabrication secondaires</string>
+    <string name="town_building_chronos_spire_name">Flèche du Chrono</string>
+    <string name="town_chronos_spire_no_bonus">Améliorez pour réduire le temps des sessions du joueur</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% de réduction du temps des sessions du joueur</string>
+    <string name="settings_theme_midnight">Minuit</string>
 </resources>

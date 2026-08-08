@@ -783,13 +783,14 @@ class SkillsViewModel @Inject constructor(
                 val petBoostedXp = if (petBoostPct > 0) (rawXp * (1.0 + petBoostPct / 100.0)).toLong() else rawXp
                 val estimatedXpGain = (petBoostedXp * xpQueueMult).toLong()
                 val agilityPrestige = gatherFlags.skillPrestige[Skills.AGILITY] ?: 0
+                val chronosMult     = townRepo.playerSessionDurationMultiplier(gatherFlags)
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = skillName,
                         activityKey         = activityKey,
                         skillDisplayName    = displayName,
                         estimatedXpGain     = estimatedXpGain,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige, chronosMult),
                     )
                 )
                 if (enqueued) queuedSessionStarter.startNextQueued()

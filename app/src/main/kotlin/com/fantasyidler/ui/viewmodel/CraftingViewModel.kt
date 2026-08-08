@@ -184,7 +184,7 @@ class CraftingViewModel @Inject constructor(
             val perItemMs = if (selectedRecipe != null) {
                 val agility = levels[Skills.AGILITY] ?: 1
                 val eff = craftToolEfficiency(selectedRecipe, equipped)
-                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0) / 60 / eff).toLong()
+                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / eff).toLong()
             } else 0L
             extra.copy(
                 smithingLevel      = levels[Skills.SMITHING]      ?: 1,

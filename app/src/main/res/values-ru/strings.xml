@@ -1032,7 +1032,7 @@
     <string name="slayer_foretell_title">Предсказать будущую цель</string>
     <string name="slayer_foretell_desc">Предварительно планируйте предстоящие задания убийцы, платя костьми. Они назначаются автоматически, когда ваша текущая задача выполнена.</string>
     <string name="slayer_foretell_queue_empty">Нет задач в очереди.</string>
-    <string name="slayer_foretell_queue_btn">+ Queue</string>
+    <string name="slayer_foretell_queue_btn">+ Очередь</string>
     <string name="slayer_foretell_queue_full">Очередь предсказаний заполнена (3/3).</string>
     <string name="slayer_foretell_not_enough_bones">Недостаточно костей (стоимость: %1$d костей).</string>
     <string name="slayer_foretell_success">Предсказанная задача: %1$s!</string>
@@ -1215,7 +1215,7 @@
     <string name="town_fairgrounds_no_bonus">4 доступных мини-игры, время восстановления 10 минут</string>
     <string name="town_fairgrounds_t1_bonus">Открывает возможность игры в Pick-a-Cup, время восстановления сокращено до 7,5 минут, +5% шанс простоя билета</string>
     <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10% idle ticket chance</string>
-    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string>
+    <string name="town_fairgrounds_t3_bonus">Время восстановления уменьшается до 5 минут, +15% к шансу получения билета</string>
     <string name="town_building_garden_name">Сад</string>
     <plurals name="town_garden_bonus">
         <item quantity="zero">Пока нет дополнительных грядок</item>
@@ -1354,7 +1354,7 @@
     <string name="carnival_redeemed">Обменяно: %1$s!</string>
     <string name="carnival_not_enough_tickets">Недостаточно билетов.</string>
     <string name="carnival_lamp_redeemed">+%1$s ОП в %2$s!</string>
-    <string name="carnival_shell_game">Pick-a-Cup</string>
+    <string name="carnival_shell_game">Выбери чашку</string>
     <string name="carnival_active_shell_desc">Посмотрите, в какой чашке спрятан драгоценный камень, а затем подберите его после перетасовки!</string>
     <string name="carnival_shell_showing">Смотрите внимательно — драгоценный камень находится под чашкой %1$d</string>
     <string name="carnival_shell_watch">Смотрите внимательно…</string>
@@ -1400,7 +1400,7 @@
     <string name="bonus_all_skills">Все навыки</string>
     <string name="bonus_section_boosts">Активные бонусы</string>
     <string name="bonus_section_skills">Бонусы навыков</string>
-    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="bonus_combat_stat_boost">Повышает боевые характеристики</string>
     <string name="bonus_combined_xp">Суммарный XP</string>
     <string name="bonus_yield">+%1$d%% выход</string>
     <string name="bonus_boost">+%1$d%% усиление</string>
@@ -1517,8 +1517,8 @@
     <string name="tower_title">Бесконечная Башня</string>
     <string name="tower_floor_label">Этаж %d</string>
     <string name="tower_best_floor">Лучший результат: этаж %d</string>
-    <string name="tower_start_btn">Attempt Floor %d</string>
-    <string name="tower_milestones">Milestones</string>
+    <string name="tower_start_btn">Отправиться на %d этаж</string>
+    <string name="tower_milestones">Рубежи</string>
     <string name="tower_floor_cleared">Этаж %d пройден!</string>
     <string name="tower_new_best">Новый рекорд: этаж %d!</string>
     <string name="tower_death_reset">Вы проиграли на этаже %1$d. Возвращение на этаж %2$d.</string>
@@ -1528,8 +1528,8 @@
     <string name="tower_enemies_this_floor">Враги</string>
     <string name="tower_enemy_strength">Сила врага: %s%%</string>
     <string name="tower_entry_card_desc">Бесконечный подъем. Как высоко вы заберетесь?</string>
-    <string name="tower_collect_prompt">Collect your tower run</string>
-    <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string>
+    <string name="tower_collect_prompt">Собери свой пробег по башне</string>
+    <string name="tower_home_collect_hint">Откройте экран «Башня», чтобы собрать этот забег</string>
 
     <!-- ===== Seasonal Events ===== -->
     <string name="seasonal_event_title">Сезонное событие</string>
@@ -1552,28 +1552,28 @@
     <string name="seasonal_claim">Забрать</string>
     <string name="seasonal_bounty_cooldown">Новое задание через %1$dм %2$dс</string>
     <string name="seasonal_go">Перейти</string>
-    <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string>
-    <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string>
-    <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string>
-    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Sunspire Solstice 2026 banner</string>
-    <string name="seasonal_bounty_sunspire_firewood_name">Bring firewood for the bonfire</string>
+    <string name="seasonal_event_sunspire_solstice_2026_name">Солнцестояние солнечного шпиля</string>
+    <string name="seasonal_event_sunspire_solstice_2026_banner">Учувствуйте в Солнцестоянии солнечного шпиля 2026</string>
+    <string name="seasonal_minigame_bonfire_rhythm_name">Ритм костра</string>
+    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Солнцестояние солнечного шпиля 2026 баннер</string>
+    <string name="seasonal_bounty_sunspire_firewood_name">Принесите дрова для костра</string>
     <string name="seasonal_bounty_sunspire_firewood_hint">Рубить дубовые бревна — Рубка дров</string>
     <string name="seasonal_bounty_sunspire_kindling_name">Собрать растопку для костра</string>
     <string name="seasonal_bounty_sunspire_kindling_hint">Рубить бревна ивы — Рубка дров</string>
-    <string name="seasonal_bounty_sunspire_sunore_name">Mine gold to gild the sun-tower</string>
+    <string name="seasonal_bounty_sunspire_sunore_name">Добывайте золото, чтобы позолотить солнечную башню</string>
     <string name="seasonal_bounty_sunspire_sunore_hint">Добыча золотой руды — Горное дело</string>
     <string name="seasonal_bounty_sunspire_draughts_name">Приготовьте зелья силы</string>
     <string name="seasonal_bounty_sunspire_draughts_hint">Травничество</string>
-    <string name="seasonal_bounty_sunspire_embers_brew_name">Brew Attack Potions for the solstice watch</string>
+    <string name="seasonal_bounty_sunspire_embers_brew_name">Приготовьте зелье атаки для наблюдения за солнцестоянием</string>
     <string name="seasonal_bounty_sunspire_embers_brew_hint">Травничество</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string>
-    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string>
-    <string name="seasonal_bounty_sunspire_wisps_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string>
-    <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
-    <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string>
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Приготовьте мифриловые стрелы, чтобы сдержать духов</string>
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Лучное дело</string>
+    <string name="seasonal_bounty_sunspire_wisps_name">Прогоните солнечных духов</string>
+    <string name="seasonal_bounty_sunspire_wisps_hint">Можно найти только в экспедиции Солнечного шпиля</string>
+    <string name="seasonal_bounty_sunspire_hounds_name">Прогоните псов пепла</string>
+    <string name="seasonal_bounty_sunspire_hounds_hint">Можно найти только в экспедиции Солнечного шпиля</string>
+    <string name="seasonal_bounty_sunspire_colossus_name">Сразите Пепельных колоссов</string>
+    <string name="seasonal_bounty_sunspire_colossus_hint">Можно найти только в экспедиции Солнечного шпиля — редкое</string>
     <string name="label_banners">Знамёна</string>
     <string name="label_journal">Журнал</string>
     <string name="journal_hint">Запишите напоминания на следующий раз — что поставить в очередь, к чему вы стремитесь.</string>
@@ -1652,15 +1652,21 @@
         <item>%1$s любит внимание!</item>
         <item>%1$s обещает и дальше усердно работать на вас.</item>
     </string-array>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
-    <string name="town_building_chronos_spire_name">Chronos Spire</string>
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+    <string name="town_building_cape_rack_name">Стойка для плащей</string>
+    <string name="town_cape_rack_no_bonus">Улучшите, чтобы пассивно применять бонусы от навыков и плаща гильдии, а также бонусы к XP</string>
+    <string name="town_cape_rack_t1_bonus">Пассивные бонусы от плащей 1-го уровня («Добыча») активированы</string>
+    <string name="town_cape_rack_t2_bonus">Пассивные бонусы от плащей 1-го и 2-го уровней («Добыча» и «Навыки крафта») активны</string>
+    <string name="town_cape_rack_t3_bonus">Пассивные бонусы от всех имеющихся у вас плащей («Добыча», «Навыки крафта», «Бой» и гильдий) активны</string>
+    <string name="town_building_artisans_workshop_name">Мастерская ремесленника</string>
+    <string name="town_artisans_workshop_no_bonus">Улучшите, чтобы получить шанс сохранить вторичные материалы для крафта</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% шанс сохранить вторичные материалы для крафта</string>
+    <string name="town_building_chronos_spire_name">Шпиль Хроноса</string>
+    <string name="town_chronos_spire_no_bonus">Улучшите, чтобы сократить продолжительность игровой сессии</string>
+    <string name="town_chronos_spire_active_bonus">Сокращение продолжительности игровых сессий на %1$d%%</string>
+    <string name="settings_theme_midnight">Полночь</string>
+    <string name="crafting_owned">Имеется: %1$d</string>
+    <string name="crafting_owned_detail">Имеется в наличии: %1$d</string>
+    <string name="firemaking_ashes_owned">Имеется пепла: %1$d</string>
+    <string name="bonus_tower">Башня</string>
+    <string name="bonus_coin_drops">+%1$d%% выпадения монет</string>
 </resources>
