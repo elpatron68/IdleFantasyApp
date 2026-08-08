@@ -49,9 +49,13 @@ class TitleRepository @Inject constructor(
             val chainIds = gameData.quests.values.filter { it.skill == skill }.map { it.id }
             if (chainIds.isNotEmpty() && chainIds.all { it in completedQuestIds }) unlocked += titleId
         }
-        if (gameData.bosses.keys.isNotEmpty() && gameData.bosses.keys.all { (flags.enemyKills[it] ?: 0) > 0 }) {
+        // Only always-available bosses count: seasonal bosses vanish with their event and
+        // monument-gated bosses sit behind a 1B coin wall, so neither can gate Godslayer.
+        val coreBosses = gameData.bosses.values.filter { it.eventKey == null && !it.requiresMonument }
+        if (coreBosses.isNotEmpty() && coreBosses.all { (flags.enemyKills[it.id] ?: 0) > 0 }) {
             unlocked += "godslayer"
         }
+        if (flags.monumentTier >= 5) unlocked += MonumentRepository.PATRON_TITLE_ID
         for (banner in flags.seasonalBannersEarned) unlocked += "seasonal_${banner.eventId}"
         for ((guild, titleId) in GUILD_TITLES) {
             if (guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedQuestIds) >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size) {

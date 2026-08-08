@@ -100,6 +100,10 @@ data class CombatUiState(
     val activeDungeonRepeatIndex: Int = 0,
     /** Total runs requested for the current dungeon repeat run. */
     val activeDungeonRepeatTotal: Int = 0,
+    /** Boss kills that still pay full coin drops today (daily soft cap). */
+    val bossFullCoinKillsLeft: Int = PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY,
+    /** True once the Grand Monument's Eternal Flame is lit (unlocks monument-gated bosses). */
+    val monumentComplete: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------
@@ -244,6 +248,8 @@ class CombatViewModel @Inject constructor(
                 activeBossRepeatTotal   = flags.activeBossRepeatTotal,
                 activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex,
                 activeDungeonRepeatTotal = flags.activeDungeonRepeatTotal,
+                bossFullCoinKillsLeft   = playerRepo.bossFullCoinKillsLeft(flags),
+                monumentComplete        = flags.monumentTier >= 5,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
@@ -255,10 +261,12 @@ class CombatViewModel @Inject constructor(
             .sortedBy { it.recommendedLevel }
     }
 
-    val bossList: List<BossData> by lazy {
+    /** Monument-gated bosses appear only once the Eternal Flame is lit, so this reads flags per call. */
+    fun bossList(monumentComplete: Boolean): List<BossData> {
         val activeEventId = seasonalEventRepo.activeEvent()?.id
-        gameData.bosses.values
+        return gameData.bosses.values
             .filter { it.eventKey == null || it.eventKey == activeEventId }
+            .filter { !it.requiresMonument || monumentComplete }
             .sortedBy { it.combatLevelRequired }
     }
 

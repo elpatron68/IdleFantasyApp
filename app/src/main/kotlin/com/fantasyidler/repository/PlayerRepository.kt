@@ -235,7 +235,7 @@ class PlayerRepository @Inject constructor(
 
     suspend fun addCoins(amount: Long) = playerMutex.withLock { addCoinsUnlocked(amount) }
 
-    private suspend fun addCoinsUnlocked(amount: Long) {
+    internal suspend fun addCoinsUnlocked(amount: Long) {
         require(amount >= 0) { "Cannot add negative coins" }
         val player = getOrCreatePlayer()
         val newCoins = (player.coins + amount).coerceAtMost(Long.MAX_VALUE)
@@ -286,6 +286,30 @@ class PlayerRepository @Inject constructor(
         if (player.coins < amount) return false
         playerDao.upsert(player.copy(coins = player.coins - amount))
         return true
+    }
+
+    /**
+     * Rolls the daily boss coin soft cap for one victorious kill: the first
+     * [BOSS_FULL_COIN_KILLS_PER_DAY] kills each day pay full coins, later ones pay
+     * [BOSS_COIN_SOFT_CAP_MULT]. Increments the day's counter and returns this kill's multiplier.
+     */
+    suspend fun rollBossCoinSoftCap(): Double = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
+        val today = java.util.Calendar.getInstance().let {
+            it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
+        }
+        val count = if (flags.bossCoinDay == today) flags.bossCoinKillsToday else 0
+        updateFlagsUnlocked(flags.copy(bossCoinDay = today, bossCoinKillsToday = count + 1))
+        if (count < BOSS_FULL_COIN_KILLS_PER_DAY) 1.0 else BOSS_COIN_SOFT_CAP_MULT
+    }
+
+    /** Full-coin boss kills still available today, for display. */
+    fun bossFullCoinKillsLeft(flags: PlayerFlags): Int {
+        val today = java.util.Calendar.getInstance().let {
+            it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
+        }
+        val count = if (flags.bossCoinDay == today) flags.bossCoinKillsToday else 0
+        return (BOSS_FULL_COIN_KILLS_PER_DAY - count).coerceAtLeast(0)
     }
 
     suspend fun updateFlags(flags: PlayerFlags) = playerMutex.withLock { updateFlagsUnlocked(flags) }
@@ -350,13 +374,14 @@ class PlayerRepository @Inject constructor(
 
     suspend fun getQueue(): List<QueuedAction> = getFlags().sessionQueue
 
-    /** Base queue size (3) plus any Queue Master town building bonus. */
+    /** Base queue size (3) plus any Queue Master town building bonus, plus the Monument's Gilded stage. */
     fun maxQueueSize(flags: PlayerFlags): Int {
         var extraSlots = 0
         flags.townBuildingTiers.forEach { (buildingName, tier) ->
             val bonuses = gameData.townBuildings[buildingName]?.tiers?.getOrNull(tier - 1)?.bonuses
             extraSlots += bonuses?.get("queue_slots")?.toInt() ?: 0
         }
+        if (flags.monumentTier >= 4) extraSlots += 1
         return 3 + extraSlots
     }
 
@@ -667,7 +692,8 @@ class PlayerRepository @Inject constructor(
         val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
         val boostMult = if (boostActive) 2L else 1L
         val xpBlessingMult = ChurchRepository.xpMultiplier(flags)
-        val coinBlessingMult = ChurchRepository.coinMultiplier(flags)
+        val coinBlessingMult = ChurchRepository.coinMultiplier(flags) *
+            gooseCoinMultiplier(json.decodeFromString(player.pets)).toFloat()
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
 
@@ -840,6 +866,23 @@ class PlayerRepository @Inject constructor(
                 newFlags = newFlags.copy(activeSpell = fallback?.name)
             }
         }
+        if (skillName == Skills.PRAYER) {
+            val prayerLevel = levels[Skills.PRAYER] ?: 1
+            val activeBlessing = ChurchRepository.activeBlessing(newFlags)
+            if (activeBlessing != null && activeBlessing.prayerLevelRequired > prayerLevel) {
+                // The bones are already paid, so the blessing downgrades (keeping its expiry)
+                // to the strongest same-type blessing the reset level allows instead of ending.
+                val fallback = ChurchRepository.ALL_BLESSINGS
+                    .filter { it.type == activeBlessing.type && it.prayerLevelRequired <= prayerLevel }
+                    .maxByOrNull { it.prayerLevelRequired }
+                newFlags = if (fallback != null) {
+                    newFlags.copy(activeBlessingKey = fallback.key)
+                } else {
+                    buffNotifScheduler.cancelBlessingExpiry()
+                    newFlags.copy(activeBlessingKey = "", activeBlessingExpiresAt = 0L)
+                }
+            }
+        }
 
         playerDao.upsert(
             player.copy(
@@ -853,8 +896,16 @@ class PlayerRepository @Inject constructor(
     }
 
     companion object {
-        const val XP_BOOST_COST = 250_000L
+        const val XP_BOOST_COST = 25_000_000L
         const val XP_BOOST_DURATION_MS = 48 * 3_600_000L   // 48 hours
+
+        /** Boss kills per day that pay full coin drops; kills beyond pay [BOSS_COIN_SOFT_CAP_MULT]. */
+        const val BOSS_FULL_COIN_KILLS_PER_DAY = 3
+        const val BOSS_COIN_SOFT_CAP_MULT = 0.25
+
+        /** Coin-drop multiplier from the Golden Goose pet (Monument stage 4); applies wherever Fortune blessings do. */
+        fun gooseCoinMultiplier(pets: List<OwnedPet>): Double =
+            1.0 + (pets.firstOrNull { it.id == MonumentRepository.GOLDEN_GOOSE_PET_ID }?.boostPercent ?: 0) / 100.0
     }
 
     /**
@@ -1192,8 +1243,10 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Adds multiple items to inventory in a single DB write. */
-    suspend fun addItems(items: Map<String, Int>) = playerMutex.withLock {
-        if (items.isEmpty()) return@withLock
+    suspend fun addItems(items: Map<String, Int>) = playerMutex.withLock { addItemsUnlocked(items) }
+
+    internal suspend fun addItemsUnlocked(items: Map<String, Int>) {
+        if (items.isEmpty()) return
         val player = getOrCreatePlayer()
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
         for ((key, qty) in items) {
@@ -1295,40 +1348,44 @@ fun resolveCapeMultiplier(
         else -> rackTier >= 3
     }
 
-    val eligibleCapeBonuses = mutableListOf<Float>()
+    var bestSkillCapeBonus = 0f
+    var bestGuildCapeBonus = 0f
 
-    // Check equipped cape
-    val equippedCapeSkill = equippedCape?.capeSkill
-    if (equippedCapeSkill != null) {
-        val isMatch = equippedCapeSkill == normSkill || isGuildCapeForSkill(equippedCapeSkill, normSkill)
-        if (isMatch && equippedCape.capeBonus > 0f) {
-            eligibleCapeBonuses.add(equippedCape.capeBonus)
+    fun considerCape(capeDef: EquipmentData?) {
+        if (capeDef == null || capeDef.capeBonus <= 0f) return
+        val capeSkill = capeDef.capeSkill ?: return
+        val isMatch = capeSkill == normSkill || isGuildCapeForSkill(capeSkill, normSkill)
+        if (!isMatch) return
+
+        val isGuildCape = capeDef.name.endsWith("_guild_cape") || capeSkill in setOf("warriors", "archers", "mages")
+        if (isGuildCape) {
+            bestGuildCapeBonus = maxOf(bestGuildCapeBonus, capeDef.capeBonus)
+        } else {
+            bestSkillCapeBonus = maxOf(bestSkillCapeBonus, capeDef.capeBonus)
         }
     }
+
+    // Check equipped cape
+    considerCape(equippedCape)
 
     // Check passive capes in inventory
     if (isCategoryUnlocked) {
         val candidateKeys = resolveOwnedCapeKeysForSkill(normSkill)
         for (key in candidateKeys) {
             if (inventoryKeys.contains(key)) {
-                val capeDef = allEquipment[key]
-                if (capeDef != null && capeDef.capeBonus > 0f) {
-                    eligibleCapeBonuses.add(capeDef.capeBonus)
-                }
+                considerCape(allEquipment[key])
             }
         }
     }
 
-    if (eligibleCapeBonuses.isEmpty()) return 1.0f
-
-    val maxBonus = eligibleCapeBonuses.maxOrNull() ?: 0f
-    if (maxBonus <= 0f) return 1.0f
+    val totalBonus = bestSkillCapeBonus + bestGuildCapeBonus
+    if (totalBonus <= 0f) return 1.0f
 
     val prestigeLevel = skillPrestige[normSkill] ?: 0
     val isCombatSkill = normSkill in setOf("attack", "strength", "defense", "ranged", "magic", "hp", "slayer")
     return if (isCombatSkill) {
-        1.0f + maxBonus
+        1.0f + totalBonus
     } else {
-        1.0f + maxBonus * (prestigeLevel + 1)
+        1.0f + totalBonus * (prestigeLevel + 1)
     }
 }

@@ -427,7 +427,8 @@ class HomeViewModel @Inject constructor(
             val boostActive      = flags.xpBoostExpiresAt > System.currentTimeMillis()
             val xpMult           = if (boostActive) 2L else 1L
             val blessingXpMult   = ChurchRepository.xpMultiplier(flags)
-            val blessingCoinMult = ChurchRepository.coinMultiplier(flags)
+            val blessingCoinMult = ChurchRepository.coinMultiplier(flags) *
+                PlayerRepository.gooseCoinMultiplier(json.decodeFromString<List<OwnedPet>>(player.pets)).toFloat()
 
             // ── Accumulators ──────────────────────────────────────────────
             val combinedXpBySkill       = mutableMapOf<String, Long>()
@@ -540,7 +541,10 @@ class HomeViewModel @Inject constructor(
                         val won = frame.kills > 0
                         bossWon = won
                         val its   = frame.items.toMutableMap()
-                        val coins = if (won) its.remove("coins")?.toLong() ?: 0L else 0L
+                        val coins = if (won) {
+                            val base = its.remove("coins")?.toLong() ?: 0L
+                            (base * playerRepo.rollBossCoinSoftCap()).toLong()
+                        } else 0L
                         val pets  = its.filterKeys { it in petIds }
                         val loot  = if (won) its.filterKeys { it !in petIds } else emptyMap()
                         val allFoodConsumed   = mutableMapOf<String, Int>()
@@ -1124,7 +1128,8 @@ class HomeViewModel @Inject constructor(
             val boostActive      = flags.xpBoostExpiresAt > System.currentTimeMillis()
             val xpMult           = if (boostActive) 2L else 1L
             val blessingXpMult   = ChurchRepository.xpMultiplier(flags)
-            val blessingCoinMult = ChurchRepository.coinMultiplier(flags)
+            val blessingCoinMult = ChurchRepository.coinMultiplier(flags) *
+                PlayerRepository.gooseCoinMultiplier(json.decodeFromString<List<OwnedPet>>(workerPlayer.pets)).toFloat()
             val innXpMult        = townRepo.workerXpMultiplier(flags)
             val workerOwnedPets: List<OwnedPet> = try { json.decodeFromString(workerPlayer.pets) } catch (_: Exception) { emptyList() }
 

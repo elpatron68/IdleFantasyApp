@@ -27,6 +27,7 @@ class FarmingRepository @Inject constructor(
     private val patchDao: FarmingPatchDao,
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val json: Json,
 ) {
     fun observePatches(): Flow<List<FarmingPatch>> = patchDao.observeAllPatches()
@@ -148,8 +149,9 @@ class FarmingRepository @Inject constructor(
             xpGained    = crop.harvestXp.toLong() * yield,
             itemsGained = items,
         )
-        
+
         playerRepo.recordWeeklyProgress("farming", "any", 1)
+        seasonalEventRepo.recordGathering(items)
 
         val farmingPet = gameData.pets.values.firstOrNull { it.boostedSkill == Skills.FARMING }
         if (farmingPet != null && kotlin.random.Random.nextDouble() < 1.0 / 1000.0) {

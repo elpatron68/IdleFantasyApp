@@ -93,6 +93,27 @@ data class SkillsUiState(
     val petBoostBySkill: Map<String, Int> = emptyMap(),
     val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     val showSessionEndTime: Boolean = true,
+    /** Guild dailies plus daily/weekly quests for each sheet skill, keyed by skill (guild keys match skill keys). */
+    val sheetQuests: Map<String, List<SheetQuestSummary>> = emptyMap(),
+)
+
+enum class SheetQuestSource { GUILD, DAILY, WEEKLY }
+
+data class SheetQuestSummary(
+    val questId: String,
+    val questName: String,
+    /** Guild key for guild dailies; the quest's skill for daily/weekly quests. */
+    val guild: String,
+    val type: String,
+    val target: String,
+    val progress: Int,
+    val amount: Int,
+    val claimed: Boolean,
+    val source: SheetQuestSource,
+    /** Raw English description, used as the fallback when no localized objective exists. */
+    val description: String = "",
+    /** Guild dailies only: true once the guild's rank is capped, so dailies no longer advance tier progression. */
+    val guildMaxed: Boolean = false,
 )
 
 sealed class SheetState {
@@ -196,6 +217,7 @@ class SkillsViewModel @Inject constructor(
                     .filterValues { it > 0 },
                 activeQuests          = computeActiveQuests(questProgress, flags, inv),
                 showSessionEndTime    = flags.showSessionEndTime,
+                sheetQuests           = computeSheetQuests(questProgress, flags),
             )
         }
     }.flowOn(Dispatchers.Default)
@@ -1037,6 +1059,110 @@ class SkillsViewModel @Inject constructor(
         }
 
         return fills.sortedBy { it.qty }
+    }
+
+    /** Guilds whose key doubles as a Skills-screen skill key (combat guilds are keyed by style, not skill). */
+    private val skillGuilds = listOf(
+        Skills.MINING, Skills.FISHING, Skills.WOODCUTTING, Skills.FARMING, Skills.THIEVING,
+        Skills.FIREMAKING, Skills.AGILITY, Skills.SMITHING, Skills.COOKING, Skills.FLETCHING,
+        Skills.CRAFTING, Skills.RUNECRAFTING, Skills.HERBLORE, Skills.CONSTRUCTION,
+        Skills.PRAYER, Skills.MERCANTILE, Skills.SLAYER,
+    )
+
+    private fun computeSheetQuests(
+        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        flags: PlayerFlags,
+    ): Map<String, List<SheetQuestSummary>> {
+        val completedIds = questProgress.filter { it.completed }.map { it.questId }.toSet()
+        val result = mutableMapOf<String, MutableList<SheetQuestSummary>>()
+        for (guild in skillGuilds) {
+            // Dailies only exist for unlocked guilds, so an empty list also covers the locked case.
+            val dailies = guildRepo.getGuildDailiesWithProgress(guild, flags)
+            if (dailies.isEmpty()) continue
+            val level = guildRepo.guildLevel(guild, flags.guildDailyTierCounts, completedIds)
+            val maxed = level >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size
+            result.getOrPut(guild) { mutableListOf() } += dailies.map { daily ->
+                SheetQuestSummary(
+                    questId    = daily.template.id,
+                    questName  = daily.template.name,
+                    guild      = guild,
+                    type       = daily.template.type,
+                    target     = daily.template.target,
+                    progress   = daily.progress.coerceAtMost(daily.template.amount),
+                    amount     = daily.template.amount,
+                    claimed    = daily.claimed,
+                    source     = SheetQuestSource.GUILD,
+                    guildMaxed = maxed,
+                )
+            }
+        }
+        for (dq in dailyQuestRepo.getActiveDailyQuests(flags)) {
+            val skill = dq.template.skill
+            if (skill !in skillGuilds) continue
+            result.getOrPut(skill) { mutableListOf() } += SheetQuestSummary(
+                questId     = dq.template.id,
+                questName   = dq.template.displayName,
+                guild       = skill,
+                type        = dq.template.type,
+                target      = dq.template.target,
+                progress    = dq.progress.coerceAtMost(dq.template.amount),
+                amount      = dq.template.amount,
+                claimed     = dq.claimed,
+                source      = SheetQuestSource.DAILY,
+                description = dq.template.description,
+            )
+        }
+        for (wq in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
+            val skill = wq.template.skill
+            if (skill !in skillGuilds) continue
+            result.getOrPut(skill) { mutableListOf() } += SheetQuestSummary(
+                questId     = wq.template.id,
+                questName   = wq.template.displayName,
+                guild       = skill,
+                type        = wq.template.type,
+                target      = wq.template.target,
+                progress    = wq.progress.coerceAtMost(wq.template.amount),
+                amount      = wq.template.amount,
+                claimed     = wq.claimed,
+                source      = SheetQuestSource.WEEKLY,
+                description = wq.template.description,
+            )
+        }
+        return result
+    }
+
+    /**
+     * Queues a session working toward [daily] from the sheet's quick-add button.
+     * Returns false for daily types with no direct session mapping (farming, prayer,
+     * trade); craft-guild dailies are routed through CraftingViewModel instead.
+     */
+    fun queueDailySession(daily: SheetQuestSummary): Boolean {
+        val remaining = (daily.amount - daily.progress).coerceAtLeast(1)
+        when {
+            daily.type == "gather" && daily.guild == Skills.MINING      -> startMiningSession(daily.target)
+            daily.type == "gather" && daily.guild == Skills.WOODCUTTING -> startWoodcuttingSession(daily.target)
+            daily.type == "gather" && daily.guild == Skills.FISHING     -> startFishingSession(daily.target)
+            daily.type == "pickpocket"                                  -> startThievingSession(daily.target)
+            daily.type == "sessions" && daily.guild == Skills.AGILITY   -> {
+                val level  = uiState.value.skillLevels[Skills.AGILITY] ?: 1
+                val course = gameData.agilityCourses.entries
+                    .filter { it.value.levelRequired <= level }
+                    .maxByOrNull { it.value.levelRequired }?.key ?: return false
+                startAgilitySession(course)
+            }
+            daily.type == "craft" && daily.guild == Skills.RUNECRAFTING -> startRunecraftingSession(daily.target, remaining)
+            daily.type == "craft" && daily.guild == Skills.FIREMAKING   -> {
+                val logKey = daily.target.replace("ashes", "log")
+                val owned  = uiState.value.inventory[logKey] ?: 0
+                if (owned <= 0) {
+                    _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
+                    return true
+                }
+                startFiremakingSession(logKey, minOf(remaining, owned))
+            }
+            else -> return false
+        }
+        return true
     }
 
     private fun computeActiveQuests(

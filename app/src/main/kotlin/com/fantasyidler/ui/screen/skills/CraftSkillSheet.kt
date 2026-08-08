@@ -113,6 +113,7 @@ import androidx.compose.ui.draw.alpha
 
 @Composable
 internal fun CraftSkillSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     skillName: String,
     craftState: CraftingUiState,
     craftingViewModel: CraftingViewModel,
@@ -201,6 +202,7 @@ internal fun CraftSkillSheet(
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp),
             )
+            guildDailyButton?.invoke()
             if (categories.size > 1) {
                 Row(
                     modifier            = Modifier

@@ -2,6 +2,7 @@ package com.fantasyidler.ui.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Celebration
 import androidx.compose.material.icons.filled.Explore
@@ -111,6 +112,12 @@ sealed class Screen(
         route    = "church",
         labelRes = R.string.church_title,
         icon     = Icons.Filled.Star,
+    )
+
+    object Monument : Screen(
+        route    = "monument",
+        labelRes = R.string.monument_title,
+        icon     = Icons.Filled.AccountBalance,
     )
 
     object GuildDetail : Screen(

@@ -114,6 +114,7 @@ import androidx.compose.ui.draw.alpha
 
 @Composable
 internal fun MiningSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     ores: Map<String, OreData>,
     isStarting: Boolean,
     hasActiveSession: Boolean,
@@ -140,6 +141,7 @@ internal fun MiningSheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         if (sessionDurationMs > 0) {
             Text(
                 text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),
@@ -189,6 +191,7 @@ internal fun MiningSheet(
 
 @Composable
 internal fun WoodcuttingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     trees: Map<String, TreeData>,
     isStarting: Boolean,
     hasActiveSession: Boolean,
@@ -215,6 +218,7 @@ internal fun WoodcuttingSheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         if (sessionDurationMs > 0) {
             Text(
                 text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),
@@ -258,6 +262,7 @@ internal fun WoodcuttingSheet(
 
 @Composable
 internal fun FishingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     fish: Map<String, FishData>,
     isStarting: Boolean,
     hasActiveSession: Boolean,
@@ -284,6 +289,7 @@ internal fun FishingSheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         if (sessionDurationMs > 0) {
             Text(
                 text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),

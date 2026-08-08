@@ -114,6 +114,7 @@ import androidx.compose.ui.draw.alpha
 
 @Composable
 internal fun FiremakingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     availableLogs: Map<String, LogData>,
     inventory: Map<String, Int>,
     currentXp: Long,
@@ -148,6 +149,7 @@ internal fun FiremakingSheet(
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
             )
+            guildDailyButton?.invoke()
             HorizontalDivider()
             if (availableLogs.isEmpty()) {
                 Box(Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {

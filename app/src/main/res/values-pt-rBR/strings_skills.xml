@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Pontos de Vida</string>
     <string name="skill_hitpoints_desc">Sua saúde total. Níveis mais altos permitem que você sobreviva por mais tempo em combate.</string>
     <string name="skill_prayer_name">Oração</string>
-    <string name="skill_prayer_desc">Enterre ossos obtidos em combate para ganhar XP de Oração. Níveis mais altos aumentam seu nível de combate.</string>
+    <string name="skill_prayer_desc">Enterre ossos obtidos em combate para ganhar XP de Oração. Níveis mais altos desbloqueiam bênçãos mais poderosas da Igreja.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Nv %1$d</string>

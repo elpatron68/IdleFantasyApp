@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Salute</string>
     <string name="skill_hitpoints_desc">La tua energia massima. Livelli più alti ti permettono di sopravvivere più a lungo in combattimento.</string>
     <string name="skill_prayer_name">Preghiera</string>
-    <string name="skill_prayer_desc">Seppellisci le ossa raccolte in combattimento per guadagnare XP Preghiera. Livelli più alti aumentano il tuo livello di combattimento.</string>
+    <string name="skill_prayer_desc">Seppellisci le ossa raccolte in combattimento per guadagnare XP Preghiera. Livelli più alti sbloccano benedizioni della Chiesa più potenti.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Lv. %1$d</string>

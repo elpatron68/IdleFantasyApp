@@ -1,3 +1,21 @@
+v1.13.0
+• Added the Gloomharvest seasonal event (September 1 to November 30): earn 300 tokens across an expanded Bounty Board with farming and turn-in tasks, two expedition dungeons (The Hollowfen and The Blightwood), the Hollow King raid boss, and the Lantern Lights memory minigame
+• Added the Grand Monument to town: build five stages with coins (1M to 1B) for a farming patch, a daily boon, longer blessings, an extra queue slot, and the Golden Goose pet; light the Eternal Flame to unlock the Vault Guardian raid boss and the Patron of the Realm title
+• Fixed the theme setting squeezing its description text once the Midnight option was added; the theme buttons now sit below the text and wrap onto a second row when needed
+• Fixed the Chronos Spire session duration reduction not being reflected in the home screen queue countdown and duration estimates (thanks fjordsec!)
+• Prestiging Prayer now downgrades an active Church blessing to the strongest one your reset level allows (keeping its remaining time) instead of letting the high-level blessing keep running
+• Replaced the expired Discord invite in Settings with a permanent link
+• Fixed a crash when queueing very large runecrafting batches (thanks tdsotm!)
+• Rebalanced the Yew and Magic Longbows (faster, stronger) so they are genuine upgrades over shortbows at their level; Equip Best Gear now picks the Magic Longbow at Ranged 60+
+• Updated Russian and French translations (thanks pikki!)
+• Skill Capes and Guild Capes for the same skill now stack their bonuses (e.g. +10% and +5% combine to +15%), so guild rank stays rewarding after level 99 (thanks fjordsec!)
+• Prayer no longer appears in the Combat screen skill list (it lives under Support skills), and its description no longer wrongly claims it raises your combat level
+• The Midnight theme background is now true black, so AMOLED pixels actually turn off
+• The 48h 2x XP boost now costs 25,000,000 coins (was 250,000)
+• Raid boss coin drops now have a daily soft cap: the first 3 victorious kills each day pay full coins, later kills pay 25%. The boss screen shows how many full drops you have left today
+• Fixed the town achievement descriptions still saying "seven buildings" now that there are nine; they no longer state a count
+• Each skill's activity sheet now has a Quests button listing that skill's guild dailies plus daily and weekly quests, each with its name, description, and progress, plus a quick-add button that queues a session working toward it. Skills with any open quest get a gold dot on the Skills list (guilds at max rank are left unmarked)
+
 v1.12.14
 • Added the Artisan's Workshop town building (Construction 80/90/99): grants a 5/10/15% chance to preserve secondary crafting materials such as herblore and runecrafting ashes
 • Added the Chronos Spire town building (Construction 82/92/99): reduces player session durations by 2/4/6% (worker sessions unaffected)

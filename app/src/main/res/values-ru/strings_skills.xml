@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Здоровье</string>
     <string name="skill_hitpoints_desc">Ваше общее здоровье. Более высокие уровни позволяют дольше выживать в бою.</string>
     <string name="skill_prayer_name">Молитва</string>
-    <string name="skill_prayer_desc">Хороните кости, выпадающие из боя, чтобы получать опыт Молитвы. Более высокие уровни увеличивают ваш боевой уровень.</string>
+    <string name="skill_prayer_desc">Хороните кости, выпадающие из боя, чтобы получать опыт Молитвы. Более высокие уровни открывают более сильные благословения Церкви.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Ур. %1$d</string>

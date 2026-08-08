@@ -412,19 +412,22 @@ private fun WeeklyQuestsContent(
     }
 }
 
-private fun buildDailyObjective(context: Context, template: DailyQuestTemplate): String {
-    val verbResId = when (template.skill) {
+internal fun buildDailyObjective(context: Context, template: DailyQuestTemplate): String =
+    buildDailyObjective(context, template.skill, template.target, template.amount, template.description)
+
+internal fun buildDailyObjective(context: Context, skill: String, target: String, amount: Int, fallback: String): String {
+    val verbResId = when (skill) {
         "mining"      -> R.string.daily_verb_mining
         "fishing"     -> R.string.daily_verb_fishing
         "woodcutting" -> R.string.daily_verb_woodcutting
         "smithing"    -> R.string.daily_verb_smithing
         "cooking"     -> R.string.daily_verb_cooking
         "combat"      -> R.string.daily_verb_combat
-        else          -> return template.description
+        else          -> return fallback
     }
     val verb = context.getString(verbResId)
-    val item = GameStrings.itemName(context, template.target)
-    return "$verb ${template.amount} $item."
+    val item = GameStrings.itemName(context, target)
+    return "$verb $amount $item."
 }
 
 private fun buildQuestObjective(context: Context, quest: QuestData): String {

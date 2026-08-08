@@ -217,6 +217,20 @@ data class PlayerFlags(
     @SerialName("seasonal_minigame_easy_mode") val seasonalMinigameEasyMode: Boolean = false,
     /** Seasonal Events: permanent record of every event completed, kept even after the event's data is removed. */
     @SerialName("seasonal_banners_earned") val seasonalBannersEarned: List<SeasonalBannerEarned> = emptyList(),
+    /** Grand Monument: completed stage (0-5). Stages 1-4 are lump purchases; 5 completes via [monumentFund]. */
+    @SerialName("monument_tier") val monumentTier: Int = 0,
+    /** Grand Monument: coins contributed toward the stage-5 Eternal Flame. */
+    @SerialName("monument_fund") val monumentFund: Long = 0L,
+    /** Grand Monument: yyyymmdd of the last daily touch boon. */
+    @SerialName("monument_touch_day") val monumentTouchDay: Int = 0,
+    /** Boss coin soft cap: yyyymmdd day stamp [bossCoinKillsToday] applies to. */
+    @SerialName("boss_coin_day") val bossCoinDay: Int = 0,
+    /** Boss coin soft cap: victorious boss kills recorded for [bossCoinDay]. */
+    @SerialName("boss_coin_kills_today") val bossCoinKillsToday: Int = 0,
+    /** Seasonal Events: event id -> token thresholds of reward tiers already claimed. */
+    @SerialName("seasonal_reward_tiers_claimed") val seasonalRewardTiersClaimed: Map<String, List<Int>> = emptyMap(),
+    /** Seasonal Events: "eventId:offerId" -> number of Night Market purchases made. */
+    @SerialName("seasonal_market_purchases") val seasonalMarketPurchases: Map<String, Int> = emptyMap(),
     /** Free-text notes the player jots down for themselves (e.g. what to queue next). */
     @SerialName("player_notes") val playerNotes: String = "",
     /** Titles: ids of every title ever earned. A title, once unlocked, is never revoked. */

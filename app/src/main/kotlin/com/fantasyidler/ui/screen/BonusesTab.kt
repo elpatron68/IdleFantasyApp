@@ -119,14 +119,32 @@ internal fun BonusesTab(
 
         val activeCapeName = run {
             if (capeMult <= 1.0f) return@run null
-            val equippedCapeSkill = cape?.capeSkill
-            if (equippedCapeSkill != null && (equippedCapeSkill == skillKey || isGuildCapeForSkill(equippedCapeSkill, skillKey))) {
-                return@run cape.displayName
+            val activeNames = mutableListOf<String>()
+            val rackTier = state.townBuildingTiers["cape_rack"] ?: 0
+            val isCategoryUnlocked = when {
+                skillKey in Skills.GATHERING -> rackTier >= 1
+                skillKey in Skills.CRAFTING_SKILLS -> rackTier >= 2
+                else -> rackTier >= 3
             }
             val candidateKeys = resolveOwnedCapeKeysForSkill(skillKey)
-            val bestCapeKey = candidateKeys.filter { state.inventory.containsKey(it) }
+            val availableKeys = mutableSetOf<String>()
+            if (isCategoryUnlocked) {
+                candidateKeys.filterTo(availableKeys) { state.inventory.containsKey(it) }
+            }
+            if (cape?.capeSkill != null) {
+                val capeSkill = cape.capeSkill!!
+                if (capeSkill == skillKey || isGuildCapeForSkill(capeSkill, skillKey)) {
+                    availableKeys.add(cape.name)
+                }
+            }
+            val skillCapeKey = availableKeys.filter { !it.endsWith("_guild_cape") && allEquipment[it]?.capeSkill !in setOf("warriors", "archers", "mages") }
                 .maxByOrNull { allEquipment[it]?.capeBonus ?: 0f }
-            bestCapeKey?.let { allEquipment[it]?.displayName }
+            val guildCapeKey = availableKeys.filter { it.endsWith("_guild_cape") || allEquipment[it]?.capeSkill in setOf("warriors", "archers", "mages") }
+                .maxByOrNull { allEquipment[it]?.capeBonus ?: 0f }
+
+            skillCapeKey?.let { allEquipment[it]?.displayName }?.let { activeNames.add(it) }
+            guildCapeKey?.let { allEquipment[it]?.displayName }?.let { activeNames.add(it) }
+            if (activeNames.isNotEmpty()) activeNames.distinct().joinToString(" + ") else null
         }
 
         val xpSources = buildList {

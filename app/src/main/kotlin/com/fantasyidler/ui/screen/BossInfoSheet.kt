@@ -77,6 +77,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kotlin.math.roundToInt
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.CookingRecipe
@@ -125,6 +126,7 @@ internal fun BossInfoSheet(
     selectedPotionKey: String?,
     isStarting: Boolean,
     repeatCount: Int,
+    fullCoinKillsLeft: Int = PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY,
     onWeaponSlotSelected: (String) -> Unit,
     onPotionSelected: (String?) -> Unit,
     onRepeatCountChanged: (Int) -> Unit,
@@ -338,6 +340,14 @@ internal fun BossInfoSheet(
                 }
             }
         }
+
+        Spacer(Modifier.height(8.dp))
+        Text(
+            text  = if (fullCoinKillsLeft > 0) stringResource(R.string.boss_coin_cap_remaining, fullCoinKillsLeft)
+                    else stringResource(R.string.boss_coin_cap_spent),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
 
         // Fight count picker (queue this boss N times in one queue slot)
         Spacer(Modifier.height(12.dp))

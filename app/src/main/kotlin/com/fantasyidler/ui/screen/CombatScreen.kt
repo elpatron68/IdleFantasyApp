@@ -126,7 +126,7 @@ fun CombatScreen(
     }
     LaunchedEffect(initialDungeonKey, initialBossKey) {
         initialDungeonKey?.let { key -> viewModel.dungeonList.firstOrNull { it.name == key }?.let(viewModel::selectDungeon) }
-        initialBossKey?.let { key -> viewModel.bossList.firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
+        initialBossKey?.let { key -> viewModel.bossList(state.monumentComplete).firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
     }
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
@@ -207,7 +207,7 @@ fun CombatScreen(
                         0 -> CombatSessionBanner(
                             session        = combatSession,
                             dungeons       = visibleDungeons,
-                            bosses         = viewModel.bossList,
+                            bosses         = viewModel.bossList(state.monumentComplete),
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
                             skillPrestige  = state.skillPrestige,
@@ -225,7 +225,7 @@ fun CombatScreen(
                         )
                         1 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList,
+                            bosses              = viewModel.bossList(state.monumentComplete),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,
@@ -302,7 +302,7 @@ fun CombatScreen(
                     when (page) {
                         0 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList,
+                            bosses              = viewModel.bossList(state.monumentComplete),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,
@@ -394,6 +394,7 @@ fun CombatScreen(
                 selectedPotionKey    = state.selectedPotionKey,
                 isStarting           = state.startingSession,
                 repeatCount          = state.selectedBossRepeatCount,
+                fullCoinKillsLeft    = state.bossFullCoinKillsLeft,
                 onWeaponSlotSelected = viewModel::selectWeaponSlot,
                 onPotionSelected     = viewModel::selectPotion,
                 onRepeatCountChanged = viewModel::selectBossRepeatCount,
@@ -673,7 +674,7 @@ private fun CombatGearTab(
 
 private val COMBAT_SKILLS = listOf(
     Skills.ATTACK, Skills.STRENGTH, Skills.DEFENSE,
-    Skills.RANGED, Skills.MAGIC, Skills.HITPOINTS, Skills.PRAYER,
+    Skills.RANGED, Skills.MAGIC, Skills.HITPOINTS,
 )
 
 @Composable
@@ -716,7 +717,7 @@ private fun CombatSkillsTab(
                 xp            = skillXp[key]     ?: 0L,
                 gearBonus     = gearBonus,
                 prestigeLevel = skillPrestige[key] ?: 0,
-                onPrestige    = if (key != Skills.PRAYER) ({ onPrestige(key) }) else null,
+                onPrestige    = { onPrestige(key) },
                 onClick       = { tappedSkill = key },
             )
         }
@@ -820,7 +821,7 @@ private fun CombatSkillRow(
                             color = MaterialTheme.colorScheme.primary,
                         )
                     }
-                    if (skillKey != Skills.PRAYER && prestigeLevel > 0) {
+                    if (prestigeLevel > 0) {
                         Spacer(Modifier.width(6.dp))
                         Text(
                             text  = stringResource(R.string.combat_prestige_bonus, prestigeLevel * 5),
