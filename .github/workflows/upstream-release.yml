@@ -112,8 +112,22 @@ jobs:
           git checkout main
           git reset --hard origin/main
 
-      - name: Sync fork with upstream
+      - name: Check if fork already at release version
         if: steps.skip.outputs.skip != 'true'
+        id: needs_sync
+        run: |
+          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')"
+          EXPECTED="${{ steps.upstream.outputs.version }}"
+          if [[ "$VERSION_NAME" == "$EXPECTED" ]]; then
+            echo "needs_sync=false" >> "$GITHUB_OUTPUT"
+            echo "Fork main is already at release version $EXPECTED — skipping upstream merge"
+          else
+            echo "needs_sync=true" >> "$GITHUB_OUTPUT"
+            echo "Fork versionName $VERSION_NAME != release $EXPECTED — will sync with upstream"
+          fi
+
+      - name: Sync fork with upstream
+        if: steps.skip.outputs.skip != 'true' && steps.needs_sync.outputs.needs_sync == 'true'
         id: sync
         uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
         with:
