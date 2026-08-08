@@ -97,6 +97,8 @@ import androidx.compose.ui.text.style.TextAlign
 import com.fantasyidler.ui.viewmodel.CraftableRecipe
 import com.fantasyidler.ui.viewmodel.CraftingUiState
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
+import com.fantasyidler.ui.viewmodel.SheetQuestSource
+import com.fantasyidler.ui.viewmodel.SheetQuestSummary
 import com.fantasyidler.ui.viewmodel.SheetState
 import com.fantasyidler.ui.viewmodel.levelDisplay
 import com.fantasyidler.ui.viewmodel.SkillsUiState
@@ -225,9 +227,29 @@ fun SkillActivitySheet(
             sheetState = sheetState,
             dragHandle = { BottomSheetDefaults.DragHandle() },
         ) {
+            // Rendered by each sheet under its skill description; only the sheets without
+            // a description header (Mercantile, Farming) show it above their content.
+            val dailyBanner: @Composable () -> Unit = {
+                GuildDailySheetBanner(sheet, state.sheetQuests) { daily ->
+                    val remaining = (daily.amount - daily.progress).coerceAtLeast(1)
+                    val craftGuilds = setOf(
+                        Skills.SMITHING, Skills.COOKING, Skills.FLETCHING,
+                        Skills.CRAFTING, Skills.HERBLORE, Skills.CONSTRUCTION,
+                    )
+                    if (daily.type == "craft" && daily.guild in craftGuilds) {
+                        craftingViewModel.queueCraftForDaily(daily.target, remaining)
+                    } else {
+                        viewModel.queueDailySession(daily)
+                    }
+                }
+            }
+            if (sheet is SheetState.Mercantile || sheet is SheetState.Farming) {
+                ScaledSheetContent { dailyBanner() }
+            }
             ScaledSheetContent {
                 when (sheet) {
                     is SheetState.Mining -> MiningSheet(
+                        guildDailyButton  = dailyBanner,
                         ores              = sheet.ores,
                         isStarting        = state.startingSession,
                         hasActiveSession  = state.anySessionActive,
@@ -241,6 +263,7 @@ fun SkillActivitySheet(
                         onSelect          = { oreKey -> viewModel.startMiningSession(oreKey) },
                     )
                     is SheetState.Woodcutting -> WoodcuttingSheet(
+                        guildDailyButton  = dailyBanner,
                         trees             = sheet.trees,
                         isStarting        = state.startingSession,
                         hasActiveSession  = state.anySessionActive,
@@ -254,6 +277,7 @@ fun SkillActivitySheet(
                         onSelect          = { treeKey -> viewModel.startWoodcuttingSession(treeKey) },
                     )
                     is SheetState.Fishing -> FishingSheet(
+                        guildDailyButton  = dailyBanner,
                         fish              = sheet.fish,
                         isStarting        = state.startingSession,
                         hasActiveSession  = state.anySessionActive,
@@ -267,6 +291,7 @@ fun SkillActivitySheet(
                         onSelect          = { fishKey -> viewModel.startFishingSession(fishKey) },
                     )
                     is SheetState.Agility -> AgilitySheet(
+                        guildDailyButton  = dailyBanner,
                         courses           = sheet.courses,
                         isStarting        = state.startingSession,
                         hasActiveSession  = state.anySessionActive,
@@ -280,6 +305,7 @@ fun SkillActivitySheet(
                         onSelect          = { courseKey -> viewModel.startAgilitySession(courseKey) },
                     )
                     is SheetState.Firemaking -> FiremakingSheet(
+                        guildDailyButton  = dailyBanner,
                         availableLogs     = sheet.availableLogs,
                         inventory         = state.inventory,
                         currentXp         = state.skillXp[Skills.FIREMAKING] ?: 0L,
@@ -294,6 +320,7 @@ fun SkillActivitySheet(
                         activeQuests      = state.activeQuests,
                     )
                     is SheetState.Runecrafting -> RunecraftingSheet(
+                        guildDailyButton  = dailyBanner,
                         sheet             = sheet,
                         inventory         = state.inventory,
                         isStarting        = state.startingSession,
@@ -306,6 +333,7 @@ fun SkillActivitySheet(
                         activeQuests      = state.activeQuests,
                     )
                     is SheetState.Prayer -> PrayerSheet(
+                        guildDailyButton  = dailyBanner,
                         availableBones        = sheet.availableBones,
                         inventory             = sheet.inventory,
                         prayerLevel           = state.skillLevels[Skills.PRAYER] ?: 1,
@@ -325,6 +353,7 @@ fun SkillActivitySheet(
                     is SheetState.Crafting -> {
                         val craftState by craftingViewModel.uiState.collectAsState()
                         CraftSkillSheet(
+                            guildDailyButton  = dailyBanner,
                             skillName         = sheet.skillName,
                             craftState        = craftState,
                             craftingViewModel = craftingViewModel,
@@ -339,6 +368,7 @@ fun SkillActivitySheet(
                         )
                     }
                     is SheetState.Thieving -> ThievingSheet(
+                        guildDailyButton  = dailyBanner,
                         npcs              = sheet.npcs,
                         thievingLevel     = state.skillLevels[com.fantasyidler.data.model.Skills.THIEVING] ?: 1,
                         currentXp         = state.skillXp[com.fantasyidler.data.model.Skills.THIEVING] ?: 0L,
@@ -355,6 +385,159 @@ fun SkillActivitySheet(
                     SheetState.ComingSoon -> ComingSoonSheet()
                 }
             }
+        }
+    }
+}
+
+/**
+ * Compact guild-daily status line shown above a skill sheet's activity list, so the
+ * player can see whether this skill still has a daily worth doing without leaving
+ * for the Guild Hall. Hidden while the skill's guild is locked (no daily assigned).
+ */
+/** Quest types the sheet's quick-add "+" can turn into a queued session. */
+private fun SheetQuestSummary.canQueue(): Boolean = when {
+    type == "gather" && guild in setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING) -> true
+    type == "pickpocket"                       -> true
+    type == "sessions" && guild == Skills.AGILITY -> true
+    type == "craft"                            -> true
+    else                                       -> false
+}
+
+@Composable
+private fun GuildDailySheetBanner(
+    sheet: SheetState,
+    guildDailies: Map<String, List<SheetQuestSummary>>,
+    onQueueDaily: (SheetQuestSummary) -> Unit,
+) {
+    val skillKey = when (sheet) {
+        is SheetState.Mining       -> Skills.MINING
+        is SheetState.Woodcutting  -> Skills.WOODCUTTING
+        is SheetState.Fishing      -> Skills.FISHING
+        is SheetState.Agility      -> Skills.AGILITY
+        is SheetState.Firemaking   -> Skills.FIREMAKING
+        is SheetState.Runecrafting -> Skills.RUNECRAFTING
+        is SheetState.Prayer       -> Skills.PRAYER
+        is SheetState.Crafting     -> sheet.skillName
+        is SheetState.Thieving     -> Skills.THIEVING
+        SheetState.Mercantile      -> Skills.MERCANTILE
+        SheetState.Farming         -> Skills.FARMING
+        SheetState.ComingSoon      -> null
+    } ?: return
+    val quests = guildDailies[skillKey]?.takeIf { it.isNotEmpty() } ?: return
+    val context = LocalContext.current
+    val guildMaxed = quests.any { it.source == SheetQuestSource.GUILD && it.guildMaxed }
+    val anyOpen = quests.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) }
+    var showDialog by remember { mutableStateOf(false) }
+
+    if (showDialog) {
+        val sections = listOf(
+            SheetQuestSource.GUILD  to R.string.guild_daily_button,
+            SheetQuestSource.DAILY  to R.string.label_daily,
+            SheetQuestSource.WEEKLY to R.string.label_weekly,
+        ).mapNotNull { (source, labelRes) ->
+            quests.filter { it.source == source }.takeIf { it.isNotEmpty() }?.let { labelRes to it }
+        }
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(stringResource(R.string.nav_quests)) },
+            text = {
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    sections.forEachIndexed { sectionIndex, (labelRes, sectionQuests) ->
+                        if (sectionIndex > 0) {
+                            Spacer(Modifier.height(12.dp))
+                        }
+                        Text(
+                            text       = stringResource(labelRes),
+                            style      = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.Bold,
+                            color      = MaterialTheme.colorScheme.primary,
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        sectionQuests.forEachIndexed { index, quest ->
+                            if (index > 0) {
+                                Spacer(Modifier.height(8.dp))
+                                HorizontalDivider()
+                                Spacer(Modifier.height(8.dp))
+                            }
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Column(Modifier.weight(1f)) {
+                                    Text(
+                                        text       = GameStrings.questName(context, quest.questId, quest.questName),
+                                        style      = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.SemiBold,
+                                    )
+                                    Spacer(Modifier.height(2.dp))
+                                    Text(
+                                        text  = when (quest.source) {
+                                            SheetQuestSource.GUILD  -> localizedQuestDesc(quest.type, quest.target, quest.amount, quest.guild)
+                                            SheetQuestSource.DAILY  -> buildDailyObjective(context, quest.guild, quest.target, quest.amount, quest.description)
+                                            SheetQuestSource.WEEKLY -> GameStrings.questDesc(context, quest.questId)
+                                                .takeIf { it.isNotBlank() } ?: quest.description
+                                        },
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                    Spacer(Modifier.height(4.dp))
+                                    Text(
+                                        text  = when {
+                                            quest.claimed                  -> stringResource(R.string.guild_daily_banner_claimed)
+                                            quest.progress >= quest.amount -> stringResource(R.string.guild_daily_banner_claimable)
+                                            else                           -> "${quest.progress} / ${quest.amount}"
+                                        },
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = GoldPrimary,
+                                    )
+                                }
+                                if (!quest.claimed && quest.progress < quest.amount && quest.canQueue()) {
+                                    IconButton(onClick = {
+                                        onQueueDaily(quest)
+                                        showDialog = false
+                                    }) {
+                                        Icon(Icons.Filled.Add, contentDescription = null, tint = GoldPrimary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (guildMaxed) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text  = stringResource(R.string.guild_daily_rank_maxed),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text(stringResource(R.string.btn_close))
+                }
+            },
+        )
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        TextButton(onClick = { showDialog = true }) {
+            Text(
+                text  = stringResource(R.string.nav_quests),
+                style = MaterialTheme.typography.labelMedium,
+                color = if (anyOpen) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        if (guildMaxed) {
+            Text(
+                text     = stringResource(R.string.guild_daily_rank_maxed),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(end = 8.dp),
+            )
         }
     }
 }
@@ -412,6 +595,7 @@ private fun SkillsTabContent(
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 onPrestige     = { viewModel.prestigeSkill(key) },
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
+                guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
             )
         }
 
@@ -433,6 +617,7 @@ private fun SkillsTabContent(
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 onPrestige     = { viewModel.prestigeSkill(key) },
+                guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
             )
         }
 
@@ -448,6 +633,7 @@ private fun SkillsTabContent(
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 onPrestige     = { viewModel.prestigeSkill(key) },
+                guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
             )
         }
 
@@ -462,6 +648,7 @@ private fun SkillsTabContent(
                 petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
                 prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
                 onPrestige    = { viewModel.prestigeSkill(Skills.SLAYER) },
+                guildDailyOpen = state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
             )
         }
     }
@@ -582,6 +769,8 @@ internal fun SkillRow(
     prestigeLevel: Int = 0,
     onPrestige: (() -> Unit)? = null,
     cropsReady: Int = 0,
+    /** Shows a gold dot when this skill's guild daily is still open and worth doing (guild not maxed). */
+    guildDailyOpen: Boolean = false,
 ) {
     val context  = LocalContext.current
     val name     = GameStrings.skillName(context, skillKey)
@@ -667,6 +856,12 @@ internal fun SkillRow(
                 )
                 if (cropsReady > 0) {
                     Badge(modifier = Modifier.align(Alignment.TopEnd))
+                }
+                if (guildDailyOpen) {
+                    Badge(
+                        containerColor = GoldPrimary,
+                        modifier       = Modifier.align(Alignment.TopStart),
+                    )
                 }
             }
 

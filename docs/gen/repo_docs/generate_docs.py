@@ -28,7 +28,7 @@ SKILLS = [
     ("Gathering", ["Mining", "Fishing", "Woodcutting", "Farming", "Thieving"]),
     ("Crafting", ["Smithing", "Cooking", "Fletching", "Crafting", "Firemaking", "Runecrafting", "Herblore", "Construction"]),
     ("Support", ["Prayer", "Mercantile", "Agility"]),
-    ("Combat", ["Slayer", "Attack", "Strength", "Defense", "Ranged", "Magic", "Hitpoints", "Prayer"])
+    ("Combat", ["Slayer", "Attack", "Strength", "Defense", "Ranged", "Magic", "Hitpoints"])
 ]
 
 # ---------------------------------------------------------------------------

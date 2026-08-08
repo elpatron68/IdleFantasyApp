@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">HP</string>
     <string name="skill_hitpoints_desc">プレイヤーの総体力。レベルが上がると戦闘でより長く生き残れるようになる。</string>
     <string name="skill_prayer_name">祈り</string>
-    <string name="skill_prayer_desc">戦闘でドロップした骨を埋めて祈り経験値（XP）を獲得する。レベルが上がると戦闘レベルが上昇する。</string>
+    <string name="skill_prayer_desc">戦闘でドロップした骨を埋めて祈り経験値（XP）を獲得する。レベルが上がると、より強力な教会の祝福が解放される。</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Lv %1$d</string>

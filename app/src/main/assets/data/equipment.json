@@ -798,15 +798,15 @@
     "display_name": "Yew Longbow",
     "slot": "weapon",
     "combat_style": "ranged",
-    "attack_speed": 2.0,
+    "attack_speed": 1.8,
     "description": "A longbow crafted from yew logs.",
-    "attack_bonus": 58,
+    "attack_bonus": 70,
     "strength_bonus": 0,
     "defense_bonus": 0,
     "requirements": {
       "ranged": 50
     },
-    "ranged_strength_bonus": 42  
+    "ranged_strength_bonus": 48  
   },
   "magic_shortbow": {
     "name": "magic_shortbow",
@@ -828,15 +828,15 @@
     "display_name": "Magic Longbow",
     "slot": "weapon",
     "combat_style": "ranged",
-    "attack_speed": 2.0,
+    "attack_speed": 1.8,
     "description": "A longbow crafted from magic logs.",
-    "attack_bonus": 80,
+    "attack_bonus": 92,
     "strength_bonus": 0,
     "defense_bonus": 0,
     "requirements": {
       "ranged": 60
     },
-    "ranged_strength_bonus": 52
+    "ranged_strength_bonus": 60
   },
   "tower_crossbow": {
     "name": "tower_crossbow",
@@ -4419,6 +4419,82 @@
     "thieving_efficiency": 3.5,
     "requirements": {
       "thieving": 85
+    }
+  },
+  "wraithbone_ring": {
+    "name": "wraithbone_ring",
+    "display_name": "Wraithbone Ring",
+    "slot": "ring",
+    "combat_style": null,
+    "description": "A pale ring carved from wight bone during the Gloomharvest. Steadies the hand and the heart.",
+    "attack_bonus": 8,
+    "strength_bonus": 8,
+    "defense_bonus": 8,
+    "requirements": {
+      "defense": 40
+    }
+  },
+  "reaper_scythe": {
+    "name": "reaper_scythe",
+    "display_name": "Reaper's Scythe",
+    "slot": "weapon",
+    "combat_style": "strength",
+    "description": "The Hollow King's own harvest tool. It reaps more than wheat.",
+    "attack_bonus": 58,
+    "strength_bonus": 75,
+    "defense_bonus": 0,
+    "requirements": {
+      "strength": 55
+    }
+  },
+  "gloomweave_cape": {
+    "name": "gloomweave_cape",
+    "display_name": "Gloomweave Cape",
+    "slot": "cape",
+    "combat_style": null,
+    "description": "Woven from dusk and lantern smoke at the Night Market. Only sold during the Gloomharvest.",
+    "attack_bonus": 3,
+    "strength_bonus": 3,
+    "defense_bonus": 8,
+    "requirements": {}
+  },
+  "gilded_full_helmet": {
+    "name": "gilded_full_helmet",
+    "display_name": "Gilded Full Helmet",
+    "slot": "head",
+    "combat_style": null,
+    "description": "Runite plate wrapped in monument gold. Dropped by the Vault Guardian.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 48,
+    "requirements": {
+      "defense": 60
+    }
+  },
+  "gilded_platebody": {
+    "name": "gilded_platebody",
+    "display_name": "Gilded Platebody",
+    "slot": "body",
+    "combat_style": null,
+    "description": "Runite plate wrapped in monument gold. Dropped by the Vault Guardian.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 95,
+    "requirements": {
+      "defense": 60
+    }
+  },
+  "gilded_kiteshield": {
+    "name": "gilded_kiteshield",
+    "display_name": "Gilded Kiteshield",
+    "slot": "shield",
+    "combat_style": null,
+    "description": "Runite plate wrapped in monument gold. Dropped by the Vault Guardian.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 71,
+    "requirements": {
+      "defense": 60
     }
   }
 }

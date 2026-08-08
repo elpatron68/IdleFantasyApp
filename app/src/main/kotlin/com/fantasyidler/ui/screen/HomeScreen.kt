@@ -34,6 +34,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.Celebration
 import androidx.compose.material.icons.filled.CloudUpload
@@ -121,6 +122,7 @@ fun HomeScreen(
     onNavigateToWorkerSkills: (Int) -> Unit = {},
     onNavigateToGuildHall: () -> Unit = {},
     onNavigateToChurch: () -> Unit = {},
+    onNavigateToMonument: () -> Unit = {},
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBuilder: () -> Unit = {},
     onNavigateToCarnival: () -> Unit = {},
@@ -696,9 +698,10 @@ fun HomeScreen(
                         modifier              = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        TownGridCard(Icons.Filled.Assignment,  stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
-                        TownGridCard(Icons.Filled.Shield,      stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
-                        TownGridCard(Icons.Filled.Celebration, stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.Filled.Assignment,     stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.Filled.Shield,         stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.Filled.Celebration,    stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.Filled.AccountBalance, stringResource(R.string.monument_title), onClick = onNavigateToMonument, modifier = Modifier.weight(1f))
                         TownGridCard(
                             icon        = Icons.Filled.CloudUpload,
                             name        = stringResource(R.string.home_sync_title),

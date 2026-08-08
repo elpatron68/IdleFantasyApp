@@ -127,6 +127,9 @@ object GameStrings {
     fun seasonalRewardDesc(context: Context, eventId: String, tokens: Int, fallback: String): String =
         context.stringByName("seasonal_reward_${eventId}_${tokens}_desc") ?: fallback
 
+    fun seasonalMarketName(context: Context, id: String, fallback: String): String =
+        context.stringByName("seasonal_market_${id}_name") ?: fallback
+
     fun skillEmoji(key: String): String = when (key) {
         "mining"      -> "⛏️"
         "fishing"     -> "🎣"

@@ -60,12 +60,13 @@ class TownRepository @Inject constructor(
         return bonuses["farm_plots"]?.toInt() ?: 0
     }
 
-    /** Extra farm plots from all builders (+1 per garden tier). */
+    /** Extra farm plots from all builders (+1 per garden tier), plus the Monument's Foundation stage. */
     fun extraFarmPlots(flags: PlayerFlags): Int {
         var extraPlots = 0
         flags.townBuildingTiers.forEach { buildingName, tier ->
             extraPlots += extraFarmPlots(buildingName, tier)
         }
+        if (flags.monumentTier >= 1) extraPlots += 1
         return extraPlots
     }
 
@@ -121,12 +122,13 @@ class TownRepository @Inject constructor(
         return (bonuses["extra_blessing_hrs"]?.toInt() ?: 0) * hoursMs
     }
 
-    /** Blessing duration in ms based on Church tier. */
+    /** Blessing duration in ms based on Church tier, plus the Monument's Statue stage bonus. */
     fun blessingDurationMs(flags: PlayerFlags): Long {
         var duration = 24 * 3_600_000L
         flags.townBuildingTiers.forEach { buildingName, tier ->
             duration += extraBlessingDuration(buildingName, tier)
         }
+        if (flags.monumentTier >= 3) duration += MonumentRepository.BLESSING_BONUS_MS
         return duration
     }
 

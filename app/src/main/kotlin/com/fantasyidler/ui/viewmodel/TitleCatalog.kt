@@ -25,6 +25,7 @@ object TitleCatalog {
         TitleDefinition("flamekeeper",       R.string.title_flamekeeper_name,       R.string.title_flamekeeper_requirement),
         TitleDefinition("slayer",            R.string.title_slayer_name,            R.string.title_slayer_requirement),
         TitleDefinition("godslayer",         R.string.title_godslayer_name,         R.string.title_godslayer_requirement),
+        TitleDefinition("patron_of_the_realm", R.string.title_patron_of_the_realm_name, R.string.title_patron_of_the_realm_requirement),
         TitleDefinition("warlord",           R.string.title_warlord_name,           R.string.title_warlord_requirement),
         TitleDefinition("marksman",          R.string.title_marksman_name,          R.string.title_marksman_requirement),
         TitleDefinition("archmage",          R.string.title_archmage_name,          R.string.title_archmage_requirement),

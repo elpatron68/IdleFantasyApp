@@ -21,18 +21,18 @@ Pick a skill or dungeon, start a session, then put your phone down. Your hero ke
 
 ## Skills
 
-Train **24 skills** at your own pace:
+Train **23 skills** at your own pace:
 
 - **Gathering** (5): Mining, Fishing, Woodcutting, Farming, and Thieving
 - **Crafting** (8): Smithing, Cooking, Fletching, Crafting, Firemaking, Runecrafting, Herblore, and Construction
 - **Support** (3): Prayer, Mercantile, and Agility
-- **Combat** (8): Slayer, Attack, Strength, Defense, Ranged, Magic, Hitpoints, and Prayer
+- **Combat** (7): Slayer, Attack, Strength, Defense, Ranged, Magic, and Hitpoints
 
 Better equipment means faster gathering and surviving tougher dungeons. Craft your own gear or buy it from the Shop. The **Mercantile** skill levels through trade routes and unlocks better prices. **Slayer** tasks are assigned by the Slayer Master in town and are completed by fighting specific enemies in dungeons.
 
 ## Combat and dungeons
 
-Explore **27 dungeons** from the starter Farm all the way to late-game Fortress Ruins and beyond. Each dungeon has its own enemy roster, difficulty rating, and potential drops. Before you go in, the game tells you how your current gear stacks up. Choose from Melee, Ranged, or Magic; each style levels its own combat skills.
+Explore **29 dungeons** from the starter Farm all the way to late-game Fortress Ruins and beyond. Each dungeon has its own enemy roster, difficulty rating, and potential drops. Before you go in, the game tells you how your current gear stacks up. Choose from Melee, Ranged, or Magic; each style levels its own combat skills.
 
 ## Infinite Tower
 

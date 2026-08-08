@@ -22,8 +22,8 @@ val DarkSurfaceHigh     = Color(0xFF1E2A4A)
 val ParchmentText       = Color(0xFFE8DCC8)
 val ParchmentTextMuted  = Color(0xFFA89880)
 
-// Midnight theme — enhanced contrast for warm display filters
-val MidnightBackground      = Color(0xFF05070C)
+// Midnight theme — true-black AMOLED background, higher-contrast surfaces for warm display filters
+val MidnightBackground      = Color(0xFF000000)
 val MidnightSurface         = Color(0xFF111827)
 val MidnightSurfaceVariant  = Color(0xFF24344D)
 val MidnightTextMuted       = Color(0xFFC7BBA7)

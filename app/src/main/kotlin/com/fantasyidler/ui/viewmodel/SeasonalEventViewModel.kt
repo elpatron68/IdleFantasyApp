@@ -30,6 +30,11 @@ data class SeasonalEventUiState(
     val bountyTasks: List<SeasonalBountyTaskWithProgress> = emptyList(),
     val minigameCooldownAt: Long = 0L,
     val minigameEasyMode: Boolean = false,
+    val coins: Long = 0L,
+    /** Token thresholds of reward tiers already claimed for the active event. */
+    val claimedRewardTiers: List<Int> = emptyList(),
+    /** Night Market offer id -> purchases made for the active event. */
+    val marketPurchases: Map<String, Int> = emptyMap(),
     val snackbarMessage: String? = null,
 )
 
@@ -57,19 +62,41 @@ class SeasonalEventViewModel @Inject constructor(
             extra.copy(isLoading = false, event = null)
         } else {
             val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val inventory: Map<String, Int> = try { json.decodeFromString(player.inventory) } catch (_: Exception) { emptyMap() }
             extra.copy(
                 isLoading          = false,
                 event              = event,
                 tokens             = flags.seasonalTokensByEvent[event.id] ?: 0,
-                bountyTasks        = seasonalEventRepo.bountyTasksWithProgress(event, flags),
+                bountyTasks        = seasonalEventRepo.bountyTasksWithProgress(event, flags, inventory),
                 minigameCooldownAt = flags.seasonalMinigameCooldownAt,
                 minigameEasyMode   = flags.seasonalMinigameEasyMode,
+                coins              = player.coins,
+                claimedRewardTiers = flags.seasonalRewardTiersClaimed[event.id].orEmpty(),
+                marketPurchases    = event.nightMarket.associate { offer ->
+                    offer.id to (flags.seasonalMarketPurchases["${event.id}:${offer.id}"] ?: 0)
+                },
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SeasonalEventUiState())
 
     fun claimBountyTask(taskId: String) {
         viewModelScope.launch { seasonalEventRepo.claimBountyTask(taskId) }
+    }
+
+    fun claimRewardTier(tierTokens: Int) {
+        viewModelScope.launch {
+            if (seasonalEventRepo.claimRewardTier(tierTokens)) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_reward_claim_success)) }
+            }
+        }
+    }
+
+    fun purchaseMarketOffer(offerId: String) {
+        viewModelScope.launch {
+            if (seasonalEventRepo.purchaseMarketOffer(offerId)) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_market_purchase_success)) }
+            }
+        }
     }
 
     fun debugStopMinigameCooldown() {

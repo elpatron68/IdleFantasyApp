@@ -112,6 +112,7 @@ import com.fantasyidler.ui.viewmodel.QuestIndicator
 
 @Composable
 internal fun AgilitySheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     courses: Map<String, AgilityCourseData>,
     isStarting: Boolean,
     hasActiveSession: Boolean,
@@ -139,6 +140,7 @@ internal fun AgilitySheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         if (sessionDurationMs > 0) {
             Text(
                 text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),

@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Punkty Życia</string>
     <string name="skill_hitpoints_desc">Twoje całkowite zdrowie. Wyższe poziomy pozwalają przetrwać dłużej w walce.</string>
     <string name="skill_prayer_name">Modlitwa</string>
-    <string name="skill_prayer_desc">Zakopuj kości zdobyte w walce, aby zdobywać XP Modlitwy. Wyższe poziomy zwiększają twój poziom bojowy.</string>
+    <string name="skill_prayer_desc">Zakopuj kości zdobyte w walce, aby zdobywać XP Modlitwy. Wyższe poziomy odblokowują potężniejsze błogosławieństwa Kościoła.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Poz. %1$d</string>

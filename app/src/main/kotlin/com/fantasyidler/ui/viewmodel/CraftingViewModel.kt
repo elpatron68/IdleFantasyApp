@@ -387,6 +387,29 @@ class CraftingViewModel @Inject constructor(
         val max    = state.maxCraftable(recipe).coerceAtLeast(1)
         val qty    = state.craftQuantity.coerceIn(1, max)
         val ashKey = if (recipe.skillName == Skills.HERBLORE) state.herbloreAshKey else null
+        craft(recipe, qty, ashKey)
+    }
+
+    /**
+     * Quick-queues the recipe producing [targetKey] toward a guild daily.
+     * Returns false when no known recipe outputs the target; shows the usual
+     * snackbar when the level or materials fall short.
+     */
+    fun queueCraftForDaily(targetKey: String, remaining: Int): Boolean {
+        val recipe = allRecipes.firstOrNull { it.outputKey == targetKey } ?: return false
+        val state  = uiState.value
+        val max    = state.maxCraftable(recipe)
+        if ((state.skillLevels[recipe.skillName] ?: 1) < recipe.levelRequired || max <= 0) {
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
+            return true
+        }
+        craft(recipe, remaining.coerceIn(1, max))
+        return true
+    }
+
+    /** Starts or enqueues [qty] crafts of [recipe] directly (guild-daily quick-add path). */
+    fun craft(recipe: CraftableRecipe, qty: Int, ashKey: String? = null) {
+        val state = uiState.value
 
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()

@@ -64,7 +64,7 @@ import com.fantasyidler.util.dailyResetClockTime
 import com.fantasyidler.util.formatCoins
 
 @Composable
-private fun localizedQuestDesc(type: String, target: String, amount: Int, guild: String): String {
+internal fun localizedQuestDesc(type: String, target: String, amount: Int, guild: String): String {
     val context = LocalContext.current
     val guildName = guildDisplayName(guild)
     val displayTarget = if (guild == "firemaking" && target.endsWith("ashes")) target.replace("ashes", "log") else target

@@ -114,6 +114,7 @@ import androidx.compose.ui.draw.alpha
 
 @Composable
 internal fun RunecraftingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     sheet: SheetState.Runecrafting,
     inventory: Map<String, Int> = emptyMap(),
     isStarting: Boolean,
@@ -150,6 +151,7 @@ internal fun RunecraftingSheet(
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
             )
+            guildDailyButton?.invoke()
             Text(
                 text     = stringResource(R.string.skills_essence_qty, sheet.essenceQty),
                 style    = MaterialTheme.typography.bodySmall,

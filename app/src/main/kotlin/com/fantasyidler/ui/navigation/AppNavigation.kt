@@ -44,6 +44,7 @@ import com.fantasyidler.ui.screen.BoneAltarScreen
 import com.fantasyidler.ui.screen.CarnivalScreen
 import com.fantasyidler.ui.screen.TowerScreen
 import com.fantasyidler.ui.screen.ChurchScreen
+import com.fantasyidler.ui.screen.MonumentScreen
 import com.fantasyidler.ui.screen.BuilderScreen
 import com.fantasyidler.ui.screen.CombatScreen
 import com.fantasyidler.ui.screen.FarmingScreen
@@ -199,6 +200,7 @@ fun AppNavigation(
                     onNavigateToWorkerSkills = { slot -> navController.navigate(Screen.WorkerSkills.routeWithSlot(slot)) },
                     onNavigateToGuildHall    = { navController.navigate(Screen.GuildHall.route) },
                     onNavigateToChurch       = { navController.navigate(Screen.Church.route) },
+                    onNavigateToMonument     = { navController.navigate(Screen.Monument.route) },
                     onNavigateToSlayer       = { navController.navigate(Screen.Slayer.route) },
                     onNavigateToBuilder      = { navController.navigate(Screen.Builder.route) },
                     onNavigateToCarnival     = { navController.navigate(Screen.Carnival.route) },
@@ -267,6 +269,11 @@ fun AppNavigation(
             }
             composable(Screen.Church.route) { entry ->
                 ChurchScreen(
+                    onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                )
+            }
+            composable(Screen.Monument.route) { entry ->
+                MonumentScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }

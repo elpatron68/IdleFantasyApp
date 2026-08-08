@@ -114,6 +114,7 @@ import androidx.compose.ui.draw.alpha
 
 @Composable
 internal fun PrayerSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     availableBones: Map<String, BoneData>,
     inventory: Map<String, Int>,
     prayerLevel: Int,
@@ -150,6 +151,7 @@ internal fun PrayerSheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         HorizontalDivider()
 
         if (selectedBone == null) {

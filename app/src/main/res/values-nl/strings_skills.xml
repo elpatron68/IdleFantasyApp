@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Hitpoints</string>
     <string name="skill_hitpoints_desc">Je totale gezondheid. Hogere levels laten je langer overleven in gevechten.</string>
     <string name="skill_prayer_name">Gebed</string>
-    <string name="skill_prayer_desc">Begraaf botten die vallen bij gevechten om Gebed XP te verdienen. Hogere levels verhogen je gevechtslevel.</string>
+    <string name="skill_prayer_desc">Begraaf botten die vallen bij gevechten om Gebed XP te verdienen. Hogere levels ontgrendelen sterkere zegeningen van de Kerk.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Lv. %1$d</string>

@@ -14,6 +14,7 @@ import kotlinx.coroutines.sync.withLock
 
 data class SeasonalBountyTaskWithProgress(
     val task: SeasonalBountyTaskData,
+    /** For "turn_in" tasks this is how many of the target the player currently holds (capped at the ask). */
     val progress: Int,
     /** Non-null while this slot is waiting for a new task to rotate in after a claim. */
     val cooldownUntilMs: Long?,
@@ -37,13 +38,18 @@ class SeasonalEventRepository @Inject constructor(
     fun activeEvent(): SeasonalEventData? =
         gameData.seasonalEvents.values.firstOrNull { it.isActiveAt(System.currentTimeMillis()) }
 
-    fun bountyTasksWithProgress(event: SeasonalEventData, flags: PlayerFlags): List<SeasonalBountyTaskWithProgress> {
+    fun bountyTasksWithProgress(
+        event: SeasonalEventData,
+        flags: PlayerFlags,
+        inventory: Map<String, Int> = emptyMap(),
+    ): List<SeasonalBountyTaskWithProgress> {
         val byId = event.bountyTasks.associateBy { it.id }
         return flags.seasonalBountySlots.mapIndexedNotNull { index, taskId ->
             val task = byId[taskId] ?: return@mapIndexedNotNull null
             SeasonalBountyTaskWithProgress(
                 task            = task,
-                progress        = flags.seasonalBountyProgress[taskId] ?: 0,
+                progress        = if (task.type == "turn_in") minOf(inventory[task.target] ?: 0, task.amount)
+                                  else flags.seasonalBountyProgress[taskId] ?: 0,
                 cooldownUntilMs = flags.seasonalBountySlotCooldownUntil[index.toString()],
             )
         }
@@ -134,7 +140,11 @@ class SeasonalEventRepository @Inject constructor(
         if (changed) playerRepo.updateFlagsUnlocked(flags.copy(seasonalBountyProgress = updated))
     }
 
-    /** Claims a completed Bounty Board task, awarding one token and starting that slot's rotation cooldown. */
+    /**
+     * Claims a completed Bounty Board task, awarding one token and starting that slot's rotation
+     * cooldown. "turn_in" tasks have no tracked progress — the asked-for items are consumed from
+     * the player's inventory here instead.
+     */
     suspend fun claimBountyTask(taskId: String): Boolean = playerRepo.playerMutex.withLock {
         val event = activeEvent() ?: return@withLock false
         if ("bounty" !in event.pillars) return@withLock false
@@ -142,8 +152,12 @@ class SeasonalEventRepository @Inject constructor(
         val flags = ensureBountySlotsRefreshedUnlocked()
         val slotIndex = flags.seasonalBountySlots.indexOf(taskId)
         if (slotIndex < 0 || flags.seasonalBountySlotCooldownUntil.containsKey(slotIndex.toString())) return@withLock false
-        val progress = flags.seasonalBountyProgress[taskId] ?: 0
-        if (progress < task.amount) return@withLock false
+        if (task.type == "turn_in") {
+            if (!playerRepo.consumeItemsUnlocked(mapOf(task.target to task.amount))) return@withLock false
+        } else {
+            val progress = flags.seasonalBountyProgress[taskId] ?: 0
+            if (progress < task.amount) return@withLock false
+        }
         val claimedFlags = flags.copy(
             seasonalBountySlotCooldownUntil = flags.seasonalBountySlotCooldownUntil +
                 (slotIndex.toString() to (System.currentTimeMillis() + event.bountyRotationMs)),
@@ -159,7 +173,7 @@ class SeasonalEventRepository @Inject constructor(
 
     suspend fun recordExpeditionCompletion(activityKey: String) = playerRepo.playerMutex.withLock {
         val event = activeEvent() ?: return@withLock
-        if ("expedition" !in event.pillars || event.expeditionDungeonKey != activityKey) return@withLock
+        if ("expedition" !in event.pillars || activityKey !in event.expeditionKeys()) return@withLock
         playerRepo.updateFlagsUnlocked(awardTokenUnlocked(playerRepo.getFlags(), event))
     }
 
@@ -167,6 +181,65 @@ class SeasonalEventRepository @Inject constructor(
         val event = activeEvent() ?: return@withLock
         if ("boss" !in event.pillars || event.bossKey != bossKey) return@withLock
         playerRepo.updateFlagsUnlocked(awardTokenUnlocked(playerRepo.getFlags(), event))
+    }
+
+    // -------------------------------------------------------------------------
+    // Reward tiers — claimable payouts along the token track. The final banner +
+    // title tier stays on the automatic path in awardTokenUnlocked.
+    // -------------------------------------------------------------------------
+
+    /** Claims the reward tier at [tierTokens] tokens: grants its payload and records the claim. */
+    suspend fun claimRewardTier(tierTokens: Int): Boolean = playerRepo.playerMutex.withLock {
+        val event = activeEvent() ?: return@withLock false
+        val tier = event.rewardTiers.firstOrNull { it.tokens == tierTokens } ?: return@withLock false
+        if (tier.coins <= 0 && tier.items.isEmpty() && tier.petId == null && !tier.xpBoost) return@withLock false
+        val flags = playerRepo.getFlagsUnlocked()
+        val claimed = flags.seasonalRewardTiersClaimed[event.id].orEmpty()
+        if ((flags.seasonalTokensByEvent[event.id] ?: 0) < tier.tokens || tier.tokens in claimed) return@withLock false
+
+        if (tier.coins > 0) playerRepo.addCoinsUnlocked(tier.coins)
+        if (tier.items.isNotEmpty()) playerRepo.addItemsUnlocked(tier.items)
+        tier.petId?.let { petId ->
+            playerRepo.addPetIfNewUnlocked(petId, gameData.pets[petId]?.boostPercent ?: 0)
+        }
+        if (tier.xpBoost) playerRepo.activateXpBoost(PlayerRepository.XP_BOOST_DURATION_MS, costEach = 0L)
+
+        // The grants above rewrite the flags column (seen items, boost expiry) — re-read before recording the claim.
+        val latest = playerRepo.getFlagsUnlocked()
+        playerRepo.updateFlagsUnlocked(latest.copy(
+            seasonalRewardTiersClaimed = latest.seasonalRewardTiersClaimed + (event.id to (claimed + tier.tokens)),
+        ))
+        true
+    }
+
+    // -------------------------------------------------------------------------
+    // Night Market — coin-priced item bundles and utility effects.
+    // -------------------------------------------------------------------------
+
+    /** Buys a Night Market offer: spends coins, then grants its items or applies its effect. */
+    suspend fun purchaseMarketOffer(offerId: String): Boolean = playerRepo.playerMutex.withLock {
+        val event = activeEvent() ?: return@withLock false
+        val offer = event.nightMarket.firstOrNull { it.id == offerId } ?: return@withLock false
+        val flags = playerRepo.getFlagsUnlocked()
+        val purchaseKey = "${event.id}:${offer.id}"
+        val bought = flags.seasonalMarketPurchases[purchaseKey] ?: 0
+        if (offer.limit != null && bought >= offer.limit) return@withLock false
+        if (!playerRepo.spendCoinsUnlocked(offer.coinCost)) return@withLock false
+
+        if (offer.items.isNotEmpty()) playerRepo.addItemsUnlocked(offer.items)
+
+        val latest = playerRepo.getFlagsUnlocked()
+        var updated = when (offer.effect) {
+            // Mark every waiting slot as already expired (not cleared — clearing would leave the
+            // claimed task in place, re-claimable); the refresh below then rotates new tasks in.
+            "skip_bounty_cooldowns"  -> latest.copy(seasonalBountySlotCooldownUntil = latest.seasonalBountySlotCooldownUntil.mapValues { 0L })
+            "skip_minigame_cooldown" -> latest.copy(seasonalMinigameCooldownAt = 0L)
+            else                     -> latest
+        }
+        updated = updated.copy(seasonalMarketPurchases = updated.seasonalMarketPurchases + (purchaseKey to bought + 1))
+        playerRepo.updateFlagsUnlocked(updated)
+        if (offer.effect == "skip_bounty_cooldowns") ensureBountySlotsRefreshedUnlocked()
+        true
     }
 
     // -------------------------------------------------------------------------

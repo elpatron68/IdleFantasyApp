@@ -21,6 +21,8 @@ data class BossData(
     val tags: List<String> = emptyList(),
     /** Seasonal Events: non-null if this boss should only appear while the matching event is active. */
     @SerialName("event_key") val eventKey: String? = null,
+    /** True for bosses only unlocked by completing the Grand Monument (Eternal Flame lit). */
+    @SerialName("requires_monument") val requiresMonument: Boolean = false,
 )
 
 @Serializable

@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Sağlık</string>
     <string name="skill_hitpoints_desc">Toplam sağlığınız. Yüksek seviyeler savaşta daha uzun süre hayatta kalmanızı sağlar.</string>
     <string name="skill_prayer_name">Dua</string>
-    <string name="skill_prayer_desc">Dua XP\'si kazanmak için savaşlardan düşen kemikleri gömün. Yüksek seviyeler savaş seviyenizi artırır.</string>
+    <string name="skill_prayer_desc">Dua XP\'si kazanmak için savaşlardan düşen kemikleri gömün. Yüksek seviyeler daha güçlü Kilise kutsamalarının kilidini açar.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Sv. %1$d</string>

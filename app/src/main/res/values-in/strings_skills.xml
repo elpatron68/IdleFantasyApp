@@ -44,7 +44,7 @@
     <string name="skill_hitpoints_name">Poin Nyawa</string>
     <string name="skill_hitpoints_desc">Total kesehatanmu. Level lebih tinggi membuatmu bertahan lebih lama dalam pertarungan.</string>
     <string name="skill_prayer_name">Doa</string>
-    <string name="skill_prayer_desc">Kubur tulang hasil pertarungan untuk mendapatkan XP Doa. Level lebih tinggi meningkatkan level bertarungmu.</string>
+    <string name="skill_prayer_desc">Kubur tulang hasil pertarungan untuk mendapatkan XP Doa. Level lebih tinggi membuka berkat Gereja yang lebih kuat.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Lv %1$d</string>

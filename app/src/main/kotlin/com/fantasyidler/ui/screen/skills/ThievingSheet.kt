@@ -112,6 +112,7 @@ import com.fantasyidler.ui.viewmodel.QuestIndicator
 
 @Composable
 internal fun ThievingSheet(
+    guildDailyButton: (@Composable () -> Unit)? = null,
     npcs: Map<String, ThievingNpcData>,
     thievingLevel: Int,
     currentXp: Long,
@@ -136,6 +137,7 @@ internal fun ThievingSheet(
             color    = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
         )
+        guildDailyButton?.invoke()
         if (sessionDurationMs > 0) {
             Text(
                 text     = stringResource(R.string.skills_session_duration, sessionDurationMs / 60_000),
