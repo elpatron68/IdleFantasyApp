@@ -128,7 +128,4 @@ class SeasonalEventViewModel @Inject constructor(
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
-
-    fun dungeonDisplayName(key: String): String = gameData.dungeons[key]?.displayName ?: key
-    fun bossDisplayName(key: String): String = gameData.bosses[key]?.displayName ?: key
 }

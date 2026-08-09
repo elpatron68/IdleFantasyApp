@@ -26,7 +26,9 @@ object GameStrings {
             ?: key.toTitleCase()
 
     fun itemDesc(context: Context, key: String): String =
-        context.stringByName("item_${key}_desc") ?: ""
+        context.stringByName("item_${key}_desc")
+            ?: context.stringByName("crop_${key}_desc")
+            ?: ""
 
     fun skillName(context: Context, key: String): String =
         context.stringByName("skill_${key}_name") ?: key.toTitleCase()
@@ -189,6 +191,29 @@ object GameStrings {
         "expedition"   -> R.drawable.skill_expedition
         else           -> null
     }
+
+    fun guildName(context: Context, guild: String): String =
+        context.stringByName("guild_name_${guild}") ?: guild.toTitleCase()
+
+    fun guildQuestVerb(context: Context, guild: String, fallback: String): String =
+        context.stringByName("daily_verb_${guild}") ?: fallback
+
+    fun guildQuestCombatStyle(context: Context, guild: String): String =
+        context.stringByName("guild_combat_${guild}") ?: guild
+
+    fun carnivalPrizeName(context: Context, prizeType: String, prize: String, fallback: String): String =
+        when (prizeType) {
+            "equipment" -> itemName(context, prize)
+            "pet" -> petName(context, prize)
+            else -> fallback
+        }
+
+    fun carnivalPrizeDesc(context: Context, prizeType: String, prize: String, fallback: String): String =
+        when (prizeType) {
+            "equipment" -> itemDesc(context, prize)
+            "pet" -> petDesc(context, prize)
+            else -> fallback
+        }
 }
 
 // ---------------------------------------------------------------------------

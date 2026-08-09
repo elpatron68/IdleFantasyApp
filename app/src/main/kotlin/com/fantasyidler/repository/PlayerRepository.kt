@@ -290,25 +290,36 @@ class PlayerRepository @Inject constructor(
 
     /**
      * Rolls the daily boss coin soft cap for one victorious kill: the first
-     * [BOSS_FULL_COIN_KILLS_PER_DAY] kills each day pay full coins, later ones pay
-     * [BOSS_COIN_SOFT_CAP_MULT]. Increments the day's counter and returns this kill's multiplier.
+     * [BOSS_FULL_COIN_KILLS_PER_DAY] kills of each boss each day pay full coins, later ones pay
+     * [BOSS_COIN_SOFT_CAP_MULT]. Increments that boss's counter and returns this kill's multiplier.
      */
-    suspend fun rollBossCoinSoftCap(): Double = playerMutex.withLock {
+    suspend fun rollBossCoinSoftCap(bossKey: String): Double = playerMutex.withLock {
         val flags = getFlagsUnlocked()
         val today = java.util.Calendar.getInstance().let {
             it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
         }
-        val count = if (flags.bossCoinDay == today) flags.bossCoinKillsToday else 0
-        updateFlagsUnlocked(flags.copy(bossCoinDay = today, bossCoinKillsToday = count + 1))
+        val counts = if (flags.bossCoinDay == today) flags.bossCoinKillsByBoss else emptyMap()
+        val count = counts[bossKey] ?: 0
+        updateFlagsUnlocked(flags.copy(bossCoinDay = today, bossCoinKillsByBoss = counts + (bossKey to count + 1)))
         if (count < BOSS_FULL_COIN_KILLS_PER_DAY) 1.0 else BOSS_COIN_SOFT_CAP_MULT
     }
 
-    /** Full-coin boss kills still available today, for display. */
-    fun bossFullCoinKillsLeft(flags: PlayerFlags): Int {
+    /** Toggles [itemKey]'s sell-lock. Returns true if the item is now locked. */
+    suspend fun toggleItemLock(itemKey: String): Boolean = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
+        val wasLocked = itemKey in flags.lockedItems
+        updateFlagsUnlocked(flags.copy(
+            lockedItems = if (wasLocked) flags.lockedItems - itemKey else flags.lockedItems + itemKey,
+        ))
+        !wasLocked
+    }
+
+    /** Full-coin kills still available today for [bossKey], for display. */
+    fun bossFullCoinKillsLeft(flags: PlayerFlags, bossKey: String): Int {
         val today = java.util.Calendar.getInstance().let {
             it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
         }
-        val count = if (flags.bossCoinDay == today) flags.bossCoinKillsToday else 0
+        val count = if (flags.bossCoinDay == today) flags.bossCoinKillsByBoss[bossKey] ?: 0 else 0
         return (BOSS_FULL_COIN_KILLS_PER_DAY - count).coerceAtLeast(0)
     }
 
@@ -899,7 +910,7 @@ class PlayerRepository @Inject constructor(
         const val XP_BOOST_COST = 25_000_000L
         const val XP_BOOST_DURATION_MS = 48 * 3_600_000L   // 48 hours
 
-        /** Boss kills per day that pay full coin drops; kills beyond pay [BOSS_COIN_SOFT_CAP_MULT]. */
+        /** Kills of each boss per day that pay full coin drops; kills beyond pay [BOSS_COIN_SOFT_CAP_MULT]. */
         const val BOSS_FULL_COIN_KILLS_PER_DAY = 3
         const val BOSS_COIN_SOFT_CAP_MULT = 0.25
 

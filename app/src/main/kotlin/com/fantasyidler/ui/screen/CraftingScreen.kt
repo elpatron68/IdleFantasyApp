@@ -64,6 +64,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
+import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.CraftableRecipe
@@ -151,12 +152,13 @@ fun CraftingScreen(
             dragHandle       = { BottomSheetDefaults.DragHandle() },
         ) {
             CraftSheet(
-                recipe        = recipe,
-                state         = state,
-                context       = context,
-                onSetQuantity = { viewModel.setQuantity(it, state.maxCraftable(recipe)) },
-                onCraft       = viewModel::craft,
-                onDismiss     = viewModel::dismissRecipe,
+                recipe    = recipe,
+                state     = state,
+                context   = context,
+                onCraft   = { qty ->
+                    viewModel.craft(recipe, qty, if (recipe.skillName == Skills.HERBLORE) state.herbloreAshKey else null)
+                },
+                onDismiss = viewModel::dismissRecipe,
             )
         }
     }
@@ -223,18 +225,7 @@ private fun RecipeRow(
                 }
                 val questIndicators = state.recipeQuests[recipe.outputKey] ?: emptyList()
                 if (questIndicators.isNotEmpty()) {
-                    val categories = questIndicators.groupBy { it.category }
-                    val sortedCategories = categories.entries.sortedBy { it.key }
-                    sortedCategories.forEach { (category, indicators) ->
-                        val emoji = if (category == QuestCategory.DAILY) "⏰" else "📜"
-                        val isCompletable = indicators.any { it.isCompletable }
-                        val alpha = if (isCompletable) 1.0f else 0.38f
-                        Text(
-                            text     = " $emoji",
-                            style    = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.alpha(alpha),
-                        )
-                    }
+                    QuestIndicatorIcons(questIndicators)
                 }
             }
             // Materials row
@@ -308,15 +299,21 @@ private fun CraftSheet(
     recipe: CraftableRecipe,
     state: CraftingUiState,
     context: android.content.Context,
-    onSetQuantity: (Int) -> Unit,
-    onCraft: () -> Unit,
+    onCraft: (Int) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val qty       = state.craftQuantity
+    // Quantity is sheet-local state: pushing it through the ViewModel re-ran the
+    // full player-state combine (JSON decodes + quest scans) on every keystroke (issue #1310).
     val max       = state.maxCraftable(recipe)
+    var quantity by remember(recipe) { mutableIntStateOf(max.coerceAtLeast(1)) }
+    val qty       = quantity.coerceIn(1, max.coerceAtLeast(1))
     val totalXp   = recipe.xpPerItem * qty
     val currentXp = state.skillXp[recipe.skillName] ?: 0L
-    var textValue by remember(qty) { mutableStateOf(qty.toString()) }
+    var textValue by remember(recipe) { mutableStateOf(qty.toString()) }
+    fun setQuantity(value: Int) {
+        quantity  = value.coerceIn(1, max.coerceAtLeast(1))
+        textValue = quantity.toString()
+    }
 
     Column(
         modifier = Modifier
@@ -394,7 +391,7 @@ private fun CraftSheet(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment     = Alignment.CenterVertically,
         ) {
-            IconButton(onClick = { onSetQuantity(qty - 1) }, enabled = qty > 1) {
+            IconButton(onClick = { setQuantity(qty - 1) }, enabled = qty > 1) {
                 Icon(Icons.Filled.Remove, contentDescription = stringResource(R.string.crafting_decrease))
             }
             OutlinedTextField(
@@ -402,7 +399,7 @@ private fun CraftSheet(
                 onValueChange = { new ->
                     val filtered = new.filter { it.isDigit() }
                     textValue = filtered
-                    filtered.toIntOrNull()?.let { onSetQuantity(it) }
+                    filtered.toIntOrNull()?.let { quantity = it.coerceIn(1, max.coerceAtLeast(1)) }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -411,8 +408,7 @@ private fun CraftSheet(
                 keyboardActions = KeyboardActions(
                     onDone = {
                         val parsed = textValue.toIntOrNull()?.coerceIn(1, max.coerceAtLeast(1)) ?: 1
-                        onSetQuantity(parsed)
-                        textValue = parsed.toString()
+                        setQuantity(parsed)
                     },
                 ),
                 textStyle = MaterialTheme.typography.headlineSmall.copy(
@@ -422,13 +418,13 @@ private fun CraftSheet(
                 singleLine = true,
                 modifier   = Modifier.width(130.dp),
             )
-            IconButton(onClick = { onSetQuantity(qty + 1) }, enabled = qty < max) {
+            IconButton(onClick = { setQuantity(qty + 1) }, enabled = qty < max) {
                 Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.crafting_increase))
             }
         }
         Spacer(Modifier.height(8.dp))
-        QtyQuickButtons(qty, max) { onSetQuantity(it) }
-        QuestFillRow(state.questFills, qty, max, onSet = onSetQuantity)
+        QtyQuickButtons(qty, max) { setQuantity(it) }
+        QuestFillRow(state.questFills, qty, max, onSet = { setQuantity(it) })
         Spacer(Modifier.height(8.dp))
 
         Text(
@@ -452,7 +448,7 @@ private fun CraftSheet(
             OutlinedButton(onClick = onDismiss, modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.btn_cancel))
             }
-            Button(onClick = onCraft, modifier = Modifier.weight(1f)) {
+            Button(onClick = { onCraft(qty) }, modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.btn_craft))
             }
         }

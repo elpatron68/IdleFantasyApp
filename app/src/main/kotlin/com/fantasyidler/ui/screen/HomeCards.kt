@@ -123,6 +123,7 @@ internal fun HomeSessionCard(
     bossEmoji: String? = null,
     repeatIndex: Int = 0,
     repeatTotal: Int = 0,
+    assignedItems: Map<String, Int> = emptyMap(),
     onRepeat: () -> Unit,
     onAbandon: () -> Unit,
     onDebugFinish: () -> Unit,
@@ -235,6 +236,17 @@ internal fun HomeSessionCard(
                     Spacer(Modifier.height(2.dp))
                     Text(
                         text  = xpLineText,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
+                    )
+                }
+                if (assignedItems.isNotEmpty()) {
+                    val assignedTemplate = stringResource(R.string.worker_session_assigned)
+                    Spacer(Modifier.height(2.dp))
+                    Text(
+                        text  = assignedItems.entries.joinToString("  ") { (key, qty) ->
+                            assignedTemplate.format("%,d".format(qty), GameStrings.itemName(context, key))
+                        },
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
                     )

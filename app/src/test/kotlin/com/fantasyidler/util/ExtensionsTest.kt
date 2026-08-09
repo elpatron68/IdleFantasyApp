@@ -59,6 +59,22 @@ class ExtensionsTest {
     }
 
     @Test
+    fun `formatDurationMs renders months weeks and days, omitting zero units`() {
+        val hour = 3_600_000L
+        assertEquals("1d", 24 * hour)                        // exactly one day
+        assertEquals("1d 1h 10m", 25 * hour + 600_000L)
+        assertEquals("1w", 7 * 24 * hour)                    // exactly one week
+        assertEquals("1w 1d 2h", 8 * 24 * hour + 2 * hour)
+        assertEquals("1mo", 30 * 24 * hour)                  // months are 30 days
+        assertEquals("2mo", 60 * 24 * hour)
+        assertEquals("1mo 1w 1d 8h 54m", 920 * hour + 54 * 60_000L)
+        assertEquals("1mo 1m", 30 * 24 * hour + 60_000L)     // interior zero units skipped
+    }
+
+    private fun assertEquals(expected: String, ms: Long) =
+        assertEquals(expected, ms.formatDurationMs())
+
+    @Test
     fun `clampLevel constrains to the 1-99 skill range`() {
         assertEquals(1, 0.clampLevel())
         assertEquals(1, (-5).clampLevel())

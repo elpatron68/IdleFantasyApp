@@ -37,6 +37,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.changedToDown
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -240,7 +242,21 @@ private fun BoneTapContent(
                 .weight(1f)
                 .fillMaxWidth()
                 .padding(24.dp)
-                .clickable(enabled = qty > 0, onClick = onTap),
+                // Raw pointer handling instead of clickable: each finger-down counts as its
+                // own bury, so two-thumb tapping doesn't drop every other tap.
+                .pointerInput(qty > 0) {
+                    if (qty <= 0) return@pointerInput
+                    awaitPointerEventScope {
+                        while (true) {
+                            awaitPointerEvent().changes.forEach { change ->
+                                if (change.changedToDown()) {
+                                    change.consume()
+                                    onTap()
+                                }
+                            }
+                        }
+                    }
+                },
             shape          = MaterialTheme.shapes.large,
             color          = if (qty > 0) MaterialTheme.colorScheme.primaryContainer
                              else MaterialTheme.colorScheme.surfaceVariant,

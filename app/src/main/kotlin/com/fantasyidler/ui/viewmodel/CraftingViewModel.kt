@@ -43,9 +43,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 data class QuestFillSuggestion(val label: String, val qty: Int)
 
-enum class QuestCategory {
-    DAILY,
-    MAIN
+/** Ordinal order is the display order of the indicator icons. */
+enum class QuestCategory(val emoji: String) {
+    DAILY("⏰"),
+    WEEKLY("📅"),
+    GUILD_DAILY("⚒️"),
+    GUILD("🏰"),
+    MAIN("📜"),
 }
 
 data class QuestIndicator(
@@ -110,7 +114,6 @@ data class CraftingUiState(
     val effectiveInventory: Map<String, Int> = emptyMap(),
     /** Non-null while the craft-quantity sheet is open. */
     val selectedRecipe: CraftableRecipe? = null,
-    val craftQuantity:  Int = 1,
     /** Ash catalyst key selected for a herblore brew, or null for no catalyst. */
     val herbloreAshKey: String? = null,
     val snackbarMessage: String? = null,
@@ -353,18 +356,12 @@ class CraftingViewModel @Inject constructor(
     // Craft sheet
     // ------------------------------------------------------------------
 
-    fun openRecipe(recipe: CraftableRecipe) {
-        val max = uiState.value.maxCraftable(recipe).coerceAtLeast(1)
-        _extra.update { it.copy(selectedRecipe = recipe, craftQuantity = max) }
-    }
+    fun openRecipe(recipe: CraftableRecipe) =
+        _extra.update { it.copy(selectedRecipe = recipe) }
 
     fun dismissRecipe() = _extra.update { it.copy(selectedRecipe = null, herbloreAshKey = null) }
 
     fun setHerbloreAsh(key: String?) = _extra.update { it.copy(herbloreAshKey = key) }
-
-    /** [max] should come from the combined uiState (which has inventory), not _extra. */
-    fun setQuantity(qty: Int, max: Int) =
-        _extra.update { it.copy(craftQuantity = qty.coerceIn(1, max.coerceAtLeast(1))) }
 
     private fun craftToolEfficiency(recipe: CraftableRecipe, equipped: Map<String, String?>): Float =
         gameData.craftDurationEfficiency(recipe.skillName, recipe.key, equipped)
@@ -379,15 +376,6 @@ class CraftingViewModel @Inject constructor(
             val pd = gameData.pets[pet.id]
             if (pd != null && (pd.boostedSkill == skillKey || pd.boostedSkill == "all")) pd.boostPercent else 0
         }
-    }
-
-    fun craft() {
-        val state  = uiState.value          // combined state — has inventory
-        val recipe = state.selectedRecipe ?: return
-        val max    = state.maxCraftable(recipe).coerceAtLeast(1)
-        val qty    = state.craftQuantity.coerceIn(1, max)
-        val ashKey = if (recipe.skillName == Skills.HERBLORE) state.herbloreAshKey else null
-        craft(recipe, qty, ashKey)
     }
 
     /**
@@ -407,7 +395,7 @@ class CraftingViewModel @Inject constructor(
         return true
     }
 
-    /** Starts or enqueues [qty] crafts of [recipe] directly (guild-daily quick-add path). */
+    /** Starts or enqueues [qty] crafts of [recipe]. */
     fun craft(recipe: CraftableRecipe, qty: Int, ashKey: String? = null) {
         val state = uiState.value
 
@@ -700,7 +688,7 @@ class CraftingViewModel @Inject constructor(
                 }
                 if (matches) {
                     val neededCrafts = ceilDiv(remaining, recipe.outputQty)
-                    indicators.add(QuestIndicator(QuestCategory.MAIN, max >= neededCrafts))
+                    indicators.add(QuestIndicator(QuestCategory.GUILD, max >= neededCrafts))
                 }
             }
 
@@ -730,7 +718,7 @@ class CraftingViewModel @Inject constructor(
                 }
                 if (matches) {
                     val neededCrafts = ceilDiv(remaining, recipe.outputQty)
-                    indicators.add(QuestIndicator(QuestCategory.DAILY, max >= neededCrafts))
+                    indicators.add(QuestIndicator(QuestCategory.WEEKLY, max >= neededCrafts))
                 }
             }
 
@@ -747,7 +735,7 @@ class CraftingViewModel @Inject constructor(
                 }
                 if (matches) {
                     val neededCrafts = ceilDiv(remaining, recipe.outputQty)
-                    indicators.add(QuestIndicator(QuestCategory.DAILY, max >= neededCrafts))
+                    indicators.add(QuestIndicator(QuestCategory.GUILD_DAILY, max >= neededCrafts))
                 }
             }
 

@@ -1,10 +1,8 @@
 import json
-import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
-from xml.dom.expatbuilder import DOCUMENT_NODE
 
 from docs.gen.repo_docs import TEMPLATES, ASSETS, ROOT, METADATA_PATH, RESOURCES
 

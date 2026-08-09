@@ -181,7 +181,7 @@ class CarnivalViewModel @Inject constructor(
                 skillLevels         = levels,
                 tierBonus           = townRepo.idleTicketBonusChance(flags),
                 queueSize           = flags.sessionQueue.size,
-                maxQueueSize        = townRepo.maxQueueSize(flags),
+                maxQueueSize        = playerRepo.maxQueueSize(flags),
                 ownedPrizeKeys      = ownedPrizeKeys,
                 selectedTab         = if (!extra.tabInitialized) flags.carnivalTab else extra.selectedTab,
                 tabInitialized      = true,

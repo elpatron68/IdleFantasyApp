@@ -701,9 +701,10 @@
     "slot": "weapon",
     "combat_style": "ranged",
     "description": "A simple wooden bow. Good for training ranged.",
-    "attack_bonus": 4,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 4,
     "requirements": {},
     "ranged_strength_bonus": 0
   },
@@ -713,9 +714,10 @@
     "slot": "weapon",
     "combat_style": "ranged",
     "description": "A shortbow crafted from regular logs.",
-    "attack_bonus": 8,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 8,
     "requirements": {},
     "ranged_strength_bonus": 3
   },
@@ -725,9 +727,10 @@
     "slot": "weapon",
     "combat_style": "ranged",
     "description": "A sturdy oak bow. Better range weapon.",
-    "attack_bonus": 9,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 9,
     "requirements": {
       "ranged": 5
     },
@@ -740,9 +743,10 @@
     "combat_style": "ranged",
     "attack_speed": 2.0,
     "description": "A shortbow crafted from oak logs.",
-    "attack_bonus": 14,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 14,
     "requirements": {
       "ranged": 5
     },
@@ -755,9 +759,10 @@
     "combat_style": "ranged",
     "attack_speed": 2.0,
     "description": "A shortbow crafted from willow logs.",
-    "attack_bonus": 20,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 20,
     "requirements": {
       "ranged": 20
     },
@@ -770,9 +775,10 @@
     "combat_style": "ranged",
     "attack_speed": 2.0,
     "description": "A shortbow crafted from maple logs.",
-    "attack_bonus": 29,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 29,
     "requirements": {
       "ranged": 30
     },
@@ -785,9 +791,10 @@
     "combat_style": "ranged",
     "attack_speed": 1.5,
     "description": "A shortbow crafted from yew logs.",
-    "attack_bonus": 47,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 47,
     "requirements": {
       "ranged": 40
     },
@@ -800,9 +807,10 @@
     "combat_style": "ranged",
     "attack_speed": 1.8,
     "description": "A longbow crafted from yew logs.",
-    "attack_bonus": 70,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 70,
     "requirements": {
       "ranged": 50
     },
@@ -815,9 +823,10 @@
     "combat_style": "ranged",
     "attack_speed": 1.5,
     "description": "A shortbow crafted from magic logs.",
-    "attack_bonus": 69,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 69,
     "requirements": {
       "ranged": 50
     },
@@ -830,9 +839,10 @@
     "combat_style": "ranged",
     "attack_speed": 1.8,
     "description": "A longbow crafted from magic logs.",
-    "attack_bonus": 92,
+    "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "ranged_attack_bonus": 92,
     "requirements": {
       "ranged": 60
     },
@@ -3716,7 +3726,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 0.25,
+    "farming_efficiency": 1.25,
     "requirements": {
       "farming": 10
     }
@@ -3730,7 +3740,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 0.5,
+    "farming_efficiency": 1.5,
     "requirements": {
       "farming": 20
     }
@@ -3744,7 +3754,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 0.75,
+    "farming_efficiency": 1.75,
     "requirements": {
       "farming": 35
     }
@@ -3758,7 +3768,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 1.0,
+    "farming_efficiency": 2.0,
     "requirements": {
       "farming": 50
     }
@@ -3772,7 +3782,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 1.25,
+    "farming_efficiency": 2.25,
     "requirements": {
       "farming": 65
     }
@@ -3786,7 +3796,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 1.75,
+    "farming_efficiency": 2.75,
     "requirements": {
       "farming": 60
     }
@@ -3800,7 +3810,7 @@
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
-    "farming_efficiency": 2.0,
+    "farming_efficiency": 3.0,
     "requirements": {
       "farming": 85
     }

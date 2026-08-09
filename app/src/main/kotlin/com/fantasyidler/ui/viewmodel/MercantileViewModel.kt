@@ -36,6 +36,7 @@ import kotlinx.serialization.serializer
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 data class MercantileUiState(
@@ -145,7 +146,7 @@ class MercantileViewModel @Inject constructor(
                 }
                 _extra.update {
                     it.copy(snackbarMessage = if (enqueued)
-                        context.getString(R.string.mercantile_added_to_queue, route.displayName)
+                        context.getString(R.string.mercantile_added_to_queue, GameStrings.tradeRouteName(context, routeId))
                     else
                         context.getString(R.string.snackbar_queue_full))
                 }
@@ -237,7 +238,7 @@ class MercantileViewModel @Inject constructor(
             if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
 
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
-            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.MAIN)
+            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.GUILD)
         }
 
         for (daily in activeDailies) {
@@ -245,13 +246,13 @@ class MercantileViewModel @Inject constructor(
         }
 
         for (weekly in activeWeeklies) {
-            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.DAILY)
+            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.WEEKLY)
         }
 
         for (id in activeGuildDailyIds) {
             val template = guildPool[id] ?: continue
             val progress = flags.guildDailyProgress[id] ?: 0
-            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.DAILY)
+            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
         }
 
         return result

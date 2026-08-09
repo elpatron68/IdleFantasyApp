@@ -79,6 +79,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.json.SkillingDungeonData
 import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
@@ -1169,7 +1170,7 @@ private fun PetsTab(
 }
 
 @Composable
-private fun PetRow(pet: com.fantasyidler.data.json.PetData, owned: Boolean) {
+private fun PetRow(pet: PetData, owned: Boolean) {
     val alpha = if (owned) 1f else 0.38f
     val context = LocalContext.current
     Row(
@@ -1177,7 +1178,7 @@ private fun PetRow(pet: com.fantasyidler.data.json.PetData, owned: Boolean) {
             .fillMaxWidth()
             .then(if (owned) Modifier.clickable {
                 val messages = context.resources.getStringArray(R.array.profile_pet_happy_messages)
-                AppBannerCenter.enqueue(String.format(messages.random(), pet.displayName))
+                AppBannerCenter.enqueue(String.format(messages.random(), GameStrings.petName(context, pet.id)))
             } else Modifier)
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -1196,13 +1197,13 @@ private fun PetRow(pet: com.fantasyidler.data.json.PetData, owned: Boolean) {
             modifier = Modifier.weight(1f),
         ) {
             Text(
-                text       = pet.displayName,
+                text       = GameStrings.petName(context, pet.id),
                 style      = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Medium,
                 color      = MaterialTheme.colorScheme.onSurface.copy(alpha = alpha),
             )
             Text(
-                text  = pet.description,
+                text  = GameStrings.petDesc(context, pet.id),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = alpha),
             )

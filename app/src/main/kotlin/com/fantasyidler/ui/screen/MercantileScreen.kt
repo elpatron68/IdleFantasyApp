@@ -221,18 +221,7 @@ private fun TradeRouteRow(
                 fontWeight = FontWeight.SemiBold,
             )
             if (questIndicators.isNotEmpty()) {
-                val categories = questIndicators.groupBy { it.category }
-                val sortedCategories = categories.entries.sortedBy { it.key }
-                sortedCategories.forEach { (category, indicators) ->
-                    val emoji = if (category == QuestCategory.DAILY) "⏰" else "📜"
-                    val isCompletable = indicators.any { it.isCompletable }
-                    val alpha = if (isCompletable) 1.0f else 0.38f
-                    Text(
-                        text     = " $emoji",
-                        style    = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.alpha(alpha),
-                    )
-                }
+                QuestIndicatorIcons(questIndicators)
             }
         }
         Spacer(Modifier.height(2.dp))

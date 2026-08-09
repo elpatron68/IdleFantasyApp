@@ -136,23 +136,23 @@ class ArmoryViewModel @Inject constructor(
         // more notable boss source rather than whichever happened to be registered first.
         gameData.bosses.forEach { (_, boss) ->
             boss.rareDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, boss.displayName, formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.bossName(context, boss.id), formatChancePct(drop.chance))
             }
             boss.commonLoot.items.keys.forEach { key ->
-                if (key !in map) map[key] = context.getString(R.string.armory_source_drop, boss.displayName)
+                if (key !in map) map[key] = context.getString(R.string.armory_source_drop, GameStrings.bossName(context, boss.id))
             }
         }
         gameData.dungeons.forEach { (_, dungeon) ->
             dungeon.rareDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, dungeon.displayName, formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.dungeonName(context, dungeon.name), formatChancePct(drop.chance))
             }
         }
         gameData.enemies.forEach { (_, enemy) ->
             enemy.alwaysDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_always, enemy.displayName)
+                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_always, GameStrings.enemyName(context, enemy.name))
             }
             enemy.dropTable.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, enemy.displayName, formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.enemyName(context, enemy.name), formatChancePct(drop.chance))
             }
         }
         gameData.marketplace.forEach { (_, category) ->

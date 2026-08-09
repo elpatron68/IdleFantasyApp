@@ -47,6 +47,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -499,14 +500,13 @@ private fun WorkerCraftSkillSheet(
 
     if (selected != null) {
         WorkerCraftQuantityContent(
-            recipe        = selected,
-            state         = state,
-            isQueueFull   = isQueueFull,
-            context       = context,
-            onSetQuantity = { viewModel.setQuantity(it, minOf(state.maxCraftable(selected), state.maxCraftQty)) },
-            onSetAsh      = if (selected.skillName == Skills.HERBLORE) viewModel::setHerbloreAsh else null,
-            onCraft       = viewModel::craft,
-            onBack        = viewModel::dismissRecipe,
+            recipe      = selected,
+            state       = state,
+            isQueueFull = isQueueFull,
+            context     = context,
+            onSetAsh    = if (selected.skillName == Skills.HERBLORE) viewModel::setHerbloreAsh else null,
+            onCraft     = viewModel::craft,
+            onBack      = viewModel::dismissRecipe,
         )
     } else {
         Column(
@@ -741,15 +741,21 @@ private fun WorkerCraftQuantityContent(
     state: WorkerSkillsUiState,
     isQueueFull: Boolean,
     context: android.content.Context,
-    onSetQuantity: (Int) -> Unit,
     onSetAsh: ((String?) -> Unit)?,
-    onCraft: () -> Unit,
+    onCraft: (Int) -> Unit,
     onBack: () -> Unit,
 ) {
-    val qty      = state.craftQuantity
+    // Quantity is sheet-local state: pushing it through the ViewModel re-ran the
+    // full player-state combine (JSON decodes) on every keystroke (issue #1310).
     val max      = minOf(state.maxCraftable(recipe), state.maxCraftQty)
+    var quantity by remember(recipe) { mutableIntStateOf(max.coerceAtLeast(1)) }
+    val qty      = quantity.coerceIn(1, max.coerceAtLeast(1))
     val totalXp  = recipe.xpPerItem * qty
-    var textValue by remember(qty) { mutableStateOf(qty.toString()) }
+    var textValue by remember(recipe) { mutableStateOf(qty.toString()) }
+    fun setQuantity(value: Int) {
+        quantity  = value.coerceIn(1, max.coerceAtLeast(1))
+        textValue = quantity.toString()
+    }
 
     Column(
         modifier = Modifier
@@ -800,21 +806,15 @@ private fun WorkerCraftQuantityContent(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment     = Alignment.CenterVertically,
         ) {
-            IconButton(onClick = { onSetQuantity(qty - 1) }, enabled = qty > 1) {
+            IconButton(onClick = { setQuantity(qty - 1) }, enabled = qty > 1) {
                 Icon(Icons.Filled.Remove, contentDescription = "Decrease")
             }
             OutlinedTextField(
                 value         = textValue,
                 onValueChange = { new ->
                     val filtered = new.filter { it.isDigit() }
-                    val parsed   = filtered.toIntOrNull()
-                    if (parsed != null) {
-                        val clamped = parsed.coerceIn(1, max.coerceAtLeast(1))
-                        textValue = clamped.toString()
-                        onSetQuantity(clamped)
-                    } else {
-                        textValue = filtered
-                    }
+                    textValue = filtered
+                    filtered.toIntOrNull()?.let { quantity = it.coerceIn(1, max.coerceAtLeast(1)) }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -823,8 +823,7 @@ private fun WorkerCraftQuantityContent(
                 keyboardActions = KeyboardActions(
                     onDone = {
                         val parsed = textValue.toIntOrNull()?.coerceIn(1, max.coerceAtLeast(1)) ?: 1
-                        onSetQuantity(parsed)
-                        textValue = parsed.toString()
+                        setQuantity(parsed)
                     },
                 ),
                 textStyle = MaterialTheme.typography.headlineSmall.copy(
@@ -834,12 +833,12 @@ private fun WorkerCraftQuantityContent(
                 singleLine = true,
                 modifier   = Modifier.width(90.dp),
             )
-            IconButton(onClick = { onSetQuantity(qty + 1) }, enabled = qty < max) {
+            IconButton(onClick = { setQuantity(qty + 1) }, enabled = qty < max) {
                 Icon(Icons.Filled.Add, contentDescription = "Increase")
             }
         }
         Spacer(Modifier.height(8.dp))
-        QtyQuickButtons(qty, max) { onSetQuantity(it) }
+        QtyQuickButtons(qty, max) { setQuantity(it) }
         Spacer(Modifier.height(8.dp))
         Text(
             text     = projectedXpLabel(state.skillXp[recipe.skillName] ?: 0L, totalXp.toLong()),
@@ -891,7 +890,7 @@ private fun WorkerCraftQuantityContent(
         }
         Spacer(Modifier.height(20.dp))
         Button(
-            onClick  = onCraft,
+            onClick  = { onCraft(qty) },
             enabled  = !isQueueFull && max > 0,
             modifier = Modifier.fillMaxWidth(),
         ) {

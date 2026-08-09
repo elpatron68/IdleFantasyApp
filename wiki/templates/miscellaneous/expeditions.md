@@ -1,4 +1,4 @@
-# Expeditions
+# {icon} Expeditions
 
 Expeditions are skilling activities that combine resource gathering with lore discovery. Each expedition is tied to a gathering skill and rewards XP and items as you progress.
 

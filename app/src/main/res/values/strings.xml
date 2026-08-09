@@ -632,6 +632,16 @@
     <string name="shop_sell_junk">Sell Junk</string>
     <string name="shop_sell_old_gear">Sell Old Gear</string>
     <string name="shop_equipped_label">(equipped)</string>
+    <string name="shop_item_locked">%1$s is locked. Long-press to unlock.</string>
+    <string name="shop_item_lock_on">%1$s locked</string>
+    <string name="shop_item_lock_off">%1$s unlocked</string>
+    <string name="quest_legend_title">Quest icons</string>
+    <string name="quest_legend_daily">Daily quest</string>
+    <string name="quest_legend_weekly">Weekly quest</string>
+    <string name="quest_legend_guild_daily">Guild daily</string>
+    <string name="quest_legend_guild">Guild quest</string>
+    <string name="quest_legend_quest">Quest</string>
+    <string name="quest_legend_notes">Dimmed icons can\'t be completed yet (missing level or materials). A small raised number means several quests of that type want the same thing.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d in inventory</string>
     <!-- Translator note: %1$s = formatted coin amount -->
@@ -878,9 +888,9 @@
     <string name="guild_quest_desc_trade">Complete %1$d %2$s trades for the %3$s.</string>
     <string name="guild_quest_desc_earn_coins">Earn %1$s coins via trade routes for the %2$s.</string>
     <string name="guild_quest_desc_pickpocket">Pickpocket the %2$s %1$d times for the %3$s.</string>
-    <string name="guild_combat_melee">melee</string>
-    <string name="guild_combat_ranged">ranged</string>
-    <string name="guild_combat_magic">magic</string>
+    <string name="guild_combat_warriors">melee</string>
+    <string name="guild_combat_archers">ranged</string>
+    <string name="guild_combat_mages">magic</string>
     <string name="guild_rep_label">%1$d / %2$d dailies</string>
     <string name="guild_quest_complete">Quest complete: %1$s!</string>
     <string name="guild_daily_complete">Daily reward claimed!</string>
@@ -994,6 +1004,10 @@
     <string name="skilling_dungeon_crumbling_watchtower_desc">A decrepit stone tower perched at the edge of the foothills. Something still guards what was once stored inside.</string>
     <string name="skilling_dungeon_shattered_spire_name">Shattered Spire</string>
     <string name="skilling_dungeon_shattered_spire_desc">The remains of a wizard\'s tower reduced to a field of rubble. The air still crackles with residual magic.</string>
+    <string name="skilling_dungeon_thieves_den_name">Thieves\' Den</string>
+    <string name="skilling_dungeon_thieves_den_desc">A labyrinth of tunnels beneath the city streets, used by an organised ring of thieves.</string>
+    <string name="skilling_dungeon_shadow_vault_name">Shadow Vault</string>
+    <string name="skilling_dungeon_shadow_vault_desc">A hidden vault beneath the Rogue Sanctum where the guild\'s most valuable stolen goods are kept.</string>
 
     <!-- Expeditions -->
     <string name="nav_expeditions">Expeditions</string>
@@ -1075,17 +1089,6 @@
     <string name="achievement_prestige_all_1_desc">Prestige all skills at least once</string>
     <string name="achievement_prestige_all_3_name">True Prestige</string>
     <string name="achievement_prestige_all_3_desc">Reach Prestige 3 on every skill</string>
-
-    <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
-    <string name="item_slayer_helm_name">Slayer Helm</string>
-    <string name="item_slayer_helm_desc">A sturdy helm worn by veteran slayers.</string>
-    <string name="item_abyssal_whip_name">Abyssal Whip</string>
-    <string name="item_abyssal_whip_desc">A whip forged from abyssal energy. Excellent for strength training.</string>
-    <string name="item_slayer_platebody_name">Slayer Platebody</string>
-    <string name="item_slayer_platebody_desc">Heavy armour etched with slayer runes.</string>
-    <string name="item_slayer_platelegs_name">Slayer Platelegs</string>
-    <string name="item_slayer_platelegs_desc">Protective legs crafted for extended dungeon runs.</string>
-
 
     <!-- Shop categories -->
     <string name="shop_cat_ores_and_materials">Ores &amp; Materials</string>
@@ -1196,30 +1199,6 @@
     <string name="thieving_npc_bishop_name">Bishop</string>
     <string name="thieving_npc_high_priest_name">High Priest</string>
 
-    <!-- Construction item names (planks, nails, stone) -->
-    <string name="item_plank_name">Plank</string>
-    <string name="item_oak_plank_name">Oak Plank</string>
-    <string name="item_willow_plank_name">Willow Plank</string>
-    <string name="item_maple_plank_name">Maple Plank</string>
-    <string name="item_yew_plank_name">Yew Plank</string>
-    <string name="item_magic_plank_name">Magic Plank</string>
-    <string name="item_iron_nail_name">Iron Nail</string>
-    <string name="item_steel_nail_name">Steel Nail</string>
-    <string name="item_mithril_nail_name">Mithril Nail</string>
-    <string name="item_stone_name">Stone</string>
-    <string name="item_carved_stone_name">Carved Stone</string>
-    <string name="item_stone_block_name">Stone Block</string>
-
-    <!-- Construction furniture names -->
-    <string name="item_wooden_rack_name">Wooden Rack</string>
-    <string name="item_wooden_shelf_name">Wooden Shelf</string>
-    <string name="item_oak_table_name">Oak Table</string>
-    <string name="item_oak_bookshelf_name">Oak Bookshelf</string>
-    <string name="item_willow_cabinet_name">Willow Cabinet</string>
-    <string name="item_maple_dresser_name">Maple Dresser</string>
-    <string name="item_yew_wardrobe_name">Yew Wardrobe</string>
-    <string name="item_magic_throne_name">Magic Throne</string>
-
     <!-- Town building upgrade UI -->
     <string name="town_upgrade_section_title">Town Building</string>
     <string name="town_building_inn_name">Inn</string>
@@ -1292,57 +1271,6 @@
     <string name="achievement_tower_floor_250_desc">Reach floor 250 in the Infinite Tower</string>
     <string name="achievement_tower_all_milestones_name">Tower Legend</string>
     <string name="achievement_tower_all_milestones_desc">Claim all 25 tower milestones</string>
-
-
-
-
-    <!-- Thieving expedition and dungeon strings -->
-    <string name="skilling_dungeon_thieves_den_name">Thieves\' Den</string>
-    <string name="skilling_dungeon_thieves_den_desc">A labyrinth of tunnels beneath the city streets, used by an organised ring of thieves.</string>
-    <string name="skilling_dungeon_shadow_vault_name">Shadow Vault</string>
-    <string name="skilling_dungeon_shadow_vault_desc">A hidden vault beneath the Rogue Sanctum where the guild\'s most valuable stolen goods are kept.</string>
-    <string name="dungeon_rogue_sanctum_name">Rogue Sanctum</string>
-    <string name="dungeon_rogue_sanctum_desc">The guild\'s inner refuge, accessible only to proven members.</string>
-    <string name="dungeon_guild_of_shadows_name">Guild of Shadows</string>
-    <string name="dungeon_guild_of_shadows_desc">The innermost sanctum of the thieves\' guild, guarded by its most elite enforcers.</string>
-    <string name="enemy_assassin_name">Assassin</string>
-    <string name="enemy_shadow_assassin_name">Shadow Assassin</string>
-    <string name="enemy_vault_guardian_name">Vault Guardian</string>
-    <string name="enemy_guild_master_name">Guild Master</string>
-    <string name="item_shadow_signet_name">Shadow Signet</string>
-    <string name="item_shadow_signet_desc">A ring bearing the seal of the Guild of Shadows. Only the guild\'s most dangerous operatives ever wore one.</string>
-
-    <!-- High-level dungeon names and descriptions -->
-    <string name="dungeon_void_rift_name">Void Rift</string>
-    <string name="dungeon_void_rift_desc">A tear in reality where void creatures spill into the mortal world.</string>
-    <string name="dungeon_frozen_citadel_name">Frozen Citadel</string>
-    <string name="dungeon_frozen_citadel_desc">An ancient fortress encased in a glacier, its defenders frozen in eternal vigil.</string>
-    <string name="dungeon_abyssal_throne_name">Abyssal Throne</string>
-    <string name="dungeon_abyssal_throne_desc">The deepest point in the known world, ruled by void lords since the dawn of time.</string>
-
-    <!-- High-level enemy names -->
-    <string name="enemy_void_stalker_name">Void Stalker</string>
-    <string name="enemy_rift_guardian_name">Rift Guardian</string>
-    <string name="enemy_chaos_elemental_name">Chaos Elemental</string>
-    <string name="enemy_frost_giant_name">Frost Giant</string>
-    <string name="enemy_ice_golem_name">Ice Golem</string>
-    <string name="enemy_glacial_mage_name">Glacial Mage</string>
-    <string name="enemy_abyssal_lord_name">Abyssal Lord</string>
-    <string name="enemy_eternal_sentinel_name">Eternal Sentinel</string>
-    <string name="enemy_void_archon_name">Void Archon</string>
-    <string name="enemy_frost_wyvern_name">Frost Wyvern</string>
-    <string name="enemy_abyssal_guardian_name">Abyssal Guardian</string>
-    <string name="enemy_shadow_thief_name">Shadow Thief</string>
-    <string name="enemy_elder_lich_name">Elder Lich</string>
-
-    <!-- Void Sovereign boss drops -->
-    <string name="item_void_reaver_name">Void Reaver</string>
-    <string name="item_void_reaver_desc">A blade forged from crystallised void energy. Its edge cuts through armour as if it were cloth.</string>
-    <string name="item_sovereign_crown_name">Sovereign Crown</string>
-    <string name="item_sovereign_crown_desc">The crown of the Void Sovereign itself, radiating dark majesty. Offers unparalleled protection.</string>
-    <string name="item_amulet_of_the_void_name">Amulet of the Void</string>
-    <string name="item_amulet_of_the_void_desc">A pendant of pure void essence. Enhances all combat stats of the wearer.</string>
-
 
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Carnival</string>
@@ -1592,23 +1520,19 @@
     <string name="item_gilded_full_helmet_name">Gilded Full Helmet</string>
     <string name="item_gilded_platebody_name">Gilded Platebody</string>
     <string name="item_gilded_kiteshield_name">Gilded Kiteshield</string>
-    <string name="boss_coin_cap_remaining">Full coin drops left today: %1$d</string>
-    <string name="boss_coin_cap_spent">Coin drops are reduced until tomorrow</string>
+    <string name="boss_coin_cap_remaining">Full coin drops left today for this boss: %1$d</string>
+    <string name="boss_coin_cap_spent">This boss\'s coin drops are reduced until tomorrow</string>
+    <string name="bestiary_coin_cap_label">After %1$d kills/day</string>
+    <string name="session_note_boss_coin_cap">Coin drop reduced (daily cap for this boss)</string>
     <string name="guild_daily_button">Guild Dailies</string>
     <string name="guild_daily_banner_claimable">Guild daily complete! Claim it in the Guild Hall</string>
     <string name="guild_daily_banner_claimed">Guild daily claimed today</string>
     <string name="guild_daily_rank_maxed">Guild rank maxed</string>
 
-    <!-- Boss Descriptions -->
-    <string name="boss_king_black_dragon_desc">The legendary three-headed dragon, feared across the realm.</string>
-    <string name="boss_demon_lord_desc">An ancient demon from the abyss, master of dark magic.</string>
-    <string name="boss_kraken_desc">The terror of the deep seas, a colossal sea monster.</string>
-    <string name="boss_balrog_desc">An ancient demon of flame and shadow, awakened from its slumber deep beneath the earth.</string>
-    <string name="boss_void_sovereign_desc">The primordial entity behind the void rifts. Ancient beyond reckoning, it regards mortal challengers with contempt.</string>
-
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Infinite Tower</string>
     <string name="tower_floor_label">Floor %d</string>
+    <string name="tower_floor_desc">Infinite Tower floor %1$d</string>
     <string name="tower_best_floor">Best: Floor %d</string>
     <string name="tower_start_btn">Attempt Floor %d</string>
     <string name="tower_milestones">Milestones</string>
@@ -1798,4 +1722,56 @@
     <string name="home_welcome_greeting">Welcome back,</string>
     <string name="home_welcome_name" translatable="false">%1$s!</string>
     <string name="home_welcome_title">The %1$s!</string>
+
+    <!-- Pet names and descriptions -->
+    <string name="pet_dragon_whelp_name">Dragon Whelp</string>
+    <string name="pet_dragon_whelp_desc">A young dragon that boosts your combat prowess.</string>
+    <string name="pet_imp_pet_name">Imp Pet</string>
+    <string name="pet_imp_pet_desc">A mischievous imp that enhances your prayer training.</string>
+    <string name="pet_baby_kraken_name">Baby Kraken</string>
+    <string name="pet_baby_kraken_desc">A tiny kraken that improves your cooking abilities.</string>
+    <string name="pet_rock_golem_name">Rock Golem</string>
+    <string name="pet_rock_golem_desc">A living rock formation that enhances your mining prowess.</string>
+    <string name="pet_ent_name">Ent</string>
+    <string name="pet_ent_desc">An ancient tree spirit that aids your woodcutting.</string>
+    <string name="pet_tiny_templar_name">Tiny Templar</string>
+    <string name="pet_tiny_templar_desc">A small fish that boosts your fishing expertise.</string>
+    <string name="pet_tangleroot_name">Tangleroot</string>
+    <string name="pet_tangleroot_desc">A magical plant creature that enhances your farming.</string>
+    <string name="pet_baby_balrog_name">Baby Balrog</string>
+    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string>
+    <string name="pet_void_wisp_name">Void Wisp</string>
+    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string>
+    <string name="pet_graceling_sprite_name">Graceling Sprite</string>
+    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string>
+    <string name="pet_shadow_fox_name">Shadow Fox</string>
+    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string>
+    <string name="pet_ember_moth_name">Ember Moth</string>
+    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string>
+    <string name="pet_herb_wisp_name">Herb Wisp</string>
+    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string>
+    <string name="pet_rune_sprite_name">Rune Sprite</string>
+    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string>
+    <string name="pet_gem_golem_name">Gem Golem</string>
+    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string>
+    <string name="pet_feather_drake_name">Feather Drake</string>
+    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string>
+    <string name="pet_forge_imp_name">Forge Imp</string>
+    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string>
+    <string name="pet_coin_drake_name">Coin Drake</string>
+    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string>
+    <string name="pet_timber_sprite_name">Timber Sprite</string>
+    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string>
+    <string name="pet_juggling_imp_name">Juggling Imp</string>
+    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string>
+    <string name="pet_tower_pet_name">Stone Guardian</string>
+    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string>
+    <string name="pet_solstice_sprite_name">Solstice Sprite</string>
+    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string>
+    <string name="pet_lantern_wisp_name">Lantern Wisp</string>
+    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string>
+    <string name="pet_grave_sprout_name">Grave Sprout</string>
+    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string>
+    <string name="pet_golden_goose_name">Golden Goose</string>
+    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string>
 </resources>

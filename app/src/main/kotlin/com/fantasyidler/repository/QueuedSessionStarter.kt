@@ -1,5 +1,7 @@
 package com.fantasyidler.repository
 
+import android.content.Context
+import com.fantasyidler.R
 import com.fantasyidler.data.json.CookingRecipe
 import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EnemyData
@@ -19,6 +21,7 @@ import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.util.toolEfficiency
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
@@ -37,6 +40,7 @@ private class TowerPendingCollectionException : Exception()
  */
 @Singleton
 class QueuedSessionStarter @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
     private val townRepo: TownRepository,
@@ -1010,8 +1014,8 @@ class QueuedSessionStarter @Inject constructor(
 
     private fun buildTowerFloorDungeon(floor: Int): DungeonData = DungeonData(
         name             = "tower_floor_$floor",
-        displayName      = "Floor $floor",
-        description      = "Infinite Tower floor $floor",
+        displayName      = context.getString(R.string.tower_floor_label, floor),
+        description      = context.getString(R.string.tower_floor_desc, floor),
         recommendedLevel = (floor * 2).coerceAtMost(200),
         encounterRate    = 0.65,
         enemySpawns      = towerTierFor(floor),

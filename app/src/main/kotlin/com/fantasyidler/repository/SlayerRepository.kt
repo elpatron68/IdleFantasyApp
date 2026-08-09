@@ -61,16 +61,13 @@ class SlayerRepository @Inject constructor(
         if (eligible.isEmpty()) return@withLock false
 
         val (enemyKey, cfg) = eligible.entries.random()
-        val displayName = gameData.enemies[enemyKey]?.displayName
-            ?: enemyKey.split('_').joinToString(" ") { it.replaceFirstChar { c -> c.uppercase() } }
-        val targetKills = kotlin.random.Random.nextInt(cfg.minKills, cfg.maxKills + 1)
+        val targetKills = Random.nextInt(cfg.minKills, cfg.maxKills + 1)
         val taskPoints  = maxOf(3, cfg.slayerLevel / 5)
 
         playerRepo.updateFlagsUnlocked(
             flags.copy(
                 activeSlayerTask = SlayerTask(
                     enemyKey       = enemyKey,
-                    displayName    = displayName,
                     targetKills    = targetKills,
                     killsCompleted = 0,
                     xpPerKill      = cfg.xpPerKill,
@@ -137,13 +134,10 @@ class SlayerRepository @Inject constructor(
         playerRepo.consumeItemsUnlocked(toConsume)
 
         val (enemyKey, cfg) = eligible.entries.random()
-        val displayName = gameData.enemies[enemyKey]?.displayName
-            ?: enemyKey.split('_').joinToString(" ") { it.replaceFirstChar { c -> c.uppercase() } }
-        val targetKills = kotlin.random.Random.nextInt(cfg.minKills, cfg.maxKills + 1)
+        val targetKills = Random.nextInt(cfg.minKills, cfg.maxKills + 1)
         val taskPoints  = maxOf(3, cfg.slayerLevel / 5)
         val task = SlayerTask(
             enemyKey       = enemyKey,
-            displayName    = displayName,
             targetKills    = targetKills,
             killsCompleted = 0,
             xpPerKill      = cfg.xpPerKill,

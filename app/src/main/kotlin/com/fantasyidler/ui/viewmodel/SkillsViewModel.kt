@@ -92,6 +92,8 @@ data class SkillsUiState(
     val inventory: Map<String, Int> = emptyMap(),
     val petBoostBySkill: Map<String, Int> = emptyMap(),
     val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    /** Timed (daily/weekly/guild daily) quest indicators per skill, for the overview rows. */
+    val timedQuestsBySkill: Map<String, List<QuestIndicator>> = emptyMap(),
     val showSessionEndTime: Boolean = true,
     /** Guild dailies plus daily/weekly quests for each sheet skill, keyed by skill (guild keys match skill keys). */
     val sheetQuests: Map<String, List<SheetQuestSummary>> = emptyMap(),
@@ -184,6 +186,7 @@ class SkillsViewModel @Inject constructor(
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val inv:      Map<String, Int>     = json.decodeFromString(player.inventory)
             val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val activeQuests = computeActiveQuests(questProgress, flags, inv)
             extra.copy(
                 isLoading             = false,
                 skillLevels           = levels,
@@ -215,7 +218,15 @@ class SkillsViewModel @Inject constructor(
                 petBoostBySkill       = (Skills.GATHERING + Skills.CRAFTING_SKILLS + Skills.SUPPORT + listOf(Skills.AGILITY, Skills.SLAYER))
                     .associateWith { key -> petBoostFor(player.pets, key) }
                     .filterValues { it > 0 },
-                activeQuests          = computeActiveQuests(questProgress, flags, inv),
+                activeQuests          = activeQuests,
+                timedQuestsBySkill    = activeQuests.entries
+                    .groupBy({ it.key.substringBefore(':') }, { it.value })
+                    .mapValues { (_, lists) ->
+                        lists.flatten().filter {
+                            it.category == QuestCategory.DAILY || it.category == QuestCategory.WEEKLY || it.category == QuestCategory.GUILD_DAILY
+                        }
+                    }
+                    .filterValues { it.isNotEmpty() },
                 showSessionEndTime    = flags.showSessionEndTime,
                 sheetQuests           = computeSheetQuests(questProgress, flags),
             )
@@ -1140,7 +1151,12 @@ class SkillsViewModel @Inject constructor(
         val remaining = (daily.amount - daily.progress).coerceAtLeast(1)
         when {
             daily.type == "gather" && daily.guild == Skills.MINING      -> startMiningSession(daily.target)
-            daily.type == "gather" && daily.guild == Skills.WOODCUTTING -> startWoodcuttingSession(daily.target)
+            daily.type == "gather" && daily.guild == Skills.WOODCUTTING -> {
+                // Woodcutting gather quests target the log item, not the tree activity.
+                val treeKey = gameData.trees.entries.firstOrNull { it.value.logName == daily.target }?.key
+                    ?: return false
+                startWoodcuttingSession(treeKey)
+            }
             daily.type == "gather" && daily.guild == Skills.FISHING     -> startFishingSession(daily.target)
             daily.type == "pickpocket"                                  -> startThievingSession(daily.target)
             daily.type == "sessions" && daily.guild == Skills.AGILITY   -> {
@@ -1301,7 +1317,7 @@ class SkillsViewModel @Inject constructor(
             if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
 
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
-            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.MAIN)
+            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.GUILD)
         }
 
         for (daily in activeDailies) {
@@ -1309,13 +1325,13 @@ class SkillsViewModel @Inject constructor(
         }
 
         for (weekly in activeWeeklies) {
-            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.DAILY)
+            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.WEEKLY)
         }
 
         for (id in activeGuildDailyIds) {
             val template = guildPool[id] ?: continue
             val progress = flags.guildDailyProgress[id] ?: 0
-            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.DAILY)
+            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
         }
 
         return result

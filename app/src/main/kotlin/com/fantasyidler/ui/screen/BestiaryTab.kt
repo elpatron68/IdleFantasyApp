@@ -48,6 +48,7 @@ import com.fantasyidler.ui.viewmodel.BestiarySort
 import com.fantasyidler.ui.viewmodel.BestiaryViewModel
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.util.formatCoinsBrief
 import kotlin.math.roundToInt
 
@@ -170,7 +171,7 @@ private fun buildLocationGroups(
     }
     return grouped.entries
         .sortedWith(compareBy({ it.key == "Other" }, { it.key }))
-        .map { it.key to it.value.sortedBy { e -> e.displayName } }
+        .map { it.key to it.value.sortedBy { e -> e.key } }
 }
 
 @Composable
@@ -193,7 +194,7 @@ private fun BestiaryRow(entry: BestiaryEntry, onClick: () -> Unit) {
     ) {
         Column(Modifier.weight(1f)) {
             Text(
-                text  = entry.displayName,
+                text  = entry.nameLoader(LocalContext.current, entry.key),
                 style = MaterialTheme.typography.bodyMedium,
                 color = textColor,
             )
@@ -238,7 +239,7 @@ private fun EnemyDetailContent(
                 verticalAlignment     = Alignment.CenterVertically,
             ) {
                 Text(
-                    text       = enemy.displayName,
+                    text       = entry.nameLoader(context, enemy.name),
                     style      = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -345,7 +346,7 @@ private fun BossDetailContent(
                 verticalAlignment     = Alignment.CenterVertically,
             ) {
                 Text(
-                    text       = "${boss.emoji}  ${boss.displayName}",
+                    text       = "${boss.emoji}  ${GameStrings.bossName(context, boss.id)}",
                     style      = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -401,11 +402,16 @@ private fun BossDetailContent(
                 "${boss.commonLoot.coinsMin.toLong().formatCoinsBrief()}–${boss.commonLoot.coinsMax.toLong().formatCoinsBrief()}",
                 null as String?,
             )
+            val cappedCoinRow = Triple(
+                stringResource(R.string.bestiary_coin_cap_label, PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY),
+                "${(boss.commonLoot.coinsMin * PlayerRepository.BOSS_COIN_SOFT_CAP_MULT).toLong().formatCoinsBrief()}–${(boss.commonLoot.coinsMax * PlayerRepository.BOSS_COIN_SOFT_CAP_MULT).toLong().formatCoinsBrief()}",
+                null as String?,
+            )
             val itemRows = boss.commonLoot.items.map { (itemKey, range) ->
                 val qty = if (range.min == range.max) "×${range.min}" else "×${range.min}–${range.max}"
                 Triple(GameStrings.itemName(context, itemKey), qty, null)
             }
-            BestiaryDropTable(listOf(coinRow) + itemRows)
+            BestiaryDropTable(listOf(coinRow, cappedCoinRow) + itemRows)
             Spacer(Modifier.height(16.dp))
         }
 
@@ -425,7 +431,7 @@ private fun BossDetailContent(
             item {
                 BestiarySectionHeader(stringResource(R.string.bestiary_pet_drop))
                 Spacer(Modifier.height(4.dp))
-                BestiaryDropTable(listOf(Triple("${pet.emoji} ${pet.displayName}", "", formatChance(pet.chance))))
+                BestiaryDropTable(listOf(Triple("${pet.emoji} ${GameStrings.petName(context, pet.id)}", "", formatChance(pet.chance))))
                 Spacer(Modifier.height(16.dp))
             }
         }

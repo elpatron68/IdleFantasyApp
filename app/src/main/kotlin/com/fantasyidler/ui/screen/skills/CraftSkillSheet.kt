@@ -53,6 +53,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -72,6 +73,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.ui.screen.QuestIndicatorIcons
 import com.fantasyidler.ui.viewmodel.ExpeditionsViewModel
 import com.fantasyidler.data.json.AgilityCourseData
 import com.fantasyidler.data.json.BoneData
@@ -162,9 +164,10 @@ internal fun CraftSkillSheet(
             isQueueFull       = isQueueFull,
             sessionDurationMs = sessionDurationMs,
             context           = context,
-            onSetQuantity     = { craftingViewModel.setQuantity(it, craftState.maxCraftable(selected)) },
             onSetAsh          = if (selected.skillName == Skills.HERBLORE) craftingViewModel::setHerbloreAsh else null,
-            onCraft           = craftingViewModel::craft,
+            onCraft           = { qty ->
+                craftingViewModel.craft(selected, qty, if (selected.skillName == Skills.HERBLORE) craftState.herbloreAshKey else null)
+            },
             onBack            = craftingViewModel::dismissRecipe,
         )
     } else {
@@ -297,18 +300,7 @@ private fun CraftRecipeRow(
                 )
                 val questIndicators = craftState.recipeQuests[recipe.outputKey] ?: emptyList()
                 if (questIndicators.isNotEmpty()) {
-                    val categories = questIndicators.groupBy { it.category }
-                    val sortedCategories = categories.entries.sortedBy { it.key }
-                    sortedCategories.forEach { (category, indicators) ->
-                        val emoji = if (category == QuestCategory.DAILY) "⏰" else "📜"
-                        val isCompletable = indicators.any { it.isCompletable }
-                        val alpha = if (isCompletable) 1.0f else 0.38f
-                        Text(
-                            text     = " $emoji",
-                            style    = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.alpha(alpha),
-                        )
-                    }
+                    QuestIndicatorIcons(questIndicators)
                 }
             }
             if (recipe.outputQty > 1) {
@@ -417,16 +409,22 @@ private fun CraftQuantityContent(
     isQueueFull: Boolean,
     sessionDurationMs: Long,
     context: android.content.Context,
-    onSetQuantity: (Int) -> Unit,
     onSetAsh: ((String?) -> Unit)? = null,
-    onCraft: () -> Unit,
+    onCraft: (Int) -> Unit,
     onBack: () -> Unit,
 ) {
-    val qty     = state.craftQuantity
+    // Quantity is sheet-local state: pushing it through the ViewModel re-ran the
+    // full player-state combine (JSON decodes + quest scans) on every keystroke (issue #1310).
     val max     = state.maxCraftable(recipe)
+    var quantity by remember(recipe) { mutableIntStateOf(max.coerceAtLeast(1)) }
+    val qty     = quantity.coerceIn(1, max.coerceAtLeast(1))
     val totalXp = recipe.xpPerItem * qty
-    var textValue by remember(qty) { mutableStateOf(qty.toString()) }
+    var textValue by remember(recipe) { mutableStateOf(qty.toString()) }
     val isHerblore = recipe.skillName == Skills.HERBLORE
+    fun setQuantity(value: Int) {
+        quantity  = value.coerceIn(1, max.coerceAtLeast(1))
+        textValue = quantity.toString()
+    }
 
     Column(
         modifier = Modifier
@@ -478,7 +476,7 @@ private fun CraftQuantityContent(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment     = Alignment.CenterVertically,
         ) {
-            IconButton(onClick = { onSetQuantity(qty - 1) }, enabled = qty > 1) {
+            IconButton(onClick = { setQuantity(qty - 1) }, enabled = qty > 1) {
                 Icon(Icons.Filled.Remove, contentDescription = "Decrease")
             }
             OutlinedTextField(
@@ -486,7 +484,7 @@ private fun CraftQuantityContent(
                 onValueChange = { new ->
                     val filtered = new.filter { it.isDigit() }
                     textValue = filtered
-                    filtered.toIntOrNull()?.let { onSetQuantity(it) }
+                    filtered.toIntOrNull()?.let { quantity = it.coerceIn(1, max.coerceAtLeast(1)) }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -495,8 +493,7 @@ private fun CraftQuantityContent(
                 keyboardActions = KeyboardActions(
                     onDone = {
                         val parsed = textValue.toIntOrNull()?.coerceIn(1, max.coerceAtLeast(1)) ?: 1
-                        onSetQuantity(parsed)
-                        textValue = parsed.toString()
+                        setQuantity(parsed)
                     },
                 ),
                 textStyle = MaterialTheme.typography.headlineSmall.copy(
@@ -506,13 +503,13 @@ private fun CraftQuantityContent(
                 singleLine = true,
                 modifier   = Modifier.width(130.dp),
             )
-            IconButton(onClick = { onSetQuantity(qty + 1) }, enabled = qty < max) {
+            IconButton(onClick = { setQuantity(qty + 1) }, enabled = qty < max) {
                 Icon(Icons.Filled.Add, contentDescription = "Increase")
             }
         }
         Spacer(Modifier.height(8.dp))
-        QtyQuickButtons(qty, max) { onSetQuantity(it) }
-        QuestFillRow(state.questFills, qty, max, onSet = onSetQuantity)
+        QtyQuickButtons(qty, max) { setQuantity(it) }
+        QuestFillRow(state.questFills, qty, max, onSet = { setQuantity(it) })
         Spacer(Modifier.height(8.dp))
         Text(
             text       = projectedXpLabel(state.skillXp[recipe.skillName] ?: 0L, totalXp.toLong()),
@@ -565,7 +562,7 @@ private fun CraftQuantityContent(
         }
         Spacer(Modifier.height(20.dp))
         Button(
-            onClick  = onCraft,
+            onClick  = { onCraft(qty) },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(if (hasActiveSession) stringResource(R.string.skills_add_to_queue) else stringResource(R.string.btn_craft))

@@ -138,6 +138,18 @@
     <string name="quest_combat_kills_5_objective">Defeat 450 enemies</string>
     <string name="quest_combat_kills_6_name">Monster Hunter VI</string>
     <string name="quest_combat_kills_6_objective">Defeat 650 enemies</string>
+    <string name="quest_slayer_1_name">Slayer I</string>
+    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string>
+    <string name="quest_slayer_2_name">Slayer II</string>
+    <string name="quest_slayer_2_objective">Complete 15 Slayer tasks</string>
+    <string name="quest_slayer_3_name">Slayer III</string>
+    <string name="quest_slayer_3_objective">Complete 40 Slayer tasks</string>
+    <string name="quest_slayer_4_name">Slayer IV</string>
+    <string name="quest_slayer_4_objective">Complete 100 Slayer tasks</string>
+    <string name="quest_slayer_5_name">Slayer V</string>
+    <string name="quest_slayer_5_objective">Complete 250 Slayer tasks</string>
+    <string name="quest_slayer_6_name">Slayer VI</string>
+    <string name="quest_slayer_6_objective">Complete 500 Slayer tasks</string>
 
     <!-- Dungeon exploration -->
     <string name="quest_dungeon_farm_1_name">Dungeon Explorer I</string>
@@ -287,6 +299,36 @@
     <string name="quest_herblore_6_name">Herblore VI</string>
     <string name="quest_herblore_6_objective">Mix 1500 Super Strength Potions</string>
 
+    <!-- Construction -->
+    <string name="quest_construction_1_name">Construction I</string>
+    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string>
+    <string name="quest_construction_2_name">Construction II</string>
+    <string name="quest_construction_2_objective">Build 50 Oak Tables</string>
+    <string name="quest_construction_3_name">Construction III</string>
+    <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string>
+    <string name="quest_construction_4_name">Construction IV</string>
+    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string>
+    <string name="quest_construction_5_name">Construction V</string>
+    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string>
+    <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string>
+    <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string>
+    <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string>
+    <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string>
+    <string name="quest_construction_upgrade_church_name">Restore the Church</string>
+    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string>
+
+    <!-- Thieving -->
+    <string name="quest_thieving_1_name">Thieving I</string>
+    <string name="quest_thieving_1_objective">Pickpocket 100 Peasants</string>
+    <string name="quest_thieving_2_name">Thieving II</string>
+    <string name="quest_thieving_2_objective">Pickpocket 100 Merchants</string>
+    <string name="quest_thieving_3_name">Thieving III</string>
+    <string name="quest_thieving_3_objective">Pickpocket 100 Nobles</string>
+    <string name="quest_thieving_4_name">Thieving IV</string>
+    <string name="quest_thieving_4_objective">Steal 5 Gold Necklaces</string>
+    <string name="quest_thieving_5_name">Thieving V</string>
+    <string name="quest_thieving_5_objective">Pickpocket 50 High Priests</string>
+
     <!-- Slayer extended -->
     <string name="quest_combat_kills_7_name">Monster Hunter VII</string>
     <string name="quest_combat_kills_7_objective">Defeat 1000 enemies</string>
@@ -359,6 +401,14 @@
     <string name="quest_balrog_bane_3_objective">Defeat the Balrog 25 times</string>
     <string name="quest_balrog_bane_4_name">Balrog Bane IV</string>
     <string name="quest_balrog_bane_4_objective">Defeat the Balrog 50 times</string>
+    <string name="quest_sovereign_slayer_1_name">Sovereign Slayer I</string>
+    <string name="quest_sovereign_slayer_1_objective">Defeat the Void Sovereign</string>
+    <string name="quest_sovereign_slayer_2_name">Sovereign Slayer II</string>
+    <string name="quest_sovereign_slayer_2_objective">Defeat the Void Sovereign 5 times</string>
+    <string name="quest_sovereign_slayer_3_name">Sovereign Slayer III</string>
+    <string name="quest_sovereign_slayer_3_objective">Defeat the Void Sovereign 25 times</string>
+    <string name="quest_sovereign_slayer_4_name">Sovereign Slayer IV</string>
+    <string name="quest_sovereign_slayer_4_objective">Defeat the Void Sovereign 50 times</string>
 
     <!-- Combat style challenges extended -->
     <string name="quest_melee_warrior_4_name">Melee Warrior IV</string>
