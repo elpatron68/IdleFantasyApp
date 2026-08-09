@@ -21,6 +21,59 @@
     <string name="enemy_chicken_name">Chicken</string>
     <string name="enemy_sheep_name">Sheep</string>
     <string name="enemy_cow_name">Cow</string>
+    <string name="enemy_fire_giant_name">Fire Giant</string>
+    <string name="enemy_ancient_guardian_name">Ancient Guardian</string>
+    <string name="enemy_lich_name">Lich</string>
+    <string name="enemy_cave_troll_name">Cave Troll</string>
+    <string name="enemy_mine_spider_name">Mine Spider</string>
+    <string name="enemy_rock_golem_name">Rock Golem</string>
+    <string name="enemy_iron_golem_name">Iron Golem</string>
+    <string name="enemy_forge_demon_name">Forge Demon</string>
+    <string name="enemy_dwarven_guardian_name">Dwarven Guardian</string>
+    <string name="enemy_drowned_cultist_name">Drowned Cultist</string>
+    <string name="enemy_sea_spirit_name">Sea Spirit</string>
+    <string name="enemy_cursed_fisherman_name">Cursed Fisherman</string>
+    <string name="enemy_abyssal_leech_name">Abyssal Leech</string>
+    <string name="enemy_deep_horror_name">Deep Horror</string>
+    <string name="enemy_void_guardian_name">Void Guardian</string>
+    <string name="enemy_corrupted_druid_name">Corrupted Druid</string>
+    <string name="enemy_vine_beast_name">Vine Beast</string>
+    <string name="enemy_forest_spirit_name">Forest Spirit</string>
+    <string name="enemy_shadow_beast_name">Shadow Beast</string>
+    <string name="enemy_twisted_treant_name">Twisted Treant</string>
+    <string name="enemy_corrupted_mage_name">Corrupted Mage</string>
+    <string name="enemy_cutpurse_name">Cutpurse</string>
+    <string name="enemy_arcane_construct_name">Arcane Construct</string>
+    <string name="enemy_storm_imp_name">Storm Imp</string>
+    <string name="enemy_sky_serpent_name">Sky Serpent</string>
+    <string name="enemy_cloud_giant_name">Cloud Giant</string>
+    <string name="enemy_sun_wisp_name">Sun Wisp</string>
+    <string name="enemy_ember_hound_name">Ember Hound</string>
+    <string name="enemy_cinder_colossus_name">Cinder Colossus</string>
+    <string name="enemy_will_o_wisp_name">Will-o\'-Wisp</string>
+    <string name="enemy_grave_ghoul_name">Grave Ghoul</string>
+    <string name="enemy_husk_horror_name">Husk Horror</string>
+    <string name="enemy_barrow_wight_name">Barrow Wight</string>
+    <string name="enemy_shade_stalker_name">Shade Stalker</string>
+    <string name="enemy_bone_colossus_name">Bone Colossus</string>
+    <string name="enemy_dread_dullahan_name">Dread Dullahan</string>
+    <string name="enemy_void_stalker_name">Void Stalker</string>
+    <string name="enemy_rift_guardian_name">Rift Guardian</string>
+    <string name="enemy_chaos_elemental_name">Chaos Elemental</string>
+    <string name="enemy_frost_giant_name">Frost Giant</string>
+    <string name="enemy_ice_golem_name">Ice Golem</string>
+    <string name="enemy_glacial_mage_name">Glacial Mage</string>
+    <string name="enemy_abyssal_lord_name">Abyssal Lord</string>
+    <string name="enemy_eternal_sentinel_name">Eternal Sentinel</string>
+    <string name="enemy_void_archon_name">Void Archon</string>
+    <string name="enemy_frost_wyvern_name">Frost Wyvern</string>
+    <string name="enemy_abyssal_guardian_name">Abyssal Guardian</string>
+    <string name="enemy_shadow_thief_name">Shadow Thief</string>
+    <string name="enemy_elder_lich_name">Elder Lich</string>
+    <string name="enemy_assassin_name">Assassin</string>
+    <string name="enemy_shadow_assassin_name">Shadow Assassin</string>
+    <string name="enemy_vault_guardian_name">Vault Guardian</string>
+    <string name="enemy_guild_master_name">Guild Master</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Imp Cavern</string>
@@ -47,29 +100,42 @@
     <string name="dungeon_infernal_stronghold_desc">A fortress of fire and brimstone, ruled by demons and hellhounds. The heat alone can kill the unprepared.</string>
     <string name="dungeon_ancient_temple_name">Ancient Temple</string>
     <string name="dungeon_ancient_temple_desc">An ancient temple guarded by the most powerful creatures in the realm. Only the strongest warriors dare enter.</string>
+    <string name="dungeon_void_rift_name">Void Rift</string>
+    <string name="dungeon_void_rift_desc">A tear in reality where void creatures spill into the mortal world.</string>
+    <string name="dungeon_frozen_citadel_name">Frozen Citadel</string>
+    <string name="dungeon_frozen_citadel_desc">An ancient fortress encased in a glacier, its defenders frozen in eternal vigil.</string>
+    <string name="dungeon_abyssal_throne_name">Abyssal Throne</string>
+    <string name="dungeon_abyssal_throne_desc">The deepest point in the known world, ruled by void lords since the dawn of time.</string>
 
-    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <!-- ===== Event dungeon names ===== -->
+    <string name="dungeon_sunspire_name">The Sunspire</string>
+    <string name="dungeon_sunspire_desc">A sun-tower ruin cracked open by the solstice, spilling heat spirits into the region. Part of the Sunspire Solstice event.</string>
+    <string name="dungeon_hollowfen_name">The Hollowfen</string>
+    <string name="dungeon_hollowfen_desc">A mist-drowned marsh of sunken barrows where the harvest dead walk. Part of the Gloomharvest event.</string>
+    <string name="dungeon_cloud_kingdom_name">Cloud Kingdom</string>
+    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string>
+    <string name="dungeon_blightwood_name">The Blightwood</string>
+    <string name="dungeon_blightwood_desc">A rotting forest deep past the Hollowfen, where the Gloomharvest\'s strongest horrors gather. Part of the Gloomharvest event.</string>
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">King Black Dragon</string>
+    <string name="boss_king_black_dragon_desc">The legendary three-headed dragon, feared across the realm.</string>
     <string name="boss_demon_lord_name">Demon Lord</string>
+    <string name="boss_demon_lord_desc">An ancient demon from the abyss, master of dark magic.</string>
     <string name="boss_kraken_name">Kraken</string>
+    <string name="boss_kraken_desc">The terror of the deep seas, a colossal sea monster.</string>
     <string name="boss_balrog_name">Balrog</string>
+    <string name="boss_balrog_desc">An ancient demon of flame and shadow, awakened from its slumber deep beneath the earth.</string>
+    <string name="boss_void_sovereign_name">The Void Sovereign</string>
+    <string name="boss_void_sovereign_desc">The primordial entity behind the void rifts. Ancient beyond reckoning, it regards mortal challengers with contempt.</string>
+    <string name="boss_sol_invictus_name">Sol Invictus, the Sundered Flame</string>
+    <string name="boss_sol_invictus_desc">A shard of the sun itself, torn loose from the Sunspire ruin. Only the boldest warriors dare approach.</string>
+    <string name="boss_the_hollow_king_name">The Hollow King</string>
+    <string name="boss_the_hollow_king_desc">The headless sovereign of the Gloomharvest, riding out from the Blightwood to reap what the living have sown.</string>
+    <string name="boss_the_vault_guardian_name">The Vault Guardian</string>
+    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string>
 
-    <!-- ===== Pet names and descriptions ===== -->
-    <string name="pet_dragon_whelp_name">Dragon Whelp</string>
-    <string name="pet_dragon_whelp_desc">A young dragon that boosts your combat XP.</string>
-    <string name="pet_imp_pet_name">Imp Pet</string>
-    <string name="pet_imp_pet_desc">A mischievous imp that enhances your Prayer training.</string>
-    <string name="pet_baby_kraken_name">Baby Kraken</string>
-    <string name="pet_baby_kraken_desc">A tiny kraken that improves your Cooking XP.</string>
-    <string name="pet_rock_golem_name">Rock Golem</string>
-    <string name="pet_rock_golem_desc">A living rock formation that enhances your Mining XP.</string>
-    <string name="pet_ent_name">Ent</string>
-    <string name="pet_ent_desc">An ancient tree spirit that boosts your Woodcutting XP.</string>
-    <string name="pet_tiny_templar_name">Tiny Templar</string>
-    <string name="pet_tiny_templar_desc">A small fish companion that boosts your Fishing XP.</string>
-    <string name="pet_tangleroot_name">Tangleroot</string>
-    <string name="pet_tangleroot_desc">A magical plant creature that enhances your Farming XP.</string>
-
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Collapsed Mine</string>
     <string name="dungeon_collapsed_mine_desc">A vast cavern beneath the copper mines. Cave trolls and rock golems haunt the rubble, and giant spiders spin webs across the collapsed shafts.</string>
     <string name="dungeon_shadow_den_name">Shadow Den</string>
@@ -86,4 +152,8 @@
     <string name="dungeon_corrupted_sanctum_desc">A shadow-drenched sanctum at the heart of the corrupted canopy. Dark priests and corrupted beasts guard an ancient evil.</string>
     <string name="dungeon_drowned_temple_name">Drowned Temple</string>
     <string name="dungeon_drowned_temple_desc">A sunken temple beneath the sea grotto, its halls filled with water and sea creatures that have made it their home.</string>
+    <string name="dungeon_rogue_sanctum_name">Rogue Sanctum</string>
+    <string name="dungeon_rogue_sanctum_desc">The guild\'s inner refuge, accessible only to proven members.</string>
+    <string name="dungeon_guild_of_shadows_name">Guild of Shadows</string>
+    <string name="dungeon_guild_of_shadows_desc">The innermost sanctum of the thieves\' guild, guarded by its most elite enforcers.</string>
 </resources>

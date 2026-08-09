@@ -1,7 +1,9 @@
 package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -176,10 +178,12 @@ fun ShopScreen(
                     else -> SellList(
                         inventory          = state.inventory,
                         equipped           = state.equipped,
+                        lockedItems        = state.lockedItems,
                         context            = context,
                         priceFor           = viewModel::sellPriceFor,
                         categoryFor        = viewModel::sellCategoryFor,
                         onSell             = { key -> viewModel.openSell(key, GameStrings.itemName(context, key)) },
+                        onToggleLock       = viewModel::toggleItemLock,
                         onSellJunk         = viewModel::previewSellJunk,
                         onSellOldEquipment = viewModel::previewSellOldEquipment,
                     )
@@ -328,15 +332,17 @@ private fun BuyList(
 
 private val SELL_CATEGORY_ORDER = listOf("Weapons", "Armor", "Tools", "Food", "Materials", "Misc")
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
 private fun SellList(
     inventory: Map<String, Int>,
     equipped: Map<String, String?>,
+    lockedItems: Set<String>,
     context: android.content.Context,
     priceFor: (String) -> Int,
     categoryFor: (String) -> String,
     onSell: (String) -> Unit,
+    onToggleLock: (String) -> Unit,
     onSellJunk: () -> Unit,
     onSellOldEquipment: () -> Unit,
 ) {
@@ -388,19 +394,28 @@ private fun SellList(
                 items(entries, key = { it.key }) { (key, qty) ->
                     val sellPrice  = priceFor(key)
                     val isEquipped = equipped.values.any { it == key }
+                    val isLocked   = key in lockedItems
+                    val lockedAlpha = if (isLocked) 0.5f else 1f
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { onSell(key) }
+                            .combinedClickable(
+                                onClick     = { onSell(key) },
+                                onLongClick = { onToggleLock(key) },
+                            )
                             .padding(horizontal = 16.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Column(Modifier.weight(1f)) {
                             FlowRow(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                 Text(
-                                    text       = GameStrings.itemName(context, key),
+                                    text       = buildString {
+                                        if (isLocked) append("🔒 ")
+                                        append(GameStrings.itemName(context, key))
+                                    },
                                     style      = MaterialTheme.typography.bodyLarge,
                                     fontWeight = FontWeight.Medium,
+                                    color      = MaterialTheme.colorScheme.onSurface.copy(alpha = lockedAlpha),
                                 )
                                 if (isEquipped) {
                                     Spacer(Modifier.width(6.dp))
@@ -421,7 +436,7 @@ private fun SellList(
                             text       = stringResource(R.string.shop_price_each, sellPrice.toString()),
                             style      = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color      = GoldPrimary,
+                            color      = GoldPrimary.copy(alpha = lockedAlpha),
                         )
                     }
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))

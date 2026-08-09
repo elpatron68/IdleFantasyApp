@@ -1,4 +1,4 @@
-## {display_name}
+## {banner} {display_name}
 
 **{start_date} – {end_date}**
 

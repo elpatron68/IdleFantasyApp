@@ -317,7 +317,7 @@ private fun armoryStatSummary(item: EquipmentData): String {
     item.miningEfficiency?.let      { parts.add("×${"%.2f".format(it)}") }
     item.woodcuttingEfficiency?.let { parts.add("×${"%.2f".format(it)}") }
     item.fishingEfficiency?.let     { parts.add("×${"%.2f".format(it)}") }
-    item.farmingEfficiency?.let     { parts.add("+${"%.0f".format(it * 100)}% yield") }
+    item.farmingEfficiency?.let     { parts.add("×${"%.2f".format(it)}") }
     if (parts.isEmpty()) {
         if (item.attackBonus   != 0) parts.add("Atk +${item.attackBonus}")
         if (item.strengthBonus != 0) parts.add("Str +${item.strengthBonus}")
@@ -338,7 +338,7 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
     item.miningEfficiency?.let      { rows.add(stringResource(R.string.armory_stat_mining) to "×${"%.2f".format(it)}") }
     item.woodcuttingEfficiency?.let { rows.add(stringResource(R.string.armory_stat_woodcutting) to "×${"%.2f".format(it)}") }
     item.fishingEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_fishing) to "×${"%.2f".format(it)}") }
-    item.farmingEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_farming) to "×${"%.2f".format(1f + it)}") }
+    item.farmingEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_farming) to "×${"%.2f".format(it)}") }
     item.smithingEfficiency?.let    { rows.add(stringResource(R.string.armory_stat_smithing) to "×${"%.2f".format(it)}") }
     item.firemakingEfficiency?.let  { rows.add(stringResource(R.string.armory_stat_firemaking) to "×${"%.2f".format(it)}") }
     item.agilityEfficiency?.let     { rows.add(stringResource(R.string.armory_stat_agility) to "×${"%.2f".format(it)}") }

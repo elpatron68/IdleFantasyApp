@@ -137,7 +137,7 @@ internal fun DungeonInfoSheet(
         if (enemy != null) {
             AlertDialog(
                 onDismissRequest = { tappedEnemyKey = null },
-                title = { Text(enemy.displayName) },
+                title = { Text(GameStrings.enemyName(context, enemyKey)) },
                 text  = {
                     val drops = buildString {
                         if (enemy.alwaysDrops.isNotEmpty()) {

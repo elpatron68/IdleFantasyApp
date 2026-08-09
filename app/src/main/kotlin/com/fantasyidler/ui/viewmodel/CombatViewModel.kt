@@ -30,6 +30,7 @@ import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -248,7 +249,7 @@ class CombatViewModel @Inject constructor(
                 activeBossRepeatTotal   = flags.activeBossRepeatTotal,
                 activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex,
                 activeDungeonRepeatTotal = flags.activeDungeonRepeatTotal,
-                bossFullCoinKillsLeft   = playerRepo.bossFullCoinKillsLeft(flags),
+                bossFullCoinKillsLeft   = playerRepo.bossFullCoinKillsLeft(flags, extra.selectedBoss?.id ?: ""),
                 monumentComplete        = flags.monumentTier >= 5,
             )
         }
@@ -371,7 +372,7 @@ class CombatViewModel @Inject constructor(
         viewModelScope.launch {
             val repeatCount = _extra.value.selectedDungeonRepeatCount.coerceIn(1, MAX_DUNGEON_REPEAT_COUNT)
             if (sessionRepo.getActiveSession() != null) {
-                val dungeonName = gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
+                val dungeonName = GameStrings.dungeonName(context, dungeonKey)
                 val player      = playerRepo.getOrCreatePlayer()
                 val queuedLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
                 val agility     = queuedLevels[Skills.AGILITY] ?: 1
@@ -573,14 +574,14 @@ class CombatViewModel @Inject constructor(
                     activityKey      = dungeonKey,
                     frames           = framesJson,
                     durationMs       = result.durationMs,
-                    skillDisplayName = dungeon.displayName,
+                    skillDisplayName = GameStrings.dungeonName(context, dungeonKey),
                     alarmOffsetMs    = alarmOffsetMs,
                 )
                 if (repeatCount > 1) {
                     val dungeonSnapshot = QueuedAction(
                         skillName        = "combat",
                         activityKey      = dungeonKey,
-                        skillDisplayName = dungeon.displayName,
+                        skillDisplayName = GameStrings.dungeonName(context, dungeonKey),
                         equippedSnapshot = player.equipped,
                         arrowsKey        = _extra.value.selectedArrowKey ?: flags.equippedArrows,
                         spellName        = if (combatStyle == "magic" && selectedSpell != null) selectedSpell.name else flags.activeSpell,
@@ -608,7 +609,7 @@ class CombatViewModel @Inject constructor(
         viewModelScope.launch {
             val repeatCount = _extra.value.selectedBossRepeatCount.coerceIn(1, MAX_BOSS_REPEAT_COUNT)
             if (sessionRepo.getActiveSession() != null) {
-                val bossName     = gameData.bosses[bossKey]?.displayName ?: bossKey
+                val bossName     = GameStrings.bossName(context, bossKey)
                 val bossMs       = (gameData.bosses[bossKey]?.durationMinutes ?: 1) * 60_000L
                 val queuedPlayer = playerRepo.getOrCreatePlayer()
                 val queuedFlags: PlayerFlags          = json.decodeFromString(queuedPlayer.flags)
@@ -775,7 +776,7 @@ class CombatViewModel @Inject constructor(
                     activityKey      = bossKey,
                     frames           = framesJson,
                     durationMs       = bossDurationMs,
-                    skillDisplayName = boss.displayName,
+                    skillDisplayName = GameStrings.bossName(context, bossKey),
                     // endsAt is cosmetic (full duration, no outcome spoiler); the alarm
                     // ends the session at the exact death tick within the final frame.
                     alarmOffsetMs    = CombatSimulator.bossEndAlarmOffsetMs(bossFrames, boss.durationMinutes, frameMs),
@@ -784,7 +785,7 @@ class CombatViewModel @Inject constructor(
                     val bossSnapshot = QueuedAction(
                         skillName        = "boss",
                         activityKey      = bossKey,
-                        skillDisplayName = boss.displayName,
+                        skillDisplayName = GameStrings.bossName(context, bossKey),
                         equippedSnapshot = player.equipped,
                         arrowsKey        = _extra.value.selectedArrowKey ?: flags.equippedArrows,
                         spellName        = if (combatStyle == "magic" && selectedSpell != null) selectedSpell.name else flags.activeSpell,

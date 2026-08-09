@@ -181,7 +181,7 @@ fun SeasonalEventScreen(
                 SectionCard(title = stringResource(R.string.label_dungeon)) {
                     expeditionKeys.forEachIndexed { index, dungeonKey ->
                         if (index > 0) Spacer(Modifier.height(12.dp))
-                        Text(viewModel.dungeonDisplayName(dungeonKey), style = MaterialTheme.typography.bodyLarge)
+                        Text(GameStrings.dungeonName(context, dungeonKey), style = MaterialTheme.typography.bodyLarge)
                         Spacer(Modifier.height(8.dp))
                         Button(onClick = { onNavigateToExpedition(dungeonKey) }, modifier = Modifier.fillMaxWidth()) {
                             Text(stringResource(R.string.seasonal_go_to_combat))
@@ -192,7 +192,7 @@ fun SeasonalEventScreen(
 
             if ("boss" in event.pillars && event.bossKey != null) {
                 SectionCard(title = stringResource(R.string.seasonal_boss_title)) {
-                    Text(viewModel.bossDisplayName(event.bossKey), style = MaterialTheme.typography.bodyLarge)
+                    Text(GameStrings.bossName(context, event.bossKey), style = MaterialTheme.typography.bodyLarge)
                     Spacer(Modifier.height(8.dp))
                     Button(onClick = { onNavigateToBoss(event.bossKey) }, modifier = Modifier.fillMaxWidth()) {
                         Text(stringResource(R.string.seasonal_go_to_combat))

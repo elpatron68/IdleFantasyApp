@@ -17,6 +17,8 @@
     <string name="item_mithril_ore_desc">A rare ore with magical properties.</string>
     <string name="item_adamantite_ore_name">Adamantite Ore</string>
     <string name="item_adamantite_ore_desc">Extremely hard and very rare ore.</string>
+    <string name="item_platinum_ore_name">Platinum Ore</string>
+    <string name="item_platinum_ore_desc">A rare platinum ore used for platinum bars.</string>
     <string name="item_runite_ore_name">Runite Ore</string>
     <string name="item_runite_ore_desc">The rarest mineable ore, used for the strongest equipment.</string>
     <string name="item_rune_essence_name">Rune Essence</string>
@@ -310,6 +312,16 @@
     <string name="item_runite_shield_name">Runite Shield</string>
     <string name="item_runite_shield_desc">The finest shield available.</string>
 
+    <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
+    <string name="item_slayer_helm_name">Slayer Helm</string>
+    <string name="item_slayer_helm_desc">A sturdy helm worn by veteran slayers.</string>
+    <string name="item_abyssal_whip_name">Abyssal Whip</string>
+    <string name="item_abyssal_whip_desc">A whip forged from abyssal energy. Excellent for strength training.</string>
+    <string name="item_slayer_platebody_name">Slayer Platebody</string>
+    <string name="item_slayer_platebody_desc">Heavy armour etched with slayer runes.</string>
+    <string name="item_slayer_platelegs_name">Slayer Platelegs</string>
+    <string name="item_slayer_platelegs_desc">Protective legs crafted for extended dungeon runs.</string>
+
     <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Bronze Pickaxe</string>
     <string name="item_bronze_pickaxe_desc">A basic pickaxe for Mining.</string>
@@ -323,6 +335,8 @@
     <string name="item_adamantite_pickaxe_desc">An extremely hard pickaxe for Mining.</string>
     <string name="item_runite_pickaxe_name">Runite Pickaxe</string>
     <string name="item_runite_pickaxe_desc">The finest pickaxe available for Mining.</string>
+    <string name="item_divine_pickaxe_name">Divine Pickaxe</string>
+    <string name="item_divine_pickaxe_desc">A pickaxe touched by divine light. Stone parts before it like water.</string>
 
     <!-- Tools — axes -->
     <string name="item_bronze_axe_name">Bronze Axe</string>
@@ -337,6 +351,8 @@
     <string name="item_adamantite_axe_desc">An extremely hard axe for Woodcutting.</string>
     <string name="item_runite_axe_name">Runite Axe</string>
     <string name="item_runite_axe_desc">The finest axe available for Woodcutting.</string>
+    <string name="item_divine_axe_name">Divine Axe</string>
+    <string name="item_divine_axe_desc">An axe that fells even the oldest trees with a single blow.</string>
 
     <!-- Tools — fishing rods -->
     <string name="item_bronze_fishing_rod_name">Bronze Fishing Rod</string>
@@ -351,6 +367,8 @@
     <string name="item_adamantite_fishing_rod_desc">An extremely durable fishing rod.</string>
     <string name="item_runite_fishing_rod_name">Runite Fishing Rod</string>
     <string name="item_runite_fishing_rod_desc">The finest fishing rod available.</string>
+    <string name="item_divine_fishing_rod_name">Divine Fishing Rod</string>
+    <string name="item_divine_fishing_rod_desc">A rod blessed by the sea gods. Fish practically leap onto it.</string>
 
     <!-- ===== Arrows ===== -->
     <string name="item_bronze_arrow_name">Bronze Arrows</string>
@@ -440,6 +458,31 @@
     <string name="item_platinum_diamond_necklace_name">Platinum Diamond Necklace</string>
     <string name="item_platinum_diamond_necklace_desc">A platinum necklace set with a diamond.</string>
 
+    <!-- Jewellery — other -->
+    <string name="item_shadow_signet_name">Shadow Signet</string>
+    <string name="item_shadow_signet_desc">A ring bearing the seal of the Guild of Shadows. Only the guild\'s most dangerous operatives ever wore one.</string>
+
+    <!-- Junk items -->
+    <string name="item_bread_name">Bread</string>
+    <string name="item_leather_name">Leather</string>
+    <string name="item_flour_name">Flour</string>
+    <string name="item_cooked_trout_name">Cooked Trout</string>
+    <string name="item_thread_name">Thread</string>
+    <string name="item_ruby_ring_name">Ruby Ring</string>
+    <string name="item_diamond_ring_name">Diamond Ring</string>
+    <string name="item_diamond_necklace_name">Diamond Necklace</string>
+    <string name="item_ancient_treasure_name">Ancient Treasure</string>
+    <string name="item_seaweed_name">Seaweed</string>
+    <string name="item_pearl_name">Pearl</string>
+    <string name="item_nature_rune_name">Nature Rune</string>
+    <string name="item_herb_name">Herb</string>
+    <string name="item_mahogany_log_name">Mahogany Log</string>
+    <string name="item_oyster_name">Oyster</string>
+    <string name="item_crab_name">Crab</string>
+    <string name="item_bird_nest_name">Bird Nest</string>
+    <string name="item_tree_seed_name">Tree Seed</string>
+    <string name="item_teak_log_name">Teak Log</string>
+
     <!-- ===== Miscellaneous drops ===== -->
     <string name="item_ashes_name">Ashes</string>
     <string name="item_ashes_desc">Burnt remnants of regular logs. Scatter in the Prayer skill for bonus Prayer XP.</string>
@@ -526,9 +569,12 @@
     <string name="crop_dragon_fruit_name">Dragon Fruit</string>
     <string name="crop_golden_wheat_name">Golden Wheat</string>
     <string name="crop_spirit_herb_name">Spirit Herb</string>
+    <string name="crop_spirit_herb_desc">A rare herb used in high-level herblore.</string>
     <string name="crop_celestial_bloom_name">Celestial Bloom</string>
+    <string name="crop_celestial_bloom_desc">An ethereal flower used in master potions.</string>
     <string name="crop_starfruit_name">Starfruit</string>
     <string name="crop_void_lotus_name">Void Lotus</string>
+    <string name="crop_void_lotus_desc">A mysterious lotus used in the rarest concoctions.</string>
 
     <!-- ===== Spells ===== -->
     <string name="spell_wind_strike_name">Wind Strike</string>
@@ -580,6 +626,46 @@
     <string name="item_adamantite_lockpick_name">Adamantite Lockpick</string>
     <string name="item_runite_lockpick_name">Runite Lockpick</string>
 
+    <!-- ===== Smithing hammers ===== -->
+    <string name="item_bronze_hammer_name">Bronze Hammer</string>
+    <string name="item_iron_hammer_name">Iron Hammer</string>
+    <string name="item_steel_hammer_name">Steel Hammer</string>
+    <string name="item_mithril_hammer_name">Mithril Hammer</string>
+    <string name="item_adamantite_hammer_name">Adamantite Hammer</string>
+    <string name="item_runite_hammer_name">Runite Hammer</string>
+
+    <!-- ===== Cooking frying pans ===== -->
+    <string name="item_bronze_frying_pan_name">Bronze Frying Pan</string>
+    <string name="item_iron_frying_pan_name">Iron Frying Pan</string>
+    <string name="item_steel_frying_pan_name">Steel Frying Pan</string>
+    <string name="item_mithril_frying_pan_name">Mithril Frying Pan</string>
+    <string name="item_adamantite_frying_pan_name">Adamantite Frying Pan</string>
+    <string name="item_runite_frying_pan_name">Runite Frying Pan</string>
+
+    <!-- ===== Firemaking tinderboxes ===== -->
+    <string name="item_bronze_tinderbox_name">Bronze Tinderbox</string>
+    <string name="item_iron_tinderbox_name">Iron Tinderbox</string>
+    <string name="item_steel_tinderbox_name">Steel Tinderbox</string>
+    <string name="item_mithril_tinderbox_name">Mithril Tinderbox</string>
+    <string name="item_adamantite_tinderbox_name">Adamantite Tinderbox</string>
+    <string name="item_runite_tinderbox_name">Runite Tinderbox</string>
+
+    <!-- ===== Agility grappling hooks ===== -->
+    <string name="item_bronze_grappling_hook_name">Bronze Grappling Hook</string>
+    <string name="item_iron_grappling_hook_name">Iron Grappling Hook</string>
+    <string name="item_steel_grappling_hook_name">Steel Grappling Hook</string>
+    <string name="item_mithril_grappling_hook_name">Mithril Grappling Hook</string>
+    <string name="item_adamantite_grappling_hook_name">Adamantite Grappling Hook</string>
+    <string name="item_runite_grappling_hook_name">Runite Grappling Hook</string>
+
+    <!-- ===== Carnival prizes ===== -->
+    <string name="item_tricksters_amulet_name">Trickster\'s Amulet</string>
+    <string name="item_tricksters_amulet_desc">A lucky charm worn by carnival performers. Grants a small combat edge.</string>
+    <string name="item_strongmans_sigil_name">Strongman\'s Sigil</string>
+    <string name="item_strongmans_sigil_desc">A heavy iron ring etched with the mark of the strongman champion. Boosts Strength.</string>
+    <string name="item_carnival_cape_name">Carnival Cape</string>
+    <string name="item_carnival_cape_desc">A vibrant cape worn by carnival champions. Grants 5% more tickets from Carnival sessions.</string>
+
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Attack Brew</string>
     <string name="item_defense_brew_name">Defense Brew</string>
@@ -618,28 +704,68 @@
 
     <string name="item_any_fish_name">fish (any type)</string>
 
+    <!-- Construction item names (planks, nails, stone) -->
+    <string name="item_plank_name">Plank</string>
+    <string name="item_oak_plank_name">Oak Plank</string>
+    <string name="item_willow_plank_name">Willow Plank</string>
+    <string name="item_maple_plank_name">Maple Plank</string>
+    <string name="item_yew_plank_name">Yew Plank</string>
+    <string name="item_magic_plank_name">Magic Plank</string>
+    <string name="item_iron_nail_name">Iron Nail</string>
+    <string name="item_steel_nail_name">Steel Nail</string>
+    <string name="item_mithril_nail_name">Mithril Nail</string>
+    <string name="item_stone_name">Stone</string>
+    <string name="item_stone_desc">A block of stone. Used for construction.</string>
+    <string name="item_carved_stone_name">Carved Stone</string>
+    <string name="item_stone_block_name">Stone Block</string>
+
+    <!-- Construction furniture names -->
+    <string name="item_wooden_rack_name">Wooden Rack</string>
+    <string name="item_wooden_shelf_name">Wooden Shelf</string>
+    <string name="item_oak_table_name">Oak Table</string>
+    <string name="item_oak_bookshelf_name">Oak Bookshelf</string>
+    <string name="item_willow_cabinet_name">Willow Cabinet</string>
+    <string name="item_maple_dresser_name">Maple Dresser</string>
+    <string name="item_yew_wardrobe_name">Yew Wardrobe</string>
+    <string name="item_magic_throne_name">Magic Throne</string>
+
 
     <!-- ===== Seed names ===== -->
     <string name="item_potato_seed_name">Potato Seed</string>
+    <string name="item_potato_seed_desc">Plant to grow potatoes. Grows in 2h.\nRequires farming level 1.</string>
     <string name="item_onion_seed_name">Onion Seed</string>
+    <string name="item_onion_seed_desc">Plant to grow onions. Grows in 3h.\nRequires farming level 5.</string>
     <string name="item_cabbage_seed_name">Cabbage Seed</string>
+    <string name="item_cabbage_seed_desc">Plant to grow cabbage. Grows in 4h.\nRequires farming level 10.</string>
     <string name="item_carrot_seed_name">Carrot Seed</string>
+    <string name="item_carrot_seed_desc">Plant to grow carrots. Grows in 5h.\nRequires farming level 15.</string>
     <string name="item_tomato_seed_name">Tomato Seed</string>
+    <string name="item_tomato_seed_desc">Plant to grow tomatoes. Grows in 6h.\nRequires farming level 20.</string>
     <string name="item_corn_seed_name">Corn Seed</string>
+    <string name="item_corn_seed_desc">Plant to grow corn. Grows in 7h.\nRequires farming level 25.</string>
     <string name="item_pumpkin_seed_name">Pumpkin Seed</string>
+    <string name="item_pumpkin_seed_desc">Plant to grow pumpkins. Grows in 9h.\nRequires farming level 30.</string>
     <string name="item_watermelon_seed_name">Watermelon Seed</string>
+    <string name="item_watermelon_seed_desc">Plant to grow watermelons. Grows in 10h.\nRequires farming level 35.</string>
     <string name="item_strawberry_seed_name">Strawberry Seed</string>
+    <string name="item_strawberry_seed_desc">Plant to grow strawberries. Grows in 11h.\nRequires farming level 40.</string>
     <string name="item_magic_herb_seed_name">Magic Herb Seed</string>
+    <string name="item_magic_herb_seed_desc">Plant to grow magic herbs. Grows in 13h.\nRequires farming level 50.</string>
     <string name="item_dragon_fruit_seed_name">Dragon Fruit Seed</string>
+    <string name="item_dragon_fruit_seed_desc">Plant to grow dragon fruit. Grows in 14h.\nRequires farming level 55.</string>
     <string name="item_golden_wheat_seed_name">Golden Wheat Seed</string>
+    <string name="item_golden_wheat_seed_desc">Plant to grow golden wheat. Grows in 16h.\nRequires farming level 65.</string>
     <string name="item_spirit_seed_name">Spirit Seed</string>
+    <string name="item_spirit_seed_desc">Plant to grow spirit herbs. Grows in 19h.\nRequires farming level 75.</string>
     <string name="item_celestial_bloom_seed_name">Celestial Bloom Seed</string>
+    <string name="item_celestial_bloom_seed_desc">Plant to grow celestial blooms. Grows in 21h.\nRequires farming level 85.</string>
     <string name="item_starfruit_seed_name">Starfruit Seed</string>
+    <string name="item_starfruit_seed_desc">Plant to grow starfruit. Grows in 23h.\nRequires farming level 95.</string>
     <string name="item_void_lotus_seed_name">Void Lotus Seed</string>
+    <string name="item_void_lotus_seed_desc">Plant to grow void lotus. Grows in 24h.\nRequires farming level 99.</string>
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="boss_void_sovereign_name" translatable="false">The Void Sovereign</string>
     <string name="item_abyssal_rod_name" translatable="false">Abyssal Rod</string>
     <string name="item_adamantite_arrow_tip_name" translatable="false">Adamantite Arrow Tips</string>
     <string name="item_adamantite_boots_name" translatable="false">Adamantite Boots</string>
@@ -654,12 +780,15 @@
     <string name="item_agility_cape_name" translatable="false">Agility Cape</string>
     <string name="item_agility_guild_cape_name" translatable="false">Agility Guild Cape</string>
     <string name="item_amulet_of_fury_name" translatable="false">Amulet Of Fury</string>
+    <string name="item_amulet_of_fury_desc">A powerful amulet granting bonuses to all combat styles. Requires Mercantile level 80 to purchase.</string>
     <string name="item_amulet_of_strength_name" translatable="false">Amulet Of Strength</string>
+    <string name="item_amulet_of_strength_desc">Increases melee strength bonus. Requires Mercantile level 20 to purchase.</string>
     <string name="item_amulet_of_the_kraken_name" translatable="false">Amulet Of The Kraken</string>
     <string name="item_arcane_grappling_hook_name">Arcane Grappling Hook</string>
     <string name="item_arcane_staff_name" translatable="false">Arcane Staff</string>
     <string name="item_archers_guild_cape_name" translatable="false">Archers Guild Cape</string>
     <string name="item_archers_ring_name" translatable="false">Archers Ring</string>
+    <string name="item_archers_ring_desc">Increases ranged accuracy. Requires Mercantile level 60 to purchase.</string>
     <string name="item_attack_cape_name" translatable="false">Attack Cape</string>
     <string name="item_baby_kraken_name" translatable="false">Baby Kraken</string>
     <string name="item_balrog_name" translatable="false">Balrog, Ancient Flame of Udûn</string>
@@ -667,6 +796,7 @@
     <string name="item_balrog_wings_name" translatable="false">Balrog Wings</string>
     <string name="item_beef_name">Cooked Beef</string>
     <string name="item_berserker_ring_name" translatable="false">Berserker Ring</string>
+    <string name="item_berserker_ring_desc">Increases melee strength. Requires Mercantile level 60 to purchase.</string>
     <string name="item_blessed_fishing_rod_name" translatable="false">Blessed Fishing Rod</string>
     <string name="item_bronze_arrow_tip_name" translatable="false">Bronze Arrow Tips</string>
     <string name="item_bronze_boots_name" translatable="false">Bronze Boots</string>
@@ -678,6 +808,7 @@
     <string name="item_bronze_plateskirt_name" translatable="false">Bronze Plateskirt</string>
     <string name="item_bronze_square_shield_name" translatable="false">Bronze Square Shield</string>
     <string name="item_chicken_name">Cooked Chicken</string>
+    <string name="item_construction_guild_cape_name" translatable="false">Construction Guild Cape</string>
     <string name="item_cooking_cape_name" translatable="false">Cooking Cape</string>
     <string name="item_cooking_guild_cape_name" translatable="false">Cooking Guild Cape</string>
     <string name="item_crafting_cape_name" translatable="false">Crafting Cape</string>
@@ -761,8 +892,8 @@
     <string name="item_mithril_square_shield_name" translatable="false">Mithril Square Shield</string>
     <string name="item_mutton_name">Cooked Mutton</string>
     <string name="item_necklace_of_anguish_name" translatable="false">Necklace Of Anguish</string>
+    <string name="item_necklace_of_anguish_desc">Provides exceptional ranged attack bonuses. Requires Mercantile level 99 to purchase.</string>
     <string name="item_oak_shortbow_name" translatable="false">Oak Shortbow</string>
-    <string name="item_platinum_ore_name" translatable="false">Platinum Ore</string>
     <string name="item_prayer_cape_name" translatable="false">Prayer Cape</string>
     <string name="item_prayer_guild_cape_name" translatable="false">Prayer Guild Cape</string>
     <string name="item_ranged_cape_name" translatable="false">Ranged Cape</string>
@@ -770,9 +901,12 @@
     <string name="item_ring_of_dragons_might_name" translatable="false">Ring Of Dragons Might</string>
     <string name="item_ring_of_flame_name" translatable="false">Ring Of Flame</string>
     <string name="item_ring_of_recoil_name" translatable="false">Ring Of Recoil</string>
+    <string name="item_ring_of_recoil_desc">Returns a portion of damage taken to attackers. Requires Mercantile level 20 to purchase.</string>
     <string name="item_ring_of_suffering_name" translatable="false">Ring Of Suffering</string>
+    <string name="item_ring_of_suffering_desc">A powerful ring that grants significant defense. Requires Mercantile level 80 to purchase.</string>
     <string name="item_ring_of_the_seas_name" translatable="false">Ring Of The Seas</string>
     <string name="item_ring_of_wealth_name" translatable="false">Ring Of Wealth</string>
+    <string name="item_ring_of_wealth_desc">Increases coin drops slightly. Requires Mercantile level 40 to purchase.</string>
     <string name="item_rock_golem_name" translatable="false">Rock Golem</string>
     <string name="item_rogues_lockpick_name">Rogue\'s Lockpick</string>
     <string name="item_runecrafting_cape_name" translatable="false">Runecrafting Cape</string>
@@ -789,6 +923,7 @@
     <string name="item_runite_square_shield_name" translatable="false">Runite Square Shield</string>
     <string name="item_sanctum_axe_name" translatable="false">Sanctum Axe</string>
     <string name="item_seers_ring_name" translatable="false">Seers Ring</string>
+    <string name="item_seers_ring_desc">Increases magic accuracy. Requires Mercantile level 60 to purchase.</string>
     <string name="item_shadow_dagger_name" translatable="false">Shadow Dagger</string>
     <string name="item_shadow_grappling_hook_name">Shadow Grappling Hook</string>
     <string name="item_shadow_lockpick_name">Shadow Lockpick</string>
@@ -799,6 +934,7 @@
     <string name="item_silver_emerald_ring_name" translatable="false">Silver Emerald Ring</string>
     <string name="item_silver_ruby_necklace_name" translatable="false">Silver Ruby Necklace</string>
     <string name="item_silver_ruby_ring_name" translatable="false">Silver Ruby Ring</string>
+    <string name="item_slayer_guild_cape_name" translatable="false">Slayer Guild Cape</string>
     <string name="item_smithing_cape_name" translatable="false">Smithing Cape</string>
     <string name="item_smithing_guild_cape_name" translatable="false">Smithing Guild Cape</string>
     <string name="item_steel_arrow_tip_name" translatable="false">Steel Arrow Tips</string>
@@ -813,8 +949,10 @@
     <string name="item_steel_square_shield_name" translatable="false">Steel Square Shield</string>
     <string name="item_strength_cape_name" translatable="false">Strength Cape</string>
     <string name="item_tangleroot_name" translatable="false">Tangleroot</string>
+    <string name="item_thieving_guild_cape_name" translatable="false">Thieving Guild Cape</string>
     <string name="item_tiny_templar_name" translatable="false">Tiny Templar</string>
     <string name="item_tormented_necklace_name" translatable="false">Tormented Necklace</string>
+    <string name="item_tormented_necklace_desc">Provides exceptional magic bonuses. Requires Mercantile level 99 to purchase.</string>
     <string name="item_trident_of_the_seas_name" translatable="false">Trident Of The Seas</string>
     <string name="item_warriors_guild_cape_name" translatable="false">Warriors Guild Cape</string>
     <string name="item_willow_shortbow_name" translatable="false">Willow Shortbow</string>
@@ -822,4 +960,10 @@
     <string name="item_woodcutting_guild_cape_name" translatable="false">Woodcutting Guild Cape</string>
     <string name="item_yew_longbow_name" translatable="false">Yew Longbow</string>
     <string name="item_yew_shortbow_name" translatable="false">Yew Shortbow</string>
+    <string name="item_void_reaver_name">Void Reaver</string>
+    <string name="item_void_reaver_desc">A blade forged from crystallised void energy. Its edge cuts through armour as if it were cloth.</string>
+    <string name="item_sovereign_crown_name">Sovereign Crown</string>
+    <string name="item_sovereign_crown_desc">The crown of the Void Sovereign itself, radiating dark majesty. Offers unparalleled protection.</string>
+    <string name="item_amulet_of_the_void_name">Amulet of the Void</string>
+    <string name="item_amulet_of_the_void_desc">A pendant of pure void essence. Enhances all combat stats of the wearer.</string>
 </resources>

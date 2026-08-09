@@ -20,7 +20,7 @@
     "coins_min": 20,
     "coins_max": 50,
     "loot_table": [
-      { "item": "cooked_trout", "chance": 0.20 },
+      { "item": "trout", "chance": 0.20 },
       { "item": "air_rune", "chance": 0.25, "min_qty": 3, "max_qty": 8 },
       { "item": "water_rune", "chance": 0.20, "min_qty": 3, "max_qty": 8 }
     ]

@@ -66,25 +66,17 @@ import com.fantasyidler.util.formatCoins
 @Composable
 internal fun localizedQuestDesc(type: String, target: String, amount: Int, guild: String): String {
     val context = LocalContext.current
-    val guildName = guildDisplayName(guild)
+    val guildName = GameStrings.guildName(context, guild)
     val displayTarget = if (guild == "firemaking" && target.endsWith("ashes")) target.replace("ashes", "log") else target
     val itemName  = if (target.isNotEmpty() && target != "any") GameStrings.itemName(context, displayTarget) else ""
-    val combatStyle = when (guild) {
-        "warriors" -> stringResource(R.string.guild_combat_melee)
-        "archers"  -> stringResource(R.string.guild_combat_ranged)
-        "mages"    -> stringResource(R.string.guild_combat_magic)
-        else       -> guild
-    }
-    val verb = run {
-        val id = context.resources.getIdentifier("daily_verb_$guild", "string", context.packageName)
-        if (id != 0) context.getString(id) else context.getString(R.string.daily_verb_mining)
-    }
+    val combatStyle = GameStrings.guildQuestCombatStyle(context, guild)
+    val verb = GameStrings.guildQuestVerb(context, guild, stringResource(R.string.daily_verb_mining))
     return when (type) {
-        "gather"     -> context.getString(R.string.guild_quest_desc_gather, verb, amount, itemName, guildName)
-        "craft"      -> context.getString(R.string.guild_quest_desc_gather, verb, amount, itemName, guildName)
+        "gather"     -> stringResource(R.string.guild_quest_desc_gather, verb, amount, itemName, guildName)
+        "craft"      -> stringResource(R.string.guild_quest_desc_gather, verb, amount, itemName, guildName)
         "kill"       -> stringResource(R.string.guild_quest_desc_kill, amount, combatStyle)
         "prayer"     -> stringResource(R.string.guild_quest_desc_prayer, amount, guildName)
-        "sessions"   -> stringResource(R.string.guild_quest_desc_sessions, amount, GameStrings.skillName(context, target), guildName)
+        "sessions"   -> stringResource(R.string.guild_quest_desc_sessions, amount, GameStrings.agilityCourse(context, target), guildName)
         "trade"      -> stringResource(R.string.guild_quest_desc_trade, amount, GameStrings.tradeRouteName(context, target), guildName)
         "earn_coins"  -> stringResource(R.string.guild_quest_desc_earn_coins, amount.toLong().formatCoins(), guildName)
         "pickpocket"  -> stringResource(R.string.guild_quest_desc_pickpocket, amount, GameStrings.thievingNpcName(context, target), guildName)
@@ -100,11 +92,12 @@ fun GuildDetailScreen(
     onBack: () -> Unit = {},
     viewModel: GuildDetailViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val state by viewModel.uiState.collectAsState()
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
 
-    val guildName = guildDisplayName(state.guildKey)
+    val guildName = GameStrings.guildName(context, state.guildKey)
 
     Scaffold(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),

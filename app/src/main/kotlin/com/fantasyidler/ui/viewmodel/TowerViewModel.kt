@@ -207,8 +207,8 @@ class TowerViewModel @Inject constructor(
 
     private fun buildFloorDungeon(floor: Int): DungeonData = DungeonData(
         name             = "tower_floor_$floor",
-        displayName      = "Floor $floor",
-        description      = "Infinite Tower floor $floor",
+        displayName      = context.getString(R.string.tower_floor_label, floor),
+        description      = context.getString(R.string.tower_floor_desc, floor),
         recommendedLevel = (floor * 2).coerceAtMost(200),
         encounterRate    = 0.65,
         enemySpawns      = tierFor(floor),

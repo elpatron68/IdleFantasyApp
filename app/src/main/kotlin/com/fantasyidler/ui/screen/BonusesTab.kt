@@ -228,7 +228,7 @@ internal fun BonusesTab(
             if (showAllPetsInBoosts) {
                 items(bonusPets.filter { it.boostedSkill == "all" }, key = { it.id }) { pet ->
                     BonusRow(
-                        name  = pet.displayName,
+                        name  = GameStrings.petName(context, pet.id),
                         pct   = "+${pet.boostPercent}%",
                         scope = stringResource(R.string.bonus_all_skills),
                     )

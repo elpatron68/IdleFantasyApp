@@ -39,10 +39,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -93,7 +91,7 @@ fun SlayerScreen(
     state.pendingSlayerDungeonKey?.let { dungeonKey ->
         val context = LocalContext.current
         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-        val dungeonName = viewModel.gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
+        val dungeonName = GameStrings.dungeonName(context, dungeonKey)
         ModalBottomSheet(
             onDismissRequest = viewModel::dismissSlayerDungeonPicker,
             sheetState       = sheetState,
@@ -244,7 +242,7 @@ fun SlayerScreen(
                 inventory            = state.inventory,
                 queueSize            = state.queueSize,
                 maxQueueSize         = state.maxQueueSize,
-                onForetell           = viewModel::foretelTask,
+                onForetell           = viewModel::foretellTask,
                 onQueueTask          = viewModel::queueForetelledTaskDungeon,
             )
 

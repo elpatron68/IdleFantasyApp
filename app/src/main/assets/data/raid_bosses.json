@@ -468,8 +468,8 @@
     },
     "event_key": "gloomharvest_2026"
   },
-  "vault_guardian": {
-    "id": "vault_guardian",
+  "the_vault_guardian": {
+    "id": "the_vault_guardian",
     "display_name": "The Vault Guardian",
     "emoji": "🏆",
     "description": "A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.",

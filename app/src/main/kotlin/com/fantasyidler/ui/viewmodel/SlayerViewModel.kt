@@ -248,7 +248,7 @@ class SlayerViewModel @Inject constructor(
     private fun doQueueTaskDungeon(dungeonKey: String, weaponSlot: String?) {
         viewModelScope.launch {
             val state = uiState.value
-            val dungeonName = gameData.dungeons[dungeonKey]?.displayName ?: dungeonKey
+            val dungeonName = GameStrings.dungeonName(context, dungeonKey)
             val player   = playerRepo.getOrCreatePlayer()
             val agility  = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
             val flags: PlayerFlags             = json.decodeFromString(player.flags)
@@ -299,12 +299,12 @@ class SlayerViewModel @Inject constructor(
         }
     }
 
-    fun foretelTask() {
+    fun foretellTask() {
         viewModelScope.launch {
             val state = uiState.value
             when (val result = slayerRepo.foretelTask(state.slayerLevel, state.unlockedDungeons)) {
                 is ForetelResult.Success ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_success, result.task.displayName)) }
+                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_success, GameStrings.enemyName(context, result.task.enemyKey))) }
                 ForetelResult.QueueFull ->
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_queue_full)) }
                 ForetelResult.NoEligibleTasks ->

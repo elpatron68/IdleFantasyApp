@@ -138,15 +138,6 @@ class TownRepository @Inject constructor(
         return bonuses["queue_slots"]?.toInt() ?: 0
     }
 
-    /** Max action queue size (3 base + Queue Master tier). */
-    fun maxQueueSize(flags: PlayerFlags): Int {
-        var extraSlots = 0
-        flags.townBuildingTiers.forEach { buildingName, tier ->
-            extraSlots += extraQueueSlots(buildingName, tier)
-        }
-        return 3 + extraSlots
-    }
-
     /** Secondary material preservation chance (Artisan's Workshop bonus). */
     fun secondaryMaterialSaveChance(building: String, tier: Int): Float {
         val bonuses = gameData.townBuildings[building]?.tiers?.getOrNull(tier - 1)?.bonuses ?: return 0.0f

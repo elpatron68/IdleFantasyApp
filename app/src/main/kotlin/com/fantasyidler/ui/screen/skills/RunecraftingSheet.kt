@@ -72,6 +72,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.ui.screen.QuestIndicatorIcons
 import com.fantasyidler.ui.viewmodel.ExpeditionsViewModel
 import com.fantasyidler.data.json.AgilityCourseData
 import com.fantasyidler.data.json.BoneData
@@ -196,18 +197,7 @@ internal fun RunecraftingSheet(
                                 Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge)
                                 val questIndicators = activeQuests["${Skills.RUNECRAFTING}:$key"] ?: emptyList()
                                 if (questIndicators.isNotEmpty()) {
-                                    val categories = questIndicators.groupBy { it.category }
-                                    val sortedCategories = categories.entries.sortedBy { it.key }
-                                    sortedCategories.forEach { (category, indicators) ->
-                                        val emoji = if (category == QuestCategory.DAILY) "⏰" else "📜"
-                                        val isCompletable = indicators.any { it.isCompletable }
-                                        val alpha = if (isCompletable) 1.0f else 0.38f
-                                        Text(
-                                            text     = " $emoji",
-                                            style    = MaterialTheme.typography.bodyMedium,
-                                            modifier = Modifier.alpha(alpha),
-                                        )
-                                    }
+                                    QuestIndicatorIcons(questIndicators)
                                 }
                             }
                             val runeOwned = inventory[key] ?: 0

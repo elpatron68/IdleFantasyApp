@@ -58,14 +58,9 @@ fun Long.toCountdown(context: android.content.Context, showEndTime: Boolean = tr
     val remaining = this - System.currentTimeMillis()
     if (remaining <= 0) return "Complete"
     val totalSeconds = remaining / 1_000
-    val hours   = totalSeconds / 3600
-    val minutes = (totalSeconds % 3600) / 60
     val seconds = totalSeconds % 60
-    val duration = when {
-        hours > 0   -> "${hours}h ${minutes}m ${seconds}s"
-        minutes > 0 -> "${minutes}m ${seconds}s"
-        else        -> "${seconds}s"
-    }
+    val duration = if (totalSeconds < 60) "${seconds}s"
+                   else "${((totalSeconds / 60) * 60_000).formatDurationMs()} ${seconds}s"
     return if (showEndTime) "$duration (${toClockTime(context)})" else duration
 }
 
@@ -86,17 +81,27 @@ fun Long.toRelativeTime(): String {
     }
 }
 
-/** Format a raw millisecond duration (not an epoch) as a human-readable string, e.g. "2h 30m" or "45m". */
+/**
+ * Format a raw millisecond duration (not an epoch) as a human-readable string, e.g. "2h 30m",
+ * "45m", or "1mo 1w 1d 8h 54m". Zero-valued units are omitted; months are 30 days.
+ */
 fun Long.formatDurationMs(): String {
     val totalSeconds = this / 1_000
-    val hours   = totalSeconds / 3600
-    val minutes = (totalSeconds % 3600) / 60
-    return when {
-        hours > 0 && minutes > 0 -> "${hours}h ${minutes}m"
-        hours > 0                -> "${hours}h"
-        minutes > 0              -> "${minutes}m"
-        else                     -> "${totalSeconds}s"
-    }
+    var rem = totalSeconds / 60
+    if (rem == 0L) return "${totalSeconds}s"
+    val minutesPerDay = 24L * 60
+    val months = rem / (30 * minutesPerDay); rem %= 30 * minutesPerDay
+    val weeks  = rem / (7 * minutesPerDay);  rem %= 7 * minutesPerDay
+    val days   = rem / minutesPerDay;        rem %= minutesPerDay
+    val hours  = rem / 60
+    val minutes = rem % 60
+    return buildList {
+        if (months  > 0) add("${months}mo")
+        if (weeks   > 0) add("${weeks}w")
+        if (days    > 0) add("${days}d")
+        if (hours   > 0) add("${hours}h")
+        if (minutes > 0) add("${minutes}m")
+    }.joinToString(" ")
 }
 
 /**

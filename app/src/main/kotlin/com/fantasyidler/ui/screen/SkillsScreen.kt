@@ -91,6 +91,7 @@ import com.fantasyidler.ui.theme.ScaledSheetContent
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.ui.text.style.TextAlign
@@ -114,7 +115,9 @@ import com.fantasyidler.util.formatDurationMs
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toCountdown
 import java.util.Locale
+import com.fantasyidler.ui.viewmodel.QuestCategory
 import com.fantasyidler.ui.viewmodel.QuestFillSuggestion
+import com.fantasyidler.ui.viewmodel.QuestIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -132,10 +135,47 @@ fun SkillsScreen(
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
     AppBannerEffect(craftSnackState.snackbarMessage, craftingViewModel::snackbarConsumed)
 
+    var showLegend by remember { mutableStateOf(false) }
+    if (showLegend) {
+        AlertDialog(
+            onDismissRequest = { showLegend = false },
+            title = { Text(stringResource(R.string.quest_legend_title)) },
+            text  = {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    listOf(
+                        QuestCategory.DAILY       to R.string.quest_legend_daily,
+                        QuestCategory.WEEKLY      to R.string.quest_legend_weekly,
+                        QuestCategory.GUILD_DAILY to R.string.quest_legend_guild_daily,
+                        QuestCategory.GUILD       to R.string.quest_legend_guild,
+                        QuestCategory.MAIN        to R.string.quest_legend_quest,
+                    ).forEach { (category, labelRes) ->
+                        Text("${category.emoji}  ${stringResource(labelRes)}")
+                    }
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text  = stringResource(R.string.quest_legend_notes),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showLegend = false }) { Text(stringResource(R.string.btn_close)) }
+            },
+        )
+    }
+
     Scaffold(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
-            TopAppBar(title = { Text(stringResource(R.string.nav_skills)) })
+            TopAppBar(
+                title   = { Text(stringResource(R.string.nav_skills)) },
+                actions = {
+                    IconButton(onClick = { showLegend = true }) {
+                        Icon(Icons.Outlined.Info, contentDescription = stringResource(R.string.quest_legend_title))
+                    }
+                },
+            )
         },
     ) { padding ->
         if (state.isLoading) {
@@ -596,6 +636,7 @@ private fun SkillsTabContent(
                 onPrestige     = { viewModel.prestigeSkill(key) },
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
         }
 
@@ -618,6 +659,7 @@ private fun SkillsTabContent(
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 onPrestige     = { viewModel.prestigeSkill(key) },
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
         }
 
@@ -634,6 +676,7 @@ private fun SkillsTabContent(
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 onPrestige     = { viewModel.prestigeSkill(key) },
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
         }
 
@@ -649,6 +692,7 @@ private fun SkillsTabContent(
                 prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
                 onPrestige    = { viewModel.prestigeSkill(Skills.SLAYER) },
                 guildDailyOpen = state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
             )
         }
     }
@@ -771,6 +815,8 @@ internal fun SkillRow(
     cropsReady: Int = 0,
     /** Shows a gold dot when this skill's guild daily is still open and worth doing (guild not maxed). */
     guildDailyOpen: Boolean = false,
+    /** Timed quest indicators (daily/weekly/guild daily) shown next to the skill name. */
+    questIndicators: List<QuestIndicator> = emptyList(),
 ) {
     val context  = LocalContext.current
     val name     = GameStrings.skillName(context, skillKey)
@@ -872,11 +918,14 @@ internal fun SkillRow(
                     modifier             = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Text(
-                        text       = name,
-                        style      = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Medium,
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text       = name,
+                            style      = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Medium,
+                        )
+                        QuestIndicatorIcons(questIndicators)
+                    }
                     if (isActive) {
                         Text(
                             text  = stringResource(R.string.label_training),

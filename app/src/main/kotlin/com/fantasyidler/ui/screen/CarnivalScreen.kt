@@ -982,6 +982,8 @@ private fun PrizeRow(
     equipData: com.fantasyidler.data.json.EquipmentData?,
     onRedeem: () -> Unit,
 ) {
+    val context = LocalContext.current
+
     Row(
         modifier              = Modifier
             .fillMaxWidth()
@@ -991,7 +993,7 @@ private fun PrizeRow(
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text       = prize.displayName,
+                text       = GameStrings.carnivalPrizeName(context, prize.type, prize.key, prize.displayName),
                 style      = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold,
             )
@@ -1022,7 +1024,7 @@ private fun PrizeRow(
                 }
             } else {
                 Text(
-                    text  = prize.description,
+                    text  = GameStrings.carnivalPrizeDesc(context, prize.type, prize.key, prize.description),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

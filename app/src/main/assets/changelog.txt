@@ -1,3 +1,39 @@
+v1.13.1
+• Fixed the action queue showing the wrong slot count when the Grand Monument is at Gilded or higher (the extra slot worked but displayed as 7/6)
+• Fixed the skill quest panel's quick-add button queueing woodcutting sessions as logs instead of the tree, which made them fail to start
+• The daily boss coin soft cap is now per boss: each boss pays full coins for its first 3 kills of the day instead of 3 kills total across all bosses
+• The bestiary now shows the reduced coin range that applies after the daily cap, and the loot summary notes when a boss coin drop was reduced
+• The Merchant pickpocket now drops real, edible Trout instead of the confusing sell-only "Cooked Trout" junk item
+• Fixed laggy typing in the craft-quantity field on the crafting, skill, and worker screens
+• Hoe farming efficiency is now stored and shown as a multiplier like all other tools (same in-game power, clearer stats)
+• The Vault Guardian boss no longer inherits kill counts from the Guild of Shadows enemy of the same name
+• Bows now show their accuracy as Ranged Atk in the armory and equipment pages instead of plain Atk (same combat power)
+• Long durations now display with months, weeks, and days instead of huge hour counts (e.g. 920h 54m becomes 1mo 1w 1d 8h 54m)
+• The active session card on the home screen now shows how many items the running crafting session will produce
+• Long-press an item in the shop's sell list to lock it against selling; locked items are greyed out with a lock icon and are skipped by Sell Junk and Sell Old Gear
+• The Bone Altar tap area now supports multi-touch, so two-thumb tapping registers every tap
+• Quest indicators now use five distinct icons (quest, daily, weekly, guild quest, guild daily) with a count when several quests of one type target the same item
+• The Skills overview now shows daily/weekly/guild-daily icons next to skills with ongoing timed quests, and an info button explains all the icons
+• Much more game text is now translatable and shown localized, including pet, boss, dungeon, and guild names (thanks CiaranGruber!)
+
+v1.13.1
+• Fixed the action queue showing the wrong slot count when the Grand Monument is at Gilded or higher (the extra slot worked but displayed as 7/6)
+• Fixed the skill quest panel's quick-add button queueing woodcutting sessions as logs instead of the tree, which made them fail to start
+• The daily boss coin soft cap is now per boss: each boss pays full coins for its first 3 kills of the day instead of 3 kills total across all bosses
+• The bestiary now shows the reduced coin range that applies after the daily cap, and the loot summary notes when a boss coin drop was reduced
+• The Merchant pickpocket now drops real, edible Trout instead of the confusing sell-only "Cooked Trout" junk item
+• Fixed laggy typing in the craft-quantity field on the crafting, skill, and worker screens
+• Hoe farming efficiency is now stored and shown as a multiplier like all other tools (same in-game power, clearer stats)
+• The Vault Guardian boss no longer inherits kill counts from the Guild of Shadows enemy of the same name
+• Bows now show their accuracy as Ranged Atk in the armory and equipment pages instead of plain Atk (same combat power)
+• Long durations now display with months, weeks, and days instead of huge hour counts (e.g. 920h 54m becomes 1mo 1w 1d 8h 54m)
+• The active session card on the home screen now shows how many items the running crafting session will produce
+• Long-press an item in the shop's sell list to lock it against selling; locked items are greyed out with a lock icon and are skipped by Sell Junk and Sell Old Gear
+• The Bone Altar tap area now supports multi-touch, so two-thumb tapping registers every tap
+• Quest indicators now use five distinct icons (quest, daily, weekly, guild quest, guild daily) with a count when several quests of one type target the same item
+• The Skills overview now shows daily/weekly/guild-daily icons next to skills with ongoing timed quests, and an info button explains all the icons
+• Much more game text is now translatable and shown localized, including pet, boss, dungeon, and guild names (thanks CiaranGruber!)
+
 v1.13.0
 • Added the Gloomharvest seasonal event (September 1 to November 30): earn 300 tokens across an expanded Bounty Board with farming and turn-in tasks, two expedition dungeons (The Hollowfen and The Blightwood), the Hollow King raid boss, and the Lantern Lights memory minigame
 • Added the Grand Monument to town: build five stages with coins (1M to 1B) for a farming patch, a daily boon, longer blessings, an extra queue slot, and the Golden Goose pet; light the Eternal Flame to unlock the Vault Guardian raid boss and the Patron of the Realm title

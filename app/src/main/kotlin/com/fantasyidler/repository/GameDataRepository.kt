@@ -35,6 +35,7 @@ import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.json.TownBuildingData
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.TreeData
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -82,7 +83,7 @@ class GameDataRepository @Inject constructor(
         val map = mutableMapOf<String, MutableList<String>>()
         dungeons.values.forEach { dungeon ->
             dungeon.enemySpawns.forEach { spawn ->
-                map.getOrPut(spawn.enemy) { mutableListOf() }.add(dungeon.displayName)
+                map.getOrPut(spawn.enemy) { mutableListOf() }.add(GameStrings.dungeonName(context, dungeon.name))
             }
         }
         map.mapValues { (_, v) -> v.sorted() }

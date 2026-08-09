@@ -81,6 +81,8 @@ data class ShopUiState(
     val isLoading: Boolean = true,
     /** Items reserved by queued actions — cannot be sold. */
     val reservedItems: Map<String, Int> = emptyMap(),
+    /** Items the player locked against selling. */
+    val lockedItems: Set<String> = emptySet(),
     val mercantileLevel: Int = 0,
     val townBuildingTiers: Map<String, Int> = emptyMap(),
     val skillPrestige: Map<String, Int> = emptyMap(),
@@ -117,6 +119,7 @@ class ShopViewModel @Inject constructor(
                 xpBoostExpiresAt = flags.xpBoostExpiresAt,
                 isLoading        = false,
                 reservedItems    = computeReserved(flags.sessionQueue),
+                lockedItems      = flags.lockedItems.toSet(),
                 mercantileLevel  = levels[Skills.MERCANTILE] ?: 0,
                 townBuildingTiers = flags.townBuildingTiers,
                 skillPrestige     = flags.skillPrestige,
@@ -343,7 +346,8 @@ class ShopViewModel @Inject constructor(
         viewModelScope.launch {
             val inventory = uiState.value.inventory
             val useful    = gameData.usefulItemKeys
-            val junk      = inventory.filterKeys { it != "coins" && it !in useful }
+            val locked    = uiState.value.lockedItems
+            val junk      = inventory.filterKeys { it != "coins" && it !in useful && it !in locked }
             if (junk.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_junk)) }
                 return@launch
@@ -363,6 +367,7 @@ class ShopViewModel @Inject constructor(
             val allEquip  = gameData.equipment
 
             val toSell = computeOldEquipmentToSell(equipped, inventory, allEquip)
+                .filterKeys { it !in state.lockedItems }
 
             if (toSell.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_old_equipment)) }
@@ -372,6 +377,17 @@ class ShopViewModel @Inject constructor(
                 BulkSellItem(key, GameStrings.itemName(context.withAppLocale(), key), qty, sellPriceFor(key))
             }.sortedBy { it.displayName }
             _extra.update { it.copy(pendingBulkSell = BulkSellPreview(R.string.shop_sell_old_gear, R.string.shop_sold_old_equipment, items)) }
+        }
+    }
+
+    fun toggleItemLock(itemKey: String) {
+        viewModelScope.launch {
+            val nowLocked = playerRepo.toggleItemLock(itemKey)
+            val name = GameStrings.itemName(context.withAppLocale(), itemKey)
+            _extra.update {
+                it.copy(snackbarMessage = context.getString(
+                    if (nowLocked) R.string.shop_item_lock_on else R.string.shop_item_lock_off, name))
+            }
         }
     }
 
@@ -414,6 +430,10 @@ class ShopViewModel @Inject constructor(
 
     fun openSell(itemKey: String, displayName: String) {
         val state         = uiState.value
+        if (itemKey in state.lockedItems) {
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_item_locked, displayName)) }
+            return
+        }
         val have          = state.inventory[itemKey] ?: 0
         val equippedCount = state.equipped.values.count { it == itemKey }
         val reserved      = state.reservedItems[itemKey] ?: 0

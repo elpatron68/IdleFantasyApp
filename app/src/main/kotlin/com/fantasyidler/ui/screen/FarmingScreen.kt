@@ -637,7 +637,7 @@ private fun PlantSheet(
                         )
                         Text(
                             text  = if (crop.id == "magic_bean") stringResource(R.string.farming_bean_picker_stats)
-                                    else "Lv. ${crop.levelRequired}  •  ${crop.growthTimeHours}h  •  ${crop.harvestXp} XP/crop",
+                                    else "Lv. ${crop.levelRequired}  •  ${(crop.growthTimeHours * 3_600_000L).formatDurationMs()}  •  ${crop.harvestXp} XP/crop",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
