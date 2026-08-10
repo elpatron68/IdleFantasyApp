@@ -66,7 +66,6 @@ import com.fantasyidler.data.json.NightMarketOfferData
 import com.fantasyidler.data.json.SeasonalMinigameConfig
 import com.fantasyidler.data.json.SeasonalRewardTierData
 import com.fantasyidler.repository.SeasonalBountyTaskWithProgress
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
 import com.fantasyidler.ui.viewmodel.SeasonalEventViewModel
 import com.fantasyidler.ui.viewmodel.SkillsViewModel
@@ -329,14 +328,14 @@ private fun RewardTierRow(
             Text(
                 text  = stringResource(R.string.seasonal_reward_tier_requirement, tier.tokens),
                 style = MaterialTheme.typography.labelSmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
         when {
             claimed || (!hasPayload && tokens >= tier.tokens) -> Text(
                 text       = stringResource(R.string.seasonal_reward_claimed),
                 style      = MaterialTheme.typography.labelMedium,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
             )
             hasPayload && tokens >= tier.tokens -> Button(onClick = onClaim) { Text(stringResource(R.string.seasonal_claim)) }
@@ -368,7 +367,7 @@ private fun MarketOfferRow(
             Text(
                 text  = stringResource(R.string.seasonal_market_price, offer.coinCost.formatCoins()),
                 style = MaterialTheme.typography.labelSmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
             val limit = offer.limit
             if (limit != null && !soldOut) {
@@ -423,7 +422,7 @@ private fun BountyTaskRow(
             Text(
                 text  = GameStrings.seasonalBountyHint(context, task.id, task.hint),
                 style = MaterialTheme.typography.labelSmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
             Text(
                 text  = "${taskProgress.progress}/${task.amount}",
@@ -509,7 +508,7 @@ private fun BonfireRhythmGame(
     Text(
         text  = stringResource(R.string.seasonal_minigame_hint, config.hitsRequired, config.rounds),
         style = MaterialTheme.typography.bodySmall,
-        color = GoldPrimary,
+        color = MaterialTheme.colorScheme.primary,
     )
     Spacer(Modifier.height(8.dp))
 
@@ -534,7 +533,7 @@ private fun BonfireRhythmGame(
                         modifier = Modifier
                             .size(56.dp)
                             .clip(CircleShape)
-                            .background(if (isLit) GoldPrimary else MaterialTheme.colorScheme.surface)
+                            .background(if (isLit) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface)
                             .clickable(enabled = isPlaying) {
                                 if (litHole == index) {
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -555,7 +554,7 @@ private fun BonfireRhythmGame(
             text       = "$c",
             style      = MaterialTheme.typography.displayMedium,
             fontWeight = FontWeight.Bold,
-            color      = GoldPrimary,
+            color      = MaterialTheme.colorScheme.primary,
             textAlign  = TextAlign.Center,
             modifier   = Modifier.fillMaxWidth(),
         )
@@ -629,7 +628,7 @@ private fun LanternSequenceGame(
     Text(
         text  = stringResource(R.string.seasonal_minigame_sequence_hint, config.hitsRequired, config.rounds),
         style = MaterialTheme.typography.bodySmall,
-        color = GoldPrimary,
+        color = MaterialTheme.colorScheme.primary,
     )
     Spacer(Modifier.height(8.dp))
 
@@ -659,7 +658,7 @@ private fun LanternSequenceGame(
                         modifier = Modifier
                             .size(56.dp)
                             .clip(CircleShape)
-                            .background(if (isLit) GoldPrimary else MaterialTheme.colorScheme.surface)
+                            .background(if (isLit) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface)
                             .clickable(enabled = isPlaying && !showingSequence) {
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 if (index == sequence.getOrNull(inputIndex)) {
@@ -692,7 +691,7 @@ private fun LanternSequenceGame(
             text       = "$c",
             style      = MaterialTheme.typography.displayMedium,
             fontWeight = FontWeight.Bold,
-            color      = GoldPrimary,
+            color      = MaterialTheme.colorScheme.primary,
             textAlign  = TextAlign.Center,
             modifier   = Modifier.fillMaxWidth(),
         )

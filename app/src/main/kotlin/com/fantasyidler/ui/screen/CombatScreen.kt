@@ -92,9 +92,7 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
-import com.fantasyidler.ui.theme.SuccessGreen
 import com.fantasyidler.ui.viewmodel.CombatViewModel
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
@@ -155,7 +153,7 @@ fun CombatScreen(
                             text       = "${stringResource(R.string.combat_level_label)} ${combatLevelFrom(state.skillLevels)}",
                             style      = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.Bold,
-                            color      = GoldPrimary,
+                            color      = MaterialTheme.colorScheme.primary,
                             modifier   = Modifier.padding(end = 16.dp),
                         )
                     }
@@ -826,7 +824,7 @@ private fun CombatSkillRow(
                         Text(
                             text  = stringResource(R.string.combat_prestige_bonus, prestigeLevel * 5),
                             style = MaterialTheme.typography.labelSmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 }
@@ -843,7 +841,7 @@ private fun CombatSkillRow(
                     .fillMaxWidth()
                     .height(4.dp)
                     .clip(RoundedCornerShape(2.dp)),
-                color            = GoldPrimary,
+                color            = MaterialTheme.colorScheme.primary,
                 trackColor       = MaterialTheme.colorScheme.surfaceVariant,
             )
         }
@@ -861,7 +859,7 @@ private fun CombatSkillRow(
                 Text(
                     text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
                     style = MaterialTheme.typography.labelMedium,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 when {
                     onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
@@ -869,7 +867,7 @@ private fun CombatSkillRow(
                             Text(
                                 text  = stringResource(R.string.prestige),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }
@@ -951,7 +949,7 @@ private fun BossRow(
             text       = "Lv. ${boss.combatLevelRequired}",
             style      = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.SemiBold,
-            color      = if (unlocked) GoldPrimary else dimColor,
+            color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
         )
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -996,7 +994,7 @@ private fun TowerEntryRow(
                 text       = stringResource(R.string.tower_best_floor, bestFloor),
                 style      = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.SemiBold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -1040,8 +1038,8 @@ private fun DungeonRow(
             )
             if (unlocked && survivalRating != null) {
                 val (ratingText, ratingColor) = when (survivalRating) {
-                    CombatSimulator.SurvivalRating.LIKELY   -> stringResource(R.string.combat_difficulty_likely)   to SuccessGreen
-                    CombatSimulator.SurvivalRating.RISKY    -> stringResource(R.string.combat_difficulty_risky)    to MaterialTheme.colorScheme.tertiary
+                    CombatSimulator.SurvivalRating.LIKELY   -> stringResource(R.string.combat_difficulty_likely)   to MaterialTheme.colorScheme.tertiary
+                    CombatSimulator.SurvivalRating.RISKY    -> stringResource(R.string.combat_difficulty_risky)    to MaterialTheme.colorScheme.secondary
                     CombatSimulator.SurvivalRating.UNLIKELY -> stringResource(R.string.combat_difficulty_unlikely) to MaterialTheme.colorScheme.error
                 }
                 Text(
@@ -1082,7 +1080,7 @@ private fun DungeonRow(
         Text(
             text  = "Lv. ${dungeon.recommendedLevel}",
             style = MaterialTheme.typography.labelMedium,
-            color = if (unlocked) GoldPrimary else dimColor,
+            color = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
             fontWeight = FontWeight.SemiBold,
         )
     }

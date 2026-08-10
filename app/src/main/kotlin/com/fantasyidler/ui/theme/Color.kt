@@ -2,53 +2,10 @@ package com.fantasyidler.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Primary — gold tones
-val GoldPrimary      = Color(0xFFC9A94D)
-val GoldContainer    = Color(0xFF3D2E00)
-val GoldOnContainer  = Color(0xFFFAD77B)
-
-// Secondary — earthy leather
-val BrownSecondary      = Color(0xFF8B5E3C)
-val BrownContainer      = Color(0xFF3E1F0A)
-val BrownOnContainer    = Color(0xFFD6A882)
-
-// Backgrounds & surfaces — dark fantasy blues
-val DarkBackground      = Color(0xFF1A1A2E)
-val DarkSurface         = Color(0xFF16213E)
-val DarkSurfaceVariant  = Color(0xFF0F3460)
-val DarkSurfaceHigh     = Color(0xFF1E2A4A)
-
-// Text
-val ParchmentText       = Color(0xFFE8DCC8)
-val ParchmentTextMuted  = Color(0xFFA89880)
-
-// Midnight theme — true-black AMOLED background, higher-contrast surfaces for warm display filters
-val MidnightBackground      = Color(0xFF000000)
-val MidnightSurface         = Color(0xFF111827)
-val MidnightSurfaceVariant  = Color(0xFF24344D)
-val MidnightTextMuted       = Color(0xFFC7BBA7)
-
-// Status
-val ErrorRed    = Color(0xFFCF6679)
-val SuccessGreen = Color(0xFF4CAF50)
+/** Semantic accent that is not a Material colour-scheme role. */
 val WarningAmber = Color(0xFFFFB300)
 
-// Light theme backgrounds & surfaces — warm parchment
-val LightBackground      = Color(0xFFF5EDD8)
-val LightSurface         = Color(0xFFFAF4E6)
-val LightSurfaceVariant  = Color(0xFFE5D5B0)
-
-// Light theme text — dark charcoal/brown
-val DarkText             = Color(0xFF1C1408)
-val DarkTextMuted        = Color(0xFF4A3820)
-
-// Light theme containers
-val GoldContainerLight      = Color(0xFFFFEFB0)
-val GoldOnContainerLight    = Color(0xFF2A1A00)
-val BrownContainerLight     = Color(0xFFF5DEC4)
-val BrownOnContainerLight   = Color(0xFF2A1208)
-
-// Equipment tier colours (used for level badges and item rarity)
+/** Equipment tier colours (level badges and item rarity). */
 val TierBronze  = Color(0xFFCD7F32)
 val TierIron    = Color(0xFF808080)
 val TierSteel   = Color(0xFF71A6D2)

@@ -45,7 +45,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.BoneAltarUiState
 import com.fantasyidler.ui.viewmodel.BoneAltarViewModel
 import com.fantasyidler.util.GameStrings
@@ -146,7 +145,7 @@ private fun BoneSelectionContent(
                         Text(
                             text  = stringResource(R.string.btn_select),
                             style = MaterialTheme.typography.labelMedium,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -168,7 +167,7 @@ private fun BoneTapContent(
     val bone        = state.availableBones[boneKey] ?: return
     val boneName    = GameStrings.itemName(context, boneKey)
     val comboActive = state.combo >= BoneAltarViewModel.COMBO_THRESHOLD
-    val comboColor  = if (comboActive) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+    val comboColor  = if (comboActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
     val qty         = state.inventory[boneKey] ?: 0
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -200,7 +199,7 @@ private fun BoneTapContent(
             Text(
                 text       = stringResource(R.string.bone_altar_session_xp, state.sessionXp.formatXp()),
                 style      = MaterialTheme.typography.bodyMedium,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold,
                 modifier   = Modifier.weight(1f),
             )
@@ -229,7 +228,7 @@ private fun BoneTapContent(
                     Text(
                         text  = stringResource(R.string.bone_altar_bonus_active),
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }

@@ -214,6 +214,9 @@ object GameStrings {
             "pet" -> petDesc(context, prize)
             else -> fallback
         }
+
+    fun themeName(context: Context, theme: String): String =
+        context.stringByName("settings_theme_${theme}") ?: theme.toTitleCase()
 }
 
 // ---------------------------------------------------------------------------

@@ -377,7 +377,28 @@ class GuildRepository @Inject constructor(
         }
 
         playerRepo.updateFlagsUnlocked(newFlags)
-        return GuildQuestClaimResult.Success(quest.rewards)
+        return GuildQuestClaimResult.Success(withCapeIfMaxLevel(quest.guild, oldLevel, newLevel, quest.rewards))
+    }
+
+    /**
+     * Returns [rewards] with the guild's cape added when [newLevel] just reached the top
+     * guild rank. The cape is awarded on reaching level 10 itself, whichever gate closes
+     * last (final quest or tier dailies), not on claiming the final quest. Skipped when
+     * the player already owns the cape, so saves that received it early are not granted
+     * a duplicate.
+     */
+    private suspend fun withCapeIfMaxLevel(
+        guild: String,
+        oldLevel: Int,
+        newLevel: Int,
+        rewards: GuildQuestRewards,
+    ): GuildQuestRewards {
+        if (newLevel <= oldLevel || newLevel < DAILIES_REQUIRED_PER_TIER.size) return rewards
+        val capeKey = "${guild}_guild_cape"
+        val owned = (playerRepo.getInventoryUnlocked()[capeKey] ?: 0) > 0 ||
+            capeKey in playerRepo.getEquipped().values
+        if (owned) return rewards
+        return rewards.copy(items = rewards.items + (capeKey to 1))
     }
 
     // -------------------------------------------------------------------------
@@ -497,7 +518,8 @@ class GuildRepository @Inject constructor(
             guildDailyClaimed      = flags.guildDailyClaimed + templateId,
             guildDailyTierCounts   = flags.guildDailyTierCounts + (tierKey to newCount),
         )
-        return newFlags to template.rewards
+        val newLevel = guildLevel(guild, newFlags.guildDailyTierCounts, completedIds)
+        return newFlags to withCapeIfMaxLevel(guild, currentLevel, newLevel, template.rewards)
     }
 
     // -------------------------------------------------------------------------

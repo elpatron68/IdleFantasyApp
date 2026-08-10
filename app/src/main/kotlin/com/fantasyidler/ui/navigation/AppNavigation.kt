@@ -58,6 +58,8 @@ import com.fantasyidler.ui.screen.QuestsScreen
 import com.fantasyidler.ui.screen.SeasonalEventScreen
 import com.fantasyidler.ui.screen.HomeScreenSettingsScreen
 import com.fantasyidler.ui.screen.SettingsScreen
+import com.fantasyidler.ui.screen.ThemeEditorScreen
+import com.fantasyidler.ui.screen.ThemeSettingsScreen
 import com.fantasyidler.ui.screen.ShopScreen
 import com.fantasyidler.ui.screen.SkillsScreen
 import com.fantasyidler.ui.screen.SlayerScreen
@@ -227,11 +229,31 @@ fun AppNavigation(
                     onBack                         = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onReopenTutorial               = { onboardingVm.reopen() },
                     onNavigateToHomeScreenSettings = { navController.navigate(Screen.Settings.homeScreenRoute) },
+                    onNavigateToThemeSettings      = { navController.navigate(Screen.Settings.themeSettingsRoute) },
                 )
             }
             composable(Screen.Settings.homeScreenRoute) { entry ->
                 HomeScreenSettingsScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                )
+            }
+            composable(Screen.Settings.themeSettingsRoute) { entry ->
+                ThemeSettingsScreen(
+                    onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                    onNavigateToThemeEditor = { source, blank -> navController.navigate(Screen.Settings.themeEditorRouteWithSource(source, blank)) },
+                )
+            }
+            composable(
+                route     = Screen.Settings.themeEditorRoute,
+                arguments = listOf(
+                    navArgument("source") { type = NavType.StringType; defaultValue = "dark" },
+                    navArgument("blank")  { type = NavType.BoolType; defaultValue = false },
+                ),
+            ) { entry ->
+                ThemeEditorScreen(
+                    source    = entry.arguments?.getString("source") ?: "dark",
+                    blankName = entry.arguments?.getBoolean("blank") ?: false,
+                    onBack    = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
             composable(Screen.Shop.route) { entry ->

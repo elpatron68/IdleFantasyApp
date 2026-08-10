@@ -372,6 +372,36 @@
     <string name="settings_font_normal">Normale</string>
     <string name="settings_font_large">Grande</string>
     <string name="settings_font_huge">Enorme</string>
+    <string name="settings_import_theme">Importa temi</string>
+    <string name="settings_import_theme_desc">Importa temi personalizzati da un file</string>
+    <string name="settings_delete_theme_btn">Elimina tema</string>
+    <string name="settings_theme_imported_ok">File del tema importato correttamente</string>
+    <string name="settings_theme_imported_fail">Importazione non riuscita: file non valido</string>
+    <string name="settings_theme_editor">Editor dei temi</string>
+    <string name="theme_editor_new_btn">Nuovo tema</string>
+    <string name="theme_editor_edit_btn">Modifica tema</string>
+    <string name="theme_editor_preview_header">Anteprima</string>
+    <string name="theme_editor_sample_title">Scheda di esempio</string>
+    <string name="theme_editor_sample_body">Testo normale e testo attenuato su una superficie</string>
+    <string name="theme_editor_sample_button">Pulsante</string>
+    <string name="theme_editor_sample_error">Testo di errore</string>
+    <string name="theme_editor_name_label">Nome del tema</string>
+    <string name="theme_editor_name_reserved">Questo nome è riservato a un tema ufficiale</string>
+    <string name="theme_editor_overwrite_hint">Il salvataggio sostituirà \"%1$s\"</string>
+    <string name="theme_editor_base_label">Stile di base</string>
+    <string name="theme_editor_palette_header">Tavolozza</string>
+    <string name="theme_editor_used_for">Usato per: %1$s</string>
+    <string name="theme_editor_contrast_header">Avvisi di contrasto</string>
+    <string name="theme_editor_low_contrast">%1$s è difficile da leggere su %2$s (%3$s, minimo 4,5)</string>
+    <string name="theme_editor_add_roles">Aggiungi ruoli colore</string>
+    <string name="theme_editor_hex_label">Colore esadecimale (AARRGGBB)</string>
+    <string name="theme_editor_copy_hex">Copia colore esadecimale</string>
+    <string name="theme_editor_paste_hex">Incolla colore esadecimale</string>
+    <string name="theme_editor_remove_colour">Rimuovi colore</string>
+    <string name="theme_editor_save">Salva tema</string>
+    <string name="theme_editor_export">Esporta</string>
+    <string name="theme_editor_saved_ok">Tema salvato e applicato</string>
+    <string name="theme_editor_exported_ok">Tema esportato</string>
     <string name="settings_language_desc">Forza lingua dell\'app</string>
     <!-- righe per la selezione del linguaggio; non sono traducibili -->
     <!-- commenti aggiunti per mantenere l'allineamento con -->

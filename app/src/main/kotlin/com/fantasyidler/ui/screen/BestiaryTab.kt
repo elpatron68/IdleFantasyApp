@@ -42,7 +42,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.EnemyData
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.BestiaryEntry
 import com.fantasyidler.ui.viewmodel.BestiarySort
 import com.fantasyidler.ui.viewmodel.BestiaryViewModel
@@ -141,7 +140,7 @@ private fun BestiaryList(
                     Text(
                         text     = groupName,
                         style    = MaterialTheme.typography.labelMedium,
-                        color    = GoldPrimary,
+                        color    = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                     )
                     HorizontalDivider()
@@ -211,7 +210,7 @@ private fun BestiaryRow(entry: BestiaryEntry, onClick: () -> Unit) {
             Text(
                 text  = "${entry.killCount} kills",
                 style = MaterialTheme.typography.labelSmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -247,7 +246,7 @@ private fun EnemyDetailContent(
                     Text(
                         text  = "${entry.killCount} kills",
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -354,7 +353,7 @@ private fun BossDetailContent(
                     Text(
                         text  = "${entry.killCount} kills",
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -507,13 +506,13 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
                 text     = stringResource(R.string.bestiary_loot_item_header),
                 modifier = Modifier.weight(1f),
                 style    = MaterialTheme.typography.labelSmall,
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Text(
                 text      = "Qty",
                 modifier  = Modifier.width(80.dp),
                 style     = MaterialTheme.typography.labelSmall,
-                color     = GoldPrimary,
+                color     = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.End,
             )
             if (hasChance) {
@@ -521,7 +520,7 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
                     text      = "Chance",
                     modifier  = Modifier.width(52.dp),
                     style     = MaterialTheme.typography.labelSmall,
-                    color     = GoldPrimary,
+                    color     = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.End,
                 )
             }
@@ -558,7 +557,7 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
                         text      = chance ?: "",
                         modifier  = Modifier.width(52.dp),
                         style     = MaterialTheme.typography.bodySmall,
-                        color     = if (chance != null) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                        color     = if (chance != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.End,
                     )
                 }
@@ -600,14 +599,14 @@ private fun BestiaryProgressBar(encountered: Int, total: Int) {
                 text       = "$pct%",
                 style      = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.SemiBold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
         Spacer(Modifier.height(4.dp))
         LinearProgressIndicator(
             progress  = { fraction },
             modifier  = Modifier.fillMaxWidth(),
-            color     = GoldPrimary,
+            color     = MaterialTheme.colorScheme.primary,
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
         )
     }
@@ -623,7 +622,7 @@ private fun BestiarySectionHeader(text: String) {
         text       = text,
         style      = MaterialTheme.typography.labelMedium,
         fontWeight = FontWeight.SemiBold,
-        color      = GoldPrimary,
+        color      = MaterialTheme.colorScheme.primary,
     )
 }
 

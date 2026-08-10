@@ -57,7 +57,6 @@ import com.fantasyidler.data.json.GuildDailyTemplate
 import com.fantasyidler.data.json.GuildQuestData
 import com.fantasyidler.repository.GuildDailyWithProgress
 import com.fantasyidler.repository.GuildQuestWithProgress
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.GuildDetailViewModel
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.dailyResetClockTime
@@ -222,7 +221,7 @@ private fun GuildProgressHeader(
             LinearProgressIndicator(
                 progress = { (dailiesCompleted.toFloat() / dailiesRequired.toFloat()).coerceIn(0f, 1f) },
                 modifier = Modifier.fillMaxWidth(),
-                color    = if (questGateBlocked) MaterialTheme.colorScheme.error else GoldPrimary,
+                color    = if (questGateBlocked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(2.dp))
             Text(
@@ -244,7 +243,7 @@ private fun GuildProgressHeader(
                     Text(
                         text  = stringResource(R.string.guild_do_dailies_hint),
                         style = MaterialTheme.typography.labelSmall,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -366,7 +365,7 @@ private fun GuildQuestRow(
             LinearProgressIndicator(
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             Text(
@@ -472,7 +471,7 @@ private fun GuildDailyCard(
             LinearProgressIndicator(
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             Text(

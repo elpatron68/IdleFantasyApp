@@ -35,7 +35,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 
 internal val CHARACTER_GENDERS = listOf("Male", "Female", "Other")
@@ -181,7 +180,7 @@ fun CharacterSetupSheet(
                                     Text(
                                         text       = stringResource(R.string.character_title_none),
                                         fontWeight = if (equippedTitleId == null) FontWeight.SemiBold else FontWeight.Normal,
-                                        color      = if (equippedTitleId == null) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                                        color      = if (equippedTitleId == null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                                     )
                                 },
                                 onClick = {
@@ -198,7 +197,7 @@ fun CharacterSetupSheet(
                                                 fontWeight = if (option.id == equippedTitleId) FontWeight.SemiBold else FontWeight.Normal,
                                                 color      = when {
                                                     !option.unlocked            -> MaterialTheme.colorScheme.onSurfaceVariant
-                                                    option.id == equippedTitleId -> GoldPrimary
+                                                    option.id == equippedTitleId -> MaterialTheme.colorScheme.primary
                                                     else                         -> MaterialTheme.colorScheme.onSurface
                                                 },
                                             )

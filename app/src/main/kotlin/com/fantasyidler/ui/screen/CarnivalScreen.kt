@@ -68,7 +68,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.CarnivalPrize
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.ActiveGameState
 import com.fantasyidler.ui.viewmodel.AppraisalQuad
 import com.fantasyidler.ui.viewmodel.CarnivalViewModel
@@ -138,7 +137,7 @@ fun CarnivalScreen(
                         Text(
                             text  = stringResource(R.string.carnival_ticket_balance, state.ticketBalance),
                             style = MaterialTheme.typography.bodySmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 },
@@ -264,7 +263,7 @@ private fun IdleGamesTab(
                             Text(
                                 text  = stringResource(R.string.carnival_skill_level, GameStrings.skillName(context, game.skillKey), skillLevel),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                             Text(
                                 text  = stringResource(R.string.carnival_ticket_yield, myTickets),
@@ -422,7 +421,7 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                     stringResource(R.string.carnival_ring_hard_hint)
                 else
                     stringResource(R.string.carnival_ring_target_hint)
-                Text(hint, style = MaterialTheme.typography.bodySmall, color = GoldPrimary)
+                Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                 Button(onClick = viewModel::startRingToss, modifier = Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.carnival_play))
                 }
@@ -457,7 +456,7 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                                 .align(Alignment.CenterStart)
                                 .padding(start = maxWidth * targetStart)
                                 .height(24.dp)
-                                .background(GoldPrimary.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
                         )
                     }
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
@@ -465,7 +464,7 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                             stringResource(R.string.carnival_ring_hard_hint)
                         else
                             stringResource(R.string.carnival_ring_target_hint)
-                        Text(hint, style = MaterialTheme.typography.bodySmall, color = GoldPrimary)
+                        Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                     }
                     Button(
                         onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitRingToss(position) },
@@ -520,14 +519,14 @@ private fun HammerStrikeCard(gameState: ActiveGameState, difficulty: Difficulty,
                         modifier   = Modifier.fillMaxWidth().height(28.dp).clip(RoundedCornerShape(4.dp)),
                         color      = when {
                             power >= perfectThreshold -> Color(0xFFF44336)
-                            power >= goodThreshold    -> GoldPrimary
+                            power >= goodThreshold    -> MaterialTheme.colorScheme.primary
                             else                      -> MaterialTheme.colorScheme.primary
                         },
                         trackColor = MaterialTheme.colorScheme.surfaceVariant,
                     )
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                         Text(stringResource(R.string.carnival_hammer_miss_zone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text(stringResource(R.string.carnival_hammer_good_zone), style = MaterialTheme.typography.bodySmall, color = GoldPrimary)
+                        Text(stringResource(R.string.carnival_hammer_good_zone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                         Text(stringResource(R.string.carnival_hammer_perfect_zone), style = MaterialTheme.typography.bodySmall, color = Color(0xFFF44336))
                     }
                     Button(
@@ -761,7 +760,7 @@ private fun ShellGameCard(gameState: ActiveGameState, difficulty: Difficulty, vi
                         (0 until cupCount).forEach { i ->
                             Surface(
                                 shape  = RoundedCornerShape(8.dp),
-                                color  = if (i == gemPos) GoldPrimary else MaterialTheme.colorScheme.surface,
+                                color  = if (i == gemPos) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
                                 modifier = Modifier.size(56.dp),
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
@@ -896,7 +895,7 @@ private fun HigherOrLowerCard(gameState: ActiveGameState, difficulty: Difficulty
                         text       = stringResource(R.string.carnival_higher_lower_current, current),
                         style      = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
-                        color      = GoldPrimary,
+                        color      = MaterialTheme.colorScheme.primary,
                     )
                     Text(
                         text  = stringResource(R.string.carnival_higher_lower_round, gameState.currentIdx + 1, totalRounds),
@@ -929,7 +928,7 @@ private fun HigherOrLowerCard(gameState: ActiveGameState, difficulty: Difficulty
                         text  = stringResource(R.string.carnival_higher_lower_last_card, gameState.lastNumber),
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
                         text  = stringResource(R.string.carnival_higher_lower_result, gameState.totalCorrect, gameState.totalRounds, gameState.tickets),
@@ -1011,7 +1010,7 @@ private fun PrizeRow(
                     Text(
                         text  = statParts.joinToString("  "),
                         style = MaterialTheme.typography.bodySmall,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 val reqs = equipData.requirements
@@ -1037,7 +1036,7 @@ private fun PrizeRow(
             Text(
                 text       = stringResource(R.string.carnival_ticket_cost, prize.ticketCost),
                 style      = MaterialTheme.typography.bodyMedium,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(4.dp))
@@ -1092,7 +1091,7 @@ private fun LampSkillPickerDialog(
                             Text(
                                 text  = stringResource(R.string.slayer_level_label, level),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }

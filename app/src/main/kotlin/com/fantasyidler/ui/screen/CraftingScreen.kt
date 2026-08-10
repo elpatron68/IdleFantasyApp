@@ -66,7 +66,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.CraftableRecipe
 import com.fantasyidler.ui.viewmodel.CraftingUiState
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
@@ -270,7 +269,7 @@ private fun RecipeRow(
                     Text(
                         text  = "×$canMake",
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
@@ -430,7 +429,7 @@ private fun CraftSheet(
         Text(
             text     = projectedXpLabel(currentXp, totalXp.toLong()),
             style    = MaterialTheme.typography.bodySmall,
-            color    = GoldPrimary,
+            color    = MaterialTheme.colorScheme.primary,
             modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         if (recipe.outputQty > 1) {

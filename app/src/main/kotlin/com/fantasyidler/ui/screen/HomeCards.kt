@@ -81,7 +81,6 @@ import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.WorkerTier
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SessionSummary
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
@@ -204,7 +203,7 @@ internal fun HomeSessionCard(
                                  else stringResource(R.string.combat_run_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
                     style      = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
-                    color      = GoldPrimary,
+                    color      = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -571,7 +570,7 @@ internal fun WorkerSessionCard(
                 Text(
                     text       = "$tierLabel · ${hiredWorker.dailyName}",
                     style      = MaterialTheme.typography.labelMedium,
-                    color      = GoldPrimary,
+                    color      = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }

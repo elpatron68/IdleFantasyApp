@@ -87,8 +87,6 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
-import com.fantasyidler.ui.theme.SuccessGreen
 import com.fantasyidler.ui.viewmodel.CombatViewModel
 import com.fantasyidler.ui.viewmodel.CombatViewModel.Companion.MAX_DUNGEON_REPEAT_COUNT
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
@@ -206,9 +204,9 @@ internal fun DungeonInfoSheet(
         // Level and combat style rows
         StatRow(label = stringResource(R.string.combat_rec_level),
             value = dungeon.recommendedLevel.toString(),
-            valueColor = if (canEnter) GoldPrimary else MaterialTheme.colorScheme.error)
+            valueColor = if (canEnter) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
         StatRow(label = stringResource(R.string.combat_your_level), value = combatLvl.toString())
-        StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = GoldPrimary)
+        StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = MaterialTheme.colorScheme.primary)
 
         Spacer(Modifier.height(12.dp))
 
@@ -287,7 +285,7 @@ internal fun DungeonInfoSheet(
                                          else GameStrings.itemName(context, key),
                             style      = MaterialTheme.typography.bodyMedium,
                             fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                            color      = if (isSelected) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                            color      = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                         )
                         if (key != null) {
                             val effectStr = potionEffects[key]?.entries
@@ -310,7 +308,7 @@ internal fun DungeonInfoSheet(
                     }
                     if (isSelected) {
                         Text("✓", style = MaterialTheme.typography.bodyMedium,
-                            color = GoldPrimary, fontWeight = FontWeight.Bold)
+                            color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                     }
                 }
             }

@@ -30,6 +30,7 @@ import com.fantasyidler.data.json.RuneData
 import com.fantasyidler.data.json.SkillData
 import com.fantasyidler.data.json.SmithingRecipe
 import com.fantasyidler.data.json.ConstructionRecipe
+import com.fantasyidler.data.json.ThemeData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.json.TownBuildingData
@@ -312,6 +313,12 @@ class GameDataRepository @Inject constructor(
             .filter { it.endsWith(".json") }
             .map { filename -> asset<TradeRouteData>("data/trade_routes/$filename") }
             .sortedBy { it.levelRequired }
+    }
+
+    // ------------------------------------------------------------------ official themes
+
+    val officialThemes: Map<String, ThemeData> by lazy {
+        asset("data/official_themes.json")
     }
 
     // ------------------------------------------------------------------ sell helpers

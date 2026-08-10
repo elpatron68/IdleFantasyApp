@@ -27,7 +27,6 @@ import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.SkillSimulator
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.isGuildCapeForSkill
@@ -367,7 +366,7 @@ private fun BonusRow(
         Text(
             text  = pct,
             style = MaterialTheme.typography.labelLarge,
-            color = GoldPrimary,
+            color = MaterialTheme.colorScheme.primary,
         )
         Spacer(Modifier.width(8.dp))
         Text(

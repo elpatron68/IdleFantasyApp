@@ -1,0 +1,4 @@
+• New in-app theme editor in Settings: recolour any theme with a colour picker, preview it live, save it as your own, and export it as a file to share (importable by others)
+• The guild cape is now awarded when the guild actually reaches level 10, instead of when the final guild quest is claimed at level 9
+• Trade route coin returns on the Mercantile screen now include your cape, prestige, and blessing bonuses, so the shown range matches what sessions actually pay
+• The quest panel's quick-add button now accounts for recipes that craft multiple items per action (e.g. 15 arrows per craft), matching the quest target chips instead of queueing far too many crafts

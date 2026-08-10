@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
-import com.fantasyidler.ui.theme.GoldPrimary
 import kotlinx.coroutines.launch
 
 private data class OnboardingPage(val emoji: String, val title: String, val body: String)
@@ -90,7 +89,7 @@ fun OnboardingScreen(onComplete: () -> Unit) {
                         val selected = pagerState.currentPage == i
                         Surface(
                             shape    = CircleShape,
-                            color    = if (selected) GoldPrimary
+                            color    = if (selected) MaterialTheme.colorScheme.primary
                                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.25f),
                             modifier = Modifier.size(if (selected) 10.dp else 7.dp),
                         ) {}

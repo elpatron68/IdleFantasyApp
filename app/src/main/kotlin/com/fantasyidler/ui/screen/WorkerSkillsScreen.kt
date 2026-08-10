@@ -68,7 +68,6 @@ import com.fantasyidler.R
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.data.model.WorkerTier
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.CraftableRecipe
 import com.fantasyidler.ui.viewmodel.SheetState
 import com.fantasyidler.ui.viewmodel.WorkerSkillsUiState
@@ -175,7 +174,7 @@ fun WorkerSkillsScreen(
                     Text(
                         text  = stringResource(R.string.inn_worker_tier, tierLabel),
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                     )
@@ -659,7 +658,7 @@ private fun WorkerCraftRecipeRow(
             Text(
                 text  = stringResource(R.string.crafting_owned, ownedQty),
                 style = MaterialTheme.typography.labelSmall,
-                color = if (ownedQty > 0) GoldPrimary else dim,
+                color = if (ownedQty > 0) MaterialTheme.colorScheme.primary else dim,
             )
             recipe.outputCombatStyle?.let { style ->
 
@@ -715,7 +714,7 @@ private fun WorkerCraftRecipeRow(
                     Text(
                         text       = "×$canMake",
                         style      = MaterialTheme.typography.labelMedium,
-                        color      = GoldPrimary,
+                        color      = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
@@ -843,7 +842,7 @@ private fun WorkerCraftQuantityContent(
         Text(
             text     = projectedXpLabel(state.skillXp[recipe.skillName] ?: 0L, totalXp.toLong()),
             style    = MaterialTheme.typography.bodySmall,
-            color    = GoldPrimary,
+            color    = MaterialTheme.colorScheme.primary,
             modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         if (state.sessionDurationMs > 0) {
@@ -871,7 +870,7 @@ private fun WorkerCraftQuantityContent(
                         Text(
                             text       = if (ashKey == null) stringResource(R.string.catalyst_none) else GameStrings.itemName(context, ashKey),
                             style      = MaterialTheme.typography.bodyMedium,
-                            color      = if (selectedAsh == ashKey) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                            color      = if (selectedAsh == ashKey) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                             fontWeight = if (selectedAsh == ashKey) FontWeight.SemiBold else FontWeight.Normal,
                         )
                         if (ashKey != null) {
@@ -884,7 +883,7 @@ private fun WorkerCraftQuantityContent(
                     }
                 }
                 if (state.herbloreAshKey != null) {
-                    Text(stringResource(R.string.catalyst_enhanced_output), style = MaterialTheme.typography.labelSmall, color = GoldPrimary)
+                    Text(stringResource(R.string.catalyst_enhanced_output), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                 }
             }
         }

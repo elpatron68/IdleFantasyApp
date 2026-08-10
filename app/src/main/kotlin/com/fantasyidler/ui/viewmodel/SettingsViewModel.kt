@@ -3,8 +3,12 @@ package com.fantasyidler.ui.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.darkColorScheme
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fantasyidler.data.json.ThemeData
+import com.fantasyidler.data.model.CustomTheme
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.toExport
 import com.fantasyidler.data.model.toSkillSession
@@ -12,22 +16,26 @@ import com.fantasyidler.repository.BackupScheduler
 import com.fantasyidler.repository.FarmingRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
-import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
+import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.ThemeRepository
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.util.SaveViewerClient
 import com.fantasyidler.util.UploadResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,8 +49,15 @@ class SettingsViewModel @Inject constructor(
     private val backupScheduler: BackupScheduler,
     private val guildRepo: GuildRepository,
     private val farmingRepo: FarmingRepository,
+    private val themeRepo: ThemeRepository,
     private val json: Json,
 ) : ViewModel() {
+
+    val officialThemes: List<String> = themeRepo.getOfficialThemes()
+
+    val customThemes: StateFlow<List<CustomTheme>> = themeRepo.observeCustomThemes()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000),
+            emptyList())
 
     val themePreference: StateFlow<String> = playerRepo.playerFlow
         .map { player ->
@@ -51,6 +66,25 @@ class SettingsViewModel @Inject constructor(
             catch (_: Exception) { "dark" }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), "dark")
+
+    private val systemDark = MutableStateFlow(themeRepo.isSystemDarkNow())
+
+    /** Keeps the "system" theme in sync with the device night-mode setting; fed from composition. */
+    fun setSystemDark(dark: Boolean) { systemDark.value = dark }
+
+    val colourScheme: StateFlow<ColorScheme> = combine(
+        playerRepo.playerFlow,
+        themeRepo.observeCustomThemes(),
+        systemDark,
+    ) { player, _, isSystemDark ->
+        val preference = if (player == null) {
+            "dark"
+        } else {
+            try { json.decodeFromString<PlayerFlags>(player.flags).themePreference }
+            catch (_: Exception) { "dark" }
+        }
+        themeRepo.getColourScheme(preference, isSystemDark)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), darkColorScheme())
 
     val fontScale: StateFlow<Float> = playerRepo.playerFlow
         .map { player ->
@@ -211,6 +245,16 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun deleteTheme(theme: String) {
+        viewModelScope.launch {
+            if (!themeRepo.deleteTheme(theme)) return@launch
+            val flags = playerRepo.getFlags()
+            if (flags.themePreference == theme) {
+                playerRepo.updateFlags(flags.copy(themePreference = "dark"))
+            }
+        }
+    }
+
     fun setFontScale(scale: Float) {
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
@@ -337,6 +381,30 @@ class SettingsViewModel @Inject constructor(
             } catch (_: Exception) {
                 onDone(false)
             }
+        }
+    }
+
+    fun importTheme(jsonString: String, onDone: (success: Boolean) -> Unit) {
+        viewModelScope.launch {
+            try {
+                themeRepo.importTheme(jsonString)
+                onDone(true)
+            } catch (_: Exception) {
+                onDone(false)
+            }
+        }
+    }
+
+    /** Serializes [theme] in the shape importTheme reads and hands it to [onReady]. */
+    fun exportTheme(theme: String, onReady: (jsonString: String) -> Unit) {
+        viewModelScope.launch {
+            val data = themeRepo.getThemeData(theme) ?: return@launch
+            onReady(
+                json.encodeToString(
+                    json.serializersModule.serializer<Map<String, ThemeData>>(),
+                    mapOf(theme to data),
+                )
+            )
         }
     }
 }

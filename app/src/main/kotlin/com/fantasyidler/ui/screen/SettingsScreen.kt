@@ -1,6 +1,5 @@
 package com.fantasyidler.ui.screen
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.DocumentsContract
@@ -75,11 +74,11 @@ fun SettingsScreen(
     onBack: () -> Unit,
     onReopenTutorial: () -> Unit = {},
     onNavigateToHomeScreenSettings: () -> Unit = {},
+    onNavigateToThemeSettings: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 
-    val themePreference        by viewModel.themePreference.collectAsState()
     val fontScale              by viewModel.fontScale.collectAsState()
     val profileLayout          by viewModel.profileLayout.collectAsState()
     val backupFolderUri  by viewModel.backupFolderUri.collectAsState()
@@ -250,26 +249,11 @@ fun SettingsScreen(
             // Appearance section
             SectionHeader(title = stringResource(R.string.settings_appearance))
 
-            // Chips render below the text (not in the trailing slot) so the four theme
-            // options can wrap instead of squeezing the description into a sliver.
             SettingsRow(
                 title    = stringResource(R.string.settings_theme),
                 subtitle = stringResource(R.string.settings_theme_desc),
+                onClick  = onNavigateToThemeSettings,
             )
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                listOf(
-                    "dark"     to stringResource(R.string.settings_theme_dark),
-                    "midnight" to stringResource(R.string.settings_theme_midnight),
-                    "light"    to stringResource(R.string.settings_theme_light),
-                    "system"   to stringResource(R.string.settings_theme_system),
-                ).forEach { (key, label) ->
-                    FilterChip(
-                        selected = themePreference == key,
-                        onClick  = { viewModel.setTheme(key) },
-                        label    = { Text(label, style = MaterialTheme.typography.labelSmall) },
-                    )
-                }
-            }
 
             SettingsRow(
                 title    = stringResource(R.string.settings_font_size),
@@ -694,6 +678,7 @@ private fun LanguageSection() {
         "ja"     to stringResource(R.string.settings_lang_japanese),
         "ga"     to stringResource(R.string.settings_lang_irish),
         "cs"     to stringResource(R.string.settings_lang_czech),
+        "zh-CN"  to stringResource(R.string.settings_lang_chinese_simplified),
         "system" to stringResource(R.string.settings_lang_system),
     )
     val selectedLabel =

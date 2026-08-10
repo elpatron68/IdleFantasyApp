@@ -67,7 +67,6 @@ import com.fantasyidler.data.json.CropData
 import com.fantasyidler.data.model.FarmingPatch
 import com.fantasyidler.repository.FarmingRepository
 import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.FarmingUiState
 import com.fantasyidler.ui.viewmodel.FarmingViewModel
@@ -182,7 +181,7 @@ fun FarmingScreen(
                     Text(
                         text  = "+${result.xpGained.formatXp()} XP",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                     )
                     if (result.itemsGained.isNotEmpty()) {
@@ -287,7 +286,7 @@ fun FarmingSheetContent(
                     Text(
                         text  = "+${result.xpGained.formatXp()} XP",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                     )
                     if (result.itemsGained.isNotEmpty()) {
@@ -345,7 +344,7 @@ private fun FarmingXpBar(state: FarmingUiState) {
             LinearProgressIndicator(
                 progress = { progress },
                 modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             Text(
@@ -436,7 +435,7 @@ private fun PatchCard(
                         LinearProgressIndicator(
                             progress = { progress },
                             modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
-                            color    = GoldPrimary,
+                            color    = MaterialTheme.colorScheme.primary,
                         )
                         if (BuildConfig.DEBUG) {
                             TextButton(onClick = onClimb) {
@@ -455,14 +454,14 @@ private fun PatchCard(
                             Text(
                                 text  = "🌿 ${context.getString(R.string.farming_fertilizer_yield, pct)}",
                                 style = MaterialTheme.typography.labelSmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                         Spacer(Modifier.height(4.dp))
                         LinearProgressIndicator(
                             progress = { progress },
                             modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
-                            color    = GoldPrimary,
+                            color    = MaterialTheme.colorScheme.primary,
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
@@ -492,7 +491,7 @@ private fun PatchCard(
                         Text(
                             text  = stringResource(R.string.farming_bean_ready),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold,
                         )
                         Spacer(Modifier.height(8.dp))
@@ -513,7 +512,7 @@ private fun PatchCard(
                         Text(
                             text  = stringResource(R.string.label_ready_to_harvest),
                             style = MaterialTheme.typography.bodySmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold,
                         )
                         Spacer(Modifier.height(8.dp))
@@ -644,7 +643,7 @@ private fun PlantSheet(
                         Text(
                             text  = "Seeds: $seedCount  •  Owned: $ownedCount",
                             style = MaterialTheme.typography.labelSmall,
-                            color = if (enabled) GoldPrimary else MaterialTheme.colorScheme.error,
+                            color = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                         )
                     }
                     Spacer(Modifier.width(8.dp))

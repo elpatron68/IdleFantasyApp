@@ -82,7 +82,6 @@ import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
@@ -209,7 +208,7 @@ internal fun PrayerSheet(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
-                        Text(stringResource(R.string.btn_select), style = MaterialTheme.typography.labelMedium, color = GoldPrimary)
+                        Text(stringResource(R.string.btn_select), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                     }
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
@@ -293,7 +292,7 @@ internal fun PrayerSheet(
             Text(
                 text     = projectedXpLabel(currentXp, (qty * selectedBone.xpPerBone).toLong()),
                 style    = MaterialTheme.typography.bodyMedium,
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
