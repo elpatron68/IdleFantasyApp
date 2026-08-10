@@ -90,7 +90,6 @@ import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.WorkerTier
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
@@ -201,7 +200,7 @@ fun HomeScreen(
                                         Text(
                                             text  = breakdown,
                                             style = MaterialTheme.typography.labelSmall,
-                                            color = GoldPrimary,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     }
                                 }
@@ -225,7 +224,7 @@ fun HomeScreen(
                                     Text(
                                         text  = breakdown,
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = GoldPrimary,
+                                        color = MaterialTheme.colorScheme.primary,
                                     )
                                 }
                             }
@@ -244,8 +243,8 @@ fun HomeScreen(
                             SummaryRow(
                                 label = if (isRare) "🌟 $item" else item,
                                 value = qty,
-                                labelColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurface,
-                                valueColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                labelColor = if (isRare) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                valueColor = if (isRare) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = if (isRare) FontWeight.Bold else FontWeight.Normal,
                             )
                         }
@@ -257,7 +256,7 @@ fun HomeScreen(
                         Text(
                             text  = stringResource(R.string.church_blessing_bonus, summary.coinBlessingBonus.formatCoins()),
                             style = MaterialTheme.typography.labelSmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                     if (summary.foodConsumedLines.isNotEmpty()) {
@@ -292,7 +291,7 @@ fun HomeScreen(
                             Text(
                                 text = note,
                                 style = MaterialTheme.typography.bodySmall.copy(fontStyle = androidx.compose.ui.text.font.FontStyle.Italic),
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(vertical = 2.dp),
                             )
                         }
@@ -357,7 +356,7 @@ fun HomeScreen(
                                         Text(
                                             text  = breakdown,
                                             style = MaterialTheme.typography.labelSmall,
-                                            color = GoldPrimary,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     }
                                 }
@@ -381,7 +380,7 @@ fun HomeScreen(
                                     Text(
                                         text  = breakdown,
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = GoldPrimary,
+                                        color = MaterialTheme.colorScheme.primary,
                                     )
                                 }
                             }
@@ -400,8 +399,8 @@ fun HomeScreen(
                             SummaryRow(
                                 label = if (isRare) "🌟 $item" else item,
                                 value = qty,
-                                labelColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurface,
-                                valueColor = if (isRare) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                labelColor = if (isRare) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                valueColor = if (isRare) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = if (isRare) FontWeight.Bold else FontWeight.Normal,
                             )
                         }
@@ -413,7 +412,7 @@ fun HomeScreen(
                         Text(
                             text  = stringResource(R.string.church_blessing_bonus, summary.coinBlessingBonus.formatCoins()),
                             style = MaterialTheme.typography.labelSmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 }
@@ -623,7 +622,7 @@ fun HomeScreen(
                             StatInline(
                                 label      = stringResource(R.string.label_coins),
                                 value      = state.coins.formatCoins(),
-                                valueColor = GoldPrimary,
+                                valueColor = MaterialTheme.colorScheme.primary,
                             )
                         }
                         if (blessingActive) {
@@ -648,14 +647,14 @@ fun HomeScreen(
                                 Icon(
                                     imageVector        = Icons.Filled.Star,
                                     contentDescription = null,
-                                    tint               = GoldPrimary,
+                                    tint               = MaterialTheme.colorScheme.primary,
                                     modifier           = Modifier.size(12.dp),
                                 )
                                 Spacer(Modifier.width(4.dp))
                                 Text(
                                     text  = blessingText,
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = GoldPrimary,
+                                    color = MaterialTheme.colorScheme.primary,
                                 )
                             }
                         }
@@ -682,7 +681,7 @@ fun HomeScreen(
 
             // ── Town grid ───────────────────────────────────────────────
             val churchTint = if (state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0)
-                GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+                MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
             val townGridRows: @Composable () -> Unit = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Row(
@@ -801,7 +800,7 @@ fun HomeScreen(
                                     text  = if (eventComplete) stringResource(R.string.seasonal_event_complete)
                                             else stringResource(R.string.seasonal_event_token_progress, event.tokens, event.goal),
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = if (eventComplete) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = if (eventComplete) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                                     fontWeight = if (eventComplete) FontWeight.Bold else FontWeight.Normal,
                                 )
                             }

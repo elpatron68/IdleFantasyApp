@@ -48,7 +48,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.GuildHallViewModel
 import com.fantasyidler.ui.viewmodel.GuildSummary
 import com.fantasyidler.util.GameStrings
@@ -190,7 +189,7 @@ private fun GuildCard(
                     Text(
                         text  = stringResource(R.string.guild_dailies_available),
                         style = MaterialTheme.typography.labelSmall,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 if (summary.level < 10) {
@@ -198,7 +197,7 @@ private fun GuildCard(
                     LinearProgressIndicator(
                         progress = { (summary.dailiesCompletedThisTier.toFloat() / summary.dailiesRequiredThisTier.toFloat()).coerceIn(0f, 1f) },
                         modifier = Modifier.fillMaxWidth(),
-                        color    = GoldPrimary,
+                        color    = MaterialTheme.colorScheme.primary,
                     )
                     Spacer(Modifier.height(2.dp))
                     Text(

@@ -86,7 +86,6 @@ import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -525,7 +524,7 @@ private fun GuildDailySheetBanner(
                                             else                           -> "${quest.progress} / ${quest.amount}"
                                         },
                                         style = MaterialTheme.typography.labelMedium,
-                                        color = GoldPrimary,
+                                        color = MaterialTheme.colorScheme.primary,
                                     )
                                 }
                                 if (!quest.claimed && quest.progress < quest.amount && quest.canQueue()) {
@@ -533,7 +532,7 @@ private fun GuildDailySheetBanner(
                                         onQueueDaily(quest)
                                         showDialog = false
                                     }) {
-                                        Icon(Icons.Filled.Add, contentDescription = null, tint = GoldPrimary)
+                                        Icon(Icons.Filled.Add, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                                     }
                                 }
                             }
@@ -568,7 +567,7 @@ private fun GuildDailySheetBanner(
             Text(
                 text  = stringResource(R.string.nav_quests),
                 style = MaterialTheme.typography.labelMedium,
-                color = if (anyOpen) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                color = if (anyOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
         if (guildMaxed) {
@@ -868,7 +867,7 @@ internal fun SkillRow(
                         .size(44.dp)
                         .clip(CircleShape)
                         .background(
-                            if (isActive) GoldPrimary
+                            if (isActive) MaterialTheme.colorScheme.primary
                             else MaterialTheme.colorScheme.surfaceVariant
                         ),
                     contentAlignment = Alignment.Center,
@@ -905,7 +904,7 @@ internal fun SkillRow(
                 }
                 if (guildDailyOpen) {
                     Badge(
-                        containerColor = GoldPrimary,
+                        containerColor = MaterialTheme.colorScheme.primary,
                         modifier       = Modifier.align(Alignment.TopStart),
                     )
                 }
@@ -930,7 +929,7 @@ internal fun SkillRow(
                         Text(
                             text  = stringResource(R.string.label_training),
                             style = MaterialTheme.typography.labelSmall,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     } else {
                         val xpText = if (xpToNextLevel(xp) > 0L)
@@ -951,7 +950,7 @@ internal fun SkillRow(
                         .fillMaxWidth()
                         .height(4.dp)
                         .clip(RoundedCornerShape(2.dp)),
-                    color    = GoldPrimary,
+                    color    = MaterialTheme.colorScheme.primary,
                 )
                 if (toolEfficiency > 1.0f) {
                     Spacer(Modifier.height(2.dp))
@@ -984,7 +983,7 @@ internal fun SkillRow(
                 Text(
                     text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
                     style = MaterialTheme.typography.labelMedium,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 when {
                     onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
@@ -992,7 +991,7 @@ internal fun SkillRow(
                             Text(
                                 text  = stringResource(R.string.prestige),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }

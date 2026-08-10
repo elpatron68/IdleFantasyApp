@@ -52,7 +52,6 @@ import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.SlayerTask
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.ui.viewmodel.PendingLamp
 import com.fantasyidler.ui.viewmodel.SlayerViewModel
@@ -323,7 +322,7 @@ private fun SlayerSkillHeader(
                 Text(
                     text  = stringResource(R.string.slayer_level_label, level),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }
@@ -346,7 +345,7 @@ private fun SlayerSkillHeader(
                 Text(
                     text  = stringResource(R.string.slayer_points, slayerPoints),
                     style = MaterialTheme.typography.bodySmall,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }
@@ -514,7 +513,7 @@ private fun ShopRow(
                     Text(
                         text  = statParts.joinToString("  "),
                         style = MaterialTheme.typography.bodySmall,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 val reqs = equipData.requirements
@@ -543,7 +542,7 @@ private fun ShopRow(
             Text(
                 text       = stringResource(R.string.slayer_shop_cost, item.cost),
                 style      = MaterialTheme.typography.bodyMedium,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(4.dp))
@@ -596,7 +595,7 @@ private fun LampSkillPickerDialog(
                             Text(
                                 text  = stringResource(R.string.slayer_level_label, level),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = GoldPrimary,
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }

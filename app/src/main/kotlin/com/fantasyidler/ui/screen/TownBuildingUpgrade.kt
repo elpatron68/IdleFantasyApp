@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
 import com.fantasyidler.data.json.TownBuildingData
 import com.fantasyidler.repository.TownRepository
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import kotlin.math.roundToInt
@@ -81,7 +80,7 @@ fun BuildingUpgradeCard(
             Text(
                 text       = tierText,
                 style      = MaterialTheme.typography.bodyMedium,
-                color      = if (isMaxed) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+                color      = if (isMaxed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                 fontWeight = if (isMaxed) FontWeight.SemiBold else FontWeight.Normal,
             )
 

@@ -34,6 +34,20 @@ val MIGRATION_4_5 = object : Migration(4, 5) {
     }
 }
 
+val MIGRATION_5_6 = object : Migration(5, 6) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            "CREATE TABLE IF NOT EXISTS `themes` (" +
+                "`name` TEXT NOT NULL, " +
+                "`display_name` TEXT NOT NULL, " +
+                "`base` TEXT NOT NULL, " +
+                "`colours` TEXT NOT NULL, " +
+                "`scheme` TEXT NOT NULL, " +
+                "PRIMARY KEY(`name`))"
+        )
+    }
+}
+
 @Database(
     entities = [
         Player::class,
@@ -42,8 +56,9 @@ val MIGRATION_4_5 = object : Migration(4, 5) {
         FarmingPatch::class,
         GlobalState::class,
         ArenaRecord::class,
+        CustomTheme::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -53,4 +68,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun farmingPatchDao(): FarmingPatchDao
     abstract fun globalStateDao(): GlobalStateDao
     abstract fun arenaRecordDao(): ArenaRecordDao
+    abstract fun customThemeDao(): CustomThemeDao
 }

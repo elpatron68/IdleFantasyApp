@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.ArmoryEntry
 import com.fantasyidler.ui.viewmodel.ArmoryFilter
 import com.fantasyidler.ui.viewmodel.ArmorySort
@@ -103,7 +102,7 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
                     Text(
                         text     = groupName,
                         style    = MaterialTheme.typography.labelMedium,
-                        color    = GoldPrimary,
+                        color    = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                     )
                     HorizontalDivider()
@@ -202,7 +201,7 @@ private fun ArmoryDetailContent(entry: ArmoryEntry) {
             Text(
                 text  = slotLabel(item.slot),
                 style = MaterialTheme.typography.labelMedium,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(16.dp))
         }
@@ -304,7 +303,7 @@ private fun ArmorySectionHeader(text: String) {
         text       = text,
         style      = MaterialTheme.typography.labelMedium,
         fontWeight = FontWeight.SemiBold,
-        color      = GoldPrimary,
+        color      = MaterialTheme.colorScheme.primary,
     )
 }
 
@@ -420,14 +419,14 @@ private fun CollectionProgressBar(obtained: Int, total: Int, label: String) {
                 text  = "$pct%",
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.SemiBold,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
         Spacer(Modifier.height(4.dp))
         LinearProgressIndicator(
             progress = { fraction },
             modifier = Modifier.fillMaxWidth(),
-            color    = GoldPrimary,
+            color    = MaterialTheme.colorScheme.primary,
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
         )
     }

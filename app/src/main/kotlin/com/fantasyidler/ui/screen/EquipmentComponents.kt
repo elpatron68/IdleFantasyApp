@@ -75,7 +75,6 @@ import com.fantasyidler.data.json.SkillingDungeonData
 import com.fantasyidler.data.json.ConstructionRecipe
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.model.EquipSlot
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.Achievement
 import com.fantasyidler.ui.viewmodel.AchievementsViewModel
 import com.fantasyidler.ui.viewmodel.ArmoryViewModel
@@ -169,7 +168,7 @@ internal fun FoodRow(
             }
         } else {
             TextButton(onClick = onEquip) {
-                Text(stringResource(R.string.btn_equip), color = GoldPrimary)
+                Text(stringResource(R.string.btn_equip), color = MaterialTheme.colorScheme.primary)
             }
         }
     }
@@ -331,7 +330,7 @@ internal fun EquipPickerSheet(
                     Text(
                         text  = stringResource(R.string.btn_equip),
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))

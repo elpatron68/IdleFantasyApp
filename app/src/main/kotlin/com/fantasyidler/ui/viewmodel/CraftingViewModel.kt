@@ -391,7 +391,7 @@ class CraftingViewModel @Inject constructor(
             _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
             return true
         }
-        craft(recipe, remaining.coerceIn(1, max))
+        craft(recipe, ceilDiv(remaining, recipe.outputQty).coerceIn(1, max))
         return true
     }
 

@@ -70,12 +70,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.BulkSellPreview
 import com.fantasyidler.ui.viewmodel.ShopEntry
 import com.fantasyidler.ui.viewmodel.ShopTransaction
 import com.fantasyidler.ui.viewmodel.ShopViewModel
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
@@ -160,7 +158,7 @@ fun ShopScreen(
                 Text(
                     text  = state.coins.formatCoins(),
                     style = MaterialTheme.typography.labelMedium,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                 )
             }
@@ -307,7 +305,7 @@ private fun BuyList(
                             text       = stringResource(R.string.shop_total_amount, discounted.toString()),
                             style      = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color      = if (canAfford) GoldPrimary else GoldPrimary.copy(alpha = 0.38f),
+                            color      = if (canAfford) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primary.copy(alpha = 0.38f),
                         )
                         if (hasDiscount) {
                             Text(
@@ -436,7 +434,7 @@ private fun SellList(
                             text       = stringResource(R.string.shop_price_each, sellPrice.toString()),
                             style      = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color      = GoldPrimary.copy(alpha = lockedAlpha),
+                            color      = MaterialTheme.colorScheme.primary.copy(alpha = lockedAlpha),
                         )
                     }
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -543,7 +541,7 @@ private fun TransactionSheet(
                 text       = stringResource(R.string.shop_total_amount, total.toString()),
                 style      = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
 
@@ -624,7 +622,7 @@ private fun BulkSellSheet(
                         text       = item.total.formatCoins(),
                         style      = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
-                        color      = GoldPrimary,
+                        color      = MaterialTheme.colorScheme.primary,
                     )
                 }
                 HorizontalDivider()
@@ -646,7 +644,7 @@ private fun BulkSellSheet(
                 text       = preview.totalCoins.formatCoins(),
                 style      = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
         Row(

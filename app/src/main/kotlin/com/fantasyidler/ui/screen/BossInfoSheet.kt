@@ -91,8 +91,6 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
-import com.fantasyidler.ui.theme.SuccessGreen
 import com.fantasyidler.ui.viewmodel.CombatViewModel
 import com.fantasyidler.ui.viewmodel.CombatViewModel.Companion.MAX_BOSS_REPEAT_COUNT
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
@@ -177,7 +175,7 @@ internal fun BossInfoSheet(
                 text       = boss.combatLevelRequired.toString(),
                 style      = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold,
-                color      = if (canFight) GoldPrimary else MaterialTheme.colorScheme.error,
+                color      = if (canFight) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
             )
         }
         Row(
@@ -198,7 +196,7 @@ internal fun BossInfoSheet(
             Text(stringResource(R.string.combat_duration_min, boss.durationMinutes), style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.SemiBold)
         }
-        StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = GoldPrimary)
+        StatRow(label = stringResource(R.string.label_combat_style), value = styleLabel, valueColor = MaterialTheme.colorScheme.primary)
 
         // Weapon picker
         if (equippedWeapons.isNotEmpty()) {
@@ -261,7 +259,7 @@ internal fun BossInfoSheet(
                     Text(GameStrings.skillName(context, skill),
                         style = MaterialTheme.typography.bodySmall)
                     Text("+$xp ${stringResource(R.string.label_xp)}", style = MaterialTheme.typography.bodySmall,
-                        color = GoldPrimary, fontWeight = FontWeight.SemiBold)
+                        color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold)
                 }
             }
         }

@@ -46,7 +46,6 @@ import com.fantasyidler.R
 import com.fantasyidler.data.json.BlessingData
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.ChurchViewModel
 import com.fantasyidler.util.formatDurationMs
 import kotlin.math.roundToInt
@@ -238,7 +237,7 @@ private fun ActiveBlessingBanner(
                 text       = name,
                 style      = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
             Text(
                 text  = effectText,

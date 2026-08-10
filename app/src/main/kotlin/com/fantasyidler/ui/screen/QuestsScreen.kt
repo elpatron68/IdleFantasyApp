@@ -59,7 +59,6 @@ import com.fantasyidler.R
 import com.fantasyidler.data.json.DailyQuestTemplate
 import com.fantasyidler.data.json.QuestData
 import com.fantasyidler.repository.DailyQuestWithProgress
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.QuestWithProgress
 import com.fantasyidler.ui.viewmodel.QuestsViewModel
 import com.fantasyidler.repository.WeeklyQuestWithProgress
@@ -390,7 +389,7 @@ private fun WeeklyQuestsContent(
                     Text(
                         text = stringResource(R.string.weekly_bonus_title),
                         style = MaterialTheme.typography.bodyLarge,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                     Spacer(Modifier.height(8.dp))
                     Button(onClick = onClaimBonus, modifier = Modifier.fillMaxWidth()) {
@@ -501,7 +500,7 @@ private fun DailyQuestCard(
             LinearProgressIndicator(
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             val displayProgress = quest.progress.coerceAtMost(quest.template.amount)
@@ -536,7 +535,7 @@ private fun DailyQuestCard(
             Text(
                 text  = stringResource(R.string.label_daily_reward),
                 style = MaterialTheme.typography.labelSmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(6.dp))
             Button(
@@ -598,7 +597,7 @@ private fun QuestRow(
             LinearProgressIndicator(
                 progress  = { questWithProgress.progressFraction },
                 modifier  = Modifier.fillMaxWidth(),
-                color     = GoldPrimary,
+                color     = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             val displayProgress = questWithProgress.progress.coerceAtMost(quest.amount)
@@ -652,7 +651,7 @@ private fun QuestRow(
                 Text(
                     text  = rewardParts.joinToString(" · "),
                     style = MaterialTheme.typography.labelSmall,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                 )
                 Spacer(Modifier.height(6.dp))
             }
@@ -702,7 +701,7 @@ private fun WeeklyQuestCard(
             LinearProgressIndicator(
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
-                color    = GoldPrimary,
+                color    = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
             val displayProgress = quest.progress.coerceAtMost(quest.template.amount)

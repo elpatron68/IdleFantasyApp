@@ -198,8 +198,7 @@
       "items": {
         "runite_bar": 40,
         "raw_sea_turtle": 20,
-        "diamond": 3,
-        "mining_guild_cape": 1
+        "diamond": 3
       },
       "reputation": 100000
     }
@@ -402,8 +401,7 @@
       "items": {
         "runite_ore": 60,
         "diamond": 4,
-        "redwood_log": 25,
-        "fishing_guild_cape": 1
+        "redwood_log": 25
       },
       "reputation": 100000
     }
@@ -604,8 +602,7 @@
       "items": {
         "runite_ore": 50,
         "diamond": 4,
-        "raw_sea_turtle": 30,
-        "woodcutting_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -809,8 +806,7 @@
       "items": {
         "runite_ore": 50,
         "redwood_log": 25,
-        "diamond": 4,
-        "farming_guild_cape": 1
+        "diamond": 4
       },
       "reputation": 100000
     }
@@ -1011,8 +1007,7 @@
       "items": {
         "redwood_log": 150,
         "diamond": 5,
-        "runite_ore": 40,
-        "firemaking_guild_cape": 1
+        "runite_ore": 40
       },
       "reputation": 100000
     }
@@ -1217,8 +1212,7 @@
       "items": {
         "diamond": 5,
         "runite_ore": 50,
-        "raw_sea_turtle": 30,
-        "agility_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -1421,8 +1415,7 @@
       "items": {
         "runite_ore": 250,
         "diamond": 5,
-        "raw_manta_ray": 30,
-        "smithing_guild_cape": 1
+        "raw_manta_ray": 30
       },
       "reputation": 100000
     }
@@ -1623,8 +1616,7 @@
       "items": {
         "raw_sea_turtle": 250,
         "diamond": 5,
-        "runite_ore": 40,
-        "cooking_guild_cape": 1
+        "runite_ore": 40
       },
       "reputation": 100000
     }
@@ -1825,8 +1817,7 @@
       "items": {
         "runite_ore": 50,
         "magic_log": 80,
-        "diamond": 4,
-        "fletching_guild_cape": 1
+        "diamond": 4
       },
       "reputation": 100000
     }
@@ -2032,8 +2023,7 @@
       "items": {
         "diamond": 150,
         "runite_ore": 40,
-        "raw_sea_turtle": 30,
-        "crafting_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -2235,8 +2225,7 @@
       "items": {
         "rune_essence": 5000,
         "diamond": 5,
-        "runite_ore": 40,
-        "runecrafting_guild_cape": 1
+        "runite_ore": 40
       },
       "reputation": 100000
     }
@@ -2440,8 +2429,7 @@
       "items": {
         "diamond": 5,
         "runite_ore": 50,
-        "raw_sea_turtle": 30,
-        "herblore_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -2651,8 +2639,7 @@
       "items": {
         "runite_ore": 80,
         "diamond": 5,
-        "raw_sea_turtle": 30,
-        "warriors_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -2862,8 +2849,7 @@
       "items": {
         "magic_log": 60,
         "diamond": 5,
-        "raw_sea_turtle": 30,
-        "archers_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -3073,8 +3059,7 @@
       "items": {
         "blood_rune": 2000,
         "diamond": 5,
-        "raw_sea_turtle": 30,
-        "mages_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -3284,8 +3269,7 @@
       "items": {
         "diamond": 5,
         "runite_ore": 60,
-        "raw_sea_turtle": 30,
-        "prayer_guild_cape": 1
+        "raw_sea_turtle": 30
       },
       "reputation": 100000
     }
@@ -3456,9 +3440,7 @@
       "coins": 10000000,
       "xp": 12000000,
       "xp_skill": "mercantile",
-      "items": {
-        "mercantile_guild_cape": 1
-      },
+      "items": {},
       "reputation": 100000
     }
   },
@@ -3657,8 +3639,7 @@
       "xp_skill": "thieving",
       "items": {
         "diamond": 10,
-        "blood_rune": 100,
-        "thieving_guild_cape": 1
+        "blood_rune": 100
       },
       "reputation": 100000
     }
@@ -3850,8 +3831,7 @@
       "items": {
         "magic_plank": 300,
         "mithril_nail": 400,
-        "diamond": 4,
-        "construction_guild_cape": 1
+        "diamond": 4
       }
     }
   },
@@ -4031,8 +4011,7 @@
       "xp": 700000,
       "xp_skill": "slayer",
       "items": {
-        "dragon_bone": 200,
-        "slayer_guild_cape": 1
+        "dragon_bone": 200
       }
     }
   }

@@ -81,7 +81,6 @@ import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove

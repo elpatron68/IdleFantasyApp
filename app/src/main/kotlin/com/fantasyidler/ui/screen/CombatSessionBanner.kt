@@ -81,8 +81,6 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
-import com.fantasyidler.ui.theme.SuccessGreen
 import com.fantasyidler.ui.viewmodel.CombatViewModel
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
@@ -240,7 +238,7 @@ internal fun CombatSessionBanner(
                     else stringResource(R.string.label_session_in_progress),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            color = if (isDone) GoldPrimary else MaterialTheme.colorScheme.onSurface,
+            color = if (isDone) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
         )
         Spacer(Modifier.height(8.dp))
         Text(
@@ -255,7 +253,7 @@ internal fun CombatSessionBanner(
                              else stringResource(R.string.combat_run_progress, repeatIndex.coerceAtLeast(1), repeatTotal),
                 style      = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
         Spacer(Modifier.height(16.dp))
@@ -551,7 +549,7 @@ internal fun CombatSessionBanner(
                                         Text(
                                             text  = stringResource(R.string.combat_log_kill, entry.enemyName),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = GoldPrimary,
+                                            color = MaterialTheme.colorScheme.primary,
                                         )
                                     } else if (entry.isPlayer) {
                                         val color = if (entry.damage > 0) Color(0xFF4CAF50)

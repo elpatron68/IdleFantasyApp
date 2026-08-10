@@ -372,6 +372,36 @@
     <string name="settings_font_normal">Normal</string>
     <string name="settings_font_large">Groß</string>
     <string name="settings_font_huge">Riesig</string>
+    <string name="settings_import_theme">Designs importieren</string>
+    <string name="settings_import_theme_desc">Importiert eigene Designs aus einer Datei</string>
+    <string name="settings_delete_theme_btn">Design löschen</string>
+    <string name="settings_theme_imported_ok">Design-Datei erfolgreich importiert</string>
+    <string name="settings_theme_imported_fail">Import fehlgeschlagen: ungültige Datei</string>
+    <string name="settings_theme_editor">Design-Editor</string>
+    <string name="theme_editor_new_btn">Neues Design</string>
+    <string name="theme_editor_edit_btn">Design bearbeiten</string>
+    <string name="theme_editor_preview_header">Vorschau</string>
+    <string name="theme_editor_sample_title">Beispielkarte</string>
+    <string name="theme_editor_sample_body">Text und gedämpfter Text auf einer Fläche</string>
+    <string name="theme_editor_sample_button">Schaltfläche</string>
+    <string name="theme_editor_sample_error">Fehlertext</string>
+    <string name="theme_editor_name_label">Designname</string>
+    <string name="theme_editor_name_reserved">Dieser Name ist für ein offizielles Design reserviert</string>
+    <string name="theme_editor_overwrite_hint">Speichern ersetzt „%1$s“</string>
+    <string name="theme_editor_base_label">Basisstil</string>
+    <string name="theme_editor_palette_header">Palette</string>
+    <string name="theme_editor_used_for">Verwendet für: %1$s</string>
+    <string name="theme_editor_contrast_header">Kontrastwarnungen</string>
+    <string name="theme_editor_low_contrast">%1$s ist auf %2$s schwer lesbar (%3$s, mindestens 4,5)</string>
+    <string name="theme_editor_add_roles">Farbrollen hinzufügen</string>
+    <string name="theme_editor_hex_label">Hex-Farbe (AARRGGBB)</string>
+    <string name="theme_editor_copy_hex">Hex-Farbe kopieren</string>
+    <string name="theme_editor_paste_hex">Hex-Farbe einfügen</string>
+    <string name="theme_editor_remove_colour">Farbe entfernen</string>
+    <string name="theme_editor_save">Design speichern</string>
+    <string name="theme_editor_export">Exportieren</string>
+    <string name="theme_editor_saved_ok">Design gespeichert und angewendet</string>
+    <string name="theme_editor_exported_ok">Design exportiert</string>
     <string name="settings_language_desc">Anzeigesprache der App überschreiben</string>
     <string name="settings_lang_english" translatable="false">English</string>
     <string name="settings_lang_deutsch" translatable="false">Deutsch</string>

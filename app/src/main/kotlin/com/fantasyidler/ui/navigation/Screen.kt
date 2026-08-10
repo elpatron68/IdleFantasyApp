@@ -74,6 +74,10 @@ sealed class Screen(
         selectedIcon = Icons.Filled.Settings,
     ) {
         const val homeScreenRoute = "settings/home_screen"
+        const val themeSettingsRoute = "settings/theme"
+        const val themeEditorRoute = "settings/theme_editor?source={source}&blank={blank}"
+        fun themeEditorRouteWithSource(source: String, blankName: Boolean) =
+            "settings/theme_editor?source=$source&blank=$blankName"
     }
 
     object Shop : Screen(

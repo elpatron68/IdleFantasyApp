@@ -50,7 +50,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.model.WorkerTier
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.DailyFoodItem
 import com.fantasyidler.ui.viewmodel.InnViewModel
 import androidx.compose.ui.platform.LocalContext
@@ -301,7 +300,7 @@ private fun FoodRow(
         Text(
             text  = stringResource(R.string.inn_hire_cost, food.price.toLong().formatCoins()),
             style = MaterialTheme.typography.bodyMedium,
-            color = GoldPrimary,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(horizontal = 12.dp),
         )
@@ -360,7 +359,7 @@ private fun BuyFoodDialog(
                     Text(
                         text       = stringResource(R.string.inn_buy_total, total.formatCoins()),
                         style      = MaterialTheme.typography.bodyMedium,
-                        color      = GoldPrimary,
+                        color      = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                     )
                 }
@@ -409,7 +408,7 @@ private fun TierCard(
                     Text(
                         text  = workerName,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                     )
                 }
@@ -429,7 +428,7 @@ private fun TierCard(
                 Text(
                     text  = stringResource(R.string.inn_hire_cost, cost.formatCoins()),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Button(

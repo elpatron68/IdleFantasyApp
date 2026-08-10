@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.XpRange
+import com.fantasyidler.data.model.EquipSlot
+import com.fantasyidler.data.model.OwnedPet
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
@@ -18,6 +20,7 @@ import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.repository.TownRepository
+import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.simulator.MercantileSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
@@ -43,6 +46,7 @@ data class MercantileUiState(
     val mercantileLevel: Int = 1,
     val mercantileXp: Long = 0L,
     val coins: Long = 0L,
+    val coinReturnMult: Float = 1f,
     val tradeRoutes: List<TradeRouteData> = emptyList(),
     val isLoading: Boolean = true,
     val startingSession: Boolean = false,
@@ -83,11 +87,21 @@ class MercantileViewModel @Inject constructor(
             val flags   = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
             val level   = levels[Skills.MERCANTILE] ?: 1
             val routes  = gameData.tradeRoutes.filter { it.levelRequired <= level }
+            // Mirror the collection-time coin math in HomeViewModel so the displayed
+            // return range matches what a session can actually pay out.
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
+            val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
+            val capeMult     = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment)
+            val prestigeMult = 1f + (flags.skillPrestige[Skills.MERCANTILE] ?: 0) * 0.10f
+            val blessingCoinMult = ChurchRepository.coinMultiplier(flags) *
+                PlayerRepository.gooseCoinMultiplier(json.decodeFromString<List<OwnedPet>>(player.pets)).toFloat()
             extra.copy(
                 isLoading        = false,
                 mercantileLevel  = level,
                 mercantileXp     = xp[Skills.MERCANTILE] ?: 0L,
                 coins            = player.coins,
+                coinReturnMult   = capeMult * prestigeMult * blessingCoinMult,
                 tradeRoutes      = routes,
                 anySessionActive = session != null,
                 queueSize        = flags.sessionQueue.size,

@@ -81,7 +81,6 @@ import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.json.SkillingDungeonData
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.Achievement
 import com.fantasyidler.ui.viewmodel.AchievementsViewModel
@@ -439,7 +438,7 @@ private fun TabsLayout(
 @Composable
 fun CoinsBanner(coins: Long) {
     Surface(
-        color    = GoldPrimary.copy(alpha = 0.15f),
+        color    = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
         modifier = Modifier.fillMaxWidth(),
     ) {
         Row(
@@ -456,7 +455,7 @@ fun CoinsBanner(coins: Long) {
                 text       = coins.formatCoins(),
                 style      = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color      = GoldPrimary,
+                color      = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -532,7 +531,7 @@ private fun SkillsTab(
 
 @Composable
 private fun CircularSkillProgress(level: Int, progressFraction: Float, modifier: Modifier = Modifier) {
-    val gold      = GoldPrimary
+    val gold      = MaterialTheme.colorScheme.primary
     val track     = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f)
     val onSurface = MaterialTheme.colorScheme.onSurface
     val textStyle = MaterialTheme.typography.labelMedium.copy(
@@ -658,7 +657,7 @@ private fun SkillUnlockSheet(
                 Text(
                     text  = stringResource(R.string.guild_level_label, level),
                     style = MaterialTheme.typography.bodySmall,
-                    color = GoldPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }
@@ -674,7 +673,7 @@ private fun SkillUnlockSheet(
                 Text(
                     text     = stringResource(R.string.label_lv, milestone.level),
                     style    = MaterialTheme.typography.labelMedium,
-                    color    = if (unlocked) GoldPrimary
+                    color    = if (unlocked) MaterialTheme.colorScheme.primary
                                else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                     modifier = Modifier.width(44.dp),
                 )
@@ -688,7 +687,7 @@ private fun SkillUnlockSheet(
                 if (unlocked) {
                     Text(
                         text  = "✓",
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelSmall,
                     )
                 }
@@ -1058,7 +1057,7 @@ private fun AchievementsTab(
                         text       = "$unlockedCount / $totalCount",
                         style      = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Bold,
-                        color      = GoldPrimary,
+                        color      = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -1119,7 +1118,7 @@ private fun AchievementRow(ach: Achievement) {
             Text(
                 text  = "✓",
                 style = MaterialTheme.typography.titleMedium,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -1211,7 +1210,7 @@ private fun PetRow(pet: PetData, owned: Boolean) {
         Text(
             text  = stringResource(R.string.format_xp_boost_percent, pet.boostPercent),
             style = MaterialTheme.typography.labelMedium,
-            color = (if (owned) GoldPrimary else MaterialTheme.colorScheme.onSurfaceVariant)
+            color = (if (owned) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
                 .copy(alpha = alpha),
         )
     }
@@ -1295,7 +1294,7 @@ private fun DungeonNotesCard(
                     Text(
                         text = "${index + 1}.",
                         style = MaterialTheme.typography.bodySmall,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.width(20.dp),
                     )
                     Text(

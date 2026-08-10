@@ -11,7 +11,6 @@ val AppTypography = Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = 36.sp,
-        color = GoldPrimary,
     ),
     headlineLarge = TextStyle(
         fontFamily = FontFamily.Default,

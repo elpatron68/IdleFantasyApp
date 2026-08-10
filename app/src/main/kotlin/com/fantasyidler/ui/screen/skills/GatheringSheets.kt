@@ -82,7 +82,6 @@ import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.Skills
-import com.fantasyidler.ui.theme.GoldPrimary
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
@@ -403,7 +402,7 @@ internal fun ActivityRow(
             Text(
                 text  = if (hasActiveSession) stringResource(R.string.skills_add_to_queue) else stringResource(R.string.btn_start_session),
                 style = MaterialTheme.typography.labelMedium,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }

@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.repository.MonumentRepository
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.MonumentViewModel
 import com.fantasyidler.util.formatCoins
 
@@ -113,7 +112,7 @@ fun MonumentScreen(
                     Text(
                         text  = stringResource(R.string.monument_your_coins, state.coins.formatCoins()),
                         style = MaterialTheme.typography.labelMedium,
-                        color = GoldPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -173,7 +172,7 @@ fun MonumentScreen(
                                 state.tier >= stage -> Text(
                                     text       = stringResource(R.string.monument_built),
                                     style      = MaterialTheme.typography.labelMedium,
-                                    color      = GoldPrimary,
+                                    color      = MaterialTheme.colorScheme.primary,
                                     fontWeight = FontWeight.Bold,
                                 )
                                 state.tier == stage - 1 -> Button(
@@ -207,14 +206,14 @@ fun MonumentScreen(
                         Text(
                             text       = stringResource(R.string.monument_flame_complete),
                             style      = MaterialTheme.typography.bodyMedium,
-                            color      = GoldPrimary,
+                            color      = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                         )
                     } else {
                         LinearProgressIndicator(
                             progress = { (state.fund.toFloat() / MonumentRepository.FLAME_GOAL).coerceIn(0f, 1f) },
                             modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
-                            color    = GoldPrimary,
+                            color    = MaterialTheme.colorScheme.primary,
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(

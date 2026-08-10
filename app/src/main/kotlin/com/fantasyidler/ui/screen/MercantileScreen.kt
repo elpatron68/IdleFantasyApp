@@ -43,7 +43,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.util.GameStrings
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.ui.viewmodel.MercantileUiState
 import com.fantasyidler.ui.viewmodel.MercantileViewModel
 import com.fantasyidler.ui.viewmodel.xpProgressFraction
@@ -101,6 +100,7 @@ fun MercantileScreen(
                 TradeRouteRow(
                     route           = route,
                     playerCoins     = state.coins,
+                    coinReturnMult  = state.coinReturnMult,
                     isStarting      = state.startingSession,
                     sessionActive   = state.anySessionActive,
                     queueFull       = state.queueSize >= state.maxQueueSize,
@@ -152,6 +152,7 @@ fun MercantileSheetContent(
                 TradeRouteRow(
                     route           = route,
                     playerCoins     = state.coins,
+                    coinReturnMult  = state.coinReturnMult,
                     isStarting      = state.startingSession,
                     sessionActive   = state.anySessionActive,
                     queueFull       = state.queueSize >= state.maxQueueSize,
@@ -187,7 +188,7 @@ private fun MercantileStatsHeader(state: MercantileUiState) {
             Text(
                 text  = stringResource(R.string.mercantile_coins_label, state.coins.formatCoins()),
                 style = MaterialTheme.typography.bodySmall,
-                color = GoldPrimary,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -197,6 +198,7 @@ private fun MercantileStatsHeader(state: MercantileUiState) {
 private fun TradeRouteRow(
     route: TradeRouteData,
     playerCoins: Long,
+    coinReturnMult: Float,
     isStarting: Boolean,
     sessionActive: Boolean,
     queueFull: Boolean,
@@ -206,8 +208,8 @@ private fun TradeRouteRow(
     val context = LocalContext.current
     val canAfford = playerCoins >= route.coinCost
     val costStr   = route.coinCost.toLong().formatCoins()
-    val minReturn = route.coinRanges.values.minOf { it.min } * 60L
-    val maxReturn = route.coinRanges.values.maxOf { it.max } * 60L
+    val minReturn = (route.coinRanges.values.minOf { it.min } * 60L * coinReturnMult.toDouble()).toLong()
+    val maxReturn = (route.coinRanges.values.maxOf { it.max } * 60L * coinReturnMult.toDouble()).toLong()
 
     Column(
         modifier = Modifier

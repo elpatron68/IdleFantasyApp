@@ -53,7 +53,6 @@ import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.ui.viewmodel.TowerMilestone
 import com.fantasyidler.ui.viewmodel.TowerViewModel
-import com.fantasyidler.ui.theme.GoldPrimary
 import com.fantasyidler.util.GameStrings
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -202,7 +201,7 @@ private fun TowerHeaderCard(
                         Text(
                             text  = stringResource(R.string.tower_best_floor, bestFloor),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = GoldPrimary,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 }
@@ -390,7 +389,7 @@ private fun MilestoneRow(
                 text       = stringResource(R.string.tower_floor_label, milestone.floor),
                 style      = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold,
-                color      = if (unlocked) GoldPrimary else dimColor,
+                color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
             )
             Text(
                 text  = milestone.description,
