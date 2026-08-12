@@ -76,7 +76,7 @@ class BoneAltarViewModel @Inject constructor(
             .entries.sortedByDescending { it.value.xpPerBone }
             .associate { it.key to it.value }
 
-        val boostActive    = flags.xpBoostExpiresAt > System.currentTimeMillis()
+        val boostActive    = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
         val equippedCape   = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
         // skillPrestige is intentionally omitted here (not flags.skillPrestige): prestige is
         // already applied as its own separate factor below (prestigeMult), multiplied together
@@ -89,12 +89,13 @@ class BoneAltarViewModel @Inject constructor(
             inventoryKeys = inventory.keys,
             townBuildingTiers = flags.townBuildingTiers,
             skillPrestige = emptyMap(),
-            allEquipment = gameData.equipment
+            allEquipment = gameData.equipment,
+            ironman = flags.ironman,
         )
-        val churchMult     = ChurchRepository.xpMultiplier(flags)
-        val prestige       = flags.skillPrestige[Skills.PRAYER] ?: 0
+        val churchMult     = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
+        val prestige       = if (flags.ironman) 0 else flags.skillPrestige[Skills.PRAYER] ?: 0
         val prestigeMult   = if (prestige > 0) (1.0 + prestige * 0.10).toFloat() else 1f
-        val petBoostPct    = petBoostFor(player.pets, Skills.PRAYER)
+        val petBoostPct    = if (flags.ironman) 0 else petBoostFor(player.pets, Skills.PRAYER)
 
         val selectedKey = extra.selectedBoneKey?.takeIf { (inventory[it] ?: 0) > 0 }
 

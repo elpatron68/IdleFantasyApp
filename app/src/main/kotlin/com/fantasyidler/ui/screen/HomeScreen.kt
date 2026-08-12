@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
@@ -475,9 +476,10 @@ fun HomeScreen(
 
     if (!state.isLoading && !state.characterSetupDone) {
         CharacterSetupSheet(
-            isFirstTime = true,
-            onSave      = { name, gender, race -> viewModel.saveCharacterProfile(name, gender, race) },
-            onDismiss   = viewModel::dismissCharacterSetup,
+            isFirstTime       = true,
+            showIronmanOption = true,
+            onSave            = { name, gender, race, ironman -> viewModel.saveCharacterProfile(name, gender, race, ironman) },
+            onDismiss         = viewModel::dismissCharacterSetup,
         )
     }
 
@@ -580,6 +582,23 @@ fun HomeScreen(
                             style      = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                         )
+                    }
+                    if (state.ironman) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector        = Icons.Filled.Shield,
+                                contentDescription = null,
+                                modifier           = Modifier.size(14.dp),
+                                tint               = MaterialTheme.colorScheme.tertiary,
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                text       = stringResource(R.string.ironman_badge),
+                                style      = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color      = MaterialTheme.colorScheme.tertiary,
+                            )
+                        }
                     }
                 }
                 if (state.showCharacterViewer) {

@@ -118,10 +118,11 @@ class PlayerRepository @Inject constructor(
     ): List<String> = playerMutex.withLock {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
+        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
         val scaledXp = if (efficiencyMultiplier == 1.0f) xpGained else (xpGained * efficiencyMultiplier).toLong()
-        val baseXp = ((if (boostActive) scaledXp * 2 else scaledXp) * ChurchRepository.xpMultiplier(flags)).toLong()
-        val prestigeLevel = flags.skillPrestige[skillName] ?: 0
+        val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
+        val baseXp = ((if (boostActive) scaledXp * 2 else scaledXp) * blessingMult).toLong()
+        val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skillName] ?: 0
         val boostedXp = if (prestigeLevel > 0) (baseXp * (1.0 + prestigeLevel * 0.10)).toLong() else baseXp
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
@@ -548,7 +549,8 @@ class PlayerRepository @Inject constructor(
         updateFlags(getFlags().copy(lastSeenVersionCode = versionCode))
     }
 
-    suspend fun updateCharacterProfile(name: String, gender: String, race: String) {
+    /** [ironman] is only non-null from the first-time creation sheet; edits never change it. */
+    suspend fun updateCharacterProfile(name: String, gender: String, race: String, ironman: Boolean? = null) {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val updated = flags.copy(
@@ -556,6 +558,7 @@ class PlayerRepository @Inject constructor(
             characterGender = gender,
             characterRace = race,
             characterSetupDone = true,
+            ironman = ironman ?: flags.ironman,
         )
         playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(updated)))
     }
@@ -700,10 +703,10 @@ class PlayerRepository @Inject constructor(
     ): List<String> {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
+        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
         val boostMult = if (boostActive) 2L else 1L
-        val xpBlessingMult = ChurchRepository.xpMultiplier(flags)
-        val coinBlessingMult = ChurchRepository.coinMultiplier(flags) *
+        val xpBlessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
+        val coinBlessingMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags) *
             gooseCoinMultiplier(json.decodeFromString(player.pets)).toFloat()
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
@@ -716,10 +719,10 @@ class PlayerRepository @Inject constructor(
         for ((skill, xp) in xpPerSkill) {
             val oldLevel = XpTable.levelForXp(xpMap[skill] ?: 0L)
             val scaledXp = if (efficiencyMultiplier == 1.0f) xp else (xp * efficiencyMultiplier).toLong()
-            val petPct = perSkillPetBoostPct[skill] ?: 0
+            val petPct = if (flags.ironman) 0 else perSkillPetBoostPct[skill] ?: 0
             val withPet = if (petPct > 0) (scaledXp * (1.0 + petPct / 100.0)).toLong() else scaledXp
             val afterBoostBlessing = (withPet * boostMult * xpBlessingMult).toLong()
-            val prestigeLevel = flags.skillPrestige[skill] ?: 0
+            val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skill] ?: 0
             val finalXp = if (prestigeLevel > 0) (afterBoostBlessing * (1.0 + prestigeLevel * 0.10)).toLong() else afterBoostBlessing
             val newXp = (xpMap[skill] ?: 0L) + finalXp
             xpMap[skill]  = newXp
@@ -764,11 +767,11 @@ class PlayerRepository @Inject constructor(
      */
     suspend fun previewFlatXpGrant(skillName: String, baseXp: Long): FlatXpBreakdown {
         val flags = getFlags()
-        val boostActive = flags.xpBoostExpiresAt > System.currentTimeMillis()
+        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
         val boostMult = if (boostActive) 2L else 1L
-        val blessingMult = ChurchRepository.xpMultiplier(flags)
+        val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
         val afterBoostBlessing = ((baseXp * boostMult) * blessingMult).toLong()
-        val prestigeLevel = flags.skillPrestige[skillName] ?: 0
+        val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skillName] ?: 0
         val finalXp = if (prestigeLevel > 0) (afterBoostBlessing * (1.0 + prestigeLevel * 0.10)).toLong() else afterBoostBlessing
         return FlatXpBreakdown(baseXp, finalXp, boostActive, blessingMult, prestigeLevel)
     }
@@ -830,6 +833,8 @@ class PlayerRepository @Inject constructor(
         val flags: PlayerFlags               = json.decodeFromString(player.flags)
 
         val currentPrestige = flags.skillPrestige[skillName] ?: 0
+        // Ironman characters get no XP bonus from a reset, so resetting would only lose levels.
+        if (flags.ironman) return@withLock
         if ((levels[skillName] ?: 1) < 99 || currentPrestige >= 3) return@withLock
 
         levels[skillName] = 1
@@ -909,6 +914,9 @@ class PlayerRepository @Inject constructor(
     companion object {
         const val XP_BOOST_COST = 25_000_000L
         const val XP_BOOST_DURATION_MS = 48 * 3_600_000L   // 48 hours
+
+        /** HMAC key for save-file signatures. Public by nature (open source), deterrence only. */
+        private const val SAVE_SIG_KEY = "ekEhdMIDo9B63HQSU80U7hvuqVd1HYcciv5Na5d7gEKdaudR4Voa8jkF"
 
         /** Kills of each boss per day that pay full coin drops; kills beyond pay [BOSS_COIN_SOFT_CAP_MULT]. */
         const val BOSS_FULL_COIN_KILLS_PER_DAY = 3
@@ -1035,26 +1043,38 @@ class PlayerRepository @Inject constructor(
     /** Returns a JSON string capturing the full player save including quest progress and sessions. */
     suspend fun exportSave(sessions: List<com.fantasyidler.data.model.SkillSessionExport> = emptyList()): String {
         val player = getOrCreatePlayer()
-        return json.encode<PlayerExport>(
-            PlayerExport(
-                skillLevels    = player.skillLevels,
-                skillXp        = player.skillXp,
-                inventory      = player.inventory,
-                equipped       = player.equipped,
-                flags          = player.flags,
-                pets           = player.pets,
-                coins          = player.coins,
-                questProgress  = questProgressDao.getAllProgress(),
-                farmingPatches = farmingPatchDao.getAllPatches(),
-                sessions       = sessions,
-                exportedAt     = System.currentTimeMillis(),
-            )
+        val export = PlayerExport(
+            skillLevels    = player.skillLevels,
+            skillXp        = player.skillXp,
+            inventory      = player.inventory,
+            equipped       = player.equipped,
+            flags          = player.flags,
+            pets           = player.pets,
+            coins          = player.coins,
+            questProgress  = questProgressDao.getAllProgress(),
+            farmingPatches = farmingPatchDao.getAllPatches(),
+            sessions       = sessions,
+            exportedAt     = System.currentTimeMillis(),
         )
+        return json.encode<PlayerExport>(export.copy(sig = saveSignature(export)))
     }
 
-    /** Overwrites the current save with data from a previously exported JSON string. Returns the parsed export. */
-    suspend fun importSave(jsonString: String): PlayerExport {
-        val export = json.decodeFromString<PlayerExport>(stripJsonGarbage(jsonString))
+    /** Result of [importSave]: the applied export, and whether an edited ironman save was demoted. */
+    data class ImportedSave(val export: PlayerExport, val ironmanDemoted: Boolean)
+
+    /**
+     * Overwrites the current save with data from a previously exported JSON string.
+     * An ironman save whose signature is missing or does not match its core fields was edited
+     * outside the game; it still imports, but as a regular (non-ironman) character.
+     */
+    suspend fun importSave(jsonString: String): ImportedSave {
+        var export = json.decodeFromString<PlayerExport>(stripJsonGarbage(jsonString))
+        var ironmanDemoted = false
+        val importedFlags = try { json.decodeFromString<PlayerFlags>(export.flags) } catch (_: Exception) { null }
+        if (importedFlags?.ironman == true && export.sig != saveSignature(export)) {
+            export = export.copy(flags = json.encode<PlayerFlags>(importedFlags.copy(ironman = false)))
+            ironmanDemoted = true
+        }
         val player = getOrCreatePlayer()
         playerDao.upsert(
             player.copy(
@@ -1071,7 +1091,23 @@ class PlayerRepository @Inject constructor(
         export.questProgress.forEach { questProgressDao.upsert(it) }
         farmingPatchDao.clearAll()
         export.farmingPatches.forEach { farmingPatchDao.upsert(it) }
-        return export
+        return ImportedSave(export, ironmanDemoted)
+    }
+
+    /**
+     * HMAC-SHA256 over the seven core player fields, joined by newlines. The raw JSON strings
+     * round-trip byte-for-byte through export parsing, and later PlayerExport schema additions
+     * don't affect the canonical form, so old signed saves stay valid across app versions.
+     * Deterrence against hand-editing only: the key is public in this open-source app.
+     */
+    private fun saveSignature(export: PlayerExport): String {
+        val canonical = listOf(
+            export.skillLevels, export.skillXp, export.inventory,
+            export.equipped, export.flags, export.pets, export.coins.toString(),
+        ).joinToString("\n")
+        val mac = javax.crypto.Mac.getInstance("HmacSHA256")
+        mac.init(javax.crypto.spec.SecretKeySpec(SAVE_SIG_KEY.toByteArray(), "HmacSHA256"))
+        return mac.doFinal(canonical.toByteArray()).joinToString("") { "%02x".format(it) }
     }
 
     // Finds the end of the root JSON object and drops any trailing garbage.
@@ -1094,8 +1130,8 @@ class PlayerRepository @Inject constructor(
         return s
     }
 
-    suspend fun resetProgression() {
-        playerDao.upsert(createDefaultPlayer())
+    suspend fun resetProgression(ironman: Boolean = false) {
+        playerDao.upsert(createDefaultPlayer(ironman))
     }
 
     // ------------------------------------------------------------------
@@ -1298,7 +1334,7 @@ class PlayerRepository @Inject constructor(
     // Helpers
     // ------------------------------------------------------------------
 
-    private fun createDefaultPlayer(): Player {
+    private fun createDefaultPlayer(ironman: Boolean = false): Player {
         val defaultEquipped: Map<String, String?> = EquipSlot.ALL.associateWith { null } +
             mapOf(
                 EquipSlot.PICKAXE     to "bronze_pickaxe",
@@ -1317,7 +1353,7 @@ class PlayerRepository @Inject constructor(
             skillXp     = json.encode<Map<String, Long>>(Skills.DEFAULT_XP),
             inventory   = json.encode<Map<String, Int>>(defaultInventory),
             equipped    = json.encode<Map<String, String?>>(defaultEquipped),
-            flags       = json.encode<PlayerFlags>(PlayerFlags()),
+            flags       = json.encode<PlayerFlags>(PlayerFlags(ironman = ironman)),
         )
     }
 }
@@ -1349,8 +1385,10 @@ fun resolveCapeMultiplier(
     inventoryKeys: Set<String>,
     townBuildingTiers: Map<String, Int>,
     skillPrestige: Map<String, Int>,
-    allEquipment: Map<String, EquipmentData>
+    allEquipment: Map<String, EquipmentData>,
+    ironman: Boolean = false,
 ): Float {
+    if (ironman) return 1.0f
     val normSkill = if (skillName == Skills.HITPOINTS) "hp" else skillName
     val rackTier = townBuildingTiers["cape_rack"] ?: 0
     val isCategoryUnlocked = when {

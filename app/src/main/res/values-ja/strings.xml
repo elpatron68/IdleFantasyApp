@@ -496,6 +496,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">HPを %1$d 回復</string>
     <string name="combat_defeated_so_far">これまでに討伐しました。</string>
+    <string name="combat_eaten_so_far">これまでに食べました。</string>
     <string name="combat_fighting">戦闘中…</string>
     <string name="combat_log_you_hit">あなたの攻撃:</string>
     <string name="combat_log_hit_you">の攻撃を受けました:</string>
@@ -1803,4 +1804,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">キャラクター</string>
+    <string name="settings_characters_desc">最大3つのセーブスロット。キャラクターの作成・切り替え・削除ができます。</string>
+    <string name="save_slots_title">キャラクター</string>
+    <string name="save_slots_desc">この端末には最大3人のキャラクターを保存できます。切り替え時に現在のキャラクターは自動で保存され、非アクティブなキャラクターのセッションは戻るまで一時停止します。</string>
+    <string name="save_slot_label">スロット%1$d</string>
+    <string name="save_slot_new">新しいキャラクター</string>
+    <string name="save_slot_playing">プレイ中</string>
+    <string name="save_slot_ironman">アイアンマン</string>
+    <string name="save_slot_combat_level">戦闘レベル%1$d</string>
+    <string name="save_slot_total_level">合計レベル%1$d</string>
+    <string name="save_slot_last_played">%1$s前</string>
+    <string name="save_slot_switch_title">キャラクターを切り替えますか？</string>
+    <string name="save_slot_switch_body">%1$sでプレイしますか？現在のキャラクターは自動で保存されます。</string>
+    <string name="save_slot_switch_btn">切り替え</string>
+    <string name="save_slot_create_title">新しいキャラクターを作成しますか？</string>
+    <string name="save_slot_create_body">スロット%1$dで新しいキャラクターを始めますか？現在のキャラクターは自動で保存されます。</string>
+    <string name="save_slot_create_btn">作成</string>
+    <string name="save_slot_delete_title">キャラクターを削除しますか？</string>
+    <string name="save_slot_delete_body">%1$sを完全に削除しますか？この操作は元に戻せません。</string>
+    <string name="save_slot_delete_btn">削除</string>
+    <string name="save_slot_switch_failed">キャラクターを切り替えられませんでした。</string>
+    <string name="character_ironman_title">アイアンマンモード</string>
+    <string name="character_ironman_desc">経験値や獲得量のブーストが無効になり、アイテムの購入や労働者の雇用もできません。恒久的な設定で、作成後は変更できません。セーブファイルを編集するとアイアンマンの状態は解除されます。</string>
+    <string name="ironman_shop_buy_blocked">アイアンマンのキャラクターはアイテムを購入できません。</string>
+    <string name="ironman_inn_blocked">アイアンマンのキャラクターは労働者を雇えません。</string>
+    <string name="ironman_blessing_blocked">アイアンマンのキャラクターは防御の祝福のみ受けられます。</string>
+    <string name="ironman_bonuses_notice">アイアンマン：このキャラクターでは経験値・獲得量・コインのブーストが無効です。</string>
+    <string name="ironman_badge">アイアンマン</string>
+    <string name="settings_imported_demoted">セーブをインポートしました。ゲーム外で変更されていたため、アイアンマンの状態は解除されました。</string>
 </resources>

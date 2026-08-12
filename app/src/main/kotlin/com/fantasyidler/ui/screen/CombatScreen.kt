@@ -265,7 +265,7 @@ fun CombatScreen(
                             totalStrengthBonus = state.totalStrengthBonus,
                             totalDefenseBonus  = state.totalDefenseBonus,
                             skillPrestige      = state.skillPrestige,
-                            onPrestige         = viewModel::prestigeSkill,
+                            onPrestige         = if (state.ironman) null else viewModel::prestigeSkill,
                         )
                     }
                 }
@@ -342,7 +342,7 @@ fun CombatScreen(
                             totalStrengthBonus = state.totalStrengthBonus,
                             totalDefenseBonus  = state.totalDefenseBonus,
                             skillPrestige      = state.skillPrestige,
-                            onPrestige         = viewModel::prestigeSkill,
+                            onPrestige         = if (state.ironman) null else viewModel::prestigeSkill,
                         )
                     }
                 }
@@ -683,7 +683,7 @@ private fun CombatSkillsTab(
     totalStrengthBonus: Int,
     totalDefenseBonus: Int,
     skillPrestige: Map<String, Int> = emptyMap(),
-    onPrestige: (String) -> Unit = {},
+    onPrestige: ((String) -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var tappedSkill by remember { mutableStateOf<String?>(null) }
@@ -715,7 +715,7 @@ private fun CombatSkillsTab(
                 xp            = skillXp[key]     ?: 0L,
                 gearBonus     = gearBonus,
                 prestigeLevel = skillPrestige[key] ?: 0,
-                onPrestige    = { onPrestige(key) },
+                onPrestige    = onPrestige?.let { cb -> { cb(key) } },
                 onClick       = { tappedSkill = key },
             )
         }

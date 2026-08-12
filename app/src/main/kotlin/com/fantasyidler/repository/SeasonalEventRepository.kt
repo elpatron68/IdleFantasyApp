@@ -202,7 +202,9 @@ class SeasonalEventRepository @Inject constructor(
         tier.petId?.let { petId ->
             playerRepo.addPetIfNewUnlocked(petId, gameData.pets[petId]?.boostPercent ?: 0)
         }
-        if (tier.xpBoost) playerRepo.activateXpBoost(PlayerRepository.XP_BOOST_DURATION_MS, costEach = 0L)
+        // Ironman characters never receive the XP boost component (boosts are inert for them);
+        // the tier's other rewards are still granted.
+        if (tier.xpBoost && !flags.ironman) playerRepo.activateXpBoost(PlayerRepository.XP_BOOST_DURATION_MS, costEach = 0L)
 
         // The grants above rewrite the flags column (seen items, boost expiry) — re-read before recording the claim.
         val latest = playerRepo.getFlagsUnlocked()

@@ -88,7 +88,10 @@ class MonumentRepository @Inject constructor(
         val day = today()
         if (flags.monumentTouchDay == day) return@withLock MonumentTouchResult.AlreadyTouchedToday
 
-        val blessingFree = flags.activeBlessingKey.isEmpty() || flags.activeBlessingExpiresAt <= System.currentTimeMillis()
+        // Ironman characters never receive blessing boons (all XP/coin multipliers are inert);
+        // the touch always rolls an item boon instead.
+        val blessingFree = !flags.ironman &&
+            (flags.activeBlessingKey.isEmpty() || flags.activeBlessingExpiresAt <= System.currentTimeMillis())
         val rollBlessing = blessingFree && Random.nextInt(4) == 0
         if (rollBlessing) {
             val expiresAt = System.currentTimeMillis() + TOUCH_BLESSING_MS

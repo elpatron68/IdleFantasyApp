@@ -412,6 +412,7 @@
     <string name="combat_def">DEF</string>
     <string name="combat_heals_hp">menyembuhkan %1$d HP</string>
     <string name="combat_defeated_so_far">telah dikalahkan sejauh ini.</string>
+    <string name="combat_eaten_so_far">telah dimakan sejauh ini.</string>
     <string name="combat_fighting">Bertarung…</string>
     <string name="combat_log_you_hit">Anda mengenai</string>
     <string name="combat_log_hit_you">mengenai anda</string>
@@ -647,7 +648,7 @@
     <string name="achievement_combat_50_desc">Capai level tempur 50</string>
     <string name="achievement_combat_75_name">Elit</string>
     <string name="achievement_combat_75_desc">Capai level tempur 75</string>
-    <string name="achievement_combat_99_name">Juara</string>
+    <string name="achievement_combat_99_name">Pahlawan</string>
     <string name="achievement_combat_99_desc">Capai level tempur 99</string>
     <string name="achievement_combat_113_name">Tempur Maksimal</string>
     <string name="achievement_combat_113_desc">Capai level tempur maksimum 113</string>
@@ -1515,4 +1516,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Karakter</string>
+    <string name="settings_characters_desc">Hingga 3 slot penyimpanan. Buat, ganti, atau hapus karakter.</string>
+    <string name="save_slots_title">Karakter</string>
+    <string name="save_slots_desc">Hingga tiga karakter dapat hidup di perangkat ini. Saat berganti, karakter aktifmu disimpan otomatis; sesi karakter yang tidak aktif dijeda sampai kamu kembali.</string>
+    <string name="save_slot_label">Slot %1$d</string>
+    <string name="save_slot_new">Karakter Baru</string>
+    <string name="save_slot_playing">Dimainkan</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Level Tempur %1$d</string>
+    <string name="save_slot_total_level">Level Total %1$d</string>
+    <string name="save_slot_last_played">%1$s yang lalu</string>
+    <string name="save_slot_switch_title">Ganti karakter?</string>
+    <string name="save_slot_switch_body">Bermain sebagai %1$s? Karakter aktifmu disimpan otomatis.</string>
+    <string name="save_slot_switch_btn">Ganti</string>
+    <string name="save_slot_create_title">Buat karakter baru?</string>
+    <string name="save_slot_create_body">Mulai karakter baru di slot %1$d? Karakter aktifmu disimpan otomatis.</string>
+    <string name="save_slot_create_btn">Buat</string>
+    <string name="save_slot_delete_title">Hapus karakter?</string>
+    <string name="save_slot_delete_body">Hapus %1$s secara permanen? Tindakan ini tidak bisa dibatalkan.</string>
+    <string name="save_slot_delete_btn">Hapus</string>
+    <string name="save_slot_switch_failed">Tidak dapat mengganti karakter.</string>
+    <string name="character_ironman_title">Mode Ironman</string>
+    <string name="character_ironman_desc">Peningkatan XP dan hasil dinonaktifkan, tidak bisa membeli barang, dan tidak bisa mempekerjakan pekerja. Permanen: tidak dapat diubah setelah pembuatan. Mengedit file simpanan akan menghapus status Ironman.</string>
+    <string name="ironman_shop_buy_blocked">Karakter Ironman tidak bisa membeli barang.</string>
+    <string name="ironman_inn_blocked">Karakter Ironman tidak bisa mempekerjakan pekerja.</string>
+    <string name="ironman_blessing_blocked">Karakter Ironman hanya bisa menerima berkat pertahanan.</string>
+    <string name="ironman_bonuses_notice">Ironman: peningkatan XP, hasil, dan koin dinonaktifkan untuk karakter ini.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Simpanan diimpor. File diubah di luar game, jadi status Ironman dihapus.</string>
 </resources>

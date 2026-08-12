@@ -17,4 +17,6 @@ object GlobalStateKey {
     const val HOLE_DEPTH          = "hole_depth"
     const val LAST_DIG_TIME       = "last_dig_time"
     const val ONBOARDING_COMPLETE = "onboarding_complete"
+    /** 1-based save slot the live DB currently holds. Absent = 1 (pre-slots installs). */
+    const val ACTIVE_SAVE_SLOT    = "active_save_slot"
 }

@@ -252,7 +252,8 @@ class TowerViewModel @Inject constructor(
         }
     }
 
-    private fun petBoostFor(petsJson: String): Int {
+    private fun petBoostFor(petsJson: String, ironman: Boolean = false): Int {
+        if (ironman) return 0
         val pets = try { json.decodeFromString<List<OwnedPet>>(petsJson) } catch (_: Exception) { return 0 }
         return pets.sumOf { pet ->
             val pd = gameData.pets[pet.id]
@@ -390,7 +391,7 @@ class TowerViewModel @Inject constructor(
                     spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = levels[Skills.AGILITY] ?: 1,
                     agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
-                    petBoostPct         = petBoostFor(player.pets),
+                    petBoostPct         = petBoostFor(player.pets, flags.ironman),
                     equippedFood        = availableFood,
                     foodHealValues      = foodHeal,
                     potionBonuses       = potionBonuses,
@@ -536,8 +537,8 @@ class TowerViewModel @Inject constructor(
             var coinsGained = allItems.remove("coins")?.toLong() ?: 0L
 
             val flags         = playerRepo.getFlags()
-            val towerXpMult   = 1.0 + flags.towerXpBonusPct / 100.0
-            val towerCoinMult = 1.0 + flags.towerCoinBonusPct / 100.0
+            val towerXpMult   = if (flags.ironman) 1.0 else 1.0 + flags.towerXpBonusPct / 100.0
+            val towerCoinMult = if (flags.ironman) 1.0 else 1.0 + flags.towerCoinBonusPct / 100.0
 
             // Apply only the tower bonus here; applyMultiSkillResults handles boost/blessing internally
             val xpForRepo = totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }

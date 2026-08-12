@@ -169,7 +169,7 @@ class SlayerRepository @Inject constructor(
         val equippedCape   = playerRepo.getEquipped()[EquipSlot.CAPE]?.let { gameData.equipment[it] }
         val capeMult       = resolveCapeMultiplier(
             Skills.SLAYER, equippedCape, playerRepo.getInventory().keys,
-            flags.townBuildingTiers, flags.skillPrestige, gameData.equipment,
+            flags.townBuildingTiers, flags.skillPrestige, gameData.equipment, flags.ironman,
         )
         val xpEarned       = (added.toLong() * task.xpPerKill * capeMult).toLong()
         val newCompleted   = task.killsCompleted + added

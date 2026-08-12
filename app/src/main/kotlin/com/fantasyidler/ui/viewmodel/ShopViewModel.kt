@@ -86,6 +86,8 @@ data class ShopUiState(
     val mercantileLevel: Int = 0,
     val townBuildingTiers: Map<String, Int> = emptyMap(),
     val skillPrestige: Map<String, Int> = emptyMap(),
+    /** Ironman characters can only sell — every buy path is blocked. */
+    val ironman: Boolean = false,
 ) {
     val xpBoostActive: Boolean get() = xpBoostExpiresAt > System.currentTimeMillis()
 }
@@ -123,6 +125,7 @@ class ShopViewModel @Inject constructor(
                 mercantileLevel  = levels[Skills.MERCANTILE] ?: 0,
                 townBuildingTiers = flags.townBuildingTiers,
                 skillPrestige     = flags.skillPrestige,
+                ironman           = flags.ironman,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ShopUiState())
@@ -236,6 +239,7 @@ class ShopViewModel @Inject constructor(
             val gem  = gameData.gems[itemKey]
             val crop = gameData.crops[itemKey]
             when {
+                itemKey in CONSTRUCTION_SELL -> CONSTRUCTION_SELL.getValue(itemKey)
                 "arrow_shaft" in itemKey -> 1
                 "_arrow_tip" in itemKey -> when {
                     "runite"     in itemKey -> 8
@@ -333,7 +337,8 @@ class ShopViewModel @Inject constructor(
             inventoryKeys = uiState.value.inventory.keys,
             townBuildingTiers = uiState.value.townBuildingTiers,
             skillPrestige = uiState.value.skillPrestige,
-            allEquipment = gameData.equipment
+            allEquipment = gameData.equipment,
+            ironman = uiState.value.ironman,
         )
         return mult - 1.0f
     }
@@ -411,6 +416,10 @@ class ShopViewModel @Inject constructor(
     // ------------------------------------------------------------------
 
     fun openBuy(entry: ShopEntry) {
+        if (uiState.value.ironman) {
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+            return
+        }
         val discount  = mercantileBuyDiscount()
         val discPrice = (entry.price * discount).toInt().coerceAtLeast(1)
         val maxAffordable = (uiState.value.coins / discPrice).coerceIn(1L, Int.MAX_VALUE.toLong()).toInt()
@@ -471,6 +480,10 @@ class ShopViewModel @Inject constructor(
 
     fun confirmTransaction() {
         val t = _extra.value.transaction ?: return
+        if (t.isBuy && uiState.value.ironman) {
+            _extra.update { it.copy(transaction = null, snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+            return
+        }
         viewModelScope.launch {
             // Special handling for XP boost
             if (t.key == XP_BOOST_KEY) {
@@ -539,6 +552,25 @@ class ShopViewModel @Inject constructor(
 
     companion object {
         const val XP_BOOST_KEY = "xp_boost_48h"
+
+        /**
+         * Construction furniture otherwise falls to the generic 5-coin fallback (issue #1337).
+         * Values are the salvage sum of each recipe's materials at their own sell prices,
+         * matching how bars price against ore+coal. Kept below buy-material cost so max
+         * Mercantile sell bonuses can't turn buy-craft-sell into a coin loop.
+         */
+        private val CONSTRUCTION_SELL = mapOf(
+            "wooden_rack"    to 10,
+            "wooden_shelf"   to 15,
+            "carved_stone"   to 4,
+            "oak_table"      to 30,
+            "oak_bookshelf"  to 40,
+            "stone_block"    to 10,
+            "willow_cabinet" to 75,
+            "maple_dresser"  to 160,
+            "yew_wardrobe"   to 340,
+            "magic_throne"   to 850,
+        )
 
         private val TOOL_SLOTS = setOf(
             EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,

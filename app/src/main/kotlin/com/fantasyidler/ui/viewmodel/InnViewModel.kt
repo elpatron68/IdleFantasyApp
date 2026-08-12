@@ -43,6 +43,8 @@ data class InnUiState(
     val dailyFoods: List<DailyFoodItem> = emptyList(),
     val snackbarMessage: String? = null,
     val navigateToWorkerSkillsSlot: Int = 0,
+    /** Ironman characters cannot hire workers or buy the daily food. */
+    val ironman: Boolean = false,
 )
 
 @HiltViewModel
@@ -72,6 +74,7 @@ class InnViewModel @Inject constructor(
                 apprenticeName  = workerName(WorkerTier.APPRENTICE),
                 journeymanName  = workerName(WorkerTier.JOURNEYMAN),
                 masterName      = workerName(WorkerTier.MASTER),
+                ironman         = flags.ironman,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), InnUiState())
@@ -79,6 +82,10 @@ class InnViewModel @Inject constructor(
     fun hire(tier: WorkerTier) {
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
+            if (flags.ironman) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_inn_blocked)) }
+                return@launch
+            }
             val slot = if (tier == WorkerTier.LONG_LABORER) 1 else 2
 
             val slotOccupied = if (slot == 1) flags.hiredWorker != null else flags.hiredWorker2 != null
@@ -102,6 +109,10 @@ class InnViewModel @Inject constructor(
 
     fun buyFood(key: String, price: Int, qty: Int = 1) {
         viewModelScope.launch {
+            if (playerRepo.getFlags().ironman) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+                return@launch
+            }
             val success = playerRepo.buyItem(key, qty, price)
             _extra.update {
                 it.copy(

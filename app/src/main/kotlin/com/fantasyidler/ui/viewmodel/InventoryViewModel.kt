@@ -96,6 +96,7 @@ class InventoryViewModel @Inject constructor(
         val skillingDungeonNotes: Map<String, Int> = emptyMap(),
         val unlockedDungeons: List<String> = emptyList(),
         val xpBoostExpiresAt: Long = 0L,
+        val ironman: Boolean = false,
         val activeBlessingKey: String = "",
         val activeBlessingExpiresAt: Long = 0L,
         val activeBlessingXpPct: Int = 0,
@@ -182,6 +183,7 @@ class InventoryViewModel @Inject constructor(
                 skillingDungeonNotes  = flags.skillingDungeonNotes,
                 unlockedDungeons      = flags.unlockedDungeons,
                 xpBoostExpiresAt        = flags.xpBoostExpiresAt,
+                ironman                 = flags.ironman,
                 activeBlessingKey       = flags.activeBlessingKey,
                 activeBlessingExpiresAt = flags.activeBlessingExpiresAt,
                 activeBlessingXpPct     = run {

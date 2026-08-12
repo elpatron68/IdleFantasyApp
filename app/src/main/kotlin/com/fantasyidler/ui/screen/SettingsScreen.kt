@@ -75,6 +75,7 @@ fun SettingsScreen(
     onReopenTutorial: () -> Unit = {},
     onNavigateToHomeScreenSettings: () -> Unit = {},
     onNavigateToThemeSettings: () -> Unit = {},
+    onNavigateToSaveSlots: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -116,9 +117,13 @@ fun SettingsScreen(
         uri ?: return@rememberLauncherForActivityResult
         val jsonString = context.contentResolver.openInputStream(uri)?.bufferedReader()?.readText()
             ?: return@rememberLauncherForActivityResult
-        viewModel.importSave(jsonString) { success ->
+        viewModel.importSave(jsonString) { success, ironmanDemoted ->
             AppBannerCenter.enqueue(
-                if (success) context.getString(R.string.settings_imported_ok) else context.getString(R.string.settings_imported_fail)
+                when {
+                    !success       -> context.getString(R.string.settings_imported_fail)
+                    ironmanDemoted -> context.getString(R.string.settings_imported_demoted)
+                    else           -> context.getString(R.string.settings_imported_ok)
+                }
             )
         }
     }
@@ -398,6 +403,12 @@ fun SettingsScreen(
             HorizontalDivider()
 
             SectionHeader(title = stringResource(R.string.settings_save_data))
+
+            SettingsRow(
+                title    = stringResource(R.string.settings_characters),
+                subtitle = stringResource(R.string.settings_characters_desc),
+                onClick  = onNavigateToSaveSlots,
+            )
 
             SettingsRow(
                 title    = stringResource(R.string.settings_export),

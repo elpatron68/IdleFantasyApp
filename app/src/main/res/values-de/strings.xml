@@ -513,6 +513,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">heilt %1$d LP</string>
     <string name="combat_defeated_so_far">bisher besiegt.</string>
+    <string name="combat_eaten_so_far">bisher gegessen.</string>
     <string name="combat_fighting">Kämpfen…</string>
     <string name="combat_log_you_hit">Ihr habt getroffen</string>
     <string name="combat_log_hit_you">traf Euch</string>
@@ -854,7 +855,7 @@
     <string name="achievement_combat_50_desc">Erreicht Kampflevel 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Erreicht Kampflevel 75</string>
-    <string name="achievement_combat_99_name">Meister</string>
+    <string name="achievement_combat_99_name">Held</string>
     <string name="achievement_combat_99_desc">Erreicht Kampflevel 99</string>
     <string name="achievement_combat_113_name">Höchstes Kampflevel</string>
     <string name="achievement_combat_113_desc">Erreicht das maximale Kampflevel von 113</string>
@@ -1871,4 +1872,35 @@
     <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string>
     <string name="pet_golden_goose_name">Golden Goose</string>
     <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Charaktere</string>
+    <string name="settings_characters_desc">Bis zu 3 Speicherplätze. Charaktere erstellen, wechseln oder löschen.</string>
+    <string name="save_slots_title">Charaktere</string>
+    <string name="save_slots_desc">Bis zu drei Charaktere können auf diesem Gerät leben. Beim Wechseln wird Euer aktueller Charakter automatisch gespeichert; die Sitzungen eines inaktiven Charakters pausieren, bis Ihr zurückkehrt.</string>
+    <string name="save_slot_label">Platz %1$d</string>
+    <string name="save_slot_new">Neuer Charakter</string>
+    <string name="save_slot_playing">Aktiv</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Kampf-Level %1$d</string>
+    <string name="save_slot_total_level">Gesamt-Level %1$d</string>
+    <string name="save_slot_last_played">vor %1$s</string>
+    <string name="save_slot_switch_title">Charakter wechseln?</string>
+    <string name="save_slot_switch_body">Als %1$s spielen? Euer aktueller Charakter wird automatisch gespeichert.</string>
+    <string name="save_slot_switch_btn">Wechseln</string>
+    <string name="save_slot_create_title">Neuen Charakter erstellen?</string>
+    <string name="save_slot_create_body">Einen neuen Charakter auf Platz %1$d beginnen? Euer aktueller Charakter wird automatisch gespeichert.</string>
+    <string name="save_slot_create_btn">Erstellen</string>
+    <string name="save_slot_delete_title">Charakter löschen?</string>
+    <string name="save_slot_delete_body">%1$s endgültig löschen? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="save_slot_delete_btn">Löschen</string>
+    <string name="save_slot_switch_failed">Charakterwechsel fehlgeschlagen.</string>
+    <string name="character_ironman_title">Ironman-Modus</string>
+    <string name="character_ironman_desc">EP- und Ertragsboni sind deaktiviert, Gegenstände können nicht gekauft und Arbeiter nicht angeheuert werden. Dauerhaft: Kann nach der Erstellung nicht mehr geändert werden. Wird die Speicherdatei bearbeitet, geht der Ironman-Status verloren.</string>
+    <string name="ironman_shop_buy_blocked">Ironman-Charaktere können keine Gegenstände kaufen.</string>
+    <string name="ironman_inn_blocked">Ironman-Charaktere können keine Arbeiter anheuern.</string>
+    <string name="ironman_blessing_blocked">Ironman-Charaktere können nur Segen für Verteidigung erhalten.</string>
+    <string name="ironman_bonuses_notice">Ironman: EP-, Ertrags- und Münzboni sind für diesen Charakter deaktiviert.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Speicherstand importiert. Er wurde außerhalb des Spiels verändert, daher wurde der Ironman-Status entfernt.</string>
 </resources>

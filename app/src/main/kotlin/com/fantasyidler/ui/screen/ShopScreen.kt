@@ -121,7 +121,7 @@ fun ShopScreen(
             )
         },
     ) { padding ->
-        val pagerState = rememberPagerState(pageCount = { 2 })
+        val pagerState = rememberPagerState(pageCount = { if (state.ironman) 1 else 2 })
         val scope      = rememberCoroutineScope()
 
         Column(
@@ -129,17 +129,27 @@ fun ShopScreen(
                 .fillMaxSize()
                 .padding(padding),
         ) {
-            TabRow(selectedTabIndex = pagerState.currentPage) {
-                Tab(
-                    selected = pagerState.currentPage == 0,
-                    onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
-                    text     = { Text(stringResource(R.string.btn_buy)) },
+            if (state.ironman) {
+                // Ironman characters can only sell — no Buy tab at all.
+                Text(
+                    text     = stringResource(R.string.ironman_shop_buy_blocked),
+                    style    = MaterialTheme.typography.bodySmall,
+                    color    = MaterialTheme.colorScheme.tertiary,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
                 )
-                Tab(
-                    selected = pagerState.currentPage == 1,
-                    onClick  = { scope.launch { pagerState.animateScrollToPage(1) } },
-                    text     = { Text(stringResource(R.string.btn_sell)) },
-                )
+            } else {
+                TabRow(selectedTabIndex = pagerState.currentPage) {
+                    Tab(
+                        selected = pagerState.currentPage == 0,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
+                        text     = { Text(stringResource(R.string.btn_buy)) },
+                    )
+                    Tab(
+                        selected = pagerState.currentPage == 1,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(1) } },
+                        text     = { Text(stringResource(R.string.btn_sell)) },
+                    )
+                }
             }
 
             Row(
@@ -164,16 +174,8 @@ fun ShopScreen(
             }
 
             HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-                when (page) {
-                    0 -> BuyList(
-                        entries            = viewModel.buyEntries.filter { it.mercantileLevelRequired <= state.mercantileLevel },
-                        coins              = state.coins,
-                        xpBoostActive      = state.xpBoostActive,
-                        inventory          = state.inventory,
-                        discountedPriceFor = viewModel::discountedPrice,
-                        onBuy              = viewModel::openBuy,
-                    )
-                    else -> SellList(
+                when {
+                    state.ironman || page == 1 -> SellList(
                         inventory          = state.inventory,
                         equipped           = state.equipped,
                         lockedItems        = state.lockedItems,
@@ -184,6 +186,14 @@ fun ShopScreen(
                         onToggleLock       = viewModel::toggleItemLock,
                         onSellJunk         = viewModel::previewSellJunk,
                         onSellOldEquipment = viewModel::previewSellOldEquipment,
+                    )
+                    else -> BuyList(
+                        entries            = viewModel.buyEntries.filter { it.mercantileLevelRequired <= state.mercantileLevel },
+                        coins              = state.coins,
+                        xpBoostActive      = state.xpBoostActive,
+                        inventory          = state.inventory,
+                        discountedPriceFor = viewModel::discountedPrice,
+                        onBuy              = viewModel::openBuy,
                     )
                 }
             }
