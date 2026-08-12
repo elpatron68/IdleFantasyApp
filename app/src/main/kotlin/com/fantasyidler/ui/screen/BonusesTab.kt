@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
@@ -63,6 +64,22 @@ internal fun BonusesTab(
 ) {
     val context = LocalContext.current
     val now     = System.currentTimeMillis()
+
+    // Ironman: every XP/yield/coin multiplier is inert, so there is nothing to list.
+    if (state.ironman) {
+        Box(
+            modifier         = Modifier.fillMaxSize().padding(32.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                text      = stringResource(R.string.ironman_bonuses_notice),
+                style     = MaterialTheme.typography.bodyLarge,
+                color     = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+            )
+        }
+        return
+    }
 
     val boostActive    = state.xpBoostExpiresAt > now
     val blessingActive = state.activeBlessingXpPct > 0 && state.activeBlessingExpiresAt > now

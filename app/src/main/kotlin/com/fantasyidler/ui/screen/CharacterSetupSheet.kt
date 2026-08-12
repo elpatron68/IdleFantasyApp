@@ -22,6 +22,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -30,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -58,7 +60,9 @@ fun CharacterSetupSheet(
     titles: List<TitleOption> = emptyList(),
     equippedTitleId: String? = null,
     onEquipTitle: (String?) -> Unit = {},
-    onSave: (name: String, gender: String, race: String) -> Unit,
+    /** Show the permanent Ironman choice — creation flows only, never the edit sheet. */
+    showIronmanOption: Boolean = false,
+    onSave: (name: String, gender: String, race: String, ironman: Boolean) -> Unit,
     onDismiss: () -> Unit,
 ) {
     var draftName   by remember { mutableStateOf(initialName) }
@@ -66,6 +70,7 @@ fun CharacterSetupSheet(
     var draftGender by remember { mutableStateOf(if (isCustomGender) "Other" else initialGender) }
     var customGenderText by remember { mutableStateOf(if (isCustomGender) initialGender else "") }
     var draftRace   by remember { mutableStateOf(initialRace) }
+    var draftIronman by remember { mutableStateOf(false) }
     val sheetState  = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
@@ -145,6 +150,31 @@ fun CharacterSetupSheet(
                             label    = { Text(raceLabels[race] ?: race) },
                         )
                     }
+                }
+            }
+
+            if (showIronmanOption) {
+                Row(
+                    modifier          = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            text  = stringResource(R.string.character_ironman_title),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Text(
+                            text  = stringResource(R.string.character_ironman_desc),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (draftIronman) MaterialTheme.colorScheme.tertiary
+                                    else MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Switch(
+                        checked         = draftIronman,
+                        onCheckedChange = { draftIronman = it },
+                    )
                 }
             }
 
@@ -237,7 +267,7 @@ fun CharacterSetupSheet(
                     onClick  = {
                         val gender = if (draftGender == "Other" && customGenderText.isNotBlank())
                             customGenderText.trim() else draftGender
-                        onSave(draftName.trim(), gender, draftRace)
+                        onSave(draftName.trim(), gender, draftRace, draftIronman)
                     },
                     enabled  = draftName.isNotBlank(),
                 ) {

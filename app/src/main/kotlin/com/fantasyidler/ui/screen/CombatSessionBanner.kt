@@ -344,11 +344,6 @@ internal fun CombatSessionBanner(
                     }
                 }
 
-                // Food remaining (equipped qty minus consumed so far in session)
-                val foodRemaining = equippedFood.mapValues { (key, qty) ->
-                    (qty - (foodConsumedSoFar[key] ?: 0)).coerceAtLeast(0)
-                }.filter { (_, qty) -> qty > 0 }
-
                 Spacer(Modifier.height(16.dp))
                 Surface(
                     shape    = RoundedCornerShape(12.dp),
@@ -470,6 +465,20 @@ internal fun CombatSessionBanner(
                                         MaterialTheme.colorScheme.onSecondaryContainer
                                     else
                                         MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.4f),
+                                )
+                            }
+                            if (foodConsumedSoFar.isNotEmpty()) {
+                                val eatenSoFar = stringResource(R.string.combat_eaten_so_far)
+                                Spacer(Modifier.height(2.dp))
+                                Text(
+                                    text  = foodConsumedSoFar.entries
+                                        .sortedByDescending { it.value }
+                                        .joinToString(", ") { (k, v) ->
+                                            "$v ${GameStrings.itemName(context, k)}"
+                                        }
+                                        + " $eatenSoFar",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                                 )
                             }
                         }

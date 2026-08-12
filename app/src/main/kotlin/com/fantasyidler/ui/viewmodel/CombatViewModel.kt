@@ -85,6 +85,7 @@ data class CombatUiState(
     val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
     val skillPrestige: Map<String, Int> = emptyMap(),
+    val ironman: Boolean = false,
     val towerHpBonus: Int = 0,
     val towerBestFloor: Int = 0,
     val showSessionEndTime: Boolean = true,
@@ -239,6 +240,7 @@ class CombatViewModel @Inject constructor(
                 unlockedDungeons        = flags.unlockedDungeons,
                 selectedArrowKey        = if (extra.selectedArrowKey == null) flags.equippedArrows else extra.selectedArrowKey,
                 skillPrestige           = flags.skillPrestige,
+                ironman                 = flags.ironman,
                 towerHpBonus            = flags.towerHpBonus,
                 towerBestFloor          = flags.towerBestFloor,
                 showSessionEndTime      = flags.showSessionEndTime,
@@ -550,7 +552,7 @@ class CombatViewModel @Inject constructor(
                     spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = levels[Skills.AGILITY]   ?: 1,
                     agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
-                    petBoostPct         = petBoostFor(player.pets),
+                    petBoostPct         = petBoostFor(player.pets, flags.ironman),
                     equippedFood        = availableFood,
                     foodHealValues      = foodHealValues,
                     potionBonuses       = potionBonuses,
@@ -1038,7 +1040,8 @@ class CombatViewModel @Inject constructor(
     )
 
     /** Returns the combined XP boost % from all "combat" and "all" pets the player owns. */
-    private fun petBoostFor(petsJson: String): Int {
+    private fun petBoostFor(petsJson: String, ironman: Boolean = false): Int {
+        if (ironman) return 0
         val pets = try {
             json.decodeFromString<List<OwnedPet>>(petsJson)
         } catch (_: Exception) { return 0 }
@@ -1118,7 +1121,7 @@ class CombatViewModel @Inject constructor(
             spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
             agilityLevel        = levels[Skills.AGILITY]   ?: 1,
             agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
-            petBoostPct         = petBoostFor(petsJson),
+            petBoostPct         = petBoostFor(petsJson, flags.ironman),
             equippedFood        = flags.equippedFood.keys.associateWith { Int.MAX_VALUE },
             foodHealValues      = gameData.foodHealValues,
             potionBonuses       = potionBonuses,

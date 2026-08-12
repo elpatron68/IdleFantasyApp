@@ -43,6 +43,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -253,10 +254,22 @@ fun WorkerSkillsScreen(
     state.sheetSkill?.let { sheet ->
         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
         ModalBottomSheet(
-            onDismissRequest = viewModel::dismissSheet,
+            onDismissRequest = {
+                // System back / scrim tap fire while the sheet is still visible; step back to
+                // the recipe list instead of closing the whole sheet (issue #1330). A swipe-down
+                // has already settled hidden and closes as before.
+                if (sheetState.isVisible && state.selectedRecipe != null) {
+                    viewModel.dismissRecipe()
+                } else {
+                    viewModel.dismissSheet()
+                }
+            },
             sheetState       = sheetState,
             dragHandle       = { BottomSheetDefaults.DragHandle() },
         ) {
+            // Dialog-based sheets (material3 1.3+) deliver back presses to in-content handlers;
+            // the onDismissRequest interception above covers the older popup-based sheet.
+            BackHandler(enabled = state.selectedRecipe != null) { viewModel.dismissRecipe() }
             ScaledSheetContent {
             // For workers: always pass hasActiveSession=true so button says "Add to Queue",
             // and isQueueFull=state.workerQueueFull.

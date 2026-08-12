@@ -366,7 +366,8 @@ class CraftingViewModel @Inject constructor(
     private fun craftToolEfficiency(recipe: CraftableRecipe, equipped: Map<String, String?>): Float =
         gameData.craftDurationEfficiency(recipe.skillName, recipe.key, equipped)
 
-    private fun petBoostFor(petsJson: String, skillKey: String): Int {
+    private fun petBoostFor(petsJson: String, skillKey: String, ironman: Boolean = false): Int {
+        if (ironman) return 0
         val pets = try {
             json.decodeFromString<List<com.fantasyidler.data.model.OwnedPet>>(petsJson)
         } catch (_: Exception) {
@@ -412,8 +413,8 @@ class CraftingViewModel @Inject constructor(
                 val toolEff   = craftToolEfficiency(recipe, json.decodeFromString(player.equipped))
                 val perItemMs = (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / toolEff).toLong()
                 val totalOutput = qty * recipe.outputQty
-                val xpQueueMult = (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
-                val queuePetPct = petBoostFor(player.pets, recipe.skillName)
+                val xpQueueMult = if (flags.ironman) 1.0 else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
+                val queuePetPct = petBoostFor(player.pets, recipe.skillName, flags.ironman)
                 val action = QueuedAction(
                     skillName           = recipe.skillName,
                     activityKey         = recipe.key,
@@ -451,7 +452,7 @@ class CraftingViewModel @Inject constructor(
             val startXp     = xpMap[recipe.skillName] ?: 0L
             val levelBefore = XpTable.levelForXp(startXp)
             val efficiency = craftToolEfficiency(recipe, equipped)
-            val petPct = petBoostFor(player.pets, recipe.skillName)
+            val petPct = petBoostFor(player.pets, recipe.skillName, flags.ironman)
             val totalXpGain = (qty * recipe.xpPerItem * efficiency * (1.0 + petPct / 100.0)).toInt()
             val xpAfter     = startXp + totalXpGain
             val levelAfter  = XpTable.levelForXp(xpAfter)

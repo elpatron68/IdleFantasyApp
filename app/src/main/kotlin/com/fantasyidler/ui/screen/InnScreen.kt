@@ -113,125 +113,140 @@ fun InnScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
-            if (state.dailyFoods.isNotEmpty()) {
-                DailyMenuSection(
-                    foods = state.dailyFoods,
-                    coins = state.coins,
-                    onBuy = { food -> buyDialogFood = food },
-                )
-            }
-
-            buyDialogFood?.let { food ->
-                BuyFoodDialog(
-                    food      = food,
-                    coins     = state.coins,
-                    onConfirm = { qty ->
-                        viewModel.buyFood(food.key, food.price, qty)
-                        buyDialogFood = null
-                    },
-                    onDismiss = { buyDialogFood = null },
-                )
-            }
-
-            // ── Slot 1: Long Laborer ─────────────────────────────────────
-            HorizontalDivider()
-            Text(
-                text  = stringResource(R.string.inn_slot1_header),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-
-            if (state.hiredWorker != null) {
+            if (state.ironman) {
                 Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    shape    = RoundedCornerShape(12.dp),
+                    color    = MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text       = stringResource(R.string.inn_worker_active),
-                        style      = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier   = Modifier.padding(16.dp),
-                        color      = MaterialTheme.colorScheme.onPrimaryContainer,
+                        text     = stringResource(R.string.ironman_inn_blocked),
+                        style    = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(16.dp),
+                        color    = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-            }
-
-            TierCard(
-                tierLabel    = stringResource(R.string.worker_long_laborer),
-                workerName   = state.hiredWorker?.dailyName ?: state.longLaborerName,
-                description  = stringResource(R.string.inn_long_laborer_desc),
-                cost         = WorkerTier.LONG_LABORER.hireCost,
-                playerCoins  = state.coins,
-                workerActive = state.hiredWorker != null,
-                onHire       = { viewModel.hire(WorkerTier.LONG_LABORER) },
-            )
-
-            // ── Slot 2: Skilled Worker ───────────────────────────────────
-            HorizontalDivider()
-            Text(
-                text  = stringResource(R.string.inn_slot2_header),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-
-            if (state.hiredWorker2 != null) {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(
-                        text       = stringResource(R.string.inn_worker_active),
-                        style      = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier   = Modifier.padding(16.dp),
-                        color      = MaterialTheme.colorScheme.onPrimaryContainer,
+            } else {
+                if (state.dailyFoods.isNotEmpty()) {
+                    DailyMenuSection(
+                        foods = state.dailyFoods,
+                        coins = state.coins,
+                        onBuy = { food -> buyDialogFood = food },
                     )
                 }
+
+                buyDialogFood?.let { food ->
+                    BuyFoodDialog(
+                        food      = food,
+                        coins     = state.coins,
+                        onConfirm = { qty ->
+                            viewModel.buyFood(food.key, food.price, qty)
+                            buyDialogFood = null
+                        },
+                        onDismiss = { buyDialogFood = null },
+                    )
+                }
+
+                // ── Slot 1: Long Laborer ─────────────────────────────────────
+                HorizontalDivider()
+                Text(
+                    text  = stringResource(R.string.inn_slot1_header),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+
+                if (state.hiredWorker != null) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            text       = stringResource(R.string.inn_worker_active),
+                            style      = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier   = Modifier.padding(16.dp),
+                            color      = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                }
+
+                TierCard(
+                    tierLabel    = stringResource(R.string.worker_long_laborer),
+                    workerName   = state.hiredWorker?.dailyName ?: state.longLaborerName,
+                    description  = stringResource(R.string.inn_long_laborer_desc),
+                    cost         = WorkerTier.LONG_LABORER.hireCost,
+                    playerCoins  = state.coins,
+                    workerActive = state.hiredWorker != null,
+                    onHire       = { viewModel.hire(WorkerTier.LONG_LABORER) },
+                )
+
+                // ── Slot 2: Skilled Worker ───────────────────────────────────
+                HorizontalDivider()
+                Text(
+                    text  = stringResource(R.string.inn_slot2_header),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+
+                if (state.hiredWorker2 != null) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            text       = stringResource(R.string.inn_worker_active),
+                            style      = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier   = Modifier.padding(16.dp),
+                            color      = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                }
+
+                TierCard(
+                    tierLabel    = stringResource(R.string.worker_apprentice),
+                    workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.APPRENTICE } ?: state.apprenticeName,
+                    description  = stringResource(R.string.inn_apprentice_desc),
+                    cost         = WorkerTier.APPRENTICE.hireCost,
+                    playerCoins  = state.coins,
+                    workerActive = state.hiredWorker2 != null,
+                    onHire       = { viewModel.hire(WorkerTier.APPRENTICE) },
+                )
+
+                TierCard(
+                    tierLabel    = stringResource(R.string.worker_journeyman),
+                    workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.JOURNEYMAN } ?: state.journeymanName,
+                    description  = stringResource(R.string.inn_journeyman_desc),
+                    cost         = WorkerTier.JOURNEYMAN.hireCost,
+                    playerCoins  = state.coins,
+                    workerActive = state.hiredWorker2 != null,
+                    onHire       = { viewModel.hire(WorkerTier.JOURNEYMAN) },
+                )
+
+                TierCard(
+                    tierLabel    = stringResource(R.string.worker_master),
+                    workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.MASTER } ?: state.masterName,
+                    description  = stringResource(R.string.inn_master_desc),
+                    cost         = WorkerTier.MASTER.hireCost,
+                    playerCoins  = state.coins,
+                    workerActive = state.hiredWorker2 != null,
+                    onHire       = { viewModel.hire(WorkerTier.MASTER) },
+                )
+
+                HorizontalDivider()
+                Text(
+                    text  = stringResource(R.string.inn_gathering_note),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Text(
+                    text  = stringResource(R.string.inn_crafting_note),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
-
-            TierCard(
-                tierLabel    = stringResource(R.string.worker_apprentice),
-                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.APPRENTICE } ?: state.apprenticeName,
-                description  = stringResource(R.string.inn_apprentice_desc),
-                cost         = WorkerTier.APPRENTICE.hireCost,
-                playerCoins  = state.coins,
-                workerActive = state.hiredWorker2 != null,
-                onHire       = { viewModel.hire(WorkerTier.APPRENTICE) },
-            )
-
-            TierCard(
-                tierLabel    = stringResource(R.string.worker_journeyman),
-                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.JOURNEYMAN } ?: state.journeymanName,
-                description  = stringResource(R.string.inn_journeyman_desc),
-                cost         = WorkerTier.JOURNEYMAN.hireCost,
-                playerCoins  = state.coins,
-                workerActive = state.hiredWorker2 != null,
-                onHire       = { viewModel.hire(WorkerTier.JOURNEYMAN) },
-            )
-
-            TierCard(
-                tierLabel    = stringResource(R.string.worker_master),
-                workerName   = state.hiredWorker2?.dailyName?.takeIf { state.hiredWorker2?.tier == WorkerTier.MASTER } ?: state.masterName,
-                description  = stringResource(R.string.inn_master_desc),
-                cost         = WorkerTier.MASTER.hireCost,
-                playerCoins  = state.coins,
-                workerActive = state.hiredWorker2 != null,
-                onHire       = { viewModel.hire(WorkerTier.MASTER) },
-            )
-
-            HorizontalDivider()
-            Text(
-                text  = stringResource(R.string.inn_gathering_note),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text  = stringResource(R.string.inn_crafting_note),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
 
         }
     }

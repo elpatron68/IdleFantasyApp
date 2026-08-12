@@ -239,6 +239,11 @@ data class PlayerFlags(
     @SerialName("unlocked_titles") val unlockedTitles: Set<String> = emptySet(),
     /** Titles: id of the currently equipped title, or null for none. */
     @SerialName("equipped_title") val equippedTitle: String? = null,
+    /**
+     * Ironman mode: chosen at character creation, permanent. All XP/yield/coin multipliers are
+     * inert, shop buying is blocked, and workers cannot be hired. Never written after creation.
+     */
+    @SerialName("ironman") val ironman: Boolean = false,
 )
 
 /** A permanent snapshot of a completed Seasonal Event, shown in the Profile Banners tab. */
@@ -432,6 +437,12 @@ data class PlayerExport(
     val farmingPatches: List<FarmingPatch> = emptyList(),
     val sessions: List<SkillSessionExport> = emptyList(),
     @SerialName("exported_at") val exportedAt: Long = 0L,
+    /**
+     * HMAC over the seven core player fields, written on every export. Only enforced when the
+     * save claims ironman: an edited or unsigned ironman save imports fine but loses its
+     * ironman status. Deterrence only — the key ships in this open-source app.
+     */
+    @SerialName("sig") val sig: String = "",
 )
 
 // ---------------------------------------------------------------------------

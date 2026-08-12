@@ -13,6 +13,8 @@ sealed class BlessingActivateResult {
     object AlreadyActive : BlessingActivateResult()
     data class NotEnoughBones(val needed: Int) : BlessingActivateResult()
     data class LevelTooLow(val requiredLevel: Int) : BlessingActivateResult()
+    /** Ironman characters may only activate defensive blessings. */
+    object IronmanBlocked : BlessingActivateResult()
 }
 
 @Singleton
@@ -122,6 +124,9 @@ class ChurchRepository @Inject constructor(
         val active    = activeBlessing(flags)
         if (active != null && active.key != key) return@withLock BlessingActivateResult.AlreadyActive
         val blessing  = BY_KEY[key] ?: return@withLock BlessingActivateResult.AlreadyActive
+        if (flags.ironman && blessing.type != BlessingType.DEFENSE) {
+            return@withLock BlessingActivateResult.IronmanBlocked
+        }
         val player    = playerRepo.getOrCreatePlayer()
         val levels: Map<String, Int> = kotlinx.serialization.json.Json.decodeFromString(player.skillLevels)
         val prayerLevel = levels[Skills.PRAYER] ?: 1

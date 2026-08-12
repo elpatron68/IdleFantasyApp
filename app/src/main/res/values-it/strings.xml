@@ -513,6 +513,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">cura %1$d HP</string>
     <string name="combat_defeated_so_far">sconfitti fino ad ora.</string>
+    <string name="combat_eaten_so_far">mangiati fino ad ora.</string>
     <string name="combat_fighting">In Battaglia…</string>
     <string name="combat_log_you_hit">Hai colpito</string>
     <string name="combat_log_hit_you">ti ha colpito</string>
@@ -1826,4 +1827,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Personaggi</string>
+    <string name="settings_characters_desc">Fino a 3 slot di salvataggio. Crea, cambia o elimina personaggi.</string>
+    <string name="save_slots_title">Personaggi</string>
+    <string name="save_slots_desc">Su questo dispositivo possono vivere fino a tre personaggi. Al cambio, il personaggio attuale viene salvato automaticamente; le sessioni di un personaggio inattivo restano in pausa finché non torni.</string>
+    <string name="save_slot_label">Slot %1$d</string>
+    <string name="save_slot_new">Nuovo personaggio</string>
+    <string name="save_slot_playing">In gioco</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Liv. combattimento %1$d</string>
+    <string name="save_slot_total_level">Liv. totale %1$d</string>
+    <string name="save_slot_last_played">%1$s fa</string>
+    <string name="save_slot_switch_title">Cambiare personaggio?</string>
+    <string name="save_slot_switch_body">Giocare come %1$s? Il personaggio attuale viene salvato automaticamente.</string>
+    <string name="save_slot_switch_btn">Cambia</string>
+    <string name="save_slot_create_title">Creare un nuovo personaggio?</string>
+    <string name="save_slot_create_body">Iniziare un nuovo personaggio nello slot %1$d? Il personaggio attuale viene salvato automaticamente.</string>
+    <string name="save_slot_create_btn">Crea</string>
+    <string name="save_slot_delete_title">Eliminare il personaggio?</string>
+    <string name="save_slot_delete_body">Eliminare definitivamente %1$s? Questa azione non può essere annullata.</string>
+    <string name="save_slot_delete_btn">Elimina</string>
+    <string name="save_slot_switch_failed">Impossibile cambiare personaggio.</string>
+    <string name="character_ironman_title">Modalità Ironman</string>
+    <string name="character_ironman_desc">I potenziamenti di XP e resa sono disattivati, non si possono comprare oggetti né assumere lavoratori. Permanente: non può essere cambiato dopo la creazione. Modificare il file di salvataggio rimuoverà lo stato Ironman.</string>
+    <string name="ironman_shop_buy_blocked">I personaggi Ironman non possono comprare oggetti.</string>
+    <string name="ironman_inn_blocked">I personaggi Ironman non possono assumere lavoratori.</string>
+    <string name="ironman_blessing_blocked">I personaggi Ironman possono ricevere solo benedizioni difensive.</string>
+    <string name="ironman_bonuses_notice">Ironman: i potenziamenti di XP, resa e monete sono disattivati per questo personaggio.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Salvataggio importato. È stato modificato fuori dal gioco, quindi lo stato Ironman è stato rimosso.</string>
 </resources>

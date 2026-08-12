@@ -36,6 +36,8 @@ data class ChurchUiState(
     val pendingBlessingKey: String? = null,
     val showDeactivateConfirm: Boolean = false,
     val snackbarMessage: String? = null,
+    /** Ironman characters can only use defensive blessings. */
+    val ironman: Boolean = false,
 )
 
 @HiltViewModel
@@ -70,6 +72,7 @@ class ChurchViewModel @Inject constructor(
             activeBlessingRemainingMs = remaining,
             totalBoneEquivalent       = ChurchRepository.totalBoneEquivalent(inventory),
             totalBoneCount            = ChurchRepository.totalBoneCount(inventory),
+            ironman                   = flags.ironman,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ChurchUiState())
 
@@ -89,6 +92,8 @@ class ChurchViewModel @Inject constructor(
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.church_not_enough_bones, result.needed)) }
                 is BlessingActivateResult.LevelTooLow ->
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.church_locked_level, result.requiredLevel)) }
+                is BlessingActivateResult.IronmanBlocked ->
+                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_blessing_blocked)) }
             }
         }
     }

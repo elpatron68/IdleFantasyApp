@@ -46,7 +46,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -115,6 +118,8 @@ import androidx.compose.ui.draw.alpha
 @Composable
 internal fun FiremakingSheet(
     guildDailyButton: (@Composable () -> Unit)? = null,
+    /** Host-owned back interceptor: set while the quantity page is open so the system back button steps back to the item list (issue #1330). */
+    backStep: MutableState<(() -> Unit)?>? = null,
     availableLogs: Map<String, LogData>,
     inventory: Map<String, Int>,
     currentXp: Long,
@@ -130,6 +135,15 @@ internal fun FiremakingSheet(
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
 ) {
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    if (backStep != null) {
+        DisposableEffect(selectedKey) {
+            backStep.value = if (selectedKey != null) ({ selectedKey = null }) else null
+            onDispose { backStep.value = null }
+        }
+    }
+    // Dialog-based sheets (material3 1.3+) deliver back presses to in-content handlers;
+    // the host's onDismissRequest interception covers the older popup-based sheet.
+    BackHandler(enabled = selectedKey != null) { selectedKey = null }
     val selectedLog = selectedKey?.let { availableLogs[it] }
 
     Column(
@@ -156,7 +170,7 @@ internal fun FiremakingSheet(
                     Text(stringResource(R.string.skills_no_logs), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
-                Column(Modifier.verticalScroll(rememberScrollState())) {
+                Column(Modifier.verticalScroll(rememberScrollState()).imePadding()) {
                     availableLogs.entries.sortedBy { it.value.levelRequired }.forEach { (key, log) ->
                         val ashKey = when (key) {
                             "oak_log" -> "oak_ashes"; "willow_log" -> "willow_ashes"

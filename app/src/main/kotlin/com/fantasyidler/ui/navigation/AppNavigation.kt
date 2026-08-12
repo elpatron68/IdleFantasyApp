@@ -57,6 +57,7 @@ import com.fantasyidler.ui.screen.ProfileScreen
 import com.fantasyidler.ui.screen.QuestsScreen
 import com.fantasyidler.ui.screen.SeasonalEventScreen
 import com.fantasyidler.ui.screen.HomeScreenSettingsScreen
+import com.fantasyidler.ui.screen.SaveSlotsScreen
 import com.fantasyidler.ui.screen.SettingsScreen
 import com.fantasyidler.ui.screen.ThemeEditorScreen
 import com.fantasyidler.ui.screen.ThemeSettingsScreen
@@ -230,11 +231,23 @@ fun AppNavigation(
                     onReopenTutorial               = { onboardingVm.reopen() },
                     onNavigateToHomeScreenSettings = { navController.navigate(Screen.Settings.homeScreenRoute) },
                     onNavigateToThemeSettings      = { navController.navigate(Screen.Settings.themeSettingsRoute) },
+                    onNavigateToSaveSlots          = { navController.navigate(Screen.Settings.saveSlotsRoute) },
                 )
             }
             composable(Screen.Settings.homeScreenRoute) { entry ->
                 HomeScreenSettingsScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                )
+            }
+            composable(Screen.Settings.saveSlotsRoute) { entry ->
+                SaveSlotsScreen(
+                    onBack     = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                    onSwitched = {
+                        // Rebuild the whole back stack on the new character.
+                        navController.navigate(Screen.Home.route) {
+                            popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                        }
+                    },
                 )
             }
             composable(Screen.Settings.themeSettingsRoute) { entry ->

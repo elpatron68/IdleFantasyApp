@@ -1,3 +1,15 @@
+v1.13.3
+• New save manager under Settings > Characters: up to 3 character slots shown side by side with each character's sprite, levels, coins, and last-played time; create, switch, or delete characters, with the current character saved automatically and inactive characters' sessions paused until you return
+• New Ironman mode, chosen at character creation and permanent: all XP, yield, and coin boosts are inert, the shop only sells (no buying), and Inn workers can't be hired; ironman characters show a badge on the home screen, profile, and save slot
+• Every crop seed can now be pickpocketed from thieving NPCs, laddered by level (peasants carry potato and onion seeds, the high priest carries starfruit and void lotus), so farming no longer depends on the shop
+• The Merchant's Guild jewelry (rings of wealth, recoil, and suffering, the archers and seers rings, the amulet of strength, and the necklace of anguish) can now also be found as rare pickpocket loot from higher-level thieving targets
+• The Android back button now steps back to the item list inside skill sheets (crafting, prayer, runecrafting, firemaking, and worker crafting) instead of closing the whole sheet, matching the in-sheet back link
+• The craft quantity page now scrolls above the on-screen keyboard so the Craft / Add to Queue button is no longer hidden while typing a quantity
+• Bottom sheets no longer slide over the Android system navigation buttons when opening or closing (Material components library upgraded, which also brings predictive-back animations to sheets on Android 14+)
+• The live combat log now shows a running count of food eaten during the current dungeon, boss, or tower run, alongside the remaining count per food type
+• Construction furniture now sells for the salvage value of its materials instead of a flat 5 coins: the Magic Throne rises from about 6 coins to 850, with the other nine pieces rescaled to match their inputs
+• The Mercantile row on the Skills page now shows quest indicator icons for trade route and coin-earning quests, like every other skill
+
 v1.13.2
 • New in-app theme editor in Settings: recolour any theme with a colour picker, preview it live, save it as your own, and export it as a file to share (importable by others)
 • The guild cape is now awarded when the guild actually reaches level 10, instead of when the final guild quest is claimed at level 9

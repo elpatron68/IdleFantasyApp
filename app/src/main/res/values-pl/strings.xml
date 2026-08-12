@@ -514,6 +514,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">leczy %1$d HP</string>
     <string name="combat_defeated_so_far">pokonanych do tej pory.</string>
+    <string name="combat_eaten_so_far">zjedzonych do tej pory.</string>
     <string name="combat_fighting">Walka…</string>
     <string name="combat_log_you_hit">Trafiłeś</string>
     <string name="combat_log_hit_you">trafił cię</string>
@@ -851,7 +852,7 @@
     <string name="achievement_combat_50_desc">Osiągnij poziom walki 50</string>
     <string name="achievement_combat_75_name">Elita</string>
     <string name="achievement_combat_75_desc">Osiągnij poziom walki 75</string>
-    <string name="achievement_combat_99_name">Czempion</string>
+    <string name="achievement_combat_99_name">Bohater</string>
     <string name="achievement_combat_99_desc">Osiągnij poziom walki 99</string>
     <string name="achievement_combat_113_name">Maks. poziom walki</string>
     <string name="achievement_combat_113_desc">Osiągnij maksymalny poziom walki 113</string>
@@ -1824,4 +1825,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Postacie</string>
+    <string name="settings_characters_desc">Do 3 miejsc zapisu. Twórz, zmieniaj i usuwaj postacie.</string>
+    <string name="save_slots_title">Postacie</string>
+    <string name="save_slots_desc">Na tym urządzeniu mogą istnieć maksymalnie trzy postacie. Przy zmianie obecna postać zapisuje się automatycznie; sesje nieaktywnej postaci są wstrzymane do twojego powrotu.</string>
+    <string name="save_slot_label">Miejsce %1$d</string>
+    <string name="save_slot_new">Nowa postać</string>
+    <string name="save_slot_playing">W grze</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Poziom bojowy %1$d</string>
+    <string name="save_slot_total_level">Poziom łączny %1$d</string>
+    <string name="save_slot_last_played">%1$s temu</string>
+    <string name="save_slot_switch_title">Zmienić postać?</string>
+    <string name="save_slot_switch_body">Grać jako %1$s? Obecna postać zapisze się automatycznie.</string>
+    <string name="save_slot_switch_btn">Zmień</string>
+    <string name="save_slot_create_title">Utworzyć nową postać?</string>
+    <string name="save_slot_create_body">Rozpocząć zupełnie nową postać w miejscu %1$d? Obecna postać zapisze się automatycznie.</string>
+    <string name="save_slot_create_btn">Utwórz</string>
+    <string name="save_slot_delete_title">Usunąć postać?</string>
+    <string name="save_slot_delete_body">Trwale usunąć %1$s? Tej operacji nie można cofnąć.</string>
+    <string name="save_slot_delete_btn">Usuń</string>
+    <string name="save_slot_switch_failed">Nie udało się zmienić postaci.</string>
+    <string name="character_ironman_title">Tryb Ironman</string>
+    <string name="character_ironman_desc">Wzmocnienia XP i zbiorów są wyłączone, nie można kupować przedmiotów ani wynajmować pracowników. Na stałe: nie można tego zmienić po utworzeniu postaci. Edycja pliku zapisu spowoduje utratę statusu Ironman.</string>
+    <string name="ironman_shop_buy_blocked">Postacie Ironman nie mogą kupować przedmiotów.</string>
+    <string name="ironman_inn_blocked">Postacie Ironman nie mogą wynajmować pracowników.</string>
+    <string name="ironman_blessing_blocked">Postacie Ironman mogą otrzymywać tylko błogosławieństwa obrony.</string>
+    <string name="ironman_bonuses_notice">Ironman: wzmocnienia XP, zbiorów i monet są wyłączone dla tej postaci.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Zapis zaimportowano. Został zmodyfikowany poza grą, więc status Ironman został usunięty.</string>
 </resources>

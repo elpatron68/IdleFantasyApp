@@ -171,6 +171,14 @@ fun ProfileScreen(
                             style      = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                         )
+                        if (state.ironman) {
+                            Text(
+                                text       = stringResource(R.string.ironman_badge),
+                                style      = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color      = MaterialTheme.colorScheme.tertiary,
+                            )
+                        }
                         val subtitle = buildString {
                             if (state.characterRace.isNotBlank()) append(state.characterRace)
                             if (state.characterRace.isNotBlank() && state.characterGender.isNotBlank()) append(" • ")
@@ -335,7 +343,7 @@ fun ProfileScreen(
             titles           = staticTitleOptions + seasonalTitleOptions,
             equippedTitleId  = state.equippedTitle,
             onEquipTitle     = viewModel::equipTitle,
-            onSave        = { name, gender, race ->
+            onSave        = { name, gender, race, _ ->
                 viewModel.saveCharacterProfile(name, gender, race)
                 showEditSheet = false
             },

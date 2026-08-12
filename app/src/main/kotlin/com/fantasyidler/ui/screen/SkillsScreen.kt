@@ -258,10 +258,20 @@ fun SkillActivitySheet(
     val context = LocalContext.current
     state.sheetSkill?.let { sheet ->
         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        // Sheets with an internal quantity page register how to step back one level here, so
+        // the system back button matches the in-sheet back link instead of closing the whole
+        // sheet (issue #1330). Back press and scrim tap fire onDismissRequest while the sheet
+        // is still visible; a swipe-down has already settled hidden and always closes.
+        val sheetBackStep = remember { mutableStateOf<(() -> Unit)?>(null) }
         ModalBottomSheet(
             onDismissRequest = {
-                viewModel.dismissSheet()
-                craftingViewModel.dismissRecipe()
+                val stepBack = sheetBackStep.value
+                if (sheetState.isVisible && stepBack != null) {
+                    stepBack()
+                } else {
+                    viewModel.dismissSheet()
+                    craftingViewModel.dismissRecipe()
+                }
             },
             sheetState = sheetState,
             dragHandle = { BottomSheetDefaults.DragHandle() },
@@ -345,6 +355,7 @@ fun SkillActivitySheet(
                     )
                     is SheetState.Firemaking -> FiremakingSheet(
                         guildDailyButton  = dailyBanner,
+                        backStep          = sheetBackStep,
                         availableLogs     = sheet.availableLogs,
                         inventory         = state.inventory,
                         currentXp         = state.skillXp[Skills.FIREMAKING] ?: 0L,
@@ -360,6 +371,7 @@ fun SkillActivitySheet(
                     )
                     is SheetState.Runecrafting -> RunecraftingSheet(
                         guildDailyButton  = dailyBanner,
+                        backStep          = sheetBackStep,
                         sheet             = sheet,
                         inventory         = state.inventory,
                         isStarting        = state.startingSession,
@@ -373,6 +385,7 @@ fun SkillActivitySheet(
                     )
                     is SheetState.Prayer -> PrayerSheet(
                         guildDailyButton  = dailyBanner,
+                        backStep          = sheetBackStep,
                         availableBones        = sheet.availableBones,
                         inventory             = sheet.inventory,
                         prayerLevel           = state.skillLevels[Skills.PRAYER] ?: 1,
@@ -393,6 +406,7 @@ fun SkillActivitySheet(
                         val craftState by craftingViewModel.uiState.collectAsState()
                         CraftSkillSheet(
                             guildDailyButton  = dailyBanner,
+                            backStep          = sheetBackStep,
                             skillName         = sheet.skillName,
                             craftState        = craftState,
                             craftingViewModel = craftingViewModel,
@@ -632,7 +646,7 @@ private fun SkillsTabContent(
                 toolEfficiency = efficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = { viewModel.prestigeSkill(key) },
+                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
@@ -656,7 +670,7 @@ private fun SkillsTabContent(
                 toolEfficiency = craftEfficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = { viewModel.prestigeSkill(key) },
+                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
@@ -673,7 +687,7 @@ private fun SkillsTabContent(
                 toolEfficiency = if (key == Skills.AGILITY) state.agilityEfficiency else 1.0f,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = { viewModel.prestigeSkill(key) },
+                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
                 guildDailyOpen = state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
@@ -689,7 +703,7 @@ private fun SkillsTabContent(
                 onClick       = onNavigateToSlayer,
                 petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
                 prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
-                onPrestige    = { viewModel.prestigeSkill(Skills.SLAYER) },
+                onPrestige    = if (state.ironman) null else ({ viewModel.prestigeSkill(Skills.SLAYER) }),
                 guildDailyOpen = state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
             )

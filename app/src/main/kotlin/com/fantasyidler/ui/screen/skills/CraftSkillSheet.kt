@@ -46,8 +46,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.text.KeyboardActions
@@ -115,6 +118,8 @@ import androidx.compose.ui.draw.alpha
 @Composable
 internal fun CraftSkillSheet(
     guildDailyButton: (@Composable () -> Unit)? = null,
+    /** Host-owned back interceptor: set while the quantity page is open so the system back button steps back to the recipe list (issue #1330). */
+    backStep: MutableState<(() -> Unit)?>? = null,
     skillName: String,
     craftState: CraftingUiState,
     craftingViewModel: CraftingViewModel,
@@ -154,6 +159,16 @@ internal fun CraftSkillSheet(
         }
 
     val selected = craftState.selectedRecipe
+
+    if (backStep != null) {
+        DisposableEffect(selected) {
+            backStep.value = if (selected != null) ({ craftingViewModel.dismissRecipe() }) else null
+            onDispose { backStep.value = null }
+        }
+    }
+    // Dialog-based sheets (material3 1.3+) deliver back presses to in-content handlers;
+    // the host's onDismissRequest interception covers the older popup-based sheet.
+    BackHandler(enabled = selected != null) { craftingViewModel.dismissRecipe() }
 
     if (selected != null) {
         CraftQuantityContent(
@@ -429,6 +444,7 @@ private fun CraftQuantityContent(
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
+            .imePadding()
             .padding(horizontal = 24.dp)
             .padding(bottom = 40.dp),
     ) {

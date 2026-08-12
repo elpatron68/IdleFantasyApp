@@ -497,6 +497,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">cura %1$d HP</string>
     <string name="combat_defeated_so_far">derrotados até agora.</string>
+    <string name="combat_eaten_so_far">comidos até agora.</string>
     <string name="combat_fighting">Lutando…</string>
     <string name="combat_log_you_hit">Você acertou</string>
     <string name="combat_log_hit_you">acertou você</string>
@@ -832,7 +833,7 @@
     <string name="achievement_combat_50_desc">Alcance o nível de combate 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Alcance o nível de combate 75</string>
-    <string name="achievement_combat_99_name">Campeão</string>
+    <string name="achievement_combat_99_name">Herói</string>
     <string name="achievement_combat_99_desc">Alcance o nível de combate 99</string>
     <string name="achievement_combat_113_name">Combate Máximo</string>
     <string name="achievement_combat_113_desc">Alcance o nível de combate máximo de 113</string>
@@ -1799,4 +1800,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Personagens</string>
+    <string name="settings_characters_desc">Até 3 espaços de salvamento. Crie, troque ou exclua personagens.</string>
+    <string name="save_slots_title">Personagens</string>
+    <string name="save_slots_desc">Até três personagens podem viver neste aparelho. Ao trocar, seu personagem atual é salvo automaticamente; as sessões de um personagem inativo ficam pausadas até você voltar.</string>
+    <string name="save_slot_label">Espaço %1$d</string>
+    <string name="save_slot_new">Novo personagem</string>
+    <string name="save_slot_playing">Jogando</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Nível de combate %1$d</string>
+    <string name="save_slot_total_level">Nível total %1$d</string>
+    <string name="save_slot_last_played">%1$s atrás</string>
+    <string name="save_slot_switch_title">Trocar de personagem?</string>
+    <string name="save_slot_switch_body">Jogar como %1$s? Seu personagem atual é salvo automaticamente.</string>
+    <string name="save_slot_switch_btn">Trocar</string>
+    <string name="save_slot_create_title">Criar novo personagem?</string>
+    <string name="save_slot_create_body">Começar um personagem novo no espaço %1$d? Seu personagem atual é salvo automaticamente.</string>
+    <string name="save_slot_create_btn">Criar</string>
+    <string name="save_slot_delete_title">Excluir personagem?</string>
+    <string name="save_slot_delete_body">Excluir %1$s permanentemente? Isso não pode ser desfeito.</string>
+    <string name="save_slot_delete_btn">Excluir</string>
+    <string name="save_slot_switch_failed">Não foi possível trocar de personagem.</string>
+    <string name="character_ironman_title">Modo Ironman</string>
+    <string name="character_ironman_desc">Bônus de XP e de rendimento ficam desativados, não é possível comprar itens nem contratar trabalhadores. Permanente: não pode ser alterado após a criação. Editar o arquivo de salvamento removerá o status Ironman.</string>
+    <string name="ironman_shop_buy_blocked">Personagens Ironman não podem comprar itens.</string>
+    <string name="ironman_inn_blocked">Personagens Ironman não podem contratar trabalhadores.</string>
+    <string name="ironman_blessing_blocked">Personagens Ironman só podem receber bênçãos defensivas.</string>
+    <string name="ironman_bonuses_notice">Ironman: bônus de XP, rendimento e moedas estão desativados para este personagem.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Salvamento importado. Ele foi modificado fora do jogo, então o status Ironman foi removido.</string>
 </resources>

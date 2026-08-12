@@ -502,6 +502,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">heelt %1$d HP</string>
     <string name="combat_defeated_so_far">tot nu toe verslagen.</string>
+    <string name="combat_eaten_so_far">tot nu toe gegeten.</string>
     <string name="combat_fighting">Vechtend…</string>
     <string name="combat_log_you_hit">Je raakt</string>
     <string name="combat_log_hit_you">raakt jou</string>
@@ -1802,4 +1803,35 @@
     <string name="town_building_chronos_spire_name">Chronos Spire</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Personages</string>
+    <string name="settings_characters_desc">Tot 3 opslagplekken. Maak, wissel of verwijder personages.</string>
+    <string name="save_slots_title">Personages</string>
+    <string name="save_slots_desc">Op dit apparaat kunnen tot drie personages leven. Bij het wisselen wordt je huidige personage automatisch opgeslagen; de sessies van een inactief personage staan op pauze tot je terugkeert.</string>
+    <string name="save_slot_label">Slot %1$d</string>
+    <string name="save_slot_new">Nieuw personage</string>
+    <string name="save_slot_playing">Actief</string>
+    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_combat_level">Gevechtslevel %1$d</string>
+    <string name="save_slot_total_level">Totaal level %1$d</string>
+    <string name="save_slot_last_played">%1$s geleden</string>
+    <string name="save_slot_switch_title">Van personage wisselen?</string>
+    <string name="save_slot_switch_body">Spelen als %1$s? Je huidige personage wordt automatisch opgeslagen.</string>
+    <string name="save_slot_switch_btn">Wisselen</string>
+    <string name="save_slot_create_title">Nieuw personage maken?</string>
+    <string name="save_slot_create_body">Een gloednieuw personage beginnen in slot %1$d? Je huidige personage wordt automatisch opgeslagen.</string>
+    <string name="save_slot_create_btn">Maken</string>
+    <string name="save_slot_delete_title">Personage verwijderen?</string>
+    <string name="save_slot_delete_body">%1$s definitief verwijderen? Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="save_slot_delete_btn">Verwijderen</string>
+    <string name="save_slot_switch_failed">Kon niet van personage wisselen.</string>
+    <string name="character_ironman_title">Ironman-modus</string>
+    <string name="character_ironman_desc">XP- en opbrengstboosts zijn uitgeschakeld, voorwerpen kopen kan niet en werknemers inhuren ook niet. Permanent: kan na het aanmaken niet meer worden gewijzigd. Het bewerken van het opslagbestand verwijdert de Ironman-status.</string>
+    <string name="ironman_shop_buy_blocked">Ironman-personages kunnen geen voorwerpen kopen.</string>
+    <string name="ironman_inn_blocked">Ironman-personages kunnen geen werknemers inhuren.</string>
+    <string name="ironman_blessing_blocked">Ironman-personages kunnen alleen verdedigingszegeningen ontvangen.</string>
+    <string name="ironman_bonuses_notice">Ironman: boosts voor XP, opbrengst en ducaten zijn uitgeschakeld voor dit personage.</string>
+    <string name="ironman_badge">Ironman</string>
+    <string name="settings_imported_demoted">Opslag geïmporteerd. Het bestand is buiten het spel gewijzigd, dus de Ironman-status is verwijderd.</string>
 </resources>

@@ -10,17 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.ThemeData
 import com.fantasyidler.data.model.CustomTheme
 import com.fantasyidler.data.model.PlayerFlags
-import com.fantasyidler.data.model.toExport
-import com.fantasyidler.data.model.toSkillSession
 import com.fantasyidler.repository.BackupScheduler
 import com.fantasyidler.repository.FarmingRepository
-import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
-import com.fantasyidler.repository.QueuedSessionStarter
+import com.fantasyidler.repository.SaveSlotRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.ThemeRepository
-import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.util.SaveViewerClient
 import com.fantasyidler.util.UploadResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,11 +40,9 @@ class SettingsViewModel @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
     private val questRepo: QuestRepository,
-    private val queuedSessionStarter: QueuedSessionStarter,
-    private val workerStarter: WorkerQueuedSessionStarter,
     private val backupScheduler: BackupScheduler,
-    private val guildRepo: GuildRepository,
     private val farmingRepo: FarmingRepository,
+    private val saveSlotRepo: SaveSlotRepository,
     private val themeRepo: ThemeRepository,
     private val json: Json,
 ) : ViewModel() {
@@ -303,15 +297,7 @@ class SettingsViewModel @Inject constructor(
                 onDone(Result.failure(it))
                 return@launch
             }
-            val sessions = buildList {
-                sessionRepo.getActiveSession()?.let { add(it.toExport()) }
-                addAll(sessionRepo.getAllCompletedSessions().map { it.toExport() })
-                for (slot in 1..2) {
-                    sessionRepo.getActiveWorkerSession(slot)?.let { add(it.toExport()) }
-                    addAll(sessionRepo.getAllCompletedWorkerSessions(slot).map { it.toExport() })
-                }
-            }
-            val jsonString = playerRepo.exportSave(sessions)
+            val jsonString = saveSlotRepo.exportFullSave()
             val result = withContext(Dispatchers.IO) {
                 SaveViewerClient.uploadSave(target, jsonString)
             }
@@ -337,49 +323,17 @@ class SettingsViewModel @Inject constructor(
 
     fun exportSave(onReady: (String) -> Unit) {
         viewModelScope.launch {
-            val sessions = buildList {
-                sessionRepo.getActiveSession()?.let { add(it.toExport()) }
-                addAll(sessionRepo.getAllCompletedSessions().map { it.toExport() })
-                for (slot in 1..2) {
-                    sessionRepo.getActiveWorkerSession(slot)?.let { add(it.toExport()) }
-                    addAll(sessionRepo.getAllCompletedWorkerSessions(slot).map { it.toExport() })
-                }
-            }.distinctBy { it.sessionId }
-            onReady(playerRepo.exportSave(sessions))
+            onReady(saveSlotRepo.exportFullSave())
         }
     }
 
-    fun importSave(jsonString: String, onDone: (success: Boolean) -> Unit) {
+    fun importSave(jsonString: String, onDone: (success: Boolean, ironmanDemoted: Boolean) -> Unit) {
         viewModelScope.launch {
             try {
-                val export = playerRepo.importSave(jsonString)
-                // Imported flags may predate the guild-leveling rework (reputation -> daily-count),
-                // and importing overwrites the current save's migration state wholesale, so this
-                // must re-run here rather than relying on the one-time app-startup call.
-                guildRepo.migrateLegacyGuildReputation()
-                sessionRepo.deleteAllSessions()
-                sessionRepo.deleteAllWorkerSessions()
-                val now = System.currentTimeMillis()
-                val exportedAt = export.exportedAt.takeIf { it > 0L } ?: now
-                export.sessions.forEach { s ->
-                    val session = if (s.completed) {
-                        s.toSkillSession()
-                    } else {
-                        val remainingMs = (s.endsAt - exportedAt).coerceAtLeast(0L)
-                        s.toSkillSession().copy(endsAt = now + remainingMs)
-                    }
-                    try {
-                        sessionRepo.insertSession(session)
-                    } catch (_: Exception) {
-                        // A duplicate/bad session in an old export file shouldn't abort the whole restore.
-                    }
-                }
-                sessionRepo.recoverActiveSession(queuedSessionStarter)
-                sessionRepo.recoverActiveWorkerSession(1, workerStarter)
-                sessionRepo.recoverActiveWorkerSession(2, workerStarter)
-                onDone(true)
+                val ironmanDemoted = saveSlotRepo.importFullSave(jsonString)
+                onDone(true, ironmanDemoted)
             } catch (_: Exception) {
-                onDone(false)
+                onDone(false, false)
             }
         }
     }

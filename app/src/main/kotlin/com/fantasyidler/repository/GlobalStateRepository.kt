@@ -24,4 +24,15 @@ class GlobalStateRepository @Inject constructor(
     suspend fun clearOnboardingComplete() {
         dao.delete(GlobalStateKey.ONBOARDING_COMPLETE)
     }
+
+    suspend fun getActiveSaveSlot(): Int =
+        dao.getValue(GlobalStateKey.ACTIVE_SAVE_SLOT)?.toIntOrNull() ?: 1
+
+    suspend fun setActiveSaveSlot(slot: Int) {
+        dao.setValue(GlobalState(
+            key       = GlobalStateKey.ACTIVE_SAVE_SLOT,
+            value     = slot.toString(),
+            updatedAt = System.currentTimeMillis(),
+        ))
+    }
 }

@@ -522,6 +522,7 @@
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">лечит %1$d здоровья</string>
     <string name="combat_defeated_so_far">уже побеждено.</string>
+    <string name="combat_eaten_so_far">уже съедено.</string>
     <string name="combat_fighting">Сражение…</string>
     <string name="combat_log_you_hit">Вы попали</string>
     <string name="combat_log_hit_you">попал по вам</string>
@@ -845,7 +846,7 @@
     <string name="achievement_combat_50_desc">Достичь боевого уровня 50</string>
     <string name="achievement_combat_75_name">Элита</string>
     <string name="achievement_combat_75_desc">Достичь боевого уровня 75</string>
-    <string name="achievement_combat_99_name">Чемпион</string>
+    <string name="achievement_combat_99_name">Герой</string>
     <string name="achievement_combat_99_desc">Достичь боевого уровня 99</string>
     <string name="achievement_combat_113_name">Макс. бой</string>
     <string name="achievement_combat_113_desc">Достичь максимального боевого уровня 113</string>
@@ -1820,4 +1821,35 @@
     <string name="firemaking_ashes_owned">Имеется пепла: %1$d</string>
     <string name="bonus_tower">Башня</string>
     <string name="bonus_coin_drops">+%1$d%% выпадения монет</string>
+
+    <!-- Save slots / character manager + Ironman mode -->
+    <string name="settings_characters">Персонажи</string>
+    <string name="settings_characters_desc">До 3 ячеек сохранения. Создавайте, переключайте и удаляйте персонажей.</string>
+    <string name="save_slots_title">Персонажи</string>
+    <string name="save_slots_desc">На этом устройстве могут жить до трёх персонажей. При переключении текущий персонаж сохраняется автоматически; сессии неактивного персонажа приостанавливаются до вашего возвращения.</string>
+    <string name="save_slot_label">Ячейка %1$d</string>
+    <string name="save_slot_new">Новый персонаж</string>
+    <string name="save_slot_playing">В игре</string>
+    <string name="save_slot_ironman">Айронмен</string>
+    <string name="save_slot_combat_level">Боевой уровень %1$d</string>
+    <string name="save_slot_total_level">Общий уровень %1$d</string>
+    <string name="save_slot_last_played">%1$s назад</string>
+    <string name="save_slot_switch_title">Сменить персонажа?</string>
+    <string name="save_slot_switch_body">Играть за %1$s? Текущий персонаж сохранится автоматически.</string>
+    <string name="save_slot_switch_btn">Сменить</string>
+    <string name="save_slot_create_title">Создать нового персонажа?</string>
+    <string name="save_slot_create_body">Начать нового персонажа в ячейке %1$d? Текущий персонаж сохранится автоматически.</string>
+    <string name="save_slot_create_btn">Создать</string>
+    <string name="save_slot_delete_title">Удалить персонажа?</string>
+    <string name="save_slot_delete_body">Навсегда удалить %1$s? Это действие нельзя отменить.</string>
+    <string name="save_slot_delete_btn">Удалить</string>
+    <string name="save_slot_switch_failed">Не удалось сменить персонажа.</string>
+    <string name="character_ironman_title">Режим «Айронмен»</string>
+    <string name="character_ironman_desc">Бонусы опыта и добычи отключены, нельзя покупать предметы и нанимать работников. Навсегда: нельзя изменить после создания. Редактирование файла сохранения снимет статус айронмена.</string>
+    <string name="ironman_shop_buy_blocked">Персонажи-айронмены не могут покупать предметы.</string>
+    <string name="ironman_inn_blocked">Персонажи-айронмены не могут нанимать работников.</string>
+    <string name="ironman_blessing_blocked">Персонажи-айронмены могут получать только благословения защиты.</string>
+    <string name="ironman_bonuses_notice">Айронмен: бонусы опыта, добычи и монет отключены для этого персонажа.</string>
+    <string name="ironman_badge">Айронмен</string>
+    <string name="settings_imported_demoted">Сохранение импортировано. Оно было изменено вне игры, поэтому статус айронмена снят.</string>
 </resources>
