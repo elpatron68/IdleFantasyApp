@@ -1419,7 +1419,7 @@
     <string name="home_not_enough_materials_repeat">Pas assez de matériaux pour répéter %1$s.</string>
     <string name="combat_start_failed">Impossible de démarrer : %1$s</string>
     <string name="skill_session_voided_prestige">Votre niveau de %1$s ne correspond plus à l\'exigence de cette session (probablement à cause d\'un prestige) — ses récompenses ont été annulées et les matériaux utilisés ont été remboursés.</string>
-    <string name="combat_session_voided_prestige">Votre niveau de combat ne correspond plus à l\'exigence de cette rencontre (probablement à cause d\'un prestige) — ses récompenses ont été annulées.</string>
+    <string name="combat_session_voided_prestige">Votre niveau a baissé après le prestige, l\'XP de cette session a donc été perdue. Toutes les autres récompenses ont été accordées.</string>
     <string name="combat_select_spell">Choisis un sort avant d\'entrer.</string>
     <string name="combat_spell_level_required">Besoin de %1$d magie pour %2$s.</string>
     <string name="guild_daily_reward_claimed">Récompense quotidienne récupérée !</string>
@@ -1441,6 +1441,8 @@
     <string name="monument_build_btn">Construire (%1$s)</string>
     <string name="monument_contribute_label">Nourrissez la Flamme Éternelle</string>
     <string name="monument_contribute_all">Tout</string>
+    <string name="monument_feed_all_confirm_title">Tout offrir ?</string>
+    <string name="monument_feed_all_confirm_message">Offrir toutes vos pièces (%1$s) à la Flamme Éternelle ? Cette action est irréversible.</string>
     <string name="monument_flame_locked">Construisez les quatre étapes pour commencer à financer la flamme</string>
     <string name="monument_flame_complete">La Flamme Éternelle brûle. La ville n\'oubliera jamais votre nom.</string>
     <string name="monument_touch_title">Toucher quotidien</string>
@@ -1530,6 +1532,9 @@
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Tout vendre</string>
     <string name="shop_xp_boost_activated">Bonus XP 2× activé pour %1$dh!</string>
+    <string name="shop_xp_boost_already_active">Un bonus XP 2× est déjà actif.</string>
+    <string name="shop_xp_boost_weekly_limit">Limite d\'un bonus XP 2× par semaine. De nouveau disponible après la réinitialisation hebdomadaire.</string>
+    <string name="item_xp_boost_48h_desc">Double toute l\'XP gagnée pendant 48 heures. Limite d\'un achat par semaine.</string>
     <string name="shop_not_enough_in_inventory">Pas assez dans l\'inventaire</string>
     <string name="shop_bought_item">%1$d× %2$s acheté</string>
     <string name="shop_sold_item">%1$d× %2$s vendu pour %3$d pièces</string>
@@ -1548,7 +1553,7 @@
     <string name="home_found_pet">Vous avez trouvé un familier : %1$s !</string>
     <string name="pet_found_title">Nouveau familier!</string>
     <string name="home_congratulations_received">Félicitations ! Vous avez reçu : %1$s</string>
-    <string name="home_session_voided">Session annulée — Matériaux remboursés</string>
+    <string name="home_session_voided">XP perdue (prestige). Toutes les autres récompenses accordées.</string>
     <string name="combat_no_food_title">Pas de nourriture équipée</string>
     <string name="combat_no_food_body">Vous n\'avez pas de nourriture équipée. Sans nourriture, vous risquez de mourir rapidement et de perdre la plupart de vos récompenses. Commencer quand même ?</string>
     <string name="combat_start_anyway">Commencer quand même</string>

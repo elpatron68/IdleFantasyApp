@@ -328,6 +328,8 @@ private fun SlayerSkillHeader(
             }
             Spacer(Modifier.height(6.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress    = { progress },
                 modifier    = Modifier.fillMaxWidth(),
                 trackColor  = MaterialTheme.colorScheme.surface,
@@ -378,6 +380,8 @@ private fun TaskCard(task: SlayerTask, dungeons: List<String>) {
             }
             Spacer(Modifier.height(8.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress   = { task.killsCompleted.toFloat() / task.targetKills.toFloat() },
                 modifier   = Modifier.fillMaxWidth(),
                 trackColor = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.2f),

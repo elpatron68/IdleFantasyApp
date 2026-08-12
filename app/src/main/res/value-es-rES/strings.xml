@@ -1809,4 +1809,9 @@
     <string name="ironman_bonuses_notice">Ironman: XP, yield, and coin boosts are disabled for this character.</string>
     <string name="ironman_badge">Ironman</string>
     <string name="settings_imported_demoted">Save imported. It was modified outside the game, so Ironman status was removed.</string>
+    <string name="shop_xp_boost_already_active">A 2× XP boost is already active.</string>
+    <string name="shop_xp_boost_weekly_limit">Limit one 2× XP boost per week. Available again after the weekly reset.</string>
+    <string name="item_xp_boost_48h_desc">Double all XP gained for 48 hours. Limit one purchase per week.</string>
+    <string name="monument_feed_all_confirm_title">Feed everything?</string>
+    <string name="monument_feed_all_confirm_message">Feed all your coins (%1$s) to the Eternal Flame? This cannot be undone.</string>
 </resources>

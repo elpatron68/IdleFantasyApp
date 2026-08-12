@@ -836,6 +836,8 @@ private fun CombatSkillRow(
             }
             Spacer(Modifier.height(4.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { progress },
                 modifier = Modifier
                     .fillMaxWidth()

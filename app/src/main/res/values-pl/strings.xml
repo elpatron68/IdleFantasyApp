@@ -1530,6 +1530,9 @@
     <string name="shop_bulk_sell_total">Razem</string>
     <string name="shop_bulk_sell_confirm">Sprzedaj wszystko</string>
     <string name="shop_xp_boost_activated">Wzmocnienie 2× XP aktywowane na %1$dh!</string>
+    <string name="shop_xp_boost_already_active">Wzmocnienie 2× XP jest już aktywne.</string>
+    <string name="shop_xp_boost_weekly_limit">Limit jednego wzmocnienia 2× XP na tydzień. Ponownie dostępne po tygodniowym resecie.</string>
+    <string name="item_xp_boost_48h_desc">Podwaja całe zdobywane XP przez 48 godzin. Limit jednego zakupu na tydzień.</string>
     <string name="shop_not_enough_in_inventory">Za mało w ekwipunku</string>
     <string name="shop_bought_item">Kupiono %1$d× %2$s</string>
     <string name="shop_sold_item">Sprzedano %1$d× %2$s za %3$d monet</string>
@@ -1548,7 +1551,7 @@
     <string name="home_found_pet">Znalazłeś zwierzaka: %1$s!</string>
     <string name="pet_found_title">Nowy zwierzak!</string>
     <string name="home_congratulations_received">Gratulacje! Otrzymujesz: %1$s</string>
-    <string name="home_session_voided">Sesja unieważniona — surowce zwrócone</string>
+    <string name="home_session_voided">XP przepadło (prestiż). Wszystkie pozostałe nagrody przyznano.</string>
     <string name="home_not_enough_coins_repeat">Za mało monet, by powtórzyć %1$s.</string>
     <string name="home_not_enough_materials_repeat">Za mało materiałów, by powtórzyć %1$s.</string>
     <string name="combat_no_food_title">Brak założonego jedzenia</string>
@@ -1568,7 +1571,7 @@
     <string name="snackbar_queue_full">Kolejka jest pełna.</string>
     <string name="combat_start_failed">Nie udało się rozpocząć: %1$s</string>
     <string name="skill_session_voided_prestige">Twój poziom %1$s nie spełnia już wymagań tej sesji (prawdopodobnie z powodu prestiżu) — nagrody zostały unieważnione, a użyte materiały zwrócone.</string>
-    <string name="combat_session_voided_prestige">Twój poziom walki nie spełnia już wymagań tego starcia (prawdopodobnie z powodu prestiżu) — nagrody zostały unieważnione.</string>
+    <string name="combat_session_voided_prestige">Twój poziom spadł po prestiżu, więc XP z tej sesji przepadło. Wszystkie pozostałe nagrody zostały przyznane.</string>
     <string name="combat_select_spell">Wybierz zaklęcie przed wejściem.</string>
     <string name="combat_spell_level_required">Wymagana Magia %1$d dla %2$s.</string>
     <string name="guild_daily_reward_claimed">Odebrano dzienną nagrodę!</string>
@@ -1590,6 +1593,8 @@
     <string name="monument_build_btn">Zbuduj (%1$s)</string>
     <string name="monument_contribute_label">Zasil Wieczny Płomień</string>
     <string name="monument_contribute_all">Wszystko</string>
+    <string name="monument_feed_all_confirm_title">Oddać wszystko?</string>
+    <string name="monument_feed_all_confirm_message">Oddać wszystkie monety (%1$s) Wiecznemu Płomieniowi? Tej operacji nie można cofnąć.</string>
     <string name="monument_flame_locked">Zbuduj cztery etapy, aby zacząć zasilać płomień</string>
     <string name="monument_flame_complete">Wieczny Płomień płonie. Miasto nigdy nie zapomni twojego imienia.</string>
     <string name="monument_touch_title">Codzienne dotknięcie</string>

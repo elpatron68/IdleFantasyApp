@@ -348,15 +348,16 @@ def table(headers: list[str], rows: list[list]) -> str:
     return f"| {header_row} |\n| {divider_row} |\n{data_rows}"
 
 
-def session_minutes(level: int) -> int:
+def session_minutes(level: int, prestige: int = 0, chronos_mult: float = 1) -> int:
     """Mirrors SkillSimulator.sessionDurationMs() — 60→40 min linear across levels 1–99."""
     fraction = (level - 1) / 98.0
-    return round(60 - 20 * fraction)
+    max_reduction = 20 + prestige * 10 / 3
+    return round((60 - max_reduction * fraction) * chronos_mult)
 
 
-def link(page_id: str, display_name: str | None = None):
+def link(page_id: str, display_name: str | None = None, header: str | None = None):
     page = PAGE_DIRECTORY[page_id]
-    return f"[{page.title if display_name is None else display_name}]({page.url.removesuffix('.md')})"
+    return f"[{page.title if display_name is None else display_name}]({page.url.removesuffix('.md')}{f"#{header}" if header else ""})"
 
 
 def html_link(page_id: str, display_name: str | None = None) -> str:
@@ -556,6 +557,7 @@ def gen_wiki_page_types() -> str:
 
 
 def gen_skills() -> str:
+    # Todo: Switch to use game data where possible
     skill_list = [
         ("Mining", "gathering", "Extract ores and gems from the earth."),
         ("Fishing", "gathering", "Catch fish and aquatic creatures."),
@@ -587,7 +589,14 @@ def gen_skills() -> str:
         for skill, cat, desc in skill_list
     ]
 
-    prestige_rows = [
+    agility_rows = [[
+        f"{x}",
+        f"{session_minutes(99, x)} mins",
+        f"{round((session_minutes(99, x) - session_minutes(1, x)) / 9.8, 1)} mins"
+    ] for x in range(4) ]
+
+    # Generate combat prestige rows
+    combat_prestige_rows = [
         ["Attack",    "+5 Attack per prestige level (up to +15 at prestige 3)"],
         ["Strength",  "+5 Strength per prestige level (up to +15 at prestige 3)"],
         ["Defense",   "+5 Defense per prestige level (up to +15 at prestige 3)"],
@@ -599,7 +608,8 @@ def gen_skills() -> str:
 
     return get_template("skills/skills").format(
         skills_table=table(["Skill", "Category", "Description"], rows),
-        prestige_table=table(["Skill", "Bonus (in addition to +10% XP)"], prestige_rows),
+        agility_prestige_table=table(["Prestige level", "Session time (Lvl 99)", "Change per 10 levels"], agility_rows),
+        combat_prestige_table=table(["Skill", "Bonus (in addition to +10% XP)"], combat_prestige_rows),
     )
 
 
@@ -718,6 +728,7 @@ def gen_agility() -> str:
     return get_template("skills/support/agility").format(
         icon=html_image(skill_icon_path("agility"), "", "text"),
         session_duration_table=table(["Agility Level", "Session Duration"], duration_rows),
+        prestige_link=link("skills", header="agility-prestige"),
         course_count=len(courses),
         course_table=table(['Course', 'Level Required', 'XP / Lap', 'XP / Min (est.)', 'XP / Session (est.)'], course_rows),
         grappling_hook_table=tool_rows,

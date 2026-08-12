@@ -2,6 +2,7 @@ package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,10 +33,14 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -68,6 +74,28 @@ fun MonumentScreen(
 ) {
     val state by viewModel.uiState.collectAsState()
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
+
+    // Confirmation for the "All" quick-feed button only: it drains the entire coin balance
+    // in one tap (discussion #1352), while the fixed +1M/+10M/+100M buttons are bounded.
+    var showFeedAllConfirm by remember { mutableStateOf(false) }
+    if (showFeedAllConfirm) {
+        AlertDialog(
+            onDismissRequest = { showFeedAllConfirm = false },
+            title = { Text(stringResource(R.string.monument_feed_all_confirm_title)) },
+            text  = { Text(stringResource(R.string.monument_feed_all_confirm_message, state.coins.formatCoins())) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showFeedAllConfirm = false
+                    viewModel.contribute(state.coins)
+                }) { Text(stringResource(R.string.btn_confirm)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showFeedAllConfirm = false }) {
+                    Text(stringResource(R.string.btn_cancel))
+                }
+            },
+        )
+    }
 
     Scaffold(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
@@ -211,6 +239,8 @@ fun MonumentScreen(
                         )
                     } else {
                         LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
                             progress = { (state.fund.toFloat() / MonumentRepository.FLAME_GOAL).coerceIn(0f, 1f) },
                             modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
                             color    = MaterialTheme.colorScheme.primary,
@@ -234,16 +264,18 @@ fun MonumentScreen(
                                         onClick  = { viewModel.contribute(amount) },
                                         enabled  = state.coins >= amount,
                                         modifier = Modifier.weight(1f),
+                                        contentPadding = PaddingValues(horizontal = 4.dp),
                                     ) {
-                                        Text("+${amount.formatCoins()}")
+                                        Text("+${amount / 1_000_000}M", maxLines = 1, softWrap = false)
                                     }
                                 }
                                 OutlinedButton(
-                                    onClick  = { viewModel.contribute(state.coins) },
+                                    onClick  = { showFeedAllConfirm = true },
                                     enabled  = state.coins > 0,
                                     modifier = Modifier.weight(1f),
+                                    contentPadding = PaddingValues(horizontal = 4.dp),
                                 ) {
-                                    Text(stringResource(R.string.monument_contribute_all))
+                                    Text(stringResource(R.string.monument_contribute_all), maxLines = 1, softWrap = false)
                                 }
                             }
                         } else {

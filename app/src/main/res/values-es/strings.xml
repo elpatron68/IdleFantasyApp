@@ -1421,7 +1421,7 @@
     <string name="home_not_enough_materials_repeat">No hay suficientes materiales para repetir %1$s.</string>
     <string name="combat_start_failed">No se pudo iniciar: %1$s</string>
     <string name="skill_session_voided_prestige">Tu nivel de %1$s ya no cumple con el requisito de esta sesión (probablemente por prestigiar) — sus recompensas fueron anuladas y los materiales usados fueron reembolsados.</string>
-    <string name="combat_session_voided_prestige">Tu nivel de combate ya no cumple con el requisito de este encuentro (probablemente por prestigiar) — sus recompensas fueron anuladas.</string>
+    <string name="combat_session_voided_prestige">Tu nivel bajó tras el prestige, así que la XP de esta sesión se perdió. Las demás recompensas sí se otorgaron.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1443,6 +1443,8 @@
     <string name="monument_build_btn">Construir (%1$s)</string>
     <string name="monument_contribute_label">Alimenta la Llama Eterna</string>
     <string name="monument_contribute_all">Todo</string>
+    <string name="monument_feed_all_confirm_title">¿Entregarlo todo?</string>
+    <string name="monument_feed_all_confirm_message">¿Entregar todas tus monedas (%1$s) a la Llama Eterna? Esto no se puede deshacer.</string>
     <string name="monument_flame_locked">Construye las cuatro etapas para empezar a financiar la llama</string>
     <string name="monument_flame_complete">La Llama Eterna arde. El pueblo nunca olvidará tu nombre.</string>
     <string name="monument_touch_title">Toque diario</string>
@@ -1532,6 +1534,9 @@
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Vender todo</string>
     <string name="shop_xp_boost_activated">¡Potenciador de XP 2× activado durante %1$dh!</string>
+    <string name="shop_xp_boost_already_active">Ya hay un potenciador de XP 2× activo.</string>
+    <string name="shop_xp_boost_weekly_limit">Límite de un potenciador de XP 2× por semana. Disponible de nuevo tras el reinicio semanal.</string>
+    <string name="item_xp_boost_48h_desc">Duplica toda la XP obtenida durante 48 horas. Límite de una compra por semana.</string>
     <string name="shop_not_enough_in_inventory">No hay suficiente en el inventario</string>
     <string name="shop_bought_item">Comprado %1$d× %2$s</string>
     <string name="shop_sold_item">%1$d× %2$s vendido por %3$d monedas</string>
@@ -1550,7 +1555,7 @@
     <string name="home_found_pet">¡Has encontrado una mascota: %1$s!</string>
     <string name="pet_found_title">¡Nueva mascota!</string>
     <string name="home_congratulations_received">¡Felicidades! Has recibido: %1$s</string>
-    <string name="home_session_voided">Sesión anulada — Materiales reembolsados</string>
+    <string name="home_session_voided">XP perdida (prestige). Se otorgaron las demás recompensas.</string>
     <string name="combat_no_food_title">Sin comida equipada</string>
     <string name="combat_no_food_body">No tienes comida equipada. Sin comida podrías morir rápidamente y perder la mayoría de tus recompensas. ¿Empezar de todas formas?</string>
     <string name="combat_start_anyway">Empezar de todas formas</string>

@@ -444,6 +444,8 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     BoxWithConstraints(modifier = Modifier.fillMaxWidth().height(24.dp)) {
                         LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
                             progress         = { position },
                             modifier         = Modifier.fillMaxWidth().height(24.dp).clip(RoundedCornerShape(4.dp)),
                             color            = if (inZone) Color(0xFFF44336) else MaterialTheme.colorScheme.primary,
@@ -515,6 +517,8 @@ private fun HammerStrikeCard(gameState: ActiveGameState, difficulty: Difficulty,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     LinearProgressIndicator(
+                        gapSize = 0.dp,
+                        drawStopIndicator = {},
                         progress   = { power },
                         modifier   = Modifier.fillMaxWidth().height(28.dp).clip(RoundedCornerShape(4.dp)),
                         color      = when {

@@ -152,6 +152,8 @@ private fun SkillingDungeonCard(
                     color = MaterialTheme.colorScheme.primary,
                 )
                 LinearProgressIndicator(
+                    gapSize = 0.dp,
+                    drawStopIndicator = {},
                     progress = { progress.coerceIn(0f, 1f) },
                     modifier = Modifier
                         .fillMaxWidth()

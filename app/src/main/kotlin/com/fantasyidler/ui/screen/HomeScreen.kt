@@ -82,6 +82,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.dropUnlessResumed
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.model.EquipSlot
@@ -524,17 +525,18 @@ fun HomeScreen(
             TopAppBar(
                 title   = { Text(stringResource(R.string.app_name)) },
                 actions = {
+                    // dropUnlessResumed: ignore ghost taps during nav transitions (issue #1345)
                     if (!state.isLoading && state.showRecentActivityLog) {
-                        IconButton(onClick = { showRecentLog = true }) {
+                        IconButton(onClick = dropUnlessResumed { showRecentLog = true }) {
                             Icon(Icons.Filled.History, contentDescription = stringResource(R.string.label_recent_activity))
                         }
                     }
                     if (!state.isLoading && state.showJournalButton) {
-                        IconButton(onClick = viewModel::openJournal) {
+                        IconButton(onClick = dropUnlessResumed { viewModel.openJournal() }) {
                             Icon(Icons.Filled.EditNote, contentDescription = stringResource(R.string.label_journal))
                         }
                     }
-                    IconButton(onClick = onNavigateToSettings) {
+                    IconButton(onClick = dropUnlessResumed { onNavigateToSettings() }) {
                         Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings_title))
                     }
                 },
@@ -825,6 +827,8 @@ fun HomeScreen(
                             }
                             Spacer(Modifier.height(6.dp))
                             LinearProgressIndicator(
+                                gapSize = 0.dp,
+                                drawStopIndicator = {},
                                 progress = { (event.tokens.toFloat() / event.goal).coerceIn(0f, 1f) },
                                 modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                             )

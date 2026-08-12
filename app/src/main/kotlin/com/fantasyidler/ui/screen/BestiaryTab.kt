@@ -604,6 +604,8 @@ private fun BestiaryProgressBar(encountered: Int, total: Int) {
         }
         Spacer(Modifier.height(4.dp))
         LinearProgressIndicator(
+            gapSize = 0.dp,
+            drawStopIndicator = {},
             progress  = { fraction },
             modifier  = Modifier.fillMaxWidth(),
             color     = MaterialTheme.colorScheme.primary,

@@ -195,6 +195,8 @@ private fun GuildCard(
                 if (summary.level < 10) {
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
+                        gapSize = 0.dp,
+                        drawStopIndicator = {},
                         progress = { (summary.dailiesCompletedThisTier.toFloat() / summary.dailiesRequiredThisTier.toFloat()).coerceIn(0f, 1f) },
                         modifier = Modifier.fillMaxWidth(),
                         color    = MaterialTheme.colorScheme.primary,

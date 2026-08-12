@@ -1505,6 +1505,9 @@
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Vender Tudo</string>
     <string name="shop_xp_boost_activated">Impulso de 2× XP ativado por %1$dh!</string>
+    <string name="shop_xp_boost_already_active">Um impulso de 2× XP já está ativo.</string>
+    <string name="shop_xp_boost_weekly_limit">Limite de um impulso de 2× XP por semana. Disponível novamente após a redefinição semanal.</string>
+    <string name="item_xp_boost_48h_desc">Dobra todo o XP ganho por 48 horas. Limite de uma compra por semana.</string>
     <string name="shop_not_enough_in_inventory">Quantidade insuficiente no inventário</string>
     <string name="shop_bought_item">Comprado %1$d× %2$s</string>
     <string name="shop_sold_item">Vendido %1$d× %2$s por %3$d moedas</string>
@@ -1523,7 +1526,7 @@
     <string name="home_found_pet">Você encontrou um mascote: %1$s!</string>
     <string name="pet_found_title">Novo Mascote!</string>
     <string name="home_congratulations_received">Parabéns! Você recebeu: %1$s</string>
-    <string name="home_session_voided">Sessão anulada — Materiais reembolsados</string>
+    <string name="home_session_voided">XP perdido (prestígio). Todas as outras recompensas concedidas.</string>
     <string name="home_not_enough_coins_repeat">Moedas insuficientes para repetir %1$s.</string>
     <string name="home_not_enough_materials_repeat">Materiais insuficientes para repetir %1$s.</string>
     <string name="combat_no_food_title">Nenhuma Comida Equipada</string>
@@ -1543,7 +1546,7 @@
     <string name="snackbar_queue_full">A fila está cheia.</string>
     <string name="combat_start_failed">Não foi possível iniciar: %1$s</string>
     <string name="skill_session_voided_prestige">Seu nível de %1$s não atende mais ao requisito desta sessão (provavelmente por prestígio) — as recompensas foram anuladas e os materiais usados foram reembolsados.</string>
-    <string name="combat_session_voided_prestige">Seu nível de combate não atende mais ao requisito deste combate (provavelmente por prestígio) — as recompensas foram anuladas.</string>
+    <string name="combat_session_voided_prestige">Seu nível caiu após o prestígio, então o XP desta sessão foi perdido. Todas as outras recompensas foram concedidas.</string>
     <string name="combat_select_spell">Selecione um feitiço antes de entrar.</string>
     <string name="combat_spell_level_required">Necessário Magia %1$d para %2$s.</string>
     <string name="guild_daily_reward_claimed">Recompensa diária recebida!</string>
@@ -1565,6 +1568,8 @@
     <string name="monument_build_btn">Construir (%1$s)</string>
     <string name="monument_contribute_label">Alimente a Chama Eterna</string>
     <string name="monument_contribute_all">Tudo</string>
+    <string name="monument_feed_all_confirm_title">Entregar tudo?</string>
+    <string name="monument_feed_all_confirm_message">Entregar todas as suas moedas (%1$s) à Chama Eterna? Isso não pode ser desfeito.</string>
     <string name="monument_flame_locked">Construa as quatro etapas para começar a financiar a chama</string>
     <string name="monument_flame_complete">A Chama Eterna arde. A cidade nunca esquecerá seu nome.</string>
     <string name="monument_touch_title">Toque diário</string>

@@ -342,6 +342,8 @@ private fun FarmingXpBar(state: FarmingUiState) {
             }
             Spacer(Modifier.height(8.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { progress },
                 modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                 color    = MaterialTheme.colorScheme.primary,
@@ -433,6 +435,8 @@ private fun PatchCard(
                         )
                         Spacer(Modifier.height(6.dp))
                         LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
                             progress = { progress },
                             modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                             color    = MaterialTheme.colorScheme.primary,
@@ -459,6 +463,8 @@ private fun PatchCard(
                         }
                         Spacer(Modifier.height(4.dp))
                         LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
                             progress = { progress },
                             modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                             color    = MaterialTheme.colorScheme.primary,

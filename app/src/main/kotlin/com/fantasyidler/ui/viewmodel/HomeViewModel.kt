@@ -486,11 +486,11 @@ class HomeViewModel @Inject constructor(
             val currentLevelsForVoidCheck = playerRepo.getSkillLevels()
             for (session in sessions) {
                 val frames: List<SessionFrame> = json.decodeFromString(session.frames)
-                if (!isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)) {
-                    refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
-                    voidedSessionIds += session.sessionId
-                    continue
-                }
+                // Level dropped mid-session (prestige): only the XP is forfeited — loot, coins,
+                // kills, and quest progress still pay out. Zeroing happens at each branch's XP
+                // application point because combat style detection needs the raw per-skill XP.
+                val grantXp = isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)
+                if (!grantXp) voidedSessionIds += session.sessionId
                 when (session.skillName) {
                     "tower" -> {
                         val playerDied = frames.any { it.died }
@@ -535,7 +535,7 @@ class HomeViewModel @Inject constructor(
                         val towerFlags       = playerRepo.getFlags()
                         val towerXpMult      = if (towerFlags.ironman) 1.0 else 1.0 + towerFlags.towerXpBonusPct / 100.0
                         val towerCoinMult    = if (towerFlags.ironman) 1.0 else 1.0 + towerFlags.towerCoinBonusPct / 100.0
-                        val towerXpForRepo   = towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
+                        val towerXpForRepo   = if (grantXp) towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() } else emptyMap()
                         val towerCoinsGained = (towerCoinsRaw * towerCoinMult).toLong()
 
                         playerRepo.applyMultiSkillResults(towerXpForRepo, towerAllItems, towerCoinsGained)
@@ -595,6 +595,7 @@ class HomeViewModel @Inject constructor(
                                 bossXpBySkill[skill] = (bossXpBySkill[skill]!! * mult.toDouble()).toLong()
                             }
                         }
+                        if (!grantXp) bossXpBySkill.clear()
                         val bossSkillLvls    = playerRepo.getSkillLevels()
                         val bossArrowsRec    = allArrowsConsumed.mapValues { (_, qty) -> (qty * reclaimChance(bossSkillLvls[Skills.RANGED] ?: 1)).toInt() }.filterValues { it > 0 }
                         val bossRunesRec     = allRunesConsumed.mapValues  { (_, qty) -> (qty * reclaimChance(bossSkillLvls[Skills.MAGIC]  ?: 1)).toInt() }.filterValues { it > 0 }
@@ -683,6 +684,8 @@ class HomeViewModel @Inject constructor(
                         var slayerXp = 0L
                         for ((enemy, k) in kills) slayerXp += slayerRepo.recordKills(enemy, k)
                         if (slayerXp > 0L) xpPerSkill[Skills.SLAYER] = (xpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
+                        val combatStyle = detectCombatStyle(xpPerSkill)
+                        if (!grantXp) xpPerSkill.clear()
                         awardedCapes += playerRepo.applyMultiSkillResults(xpPerSkill, loot, coins)
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
@@ -690,18 +693,17 @@ class HomeViewModel @Inject constructor(
                                 petFoundName = GameStrings.petName(context, pd.id)
                         }
                         if (!died) {
-                            val style = detectCombatStyle(xpPerSkill)
                             questRepo.recordCombat(
                                 dungeonKey         = session.activityKey,
                                 killsByEnemy       = kills,
                                 loot               = loot,
-                                combatStyle        = style,
+                                combatStyle        = combatStyle,
                                 foodConsumedTotal  = food.values.sum(),
                             )
                             playerRepo.incrementDungeonRun(session.activityKey)
                             if (kills.isNotEmpty()) {
                                 for ((e, k) in kills) dailyKills[e] = (dailyKills[e] ?: 0) + k
-                                guildRepo.recordGuildCombat(kills, style)
+                                guildRepo.recordGuildCombat(kills, combatStyle)
                                 seasonalEventRepo.recordCombat(kills)
                             }
                             seasonalEventRepo.recordExpeditionCompletion(session.activityKey)
@@ -738,7 +740,7 @@ class HomeViewModel @Inject constructor(
                     "expedition" -> {
                         val result = collectExpeditionSession(
                             session = session,
-                            frames = frames,
+                            frames = if (grantXp) frames else frames.map { it.copy(xpGain = 0, xpBySkill = emptyMap()) },
                             petIds = petIds,
                             awardedCapes = awardedCapes,
                             combinedXpBySkill = combinedXpBySkill,
@@ -749,7 +751,7 @@ class HomeViewModel @Inject constructor(
                         expeditionUnlockMessage = result.unlockMessage
                     }
                     Skills.MERCANTILE -> {
-                        val totalXp    = frames.sumOf { it.xpGain.toLong() }
+                        val totalXp    = if (grantXp) frames.sumOf { it.xpGain.toLong() } else 0L
                         val coinReturn = frames.sumOf { (it.items["_coins"] ?: 0).toLong() }
                         val mercantileCapeMult    = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, skillPrestige, gameData.equipment, flags.ironman)
                         val mercantilePrestigeMult = 1f + (skillPrestige[Skills.MERCANTILE] ?: 0) * 0.10f
@@ -767,7 +769,7 @@ class HomeViewModel @Inject constructor(
                         combinedCoins += coinReturnPreBlessing
                     }
                     else -> {
-                        val totalXp = frames.sumOf { it.xpGain.toLong() }
+                        val totalXp = if (grantXp) frames.sumOf { it.xpGain.toLong() } else 0L
                         val its     = mutableMapOf<String, Int>()
                         for (frame in frames) for ((item, qty) in frame.items) its[item] = (its[item] ?: 0) + qty
                         val coinsFromItems = (its.remove("coins") ?: 0).toLong()
@@ -1181,13 +1183,12 @@ class HomeViewModel @Inject constructor(
 
             val currentLevelsForVoidCheck = playerRepo.getSkillLevels()
             for (session in sessions) {
-                val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+                // Prestige mid-session forfeits only the XP (zeroed at the frame level here —
+                // no combat-style detection in the worker path needs the raw values).
+                val grantXp = isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)
+                val frames: List<SessionFrame> = json.decodeFromString<List<SessionFrame>>(session.frames)
+                    .let { if (grantXp) it else it.map { f -> f.copy(xpGain = 0, xpBySkill = emptyMap()) } }
                 val mult = session.efficiencyMultiplier
-
-                if (!isSkillSessionStillEligible(session, currentLevelsForVoidCheck, gameData)) {
-                    refundVoidedSessionMaterials(session, frames, playerRepo, gameData)
-                    continue
-                }
 
                 when (session.skillName) {
                     "boss" -> {
@@ -1630,9 +1631,11 @@ private fun reclaimChance(level: Int): Double = 0.25 + (level - 1) / 98.0 * 0.50
  * True if [session]'s relevant level (combat level for boss/combat/tower, the specific
  * skill's level otherwise) hasn't dropped below what it was when the session started
  * ([SkillSession.levelAtStart]). False means it dropped mid-session — almost certainly via
- * a prestige — and the session must be voided instead of paid out. This is a regression
- * check, not a difficulty/unlock gate: a session that was legitimately allowed to start
- * (e.g. an under-levelled Tower floor pushed via gear) always stays eligible on its own.
+ * a prestige — and the session pays out with its XP zeroed (loot, coins, kills, and quest
+ * progress are kept; only the pre-prestige XP is forfeited, so prestige timing can't be
+ * used to cheese re-leveling). This is a regression check, not a difficulty/unlock gate:
+ * a session that was legitimately allowed to start (e.g. an under-levelled Tower floor
+ * pushed via gear) always stays eligible on its own.
  */
 fun isSkillSessionStillEligible(
     session: SkillSession,
@@ -1647,21 +1650,3 @@ fun isSkillSessionStillEligible(
     return currentLevel >= session.levelAtStart
 }
 
-/** Refunds whatever [session] consumed up front at start time (materials/catalyst/trade coin cost). */
-suspend fun refundVoidedSessionMaterials(
-    session: SkillSession,
-    frames: List<SessionFrame>,
-    playerRepo: PlayerRepository,
-    gameData: GameDataRepository,
-) {
-    if (session.skillName == Skills.MERCANTILE) {
-        val coinCost = gameData.tradeRoutes.firstOrNull { it.id == session.activityKey }?.coinCost?.toLong() ?: 0L
-        if (coinCost > 0) playerRepo.addCoins(coinCost)
-    } else {
-        playerSessionMaterials(session.skillName, session.activityKey, frames.sumOf { it.kills }, gameData)
-            ?.let { playerRepo.addItems(it) }
-    }
-    if (session.catalystKey != null && session.catalystQty > 0) {
-        playerRepo.addItem(session.catalystKey, session.catalystQty)
-    }
-}

@@ -47,7 +47,8 @@ data class SlotInfo(
  * full save-export JSON files (the same [PlayerExport] format as manual export/import) under
  * filesDir/save_slots/. Switching slots snapshots the outgoing character to its file, then
  * restores the incoming one through the same import path used by Settings > Import save —
- * incomplete sessions keep their remaining time (frozen while inactive) and alarms are
+ * incomplete sessions keep their absolute end times (they finish in real time while the
+ * character is inactive; only manual file imports freeze remaining time) and alarms are
  * re-registered for the incoming character.
  */
 @Singleton
@@ -89,11 +90,14 @@ class SaveSlotRepository @Inject constructor(
 
     /**
      * Overwrites the current character with [jsonString] and restores its sessions.
-     * Incomplete sessions resume with the remaining time they had at export, and
-     * session/buff/backup alarms are re-registered for the restored character.
+     * With [freezeSessionTimers] (manual file imports) incomplete sessions resume with the
+     * remaining time they had at export; without it (slot switches) they keep their absolute
+     * end times so they finish in real time while the character is inactive, and the recovery
+     * pass below completes them and catches up the queue exactly as if the app had been closed.
+     * Session/buff/backup alarms are re-registered for the restored character.
      * Returns true if an edited ironman save was demoted to a regular character.
      */
-    suspend fun importFullSave(jsonString: String): Boolean {
+    suspend fun importFullSave(jsonString: String, freezeSessionTimers: Boolean = true): Boolean {
         val (export, ironmanDemoted) = playerRepo.importSave(jsonString)
         // Imported flags may predate the guild-leveling rework (reputation -> daily-count),
         // and importing overwrites the current save's migration state wholesale, so this
@@ -104,7 +108,7 @@ class SaveSlotRepository @Inject constructor(
         val now = System.currentTimeMillis()
         val exportedAt = export.exportedAt.takeIf { it > 0L } ?: now
         export.sessions.forEach { s ->
-            val session = if (s.completed) {
+            val session = if (s.completed || !freezeSessionTimers) {
                 s.toSkillSession()
             } else {
                 val remainingMs = (s.endsAt - exportedAt).coerceAtLeast(0L)
@@ -165,7 +169,7 @@ class SaveSlotRepository @Inject constructor(
         val target = slotFile(targetSlot)
         var ironmanDemoted = false
         if (target.exists()) {
-            ironmanDemoted = importFullSave(target.readText())
+            ironmanDemoted = importFullSave(target.readText(), freezeSessionTimers = false)
         } else {
             sessionRepo.deleteAllSessions()
             sessionRepo.deleteAllWorkerSessions()

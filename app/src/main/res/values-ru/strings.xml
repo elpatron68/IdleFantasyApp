@@ -1453,7 +1453,7 @@
     <string name="home_not_enough_materials_repeat">Недостаточно материалов для повтора %1$s.</string>
     <string name="combat_start_failed">Не удалось запустить: %1$s</string>
     <string name="skill_session_voided_prestige">Ваш уровень %1$s больше не соответствует требованию этой сессии (вероятно, из-за престижа) — награды были аннулированы, а использованные материалы возвращены.</string>
-    <string name="combat_session_voided_prestige">Ваш боевой уровень больше не соответствует требованию этой встречи (вероятно, из-за престижа) — награды были аннулированы.</string>
+    <string name="combat_session_voided_prestige">Ваш уровень снизился после престижа, поэтому опыт этой сессии аннулирован. Все остальные награды были выданы.</string>
     <string name="combat_select_spell">Выберите заклинание перед началом.</string>
     <string name="combat_spell_level_required">Нужна магия %1$d для %2$s.</string>
     <string name="guild_daily_reward_claimed">Ежедневная награда получена!</string>
@@ -1475,6 +1475,8 @@
     <string name="monument_build_btn">Построить (%1$s)</string>
     <string name="monument_contribute_label">Питайте Вечное пламя</string>
     <string name="monument_contribute_all">Всё</string>
+    <string name="monument_feed_all_confirm_title">Отдать всё?</string>
+    <string name="monument_feed_all_confirm_message">Отдать все ваши монеты (%1$s) Вечному пламени? Это действие нельзя отменить.</string>
     <string name="monument_flame_locked">Постройте первые четыре этапа, чтобы начать питать пламя</string>
     <string name="monument_flame_complete">Вечное пламя горит. Город никогда не забудет ваше имя.</string>
     <string name="monument_touch_title">Ежедневное прикосновение</string>
@@ -1564,6 +1566,9 @@
     <string name="shop_bulk_sell_total">Итого</string>
     <string name="shop_bulk_sell_confirm">Продать всё</string>
     <string name="shop_xp_boost_activated">Бонус XP 2× активирован на %1$d ч!</string>
+    <string name="shop_xp_boost_already_active">Бонус XP 2× уже активен.</string>
+    <string name="shop_xp_boost_weekly_limit">Не более одного бонуса XP 2× в неделю. Снова доступен после еженедельного сброса.</string>
+    <string name="item_xp_boost_48h_desc">Удваивает весь получаемый опыт на 48 часов. Не более одной покупки в неделю.</string>
     <string name="shop_not_enough_in_inventory">Недостаточно в инвентаре</string>
     <string name="shop_bought_item">Куплено %1$d× %2$s</string>
     <string name="shop_sold_item">%1$d× %2$s продано за %3$d монет</string>
@@ -1582,7 +1587,7 @@
     <string name="home_found_pet">Вы нашли питомца: %1$s!</string>
     <string name="pet_found_title">Новый питомец!</string>
     <string name="home_congratulations_received">Поздравляем! Вы получили: %1$s</string>
-    <string name="home_session_voided">Сессия аннулирована — материалы возвращены</string>
+    <string name="home_session_voided">Опыт аннулирован (престиж). Все остальные награды получены.</string>
     <string name="combat_no_food_title">Еда не экипирована</string>
     <string name="combat_no_food_body">У вас нет еды. Без еды вы можете быстро погибнуть и потерять большинство наград. Всё равно начать?</string>
     <string name="combat_start_anyway">Начать всё равно</string>

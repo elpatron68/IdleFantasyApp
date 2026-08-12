@@ -1509,6 +1509,9 @@
     <string name="shop_bulk_sell_total">合計</string>
     <string name="shop_bulk_sell_confirm">すべて売却</string>
     <string name="shop_xp_boost_activated">%1$d時間の間、2倍経験値ブーストが有効になりました！</string>
+    <string name="shop_xp_boost_already_active">2倍経験値ブーストはすでに有効です。</string>
+    <string name="shop_xp_boost_weekly_limit">2倍経験値ブーストは週に1回まで購入できます。週間リセット後に再度購入可能になります。</string>
+    <string name="item_xp_boost_48h_desc">48時間、獲得経験値が2倍になります。購入は週に1回までです。</string>
     <string name="shop_not_enough_in_inventory">インベントリの所持数が不足しています</string>
     <string name="shop_bought_item">%2$s を %1$d個購入しました</string>
     <string name="shop_sold_item">%2$s を %1$d個売却し、%3$d コイン獲得しました</string>
@@ -1527,7 +1530,7 @@
     <string name="home_found_pet">ペットを発見しました: %1$s！</string>
     <string name="pet_found_title">新しいペット！</string>
     <string name="home_congratulations_received">おめでとうございます！ %1$s を獲得しました</string>
-    <string name="home_session_voided">セッションが無効になりました — 素材は返還されました</string>
+    <string name="home_session_voided">経験値は無効になりました (名声)。その他の報酬はすべて獲得しました。</string>
     <string name="home_not_enough_coins_repeat">%1$s を繰り返すためのコインが足りません。</string>
     <string name="home_not_enough_materials_repeat">%1$s を繰り返すための素材が足りません。</string>
     <string name="combat_no_food_title">料理が装備されていません</string>
@@ -1547,7 +1550,7 @@
     <string name="snackbar_queue_full">キューが満杯です。</string>
     <string name="combat_start_failed">開始できませんでした: %1$s</string>
     <string name="skill_session_voided_prestige">%1$s レベルがセッションの必要条件を満たさなくなったため (名声獲得によるものと思われます)、獲得報酬は無効化され、使用した材料は返却されました。</string>
-    <string name="combat_session_voided_prestige">戦闘レベルが遭遇条件を満たさなくなったため (名声獲得によるものと思われます)、獲得報酬は無効化されました。</string>
+    <string name="combat_session_voided_prestige">名声によりレベルが下がったため、このセッションの経験値は無効になりました。その他の報酬はすべて獲得しています。</string>
     <string name="combat_select_spell">開始する前にスペルを選択してください。</string>
     <string name="combat_spell_level_required">%2$s には魔法レベル %1$d が必要です。</string>
     <string name="guild_daily_reward_claimed">デイリー報酬を回収しました！</string>
@@ -1569,6 +1572,8 @@
     <string name="monument_build_btn">建設（%1$s）</string>
     <string name="monument_contribute_label">永遠の炎に捧げる</string>
     <string name="monument_contribute_all">全額</string>
+    <string name="monument_feed_all_confirm_title">すべて捧げますか？</string>
+    <string name="monument_feed_all_confirm_message">所持コインすべて (%1$s) を永遠の炎に捧げますか？この操作は取り消せません。</string>
     <string name="monument_flame_locked">炎に資金を注ぐには、まず4つの段階を建設してください</string>
     <string name="monument_flame_complete">永遠の炎が燃えている。街はあなたの名を決して忘れない。</string>
     <string name="monument_touch_title">毎日のタッチ</string>

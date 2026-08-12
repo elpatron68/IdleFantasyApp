@@ -362,6 +362,8 @@ internal fun CombatSessionBanner(
                             )
                             Spacer(Modifier.height(4.dp))
                             LinearProgressIndicator(
+                                gapSize = 0.dp,
+                                drawStopIndicator = {},
                                 progress  = { if (currentBoss.hp > 0) currentEnemyHp / currentBoss.hp.toFloat() else 0f },
                                 modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                                 color     = MaterialTheme.colorScheme.error,
@@ -382,6 +384,8 @@ internal fun CombatSessionBanner(
                             )
                             Spacer(Modifier.height(4.dp))
                             LinearProgressIndicator(
+                                gapSize = 0.dp,
+                                drawStopIndicator = {},
                                 progress  = { if (currentEnemy.hp > 0) currentEnemyHp / currentEnemy.hp.toFloat() else 0f },
                                 modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                                 color     = MaterialTheme.colorScheme.error,
@@ -423,6 +427,8 @@ internal fun CombatSessionBanner(
                         }
                         Spacer(Modifier.height(4.dp))
                         LinearProgressIndicator(
+                            gapSize = 0.dp,
+                            drawStopIndicator = {},
                             progress  = { if (maxHp > 0) currentPlayerHp / maxHp.toFloat() else 0f },
                             modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                             color     = hpColor,

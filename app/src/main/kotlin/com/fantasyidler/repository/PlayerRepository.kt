@@ -33,6 +33,8 @@ internal fun capeKeyForSkill(skill: String): String? = when (skill) {
 private fun PlayerFlags.plusSeen(keys: Collection<String>): PlayerFlags =
     if (keys.isEmpty()) this else copy(seenItemKeys = seenItemKeys + keys)
 
+enum class XpBoostPurchaseResult { SUCCESS, NOT_ENOUGH_COINS, ALREADY_ACTIVE, WEEKLY_LIMIT_REACHED }
+
 @Singleton
 class PlayerRepository @Inject constructor(
     private val playerDao: PlayerDao,
@@ -174,24 +176,28 @@ class PlayerRepository @Inject constructor(
         ))
     }
 
-    data class BuryBoneResult(val xpGained: Long, val awardedCape: String?)
+    data class BuryBonesResult(val buried: Int, val xpGained: Long, val awardedCape: String?)
 
     /**
-     * Atomically consume one [boneKey] from inventory and award [xpToAward] prayer XP.
-     * Returns a result with xpGained=0 if the bone is not in inventory.
+     * Atomically consume up to [count] of [boneKey] from inventory and award [xpToAward]
+     * prayer XP (scaled down proportionally if fewer bones were available). One DB write
+     * regardless of [count] — the Bone Altar accumulates rapid taps into batches.
      */
-    suspend fun buryBoneAtomic(boneKey: String, xpToAward: Long): BuryBoneResult {
+    suspend fun buryBonesAtomic(boneKey: String, count: Int, xpToAward: Long): BuryBonesResult {
         val player    = getOrCreatePlayer()
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
-        if ((inventory[boneKey] ?: 0) <= 0) return BuryBoneResult(0L, null)
+        val available = inventory[boneKey] ?: 0
+        val buried    = minOf(count, available)
+        if (buried <= 0) return BuryBonesResult(0, 0L, null)
+        val xpGained  = if (buried == count) xpToAward else xpToAward * buried / count
 
-        val newQty = (inventory[boneKey] ?: 0) - 1
+        val newQty = available - buried
         if (newQty <= 0) inventory.remove(boneKey) else inventory[boneKey] = newQty
 
         val levels: MutableMap<String, Int> = json.decodeFromString(player.skillLevels)
         val xpMap:  MutableMap<String, Long> = json.decodeFromString(player.skillXp)
         val oldLevel = XpTable.levelForXp(xpMap[Skills.PRAYER] ?: 0L)
-        val newXp    = (xpMap[Skills.PRAYER] ?: 0L) + xpToAward
+        val newXp    = (xpMap[Skills.PRAYER] ?: 0L) + xpGained
         xpMap[Skills.PRAYER]  = newXp
         levels[Skills.PRAYER] = XpTable.levelForXp(newXp)
 
@@ -209,7 +215,7 @@ class PlayerRepository @Inject constructor(
             skillLevels = json.encode<Map<String, Int>>(levels),
             skillXp     = json.encode<Map<String, Long>>(xpMap),
         ))
-        return BuryBoneResult(xpToAward, awardedCape)
+        return BuryBonesResult(buried, xpGained, awardedCape)
     }
 
     /**
@@ -777,28 +783,52 @@ class PlayerRepository @Inject constructor(
     }
 
     /**
-     * Activates or extends the 2× XP boost for [durationMs] × [qty] milliseconds.
-     * Deducts [XP_BOOST_COST] × [qty] coins. Returns false if not enough coins.
+     * Activates the 2× XP boost for [durationMs]. Refused while a boost is already running
+     * (no stacking) and limited to one purchase per weekly reset (Monday 6am, same clock as
+     * weekly quests). Deducts [cost] coins on success.
      */
-    suspend fun activateXpBoost(durationMs: Long, qty: Int = 1, costEach: Long = XP_BOOST_COST): Boolean {
-        val totalCost = costEach * qty
-        val player    = getOrCreatePlayer()
-        if (player.coins < totalCost) return false
-
+    suspend fun activateXpBoost(durationMs: Long, cost: Long = XP_BOOST_COST): XpBoostPurchaseResult {
+        val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val now        = System.currentTimeMillis()
-        val currentEnd = if (flags.xpBoostExpiresAt > now) flags.xpBoostExpiresAt else now
-        val newExpiry  = currentEnd + durationMs * qty
+        val now = System.currentTimeMillis()
 
+        if (flags.xpBoostExpiresAt > now) return XpBoostPurchaseResult.ALREADY_ACTIVE
+        if (flags.xpBoostLastPurchaseAt > 0 && now < weeklyQuestRepo.nextResetMs(flags.xpBoostLastPurchaseAt)) {
+            return XpBoostPurchaseResult.WEEKLY_LIMIT_REACHED
+        }
+        if (player.coins < cost) return XpBoostPurchaseResult.NOT_ENOUGH_COINS
+
+        val newExpiry = now + durationMs
         playerDao.upsert(
             player.copy(
-                coins = player.coins - totalCost,
-                flags = json.encode<PlayerFlags>(flags.copy(xpBoostExpiresAt = newExpiry)),
+                coins = player.coins - cost,
+                flags = json.encode<PlayerFlags>(flags.copy(
+                    xpBoostExpiresAt      = newExpiry,
+                    xpBoostLastPurchaseAt = now,
+                )),
             )
         )
         buffNotifScheduler.cancelXpBoostExpiry()
         buffNotifScheduler.scheduleXpBoostExpiry(newExpiry)
-        return true
+        return XpBoostPurchaseResult.SUCCESS
+    }
+
+    /**
+     * Grants [durationMs] of 2× XP boost as a reward (seasonal event tiers). No cost, exempt
+     * from the purchase limits, and extends any boost already running so the reward is never lost.
+     */
+    suspend fun grantXpBoost(durationMs: Long) {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val now        = System.currentTimeMillis()
+        val currentEnd = if (flags.xpBoostExpiresAt > now) flags.xpBoostExpiresAt else now
+        val newExpiry  = currentEnd + durationMs
+
+        playerDao.upsert(
+            player.copy(flags = json.encode<PlayerFlags>(flags.copy(xpBoostExpiresAt = newExpiry)))
+        )
+        buffNotifScheduler.cancelXpBoostExpiry()
+        buffNotifScheduler.scheduleXpBoostExpiry(newExpiry)
     }
 
     /** Bronze/starter fallback item granted to a slot if prestige invalidates its gear and nothing else in inventory qualifies. */
@@ -912,7 +942,7 @@ class PlayerRepository @Inject constructor(
     }
 
     companion object {
-        const val XP_BOOST_COST = 25_000_000L
+        const val XP_BOOST_COST = 2_500_000L
         const val XP_BOOST_DURATION_MS = 48 * 3_600_000L   // 48 hours
 
         /** HMAC key for save-file signatures. Public by nature (open source), deterrence only. */
@@ -1391,9 +1421,9 @@ fun resolveCapeMultiplier(
     if (ironman) return 1.0f
     val normSkill = if (skillName == Skills.HITPOINTS) "hp" else skillName
     val rackTier = townBuildingTiers["cape_rack"] ?: 0
-    val isCategoryUnlocked = when {
-        normSkill in Skills.GATHERING -> rackTier >= 1
-        normSkill in Skills.CRAFTING_SKILLS -> rackTier >= 2
+    val isCategoryUnlocked = when (normSkill) {
+        in Skills.GATHERING -> rackTier >= 1
+        in Skills.CRAFTING_SKILLS -> rackTier >= 2
         else -> rackTier >= 3
     }
 

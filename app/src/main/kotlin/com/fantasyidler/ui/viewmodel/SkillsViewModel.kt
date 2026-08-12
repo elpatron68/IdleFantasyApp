@@ -903,17 +903,9 @@ class SkillsViewModel @Inject constructor(
 
     fun prestigeSkill(skillName: String) {
         viewModelScope.launch {
-            val activeSession = sessionRepo.getActiveSession()
-            val abandonedSession = activeSession?.takeIf { it.skillName == skillName }
-            if (abandonedSession != null) {
-                val frames: List<SessionFrame> = json.decodeFromString(abandonedSession.frames)
-                playerSessionMaterials(abandonedSession.skillName, abandonedSession.activityKey, frames.sumOf { it.kills }, gameData)
-                    ?.let { playerRepo.addItems(it) }
-                if (abandonedSession.catalystKey != null && abandonedSession.catalystQty > 0) {
-                    playerRepo.addItem(abandonedSession.catalystKey, abandonedSession.catalystQty)
-                }
-                sessionRepo.abandonSession(abandonedSession.sessionId)
-            }
+            // The active session is deliberately left running: it completes normally and pays
+            // out loot without XP (the eligibility check at collection zeroes it). Only queued
+            // actions are evicted — they haven't started and can't start at level 1.
             val evicted = playerRepo.evictQueueForSkill(skillName)
             for (action in evicted) {
                 if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
@@ -924,7 +916,6 @@ class SkillsViewModel @Inject constructor(
                 }
             }
             playerRepo.prestigeSkill(skillName)
-            if (abandonedSession != null) queuedSessionStarter.startNextQueued()
         }
     }
 

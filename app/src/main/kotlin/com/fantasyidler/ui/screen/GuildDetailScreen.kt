@@ -219,6 +219,8 @@ private fun GuildProgressHeader(
         if (level < 10) {
             Spacer(Modifier.height(6.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { (dailiesCompleted.toFloat() / dailiesRequired.toFloat()).coerceIn(0f, 1f) },
                 modifier = Modifier.fillMaxWidth(),
                 color    = if (questGateBlocked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
@@ -363,6 +365,8 @@ private fun GuildQuestRow(
             Spacer(Modifier.height(8.dp))
             val fraction = (qwp.progress.toFloat() / qwp.effectiveAmount.toFloat()).coerceIn(0f, 1f)
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
                 color    = MaterialTheme.colorScheme.primary,
@@ -469,6 +473,8 @@ private fun GuildDailyCard(
             Spacer(Modifier.height(8.dp))
             val fraction = (dwp.progress.toFloat() / dwp.template.amount.toFloat()).coerceIn(0f, 1f)
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
                 color    = MaterialTheme.colorScheme.primary,

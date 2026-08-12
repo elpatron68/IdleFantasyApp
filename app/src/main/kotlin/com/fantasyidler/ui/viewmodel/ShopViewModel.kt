@@ -9,6 +9,8 @@ import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.WeeklyQuestRepository
+import com.fantasyidler.repository.XpBoostPurchaseResult
 import com.fantasyidler.repository.resolveCapeMultiplier
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -75,6 +77,7 @@ data class ShopUiState(
     val inventory: Map<String, Int> = emptyMap(),
     val equipped: Map<String, String?> = emptyMap(),
     val xpBoostExpiresAt: Long = 0L,
+    val xpBoostLastPurchaseAt: Long = 0L,
     val transaction: ShopTransaction? = null,
     val pendingBulkSell: BulkSellPreview? = null,
     val snackbarMessage: String? = null,
@@ -101,6 +104,7 @@ class ShopViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    private val weeklyQuestRepo: WeeklyQuestRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -119,6 +123,7 @@ class ShopViewModel @Inject constructor(
                 inventory        = json.decodeFromString(player.inventory),
                 equipped         = json.decodeFromString(player.equipped),
                 xpBoostExpiresAt = flags.xpBoostExpiresAt,
+                xpBoostLastPurchaseAt = flags.xpBoostLastPurchaseAt,
                 isLoading        = false,
                 reservedItems    = computeReserved(flags.sessionQueue),
                 lockedItems      = flags.lockedItems.toSet(),
@@ -153,7 +158,7 @@ class ShopViewModel @Inject constructor(
         val boost = ShopEntry(
             key          = XP_BOOST_KEY,
             displayName  = "2× XP Boost (48h)",
-            description  = "Double all XP gained for 48 hours",
+            description  = "Double all XP gained for 48 hours. Limit one purchase per week.",
             price        = PlayerRepository.XP_BOOST_COST.toInt(),
             categoryName = "Special",
         )
@@ -420,6 +425,20 @@ class ShopViewModel @Inject constructor(
             _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
             return
         }
+        val isXpBoost = entry.key == XP_BOOST_KEY
+        if (isXpBoost) {
+            val state = uiState.value
+            if (state.xpBoostActive) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_xp_boost_already_active)) }
+                return
+            }
+            if (state.xpBoostLastPurchaseAt > 0 &&
+                System.currentTimeMillis() < weeklyQuestRepo.nextResetMs(state.xpBoostLastPurchaseAt)
+            ) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_xp_boost_weekly_limit)) }
+                return
+            }
+        }
         val discount  = mercantileBuyDiscount()
         val discPrice = (entry.price * discount).toInt().coerceAtLeast(1)
         val maxAffordable = (uiState.value.coins / discPrice).coerceIn(1L, Int.MAX_VALUE.toLong()).toInt()
@@ -429,7 +448,7 @@ class ShopViewModel @Inject constructor(
                     key         = entry.key,
                     displayName = entry.displayName,
                     priceEach   = discPrice,
-                    maxQty      = maxAffordable,
+                    maxQty      = if (isXpBoost) 1 else maxAffordable,
                     qty         = 1,
                     isBuy       = true,
                 )
@@ -487,12 +506,16 @@ class ShopViewModel @Inject constructor(
         viewModelScope.launch {
             // Special handling for XP boost
             if (t.key == XP_BOOST_KEY) {
-                val activated = playerRepo.activateXpBoost(PlayerRepository.XP_BOOST_DURATION_MS, t.qty, t.priceEach.toLong())
+                val result = playerRepo.activateXpBoost(PlayerRepository.XP_BOOST_DURATION_MS, t.priceEach.toLong())
                 _extra.update {
                     it.copy(
                         transaction     = null,
-                        snackbarMessage = if (activated) context.getString(R.string.shop_xp_boost_activated, t.qty * 48)
-                                          else           context.getString(R.string.error_not_enough_coins),
+                        snackbarMessage = when (result) {
+                            XpBoostPurchaseResult.SUCCESS              -> context.getString(R.string.shop_xp_boost_activated, 48)
+                            XpBoostPurchaseResult.NOT_ENOUGH_COINS     -> context.getString(R.string.error_not_enough_coins)
+                            XpBoostPurchaseResult.ALREADY_ACTIVE       -> context.getString(R.string.shop_xp_boost_already_active)
+                            XpBoostPurchaseResult.WEEKLY_LIMIT_REACHED -> context.getString(R.string.shop_xp_boost_weekly_limit)
+                        },
                     )
                 }
                 return@launch

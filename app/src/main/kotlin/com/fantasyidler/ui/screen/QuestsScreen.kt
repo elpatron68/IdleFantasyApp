@@ -498,6 +498,8 @@ private fun DailyQuestCard(
             Spacer(Modifier.height(8.dp))
             val fraction = (quest.progress.toFloat() / quest.template.amount.toFloat()).coerceIn(0f, 1f)
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
                 color    = MaterialTheme.colorScheme.primary,
@@ -595,6 +597,8 @@ private fun QuestRow(
         if (!questWithProgress.completed && questWithProgress.progress > 0) {
             Spacer(Modifier.height(8.dp))
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress  = { questWithProgress.progressFraction },
                 modifier  = Modifier.fillMaxWidth(),
                 color     = MaterialTheme.colorScheme.primary,
@@ -699,6 +703,8 @@ private fun WeeklyQuestCard(
             Spacer(Modifier.height(8.dp))
             val fraction = (quest.progress.toFloat() / quest.template.amount.toFloat()).coerceIn(0f, 1f)
             LinearProgressIndicator(
+                gapSize = 0.dp,
+                drawStopIndicator = {},
                 progress = { fraction },
                 modifier = Modifier.fillMaxWidth(),
                 color    = MaterialTheme.colorScheme.primary,

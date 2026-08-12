@@ -1248,6 +1248,9 @@
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Jual Semua</string>
     <string name="shop_xp_boost_activated">Peningkatan XP 2x diaktifkan hanya dengan %1$dh!</string>
+    <string name="shop_xp_boost_already_active">Peningkatan XP 2x sudah aktif.</string>
+    <string name="shop_xp_boost_weekly_limit">Batas satu peningkatan XP 2x per minggu. Tersedia lagi setelah reset mingguan.</string>
+    <string name="item_xp_boost_48h_desc">Menggandakan semua XP yang diperoleh selama 48 jam. Batas satu pembelian per minggu.</string>
     <string name="shop_not_enough_in_inventory">inventaris tidak cukup</string>
     <string name="shop_bought_item">Membeli %1$d× %2$s</string>
     <string name="shop_sold_item">Terjual %1$d× %2$s seharga %3$d koin</string>
@@ -1266,7 +1269,7 @@
     <string name="home_found_pet">Anda menemukan peliharaan: %1$s!</string>
     <string name="pet_found_title">New Pet!</string>
     <string name="home_congratulations_received">Selamat! Anda menerima: %1$s</string>
-    <string name="home_session_voided">Sesi Dibatalkan — Bahan Dikembalikan</string>
+    <string name="home_session_voided">XP hangus (prestise). Semua hadiah lainnya diberikan.</string>
     <string name="home_not_enough_coins_repeat">koin tidak cukup untuk mengulangi %1$s.</string>
     <string name="home_not_enough_materials_repeat">Bahan tidak cukup untuk mengulang %1$s.</string>
     <string name="combat_no_food_title">Makanan Tak Digunakan</string>
@@ -1284,7 +1287,7 @@
     <string name="snackbar_queue_full">Antrian penuh.</string>
     <string name="combat_start_failed">Tak dapat memulai: %1$s</string>
     <string name="skill_session_voided_prestige">Level %1$s Anda tidak lagi memenuhi persyaratan sesi ini (kemungkinan karena prestise) — hadiahnya dibatalkan dan bahan yang digunakan telah dikembalikan.</string>
-    <string name="combat_session_voided_prestige">Level combat Anda tidak lagi memenuhi persyaratan pertarungan ini (kemungkinan karena prestise) — hadiahnya dibatalkan.</string>
+    <string name="combat_session_voided_prestige">Level kamu turun setelah prestise, jadi XP sesi ini hangus. Semua hadiah lainnya tetap diberikan.</string>
     <string name="combat_select_spell">Pilih mantra sebelum masuk.</string>
     <string name="combat_spell_level_required">Butuh Magic %1$d untuk %2$s.</string>
     <string name="guild_daily_reward_claimed">Hadiah harian telah diklaim!</string>
@@ -1306,6 +1309,8 @@
     <string name="monument_build_btn">Bangun (%1$s)</string>
     <string name="monument_contribute_label">Beri makan Api Abadi</string>
     <string name="monument_contribute_all">Semua</string>
+    <string name="monument_feed_all_confirm_title">Berikan semuanya?</string>
+    <string name="monument_feed_all_confirm_message">Berikan semua koinmu (%1$s) ke Api Abadi? Tindakan ini tidak dapat dibatalkan.</string>
     <string name="monument_flame_locked">Bangun empat tahap pertama untuk mulai mendanai api</string>
     <string name="monument_flame_complete">Api Abadi menyala. Kota tak akan pernah melupakan namamu.</string>
     <string name="monument_touch_title">Sentuhan Harian</string>

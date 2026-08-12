@@ -1426,7 +1426,7 @@
     <string name="home_not_enough_materials_repeat">%1$s tekrarlamak için yeterli malzeme yok.</string>
     <string name="combat_start_failed">Başlatılamadı: %1$s</string>
     <string name="skill_session_voided_prestige">%1$s seviyeniz artık bu oturumun gereksinimini karşılamıyor (muhtemelen prestij nedeniyle) — ödülleri iptal edildi ve kullanılan malzemeler iade edildi.</string>
-    <string name="combat_session_voided_prestige">Savaş seviyeniz artık bu karşılaşmanın gereksinimini karşılamıyor (muhtemelen prestij nedeniyle) — ödülleri iptal edildi.</string>
+    <string name="combat_session_voided_prestige">Prestige sonrasında seviyeniz düştüğü için bu oturumun XP\'si kaybedildi. Diğer tüm ödüller verildi.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1448,6 +1448,8 @@
     <string name="monument_build_btn">İnşa et (%1$s)</string>
     <string name="monument_contribute_label">Sonsuz Alevi besle</string>
     <string name="monument_contribute_all">Hepsi</string>
+    <string name="monument_feed_all_confirm_title">Hepsi verilsin mi?</string>
+    <string name="monument_feed_all_confirm_message">Tüm paranız (%1$s) Sonsuz Alev\'e verilsin mi? Bu işlem geri alınamaz.</string>
     <string name="monument_flame_locked">Alevi beslemek için önce dört aşamayı inşa et</string>
     <string name="monument_flame_complete">Sonsuz Alev yanıyor. Şehir adını asla unutmayacak.</string>
     <string name="monument_touch_title">Günlük Dokunuş</string>
@@ -1537,6 +1539,9 @@
     <string name="shop_bulk_sell_total">Toplam</string>
     <string name="shop_bulk_sell_confirm">Hepsini sat</string>
     <string name="shop_xp_boost_activated">2× XP bonusu %1$d saat için aktifleştirildi!</string>
+    <string name="shop_xp_boost_already_active">2× XP bonusu zaten aktif.</string>
+    <string name="shop_xp_boost_weekly_limit">Haftada yalnızca bir 2× XP bonusu alınabilir. Haftalık sıfırlamadan sonra tekrar kullanılabilir.</string>
+    <string name="item_xp_boost_48h_desc">48 saat boyunca kazanılan tüm XP\'yi ikiye katlar. Haftada bir satın alma ile sınırlıdır.</string>
     <string name="shop_not_enough_in_inventory">Envanterde yeterli değil</string>
     <string name="shop_bought_item">%1$d× %2$s satın alındı</string>
     <string name="shop_sold_item">%1$d× %2$s, %3$d altına satıldı</string>
@@ -1555,7 +1560,7 @@
     <string name="home_found_pet">Bir evcil hayvan buldunuz: %1$s!</string>
     <string name="pet_found_title">Yeni evcil hayvan!</string>
     <string name="home_congratulations_received">Tebrikler! Aldığınız: %1$s</string>
-    <string name="home_session_voided">Oturum İptal Edildi — Malzemeler İade Edildi</string>
+    <string name="home_session_voided">XP kaybedildi (prestige). Diğer tüm ödüller verildi.</string>
     <string name="combat_no_food_title">Yiyecek Takılı Değil</string>
     <string name="combat_no_food_body">Yiyecek takılı değil. Yiyecek olmadan çabuk ölebilir ve ödüllerin çoğunu kaybedebilirsiniz. Yine de başlansın mı?</string>
     <string name="combat_start_anyway">Yine de başla</string>

@@ -1529,6 +1529,9 @@
     <string name="shop_bulk_sell_total">Gesamt</string>
     <string name="shop_bulk_sell_confirm">Alles verkaufen</string>
     <string name="shop_xp_boost_activated">2×-EP-Hilfe für %1$d Stunden aktiviert!</string>
+    <string name="shop_xp_boost_already_active">Eine 2×-EP-Hilfe ist bereits aktiv.</string>
+    <string name="shop_xp_boost_weekly_limit">Nur eine 2×-EP-Hilfe pro Woche. Nach dem wöchentlichen Reset wieder verfügbar.</string>
+    <string name="item_xp_boost_48h_desc">Verdoppelt alle EP für 48 Stunden. Nur ein Kauf pro Woche.</string>
     <string name="shop_not_enough_in_inventory">Nicht genug im Inventar</string>
     <string name="shop_bought_item">%1$d× %2$s gekauft</string>
     <string name="shop_sold_item">%1$d× %2$s für %3$d Münzen verkauft</string>
@@ -1548,7 +1551,7 @@
     <string name="pet_found_title">Neues Haustier!</string>
     <string name="home_congratulations_received">Glückwunsch! Ihr habt erhalten: %1$s</string>
     <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
-    <string name="home_session_voided">Sitzung ungültig — Materialien erstattet</string>
+    <string name="home_session_voided">EP verfallen (Prestige). Alle anderen Belohnungen erhalten.</string>
     <string name="home_not_enough_coins_repeat">Nicht genug Münzen, um %1$s zu wiederholen.</string>
     <string name="home_not_enough_materials_repeat">Nicht genug Material, um %1$s zu wiederholen.</string>
     <string name="combat_no_food_title">Keine Nahrung ausgerüstet</string>
@@ -1572,7 +1575,7 @@
     <string name="snackbar_queue_full">Warteschlange ist voll.</string>
     <string name="combat_start_failed">Konnte nicht gestartet werden: %1$s</string>
     <string name="skill_session_voided_prestige">Euer %1$s-Level erfüllt die Anforderung dieser Sitzung nicht mehr (wahrscheinlich durch Prestige) — die Belohnungen wurden verworfen und verwendete Materialien wurden zurückerstattet.</string>
-    <string name="combat_session_voided_prestige">Euer Kampflevel erfüllt die Anforderung dieser Begegnung nicht mehr (wahrscheinlich durch Prestige) — die Belohnungen wurden verworfen.</string>
+    <string name="combat_session_voided_prestige">Dein Level ist durch das Prestige gesunken, daher sind die EP dieser Sitzung verfallen. Alle anderen Belohnungen wurden gewährt.</string>
     <string name="combat_select_spell">Wählt einen Zauber vor Betreten.</string>
     <string name="combat_spell_level_required">Benötigt Magie %1$d für %2$s.</string>
     <string name="guild_daily_reward_claimed">Tägliche Belohnung eingefordert!</string>
@@ -1594,6 +1597,8 @@
     <string name="monument_build_btn">Errichten (%1$s)</string>
     <string name="monument_contribute_label">Nährt die Ewige Flamme</string>
     <string name="monument_contribute_all">Alles</string>
+    <string name="monument_feed_all_confirm_title">Alles opfern?</string>
+    <string name="monument_feed_all_confirm_message">Alle deine Münzen (%1$s) der Ewigen Flamme opfern? Das kann nicht rückgängig gemacht werden.</string>
     <string name="monument_flame_locked">Errichtet erst die vier Stufen, um die Flamme zu speisen</string>
     <string name="monument_flame_complete">Die Ewige Flamme brennt. Die Stadt wird euren Namen nie vergessen.</string>
     <string name="monument_touch_title">Tägliche Berührung</string>

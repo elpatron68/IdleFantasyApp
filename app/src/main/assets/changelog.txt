@@ -1,3 +1,27 @@
+v1.13.4
+• The 2× XP boost now costs 2.5M coins (down from 25M) but can no longer be stacked: a new boost can't be bought while one is running, and purchases are limited to one per week, resetting Monday 6am alongside weekly quests; previously stockpiled boost time is unaffected
+• Fixed the quest icons legend flashing over the home screen when tapping Settings quickly after returning from the Skills page: taps no longer register on a page that is still animating out, which could also open Settings unintentionally in the reverse direction
+• The Grand Monument's Eternal Flame quick-feed buttons now show clean single-line labels (+1M, +10M, +100M) instead of wrapping decimals across several lines inside the button
+• Inactive characters' sessions now keep running in real time instead of freezing when you switch save slots: the session in progress finishes while you're away, and queued actions catch up when you switch back, just as if the app had been closed; manually imported save files still restore with their remaining session time intact
+• Bone Altar taps now register instantly: the buried counter no longer lags behind fast tapping right after opening the altar or keeps counting after you stop, and taps still waiting to be saved are no longer lost when leaving the screen quickly
+• Cleaner, more compact skill rows: tool and pet bonuses share one line and the prestige stars and button sit inside the row (thanks Michaelomh!)
+• Prestiging mid-session no longer voids the session: it keeps running and pays out loot, coins, kills, and quest progress as normal, with only the XP forfeited (the XP forfeit still prevents banking high-level XP through a prestige)
+• Removed the stray dot at the end of every progress bar and the small gap between the filled and unfilled portions, both introduced by the Material library upgrade in 1.13.3
+• Mercantile and Agility guild quests need far fewer sessions (both ladders are now 1/4/8/12/18/25/34/45/60/75, down from up to 500 trades and 250 course runs): their progress is capped at roughly two sessions per hour no matter your gear or levels, so the top quests took several days of nonstop play where other guilds take a day or less; existing quest progress carries over
+• The Grand Monument's "All" feed button now asks for confirmation with the exact amount before donating, so a stray tap can't drain your entire coin balance; the fixed +1M/+10M/+100M buttons stay instant
+
+v1.13.4
+• The 2× XP boost now costs 2.5M coins (down from 25M) but can no longer be stacked: a new boost can't be bought while one is running, and purchases are limited to one per week, resetting Monday 6am alongside weekly quests; previously stockpiled boost time is unaffected
+• Fixed the quest icons legend flashing over the home screen when tapping Settings quickly after returning from the Skills page: taps no longer register on a page that is still animating out, which could also open Settings unintentionally in the reverse direction
+• The Grand Monument's Eternal Flame quick-feed buttons now show clean single-line labels (+1M, +10M, +100M) instead of wrapping decimals across several lines inside the button
+• Inactive characters' sessions now keep running in real time instead of freezing when you switch save slots: the session in progress finishes while you're away, and queued actions catch up when you switch back, just as if the app had been closed; manually imported save files still restore with their remaining session time intact
+• Bone Altar taps now register instantly: the buried counter no longer lags behind fast tapping right after opening the altar or keeps counting after you stop, and taps still waiting to be saved are no longer lost when leaving the screen quickly
+• Cleaner, more compact skill rows: tool and pet bonuses share one line and the prestige stars and button sit inside the row (thanks Michaelomh!)
+• Prestiging mid-session no longer voids the session: it keeps running and pays out loot, coins, kills, and quest progress as normal, with only the XP forfeited (the XP forfeit still prevents banking high-level XP through a prestige)
+• Removed the stray dot at the end of every progress bar and the small gap between the filled and unfilled portions, both introduced by the Material library upgrade in 1.13.3
+• Mercantile and Agility guild quests need far fewer sessions (both ladders are now 1/4/8/12/18/25/34/45/60/75, down from up to 500 trades and 250 course runs): their progress is capped at roughly two sessions per hour no matter your gear or levels, so the top quests took several days of nonstop play where other guilds take a day or less; existing quest progress carries over
+• The Grand Monument's "All" feed button now asks for confirmation with the exact amount before donating, so a stray tap can't drain your entire coin balance; the fixed +1M/+10M/+100M buttons stay instant
+
 v1.13.3
 • New save manager under Settings > Characters: up to 3 character slots shown side by side with each character's sprite, levels, coins, and last-played time; create, switch, or delete characters, with the current character saved automatically and inactive characters' sessions paused until you return
 • New Ironman mode, chosen at character creation and permanent: all XP, yield, and coin boosts are inert, the shop only sells (no buying), and Inn workers can't be hired; ironman characters show a badge on the home screen, profile, and save slot

@@ -39,19 +39,20 @@ def _fix_page_links(html: str, active_page_id: str | None) -> str:
     need to turn PageStem into PageStem.html (or PageStem.html#slug for item cross-links).
     """
     def fix(m: re.Match) -> str:
-        start, href, end, text = m.group(1), m.group(2), m.group(3), m.group(4)
+        start, href, slug, end, text = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
         if href not in _PAGE_BY_URL:
             return m.group(0)
         is_page_link = _PAGE_BY_URL[href] == text
         css = ' class="active"' if (active_page_id and active_page_id in PAGE_DIRECTORY
                                     and href == PAGE_DIRECTORY[active_page_id].url[:-3]) else ""
         if is_page_link:
-            return f'<a{start}href="{href}.html"{end}{css}>{text}</a>'
+            return f'<a{start}href="{href}.html#{slug}"{end}{css}>{text}</a>'
+        # Existing slug intentionally overwritten if page does not exist
         slug = _slugify(text)
         return f'<a{start}href="{href}.html#{slug}"{end}{css}>{text}</a>'
 
     # Match <a href="Stem">display text</a> -- display may include emoji/spaces
-    return re.sub(r'<a([^>]*)href=[\'"]([^\'"#]+)[\'"]([^>]*)>([^<]+)</a>', fix, html)
+    return re.sub(r'<a([^>]*)href=[\'"]([^\'"#]+)#?([^\'"]*)[\'"]([^>]*)>([^<]+)</a>', fix, html)
 
 
 def _add_row_ids(html: str) -> str:

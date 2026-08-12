@@ -1386,7 +1386,7 @@
     <string name="home_not_enough_materials_repeat">Niet genoeg materialen om %1$s te herhalen.</string>
     <string name="combat_start_failed">Kon niet starten: %1$s</string>
     <string name="skill_session_voided_prestige">Je %1$s-niveau voldoet niet meer aan de vereiste voor deze sessie (waarschijnlijk door prestige) — de beloningen zijn geannuleerd en gebruikte materialen zijn terugbetaald.</string>
-    <string name="combat_session_voided_prestige">Je gevechtsniveau voldoet niet meer aan de vereiste voor dit gevecht (waarschijnlijk door prestige) — de beloningen zijn geannuleerd.</string>
+    <string name="combat_session_voided_prestige">Je level is gedaald na prestige, dus de XP van deze sessie is vervallen. Alle andere beloningen zijn wel toegekend.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1408,6 +1408,8 @@
     <string name="monument_build_btn">Bouw (%1$s)</string>
     <string name="monument_contribute_label">Voed de Eeuwige Vlam</string>
     <string name="monument_contribute_all">Alles</string>
+    <string name="monument_feed_all_confirm_title">Alles offeren?</string>
+    <string name="monument_feed_all_confirm_message">Al je munten (%1$s) aan de Eeuwige Vlam offeren? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="monument_flame_locked">Bouw eerst de vier fasen om de vlam te financieren</string>
     <string name="monument_flame_complete">De Eeuwige Vlam brandt. De stad zal je naam nooit vergeten.</string>
     <string name="monument_touch_title">Dagelijkse aanraking</string>
@@ -1568,6 +1570,9 @@
     <string name="shop_bulk_sell_total">Totaal</string>
     <string name="shop_bulk_sell_confirm">Alles verkopen</string>
     <string name="shop_xp_boost_activated">2× XP boost geactiveerd voor %1$d uur!</string>
+    <string name="shop_xp_boost_already_active">Er is al een 2× XP-boost actief.</string>
+    <string name="shop_xp_boost_weekly_limit">Maximaal één 2× XP-boost per week. Weer beschikbaar na de wekelijkse reset.</string>
+    <string name="item_xp_boost_48h_desc">Verdubbelt alle XP gedurende 48 uur. Maximaal één aankoop per week.</string>
     <string name="shop_not_enough_in_inventory">Niet genoeg in inventaris</string>
     <string name="shop_bought_item">%1$d× %2$s gekocht</string>
     <string name="shop_sold_item">%1$d× %2$s verkocht voor %3$d munten</string>
@@ -1586,7 +1591,7 @@
     <string name="home_found_pet">Je hebt een huisdier gevonden: %1$s!</string>
     <string name="pet_found_title">Nieuw huisdier!</string>
     <string name="home_congratulations_received">Gefeliciteerd! Je hebt ontvangen: %1$s</string>
-    <string name="home_session_voided">Sessie ongeldig — materialen terugbetaald</string>
+    <string name="home_session_voided">XP vervallen (prestige). Alle andere beloningen toegekend.</string>
     <string name="combat_no_food_title">Geen voedsel uitgerust</string>
     <string name="combat_no_food_body">Je hebt geen voedsel uitgerust. Zonder voedsel kun je snel sterven en de meeste beloningen verliezen. Toch starten?</string>
     <string name="combat_start_anyway">Toch starten</string>

@@ -16,6 +16,10 @@ import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.QuestRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -23,8 +27,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
@@ -57,8 +59,20 @@ class BoneAltarViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
-    private val mutex = Mutex()
     private val _extra = MutableStateFlow(BoneAltarUiState())
+
+    // Rapid taps are counted optimistically in the UI and written to the DB in adaptive
+    // batches: while one batch is being written, new taps accumulate into the next one.
+    // Everything below is only touched from the main thread (tap handlers and the drain
+    // loop both run on Dispatchers.Main), so no locking is needed. The drain runs on its
+    // own scope so a final flush can survive onCleared() — the old per-tap pipeline
+    // silently dropped still-queued taps when the player left the screen quickly.
+    private class PendingTaps(var count: Int = 0, var xp: Long = 0L)
+    private val pending = LinkedHashMap<String, PendingTaps>()
+    private var inFlightKey: String? = null
+    private var inFlightCount = 0
+    private var drainJob: Job? = null
+    private val flushScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     val uiState: StateFlow<BoneAltarUiState> = combine(
         playerRepo.playerFlow,
@@ -127,11 +141,16 @@ class BoneAltarViewModel @Inject constructor(
         val boneKey = state.selectedBoneKey ?: return
         val bone    = gameData.bones[boneKey] ?: return
 
+        // Refuse the tap once every bone in inventory is already spoken for by
+        // unflushed or in-flight taps, so optimistic counting can't overshoot.
+        val unflushed = (pending[boneKey]?.count ?: 0) +
+            (if (inFlightKey == boneKey) inFlightCount else 0)
+        if ((state.inventory[boneKey] ?: 0) - unflushed <= 0) return
+
         val now      = System.currentTimeMillis()
         val newCombo = if (now - state.lastTapMs > COMBO_RESET_MS) 1
                        else (state.combo + 1).coerceAtMost(99)
         val comboMult = if (newCombo >= COMBO_THRESHOLD) COMBO_XP_MULT else 1.0f
-        _extra.update { it.copy(combo = newCombo, lastTapMs = now) }
 
         val boostMult   = if (state.boostActive) 2.0f else 1.0f
         val petMult     = 1.0f + state.petBoostPct / 100.0f
@@ -139,24 +158,49 @@ class BoneAltarViewModel @Inject constructor(
             state.churchMult * state.prayerCapeMult * state.prestigeMult * petMult)
             .toLong().coerceAtLeast(1L)
 
-        viewModelScope.launch {
-            mutex.withLock {
-                val result = playerRepo.buryBoneAtomic(boneKey, effectiveXp)
-                if (result.xpGained > 0L) {
-                    if (!bone.isAsh) {
-                        questRepo.recordBuried(1)
-                        guildRepo.recordGuildPrayer(1)
-                        playerRepo.recordDailyPrayer(1)
-                    }
+        _extra.update { it.copy(
+            combo       = newCombo,
+            lastTapMs   = now,
+            sessionXp   = it.sessionXp + effectiveXp,
+            totalBuried = it.totalBuried + 1,
+        )}
+        val taps = pending.getOrPut(boneKey) { PendingTaps() }
+        taps.count += 1
+        taps.xp    += effectiveXp
+        scheduleDrain()
+    }
+
+    private fun scheduleDrain() {
+        if (drainJob?.isActive == true) return
+        drainJob = flushScope.launch {
+            while (pending.isNotEmpty()) {
+                val (boneKey, taps) = pending.entries.first()
+                pending.remove(boneKey)
+                inFlightKey   = boneKey
+                inFlightCount = taps.count
+                val isAsh  = gameData.bones[boneKey]?.isAsh == true
+                val result = playerRepo.buryBonesAtomic(boneKey, taps.count, taps.xp)
+                if (result.buried > 0 && !isAsh) {
+                    questRepo.recordBuried(result.buried)
+                    guildRepo.recordGuildPrayer(result.buried)
+                    playerRepo.recordDailyPrayer(result.buried)
+                }
+                inFlightKey   = null
+                inFlightCount = 0
+                if (result.buried < taps.count || result.awardedCape != null) {
                     _extra.update { it.copy(
-                        sessionXp       = it.sessionXp + result.xpGained,
-                        totalBuried     = it.totalBuried + 1,
+                        totalBuried     = it.totalBuried - (taps.count - result.buried),
+                        sessionXp       = it.sessionXp - (taps.xp - result.xpGained),
                         snackbarMessage = if (result.awardedCape != null)
-                            context.getString(R.string.bone_altar_cape_awarded) else null,
+                            context.getString(R.string.bone_altar_cape_awarded) else it.snackbarMessage,
                     )}
                 }
             }
         }
+    }
+
+    override fun onCleared() {
+        scheduleDrain()
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }

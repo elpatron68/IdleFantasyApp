@@ -136,6 +136,8 @@ fun SeasonalEventScreen(
                     )
                     Spacer(Modifier.height(8.dp))
                     LinearProgressIndicator(
+                        gapSize = 0.dp,
+                        drawStopIndicator = {},
                         progress = { (state.tokens.toFloat() / event.tokenGoal).coerceIn(0f, 1f) },
                         modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
                     )

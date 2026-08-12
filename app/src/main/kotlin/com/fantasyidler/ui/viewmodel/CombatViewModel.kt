@@ -860,25 +860,11 @@ class CombatViewModel @Inject constructor(
 
     fun prestigeSkill(skillName: String) {
         viewModelScope.launch {
-            val activeSession = sessionRepo.getActiveSession()
-            // A combat/boss fight's frames are locked in at start using the pre-prestige stats
-            // (e.g. Hitpoints level). Prestiging resets that skill to level 1, so an active fight
-            // left running would later fail its post-completion combat-level eligibility check
-            // and get silently voided -- but still show a misleading "Defeated by X" result
-            // (issue #1144). Abandoning it here, matching a manual abandon, avoids that entirely.
-            val abandonedCombatSession = activeSession?.takeIf {
-                skillName in Skills.COMBAT && (it.skillName == "combat" || it.skillName == "boss")
-            }
-            val abandonedSession = abandonedCombatSession
-                ?: activeSession?.takeIf { it.skillName == skillName }
-            if (abandonedCombatSession != null) {
-                abandonCombatSession(abandonedCombatSession)
-            } else if (abandonedSession != null) {
-                val frames: List<SessionFrame> = json.decodeFromString(abandonedSession.frames)
-                playerSessionMaterials(abandonedSession.skillName, abandonedSession.activityKey, frames.sumOf { it.kills }, gameData)
-                    ?.let { playerRepo.addItems(it) }
-                sessionRepo.abandonSession(abandonedSession.sessionId)
-            }
+            // The active session (fight included) is deliberately left running: it completes
+            // with its real result and pays out loot without XP (the eligibility check at
+            // collection zeroes it), so the misleading silently-voided outcome that the old
+            // abandon-on-prestige workaround existed for (issue #1144) can't occur anymore.
+            // Only queued actions are evicted — they haven't started and can't start at level 1.
             val evicted = playerRepo.evictQueueForSkill(skillName)
             for (action in evicted) {
                 if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
@@ -889,7 +875,6 @@ class CombatViewModel @Inject constructor(
             // The repository resets flags.activeSpell if it now outlevels the player; drop the
             // in-memory pick too or the Gear tab keeps showing the stale spell (issue #1256).
             if (skillName == Skills.MAGIC) _extra.update { it.copy(selectedSpell = null) }
-            if (abandonedSession != null) queuedSessionStarter.startNextQueued()
         }
     }
 

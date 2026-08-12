@@ -1470,6 +1470,9 @@
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Sell All</string>
     <string name="shop_xp_boost_activated">2× XP boost activated for %1$dh!</string>
+    <string name="shop_xp_boost_already_active">A 2× XP boost is already active.</string>
+    <string name="shop_xp_boost_weekly_limit">Limit one 2× XP boost per week. Available again after the weekly reset.</string>
+    <string name="item_xp_boost_48h_desc">Double all XP gained for 48 hours. Limit one purchase per week.</string>
     <string name="shop_not_enough_in_inventory">Not enough in inventory</string>
     <string name="shop_bought_item">Bought %1$d× %2$s</string>
     <string name="shop_sold_item">Sold %1$d× %2$s for %3$d coins</string>
@@ -1489,7 +1492,7 @@
     <string name="pet_found_title">New Pet!</string>
     <string name="home_congratulations_received">Congratulations! You received: %1$s</string>
     <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
-    <string name="home_session_voided">Session Voided — Materials Refunded</string>
+    <string name="home_session_voided">XP forfeited (prestige). All other rewards granted.</string>
     <string name="home_not_enough_coins_repeat">Not enough coins to repeat %1$s.</string>
     <string name="home_not_enough_materials_repeat">Not enough materials to repeat %1$s.</string>
     <string name="combat_no_food_title">No Food Equipped</string>
@@ -1513,7 +1516,7 @@
     <string name="snackbar_queue_full">Queue is full.</string>
     <string name="combat_start_failed">Could not start: %1$s</string>
     <string name="skill_session_voided_prestige">Your %1$s level no longer meets this session\'s requirement (likely from prestiging) — its rewards were voided and any materials used were refunded.</string>
-    <string name="combat_session_voided_prestige">Your combat level no longer meets this encounter\'s requirement (likely from prestiging) — its rewards were voided.</string>
+    <string name="combat_session_voided_prestige">Your level dropped after prestiging, so this session\'s XP was forfeited. All other rewards were granted.</string>
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
@@ -1535,6 +1538,8 @@
     <string name="monument_build_btn">Build (%1$s)</string>
     <string name="monument_contribute_label">Feed the Eternal Flame</string>
     <string name="monument_contribute_all">All</string>
+    <string name="monument_feed_all_confirm_title">Feed everything?</string>
+    <string name="monument_feed_all_confirm_message">Feed all your coins (%1$s) to the Eternal Flame? This cannot be undone.</string>
     <string name="monument_flame_locked">Build the first four stages to begin funding the flame</string>
     <string name="monument_flame_complete">The Eternal Flame burns. The town will never forget your name.</string>
     <string name="monument_touch_title">Daily Touch</string>

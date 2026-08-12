@@ -488,12 +488,9 @@ class TowerViewModel @Inject constructor(
             val frames: List<SessionFrame> = json.decodeFromString(session.frames)
 
             val currentLevels = playerRepo.getSkillLevels()
-            if (!isSkillSessionStillEligible(session, currentLevels, gameData)) {
-                sessionRepo.deleteSession(session.sessionId)
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
-                session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
-                continue
-            }
+            // Prestige mid-floor forfeits only the XP; loot, coins, kills, and floor progress
+            // still pay out below.
+            val grantXp = isSkillSessionStillEligible(session, currentLevels, gameData)
 
             val playerDied = frames.any { it.died }
 
@@ -541,7 +538,7 @@ class TowerViewModel @Inject constructor(
             val towerCoinMult = if (flags.ironman) 1.0 else 1.0 + flags.towerCoinBonusPct / 100.0
 
             // Apply only the tower bonus here; applyMultiSkillResults handles boost/blessing internally
-            val xpForRepo = totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() }
+            val xpForRepo = if (grantXp) totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() } else emptyMap()
             coinsGained   = (coinsGained * towerCoinMult).toLong()
 
             playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
@@ -582,6 +579,9 @@ class TowerViewModel @Inject constructor(
                 ))
                 sessionRepo.deleteSession(session.sessionId)
                 _extra.update { it.copy(snackbarMessage = msg) }
+            }
+            if (!grantXp) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
             }
             session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
             }
