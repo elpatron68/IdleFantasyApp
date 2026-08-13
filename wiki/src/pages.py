@@ -15,7 +15,7 @@ from logging import log
 from pathlib import Path
 from typing import Callable
 
-from wiki.src import ASSETS, TEMPLATES, RESOURCES, REPO_ROOT
+from wiki.src import ASSETS, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO
 from wiki.src.game_data import STRINGS, load, title, item_name, skill_name, enemy_name, guild_name, trade_route_name, \
     thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, pet_name, boss_name, \
     boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, expedition_desc, \
@@ -355,6 +355,18 @@ def session_minutes(level: int, prestige: int = 0, chronos_mult: float = 1) -> i
     return round((60 - max_reduction * fraction) * chronos_mult)
 
 
+def github_issue_link(issue_num: int, display_name: str | None = None) -> str:
+    return f"[{display_name if display_name else f"#{issue_num}"}]({GITHUB_REPO}/issues/{issue_num})"
+
+
+def github_pull_request_link(pr_num: int, display_name: str | None = None) -> str:
+    return f"[{display_name if display_name else f"#{pr_num}"}]({GITHUB_REPO}/pull/{pr_num})"
+
+
+def github_discussion_link(disc_num: int, display_name: str | None = None) -> str:
+    return f"[{display_name if display_name else f"#{disc_num}"}]({GITHUB_REPO}/discussions/{disc_num})"
+
+
 def link(page_id: str, display_name: str | None = None, header: str | None = None):
     page = PAGE_DIRECTORY[page_id]
     return f"[{page.title if display_name is None else display_name}]({page.url.removesuffix('.md')}{f"#{header}" if header else ""})"
@@ -546,6 +558,7 @@ def gen_getting_started_game() -> str:
 def gen_getting_started_wiki() -> str:
     page = get_template("contributing/getting_started_wiki").format(
         page_types_link=link("wiki_page_types"),
+        editing_a_page_link=github_pull_request_link(1353, "Guide: Fixing an out-of-date wiki page"),
         game_contribution_link=link("getting_started_game", "how to contribute to the game")
     )
     return page.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}")

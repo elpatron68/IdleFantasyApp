@@ -4,15 +4,17 @@ Great! You want to know how you can contribute to the wiki and make it better ov
 
 If you want to make changes to the game itself, check out {game_contribution_link}.
 
+If you find examples much easier to work with, there are pull request guides available [here](#pull-request-guides) where you can see an actual example of editing the wiki.
+
 {{table_of_contents}}
 
 ## How the wiki works
 
-Unlike most wikis which have a collection of pages that require constant maintenance from the community whenever a game is updated, Idle Fantasy relies on a dynamically generated wiki which uses actual game data to generate the individual pages.
+Unlike most wikis which have a collection of pages that require constant maintenance from the community whenever a game is updated, Idle Fantasy relies on a dynamically generated wiki. This uses actual game data to generate the content within the individual pages reducing necessary maintenance of the wiki.
 
 It uses Markdown to define templates with Python being responsible for the compilation and generation of dynamic content.
 
-Some content still requires manual maintenance such as strategy guides and some text content however a number of changes in the game is reflected in the wiki.
+Some content still requires manual maintenance such as adding new mechanics, strategy guides and some text content however a number of changes in the game is reflected in the wiki.
 
 ## Core terminology
 
@@ -20,19 +22,19 @@ To best understand how you can work with the wiki codebase (and also understand 
 
 ### Page Directory
 
-The page directory is responsible for holding information about all the pages used within the wiki. It gets populated with information about all pages before the actual generation of any content and allows you to refer to other pages when defining page content through the use of a page ID (e.g. for links).
+The page directory is a directory describing all the metadata about the pages in the wiki. It gets populated with information about all pages before the actual generation of any content and allows you to refer to other pages when defining page content through the use of a page ID (e.g. for links).
 
 Pages are added to the page directory in `pages.py` under the `Page Listings` section.
 
 ### Page Hierarchy
 
-The page hierarchy is responsible primarily for controlling the navigation used within the sidebar but also on the home page. It lets you have precise control over how the navigation shows including the ordering of items. When adding pages to the page hierarchy, you can do so by "merging" it with a list using the `PageHierarchy.merge()` method. You can see examples of this in the generated pages.
+The page hierarchy describes the hierarchical navigation used within the sidebar and on the home page. It lets you have precise control over the items in the navigation bar including how items are ordered. When adding pages to the page hierarchy, you can do so by "merging" it with a list using the `PageHierarchy.merge()` method. You can see examples of this `Page Listings` section where some dynamic pages are merged.
 
-Pages are added to the page hierarchy in `pages.py` under the `Page Listings` section.
+Like the directory, pages are added to the page hierarchy in `pages.py` under the `Page Listings` section.
 
 ### Generator functions
 
-Generator functions are responsible for the actual content generation itself. They work by reading game data and filling out a template file based upon the actual content. There are two main ways that generator functions are defined depending on whether you are defining static pages or dynamically-generated pages.
+Generator functions are responsible for the actual content generation itself. They work by reading game data and filling out a template file with the appropriate Markdown. There are two main ways that generator functions are defined depending on whether you are defining static pages or dynamically-generated pages (see {page_types_link}).
 
 These generator functions are defined in `pages.py` in the page generation section.
 
@@ -42,19 +44,20 @@ Templates provide the base formatting for pages within the wiki. Whenever they r
 
 ### Static/Dynamically-generated pages
 
-Whenever we refer to static vs dynamically-generated pages this refers not to the content within pages but how the pages are defined. If pages are "hardcoded" in the `add_static_pages` function, these are static, whereas generated pages will produce an unknown amount of pages like with each individual boss page.
+Whenever we refer to static vs dynamically-generated pages, this refers not to the content within pages but how the pages are defined. If pages are "hardcoded" in the `add_static_pages` function, these are static, whereas generated pages will produce an unknown amount of pages like with each individual boss page for which the number of pages change as bosses are added to the game.
 
 For more information, see {page_types_link}.
 
 ## Building/Compiling the Wiki
 
-To build the wiki, you'll need to set up an appropriate Python environment which you can use to run the wiki compilation. For information about setting up virtual environments, see [this tutorial](https://www.geeksforgeeks.org/python/create-virtual-environment-using-venv-python/) (make sure to call it .venv to have it be gitignored).
+To build the wiki, you'll need to set up an appropriate Python environment in the root directory. For information about setting up virtual environments, see [this tutorial](https://www.geeksforgeeks.org/python/create-virtual-environment-using-venv-python/) (make sure to call it .venv to have it be gitignored).
 
-Then, make sure you've installed all packages shown in `wiki/requirements.txt`
+Then, make sure you've installed all packages shown in `wiki/requirements.txt`.
 
-From there, you can run the following command to see what you can do (from the project folder):
+From there, you can run the following command to see what you can do:
 
 ```bash
+# Ensure you are currently at the root folder for the repository
 # Activate the virtual environment (Only run in Windows terminal)
 .venv/Scripts/activate
 # Activate the virtual environment (Only run in bash terminal)
@@ -63,14 +66,19 @@ source .venv/Scripts/activate
 python -m wiki.src -h
 ```
 
+The main command you'll need use is `python -m wiki.src write_html`. This writes out the HTML version of the wiki into `out/IdleFantasy-site`. You can then open any of the HTML pages and the website should come up. If you're using Pycharm, I'd recommend opening it using the Live Preview option which should update things more seamlessly.
+
+`python -m wiki.src validate` is the next most common command which you can use to validate the wiki and perform several tests that can help you pick up errors
+
 ## Wiki code structure
 
 The following code files are used as follows in the wiki:
 
 - `__main__.py` - The main entry point to the wiki program responsible for parsing arguments and top-level management.
-- `page_hierarchy.py` - A simple file defining the page hierarchy structure.
 - `pages.py` - The primary code responsible for generating all the Markdown pages. This also contains a number of helper functions which you should use where relevant such as `link()`, etc.
+- `game_data.py` - A set of helper functions which retrieve data from the game such as json files and game strings
 - `site.py` - The code responsible for generating the Idle Fantasy wiki website based upon the generated Markdown files.
+- `page_hierarchy.py` - A simple file defining the page hierarchy structure.
 
 ## Contributing process
 
@@ -81,6 +89,12 @@ If you notice larger issues/inaccuracies that might take some time to fix, you s
 If you want to make a number of new pages or significant changes (especially dynamically-generated ones) in order to improve the wiki, then you should open a discussion to give the opportunity for community involvement.
 
 Additionally, you might notice a number of #Todo items in the wiki code. These are also great places to look for things that need doing that we maybe just haven't got around to sorting out yet.
+
+## Pull request guides
+
+The guides below will show you an example of editing the wiki which you might find helpful to wrap your head around how things work:
+
+- {editing_a_page_link} - In this detailed guide, I go over editing a couple pages in the wiki. This is probably the most common level of detail you'll need to edit a page.
 
 ## Additional topics
 
