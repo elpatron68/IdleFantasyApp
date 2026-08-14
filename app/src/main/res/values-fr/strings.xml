@@ -1109,7 +1109,7 @@
     <string name="prestige_confirm_message_xp">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%%% XP pour cette aptitude.</string>
     <string name="prestige_confirm_message_stat">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d à vos statistiques.</string>
     <string name="prestige_confirm_message_agility">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%%% d\'XP, et la durée de vos sessions continuera de diminuer — au niveau 99, une session prendra %3$d min au lieu de %4$d min.</string>
-    <string name="prestige_confirm_message_mercantile">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%%% d\'XP, plus un bonus supplémentaire de +%2$d%%% sur les gains de pièces des routes commerciales.</string>
+    <string name="prestige_confirm_message_mercantile">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%% d\'XP, plus un bonus supplémentaire de +%2$d%% sur les gains de pièces des routes commerciales.</string>
 
     <!-- Prestige achievements -->
     <string name="achievement_prestige_first_name">Première réinitialisation</string>
@@ -1201,7 +1201,7 @@
     <string name="firemaking_burn">Brûle</string>
     <string name="farming_fertilizer">Engrais</string>
     <string name="farming_fertilizer_optional">Ajouter de l’engrais (optionnel)</string>
-    <string name="farming_fertilizer_yield">+%1$d%%% rendement</string>
+    <string name="farming_fertilizer_yield">+%1$d%% rendement</string>
     <string name="farming_fertilized">fertilisé</string>
     <string name="catalyst_optional">Catalyseur à cendres (optionnel)</string>
     <string name="catalyst_enhanced_output">Produit une potion améliorée</string>
@@ -1215,7 +1215,7 @@
     <!-- Thieving skill -->
     <string name="skill_thieving_name">Vol à la tire</string>
     <string name="skill_thieving_desc">Effectuez un vol à la tire sur des PNJ à chaque session. La chance de succès dépend de votre niveau. Les échecs vous étourdissent pendant une frame.</string>
-    <string name="thieving_npc_detail">Nv. %1$d • %2$d XP • %3$d%%% succès</string>
+    <string name="thieving_npc_detail">Nv. %1$d • %2$d XP • %3$d%% succès</string>
     <string name="thieving_npc_coins">%1$d–%2$d pièces par succès</string>
 
     <!-- Thieving NPC names -->
@@ -1248,7 +1248,7 @@
     <string name="town_upgrade_fail_mats">Matériaux insuffisants</string>
     <string name="town_inn_active_bonus">+%1$d%%% XP d\'ouvrier par session</string>
     <string name="town_inn_no_bonus">Améliorez pour donner un bonus XP aux ouvriers</string>
-    <string name="town_guild_active_bonus">-%1$d%%% exigences de quêtes de guilde</string>
+    <string name="town_guild_active_bonus">-%1$d%% exigences de quêtes de guilde</string>
     <string name="town_guild_no_bonus">Améliorez pour réduire les exigences de quête</string>
     <string name="town_church_active_bonus">Les bénédictions durent %1$dh (défaut : 24h)</string>
     <string name="town_church_no_bonus">Améliorez pour prolonger la durée des bénédictions</string>
@@ -1276,7 +1276,7 @@
     <string name="town_cape_rack_t3_bonus">Les bonus passifs de toutes les capes possédées (de Collecte, de Façonnage, de Combat &amp; de Guildes) sont actives</string>
     <string name="town_building_artisans_workshop_name">Atelier de l\'Artisan</string>
     <string name="town_artisans_workshop_no_bonus">Améliorez pour avoir une chance de préserver des matériaux de fabrication secondaires</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%%% chance de préserver des matériaux de fabrication secondaires</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance de préserver des matériaux de fabrication secondaires</string>
     <string name="town_building_chronos_spire_name">Flèche du Chrono</string>
     <string name="town_chronos_spire_no_bonus">Améliorez pour réduire le temps des sessions du joueur</string>
     <string name="town_chronos_spire_active_bonus">%1$d%%% de réduction du temps des sessions du joueur</string>

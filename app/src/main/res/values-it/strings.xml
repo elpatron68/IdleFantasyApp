@@ -1108,8 +1108,8 @@
     <string name="prestige_confirm_title">Onora %s?</string>
     <string name="prestige_confirm_message_xp">Il livello di %1$s tornerà a 1, ma otterrai un bonus permanente di +%2$d%%% XP per questa abilità.</string>
     <string name="prestige_confirm_message_stat">Il livello di %1$s tornerà a 1, ma otterrai un bonus permanente di +%2$d alle statistiche.</string>
-    <string name="prestige_confirm_message_agility">Il livello di %1$s tornerà a 1, ma otterrai un bonus XP permanente del +%2$d%%%, e la durata delle sessioni continuerà a diminuire — al livello 99 una sessione durerà %3$d min invece di %4$d min.</string>
-    <string name="prestige_confirm_message_mercantile">Il livello di %1$s tornerà a 1, ma otterrai un bonus XP permanente del +%2$d%%%, oltre a un ulteriore +%2$d%%% di ritorno in monete dalle rotte commerciali.</string>
+    <string name="prestige_confirm_message_agility">Il livello di %1$s tornerà a 1, ma otterrai un bonus XP permanente del +%2$d%%, e la durata delle sessioni continuerà a diminuire — al livello 99 una sessione durerà %3$d min invece di %4$d min.</string>
+    <string name="prestige_confirm_message_mercantile">Il livello di %1$s tornerà a 1, ma otterrai un bonus XP permanente del +%2$d%%, oltre a un ulteriore +%2$d%% di ritorno in monete dalle rotte commerciali.</string>
 
     <!-- Prestige achievements -->
     <string name="achievement_prestige_first_name">Primo Reset</string>
@@ -1201,7 +1201,7 @@
     <string name="firemaking_burn">Ardi</string>
     <string name="farming_fertilizer">Fertilizzante</string>
     <string name="farming_fertilizer_optional">Aggiungi fertilizzante</string>
-    <string name="farming_fertilizer_yield">+%1$d%%% alla resa</string>
+    <string name="farming_fertilizer_yield">+%1$d%% alla resa</string>
     <string name="farming_fertilized">Fertilizzato</string>
     <string name="catalyst_optional">Cenere catalizzante (facoltativo)</string>
     <string name="catalyst_enhanced_output">Produce pozione potenziata</string>
@@ -1279,7 +1279,7 @@
     <string name="town_artisans_workshop_active_bonus">%1$d%%% di recuperare materiali</string>
     <string name="town_building_chronos_spire_name">Guglia di Crono</string>
     <string name="town_chronos_spire_no_bonus">Migliora per ridurre i tempi di sessione</string>
-    <string name="town_chronos_spire_active_bonus">Riduzione del %1$d%%% ai tempi di sessione</string>
+    <string name="town_chronos_spire_active_bonus">Riduzione del %1$d%% ai tempi di sessione</string>
 
     <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">Ristrutturazione</string>
@@ -1503,8 +1503,8 @@
     <string name="bonus_section_skills">Bonus da Abilità</string>
     <string name="bonus_combat_stat_boost">Potenzia statistiche combattimento</string>
     <string name="bonus_combined_xp">XP combinata</string>
-    <string name="bonus_yield">+%1$d%%% alla resa</string>
-    <string name="bonus_boost">+%1$d%%% bonus</string>
+    <string name="bonus_yield">+%1$d%% alla resa</string>
+    <string name="bonus_boost">+%1$d%% bonus</string>
     <string name="bonus_session_shorter">%1$d min in meno per sessione</string>
     <string name="bonus_coin_return">+%1$d%%% ritorno in monete</string>
     <string name="bonus_tower">Torre</string>

@@ -1187,7 +1187,7 @@
     <string name="firemaking_burn">燃烧</string>
     <string name="farming_fertilizer">肥料</string>
     <string name="farming_fertilizer_optional">添加肥料（可选）</string>
-    <string name="farming_fertilizer_yield">+%1$d%%% 产出</string>
+    <string name="farming_fertilizer_yield">+%1$d%% 产出</string>
     <string name="farming_fertilized">Fertilized</string> <!-- untranslated -->
     <string name="catalyst_optional">灰烬催化剂（可选）</string>
     <string name="catalyst_enhanced_output">酿造强化药剂</string>

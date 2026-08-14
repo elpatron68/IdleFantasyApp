@@ -664,7 +664,7 @@
     <string name="item_strongmans_sigil_name">Sigillo Forzuto</string>
     <string name="item_strongmans_sigil_desc">Un pesante anello di ferro conferito ai più forti. Rafforza i tuoi muscoli.</string>
     <string name="item_carnival_cape_name">Mantello Carnevalesco</string>
-    <string name="item_carnival_cape_desc">Un mantello variopinto indossato dai campioni delle giostre. Fornisce un bonus del 5% ai biglietti ricevuti in ogni sessione.</string>
+    <string name="item_carnival_cape_desc">Un mantello variopinto indossato dai campioni delle giostre. Fornisce un bonus del 5%% ai biglietti ricevuti in ogni sessione.</string>
 
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Miscela Attacco</string>

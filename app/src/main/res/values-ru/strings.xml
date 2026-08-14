@@ -1217,7 +1217,7 @@
     <string name="firemaking_burn">Сжечь</string>
     <string name="farming_fertilizer">Удобрение</string>
     <string name="farming_fertilizer_optional">Добавить удобрение (необязательно)</string>
-    <string name="farming_fertilizer_yield">+%1$d%%% урожай</string>
+    <string name="farming_fertilizer_yield">+%1$d%% урожай</string>
     <string name="farming_fertilized">Удобрено</string>
     <string name="catalyst_optional">Пепельный катализатор (необязательно)</string>
     <string name="catalyst_enhanced_output">Производит усиленное зелье</string>
