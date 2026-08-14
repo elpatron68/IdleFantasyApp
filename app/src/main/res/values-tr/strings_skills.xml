@@ -86,6 +86,7 @@
     <string name="agility_divine_course_desc">Çeviklik tanrıları tarafından kutsanmış ilahi bir parkur.</string>
     <string name="agility_transcendent_course_name">Aşkın Parkur</string>
     <string name="agility_transcendent_course_desc">Çeviklikte nihai test, ölümlü sınırlarını aşıyor.</string>
+
     <!-- ===== Session skill type labels ===== -->
     <string name="skill_expedition_name">Keşif</string>
     <string name="skill_boss_name">Patron</string>

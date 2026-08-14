@@ -210,7 +210,7 @@ private fun RecipeRow(
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text       = recipe.displayName,
+                    text       = GameStrings.itemName(LocalContext.current, recipe.outputKey),
                     style      = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color      = if (enabled) MaterialTheme.colorScheme.onSurface else dimColor,
@@ -321,7 +321,7 @@ private fun CraftSheet(
             .padding(bottom = 40.dp),
     ) {
         Text(
-            text       = recipe.displayName,
+            text       = GameStrings.itemName(LocalContext.current, recipe.outputKey),
             style      = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
         )
@@ -434,7 +434,7 @@ private fun CraftSheet(
         )
         if (recipe.outputQty > 1) {
             Text(
-                text     = stringResource(R.string.crafting_produces, recipe.outputQty * qty, recipe.displayName),
+                text     = stringResource(R.string.crafting_produces, recipe.outputQty * qty, GameStrings.itemName(LocalContext.current, recipe.outputKey)),
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.align(Alignment.CenterHorizontally),

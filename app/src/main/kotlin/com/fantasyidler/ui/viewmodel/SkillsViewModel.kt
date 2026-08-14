@@ -274,8 +274,11 @@ class SkillsViewModel @Inject constructor(
                     val inv: Map<String, Int> = json.decodeFromString(player.inventory)
                     val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
                     val questProgress = questRepo.observeProgress().first().associateBy { it.questId }
-                    val availableLogs = gameData.logs.filter { (key, log) ->
-                        inv.containsKey(key) && log.levelRequired <= fmLevel
+                    // Level-gated only: logs the player has run out of stay visible (dimmed,
+                    // "0 in inventory") instead of vanishing — a disappearing row reads like
+                    // the log type became unburnable (issue #1358).
+                    val availableLogs = gameData.logs.filter { (_, log) ->
+                        log.levelRequired <= fmLevel
                     }
                     val logToAsh = mapOf(
                         "log" to "ashes", "oak_log" to "oak_ashes", "willow_log" to "willow_ashes",

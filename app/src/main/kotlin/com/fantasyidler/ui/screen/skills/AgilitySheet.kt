@@ -155,7 +155,7 @@ internal fun AgilitySheet(
                 .forEach { (key, course) ->
                     val xpGain = (SkillSimulator.estimateAgilityXp(course.xpPerSuccess, course.levelRequired, currentAgilityLevel, efficiency) * (1 + petBoostPct / 100f) * xpBonusMult).toLong()
                     ActivityRow(
-                        name             = course.displayName,
+                        name             = GameStrings.agilityCourse(context, key),
                         detail           = context.getString(R.string.skills_agility_course_detail, course.levelRequired, course.xpPerSuccess),
                         projectedLabel   = projectedXpLabel(currentXp, xpGain),
                         isStarting       = isStarting,
@@ -170,8 +170,8 @@ internal fun AgilitySheet(
     selectedKey?.let { key ->
         val course = courses[key] ?: return@let
         ActivityDetailDialog(
-            name             = course.displayName,
-            detail           = "Lv. ${course.levelRequired}  •  ${course.xpPerSuccess} XP/lap",
+            name             = GameStrings.agilityCourse(context, key),
+            detail           = context.getString(R.string.skills_agility_course_detail, course.levelRequired, course.xpPerSuccess),
             description      = GameStrings.agilityCourseDesc(context, key),
             hasActiveSession = hasActiveSession,
             isQueueFull      = isQueueFull,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Idle Fantasy</string>
+
 
     <!-- ===== Bottom navigation ===== -->
     <string name="nav_skills">スキル</string>
@@ -47,7 +47,7 @@
     <string name="label_level">レベル</string>
     <string name="label_xp">経験値</string>
     <string name="label_coins">コイン</string>
-    <string name="label_hp">HP</string>
+    <string name="label_hp">HP</string> <!-- untranslated -->
     <string name="label_attack">攻撃</string>
     <string name="label_strength">筋力</string>
     <string name="label_defense">防御</string>
@@ -100,7 +100,7 @@
     <string name="label_ready_to_harvest">収穫可能</string>
     <string name="label_empty">空</string>
     <string name="inventory_sort_quantity">数量</string>
-    <string name="inventory_sort_az">名前順</string>
+
     <string name="inventory_cat_weapons">武器</string>
     <string name="inventory_cat_armour">防具</string>
     <string name="inventory_cat_tools">道具</string>
@@ -163,7 +163,7 @@
     <string name="label_daily_dig">デイリー採掘</string>
     <string name="label_dig_depth">穴の深さ</string>
     <string name="label_version">バージョン</string>
-    <string name="label_open_source">オープンソース</string>
+
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
     <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
@@ -175,7 +175,7 @@
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
     <string name="format_started_ago">%1$s前に開始</string>
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
-    <string name="format_item_quantity">%1$s ×%2$d</string>
+
     <!-- Translator note: %1$d = coin amount -->
     <string name="format_price_coins">%1$d コイン</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
@@ -191,7 +191,7 @@
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%1$d%% 経験値</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
-    <string name="format_drop_chance">%1$s: %2$d</string>
+
     <!-- Translator note: %1$d = minutes remaining -->
     <string name="format_minutes_remaining">残り %1$d 分</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
@@ -364,6 +364,7 @@
     <string name="settings_theme">テーマ</string>
     <string name="settings_theme_desc">お好みのカラー設定を選択</string>
     <string name="settings_theme_dark">ダーク</string>
+    <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
     <string name="settings_theme_light">ライト</string>
     <string name="settings_theme_system">システムデフォルト</string>
     <string name="settings_font_size">フォントサイズ</string>
@@ -403,20 +404,21 @@
     <string name="theme_editor_saved_ok">テーマを保存して適用しました</string>
     <string name="theme_editor_exported_ok">テーマをエクスポートしました</string>
     <string name="settings_language_desc">アプリの表示言語を上書き</string>
-    <string name="settings_lang_english">English</string>
-    <string name="settings_lang_deutsch">Deutsch</string>
-    <string name="settings_lang_français">Français</string>
-    <string name="settings_lang_dutch">Nederlands</string>
-    <string name="settings_lang_español">Español</string>
-    <string name="settings_lang_español_españa">Español (España)</string>
-    <string name="settings_lang_turkish">Türkçe</string>
-    <string name="settings_lang_italiano">Italiano</string>
-    <string name="settings_lang_russian">Русский</string>
-    <string name="settings_lang_indonesian">Bahasa Indonesia</string>
-    <string name="settings_lang_portugues_brasil">Português (Brasil)</string>
-    <string name="settings_lang_japanese">日本語</string>
-    <string name="settings_lang_irish">Gaeilge</string>
-    <string name="settings_lang_czech">Čeština</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_lang_system">システムデフォルト</string>
     <string name="settings_save_data">セーブデータ</string>
     <string name="settings_export">セーブデータ書き出し</string>
@@ -426,12 +428,12 @@
     <string name="settings_import_desc">ファイルから進行状況を復元する</string>
     <string name="settings_import_btn">読み込み</string>
     <string name="settings_source_code">ソースコード</string>
-    <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
+
     <string name="settings_source_open">開く</string>
-    <string name="settings_wiki">Wiki</string>
-    <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
-    <string name="settings_discord">Discord</string>
-    <string name="settings_discord_url">discord.gg/vRxtXsBwQU</string>
+
+
+
+
     <string name="settings_exported_ok">セーブデータを書き出しました</string>
     <string name="settings_imported_ok">セーブデータの読み込みに成功しました</string>
     <string name="settings_imported_fail">読み込みに失敗しました — 無効なファイルです</string>
@@ -454,6 +456,9 @@
     <string name="home_town_title">街</string>
     <string name="home_town_desc">ショップ、宿屋、ギルド、教会、建築屋の作業場、スレイヤーマスター、カーニバルを訪れます</string>
     <string name="guild_dailies_available">デイリー依頼があります</string>
+    <string name="guild_not_unlocked">Not yet unlocked</string> <!-- untranslated -->
+    <string name="guild_dailies_done_today">Dailies done today</string> <!-- untranslated -->
+    <string name="guild_dailies_remaining_today">%1$d left today</string> <!-- untranslated -->
     <string name="guild_do_dailies_hint">次のランクに進むためにデイリー依頼をクリアしましょう</string>
     <string name="guild_quest_gate_blocked">ランクを上げるためにクエストを完了してください</string>
     <string name="guild_quest_required">昇格にはクエストが必要です</string>
@@ -472,7 +477,7 @@
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">キュー終了まで %1$s</string>
     <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
-    <string name="queue_item_qty">×%1$d</string>
+
     <string name="queue_item_qty_with_output">×%1$d → %2$d個のアイテム</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
@@ -526,14 +531,18 @@
     <!-- Translator note: %1$d = minutes -->
     <string name="combat_duration_min">%1$d 分</string>
     <string name="combat_fight_count_label">戦闘回数</string>
+    <!-- Translator note: %1$d = number of queued repeat fights, e.g. "×100 fights" -->
     <string name="combat_fight_count_suffix">×%1$d 戦</string>
+    <!-- Translator note: %1$d = current fight number, %2$d = total fights requested, e.g. "Fight 34/100" -->
     <string name="combat_fight_progress">戦闘 %1$d/%2$d</string>
     <string name="combat_run_count_label">周回数</string>
+    <!-- Translator note: %1$d = number of queued repeat dungeon runs, e.g. "×24 runs" -->
     <string name="combat_run_count_suffix">×%1$d 周</string>
+    <!-- Translator note: %1$d = current run number, %2$d = total runs requested, e.g. "Run 12/24" -->
     <string name="combat_run_progress">周回 %1$d/%2$d</string>
     <string name="combat_xp_on_victory">勝利時の獲得経験値</string>
     <string name="combat_you_died">死亡しました！</string>
-    <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string>
+    <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string> <!-- untranslated -->
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">装備ボーナス: +%1$d</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -629,6 +638,11 @@
     <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/釣果</string>
     <!-- Translator note: %1$d = required level, %2$s = skill name, %3$d = player level, %4$s = skill name again -->
     <string name="skills_req_with_have">必要条件: %2$s レベル %1$d (現在: %4$s レベル %3$d)</string>
+    <!-- Translator note: %1$d = owned quantity -->
+    <string name="crafting_owned">Owned: %1$d</string> <!-- untranslated -->
+    <string name="crafting_owned_detail">Owned in inventory: %1$d</string> <!-- untranslated -->
+    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string> <!-- untranslated -->
+
 
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">アクティブ</string>
@@ -662,7 +676,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">素材なし</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-    <string name="crafting_produces">= %2$s ×%1$d</string>
+
     <string name="crafting_effects">効果</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">合計 +%1$d XP</string>
@@ -712,7 +726,7 @@
     <string name="character_race_elf">エルフ</string>
     <string name="character_race_dwarf">ドワーフ</string>
     <string name="character_race_orc">オーク</string>
-    <string name="character_race_halfling">ハーフリング</string>
+
     <string name="character_race_gnome">ノーム</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1007,6 +1021,10 @@
     <string name="skilling_dungeon_crumbling_watchtower_desc">麓の端に佇む老朽化した石造りの塔。かつて中に保管されていたものを、今も何かが守っています。</string>
     <string name="skilling_dungeon_shattered_spire_name">砕かれた尖塔</string>
     <string name="skilling_dungeon_shattered_spire_desc">瓦礫と化した魔法使いの塔の残骸。空気は今も残留魔法でパチパチと音を立てています。</string>
+    <string name="skilling_dungeon_thieves_den_name">盗賊の根城</string>
+    <string name="skilling_dungeon_thieves_den_desc">街の通りの下に広がる迷路のようなトンネル。組織化された盗賊団によって使用されています。</string>
+    <string name="skilling_dungeon_shadow_vault_name">シャドウボルト</string>
+    <string name="skilling_dungeon_shadow_vault_desc">「ローグサンクタム」の地下にある隠された保管庫。ギルドの最も価値ある盗品が保管されています。</string>
 
     <!-- Expeditions -->
     <string name="nav_expeditions">遠征</string>
@@ -1030,7 +1048,7 @@
     <string name="slayer_card_desc">スレイヤー用の任務と報酬</string>
     <string name="slayer_desc">任務を完了してスレイヤー経験値とポイントを獲得しましょう。ポイントはショップで専用装備と交換できます。</string>
     <string name="slayer_level_label">レベル %1$d</string>
-    <string name="slayer_xp_label">%1$s XP</string>
+    <string name="slayer_xp_label">%1$s XP</string> <!-- untranslated -->
     <string name="slayer_points">%1$d Pt</string>
     <string name="slayer_active_task">現在の任務</string>
     <string name="slayer_kills_remaining">残り討伐数: %1$d / %2$d</string>
@@ -1088,17 +1106,6 @@
     <string name="achievement_prestige_all_1_desc">すべてのスキルで少なくとも1回名声機能を実行する</string>
     <string name="achievement_prestige_all_3_name">真の名声</string>
     <string name="achievement_prestige_all_3_desc">すべてのスキルで名声ランク3に到達する</string>
-
-    <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
-    <string name="item_slayer_helm_name">スレイヤーヘルム</string>
-    <string name="item_slayer_helm_desc">ベテランスレイヤーが愛用する頑丈な兜。</string>
-    <string name="item_abyssal_whip_name">アビサルウィップ</string>
-    <string name="item_abyssal_whip_desc">深淵のエネルギーから鍛造された鞭。筋力の訓練に最適です。</string>
-    <string name="item_slayer_platebody_name">スレイヤープレートボディ</string>
-    <string name="item_slayer_platebody_desc">スレイヤーのルーンが刻まれた重厚な鎧。</string>
-    <string name="item_slayer_platelegs_name">スレイヤープレートレッグ</string>
-    <string name="item_slayer_platelegs_desc">長期のダンジョン探索用に作られた防護用の脚甲。</string>
-
 
     <!-- Shop categories -->
     <string name="shop_cat_ores_and_materials">鉱石・素材</string>
@@ -1168,7 +1175,7 @@
     <string name="bone_altar_tap">タップして埋葬</string>
     <string name="bone_altar_change_bone">変更</string>
     <string name="bone_altar_combo_count">コンボ ×%d</string>
-    <string name="bone_altar_bonus_active" formatted="false">+50% XP bonus!</string>
+    <string name="bone_altar_bonus_active" formatted="false">+50% XP bonus!</string> <!-- untranslated -->
     <string name="bone_altar_session_xp">このセッション: +%s XP</string>
     <string name="bone_altar_buried_count">%d 個埋葬済み</string>
     <string name="bone_altar_no_bones">インベントリに骨がありません</string>
@@ -1209,30 +1216,6 @@
     <string name="thieving_npc_bishop_name">司教</string>
     <string name="thieving_npc_high_priest_name">大司祭</string>
 
-    <!-- Construction item names (planks, nails, stone) -->
-    <string name="item_plank_name">木板</string>
-    <string name="item_oak_plank_name">オークの木板</string>
-    <string name="item_willow_plank_name">ヤナギの木板</string>
-    <string name="item_maple_plank_name">メープルの木板</string>
-    <string name="item_yew_plank_name">イチイの木板</string>
-    <string name="item_magic_plank_name">魔法の木板</string>
-    <string name="item_iron_nail_name">鉄の釘</string>
-    <string name="item_steel_nail_name">鋼鉄の釘</string>
-    <string name="item_mithril_nail_name">ミスリルの釘</string>
-    <string name="item_stone_name">石材</string>
-    <string name="item_carved_stone_name">彫刻された石材</string>
-    <string name="item_stone_block_name">石のブロック</string>
-
-    <!-- Construction furniture names -->
-    <string name="item_wooden_rack_name">木製の棚</string>
-    <string name="item_wooden_shelf_name">木製のシェルフ</string>
-    <string name="item_oak_table_name">オークのテーブル</string>
-    <string name="item_oak_bookshelf_name">オークの本棚</string>
-    <string name="item_willow_cabinet_name">ヤナギのキャビネット</string>
-    <string name="item_maple_dresser_name">メープルのタンス</string>
-    <string name="item_yew_wardrobe_name">イチイのクローゼット</string>
-    <string name="item_magic_throne_name">魔法の玉座</string>
-
     <!-- Town building upgrade UI -->
     <string name="town_upgrade_section_title">街の建築物</string>
     <string name="town_building_inn_name">宿屋</string>
@@ -1257,9 +1240,9 @@
     <string name="town_church_no_bonus">祝福の持続時間を延ばすにはアップグレードしてください</string>
     <string name="town_building_fairgrounds_name">カーニバル広場</string>
     <string name="town_fairgrounds_no_bonus">4つのミニゲームがプレイ可能、クールダウン10分</string>
-    <string name="town_fairgrounds_t1_bonus">「Pick-a-Cup」をアンロック、クールダウンが7.5分に短縮、チケットのドロップ確率 +5%</string>
-    <string name="town_fairgrounds_t2_bonus">「Higher or Lower」をアンロック、チケットのドロップ確率 +10%</string>
-    <string name="town_fairgrounds_t3_bonus">クールダウンが5分に短縮、チケットのドロップ確率 +15%</string>
+    <string name="town_fairgrounds_t1_bonus">「Pick-a-Cup」をアンロック、クールダウンが7.5分に短縮、チケットのドロップ確率 +5%%</string>
+    <string name="town_fairgrounds_t2_bonus">「Higher or Lower」をアンロック、チケットのドロップ確率 +10%%</string>
+    <string name="town_fairgrounds_t3_bonus">クールダウンが5分に短縮、チケットのドロップ確率 +15%%</string>
     <string name="town_building_garden_name">庭園</string>
     <plurals name="town_garden_bonus">
         <item quantity="zero">追加の畑はまだありません</item>
@@ -1272,6 +1255,17 @@
         <item quantity="one">追加のキュー枠: +%1$d 個</item>
         <item quantity="other">追加のキュー枠: +%1$d 個</item>
     </plurals>
+    <string name="town_building_cape_rack_name">Cape Rack</string> <!-- untranslated -->
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string> <!-- untranslated -->
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string> <!-- untranslated -->
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_building_chronos_spire_name">Chronos Spire</string> <!-- untranslated -->
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string> <!-- untranslated -->
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string> <!-- untranslated -->
 
     <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">最初の改築</string>
@@ -1295,57 +1289,6 @@
     <string name="achievement_tower_all_milestones_name">塔のレジェンド</string>
     <string name="achievement_tower_all_milestones_desc">塔のすべてのマイルストーン (25個) を回収する</string>
 
-
-
-
-    <!-- Thieving expedition and dungeon strings -->
-    <string name="skilling_dungeon_thieves_den_name">盗賊の根城</string>
-    <string name="skilling_dungeon_thieves_den_desc">街の通りの下に広がる迷路のようなトンネル。組織化された盗賊団によって使用されています。</string>
-    <string name="skilling_dungeon_shadow_vault_name">シャドウボルト</string>
-    <string name="skilling_dungeon_shadow_vault_desc">「ローグサンクタム」の地下にある隠された保管庫。ギルドの最も価値ある盗品が保管されています。</string>
-    <string name="dungeon_rogue_sanctum_name">ローグサンクタム</string>
-    <string name="dungeon_rogue_sanctum_desc">実力を証明したメンバーのみが立ち入りを許される、盗賊ギルドの隠れ家。</string>
-    <string name="dungeon_guild_of_shadows_name">シャドウギルド</string>
-    <string name="dungeon_guild_of_shadows_desc">盗賊ギルドの最深部。精鋭の護衛たちによって守られています。</string>
-    <string name="enemy_assassin_name">アサシン</string>
-    <string name="enemy_shadow_assassin_name">シャドウアサシン</string>
-    <string name="enemy_vault_guardian_name">ボルトガーディアン</string>
-    <string name="enemy_guild_master_name">ギルドマスター</string>
-    <string name="item_shadow_signet_name">シャドウシグネット</string>
-    <string name="item_shadow_signet_desc">シャドウギルドの紋章が刻まれた指輪。ギルドで最も危険な工作員のみが着用を許されました。</string>
-
-    <!-- High-level dungeon names and descriptions -->
-    <string name="dungeon_void_rift_name">ヴォイドリフト</string>
-    <string name="dungeon_void_rift_desc">現実世界の裂け目。ここからヴォイドの怪物たちが人間界へと流れ込んでいます。</string>
-    <string name="dungeon_frozen_citadel_name">凍てついた砦</string>
-    <string name="dungeon_frozen_citadel_desc">氷河に閉ざされた古代の要塞。その守護者たちは永遠の監視のなかで凍りついています。</string>
-    <string name="dungeon_abyssal_throne_name">アビサルスローン</string>
-    <string name="dungeon_abyssal_throne_desc">既知の世界の最深部。天地創造の黎明期よりヴォイドロードたちによって支配されています。</string>
-
-    <!-- High-level enemy names -->
-    <string name="enemy_void_stalker_name">ヴォイドストーカー</string>
-    <string name="enemy_rift_guardian_name">リフトガーディアン</string>
-    <string name="enemy_chaos_elemental_name">カオスエレメンタル</string>
-    <string name="enemy_frost_giant_name">フロストジャイアント</string>
-    <string name="enemy_ice_golem_name">アイスゴーレム</string>
-    <string name="enemy_glacial_mage_name">氷河の魔術師</string>
-    <string name="enemy_abyssal_lord_name">アビサルロード</string>
-    <string name="enemy_eternal_sentinel_name">エターナルセンチネル</string>
-    <string name="enemy_void_archon_name">ヴォイドアーコン</string>
-    <string name="enemy_frost_wyvern_name">フロストワイバーン</string>
-    <string name="enemy_abyssal_guardian_name">アビサルガーディアン</string>
-    <string name="enemy_shadow_thief_name">シャドウシーフ</string>
-    <string name="enemy_elder_lich_name">エルダーリッチ</string>
-
-    <!-- Void Sovereign boss drops -->
-    <string name="item_void_reaver_name">ヴォイドリーヴァー</string>
-    <string name="item_void_reaver_desc">結晶化したヴォイドエネルギーから鍛造された刃。その刃は、まるで布のように鎧を切り裂きます。</string>
-    <string name="item_sovereign_crown_name">ソヴリンクラウン</string>
-    <string name="item_sovereign_crown_desc">暗黒の威光を放つヴォイドソヴリンの王冠。比類なき防御力を提供します。</string>
-    <string name="item_amulet_of_the_void_name">アミュレットオブヴォイド</string>
-    <string name="item_amulet_of_the_void_desc">純粋なヴォイドエッセンスのペンダント。着用者のすべての戦闘ステータスを向上させます。</string>
-
-
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">カーニバル</string>
     <string name="carnival_desc">ゲーム、賞品、そしてお祭り騒ぎ！</string>
@@ -1362,19 +1305,19 @@
     <string name="carnival_idle_desc_wizard">ライバルの魔術師に対して幻影魔法を唱えます。魔法スキルのレベルに応じてチケット獲得量が増加します。</string>
     <string name="carnival_fishing_derby">フィッシングダービー</string>
     <string name="carnival_idle_desc_fishing">カーニバルの池で大物を釣り上げます。釣りスキルのレベルに応じてチケット獲得量が増加します。</string>
-    <string name="carnival_skill_level">%1$s Lv.%2$d</string>
+    <string name="carnival_skill_level">%1$s Lv.%2$d</string> <!-- untranslated -->
     <string name="carnival_ticket_yield">セッションあたり約 %1$d チケット</string>
     <string name="carnival_queue">セッションをキューに追加</string>
     <string name="carnival_ring_toss">輪投げ</string>
     <string name="carnival_active_ring_desc">インジケーターがゴールデンターゲットゾーンに入った瞬間に輪を投げましょう。</string>
-    <string name="carnival_ring_target_hint">中央を狙う (45%–55%)</string>
+    <string name="carnival_ring_target_hint">中央を狙う (45%%–55%%)</string>
     <string name="carnival_throw">投げる！</string>
     <string name="carnival_hammer_strike">ハンマー叩き</string>
     <string name="carnival_active_hammer_desc">パワーメーターが最大になった瞬間に叩いて最高スコアを目指しましょう。</string>
     <string name="carnival_power_label">パワーメーター</string>
     <string name="carnival_hammer_miss_zone">ミス</string>
-    <string name="carnival_hammer_good_zone">Good</string>
-    <string name="carnival_hammer_perfect_zone">Perfect!</string>
+    <string name="carnival_hammer_good_zone">Good</string> <!-- untranslated -->
+    <string name="carnival_hammer_perfect_zone">Perfect!</string> <!-- untranslated -->
     <string name="carnival_strike">叩く！</string>
     <string name="carnival_potion_sequence">ポーションシーケンス</string>
     <string name="carnival_active_sequence_desc">ポーションの色の順序を記憶し、同じ順序でタップしてください。</string>
@@ -1401,7 +1344,7 @@
     <string name="carnival_redeemed">交換完了: %1$s！</string>
     <string name="carnival_not_enough_tickets">チケットが足りません。</string>
     <string name="carnival_lamp_redeemed">%2$s に +%1$s XPが付与されました！</string>
-    <string name="carnival_shell_game">Pick-a-Cup</string>
+    <string name="carnival_shell_game">Pick-a-Cup</string> <!-- untranslated -->
     <string name="carnival_active_shell_desc">宝石がどのカップに入ったかを見極め、シャッフル後に当てましょう！</string>
     <string name="carnival_shell_showing">よく見てください — 宝石はカップ %1$d の下にあります</string>
     <string name="carnival_shell_watch">シャッフル中…</string>
@@ -1409,9 +1352,9 @@
     <string name="carnival_shell_won">正解！ +%1$d チケット</string>
     <string name="carnival_shell_missed">不正解！宝石はカップ %1$d の下にありました。</string>
     <string name="carnival_shell_locked">アンロックするにはカーニバル広場をティア1にアップグレードしてください</string>
-    <string name="carnival_higher_lower">Higher or Lower</string>
+    <string name="carnival_higher_lower">Higher or Lower</string> <!-- untranslated -->
     <string name="carnival_active_higher_desc">次の数字が現在の数字より大きいか小さいかを予想してください。</string>
-    <string name="carnival_higher_lower_current">%1$d</string>
+
     <string name="carnival_higher_lower_score">正解数: %1$d (%2$d回中)</string>
     <string name="carnival_higher_lower_round">ラウンド %1$d / %2$d</string>
     <string name="carnival_higher_lower_btn_higher">大きい</string>
@@ -1423,7 +1366,8 @@
     <string name="carnival_difficulty_label">難易度</string>
     <string name="carnival_difficulty_normal">ノーマル</string>
     <string name="carnival_difficulty_hard">ハード</string>
-    <string name="carnival_ring_hard_hint">ハード: ターゲット 52%–57%、獲得 7チケット</string>
+    <string name="carnival_ring_hard_hint">ハード: ターゲット 52%%–57%%、獲得 7チケット</string>
+
 
     <!-- ===== Magic Bean / Farming ===== -->
     <string name="farming_bean_note_1">小さな芽が土を突き抜けて顔を出しました。</string>
@@ -1437,7 +1381,7 @@
     <string name="farming_bean_ready">豆の木は雲の彼方まで達しました。登る準備はできていますか？</string>
     <string name="farming_bean_climb">登る</string>
     <string name="farming_bean_climbed">豆の木を登りきりました。そこには何かが待ち受けています…</string>
-    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+
     <string name="farming_magic_bean_one_plot">魔法の豆は1つの区画にしか植えられません</string>
 
     <!-- ===== Armory Tab ===== -->
@@ -1479,6 +1423,7 @@
     <string name="armory_stat_attack_speed">攻撃速度</string>
     <string name="armory_stat_cape">経験値ボーナス</string>
     <string name="armory_stat_cape_yield">収穫量ボーナス</string>
+    <string name="armory_stat_cape_boost">Boost Bonus</string> <!-- untranslated -->
     <string name="armory_source_carnival">カーニバル景品交換所</string>
     <string name="armory_source_smithing">鍛冶</string>
     <string name="armory_source_crafting">クラフト</string>
@@ -1489,6 +1434,7 @@
     <string name="armory_source_shop">ショップ</string>
     <string name="armory_source_daily_bonus">デイリークエストを全て達成したときのレア報酬</string>
     <string name="armory_source_weekly_bonus">ウィークリークエストを全て達成したときのレア報酬</string>
+    <!-- Translator note: %1$s = skill name, e.g. "Reach level 99 in Mining" -->
     <string name="armory_source_skill_cape">%1$s のレベル99に到達する</string>
 
     <!-- Session / queue messages (issue #596) -->
@@ -1530,6 +1476,7 @@
     <string name="home_found_pet">ペットを発見しました: %1$s！</string>
     <string name="pet_found_title">新しいペット！</string>
     <string name="home_congratulations_received">おめでとうございます！ %1$s を獲得しました</string>
+    <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
     <string name="home_session_voided">経験値は無効になりました (名声)。その他の報酬はすべて獲得しました。</string>
     <string name="home_not_enough_coins_repeat">%1$s を繰り返すためのコインが足りません。</string>
     <string name="home_not_enough_materials_repeat">%1$s を繰り返すための素材が足りません。</string>
@@ -1546,6 +1493,10 @@
     <string name="bonus_boost">+%1$d%% 強化</string>
     <string name="bonus_session_shorter">セッション時間を %1$d 分短縮</string>
     <string name="bonus_coin_return">+%1$d%% コイン獲得</string>
+    <string name="bonus_tower">Tower</string> <!-- untranslated -->
+
+    <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
+    <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">キューに追加: %1$s</string>
     <string name="snackbar_queue_full">キューが満杯です。</string>
     <string name="combat_start_failed">開始できませんでした: %1$s</string>
@@ -1600,21 +1551,16 @@
     <string name="guild_daily_banner_claimed">ギルドデイリーは受取済み</string>
     <string name="guild_daily_rank_maxed">ギルドランク最大</string>
 
-    <!-- Boss Descriptions -->
-    <string name="boss_king_black_dragon_desc">世界中で恐れられている、伝説の三つ頭のドラゴン。</string>
-    <string name="boss_demon_lord_desc">深淵から現れた古代の悪魔。暗黒魔法の使い手。</string>
-    <string name="boss_kraken_desc">深海の恐怖。巨大な海の怪物。</string>
-    <string name="boss_balrog_desc">地中深くの眠りから目覚めた、炎と影をまとう古代の悪魔。</string>
-    <string name="boss_void_sovereign_desc">ヴォイドリフトの背後に存在する始原の存在。計り知れない歳月を生きており、挑んでくる凡百の冒険者を軽蔑しています。</string>
-
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">無限の塔</string>
     <string name="tower_floor_label">%d 階</string>
+    <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
     <string name="tower_best_floor">最高到達: %d 階</string>
     <string name="tower_start_btn">%d 階に挑戦</string>
     <string name="tower_milestones">マイルストーン</string>
     <string name="tower_floor_cleared">%d 階をクリア！</string>
     <string name="tower_new_best">自己ベスト更新: %d 階！</string>
+    <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">%1$d 階で倒れました。%2$d 階にリセットされます。</string>
     <string name="tower_not_enough_runes">%1$s が不足しているため、最大数での攻撃が行えません。</string>
     <string name="tower_milestone_claim">回収</string>
@@ -1790,27 +1736,68 @@
     <string name="title_master_farmer_requirement">農業ギルドで最大レベルに到達する</string>
     <string name="settings_art_credits">アートクレジット</string>
     <string name="settings_credit_banners_title">季節限定バナー</string>
-    <string name="settings_credit_banners_subtitle">Art by Wenrexa</string>
+    <string name="settings_credit_banners_subtitle">Art by Wenrexa</string> <!-- untranslated -->
     <string name="settings_credit_skill_icons_title">スキルアイコン</string>
-    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+
     <string name="title_seasonal_champion_of">%1$sの覇者</string>
     <string name="title_seasonal_requirement">%1$s 季節イベントを完了する</string>
     <string name="home_welcome_greeting">おかえりなさい、</string>
-    <string name="home_welcome_name">%1$s！</string>
-    <string name="home_welcome_title">%1$s！</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
-    <string name="town_building_chronos_spire_name">Chronos Spire</string>
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
 
-    <!-- Save slots / character manager + Ironman mode -->
+    <string name="home_welcome_title">%1$s！</string>
+
+    <!-- Pet names and descriptions -->
+    <string name="pet_dragon_whelp_name">ドラゴンの幼獣</string>
+    <string name="pet_dragon_whelp_desc">戦闘経験値を増加させるドラゴンの子ども。</string>
+    <string name="pet_imp_pet_name">インプのペット</string>
+    <string name="pet_imp_pet_desc">祈りスキルの訓練効率を高めるいたずら好きなインプ。</string>
+    <string name="pet_baby_kraken_name">ベビークラーケン</string>
+    <string name="pet_baby_kraken_desc">調理経験値を増加させる小さなクラーケン。</string>
+    <string name="pet_rock_golem_name">ロックゴーレム</string>
+    <string name="pet_rock_golem_desc">採掘経験値を増加させる生きた岩石。</string>
+    <string name="pet_ent_name">エント</string>
+    <string name="pet_ent_desc">伐採経験値を増加させる古代の樹木の精霊。</string>
+    <string name="pet_tiny_templar_name">タイニーテンプラー</string>
+    <string name="pet_tiny_templar_desc">釣り経験値を増加させる小さな魚の相棒。</string>
+    <string name="pet_tangleroot_name">タングルルート</string>
+    <string name="pet_tangleroot_desc">農業経験値を増加させる魔法の植物クリーチャー。</string>
+    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
+    <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
+    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_name">Graceling Sprite</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_name">Shadow Fox</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string> <!-- untranslated -->
+    <string name="pet_ember_moth_name">Ember Moth</string> <!-- untranslated -->
+    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_name">Herb Wisp</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_name">Rune Sprite</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string> <!-- untranslated -->
+    <string name="pet_gem_golem_name">Gem Golem</string> <!-- untranslated -->
+    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string> <!-- untranslated -->
+    <string name="pet_feather_drake_name">Feather Drake</string> <!-- untranslated -->
+    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string> <!-- untranslated -->
+    <string name="pet_forge_imp_name">Forge Imp</string> <!-- untranslated -->
+    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string> <!-- untranslated -->
+    <string name="pet_coin_drake_name">Coin Drake</string> <!-- untranslated -->
+    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
+    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_name">Lantern Wisp</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_name">Grave Sprout</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string> <!-- untranslated -->
+    <string name="pet_golden_goose_name">Golden Goose</string> <!-- untranslated -->
+    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string> <!-- untranslated -->
+
+    <!-- Save slots / character manager -->
     <string name="settings_characters">キャラクター</string>
     <string name="settings_characters_desc">最大3つのセーブスロット。キャラクターの作成・切り替え・削除ができます。</string>
     <string name="save_slots_title">キャラクター</string>
@@ -1832,6 +1819,8 @@
     <string name="save_slot_delete_body">%1$sを完全に削除しますか？この操作は元に戻せません。</string>
     <string name="save_slot_delete_btn">削除</string>
     <string name="save_slot_switch_failed">キャラクターを切り替えられませんでした。</string>
+
+    <!-- Ironman mode -->
     <string name="character_ironman_title">アイアンマンモード</string>
     <string name="character_ironman_desc">経験値や獲得量のブーストが無効になり、アイテムの購入や労働者の雇用もできません。恒久的な設定で、作成後は変更できません。セーブファイルを編集するとアイアンマンの状態は解除されます。</string>
     <string name="ironman_shop_buy_blocked">アイアンマンのキャラクターはアイテムを購入できません。</string>
@@ -1840,4 +1829,32 @@
     <string name="ironman_bonuses_notice">アイアンマン：このキャラクターでは経験値・獲得量・コインのブーストが無効です。</string>
     <string name="ironman_badge">アイアンマン</string>
     <string name="settings_imported_demoted">セーブをインポートしました。ゲーム外で変更されていたため、アイアンマンの状態は解除されました。</string>
+    <string name="shop_xp_boost_name">2× XP Boost (48h)</string> <!-- untranslated -->
+    <string name="bestiary_stat_hp">HP</string> <!-- untranslated -->
+    <string name="bestiary_stat_attack">Attack</string> <!-- untranslated -->
+    <string name="bestiary_stat_strength">Strength</string> <!-- untranslated -->
+    <string name="bestiary_stat_defense">Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_atk_defense">Atk Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_str_defense">Str Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_rng_defense">Rng Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_mag_defense">Mag Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp">XP</string> <!-- untranslated -->
+    <string name="bestiary_stat_required_level">Required Level</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp_reward">XP Reward</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration">Duration</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration_min">%1$d min</string> <!-- untranslated -->
+    <string name="bestiary_kill_count">%1$d kills</string> <!-- untranslated -->
+    <string name="bestiary_location_other">Other</string> <!-- untranslated -->
+    <string name="carnival_stat_atk">ATK +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_str">STR +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_def">DEF +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_yield">Yield</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_green">G</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_blue">B</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_red">R</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_purple">P</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_orange">O</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_cyan">C</string> <!-- untranslated -->
+    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/crop</string> <!-- untranslated -->
+    <string name="farming_seeds_owned">Seeds: %1$d  •  Owned: %2$d</string> <!-- untranslated -->
 </resources>

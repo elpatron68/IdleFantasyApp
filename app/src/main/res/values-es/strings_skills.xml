@@ -23,9 +23,9 @@
     <string name="skill_cooking_desc">Cocina ingredientes crudos para crear comida que restaura HP en combate.</string>
     <string name="skill_fletching_name">Arquería</string>
     <string name="skill_fletching_desc">Crea arcos y flechas usando madera y componentes metálicos.</string>
-    <string name="skill_crafting_name">Crafting</string>
+    <string name="skill_crafting_name">Crafting</string> <!-- untranslated -->
     <string name="skill_crafting_desc">Crea joyería y otros objetos a partir de materiales preciosos.</string>
-    <string name="skill_runecrafting_name">Runecrafting</string>
+    <string name="skill_runecrafting_name">Runecrafting</string> <!-- untranslated -->
     <string name="skill_runecrafting_desc">Crea runas mágicas a partir de esencia rúnica para usar en hechizos.</string>
     <string name="skill_herblore_name">Herboristería</string>
     <string name="skill_herblore_desc">Prepara pociones con hierbas y materiales de mazmorra para mejorar tus estadísticas de combate.</string>
@@ -68,7 +68,7 @@
     <string name="agility_advanced_course_desc">Un entrenamiento exigente que pone a prueba tu agilidad.</string>
     <string name="agility_expert_course_name">Curso Experto</string>
     <string name="agility_expert_course_desc">Un entrenamiento de alto nivel con obstáculos peligrosos.</string>
-    <string name="agility_elite_course_name">Curso Elite</string> 
+    <string name="agility_elite_course_name">Curso Elite</string>
     <string name="agility_elite_course_desc">Solo los más ágiles pueden dominar este entrenamiento de élite.</string>
     <string name="agility_master_course_name">Curso Maestro</string>
     <string name="agility_master_course_desc">Un entrenamiento de nivel maestro con obstáculos extremos.</string>
@@ -86,6 +86,7 @@
     <string name="agility_divine_course_desc">Un entrenamiento bendecido por los dioses de la agilidad.</string>
     <string name="agility_transcendent_course_name">Curso Transcendente</string>
     <string name="agility_transcendent_course_desc">El desafío definitivo de agilidad que trasciende los límites mortales.</string>
+
     <!-- ===== Session skill type labels ===== -->
     <string name="skill_expedition_name">Expedición</string>
     <string name="skill_boss_name">Jefe</string>

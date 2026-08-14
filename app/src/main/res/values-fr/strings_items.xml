@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ===== ores ===== -->
+    <!-- ===== Ores ===== -->
     <string name="item_copper_ore_name">Minerai de cuivre</string>
     <string name="item_copper_ore_desc">Minerai courant. Se combine avec du minerai d’étain pour fondre des barres de bronze.</string>
     <string name="item_tin_ore_name">Minerai d’étain</string>
@@ -17,6 +17,8 @@
     <string name="item_mithril_ore_desc">Un minerai rare doté de propriétés magiques.</string>
     <string name="item_adamantite_ore_name">Minerai d’adamantite</string>
     <string name="item_adamantite_ore_desc">Un minerai extrêmement dur et très rare.</string>
+    <string name="item_platinum_ore_name">Minerai de platine</string>
+    <string name="item_platinum_ore_desc">Un minerai de platine rare utilisé pour des lingots de platine.</string>
     <string name="item_runite_ore_name">Minerai de runite</string>
     <string name="item_runite_ore_desc">Le minerai exploitable le plus rare, utilisé pour la fabrication des équipements les plus puissants.</string>
     <string name="item_rune_essence_name">Essence de runes</string>
@@ -54,7 +56,7 @@
 
     <!-- ===== Logs ===== -->
     <string name="item_log_name">Bûches</string>
-    <string name="item_log_desc">Bûches de base provenant d’arbres normaux. Utilisées en allumage de feu et en ébénisterie.</string>
+    <string name="item_log_desc">Bûches de base provenant d’arbres normaux. Utilisées en Incinération et en Art du Bois.</string>
     <string name="item_oak_log_name">Bûches de chêne</string>
     <string name="item_oak_log_desc">Bûches provenant des chênes.</string>
     <string name="item_willow_log_name">Bûches de saule</string>
@@ -95,7 +97,7 @@
     <string name="item_raw_sea_turtle_desc">Tortue de mer crue. Cuire avant de manger.</string>
     <string name="item_raw_manta_ray_name">Raie manta crue</string>
     <string name="item_raw_manta_ray_desc">Raie manta crue. Cuire avant de manger.</string>
-    
+
     <!-- ===== Cooked fish ===== -->
     <string name="item_shrimp_name">Crevettes cuites</string>
     <string name="item_shrimp_desc">Crevettes cuites. Restaure une petite quantité de PV.</string>
@@ -260,7 +262,7 @@
     <string name="item_bronze_shield_name">Bouclier en bronze</string>
     <string name="item_bronze_shield_desc">Un bouclier en bronze simple.</string>
 
-    <!-- Armure — fer -->
+    <!-- Armour — iron -->
     <string name="item_iron_helmet_name">Casque en fer</string>
     <string name="item_iron_helmet_desc">Protection de tête en fer.</string>
     <string name="item_iron_platebody_name">Corps en fer</string>
@@ -270,7 +272,7 @@
     <string name="item_iron_shield_name">Bouclier en fer</string>
     <string name="item_iron_shield_desc">Un bouclier en fer.</string>
 
-    <!-- Armure — acier -->
+    <!-- Armour — steel -->
     <string name="item_steel_helmet_name">Casque en acier</string>
     <string name="item_steel_helmet_desc">Protection de tête solide en acier.</string>
     <string name="item_steel_platebody_name">Corps en acier</string>
@@ -280,7 +282,7 @@
     <string name="item_steel_shield_name">Bouclier en acier</string>
     <string name="item_steel_shield_desc">Un bouclier robuste en acier.</string>
 
-    <!-- Armure — mithril -->
+    <!-- Armour — mithril -->
     <string name="item_mithril_helmet_name">Casque en mithril</string>
     <string name="item_mithril_helmet_desc">Protection de tête légère et magique.</string>
     <string name="item_mithril_platebody_name">Corps en mithril</string>
@@ -290,7 +292,7 @@
     <string name="item_mithril_shield_name">Bouclier en mithril</string>
     <string name="item_mithril_shield_desc">Un bouclier léger et magique.</string>
 
-    <!-- Armure — adamantite -->
+    <!-- Armour — adamantite -->
     <string name="item_adamantite_helmet_name">Casque en adamantite</string>
     <string name="item_adamantite_helmet_desc">Protection de tête extrêmement dure.</string>
     <string name="item_adamantite_platebody_name">Corps en adamantite</string>
@@ -300,7 +302,7 @@
     <string name="item_adamantite_shield_name">Bouclier en adamantite</string>
     <string name="item_adamantite_shield_desc">Un bouclier extrêmement dur.</string>
 
-    <!-- Armure — runite -->
+    <!-- Armour — runite -->
     <string name="item_runite_helmet_name">Casque en runite</string>
     <string name="item_runite_helmet_desc">La meilleure protection de tête disponible.</string>
     <string name="item_runite_platebody_name">Corps en runite</string>
@@ -310,7 +312,17 @@
     <string name="item_runite_shield_name">Bouclier en runite</string>
     <string name="item_runite_shield_desc">Le meilleur bouclier disponible.</string>
 
-    <!-- Outils — pioches -->
+    <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
+    <string name="item_slayer_helm_name">Heaume de Tueur</string>
+    <string name="item_slayer_helm_desc">Un heaume robuste porté par les tueurs expérimentés.</string>
+    <string name="item_abyssal_whip_name">Fouet Abyssal</string>
+    <string name="item_abyssal_whip_desc">Un fouet forgé à partir d’énergie abyssale. Excellent pour l’entraînement à la force.</string>
+    <string name="item_slayer_platebody_name">Plastron de Tueur</string>
+    <string name="item_slayer_platebody_desc">Armure lourde gravée de runes de tueur.</string>
+    <string name="item_slayer_platelegs_name">Jambières de Tueur</string>
+    <string name="item_slayer_platelegs_desc">Jambières protectrices conçues pour des excursions prolongées en donjon.</string>
+
+    <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Pioche en bronze</string>
     <string name="item_bronze_pickaxe_desc">Une pioche basique pour l’exploitation minière.</string>
     <string name="item_iron_pickaxe_name">Pioche en fer</string>
@@ -323,8 +335,10 @@
     <string name="item_adamantite_pickaxe_desc">Une pioche extrêmement dure pour l’exploitation minière.</string>
     <string name="item_runite_pickaxe_name">Pioche en runite</string>
     <string name="item_runite_pickaxe_desc">La meilleure pioche disponible pour l’exploitation minière.</string>
+    <string name="item_divine_pickaxe_name">Pioche Divine</string>
+    <string name="item_divine_pickaxe_desc">Une pioche touchée par une lumière divine. La pierre s\'écarte devant elle comme de l\'eau.</string>
 
-    <!-- Outils — haches -->
+    <!-- Tools — axes -->
     <string name="item_bronze_axe_name">Hache en bronze</string>
     <string name="item_bronze_axe_desc">Une hache basique pour la coupe de bois.</string>
     <string name="item_iron_axe_name">Hache en fer</string>
@@ -337,8 +351,10 @@
     <string name="item_adamantite_axe_desc">Une hache extrêmement dure pour la coupe de bois.</string>
     <string name="item_runite_axe_name">Hache en runite</string>
     <string name="item_runite_axe_desc">La meilleure hache disponible pour la coupe de bois.</string>
+    <string name="item_divine_axe_name">Hache Divine</string>
+    <string name="item_divine_axe_desc">Une hache qui abat même les arbres les plus vieux d\'un seul coup.</string>
 
-    <!-- Outils — cannes à pêche -->
+    <!-- Tools — fishing rods -->
     <string name="item_bronze_fishing_rod_name">Canne à pêche en bronze</string>
     <string name="item_bronze_fishing_rod_desc">Une canne à pêche basique.</string>
     <string name="item_iron_fishing_rod_name">Canne à pêche en fer</string>
@@ -351,8 +367,10 @@
     <string name="item_adamantite_fishing_rod_desc">Une canne à pêche extrêmement durable.</string>
     <string name="item_runite_fishing_rod_name">Canne à pêche en runite</string>
     <string name="item_runite_fishing_rod_desc">La meilleure canne à pêche disponible.</string>
-    
-    <!-- Flèches -->
+    <string name="item_divine_fishing_rod_name">Canne à pêche divine</string>
+    <string name="item_divine_fishing_rod_desc">Une canne bénie par les dieux de la mer. Les poissons bondissent pratiquement dessus.</string>
+
+    <!-- ===== Arrows ===== -->
     <string name="item_bronze_arrow_name">Flèches en bronze</string>
     <string name="item_bronze_arrow_desc">Flèches basiques pour le combat à distance.</string>
     <string name="item_iron_arrow_name">Flèches en fer</string>
@@ -366,7 +384,7 @@
     <string name="item_runite_arrow_name">Flèches en runite</string>
     <string name="item_runite_arrow_desc">Les meilleures flèches disponibles.</string>
 
-    <!-- Composants de flèches -->
+    <!-- Arrow components -->
     <string name="item_arrow_shaft_name">Fûts de flèche</string>
     <string name="item_arrow_shaft_desc">Tiges en bois utilisés pour fabriquer des flèches.</string>
     <string name="item_bronze_arrow_tips_name">Pointes de flèche en bronze</string>
@@ -382,7 +400,7 @@
     <string name="item_runite_arrow_tips_name">Pointes de flèche en runite</string>
     <string name="item_runite_arrow_tips_desc">Pointes en runite pour fabriquer des flèches en runite.</string>
 
-    <!-- Bijoux - simples -->
+    <!-- ===== Jewellery — plain ===== -->
     <string name="item_silver_ring_name">Bague en argent</string>
     <string name="item_silver_ring_desc">Une bague simple en argent.</string>
     <string name="item_silver_necklace_name">Collier en argent</string>
@@ -396,7 +414,7 @@
     <string name="item_platinum_necklace_name">Collier en platine</string>
     <string name="item_platinum_necklace_desc">Un collier simple en platine.</string>
 
-    <!-- Bijoux - saphir -->
+    <!-- Jewellery — sapphire -->
     <string name="item_silver_sapphire_ring_name">Bague en argent avec saphir</string>
     <string name="item_silver_sapphire_ring_desc">Une bague en argent sertie d’un saphir.</string>
     <string name="item_silver_sapphire_necklace_name">Collier en argent avec saphir</string>
@@ -409,7 +427,8 @@
     <string name="item_platinum_sapphire_ring_desc">Une bague en platine sertie d’un saphir.</string>
     <string name="item_platinum_sapphire_necklace_name">Collier en platine avec saphir</string>
     <string name="item_platinum_sapphire_necklace_desc">Un collier en platine serti d’un saphir.</string>
-    <!-- Bijoux — émeraude -->
+
+    <!-- Jewellery — emerald -->
     <string name="item_gold_emerald_ring_name">Bague en émeraude en or</string>
     <string name="item_gold_emerald_ring_desc">Une bague en or sertie d’une émeraude.</string>
     <string name="item_gold_emerald_necklace_name">Collier en émeraude en or</string>
@@ -419,7 +438,7 @@
     <string name="item_platinum_emerald_necklace_name">Collier en émeraude en platine</string>
     <string name="item_platinum_emerald_necklace_desc">Un collier en platine serti d’une émeraude.</string>
 
-    <!-- Bijoux — rubis -->
+    <!-- Jewellery — ruby -->
     <string name="item_gold_ruby_ring_name">Bague en Rubis en or</string>
     <string name="item_gold_ruby_ring_desc">Une bague en or sertie d’un rubis.</string>
     <string name="item_gold_ruby_necklace_name">Collier en Rubis en or</string>
@@ -429,7 +448,7 @@
     <string name="item_platinum_ruby_necklace_name">Collier en Rubis en platine</string>
     <string name="item_platinum_ruby_necklace_desc">Un collier en platine serti d’un rubis.</string>
 
-    <!-- Bijoux — diamant -->
+    <!-- Jewellery — diamond -->
     <string name="item_gold_diamond_ring_name">Bague en diamant en or</string>
     <string name="item_gold_diamond_ring_desc">Une bague en or sertie d’un diamant.</string>
     <string name="item_gold_diamond_necklace_name">Collier en diamant en or</string>
@@ -439,7 +458,32 @@
     <string name="item_platinum_diamond_necklace_name">Collier en diamant en platine</string>
     <string name="item_platinum_diamond_necklace_desc">Un collier en platine serti d’un diamant.</string>
 
-    <!-- Divers drops -->
+    <!-- Jewellery — other -->
+    <string name="item_shadow_signet_name">Chevalière de l\'Ombre</string>
+    <string name="item_shadow_signet_desc">Une bague portant le sceau de la Guilde des Ombres. Seuls les agents les plus dangereux de la guilde en portaient une.</string>
+
+    <!-- Junk items -->
+    <string name="item_bread_name">Pain</string>
+    <string name="item_leather_name">Cuir</string>
+    <string name="item_flour_name">Farine</string>
+    <string name="item_cooked_trout_name">Truite Cuite</string>
+    <string name="item_thread_name">Fil</string>
+    <string name="item_ruby_ring_name">Anneau en Rubis</string>
+    <string name="item_diamond_ring_name">Anneau en Diamant</string>
+    <string name="item_diamond_necklace_name">Collier en Diamant</string>
+    <string name="item_ancient_treasure_name">Ancien Trésor</string>
+    <string name="item_seaweed_name">Algue</string>
+    <string name="item_pearl_name">Perle</string>
+    <string name="item_nature_rune_name">Rune Naturelle</string>
+    <string name="item_herb_name">Herbe</string>
+    <string name="item_mahogany_log_name">Bûche d\'Acajou</string>
+    <string name="item_oyster_name">Huitre</string>
+    <string name="item_crab_name">Crabe</string>
+    <string name="item_bird_nest_name">Nid d\'Oiseau</string>
+    <string name="item_tree_seed_name">Graine d\'Arbre</string>
+    <string name="item_teak_log_name">Bûche de Teck</string>
+
+    <!-- ===== Miscellaneous drops ===== -->
     <string name="item_ashes_name">Cendres</string>
     <string name="item_ashes_desc">Restes brûlés de bois normaux. À disperser dans la compétence Prière pour gagner des XP en Prière.</string>
     <string name="item_oak_ashes_name">Cendres de chêne</string>
@@ -493,7 +537,7 @@
     <string name="item_troll_bone_name">Os de troll</string>
     <string name="item_troll_bone_desc">Un os massif et noueux d’un troll des montagnes.</string>
 
-    <!-- Runes -->
+    <!-- ===== Runes ===== -->
     <string name="item_air_rune_name">Rune d’air</string>
     <string name="item_air_rune_desc">Une rune imprégnée du pouvoir de l’air. Utilisée dans les sorts d’air.</string>
     <string name="item_water_rune_name">Rune d’eau</string>
@@ -511,7 +555,7 @@
     <string name="item_blood_rune_name">Rune de sang</string>
     <string name="item_blood_rune_desc">Une rune rare alimentée par la magie du sang.</string>
 
-    <!-- Cultures -->
+    <!-- ===== Crops ===== -->
     <string name="crop_potato_name">Pommes de terre</string>
     <string name="crop_onion_name">Oignon</string>
     <string name="crop_cabbage_name">Chou</string>
@@ -525,11 +569,14 @@
     <string name="crop_dragon_fruit_name">Fruits du dragon</string>
     <string name="crop_golden_wheat_name">Blé doré</string>
     <string name="crop_spirit_herb_name">Herbe de l’esprit</string>
+    <string name="crop_spirit_herb_desc">Une herbe rare utilisée en herboristerie de haut niveau.</string>
     <string name="crop_celestial_bloom_name">Fleur céleste</string>
+    <string name="crop_celestial_bloom_desc">Une fleur éthérée utilisée dans des potions de maître.</string>
     <string name="crop_starfruit_name">Fruit d’étoile</string>
     <string name="crop_void_lotus_name">Lotus du vide</string>
+    <string name="crop_void_lotus_desc">Un lotus mystérieux utilisé dans les préparations les plus rares.</string>
 
-    <!-- Sorts -->
+    <!-- ===== Spells ===== -->
     <string name="spell_wind_strike_name">Frappe de vent</string>
     <string name="spell_wind_bolt_name">Éclair de vent</string>
     <string name="spell_wind_blast_name">Souffle de vent</string>
@@ -563,7 +610,7 @@
     <string name="spell_blood_blast_name">Explosion de sang</string>
     <string name="spell_blood_wave_name">Vague de sang</string>
 
-    <!-- Houes -->
+    <!-- ===== Hoes ===== -->
     <string name="item_bronze_hoe_name">Houe en bronze</string>
     <string name="item_iron_hoe_name">Houe en fer</string>
     <string name="item_steel_hoe_name">Houe en acier</string>
@@ -571,30 +618,55 @@
     <string name="item_adamantite_hoe_name">Houe en adamantite</string>
     <string name="item_runite_hoe_name">Houe en runite</string>
 
-    <!-- Crochets de serrurier -->
+    <!-- ===== Lockpicks ===== -->
     <string name="item_bronze_lockpick_name">Rossignol en bronze</string>
     <string name="item_iron_lockpick_name">Rossignol en fer</string>
     <string name="item_steel_lockpick_name">Rossignol en acier</string>
     <string name="item_mithril_lockpick_name">Rossignol en mithril</string>
     <string name="item_adamantite_lockpick_name">Rossignol en adamantite</string>
     <string name="item_runite_lockpick_name">Rossignol en runite</string>
-    <string name="item_divine_hoe_name">Houe divine</string>
-    <string name="item_dwarven_hammer_name">Marteau nain</string>
-    <string name="item_divine_hammer_name">Marteau divin</string>
-    <string name="item_dwarven_tinderbox_name">Briquet à amadou nain</string>
-    <string name="item_divine_tinderbox_name">Briquet à amadou divin</string>
-    <string name="item_dwarven_frying_pan_name">Poêle à frire naine</string>
-    <string name="item_divine_frying_pan_name">Poêle à frire divine</string>
-    <string name="item_shadow_grappling_hook_name">Grappin des ombres</string>
-    <string name="item_dwarven_grappling_hook_name">Grappin nain</string>
-    <string name="item_arcane_grappling_hook_name">Grappin arcanique</string>
-    <string name="item_divine_grappling_hook_name">Grappin divin</string>
-    <string name="item_rogues_lockpick_name">Rossignol des malfrats</string>
-    <string name="item_dwarven_lockpick_name">Rossignol nain</string>
-    <string name="item_shadow_lockpick_name">Rossignol des ombres</string>
-    <string name="item_divine_lockpick_name">Rossignol divin</string>
 
-    <!-- Potions d'Herblore -->
+    <!-- ===== Smithing hammers ===== -->
+    <string name="item_bronze_hammer_name">Marteau en Bronze</string>
+    <string name="item_iron_hammer_name">Marteau en Fer</string>
+    <string name="item_steel_hammer_name">Marteau en Acier</string>
+    <string name="item_mithril_hammer_name">Marteau en Mithril</string>
+    <string name="item_adamantite_hammer_name">Marteau en Adamantite</string>
+    <string name="item_runite_hammer_name">Marteau en Runite</string>
+
+    <!-- ===== Cooking frying pans ===== -->
+    <string name="item_bronze_frying_pan_name">Poêle à Frire en Bronze</string>
+    <string name="item_iron_frying_pan_name">Poêle à Frire en Fer</string>
+    <string name="item_steel_frying_pan_name">Poêle à Frire en Acier</string>
+    <string name="item_mithril_frying_pan_name">Poêle à Frire en Mithril</string>
+    <string name="item_adamantite_frying_pan_name">Poêle à Frire en Adamantite</string>
+    <string name="item_runite_frying_pan_name">Poêle à Frire en Runite</string>
+
+    <!-- ===== Firemaking tinderboxes ===== -->
+    <string name="item_bronze_tinderbox_name">Briquet à Amadou en Bronze</string>
+    <string name="item_iron_tinderbox_name">Briquet à Amadou en Fer</string>
+    <string name="item_steel_tinderbox_name">Briquet à Amadou en Acier</string>
+    <string name="item_mithril_tinderbox_name">Briquet à Amadou en Mithril</string>
+    <string name="item_adamantite_tinderbox_name">Briquet à Amadou en Adamantite</string>
+    <string name="item_runite_tinderbox_name">Briquet à Amadou en Runite</string>
+
+    <!-- ===== Agility grappling hooks ===== -->
+    <string name="item_bronze_grappling_hook_name">Grappin en bronze</string>
+    <string name="item_iron_grappling_hook_name">Grappin en fer</string>
+    <string name="item_steel_grappling_hook_name">Grappin en Acier</string>
+    <string name="item_mithril_grappling_hook_name">Grappin en Mithril</string>
+    <string name="item_adamantite_grappling_hook_name">Grappin en Adamantite</string>
+    <string name="item_runite_grappling_hook_name">Grappin en Runite</string>
+
+    <!-- ===== Carnival prizes ===== -->
+    <string name="item_tricksters_amulet_name">Amulette du Farceur</string>
+    <string name="item_tricksters_amulet_desc">Un porte-bonheur porté par les artistes de carnaval. Il confère un léger avantage au combat.</string>
+    <string name="item_strongmans_sigil_name">Sceau de l\'Homme Fort</string>
+    <string name="item_strongmans_sigil_desc">Un lourd anneau de fer gravé du sceau du champion des Hommes Forts. Augmente la Force.</string>
+    <string name="item_carnival_cape_name">Cape de Carnaval</string>
+    <string name="item_carnival_cape_desc">Une cape éclatante portée par les champions du carnaval. Permet d\'obtenir 5 % de tickets supplémentaires lors des sessions de carnaval.</string>
+
+    <!-- Herblore potions -->
     <string name="item_attack_brew_name">Bière d’attaque</string>
     <string name="item_defense_brew_name">Bière de défense</string>
     <string name="item_attack_potion_name">Potion d’attaque</string>
@@ -632,276 +704,594 @@
 
     <string name="item_any_fish_name">poisson (tout type)</string>
 
+    <!-- Construction item names (planks, nails, stone) -->
+    <string name="item_plank_name">Planche</string>
+    <string name="item_oak_plank_name">Planche de Chêne</string>
+    <string name="item_willow_plank_name">Planche de Saule</string>
+    <string name="item_maple_plank_name">Planche d\'Érable</string>
+    <string name="item_yew_plank_name">Planche d\'If</string>
+    <string name="item_magic_plank_name">Planche Magique</string>
+    <string name="item_iron_nail_name">Clou en Fer</string>
+    <string name="item_steel_nail_name">Clou en Acier</string>
+    <string name="item_mithril_nail_name">Clou en Mithril</string>
+    <string name="item_stone_name">Pierre</string>
+    <string name="item_stone_desc">Un bloc de pierre. Utilisé pour la construction.</string>
+    <string name="item_carved_stone_name">Pierre Sculptée</string>
+    <string name="item_stone_block_name">Bloc de Pierre</string>
+
+    <!-- Construction furniture names -->
+    <string name="item_wooden_rack_name">Étagère en Bois</string>
+    <string name="item_wooden_shelf_name">Tablette en Bois</string>
+    <string name="item_oak_table_name">Table en Chêne</string>
+    <string name="item_oak_bookshelf_name">Bibliothèque en Chêne</string>
+    <string name="item_willow_cabinet_name">Armoire en Saule</string>
+    <string name="item_maple_dresser_name">Commode en Érable</string>
+    <string name="item_yew_wardrobe_name">Armoire en If</string>
+    <string name="item_magic_throne_name">Trône Magique</string>
+
 
     <!-- ===== Seed names ===== -->
     <string name="item_potato_seed_name">Graine de pommes de terre</string>
+    <string name="item_potato_seed_desc">Plantez pour cultiver des pommes de terre. Pousse en 2 heures.
+\nNécessite un niveau d\'agriculture de 1.</string>
     <string name="item_onion_seed_name">Graine d\'oignon</string>
+    <string name="item_onion_seed_desc">Plantez pour cultiver des oignons. Pousse en 3 heures.
+\nNécessite le niveau 5 d\'agriculture.</string>
     <string name="item_cabbage_seed_name">Graine de chou</string>
+    <string name="item_cabbage_seed_desc">Plantez pour cultiver des choux. Pousse en 4 heures.
+\nNécessite le niveau 10 d\'agriculture.</string>
     <string name="item_carrot_seed_name">Graine de carotte</string>
+    <string name="item_carrot_seed_desc">Plantez pour cultiver des carottes. Pousse en 5 heures.
+\nNécessite le niveau 15 d\'agriculture.</string>
     <string name="item_tomato_seed_name">Graine de tomate</string>
+    <string name="item_tomato_seed_desc">Plantez pour cultiver des tomates. Pousse en 6 heures.
+\nNécessite le niveau 20 d\'agriculture.</string>
     <string name="item_corn_seed_name">Graine de maïs</string>
+    <string name="item_corn_seed_desc">Plantez pour cultiver du maïs. Pousse en 7 heures.
+\nNécessite le niveau 25 d\'agriculture.</string>
     <string name="item_pumpkin_seed_name">Graine de citrouille</string>
+    <string name="item_pumpkin_seed_desc">Plantez pour cultiver des citrouilles. Pousse en 9 heures.
+\nNécessite le niveau 30 d\'agriculture.</string>
     <string name="item_watermelon_seed_name">Graine de pastèque</string>
+    <string name="item_watermelon_seed_desc">Plantez pour cultiver des pastèques. Pousse en 10 heures.
+\nNécessite le niveau 35 d\'agriculture.</string>
     <string name="item_strawberry_seed_name">Graine de fraise</string>
+    <string name="item_strawberry_seed_desc">Plantez pour cultiver des fraises. Pousse en 11 heures.
+\nNécessite le niveau 40 d\'agriculture.</string>
     <string name="item_magic_herb_seed_name">Graine d\'herbe magique</string>
+    <string name="item_magic_herb_seed_desc">Plantez pour cultiver des herbes magiques. Pousse en 13 heures.
+\nNécessite le niveau 50 d\'agriculture.</string>
     <string name="item_dragon_fruit_seed_name">Graine de fruit du dragon</string>
+    <string name="item_dragon_fruit_seed_desc">Plantez pour cultiver des fruits du dragon. Pousse en 14 heures.
+\nNécessite le niveau 55 d\'agriculture.</string>
     <string name="item_golden_wheat_seed_name">Graine de blé doré</string>
+    <string name="item_golden_wheat_seed_desc">Plantez pour cultiver du blé doré. Pousse en 16 heures.
+\nNécessite le niveau 65 d\'agriculture.</string>
     <string name="item_spirit_seed_name">Graine de l\'esprit</string>
+    <string name="item_spirit_seed_desc">Plantez pour cultiver des herbes spirituelles. Pousse en 19 heures.
+\nNécessite le niveau 75 d\'agriculture.</string>
     <string name="item_celestial_bloom_seed_name">Graine de fleur céleste</string>
+    <string name="item_celestial_bloom_seed_desc">Plantez pour cultiver des fleurs célestes. Pousse en 21 heures.
+\nNécessite le niveau 85 d\'agriculture.</string>
     <string name="item_starfruit_seed_name">Graine de fruit d\'étoile</string>
+    <string name="item_starfruit_seed_desc">Plantez pour cultiver des fruits d\'étoile. Pousse en 23 heures.
+\nNécessite le niveau 95 d\'agriculture.</string>
     <string name="item_void_lotus_seed_name">Graine de lotus du vide</string>
-    <string name="boss_void_sovereign_name">Le Souverain du Vide</string>
-    <string name="item_abyssal_rod_name">Canne abyssale</string>
-    <string name="item_adamantite_arrow_tip_name">Pointe de flèche en adamantite</string>
-    <string name="item_adamantite_boots_name">Bottes en adamantite</string>
-    <string name="item_adamantite_chainbody_name">Cotte de mailles en adamantite</string>
-    <string name="item_adamantite_dagger_name">Dague d\'adamantite</string>
-    <string name="item_adamantite_full_helmet_name">Casque intégral en adamantite</string>
-    <string name="item_adamantite_kiteshield_name">Écu en adamantite</string>
-    <string name="item_adamantite_longsword_name">Épée longue en adamantite</string>
-    <string name="item_adamantite_med_helmet_name">Demi-casque en adamantite</string>
-    <string name="item_adamantite_plateskirt_name">Jupe en adamantite</string>
-    <string name="item_adamantite_square_shield_name">Bouclier carré en adamantite</string>
-    <string name="item_agility_cape_name">Cape d\'agilité</string>
-    <string name="item_agility_guild_cape_name">Cape de guilde d\'agilité</string>
-    <string name="item_amulet_of_fury_name">Amulette de fureur</string>
-    <string name="item_amulet_of_strength_name">Amulette de force</string>
-    <string name="item_amulet_of_the_kraken_name">Amulette du Kraken</string>
-    <string name="item_arcane_staff_name">Bâton arcanique</string>
-    <string name="item_archers_guild_cape_name">Cape de guilde des archers</string>
-    <string name="item_archers_ring_name">Bague des archers</string>
-    <string name="item_attack_cape_name">Cape d\'attaque</string>
-    <string name="item_baby_kraken_name">Petit Kraken</string>
-    <string name="item_balrog_name">Balrog, Ancienne Flamme d\'Udûn</string>
-    <string name="item_balrog_whip_name">Fouet du Balrog</string>
-    <string name="item_balrog_wings_name">Ailes du Balrog</string>
+    <string name="item_void_lotus_seed_desc">Plantez pour cultiver des lotus du vide. Pousse en 24 heures.
+\nNécessite le niveau 99 d\'agriculture.</string>
+
+
+    <!-- Additional item/boss/food names (English placeholders) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="item_amulet_of_fury_desc">Une puissante amulette conférant des bonus à tous les styles de combat. Nécessite le niveau 80 en Commerce pour l\'acheter.</string>
+
+    <string name="item_amulet_of_strength_desc">Augmente le bonus de force au corps à corps. Nécessite le niveau 20 en Commerce pour l\'acheter.</string>
+
+    <string name="item_arcane_grappling_hook_name">Grappin arcanique</string>
+
+
+
+    <string name="item_archers_ring_desc">Augmente la précision à distance. Nécessite le niveau 60 en Commerce pour l\'acheter.</string>
+
+
+
+
+
     <string name="item_beef_name">Bœuf cuit</string>
-    <string name="item_berserker_ring_name">Bague du berserker</string>
-    <string name="item_blessed_fishing_rod_name">Canne à pêche bénie</string>
-    <string name="item_bronze_arrow_tip_name">Pointe de flèche en bronze</string>
-    <string name="item_bronze_boots_name">Bottes en bronze</string>
-    <string name="item_bronze_chainbody_name">Cotte de mailles en bronze</string>
-    <string name="item_bronze_full_helmet_name">Casque intégral en bronze</string>
-    <string name="item_bronze_kiteshield_name">Écu en bronze</string>
-    <string name="item_bronze_longsword_name">Épée longue en bronze</string>
-    <string name="item_bronze_med_helmet_name">Demi-casque en bronze</string>
-    <string name="item_bronze_plateskirt_name">Jupe en bronze</string>
-    <string name="item_bronze_square_shield_name">Bouclier carré en bronze</string>
+
+    <string name="item_berserker_ring_desc">Augmente la force au corps à corps. Nécessite le niveau 60 en Commerce pour l\'acheter.</string>
+
+
+
+
+
+
+
+
+
+
     <string name="item_chicken_name">Poulet cuit</string>
-    <string name="item_cooking_cape_name">Cape de cuisine</string>
-    <string name="item_cooking_guild_cape_name">Cape de guilde de cuisine</string>
-    <string name="item_crafting_cape_name">Cape d\'artisanat</string>
-    <string name="item_crafting_guild_cape_name">Cape de guilde d\'artisanat</string>
-    <string name="item_deep_iron_pickaxe_name">Pioche en fer profond</string>
-    <string name="item_defense_cape_name">Cape de défense</string>
-    <string name="item_demon_lord_name">Seigneur démon</string>
-    <string name="item_dragon_amulet_name">Amulette de dragon</string>
-    <string name="item_dragon_boots_name">Bottes de dragon</string>
-    <string name="item_dragon_longsword_name">Épée longue de dragon</string>
-    <string name="item_dragon_scimitar_name">Cimeterre de dragon</string>
-    <string name="item_dragon_whelp_name">Dragonnet</string>
-    <string name="item_dwarven_axe_name">Hache naine</string>
-    <string name="item_dwarven_boots_name">Bottes naines</string>
-    <string name="item_dwarven_fishing_rod_name">Canne à pêche naine</string>
-    <string name="item_dwarven_helm_name">Heaume nain</string>
-    <string name="item_dwarven_hoe_name">Houe naine</string>
-    <string name="item_dwarven_pickaxe_name">Pioche naine</string>
-    <string name="item_dwarven_platebody_name">Corps en plaque nain</string>
-    <string name="item_dwarven_platelegs_name">Jambières naines</string>
-    <string name="item_dwarven_scimitar_name">Cimeterre nain</string>
-    <string name="item_dwarven_shield_name">Bouclier nain</string>
-    <string name="item_dwarven_sword_name">Épée naine</string>
-    <string name="item_dwarven_warhammer_name">Marteau de guerre nain</string>
-    <string name="item_ent_name">Ent</string>
-    <string name="item_farming_cape_name">Cape d\'agriculture</string>
-    <string name="item_farming_guild_cape_name">Cape de guilde d\'agriculture</string>
-    <string name="item_firemaking_cape_name">Cape d\'allumage de feu</string>
-    <string name="item_firemaking_guild_cape_name">Cape de guilde d\'allumage de feu</string>
-    <string name="item_fishing_cape_name">Cape de pêche</string>
-    <string name="item_fishing_guild_cape_name">Cape de guilde de pêche</string>
-    <string name="item_flame_heart_amulet_name">Amulette du cœur de flamme</string>
-    <string name="item_fletching_cape_name">Cape de fabrication de flèches</string>
-    <string name="item_fletching_guild_cape_name">Cape de guilde de fabrication de flèches</string>
-    <string name="item_forge_pickaxe_name">Pioche de forge</string>
-    <string name="item_hellfire_staff_name">Bâton de feu infernal</string>
-    <string name="item_herblore_guild_cape_name">Cape de guilde d\'herboristerie</string>
-    <string name="item_hp_cape_name">Cape de PV</string>
-    <string name="item_imp_pet_name">Diablotin de compagnie</string>
-    <string name="item_iron_arrow_tip_name">Pointe de flèche en fer</string>
-    <string name="item_iron_boots_name">Bottes en fer</string>
-    <string name="item_iron_chainbody_name">Cotte de mailles en fer</string>
-    <string name="item_iron_full_helmet_name">Casque intégral en fer</string>
-    <string name="item_iron_kiteshield_name">Écu en fer</string>
-    <string name="item_iron_longsword_name">Épée longue en fer</string>
-    <string name="item_iron_med_helmet_name">Demi-casque en fer</string>
-    <string name="item_iron_plateskirt_name">Jupe en fer</string>
-    <string name="item_iron_square_shield_name">Bouclier carré en fer</string>
-    <string name="item_ironwood_axe_name">Hache en bois de fer</string>
-    <string name="item_king_black_dragon_name">Roi Dragon Noir</string>
-    <string name="item_kraken_name">Kraken</string>
-    <string name="item_kraken_tentacle_name">Tentacule de Kraken</string>
-    <string name="item_mages_guild_cape_name">Cape de guilde des mages</string>
-    <string name="item_magic_cape_name">Cape de magie</string>
-    <string name="item_magic_longbow_name">Arc long magique</string>
-    <string name="item_magic_shortbow_name">Arc court magique</string>
-    <string name="item_maple_shortbow_name">Arc court en érable</string>
-    <string name="item_mercantile_guild_cape_name">Cape de guilde des marchands</string>
-    <string name="item_mining_cape_name">Cape de minage</string>
-    <string name="item_mining_guild_cape_name">Cape de guilde de minage</string>
-    <string name="item_mithril_arrow_tip_name">Pointe de flèche en mithril</string>
-    <string name="item_mithril_boots_name">Bottes en mithril</string>
-    <string name="item_mithril_chainbody_name">Cotte de mailles en mithril</string>
-    <string name="item_mithril_dagger_name">Dague de mithril</string>
-    <string name="item_mithril_full_helmet_name">Casque intégral en mithril</string>
-    <string name="item_mithril_kiteshield_name">Écu en mithril</string>
-    <string name="item_mithril_longsword_name">Épée longue en mithril</string>
-    <string name="item_mithril_med_helmet_name">Demi-casque en mithril</string>
-    <string name="item_mithril_plateskirt_name">Jupe en mithril</string>
-    <string name="item_mithril_square_shield_name">Bouclier carré en mithril</string>
+
+
+
+
+
+
+
+
+    <string name="item_divine_frying_pan_name">Poêle à Frire Divine</string>
+    <string name="item_divine_grappling_hook_name">Grappin Divin</string>
+    <string name="item_divine_hammer_name">Marteau Divin</string>
+    <string name="item_divine_hoe_name">Houe Divine</string>
+    <string name="item_divine_lockpick_name">Rossignol Divin</string>
+    <string name="item_divine_tinderbox_name">Briquet à Amadou Divin</string>
+
+
+
+
+
+
+
+
+    <string name="item_dwarven_frying_pan_name">Poêle à Frire Naine</string>
+    <string name="item_dwarven_grappling_hook_name">Grappin Nain</string>
+    <string name="item_dwarven_hammer_name">Marteau Nain</string>
+
+
+    <string name="item_dwarven_lockpick_name">Rossignol Nain</string>
+
+
+
+
+
+
+    <string name="item_dwarven_tinderbox_name">Briquet à Amadou Nain</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="item_mutton_name">Mouton cuit</string>
-    <string name="item_necklace_of_anguish_name">Collier d\'angoisse</string>
-    <string name="item_oak_shortbow_name">Arc court en chêne</string>
-    <string name="item_platinum_ore_name">Minerai de platine</string>
-    <string name="item_prayer_cape_name">Cape de prière</string>
-    <string name="item_prayer_guild_cape_name">Cape de guilde de prière</string>
-    <string name="item_ranged_cape_name">Cape de tir à distance</string>
+
+    <string name="item_necklace_of_anguish_desc">Confère des bonus d\'attaque à distance exceptionnels. Nécessite le niveau 99 en Commerce pour l\'acheter.</string>
+
+
+
+
     <string name="item_rat_meat_name">Viande de rat cuite</string>
-    <string name="item_ring_of_dragons_might_name">Bague de la puissance des dragons</string>
-    <string name="item_ring_of_flame_name">Bague de flamme</string>
-    <string name="item_ring_of_recoil_name">Bague de recul</string>
-    <string name="item_ring_of_suffering_name">Bague de souffrance</string>
-    <string name="item_ring_of_the_seas_name">Bague des mers</string>
-    <string name="item_ring_of_wealth_name">Bague de richesse</string>
-    <string name="item_rock_golem_name">Golem de pierre</string>
-    <string name="item_runecrafting_cape_name">Cape de fabrication de runes</string>
-    <string name="item_runecrafting_guild_cape_name">Cape de guilde de fabrication de runes</string>
-    <string name="item_runite_arrow_tip_name">Pointe de flèche en runite</string>
-    <string name="item_runite_boots_name">Bottes en runite</string>
-    <string name="item_runite_chainbody_name">Cotte de mailles en runite</string>
-    <string name="item_runite_dagger_name">Dague de runite</string>
-    <string name="item_runite_full_helmet_name">Casque intégral en runite</string>
-    <string name="item_runite_kiteshield_name">Écu en runite</string>
-    <string name="item_runite_longsword_name">Épée longue en runite</string>
-    <string name="item_runite_med_helmet_name">Demi-casque en runite</string>
-    <string name="item_runite_plateskirt_name">Jupe en runite</string>
-    <string name="item_runite_square_shield_name">Bouclier carré en runite</string>
-    <string name="item_sanctum_axe_name">Hache du sanctuaire</string>
-    <string name="item_seers_ring_name">Bague des voyants</string>
-    <string name="item_shadow_dagger_name">Dague des ombres</string>
-    <string name="item_shortbow_name">Arc court</string>
-    <string name="item_silver_diamond_necklace_name">Collier en argent avec diamant</string>
-    <string name="item_silver_diamond_ring_name">Bague en argent avec diamant</string>
-    <string name="item_silver_emerald_necklace_name">Collier en argent avec émeraude</string>
-    <string name="item_silver_emerald_ring_name">Bague en argent avec émeraude</string>
-    <string name="item_silver_ruby_necklace_name">Collier en argent avec rubis</string>
-    <string name="item_silver_ruby_ring_name">Bague en argent avec rubis</string>
-    <string name="item_smithing_cape_name">Cape de forge</string>
-    <string name="item_smithing_guild_cape_name">Cape de guilde de forge</string>
-    <string name="item_steel_arrow_tip_name">Pointe de flèche en acier</string>
-    <string name="item_steel_boots_name">Bottes en acier</string>
-    <string name="item_steel_chainbody_name">Cotte de mailles en acier</string>
-    <string name="item_steel_dagger_name">Dague d\'acier</string>
-    <string name="item_steel_full_helmet_name">Casque intégral en acier</string>
-    <string name="item_steel_kiteshield_name">Écu en acier</string>
-    <string name="item_steel_longsword_name">Épée longue en acier</string>
-    <string name="item_steel_med_helmet_name">Demi-casque en acier</string>
-    <string name="item_steel_plateskirt_name">Jupe en acier</string>
-    <string name="item_steel_square_shield_name">Bouclier carré en acier</string>
-    <string name="item_strength_cape_name">Cape de force</string>
-    <string name="item_tangleroot_name">Entortille-racines</string>
-    <string name="item_tiny_templar_name">Minuscule templier</string>
-    <string name="item_tormented_necklace_name">Collier tourmenté</string>
-    <string name="item_trident_of_the_seas_name">Trident des mers</string>
-    <string name="item_warriors_guild_cape_name">Cape de guilde des guerriers</string>
-    <string name="item_willow_shortbow_name">Arc court en saule</string>
-    <string name="item_woodcutting_cape_name">Cape de bûcheronnage</string>
-    <string name="item_woodcutting_guild_cape_name">Cape de guilde de bûcheronnage</string>
-    <string name="item_yew_longbow_name">Arc long en if</string>
-    <string name="item_yew_shortbow_name">Arc court en if</string>
-    <string name="item_platinum_ore_desc">A rare platinum ore used for platinum bars.</string>
-    <string name="item_divine_pickaxe_name">Divine Pickaxe</string>
-    <string name="item_divine_pickaxe_desc">A pickaxe touched by divine light. Stone parts before it like water.</string>
-    <string name="item_divine_axe_name">Divine Axe</string>
-    <string name="item_divine_axe_desc">An axe that fells even the oldest trees with a single blow.</string>
-    <string name="item_divine_fishing_rod_name">Divine Fishing Rod</string>
-    <string name="item_divine_fishing_rod_desc">A rod blessed by the sea gods. Fish practically leap onto it.</string>
-    <string name="item_bread_name">Bread</string>
-    <string name="item_leather_name">Leather</string>
-    <string name="item_flour_name">Flour</string>
-    <string name="item_cooked_trout_name">Cooked Trout</string>
-    <string name="item_thread_name">Thread</string>
-    <string name="item_ruby_ring_name">Ruby Ring</string>
-    <string name="item_diamond_ring_name">Diamond Ring</string>
-    <string name="item_diamond_necklace_name">Diamond Necklace</string>
-    <string name="item_ancient_treasure_name">Ancient Treasure</string>
-    <string name="item_seaweed_name">Seaweed</string>
-    <string name="item_pearl_name">Pearl</string>
-    <string name="item_nature_rune_name">Nature Rune</string>
-    <string name="item_herb_name">Herb</string>
-    <string name="item_mahogany_log_name">Mahogany Log</string>
-    <string name="item_oyster_name">Oyster</string>
-    <string name="item_crab_name">Crab</string>
-    <string name="item_bird_nest_name">Bird Nest</string>
-    <string name="item_tree_seed_name">Tree Seed</string>
-    <string name="item_teak_log_name">Teak Log</string>
-    <string name="crop_spirit_herb_desc">A rare herb used in high-level herblore.</string>
-    <string name="crop_celestial_bloom_desc">An ethereal flower used in master potions.</string>
-    <string name="crop_void_lotus_desc">A mysterious lotus used in the rarest concoctions.</string>
-    <string name="item_bronze_hammer_name">Bronze Hammer</string>
-    <string name="item_iron_hammer_name">Iron Hammer</string>
-    <string name="item_steel_hammer_name">Steel Hammer</string>
-    <string name="item_mithril_hammer_name">Mithril Hammer</string>
-    <string name="item_adamantite_hammer_name">Adamantite Hammer</string>
-    <string name="item_runite_hammer_name">Runite Hammer</string>
-    <string name="item_bronze_frying_pan_name">Bronze Frying Pan</string>
-    <string name="item_iron_frying_pan_name">Iron Frying Pan</string>
-    <string name="item_steel_frying_pan_name">Steel Frying Pan</string>
-    <string name="item_mithril_frying_pan_name">Mithril Frying Pan</string>
-    <string name="item_adamantite_frying_pan_name">Adamantite Frying Pan</string>
-    <string name="item_runite_frying_pan_name">Runite Frying Pan</string>
-    <string name="item_bronze_tinderbox_name">Bronze Tinderbox</string>
-    <string name="item_iron_tinderbox_name">Iron Tinderbox</string>
-    <string name="item_steel_tinderbox_name">Steel Tinderbox</string>
-    <string name="item_mithril_tinderbox_name">Mithril Tinderbox</string>
-    <string name="item_adamantite_tinderbox_name">Adamantite Tinderbox</string>
-    <string name="item_runite_tinderbox_name">Runite Tinderbox</string>
-    <string name="item_bronze_grappling_hook_name">Bronze Grappling Hook</string>
-    <string name="item_iron_grappling_hook_name">Iron Grappling Hook</string>
-    <string name="item_steel_grappling_hook_name">Steel Grappling Hook</string>
-    <string name="item_mithril_grappling_hook_name">Mithril Grappling Hook</string>
-    <string name="item_adamantite_grappling_hook_name">Adamantite Grappling Hook</string>
-    <string name="item_runite_grappling_hook_name">Runite Grappling Hook</string>
-    <string name="item_tricksters_amulet_name">Trickster\'s Amulet</string>
-    <string name="item_tricksters_amulet_desc">A lucky charm worn by carnival performers. Grants a small combat edge.</string>
-    <string name="item_strongmans_sigil_name">Strongman\'s Sigil</string>
-    <string name="item_strongmans_sigil_desc">A heavy iron ring etched with the mark of the strongman champion. Boosts Strength.</string>
-    <string name="item_carnival_cape_name">Carnival Cape</string>
-    <string name="item_carnival_cape_desc">A vibrant cape worn by carnival champions. Grants 5% more tickets from Carnival sessions.</string>
-    <string name="item_stone_desc">A block of stone. Used for construction.</string>
-    <string name="item_potato_seed_desc">Plant to grow potatoes. Grows in 2h.\nRequires farming level 1.</string>
-    <string name="item_onion_seed_desc">Plant to grow onions. Grows in 3h.\nRequires farming level 5.</string>
-    <string name="item_cabbage_seed_desc">Plant to grow cabbage. Grows in 4h.\nRequires farming level 10.</string>
-    <string name="item_carrot_seed_desc">Plant to grow carrots. Grows in 5h.\nRequires farming level 15.</string>
-    <string name="item_tomato_seed_desc">Plant to grow tomatoes. Grows in 6h.\nRequires farming level 20.</string>
-    <string name="item_corn_seed_desc">Plant to grow corn. Grows in 7h.\nRequires farming level 25.</string>
-    <string name="item_pumpkin_seed_desc">Plant to grow pumpkins. Grows in 9h.\nRequires farming level 30.</string>
-    <string name="item_watermelon_seed_desc">Plant to grow watermelons. Grows in 10h.\nRequires farming level 35.</string>
-    <string name="item_strawberry_seed_desc">Plant to grow strawberries. Grows in 11h.\nRequires farming level 40.</string>
-    <string name="item_magic_herb_seed_desc">Plant to grow magic herbs. Grows in 13h.\nRequires farming level 50.</string>
-    <string name="item_dragon_fruit_seed_desc">Plant to grow dragon fruit. Grows in 14h.\nRequires farming level 55.</string>
-    <string name="item_golden_wheat_seed_desc">Plant to grow golden wheat. Grows in 16h.\nRequires farming level 65.</string>
-    <string name="item_spirit_seed_desc">Plant to grow spirit herbs. Grows in 19h.\nRequires farming level 75.</string>
-    <string name="item_celestial_bloom_seed_desc">Plant to grow celestial blooms. Grows in 21h.\nRequires farming level 85.</string>
-    <string name="item_starfruit_seed_desc">Plant to grow starfruit. Grows in 23h.\nRequires farming level 95.</string>
-    <string name="item_void_lotus_seed_desc">Plant to grow void lotus. Grows in 24h.\nRequires farming level 99.</string>
-    <string name="item_amulet_of_fury_desc">A powerful amulet granting bonuses to all combat styles. Requires Mercantile level 80 to purchase.</string>
-    <string name="item_amulet_of_strength_desc">Increases melee strength bonus. Requires Mercantile level 20 to purchase.</string>
-    <string name="item_archers_ring_desc">Increases ranged accuracy. Requires Mercantile level 60 to purchase.</string>
-    <string name="item_berserker_ring_desc">Increases melee strength. Requires Mercantile level 60 to purchase.</string>
-    <string name="item_necklace_of_anguish_desc">Provides exceptional ranged attack bonuses. Requires Mercantile level 99 to purchase.</string>
-    <string name="item_ring_of_recoil_desc">Returns a portion of damage taken to attackers. Requires Mercantile level 20 to purchase.</string>
-    <string name="item_ring_of_suffering_desc">A powerful ring that grants significant defense. Requires Mercantile level 80 to purchase.</string>
-    <string name="item_ring_of_wealth_desc">Increases coin drops slightly. Requires Mercantile level 40 to purchase.</string>
-    <string name="item_seers_ring_desc">Increases magic accuracy. Requires Mercantile level 60 to purchase.</string>
-    <string name="item_tormented_necklace_desc">Provides exceptional magic bonuses. Requires Mercantile level 99 to purchase.</string>
+
+
+
+    <string name="item_ring_of_recoil_desc">Renvoie une partie des dommages subis aux attaquants. Nécessite le niveau 20 en Commerce pour l\'acheter.</string>
+
+    <string name="item_ring_of_suffering_desc">Un anneau puissant offrant une défense considérable. Nécessite le niveau 80 en Commerce pour l\'acheter.</string>
+
+
+    <string name="item_ring_of_wealth_desc">Augmente légèrement le nombre de pièces obtenues. Nécessite le niveau 40 en Commerce pour l\'acheter.</string>
+
+    <string name="item_rogues_lockpick_name">Rossignol des malfrats</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="item_seers_ring_desc">Augmente la précision magique. Nécessite le niveau 60 en Commerce pour l\'acheter.</string>
+
+    <string name="item_shadow_grappling_hook_name">Grappin des ombres</string>
+    <string name="item_shadow_lockpick_name">Rossignol des ombres</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="item_tormented_necklace_desc">Confère des bonus magiques exceptionnels. Nécessite le niveau 99 en Commerce pour l\'acheter.</string>
+
+
+
+
+
+
+
+    <string name="item_void_reaver_name">Ravageur du Vide</string>
+    <string name="item_void_reaver_desc">Une lame forgée d\'énergie du vide cristallisée. Son tranchant traverse l\'armure comme du tissu.</string>
+    <string name="item_sovereign_crown_name">Couronne Souveraine</string>
+    <string name="item_sovereign_crown_desc">La couronne du Souverain du Vide lui-même, rayonnant de sombre majesté. Offre une protection inégalée.</string>
+    <string name="item_amulet_of_the_void_name">Amulette du Vide</string>
+    <string name="item_amulet_of_the_void_desc">Un pendentif de pure essence du vide. Améliore toutes les statistiques de combat du porteur.</string>
+    <string name="item_bronze_longsword_desc">Une épée longue en bronze.</string>
+    <string name="item_iron_longsword_desc">Une épée longue en fer.</string>
+    <string name="item_shadow_dagger_desc">Une dague à lame noire récupérée dans le Repaire des Ombres. Redoutablement tranchante et parfaitement équilibrée pour le combat rapproché.</string>
+    <string name="item_steel_dagger_desc">Une dague en acier.</string>
+    <string name="item_steel_longsword_desc">Une épée longue en acier.</string>
+    <string name="item_mithril_dagger_desc">Une dague en mithril.</string>
+    <string name="item_mithril_longsword_desc">Une épée longue en mithril.</string>
+    <string name="item_adamantite_dagger_desc">Une dague en adamantite.</string>
+    <string name="item_adamantite_longsword_desc">Une épée longue en adamantite.</string>
+    <string name="item_runite_dagger_desc">Une dague en runite.</string>
+    <string name="item_runite_longsword_desc">Une épée longue en runite.</string>
+    <string name="item_dragon_scimitar_desc">Un cimeterre au tranchant tel un rasoir, forgé à partir de métal de dragon.</string>
+    <string name="item_dragon_longsword_desc">Une puissante épée longue forgée à partir de métal de dragon.</string>
+    <string name="item_dwarven_sword_desc">Une ancienne lame naine, forgée dans les profondeurs de la terre.</string>
+    <string name="item_dwarven_scimitar_desc">Une lame naine incurvée, idéale pour des frappes rapides.</string>
+    <string name="item_dwarven_warhammer_desc">Un massif marteau nain qui écrase tout sur son passage.</string>
+    <string name="item_tower_sword_name">Épée de la Tour</string>
+    <string name="item_tower_sword_desc">Une lame qui a fendu d\'innombrables étages de la Tour.</string>
+    <string name="item_balrog_whip_desc">Un fouet d\'une flamme pure, arraché au Balrog lui-même. Brûle d\'un feu éternel.</string>
+    <string name="item_divine_sword_name">Épée Divine</string>
+    <string name="item_divine_sword_desc">Une lame de pure lumière divine, dont on dit qu\'elle n\'est maniée que par l\'élu.</string>
+    <string name="item_divine_greatblade_name">Grande Lame Divine</string>
+    <string name="item_divine_greatblade_desc">Une lame divine colossale qui canalise une puissance brute dans chaque coup.</string>
+    <string name="item_shortbow_desc">Un arc court façonné à partir de bûches ordinaires.</string>
+    <string name="item_oak_shortbow_desc">Un arc court façonné à partir de bûches de chêne.</string>
+    <string name="item_willow_shortbow_desc">Un arc court façonné à partir de bûches de saule.</string>
+    <string name="item_maple_shortbow_desc">Un arc court façonné à partir de bûches d\'érable.</string>
+    <string name="item_yew_shortbow_desc">Un arc court façonné à partir de bûches d\'if.</string>
+    <string name="item_yew_longbow_desc">Un arc long façonné à partir de bûches d\'if.</string>
+    <string name="item_magic_shortbow_desc">Un arc court façonné à partir de bûches magiques.</string>
+    <string name="item_magic_longbow_desc">Un arc long façonné à partir de bûches magiques.</string>
+    <string name="item_tower_crossbow_name">Arbalète de la Tour</string>
+    <string name="item_tower_crossbow_desc">Une arbalète de précision façonnée à partir de métal de la Tour.</string>
+    <string name="item_arcane_staff_desc">Un bâton récupéré dans les Ruines des Arcanes, vibrant encore de l\'énergie magique contenue issue de la catastrophe qui a détruit la flèche située au-dessus.</string>
+    <string name="item_hellfire_staff_desc">Un bâton enveloppé de flammes démoniaques, arraché à l\'emprise du Seigneur Démon.</string>
+    <string name="item_void_staff_name">Bâton du Vide</string>
+    <string name="item_void_staff_desc">Un bâton d\'énergie du vide pure. Confère des runes infinies pour tous les sorts.</string>
+    <string name="item_trident_of_the_seas_desc">Un trident redoutable imprégné du pouvoir des abysses, dérobé dans l\'antre du Kraken.</string>
+    <string name="item_bronze_med_helmet_desc">Un demi-casque en bronze.</string>
+    <string name="item_bronze_full_helmet_desc">Un casque intégral en bronze.</string>
+    <string name="item_bronze_chainbody_desc">Une cotte de mailles en bronze.</string>
+    <string name="item_bronze_plateskirt_desc">Une jupe de plaques en bronze.</string>
+    <string name="item_bronze_boots_desc">Une paire de bottes en bronze.</string>
+    <string name="item_bronze_square_shield_desc">Un bouclier carré en bronze.</string>
+    <string name="item_bronze_kiteshield_desc">Un écu en bronze.</string>
+    <string name="item_iron_med_helmet_desc">Un demi-casque en fer.</string>
+    <string name="item_iron_full_helmet_desc">Un casque intégral en fer.</string>
+    <string name="item_iron_chainbody_desc">Une cotte de mailles en fer.</string>
+    <string name="item_iron_plateskirt_desc">Une jupe de plaques en fer.</string>
+    <string name="item_iron_boots_desc">Une paire de bottes en fer.</string>
+    <string name="item_iron_square_shield_desc">Un bouclier carré en fer.</string>
+    <string name="item_iron_kiteshield_desc">Un écu en fer.</string>
+    <string name="item_steel_med_helmet_desc">Un demi-casque en acier.</string>
+    <string name="item_steel_full_helmet_desc">Un casque intégral en acier.</string>
+    <string name="item_steel_chainbody_desc">Une cotte de mailles en acier.</string>
+    <string name="item_steel_plateskirt_desc">Une jupe de plaques en acier.</string>
+    <string name="item_steel_boots_desc">Une paire de bottes en acier.</string>
+    <string name="item_steel_square_shield_desc">Un bouclier carré en acier.</string>
+    <string name="item_steel_kiteshield_desc">Un écu en acier.</string>
+    <string name="item_mithril_med_helmet_desc">Un demi-casque en mithril.</string>
+    <string name="item_mithril_full_helmet_desc">Un casque intégral en mithril.</string>
+    <string name="item_mithril_chainbody_desc">Une cotte de mailles en mithril.</string>
+    <string name="item_mithril_plateskirt_desc">Une jupe de plaques en mithril.</string>
+    <string name="item_mithril_boots_desc">Une paire de bottes en mithril.</string>
+    <string name="item_mithril_square_shield_desc">Un bouclier carré en mithril.</string>
+    <string name="item_mithril_kiteshield_desc">Un écu en mithril.</string>
+    <string name="item_adamantite_med_helmet_desc">Un demi-casque en adamantite.</string>
+    <string name="item_adamantite_full_helmet_desc">Un casque intégral en adamantite.</string>
+    <string name="item_adamantite_chainbody_desc">Une cotte de mailles en adamantite.</string>
+    <string name="item_adamantite_plateskirt_desc">Une jupe de plaques en adamantite.</string>
+    <string name="item_adamantite_boots_desc">Une paire de bottes en adamantite.</string>
+    <string name="item_adamantite_square_shield_desc">Un bouclier carré en adamantite.</string>
+    <string name="item_adamantite_kiteshield_desc">Un écu en adamantite.</string>
+    <string name="item_runite_med_helmet_desc">Un demi-casque en runite.</string>
+    <string name="item_runite_full_helmet_desc">Un casque intégral en runite.</string>
+    <string name="item_runite_chainbody_desc">Une cotte de mailles en runite.</string>
+    <string name="item_runite_plateskirt_desc">Une jupe de plaques en runite.</string>
+    <string name="item_runite_boots_desc">Une paire de bottes en runite.</string>
+    <string name="item_runite_square_shield_desc">Un bouclier carré en runite.</string>
+    <string name="item_runite_kiteshield_desc">Un écu en runite.</string>
+    <string name="item_dwarven_helm_desc">Un casque nain robuste, forgé à partir de métaux anciens.</string>
+    <string name="item_dwarven_platebody_desc">Ancienne armure naine, presque impénétrable.</string>
+    <string name="item_dwarven_platelegs_desc">Armure de jambes naine, parfaitement équilibrée pour le combat.</string>
+    <string name="item_dwarven_boots_desc">Bottes naines de chef-d\'œuvre, plus lourdes que l\'acier mais presque indestructibles.</string>
+    <string name="item_dwarven_shield_desc">Un bouclier nain qui a résisté à d\'innombrables batailles.</string>
+    <string name="item_dragon_boots_desc">Une paire de bottes de dragon.</string>
+    <string name="item_tower_helm_name">Heaume de la Tour</string>
+    <string name="item_tower_helm_desc">Un casque taillé dans les étages supérieurs de la tour.</string>
+    <string name="item_tower_body_name">Plaque de la Tour</string>
+    <string name="item_tower_body_desc">Une armure impénétrable provenant du sanctuaire intérieur de la tour.</string>
+    <string name="item_tower_legs_name">Cnémides de la Tour</string>
+    <string name="item_tower_legs_desc">Cnémides forgées dans la forge la plus profonde de la Tour.</string>
+    <string name="item_tower_boots_name">Bottes de la Tour</string>
+    <string name="item_tower_boots_desc">Bottes forgées dans la forge la plus profonde de la Tour.</string>
+    <string name="item_tower_shield_name">Bouclier de la Tour</string>
+    <string name="item_tower_shield_desc">Un bouclier massif taillé dans la pierre de la Tour.</string>
+    <string name="item_balrog_wings_desc">Les ailes puissantes d\'un Balrog, imprégnées d\'une puissance ténébreuse. L\'armure ultime.</string>
+    <string name="item_divine_helm_name">Heaume Divin</string>
+    <string name="item_divine_helm_desc">Un heaume rayonnant béni par les dieux. Il détourne les coups qui abattraient n\'importe quel mortel.</string>
+    <string name="item_divine_platebody_name">Plastron Divin</string>
+    <string name="item_divine_platebody_desc">Armure forgée dans un métal céleste. On dit qu\'elle est quasi indestructible.</string>
+    <string name="item_divine_platelegs_name">Jambières Divines</string>
+    <string name="item_divine_platelegs_desc">Armure de jambes d\'une facture divine. Plus lourde qu\'elle n\'en a l\'air, plus légère qu\'elle ne devrait l\'être.</string>
+    <string name="item_divine_boots_name">Bottes Divines</string>
+    <string name="item_divine_boots_desc">Bottes de facture divine. Ne laissent aucune trace de pas.</string>
+    <string name="item_divine_shield_name">Bouclier Divin</string>
+    <string name="item_divine_shield_desc">Un bouclier béni qui rayonne d\'une faible lumière dorée.</string>
+    <string name="item_silver_emerald_necklace_desc">Un collier en argent orné d\'une émeraude. Améliore les tirs à distance.</string>
+    <string name="item_silver_ruby_necklace_desc">Un collier en argent orné d\'un rubis. Améliore le combat au corps à corps.</string>
+    <string name="item_silver_diamond_necklace_desc">Un collier en argent avec un diamant. Équilibré pour le combat.</string>
+    <string name="item_tower_amulet_name">Amulette de la Tour</string>
+    <string name="item_tower_amulet_desc">Une amulette vibrant de l\'ancien pouvoir de la Tour.</string>
+    <string name="item_dragon_amulet_desc">Une puissante amulette forgée à partir d\'écailles de dragon. Améliore tous les styles de combat.</string>
+    <string name="item_flame_heart_amulet_desc">Le cœur cristallisé d\'un ancien démon des flammes. Il irradie une puissance immense.</string>
+    <string name="item_amulet_of_the_kraken_desc">Une amulette sombre vibrant de l\'énergie magique du Kraken.</string>
+    <string name="item_silver_emerald_ring_desc">Une bague en argent ornée d\'une émeraude. Améliore les tirs à distance.</string>
+    <string name="item_silver_ruby_ring_desc">Une bague en argent ornée d\'un rubis. Améliore le combat au corps à corps.</string>
+    <string name="item_silver_diamond_ring_desc">Une bague en argent avec un diamant. Équilibré pour le combat.</string>
+    <string name="item_tower_ring_name">Anneau de la Tour</string>
+    <string name="item_tower_ring_desc">Un anneau forgé dans la pierre de la Tour Infinie.</string>
+    <string name="item_ring_of_flame_desc">Forgé dans les feux des profondeurs de la terre. Ceux qui le portent ressentent la force du Balrog.</string>
+    <string name="item_ring_of_dragons_might_desc">Un anneau imprégné du feu de dragon. Augmente considérablement la force au corps à corps.</string>
+    <string name="item_ring_of_the_seas_desc">Une bague bénie par les profondeurs marines. Elle améliore la précision et la puissance des tirs à distance.</string>
+    <string name="item_kraken_tentacle_desc">Un anneau en forme de tentacule enroulé qui canalise le pouvoir arcanique du Kraken.</string>
+    <string name="item_tower_cape_name">Cape de la Tour</string>
+    <string name="item_tower_cape_desc">Une cape fluide qui rayonne de l\'énergie de la tour.</string>
+    <string name="item_mining_cape_desc">Décerné pour avoir atteint le niveau 99 en Minage. Permet d\'obtenir 10 % de minerai en plus par session.</string>
+    <string name="item_construction_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Bâtisseurs. Permet d\'obtenir 5 % de meubles en plus par session.</string>
+    <string name="item_mining_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Mineurs. Permet d\'obtenir 5 % de minerais en plus par session.</string>
+    <string name="item_fishing_cape_desc">Décerné pour avoir atteint le niveau 99 en Pêche. Permet d\'obtenir 10 % de poisson en plus par session.</string>
+    <string name="item_fishing_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Pêcheurs. Permet d\'obtenir 5 % de poissons en plus par session.</string>
+    <string name="item_woodcutting_cape_desc">Décerné pour avoir atteint le niveau 99 en Bûcheronnage. Permet d\'obtenir 10 % de bûches en plus par session.</string>
+    <string name="item_woodcutting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Bûcherons. Permet d\'obtenir 5 % de bûches en plus par session.</string>
+    <string name="item_farming_cape_desc">Décerné pour avoir atteint le niveau 99 en Agriculture. Permet d\'obtenir 10 % de récolte en plus par session.</string>
+    <string name="item_farming_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Agriculteurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_thieving_cape_name">Cape de Voleur</string>
+    <string name="item_thieving_cape_desc">Décerné pour avoir atteint le niveau 99 en Vol à la tire. Permet de réussir 10 % de vols à la tire en plus par session.</string>
+    <string name="item_thieving_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Voleurs. Permet de réussir 5 % de vols à la tire en plus par session.</string>
+    <string name="item_smithing_cape_desc">Décerné pour avoir atteint le niveau 99 en Forge. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_smithing_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Forgerons. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
+    <string name="item_cooking_cape_desc">Décerné pour avoir atteint le niveau 99 en Cuisine. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
+    <string name="item_cooking_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Cuisiniers. Permet d\'obtenir 5 % de nourriture en plus par session.</string>
+    <string name="item_fletching_cape_desc">Décerné pour avoir atteint le niveau 99 en Art du bois. Permet d\'obtenir 10 % de flèches en plus par session.</string>
+    <string name="item_fletching_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Artistes du Bois. Permet d\'obtenir 5 % de flèches en plus par session.</string>
+    <string name="item_crafting_cape_desc">Décerné pour avoir atteint le niveau 99 en Artisanat. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_crafting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Artisans. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
+    <string name="item_firemaking_cape_desc">Décerné pour avoir atteint le niveau 99 en Incinération. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
+    <string name="item_firemaking_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Brûleurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_runecrafting_cape_desc">Décerné pour avoir atteint le niveau 99 en Fabrication de runes. Permet d\'obtenir 10 % de runes en plus par session.</string>
+    <string name="item_runecrafting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Fabricants de Runes. Permet d\'obtenir 5 % de runes en plus par session.</string>
+    <string name="item_herblore_cape_name">Cape d\'Herboriste</string>
+    <string name="item_herblore_cape_desc">Décerné pour avoir atteint le niveau 99 en Herboristerie. Permet d\'obtenir 10 % de potions en plus par session.</string>
+    <string name="item_herblore_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Herboristes. Permet d\'obtenir 5 % de potions en plus par session.</string>
+    <string name="item_construction_cape_name">Cape de la Construction</string>
+    <string name="item_construction_cape_desc">Décerné pour avoir atteint le niveau 99 en Construction. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_prayer_cape_desc">Décerné pour avoir atteint le niveau 99 en Prière. Augmente de 10% la prière active.</string>
+    <string name="item_prayer_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Prêtres. Augmente de 5% la prière active.</string>
+    <string name="item_mercantile_cape_name">Cape du Marchand</string>
+    <string name="item_mercantile_cape_desc">Décerné pour avoir atteint le niveau 99 en Commerce. Permet d\'obtenir de meilleurs prix en magasin et de gains des routes commerciales, de 10 %.</string>
+    <string name="item_mercantile_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Marchands. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_agility_cape_desc">Décerné pour avoir atteint le niveau 99 en Agilité. Permet d\'obtenir 10 % d\'XP en plus par session.</string>
+    <string name="item_agility_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Agiles. Permet d\'obtenir 5 % d\'XP en plus par session.</string>
+    <string name="item_slayer_cape_name">Cape de Tueur</string>
+    <string name="item_slayer_cape_desc">Décerné pour avoir atteint le niveau 99 en Tueur. Permet d\'obtenir 10 % de points de Tueur en plus par session.</string>
+    <string name="item_attack_cape_desc">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Attaque de 10 %.</string>
+    <string name="item_strength_cape_desc">Décerné pour avoir atteint le niveau 99 en Force. Permet d\'obtenir un bonus d\'XP en Force de 10 %.</string>
+    <string name="item_defense_cape_desc">Décerné pour avoir atteint le niveau 99 en Défense. Permet d\'obtenir un bonus d\'XP en Défense de 10 %.</string>
+    <string name="item_warriors_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Guerriers. Permet d\'obtenir un bonus de 5 % d\'XP en Attaque, Force et Défense.</string>
+    <string name="item_ranged_cape_desc">Décerné pour avoir atteint le niveau 99 en Tir à Distance. Permet d\'obtenir un bonus d\'XP en Tir à Distance de 10 %.</string>
+    <string name="item_archers_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Archers. Permet d\'obtenir un bonus de 5 % d\'XP en Tir à Distance.</string>
+    <string name="item_magic_cape_desc">Décerné pour avoir atteint le niveau 99 en Magie. Permet d\'obtenir un bonus d\'XP en Magie de 10 %.</string>
+    <string name="item_mages_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Mages. Permet d\'obtenir un bonus de 5 % d\'XP en Magie.</string>
+    <string name="item_slayer_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Tueurs. Permet d\'obtenir un bonus de 5 % d\'XP en Tueur.</string>
+    <string name="item_hp_cape_desc">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Points de Vie de 10 %.</string>
+    <string name="item_deep_iron_pickaxe_desc">Forgé à partir de minerai extrait des galeries les plus profondes de la Mine effondrée. Frappe avec une précision surnaturelle.</string>
+    <string name="item_dwarven_pickaxe_desc">Une pioche naine de qualité magistrale. Le meilleur outil d\'extraction jamais façonné.</string>
+    <string name="item_forge_pickaxe_desc">Trempée dans les flammes de l\'Ancienne Forge elle-même. La pioche la plus rare et la plus puissante qui soit.</string>
+    <string name="item_ironwood_axe_desc">Taillé dans les bois de fer qui se dressaient autrefois dans les Ruines de la Forêt Ancienne. D\'une durabilité exceptionnelle.</string>
+    <string name="item_dwarven_axe_desc">Une hache naine légendaire. Elle abat n\'importe quel arbre avec facilité.</string>
+    <string name="item_sanctum_axe_desc">Forgée dans l\'ombre du Sanctuaire corrompu. Sa lame tranche avec aisance même les bûches imprégnées de magie.</string>
+    <string name="item_blessed_fishing_rod_desc">Façonné à partir de bois flotté récupéré au Temple englouti, béni par d\'anciens rites marins.</string>
+    <string name="item_dwarven_fishing_rod_desc">Une canne à pêche de facture naine. Elle sort pratiquement les poissons de l\'eau toute seule.</string>
+    <string name="item_abyssal_rod_desc">Tissé à partir de filaments imprégnés du Vide, récupérés dans les Ruines abyssales. Les poissons bondissent littéralement dessus.</string>
+    <string name="item_bronze_hoe_desc">Une houe en bronze ordinaire. Augmente légèrement le rendement des récoltes.</string>
+    <string name="item_iron_hoe_desc">Une houe en fer. Augmente le rendement des récoltes.</string>
+    <string name="item_steel_hoe_desc">Une houe en acier. Augmente notablement le rendement des récoltes.</string>
+    <string name="item_mithril_hoe_desc">Une houe en mithril. Augmente considérablement le rendement des récoltes.</string>
+    <string name="item_adamantite_hoe_desc">Une houe en adamantite. Augmente substantiellement le rendement des récoltes.</string>
+    <string name="item_runite_hoe_desc">Une houe en runite. L\'outil agricole le plus raffiné disponible.</string>
+    <string name="item_dwarven_hoe_desc">Une houe naine légendaire. Elle double la récolte de n\'importe quelle culture.</string>
+    <string name="item_divine_hoe_desc">Une houe bénie par la lumière divine. Les cultures prospèrent à son contact.</string>
+    <string name="item_bronze_hammer_desc">Un marteau en bronze pour le travail de forge.</string>
+    <string name="item_iron_hammer_desc">Un marteau en fer pour le travail de forge.</string>
+    <string name="item_steel_hammer_desc">Un marteau en acier pour le travail de forge.</string>
+    <string name="item_mithril_hammer_desc">Un marteau en mithril pour le travail de forge.</string>
+    <string name="item_adamantite_hammer_desc">Un marteau en adamantite pour le travail de forge.</string>
+    <string name="item_runite_hammer_desc">Un marteau en runite pour le travail de forge.</string>
+    <string name="item_dwarven_hammer_desc">Un marteau forgé par des nains. Il frappe juste à tous les coups.</string>
+    <string name="item_divine_hammer_desc">Un marteau touché par la lumière divine. Le métal se plie à sa volonté.</string>
+    <string name="item_bronze_tinderbox_desc">Un briquet à amadou en bronze pour faire du feu.</string>
+    <string name="item_iron_tinderbox_desc">Un briquet à amadou en fer pour faire du feu.</string>
+    <string name="item_steel_tinderbox_desc">Un briquet à amadou en acier pour faire du feu.</string>
+    <string name="item_mithril_tinderbox_desc">Un briquet à amadou en mithril pour faire du feu.</string>
+    <string name="item_adamantite_tinderbox_desc">Un briquet à amadou en adamantite pour faire du feu.</string>
+    <string name="item_runite_tinderbox_desc">Un briquet à amadou en runite pour faire du feu.</string>
+    <string name="item_dwarven_tinderbox_desc">Un briquet à amadou forgée par des nains. Il produit instantanément une flamme ardente.</string>
+    <string name="item_divine_tinderbox_desc">Un briquet à amadou touché par une lumière divine. Il attise la flamme à la moindre étincelle.</string>
+    <string name="item_bronze_grappling_hook_desc">Un grappin en bronze pour l\'agilité.</string>
+    <string name="item_iron_grappling_hook_desc">Un grappin en fer pour l\'agilité.</string>
+    <string name="item_steel_grappling_hook_desc">Un grappin en acier pour l\'agilité.</string>
+    <string name="item_mithril_grappling_hook_desc">Un grappin en mithril pour l\'agilité.</string>
+    <string name="item_adamantite_grappling_hook_desc">Un grappin en adamantite pour l\'agilité.</string>
+    <string name="item_runite_grappling_hook_desc">Un grappin en runite pour l\'agilité.</string>
+    <string name="item_shadow_grappling_hook_desc">Un grappin tissé d\'ombre. Il s\'accroche même là où il n\'y a rien à saisir.</string>
+    <string name="item_dwarven_grappling_hook_desc">Un grappin forgé par des nains. Il ne glisse jamais.</string>
+    <string name="item_arcane_grappling_hook_desc">Un grappin vibrant d\'énergie arcanique. Il vous propulse par-delà les gouffres en un instant.</string>
+    <string name="item_divine_grappling_hook_desc">Un grappin baigné de lumière divine. Il s\'accroche partout où il est lancé.</string>
+    <string name="item_bronze_frying_pan_desc">Une poêle à frire en bronze pour la cuisson.</string>
+    <string name="item_iron_frying_pan_desc">Une poêle à frire en fer pour la cuisson.</string>
+    <string name="item_steel_frying_pan_desc">Une poêle à frire en acier pour la cuisson.</string>
+    <string name="item_mithril_frying_pan_desc">Une poêle à frire en mithril pour la cuisson.</string>
+    <string name="item_adamantite_frying_pan_desc">Une poêle à frire en adamantite pour la cuisson.</string>
+    <string name="item_runite_frying_pan_desc">Une poêle à frire en runite pour la cuisson.</string>
+    <string name="item_dwarven_frying_pan_desc">Une poêle à frire forgée par des nains. Elle cuit les aliments à la perfection à tous les coups.</string>
+    <string name="item_divine_frying_pan_desc">Une poêle à frire touchée par une lumière divine. Elle ne brûle jamais le moindre plat.</string>
+    <string name="item_bronze_lockpick_desc">Un crochet de base en bronze pour le vol.</string>
+    <string name="item_iron_lockpick_desc">Un crochet en fer pour voler.</string>
+    <string name="item_steel_lockpick_desc">Un crochet en acier pour voler.</string>
+    <string name="item_mithril_lockpick_desc">Un crochet en mithril pour voler.</string>
+    <string name="item_adamantite_lockpick_desc">Un crochet en adamantite pour voler.</string>
+    <string name="item_runite_lockpick_desc">Un crochet en runite pour voler.</string>
+    <string name="item_rogues_lockpick_desc">Un crochet usé, prisé des voleurs de la guilde. Il s\'insère dans n\'importe quelle serrure.</string>
+    <string name="item_dwarven_lockpick_desc">Un crochet de serrurier forgé par des nains. Il trouve instantanément les goupilles.</string>
+    <string name="item_shadow_lockpick_desc">Un crochet forgé dans l\'ombre. Aucune serrure ne lui résiste longtemps.</string>
+    <string name="item_divine_lockpick_desc">Un crochet imprégné de lumière divine. Chaque serrure lui cède.</string>
+    <string name="item_wraithbone_ring_desc">Un anneau pâle taillé dans de l\'os de spectre durant la Sombre Moisson. Il stabilise la main et le cœur.</string>
+    <string name="item_reaper_scythe_desc">L\'outil de moisson du Roi Creux. Il ne moissonne pas que du blé.</string>
+    <string name="item_gloomweave_cape_desc">Tissé à partir du crépuscule et de la fumée des lanternes au Marché de nuit. Vendu uniquement durant la Sombre Moisson.</string>
+    <string name="item_gilded_full_helmet_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_platebody_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_kiteshield_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_wind_strike_name">Frappe de Vent</string>
+    <string name="item_wind_strike_desc">Un sort d\'air élémentaire qui frappe votre adversaire.</string>
+    <string name="item_wind_bolt_name">Trait de Vent</string>
+    <string name="item_wind_bolt_desc">Un sort d\'air modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_wind_blast_name">Explosion de Vent</string>
+    <string name="item_wind_blast_desc">Un puissant sort d\'air qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_wind_wave_name">Vague de Vent</string>
+    <string name="item_wind_wave_desc">Un sort d\'air dévastateur qui balaie votre adversaire.</string>
+    <string name="item_water_strike_name">Frappe d\'Eau</string>
+    <string name="item_water_strike_desc">Un sort d\'eau élémentaire qui frappe votre adversaire.</string>
+    <string name="item_water_bolt_name">Trait d\'Eau</string>
+    <string name="item_water_bolt_desc">Un sort d\'eau modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_water_blast_name">Explosion d\'Eau</string>
+    <string name="item_water_blast_desc">Un puissant sort d\'eau qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_water_wave_name">Vague d\'Eau</string>
+    <string name="item_water_wave_desc">Un sort d\'eau dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_earth_strike_name">Frappe de Terre</string>
+    <string name="item_earth_strike_desc">Un sort de terre élémentaire qui frappe votre adversaire.</string>
+    <string name="item_earth_bolt_name">Trait de Terre</string>
+    <string name="item_earth_bolt_desc">Un sort de terre modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_earth_blast_name">Explosion de Terre</string>
+    <string name="item_earth_blast_desc">Un puissant sort de terre qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_earth_wave_name">Vague de Terre</string>
+    <string name="item_earth_wave_desc">Un sort de terre dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_fire_strike_name">Frappe de Feu</string>
+    <string name="item_fire_strike_desc">Un sort de feu élémentaire qui frappe votre adversaire.</string>
+    <string name="item_fire_bolt_name">Trait de Feu</string>
+    <string name="item_fire_bolt_desc">Un sort de feu modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_fire_blast_name">Explosion de Feu</string>
+    <string name="item_fire_blast_desc">Un puissant sort de feu qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_fire_wave_name">Vague de Feu</string>
+    <string name="item_fire_wave_desc">Un sort de feu dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_mind_strike_name">Frappe Mentale</string>
+    <string name="item_mind_strike_desc">Un sort mental élémentaire qui frappe votre adversaire.</string>
+    <string name="item_mind_bolt_name">Trait Mental</string>
+    <string name="item_mind_bolt_desc">Un sort mental modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_mind_blast_name">Explosion Mentale</string>
+    <string name="item_mind_blast_desc">Un puissant sort mental qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_mind_wave_name">Vague Mentale</string>
+    <string name="item_mind_wave_desc">Un sort mental dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_chaos_strike_name">Frappe du Chaos</string>
+    <string name="item_chaos_strike_desc">Un sort de chaos élémentaire qui frappe votre adversaire.</string>
+    <string name="item_chaos_bolt_name">Trait du Chaos</string>
+    <string name="item_chaos_bolt_desc">Un sort de chaos modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_chaos_blast_name">Explosion du Chaos</string>
+    <string name="item_chaos_blast_desc">Un puissant sort de chaos qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_chaos_wave_name">Vague du Chaos</string>
+    <string name="item_chaos_wave_desc">Un sort de chaos dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_death_strike_name">Frappe de la Mort</string>
+    <string name="item_death_strike_desc">Un sort de mort élémentaire qui frappe votre adversaire.</string>
+    <string name="item_death_bolt_name">Trait de la Mort</string>
+    <string name="item_death_bolt_desc">Un sort de mort modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_death_blast_name">Explosion de la Mort</string>
+    <string name="item_death_blast_desc">Un puissant sort de mort qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_death_wave_name">Vague de la Mort</string>
+    <string name="item_death_wave_desc">Un sort de mort dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_blood_strike_name">Frappe de Sang</string>
+    <string name="item_blood_strike_desc">Un sort de sang élémentaire qui frappe votre adversaire.</string>
+    <string name="item_blood_bolt_name">Trait de Sang</string>
+    <string name="item_blood_bolt_desc">Un sort de sang modéré qui frappe votre adversaire d\'un trait.</string>
+    <string name="item_blood_blast_name">Explosion de Sang</string>
+    <string name="item_blood_blast_desc">Un puissant sort de sang qui projette une déferlante sur votre adversaire.</string>
+    <string name="item_blood_wave_name">Vague de Sang</string>
+    <string name="item_blood_wave_desc">Un sort de sang dévastateur qui déferle sur votre adversaire.</string>
+    <string name="item_spirit_herb_name">Spirit Herb</string> <!-- untranslated -->
+    <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
+    <string name="item_celestial_bloom_name">Celestial Bloom</string> <!-- untranslated -->
+    <string name="item_celestial_bloom_desc">An ethereal flower used in master potions. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
+    <string name="item_void_lotus_name">Void Lotus</string> <!-- untranslated -->
+    <string name="item_void_lotus_desc">A mysterious lotus used in the rarest concoctions. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
+    <string name="crop_magic_bean_name">Magic Bean</string> <!-- untranslated -->
 </resources>

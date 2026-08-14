@@ -179,14 +179,16 @@ internal fun FiremakingSheet(
                             else -> "ashes"
                         }
                         val ashName = GameStrings.itemName(context, ashKey)
+                        val logsOwned = inventory[key] ?: 0
+                        val rowAlpha = if (logsOwned > 0) 1f else 0.38f
                         Row(
-                            modifier          = Modifier.fillMaxWidth().clickable { selectedKey = key }.padding(horizontal = 16.dp, vertical = 12.dp),
+                            modifier          = Modifier.fillMaxWidth().clickable(enabled = logsOwned > 0) { selectedKey = key }.padding(horizontal = 16.dp, vertical = 12.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Column(Modifier.weight(1f)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge)
+                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface.copy(alpha = rowAlpha))
                                     val questIndicators = activeQuests["${Skills.FIREMAKING}:$ashKey"] ?: emptyList()
                                     if (questIndicators.isNotEmpty()) {
                                         QuestIndicatorIcons(questIndicators)
@@ -196,13 +198,13 @@ internal fun FiremakingSheet(
                                 Text(
                                     text  = stringResource(R.string.firemaking_burns_to, ashName) + "  •  ${log.xpPerLog} XP  •  " + stringResource(R.string.firemaking_ashes_owned, ashOwned),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = rowAlpha),
                                 )
                             }
                             Text(
-                                text  = "${inventory[key] ?: 0} ${stringResource(R.string.firemaking_logs_in_inventory)}",
+                                text  = "$logsOwned ${stringResource(R.string.firemaking_logs_in_inventory)}",
                                 style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = rowAlpha),
                             )
                         }
                         HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))

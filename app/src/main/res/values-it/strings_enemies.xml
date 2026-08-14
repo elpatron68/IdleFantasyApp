@@ -4,7 +4,7 @@
     <string name="enemy_giant_rat_name">Ratto Gigante</string>
     <string name="enemy_goblin_name">Goblin</string>
     <string name="enemy_skeleton_name">Scheletro</string>
-    <string name="enemy_zombie_name">Zombie</string>
+    <string name="enemy_zombie_name">Zombi</string>
     <string name="enemy_bandit_name">Bandito</string>
     <string name="enemy_guard_name">Guardia</string>
     <string name="enemy_dark_wizard_name">Mago Oscuro</string>
@@ -21,6 +21,59 @@
     <string name="enemy_chicken_name">Gallina</string>
     <string name="enemy_sheep_name">Pecora</string>
     <string name="enemy_cow_name">Mucca</string>
+    <string name="enemy_fire_giant_name">Gigante di Fuoco</string>
+    <string name="enemy_ancient_guardian_name">Antico Guardiano</string>
+    <string name="enemy_lich_name">Lich</string>
+    <string name="enemy_cave_troll_name">Toll di Montagna</string>
+    <string name="enemy_mine_spider_name">Ragno delle Caverne</string>
+    <string name="enemy_rock_golem_name">Golem di Roccia</string>
+    <string name="enemy_iron_golem_name">Golem di Ferro</string>
+    <string name="enemy_forge_demon_name">Demone della Forgia</string>
+    <string name="enemy_dwarven_guardian_name">Guardiano Nanico</string>
+    <string name="enemy_drowned_cultist_name">Fanatico Annegato</string>
+    <string name="enemy_sea_spirit_name">Spirito dei Mari</string>
+    <string name="enemy_cursed_fisherman_name">Pescatore Maledetto</string>
+    <string name="enemy_abyssal_leech_name">Sanguisuga Abissale</string>
+    <string name="enemy_deep_horror_name">Orrore del Profondo</string>
+    <string name="enemy_void_guardian_name">Guardiano del Vuoto</string>
+    <string name="enemy_corrupted_druid_name">Drudio Corrotto</string>
+    <string name="enemy_vine_beast_name">Bestia Rampicante</string>
+    <string name="enemy_forest_spirit_name">Spirito dei Boschi</string>
+    <string name="enemy_shadow_beast_name">Bestia delle Ombre</string>
+    <string name="enemy_twisted_treant_name">Trent Oscuro</string>
+    <string name="enemy_corrupted_mage_name">Mago Corrotto</string>
+    <string name="enemy_cutpurse_name">Furfante</string>
+    <string name="enemy_arcane_construct_name">Macchina Arcana</string>
+    <string name="enemy_storm_imp_name">Folletto Impetuoso</string>
+    <string name="enemy_sky_serpent_name">Serpente dei Cieli</string>
+    <string name="enemy_cloud_giant_name">Gigante delle Nuvole</string>
+    <string name="enemy_sun_wisp_name">Spirito Solare</string>
+    <string name="enemy_ember_hound_name">Segugio di Brace</string>
+    <string name="enemy_cinder_colossus_name">Colosso Infuocato</string>
+    <string name="enemy_will_o_wisp_name">Fuoco Fatuo</string>
+    <string name="enemy_grave_ghoul_name">Ghoul Oscuro</string>
+    <string name="enemy_husk_horror_name">Mostro dell\'Ombra</string>
+    <string name="enemy_barrow_wight_name">Anima Errante</string>
+    <string name="enemy_shade_stalker_name">Ombra Perseguitante</string>
+    <string name="enemy_bone_colossus_name">Colosso delle Ossa</string>
+    <string name="enemy_dread_dullahan_name">Dullahan del Timore</string>
+    <string name="enemy_void_stalker_name">Predatore del Vuoto</string>
+    <string name="enemy_rift_guardian_name">Guardiano della Faglia</string>
+    <string name="enemy_chaos_elemental_name">Elementale del Caos</string>
+    <string name="enemy_frost_giant_name">Gigante di Gelo</string>
+    <string name="enemy_ice_golem_name">Golem di Ghiaccio</string>
+    <string name="enemy_glacial_mage_name">Mago Glaciale</string>
+    <string name="enemy_abyssal_lord_name">Signore Abissale</string>
+    <string name="enemy_eternal_sentinel_name">Sentinella Eterna</string>
+    <string name="enemy_void_archon_name">Arconte del Vuoto</string>
+    <string name="enemy_frost_wyvern_name">Viverna del Gelo</string>
+    <string name="enemy_abyssal_guardian_name">Guardiano Abissale</string>
+    <string name="enemy_shadow_thief_name">Ladro dell\'Ombra</string>
+    <string name="enemy_elder_lich_name">Anziano Lich</string>
+    <string name="enemy_assassin_name">Assassino</string>
+    <string name="enemy_shadow_assassin_name">Assassino dell\'Ombra</string>
+    <string name="enemy_vault_guardian_name">Guardiano del Caveau</string>
+    <string name="enemy_guild_master_name">Gran Maestro della Gilda</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Caverna dei Folletti</string>
@@ -47,29 +100,42 @@
     <string name="dungeon_infernal_stronghold_desc">Una fortezza di fuoco e zolfo, governata da demoni e segugi infernali. Il solo calore è sufficiente per uccidere gli impreparati.</string>
     <string name="dungeon_ancient_temple_name">Antico Tempio</string>
     <string name="dungeon_ancient_temple_desc">Un antico tempio custodito dalle più potenti creature del regno. Solo i più forti guerrieri osano entrare.</string>
+    <string name="dungeon_void_rift_name">Faglia del Vuoto</string>
+    <string name="dungeon_void_rift_desc">Una spaccatura nella realtà da cui creature del vuoto si riversano nel mondo mortale.</string>
+    <string name="dungeon_frozen_citadel_name">Cittadella Ghiacciata</string>
+    <string name="dungeon_frozen_citadel_desc">Una fortezza ancestrale intrappolata in un ghiacciaio; i suoi guardiani congelati in eterna veglia.</string>
+    <string name="dungeon_abyssal_throne_name">Trono Abissale</string>
+    <string name="dungeon_abyssal_throne_desc">Il punto più profondo del mondo conosciuto, governato da signori del vuoto dall\'alba dei tempi.</string>
 
-    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <!-- ===== Event dungeon names ===== -->
+    <string name="dungeon_sunspire_name">Il Pinnacolo</string>
+    <string name="dungeon_sunspire_desc">Una torre distrutta dalla forza del Sole durante il Solstizio, rilasciando spiriti del fuoco ovunque. Parte dell\'evento \"Pinnacolo del Solstizio\".</string>
+    <string name="dungeon_hollowfen_name">Hollowfen</string>
+    <string name="dungeon_hollowfen_desc">Una palude spettrale dove piante maledette vagano senza meta. Parte dell\'evento \"Raccolto Oscuro\".</string>
+    <string name="dungeon_cloud_kingdom_name">Regno delle Nuvole</string>
+    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_name">Bosco Moribondo</string>
+    <string name="dungeon_blightwood_desc">Foresta dove tutto diventa marcio e putrefatto, casa degli orrori più terribili. Parte dell\'evento \"Raccolto Oscuro\".</string>
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">Drago Nero Regale</string>
+    <string name="boss_king_black_dragon_desc">Il leggendario drago a tre teste, temuto in tutto il regno.</string>
     <string name="boss_demon_lord_name">Signore dei Demoni</string>
+    <string name="boss_demon_lord_desc">Un antico demone dell\'abisso, maestro della magia oscura.</string>
     <string name="boss_kraken_name">Kraken</string>
+    <string name="boss_kraken_desc">Il terrore dei mari profondi, un colossale mostro marino.</string>
     <string name="boss_balrog_name">Balrog</string>
+    <string name="boss_balrog_desc">Un antico demone di fiamme e ombre, risvegliato dal suo sonno profondo sotto la terra.</string>
+    <string name="boss_void_sovereign_name">Sovrano del Vuoto</string>
+    <string name="boss_void_sovereign_desc">L\'entità primordiale dietro gli squarci del vuoto. Antica oltre ogni misura, guarda agli sfidanti mortali con disprezzo.</string>
+    <string name="boss_sol_invictus_name">Sol Invictus, l\'Estrema Fiamma</string>
+    <string name="boss_sol_invictus_desc">Un frammento di Sole, liberatosi dal giogo del Pinnacolo del Solstizio. Solo i guerrieri più temerari osano avvicinarsi.</string>
+    <string name="boss_the_hollow_king_name">Il Re Vacuo</string>
+    <string name="boss_the_hollow_king_desc">Il sovrano decapitato di ogni oscura pianta, uscito dal suo castello nel Bosco Moribondo per giudicare i mortali.</string>
+    <string name="boss_the_vault_guardian_name">The Vault Guardian</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string> <!-- untranslated -->
 
-    <!-- ===== Pet names and descriptions ===== -->
-    <string name="pet_dragon_whelp_name">Cucciolo di Drago</string>
-    <string name="pet_dragon_whelp_desc">Un giovane drago che potenzia i tuoi XP in Combattimento.</string>
-    <string name="pet_imp_pet_name">Folletto da Compagnia</string>
-    <string name="pet_imp_pet_desc">Un folletto dispettoso che potenzia il tuo addestramento in Preghiera.</string>
-    <string name="pet_baby_kraken_name">Piccolo Kraken</string>
-    <string name="pet_baby_kraken_desc">Un minuscolo kraken che migliora i tuoi XP in Cucina.</string>
-    <string name="pet_rock_golem_name">Golem di Pietra</string>
-    <string name="pet_rock_golem_desc">Una formazione rocciosa vivente che migliora i tuoi XP da Estrazione.</string>
-    <string name="pet_ent_name">Ent</string>
-    <string name="pet_ent_desc">Lo spirito di un albero antico che potenzia i tuoi XP in Taglialegna.</string>
-    <string name="pet_tiny_templar_name">Piccolo Templare</string>
-    <string name="pet_tiny_templar_desc">Un piccolo pesce da compagnia che potenzia i tuoi XP durante la Pesca.</string>
-    <string name="pet_tangleroot_name">Radicroviglio</string>
-    <string name="pet_tangleroot_desc">Una creatura magica vegetale che migliora i tuoi XP in Agricoltura.</string>
-
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Miniera Crollata</string>
     <string name="dungeon_collapsed_mine_desc">Una vasta caverna sotto le miniere di rame. Troll delle caverne e golem di roccia infestano le macerie, e ragni giganti tessono ragnatele nei cunicoli crollati.</string>
     <string name="dungeon_shadow_den_name">Tana delle Ombre</string>
@@ -86,4 +152,8 @@
     <string name="dungeon_corrupted_sanctum_desc">Un santuario pervaso d\'ombra nel cuore della foresta corrotta. Sacerdoti oscuri e bestie demoniache custodiscono un antico male.</string>
     <string name="dungeon_drowned_temple_name">Tempio Sommerso</string>
     <string name="dungeon_drowned_temple_desc">Un tempio sommerso sotto la grotta marina, le sue sale sono piene d\'acqua e creature marine che ne hanno fatto la loro dimora.</string>
+    <string name="dungeon_rogue_sanctum_name">Santuario dei Briganti</string>
+    <string name="dungeon_rogue_sanctum_desc">Il rifugio interno della gilda, accessibile solo ai membri più fidati.</string>
+    <string name="dungeon_guild_of_shadows_name">Gilda delle Ombre</string>
+    <string name="dungeon_guild_of_shadows_desc">L\'area più interna della gilda, protetta da un corpo di guardie speciale.</string>
 </resources>

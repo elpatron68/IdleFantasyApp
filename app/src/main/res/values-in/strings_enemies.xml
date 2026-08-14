@@ -2,10 +2,10 @@
 <resources>
     <!-- ===== Enemy names ===== -->
     <string name="enemy_giant_rat_name">Tikus Raksasa</string>
-    <string name="enemy_goblin_name">Goblin</string>
+    <string name="enemy_goblin_name">Goblin</string> <!-- untranslated -->
     <string name="enemy_skeleton_name">Tengkorak</string>
     <string name="enemy_zombie_name">Zombi</string>
-    <string name="enemy_bandit_name">Bandit</string>
+    <string name="enemy_bandit_name">Bandit</string> <!-- untranslated -->
     <string name="enemy_guard_name">Penjaga</string>
     <string name="enemy_dark_wizard_name">Penyihir Kegelapan</string>
     <string name="enemy_orc_warrior_name">Prajurit Orc</string>
@@ -21,6 +21,59 @@
     <string name="enemy_chicken_name">Ayam</string>
     <string name="enemy_sheep_name">Domba</string>
     <string name="enemy_cow_name">Sapi</string>
+    <string name="enemy_fire_giant_name">Fire Giant</string> <!-- untranslated -->
+    <string name="enemy_ancient_guardian_name">Ancient Guardian</string> <!-- untranslated -->
+    <string name="enemy_lich_name">Lich</string> <!-- untranslated -->
+    <string name="enemy_cave_troll_name">Cave Troll</string> <!-- untranslated -->
+    <string name="enemy_mine_spider_name">Mine Spider</string> <!-- untranslated -->
+    <string name="enemy_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="enemy_iron_golem_name">Iron Golem</string> <!-- untranslated -->
+    <string name="enemy_forge_demon_name">Forge Demon</string> <!-- untranslated -->
+    <string name="enemy_dwarven_guardian_name">Dwarven Guardian</string> <!-- untranslated -->
+    <string name="enemy_drowned_cultist_name">Drowned Cultist</string> <!-- untranslated -->
+    <string name="enemy_sea_spirit_name">Sea Spirit</string> <!-- untranslated -->
+    <string name="enemy_cursed_fisherman_name">Cursed Fisherman</string> <!-- untranslated -->
+    <string name="enemy_abyssal_leech_name">Abyssal Leech</string> <!-- untranslated -->
+    <string name="enemy_deep_horror_name">Deep Horror</string> <!-- untranslated -->
+    <string name="enemy_void_guardian_name">Void Guardian</string> <!-- untranslated -->
+    <string name="enemy_corrupted_druid_name">Corrupted Druid</string> <!-- untranslated -->
+    <string name="enemy_vine_beast_name">Vine Beast</string> <!-- untranslated -->
+    <string name="enemy_forest_spirit_name">Forest Spirit</string> <!-- untranslated -->
+    <string name="enemy_shadow_beast_name">Shadow Beast</string> <!-- untranslated -->
+    <string name="enemy_twisted_treant_name">Twisted Treant</string> <!-- untranslated -->
+    <string name="enemy_corrupted_mage_name">Corrupted Mage</string> <!-- untranslated -->
+    <string name="enemy_cutpurse_name">Cutpurse</string> <!-- untranslated -->
+    <string name="enemy_arcane_construct_name">Arcane Construct</string> <!-- untranslated -->
+    <string name="enemy_storm_imp_name">Storm Imp</string> <!-- untranslated -->
+    <string name="enemy_sky_serpent_name">Sky Serpent</string> <!-- untranslated -->
+    <string name="enemy_cloud_giant_name">Cloud Giant</string> <!-- untranslated -->
+    <string name="enemy_sun_wisp_name">Sun Wisp</string> <!-- untranslated -->
+    <string name="enemy_ember_hound_name">Ember Hound</string> <!-- untranslated -->
+    <string name="enemy_cinder_colossus_name">Cinder Colossus</string> <!-- untranslated -->
+    <string name="enemy_will_o_wisp_name">Will-o\'-Wisp</string> <!-- untranslated -->
+    <string name="enemy_grave_ghoul_name">Grave Ghoul</string> <!-- untranslated -->
+    <string name="enemy_husk_horror_name">Husk Horror</string> <!-- untranslated -->
+    <string name="enemy_barrow_wight_name">Barrow Wight</string> <!-- untranslated -->
+    <string name="enemy_shade_stalker_name">Shade Stalker</string> <!-- untranslated -->
+    <string name="enemy_bone_colossus_name">Bone Colossus</string> <!-- untranslated -->
+    <string name="enemy_dread_dullahan_name">Dread Dullahan</string> <!-- untranslated -->
+    <string name="enemy_void_stalker_name">Void Stalker</string> <!-- untranslated -->
+    <string name="enemy_rift_guardian_name">Penjaga Celah</string>
+    <string name="enemy_chaos_elemental_name">Chaos Elemental</string> <!-- untranslated -->
+    <string name="enemy_frost_giant_name">Raksasa Es</string>
+    <string name="enemy_ice_golem_name">Golem Es</string>
+    <string name="enemy_glacial_mage_name">Penyihir Gletser</string>
+    <string name="enemy_abyssal_lord_name">Abyssal Lord</string> <!-- untranslated -->
+    <string name="enemy_eternal_sentinel_name">Eternal Sentinel</string> <!-- untranslated -->
+    <string name="enemy_void_archon_name">Void Archon</string> <!-- untranslated -->
+    <string name="enemy_frost_wyvern_name">Frost Wyvern</string> <!-- untranslated -->
+    <string name="enemy_abyssal_guardian_name">Abyssal Guardian</string> <!-- untranslated -->
+    <string name="enemy_shadow_thief_name">Shadow Thief</string> <!-- untranslated -->
+    <string name="enemy_elder_lich_name">Elder Lich</string> <!-- untranslated -->
+    <string name="enemy_assassin_name">Assassin</string> <!-- untranslated -->
+    <string name="enemy_shadow_assassin_name">Pembunuh Bayangan</string>
+    <string name="enemy_vault_guardian_name">Penjaga Markas</string>
+    <string name="enemy_guild_master_name">Guild Master</string> <!-- untranslated -->
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Gua Setan Kerdil</string>
@@ -47,30 +100,42 @@
     <string name="dungeon_infernal_stronghold_desc">Benteng api dan belerang, dikuasai oleh iblis dan anjing neraka. Panasnya saja sudah cukup untuk membunuh mereka yang tak siap.</string>
     <string name="dungeon_ancient_temple_name">Kuil Kuno</string>
     <string name="dungeon_ancient_temple_desc">Kuil kuno yang dijaga oleh makhluk-makhluk terkuat di seluruh negeri. Hanya pejuang terkuat yang berani memasukinya.</string>
+    <string name="dungeon_void_rift_name">Robekan Void</string>
+    <string name="dungeon_void_rift_desc">Sebuah robekan di realitas tempat makhluk-makhluk hampa masuk ke dunia fana.</string>
+    <string name="dungeon_frozen_citadel_name">Citadel Beku</string>
+    <string name="dungeon_frozen_citadel_desc">Sebuah benteng kuno yang diselimuti gletser, para pembelanya membeku dalam penjagaan abadi.</string>
+    <string name="dungeon_abyssal_throne_name">Takhta Abyssal</string>
+    <string name="dungeon_abyssal_throne_desc">Titik terdalam di dunia yang dikenal, diperintah oleh penguasa kehampaan sejak awal waktu.</string>
 
-    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <!-- ===== Event dungeon names ===== -->
+    <string name="dungeon_sunspire_name">The Sunspire</string> <!-- untranslated -->
+    <string name="dungeon_sunspire_desc">A sun-tower ruin cracked open by the solstice, spilling heat spirits into the region. Part of the Sunspire Solstice event.</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_name">The Hollowfen</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_desc">A mist-drowned marsh of sunken barrows where the harvest dead walk. Part of the Gloomharvest event.</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_name">Cloud Kingdom</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_name">The Blightwood</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_desc">A rotting forest deep past the Hollowfen, where the Gloomharvest\'s strongest horrors gather. Part of the Gloomharvest event.</string> <!-- untranslated -->
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">Raja Naga Hitam</string>
+    <string name="boss_king_black_dragon_desc">Naga berkepala tiga yang legendaris, ditakuti di seluruh alam.</string>
     <string name="boss_demon_lord_name">Penguasa Iblis</string>
-    <string name="boss_kraken_name">Kraken</string>
-    <string name="boss_balrog_name">Balrog</string>
+    <string name="boss_demon_lord_desc">Sesosok iblis kuno dari jurang maut, penguasa sihir gelap.</string>
+    <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="boss_kraken_desc">Teror laut dalam, monster laut raksasa.</string>
+    <string name="boss_balrog_name">Balrog</string> <!-- untranslated -->
+    <string name="boss_balrog_desc">Sesosok iblis kuno api dan bayangan, terbangun dari tidurnya jauh di bawah bumi.</string>
+    <string name="boss_void_sovereign_name">Penguasa Hampa</string>
+    <string name="boss_void_sovereign_desc">Entitas primordial di balik robekan void. Kuno melampaui segala perhitungan, ia memandang para penantang fana dengan penghinaan.</string>
+    <string name="boss_sol_invictus_name">Sol Invictus, the Sundered Flame</string> <!-- untranslated -->
+    <string name="boss_sol_invictus_desc">A shard of the sun itself, torn loose from the Sunspire ruin. Only the boldest warriors dare approach.</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_name">The Hollow King</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_desc">The headless sovereign of the Gloomharvest, riding out from the Blightwood to reap what the living have sown.</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_name">The Vault Guardian</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string> <!-- untranslated -->
 
-    <!-- ===== Pet names and descriptions ===== -->
-    <string name="pet_dragon_whelp_name">Anak Naga</string>
-    <string name="pet_dragon_whelp_desc">Naga muda yang meningkatkan XP pertarunganmu.</string>
-    <string name="pet_imp_pet_name">Peliharaan Setan Kerdil</string>
-    <string name="pet_imp_pet_desc">Setan kerdil usil yang meningkatkan latihan Doamu.</string>
-    <string name="pet_baby_kraken_name">Anak Kraken</string>
-    <string name="pet_baby_kraken_desc">Kraken kecil yang meningkatkan XP Memasakmu.</string>
-    <string name="pet_rock_golem_name">Golem Batu</string>
-    <string name="pet_rock_golem_desc">Formasi batu hidup yang meningkatkan XP Pertambanganmu.</string>
-    <string name="pet_ent_name">Ent</string>
-    <string name="pet_ent_desc">Roh pohon kuno yang meningkatkan XP Menebangmu.</string>
-    <string name="pet_tiny_templar_name">Templar Kecil</string>
-    <string name="pet_tiny_templar_desc">Sahabat ikan kecil yang meningkatkan XP Memancingmu.</string>
-    <string name="pet_tangleroot_name">Akar Kusut</string>
-    <string name="pet_tangleroot_desc">Makhluk tumbuhan ajaib yang meningkatkan XP Bertanimu.</string>
-
-    <!-- Missing dungeons -->
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Tambang Runtuh</string>
     <string name="dungeon_collapsed_mine_desc">Gua luas di bawah tambang tembaga. Troll gua dan golem batu menghantui reruntuhannya, sementara laba-laba raksasa menenun jaring di poros-poros yang runtuh.</string>
     <string name="dungeon_shadow_den_name">Sarang Bayangan</string>
@@ -87,4 +152,8 @@
     <string name="dungeon_corrupted_sanctum_desc">Tempat suci yang diselimuti bayangan di jantung kanopi yang terkorupsi. Pendeta kegelapan dan makhluk buas yang terkorupsi menjaga kejahatan kuno.</string>
     <string name="dungeon_drowned_temple_name">Kuil Tenggelam</string>
     <string name="dungeon_drowned_temple_desc">Kuil yang tenggelam di bawah gua laut, lorong-lorongnya dipenuhi air dan makhluk laut yang telah menjadikannya rumah.</string>
+    <string name="dungeon_rogue_sanctum_name">Rogue Sanctum</string> <!-- untranslated -->
+    <string name="dungeon_rogue_sanctum_desc">Tempat perlindungan dalam serikat, hanya untuk anggota yang terbukti.</string>
+    <string name="dungeon_guild_of_shadows_name">Serikat Bayangan</string>
+    <string name="dungeon_guild_of_shadows_desc">Ruang paling rahasia dari perkumpulan pencuri, dijaga oleh para penegak hukum paling elitnya.</string>
 </resources>

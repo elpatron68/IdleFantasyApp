@@ -21,6 +21,16 @@
     <string name="quest_archers_guild_7_name">スナイパー</string>
     <string name="quest_archers_guild_8_name">ホークアイ</string>
     <string name="quest_archers_guild_9_name">ファントム</string>
+    <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
+    <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
+    <string name="quest_construction_guild_4_name">Table Service</string> <!-- untranslated -->
+    <string name="quest_construction_guild_5_name">Well Read</string> <!-- untranslated -->
+    <string name="quest_construction_guild_6_name">Block by Block</string> <!-- untranslated -->
+    <string name="quest_construction_guild_7_name">Cabinet Meeting</string> <!-- untranslated -->
+    <string name="quest_construction_guild_8_name">Dressed to Impress</string> <!-- untranslated -->
+    <string name="quest_construction_guild_9_name">Wardrobe Change</string> <!-- untranslated -->
     <string name="quest_cooking_guild_1_name">チキン・ラン</string>
     <string name="quest_cooking_guild_10_name">総料理長</string>
     <string name="quest_cooking_guild_2_name">マスのごちそう</string>
@@ -141,6 +151,16 @@
     <string name="quest_runecrafting_guild_7_name">ブラッドの備蓄</string>
     <string name="quest_runecrafting_guild_8_name">ルーン保管庫</string>
     <string name="quest_runecrafting_guild_9_name">アルケインの備蓄</string>
+    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_7_name">Veteran Slayer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_8_name">A Thousand Fangs</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_9_name">Master of the Hunt</string> <!-- untranslated -->
     <string name="quest_smithing_guild_1_name">ブロンズの基礎</string>
     <string name="quest_smithing_guild_10_name">伝説の鍛冶師</string>
     <string name="quest_smithing_guild_2_name">アイアンワークス</string>
@@ -151,6 +171,16 @@
     <string name="quest_smithing_guild_7_name">ルナイトの製錬所</string>
     <string name="quest_smithing_guild_8_name">武器の隠し場所</string>
     <string name="quest_smithing_guild_9_name">防具保管庫</string>
+    <string name="quest_thieving_guild_1_name">Street Rat</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_10_name">Master Thief</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_2_name">Market Pilferer</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_4_name">Skilled Fingers</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_5_name">High Society</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_9_name">Sacred Pockets</string> <!-- untranslated -->
     <string name="quest_warriors_guild_1_name">初陣</string>
     <string name="quest_warriors_guild_10_name">剣聖</string>
     <string name="quest_warriors_guild_2_name">散兵</string>
@@ -285,15 +315,10 @@
     <string name="quest_herblore_daily_1e_name">筋力ポーション</string>
     <string name="quest_herblore_daily_4a_name">遠距離ポーション</string>
     <string name="quest_herblore_daily_4b_name">魔法ポーション</string>
-    <!-- 他の翻訳候補:超筋力ポーション -->
     <string name="quest_herblore_daily_4c_name">超筋力</string>
-    <!-- 他の翻訳候補:超遠距離ポーション -->
     <string name="quest_herblore_daily_4d_name">超遠距離</string>
-    <!-- 他の翻訳候補:超魔法ポーション -->
     <string name="quest_herblore_daily_4e_name">超魔法</string>
-    <!-- 他の翻訳候補:オーバーロードポーションの調合、限界突破ポーションの調合 -->
     <string name="quest_herblore_daily_7a_name">オーバーロードの仕込み</string>
-    <!-- 他の翻訳候補:オーバーロードポーションの備蓄、限界突破ポーションの備蓄 -->
     <string name="quest_herblore_daily_7b_name">オーバーロードの備蓄</string>
     <string name="quest_herblore_daily_7c_name">大備蓄</string>
     <string name="quest_mages_daily_1a_name">呪文の練習</string>

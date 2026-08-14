@@ -463,7 +463,7 @@ internal fun CombatSessionBanner(
                             for ((key, startQty) in equippedFood) {
                                 val remaining = (startQty - (foodConsumedSoFar[key] ?: 0)).coerceAtLeast(0)
                                 val heal      = foodHealValues[key] ?: 0
-                                val name      = key.replace('_', ' ').replaceFirstChar { it.uppercase() }
+                                val name      = GameStrings.itemName(context, key)
                                 Text(
                                     text  = "$name ×$remaining (${stringResource(R.string.combat_heals_hp, heal)})",
                                     style = MaterialTheme.typography.bodySmall,

@@ -89,6 +89,6 @@
 
     <!-- ===== Session skill type labels ===== -->
     <string name="skill_expedition_name">Wyprawa</string>
-    <string name="skill_boss_name">Boss</string>
+    <string name="skill_boss_name">Boss</string> <!-- untranslated -->
     <string name="skill_mercantile_name">Handel</string>
 </resources>

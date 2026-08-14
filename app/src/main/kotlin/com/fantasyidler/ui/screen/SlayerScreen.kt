@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -50,10 +49,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.platform.LocalContext
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
-import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.SlayerTask
 import com.fantasyidler.util.GameStrings
-import com.fantasyidler.ui.viewmodel.PendingLamp
+import com.fantasyidler.ui.components.LampSkillDialog
 import com.fantasyidler.ui.viewmodel.SlayerViewModel
 import com.fantasyidler.ui.viewmodel.xpProgressFraction
 import com.fantasyidler.ui.theme.ScaledSheetContent
@@ -241,6 +239,7 @@ fun SlayerScreen(
                 inventory            = state.inventory,
                 queueSize            = state.queueSize,
                 maxQueueSize         = state.maxQueueSize,
+                hasActiveTask        = state.activeTask != null,
                 onForetell           = viewModel::foretellTask,
                 onQueueTask          = viewModel::queueForetelledTaskDungeon,
             )
@@ -284,11 +283,11 @@ fun SlayerScreen(
             )
         }
 
-        val pendingLamp = state.pendingLamp
-        if (pendingLamp != null) {
-            LampSkillPickerDialog(
-                pendingLamp     = pendingLamp,
+        state.pendingLamp?.let { pendingLamp ->
+            LampSkillDialog(
                 skillLevels     = state.skillLevels,
+                skillXp         = state.skillXp,
+                sessionXpGain   = pendingLamp.xpAmount,
                 onSkillSelected = viewModel::selectLampSkill,
                 onDismiss       = viewModel::dismissLampPicker,
             )
@@ -418,6 +417,7 @@ private fun ForetellSection(
     inventory: Map<String, Int>,
     queueSize: Int,
     maxQueueSize: Int,
+    hasActiveTask: Boolean,
     onForetell: () -> Unit,
     onQueueTask: (SlayerTask) -> Unit,
 ) {
@@ -473,6 +473,7 @@ private fun ForetellSection(
             if (foretelledTasks.size < 3) {
                 Button(
                     onClick  = onForetell,
+                    enabled  = hasActiveTask,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.slayer_foretell_btn, nextCostUnits))
@@ -561,58 +562,6 @@ private fun ShopRow(
             }
         }
     }
-}
-
-@Composable
-private fun LampSkillPickerDialog(
-    pendingLamp: PendingLamp,
-    skillLevels: Map<String, Int>,
-    onSkillSelected: (String) -> Unit,
-    onDismiss: () -> Unit,
-) {
-    val context = LocalContext.current
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.slayer_lamp_pick_skill)) },
-        text = {
-            Column(
-                modifier            = Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Skills.ALL.forEach { skillKey ->
-                    val level = skillLevels[skillKey] ?: 1
-                    val name  = GameStrings.skillName(context, skillKey)
-                    Surface(
-                        onClick  = { onSkillSelected(skillKey) },
-                        shape    = RoundedCornerShape(8.dp),
-                        color    = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Row(
-                            modifier              = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp, vertical = 10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment     = Alignment.CenterVertically,
-                        ) {
-                            Text(name, style = MaterialTheme.typography.bodyMedium)
-                            Text(
-                                text  = stringResource(R.string.slayer_level_label, level),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.primary,
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.btn_cancel))
-            }
-        },
-    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)

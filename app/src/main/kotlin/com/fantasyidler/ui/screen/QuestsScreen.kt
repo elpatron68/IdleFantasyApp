@@ -425,7 +425,10 @@ internal fun buildDailyObjective(context: Context, skill: String, target: String
         else          -> return fallback
     }
     val verb = context.getString(verbResId)
-    val item = GameStrings.itemName(context, target)
+    // Combat dailies target an enemy key, not an item key — weekly quests
+    // already localize these; dailies showed raw English names (issue #1146).
+    val item = if (skill == "combat") GameStrings.enemyName(context, target)
+               else GameStrings.itemName(context, target)
     return "$verb $amount $item."
 }
 

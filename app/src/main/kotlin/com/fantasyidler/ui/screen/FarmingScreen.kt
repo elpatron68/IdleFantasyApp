@@ -642,12 +642,12 @@ private fun PlantSheet(
                         )
                         Text(
                             text  = if (crop.id == "magic_bean") stringResource(R.string.farming_bean_picker_stats)
-                                    else "Lv. ${crop.levelRequired}  •  ${(crop.growthTimeHours * 3_600_000L).formatDurationMs()}  •  ${crop.harvestXp} XP/crop",
+                                    else stringResource(R.string.farming_crop_picker_stats, crop.levelRequired, (crop.growthTimeHours * 3_600_000L).formatDurationMs(), crop.harvestXp),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Text(
-                            text  = "Seeds: $seedCount  •  Owned: $ownedCount",
+                            text  = stringResource(R.string.farming_seeds_owned, seedCount, ownedCount),
                             style = MaterialTheme.typography.labelSmall,
                             color = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
                         )

@@ -83,7 +83,8 @@ internal fun BonusesTab(
 
     val boostActive    = state.xpBoostExpiresAt > now
     val blessingActive = state.activeBlessingXpPct > 0 && state.activeBlessingExpiresAt > now
-    val cape           = state.equipped[EquipSlot.CAPE]?.let { allEquipment[it] }?.takeIf { it.capeBonus > 0f }
+    val capeKey        = state.equipped[EquipSlot.CAPE]
+    val cape           = capeKey?.let { allEquipment[it] }?.takeIf { it.capeBonus > 0f }
     val bonusPets      = allPets.values.filter { it.id in state.ownedPetIds && it.boostPercent > 0 }
     val prestigeEntries = state.skillPrestige.entries.filter { it.value > 0 }
 
@@ -158,15 +159,15 @@ internal fun BonusesTab(
             val guildCapeKey = availableKeys.filter { it.endsWith("_guild_cape") || allEquipment[it]?.capeSkill in setOf("warriors", "archers", "mages") }
                 .maxByOrNull { allEquipment[it]?.capeBonus ?: 0f }
 
-            skillCapeKey?.let { allEquipment[it]?.displayName }?.let { activeNames.add(it) }
-            guildCapeKey?.let { allEquipment[it]?.displayName }?.let { activeNames.add(it) }
+            skillCapeKey?.let { activeNames.add(GameStrings.itemName(context, it)) }
+            guildCapeKey?.let { activeNames.add(GameStrings.itemName(context, it)) }
             if (activeNames.isNotEmpty()) activeNames.distinct().joinToString(" + ") else null
         }
 
         val xpSources = buildList {
             if (totalPetPct > 0)  add(context.getString(R.string.label_pets) to totalPetPct)
             if (prestigePct > 0)  add(context.getString(R.string.prestige) to prestigePct)
-            if (capeXpPct > 0)    add((activeCapeName ?: "Cape") to capeXpPct)
+            if (capeXpPct > 0)    add((activeCapeName ?: GameStrings.slotName(context, EquipSlot.CAPE)) to capeXpPct)
         }
         SkillBonusEntry(
             skillKey    = skillKey,
@@ -257,7 +258,7 @@ internal fun BonusesTab(
             item {
                 val pct = (cape!!.capeBonus * 100 + 0.5f).toInt()
                 BonusRow(
-                    name   = cape.displayName,
+                    name   = GameStrings.itemName(context, capeKey!!),
                     pct    = "+$pct%",
                     scope  = GameStrings.skillName(context, cape.capeSkill ?: ""),
                     detail = stringResource(R.string.bonus_combat_stat_boost),

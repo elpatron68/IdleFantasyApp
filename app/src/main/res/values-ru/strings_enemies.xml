@@ -21,6 +21,59 @@
     <string name="enemy_chicken_name">Курица</string>
     <string name="enemy_sheep_name">Овца</string>
     <string name="enemy_cow_name">Корова</string>
+    <string name="enemy_fire_giant_name">Fire Giant</string> <!-- untranslated -->
+    <string name="enemy_ancient_guardian_name">Ancient Guardian</string> <!-- untranslated -->
+    <string name="enemy_lich_name">Lich</string> <!-- untranslated -->
+    <string name="enemy_cave_troll_name">Cave Troll</string> <!-- untranslated -->
+    <string name="enemy_mine_spider_name">Mine Spider</string> <!-- untranslated -->
+    <string name="enemy_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="enemy_iron_golem_name">Iron Golem</string> <!-- untranslated -->
+    <string name="enemy_forge_demon_name">Forge Demon</string> <!-- untranslated -->
+    <string name="enemy_dwarven_guardian_name">Dwarven Guardian</string> <!-- untranslated -->
+    <string name="enemy_drowned_cultist_name">Drowned Cultist</string> <!-- untranslated -->
+    <string name="enemy_sea_spirit_name">Sea Spirit</string> <!-- untranslated -->
+    <string name="enemy_cursed_fisherman_name">Cursed Fisherman</string> <!-- untranslated -->
+    <string name="enemy_abyssal_leech_name">Abyssal Leech</string> <!-- untranslated -->
+    <string name="enemy_deep_horror_name">Deep Horror</string> <!-- untranslated -->
+    <string name="enemy_void_guardian_name">Void Guardian</string> <!-- untranslated -->
+    <string name="enemy_corrupted_druid_name">Corrupted Druid</string> <!-- untranslated -->
+    <string name="enemy_vine_beast_name">Vine Beast</string> <!-- untranslated -->
+    <string name="enemy_forest_spirit_name">Forest Spirit</string> <!-- untranslated -->
+    <string name="enemy_shadow_beast_name">Shadow Beast</string> <!-- untranslated -->
+    <string name="enemy_twisted_treant_name">Twisted Treant</string> <!-- untranslated -->
+    <string name="enemy_corrupted_mage_name">Corrupted Mage</string> <!-- untranslated -->
+    <string name="enemy_cutpurse_name">Cutpurse</string> <!-- untranslated -->
+    <string name="enemy_arcane_construct_name">Arcane Construct</string> <!-- untranslated -->
+    <string name="enemy_storm_imp_name">Storm Imp</string> <!-- untranslated -->
+    <string name="enemy_sky_serpent_name">Sky Serpent</string> <!-- untranslated -->
+    <string name="enemy_cloud_giant_name">Cloud Giant</string> <!-- untranslated -->
+    <string name="enemy_sun_wisp_name">Sun Wisp</string> <!-- untranslated -->
+    <string name="enemy_ember_hound_name">Ember Hound</string> <!-- untranslated -->
+    <string name="enemy_cinder_colossus_name">Cinder Colossus</string> <!-- untranslated -->
+    <string name="enemy_will_o_wisp_name">Will-o\'-Wisp</string> <!-- untranslated -->
+    <string name="enemy_grave_ghoul_name">Grave Ghoul</string> <!-- untranslated -->
+    <string name="enemy_husk_horror_name">Husk Horror</string> <!-- untranslated -->
+    <string name="enemy_barrow_wight_name">Barrow Wight</string> <!-- untranslated -->
+    <string name="enemy_shade_stalker_name">Shade Stalker</string> <!-- untranslated -->
+    <string name="enemy_bone_colossus_name">Bone Colossus</string> <!-- untranslated -->
+    <string name="enemy_dread_dullahan_name">Dread Dullahan</string> <!-- untranslated -->
+    <string name="enemy_void_stalker_name">Охотник Пустоты</string>
+    <string name="enemy_rift_guardian_name">Страж Разлома</string>
+    <string name="enemy_chaos_elemental_name">Хаотический Элементаль</string>
+    <string name="enemy_frost_giant_name">Морозный Великан</string>
+    <string name="enemy_ice_golem_name">Ледяной Голем</string>
+    <string name="enemy_glacial_mage_name">Ледниковый Маг</string>
+    <string name="enemy_abyssal_lord_name">Повелитель Бездны</string>
+    <string name="enemy_eternal_sentinel_name">Вечный Страж</string>
+    <string name="enemy_void_archon_name">Архонт Пустоты</string>
+    <string name="enemy_frost_wyvern_name">Морозный Виверн</string>
+    <string name="enemy_abyssal_guardian_name">Страж Бездны</string>
+    <string name="enemy_shadow_thief_name">Теневой Вор</string>
+    <string name="enemy_elder_lich_name">Старший Лич</string>
+    <string name="enemy_assassin_name">Убийца</string>
+    <string name="enemy_shadow_assassin_name">Теневой Убийца</string>
+    <string name="enemy_vault_guardian_name">Страж Хранилища</string>
+    <string name="enemy_guild_master_name">Гильдмейстер</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Пещера бесов</string>
@@ -47,30 +100,42 @@
     <string name="dungeon_infernal_stronghold_desc">Крепость огня и серы, управляемая демонами и адскими гончими. Одна лишь жара может убить неподготовленного.</string>
     <string name="dungeon_ancient_temple_name">Древний храм</string>
     <string name="dungeon_ancient_temple_desc">Древний храм, охраняемый самыми могущественными существами в мире. Только сильнейшие воины осмеливаются войти.</string>
+    <string name="dungeon_void_rift_name">Разлом Пустоты</string>
+    <string name="dungeon_void_rift_desc">Прореха в реальности, через которую существа пустоты проникают в смертный мир.</string>
+    <string name="dungeon_frozen_citadel_name">Замёрзшая Цитадель</string>
+    <string name="dungeon_frozen_citadel_desc">Древняя крепость, заточённая в леднике, с защитниками, замершими в вечном карауле.</string>
+    <string name="dungeon_abyssal_throne_name">Трон Бездны</string>
+    <string name="dungeon_abyssal_throne_desc">Самая глубокая точка известного мира, которой правят повелители пустоты с начала времён.</string>
 
-    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <!-- ===== Event dungeon names ===== -->
+    <string name="dungeon_sunspire_name">The Sunspire</string> <!-- untranslated -->
+    <string name="dungeon_sunspire_desc">A sun-tower ruin cracked open by the solstice, spilling heat spirits into the region. Part of the Sunspire Solstice event.</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_name">The Hollowfen</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_desc">A mist-drowned marsh of sunken barrows where the harvest dead walk. Part of the Gloomharvest event.</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_name">Cloud Kingdom</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_name">The Blightwood</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_desc">A rotting forest deep past the Hollowfen, where the Gloomharvest\'s strongest horrors gather. Part of the Gloomharvest event.</string> <!-- untranslated -->
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">Чёрный король-дракон</string>
+    <string name="boss_king_black_dragon_desc">Легендарный трехголовый дракон, которого боятся во всем королевстве.</string>
     <string name="boss_demon_lord_name">Повелитель демонов</string>
+    <string name="boss_demon_lord_desc">Древний демон из бездны, мастер темной магии.</string>
     <string name="boss_kraken_name">Кракен</string>
+    <string name="boss_kraken_desc">Ужас глубоких морей, колоссальный морской монстр.</string>
     <string name="boss_balrog_name">Балрог</string>
+    <string name="boss_balrog_desc">Древний демон пламени и тени, пробужденный от сна глубоко под землей.</string>
+    <string name="boss_void_sovereign_name">Владыка Пустоты</string>
+    <string name="boss_void_sovereign_desc">Первобытная сущность, скрывающаяся за разломами пустоты. Неизмеримо древняя, она с презрением смотрит на смертных.</string>
+    <string name="boss_sol_invictus_name">Sol Invictus, the Sundered Flame</string> <!-- untranslated -->
+    <string name="boss_sol_invictus_desc">A shard of the sun itself, torn loose from the Sunspire ruin. Only the boldest warriors dare approach.</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_name">The Hollow King</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_desc">The headless sovereign of the Gloomharvest, riding out from the Blightwood to reap what the living have sown.</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_name">The Vault Guardian</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string> <!-- untranslated -->
 
-    <!-- ===== Pet names and descriptions ===== -->
-    <string name="pet_dragon_whelp_name">Дракончик</string>
-    <string name="pet_dragon_whelp_desc">Молодой дракон, увеличивающий ваш боевой опыт.</string>
-    <string name="pet_imp_pet_name">Бес-питомец</string>
-    <string name="pet_imp_pet_desc">Озорной бес, усиливающий вашу тренировку Молитвы.</string>
-    <string name="pet_baby_kraken_name">Кракенчик</string>
-    <string name="pet_baby_kraken_desc">Крошечный кракен, улучшающий ваш опыт Кулинарии.</string>
-    <string name="pet_rock_golem_name">Каменный голем</string>
-    <string name="pet_rock_golem_desc">Живая скальная формация, усиливающая ваш опыт Добычи руды.</string>
-    <string name="pet_ent_name">Энт</string>
-    <string name="pet_ent_desc">Древний дух дерева, увеличивающий ваш опыт Рубки леса.</string>
-    <string name="pet_tiny_templar_name">Крошечный храмовник</string>
-    <string name="pet_tiny_templar_desc">Маленький рыбный спутник, увеличивающий ваш опыт Рыбалки.</string>
-    <string name="pet_tangleroot_name">Путаник</string>
-    <string name="pet_tangleroot_desc">Магическое растение, усиливающее ваш опыт Фермерства.</string>
-
-    <!-- Missing dungeons -->
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Обвалившаяся шахта</string>
     <string name="dungeon_collapsed_mine_desc">Обширная пещера под медными рудниками. Пещерные тролли и каменные големы бродят среди обломков, а гигантские пауки плетут сети в обвалившихся штольнях.</string>
     <string name="dungeon_shadow_den_name">Теневое логово</string>
@@ -87,4 +152,8 @@
     <string name="dungeon_corrupted_sanctum_desc">Святилище, пропитанное тьмой, в центре осквернённого полога. Тёмные жрецы и осквернённые твари охраняют древнее зло.</string>
     <string name="dungeon_drowned_temple_name">Затопленный храм</string>
     <string name="dungeon_drowned_temple_desc">Затонувший храм под морским гротом, его залы заполнены водой и морскими существами, сделавшими его своим домом.</string>
+    <string name="dungeon_rogue_sanctum_name">Разбойничье Святилище</string>
+    <string name="dungeon_rogue_sanctum_desc">Внутреннее убежище гильдии, доступное только проверенным членам.</string>
+    <string name="dungeon_guild_of_shadows_name">Гильдия Теней</string>
+    <string name="dungeon_guild_of_shadows_desc">Самое глубокое святилище гильдии воров, охраняемое её самыми опасными исполнителями.</string>
 </resources>

@@ -57,6 +57,7 @@ data class CarnivalUiState(
     val selectedTab: Int = 0,
     val tabInitialized: Boolean = false,
     val skillLevels: Map<String, Int> = emptyMap(),
+    val skillXp: Map<String, Long> = emptyMap(),
     val tierBonus: Float = 0f,
     val queueSize: Int = 0,
     val maxQueueSize: Int = 3,
@@ -96,35 +97,35 @@ class CarnivalViewModel @Inject constructor(
     val prizesMap: Map<String, CarnivalPrize> by lazy { carnivalRepo.prizes }
 
     private val APPRAISAL_PAIRS = listOf(
-        AppraisalPair("Dragon Sword", "Iron Sword", true),
-        AppraisalPair("Magic Log", "Oak Log", true),
-        AppraisalPair("Raw Shark", "Raw Trout", true),
-        AppraisalPair("Diamond", "Sapphire", true),
-        AppraisalPair("Runite Ore", "Iron Ore", true),
-        AppraisalPair("Yew Log", "Willow Log", true),
-        AppraisalPair("Gold Bar", "Bronze Bar", true),
-        AppraisalPair("Raw Lobster", "Raw Herring", true),
-        AppraisalPair("Mithril Ore", "Copper Ore", true),
-        AppraisalPair("Iron Sword", "Dragon Sword", false),
-        AppraisalPair("Oak Log", "Magic Log", false),
-        AppraisalPair("Raw Trout", "Raw Shark", false),
-        AppraisalPair("Copper Ore", "Mithril Ore", false),
-        AppraisalPair("Willow Log", "Yew Log", false),
-        AppraisalPair("Sapphire", "Diamond", false),
+        AppraisalPair("divine_sword", "iron_sword", true),
+        AppraisalPair("magic_log", "oak_log", true),
+        AppraisalPair("raw_shark", "raw_trout", true),
+        AppraisalPair("diamond", "sapphire", true),
+        AppraisalPair("runite_ore", "iron_ore", true),
+        AppraisalPair("yew_log", "willow_log", true),
+        AppraisalPair("gold_bar", "bronze_bar", true),
+        AppraisalPair("raw_lobster", "raw_herring", true),
+        AppraisalPair("mithril_ore", "copper_ore", true),
+        AppraisalPair("iron_sword", "divine_sword", false),
+        AppraisalPair("oak_log", "magic_log", false),
+        AppraisalPair("raw_trout", "raw_shark", false),
+        AppraisalPair("copper_ore", "mithril_ore", false),
+        AppraisalPair("willow_log", "yew_log", false),
+        AppraisalPair("sapphire", "diamond", false),
     )
 
     // Hard mode: 4-item quads — correctIdx = index of the most valuable item
     private val APPRAISAL_QUADS = listOf(
-        AppraisalQuad(listOf("Dragon Sword", "Rune Sword", "Adamant Sword", "Iron Sword"), 0),
-        AppraisalQuad(listOf("Magic Log", "Yew Log", "Maple Log", "Oak Log"), 0),
-        AppraisalQuad(listOf("Raw Shark", "Raw Lobster", "Raw Trout", "Raw Herring"), 0),
-        AppraisalQuad(listOf("Diamond", "Ruby", "Sapphire", "Opal"), 0),
-        AppraisalQuad(listOf("Runite Ore", "Adamantite Ore", "Mithril Ore", "Iron Ore"), 0),
-        AppraisalQuad(listOf("Dragon Bone", "Giant Bones", "Big Bones", "Bones"), 0),
-        AppraisalQuad(listOf("Rune Bar", "Adamant Bar", "Steel Bar", "Bronze Bar"), 0),
-        AppraisalQuad(listOf("Yew Log", "Maple Log", "Willow Log", "Oak Log"), 0),
-        AppraisalQuad(listOf("Gold Bar", "Steel Bar", "Iron Bar", "Bronze Bar"), 0),
-        AppraisalQuad(listOf("Rune Sword", "Adamant Sword", "Mithril Sword", "Iron Sword"), 0),
+        AppraisalQuad(listOf("divine_sword", "runite_sword", "adamantite_sword", "iron_sword"), 0),
+        AppraisalQuad(listOf("magic_log", "yew_log", "maple_log", "oak_log"), 0),
+        AppraisalQuad(listOf("raw_shark", "raw_lobster", "raw_trout", "raw_herring"), 0),
+        AppraisalQuad(listOf("diamond", "ruby", "sapphire", "emerald"), 0),
+        AppraisalQuad(listOf("runite_ore", "adamantite_ore", "mithril_ore", "iron_ore"), 0),
+        AppraisalQuad(listOf("dragon_bone", "giant_bones", "big_bones", "bones"), 0),
+        AppraisalQuad(listOf("runite_bar", "adamantite_bar", "steel_bar", "bronze_bar"), 0),
+        AppraisalQuad(listOf("yew_log", "maple_log", "willow_log", "oak_log"), 0),
+        AppraisalQuad(listOf("gold_bar", "steel_bar", "iron_bar", "bronze_bar"), 0),
+        AppraisalQuad(listOf("runite_sword", "adamantite_sword", "mithril_sword", "iron_sword"), 0),
     )
 
     private val _extra = MutableStateFlow(CarnivalUiState())
@@ -165,6 +166,7 @@ class CarnivalViewModel @Inject constructor(
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val xpMap: Map<String, Long> = json.decodeFromString(player.skillXp)
             val pets: List<com.fantasyidler.data.model.OwnedPet> = try { json.decodeFromString(player.pets) } catch (_: Exception) { emptyList() }
             val ownedPetIds = pets.map { it.id }.toSet()
             val ownedPrizeKeys = prizes
@@ -179,6 +181,7 @@ class CarnivalViewModel @Inject constructor(
                 isLoading           = false,
                 ticketBalance       = inventory["carnival_ticket"] ?: 0,
                 skillLevels         = levels,
+                skillXp             = xpMap,
                 tierBonus           = townRepo.idleTicketBonusChance(flags),
                 queueSize           = flags.sessionQueue.size,
                 maxQueueSize        = playerRepo.maxQueueSize(flags),
@@ -426,6 +429,7 @@ class CarnivalViewModel @Inject constructor(
             won = (chosenIdx == 0) == pair.correctIsA
             correctName = if (pair.correctIsA) pair.itemA else pair.itemB
         }
+        val correctDisplayName = GameStrings.itemName(context.withAppLocale(), correctName)
         val tickets = if (won) (if (diff == Difficulty.HARD) 7 else 2) else 0
         viewModelScope.launch {
             if (tickets > 0) carnivalRepo.awardTickets(tickets)
@@ -438,7 +442,7 @@ class CarnivalViewModel @Inject constructor(
                     snackbarMessage     = if (won)
                         context.withAppLocale().getString(R.string.carnival_appraisal_correct, tickets)
                     else
-                        context.withAppLocale().getString(R.string.carnival_appraisal_wrong, correctName),
+                        context.withAppLocale().getString(R.string.carnival_appraisal_wrong, correctDisplayName),
                 )
             }
         }
