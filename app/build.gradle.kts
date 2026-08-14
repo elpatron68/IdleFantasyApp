@@ -15,8 +15,8 @@ android {
         applicationId = "com.tristinbaker.idlefantasy"
         minSdk = 26
         targetSdk = 35
-        versionCode = 131
-        versionName = "1.13.4"
+        versionCode = 132
+        versionName = "1.13.5"
     }
 
     dependenciesInfo {
@@ -78,7 +78,7 @@ android {
         // running `./gradlew lintDebug`.
         baseline = file("lint-baseline.xml")
         warningsAsErrors = false
-        warning += "MissingTranslation"
+        warning += listOf("MissingTranslation", "MissingQuantity")
     }
 
     testOptions {

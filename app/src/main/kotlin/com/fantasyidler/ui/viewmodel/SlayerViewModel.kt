@@ -53,6 +53,7 @@ data class SlayerUiState(
     val unlockedDungeons: Set<String> = emptySet(),
     val inventory: Map<String, Int> = emptyMap(),
     val skillLevels: Map<String, Int> = emptyMap(),
+    val skillXp: Map<String, Long> = emptyMap(),
     val activeWeaponSlot: String? = null,
     /** Non-null when the player has tapped Buy on a lamp and needs to choose a skill. */
     val pendingLamp: PendingLamp? = null,
@@ -133,6 +134,7 @@ class SlayerViewModel @Inject constructor(
                 unlockedDungeons      = unlockedDungeons,
                 inventory             = inventory,
                 skillLevels           = levels,
+                skillXp               = xpMap,
                 activeWeaponSlot      = flags.activeWeaponSlot,
                 slayerEquippedWeapons = equippedWeapons,
                 foretelledTasks       = flags.foretelledTasks,

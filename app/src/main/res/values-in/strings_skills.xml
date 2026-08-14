@@ -47,7 +47,7 @@
     <string name="skill_prayer_desc">Kubur tulang hasil pertarungan untuk mendapatkan XP Doa. Level lebih tinggi membuka berkat Gereja yang lebih kuat.</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
-    <string name="label_lv">Lv %1$d</string>
+    <string name="label_lv">Lv %1$d</string> <!-- untranslated -->
     <string name="skills_agility_course_detail">Lv. %1$d  •  %2$d XP/putaran</string>
     <string name="label_hp_passive">Pasif — meningkatkan HP maksimum</string>
     <string name="label_hp_scales">HP maksimum meningkat setiap level</string>

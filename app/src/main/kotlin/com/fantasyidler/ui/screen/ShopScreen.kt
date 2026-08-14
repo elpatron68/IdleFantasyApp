@@ -618,7 +618,7 @@ private fun BulkSellSheet(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text     = item.displayName,
+                        text     = GameStrings.itemName(LocalContext.current, item.key),
                         style    = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f),
                     )

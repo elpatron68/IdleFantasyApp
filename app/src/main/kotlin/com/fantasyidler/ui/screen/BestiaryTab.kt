@@ -132,9 +132,10 @@ private fun BestiaryList(
     sort: BestiarySort,
     onEntryClick: (BestiaryEntry) -> Unit,
 ) {
+    val otherLabel = stringResource(R.string.bestiary_location_other)
     LazyColumn(Modifier.fillMaxSize()) {
         if (sort == BestiarySort.BY_LOCATION) {
-            val grouped = buildLocationGroups(entries)
+            val grouped = buildLocationGroups(entries, otherLabel)
             grouped.forEach { (groupName, groupEntries) ->
                 item(key = "header_$groupName") {
                     Text(
@@ -162,14 +163,15 @@ private fun BestiaryList(
 
 private fun buildLocationGroups(
     entries: List<BestiaryEntry>,
+    otherLabel: String,
 ): List<Pair<String, List<BestiaryEntry>>> {
     val grouped = mutableMapOf<String, MutableList<BestiaryEntry>>()
     entries.forEach { entry ->
-        val locs = entry.locations.ifEmpty { listOf("Other") }
+        val locs = entry.locations.ifEmpty { listOf(otherLabel) }
         locs.forEach { loc -> grouped.getOrPut(loc) { mutableListOf() }.add(entry) }
     }
     return grouped.entries
-        .sortedWith(compareBy({ it.key == "Other" }, { it.key }))
+        .sortedWith(compareBy({ it.key == otherLabel }, { it.key }))
         .map { it.key to it.value.sortedBy { e -> e.key } }
 }
 
@@ -208,7 +210,7 @@ private fun BestiaryRow(entry: BestiaryEntry, onClick: () -> Unit) {
         if (entry.killCount > 0) {
             Spacer(Modifier.width(8.dp))
             Text(
-                text  = "${entry.killCount} kills",
+                text  = stringResource(R.string.bestiary_kill_count, entry.killCount),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -244,7 +246,7 @@ private fun EnemyDetailContent(
                 )
                 if (entry.killCount > 0) {
                     Text(
-                        text  = "${entry.killCount} kills",
+                        text  = stringResource(R.string.bestiary_kill_count, entry.killCount),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -270,15 +272,15 @@ private fun EnemyDetailContent(
             Spacer(Modifier.height(4.dp))
             val xp = enemy.xpDrops.values.sum()
             val statRows = buildList {
-                add("HP" to enemy.hp.toString())
-                add("Attack" to enemy.combatStats.attackLevel.toString())
-                add("Strength" to enemy.combatStats.strengthLevel.toString())
-                add("Defense" to enemy.combatStats.defenseLevel.toString())
-                add("Atk Defense" to enemy.defensiveStats.attackDefense.toString())
-                add("Str Defense" to enemy.defensiveStats.strengthDefense.toString())
-                add("Rng Defense" to enemy.defensiveStats.rangedDefense.toString())
-                add("Mag Defense" to enemy.defensiveStats.magicDefense.toString())
-                if (xp > 0) add("XP" to xp.toString())
+                add(stringResource(R.string.bestiary_stat_hp) to enemy.hp.toString())
+                add(stringResource(R.string.bestiary_stat_attack) to enemy.combatStats.attackLevel.toString())
+                add(stringResource(R.string.bestiary_stat_strength) to enemy.combatStats.strengthLevel.toString())
+                add(stringResource(R.string.bestiary_stat_defense) to enemy.combatStats.defenseLevel.toString())
+                add(stringResource(R.string.bestiary_stat_atk_defense) to enemy.defensiveStats.attackDefense.toString())
+                add(stringResource(R.string.bestiary_stat_str_defense) to enemy.defensiveStats.strengthDefense.toString())
+                add(stringResource(R.string.bestiary_stat_rng_defense) to enemy.defensiveStats.rangedDefense.toString())
+                add(stringResource(R.string.bestiary_stat_mag_defense) to enemy.defensiveStats.magicDefense.toString())
+                if (xp > 0) add(stringResource(R.string.bestiary_stat_xp) to xp.toString())
             }
             BestiaryStatTable(statRows)
             Spacer(Modifier.height(16.dp))
@@ -351,7 +353,7 @@ private fun BossDetailContent(
                 )
                 if (entry.killCount > 0) {
                     Text(
-                        text  = "${entry.killCount} kills",
+                        text  = stringResource(R.string.bestiary_kill_count, entry.killCount),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -377,17 +379,17 @@ private fun BossDetailContent(
             Spacer(Modifier.height(4.dp))
             val xp = boss.xpRewards.values.sum()
             val statRows = buildList {
-                add("HP" to boss.hp.toString())
-                add("Required Level" to boss.combatLevelRequired.toString())
-                add("Duration" to "${boss.durationMinutes} min")
-                add("Attack" to boss.combatStats.attackLevel.toString())
-                add("Strength" to boss.combatStats.strengthLevel.toString())
-                add("Defense" to boss.combatStats.defenseLevel.toString())
-                add("Atk Defense" to boss.defensiveStats.attackDefense.toString())
-                add("Str Defense" to boss.defensiveStats.strengthDefense.toString())
-                add("Rng Defense" to boss.defensiveStats.rangedDefense.toString())
-                add("Mag Defense" to boss.defensiveStats.magicDefense.toString())
-                if (xp > 0) add("XP Reward" to xp.toString())
+                add(stringResource(R.string.bestiary_stat_hp) to boss.hp.toString())
+                add(stringResource(R.string.bestiary_stat_required_level) to boss.combatLevelRequired.toString())
+                add(stringResource(R.string.bestiary_stat_duration) to stringResource(R.string.bestiary_stat_duration_min, boss.durationMinutes))
+                add(stringResource(R.string.bestiary_stat_attack) to boss.combatStats.attackLevel.toString())
+                add(stringResource(R.string.bestiary_stat_strength) to boss.combatStats.strengthLevel.toString())
+                add(stringResource(R.string.bestiary_stat_defense) to boss.combatStats.defenseLevel.toString())
+                add(stringResource(R.string.bestiary_stat_atk_defense) to boss.defensiveStats.attackDefense.toString())
+                add(stringResource(R.string.bestiary_stat_str_defense) to boss.defensiveStats.strengthDefense.toString())
+                add(stringResource(R.string.bestiary_stat_rng_defense) to boss.defensiveStats.rangedDefense.toString())
+                add(stringResource(R.string.bestiary_stat_mag_defense) to boss.defensiveStats.magicDefense.toString())
+                if (xp > 0) add(stringResource(R.string.bestiary_stat_xp_reward) to xp.toString())
             }
             BestiaryStatTable(statRows)
             Spacer(Modifier.height(16.dp))

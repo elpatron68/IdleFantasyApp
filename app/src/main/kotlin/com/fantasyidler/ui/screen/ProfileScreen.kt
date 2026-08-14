@@ -1260,6 +1260,7 @@ private fun NotesTab(
                     if (notesFound > 0) {
                         item(key = key) {
                             DungeonNotesCard(
+                                dungeonKey = key,
                                 dungeon = dungeon,
                                 notesFound = notesFound,
                                 combatDungeonUnlocked = unlockedDungeons.contains(dungeon.unlockDungeon),
@@ -1268,7 +1269,7 @@ private fun NotesTab(
                     } else {
                         item(key = "$key-locked") {
                             Text(
-                                text = "${dungeon.displayName}: ???",
+                                text = "${GameStrings.skillingDungeonName(LocalContext.current, key, dungeon.displayName)}: ???",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                                 modifier = Modifier.padding(vertical = 4.dp),
@@ -1284,14 +1285,16 @@ private fun NotesTab(
 
 @Composable
 private fun DungeonNotesCard(
+    dungeonKey: String,
     dungeon: SkillingDungeonData,
     notesFound: Int,
     combatDungeonUnlocked: Boolean,
 ) {
+    val context = LocalContext.current
     androidx.compose.material3.ElevatedCard(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
-                text = dungeon.displayName,
+                text = GameStrings.skillingDungeonName(context, dungeonKey, dungeon.displayName),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
             )
@@ -1306,7 +1309,7 @@ private fun DungeonNotesCard(
                         modifier = Modifier.width(20.dp),
                     )
                     Text(
-                        text = text,
+                        text = GameStrings.skillingDungeonNote(context, dungeonKey, index, text),
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
                         ),

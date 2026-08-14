@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nama quest guild — diterjemahkan per lokal, kembali ke nama JSON jika tidak ada -->
+    <!-- Guild quest names — translate per locale, falls back to JSON name if absent -->
     <string name="quest_agility_guild_1_name">Putaran Pertama</string>
     <string name="quest_agility_guild_10_name">Master Pergerakan</string>
     <string name="quest_agility_guild_2_name">Pelari Berdedikasi</string>
@@ -18,9 +18,19 @@
     <string name="quest_archers_guild_4_name">Penembak Ulung</string>
     <string name="quest_archers_guild_5_name">Mata Elang</string>
     <string name="quest_archers_guild_6_name">Tembakan Mematikan</string>
-    <string name="quest_archers_guild_7_name">Sniper</string>
+    <string name="quest_archers_guild_7_name">Sniper</string> <!-- untranslated -->
     <string name="quest_archers_guild_8_name">Mata Rajawali</string>
     <string name="quest_archers_guild_9_name">Hantu</string>
+    <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
+    <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
+    <string name="quest_construction_guild_4_name">Table Service</string> <!-- untranslated -->
+    <string name="quest_construction_guild_5_name">Well Read</string> <!-- untranslated -->
+    <string name="quest_construction_guild_6_name">Block by Block</string> <!-- untranslated -->
+    <string name="quest_construction_guild_7_name">Cabinet Meeting</string> <!-- untranslated -->
+    <string name="quest_construction_guild_8_name">Dressed to Impress</string> <!-- untranslated -->
+    <string name="quest_construction_guild_9_name">Wardrobe Change</string> <!-- untranslated -->
     <string name="quest_cooking_guild_1_name">Antar Ayam</string>
     <string name="quest_cooking_guild_10_name">Master Koki</string>
     <string name="quest_cooking_guild_2_name">Pesta Trout</string>
@@ -97,9 +107,9 @@
     <string name="quest_mages_guild_3_name">Mage Madya</string>
     <string name="quest_mages_guild_4_name">Pengendali Chaos</string>
     <string name="quest_mages_guild_5_name">Tukang Sihir</string>
-    <string name="quest_mages_guild_6_name">Warlock</string>
+    <string name="quest_mages_guild_6_name">Warlock</string> <!-- untranslated -->
     <string name="quest_mages_guild_7_name">Arcimagus</string>
-    <string name="quest_mages_guild_8_name">Lich</string>
+    <string name="quest_mages_guild_8_name">Lich</string> <!-- untranslated -->
     <string name="quest_mages_guild_9_name">Penenun Mantra</string>
     <string name="quest_mercantile_guild_1_name">Perdagangan Pertama</string>
     <string name="quest_mercantile_guild_10_name">Master Pertukaran</string>
@@ -141,6 +151,16 @@
     <string name="quest_runecrafting_guild_7_name">Cadangan Darah</string>
     <string name="quest_runecrafting_guild_8_name">Brankas Rune</string>
     <string name="quest_runecrafting_guild_9_name">Timbunan Arkana</string>
+    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_7_name">Veteran Slayer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_8_name">A Thousand Fangs</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_9_name">Master of the Hunt</string> <!-- untranslated -->
     <string name="quest_smithing_guild_1_name">Dasar Perunggu</string>
     <string name="quest_smithing_guild_10_name">Master Pandai Besi</string>
     <string name="quest_smithing_guild_2_name">Karya Besi</string>
@@ -151,6 +171,16 @@
     <string name="quest_smithing_guild_7_name">Peleburan Runite</string>
     <string name="quest_smithing_guild_8_name">Gudang Senjata</string>
     <string name="quest_smithing_guild_9_name">Brankas Baju Zirah</string>
+    <string name="quest_thieving_guild_1_name">Street Rat</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_10_name">Master Thief</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_2_name">Market Pilferer</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_4_name">Skilled Fingers</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_5_name">High Society</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_9_name">Sacred Pockets</string> <!-- untranslated -->
     <string name="quest_warriors_guild_1_name">Darah Pertama</string>
     <string name="quest_warriors_guild_10_name">Master Pejuang</string>
     <string name="quest_warriors_guild_2_name">Petarung</string>
@@ -172,7 +202,7 @@
     <string name="quest_woodcutting_guild_8_name">Kayu Kuno</string>
     <string name="quest_woodcutting_guild_9_name">Warisan Redwood</string>
 
-    <!-- Nama quest harian guild -->
+    <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Lari Pagi</string>
     <string name="quest_agility_daily_1b_name">Latihan Lari Cepat</string>
     <string name="quest_agility_daily_1c_name">Sirkuit Rintangan</string>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Agility Guild Quests -->
+    <!-- Guild quest names — translate per locale, falls back to JSON name if absent -->
     <string name="quest_agility_guild_1_name">Первые круги</string>
+    <string name="quest_agility_guild_10_name">Мастер движения</string>
     <string name="quest_agility_guild_2_name">Преданный бегун</string>
     <string name="quest_agility_guild_3_name">Забег на выносливость</string>
     <string name="quest_agility_guild_4_name">Эксперт препятствий</string>
@@ -10,10 +11,8 @@
     <string name="quest_agility_guild_7_name">Элитный бегун</string>
     <string name="quest_agility_guild_8_name">Неутомимый</string>
     <string name="quest_agility_guild_9_name">Непреклонный</string>
-    <string name="quest_agility_guild_10_name">Мастер движения</string>
-
-    <!-- Archers Guild Quests -->
     <string name="quest_archers_guild_1_name">Первая стрела</string>
+    <string name="quest_archers_guild_10_name">Мастер лучников</string>
     <string name="quest_archers_guild_2_name">Острый глаз</string>
     <string name="quest_archers_guild_3_name">Меткий стрелок</string>
     <string name="quest_archers_guild_4_name">Снайпер</string>
@@ -22,10 +21,18 @@
     <string name="quest_archers_guild_7_name">Снайпер-призрак</string>
     <string name="quest_archers_guild_8_name">Соколиный глаз</string>
     <string name="quest_archers_guild_9_name">Призрак</string>
-    <string name="quest_archers_guild_10_name">Мастер лучников</string>
-
-    <!-- Cooking Guild Quests -->
+    <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
+    <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
+    <string name="quest_construction_guild_4_name">Table Service</string> <!-- untranslated -->
+    <string name="quest_construction_guild_5_name">Well Read</string> <!-- untranslated -->
+    <string name="quest_construction_guild_6_name">Block by Block</string> <!-- untranslated -->
+    <string name="quest_construction_guild_7_name">Cabinet Meeting</string> <!-- untranslated -->
+    <string name="quest_construction_guild_8_name">Dressed to Impress</string> <!-- untranslated -->
+    <string name="quest_construction_guild_9_name">Wardrobe Change</string> <!-- untranslated -->
     <string name="quest_cooking_guild_1_name">Куриный забег</string>
+    <string name="quest_cooking_guild_10_name">Мастер-повар</string>
     <string name="quest_cooking_guild_2_name">Праздник форели</string>
     <string name="quest_cooking_guild_3_name">Заказ говядины</string>
     <string name="quest_cooking_guild_4_name">Лобстер-приём</string>
@@ -34,10 +41,8 @@
     <string name="quest_cooking_guild_7_name">Акулий деликатес</string>
     <string name="quest_cooking_guild_8_name">Барановый марафон</string>
     <string name="quest_cooking_guild_9_name">Праздник морской черепахи</string>
-    <string name="quest_cooking_guild_10_name">Мастер-повар</string>
-
-    <!-- Crafting Guild Quests -->
     <string name="quest_crafting_guild_1_name">Серебряные украшения</string>
+    <string name="quest_crafting_guild_10_name">Мастер ремесла</string>
     <string name="quest_crafting_guild_2_name">Золотые безделушки</string>
     <string name="quest_crafting_guild_3_name">Сапфировый набор</string>
     <string name="quest_crafting_guild_4_name">Изумрудная коллекция</string>
@@ -46,10 +51,8 @@
     <string name="quest_crafting_guild_7_name">Платиновые украшения</string>
     <string name="quest_crafting_guild_8_name">Платиновые ожерелья</string>
     <string name="quest_crafting_guild_9_name">Сокровищница самоцветов</string>
-    <string name="quest_crafting_guild_10_name">Мастер ремесла</string>
-
-    <!-- Farming Guild Quests -->
     <string name="quest_farming_guild_1_name">Сбор картофеля</string>
+    <string name="quest_farming_guild_10_name">Мастер-фермер</string>
     <string name="quest_farming_guild_2_name">Доставка моркови</string>
     <string name="quest_farming_guild_3_name">Запас кукурузы</string>
     <string name="quest_farming_guild_4_name">Тыквенный участок</string>
@@ -58,10 +61,8 @@
     <string name="quest_farming_guild_7_name">Урожай драконьего фрукта</string>
     <string name="quest_farming_guild_8_name">Золотая пшеница</string>
     <string name="quest_farming_guild_9_name">Духовные травы</string>
-    <string name="quest_farming_guild_10_name">Мастер-фермер</string>
-
-    <!-- Firemaking Guild Quests -->
     <string name="quest_firemaking_guild_1_name">Первые огни</string>
+    <string name="quest_firemaking_guild_10_name">Мастер огня</string>
     <string name="quest_firemaking_guild_2_name">Дубовый костёр</string>
     <string name="quest_firemaking_guild_3_name">Ивовые уголья</string>
     <string name="quest_firemaking_guild_4_name">Клёновый пожар</string>
@@ -70,10 +71,8 @@
     <string name="quest_firemaking_guild_7_name">Краснодревный костёр</string>
     <string name="quest_firemaking_guild_8_name">Древний огонь</string>
     <string name="quest_firemaking_guild_9_name">Наследие красного дерева</string>
-    <string name="quest_firemaking_guild_10_name">Мастер огня</string>
-
-    <!-- Fishing Guild Quests -->
     <string name="quest_fishing_guild_1_name">Улов креветок</string>
+    <string name="quest_fishing_guild_10_name">Мастер-рыболов</string>
     <string name="quest_fishing_guild_2_name">Забег форели</string>
     <string name="quest_fishing_guild_3_name">Улов лосося</string>
     <string name="quest_fishing_guild_4_name">Доставка тунца</string>
@@ -82,10 +81,8 @@
     <string name="quest_fishing_guild_7_name">Заказ монахфиша</string>
     <string name="quest_fishing_guild_8_name">Акулий промысел</string>
     <string name="quest_fishing_guild_9_name">Резерв манта-скатов</string>
-    <string name="quest_fishing_guild_10_name">Мастер-рыболов</string>
-
-    <!-- Fletching Guild Quests -->
     <string name="quest_fletching_guild_1_name">Стрельные древки</string>
+    <string name="quest_fletching_guild_10_name">Мастер флетчинга</string>
     <string name="quest_fletching_guild_2_name">Бронзовые стрелы</string>
     <string name="quest_fletching_guild_3_name">Железный полёт</string>
     <string name="quest_fletching_guild_4_name">Стальная стрела</string>
@@ -94,10 +91,8 @@
     <string name="quest_fletching_guild_7_name">Рунитовый колчан</string>
     <string name="quest_fletching_guild_8_name">Тисовые длинные луки</string>
     <string name="quest_fletching_guild_9_name">Магические длинные луки</string>
-    <string name="quest_fletching_guild_10_name">Мастер флетчинга</string>
-
-    <!-- Herblore Guild Quests -->
     <string name="quest_herblore_guild_1_name">Зелья атаки</string>
+    <string name="quest_herblore_guild_10_name">Мастер-травник</string>
     <string name="quest_herblore_guild_2_name">Настойки атаки</string>
     <string name="quest_herblore_guild_3_name">Настойки силы</string>
     <string name="quest_herblore_guild_4_name">Настойки дальнего боя</string>
@@ -106,10 +101,8 @@
     <string name="quest_herblore_guild_7_name">Супер дальнего боя</string>
     <string name="quest_herblore_guild_8_name">Супер магия</string>
     <string name="quest_herblore_guild_9_name">Запас перегрузок</string>
-    <string name="quest_herblore_guild_10_name">Мастер-травник</string>
-
-    <!-- Mages Guild Quests -->
     <string name="quest_mages_guild_1_name">Ученик чародея</string>
+    <string name="quest_mages_guild_10_name">Великий маг</string>
     <string name="quest_mages_guild_2_name">Арканный ученик</string>
     <string name="quest_mages_guild_3_name">Подмастерье мага</string>
     <string name="quest_mages_guild_4_name">Повелитель хаоса</string>
@@ -118,10 +111,8 @@
     <string name="quest_mages_guild_7_name">Архимаг</string>
     <string name="quest_mages_guild_8_name">Лич</string>
     <string name="quest_mages_guild_9_name">Ткач заклинаний</string>
-    <string name="quest_mages_guild_10_name">Великий маг</string>
-
-    <!-- Mercantile Guild Quests -->
     <string name="quest_mercantile_guild_1_name">Первая сделка</string>
+    <string name="quest_mercantile_guild_10_name">Мастер биржи</string>
     <string name="quest_mercantile_guild_2_name">Начинающий торговец</string>
     <string name="quest_mercantile_guild_3_name">Речной торговец</string>
     <string name="quest_mercantile_guild_4_name">Мастер караванов</string>
@@ -130,10 +121,8 @@
     <string name="quest_mercantile_guild_7_name">Барон торговли</string>
     <string name="quest_mercantile_guild_8_name">Великий торговец</string>
     <string name="quest_mercantile_guild_9_name">Легендарный торговец</string>
-    <string name="quest_mercantile_guild_10_name">Мастер биржи</string>
-
-    <!-- Mining Guild Quests -->
     <string name="quest_mining_guild_1_name">Медный забег</string>
+    <string name="quest_mining_guild_10_name">Мастер-шахтёр</string>
     <string name="quest_mining_guild_2_name">Железная квота</string>
     <string name="quest_mining_guild_3_name">Доставка угля</string>
     <string name="quest_mining_guild_4_name">Серебряная поставка</string>
@@ -142,10 +131,8 @@
     <string name="quest_mining_guild_7_name">Адамантитовый заказ</string>
     <string name="quest_mining_guild_8_name">Платиновая добыча</string>
     <string name="quest_mining_guild_9_name">Рунитовый резерв</string>
-    <string name="quest_mining_guild_10_name">Мастер-шахтёр</string>
-
-    <!-- Prayer Guild Quests -->
     <string name="quest_prayer_guild_1_name">Первое подношение</string>
+    <string name="quest_prayer_guild_10_name">Верховный жрец</string>
     <string name="quest_prayer_guild_2_name">Преданный</string>
     <string name="quest_prayer_guild_3_name">Благочестивый</string>
     <string name="quest_prayer_guild_4_name">Праведный</string>
@@ -154,10 +141,8 @@
     <string name="quest_prayer_guild_7_name">Благословенный</string>
     <string name="quest_prayer_guild_8_name">Божественный</string>
     <string name="quest_prayer_guild_9_name">Трансцендентный</string>
-    <string name="quest_prayer_guild_10_name">Верховный жрец</string>
-
-    <!-- Runecrafting Guild Quests -->
     <string name="quest_runecrafting_guild_1_name">Воздушный запас</string>
+    <string name="quest_runecrafting_guild_10_name">Мастер рунического ремесла</string>
     <string name="quest_runecrafting_guild_2_name">Земляная партия</string>
     <string name="quest_runecrafting_guild_3_name">Огненный запас</string>
     <string name="quest_runecrafting_guild_4_name">Создание разума</string>
@@ -166,10 +151,18 @@
     <string name="quest_runecrafting_guild_7_name">Кровавый резерв</string>
     <string name="quest_runecrafting_guild_8_name">Руническое хранилище</string>
     <string name="quest_runecrafting_guild_9_name">Арканный запас</string>
-    <string name="quest_runecrafting_guild_10_name">Мастер рунического ремесла</string>
-
-    <!-- Smithing Guild Quests -->
+    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_7_name">Veteran Slayer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_8_name">A Thousand Fangs</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_9_name">Master of the Hunt</string> <!-- untranslated -->
     <string name="quest_smithing_guild_1_name">Бронзовые основы</string>
+    <string name="quest_smithing_guild_10_name">Мастер-кузнец</string>
     <string name="quest_smithing_guild_2_name">Железные работы</string>
     <string name="quest_smithing_guild_3_name">Сталеварное производство</string>
     <string name="quest_smithing_guild_4_name">Мифриловая литейная</string>
@@ -178,10 +171,18 @@
     <string name="quest_smithing_guild_7_name">Рунитовая плавка</string>
     <string name="quest_smithing_guild_8_name">Склад оружия</string>
     <string name="quest_smithing_guild_9_name">Хранилище брони</string>
-    <string name="quest_smithing_guild_10_name">Мастер-кузнец</string>
-
-    <!-- Warriors Guild Quests -->
+    <string name="quest_thieving_guild_1_name">Street Rat</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_10_name">Master Thief</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_2_name">Market Pilferer</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_4_name">Skilled Fingers</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_5_name">High Society</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_9_name">Sacred Pockets</string> <!-- untranslated -->
     <string name="quest_warriors_guild_1_name">Первая кровь</string>
+    <string name="quest_warriors_guild_10_name">Мастер войны</string>
     <string name="quest_warriors_guild_2_name">Застрельщик</string>
     <string name="quest_warriors_guild_3_name">Закалённый в бою</string>
     <string name="quest_warriors_guild_4_name">Ветеран войны</string>
@@ -190,10 +191,8 @@
     <string name="quest_warriors_guild_7_name">Чемпион</string>
     <string name="quest_warriors_guild_8_name">Военачальник</string>
     <string name="quest_warriors_guild_9_name">Завоеватель</string>
-    <string name="quest_warriors_guild_10_name">Мастер войны</string>
-
-    <!-- Woodcutting Guild Quests -->
     <string name="quest_woodcutting_guild_1_name">Обычные брёвна</string>
+    <string name="quest_woodcutting_guild_10_name">Мастер лесоруба</string>
     <string name="quest_woodcutting_guild_2_name">Доставка дуба</string>
     <string name="quest_woodcutting_guild_3_name">Ивовый забег</string>
     <string name="quest_woodcutting_guild_4_name">Клёновый заказ</string>
@@ -202,9 +201,8 @@
     <string name="quest_woodcutting_guild_7_name">Запас красного дерева</string>
     <string name="quest_woodcutting_guild_8_name">Древесина древних</string>
     <string name="quest_woodcutting_guild_9_name">Наследие красного дерева</string>
-    <string name="quest_woodcutting_guild_10_name">Мастер лесоруба</string>
 
-    <!-- Agility Daily Quests -->
+    <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Утренний бег</string>
     <string name="quest_agility_daily_1b_name">Спринтерская тренировка</string>
     <string name="quest_agility_daily_1c_name">Полоса препятствий</string>
@@ -214,8 +212,6 @@
     <string name="quest_agility_daily_7a_name">Мастерский круг</string>
     <string name="quest_agility_daily_7b_name">Чемпионский бег</string>
     <string name="quest_agility_daily_7c_name">Легендарный спринт</string>
-
-    <!-- Archers Daily Quests -->
     <string name="quest_archers_daily_1a_name">Практика стрельбы</string>
     <string name="quest_archers_daily_1b_name">Дежурство на стрельбище</string>
     <string name="quest_archers_daily_1c_name">Ежедневная охота</string>
@@ -226,8 +222,6 @@
     <string name="quest_archers_daily_7a_name">Рейд снайпера-призрака</string>
     <string name="quest_archers_daily_7b_name">Марш соколиного глаза</string>
     <string name="quest_archers_daily_7c_name">Великая охота</string>
-
-    <!-- Cooking Daily Quests -->
     <string name="quest_cooking_daily_1a_name">Партия креветок</string>
     <string name="quest_cooking_daily_1b_name">Праздник форели</string>
     <string name="quest_cooking_daily_1c_name">Лососевый ужин</string>
@@ -242,8 +236,6 @@
     <string name="quest_cooking_daily_7b_name">Банкет манта-скатов</string>
     <string name="quest_cooking_daily_7c_name">Праздник морской черепахи</string>
     <string name="quest_cooking_daily_7d_name">Резерв акул</string>
-
-    <!-- Crafting Daily Quests -->
     <string name="quest_crafting_daily_1a_name">Серебряные кольца</string>
     <string name="quest_crafting_daily_1b_name">Золотые кольца</string>
     <string name="quest_crafting_daily_1c_name">Сапфировые камни</string>
@@ -257,8 +249,6 @@
     <string name="quest_crafting_daily_7a_name">Платиновые алмазы</string>
     <string name="quest_crafting_daily_7b_name">Алмазные ожерелья</string>
     <string name="quest_crafting_daily_7c_name">Сокровищница самоцветов</string>
-
-    <!-- Farming Daily Quests -->
     <string name="quest_farming_daily_1a_name">Картофельный забег</string>
     <string name="quest_farming_daily_1b_name">Доставка лука</string>
     <string name="quest_farming_daily_1c_name">Запас моркови</string>
@@ -274,8 +264,6 @@
     <string name="quest_farming_daily_7c_name">Золотая пшеница</string>
     <string name="quest_farming_daily_7d_name">Доставка старфрута</string>
     <string name="quest_farming_daily_7e_name">Лотос пустоты</string>
-
-    <!-- Firemaking Daily Quests -->
     <string name="quest_firemaking_daily_1a_name">Сжигание брёвен</string>
     <string name="quest_firemaking_daily_1b_name">Дубовый костёр</string>
     <string name="quest_firemaking_daily_1c_name">Ивовый огонь</string>
@@ -291,8 +279,6 @@
     <string name="quest_firemaking_daily_7c_name">Древний огонь</string>
     <string name="quest_firemaking_daily_7d_name">Вечное пламя</string>
     <string name="quest_firemaking_daily_7e_name">Великий костёр</string>
-
-    <!-- Fishing Daily Quests -->
     <string name="quest_fishing_daily_1a_name">Улов креветок</string>
     <string name="quest_fishing_daily_1b_name">Забег форели</string>
     <string name="quest_fishing_daily_1c_name">Партия лосося</string>
@@ -308,8 +294,6 @@
     <string name="quest_fishing_daily_7c_name">Акулий наплыв</string>
     <string name="quest_fishing_daily_7d_name">Улов морских черепах</string>
     <string name="quest_fishing_daily_7e_name">Запас манта-скатов</string>
-
-    <!-- Fletching Daily Quests -->
     <string name="quest_fletching_daily_1a_name">Стрельные древки</string>
     <string name="quest_fletching_daily_1b_name">Бронзовая стрела</string>
     <string name="quest_fletching_daily_1c_name">Железные стрелы</string>
@@ -324,8 +308,6 @@
     <string name="quest_fletching_daily_7b_name">Магические длинные луки</string>
     <string name="quest_fletching_daily_7c_name">Рунитовый колчан</string>
     <string name="quest_fletching_daily_7d_name">Великий арсенал</string>
-
-    <!-- Herblore Daily Quests -->
     <string name="quest_herblore_daily_1a_name">Зелья атаки</string>
     <string name="quest_herblore_daily_1b_name">Зелья защиты</string>
     <string name="quest_herblore_daily_1c_name">Зелья силы</string>
@@ -339,8 +321,6 @@
     <string name="quest_herblore_daily_7a_name">Партия перегрузок</string>
     <string name="quest_herblore_daily_7b_name">Запас перегрузок</string>
     <string name="quest_herblore_daily_7c_name">Великий запас</string>
-
-    <!-- Mages Daily Quests -->
     <string name="quest_mages_daily_1a_name">Практика заклинаний</string>
     <string name="quest_mages_daily_1b_name">Арканное дежурство</string>
     <string name="quest_mages_daily_1c_name">Ежедневное колдовство</string>
@@ -351,8 +331,6 @@
     <string name="quest_mages_daily_7a_name">Рейд лича</string>
     <string name="quest_mages_daily_7b_name">Дежурство великого мага</string>
     <string name="quest_mages_daily_7c_name">Арканное завоевание</string>
-
-    <!-- Mercantile Daily Quests -->
     <string name="quest_mercantile_daily_1a_name">Быстрая сделка</string>
     <string name="quest_mercantile_daily_1b_name">Рыночный забег</string>
     <string name="quest_mercantile_daily_1c_name">Загруженный день</string>
@@ -368,8 +346,6 @@
     <string name="quest_mercantile_daily_7c_name">Мастер биржи</string>
     <string name="quest_mercantile_daily_7d_name">Забег удачи</string>
     <string name="quest_mercantile_daily_7e_name">Великая прибыль</string>
-
-    <!-- Mining Daily Quests -->
     <string name="quest_mining_daily_1a_name">Доставка железа</string>
     <string name="quest_mining_daily_1b_name">Медная квота</string>
     <string name="quest_mining_daily_1c_name">Угольный забег</string>
@@ -385,8 +361,6 @@
     <string name="quest_mining_daily_7c_name">Адамантитовый наплыв</string>
     <string name="quest_mining_daily_7d_name">Платиновый запас</string>
     <string name="quest_mining_daily_7e_name">Глубинная добыча</string>
-
-    <!-- Prayer Daily Quests -->
     <string name="quest_prayer_daily_1a_name">Утреннее подношение</string>
     <string name="quest_prayer_daily_1b_name">Ежедневные обряды</string>
     <string name="quest_prayer_daily_1c_name">Священное подношение</string>
@@ -397,8 +371,6 @@
     <string name="quest_prayer_daily_7a_name">Божественное подношение</string>
     <string name="quest_prayer_daily_7b_name">Трансцендентные обряды</string>
     <string name="quest_prayer_daily_7c_name">Великое благочестие</string>
-
-    <!-- Runecrafting Daily Quests -->
     <string name="quest_runecrafting_daily_1a_name">Воздушные руны</string>
     <string name="quest_runecrafting_daily_1b_name">Водные руны</string>
     <string name="quest_runecrafting_daily_1c_name">Земляные руны</string>
@@ -412,8 +384,6 @@
     <string name="quest_runecrafting_daily_7a_name">Кровавое хранилище</string>
     <string name="quest_runecrafting_daily_7b_name">Арканный резерв</string>
     <string name="quest_runecrafting_daily_7c_name">Великий запас</string>
-
-    <!-- Smithing Daily Quests -->
     <string name="quest_smithing_daily_1a_name">Бронзовая партия</string>
     <string name="quest_smithing_daily_1b_name">Железный забег</string>
     <string name="quest_smithing_daily_1c_name">Доставка стали</string>
@@ -428,8 +398,6 @@
     <string name="quest_smithing_daily_7b_name">Рунитовый резерв</string>
     <string name="quest_smithing_daily_7c_name">Платиновое хранилище</string>
     <string name="quest_smithing_daily_7d_name">Великая кузня</string>
-
-    <!-- Warriors Daily Quests -->
     <string name="quest_warriors_daily_1a_name">Первая стычка</string>
     <string name="quest_warriors_daily_1b_name">Ежедневный рейд</string>
     <string name="quest_warriors_daily_1c_name">Долг воина</string>
@@ -440,8 +408,6 @@
     <string name="quest_warriors_daily_7a_name">Рейд военачальника</string>
     <string name="quest_warriors_daily_7b_name">Марш завоевателя</string>
     <string name="quest_warriors_daily_7c_name">Великая битва</string>
-
-    <!-- Woodcutting Daily Quests -->
     <string name="quest_woodcutting_daily_1a_name">Запас брёвен</string>
     <string name="quest_woodcutting_daily_1b_name">Дубовый забег</string>
     <string name="quest_woodcutting_daily_1c_name">Ивовая партия</string>

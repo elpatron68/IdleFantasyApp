@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Idle Fantasy</string>
+
 
     <!-- ===== Bottom navigation ===== -->
     <string name="nav_skills">Yetenekler</string>
@@ -19,6 +19,7 @@
     <string name="btn_craft">Üret</string>
     <string name="btn_confirm">Onayla</string>
     <string name="btn_abandon">Terk Et</string>
+    <string name="btn_repeat_action">Tekrarla</string>
     <string name="btn_collect">Ödülleri Topla</string>
     <string name="btn_equip">Kuşan</string>
     <string name="btn_unequip">Çıkar</string>
@@ -44,9 +45,9 @@
 
     <!-- ===== Common labels ===== -->
     <string name="label_level">Seviye</string>
-    <string name="label_xp">XP</string>
+    <string name="label_xp">XP</string> <!-- untranslated -->
     <string name="label_coins">Altın</string>
-    <string name="label_hp">HP</string>
+    <string name="label_hp">HP</string> <!-- untranslated -->
     <string name="label_attack">Saldırı</string>
     <string name="label_strength">Güç</string>
     <string name="label_defense">Savunma</string>
@@ -98,6 +99,21 @@
     <string name="label_growth_time">Büyüme süresi</string>
     <string name="label_ready_to_harvest">Hasada hazır</string>
     <string name="label_empty">Boş</string>
+    <string name="inventory_sort_quantity">Adet</string>
+
+    <string name="inventory_cat_weapons">Silahlar</string>
+    <string name="inventory_cat_armour">Zırhlar</string>
+    <string name="inventory_cat_tools">Aletler</string>
+    <string name="inventory_cat_food">Yiyecek</string>
+    <string name="inventory_cat_potions">İksirler</string>
+    <string name="inventory_cat_materials">Materyaller</string>
+    <string name="inventory_cat_other">Diğer</string>
+    <string name="inventory_cat_raw_food">Ham Yiyecek</string>
+    <string name="inventory_cat_ammunition">Mühimmat</string>
+    <string name="inventory_cat_ores">Madenler &amp; Taşlar</string>
+    <string name="inventory_cat_construction">İnşaat</string>
+    <string name="inventory_cat_seeds">Tohumlar &amp; Ürünler</string>
+    <string name="inventory_cat_filter_all">Tümü</string>
     <string name="label_combat_style">Savaş Tipi</string>
     <string name="label_active_spell">Aktif Büyü</string>
     <string name="label_drops">Düşen Ganimetler</string>
@@ -147,7 +163,7 @@
     <string name="label_daily_dig">Günlük Kazı</string>
     <string name="label_dig_depth">Çukur Derinliği</string>
     <string name="label_version">Sürüm</string>
-    <string name="label_open_source">Açık Kaynak</string>
+
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
     <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
@@ -159,7 +175,7 @@
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
     <string name="format_started_ago">%1$s önce başladı</string>
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
-    <string name="format_item_quantity">%1$s ×%2$d</string>
+
     <!-- Translator note: %1$d = coin amount -->
     <string name="format_price_coins">%1$d altın</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
@@ -175,7 +191,7 @@
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%% %1$d XP</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
-    <string name="format_drop_chance">%1$s: %2$d</string>
+
     <!-- Translator note: %1$d = minutes remaining -->
     <string name="format_minutes_remaining">%1$d dk kaldı</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
@@ -281,6 +297,7 @@
     <string name="label_dungeons_tab">Zindanlar</string>
     <string name="btn_fight">Savaş!</string>
 
+    <!-- ===== SkillsScreen ===== -->
     <string name="btn_back_arrow">← Geri</string>
     <string name="btn_start_burying">Gömmeye Başla</string>
     <string name="btn_start_crafting">Üretime Başla</string>
@@ -289,6 +306,21 @@
 
     <!-- ===== QuestsScreen ===== -->
     <string name="label_claim_reward">Ödülü Al</string>
+    <string name="label_daily">Günlük</string>
+    <string name="label_weekly">Haftalık</string>
+    <string name="label_timed">Süreli</string>
+    <string name="label_daily_quests">Günlük Görevler</string>
+    <string name="label_daily_reset">%1$s vaktinde sıfırlanır</string>
+    <string name="label_weekly_reset">Her Pazartesi %1$s vaktinde sıfırlanır</string>
+    <string name="weekly_bonus_title">Haftalık Ödül!</string>
+    <string name="weekly_bonus_claim">Haftalık Ödülü Al</string>
+    <string name="label_daily_info">Her günlük görev altın kazandırır. Ayrıca her görevin yüzde 1 ihtimal ile Dwarven ekipmanı düşürebilir.</string>
+    <string name="label_weekly_info">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın, veya %1$s şans ile bir Divine ekipman parçası.</string>
+    <string name="label_weekly_info_complete">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın. Bütün Divine ekipmanlarına zaten sahipsin!</string>
+    <string name="label_daily_reward">2.000 altın (1/100: Dwarven ekipmanı)</string>
+    <string name="msg_daily_claimed_coins">Günlük görev tamamlandı! +2.000 altın.</string>
+    <string name="msg_daily_claimed_dwarven">Günlük görev tamamlandı! %1$s ekipmanını buldun!</string>
+    <string name="label_hide_completed">Tamamlananları sakla</string>
 
     <!-- ===== OnboardingScreen ===== -->
     <string name="onboarding_lets_go">Hadi Başlayalım!</string>
@@ -302,6 +334,9 @@
     <string name="settings_tutorial_title">Öğretici</string>
     <string name="settings_tutorial_desc">Giriş kısmını tekrar göster</string>
     <string name="settings_reopen">Yeniden Aç</string>
+    <string name="settings_changelog_title">Yenilikler</string>
+    <string name="settings_changelog_desc">En son güncellemedeki değişiklikleri gör</string>
+    <string name="settings_changelog_btn">Göster</string>
     <string name="settings_foss_desc">Idle Fantasy açık kaynaklı ve ücretsiz bir yazılımdır.</string>
     <string name="settings_reset_title">İlerlemeyi Sıfırla</string>
     <string name="settings_reset_desc">Tüm yetenekleri, eşyaları, görevleri ve altınları sil</string>
@@ -329,10 +364,13 @@
     <string name="settings_theme">Tema</string>
     <string name="settings_theme_desc">Tercih ettiğin renk düzenini seç</string>
     <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_theme_midnight">Geceyarısı</string>
     <string name="settings_theme_light">Açık</string>
     <string name="settings_theme_system">Sistem</string>
     <string name="settings_font_size">Yazı Tipi Boyutu</string>
-    <string name="settings_font_normal">Normal</string>
+    <string name="settings_font_tiny">En Küçük</string>
+    <string name="settings_font_small">Küçük</string>
+    <string name="settings_font_normal">Normal</string> <!-- untranslated -->
     <string name="settings_font_large">Büyük</string>
     <string name="settings_font_huge">Çok Büyük</string>
     <string name="settings_import_theme">Temaları içe aktar</string>
@@ -366,12 +404,21 @@
     <string name="theme_editor_saved_ok">Tema kaydedildi ve uygulandı</string>
     <string name="theme_editor_exported_ok">Tema dışa aktarıldı</string>
     <string name="settings_language_desc">Uygulamanın görüntüleme dilini değiştir</string>
-    <string name="settings_lang_english">English</string>
-    <string name="settings_lang_deutsch">Deutsch</string>
-    <string name="settings_lang_français">Français</string>
-    <string name="settings_lang_español">Español</string>
-    <string name="settings_lang_irish">Gaeilge</string>
-    <string name="settings_lang_czech">Čeština</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_lang_system">Sistem</string>
     <string name="settings_save_data">Verileri Kaydet</string>
     <string name="settings_export">Kayıt Dosyasını Dışa Aktar</string>
@@ -381,10 +428,12 @@
     <string name="settings_import_desc">İlerlemeyi bir dosyadan geri yükle</string>
     <string name="settings_import_btn">İçe Aktar</string>
     <string name="settings_source_code">Kaynak Kodu</string>
+
     <string name="settings_source_open">Aç</string>
-    <string name="settings_wiki">Wiki</string>
-    <string name="settings_discord">Discord</string>
-    <string name="settings_discord_url">discord.gg/vRxtXsBwQU</string>
+
+
+
+
     <string name="settings_exported_ok">Kayıt dosyası dışa aktarıldı</string>
     <string name="settings_imported_ok">Kayıt dosyası başarıyla içe aktarıldı</string>
     <string name="settings_imported_fail">İçe aktarma başarısız — geçersiz dosya</string>
@@ -400,10 +449,34 @@
     <string name="settings_viewer_upload_parse">Could not parse save on the server</string>
     <string name="settings_viewer_upload_rate_limit">Too many uploads — try again later</string>
     <string name="settings_viewer_open">Open viewer</string>
+    <string name="settings_backup_title">Otomatik Yedekleme</string>
+    <string name="settings_backup_folder">Yedekleme Klasörü</string>
+    <string name="settings_backup_no_folder">Klasör seçilmedi</string>
+    <string name="settings_backup_choose">Seç</string>
+    <string name="settings_backup_frequency">Yedekleme Sıklığı</string>
+    <string name="settings_backup_off">Kapalı</string>
+    <string name="settings_backup_hourly">Saatlik</string>
+    <string name="settings_backup_daily">Günlük</string>
+    <string name="settings_backup_weekly">Haftalık</string>
+    <string name="settings_backup_at_5am">05:00 saatinde</string>
+    <string name="settings_backup_now">Şimdi Yedekle</string>
+    <string name="settings_backup_success">Yedekleme kaydedildi.</string>
+    <string name="settings_backup_failed">Yedekleme başarısız.</string>
+    <string name="settings_backup_folder_set">Yedekleme klasörü seçildi.</string>
 
     <!-- ===== HomeScreen ===== -->
+    <string name="home_town_title">Kasaba</string>
+    <string name="home_town_desc">Dükkanı, hanı, loncayı, kiliseyi, usta atölyesini, avcı ustasını ve panayırı ziyaret edin</string>
+    <string name="guild_dailies_available">Günlük görevler mevcut</string>
+    <string name="guild_not_unlocked">Henüz açılmadı</string>
+    <string name="guild_dailies_done_today">Bugünkü günlükler tamamlandı</string>
+    <string name="guild_dailies_remaining_today">Bugün %1$d kaldı</string>
+    <string name="guild_do_dailies_hint">Bir sonraki rütbeye ilerlemek için günlük görevleri tamamlayın</string>
+    <string name="guild_quest_gate_blocked">Rütbenizi yükseltmek için görevleri tamamlayın.</string>
+    <string name="guild_quest_required">İlerlemek için görev gerekli</string>
     <string name="home_died_message">Öldün ve kazanımlarının çoğunu kaybettin.</string>
     <string name="home_xp_boost_was_active">2× XP Takviyesi aktifti</string>
+    <string name="home_xp_boost_active">2x XP Takviyesi aktif — %1$s kaldı</string>
     <string name="home_loot">Ganimet</string>
     <string name="home_food_consumed">Tüketilen Yemek</string>
     <string name="home_bones_buried">Gömülen kemikler</string>
@@ -417,7 +490,8 @@
     <string name="home_sync_content_desc">Open Save Viewer. Long press to upload save.</string>
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Kuyruk %1$s içinde bitiyor</string>
-    <string name="queue_item_qty">×%1$d</string>
+    <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
+
     <string name="queue_item_qty_with_output">×%1$d → %2$d öğe</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
@@ -431,7 +505,9 @@
     <string name="combat_solo_bosses">Solo Patronlar</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
     <string name="combat_dungeon_runs">%1$d koşu</string>
+    <!-- Translator note: %1$d = kills, %2$d = food consumed -->
     <string name="combat_last_run">Son: %1$d öldürme, %2$d yiyecek</string>
+    <!-- Translator note: %1$d = kills -->
     <string name="combat_last_run_died">Son: öldü (%1$d öldürme)</string>
     <string name="combat_atk">SAL</string>
     <string name="combat_str">GÜÇ</string>
@@ -454,6 +530,9 @@
     <string name="combat_your_level">Senin savaş seviyen</string>
     <string name="combat_no_strength_bonus">Hiçbiri (güç bonusu yok)</string>
     <string name="combat_best_arrow">En iyi ok</string>
+    <string name="combat_arrow_auto">Otomatik (mevcut olan en iyisi)</string>
+    <string name="combat_label_arrow">Ok</string>
+    <string name="combat_select_loadout">Ekipman Setini Seç</string>
     <string name="combat_enemies">Düşmanlar</string>
     <string name="combat_no_spells">Büyü seviyene uygun büyü yok.</string>
     <string name="combat_only_castable">Sadece Kullanılabilir</string>
@@ -466,14 +545,18 @@
     <!-- Translator note: %1$d = minutes -->
     <string name="combat_duration_min">%1$d dk</string>
     <string name="combat_fight_count_label">Dövüş Sayısı</string>
+    <!-- Translator note: %1$d = number of queued repeat fights, e.g. "×100 fights" -->
     <string name="combat_fight_count_suffix">×%1$d dövüş</string>
+    <!-- Translator note: %1$d = current fight number, %2$d = total fights requested, e.g. "Fight 34/100" -->
     <string name="combat_fight_progress">Dövüş %1$d/%2$d</string>
     <string name="combat_run_count_label">Koşu Sayısı</string>
+    <!-- Translator note: %1$d = number of queued repeat dungeon runs, e.g. "×24 runs" -->
     <string name="combat_run_count_suffix">×%1$d koşu</string>
+    <!-- Translator note: %1$d = current run number, %2$d = total runs requested, e.g. "Run 12/24" -->
     <string name="combat_run_progress">Koşu %1$d/%2$d</string>
     <string name="combat_xp_on_victory">Zaferde kazanılacak XP</string>
     <string name="combat_you_died">Öldün!</string>
-    <string name="combat_died_reward">Ödüllerin %10\'unu aldın.</string>
+    <string name="combat_died_reward">Ödüllerin %%10\'unu aldın.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d eşya</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -498,7 +581,9 @@
     </string-array>
     <string name="profile_equip_best">En İyi Eşyayı Kuşan</string>
     <string name="profile_equip_best_tools">En İyi Araçları Kuşan</string>
+    <string name="profile_weapons">Silahlar</string>
     <string name="profile_combat_gear">Savaş Ekipmanı</string>
+    <string name="profile_view_combat_gear">Savaş Ekipmanını Gör</string>
     <string name="profile_gathering_tools">Toplama Araçları</string>
     <string name="profile_food_dungeon">Yiyecek (Zindan)</string>
     <string name="profile_no_food">Envanterde pişmiş yiyecek yok</string>
@@ -528,6 +613,7 @@
     <!-- ===== SkillsScreen ===== -->
     <!-- Translator note: %1$d = session duration in minutes -->
     <string name="skills_session_duration">Oturum: %1$dm</string>
+    <!-- Translator note: %1$d = estimated number of ores mined in one session -->
     <string name="skill_mining_qty_estimate">~%1$d cevher/oturum</string>
     <string name="skills_only_craftable">Sadece üretilebilir</string>
     <string name="skills_filter_all">Tümü</string>
@@ -566,6 +652,11 @@
     <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/av</string>
     <!-- Translator note: %1$d = required level, %2$s = skill name, %3$d = player level, %4$s = skill name again -->
     <string name="skills_req_with_have">Gereken: %1$d %2$s (Sende olan: %3$d %4$s)</string>
+    <!-- Translator note: %1$d = owned quantity -->
+    <string name="crafting_owned">Sahip olunan: %1$d</string>
+    <string name="crafting_owned_detail">Envanterde sahip olunan: %1$d</string>
+    <string name="firemaking_ashes_owned">Sahip olunan küller: %1$d</string>
+
 
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">AKTİF</string>
@@ -598,8 +689,8 @@
 
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Malzeme yok</string>
-    <!-- Translator note: %1$d = quantity produced -->
-    <string name="crafting_produces">Her üretimde %1$d× üretir</string>
+    <!-- Translator note: %1$d = total quantity, %2$s = item name -->
+
     <string name="crafting_effects">Etkiler</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">Toplam +%1$d XP</string>
@@ -646,11 +737,13 @@
     <string name="character_gender_custom_hint">Cinsiyetinizi açıklayın</string>
     <string name="character_race">Irk</string>
     <string name="character_race_human">İnsan</string>
-    <string name="character_race_elf">Elf</string>
+    <string name="character_race_elf">Elf</string> <!-- untranslated -->
     <string name="character_race_dwarf">Cüce</string>
     <string name="character_race_orc">Ork</string>
-    <string name="character_race_halfling">Buçukluk</string>
+
     <string name="character_race_gnome">Gnom</string>
+
+    <!-- ===== CharacterCustomizationSheet ===== -->
     <string name="appearance_title">Görünümü Özelleştir</string>
     <string name="appearance_skin_tone">Cilt Tonu</string>
     <string name="appearance_eyes">Gözler</string>
@@ -672,101 +765,7 @@
     <!-- Quantity picker quick buttons -->
     <string name="qty_max">Maks</string>
 
-    <!-- ===== Combat difficulty ratings ===== -->
-    <string name="combat_difficulty_likely">Bu iş sende!</string>
-    <string name="combat_difficulty_risky">Mevcut ekipman ile riskli</string>
-    <string name="combat_difficulty_unlikely">Ölme ihtimalin yüksek</string>
-
-    <!-- ===== Achievements ===== -->
-    <string name="achievement_group_levelling">Seviye Atlama</string>
-    <string name="achievement_group_combat">Savaş</string>
-    <string name="achievement_group_quests">Görevler</string>
-    <string name="achievement_group_collection">Koleksiyon</string>
-    <string name="achievement_total_50_name">Maceracı</string>
-    <string name="achievement_total_50_desc">Seviye 50\'ye ulaş</string>
-    <string name="achievement_total_100_name">Gezgin</string>
-    <string name="achievement_total_100_desc">Seviye 100\'e ulaş</string>
-    <string name="achievement_total_250_name">Deneyimli</string>
-    <string name="achievement_total_250_desc">Seviye 250\'ye ulaş</string>
-    <string name="achievement_total_500_name">Kıdemli</string>
-    <string name="achievement_total_500_desc">Seviye 500\'e ulaş</string>
-    <string name="achievement_total_750_name">Üstat</string>
-    <string name="achievement_total_750_desc">Seviye 750\'e ulaş</string>
-    <string name="achievement_total_1000_name">Efsane</string>
-    <string name="achievement_total_1000_desc">Seviye 1000\'e ulaş</string>
-    <string name="achievement_total_1500_name">Şampiyon</string>
-    <string name="achievement_total_1500_desc">Seviye 1500\'e ulaş</string>
-    <string name="achievement_skill_99_name">İlk Ustalık</string>
-    <string name="achievement_skill_99_desc">Herhangi bir yeteneği seviye 99\'a getir</string>
-    <string name="achievement_all_99_name">Tam Ustalık</string>
-    <string name="achievement_all_99_desc">Bütün yetenekleri seviye 99\'a getir</string>
-    <string name="achievement_combat_10_name">Dövüşçü</string>
-    <string name="achievement_combat_10_desc">Savaş seviyesi 10\'a ulaş</string>
-    <string name="achievement_combat_30_name">Savaşçı</string>
-    <string name="achievement_combat_30_desc">Savaş seviyesi 30\'a ulaş</string>
-    <string name="achievement_combat_50_name">Şampiyon</string>
-    <string name="achievement_combat_50_desc">Savaş seviyesi 50\'ye ulaş</string>
-    <string name="achievement_combat_75_name">Elit</string>
-    <string name="achievement_combat_75_desc">Savaş seviyesi 75\'e ulaş</string>
-    <string name="achievement_combat_99_name">Kahraman</string>
-    <string name="achievement_combat_99_desc">Savaş seviyesi 99\'a ulaş</string>
-    <string name="achievement_combat_113_name">Savaş Seviyesi Maks.</string>
-    <string name="achievement_combat_113_desc">Savaş seviyesi 113\'e ulaş</string>
-    <string name="achievement_quest_1_name">Görevci</string>
-    <string name="achievement_quest_1_desc">1 görev tamamla</string>
-    <string name="achievement_quest_5_name">Azimli</string>
-    <string name="achievement_quest_5_desc">5 görev tamamla</string>
-    <string name="achievement_quest_25_name">Görev Avcısı</string>
-    <string name="achievement_quest_25_desc">25 görev tamamla</string>
-    <string name="achievement_quest_50_name">Görev Ustası</string>
-    <string name="achievement_quest_50_desc">50 görev tamamla</string>
-    <string name="achievement_quest_all_name">Görev Şampiyonu</string>
-    <string name="achievement_quest_all_desc">Bütün görevleri tamamla</string>
-    <string name="achievement_pet_first_name">Hayvan Dostu</string>
-    <string name="achievement_pet_first_desc">İlk evcil hayvanını kazan</string>
-    <string name="achievement_pet_all_name">Koleksiyoncu</string>
-    <string name="achievement_pet_all_desc">Bütün evcil hayvanları topla</string>
-
-    <string name="btn_repeat_action">Tekrarla</string>
-    <string name="inventory_sort_quantity">Adet</string>
-    <string name="inventory_sort_az">A-Z</string>
-    <string name="inventory_cat_weapons">Silahlar</string>
-    <string name="inventory_cat_armour">Zırhlar</string>
-    <string name="inventory_cat_tools">Aletler</string>
-    <string name="inventory_cat_food">Yiyecek</string>
-    <string name="inventory_cat_potions">İksirler</string>
-    <string name="inventory_cat_materials">Materyaller</string>
-    <string name="inventory_cat_other">Diğer</string>
-    <string name="inventory_cat_raw_food">Ham Yiyecek</string>
-    <string name="inventory_cat_ammunition">Mühimmat</string>
-    <string name="inventory_cat_ores">Madenler &amp; Taşlar</string>
-    <string name="inventory_cat_construction">İnşaat</string>
-    <string name="inventory_cat_seeds">Tohumlar &amp; Ürünler</string>
-    <string name="inventory_cat_filter_all">Tümü</string>
-    <string name="label_daily">Günlük</string>
-    <string name="label_weekly">Haftalık</string>
-    <string name="label_timed">Süreli</string>
-    <string name="label_daily_quests">Günlük Görevler</string>
-    <string name="label_daily_reset">%1$s vaktinde sıfırlanır</string>
-    <string name="label_weekly_reset">Her Pazartesi %1$s vaktinde sıfırlanır</string>
-    <string name="weekly_bonus_title">Haftalık Ödül!</string>
-    <string name="weekly_bonus_claim">Haftalık Ödülü Al</string>
-    <string name="label_daily_info">Her günlük görev altın kazandırır. Ayrıca her görevin yüzde 1 ihtimal ile Dwarven ekipmanı düşürebilir.</string>
-    <string name="label_weekly_info">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın, veya %1$s şans ile bir Divine ekipman parçası.</string>
-    <string name="label_weekly_info_complete">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın. Bütün Divine ekipmanlarına zaten sahipsin!</string>
-    <string name="label_daily_reward">2.000 altın (1/100: Dwarven ekipmanı)</string>
-    <string name="msg_daily_claimed_coins">Günlük görev tamamlandı! +2.000 altın.</string>
-    <string name="msg_daily_claimed_dwarven">Günlük görev tamamlandı! %1$s ekipmanını buldun!</string>
-    <string name="label_hide_completed">Tamamlananları sakla</string>
-    <string name="settings_font_tiny">En Küçük</string>
-    <string name="settings_font_small">Küçük</string>
-    <string name="settings_lang_español_españa">Español (España)</string>
-    <string name="settings_lang_turkish">Türkçe</string>
-    <string name="settings_lang_italiano">Italiano</string>
-    <string name="settings_lang_russian">Русский</string>
-    <string name="settings_lang_indonesian">Endonezce</string>
-    <string name="settings_lang_portugues_brasil">Português (Brasil)</string>
-    <string name="profile_weapons">Silahlar</string>
+    <!-- ===== Inn / Worker ===== -->
     <string-array name="worker_names">
         <item>Aldric</item>
         <item>Brenna</item>
@@ -793,7 +792,7 @@
         <item>Wren</item>
         <item>Xander</item>
         <item>Yara</item>
-    </string-array>
+    </string-array> <!-- untranslated -->
     <string name="inn_title">Han</string>
     <string name="inn_desc">Yeteneklerini senin yerine geliştirebilecek bir işçi tut veya günlük menüden yiyecek satın al. İşçilerin kazandırdığı ilerleme senin görevlerine etki etmez.</string>
     <string name="inn_worker_already_hired">Zaten tuttuğun bir işçi var.</string>
@@ -824,26 +823,93 @@
     <string name="worker_dismiss_confirm_body">İşçinin seansı ve sıradaki görevleri iptal edilecek. İşçi tutma ücreti ve sıradaki görevlere ait bütün materyaller geri verilecek.</string>
     <string name="inn_daily_menu">Günlük Menü</string>
     <string name="inn_laborers_header">İşçiler</string>
+    <string name="inn_slot1_header">Amele</string>
+    <string name="inn_slot2_header">Deneyimli İşçi</string>
+
+    <!-- ===== Combat difficulty ratings ===== -->
+    <string name="combat_difficulty_likely">Bu iş sende!</string>
+    <string name="combat_difficulty_risky">Mevcut ekipman ile riskli</string>
+    <string name="combat_difficulty_unlikely">Ölme ihtimalin yüksek</string>
+
+    <!-- ===== Achievements ===== -->
+    <string name="achievement_group_levelling">Seviye Atlama</string>
+    <string name="achievement_group_combat">Savaş</string>
+    <string name="achievement_group_quests">Görevler</string>
+    <string name="achievement_group_collection">Koleksiyon</string>
+
+    <string name="achievement_total_50_name">Maceracı</string>
+    <string name="achievement_total_50_desc">Seviye 50\'ye ulaş</string>
+    <string name="achievement_total_100_name">Gezgin</string>
+    <string name="achievement_total_100_desc">Seviye 100\'e ulaş</string>
+    <string name="achievement_total_250_name">Deneyimli</string>
+    <string name="achievement_total_250_desc">Seviye 250\'ye ulaş</string>
+    <string name="achievement_total_500_name">Kıdemli</string>
+    <string name="achievement_total_500_desc">Seviye 500\'e ulaş</string>
+    <string name="achievement_total_750_name">Üstat</string>
+    <string name="achievement_total_750_desc">Seviye 750\'e ulaş</string>
+    <string name="achievement_total_1000_name">Efsane</string>
+    <string name="achievement_total_1000_desc">Seviye 1000\'e ulaş</string>
+    <string name="achievement_total_1500_name">Şampiyon</string>
+    <string name="achievement_total_1500_desc">Seviye 1500\'e ulaş</string>
+    <string name="achievement_skill_99_name">İlk Ustalık</string>
+    <string name="achievement_skill_99_desc">Herhangi bir yeteneği seviye 99\'a getir</string>
+    <string name="achievement_all_99_name">Tam Ustalık</string>
+    <string name="achievement_all_99_desc">Bütün yetenekleri seviye 99\'a getir</string>
+
+    <string name="achievement_combat_10_name">Dövüşçü</string>
+    <string name="achievement_combat_10_desc">Savaş seviyesi 10\'a ulaş</string>
+    <string name="achievement_combat_30_name">Savaşçı</string>
+    <string name="achievement_combat_30_desc">Savaş seviyesi 30\'a ulaş</string>
+    <string name="achievement_combat_50_name">Şampiyon</string>
+    <string name="achievement_combat_50_desc">Savaş seviyesi 50\'ye ulaş</string>
+    <string name="achievement_combat_75_name">Elit</string>
+    <string name="achievement_combat_75_desc">Savaş seviyesi 75\'e ulaş</string>
+    <string name="achievement_combat_99_name">Kahraman</string>
+    <string name="achievement_combat_99_desc">Savaş seviyesi 99\'a ulaş</string>
+    <string name="achievement_combat_113_name">Savaş Seviyesi Maks.</string>
+    <string name="achievement_combat_113_desc">Savaş seviyesi 113\'e ulaş</string>
+
+    <string name="achievement_quest_1_name">Görevci</string>
+    <string name="achievement_quest_1_desc">1 görev tamamla</string>
+    <string name="achievement_quest_5_name">Azimli</string>
+    <string name="achievement_quest_5_desc">5 görev tamamla</string>
+    <string name="achievement_quest_25_name">Görev Avcısı</string>
+    <string name="achievement_quest_25_desc">25 görev tamamla</string>
+    <string name="achievement_quest_50_name">Görev Ustası</string>
+    <string name="achievement_quest_50_desc">50 görev tamamla</string>
+    <string name="achievement_quest_all_name">Görev Şampiyonu</string>
+    <string name="achievement_quest_all_desc">Bütün görevleri tamamla</string>
+
+    <string name="achievement_pet_first_name">Hayvan Dostu</string>
+    <string name="achievement_pet_first_desc">İlk evcil hayvanını kazan</string>
+    <string name="achievement_pet_all_name">Koleksiyoncu</string>
+    <string name="achievement_pet_all_desc">Bütün evcil hayvanları topla</string>
+
+    <!-- ===== Quest display names (override toTitleCase fallback) ===== -->
     <string name="quest_kbd_slayer_1_name">Kara Ejder Kral Katili I</string>
     <string name="quest_kbd_slayer_2_name">Kara Ejder Kral Katili II</string>
     <string name="quest_kbd_slayer_3_name">Kara Ejder Kral Katili III</string>
     <string name="inn_daily_resets">Her gün %1$s vaktinde yenilenir</string>
-    <string name="inn_food_heal">+%1$d HP</string>
+    <string name="inn_food_heal">+%1$d HP</string> <!-- untranslated -->
     <string name="inn_food_purchased">Yiyecek satın alındı.</string>
+    <string name="inn_buy_qty">Adet</string>
+    <string name="inn_buy_total">Toplam: %1$s</string>
     <string name="inn_card_desc">Workers and daily food</string>
     <string name="worker_no_active_session">İşçi beklemede — Sırada herhangi bir görev yok</string>
     <string name="worker_add_sessions">Seans ekle</string>
     <string name="inn_worker_tier">%1$s İşçi</string>
     <string name="worker_skills_title_nav">İşçi Yetenekleri</string>
-    <string name="guild_hall_title">Guild Hall</string>
+
+    <!-- Guild Hall -->
+    <string name="guild_hall_title">Guild Hall</string> <!-- untranslated -->
     <string name="guild_hall_desc">Loncalara katılın ve rütbe kazanmak için günlük görevleri tamamlayın</string>
-    <string name="guild_hall_intro">Guilds reward you for activities you already do. Complete quests and daily requests to earn cross-skill materials, coins, and XP, so specialists can still access resources from skills they don\'t train.</string>
-    <string name="guild_level_label">Level %1$d</string>
-    <string name="guild_level_max">Level 10 (Max)</string>
-    <string name="guild_tab_quests">Quests</string>
-    <string name="guild_tab_dailies">Daily Requests</string>
-    <string name="guild_daily_resets_in">Resets daily at %1$s</string>
-    <string name="guild_locked_hint">Requires Guild Level %1$d</string>
+    <string name="guild_hall_intro">Guilds reward you for activities you already do. Complete quests and daily requests to earn cross-skill materials, coins, and XP, so specialists can still access resources from skills they don\'t train.</string> <!-- untranslated -->
+    <string name="guild_level_label">Level %1$d</string> <!-- untranslated -->
+    <string name="guild_level_max">Level 10 (Max)</string> <!-- untranslated -->
+    <string name="guild_tab_quests">Quests</string> <!-- untranslated -->
+    <string name="guild_tab_dailies">Daily Requests</string> <!-- untranslated -->
+    <string name="guild_daily_resets_in">Resets daily at %1$s</string> <!-- untranslated -->
+    <string name="guild_locked_hint">Requires Guild Level %1$d</string> <!-- untranslated -->
     <string name="guild_no_dailies">Günlük isteklerin kilidini açmak için lonca görevlerini tamamlayın.</string>
     <string name="guild_contribute_inventory">Envanterden katkıda bulun (%1$d mevcut)</string>
     <string name="guild_quest_desc_gather">%4$s için %2$d %3$s %1$s.</string>
@@ -858,79 +924,99 @@
     <string name="guild_combat_mages">sihir</string>
     <string name="guild_rep_label">%1$d / %2$d günlük görev</string>
     <string name="guild_quest_complete">Quest complete: %1$s</string>
-    <string name="guild_daily_complete">Daily reward claimed!</string>
-    <string name="guild_name_mining">Mining Guild</string>
-    <string name="guild_name_fishing">Fishing Guild</string>
-    <string name="guild_name_woodcutting">Woodcutting Guild</string>
-    <string name="guild_name_farming">Farming Guild</string>
-    <string name="guild_name_firemaking">Firemakers Guild</string>
-    <string name="guild_name_agility">Agility Guild</string>
-    <string name="guild_name_smithing">Smithing Guild</string>
-    <string name="guild_name_cooking">Cooks Guild</string>
-    <string name="guild_name_fletching">Fletchers Guild</string>
-    <string name="guild_name_crafting">Crafting Guild</string>
-    <string name="guild_name_runecrafting">Runecrafters Guild</string>
-    <string name="guild_name_herblore">Herblorists Guild</string>
-    <string name="guild_name_warriors">Warriors Guild</string>
-    <string name="guild_name_archers">Archers Guild</string>
-    <string name="guild_name_mages">Mages Guild</string>
-    <string name="guild_name_prayer">Prayer Guild</string>
+    <string name="guild_daily_complete">Daily reward claimed!</string> <!-- untranslated -->
+    <string name="guild_name_mining">Mining Guild</string> <!-- untranslated -->
+    <string name="guild_name_fishing">Fishing Guild</string> <!-- untranslated -->
+    <string name="guild_name_woodcutting">Woodcutting Guild</string> <!-- untranslated -->
+    <string name="guild_name_farming">Farming Guild</string> <!-- untranslated -->
+    <string name="guild_name_firemaking">Firemakers Guild</string> <!-- untranslated -->
+    <string name="guild_name_agility">Agility Guild</string> <!-- untranslated -->
+    <string name="guild_name_smithing">Smithing Guild</string> <!-- untranslated -->
+    <string name="guild_name_cooking">Cooks Guild</string> <!-- untranslated -->
+    <string name="guild_name_fletching">Fletchers Guild</string> <!-- untranslated -->
+    <string name="guild_name_crafting">Crafting Guild</string> <!-- untranslated -->
+    <string name="guild_name_runecrafting">Runecrafters Guild</string> <!-- untranslated -->
+    <string name="guild_name_herblore">Herblorists Guild</string> <!-- untranslated -->
+    <string name="guild_name_warriors">Warriors Guild</string> <!-- untranslated -->
+    <string name="guild_name_archers">Archers Guild</string> <!-- untranslated -->
+    <string name="guild_name_mages">Mages Guild</string> <!-- untranslated -->
+    <string name="guild_name_prayer">Prayer Guild</string> <!-- untranslated -->
+    <string name="guild_name_thieving">Hirsizlar Loncasi</string>
+    <string name="guild_name_mercantile">Merchants Guild</string> <!-- untranslated -->
+    <string name="guild_name_construction">İnşaatçılar Loncası</string>
+    <string name="guild_name_slayer">Slayers Guild</string> <!-- untranslated -->
+    <string name="guild_quest_desc_slayer_task">%2$s için %1$d Slayer görevi tamamlayın.</string>
+    <string name="guild_quest_desc_slayer_kill">Bir Slayer görevindeyken %1$d düşmanı yenin.</string>
+
+    <!-- Mercantile skill -->
+    <string name="skill_mercantile">Mercantile</string> <!-- untranslated -->
+    <string name="label_support_skills">Support</string> <!-- untranslated -->
+    <string name="mercantile_routes_label">Trade Routes</string> <!-- untranslated -->
+    <string name="mercantile_level_label">Level %1$d Mercantile</string> <!-- untranslated -->
+    <string name="mercantile_xp_label">XP: %1$s</string> <!-- untranslated -->
+    <string name="mercantile_coins_label">Coins: %1$s</string> <!-- untranslated -->
+    <string name="mercantile_cost_label">Cost: %1$s</string> <!-- untranslated -->
+    <string name="mercantile_return_range">Returns: %1$s – %2$s</string> <!-- untranslated -->
+    <string name="mercantile_dispatch_label">Dispatch</string> <!-- untranslated -->
+    <string name="mercantile_queue_label">Add to Queue</string> <!-- untranslated -->
 
     <!-- Church -->
-    <string name="church_title">Church</string>
+    <string name="church_title">Church</string> <!-- untranslated -->
     <string name="church_desc">Prayer blessings</string>
-    <string name="church_no_active_blessing">No active blessing — visit the Church to pray.</string>
-    <string name="church_active_label">Active Blessing</string>
-    <string name="church_expires_in">Expires in %1$s</string>
-    <string name="church_blessing_active_fmt">%1$s • %2$s left</string>
-    <string name="church_section_xp">XP Blessings</string>
-    <string name="church_section_defense">Defense Blessings</string>
-    <string name="church_section_coins">Coin Blessings</string>
-    <string name="church_locked_level">Requires Prayer level %1$d</string>
-    <string name="church_active_chip">Active</string>
-    <string name="church_activate">Activate</string>
-    <string name="church_blessing_bonus">+%1$s from blessing</string>
-    <string name="church_blessing_suffix">from blessing</string>
-    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string>
-    <string name="church_effect_def">+%1$d Defense for %2$d hours</string>
-    <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string>
-    <string name="church_cost_bones">Costs %1$d bones</string>
-    <string name="church_confirm_title">Activate Blessing?</string>
+    <string name="church_no_active_blessing">No active blessing — visit the Church to pray.</string> <!-- untranslated -->
+    <string name="church_active_label">Active Blessing</string> <!-- untranslated -->
+    <string name="church_expires_in">Expires in %1$s</string> <!-- untranslated -->
+    <string name="church_blessing_active_fmt">%1$s • %2$s left</string> <!-- untranslated -->
+    <string name="church_section_xp">XP Blessings</string> <!-- untranslated -->
+    <string name="church_section_defense">Defense Blessings</string> <!-- untranslated -->
+    <string name="church_section_coins">Coin Blessings</string> <!-- untranslated -->
+    <string name="church_locked_level">Requires Prayer level %1$d</string> <!-- untranslated -->
+    <string name="church_active_chip">Active</string> <!-- untranslated -->
+    <string name="church_activate">Activate</string> <!-- untranslated -->
+    <string name="church_blessing_bonus">+%1$s from blessing</string> <!-- untranslated -->
+    <string name="church_blessing_suffix">from blessing</string> <!-- untranslated -->
+    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string> <!-- untranslated -->
+    <string name="church_effect_def">+%1$d Defense for %2$d hours</string> <!-- untranslated -->
+    <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
+    <string name="church_cost_bones">Costs %1$d bones</string> <!-- untranslated -->
+    <string name="church_confirm_title">Activate Blessing?</string> <!-- untranslated -->
     <string name="church_bones_available">%1$d kemiğiniz var (tüm türler), kutsamalar için %2$d değerinde (büyük kemikler daha fazla sayılır)</string>
-    <string name="church_not_enough_bones">Not enough bones (need %1$d)</string>
-    <string name="church_already_active">A blessing is already active</string>
+    <string name="church_not_enough_bones">Not enough bones (need %1$d)</string> <!-- untranslated -->
+    <string name="church_already_active">A blessing is already active</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Kutsamayı Devre Dışı Bırak?</string>
     <string name="church_confirm_deactivate_body">Aktif kutsamanızı devre dışı bırakmak istediğinizden emin misiniz? Kemiklerinizi geri alamayacaksınız.</string>
-    <string name="blessing_blessed_focus_name">Blessed Focus</string>
-    <string name="blessing_stone_skin_name">Stone Skin</string>
-    <string name="blessing_blessed_focus_ii_name">Blessed Focus II</string>
-    <string name="blessing_stone_skin_ii_name">Stone Skin II</string>
-    <string name="blessing_blessed_focus_iii_name">Blessed Focus III</string>
-    <string name="blessing_stone_skin_iii_name">Stone Skin III</string>
-    <string name="blessing_tithe_blessing_name">Tithe Blessing</string>
-    <string name="blessing_stone_skin_iv_name">Stone Skin IV</string>
-    <string name="blessing_fortune_i_name">Fortune I</string>
-    <string name="blessing_tithe_blessing_ii_name">Tithe Blessing II</string>
-    <string name="blessing_iron_ward_name">Iron Ward</string>
-    <string name="blessing_fortune_ii_name">Fortune II</string>
-    <string name="blessing_tithe_blessing_iii_name">Tithe Blessing III</string>
-    <string name="blessing_iron_ward_ii_name">Iron Ward II</string>
-    <string name="blessing_fortune_iii_name">Fortune III</string>
-    <string name="blessing_divine_focus_name">Divine Focus</string>
-    <string name="blessing_diamond_skin_name">Diamond Skin</string>
-    <string name="blessing_fortune_iv_name">Fortune IV</string>
-    <string name="blessing_divine_focus_ii_name">Divine Focus II</string>
-    <string name="blessing_diamond_skin_ii_name">Diamond Skin II</string>
-    <string name="blessing_fortune_v_name">Fortune V</string>
-    <string name="blessing_divine_grace_name">Divine Grace</string>
-    <string name="blessing_holy_shield_name">Holy Shield</string>
-    <string name="blessing_abundance_name">Abundance</string>
-    <string name="blessing_divine_grace_ii_name">Divine Grace II</string>
-    <string name="blessing_holy_shield_ii_name">Holy Shield II</string>
-    <string name="blessing_abundance_ii_name">Abundance II</string>
-    <string name="blessing_sacred_grace_name">Sacred Grace</string>
-    <string name="blessing_aegis_name">Aegis</string>
-    <string name="blessing_abundance_iii_name">Abundance III</string>
+
+    <!-- Blessing names -->
+    <string name="blessing_blessed_focus_name">Blessed Focus</string> <!-- untranslated -->
+    <string name="blessing_stone_skin_name">Stone Skin</string> <!-- untranslated -->
+    <string name="blessing_blessed_focus_ii_name">Blessed Focus II</string> <!-- untranslated -->
+    <string name="blessing_stone_skin_ii_name">Stone Skin II</string> <!-- untranslated -->
+    <string name="blessing_blessed_focus_iii_name">Blessed Focus III</string> <!-- untranslated -->
+    <string name="blessing_stone_skin_iii_name">Stone Skin III</string> <!-- untranslated -->
+    <string name="blessing_tithe_blessing_name">Tithe Blessing</string> <!-- untranslated -->
+    <string name="blessing_stone_skin_iv_name">Stone Skin IV</string> <!-- untranslated -->
+    <string name="blessing_fortune_i_name">Fortune I</string> <!-- untranslated -->
+    <string name="blessing_tithe_blessing_ii_name">Tithe Blessing II</string> <!-- untranslated -->
+    <string name="blessing_iron_ward_name">Iron Ward</string> <!-- untranslated -->
+    <string name="blessing_fortune_ii_name">Fortune II</string> <!-- untranslated -->
+    <string name="blessing_tithe_blessing_iii_name">Tithe Blessing III</string> <!-- untranslated -->
+    <string name="blessing_iron_ward_ii_name">Iron Ward II</string> <!-- untranslated -->
+    <string name="blessing_fortune_iii_name">Fortune III</string> <!-- untranslated -->
+    <string name="blessing_divine_focus_name">Divine Focus</string> <!-- untranslated -->
+    <string name="blessing_diamond_skin_name">Diamond Skin</string> <!-- untranslated -->
+    <string name="blessing_fortune_iv_name">Fortune IV</string> <!-- untranslated -->
+    <string name="blessing_divine_focus_ii_name">Divine Focus II</string> <!-- untranslated -->
+    <string name="blessing_diamond_skin_ii_name">Diamond Skin II</string> <!-- untranslated -->
+    <string name="blessing_fortune_v_name">Fortune V</string> <!-- untranslated -->
+    <string name="blessing_divine_grace_name">Divine Grace</string> <!-- untranslated -->
+    <string name="blessing_holy_shield_name">Holy Shield</string> <!-- untranslated -->
+    <string name="blessing_abundance_name">Abundance</string> <!-- untranslated -->
+    <string name="blessing_divine_grace_ii_name">Divine Grace II</string> <!-- untranslated -->
+    <string name="blessing_holy_shield_ii_name">Holy Shield II</string> <!-- untranslated -->
+    <string name="blessing_abundance_ii_name">Abundance II</string> <!-- untranslated -->
+    <string name="blessing_sacred_grace_name">Sacred Grace</string> <!-- untranslated -->
+    <string name="blessing_aegis_name">Aegis</string> <!-- untranslated -->
+    <string name="blessing_abundance_iii_name">Abundance III</string> <!-- untranslated -->
 
     <!-- Skilling dungeon names and descriptions -->
     <string name="skilling_dungeon_copper_caverns_name">Bakır Mağaralar</string>
@@ -949,7 +1035,12 @@
     <string name="skilling_dungeon_crumbling_watchtower_desc">Tepelerin kenarına yerleşmiş harap bir taş kule. Bir zamanlar içinde ne saklandıysa onu hâlâ bir şey koruyor.</string>
     <string name="skilling_dungeon_shattered_spire_name">Parçalanmış Kule</string>
     <string name="skilling_dungeon_shattered_spire_desc">Moloz yığınına dönmüş bir büyücü kulesinin kalıntıları. Havada hâlâ artık büyü cızırtısı var.</string>
+    <string name="skilling_dungeon_thieves_den_name">Hırsızlar Ini</string>
+    <string name="skilling_dungeon_thieves_den_desc">Şehrin sokaklarının altındaki bir tünel labirenti; örgütlü bir hırsız çetesi tarafından kullanılır.</string>
+    <string name="skilling_dungeon_shadow_vault_name">Gölge Kasası</string>
+    <string name="skilling_dungeon_shadow_vault_desc">Haydut Tapınağı\'nın altındaki gizli bir kasa; loncanın en değerli çalıntı malları burada saklanır.</string>
 
+    <!-- Expeditions -->
     <string name="nav_expeditions">Seferler</string>
     <string name="expeditions_title">Seferler</string>
     <string name="expedition_explore_button">Keşfet</string>
@@ -961,131 +1052,74 @@
     <string name="expedition_lock_notes">%1$s içindeki tüm notları bul</string>
     <string name="expedition_lock_prerequisite">Bir ön koşulu tamamla</string>
     <string name="label_notes">Notlar</string>
-    <string name="settings_backup_title">Otomatik Yedekleme</string>
-    <string name="settings_backup_folder">Yedekleme Klasörü</string>
-    <string name="settings_backup_no_folder">Klasör seçilmedi</string>
-    <string name="settings_backup_choose">Seç</string>
-    <string name="settings_backup_frequency">Yedekleme Sıklığı</string>
-    <string name="settings_backup_off">Kapalı</string>
-    <string name="settings_backup_hourly">Saatlik</string>
-    <string name="settings_backup_daily">Günlük</string>
-    <string name="settings_backup_weekly">Haftalık</string>
-    <string name="settings_backup_at_5am">05:00 saatinde</string>
-    <string name="settings_backup_now">Şimdi Yedekle</string>
-    <string name="settings_backup_success">Yedekleme kaydedildi.</string>
-    <string name="settings_backup_failed">Yedekleme başarısız.</string>
-    <string name="settings_backup_folder_set">Yedekleme klasörü seçildi.</string>
-    <string name="home_town_title">Kasaba</string>
-    <string name="home_town_desc">Dükkanı, hanı, loncayı, kiliseyi, usta atölyesini, avcı ustasını ve panayırı ziyaret edin</string>
-    <string name="guild_dailies_available">Günlük görevler mevcut</string>
-    <string name="guild_not_unlocked">Henüz açılmadı</string>
-    <string name="guild_dailies_done_today">Bugünkü günlükler tamamlandı</string>
-    <string name="guild_dailies_remaining_today">Bugün %1$d kaldı</string>
-    <string name="guild_do_dailies_hint">Bir sonraki rütbeye ilerlemek için günlük görevleri tamamlayın</string>
-    <string name="guild_name_thieving">Hirsizlar Loncasi</string>
-    <string name="guild_name_mercantile">Merchants Guild</string>
-    <string name="guild_name_construction">İnşaatçılar Loncası</string>
-    <string name="guild_name_slayer">Slayers Guild</string>
-    <string name="guild_quest_desc_slayer_task">%2$s için %1$d Slayer görevi tamamlayın.</string>
-    <string name="guild_quest_desc_slayer_kill">Bir Slayer görevindeyken %1$d düşmanı yenin.</string>
-    <string name="skill_mercantile">Mercantile</string>
-    <string name="label_support_skills">Support</string>
-    <string name="mercantile_routes_label">Trade Routes</string>
-    <string name="mercantile_level_label">Level %1$d Mercantile</string>
-    <string name="mercantile_xp_label">XP: %1$s</string>
-    <string name="mercantile_coins_label">Coins: %1$s</string>
-    <string name="mercantile_cost_label">Cost: %1$s</string>
-    <string name="mercantile_return_range">Returns: %1$s – %2$s</string>
-    <string name="mercantile_dispatch_label">Dispatch</string>
-    <string name="mercantile_queue_label">Add to Queue</string>
 
-    <string name="settings_lang_dutch">Nederlands</string>
-    <string name="skill_slayer_name">Slayer</string>
-    <string name="skill_slayer_desc">Receive tasks from the Slayer Master in Town.</string>
+    <!-- Slayer -->
+    <string name="skill_slayer_name">Slayer</string> <!-- untranslated -->
+    <string name="skill_slayer_desc">Receive tasks from the Slayer Master in Town.</string> <!-- untranslated -->
     <string name="builder_title">Usta Atölyesi</string>
     <string name="builder_card_desc">Han, Lonca Salonu ve Kilise\'yi yükselt</string>
-    <string name="slayer_title">Slayer Master</string>
-    <string name="slayer_card_desc">Tasks and rewards for slayers</string>
-    <string name="slayer_desc">Complete tasks to earn Slayer XP and points. Spend points in the shop for exclusive gear.</string>
-    <string name="slayer_level_label">Level %1$d</string>
-    <string name="slayer_xp_label">%1$s XP</string>
-    <string name="slayer_points">%1$d pts</string>
-    <string name="slayer_active_task">Active Task</string>
-    <string name="slayer_kills_remaining">%1$d / %2$d kills</string>
-    <string name="slayer_get_task">Get New Task</string>
-    <string name="slayer_skip_task">Skip (30 pts)</string>
-    <string name="slayer_no_task">No active task. Tap Get New Task.</string>
-    <string name="slayer_task_stuck">This enemy is only found in an Expeditions dungeon you haven\'t discovered yet. Reroll for free.</string>
-    <string name="slayer_reroll_free">Reroll (free)</string>
-    <string name="slayer_no_eligible_tasks">No eligible tasks at your Slayer level.</string>
-    <string name="slayer_task_complete">Task complete! Visit the Slayer Master for a new one.</string>
-    <string name="slayer_xp_per_kill">%1$d XP/kill</string>
-    <string name="slayer_points_on_complete">+%1$d pts on completion</string>
-    <string name="slayer_shop_title">Slayer Shop</string>
-    <string name="slayer_shop_cost">%1$d pts</string>
-    <string name="slayer_not_enough_points">Not enough Slayer points.</string>
-    <string name="slayer_already_owned">Already owned.</string>
-    <string name="slayer_purchased">Added to inventory.</string>
-    <string name="slayer_owned">Owned</string>
+    <string name="slayer_title">Slayer Master</string> <!-- untranslated -->
+    <string name="slayer_card_desc">Tasks and rewards for slayers</string> <!-- untranslated -->
+    <string name="slayer_desc">Complete tasks to earn Slayer XP and points. Spend points in the shop for exclusive gear.</string> <!-- untranslated -->
+    <string name="slayer_level_label">Level %1$d</string> <!-- untranslated -->
+    <string name="slayer_xp_label">%1$s XP</string> <!-- untranslated -->
+    <string name="slayer_points">%1$d pts</string> <!-- untranslated -->
+    <string name="slayer_active_task">Active Task</string> <!-- untranslated -->
+    <string name="slayer_kills_remaining">%1$d / %2$d kills</string> <!-- untranslated -->
+    <string name="slayer_get_task">Get New Task</string> <!-- untranslated -->
+    <string name="slayer_skip_task">Skip (30 pts)</string> <!-- untranslated -->
+    <string name="slayer_no_task">No active task. Tap Get New Task.</string> <!-- untranslated -->
+    <string name="slayer_task_stuck">This enemy is only found in an Expeditions dungeon you haven\'t discovered yet. Reroll for free.</string> <!-- untranslated -->
+    <string name="slayer_reroll_free">Reroll (free)</string> <!-- untranslated -->
+    <string name="slayer_no_eligible_tasks">No eligible tasks at your Slayer level.</string> <!-- untranslated -->
+    <string name="slayer_task_complete">Task complete! Visit the Slayer Master for a new one.</string> <!-- untranslated -->
+    <string name="slayer_xp_per_kill">%1$d XP/kill</string> <!-- untranslated -->
+    <string name="slayer_points_on_complete">+%1$d pts on completion</string> <!-- untranslated -->
+    <string name="slayer_shop_title">Slayer Shop</string> <!-- untranslated -->
+    <string name="slayer_shop_cost">%1$d pts</string> <!-- untranslated -->
+    <string name="slayer_not_enough_points">Not enough Slayer points.</string> <!-- untranslated -->
+    <string name="slayer_already_owned">Already owned.</string> <!-- untranslated -->
+    <string name="slayer_purchased">Added to inventory.</string> <!-- untranslated -->
+    <string name="slayer_owned">Owned</string> <!-- untranslated -->
     <string name="slayer_lamp_purchased">+%1$s XP %2$s\'e eklendi!</string>
-    <string name="slayer_lamp_pick_skill">Choose a skill</string>
-    <string name="slayer_lamp_small">XP Lamp (Small)</string>
-    <string name="slayer_lamp_large">XP Lamp (Large)</string>
-    <string name="slayer_lamp_small_desc">+10,000 XP to any skill</string>
-    <string name="slayer_lamp_large_desc">+50,000 XP to any skill</string>
-    <string name="slayer_found_in">Found in: %1$s</string>
-    <string name="slayer_requires">Requires: %1$s</string>
+    <string name="slayer_lamp_pick_skill">Choose a skill</string> <!-- untranslated -->
+    <string name="slayer_lamp_small">XP Lamp (Small)</string> <!-- untranslated -->
+    <string name="slayer_lamp_large">XP Lamp (Large)</string> <!-- untranslated -->
+    <string name="slayer_lamp_small_desc">+10,000 XP to any skill</string> <!-- untranslated -->
+    <string name="slayer_lamp_large_desc">+50,000 XP to any skill</string> <!-- untranslated -->
+    <string name="slayer_found_in">Found in: %1$s</string> <!-- untranslated -->
+    <string name="slayer_requires">Requires: %1$s</string> <!-- untranslated -->
     <string name="slayer_add_dungeon_to_queue">Zindanı Kuyruğa Ekle</string>
     <string name="slayer_queue_added">Kuyruğa eklendi: %1$s.</string>
     <string name="slayer_queue_full">Kuyruk dolu.</string>
-    <string name="slayer_foretell_title">Foretell Future Tasks</string>
-    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string>
-    <string name="slayer_foretell_queue_empty">No tasks queued.</string>
-    <string name="slayer_foretell_queue_btn">+ Queue</string>
-    <string name="slayer_foretell_queue_full">Foretell queue is full (3/3).</string>
-    <string name="slayer_foretell_not_enough_bones">Not enough bones (cost: %1$d bones).</string>
-    <string name="slayer_foretell_success">Task foretold: %1$s!</string>
-    <string name="slayer_foretell_btn">Foretell Next Task (%1$d bones)</string>
-    <string name="slayer_foretell_slot">Slot %1$d: %2$s</string>
-    <string name="item_slayer_helm_name">Slayer Helm</string>
-    <string name="item_slayer_helm_desc">A sturdy helm worn by veteran slayers.</string>
-    <string name="item_abyssal_whip_name">Abyssal Whip</string>
-    <string name="item_abyssal_whip_desc">A whip forged from abyssal energy. Excellent for strength training.</string>
-    <string name="item_slayer_platebody_name">Slayer Platebody</string>
-    <string name="item_slayer_platebody_desc">Heavy armour etched with slayer runes.</string>
-    <string name="item_slayer_platelegs_name">Slayer Platelegs</string>
-    <string name="item_slayer_platelegs_desc">Protective legs crafted for extended dungeon runs.</string>
-    <string name="settings_changelog_title">Yenilikler</string>
-    <string name="settings_changelog_desc">En son güncellemedeki değişiklikleri gör</string>
-    <string name="settings_changelog_btn">Göster</string>
-    <string name="profile_view_combat_gear">Savaş Ekipmanını Gör</string>
-    <string name="inn_slot1_header">Amele</string>
-    <string name="inn_slot2_header">Deneyimli İşçi</string>
-    <string name="guild_quest_gate_blocked">Rütbenizi yükseltmek için görevleri tamamlayın.</string>
-    <string name="guild_quest_required">İlerlemek için görev gerekli</string>
-    <string name="home_xp_boost_active">2x XP Takviyesi aktif — %1$s kaldı</string>
-    <string name="inn_buy_qty">Adet</string>
-    <string name="inn_buy_total">Toplam: %1$s</string>
-    <string name="combat_arrow_auto">Otomatik (mevcut olan en iyisi)</string>
-    <string name="combat_label_arrow">Ok</string>
-    <string name="combat_select_loadout">Ekipman Setini Seç</string>
+    <string name="slayer_foretell_title">Foretell Future Tasks</string> <!-- untranslated -->
+    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_empty">No tasks queued.</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_btn">+ Queue</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_full">Foretell queue is full (3/3).</string> <!-- untranslated -->
+    <string name="slayer_foretell_not_enough_bones">Not enough bones (cost: %1$d bones).</string> <!-- untranslated -->
+    <string name="slayer_foretell_success">Task foretold: %1$s!</string> <!-- untranslated -->
+    <string name="slayer_foretell_btn">Foretell Next Task (%1$d bones)</string> <!-- untranslated -->
+    <string name="slayer_foretell_slot">Slot %1$d: %2$s</string> <!-- untranslated -->
 
     <!-- Prestige system -->
-    <string name="prestige">Prestige</string>
-    <string name="prestige_max">Max Prestige</string>
-    <string name="prestige_confirm_title">Prestige %s?</string>
-    <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string>
-    <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string>
+    <string name="prestige">Prestige</string> <!-- untranslated -->
+    <string name="prestige_max">Max Prestige</string> <!-- untranslated -->
+    <string name="prestige_confirm_title">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_agility">%1$s seviyeniz 1\'e sıfırlanacak, ancak kalıcı bir +%2$d%% XP bonusu kazanacaksınız ve oturum süreniz kısalmaya devam edecek — seviye 99\'da bir oturum %4$d dakika yerine %3$d dakika sürecek.</string>
     <string name="prestige_confirm_message_mercantile">%1$s seviyeniz 1\'e sıfırlanacak, ancak kalıcı bir +%2$d%% XP bonusu kazanacaksınız, ayrıca ticaret rotalarından +%2$d%% ekstra altın getirisi kazanacaksınız.</string>
-    <string name="achievement_prestige_first_name">First Reset</string>
-    <string name="achievement_prestige_first_desc">Prestige any skill for the first time</string>
-    <string name="achievement_prestige_any_3_name">Mastered</string>
-    <string name="achievement_prestige_any_3_desc">Reach Prestige 3 on any skill</string>
-    <string name="achievement_prestige_all_1_name">Clean Slate</string>
-    <string name="achievement_prestige_all_1_desc">Prestige all skills at least once</string>
-    <string name="achievement_prestige_all_3_name">True Prestige</string>
-    <string name="achievement_prestige_all_3_desc">Reach Prestige 3 on every skill</string>
+
+    <!-- Prestige achievements -->
+    <string name="achievement_prestige_first_name">First Reset</string> <!-- untranslated -->
+    <string name="achievement_prestige_first_desc">Prestige any skill for the first time</string> <!-- untranslated -->
+    <string name="achievement_prestige_any_3_name">Mastered</string> <!-- untranslated -->
+    <string name="achievement_prestige_any_3_desc">Reach Prestige 3 on any skill</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_1_name">Clean Slate</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_1_desc">Prestige all skills at least once</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_3_name">True Prestige</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_3_desc">Reach Prestige 3 on every skill</string> <!-- untranslated -->
 
     <!-- Shop categories -->
     <string name="shop_cat_ores_and_materials">Cevher &amp; Malzeme</string>
@@ -1139,14 +1173,27 @@
     <string name="crafting_tier_iron">Demir</string>
     <string name="crafting_tier_magic">Büyülü</string>
     <string name="crafting_tier_maple">Akçaağaç</string>
-    <string name="crafting_tier_mithril">Mithril</string>
+    <string name="crafting_tier_mithril">Mithril</string> <!-- untranslated -->
     <string name="crafting_tier_oak">Meşe</string>
     <string name="crafting_tier_platinum">Platin</string>
-    <string name="crafting_tier_runite">Runite</string>
+    <string name="crafting_tier_runite">Runite</string> <!-- untranslated -->
     <string name="crafting_tier_silver">Gümüş</string>
     <string name="crafting_tier_steel">Çelik</string>
     <string name="crafting_tier_willow">Söğüt</string>
     <string name="crafting_tier_yew">Porsuk</string>
+
+    <!-- Bone Altar -->
+    <string name="bone_altar_title">Kemik Sunağı</string>
+    <string name="bone_altar_open">Sunağı Kullan</string>
+    <string name="bone_altar_select_prompt">Gömmek için bir kemik seçin</string>
+    <string name="bone_altar_tap">Gömmek için Dokun</string>
+    <string name="bone_altar_change_bone">Değiştir</string>
+    <string name="bone_altar_combo_count">Kombo ×%d</string>
+    <string name="bone_altar_bonus_active">+50%% XP bonusu!</string>
+    <string name="bone_altar_session_xp">+%s XP bu oturumda</string>
+    <string name="bone_altar_buried_count">%d gömüldü</string>
+    <string name="bone_altar_no_bones">Envanterde kemik yok</string>
+    <string name="bone_altar_cape_awarded">Dua pelerini kazanıldı!</string>
 
     <!-- Firemaking rework + ash catalyst + fertilizer -->
     <string name="firemaking_logs_in_inventory">envanterde</string>
@@ -1160,25 +1207,18 @@
     <string name="catalyst_enhanced_output">Güçlendirilmiş iksir üretir</string>
     <string name="catalyst_rune_bonus">Esans başına %1$d rün</string>
     <string name="catalyst_none">Katalizör yok</string>
-    <string name="bone_altar_title">Kemik Sunağı</string>
-    <string name="bone_altar_open">Sunağı Kullan</string>
-    <string name="bone_altar_select_prompt">Gömmek için bir kemik seçin</string>
-    <string name="bone_altar_tap">Gömmek için Dokun</string>
-    <string name="bone_altar_change_bone">Değiştir</string>
-    <string name="bone_altar_combo_count">Kombo ×%d</string>
-    <string name="bone_altar_bonus_active">+50% XP bonusu!</string>
-    <string name="bone_altar_session_xp">+%s XP bu oturumda</string>
-    <string name="bone_altar_buried_count">%d gömüldü</string>
-    <string name="bone_altar_no_bones">Envanterde kemik yok</string>
-    <string name="bone_altar_cape_awarded">Dua pelerini kazanıldı!</string>
 
-    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <!-- Construction skill -->
     <string name="skill_construction_name">İnşaat</string>
     <string name="skill_construction_desc">XP kazanmak için tahta ve çivi kullanarak mobilya yap. Yüksek İnşaat seviyeleri kasaba binalarını yükseltmeni sağlar.</string>
+
+    <!-- Thieving skill -->
     <string name="skill_thieving_name">Hırsızlık</string>
     <string name="skill_thieving_desc">Her seansta NPC\'lerin ceplerini boşalt. Başarı şansı seviyene bağlıdır. Başarısızlıklar seni bir frame boyunca sersemletir.</string>
     <string name="thieving_npc_detail">Sv. %1$d • %2$d XP • %%%3$d başarı</string>
     <string name="thieving_npc_coins">Başarı başına %1$d–%2$d altın</string>
+
+    <!-- Thieving NPC names -->
     <string name="thieving_npc_peasant_name">Köylü</string>
     <string name="thieving_npc_merchant_name">Tüccar</string>
     <string name="thieving_npc_guardsman_name">Muhafız</string>
@@ -1189,30 +1229,12 @@
     <string name="thieving_npc_knight_name">Şövalye</string>
     <string name="thieving_npc_bishop_name">Piskopos</string>
     <string name="thieving_npc_high_priest_name">Başrahip</string>
-    <string name="item_plank_name">Tahta</string>
-    <string name="item_oak_plank_name">Meşe Tahtası</string>
-    <string name="item_willow_plank_name">Söğüt Tahtası</string>
-    <string name="item_maple_plank_name">Akçaağaç Tahtası</string>
-    <string name="item_yew_plank_name">Porsuk Tahtası</string>
-    <string name="item_magic_plank_name">Sihirli Tahta</string>
-    <string name="item_iron_nail_name">Demir Çivi</string>
-    <string name="item_steel_nail_name">Çelik Çivi</string>
-    <string name="item_mithril_nail_name">Mithril Çivi</string>
-    <string name="item_stone_name">Taş</string>
-    <string name="item_carved_stone_name">Oymalı Taş</string>
-    <string name="item_stone_block_name">Taş Blok</string>
-    <string name="item_wooden_rack_name">Ahşap Raf</string>
-    <string name="item_wooden_shelf_name">Ahşap Raf Bölmesi</string>
-    <string name="item_oak_table_name">Meşe Masa</string>
-    <string name="item_oak_bookshelf_name">Meşe Kitaplık</string>
-    <string name="item_willow_cabinet_name">Söğüt Dolap</string>
-    <string name="item_maple_dresser_name">Akçaağaç Şifoniyer</string>
-    <string name="item_yew_wardrobe_name">Porsuk Gardırop</string>
-    <string name="item_magic_throne_name">Sihirli Taht</string>
+
+    <!-- Town building upgrade UI -->
     <string name="town_upgrade_section_title">Kasaba Binası</string>
-    <string name="town_building_inn_name">Inn</string>
-    <string name="town_building_guild_hall_name">Guild Hall</string>
-    <string name="town_building_church_name">Church</string>
+    <string name="town_building_inn_name">Inn</string> <!-- untranslated -->
+    <string name="town_building_guild_hall_name">Guild Hall</string> <!-- untranslated -->
+    <string name="town_building_church_name">Church</string> <!-- untranslated -->
     <string name="town_building_current_tier">Kademe %1$d / %2$d</string>
     <string name="town_building_maxed_label">Tamamen Geliştirildi</string>
     <string name="town_upgrade_next_label">Sonraki Yükseltme</string>
@@ -1230,12 +1252,12 @@
     <string name="town_guild_no_bonus">Görev gereksinimlerini azaltmak için yükselt</string>
     <string name="town_church_active_bonus">Bereketler %1$dh sürer (varsayılan: 24h)</string>
     <string name="town_church_no_bonus">Bereket süresini uzatmak için yükselt</string>
-    <string name="town_building_fairgrounds_name">Fairgrounds</string>
-    <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string>
-    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5% idle ticket chance</string>
-    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10% idle ticket chance</string>
-    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string>
-    <string name="town_building_garden_name">Garden</string>
+    <string name="town_building_fairgrounds_name">Fairgrounds</string> <!-- untranslated -->
+    <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_building_garden_name">Garden</string> <!-- untranslated -->
     <plurals name="town_garden_bonus">
         <item quantity="zero">Henüz ekstra çiftlik parseli yok</item>
         <item quantity="one">+%1$d ekstra çiftlik parseli</item>
@@ -1247,6 +1269,19 @@
         <item quantity="one">+%1$d ekstra sıra yuvası</item>
         <item quantity="other">+%1$d ekstra sıra yuvası</item>
     </plurals>
+    <string name="town_building_cape_rack_name">Cape Rack</string> <!-- untranslated -->
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string> <!-- untranslated -->
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string> <!-- untranslated -->
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_building_chronos_spire_name">Chronos Spire</string> <!-- untranslated -->
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string> <!-- untranslated -->
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string> <!-- untranslated -->
+
+    <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">İlk Tadilat</string>
     <string name="achievement_town_first_upgrade_desc">Herhangi bir kasaba binasını ilk kez yükselt</string>
     <string name="achievement_town_all_tier1_name">Kasaba Geliştirici</string>
@@ -1255,63 +1290,18 @@
     <string name="achievement_town_one_maxed_desc">Herhangi bir binayı maksimum kademeye yükselt</string>
     <string name="achievement_town_all_maxed_name">Efsanevi Kasaba</string>
     <string name="achievement_town_all_maxed_desc">Tüm kasaba binalarını maksimum kademeye yükselt</string>
-    <string name="achievement_tower_first_floor_name">First Step</string>
-    <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
-    <string name="achievement_tower_floor_10_name">Tower Initiate</string>
-    <string name="achievement_tower_floor_10_desc">Reach floor 10 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_50_name">Climbing Higher</string>
-    <string name="achievement_tower_floor_50_desc">Reach floor 50 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_100_name">Century Climber</string>
-    <string name="achievement_tower_floor_100_desc">Reach floor 100 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_250_name">Void Conqueror</string>
-    <string name="achievement_tower_floor_250_desc">Reach floor 250 in the Infinite Tower</string>
-    <string name="achievement_tower_all_milestones_name">Tower Legend</string>
-    <string name="achievement_tower_all_milestones_desc">Claim all 25 tower milestones</string>
-
-
-
-
-    <string name="skilling_dungeon_thieves_den_name">Hırsızlar Ini</string>
-    <string name="skilling_dungeon_thieves_den_desc">Şehrin sokaklarının altındaki bir tünel labirenti; örgütlü bir hırsız çetesi tarafından kullanılır.</string>
-    <string name="skilling_dungeon_shadow_vault_name">Gölge Kasası</string>
-    <string name="skilling_dungeon_shadow_vault_desc">Haydut Tapınağı\'nın altındaki gizli bir kasa; loncanın en değerli çalıntı malları burada saklanır.</string>
-    <string name="dungeon_rogue_sanctum_name">Haydut Tapınağı</string>
-    <string name="dungeon_rogue_sanctum_desc">Loncanın iç sığınağı; yalnızca kanıtlanmış üyeler tarafından erişilebilir.</string>
-    <string name="dungeon_guild_of_shadows_name">Gölgeler Loncası</string>
-    <string name="dungeon_guild_of_shadows_desc">Hırsızlar loncasının en derin kutsal alanı; en seçkin uygulayıcıları tarafından korunur.</string>
-    <string name="enemy_assassin_name">Suikastçı</string>
-    <string name="enemy_shadow_assassin_name">Gölge Suikastçısı</string>
-    <string name="enemy_vault_guardian_name">Kasa Bekçisi</string>
-    <string name="enemy_guild_master_name">Lonca Ustası</string>
-    <string name="item_shadow_signet_name">Gölge Mührü</string>
-    <string name="item_shadow_signet_desc">Gölgeler Loncası\'nın mührünü taşıyan bir yüzük. Yalnızca loncanın en tehlikeli operatifleri bunu takardı.</string>
-    <string name="dungeon_void_rift_name">Boşluk Yarığı</string>
-    <string name="dungeon_void_rift_desc">Gerçeklikte bir yırtık; boşluk yaratıkları buradan ölümlü dünyaya akar.</string>
-    <string name="dungeon_frozen_citadel_name">Donmuş Kale</string>
-    <string name="dungeon_frozen_citadel_desc">Bir buzulun içine hapsolmuş antik bir kale; savunucuları ebedi nöbette donmuş halde bekler.</string>
-    <string name="dungeon_abyssal_throne_name">Uçurum Tahtı</string>
-    <string name="dungeon_abyssal_throne_desc">Bilinen dünyanın en derin noktası; zamanın başından beri boşluk lordlarının egemenliğinde.</string>
-    <string name="enemy_void_stalker_name">Boşluk Avcısı</string>
-    <string name="enemy_rift_guardian_name">Yarık Bekçisi</string>
-    <string name="enemy_chaos_elemental_name">Kaos Elementali</string>
-    <string name="enemy_frost_giant_name">Don Devi</string>
-    <string name="enemy_ice_golem_name">Buz Golemi</string>
-    <string name="enemy_glacial_mage_name">Buzul Büyücüsü</string>
-    <string name="enemy_abyssal_lord_name">Uçurum Lordu</string>
-    <string name="enemy_eternal_sentinel_name">Ebedi Nöbetçi</string>
-    <string name="enemy_void_archon_name">Boşluk Arkontu</string>
-    <string name="enemy_frost_wyvern_name">Don Ejderi</string>
-    <string name="enemy_abyssal_guardian_name">Uçurum Muhafızı</string>
-    <string name="enemy_shadow_thief_name">Gölge Hırsızı</string>
-    <string name="enemy_elder_lich_name">Yaşlı Lich</string>
-
-    <string name="item_void_reaver_name">Boşluk Tahrip Edici</string>
-    <string name="item_void_reaver_desc">Kristalleşmiş boşluk enerjisinden dövülmüş bir kılıç. Keskin kenarı zırhı kumaş gibi keser.</string>
-    <string name="item_sovereign_crown_name">Egemen Taç</string>
-    <string name="item_sovereign_crown_desc">Boşluk Egemeninin tacı, karanlık bir ihtişam yayar. Eşsiz koruma sağlar.</string>
-    <string name="item_amulet_of_the_void_name">Boşluk Muskası</string>
-    <string name="item_amulet_of_the_void_desc">Saf boşluk özünden yapılmış bir kolye. Taşıyanın tüm savaş istatistiklerini artırır.</string>
-
+    <string name="achievement_tower_first_floor_name">First Step</string> <!-- untranslated -->
+    <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_10_name">Tower Initiate</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_10_desc">Reach floor 10 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_50_name">Climbing Higher</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_50_desc">Reach floor 50 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_100_name">Century Climber</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_100_desc">Reach floor 100 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_250_name">Void Conqueror</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_250_desc">Reach floor 250 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_all_milestones_name">Tower Legend</string> <!-- untranslated -->
+    <string name="achievement_tower_all_milestones_desc">Claim all 25 tower milestones</string> <!-- untranslated -->
 
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Panayır</string>
@@ -1334,7 +1324,7 @@
     <string name="carnival_queue">Sıraya Ekle</string>
     <string name="carnival_ring_toss">Halka Fırlatma</string>
     <string name="carnival_active_ring_desc">Gösterge altın hedef bölgesine ulaştığında fırlatın.</string>
-    <string name="carnival_ring_target_hint">Merkezi hedefleyin (45%–55%)</string>
+    <string name="carnival_ring_target_hint">Merkezi hedefleyin (45%%–55%%)</string>
     <string name="carnival_throw">Fırlat!</string>
     <string name="carnival_hammer_strike">Çekiç Darbesi</string>
     <string name="carnival_active_hammer_desc">Güç göstergesi en yüksek seviyedeyken vurun.</string>
@@ -1368,29 +1358,30 @@
     <string name="carnival_redeemed">Kullanıldı: %1$s!</string>
     <string name="carnival_not_enough_tickets">Yeterli bilet yok.</string>
     <string name="carnival_lamp_redeemed">+%1$s XP %2$s\'de!</string>
-    <string name="carnival_shell_game">Pick-a-Cup</string>
-    <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
-    <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
-    <string name="carnival_shell_pick">Which cup is it under?</string>
-    <string name="carnival_shell_won">Correct! +%1$d tickets</string>
-    <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
-    <string name="carnival_shell_locked">Upgrade the Fairgrounds to Tier 1 to unlock</string>
-    <string name="carnival_higher_lower">Higher or Lower</string>
-    <string name="carnival_active_higher_desc">Guess whether the next number will be higher or lower than the current one.</string>
-    <string name="carnival_higher_lower_current">%1$d</string>
-    <string name="carnival_higher_lower_score">%1$d correct (%2$d played)</string>
-    <string name="carnival_higher_lower_round">Round %1$d of %2$d</string>
-    <string name="carnival_higher_lower_btn_higher">Higher</string>
-    <string name="carnival_higher_lower_btn_lower">Lower</string>
-    <string name="carnival_higher_lower_result">%1$d/%2$d correct — +%3$d tickets</string>
-    <string name="carnival_higher_lower_locked">Upgrade the Fairgrounds to Tier 2 to unlock</string>
-    <string name="carnival_higher_lower_last_card">Last card: %1$d</string>
-    <string name="carnival_higher_lower_continue">Continue</string>
-    <string name="carnival_difficulty_label">Difficulty</string>
-    <string name="carnival_difficulty_normal">Normal</string>
-    <string name="carnival_difficulty_hard">Hard</string>
-    <string name="carnival_ring_hard_hint">Hard: 52%–57% target, 7 tickets</string>
+    <string name="carnival_shell_game">Pick-a-Cup</string> <!-- untranslated -->
+    <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string> <!-- untranslated -->
+    <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string> <!-- untranslated -->
+    <string name="carnival_shell_watch">Watch closely…</string> <!-- untranslated -->
+    <string name="carnival_shell_pick">Which cup is it under?</string> <!-- untranslated -->
+    <string name="carnival_shell_won">Correct! +%1$d tickets</string> <!-- untranslated -->
+    <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string> <!-- untranslated -->
+    <string name="carnival_shell_locked">Upgrade the Fairgrounds to Tier 1 to unlock</string> <!-- untranslated -->
+    <string name="carnival_higher_lower">Higher or Lower</string> <!-- untranslated -->
+    <string name="carnival_active_higher_desc">Guess whether the next number will be higher or lower than the current one.</string> <!-- untranslated -->
+
+    <string name="carnival_higher_lower_score">%1$d correct (%2$d played)</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_round">Round %1$d of %2$d</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_btn_higher">Higher</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_btn_lower">Lower</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_result">%1$d/%2$d correct — +%3$d tickets</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_locked">Upgrade the Fairgrounds to Tier 2 to unlock</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_last_card">Last card: %1$d</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_continue">Continue</string> <!-- untranslated -->
+    <string name="carnival_difficulty_label">Difficulty</string> <!-- untranslated -->
+    <string name="carnival_difficulty_normal">Normal</string> <!-- untranslated -->
+    <string name="carnival_difficulty_hard">Hard</string> <!-- untranslated -->
+    <string name="carnival_ring_hard_hint">Hard: 52%%–57%% target, 7 tickets</string> <!-- untranslated -->
+
 
     <!-- ===== Magic Bean / Farming ===== -->
     <string name="farming_bean_note_1">Küçük bir filiz toprağı deldi.</string>
@@ -1404,7 +1395,7 @@
     <string name="farming_bean_ready">Fasulye sapı bulutların ötesine uzanıyor. Tırmanmaya hazır mısınız?</string>
     <string name="farming_bean_climb">Tırman</string>
     <string name="farming_bean_climbed">Fasulye sapına tırmandınız. Bir şeyler sizi bekliyor…</string>
-    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+
     <string name="farming_magic_bean_one_plot">Sihirli fasulyeler yalnızca bir tarlaya ekilebilir</string>
 
     <!-- ===== Armory Tab ===== -->
@@ -1413,23 +1404,121 @@
     <string name="bonus_none">Aktif XP bonusu yok</string>
     <string name="bonus_all_skills">Tüm beceriler</string>
     <string name="bonus_section_boosts">Aktif bonuslar</string>
-    <string name="bonus_section_skills">Skill Bonuses</string>
-    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="armory_not_owned">Bu eşyaya sahip değilsiniz.</string>
+    <string name="armory_how_to_obtain">Nasıl edinilir</string>
+    <string name="armory_no_stats">İstatistik bonusu yok.</string>
+    <string name="armory_filter_all">Tümü</string>
+    <string name="armory_filter_weapons">Silahlar</string>
+    <string name="armory_filter_armor">Zırh</string>
+    <string name="armory_filter_accessories">Aksesuarlar</string>
+    <string name="armory_filter_tools">Aletler</string>
+    <string name="armory_sort_default">Default</string> <!-- untranslated -->
+    <string name="armory_sort_attack">Attack</string> <!-- untranslated -->
+    <string name="armory_sort_strength">Strength</string> <!-- untranslated -->
+    <string name="armory_sort_defense">Defense</string> <!-- untranslated -->
+    <string name="armory_sort_requirement">Requirement</string> <!-- untranslated -->
+    <string name="armory_progress_bar">edinildi</string>
+    <string name="armory_stat_mining">Madencilik verimliliği</string>
+    <string name="armory_stat_woodcutting">Odunculuk verimliliği</string>
+    <string name="armory_stat_fishing">Balıkçılık verimliliği</string>
+    <string name="armory_stat_farming">Çiftçilik verimliliği</string>
+    <string name="armory_stat_smithing">Demircilik verimliliği</string>
+    <string name="armory_stat_firemaking">Ateş yakma verimliliği</string>
+    <string name="armory_stat_agility">Çeviklik verimliliği</string>
+    <string name="armory_stat_cooking">Yemek pişirme verimliliği</string>
+    <string name="armory_stat_thieving">Hırsızlık verimliliği</string>
+    <string name="armory_stat_attack">Saldırı bonusu</string>
+    <string name="armory_stat_strength">Güç bonusu</string>
+    <string name="armory_stat_defense">Savunma bonusu</string>
+    <string name="armory_stat_ranged_atk">Menzilli saldırı</string>
+    <string name="armory_stat_ranged_str">Menzilli güç</string>
+    <string name="armory_stat_magic_atk">Sihirli saldırı</string>
+    <string name="armory_stat_magic_dmg">Sihirli hasar</string>
+    <string name="armory_stat_attack_speed">Saldırı hızı</string>
+    <string name="armory_stat_cape">XP bonusu</string>
+    <string name="armory_stat_cape_yield">Verim Bonusu</string>
+    <string name="armory_stat_cape_boost">Güçlendirme Bonusu</string>
+    <string name="armory_source_carnival">Karnaval ödül mağazası</string>
+    <string name="armory_source_smithing">Demircilik</string>
+    <string name="armory_source_crafting">El sanatları</string>
+    <string name="armory_source_fletching">Ok yapımı</string>
+    <string name="armory_source_drop_always">%1$s tarafından düşürüldü (Her zaman)</string>
+    <string name="armory_source_drop_chance">%1$s tarafından düşürüldü (%2$s)</string>
+    <string name="armory_source_drop">%1$s tarafından düşürüldü</string>
+    <string name="armory_source_shop">Mağaza</string>
+    <string name="armory_source_daily_bonus">Tüm Günlük Görevleri tamamlamak için nadir ödül</string>
+    <string name="armory_source_weekly_bonus">Tüm Haftalık Görevleri tamamlamak için nadir ödül</string>
+    <!-- Translator note: %1$s = skill name, e.g. "Reach level 99 in Mining" -->
+    <string name="armory_source_skill_cape">%1$s içinde seviye 99\'a ulaşın</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Envanterde kütük yok</string>
+    <string name="skill_not_enough_rune_essence">Yeterli Rün Özü yok</string>
+    <string name="skill_not_enough_item">Yeterli %1$s yok</string>
+    <string name="skill_not_enough_materials">Yeterli malzeme yok</string>
+    <string name="skill_session_start_failed">Oturum başlatılamadı: %1$s</string>
+    <string name="skill_added_to_queue_activity">Sıraya eklendi: %1$s — %2$s.</string>
+    <string name="worker_already_busy">İşçi zaten meşgul.</string>
+    <string name="worker_not_enough_logs">Yeterli kütük yok.</string>
+    <string name="worker_not_enough_rune_essence">Yeterli Rün Özü yok.</string>
+    <string name="worker_not_enough_materials">Yeterli malzeme yok.</string>
+    <string name="shop_no_junk">Satılacak ıvır zıvır yok</string>
+    <string name="shop_sold_junk">Ivır zıvır %1$s altına satıldı</string>
+    <string name="shop_no_old_equipment">Satılacak eski ekipman yok</string>
+    <string name="shop_sold_old_equipment">Eski ekipman %1$s altına satıldı</string>
+    <string name="shop_bulk_sell_total">Toplam</string>
+    <string name="shop_bulk_sell_confirm">Hepsini sat</string>
+    <string name="shop_xp_boost_activated">2× XP bonusu %1$d saat için aktifleştirildi!</string>
+    <string name="shop_xp_boost_already_active">2× XP bonusu zaten aktif.</string>
+    <string name="shop_xp_boost_weekly_limit">Haftada yalnızca bir 2× XP bonusu alınabilir. Haftalık sıfırlamadan sonra tekrar kullanılabilir.</string>
+    <string name="item_xp_boost_48h_desc">48 saat boyunca kazanılan tüm XP\'yi ikiye katlar. Haftada bir satın alma ile sınırlıdır.</string>
+    <string name="shop_not_enough_in_inventory">Envanterde yeterli değil</string>
+    <string name="shop_bought_item">%1$d× %2$s satın alındı</string>
+    <string name="shop_sold_item">%1$d× %2$s, %3$d altına satıldı</string>
+    <string name="quest_complete_notification">Görev tamamlandı: %1$s!</string>
+    <string name="quest_complete_with_rewards">Görev tamamlandı: %1$s! Alındı: %2$s</string>
+    <string name="quest_daily_complete_coins">Günlük görev tamamlandı! +%1$s altın</string>
+    <string name="quest_daily_complete_dwarven">Günlük görev tamamlandı! Cüce ekipmanı buldunuz!</string>
+    <string name="quest_weekly_complete">Haftalık görev tamamlandı! +%1$s altın</string>
+    <string name="quest_weekly_bonus_complete_coins">Tüm haftalık görevler tamamlandı! +%1$s altın</string>
+    <string name="quest_weekly_bonus_complete_divine">Tüm haftalık görevler tamamlandı! İlahi ekipman buldunuz!</string>
+    <string name="guild_contributed_items">%1$d eşya katkıda bulunuldu.</string>
+    <string name="mercantile_not_enough_coins">Yeterli altın yok (%1$s altın gerekli).</string>
+    <string name="mercantile_route_start_failed">Rota başlatılamadı: %1$s</string>
+    <string name="mercantile_added_to_queue">Sıraya eklendi: Ticaret — %1$s.</string>
+    <string name="inventory_requires_to_equip">Ekipman için %1$s gerekli.</string>
+    <string name="home_found_pet">Bir evcil hayvan buldunuz: %1$s!</string>
+    <string name="pet_found_title">Yeni evcil hayvan!</string>
+    <string name="home_congratulations_received">Tebrikler! Aldığınız: %1$s</string>
+    <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
+    <string name="home_session_voided">XP kaybedildi (prestige). Diğer tüm ödüller verildi.</string>
+    <string name="home_not_enough_coins_repeat">%1$s tekrarlamak için yeterli altın yok.</string>
+    <string name="home_not_enough_materials_repeat">%1$s tekrarlamak için yeterli malzeme yok.</string>
+    <string name="combat_no_food_title">Yiyecek Takılı Değil</string>
+    <string name="combat_no_food_body">Yiyecek takılı değil. Yiyecek olmadan çabuk ölebilir ve ödüllerin çoğunu kaybedebilirsiniz. Yine de başlansın mı?</string>
+    <string name="combat_start_anyway">Yine de başla</string>
+    <string name="combat_xp_consolation">XP (teselli)</string>
+    <string name="bestiary_loot_item_header">Eşya</string>
+    <string name="worker_no_mats">Mat. yok</string>
+    <string name="bonus_section_skills">Skill Bonuses</string> <!-- untranslated -->
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string> <!-- untranslated -->
     <string name="bonus_combined_xp">Birleşik XP</string>
     <string name="bonus_yield">+%1$d%% verim</string>
     <string name="bonus_boost">+%1$d%% güçlendirme</string>
     <string name="bonus_session_shorter">%1$d dk daha kısa oturumlar</string>
     <string name="bonus_coin_return">+%1$d%% altın getirisi</string>
+    <string name="bonus_tower">Tower</string> <!-- untranslated -->
+
+    <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
+    <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">Sıraya eklendi: %1$s.</string>
     <string name="snackbar_queue_full">Sıra dolu.</string>
-    <string name="home_not_enough_coins_repeat">%1$s tekrarlamak için yeterli altın yok.</string>
-    <string name="home_not_enough_materials_repeat">%1$s tekrarlamak için yeterli malzeme yok.</string>
     <string name="combat_start_failed">Başlatılamadı: %1$s</string>
     <string name="skill_session_voided_prestige">%1$s seviyeniz artık bu oturumun gereksinimini karşılamıyor (muhtemelen prestij nedeniyle) — ödülleri iptal edildi ve kullanılan malzemeler iade edildi.</string>
     <string name="combat_session_voided_prestige">Prestige sonrasında seviyeniz düştüğü için bu oturumun XP\'si kaybedildi. Diğer tüm ödüller verildi.</string>
-    <string name="combat_select_spell">Select a spell before entering.</string>
-    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
-    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="combat_select_spell">Select a spell before entering.</string> <!-- untranslated -->
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string> <!-- untranslated -->
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string> <!-- untranslated -->
     <string name="monument_title">Büyük Anıt</string>
     <string name="monument_desc">Altın altın yükselen bir şehir harikası. Her aşama şehre bir armağan.</string>
     <string name="monument_your_coins">Altının: %1$s</string>
@@ -1475,123 +1564,26 @@
     <string name="guild_daily_banner_claimable">Lonca günlük görevi tamamlandı! Ödülünü Guild Hall\'da al</string>
     <string name="guild_daily_banner_claimed">Lonca günlük görevi bugün alındı</string>
     <string name="guild_daily_rank_maxed">Lonca rütbesi maksimum</string>
-    <string name="armory_not_owned">Bu eşyaya sahip değilsiniz.</string>
-    <string name="armory_how_to_obtain">Nasıl edinilir</string>
-    <string name="armory_no_stats">İstatistik bonusu yok.</string>
-    <string name="armory_filter_all">Tümü</string>
-    <string name="armory_filter_weapons">Silahlar</string>
-    <string name="armory_filter_armor">Zırh</string>
-    <string name="armory_filter_accessories">Aksesuarlar</string>
-    <string name="armory_filter_tools">Aletler</string>
-    <string name="armory_sort_default">Default</string>
-    <string name="armory_sort_attack">Attack</string>
-    <string name="armory_sort_strength">Strength</string>
-    <string name="armory_sort_defense">Defense</string>
-    <string name="armory_sort_requirement">Requirement</string>
-    <string name="armory_progress_bar">edinildi</string>
-    <string name="armory_stat_mining">Madencilik verimliliği</string>
-    <string name="armory_stat_woodcutting">Odunculuk verimliliği</string>
-    <string name="armory_stat_fishing">Balıkçılık verimliliği</string>
-    <string name="armory_stat_farming">Çiftçilik verimliliği</string>
-    <string name="armory_stat_smithing">Demircilik verimliliği</string>
-    <string name="armory_stat_firemaking">Ateş yakma verimliliği</string>
-    <string name="armory_stat_agility">Çeviklik verimliliği</string>
-    <string name="armory_stat_cooking">Yemek pişirme verimliliği</string>
-    <string name="armory_stat_thieving">Hırsızlık verimliliği</string>
-    <string name="armory_stat_attack">Saldırı bonusu</string>
-    <string name="armory_stat_strength">Güç bonusu</string>
-    <string name="armory_stat_defense">Savunma bonusu</string>
-    <string name="armory_stat_ranged_atk">Menzilli saldırı</string>
-    <string name="armory_stat_ranged_str">Menzilli güç</string>
-    <string name="armory_stat_magic_atk">Sihirli saldırı</string>
-    <string name="armory_stat_magic_dmg">Sihirli hasar</string>
-    <string name="armory_stat_attack_speed">Saldırı hızı</string>
-    <string name="armory_stat_cape">XP bonusu</string>
-    <string name="armory_stat_cape_yield">Verim Bonusu</string>
-    <string name="armory_stat_cape_boost">Güçlendirme Bonusu</string>
-    <string name="armory_source_carnival">Karnaval ödül mağazası</string>
-    <string name="armory_source_smithing">Demircilik</string>
-    <string name="armory_source_crafting">El sanatları</string>
-    <string name="armory_source_fletching">Ok yapımı</string>
-    <string name="armory_source_drop_always">%1$s tarafından düşürüldü (Her zaman)</string>
-    <string name="armory_source_drop_chance">%1$s tarafından düşürüldü (%2$s)</string>
-    <string name="armory_source_drop">%1$s tarafından düşürüldü</string>
-    <string name="armory_source_shop">Mağaza</string>
-    <string name="armory_source_daily_bonus">Tüm Günlük Görevleri tamamlamak için nadir ödül</string>
-    <string name="armory_source_weekly_bonus">Tüm Haftalık Görevleri tamamlamak için nadir ödül</string>
-    <string name="armory_source_skill_cape">%1$s içinde seviye 99\'a ulaşın</string>
-
-    <!-- Session / queue messages (issue #596) -->
-    <string name="skill_no_logs">Envanterde kütük yok</string>
-    <string name="skill_not_enough_rune_essence">Yeterli Rün Özü yok</string>
-    <string name="skill_not_enough_item">Yeterli %1$s yok</string>
-    <string name="skill_not_enough_materials">Yeterli malzeme yok</string>
-    <string name="skill_session_start_failed">Oturum başlatılamadı: %1$s</string>
-    <string name="skill_added_to_queue_activity">Sıraya eklendi: %1$s — %2$s.</string>
-    <string name="worker_already_busy">İşçi zaten meşgul.</string>
-    <string name="worker_not_enough_logs">Yeterli kütük yok.</string>
-    <string name="worker_not_enough_rune_essence">Yeterli Rün Özü yok.</string>
-    <string name="worker_not_enough_materials">Yeterli malzeme yok.</string>
-    <string name="shop_no_junk">Satılacak ıvır zıvır yok</string>
-    <string name="shop_sold_junk">Ivır zıvır %1$s altına satıldı</string>
-    <string name="shop_no_old_equipment">Satılacak eski ekipman yok</string>
-    <string name="shop_sold_old_equipment">Eski ekipman %1$s altına satıldı</string>
-    <string name="shop_bulk_sell_total">Toplam</string>
-    <string name="shop_bulk_sell_confirm">Hepsini sat</string>
-    <string name="shop_xp_boost_activated">2× XP bonusu %1$d saat için aktifleştirildi!</string>
-    <string name="shop_xp_boost_already_active">2× XP bonusu zaten aktif.</string>
-    <string name="shop_xp_boost_weekly_limit">Haftada yalnızca bir 2× XP bonusu alınabilir. Haftalık sıfırlamadan sonra tekrar kullanılabilir.</string>
-    <string name="item_xp_boost_48h_desc">48 saat boyunca kazanılan tüm XP\'yi ikiye katlar. Haftada bir satın alma ile sınırlıdır.</string>
-    <string name="shop_not_enough_in_inventory">Envanterde yeterli değil</string>
-    <string name="shop_bought_item">%1$d× %2$s satın alındı</string>
-    <string name="shop_sold_item">%1$d× %2$s, %3$d altına satıldı</string>
-    <string name="quest_complete_notification">Görev tamamlandı: %1$s!</string>
-    <string name="quest_complete_with_rewards">Görev tamamlandı: %1$s! Alındı: %2$s</string>
-    <string name="quest_daily_complete_coins">Günlük görev tamamlandı! +%1$s altın</string>
-    <string name="quest_daily_complete_dwarven">Günlük görev tamamlandı! Cüce ekipmanı buldunuz!</string>
-    <string name="quest_weekly_complete">Haftalık görev tamamlandı! +%1$s altın</string>
-    <string name="quest_weekly_bonus_complete_coins">Tüm haftalık görevler tamamlandı! +%1$s altın</string>
-    <string name="quest_weekly_bonus_complete_divine">Tüm haftalık görevler tamamlandı! İlahi ekipman buldunuz!</string>
-    <string name="guild_contributed_items">%1$d eşya katkıda bulunuldu.</string>
-    <string name="mercantile_not_enough_coins">Yeterli altın yok (%1$s altın gerekli).</string>
-    <string name="mercantile_route_start_failed">Rota başlatılamadı: %1$s</string>
-    <string name="mercantile_added_to_queue">Sıraya eklendi: Ticaret — %1$s.</string>
-    <string name="inventory_requires_to_equip">Ekipman için %1$s gerekli.</string>
-    <string name="home_found_pet">Bir evcil hayvan buldunuz: %1$s!</string>
-    <string name="pet_found_title">Yeni evcil hayvan!</string>
-    <string name="home_congratulations_received">Tebrikler! Aldığınız: %1$s</string>
-    <string name="home_session_voided">XP kaybedildi (prestige). Diğer tüm ödüller verildi.</string>
-    <string name="combat_no_food_title">Yiyecek Takılı Değil</string>
-    <string name="combat_no_food_body">Yiyecek takılı değil. Yiyecek olmadan çabuk ölebilir ve ödüllerin çoğunu kaybedebilirsiniz. Yine de başlansın mı?</string>
-    <string name="combat_start_anyway">Yine de başla</string>
-    <string name="combat_xp_consolation">XP (teselli)</string>
-    <string name="bestiary_loot_item_header">Eşya</string>
-    <string name="worker_no_mats">Mat. yok</string>
-
-    <!-- Boss Descriptions -->
-    <string name="boss_king_black_dragon_desc">Tüm diyarda korkulan efsanevi üç başlı ejderha.</string>
-    <string name="boss_demon_lord_desc">Karanlık büyünün ustası, uçurumdan gelen kadim bir iblis.</string>
-    <string name="boss_kraken_desc">Derin denizlerin dehşeti, devasa bir deniz canavarı.</string>
-    <string name="boss_balrog_desc">Yerin derinliklerindeki uykusundan uyanan, alev ve gölgeden kadim bir iblis.</string>
-    <string name="boss_void_sovereign_desc">Hiçlik yarıklarının arkasındaki ilkel varlık. Ölçülemeyecek kadar yaşlı, ölümlü meydan okuyanlara küçümsemeyle bakar.</string>
 
     <!-- ===== Infinite Tower ===== -->
-    <string name="tower_title">Infinite Tower</string>
-    <string name="tower_floor_label">Floor %d</string>
-    <string name="tower_best_floor">Best: Floor %d</string>
-    <string name="tower_start_btn">Attempt Floor %d</string>
-    <string name="tower_milestones">Milestones</string>
-    <string name="tower_floor_cleared">Floor %d cleared!</string>
-    <string name="tower_new_best">New best: Floor %d!</string>
+    <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
+    <string name="tower_floor_label">Floor %d</string> <!-- untranslated -->
+    <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
+    <string name="tower_best_floor">Best: Floor %d</string> <!-- untranslated -->
+    <string name="tower_start_btn">Attempt Floor %d</string> <!-- untranslated -->
+    <string name="tower_milestones">Milestones</string> <!-- untranslated -->
+    <string name="tower_floor_cleared">Floor %d cleared!</string> <!-- untranslated -->
+    <string name="tower_new_best">New best: Floor %d!</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">Kat %1$d\'de düştün. Kat %2$d\'e dönülüyor.</string>
     <string name="tower_not_enough_runes">Maksimum saldırı sayısı için yeterli %1$s yok.</string>
-    <string name="tower_milestone_claim">Claim</string>
-    <string name="tower_milestone_claimed">Claimed</string>
-    <string name="tower_enemies_this_floor">Enemies</string>
-    <string name="tower_enemy_strength">Enemy strength: %s%%</string>
-    <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string>
-    <string name="tower_collect_prompt">Collect your tower run</string>
-    <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string>
+    <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
+    <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
+    <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
+    <string name="tower_enemy_strength">Enemy strength: %s%%</string> <!-- untranslated -->
+    <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
+    <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
+    <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
 
     <!-- ===== Seasonal Events ===== -->
     <string name="seasonal_event_title">Sezonluk Etkinlik</string>
@@ -1605,7 +1597,7 @@
     <string name="seasonal_minigame_hint">Sönmeden önce %2$d korden %1$d\'ine dokun!</string>
     <string name="seasonal_minigame_round">Tur %1$d / %2$d — Vuruş: %3$d</string>
     <string name="seasonal_minigame_mode_label">Mod</string>
-    <string name="seasonal_minigame_mode_normal">Normal</string>
+    <string name="seasonal_minigame_mode_normal">Normal</string> <!-- untranslated -->
     <string name="seasonal_minigame_mode_easy">Kolay</string>
     <string name="seasonal_minigame_mode_caption">%1$dms pencere, %2$s bekleme</string>
     <string name="seasonal_minigame_success">Mükemmel zamanlama! +1 jeton.</string>
@@ -1614,28 +1606,28 @@
     <string name="seasonal_claim">Talep Et</string>
     <string name="seasonal_bounty_cooldown">%1$ddk %2$dsn içinde yeni görev</string>
     <string name="seasonal_go">Git</string>
-    <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string>
-    <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string>
-    <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string>
-    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Sunspire Solstice 2026 banner</string>
-    <string name="seasonal_bounty_sunspire_firewood_name">Bring firewood for the bonfire</string>
-    <string name="seasonal_bounty_sunspire_firewood_hint">Chop Oak Logs — Woodcutting</string>
-    <string name="seasonal_bounty_sunspire_kindling_name">Gather kindling for the bonfire</string>
-    <string name="seasonal_bounty_sunspire_kindling_hint">Chop Willow Logs — Woodcutting</string>
-    <string name="seasonal_bounty_sunspire_sunore_name">Mine gold to gild the sun-tower</string>
-    <string name="seasonal_bounty_sunspire_sunore_hint">Mine Gold Ore — Mining</string>
-    <string name="seasonal_bounty_sunspire_draughts_name">Brew Strength Potions</string>
-    <string name="seasonal_bounty_sunspire_draughts_hint">Herblore</string>
-    <string name="seasonal_bounty_sunspire_embers_brew_name">Brew Attack Potions for the solstice watch</string>
-    <string name="seasonal_bounty_sunspire_embers_brew_hint">Herblore</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string>
-    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string>
-    <string name="seasonal_bounty_sunspire_wisps_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string>
-    <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
-    <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string>
+    <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
+    <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->
+    <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string> <!-- untranslated -->
+    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Sunspire Solstice 2026 banner</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_firewood_name">Bring firewood for the bonfire</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_firewood_hint">Chop Oak Logs — Woodcutting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_kindling_name">Gather kindling for the bonfire</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_kindling_hint">Chop Willow Logs — Woodcutting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunore_name">Mine gold to gild the sun-tower</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunore_hint">Mine Gold Ore — Mining</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_draughts_name">Brew Strength Potions</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_draughts_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_embers_brew_name">Brew Attack Potions for the solstice watch</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_embers_brew_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_wisps_hint">Only found in The Sunspire Expedition</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string> <!-- untranslated -->
     <string name="seasonal_rewards_title">Ödüller</string>
     <string name="seasonal_reward_tier_requirement">%1$d jeton</string>
     <string name="seasonal_reward_claimed">Alındı</string>
@@ -1646,64 +1638,64 @@
     <string name="seasonal_market_limit_left">%1$d kaldı</string>
     <string name="seasonal_market_purchase_success">Satın alma tamamlandı!</string>
     <string name="seasonal_donate">Bağışla</string>
-    <string name="seasonal_event_gloomharvest_2026_name">Gloomharvest</string>
-    <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string>
-    <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string>
+    <string name="seasonal_event_gloomharvest_2026_name">Gloomharvest</string> <!-- untranslated -->
+    <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string> <!-- untranslated -->
+    <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_hint">Fenerleri izle ve sırayı tekrarla. Jeton kazanmak için %1$d / %2$d turuna ulaş!</string>
     <string name="seasonal_minigame_sequence_round">Tur %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Dikkatle izle!</string>
     <string name="seasonal_minigame_your_turn">Sıra sende!</string>
     <string name="seasonal_minigame_sequence_mode_caption">Işık başına %1$dms, bekleme %2$s</string>
     <string name="seasonal_market_price">%1$s altın</string>
-    <string name="seasonal_reward_gloomharvest_2026_25_desc">Coin purse (50,000 coins)</string>
-    <string name="seasonal_reward_gloomharvest_2026_60_desc">Wraithbone Ring</string>
-    <string name="seasonal_reward_gloomharvest_2026_100_desc">Free 48h XP Boost</string>
-    <string name="seasonal_reward_gloomharvest_2026_150_desc">Reaper\'s Scythe</string>
-    <string name="seasonal_reward_gloomharvest_2026_200_desc">Coin purse (250,000 coins)</string>
-    <string name="seasonal_reward_gloomharvest_2026_250_desc">Grave Sprout pet</string>
-    <string name="seasonal_reward_gloomharvest_2026_300_desc">Gloomharvest 2026 banner</string>
-    <string name="seasonal_market_gloomweave_cape_name">Gloomweave Cape</string>
-    <string name="seasonal_market_bounty_refresh_name">Fresh Bounties (skip the wait)</string>
-    <string name="seasonal_market_lantern_relight_name">Relight the Lanterns (skip minigame cooldown)</string>
-    <string name="seasonal_bounty_gloom_pumpkins_name">Harvest pumpkins for the festival</string>
-    <string name="seasonal_bounty_gloom_pumpkins_hint">Grow Pumpkins (Farming)</string>
-    <string name="seasonal_bounty_gloom_corn_name">Bring in the corn harvest</string>
-    <string name="seasonal_bounty_gloom_corn_hint">Grow Corn (Farming)</string>
-    <string name="seasonal_bounty_gloom_maples_name">Chop maple wood for the pyres</string>
-    <string name="seasonal_bounty_gloom_maples_hint">Chop Maple Logs (Woodcutting)</string>
-    <string name="seasonal_bounty_gloom_swordfish_name">Land swordfish for the feast</string>
-    <string name="seasonal_bounty_gloom_swordfish_hint">Fish Raw Swordfish (Fishing)</string>
-    <string name="seasonal_bounty_gloom_mithril_name">Mine mithril to ward the gates</string>
-    <string name="seasonal_bounty_gloom_mithril_hint">Mine Mithril Ore (Mining)</string>
-    <string name="seasonal_bounty_gloom_brews_name">Brew Defense Potions for the night watch</string>
-    <string name="seasonal_bounty_gloom_brews_hint">Herblore</string>
-    <string name="seasonal_bounty_gloom_shortbows_name">Fletch Maple Shortbows for the wardens</string>
-    <string name="seasonal_bounty_gloom_shortbows_hint">Fletching</string>
-    <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string>
-    <string name="seasonal_bounty_gloom_feast_hint">Cooking</string>
-    <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string>
-    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string>
-    <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string>
-    <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string>
-    <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string>
-    <string name="seasonal_bounty_gloom_wisps_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_ghouls_name">Put down Grave Ghouls</string>
-    <string name="seasonal_bounty_gloom_ghouls_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_husks_name">Fell the Husk Horrors</string>
-    <string name="seasonal_bounty_gloom_husks_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_stalkers_name">Hunt Shade Stalkers</string>
-    <string name="seasonal_bounty_gloom_stalkers_hint">Only found in The Blightwood</string>
-    <string name="seasonal_bounty_gloom_wights_name">Topple Barrow Wights</string>
-    <string name="seasonal_bounty_gloom_wights_hint">Only found in The Hollowfen (rare)</string>
-    <string name="seasonal_bounty_gloom_tithe_pumpkins_name">Tithe: donate pumpkins</string>
-    <string name="seasonal_bounty_gloom_tithe_pumpkins_hint">Donated straight from your inventory</string>
-    <string name="seasonal_bounty_gloom_tithe_maple_name">Tithe: donate maple logs</string>
-    <string name="seasonal_bounty_gloom_tithe_maple_hint">Donated straight from your inventory</string>
-    <string name="seasonal_bounty_gloom_tithe_swordfish_name">Tithe: donate cooked swordfish</string>
-    <string name="seasonal_bounty_gloom_tithe_swordfish_hint">Donated straight from your inventory</string>
-    <string name="item_wraithbone_ring_name">Wraithbone Ring</string>
-    <string name="item_reaper_scythe_name">Reaper\'s Scythe</string>
-    <string name="item_gloomweave_cape_name">Gloomweave Cape</string>
+    <string name="seasonal_reward_gloomharvest_2026_25_desc">Coin purse (50,000 coins)</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_60_desc">Wraithbone Ring</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_100_desc">Free 48h XP Boost</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_150_desc">Reaper\'s Scythe</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_200_desc">Coin purse (250,000 coins)</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_250_desc">Grave Sprout pet</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_300_desc">Gloomharvest 2026 banner</string> <!-- untranslated -->
+    <string name="seasonal_market_gloomweave_cape_name">Gloomweave Cape</string> <!-- untranslated -->
+    <string name="seasonal_market_bounty_refresh_name">Fresh Bounties (skip the wait)</string> <!-- untranslated -->
+    <string name="seasonal_market_lantern_relight_name">Relight the Lanterns (skip minigame cooldown)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_pumpkins_name">Harvest pumpkins for the festival</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_pumpkins_hint">Grow Pumpkins (Farming)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_corn_name">Bring in the corn harvest</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_corn_hint">Grow Corn (Farming)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_maples_name">Chop maple wood for the pyres</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_maples_hint">Chop Maple Logs (Woodcutting)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_swordfish_name">Land swordfish for the feast</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_swordfish_hint">Fish Raw Swordfish (Fishing)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_mithril_name">Mine mithril to ward the gates</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_mithril_hint">Mine Mithril Ore (Mining)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_brews_name">Brew Defense Potions for the night watch</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_brews_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_shortbows_name">Fletch Maple Shortbows for the wardens</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_shortbows_hint">Fletching</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_feast_hint">Cooking</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wisps_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_ghouls_name">Put down Grave Ghouls</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_ghouls_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_husks_name">Fell the Husk Horrors</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_husks_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_stalkers_name">Hunt Shade Stalkers</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_stalkers_hint">Only found in The Blightwood</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wights_name">Topple Barrow Wights</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wights_hint">Only found in The Hollowfen (rare)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_pumpkins_name">Tithe: donate pumpkins</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_pumpkins_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_maple_name">Tithe: donate maple logs</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_maple_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_swordfish_name">Tithe: donate cooked swordfish</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_swordfish_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="item_wraithbone_ring_name">Wraithbone Ring</string> <!-- untranslated -->
+    <string name="item_reaper_scythe_name">Reaper\'s Scythe</string> <!-- untranslated -->
+    <string name="item_gloomweave_cape_name">Gloomweave Cape</string> <!-- untranslated -->
     <string name="label_banners">Sancaklar</string>
     <string name="label_journal">Günlük</string>
     <string name="journal_hint">Bir dahaki sefere için hatırlatmalar not edin — sıraya ne ekleyeceğinizi, neye çalıştığınızı.</string>
@@ -1760,71 +1752,66 @@
     <string name="settings_credit_banners_title">Sezonluk Sancaklar</string>
     <string name="settings_credit_banners_subtitle">Sanat: Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Yetenek Simgeleri</string>
-    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+
     <string name="title_seasonal_champion_of">%1$s Şampiyonu</string>
     <string name="title_seasonal_requirement">%1$s Sezonluk Etkinliğini tamamla</string>
     <string name="home_welcome_greeting">Tekrar hoş geldin,</string>
-    <string name="home_welcome_name">%1$s!</string>
-    <string name="home_welcome_title">%1$s!</string>
-    <string name="settings_lang_japanese">日本語</string>
-    <string name="bonus_tower">Tower</string>
-    <string name="bonus_xp">+%1$d%% XP</string>
-    <string name="bonus_coin_drops">+%1$d%% coin drops</string>
-    <string name="bonus_hp">+%1$d HP</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="crafting_owned">Sahip olunan: %1$d</string>
-    <string name="crafting_owned_detail">Envanterde sahip olunan: %1$d</string>
-    <string name="firemaking_ashes_owned">Sahip olunan küller: %1$d</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
-    <string name="town_building_chronos_spire_name">Chronos Spire</string>
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
-    <string name="settings_theme_midnight">Geceyarısı</string>
-    <string name="tower_floor_desc">Infinite Tower floor %1$d</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string>
-    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string>
-    <string name="pet_void_wisp_name">Void Wisp</string>
-    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string>
-    <string name="pet_graceling_sprite_name">Graceling Sprite</string>
-    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string>
-    <string name="pet_shadow_fox_name">Shadow Fox</string>
-    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string>
-    <string name="pet_ember_moth_name">Ember Moth</string>
-    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string>
-    <string name="pet_herb_wisp_name">Herb Wisp</string>
-    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string>
-    <string name="pet_rune_sprite_name">Rune Sprite</string>
-    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string>
-    <string name="pet_gem_golem_name">Gem Golem</string>
-    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string>
-    <string name="pet_feather_drake_name">Feather Drake</string>
-    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string>
-    <string name="pet_forge_imp_name">Forge Imp</string>
-    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string>
-    <string name="pet_coin_drake_name">Coin Drake</string>
-    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string>
-    <string name="pet_timber_sprite_name">Timber Sprite</string>
-    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string>
-    <string name="pet_juggling_imp_name">Juggling Imp</string>
-    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string>
-    <string name="pet_tower_pet_name">Stone Guardian</string>
-    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string>
-    <string name="pet_solstice_sprite_name">Solstice Sprite</string>
-    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string>
-    <string name="pet_lantern_wisp_name">Lantern Wisp</string>
-    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string>
-    <string name="pet_grave_sprout_name">Grave Sprout</string>
-    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string>
-    <string name="pet_golden_goose_name">Golden Goose</string>
-    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string>
 
-    <!-- Save slots / character manager + Ironman mode -->
+    <string name="home_welcome_title">%1$s!</string>
+
+    <!-- Pet names and descriptions -->
+    <string name="pet_dragon_whelp_name">Yavru Ejderha</string>
+    <string name="pet_dragon_whelp_desc">Dövüş XP\'nizi artıran genç bir ejderha.</string>
+    <string name="pet_imp_pet_name">Evcil İmp</string>
+    <string name="pet_imp_pet_desc">Dua eğitiminize yardımcı olan yaramaz bir imp.</string>
+    <string name="pet_baby_kraken_name">Yavru Kraken</string>
+    <string name="pet_baby_kraken_desc">Aşçılık XP\'nizi geliştiren minik bir kraken.</string>
+    <string name="pet_rock_golem_name">Kaya Golemi</string>
+    <string name="pet_rock_golem_desc">Madencilik XP\'nizi geliştiren canlı bir kaya oluşumu.</string>
+    <string name="pet_ent_name">Ent</string> <!-- untranslated -->
+    <string name="pet_ent_desc">Odunculuk XP\'nizi artıran kadim bir ağaç ruhu.</string>
+    <string name="pet_tiny_templar_name">Minik Tapınakçı</string>
+    <string name="pet_tiny_templar_desc">Balıkçılık XP\'nizi artıran küçük bir balık yoldaşı.</string>
+    <string name="pet_tangleroot_name">Düğümlü Kök</string>
+    <string name="pet_tangleroot_desc">Tarım XP\'nizi geliştiren büyülü bir bitki yaratığı.</string>
+    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
+    <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
+    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_name">Graceling Sprite</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_name">Shadow Fox</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string> <!-- untranslated -->
+    <string name="pet_ember_moth_name">Ember Moth</string> <!-- untranslated -->
+    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_name">Herb Wisp</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_name">Rune Sprite</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string> <!-- untranslated -->
+    <string name="pet_gem_golem_name">Gem Golem</string> <!-- untranslated -->
+    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string> <!-- untranslated -->
+    <string name="pet_feather_drake_name">Feather Drake</string> <!-- untranslated -->
+    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string> <!-- untranslated -->
+    <string name="pet_forge_imp_name">Forge Imp</string> <!-- untranslated -->
+    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string> <!-- untranslated -->
+    <string name="pet_coin_drake_name">Coin Drake</string> <!-- untranslated -->
+    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
+    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_name">Lantern Wisp</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_name">Grave Sprout</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string> <!-- untranslated -->
+    <string name="pet_golden_goose_name">Golden Goose</string> <!-- untranslated -->
+    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string> <!-- untranslated -->
+
+    <!-- Save slots / character manager -->
     <string name="settings_characters">Karakterler</string>
     <string name="settings_characters_desc">En fazla 3 kayıt yuvası. Karakter oluştur, değiştir veya sil.</string>
     <string name="save_slots_title">Karakterler</string>
@@ -1832,7 +1819,7 @@
     <string name="save_slot_label">Yuva %1$d</string>
     <string name="save_slot_new">Yeni Karakter</string>
     <string name="save_slot_playing">Oynanıyor</string>
-    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_ironman">Ironman</string> <!-- untranslated -->
     <string name="save_slot_combat_level">Savaş Seviyesi %1$d</string>
     <string name="save_slot_total_level">Toplam Seviye %1$d</string>
     <string name="save_slot_last_played">%1$s önce</string>
@@ -1846,12 +1833,42 @@
     <string name="save_slot_delete_body">%1$s kalıcı olarak silinsin mi? Bu işlem geri alınamaz.</string>
     <string name="save_slot_delete_btn">Sil</string>
     <string name="save_slot_switch_failed">Karakter değiştirilemedi.</string>
+
+    <!-- Ironman mode -->
     <string name="character_ironman_title">Ironman Modu</string>
     <string name="character_ironman_desc">XP ve verim takviyeleri devre dışıdır, eşya satın alınamaz ve işçi tutulamaz. Kalıcıdır: oluşturulduktan sonra değiştirilemez. Kayıt dosyasını düzenlemek Ironman durumunu kaldırır.</string>
     <string name="ironman_shop_buy_blocked">Ironman karakterler eşya satın alamaz.</string>
     <string name="ironman_inn_blocked">Ironman karakterler işçi tutamaz.</string>
     <string name="ironman_blessing_blocked">Ironman karakterler yalnızca savunma kutsamaları alabilir.</string>
     <string name="ironman_bonuses_notice">Ironman: bu karakter için XP, verim ve altın takviyeleri devre dışıdır.</string>
-    <string name="ironman_badge">Ironman</string>
+    <string name="ironman_badge">Ironman</string> <!-- untranslated -->
     <string name="settings_imported_demoted">Kayıt içe aktarıldı. Oyun dışında değiştirildiği için Ironman durumu kaldırıldı.</string>
+    <string name="shop_xp_boost_name">2× XP Boost (48h)</string> <!-- untranslated -->
+    <string name="bestiary_stat_hp">HP</string> <!-- untranslated -->
+    <string name="bestiary_stat_attack">Attack</string> <!-- untranslated -->
+    <string name="bestiary_stat_strength">Strength</string> <!-- untranslated -->
+    <string name="bestiary_stat_defense">Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_atk_defense">Atk Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_str_defense">Str Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_rng_defense">Rng Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_mag_defense">Mag Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp">XP</string> <!-- untranslated -->
+    <string name="bestiary_stat_required_level">Required Level</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp_reward">XP Reward</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration">Duration</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration_min">%1$d min</string> <!-- untranslated -->
+    <string name="bestiary_kill_count">%1$d kills</string> <!-- untranslated -->
+    <string name="bestiary_location_other">Other</string> <!-- untranslated -->
+    <string name="carnival_stat_atk">ATK +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_str">STR +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_def">DEF +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_yield">Yield</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_green">G</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_blue">B</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_red">R</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_purple">P</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_orange">O</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_cyan">C</string> <!-- untranslated -->
+    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/crop</string> <!-- untranslated -->
+    <string name="farming_seeds_owned">Seeds: %1$d  •  Owned: %2$d</string> <!-- untranslated -->
 </resources>

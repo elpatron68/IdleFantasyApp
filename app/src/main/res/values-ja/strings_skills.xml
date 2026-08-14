@@ -47,7 +47,7 @@
     <string name="skill_prayer_desc">戦闘でドロップした骨を埋めて祈り経験値（XP）を獲得する。レベルが上がると、より強力な教会の祝福が解放される。</string>
 
     <!-- ===== Skill unlock sheet labels ===== -->
-    <string name="label_lv">Lv %1$d</string>
+    <string name="label_lv">Lv %1$d</string> <!-- untranslated -->
     <string name="skills_agility_course_detail">Lv. %1$d  •  %2$d XP/周</string>
     <string name="label_hp_passive">パッシブ — 最大HPを増加</string>
     <string name="label_hp_scales">レベルごとに最大HPが増加</string>

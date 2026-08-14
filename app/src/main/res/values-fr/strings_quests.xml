@@ -45,7 +45,6 @@
     <string name="quest_fishing_6_name">Pêche VI</string>
     <string name="quest_fishing_6_objective">Attraper 3650 poissons</string>
 
-
     <!-- Smithing -->
     <string name="quest_smithing_1_name">Forge I</string>
     <string name="quest_smithing_1_objective">Fondre 500 lingots de bronze</string>
@@ -139,6 +138,18 @@
     <string name="quest_combat_kills_5_objective">Vaincre 450 ennemis</string>
     <string name="quest_combat_kills_6_name">Tueur de monstres VI</string>
     <string name="quest_combat_kills_6_objective">Vaincre 650 ennemis</string>
+    <string name="quest_slayer_1_name">Slayer I</string> <!-- untranslated -->
+    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_2_name">Slayer II</string> <!-- untranslated -->
+    <string name="quest_slayer_2_objective">Complete 15 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_3_name">Slayer III</string> <!-- untranslated -->
+    <string name="quest_slayer_3_objective">Complete 40 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_4_name">Slayer IV</string> <!-- untranslated -->
+    <string name="quest_slayer_4_objective">Complete 100 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_5_name">Slayer V</string> <!-- untranslated -->
+    <string name="quest_slayer_5_objective">Complete 250 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_6_name">Slayer VI</string> <!-- untranslated -->
+    <string name="quest_slayer_6_objective">Complete 500 Slayer tasks</string> <!-- untranslated -->
 
     <!-- Dungeon exploration -->
     <string name="quest_dungeon_farm_1_name">Explorateur de donjon I</string>
@@ -205,7 +216,7 @@
     <string name="quest_dragon_slayer_1_objective">Vaincre 10 dragons verts</string>
     <string name="quest_dragon_slayer_2_name">Chasseur de dragons II</string>
     <string name="quest_dragon_slayer_2_objective">Vaincre 25 dragons verts</string>
-    
+
     <!-- Combat style challenges -->
     <string name="quest_melee_warrior_1_name">Guerrier au corps à corps I</string>
     <string name="quest_melee_warrior_1_objective">Terminer la Caverne des gobelins en utilisant uniquement le combat au corps à corps</string>
@@ -225,7 +236,6 @@
     <string name="quest_mage_master_2_objective">Terminer le Camp des bandits en utilisant uniquement la magie</string>
     <string name="quest_mage_master_3_name">Maître magicien III</string>
     <string name="quest_mage_master_3_objective">Terminer les Ruines de la forteresse en utilisant uniquement la magie</string>
-
 
     <!-- Iron Stomach (no food) challenges -->
     <string name="quest_iron_stomach_1_name">Estomac en fer I</string>
@@ -247,6 +257,7 @@
     <string name="quest_treasure_hunter_4_name">Chasseur de trésors IV</string>
     <string name="quest_treasure_hunter_4_objective">Collecter 3 écailles de dragon lors de combats</string>
 
+    <!-- Firemaking -->
     <string name="quest_firemaking_1_name">Fabrication de Feu I</string>
     <string name="quest_firemaking_1_objective">Brûler 500 bûches</string>
     <string name="quest_firemaking_2_name">Fabrication de Feu II</string>
@@ -259,6 +270,8 @@
     <string name="quest_firemaking_5_objective">Brûler 2450 bûches de if</string>
     <string name="quest_firemaking_6_name">Fabrication de Feu VI</string>
     <string name="quest_firemaking_6_objective">Brûler 3650 bûches magiques</string>
+
+    <!-- Runecrafting -->
     <string name="quest_runecrafting_1_name">Création de Runes I</string>
     <string name="quest_runecrafting_1_objective">Créer 500 Runes d’Air</string>
     <string name="quest_runecrafting_2_name">Création de Runes II</string>
@@ -271,6 +284,8 @@
     <string name="quest_runecrafting_5_objective">Créer 2450 Runes de l’Esprit</string>
     <string name="quest_runecrafting_6_name">Création de Runes VI</string>
     <string name="quest_runecrafting_6_objective">Créer 3650 Runes du Chaos</string>
+
+    <!-- Herblore -->
     <string name="quest_herblore_1_name">Herboristerie I</string>
     <string name="quest_herblore_1_objective">Préparer 100 Potions d’Attaque</string>
     <string name="quest_herblore_2_name">Herboristerie II</string>
@@ -283,6 +298,38 @@
     <string name="quest_herblore_5_objective">Mélanger 1000 Potions Magiques</string>
     <string name="quest_herblore_6_name">Herboristerie VI</string>
     <string name="quest_herblore_6_objective">Mélanger 1500 Potions de Super Force</string>
+
+    <!-- Construction -->
+    <string name="quest_construction_1_name">Construction I</string> <!-- untranslated -->
+    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string> <!-- untranslated -->
+    <string name="quest_construction_2_name">Construction II</string> <!-- untranslated -->
+    <string name="quest_construction_2_objective">Build 50 Oak Tables</string> <!-- untranslated -->
+    <string name="quest_construction_3_name">Construction III</string> <!-- untranslated -->
+    <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string> <!-- untranslated -->
+    <string name="quest_construction_4_name">Construction IV</string> <!-- untranslated -->
+    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string> <!-- untranslated -->
+    <string name="quest_construction_5_name">Construction V</string> <!-- untranslated -->
+    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_church_name">Restore the Church</string> <!-- untranslated -->
+    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string> <!-- untranslated -->
+
+    <!-- Thieving -->
+    <string name="quest_thieving_1_name">Thieving I</string> <!-- untranslated -->
+    <string name="quest_thieving_1_objective">Pickpocket 100 Peasants</string> <!-- untranslated -->
+    <string name="quest_thieving_2_name">Thieving II</string> <!-- untranslated -->
+    <string name="quest_thieving_2_objective">Pickpocket 100 Merchants</string> <!-- untranslated -->
+    <string name="quest_thieving_3_name">Thieving III</string> <!-- untranslated -->
+    <string name="quest_thieving_3_objective">Pickpocket 100 Nobles</string> <!-- untranslated -->
+    <string name="quest_thieving_4_name">Thieving IV</string> <!-- untranslated -->
+    <string name="quest_thieving_4_objective">Steal 5 Gold Necklaces</string> <!-- untranslated -->
+    <string name="quest_thieving_5_name">Thieving V</string> <!-- untranslated -->
+    <string name="quest_thieving_5_objective">Pickpocket 50 High Priests</string> <!-- untranslated -->
+
+    <!-- Slayer extended -->
     <string name="quest_combat_kills_7_name">Tueur de Monstres VII</string>
     <string name="quest_combat_kills_7_objective">Vaincre 1000 ennemis</string>
     <string name="quest_combat_kills_8_name">Tueur de Monstres VIII</string>
@@ -295,6 +342,8 @@
     <string name="quest_combat_kills_11_objective">Vaincre 5100 ennemis</string>
     <string name="quest_combat_kills_12_name">Tueur de Monstres XII</string>
     <string name="quest_combat_kills_12_objective">Vaincre 7650 ennemis</string>
+
+    <!-- New monster slayer chains -->
     <string name="quest_zombie_slayer_1_name">Chasseur de Zombies I</string>
     <string name="quest_zombie_slayer_1_objective">Vaincre 35 Zombies</string>
     <string name="quest_zombie_slayer_2_name">Chasseur de Zombies II</string>
@@ -319,12 +368,16 @@
     <string name="quest_lich_slayer_1_objective">Vaincre 10 Liches</string>
     <string name="quest_lich_slayer_2_name">Chasseur de Liches II</string>
     <string name="quest_lich_slayer_2_objective">Vaincre 20 Liches</string>
+
+    <!-- Dungeon exploration extended -->
     <string name="quest_dungeon_imp_1_name">Explorateur de Donjon VII</string>
     <string name="quest_dungeon_imp_1_objective">Terminer la Grotte des diablotins 5 fois</string>
     <string name="quest_dungeon_infernal_1_name">Maître du Donjon IV</string>
     <string name="quest_dungeon_infernal_1_objective">Terminer la Forteresse Infernale 5 fois</string>
     <string name="quest_dungeon_ancient_1_name">Maître du Donjon V</string>
     <string name="quest_dungeon_ancient_1_objective">Terminer le Temple Ancien 5 fois</string>
+
+    <!-- Boss extended -->
     <string name="quest_kbd_slayer_1_objective">Vaincre le Roi Dragon Noir</string>
     <string name="quest_kbd_slayer_2_objective">Vaincre le Roi Dragon Noir 5 fois</string>
     <string name="quest_kbd_slayer_3_objective">Vaincre le Roi Dragon Noir 25 fois</string>
@@ -348,6 +401,16 @@
     <string name="quest_balrog_bane_3_objective">Vaincre le Balrog 25 fois</string>
     <string name="quest_balrog_bane_4_name">Chasseur de Balrog IV</string>
     <string name="quest_balrog_bane_4_objective">Vaincre le Balrog 50 fois</string>
+    <string name="quest_sovereign_slayer_1_name">Sovereign Slayer I</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_1_objective">Defeat the Void Sovereign</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_2_name">Sovereign Slayer II</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_2_objective">Defeat the Void Sovereign 5 times</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_3_name">Sovereign Slayer III</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_3_objective">Defeat the Void Sovereign 25 times</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_4_name">Sovereign Slayer IV</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_4_objective">Defeat the Void Sovereign 50 times</string> <!-- untranslated -->
+
+    <!-- Combat style challenges extended -->
     <string name="quest_melee_warrior_4_name">Guerrier au Corps à Corps IV</string>
     <string name="quest_melee_warrior_4_objective">Terminer la Forteresse Orc en utilisant uniquement le mêlée</string>
     <string name="quest_melee_warrior_5_name">Guerrier au Corps à Corps V</string>
@@ -360,10 +423,14 @@
     <string name="quest_mage_master_4_objective">Terminer la Forteresse Orc en utilisant uniquement la magie</string>
     <string name="quest_mage_master_5_name">Maître Mage V</string>
     <string name="quest_mage_master_5_objective">Terminer la Galerie du Dragon en utilisant uniquement la magie</string>
+
+    <!-- Iron Stomach extended -->
     <string name="quest_iron_stomach_5_name">Estomac de Fer V</string>
     <string name="quest_iron_stomach_5_objective">Terminer la Forteresse Infernale sans utiliser de nourriture</string>
     <string name="quest_iron_stomach_6_name">Estomac de Fer VI</string>
     <string name="quest_iron_stomach_6_objective">Terminer le Temple Ancien sans utiliser de nourriture</string>
+
+    <!-- Treasure Hunter extended -->
     <string name="quest_treasure_hunter_5_name">Chasseur de Trésors V</string>
     <string name="quest_treasure_hunter_5_objective">Collecter 10 Dents de Chiens des Enfers lors de combats</string>
     <string name="quest_treasure_hunter_6_name">Chasseur de Trésors VI</string>
@@ -414,8 +481,8 @@
     <string name="daily_verb_farming">Récolter</string>
 
     <!-- Quest objective format strings -->
-    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
-    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string> <!-- untranslated -->
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string> <!-- untranslated -->
     <string name="quest_obj_prayer">Enterrer %1$d os de tout type</string>
     <string name="quest_obj_kill">Vaincre %1$d ennemis</string>
     <string name="quest_obj_kill_enemy">Vaincre %1$d %2$s</string>
@@ -430,50 +497,54 @@
     <string name="quest_obj_collect">Collecter %1$d %2$s en combat</string>
     <string name="quest_obj_slayer_task">Terminer %1$d tâches du Tueur</string>
 
-    <string name="quest_slayer_1_name">Slayer I</string>
-    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string>
-    <string name="quest_slayer_2_name">Slayer II</string>
-    <string name="quest_slayer_2_objective">Complete 15 Slayer tasks</string>
-    <string name="quest_slayer_3_name">Slayer III</string>
-    <string name="quest_slayer_3_objective">Complete 40 Slayer tasks</string>
-    <string name="quest_slayer_4_name">Slayer IV</string>
-    <string name="quest_slayer_4_objective">Complete 100 Slayer tasks</string>
-    <string name="quest_slayer_5_name">Slayer V</string>
-    <string name="quest_slayer_5_objective">Complete 250 Slayer tasks</string>
-    <string name="quest_slayer_6_name">Slayer VI</string>
-    <string name="quest_slayer_6_objective">Complete 500 Slayer tasks</string>
-    <string name="quest_construction_1_name">Construction I</string>
-    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string>
-    <string name="quest_construction_2_name">Construction II</string>
-    <string name="quest_construction_2_objective">Build 50 Oak Tables</string>
-    <string name="quest_construction_3_name">Construction III</string>
-    <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string>
-    <string name="quest_construction_4_name">Construction IV</string>
-    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string>
-    <string name="quest_construction_5_name">Construction V</string>
-    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string>
-    <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string>
-    <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string>
-    <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string>
-    <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string>
-    <string name="quest_construction_upgrade_church_name">Restore the Church</string>
-    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string>
-    <string name="quest_thieving_1_name">Thieving I</string>
-    <string name="quest_thieving_1_objective">Pickpocket 100 Peasants</string>
-    <string name="quest_thieving_2_name">Thieving II</string>
-    <string name="quest_thieving_2_objective">Pickpocket 100 Merchants</string>
-    <string name="quest_thieving_3_name">Thieving III</string>
-    <string name="quest_thieving_3_objective">Pickpocket 100 Nobles</string>
-    <string name="quest_thieving_4_name">Thieving IV</string>
-    <string name="quest_thieving_4_objective">Steal 5 Gold Necklaces</string>
-    <string name="quest_thieving_5_name">Thieving V</string>
-    <string name="quest_thieving_5_objective">Pickpocket 50 High Priests</string>
-    <string name="quest_sovereign_slayer_1_name">Sovereign Slayer I</string>
-    <string name="quest_sovereign_slayer_1_objective">Defeat the Void Sovereign</string>
-    <string name="quest_sovereign_slayer_2_name">Sovereign Slayer II</string>
-    <string name="quest_sovereign_slayer_2_objective">Defeat the Void Sovereign 5 times</string>
-    <string name="quest_sovereign_slayer_3_name">Sovereign Slayer III</string>
-    <string name="quest_sovereign_slayer_3_objective">Defeat the Void Sovereign 25 times</string>
-    <string name="quest_sovereign_slayer_4_name">Sovereign Slayer IV</string>
-    <string name="quest_sovereign_slayer_4_objective">Defeat the Void Sovereign 50 times</string>
+    <string name="skilling_dungeon_shattered_spire_note_1">Charred stone and melted glass for a hundred metres in every direction. Whatever happened here was catastrophic.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shattered_spire_note_2">A torn page from a research journal: \'The convergence experiment exceeds all projections. We must press on.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shattered_spire_note_3">Arcane matrices etched into the surviving wall sections — a containment circle, poorly designed, clearly overstressed.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shattered_spire_note_4">A passage has been blasted open downward. Constructs still move in the dark below, following old instructions.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shattered_spire_note_5">The passage descends into intact chambers beneath the rubble. The Arcane Ruins still function, after a fashion.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_abyssal_lagoon_note_1">The water here has no bottom. Strange lights pulse from impossible depths.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_abyssal_lagoon_note_2">Fish pulled from the deep glow faintly and dissolve within minutes. What fed on them?</string> <!-- untranslated -->
+    <string name="skilling_dungeon_abyssal_lagoon_note_3">A torn map marks this lagoon with a single word: \'DO NOT FISH.\' No explanation is given.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_abyssal_lagoon_note_4">Something rises to the surface and sinks again. Massive. Ancient. Curious.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_abyssal_lagoon_note_5">The dark water parts. The Abyssal Ruins loom below — vast, alien, and ancient beyond reckoning.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_sunken_grotto_note_1">Strange stone pillars rise from the grotto floor, carved with script no living scholar can read.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_sunken_grotto_note_2">The fish scatter without warning — something large passes below.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_sunken_grotto_note_3">A waterlogged journal drifts by: \'The temple they found beneath the water was not abandoned. It was waiting.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_sunken_grotto_note_4">A submerged archway pulses with faint ancient light. The current pulls toward it.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_sunken_grotto_note_5">The archway is clear. The Drowned Temple lies beyond — something old watches from within.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_1">Ancient rune-carved walls pulse faintly. The dwarves who built this place are long gone.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_2">A colossal forge stands at the passage end, its fires somehow still burning after centuries.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_3">Iron golems stand dormant in the alcoves. Their eyes flicker as you mine nearby.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_4">The forge runes are a warning — something was bound here, and it grows restless.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_5">The golems rise fully to life. The Ancient Forge awakens — its guardians await those brave enough to enter.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_1">The trees here bleed shadow where cut. The wood writhes and resists the blade.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_2">A shadow beast watches from the canopy. It does not attack — it only observes.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_3">Old sanctum stones are visible through the twisted trunks. Something still lives there.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_4">The corruption spreads as you work. The canopy hungers for something unnamed.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_5">The canopy parts. The Corrupted Sanctum rises from the shadow-wood — its doors open, waiting.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_1">The trees here whisper in a language older than any known tongue.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_2">Stone foundations visible beneath the roots — the remains of something built long before the forest.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_3">A druid\'s warning carved in bark: \'The clearing at the grove\'s heart is not what it was. Stay away.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_4">Corrupted vines reach toward you as you chop. The grove resists your presence.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_5">A gap in the canopy reveals ruins at the grove\'s heart. The Ancient Forest Ruins call to be explored.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_1">A crumpled ledger page: names, dates, and numbers. Someone has been tracking payments to a person called the Warden.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_2">Scratched into the wall: \'For those who prove themselves — the Sanctum awaits. Ask no questions.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_3">A torn letter warning a member to stay away from the eastern tunnels. No reason is given.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_4">A wax-sealed map fragment. The seal is unfamiliar — a shadow behind a locked door.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_5">The last passage opens into a vaulted chamber. At the far end, a reinforced door bears the same seal. The Rogue Sanctum lies beyond.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_1">Fresh rope marks on the windowsills. Someone uses this tower regularly.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_2">A hidden cache inside a cracked wall: lockpicks, a short blade, and a coded ledger.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_3">The ledger is a tally of stolen goods and split payments. The rogues operate out of somewhere beneath the hill.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_4">A trapdoor in the floor, recently oiled, its hinges silent. Worn boot prints surround it.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_5">The trapdoor opens onto a carved stairway going deep into the earth. The Shadow Den waits below.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_copper_caverns_note_1">Scratches mark the tunnel walls, too deep and wide for any pickaxe.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_copper_caverns_note_2">Old mining equipment, twisted and bent. Whatever was here left in a hurry.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_copper_caverns_note_3">A miner\'s torn note: \'We broke through to something below. The foreman sealed the lower shaft. He won\'t say why.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_copper_caverns_note_4">Tremors from below. Dust falls from the ceiling in slow waves. Something stirs.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_copper_caverns_note_5">The sealed shaft gives way. A vast cavern opens beneath — the Collapsed Mine lies ahead.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_1">A dossier on every major merchant in the city. Someone has been compiling this for years.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_2">A vault door, partially ajar. Inside — crates of stolen weapons, armour, and sealed scroll cases.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_3">One scroll case is different from the others. It bears the seal of the royal treasury. It is empty.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_4">A private journal: \'The Guild of Shadows is not just a guild. It is a government. They have always been watching.\'</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_5">The deepest vault is not locked. It is guarded. What waits inside is the Guild\'s greatest secret — and its most dangerous protectors.</string> <!-- untranslated -->
 </resources>

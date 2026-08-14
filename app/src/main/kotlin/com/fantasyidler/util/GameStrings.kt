@@ -48,6 +48,10 @@ object GameStrings {
     fun skillingDungeonDesc(context: Context, key: String, fallback: String): String =
         context.stringByName("skilling_dungeon_${key}_desc") ?: fallback
 
+    /** Lore note [index] (0-based) for a skilling dungeon; falls back to the JSON text. */
+    fun skillingDungeonNote(context: Context, key: String, index: Int, fallback: String): String =
+        context.stringByName("skilling_dungeon_${key}_note_${index + 1}") ?: fallback
+
     fun enemyName(context: Context, key: String): String =
         context.stringByName("enemy_${key}_name") ?: key.toTitleCase()
 

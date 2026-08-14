@@ -157,8 +157,8 @@ class ShopViewModel @Inject constructor(
 
         val boost = ShopEntry(
             key          = XP_BOOST_KEY,
-            displayName  = "2× XP Boost (48h)",
-            description  = "Double all XP gained for 48 hours. Limit one purchase per week.",
+            displayName  = context.getString(R.string.shop_xp_boost_name),
+            description  = context.getString(R.string.item_xp_boost_48h_desc),
             price        = PlayerRepository.XP_BOOST_COST.toInt(),
             categoryName = "Special",
         )

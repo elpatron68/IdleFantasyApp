@@ -11,7 +11,7 @@
     <!-- Translator note: %1$s = localised skill name (e.g. "Mining") -->
     <string name="notif_session_complete_body">Votre session %1$s est terminée. Appuyez ici pour récupérer vos récompenses.</string>
 
-        <!-- ===== Buff alerts ===== -->
+    <!-- ===== Buff alerts ===== -->
     <string name="notif_channel_buffs_name">Bonus Alerte</string>
     <string name="notif_channel_buffs_desc">Notifications lorsque vos bonus actifs expirent</string>
     <string name="notif_xp_boost_expired_title">XP Boost a expiré</string>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Idle Fantasy</string>
+
 
     <!-- ===== Bottom navigation ===== -->
     <string name="nav_skills">Vaardigheden</string>
     <string name="nav_combat">Vecht</string>
     <string name="nav_home">Kamp</string>
     <string name="nav_crafting">Juwelier</string>
-    <string name="nav_quests">Quests</string>
+    <string name="nav_quests">Quests</string> <!-- untranslated -->
     <string name="nav_profile">Profiel</string>
 
     <!-- ===== Common buttons ===== -->
-    <string name="btn_start">Start</string>
+    <string name="btn_start">Start</string> <!-- untranslated -->
     <string name="btn_start_session">Start Sessie</string>
     <string name="btn_abandon_session">Sessie Afbreken</string>
     <string name="btn_collect_results">Resultaat Verzamelen</string>
@@ -32,7 +32,7 @@
     <string name="btn_clear_all">Alles Wissen</string>
     <string name="btn_inspect">Inspecteren</string>
     <string name="btn_view_drops">Bekijk Drops</string>
-    <string name="btn_start_quest">Start Quest</string>
+    <string name="btn_start_quest">Start Quest</string> <!-- untranslated -->
     <string name="btn_abandon_quest">Quest Afbreken</string>
     <string name="btn_enter_dungeon">Dungeon Betreden</string>
     <string name="btn_enter_arena">Arena Betreden</string>
@@ -44,17 +44,17 @@
     <string name="btn_save">Opslaan</string>
 
     <!-- ===== Common labels ===== -->
-    <string name="label_level">Level</string>
-    <string name="label_xp">XP</string>
+    <string name="label_level">Level</string> <!-- untranslated -->
+    <string name="label_xp">XP</string> <!-- untranslated -->
     <string name="label_coins">Ducaten</string>
-    <string name="label_hp">HP</string>
+    <string name="label_hp">HP</string> <!-- untranslated -->
     <string name="label_attack">Aanval</string>
     <string name="label_strength">Kracht</string>
     <string name="label_defense">Verdediging</string>
     <string name="label_ranged">Afstand</string>
     <string name="label_magic">Magie</string>
     <string name="label_prayer">Gebed</string>
-    <string name="label_hitpoints">Hitpoints</string>
+    <string name="label_hitpoints">Hitpoints</string> <!-- untranslated -->
     <string name="label_inventory">Inventaris</string>
     <string name="label_equipment">Uitrusting</string>
     <string name="label_pets">Huisdieren</string>
@@ -77,7 +77,7 @@
     <string name="label_session_active">Sessie actief</string>
     <string name="label_no_active_session">Geen actieve sessie</string>
     <string name="label_session_complete">Sessie voltooid</string>
-    <string name="label_training">Training</string>
+    <string name="label_training">Training</string> <!-- untranslated -->
     <string name="label_gathering_skills">Doe</string>
     <string name="label_crafting_skills">Maakvaardigheden</string>
     <string name="label_choose_activity">Kies Activiteit</string>
@@ -86,7 +86,7 @@
     <string name="label_session_results">Sessie Resultaten</string>
     <string name="label_xp_gained">Verworven XP</string>
     <string name="label_items_collected">Verzamelde Items</string>
-    <string name="label_level_ups">Level ups</string>
+    <string name="label_level_ups">Level ups</string> <!-- untranslated -->
     <string name="label_requirements">Vereisten</string>
     <string name="label_rewards">Beloningen</string>
     <string name="label_your_level">Jouw Level</string>
@@ -100,7 +100,7 @@
     <string name="label_ready_to_harvest">Klaar om te oogsten</string>
     <string name="label_empty">Leeg</string>
     <string name="inventory_sort_quantity">Hoeveelheid</string>
-    <string name="inventory_sort_az">A-Z</string>
+
     <string name="inventory_cat_weapons">Wapens</string>
     <string name="inventory_cat_armour">Uitrusting</string>
     <string name="inventory_cat_tools">Gereedschap</string>
@@ -116,9 +116,9 @@
     <string name="inventory_cat_filter_all">Alles</string>
     <string name="label_combat_style">Vechtstijl</string>
     <string name="label_active_spell">Actieve Spreuk</string>
-    <string name="label_drops">Drops</string>
+    <string name="label_drops">Drops</string> <!-- untranslated -->
     <string name="label_boss">Baas</string>
-    <string name="label_dungeon">Dungeon</string>
+    <string name="label_dungeon">Dungeon</string> <!-- untranslated -->
     <string name="label_difficulty">Moeilijkheid</string>
     <string name="label_completed">Voltooid</string>
     <string name="label_in_progress">Bezig</string>
@@ -132,8 +132,8 @@
     <string name="label_losses">Verliezen</string>
     <string name="label_active">Actief</string>
     <string name="label_inactive">Inactief</string>
-    <string name="label_boost">Boost</string>
-    <string name="label_xp_boost">XP Boost</string>
+    <string name="label_boost">Boost</string> <!-- untranslated -->
+    <string name="label_xp_boost">XP Boost</string> <!-- untranslated -->
     <string name="label_weapon">Wapen</string>
     <string name="label_armour">Uitrusting</string>
     <string name="label_food">Voedsel</string>
@@ -145,7 +145,7 @@
     <string name="label_runes">Runen</string>
     <string name="label_spell">Spreuk</string>
     <string name="label_none">Geen</string>
-    <string name="label_melee">Melee</string>
+    <string name="label_melee">Melee</string> <!-- untranslated -->
     <string name="label_ranged_style">Afstand</string>
     <string name="label_magic_style">Magie</string>
     <string name="label_gathering">Verzamelen</string>
@@ -158,16 +158,16 @@
     <string name="label_output">Uitvoer</string>
     <string name="label_xp_per_action">XP per actie</string>
     <string name="label_unlocked_at">Ontgrendeld op level</string>
-    <string name="label_kills">Kills</string>
+    <string name="label_kills">Kills</string> <!-- untranslated -->
     <string name="label_personal_best">Persoonlijk Beste</string>
     <string name="label_daily_dig">Dagelijkse Graafopdracht</string>
     <string name="label_dig_depth">Graaftdiepte</string>
     <string name="label_version">Versie</string>
-    <string name="label_open_source">Open Source</string>
+
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
     <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
-    <string name="format_level_xp">Level %1$d — %2$s XP</string>
+    <string name="format_level_xp">Level %1$d — %2$s XP</string> <!-- untranslated -->
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s XP naar level %2$d</string>
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
@@ -175,7 +175,7 @@
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
     <string name="format_started_ago">Gestart %1$s geleden</string>
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
-    <string name="format_item_quantity">%1$s ×%2$d</string>
+
     <!-- Translator note: %1$d = coin amount -->
     <string name="format_price_coins">%1$d ducaten</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
@@ -187,11 +187,11 @@
     <!-- Translator note: %1$d = wins, %2$d = losses -->
     <string name="format_arena_record">%1$d gewonnen / %2$d verloren</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
-    <string name="format_skill_level">%1$s: Level %2$d</string>
+    <string name="format_skill_level">%1$s: Level %2$d</string> <!-- untranslated -->
     <!-- Translator note: %1$d = boost percentage -->
-    <string name="format_xp_boost_percent">+%1$d%% XP</string>
+    <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
-    <string name="format_drop_chance">%1$s: %2$d</string>
+
     <!-- Translator note: %1$d = minutes remaining -->
     <string name="format_minutes_remaining">%1$d min te gaan</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
@@ -201,11 +201,11 @@
     <plurals name="plural_level_ups">
         <item quantity="one">%1$d level up</item>
         <item quantity="other">%1$d level ups</item>
-    </plurals>
+    </plurals> <!-- untranslated -->
     <plurals name="plural_items">
         <item quantity="one">%1$d item</item>
         <item quantity="other">%1$d items</item>
-    </plurals>
+    </plurals> <!-- untranslated -->
     <plurals name="plural_minutes">
         <item quantity="one">%1$d minuut</item>
         <item quantity="other">%1$d minuten</item>
@@ -294,7 +294,7 @@
     <string name="label_no_sessions_yet">Nog geen sessies voltooid.</string>
 
     <!-- ===== CombatScreen ===== -->
-    <string name="label_dungeons_tab">Dungeons</string>
+    <string name="label_dungeons_tab">Dungeons</string> <!-- untranslated -->
     <string name="btn_fight">Vecht!</string>
 
     <!-- ===== SkillsScreen ===== -->
@@ -311,12 +311,12 @@
     <string name="label_timed">Tijdelijk</string>
     <string name="label_daily_quests">Dagelijkse Quests</string>
     <string name="label_daily_reset">Reset om %1$s</string>
-    <string name="label_weekly_reset">Resets Monday at %1$s</string>
+    <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
     <string name="weekly_bonus_title">Wekelijkse Bonus!</string>
-    <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
-    <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string>
-    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string>
+    <string name="weekly_bonus_claim">Claim Weekly Bonus</string> <!-- untranslated -->
+    <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string> <!-- untranslated -->
+    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string> <!-- untranslated -->
+    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string> <!-- untranslated -->
     <string name="label_daily_reward">2000 ducaten (1/100: Dwergenuitrusting)</string>
     <string name="msg_daily_claimed_coins">Dagelijkse quest voltooid! +2000 ducaten.</string>
     <string name="msg_daily_claimed_dwarven">Dagelijkse quest voltooid! Je hebt %1$s gevonden!</string>
@@ -331,13 +331,16 @@
     <string name="settings_notifications_header">Meldingen</string>
     <string name="settings_performance_header">Prestaties</string>
     <string name="settings_general_header">Algemeen</string>
-    <string name="settings_tutorial_title">Tutorial</string>
+    <string name="settings_tutorial_title">Tutorial</string> <!-- untranslated -->
     <string name="settings_tutorial_desc">Toon de introductie opnieuw</string>
     <string name="settings_reopen">Opnieuw openen</string>
+    <string name="settings_changelog_title">Wat is er nieuw</string>
+    <string name="settings_changelog_desc">Bekijk de laatste wijzigingen</string>
+    <string name="settings_changelog_btn">Bekijken</string>
     <string name="settings_foss_desc">Idle Fantasy is gratis en open source software.</string>
     <string name="settings_reset_title">Voortgang resetten</string>
     <string name="settings_reset_desc">Wis alle vaardigheden, items, quests en ducaten</string>
-    <string name="settings_reset_btn">Reset</string>
+    <string name="settings_reset_btn">Reset</string> <!-- untranslated -->
     <string name="reset_confirm1_title">Alle voortgang resetten?</string>
     <string name="reset_confirm1_body">Dit zal alle vaardigheidservaring, items, ducaten en quest-voortgang wissen. Dit kan niet ongedaan worden gemaakt.</string>
     <string name="reset_confirm2_title">Weet je het zeker?</string>
@@ -361,6 +364,7 @@
     <string name="settings_theme">Thema</string>
     <string name="settings_theme_desc">Kies je kleurenschema</string>
     <string name="settings_theme_dark">Donker</string>
+    <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
     <string name="settings_theme_light">Licht</string>
     <string name="settings_theme_system">Systeem</string>
     <string name="settings_font_size">Lettergrootte</string>
@@ -400,19 +404,21 @@
     <string name="theme_editor_saved_ok">Thema opgeslagen en toegepast</string>
     <string name="theme_editor_exported_ok">Thema geëxporteerd</string>
     <string name="settings_language_desc">Kies de taal van de app</string>
-    <string name="settings_lang_english">Engels</string>
-    <string name="settings_lang_deutsch">Duits</string>
-    <string name="settings_lang_français">Frans</string>
-    <string name="settings_lang_dutch">Nederlands</string>
-    <string name="settings_lang_español">Spaans</string>
-    <string name="settings_lang_español_españa">Spaans</string>
-    <string name="settings_lang_turkish">Turks</string>
-    <string name="settings_lang_italiano">Italiano</string>
-    <string name="settings_lang_russian">Русский</string>
-    <string name="settings_lang_indonesian">Indonesisch</string>
-    <string name="settings_lang_portugues_brasil">Português (Brasil)</string>
-    <string name="settings_lang_irish">Gaeilge</string>
-    <string name="settings_lang_czech">Čeština</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="settings_lang_system">Systeem</string>
     <string name="settings_save_data">Data opslaan</string>
     <string name="settings_export">Exporteer opslag</string>
@@ -422,11 +428,12 @@
     <string name="settings_import_desc">Herstel voortgang vanuit een bestand</string>
     <string name="settings_import_btn">Importeer</string>
     <string name="settings_source_code">Broncode</string>
-    <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
-    <string name="settings_source_open">Open</string>
-    <string name="settings_wiki">Wiki</string>
-    <string name="settings_discord">Discord</string>
-    <string name="settings_discord_url">discord.gg/vRxtXsBwQU</string>
+
+    <string name="settings_source_open">Open</string> <!-- untranslated -->
+
+
+
+
     <string name="settings_exported_ok">Opslag geëxporteerd</string>
     <string name="settings_imported_ok">Opslag succesvol geïmporteerd</string>
     <string name="settings_imported_fail">Importeren mislukt — ongeldig bestand</string>
@@ -465,8 +472,11 @@
     <string name="guild_dailies_done_today">Dagelijkse opdrachten voltooid</string>
     <string name="guild_dailies_remaining_today">%1$d over vandaag</string>
     <string name="guild_do_dailies_hint">Doe dagelijkse opdrachten om naar de volgende rang te gaan</string>
+    <string name="guild_quest_gate_blocked">Voltooi quests om je rang te verhogen</string>
+    <string name="guild_quest_required">Quest vereist om te vorderen</string>
     <string name="home_died_message">Je bent dood en hebt het grootste deel van je voortgang verloren.</string>
     <string name="home_xp_boost_was_active">2× XP Boost was actief</string>
+    <string name="home_xp_boost_active">2× XP-boost actief — nog %1$s</string>
     <string name="home_loot">Buit</string>
     <string name="home_food_consumed">Gegeten voedsel</string>
     <string name="home_bones_buried">Begraven botten</string>
@@ -480,8 +490,9 @@
     <string name="home_sync_content_desc">Open Save Viewer. Long press to upload save.</string>
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
     <string name="home_queue_ends_in">Wachtrij eindigt over %1$s</string>
-    <string name="queue_item_qty">×%1$d</string>
-    <string name="queue_item_qty_with_output">×%1$d → %2$d items</string>
+    <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
+
+    <string name="queue_item_qty_with_output">×%1$d → %2$d items</string> <!-- untranslated -->
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
         <item quantity="one">Verzamel de beloningen van %1$d sessie</item>
@@ -493,12 +504,14 @@
     <string name="combat_log_label">Gevechtslog</string>
     <string name="combat_solo_bosses">Solo Bazen</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
-    <string name="combat_dungeon_runs">%1$d runs</string>
+    <string name="combat_dungeon_runs">%1$d runs</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = kills, %2$d = food consumed -->
     <string name="combat_last_run">Laatste: %1$d kills, %2$d voedsel</string>
+    <!-- Translator note: %1$d = kills -->
     <string name="combat_last_run_died">Laatste: gestorven (%1$d kills)</string>
-    <string name="combat_atk">ATK</string>
-    <string name="combat_str">STR</string>
-    <string name="combat_def">DEF</string>
+    <string name="combat_atk">ATK</string> <!-- untranslated -->
+    <string name="combat_str">STR</string> <!-- untranslated -->
+    <string name="combat_def">DEF</string> <!-- untranslated -->
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">heelt %1$d HP</string>
     <string name="combat_defeated_so_far">tot nu toe verslagen.</string>
@@ -517,6 +530,9 @@
     <string name="combat_your_level">Jouw gevechtslevel</string>
     <string name="combat_no_strength_bonus">Geen (geen krachtbonus)</string>
     <string name="combat_best_arrow">Beste pijlen</string>
+    <string name="combat_arrow_auto">Automatisch (beste beschikbare)</string>
+    <string name="combat_label_arrow">Pijl</string>
+    <string name="combat_select_loadout">Uitrusting kiezen</string>
     <string name="combat_enemies">Vijanden</string>
     <string name="combat_no_spells">Geen spreuken beschikbaar op jouw magielevel.</string>
     <string name="combat_only_castable">Alleen bruikbare spreuken</string>
@@ -527,20 +543,24 @@
     <string name="combat_req_level">Vereist gevechtslevel</string>
     <string name="combat_duration">Duur</string>
     <!-- Translator note: %1$d = minutes -->
-    <string name="combat_duration_min">%1$d min</string>
+    <string name="combat_duration_min">%1$d min</string> <!-- untranslated -->
     <string name="combat_fight_count_label">Aantal gevechten</string>
+    <!-- Translator note: %1$d = number of queued repeat fights, e.g. "×100 fights" -->
     <string name="combat_fight_count_suffix">×%1$d gevechten</string>
+    <!-- Translator note: %1$d = current fight number, %2$d = total fights requested, e.g. "Fight 34/100" -->
     <string name="combat_fight_progress">Gevecht %1$d/%2$d</string>
     <string name="combat_run_count_label">Aantal runs</string>
-    <string name="combat_run_count_suffix">×%1$d runs</string>
-    <string name="combat_run_progress">Run %1$d/%2$d</string>
+    <!-- Translator note: %1$d = number of queued repeat dungeon runs, e.g. "×24 runs" -->
+    <string name="combat_run_count_suffix">×%1$d runs</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = current run number, %2$d = total runs requested, e.g. "Run 12/24" -->
+    <string name="combat_run_progress">Run %1$d/%2$d</string> <!-- untranslated -->
     <string name="combat_xp_on_victory">XP bij overwinning</string>
     <string name="combat_you_died">Je bent dood!</string>
-    <string name="combat_died_reward">Je ontvangt 10% van de beloningen.</string>
+    <string name="combat_died_reward">Je ontvangt 10%% van de beloningen.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d uitrusting</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
-    <string name="combat_prestige_bonus">+%1$d prestige</string>
+    <string name="combat_prestige_bonus">+%1$d prestige</string> <!-- untranslated -->
 
     <!-- ===== ProfileScreen ===== -->
     <string name="profile_unnamed">Naamloze Avonturier</string>
@@ -563,6 +583,7 @@
     <string name="profile_equip_best_tools">Beste gereedschap aantrekken</string>
     <string name="profile_weapons">Wapens</string>
     <string name="profile_combat_gear">Gevechtsuitrusting</string>
+    <string name="profile_view_combat_gear">Gevechtsuitrusting Bekijken</string>
     <string name="profile_gathering_tools">Gereedschap</string>
     <string name="profile_food_dungeon">Eten (Dungeons)</string>
     <string name="profile_no_food">Geen gekookt voedsel in inventaris</string>
@@ -586,12 +607,13 @@
     <string name="profile_stat_agility">Behendigheid</string>
     <string name="profile_stat_cooking">Koken</string>
     <string name="profile_stat_thieving">Stelen</string>
-    <string name="profile_stat_def">Def</string>
+    <string name="profile_stat_def">Def</string> <!-- untranslated -->
     <string name="profile_req_lv">Lvl nodig</string>
 
     <!-- ===== SkillsScreen ===== -->
     <!-- Translator note: %1$d = session duration in minutes -->
     <string name="skills_session_duration">Sessie: %1$dm</string>
+    <!-- Translator note: %1$d = estimated number of ores mined in one session -->
     <string name="skill_mining_qty_estimate">~%1$d ertsen/sessie</string>
     <string name="skills_only_craftable">Alleen maakbaar</string>
     <string name="skills_filter_all">Alles</string>
@@ -601,7 +623,7 @@
     <string name="skills_level_req_xp">Lvl %1$d  •  %2$s XP/erts</string>
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">×%1$s Gereedschapsbonus</string>
-    <string name="skills_pet_bonus">+%1$d%% XP (pet)</string>
+    <string name="skills_pet_bonus">+%1$d%% XP (pet)</string> <!-- untranslated -->
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Lvl %1$d  •  Level-geschikte vangsten</string>
     <!-- Translator note: %1$d = prayer level -->
@@ -630,6 +652,11 @@
     <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/vangst</string>
     <!-- Translator note: %1$d = required level, %2$s = skill name, %3$d = player level, %4$s = skill name again -->
     <string name="skills_req_with_have">%1$d %2$s benodigd (Je hebt %3$d %4$s)</string>
+    <!-- Translator note: %1$d = owned quantity -->
+    <string name="crafting_owned">Owned: %1$d</string> <!-- untranslated -->
+    <string name="crafting_owned_detail">Owned in inventory: %1$d</string> <!-- untranslated -->
+    <string name="firemaking_ashes_owned">Ashes owned: %1$d</string> <!-- untranslated -->
+
 
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">ACTIEF</string>
@@ -644,7 +671,7 @@
     <string name="quest_legend_weekly">Wekelijkse quest</string>
     <string name="quest_legend_guild_daily">Dagelijkse gildequest</string>
     <string name="quest_legend_guild">Gildequest</string>
-    <string name="quest_legend_quest">Quest</string>
+    <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
     <string name="quest_legend_notes">Gedimde pictogrammen kunnen nog niet voltooid worden (level of materialen ontbreken). Een klein verhoogd cijfer betekent dat meerdere quests van dat type hetzelfde willen.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d in inventaris</string>
@@ -662,8 +689,8 @@
 
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Geen materialen</string>
-    <!-- Translator note: %1$d = quantity produced -->
-    <string name="crafting_produces">Produceert %1$d× per craft</string>
+    <!-- Translator note: %1$d = total quantity, %2$s = item name -->
+
     <string name="crafting_effects">Effecten</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP totaal</string>
@@ -710,11 +737,13 @@
     <string name="character_gender_custom_hint">Beschrijf je gender</string>
     <string name="character_race">Ras</string>
     <string name="character_race_human">Mens</string>
-    <string name="character_race_elf">Elf</string>
+    <string name="character_race_elf">Elf</string> <!-- untranslated -->
     <string name="character_race_dwarf">Dwerg</string>
     <string name="character_race_orc">Ork</string>
-    <string name="character_race_halfling">Halfling</string>
+
     <string name="character_race_gnome">Gnoom</string>
+
+    <!-- ===== CharacterCustomizationSheet ===== -->
     <string name="appearance_title">Uiterlijk aanpassen</string>
     <string name="appearance_skin_tone">Huidskleur</string>
     <string name="appearance_eyes">Ogen</string>
@@ -734,7 +763,7 @@
     <string name="onboarding_welcome_desc">Een idle RPG geïnspireerd door klassieke MMORPGs. Train vaardigheden, vecht in Dungeons en maak uitrusting. Alles offline, geen accounts, geen advertenties.</string>
 
     <!-- Quantity picker quick buttons -->
-    <string name="qty_max">Max</string>
+    <string name="qty_max">Max</string> <!-- untranslated -->
 
     <!-- ===== Inn / Worker ===== -->
     <string-array name="worker_names">
@@ -763,7 +792,7 @@
         <item>Wren</item>
         <item>Xander</item>
         <item>Yara</item>
-    </string-array>
+    </string-array> <!-- untranslated -->
     <string name="inn_title">Herberg</string>
     <string name="inn_desc">Huur een werknemer om vaardigheden voor je te trainen, of koop voedsel van het dagelijkse menu. Werknemers tellen niet mee voor je quests.</string>
     <string name="inn_worker_already_hired">Er is al een werknemer ingehuurd.</string>
@@ -794,16 +823,18 @@
     <string name="worker_dismiss_confirm_body">De actieve sessie en wachtrij worden geannuleerd. Je inhuurkosten en eventuele geplande materialen worden teruggegeven.</string>
     <string name="inn_daily_menu">Dagelijks Menu</string>
     <string name="inn_laborers_header">Werknemers</string>
+    <string name="inn_slot1_header">Lange Arbeider</string>
+    <string name="inn_slot2_header">Geschoolde Arbeider</string>
 
     <!-- ===== Combat difficulty ratings ===== -->
-    <string name="combat_difficulty_likely">You\'ve got this</string>
+    <string name="combat_difficulty_likely">You\'ve got this</string> <!-- untranslated -->
     <string name="combat_difficulty_risky">Riskant met de huidige uitrusting</string>
     <string name="combat_difficulty_unlikely">Waarschijnlijk dat je dood gaat</string>
 
     <!-- ===== Achievements ===== -->
     <string name="achievement_group_levelling">Levelen</string>
     <string name="achievement_group_combat">Gevecht</string>
-    <string name="achievement_group_quests">Quests</string>
+    <string name="achievement_group_quests">Quests</string> <!-- untranslated -->
     <string name="achievement_group_collection">Verzameling</string>
 
     <string name="achievement_total_50_name">Avonturier</string>
@@ -831,14 +862,14 @@
     <string name="achievement_combat_30_desc">Bereik gevechtslevel 30</string>
     <string name="achievement_combat_50_name">Kampioen</string>
     <string name="achievement_combat_50_desc">Bereik gevechtslevel 50</string>
-    <string name="achievement_combat_75_name">Elite</string>
+    <string name="achievement_combat_75_name">Elite</string> <!-- untranslated -->
     <string name="achievement_combat_75_desc">Bereik gevechtslevel 75</string>
     <string name="achievement_combat_99_name">Champion</string>
     <string name="achievement_combat_99_desc">Bereik gevechtslevel 99</string>
     <string name="achievement_combat_113_name">Oorlogsgod</string>
     <string name="achievement_combat_113_desc">Bereik het maximale gevechtslevel van 113</string>
 
-    <string name="achievement_quest_1_name">Quester</string>
+    <string name="achievement_quest_1_name">Quester</string> <!-- untranslated -->
     <string name="achievement_quest_1_desc">Doe 1 quest</string>
     <string name="achievement_quest_5_name">Beginnende avonturier</string>
     <string name="achievement_quest_5_desc">Doe 5 quests</string>
@@ -859,8 +890,10 @@
     <string name="quest_kbd_slayer_2_name">Koning der Zwarte Draken Slachter II</string>
     <string name="quest_kbd_slayer_3_name">Koning der Zwarte Draken Slachter III</string>
     <string name="inn_daily_resets">Vernieuwt dagelijks om %1$s</string>
-    <string name="inn_food_heal">+%1$d HP</string>
+    <string name="inn_food_heal">+%1$d HP</string> <!-- untranslated -->
     <string name="inn_food_purchased">Voedsel gekocht.</string>
+    <string name="inn_buy_qty">Hoeveelheid</string>
+    <string name="inn_buy_total">Totaal: %1$s</string>
     <string name="inn_card_desc">Huur werknemers en koop voedsel</string>
     <string name="worker_no_active_session">Werknemer is inactief — geen sessies in wachtrij</string>
     <string name="worker_add_sessions">Sessies toevoegen</string>
@@ -871,9 +904,9 @@
     <string name="guild_hall_title">Gilde</string>
     <string name="guild_hall_desc">Word lid van gilden en voltooi dagelijkse opdrachten om te promoveren</string>
     <string name="guild_hall_intro">Gilden belonen je voor activiteiten die je al doet. Voltooi quests en dagelijkse verzoeken om cross-skill materialen, Ducaten en XP te verdienen, zodat specialisten nog steeds toegang hebben tot middelen van vaardigheden die ze niet trainen.</string>
-    <string name="guild_level_label">Level %1$d</string>
-    <string name="guild_level_max">Level 10 (Max)</string>
-    <string name="guild_tab_quests">Quests</string>
+    <string name="guild_level_label">Level %1$d</string> <!-- untranslated -->
+    <string name="guild_level_max">Level 10 (Max)</string> <!-- untranslated -->
+    <string name="guild_tab_quests">Quests</string> <!-- untranslated -->
     <string name="guild_tab_dailies">Dagelijkse Quests</string>
     <string name="guild_daily_resets_in">Vernieuwt dagelijks om %1$s</string>
     <string name="guild_locked_hint">Vereist Gilde Level %1$d</string>
@@ -920,7 +953,7 @@
     <string name="label_support_skills">Buffs</string>
     <string name="mercantile_routes_label">Handelsroutes</string>
     <string name="mercantile_level_label">Level %1$d Handel</string>
-    <string name="mercantile_xp_label">XP: %1$s</string>
+    <string name="mercantile_xp_label">XP: %1$s</string> <!-- untranslated -->
     <string name="mercantile_coins_label">Ducaten: %1$s</string>
     <string name="mercantile_cost_label">Kost: %1$s</string>
     <string name="mercantile_return_range">Opbrengst: %1$s – %2$s</string>
@@ -982,7 +1015,7 @@
     <string name="blessing_holy_shield_ii_name">Heilig Schild II</string>
     <string name="blessing_abundance_ii_name">Overvloed II</string>
     <string name="blessing_sacred_grace_name">Heilige Genade</string>
-    <string name="blessing_aegis_name">Aegis</string>
+    <string name="blessing_aegis_name">Aegis</string> <!-- untranslated -->
     <string name="blessing_abundance_iii_name">Overvloed III</string>
 
     <!-- Skilling dungeon names and descriptions -->
@@ -1002,6 +1035,10 @@
     <string name="skilling_dungeon_crumbling_watchtower_desc">Een vervallen stenen toren aan de rand van de heuvels. Iets bewaakt nog steeds wat ooit daarin was opgeslagen.</string>
     <string name="skilling_dungeon_shattered_spire_name">Gebroken Toren</string>
     <string name="skilling_dungeon_shattered_spire_desc">De overblijfselen van een tovenarstoren herleid tot een veld van puin. De lucht knetters nog van residuele magie.</string>
+    <string name="skilling_dungeon_thieves_den_name">Dievenhol</string>
+    <string name="skilling_dungeon_thieves_den_desc">Een doolhof van tunnels onder de stadsstraten, gebruikt door een georganiseerde dievenbende.</string>
+    <string name="skilling_dungeon_shadow_vault_name">Schaduwkluis</string>
+    <string name="skilling_dungeon_shadow_vault_desc">Een verborgen kluis onder het Schurkentoevluchtsoord waar de meest waardevolle gestolen goederen van het gilde worden bewaard.</string>
 
     <!-- Expeditions -->
     <string name="nav_expeditions">Expedities</string>
@@ -1016,22 +1053,73 @@
     <string name="expedition_lock_prerequisite">Vervul een vereiste</string>
     <string name="label_notes">Notities</string>
 
+    <!-- Slayer -->
+    <string name="skill_slayer_name">Slayer</string> <!-- untranslated -->
+    <string name="skill_slayer_desc">Ontvang taken van de Slayer Meester in de Stad.</string>
+    <string name="builder_title">Bouwersatelier</string>
+    <string name="builder_card_desc">Verbeter de Herberg, Gildehuis en Kerk</string>
+    <string name="slayer_title">Slayer Meester</string>
+    <string name="slayer_card_desc">Taken en beloningen voor slayers</string>
+    <string name="slayer_desc">Voltooi taken voor Slayer XP en punten. Besteed punten in de winkel voor exclusieve uitrusting.</string>
+    <string name="slayer_level_label">Niveau %1$d</string>
+    <string name="slayer_xp_label">%1$s XP</string> <!-- untranslated -->
+    <string name="slayer_points">%1$d pts</string> <!-- untranslated -->
+    <string name="slayer_active_task">Actieve Taak</string>
+    <string name="slayer_kills_remaining">%1$d / %2$d kills</string> <!-- untranslated -->
+    <string name="slayer_get_task">Nieuwe Taak Ophalen</string>
+    <string name="slayer_skip_task">Overslaan (30 pts)</string>
+    <string name="slayer_no_task">Geen actieve taak. Tik op Nieuwe Taak Ophalen.</string>
+    <string name="slayer_task_stuck">Deze vijand is alleen te vinden in een Expeditie-kerker die je nog niet hebt ontdekt. Hergooi gratis.</string>
+    <string name="slayer_reroll_free">Hergooi (gratis)</string>
+    <string name="slayer_no_eligible_tasks">Geen beschikbare taken op jouw Slayer-niveau.</string>
+    <string name="slayer_task_complete">Taak voltooid! Bezoek de Slayer Meester voor een nieuwe.</string>
+    <string name="slayer_xp_per_kill">%1$d XP/kill</string> <!-- untranslated -->
+    <string name="slayer_points_on_complete">+%1$d pts bij voltooiing</string>
+    <string name="slayer_shop_title">Slayer Winkel</string>
+    <string name="slayer_shop_cost">%1$d pts</string> <!-- untranslated -->
+    <string name="slayer_not_enough_points">Niet genoeg Slayer-punten.</string>
+    <string name="slayer_already_owned">Al in bezit.</string>
+    <string name="slayer_purchased">Toegevoegd aan inventaris.</string>
+    <string name="slayer_owned">In bezit</string>
+    <string name="slayer_lamp_purchased">+%1$s XP toegevoegd aan %2$s!</string>
+    <string name="slayer_lamp_pick_skill">Kies een vaardigheid</string>
+    <string name="slayer_lamp_small">XP Lamp (Klein)</string>
+    <string name="slayer_lamp_large">XP Lamp (Groot)</string>
+    <string name="slayer_lamp_small_desc">+10.000 XP aan elke vaardigheid</string>
+    <string name="slayer_lamp_large_desc">+50.000 XP aan elke vaardigheid</string>
+    <string name="slayer_found_in">Gevonden in: %1$s</string>
+    <string name="slayer_requires">Vereist: %1$s</string>
+    <string name="slayer_add_dungeon_to_queue">Kerker aan wachtrij toevoegen</string>
+    <string name="slayer_queue_added">Toegevoegd aan wachtrij: %1$s.</string>
+    <string name="slayer_queue_full">Wachtrij is vol.</string>
+    <string name="slayer_foretell_title">Foretell Future Tasks</string> <!-- untranslated -->
+    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_empty">No tasks queued.</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_btn">+ Queue</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_full">Foretell queue is full (3/3).</string> <!-- untranslated -->
+    <string name="slayer_foretell_not_enough_bones">Not enough bones (cost: %1$d bones).</string> <!-- untranslated -->
+    <string name="slayer_foretell_success">Task foretold: %1$s!</string> <!-- untranslated -->
+    <string name="slayer_foretell_btn">Foretell Next Task (%1$d bones)</string> <!-- untranslated -->
+    <string name="slayer_foretell_slot">Slot %1$d: %2$s</string> <!-- untranslated -->
+
     <!-- Prestige system -->
-    <string name="prestige">Prestige</string>
-    <string name="prestige_max">Max Prestige</string>
-    <string name="prestige_confirm_title">Prestige %s?</string>
-    <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string>
-    <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string>
+    <string name="prestige">Prestige</string> <!-- untranslated -->
+    <string name="prestige_max">Max Prestige</string> <!-- untranslated -->
+    <string name="prestige_confirm_title">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_agility">Je %1$s-niveau wordt gereset naar 1, maar je krijgt een permanente +%2$d%% XP-bonus, en je sessieduur blijft korter worden — op niveau 99 duurt een sessie %3$d min in plaats van %4$d min.</string>
     <string name="prestige_confirm_message_mercantile">Je %1$s-niveau wordt gereset naar 1, maar je krijgt een permanente +%2$d%% XP-bonus, plus een extra +%2$d%% muntteruggave van handelsroutes.</string>
-    <string name="achievement_prestige_first_name">First Reset</string>
-    <string name="achievement_prestige_first_desc">Prestige any skill for the first time</string>
-    <string name="achievement_prestige_any_3_name">Mastered</string>
-    <string name="achievement_prestige_any_3_desc">Reach Prestige 3 on any skill</string>
-    <string name="achievement_prestige_all_1_name">Clean Slate</string>
-    <string name="achievement_prestige_all_1_desc">Prestige all skills at least once</string>
-    <string name="achievement_prestige_all_3_name">True Prestige</string>
-    <string name="achievement_prestige_all_3_desc">Reach Prestige 3 on every skill</string>
+
+    <!-- Prestige achievements -->
+    <string name="achievement_prestige_first_name">First Reset</string> <!-- untranslated -->
+    <string name="achievement_prestige_first_desc">Prestige any skill for the first time</string> <!-- untranslated -->
+    <string name="achievement_prestige_any_3_name">Mastered</string> <!-- untranslated -->
+    <string name="achievement_prestige_any_3_desc">Reach Prestige 3 on any skill</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_1_name">Clean Slate</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_1_desc">Prestige all skills at least once</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_3_name">True Prestige</string> <!-- untranslated -->
+    <string name="achievement_prestige_all_3_desc">Reach Prestige 3 on every skill</string> <!-- untranslated -->
 
     <!-- Shop categories -->
     <string name="shop_cat_ores_and_materials">Ertsen &amp; Materialen</string>
@@ -1075,7 +1163,7 @@
     <string name="crafting_cat_potion">Drankje</string>
     <string name="crafting_cat_arrow">Pijl</string>
     <string name="crafting_cat_bow">Boog</string>
-    <string name="crafting_cat_plank">Plank</string>
+    <string name="crafting_cat_plank">Plank</string> <!-- untranslated -->
     <string name="crafting_cat_staff">Staf</string>
 
     <!-- Crafting tier filter chips -->
@@ -1085,7 +1173,7 @@
     <string name="crafting_tier_iron">IJzer</string>
     <string name="crafting_tier_magic">Magisch</string>
     <string name="crafting_tier_maple">Esdoorn</string>
-    <string name="crafting_tier_mithril">Mithril</string>
+    <string name="crafting_tier_mithril">Mithril</string> <!-- untranslated -->
     <string name="crafting_tier_oak">Eiken</string>
     <string name="crafting_tier_platinum">Platina</string>
     <string name="crafting_tier_runite">Runiet</string>
@@ -1093,6 +1181,19 @@
     <string name="crafting_tier_steel">Staal</string>
     <string name="crafting_tier_willow">Wilg</string>
     <string name="crafting_tier_yew">Taxus</string>
+
+    <!-- Bone Altar -->
+    <string name="bone_altar_title">Beenaltaar</string>
+    <string name="bone_altar_open">Gebruik Altaar</string>
+    <string name="bone_altar_select_prompt">Selecteer een bot om te begraven</string>
+    <string name="bone_altar_tap">Tik om te Begraven</string>
+    <string name="bone_altar_change_bone">Wijzigen</string>
+    <string name="bone_altar_combo_count">Combo ×%d</string> <!-- untranslated -->
+    <string name="bone_altar_bonus_active">+50%% XP-bonus!</string>
+    <string name="bone_altar_session_xp">+%s XP deze sessie</string>
+    <string name="bone_altar_buried_count">%d begraven</string>
+    <string name="bone_altar_no_bones">Geen botten in inventaris</string>
+    <string name="bone_altar_cape_awarded">Gebedscape verdiend!</string>
 
     <!-- Firemaking rework + ash catalyst + fertilizer -->
     <string name="firemaking_logs_in_inventory">in inventaris</string>
@@ -1106,37 +1207,18 @@
     <string name="catalyst_enhanced_output">Produceert verbeterd drankje</string>
     <string name="catalyst_rune_bonus">%1$d runen per essentie</string>
     <string name="catalyst_none">Geen katalysator</string>
-    <string name="bone_altar_title">Beenaltaar</string>
-    <string name="bone_altar_open">Gebruik Altaar</string>
-    <string name="bone_altar_select_prompt">Selecteer een bot om te begraven</string>
-    <string name="bone_altar_tap">Tik om te Begraven</string>
-    <string name="bone_altar_change_bone">Wijzigen</string>
-    <string name="bone_altar_combo_count">Combo ×%d</string>
-    <string name="bone_altar_bonus_active">+50% XP-bonus!</string>
-    <string name="bone_altar_session_xp">+%s XP deze sessie</string>
-    <string name="bone_altar_buried_count">%d begraven</string>
-    <string name="bone_altar_no_bones">Geen botten in inventaris</string>
-    <string name="bone_altar_cape_awarded">Gebedscape verdiend!</string>
-    <string name="slayer_add_dungeon_to_queue">Kerker aan wachtrij toevoegen</string>
-    <string name="slayer_queue_added">Toegevoegd aan wachtrij: %1$s.</string>
-    <string name="slayer_queue_full">Wachtrij is vol.</string>
-    <string name="slayer_foretell_title">Foretell Future Tasks</string>
-    <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string>
-    <string name="slayer_foretell_queue_empty">No tasks queued.</string>
-    <string name="slayer_foretell_queue_btn">+ Queue</string>
-    <string name="slayer_foretell_queue_full">Foretell queue is full (3/3).</string>
-    <string name="slayer_foretell_not_enough_bones">Not enough bones (cost: %1$d bones).</string>
-    <string name="slayer_foretell_success">Task foretold: %1$s!</string>
-    <string name="slayer_foretell_btn">Foretell Next Task (%1$d bones)</string>
-    <string name="slayer_foretell_slot">Slot %1$d: %2$s</string>
 
-    <!-- Construction + Thieving + Town upgrades (v1.8.0) -->
+    <!-- Construction skill -->
     <string name="skill_construction_name">Constructie</string>
     <string name="skill_construction_desc">Bouw meubels met planken en spijkers voor XP. Hogere niveaus laten je stadsgebouwen upgraden voor permanente bonussen.</string>
+
+    <!-- Thieving skill -->
     <string name="skill_thieving_name">Stelen</string>
     <string name="skill_thieving_desc">Zakkenrol NPC\'s elke sessie. Slagingskans hangt af van je niveau. Mislukkingen verdoven je voor één frame.</string>
     <string name="thieving_npc_detail">Nv. %1$d • %2$d XP • %3$d%% succes</string>
     <string name="thieving_npc_coins">%1$d–%2$d munten per succes</string>
+
+    <!-- Thieving NPC names -->
     <string name="thieving_npc_peasant_name">Boer</string>
     <string name="thieving_npc_merchant_name">Koopman</string>
     <string name="thieving_npc_guardsman_name">Bewaker</string>
@@ -1147,30 +1229,12 @@
     <string name="thieving_npc_knight_name">Ridder</string>
     <string name="thieving_npc_bishop_name">Bisschop</string>
     <string name="thieving_npc_high_priest_name">Hogepriester</string>
-    <string name="item_plank_name">Plank</string>
-    <string name="item_oak_plank_name">Eikenplank</string>
-    <string name="item_willow_plank_name">Wilgeplank</string>
-    <string name="item_maple_plank_name">Ahornnplank</string>
-    <string name="item_yew_plank_name">Taxusplank</string>
-    <string name="item_magic_plank_name">Magische Plank</string>
-    <string name="item_iron_nail_name">IJzeren Spijker</string>
-    <string name="item_steel_nail_name">Stalen Spijker</string>
-    <string name="item_mithril_nail_name">Mithrillen Spijker</string>
-    <string name="item_stone_name">Steen</string>
-    <string name="item_carved_stone_name">Gebeeldhouwde Steen</string>
-    <string name="item_stone_block_name">Steenblok</string>
-    <string name="item_wooden_rack_name">Houten Rek</string>
-    <string name="item_wooden_shelf_name">Houten Plank</string>
-    <string name="item_oak_table_name">Eikenhouten Tafel</string>
-    <string name="item_oak_bookshelf_name">Eikenhouten Boekenkast</string>
-    <string name="item_willow_cabinet_name">Wilgehouten Kast</string>
-    <string name="item_maple_dresser_name">Ahornhouten Dressoir</string>
-    <string name="item_yew_wardrobe_name">Taxushouten Kledingkast</string>
-    <string name="item_magic_throne_name">Magische Troon</string>
+
+    <!-- Town building upgrade UI -->
     <string name="town_upgrade_section_title">Stadsgebouw</string>
-    <string name="town_building_inn_name">Inn</string>
-    <string name="town_building_guild_hall_name">Guild Hall</string>
-    <string name="town_building_church_name">Church</string>
+    <string name="town_building_inn_name">Inn</string> <!-- untranslated -->
+    <string name="town_building_guild_hall_name">Guild Hall</string> <!-- untranslated -->
+    <string name="town_building_church_name">Church</string> <!-- untranslated -->
     <string name="town_building_current_tier">Rang %1$d / %2$d</string>
     <string name="town_building_maxed_label">Volledig Verbeterd</string>
     <string name="town_upgrade_next_label">Volgende Upgrade</string>
@@ -1188,12 +1252,12 @@
     <string name="town_guild_no_bonus">Verbeter om questvereisten te verlagen</string>
     <string name="town_church_active_bonus">Zegeningen duren %1$dh (standaard: 24h)</string>
     <string name="town_church_no_bonus">Verbeter om zegeningsduur te verlengen</string>
-    <string name="town_building_fairgrounds_name">Fairgrounds</string>
-    <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string>
-    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5% idle ticket chance</string>
-    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10% idle ticket chance</string>
-    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string>
-    <string name="town_building_garden_name">Garden</string>
+    <string name="town_building_fairgrounds_name">Fairgrounds</string> <!-- untranslated -->
+    <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_building_garden_name">Garden</string> <!-- untranslated -->
     <plurals name="town_garden_bonus">
         <item quantity="zero">Nog geen extra akkers</item>
         <item quantity="one">+%1$d extra akker</item>
@@ -1205,6 +1269,19 @@
         <item quantity="one">+%1$d extra wachtrijplek</item>
         <item quantity="other">+%1$d extra wachtrijplekken</item>
     </plurals>
+    <string name="town_building_cape_rack_name">Cape Rack</string> <!-- untranslated -->
+    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string> <!-- untranslated -->
+    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string> <!-- untranslated -->
+    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string> <!-- untranslated -->
+    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string> <!-- untranslated -->
+    <string name="town_building_chronos_spire_name">Chronos Spire</string> <!-- untranslated -->
+    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string> <!-- untranslated -->
+    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string> <!-- untranslated -->
+
+    <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">Eerste Renovatie</string>
     <string name="achievement_town_first_upgrade_desc">Verbeter een stadsgebouw voor de eerste keer</string>
     <string name="achievement_town_all_tier1_name">Stadsverbeteraar</string>
@@ -1213,65 +1290,18 @@
     <string name="achievement_town_one_maxed_desc">Verbeter een stadsgebouw naar het maximum</string>
     <string name="achievement_town_all_maxed_name">Legendarische Stad</string>
     <string name="achievement_town_all_maxed_desc">Verbeter alle stadsgebouwen naar het maximum</string>
-    <string name="achievement_tower_first_floor_name">First Step</string>
-    <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string>
-    <string name="achievement_tower_floor_10_name">Tower Initiate</string>
-    <string name="achievement_tower_floor_10_desc">Reach floor 10 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_50_name">Climbing Higher</string>
-    <string name="achievement_tower_floor_50_desc">Reach floor 50 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_100_name">Century Climber</string>
-    <string name="achievement_tower_floor_100_desc">Reach floor 100 in the Infinite Tower</string>
-    <string name="achievement_tower_floor_250_name">Void Conqueror</string>
-    <string name="achievement_tower_floor_250_desc">Reach floor 250 in the Infinite Tower</string>
-    <string name="achievement_tower_all_milestones_name">Tower Legend</string>
-    <string name="achievement_tower_all_milestones_desc">Claim all 25 tower milestones</string>
-    <string name="builder_title">Bouwersatelier</string>
-    <string name="builder_card_desc">Verbeter de Herberg, Gildehuis en Kerk</string>
-
-
-
-
-    <string name="skilling_dungeon_thieves_den_name">Dievenhol</string>
-    <string name="skilling_dungeon_thieves_den_desc">Een doolhof van tunnels onder de stadsstraten, gebruikt door een georganiseerde dievenbende.</string>
-    <string name="skilling_dungeon_shadow_vault_name">Schaduwkluis</string>
-    <string name="skilling_dungeon_shadow_vault_desc">Een verborgen kluis onder het Schurkentoevluchtsoord waar de meest waardevolle gestolen goederen van het gilde worden bewaard.</string>
-    <string name="dungeon_rogue_sanctum_name">Schurkentoevluchtsoord</string>
-    <string name="dungeon_rogue_sanctum_desc">Het innerlijke toevluchtsoord van het gilde, alleen toegankelijk voor bewezen leden.</string>
-    <string name="dungeon_guild_of_shadows_name">Schaduwgilde</string>
-    <string name="dungeon_guild_of_shadows_desc">Het diepste heiligdom van het dievensgilde, bewaakt door zijn gevaarlijkste handhavers.</string>
-    <string name="enemy_assassin_name">Sluipmoordenaar</string>
-    <string name="enemy_shadow_assassin_name">Schaduwsluipmoordenaar</string>
-    <string name="enemy_vault_guardian_name">Kluiswachter</string>
-    <string name="enemy_guild_master_name">Gildemeester</string>
-    <string name="item_shadow_signet_name">Schaduwzegel</string>
-    <string name="item_shadow_signet_desc">Een ring met het zegel van het Schaduwgilde. Alleen de gevaarlijkste operatieve leden van het gilde droegen hem.</string>
-    <string name="dungeon_void_rift_name">Leegtekloof</string>
-    <string name="dungeon_void_rift_desc">Een scheur in de werkelijkheid waar leegtewezens de sterfelijke wereld binnendringen.</string>
-    <string name="dungeon_frozen_citadel_name">Bevroren Citadel</string>
-    <string name="dungeon_frozen_citadel_desc">Een eeuwenoude vesting opgesloten in een gletsjer, met verdedigers bevroren in eeuwige wacht.</string>
-    <string name="dungeon_abyssal_throne_name">Afgrondstroon</string>
-    <string name="dungeon_abyssal_throne_desc">Het diepste punt van de bekende wereld, geregeerd door leegteheren sinds het begin der tijden.</string>
-    <string name="enemy_void_stalker_name">Leegtesluiper</string>
-    <string name="enemy_rift_guardian_name">Spleetwachter</string>
-    <string name="enemy_chaos_elemental_name">Chaoselemental</string>
-    <string name="enemy_frost_giant_name">Vorstgigant</string>
-    <string name="enemy_ice_golem_name">IJsgolem</string>
-    <string name="enemy_glacial_mage_name">Gletsjermagiër</string>
-    <string name="enemy_abyssal_lord_name">Afgrondsheer</string>
-    <string name="enemy_eternal_sentinel_name">Eeuwige Schildwacht</string>
-    <string name="enemy_void_archon_name">Leegte-archon</string>
-    <string name="enemy_frost_wyvern_name">Vorstwijvern</string>
-    <string name="enemy_abyssal_guardian_name">Afgrondswachter</string>
-    <string name="enemy_shadow_thief_name">Schaduwdief</string>
-    <string name="enemy_elder_lich_name">Oude Lich</string>
-
-    <string name="item_void_reaver_name">Leegte-vernietiger</string>
-    <string name="item_void_reaver_desc">Een kling gesmeed uit gekristalliseerde leegte-energie. De snede snijdt door pantsers als stof.</string>
-    <string name="item_sovereign_crown_name">Soevereine Kroon</string>
-    <string name="item_sovereign_crown_desc">De kroon van de Leegte-soeverein zelf, uitstralend donkere majesteit. Biedt ongeëvenaarde bescherming.</string>
-    <string name="item_amulet_of_the_void_name">Amulet van de Leegte</string>
-    <string name="item_amulet_of_the_void_desc">Een hanger van pure leegte-essentie. Verbetert alle gevechtsstatistieken van de drager.</string>
-
+    <string name="achievement_tower_first_floor_name">First Step</string> <!-- untranslated -->
+    <string name="achievement_tower_first_floor_desc">Clear your first Infinite Tower floor</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_10_name">Tower Initiate</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_10_desc">Reach floor 10 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_50_name">Climbing Higher</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_50_desc">Reach floor 50 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_100_name">Century Climber</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_100_desc">Reach floor 100 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_250_name">Void Conqueror</string> <!-- untranslated -->
+    <string name="achievement_tower_floor_250_desc">Reach floor 250 in the Infinite Tower</string> <!-- untranslated -->
+    <string name="achievement_tower_all_milestones_name">Tower Legend</string> <!-- untranslated -->
+    <string name="achievement_tower_all_milestones_desc">Claim all 25 tower milestones</string> <!-- untranslated -->
 
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Kermis</string>
@@ -1294,7 +1324,7 @@
     <string name="carnival_queue">Sessie in wachtrij</string>
     <string name="carnival_ring_toss">Ringwerpen</string>
     <string name="carnival_active_ring_desc">Gooi wanneer de indicator de gouden doelzone bereikt.</string>
-    <string name="carnival_ring_target_hint">Mik op het midden (45%–55%)</string>
+    <string name="carnival_ring_target_hint">Mik op het midden (45%%–55%%)</string>
     <string name="carnival_throw">Gooi!</string>
     <string name="carnival_hammer_strike">Hamerstoot</string>
     <string name="carnival_active_hammer_desc">Sla toe wanneer de krachtmeter op zijn hoogtepunt is.</string>
@@ -1327,30 +1357,31 @@
     <string name="carnival_appraisal_wrong">Fout! Het meest waardevolle item was %1$s.</string>
     <string name="carnival_redeemed">Ingewisseld: %1$s!</string>
     <string name="carnival_not_enough_tickets">Niet genoeg loten.</string>
-    <string name="carnival_lamp_redeemed">+%1$s XP in %2$s!</string>
-    <string name="carnival_shell_game">Pick-a-Cup</string>
-    <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string>
-    <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string>
-    <string name="carnival_shell_watch">Watch closely…</string>
-    <string name="carnival_shell_pick">Which cup is it under?</string>
-    <string name="carnival_shell_won">Correct! +%1$d tickets</string>
-    <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string>
-    <string name="carnival_shell_locked">Upgrade the Fairgrounds to Tier 1 to unlock</string>
-    <string name="carnival_higher_lower">Higher or Lower</string>
-    <string name="carnival_active_higher_desc">Guess whether the next number will be higher or lower than the current one.</string>
-    <string name="carnival_higher_lower_current">%1$d</string>
-    <string name="carnival_higher_lower_score">%1$d correct (%2$d played)</string>
-    <string name="carnival_higher_lower_round">Round %1$d of %2$d</string>
-    <string name="carnival_higher_lower_btn_higher">Higher</string>
-    <string name="carnival_higher_lower_btn_lower">Lower</string>
-    <string name="carnival_higher_lower_result">%1$d/%2$d correct — +%3$d tickets</string>
-    <string name="carnival_higher_lower_locked">Upgrade the Fairgrounds to Tier 2 to unlock</string>
-    <string name="carnival_higher_lower_last_card">Last card: %1$d</string>
-    <string name="carnival_higher_lower_continue">Continue</string>
-    <string name="carnival_difficulty_label">Difficulty</string>
-    <string name="carnival_difficulty_normal">Normal</string>
-    <string name="carnival_difficulty_hard">Hard</string>
-    <string name="carnival_ring_hard_hint">Hard: 52%–57% target, 7 tickets</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP in %2$s!</string> <!-- untranslated -->
+    <string name="carnival_shell_game">Pick-a-Cup</string> <!-- untranslated -->
+    <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string> <!-- untranslated -->
+    <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string> <!-- untranslated -->
+    <string name="carnival_shell_watch">Watch closely…</string> <!-- untranslated -->
+    <string name="carnival_shell_pick">Which cup is it under?</string> <!-- untranslated -->
+    <string name="carnival_shell_won">Correct! +%1$d tickets</string> <!-- untranslated -->
+    <string name="carnival_shell_missed">Wrong! The gem was under cup %1$d.</string> <!-- untranslated -->
+    <string name="carnival_shell_locked">Upgrade the Fairgrounds to Tier 1 to unlock</string> <!-- untranslated -->
+    <string name="carnival_higher_lower">Higher or Lower</string> <!-- untranslated -->
+    <string name="carnival_active_higher_desc">Guess whether the next number will be higher or lower than the current one.</string> <!-- untranslated -->
+
+    <string name="carnival_higher_lower_score">%1$d correct (%2$d played)</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_round">Round %1$d of %2$d</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_btn_higher">Higher</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_btn_lower">Lower</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_result">%1$d/%2$d correct — +%3$d tickets</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_locked">Upgrade the Fairgrounds to Tier 2 to unlock</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_last_card">Last card: %1$d</string> <!-- untranslated -->
+    <string name="carnival_higher_lower_continue">Continue</string> <!-- untranslated -->
+    <string name="carnival_difficulty_label">Difficulty</string> <!-- untranslated -->
+    <string name="carnival_difficulty_normal">Normal</string> <!-- untranslated -->
+    <string name="carnival_difficulty_hard">Hard</string> <!-- untranslated -->
+    <string name="carnival_ring_hard_hint">Hard: 52%%–57%% target, 7 tickets</string> <!-- untranslated -->
+
 
     <!-- ===== Magic Bean / Farming ===== -->
     <string name="farming_bean_note_1">Een klein spruitje heeft door de grond geduwd.</string>
@@ -1364,7 +1395,7 @@
     <string name="farming_bean_ready">De bonenrank reikt tot voorbij de wolken. Klaar om te klimmen?</string>
     <string name="farming_bean_climb">Klimmen</string>
     <string name="farming_bean_climbed">Je hebt de bonenrank beklommen. Iets wacht je…</string>
-    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+
     <string name="farming_magic_bean_one_plot">Magische bonen kunnen slechts op één veld worden geplant</string>
 
     <!-- ===== Armory Tab ===== -->
@@ -1373,23 +1404,121 @@
     <string name="bonus_none">Geen actieve XP-bonussen</string>
     <string name="bonus_all_skills">Alle vaardigheden</string>
     <string name="bonus_section_boosts">Actieve bonussen</string>
-    <string name="bonus_section_skills">Skill Bonuses</string>
-    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
-    <string name="bonus_combined_xp">Gecombineerde XP</string>
-    <string name="bonus_yield">+%1$d%% opbrengst</string>
-    <string name="bonus_boost">+%1$d%% boost</string>
-    <string name="bonus_session_shorter">%1$d min kortere sessies</string>
-    <string name="bonus_coin_return">+%1$d%% muntteruggave</string>
-    <string name="snackbar_added_to_queue">Toegevoegd aan wachtrij: %1$s.</string>
-    <string name="snackbar_queue_full">Wachtrij is vol.</string>
+    <string name="armory_not_owned">Je bezit dit item niet.</string>
+    <string name="armory_how_to_obtain">Hoe te verkrijgen</string>
+    <string name="armory_no_stats">Geen statbonussen.</string>
+    <string name="armory_filter_all">Alles</string>
+    <string name="armory_filter_weapons">Wapens</string>
+    <string name="armory_filter_armor">Pantser</string>
+    <string name="armory_filter_accessories">Accessoires</string>
+    <string name="armory_filter_tools">Gereedschap</string>
+    <string name="armory_sort_default">Default</string> <!-- untranslated -->
+    <string name="armory_sort_attack">Attack</string> <!-- untranslated -->
+    <string name="armory_sort_strength">Strength</string> <!-- untranslated -->
+    <string name="armory_sort_defense">Defense</string> <!-- untranslated -->
+    <string name="armory_sort_requirement">Requirement</string> <!-- untranslated -->
+    <string name="armory_progress_bar">verkregen</string>
+    <string name="armory_stat_mining">Mijnbouw-efficiëntie</string>
+    <string name="armory_stat_woodcutting">Houthak-efficiëntie</string>
+    <string name="armory_stat_fishing">Visserij-efficiëntie</string>
+    <string name="armory_stat_farming">Landbouw-efficiëntie</string>
+    <string name="armory_stat_smithing">Smeden-efficiëntie</string>
+    <string name="armory_stat_firemaking">Vuur maken-efficiëntie</string>
+    <string name="armory_stat_agility">Behendigheid-efficiëntie</string>
+    <string name="armory_stat_cooking">Koken-efficiëntie</string>
+    <string name="armory_stat_thieving">Stelen-efficiëntie</string>
+    <string name="armory_stat_attack">Aanvalsbonus</string>
+    <string name="armory_stat_strength">Krachtbonus</string>
+    <string name="armory_stat_defense">Verdedigingsbonus</string>
+    <string name="armory_stat_ranged_atk">Afstandsaanval</string>
+    <string name="armory_stat_ranged_str">Afstandskracht</string>
+    <string name="armory_stat_magic_atk">Magische aanval</string>
+    <string name="armory_stat_magic_dmg">Magische schade</string>
+    <string name="armory_stat_attack_speed">Aanvalssnelheid</string>
+    <string name="armory_stat_cape">XP-bonus</string>
+    <string name="armory_stat_cape_yield">Opbrengstbonus</string>
+    <string name="armory_stat_cape_boost">Boost-bonus</string>
+    <string name="armory_source_carnival">Carnavalsprijswinkel</string>
+    <string name="armory_source_smithing">Smeden</string>
+    <string name="armory_source_crafting">Ambacht</string>
+    <string name="armory_source_fletching">Pijlmakers</string>
+    <string name="armory_source_drop_always">Gevallen van %1$s (Altijd)</string>
+    <string name="armory_source_drop_chance">Gevallen van %1$s (%2$s)</string>
+    <string name="armory_source_drop">Gevallen van %1$s</string>
+    <string name="armory_source_shop">Winkel</string>
+    <string name="armory_source_daily_bonus">Zeldzame beloning voor het voltooien van alle Dagelijkse Taken</string>
+    <string name="armory_source_weekly_bonus">Zeldzame beloning voor het voltooien van alle Wekelijkse Taken</string>
+    <!-- Translator note: %1$s = skill name, e.g. "Reach level 99 in Mining" -->
+    <string name="armory_source_skill_cape">Bereik niveau 99 in %1$s</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Geen stammen in inventaris</string>
+    <string name="skill_not_enough_rune_essence">Niet genoeg Runenessence</string>
+    <string name="skill_not_enough_item">Niet genoeg %1$s</string>
+    <string name="skill_not_enough_materials">Niet genoeg materialen</string>
+    <string name="skill_session_start_failed">Sessie starten mislukt: %1$s</string>
+    <string name="skill_added_to_queue_activity">Toegevoegd aan wachtrij: %1$s — %2$s.</string>
+    <string name="worker_already_busy">De arbeider is al bezig.</string>
+    <string name="worker_not_enough_logs">Niet genoeg stammen.</string>
+    <string name="worker_not_enough_rune_essence">Niet genoeg Runenessence.</string>
+    <string name="worker_not_enough_materials">Niet genoeg materialen.</string>
+    <string name="shop_no_junk">Geen rommel te verkopen</string>
+    <string name="shop_sold_junk">Rommel verkocht voor %1$s munten</string>
+    <string name="shop_no_old_equipment">Geen oud uitrusting te verkopen</string>
+    <string name="shop_sold_old_equipment">Oud uitrusting verkocht voor %1$s munten</string>
+    <string name="shop_bulk_sell_total">Totaal</string>
+    <string name="shop_bulk_sell_confirm">Alles verkopen</string>
+    <string name="shop_xp_boost_activated">2× XP boost geactiveerd voor %1$d uur!</string>
+    <string name="shop_xp_boost_already_active">Er is al een 2× XP-boost actief.</string>
+    <string name="shop_xp_boost_weekly_limit">Maximaal één 2× XP-boost per week. Weer beschikbaar na de wekelijkse reset.</string>
+    <string name="item_xp_boost_48h_desc">Verdubbelt alle XP gedurende 48 uur. Maximaal één aankoop per week.</string>
+    <string name="shop_not_enough_in_inventory">Niet genoeg in inventaris</string>
+    <string name="shop_bought_item">%1$d× %2$s gekocht</string>
+    <string name="shop_sold_item">%1$d× %2$s verkocht voor %3$d munten</string>
+    <string name="quest_complete_notification">Quest voltooid: %1$s!</string>
+    <string name="quest_complete_with_rewards">Quest voltooid: %1$s! Geclaimd: %2$s</string>
+    <string name="quest_daily_complete_coins">Dagelijkse quest voltooid! +%1$s munten</string>
+    <string name="quest_daily_complete_dwarven">Dagelijkse quest voltooid! Je hebt dwerguitrusting gevonden!</string>
+    <string name="quest_weekly_complete">Wekelijkse uitdaging voltooid! +%1$s munten</string>
+    <string name="quest_weekly_bonus_complete_coins">Alle wekelijkse uitdagingen voltooid! +%1$s munten</string>
+    <string name="quest_weekly_bonus_complete_divine">Alle wekelijkse uitdagingen voltooid! Je hebt goddelijke uitrusting gevonden!</string>
+    <string name="guild_contributed_items">%1$d items bijgedragen.</string>
+    <string name="mercantile_not_enough_coins">Niet genoeg munten (nodig %1$s munten).</string>
+    <string name="mercantile_route_start_failed">Route starten mislukt: %1$s</string>
+    <string name="mercantile_added_to_queue">Toegevoegd aan wachtrij: Handelsvaardig — %1$s.</string>
+    <string name="inventory_requires_to_equip">Vereist %1$s om uit te rusten.</string>
+    <string name="home_found_pet">Je hebt een huisdier gevonden: %1$s!</string>
+    <string name="pet_found_title">Nieuw huisdier!</string>
+    <string name="home_congratulations_received">Gefeliciteerd! Je hebt ontvangen: %1$s</string>
+    <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
+    <string name="home_session_voided">XP vervallen (prestige). Alle andere beloningen toegekend.</string>
     <string name="home_not_enough_coins_repeat">Niet genoeg munten om %1$s te herhalen.</string>
     <string name="home_not_enough_materials_repeat">Niet genoeg materialen om %1$s te herhalen.</string>
+    <string name="combat_no_food_title">Geen voedsel uitgerust</string>
+    <string name="combat_no_food_body">Je hebt geen voedsel uitgerust. Zonder voedsel kun je snel sterven en de meeste beloningen verliezen. Toch starten?</string>
+    <string name="combat_start_anyway">Toch starten</string>
+    <string name="combat_xp_consolation">XP (troostprijs)</string>
+    <string name="bestiary_loot_item_header">Voorwerp</string>
+    <string name="worker_no_mats">Geen mat.</string>
+    <string name="bonus_section_skills">Skill Bonuses</string> <!-- untranslated -->
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string> <!-- untranslated -->
+    <string name="bonus_combined_xp">Gecombineerde XP</string>
+    <string name="bonus_yield">+%1$d%% opbrengst</string>
+    <string name="bonus_boost">+%1$d%% boost</string> <!-- untranslated -->
+    <string name="bonus_session_shorter">%1$d min kortere sessies</string>
+    <string name="bonus_coin_return">+%1$d%% muntteruggave</string>
+    <string name="bonus_tower">Tower</string> <!-- untranslated -->
+
+    <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
+    <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
+    <string name="snackbar_added_to_queue">Toegevoegd aan wachtrij: %1$s.</string>
+    <string name="snackbar_queue_full">Wachtrij is vol.</string>
     <string name="combat_start_failed">Kon niet starten: %1$s</string>
     <string name="skill_session_voided_prestige">Je %1$s-niveau voldoet niet meer aan de vereiste voor deze sessie (waarschijnlijk door prestige) — de beloningen zijn geannuleerd en gebruikte materialen zijn terugbetaald.</string>
     <string name="combat_session_voided_prestige">Je level is gedaald na prestige, dus de XP van deze sessie is vervallen. Alle andere beloningen zijn wel toegekend.</string>
-    <string name="combat_select_spell">Select a spell before entering.</string>
-    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
-    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="combat_select_spell">Select a spell before entering.</string> <!-- untranslated -->
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string> <!-- untranslated -->
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string> <!-- untranslated -->
     <string name="monument_title">Groot Monument</string>
     <string name="monument_desc">Een stedelijk wonder, munt voor munt opgebouwd. Elke fase is een geschenk aan de stad.</string>
     <string name="monument_your_coins">Jouw munten: %1$s</string>
@@ -1435,199 +1564,31 @@
     <string name="guild_daily_banner_claimable">Gildedagtaak voltooid! Claim hem in de Guild Hall</string>
     <string name="guild_daily_banner_claimed">Gildedagtaak vandaag geclaimd</string>
     <string name="guild_daily_rank_maxed">Gilderang maximaal</string>
-    <string name="armory_not_owned">Je bezit dit item niet.</string>
-    <string name="armory_how_to_obtain">Hoe te verkrijgen</string>
-    <string name="armory_no_stats">Geen statbonussen.</string>
-    <string name="armory_filter_all">Alles</string>
-    <string name="armory_filter_weapons">Wapens</string>
-    <string name="armory_filter_armor">Pantser</string>
-    <string name="armory_filter_accessories">Accessoires</string>
-    <string name="armory_filter_tools">Gereedschap</string>
-    <string name="armory_sort_default">Default</string>
-    <string name="armory_sort_attack">Attack</string>
-    <string name="armory_sort_strength">Strength</string>
-    <string name="armory_sort_defense">Defense</string>
-    <string name="armory_sort_requirement">Requirement</string>
-    <string name="armory_progress_bar">verkregen</string>
-    <string name="armory_stat_mining">Mijnbouw-efficiëntie</string>
-    <string name="armory_stat_woodcutting">Houthak-efficiëntie</string>
-    <string name="armory_stat_fishing">Visserij-efficiëntie</string>
-    <string name="armory_stat_farming">Landbouw-efficiëntie</string>
-    <string name="armory_stat_smithing">Smeden-efficiëntie</string>
-    <string name="armory_stat_firemaking">Vuur maken-efficiëntie</string>
-    <string name="armory_stat_agility">Behendigheid-efficiëntie</string>
-    <string name="armory_stat_cooking">Koken-efficiëntie</string>
-    <string name="armory_stat_thieving">Stelen-efficiëntie</string>
-    <string name="armory_stat_attack">Aanvalsbonus</string>
-    <string name="armory_stat_strength">Krachtbonus</string>
-    <string name="armory_stat_defense">Verdedigingsbonus</string>
-    <string name="armory_stat_ranged_atk">Afstandsaanval</string>
-    <string name="armory_stat_ranged_str">Afstandskracht</string>
-    <string name="armory_stat_magic_atk">Magische aanval</string>
-    <string name="armory_stat_magic_dmg">Magische schade</string>
-    <string name="armory_stat_attack_speed">Aanvalssnelheid</string>
-    <string name="armory_stat_cape">XP-bonus</string>
-    <string name="armory_stat_cape_yield">Opbrengstbonus</string>
-    <string name="armory_stat_cape_boost">Boost-bonus</string>
-    <string name="armory_source_carnival">Carnavalsprijswinkel</string>
-    <string name="armory_source_smithing">Smeden</string>
-    <string name="armory_source_crafting">Ambacht</string>
-    <string name="armory_source_fletching">Pijlmakers</string>
-    <string name="armory_source_drop_always">Gevallen van %1$s (Altijd)</string>
-    <string name="armory_source_drop_chance">Gevallen van %1$s (%2$s)</string>
-    <string name="armory_source_drop">Gevallen van %1$s</string>
-    <string name="armory_source_shop">Winkel</string>
-    <string name="armory_source_daily_bonus">Zeldzame beloning voor het voltooien van alle Dagelijkse Taken</string>
-    <string name="armory_source_weekly_bonus">Zeldzame beloning voor het voltooien van alle Wekelijkse Taken</string>
-    <string name="armory_source_skill_cape">Bereik niveau 99 in %1$s</string>
-
-    <!-- ===== Combat arrows ===== -->
-    <string name="combat_arrow_auto">Automatisch (beste beschikbare)</string>
-    <string name="combat_label_arrow">Pijl</string>
-    <string name="combat_select_loadout">Uitrusting kiezen</string>
-
-    <!-- ===== Guild ===== -->
-    <string name="guild_quest_gate_blocked">Voltooi quests om je rang te verhogen</string>
-    <string name="guild_quest_required">Quest vereist om te vorderen</string>
-
-    <!-- ===== Home screen ===== -->
-    <string name="home_xp_boost_active">2× XP-boost actief — nog %1$s</string>
-
-    <!-- ===== Inn ===== -->
-    <string name="inn_buy_qty">Hoeveelheid</string>
-    <string name="inn_buy_total">Totaal: %1$s</string>
-    <string name="inn_slot1_header">Lange Arbeider</string>
-    <string name="inn_slot2_header">Geschoolde Arbeider</string>
-
-    <!-- ===== Slayer items ===== -->
-    <string name="item_abyssal_whip_name">Abyssale Zweep</string>
-    <string name="item_abyssal_whip_desc">Een zweep gesmeed uit abyssale energie. Uitstekend voor krachttraining.</string>
-    <string name="item_slayer_helm_name">Slayer Helm</string>
-    <string name="item_slayer_helm_desc">Een stevige helm gedragen door veteraan-slayers.</string>
-    <string name="item_slayer_platebody_name">Slayer Platenromp</string>
-    <string name="item_slayer_platebody_desc">Zwaar pantser gegraveerd met slayer-runen.</string>
-    <string name="item_slayer_platelegs_name">Slayer Beenplaten</string>
-    <string name="item_slayer_platelegs_desc">Beschermende beenplaten gemaakt voor lange kerker-tochten.</string>
-
-    <!-- ===== Profile ===== -->
-    <string name="profile_view_combat_gear">Gevechtsuitrusting Bekijken</string>
-
-    <!-- ===== Settings changelog ===== -->
-    <string name="settings_changelog_title">Wat is er nieuw</string>
-    <string name="settings_changelog_desc">Bekijk de laatste wijzigingen</string>
-    <string name="settings_changelog_btn">Bekijken</string>
-
-    <!-- ===== Slayer ===== -->
-    <string name="skill_slayer_name">Slayer</string>
-    <string name="skill_slayer_desc">Ontvang taken van de Slayer Meester in de Stad.</string>
-    <string name="slayer_title">Slayer Meester</string>
-    <string name="slayer_card_desc">Taken en beloningen voor slayers</string>
-    <string name="slayer_desc">Voltooi taken voor Slayer XP en punten. Besteed punten in de winkel voor exclusieve uitrusting.</string>
-    <string name="slayer_active_task">Actieve Taak</string>
-    <string name="slayer_no_task">Geen actieve taak. Tik op Nieuwe Taak Ophalen.</string>
-    <string name="slayer_get_task">Nieuwe Taak Ophalen</string>
-    <string name="slayer_skip_task">Overslaan (30 pts)</string>
-    <string name="slayer_reroll_free">Hergooi (gratis)</string>
-    <string name="slayer_kills_remaining">%1$d / %2$d kills</string>
-    <string name="slayer_task_complete">Taak voltooid! Bezoek de Slayer Meester voor een nieuwe.</string>
-    <string name="slayer_task_stuck">Deze vijand is alleen te vinden in een Expeditie-kerker die je nog niet hebt ontdekt. Hergooi gratis.</string>
-    <string name="slayer_no_eligible_tasks">Geen beschikbare taken op jouw Slayer-niveau.</string>
-    <string name="slayer_level_label">Niveau %1$d</string>
-    <string name="slayer_xp_label">%1$s XP</string>
-    <string name="slayer_xp_per_kill">%1$d XP/kill</string>
-    <string name="slayer_found_in">Gevonden in: %1$s</string>
-    <string name="slayer_requires">Vereist: %1$s</string>
-    <string name="slayer_points">%1$d pts</string>
-    <string name="slayer_points_on_complete">+%1$d pts bij voltooiing</string>
-    <string name="slayer_shop_title">Slayer Winkel</string>
-    <string name="slayer_shop_cost">%1$d pts</string>
-    <string name="slayer_not_enough_points">Niet genoeg Slayer-punten.</string>
-    <string name="slayer_owned">In bezit</string>
-    <string name="slayer_already_owned">Al in bezit.</string>
-    <string name="slayer_purchased">Toegevoegd aan inventaris.</string>
-    <string name="slayer_lamp_small">XP Lamp (Klein)</string>
-    <string name="slayer_lamp_small_desc">+10.000 XP aan elke vaardigheid</string>
-    <string name="slayer_lamp_large">XP Lamp (Groot)</string>
-    <string name="slayer_lamp_large_desc">+50.000 XP aan elke vaardigheid</string>
-    <string name="slayer_lamp_pick_skill">Kies een vaardigheid</string>
-    <string name="slayer_lamp_purchased">+%1$s XP toegevoegd aan %2$s!</string>
-
-    <!-- Session / queue messages (issue #596) -->
-    <string name="skill_no_logs">Geen stammen in inventaris</string>
-    <string name="skill_not_enough_rune_essence">Niet genoeg Runenessence</string>
-    <string name="skill_not_enough_item">Niet genoeg %1$s</string>
-    <string name="skill_not_enough_materials">Niet genoeg materialen</string>
-    <string name="skill_session_start_failed">Sessie starten mislukt: %1$s</string>
-    <string name="skill_added_to_queue_activity">Toegevoegd aan wachtrij: %1$s — %2$s.</string>
-    <string name="worker_already_busy">De arbeider is al bezig.</string>
-    <string name="worker_not_enough_logs">Niet genoeg stammen.</string>
-    <string name="worker_not_enough_rune_essence">Niet genoeg Runenessence.</string>
-    <string name="worker_not_enough_materials">Niet genoeg materialen.</string>
-    <string name="shop_no_junk">Geen rommel te verkopen</string>
-    <string name="shop_sold_junk">Rommel verkocht voor %1$s munten</string>
-    <string name="shop_no_old_equipment">Geen oud uitrusting te verkopen</string>
-    <string name="shop_sold_old_equipment">Oud uitrusting verkocht voor %1$s munten</string>
-    <string name="shop_bulk_sell_total">Totaal</string>
-    <string name="shop_bulk_sell_confirm">Alles verkopen</string>
-    <string name="shop_xp_boost_activated">2× XP boost geactiveerd voor %1$d uur!</string>
-    <string name="shop_xp_boost_already_active">Er is al een 2× XP-boost actief.</string>
-    <string name="shop_xp_boost_weekly_limit">Maximaal één 2× XP-boost per week. Weer beschikbaar na de wekelijkse reset.</string>
-    <string name="item_xp_boost_48h_desc">Verdubbelt alle XP gedurende 48 uur. Maximaal één aankoop per week.</string>
-    <string name="shop_not_enough_in_inventory">Niet genoeg in inventaris</string>
-    <string name="shop_bought_item">%1$d× %2$s gekocht</string>
-    <string name="shop_sold_item">%1$d× %2$s verkocht voor %3$d munten</string>
-    <string name="quest_complete_notification">Quest voltooid: %1$s!</string>
-    <string name="quest_complete_with_rewards">Quest voltooid: %1$s! Geclaimd: %2$s</string>
-    <string name="quest_daily_complete_coins">Dagelijkse quest voltooid! +%1$s munten</string>
-    <string name="quest_daily_complete_dwarven">Dagelijkse quest voltooid! Je hebt dwerguitrusting gevonden!</string>
-    <string name="quest_weekly_complete">Wekelijkse uitdaging voltooid! +%1$s munten</string>
-    <string name="quest_weekly_bonus_complete_coins">Alle wekelijkse uitdagingen voltooid! +%1$s munten</string>
-    <string name="quest_weekly_bonus_complete_divine">Alle wekelijkse uitdagingen voltooid! Je hebt goddelijke uitrusting gevonden!</string>
-    <string name="guild_contributed_items">%1$d items bijgedragen.</string>
-    <string name="mercantile_not_enough_coins">Niet genoeg munten (nodig %1$s munten).</string>
-    <string name="mercantile_route_start_failed">Route starten mislukt: %1$s</string>
-    <string name="mercantile_added_to_queue">Toegevoegd aan wachtrij: Handelsvaardig — %1$s.</string>
-    <string name="inventory_requires_to_equip">Vereist %1$s om uit te rusten.</string>
-    <string name="home_found_pet">Je hebt een huisdier gevonden: %1$s!</string>
-    <string name="pet_found_title">Nieuw huisdier!</string>
-    <string name="home_congratulations_received">Gefeliciteerd! Je hebt ontvangen: %1$s</string>
-    <string name="home_session_voided">XP vervallen (prestige). Alle andere beloningen toegekend.</string>
-    <string name="combat_no_food_title">Geen voedsel uitgerust</string>
-    <string name="combat_no_food_body">Je hebt geen voedsel uitgerust. Zonder voedsel kun je snel sterven en de meeste beloningen verliezen. Toch starten?</string>
-    <string name="combat_start_anyway">Toch starten</string>
-    <string name="combat_xp_consolation">XP (troostprijs)</string>
-    <string name="bestiary_loot_item_header">Voorwerp</string>
-    <string name="worker_no_mats">Geen mat.</string>
-
-    <!-- Boss Descriptions -->
-    <string name="boss_king_black_dragon_desc">De legendarische driekoppige draak, gevreesd in het hele rijk.</string>
-    <string name="boss_demon_lord_desc">Een oeroude demon uit de afgrond, meester van duistere magie.</string>
-    <string name="boss_kraken_desc">De schrik van de diepzee, een kolossaal zeemonster.</string>
-    <string name="boss_balrog_desc">Een oeroude demon van vlam en schaduw, ontwaakt uit zijn sluimer diep onder de aarde.</string>
-    <string name="boss_void_sovereign_desc">De oorspronkelijke entiteit achter de leemtescheuren. Onmetelijk oud, bekijkt sterfelijke uitdagers met minachting.</string>
 
     <!-- ===== Infinite Tower ===== -->
-    <string name="tower_title">Infinite Tower</string>
-    <string name="tower_floor_label">Floor %d</string>
-    <string name="tower_best_floor">Best: Floor %d</string>
-    <string name="tower_start_btn">Attempt Floor %d</string>
-    <string name="tower_milestones">Milestones</string>
-    <string name="tower_floor_cleared">Floor %d cleared!</string>
-    <string name="tower_new_best">New best: Floor %d!</string>
+    <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
+    <string name="tower_floor_label">Floor %d</string> <!-- untranslated -->
+    <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
+    <string name="tower_best_floor">Best: Floor %d</string> <!-- untranslated -->
+    <string name="tower_start_btn">Attempt Floor %d</string> <!-- untranslated -->
+    <string name="tower_milestones">Milestones</string> <!-- untranslated -->
+    <string name="tower_floor_cleared">Floor %d cleared!</string> <!-- untranslated -->
+    <string name="tower_new_best">New best: Floor %d!</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">Je bent gevallen op verdieping %1$d. Terug naar verdieping %2$d.</string>
     <string name="tower_not_enough_runes">Niet genoeg %1$s voor het maximale aantal aanvallen.</string>
-    <string name="tower_milestone_claim">Claim</string>
-    <string name="tower_milestone_claimed">Claimed</string>
-    <string name="tower_enemies_this_floor">Enemies</string>
-    <string name="tower_enemy_strength">Enemy strength: %s%%</string>
-    <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string>
-    <string name="tower_collect_prompt">Collect your tower run</string>
-    <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string>
+    <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
+    <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
+    <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
+    <string name="tower_enemy_strength">Enemy strength: %s%%</string> <!-- untranslated -->
+    <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
+    <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
+    <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
 
     <!-- ===== Seasonal Events ===== -->
     <string name="seasonal_event_title">Seizoensevenement</string>
     <string name="seasonal_event_none">Er is momenteel geen evenement actief. Kom later terug!</string>
-    <string name="seasonal_event_token_progress">%1$d / %2$d tokens</string>
+    <string name="seasonal_event_token_progress">%1$d / %2$d tokens</string> <!-- untranslated -->
     <string name="seasonal_event_complete">Voltooid!</string>
     <string name="seasonal_bounty_board_title">Beloningsbord</string>
     <string name="seasonal_expedition_title">Expeditie</string>
@@ -1642,33 +1603,33 @@
     <string name="seasonal_minigame_success">Perfecte timing! +1 token.</string>
     <string name="seasonal_minigame_failure">Misgetikt. Probeer opnieuw na de afkoeltijd.</string>
     <string name="seasonal_tap">Tik!</string>
-    <string name="seasonal_claim">Claim</string>
+    <string name="seasonal_claim">Claim</string> <!-- untranslated -->
     <string name="seasonal_bounty_cooldown">Nieuwe beloning in %1$dm %2$ds</string>
     <string name="seasonal_go">Ga</string>
-    <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string>
-    <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string>
-    <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string>
-    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Sunspire Solstice 2026 banner</string>
-    <string name="seasonal_bounty_sunspire_firewood_name">Bring firewood for the bonfire</string>
-    <string name="seasonal_bounty_sunspire_firewood_hint">Chop Oak Logs — Woodcutting</string>
-    <string name="seasonal_bounty_sunspire_kindling_name">Gather kindling for the bonfire</string>
-    <string name="seasonal_bounty_sunspire_kindling_hint">Chop Willow Logs — Woodcutting</string>
-    <string name="seasonal_bounty_sunspire_sunore_name">Mine gold to gild the sun-tower</string>
-    <string name="seasonal_bounty_sunspire_sunore_hint">Mine Gold Ore — Mining</string>
-    <string name="seasonal_bounty_sunspire_draughts_name">Brew Strength Potions</string>
-    <string name="seasonal_bounty_sunspire_draughts_hint">Herblore</string>
-    <string name="seasonal_bounty_sunspire_embers_brew_name">Brew Attack Potions for the solstice watch</string>
-    <string name="seasonal_bounty_sunspire_embers_brew_hint">Herblore</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string>
-    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string>
-    <string name="seasonal_bounty_sunspire_wisps_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string>
-    <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string>
-    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string>
-    <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string>
+    <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
+    <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->
+    <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string> <!-- untranslated -->
+    <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Sunspire Solstice 2026 banner</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_firewood_name">Bring firewood for the bonfire</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_firewood_hint">Chop Oak Logs — Woodcutting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_kindling_name">Gather kindling for the bonfire</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_kindling_hint">Chop Willow Logs — Woodcutting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunore_name">Mine gold to gild the sun-tower</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunore_hint">Mine Gold Ore — Mining</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_draughts_name">Brew Strength Potions</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_draughts_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_embers_brew_name">Brew Attack Potions for the solstice watch</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_embers_brew_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Fletch Mithril arrows to hold back the wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Fletching</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_wisps_name">Drive off Sun Wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_wisps_hint">Only found in The Sunspire Expedition</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_hounds_name">Drive off Ember Hounds</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_hounds_hint">Only found in The Sunspire Expedition</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_colossus_name">Topple Cinder Colossi</string> <!-- untranslated -->
+    <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string> <!-- untranslated -->
     <string name="seasonal_rewards_title">Beloningen</string>
-    <string name="seasonal_reward_tier_requirement">%1$d tokens</string>
+    <string name="seasonal_reward_tier_requirement">%1$d tokens</string> <!-- untranslated -->
     <string name="seasonal_reward_claimed">Geclaimd</string>
     <string name="seasonal_reward_claim_success">Beloning geclaimd!</string>
     <string name="seasonal_market_title">Nachtmarkt</string>
@@ -1677,64 +1638,64 @@
     <string name="seasonal_market_limit_left">Nog %1$d</string>
     <string name="seasonal_market_purchase_success">Aankoop voltooid!</string>
     <string name="seasonal_donate">Doneer</string>
-    <string name="seasonal_event_gloomharvest_2026_name">Gloomharvest</string>
-    <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string>
-    <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string>
+    <string name="seasonal_event_gloomharvest_2026_name">Gloomharvest</string> <!-- untranslated -->
+    <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string> <!-- untranslated -->
+    <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_hint">Kijk naar de lantaarns en herhaal de volgorde. Haal ronde %1$d van %2$d om een token te winnen!</string>
     <string name="seasonal_minigame_sequence_round">Ronde %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Kijk goed!</string>
     <string name="seasonal_minigame_your_turn">Jouw beurt!</string>
     <string name="seasonal_minigame_sequence_mode_caption">%1$dms per flits, %2$s afkoeltijd</string>
     <string name="seasonal_market_price">%1$s munten</string>
-    <string name="seasonal_reward_gloomharvest_2026_25_desc">Coin purse (50,000 coins)</string>
-    <string name="seasonal_reward_gloomharvest_2026_60_desc">Wraithbone Ring</string>
-    <string name="seasonal_reward_gloomharvest_2026_100_desc">Free 48h XP Boost</string>
-    <string name="seasonal_reward_gloomharvest_2026_150_desc">Reaper\'s Scythe</string>
-    <string name="seasonal_reward_gloomharvest_2026_200_desc">Coin purse (250,000 coins)</string>
-    <string name="seasonal_reward_gloomharvest_2026_250_desc">Grave Sprout pet</string>
-    <string name="seasonal_reward_gloomharvest_2026_300_desc">Gloomharvest 2026 banner</string>
-    <string name="seasonal_market_gloomweave_cape_name">Gloomweave Cape</string>
-    <string name="seasonal_market_bounty_refresh_name">Fresh Bounties (skip the wait)</string>
-    <string name="seasonal_market_lantern_relight_name">Relight the Lanterns (skip minigame cooldown)</string>
-    <string name="seasonal_bounty_gloom_pumpkins_name">Harvest pumpkins for the festival</string>
-    <string name="seasonal_bounty_gloom_pumpkins_hint">Grow Pumpkins (Farming)</string>
-    <string name="seasonal_bounty_gloom_corn_name">Bring in the corn harvest</string>
-    <string name="seasonal_bounty_gloom_corn_hint">Grow Corn (Farming)</string>
-    <string name="seasonal_bounty_gloom_maples_name">Chop maple wood for the pyres</string>
-    <string name="seasonal_bounty_gloom_maples_hint">Chop Maple Logs (Woodcutting)</string>
-    <string name="seasonal_bounty_gloom_swordfish_name">Land swordfish for the feast</string>
-    <string name="seasonal_bounty_gloom_swordfish_hint">Fish Raw Swordfish (Fishing)</string>
-    <string name="seasonal_bounty_gloom_mithril_name">Mine mithril to ward the gates</string>
-    <string name="seasonal_bounty_gloom_mithril_hint">Mine Mithril Ore (Mining)</string>
-    <string name="seasonal_bounty_gloom_brews_name">Brew Defense Potions for the night watch</string>
-    <string name="seasonal_bounty_gloom_brews_hint">Herblore</string>
-    <string name="seasonal_bounty_gloom_shortbows_name">Fletch Maple Shortbows for the wardens</string>
-    <string name="seasonal_bounty_gloom_shortbows_hint">Fletching</string>
-    <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string>
-    <string name="seasonal_bounty_gloom_feast_hint">Cooking</string>
-    <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string>
-    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string>
-    <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string>
-    <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string>
-    <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string>
-    <string name="seasonal_bounty_gloom_wisps_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_ghouls_name">Put down Grave Ghouls</string>
-    <string name="seasonal_bounty_gloom_ghouls_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_husks_name">Fell the Husk Horrors</string>
-    <string name="seasonal_bounty_gloom_husks_hint">Only found in The Hollowfen</string>
-    <string name="seasonal_bounty_gloom_stalkers_name">Hunt Shade Stalkers</string>
-    <string name="seasonal_bounty_gloom_stalkers_hint">Only found in The Blightwood</string>
-    <string name="seasonal_bounty_gloom_wights_name">Topple Barrow Wights</string>
-    <string name="seasonal_bounty_gloom_wights_hint">Only found in The Hollowfen (rare)</string>
-    <string name="seasonal_bounty_gloom_tithe_pumpkins_name">Tithe: donate pumpkins</string>
-    <string name="seasonal_bounty_gloom_tithe_pumpkins_hint">Donated straight from your inventory</string>
-    <string name="seasonal_bounty_gloom_tithe_maple_name">Tithe: donate maple logs</string>
-    <string name="seasonal_bounty_gloom_tithe_maple_hint">Donated straight from your inventory</string>
-    <string name="seasonal_bounty_gloom_tithe_swordfish_name">Tithe: donate cooked swordfish</string>
-    <string name="seasonal_bounty_gloom_tithe_swordfish_hint">Donated straight from your inventory</string>
-    <string name="item_wraithbone_ring_name">Wraithbone Ring</string>
-    <string name="item_reaper_scythe_name">Reaper\'s Scythe</string>
-    <string name="item_gloomweave_cape_name">Gloomweave Cape</string>
+    <string name="seasonal_reward_gloomharvest_2026_25_desc">Coin purse (50,000 coins)</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_60_desc">Wraithbone Ring</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_100_desc">Free 48h XP Boost</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_150_desc">Reaper\'s Scythe</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_200_desc">Coin purse (250,000 coins)</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_250_desc">Grave Sprout pet</string> <!-- untranslated -->
+    <string name="seasonal_reward_gloomharvest_2026_300_desc">Gloomharvest 2026 banner</string> <!-- untranslated -->
+    <string name="seasonal_market_gloomweave_cape_name">Gloomweave Cape</string> <!-- untranslated -->
+    <string name="seasonal_market_bounty_refresh_name">Fresh Bounties (skip the wait)</string> <!-- untranslated -->
+    <string name="seasonal_market_lantern_relight_name">Relight the Lanterns (skip minigame cooldown)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_pumpkins_name">Harvest pumpkins for the festival</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_pumpkins_hint">Grow Pumpkins (Farming)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_corn_name">Bring in the corn harvest</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_corn_hint">Grow Corn (Farming)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_maples_name">Chop maple wood for the pyres</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_maples_hint">Chop Maple Logs (Woodcutting)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_swordfish_name">Land swordfish for the feast</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_swordfish_hint">Fish Raw Swordfish (Fishing)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_mithril_name">Mine mithril to ward the gates</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_mithril_hint">Mine Mithril Ore (Mining)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_brews_name">Brew Defense Potions for the night watch</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_brews_hint">Herblore</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_shortbows_name">Fletch Maple Shortbows for the wardens</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_shortbows_hint">Fletching</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_feast_hint">Cooking</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wisps_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_ghouls_name">Put down Grave Ghouls</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_ghouls_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_husks_name">Fell the Husk Horrors</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_husks_hint">Only found in The Hollowfen</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_stalkers_name">Hunt Shade Stalkers</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_stalkers_hint">Only found in The Blightwood</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wights_name">Topple Barrow Wights</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_wights_hint">Only found in The Hollowfen (rare)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_pumpkins_name">Tithe: donate pumpkins</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_pumpkins_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_maple_name">Tithe: donate maple logs</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_maple_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_swordfish_name">Tithe: donate cooked swordfish</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_tithe_swordfish_hint">Donated straight from your inventory</string> <!-- untranslated -->
+    <string name="item_wraithbone_ring_name">Wraithbone Ring</string> <!-- untranslated -->
+    <string name="item_reaper_scythe_name">Reaper\'s Scythe</string> <!-- untranslated -->
+    <string name="item_gloomweave_cape_name">Gloomweave Cape</string> <!-- untranslated -->
     <string name="label_banners">Banieren</string>
     <string name="label_journal">Dagboek</string>
     <string name="journal_hint">Noteer herinneringen voor de volgende keer — wat je in de wachtrij wilt zetten, waar je naartoe werkt.</string>
@@ -1791,33 +1752,74 @@
     <string name="settings_credit_banners_title">Seizoensbanieren</string>
     <string name="settings_credit_banners_subtitle">Kunst door Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Vaardigheidsiconen</string>
-    <string name="settings_credit_skill_icons_subtitle">Shikashi\'s Fantasy Icons Pack</string>
+
     <string name="title_seasonal_champion_of">Kampioen van %1$s</string>
     <string name="title_seasonal_requirement">Voltooi het Seizoensevenement %1$s</string>
     <string name="home_welcome_greeting">Welkom terug,</string>
-    <string name="home_welcome_name">%1$s!</string>
-    <string name="home_welcome_title">De %1$s!</string>
-    <string name="town_building_cape_rack_name">Cape Rack</string>
-    <string name="town_cape_rack_no_bonus">Upgrade to passively apply owned skill/guild cape yield and XP bonuses</string>
-    <string name="town_cape_rack_t1_bonus">Passive bonuses from Tier 1 (Gathering) capes are active</string>
-    <string name="town_cape_rack_t2_bonus">Passive bonuses from Tier 1 &amp; 2 (Gathering, Artisan) capes are active</string>
-    <string name="town_cape_rack_t3_bonus">Passive bonuses from all owned capes (Gathering, Artisan, Combat &amp; Guild) are active</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string>
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string>
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string>
-    <string name="town_building_chronos_spire_name">Chronos Spire</string>
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string>
 
-    <!-- Save slots / character manager + Ironman mode -->
+    <string name="home_welcome_title">De %1$s!</string>
+
+    <!-- Pet names and descriptions -->
+    <string name="pet_dragon_whelp_name">Drakenjong</string>
+    <string name="pet_dragon_whelp_desc">Een jonge draak die je Gevechts XP verbetert.</string>
+    <string name="pet_imp_pet_name">Getemde Imp</string>
+    <string name="pet_imp_pet_desc">Een ondeugende imp die je Gebeds XP verbetert.</string>
+    <string name="pet_baby_kraken_name">Krakenjong</string>
+    <string name="pet_baby_kraken_desc">Een jonge kraken die je Koks XP verbetert.</string>
+    <string name="pet_rock_golem_name">Rots Golem</string>
+    <string name="pet_rock_golem_desc">Een levende rotsformatie die je Mijners XP verbetert.</string>
+    <string name="pet_ent_name">Ent</string> <!-- untranslated -->
+    <string name="pet_ent_desc">Een eeuwenoude Boomherder die je Houthakkers XP verbetert.</string>
+    <string name="pet_tiny_templar_name">Vinneling</string>
+    <string name="pet_tiny_templar_desc">Een kleine visvriend die je Vissers XP verbetert.</string>
+    <string name="pet_tangleroot_name">Tangleroot</string> <!-- untranslated -->
+    <string name="pet_tangleroot_desc">Een magisch plantwezen dat je Landbouw XP verbetert.</string>
+    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
+    <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
+    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_name">Graceling Sprite</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_name">Shadow Fox</string> <!-- untranslated -->
+    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string> <!-- untranslated -->
+    <string name="pet_ember_moth_name">Ember Moth</string> <!-- untranslated -->
+    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_name">Herb Wisp</string> <!-- untranslated -->
+    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_name">Rune Sprite</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string> <!-- untranslated -->
+    <string name="pet_gem_golem_name">Gem Golem</string> <!-- untranslated -->
+    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string> <!-- untranslated -->
+    <string name="pet_feather_drake_name">Feather Drake</string> <!-- untranslated -->
+    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string> <!-- untranslated -->
+    <string name="pet_forge_imp_name">Forge Imp</string> <!-- untranslated -->
+    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string> <!-- untranslated -->
+    <string name="pet_coin_drake_name">Coin Drake</string> <!-- untranslated -->
+    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
+    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_name">Lantern Wisp</string> <!-- untranslated -->
+    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_name">Grave Sprout</string> <!-- untranslated -->
+    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string> <!-- untranslated -->
+    <string name="pet_golden_goose_name">Golden Goose</string> <!-- untranslated -->
+    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string> <!-- untranslated -->
+
+    <!-- Save slots / character manager -->
     <string name="settings_characters">Personages</string>
     <string name="settings_characters_desc">Tot 3 opslagplekken. Maak, wissel of verwijder personages.</string>
     <string name="save_slots_title">Personages</string>
     <string name="save_slots_desc">Op dit apparaat kunnen tot drie personages leven. Bij het wisselen wordt je huidige personage automatisch opgeslagen; de sessies van een inactief personage staan op pauze tot je terugkeert.</string>
-    <string name="save_slot_label">Slot %1$d</string>
+    <string name="save_slot_label">Slot %1$d</string> <!-- untranslated -->
     <string name="save_slot_new">Nieuw personage</string>
     <string name="save_slot_playing">Actief</string>
-    <string name="save_slot_ironman">Ironman</string>
+    <string name="save_slot_ironman">Ironman</string> <!-- untranslated -->
     <string name="save_slot_combat_level">Gevechtslevel %1$d</string>
     <string name="save_slot_total_level">Totaal level %1$d</string>
     <string name="save_slot_last_played">%1$s geleden</string>
@@ -1831,12 +1833,42 @@
     <string name="save_slot_delete_body">%1$s definitief verwijderen? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="save_slot_delete_btn">Verwijderen</string>
     <string name="save_slot_switch_failed">Kon niet van personage wisselen.</string>
+
+    <!-- Ironman mode -->
     <string name="character_ironman_title">Ironman-modus</string>
     <string name="character_ironman_desc">XP- en opbrengstboosts zijn uitgeschakeld, voorwerpen kopen kan niet en werknemers inhuren ook niet. Permanent: kan na het aanmaken niet meer worden gewijzigd. Het bewerken van het opslagbestand verwijdert de Ironman-status.</string>
     <string name="ironman_shop_buy_blocked">Ironman-personages kunnen geen voorwerpen kopen.</string>
     <string name="ironman_inn_blocked">Ironman-personages kunnen geen werknemers inhuren.</string>
     <string name="ironman_blessing_blocked">Ironman-personages kunnen alleen verdedigingszegeningen ontvangen.</string>
     <string name="ironman_bonuses_notice">Ironman: boosts voor XP, opbrengst en ducaten zijn uitgeschakeld voor dit personage.</string>
-    <string name="ironman_badge">Ironman</string>
+    <string name="ironman_badge">Ironman</string> <!-- untranslated -->
     <string name="settings_imported_demoted">Opslag geïmporteerd. Het bestand is buiten het spel gewijzigd, dus de Ironman-status is verwijderd.</string>
+    <string name="shop_xp_boost_name">2× XP Boost (48h)</string> <!-- untranslated -->
+    <string name="bestiary_stat_hp">HP</string> <!-- untranslated -->
+    <string name="bestiary_stat_attack">Attack</string> <!-- untranslated -->
+    <string name="bestiary_stat_strength">Strength</string> <!-- untranslated -->
+    <string name="bestiary_stat_defense">Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_atk_defense">Atk Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_str_defense">Str Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_rng_defense">Rng Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_mag_defense">Mag Defense</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp">XP</string> <!-- untranslated -->
+    <string name="bestiary_stat_required_level">Required Level</string> <!-- untranslated -->
+    <string name="bestiary_stat_xp_reward">XP Reward</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration">Duration</string> <!-- untranslated -->
+    <string name="bestiary_stat_duration_min">%1$d min</string> <!-- untranslated -->
+    <string name="bestiary_kill_count">%1$d kills</string> <!-- untranslated -->
+    <string name="bestiary_location_other">Other</string> <!-- untranslated -->
+    <string name="carnival_stat_atk">ATK +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_str">STR +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_def">DEF +%1$d</string> <!-- untranslated -->
+    <string name="carnival_stat_yield">Yield</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_green">G</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_blue">B</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_red">R</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_purple">P</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_orange">O</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_cyan">C</string> <!-- untranslated -->
+    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/crop</string> <!-- untranslated -->
+    <string name="farming_seeds_owned">Seeds: %1$d  •  Owned: %2$d</string> <!-- untranslated -->
 </resources>

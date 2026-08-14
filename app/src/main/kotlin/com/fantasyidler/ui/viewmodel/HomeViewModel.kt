@@ -1567,6 +1567,7 @@ class HomeViewModel @Inject constructor(
         var unlockMessage: String? = null
         if (localNotesFound > 0 && dungeonData != null) {
             val revealed = dungeonData.noteTexts.take(localNewCount.coerceAtMost(dungeonData.noteTexts.size))
+                .mapIndexed { i, text -> GameStrings.skillingDungeonNote(context, session.activityKey, i, text) }
             val newlyRevealedTexts = revealed.drop(localOldCount.coerceAtMost(revealed.size))
             noteLines = newlyRevealedTexts
             unlockMessage = localUnlockMsg

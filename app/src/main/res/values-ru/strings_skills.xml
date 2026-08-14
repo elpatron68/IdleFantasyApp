@@ -86,6 +86,7 @@
     <string name="agility_divine_course_desc">Божественный маршрут, благословлённый богами ловкости.</string>
     <string name="agility_transcendent_course_name">Трансцендентный маршрут</string>
     <string name="agility_transcendent_course_desc">Высшее испытание ловкости, превосходящее смертные пределы.</string>
+
     <!-- ===== Session skill type labels ===== -->
     <string name="skill_expedition_name">Экспедиция</string>
     <string name="skill_boss_name">Босс</string>

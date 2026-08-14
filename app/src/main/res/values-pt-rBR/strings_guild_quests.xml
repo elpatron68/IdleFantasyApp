@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nomes das missões de guilda — traduzidos por localidade, retorna ao nome do JSON se ausente -->
+    <!-- Guild quest names — translate per locale, falls back to JSON name if absent -->
     <string name="quest_agility_guild_1_name">Primeiras Voltas</string>
     <string name="quest_agility_guild_10_name">Mestre do Movimento</string>
     <string name="quest_agility_guild_2_name">Corredor Dedicado</string>
@@ -18,9 +18,19 @@
     <string name="quest_archers_guild_4_name">Atirador Certeiro</string>
     <string name="quest_archers_guild_5_name">Olho de Águia</string>
     <string name="quest_archers_guild_6_name">Tiro Mortal</string>
-    <string name="quest_archers_guild_7_name">Sniper</string>
+    <string name="quest_archers_guild_7_name">Sniper</string> <!-- untranslated -->
     <string name="quest_archers_guild_8_name">Olho de Falcão</string>
     <string name="quest_archers_guild_9_name">Fantasma</string>
+    <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
+    <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
+    <string name="quest_construction_guild_4_name">Table Service</string> <!-- untranslated -->
+    <string name="quest_construction_guild_5_name">Well Read</string> <!-- untranslated -->
+    <string name="quest_construction_guild_6_name">Block by Block</string> <!-- untranslated -->
+    <string name="quest_construction_guild_7_name">Cabinet Meeting</string> <!-- untranslated -->
+    <string name="quest_construction_guild_8_name">Dressed to Impress</string> <!-- untranslated -->
+    <string name="quest_construction_guild_9_name">Wardrobe Change</string> <!-- untranslated -->
     <string name="quest_cooking_guild_1_name">Corrida do Frango</string>
     <string name="quest_cooking_guild_10_name">Mestre Cozinheiro</string>
     <string name="quest_cooking_guild_2_name">Banquete de Truta</string>
@@ -99,7 +109,7 @@
     <string name="quest_mages_guild_5_name">Feiticeiro</string>
     <string name="quest_mages_guild_6_name">Bruxo</string>
     <string name="quest_mages_guild_7_name">Arquimago</string>
-    <string name="quest_mages_guild_8_name">Lich</string>
+    <string name="quest_mages_guild_8_name">Lich</string> <!-- untranslated -->
     <string name="quest_mages_guild_9_name">Tecelão de Feitiços</string>
     <string name="quest_mercantile_guild_1_name">Primeiro Negócio</string>
     <string name="quest_mercantile_guild_10_name">Mestre das Trocas</string>
@@ -141,6 +151,16 @@
     <string name="quest_runecrafting_guild_7_name">Reserva de Sangue</string>
     <string name="quest_runecrafting_guild_8_name">Cofre de Runas</string>
     <string name="quest_runecrafting_guild_9_name">Estoque Arcano</string>
+    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_7_name">Veteran Slayer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_8_name">A Thousand Fangs</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_9_name">Master of the Hunt</string> <!-- untranslated -->
     <string name="quest_smithing_guild_1_name">Fundamentos do Bronze</string>
     <string name="quest_smithing_guild_10_name">Mestre Ferreiro</string>
     <string name="quest_smithing_guild_2_name">Obras de Ferro</string>
@@ -151,6 +171,16 @@
     <string name="quest_smithing_guild_7_name">Fundidora de Runite</string>
     <string name="quest_smithing_guild_8_name">Arsenal de Armas</string>
     <string name="quest_smithing_guild_9_name">Cofre de Armaduras</string>
+    <string name="quest_thieving_guild_1_name">Street Rat</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_10_name">Master Thief</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_2_name">Market Pilferer</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_4_name">Skilled Fingers</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_5_name">High Society</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_9_name">Sacred Pockets</string> <!-- untranslated -->
     <string name="quest_warriors_guild_1_name">Primeiro Sangue</string>
     <string name="quest_warriors_guild_10_name">Mestre Guerreiro</string>
     <string name="quest_warriors_guild_2_name">Combatente</string>
@@ -172,7 +202,7 @@
     <string name="quest_woodcutting_guild_8_name">Madeira Ancestral</string>
     <string name="quest_woodcutting_guild_9_name">Legado da Sequoia</string>
 
-    <!-- Nomes das missões diárias de guilda -->
+    <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Corrida Matinal</string>
     <string name="quest_agility_daily_1b_name">Treino de Sprint</string>
     <string name="quest_agility_daily_1c_name">Circuito de Obstáculos</string>

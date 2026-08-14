@@ -1,3 +1,9 @@
+v1.13.5
+• Large translatability pass (thanks widowild1, Azerliap, and mh-tp for the detailed audit): agility course names, crafting recipe names, the shop's 2× XP boost name, bestiary stat labels and dungeon locations, carnival prize stats and item appraisal names, potion sequence letters (now translator-chosen per language so colours can't collide), farming picker labels and planting messages, daily quest monster names, combat log food names, expedition lore notes, Infinite Tower session names, and cape names in the bonuses tab now all follow your language
+• Added over 350 previously missing translatable entries (item descriptions, seed and crop names, expedition notes) so translators can cover the whole game
+• The Firemaking screen now lists every log type your level allows, showing a dimmed "0 in inventory" row when you've run out instead of hiding the log entirely, which made it look like the log type could no longer be burned
+• Started a Lithuanian (lietuvių) translation (thanks Motvisss!) and refreshed dozens of Italian translations (thanks Stark-Night!)
+
 v1.13.4
 • The 2× XP boost now costs 2.5M coins (down from 25M) but can no longer be stacked: a new boost can't be bought while one is running, and purchases are limited to one per week, resetting Monday 6am alongside weekly quests; previously stockpiled boost time is unaffected
 • Fixed the quest icons legend flashing over the home screen when tapping Settings quickly after returning from the Skills page: taps no longer register on a page that is still animating out, which could also open Settings unintentionally in the reverse direction

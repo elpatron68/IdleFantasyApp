@@ -813,7 +813,7 @@ fun HomeScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
-                                    text       = event.displayName,
+                                    text       = GameStrings.seasonalEventName(LocalContext.current, event.id, event.displayName),
                                     style      = MaterialTheme.typography.titleSmall,
                                     fontWeight = FontWeight.Bold,
                                 )

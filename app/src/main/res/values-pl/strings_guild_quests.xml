@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nazwy zadań gildii — tłumaczyć zależnie od lokalizacji, w razie braku zostanie użyta nazwa z JSON -->
+    <!-- Guild quest names — translate per locale, falls back to JSON name if absent -->
     <string name="quest_agility_guild_1_name">Pierwsze Okrążenia</string>
     <string name="quest_agility_guild_10_name">Mistrz Ruchu</string>
     <string name="quest_agility_guild_2_name">Zaangażowany Biegacz</string>
@@ -21,6 +21,16 @@
     <string name="quest_archers_guild_7_name">Snajper</string>
     <string name="quest_archers_guild_8_name">Jastrzębie Oko</string>
     <string name="quest_archers_guild_9_name">Widmo</string>
+    <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
+    <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
+    <string name="quest_construction_guild_4_name">Table Service</string> <!-- untranslated -->
+    <string name="quest_construction_guild_5_name">Well Read</string> <!-- untranslated -->
+    <string name="quest_construction_guild_6_name">Block by Block</string> <!-- untranslated -->
+    <string name="quest_construction_guild_7_name">Cabinet Meeting</string> <!-- untranslated -->
+    <string name="quest_construction_guild_8_name">Dressed to Impress</string> <!-- untranslated -->
+    <string name="quest_construction_guild_9_name">Wardrobe Change</string> <!-- untranslated -->
     <string name="quest_cooking_guild_1_name">Dostawa Kurczaka</string>
     <string name="quest_cooking_guild_10_name">Mistrz Kuchni</string>
     <string name="quest_cooking_guild_2_name">Uczta z Pstrąga</string>
@@ -141,6 +151,16 @@
     <string name="quest_runecrafting_guild_7_name">Zapas Run Krwi</string>
     <string name="quest_runecrafting_guild_8_name">Skarbiec Run</string>
     <string name="quest_runecrafting_guild_9_name">Zapasy Arkanicznych Run</string>
+    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_7_name">Veteran Slayer</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_8_name">A Thousand Fangs</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_9_name">Master of the Hunt</string> <!-- untranslated -->
     <string name="quest_smithing_guild_1_name">Podstawy Brązu</string>
     <string name="quest_smithing_guild_10_name">Mistrz Kowalstwa</string>
     <string name="quest_smithing_guild_2_name">Kuźnia Żelaza</string>
@@ -151,6 +171,16 @@
     <string name="quest_smithing_guild_7_name">Huta Runitu</string>
     <string name="quest_smithing_guild_8_name">Skrytka Broni</string>
     <string name="quest_smithing_guild_9_name">Skarbiec Zbroi</string>
+    <string name="quest_thieving_guild_1_name">Street Rat</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_10_name">Master Thief</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_2_name">Market Pilferer</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_4_name">Skilled Fingers</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_5_name">High Society</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_9_name">Sacred Pockets</string> <!-- untranslated -->
     <string name="quest_warriors_guild_1_name">Pierwsza Krew</string>
     <string name="quest_warriors_guild_10_name">Mistrz Wojownik</string>
     <string name="quest_warriors_guild_2_name">Harcownik</string>
@@ -172,7 +202,7 @@
     <string name="quest_woodcutting_guild_8_name">Starożytne Drewno</string>
     <string name="quest_woodcutting_guild_9_name">Dziedzictwo Sekwoi</string>
 
-    <!-- Nazwy codziennych zadań gildii -->
+    <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Poranny Bieg</string>
     <string name="quest_agility_daily_1b_name">Trening Sprintu</string>
     <string name="quest_agility_daily_1c_name">Tor Przeszkód</string>

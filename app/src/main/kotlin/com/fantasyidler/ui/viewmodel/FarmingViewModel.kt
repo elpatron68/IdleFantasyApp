@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.withAppLocale
 import javax.inject.Inject
 
 // ---------------------------------------------------------------------------
@@ -172,7 +174,7 @@ class FarmingViewModel @Inject constructor(
             if (flags.lastFertilizerKey != ashKey) {
                 playerRepo.updateFlags(flags.copy(lastFertilizerKey = ashKey))
             }
-            val seedName = crop.seedName.replace('_', ' ')
+            val seedName = GameStrings.itemName(context.withAppLocale(), crop.seedName)
 
             if (patchNumber == -1) {
                 delay(300)

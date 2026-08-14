@@ -23,7 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,7 +40,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -68,6 +66,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.CarnivalPrize
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.ui.components.LampSkillDialog
 import com.fantasyidler.ui.viewmodel.ActiveGameState
 import com.fantasyidler.ui.viewmodel.AppraisalQuad
 import com.fantasyidler.ui.viewmodel.CarnivalViewModel
@@ -103,7 +102,17 @@ private val POTION_COLORS = listOf(
     Color(0xFF00BCD4), // cyan   (hard mode)
 )
 
-private val POTION_NAMES = listOf("Green", "Blue", "Red", "Purple", "Orange", "Cyan")
+// One single-letter string per potion color, translator-controlled so every
+// language can pick six DISTINCT letters (in French "Violet" and "Vert" would
+// otherwise both abbreviate to V - issue #1146).
+private val POTION_LETTER_RES = listOf(
+    R.string.carnival_potion_letter_green,
+    R.string.carnival_potion_letter_blue,
+    R.string.carnival_potion_letter_red,
+    R.string.carnival_potion_letter_purple,
+    R.string.carnival_potion_letter_orange,
+    R.string.carnival_potion_letter_cyan,
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -118,9 +127,10 @@ fun CarnivalScreen(
     state.pendingLampPrizeKey?.let { prizeKey ->
         val prize = viewModel.prizesMap[prizeKey]
         if (prize != null) {
-            LampSkillPickerDialog(
-                xpAmount        = prize.xpAmount,
+            LampSkillDialog(
                 skillLevels     = state.skillLevels,
+                skillXp         = state.skillXp,
+                sessionXpGain   = prize.xpAmount,
                 onSkillSelected = viewModel::redeemLamp,
                 onDismiss       = viewModel::dismissLampPicker,
             )
@@ -586,7 +596,7 @@ private fun PotionSequenceCard(gameState: ActiveGameState, difficulty: Difficult
                                 ) {
                                     if (i == current) {
                                         Text(
-                                            text  = POTION_NAMES[colorIdx].first().toString(),
+                                            text  = stringResource(POTION_LETTER_RES[colorIdx]),
                                             style = MaterialTheme.typography.bodyLarge,
                                             fontWeight = FontWeight.Bold,
                                             color = Color.White,
@@ -651,7 +661,7 @@ private fun PotionButton(colorIdx: Int, onClick: () -> Unit) {
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Text(
-                    text  = POTION_NAMES[colorIdx].first().toString(),
+                    text  = stringResource(POTION_LETTER_RES[colorIdx]),
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
@@ -691,18 +701,18 @@ private fun ItemAppraisalCard(
                         )
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(0) }, modifier = Modifier.weight(1f)) {
-                                Text(quad.items[0], textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[0]), textAlign = TextAlign.Center)
                             }
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(1) }, modifier = Modifier.weight(1f)) {
-                                Text(quad.items[1], textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[1]), textAlign = TextAlign.Center)
                             }
                         }
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(2) }, modifier = Modifier.weight(1f)) {
-                                Text(quad.items[2], textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[2]), textAlign = TextAlign.Center)
                             }
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(3) }, modifier = Modifier.weight(1f)) {
-                                Text(quad.items[3], textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, quad.items[3]), textAlign = TextAlign.Center)
                             }
                         }
                     }
@@ -717,10 +727,10 @@ private fun ItemAppraisalCard(
                         )
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(0) }, modifier = Modifier.weight(1f)) {
-                                Text(pair.itemA, textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, pair.itemA), textAlign = TextAlign.Center)
                             }
                             OutlinedButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitAppraisalAnswer(1) }, modifier = Modifier.weight(1f)) {
-                                Text(pair.itemB, textAlign = TextAlign.Center)
+                                Text(GameStrings.itemName(LocalContext.current, pair.itemB), textAlign = TextAlign.Center)
                             }
                         }
                     }
@@ -1002,11 +1012,12 @@ private fun PrizeRow(
             )
             if (equipData != null) {
                 val statParts = buildList {
-                    if (equipData.attackBonus   > 0) add("ATK +${equipData.attackBonus}")
-                    if (equipData.strengthBonus > 0) add("STR +${equipData.strengthBonus}")
-                    if (equipData.defenseBonus  > 0) add("DEF +${equipData.defenseBonus}")
+                    if (equipData.attackBonus   > 0) add(stringResource(R.string.carnival_stat_atk, equipData.attackBonus))
+                    if (equipData.strengthBonus > 0) add(stringResource(R.string.carnival_stat_str, equipData.strengthBonus))
+                    if (equipData.defenseBonus  > 0) add(stringResource(R.string.carnival_stat_def, equipData.defenseBonus))
                     if ((equipData.capeBonus) > 0f) {
-                        val capeLabel = if (equipData.capeSkill in COMBAT_CAPE_SKILLS) "XP" else "Yield"
+                        val capeLabel = if (equipData.capeSkill in COMBAT_CAPE_SKILLS) stringResource(R.string.bestiary_stat_xp)
+                                        else stringResource(R.string.carnival_stat_yield)
                         add("$capeLabel +${(equipData.capeBonus * 100).toInt()}%")
                     }
                 }
@@ -1057,52 +1068,3 @@ private fun PrizeRow(
     }
 }
 
-// ── Lamp skill picker ──────────────────────────────────────────────────────────
-
-@Composable
-private fun LampSkillPickerDialog(
-    xpAmount: Long,
-    skillLevels: Map<String, Int>,
-    onSkillSelected: (String) -> Unit,
-    onDismiss: () -> Unit,
-) {
-    val context = LocalContext.current
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.slayer_lamp_pick_skill)) },
-        text = {
-            Column(
-                modifier            = Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Skills.ALL.forEach { skillKey ->
-                    val level = skillLevels[skillKey] ?: 1
-                    val name  = GameStrings.skillName(context, skillKey)
-                    Surface(
-                        onClick  = { onSkillSelected(skillKey) },
-                        shape    = RoundedCornerShape(8.dp),
-                        color    = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Row(
-                            modifier              = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp, vertical = 10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment     = Alignment.CenterVertically,
-                        ) {
-                            Text(name, style = MaterialTheme.typography.bodyMedium)
-                            Text(
-                                text  = stringResource(R.string.slayer_level_label, level),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.primary,
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.btn_cancel)) } },
-    )
-}

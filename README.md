@@ -80,7 +80,7 @@ For **this fork's builds** (Save Viewer sync), see **[FORK.md](FORK.md)**.
 
 ## Translating
 
-The game is available in 15 languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
+The game is available in 16 languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
 
 ## Contributing
 

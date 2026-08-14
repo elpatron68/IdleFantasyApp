@@ -2,9 +2,9 @@
 <resources>
     <!-- ===== Enemy names ===== -->
     <string name="enemy_giant_rat_name">Wielki Szczur</string>
-    <string name="enemy_goblin_name">Goblin</string>
+    <string name="enemy_goblin_name">Goblin</string> <!-- untranslated -->
     <string name="enemy_skeleton_name">Szkielet</string>
-    <string name="enemy_zombie_name">Zombie</string>
+    <string name="enemy_zombie_name">Zombie</string> <!-- untranslated -->
     <string name="enemy_bandit_name">Bandyta</string>
     <string name="enemy_guard_name">Strażnik</string>
     <string name="enemy_dark_wizard_name">Mroczny Czarodziej</string>
@@ -21,6 +21,59 @@
     <string name="enemy_chicken_name">Kura</string>
     <string name="enemy_sheep_name">Owca</string>
     <string name="enemy_cow_name">Krowa</string>
+    <string name="enemy_fire_giant_name">Fire Giant</string> <!-- untranslated -->
+    <string name="enemy_ancient_guardian_name">Ancient Guardian</string> <!-- untranslated -->
+    <string name="enemy_lich_name">Lich</string> <!-- untranslated -->
+    <string name="enemy_cave_troll_name">Cave Troll</string> <!-- untranslated -->
+    <string name="enemy_mine_spider_name">Mine Spider</string> <!-- untranslated -->
+    <string name="enemy_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="enemy_iron_golem_name">Iron Golem</string> <!-- untranslated -->
+    <string name="enemy_forge_demon_name">Forge Demon</string> <!-- untranslated -->
+    <string name="enemy_dwarven_guardian_name">Dwarven Guardian</string> <!-- untranslated -->
+    <string name="enemy_drowned_cultist_name">Drowned Cultist</string> <!-- untranslated -->
+    <string name="enemy_sea_spirit_name">Sea Spirit</string> <!-- untranslated -->
+    <string name="enemy_cursed_fisherman_name">Cursed Fisherman</string> <!-- untranslated -->
+    <string name="enemy_abyssal_leech_name">Abyssal Leech</string> <!-- untranslated -->
+    <string name="enemy_deep_horror_name">Deep Horror</string> <!-- untranslated -->
+    <string name="enemy_void_guardian_name">Void Guardian</string> <!-- untranslated -->
+    <string name="enemy_corrupted_druid_name">Corrupted Druid</string> <!-- untranslated -->
+    <string name="enemy_vine_beast_name">Vine Beast</string> <!-- untranslated -->
+    <string name="enemy_forest_spirit_name">Forest Spirit</string> <!-- untranslated -->
+    <string name="enemy_shadow_beast_name">Shadow Beast</string> <!-- untranslated -->
+    <string name="enemy_twisted_treant_name">Twisted Treant</string> <!-- untranslated -->
+    <string name="enemy_corrupted_mage_name">Corrupted Mage</string> <!-- untranslated -->
+    <string name="enemy_cutpurse_name">Cutpurse</string> <!-- untranslated -->
+    <string name="enemy_arcane_construct_name">Arcane Construct</string> <!-- untranslated -->
+    <string name="enemy_storm_imp_name">Storm Imp</string> <!-- untranslated -->
+    <string name="enemy_sky_serpent_name">Sky Serpent</string> <!-- untranslated -->
+    <string name="enemy_cloud_giant_name">Cloud Giant</string> <!-- untranslated -->
+    <string name="enemy_sun_wisp_name">Sun Wisp</string> <!-- untranslated -->
+    <string name="enemy_ember_hound_name">Ember Hound</string> <!-- untranslated -->
+    <string name="enemy_cinder_colossus_name">Cinder Colossus</string> <!-- untranslated -->
+    <string name="enemy_will_o_wisp_name">Will-o\'-Wisp</string> <!-- untranslated -->
+    <string name="enemy_grave_ghoul_name">Grave Ghoul</string> <!-- untranslated -->
+    <string name="enemy_husk_horror_name">Husk Horror</string> <!-- untranslated -->
+    <string name="enemy_barrow_wight_name">Barrow Wight</string> <!-- untranslated -->
+    <string name="enemy_shade_stalker_name">Shade Stalker</string> <!-- untranslated -->
+    <string name="enemy_bone_colossus_name">Bone Colossus</string> <!-- untranslated -->
+    <string name="enemy_dread_dullahan_name">Dread Dullahan</string> <!-- untranslated -->
+    <string name="enemy_void_stalker_name">Łowca Pustki</string>
+    <string name="enemy_rift_guardian_name">Strażnik Szczeliny</string>
+    <string name="enemy_chaos_elemental_name">Żywiołak Chaosu</string>
+    <string name="enemy_frost_giant_name">Olbrzym Mrozu</string>
+    <string name="enemy_ice_golem_name">Golem Lodu</string>
+    <string name="enemy_glacial_mage_name">Lodowcowy Mag</string>
+    <string name="enemy_abyssal_lord_name">Władca Otchłani</string>
+    <string name="enemy_eternal_sentinel_name">Wieczny Strażnik</string>
+    <string name="enemy_void_archon_name">Archont Pustki</string>
+    <string name="enemy_frost_wyvern_name">Mroźny Wywern</string>
+    <string name="enemy_abyssal_guardian_name">Otchłanny Strażnik</string>
+    <string name="enemy_shadow_thief_name">Cienisty Złodziej</string>
+    <string name="enemy_elder_lich_name">Starszy Licz</string>
+    <string name="enemy_assassin_name">Zabójca</string>
+    <string name="enemy_shadow_assassin_name">Cienisty Zabójca</string>
+    <string name="enemy_vault_guardian_name">Strażnik Skarbca</string>
+    <string name="enemy_guild_master_name">Mistrz Gildii</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Jaskinia Chochlików</string>
@@ -47,30 +100,42 @@
     <string name="dungeon_infernal_stronghold_desc">Twierdza ognia i siarki, rządzona przez demony i piekielne ogary. Sam upał może zabić nieprzygotowanych.</string>
     <string name="dungeon_ancient_temple_name">Starożytna Świątynia</string>
     <string name="dungeon_ancient_temple_desc">Starożytna świątynia strzeżona przez najpotężniejsze stworzenia w krainie. Tylko najsilniejsi wojownicy ważą się tam wejść.</string>
+    <string name="dungeon_void_rift_name">Szczelina Pustki</string>
+    <string name="dungeon_void_rift_desc">Rozdarcie w rzeczywistości, przez które istoty pustki wdzierają się do śmiertelnego świata.</string>
+    <string name="dungeon_frozen_citadel_name">Zamarznięta Cytadela</string>
+    <string name="dungeon_frozen_citadel_desc">Starożytna forteca zamknięta w lodowcu, jej obrońcy zamrożeni w wiecznej czujności.</string>
+    <string name="dungeon_abyssal_throne_name">Otchłanny Tron</string>
+    <string name="dungeon_abyssal_throne_desc">Najgłębszy punkt znanego świata, rządzony przez władców pustki od zarania dziejów.</string>
 
-    <!-- ===== Solo boss names (raid bosses retargeted for solo play) ===== -->
+    <!-- ===== Event dungeon names ===== -->
+    <string name="dungeon_sunspire_name">The Sunspire</string> <!-- untranslated -->
+    <string name="dungeon_sunspire_desc">A sun-tower ruin cracked open by the solstice, spilling heat spirits into the region. Part of the Sunspire Solstice event.</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_name">The Hollowfen</string> <!-- untranslated -->
+    <string name="dungeon_hollowfen_desc">A mist-drowned marsh of sunken barrows where the harvest dead walk. Part of the Gloomharvest event.</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_name">Cloud Kingdom</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_name">The Blightwood</string> <!-- untranslated -->
+    <string name="dungeon_blightwood_desc">A rotting forest deep past the Hollowfen, where the Gloomharvest\'s strongest horrors gather. Part of the Gloomharvest event.</string> <!-- untranslated -->
+
+    <!-- ===== Raid bosses ===== -->
     <string name="boss_king_black_dragon_name">Król Czarny Smok</string>
+    <string name="boss_king_black_dragon_desc">Legendarny trójgłowy smok, budzący postrach w całym królestwie.</string>
     <string name="boss_demon_lord_name">Władca Demonów</string>
-    <string name="boss_kraken_name">Kraken</string>
-    <string name="boss_balrog_name">Balrog</string>
+    <string name="boss_demon_lord_desc">Starożytny demon z otchłani, mistrz mrocznej magii.</string>
+    <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="boss_kraken_desc">Postrach głębokich mórz, kolosalny morski potwór.</string>
+    <string name="boss_balrog_name">Balrog</string> <!-- untranslated -->
+    <string name="boss_balrog_desc">Starożytny demon płomienia i cienia, przebudzony ze snu głęboko pod ziemią.</string>
+    <string name="boss_void_sovereign_name" translatable="false">The Void Sovereign</string> <!-- untranslated -->
+    <string name="boss_void_sovereign_desc">Pierwotna istota stojąca za szczelinami pustki. Niewyobrażalnie stara, patrzy na śmiertelnych śmiałków z pogardą.</string>
+    <string name="boss_sol_invictus_name">Sol Invictus, the Sundered Flame</string> <!-- untranslated -->
+    <string name="boss_sol_invictus_desc">A shard of the sun itself, torn loose from the Sunspire ruin. Only the boldest warriors dare approach.</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_name">The Hollow King</string> <!-- untranslated -->
+    <string name="boss_the_hollow_king_desc">The headless sovereign of the Gloomharvest, riding out from the Blightwood to reap what the living have sown.</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_name">The Vault Guardian</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string> <!-- untranslated -->
 
-    <!-- ===== Pet names and descriptions ===== -->
-    <string name="pet_dragon_whelp_name">Smocze Szczenię</string>
-    <string name="pet_dragon_whelp_desc">Młody smok, który zwiększa twoje doświadczenie bojowe.</string>
-    <string name="pet_imp_pet_name">Chochlik-pupil</string>
-    <string name="pet_imp_pet_desc">Psotny chochlik, który wzmacnia twój trening Modlitwy.</string>
-    <string name="pet_baby_kraken_name">Mały Kraken</string>
-    <string name="pet_baby_kraken_desc">Malutki kraken, który poprawia twoje doświadczenie w Gotowaniu.</string>
-    <string name="pet_rock_golem_name">Golem Skalny</string>
-    <string name="pet_rock_golem_desc">Żywa formacja skalna, która wzmacnia twoje doświadczenie w Górnictwie.</string>
-    <string name="pet_ent_name">Ent</string>
-    <string name="pet_ent_desc">Starożytny duch drzewa, który zwiększa twoje doświadczenie w Drwalstwie.</string>
-    <string name="pet_tiny_templar_name">Mały Templariusz</string>
-    <string name="pet_tiny_templar_desc">Mały rybi towarzysz, który zwiększa twoje doświadczenie w Wędkarstwie.</string>
-    <string name="pet_tangleroot_name">Plątany Korzeń</string>
-    <string name="pet_tangleroot_desc">Magiczne stworzenie roślinne, które wzmacnia twoje doświadczenie w Uprawie.</string>
-
-    <!-- Missing dungeons -->
+    <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Zawalona Kopalnia</string>
     <string name="dungeon_collapsed_mine_desc">Rozległa jaskinia pod kopalniami miedzi. Trolle jaskiniowe i golemy skalne nawiedzają gruzy, a wielkie pająki snują sieci w zawalonych szybach.</string>
     <string name="dungeon_shadow_den_name">Cieniste Legowisko</string>
@@ -87,4 +152,8 @@
     <string name="dungeon_corrupted_sanctum_desc">Spowite cieniem sanktuarium w sercu skażonego baldachimu lasu. Mroczni kapłani i skażone bestie strzegą starożytnego zła.</string>
     <string name="dungeon_drowned_temple_name">Zatopiona Świątynia</string>
     <string name="dungeon_drowned_temple_desc">Zatopiona świątynia pod morską grotą, której korytarze wypełnia woda i morskie stworzenia, które uczyniły z niej swój dom.</string>
+    <string name="dungeon_rogue_sanctum_name">Sanktuarium Łotrów</string>
+    <string name="dungeon_rogue_sanctum_desc">Wewnętrzne schronienie gildii, dostępne tylko dla sprawdzonych członków.</string>
+    <string name="dungeon_guild_of_shadows_name">Gildia Cieni</string>
+    <string name="dungeon_guild_of_shadows_desc">Najgłębsze sanktuarium gildii złodziei, strzeżone przez jej najbardziej elitarnych egzekutorów.</string>
 </resources>

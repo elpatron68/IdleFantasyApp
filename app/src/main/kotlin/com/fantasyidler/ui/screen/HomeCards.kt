@@ -149,6 +149,10 @@ internal fun HomeSessionCard(
         "combat"     -> GameStrings.dungeonName(context, session.activityKey)
         "boss"       -> GameStrings.bossName(context, session.activityKey)
         "expedition" -> GameStrings.skillingDungeonName(context, session.activityKey, session.activityKey.toTitleCase())
+        "tower"      -> context.getString(R.string.tower_title) + ": " + context.getString(
+            R.string.tower_floor_label,
+            session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 0,
+        )
         else         -> GameStrings.itemName(context, session.activityKey)
     }.takeIf { session.activityKey.isNotEmpty() }
 
@@ -371,7 +375,7 @@ internal fun QueueCard(
                         "combat"     -> labelDungeon    to GameStrings.dungeonName(context, action.activityKey)
                         "boss"       -> labelBoss       to GameStrings.bossName(context, action.activityKey)
                         "farming"    -> action.skillDisplayName to null
-                        "tower"      -> GameStrings.skillName(context, "tower") to "Tower Floor ${towerFloorLabels.getOrNull(index)}"
+                        "tower"      -> stringResource(R.string.tower_title) to stringResource(R.string.tower_floor_label, towerFloorLabels.getOrNull(index) ?: 0)
                         else         -> GameStrings.skillName(context, action.skillName) to
                             GameStrings.itemName(context, action.activityKey)
                                 .takeIf { action.activityKey.isNotEmpty() }
