@@ -15,7 +15,7 @@ from logging import log
 from pathlib import Path
 from typing import Callable
 
-from wiki.src import ASSETS, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO
+from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO
 from wiki.src.game_data import STRINGS, load, title, item_name, skill_name, enemy_name, guild_name, trade_route_name, \
     thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, pet_name, boss_name, \
     boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, expedition_desc, \
@@ -260,7 +260,7 @@ def get_image_directory() -> dict[Path, str]:
         for image_path in raw_image_paths:
             relative_path = Path(REPO_ROOT / image_path)
             if relative_path not in image_directory:
-                image_directory[relative_path] = f"image_{start_img_id}{icon.suffix}"
+                image_directory[relative_path] = f"image_{start_img_id}{relative_path.suffix}"
                 start_img_id += 1
         return start_img_id
 
@@ -379,9 +379,12 @@ def html_link(page_id: str, display_name: str | None = None) -> str:
     return f'<a href="{page.url.removesuffix(".md")}">{name}</a>'
 
 
-def html_image(image_path: Path, alt_tag: str | None = None, classes: str | None = None) -> str:
+def html_image(image_path: Path, alt_tag: str | None = None, classes: str | None = None, width: int | None = None) -> str:
+    # width is an HTML attribute rather than CSS so sizing survives the GitHub
+    # wiki's tag sanitizer, which strips class and style attributes.
     return (f"<img src='{image_path.relative_to(REPO_ROOT).as_posix()}' alt='{"" if alt_tag is None else alt_tag}'"
-            f"{f" class='{classes}'" if classes else ""}>")
+            f"{f" class='{classes}'" if classes else ""}"
+            f"{f" width='{width}'" if width else ""}>")
 
 
 def image(image_path: Path, alt_tag: str | None = None) -> str:
@@ -394,6 +397,14 @@ def icon_path(icon_name: str) -> Path:
 
 def skill_icon_path(skill: str) -> Path:
     return icon_path(f"skill_{skill.lower()}")
+
+
+def boss_icon(boss_id: str, boss: dict, width: int) -> str:
+    """Boss art image, falling back to the emoji for bosses without a sprite."""
+    sprite = SPRITES / "bosses" / f"{boss_id}.png"
+    if sprite.is_file():
+        return html_image(sprite, boss_name(boss_id), width=width)
+    return boss.get("emoji", "")
 
 
 def _tool_table(slot: str, efficiency_key: str) -> str:
@@ -1162,6 +1173,7 @@ def gen_bosses() -> str:
     assert isinstance(bosses, dict)
     rows = [
         [
+            boss_icon(boss_id, boss, 48),
             link(boss_id),
             boss.get("combat_level_required", "—"),
             boss_desc(boss_id),
@@ -1169,7 +1181,7 @@ def gen_bosses() -> str:
         for boss_id, boss in sorted(bosses.items(), key=lambda x: x[1].get("combat_level_required", 0))
     ]
     return get_template("combat/bosses").format(
-        boss_table=table(["Boss", "Combat Level", "Description"], rows),
+        boss_table=table(["", "Boss", "Combat Level", "Description"], rows),
         combat_footer=gen_combat_footer(),
     )
 
@@ -1786,7 +1798,7 @@ def gen_boss(boss: dict) -> str:
     xp = boss.get("xp_rewards", {})
 
     return get_template("combat/boss").format(
-        icon=boss.get("emoji", ""),
+        icon=boss_icon(boss["id"], boss, 192),
         name=boss_name(boss["id"]),
         combat_level=boss.get("combat_level_required", "—"),
         hp=f"{hp:,}" if isinstance(hp, int) else hp,

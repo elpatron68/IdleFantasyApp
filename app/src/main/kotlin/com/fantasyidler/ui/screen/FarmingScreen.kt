@@ -547,7 +547,12 @@ private fun PatchCard(
         AlertDialog(
             onDismissRequest = { showClearConfirm = false },
             title = { Text(stringResource(R.string.farming_clear_patch)) },
-            text  = { Text(stringResource(R.string.farming_clear_desc)) },
+            text  = {
+                Text(
+                    if (patch?.cropType == "magic_bean") stringResource(R.string.farming_clear_desc_bean)
+                    else stringResource(R.string.farming_clear_desc_named, GameStrings.cropName(context, patch?.cropType ?: ""))
+                )
+            },
             confirmButton = {
                 Button(
                     onClick = { showClearConfirm = false; onClear() },

@@ -423,6 +423,8 @@
     <string name="settings_lang_irish" translatable="false">Gaeilge</string>
     <string name="settings_lang_czech" translatable="false">Čeština</string>
     <string name="settings_lang_chinese_simplified" translatable="false">中文（简体）</string>
+    <string name="settings_lang_polish" translatable="false">Polski</string>
+    <string name="settings_lang_lithuanian" translatable="false">Lietuvių</string>
     <string name="settings_lang_system">System</string>
     <string name="settings_save_data">Save Data</string>
     <string name="settings_export">Export Save</string>
@@ -718,7 +720,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d patches unlocked</string>
     <string name="farming_clear_patch">Clear Patch</string>
-    <string name="farming_clear_desc">Remove the crop without any reward?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string>
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string>
     <string name="farming_harvest_and_plant">Harvest and Plant All</string>
     <string name="farming_harvest_all_complete">All Patches Harvested!</string>
     <string name="farming_no_crops_ready">No crops ready to harvest</string>
@@ -981,7 +985,7 @@
     <string name="church_activate">Activate</string>
     <string name="church_blessing_bonus">+%1$s from blessing</string>
     <string name="church_blessing_suffix">from blessing</string>
-    <string name="church_effect_xp">×%%1$.2f XP for %2$d hours</string>
+    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string>
     <string name="church_effect_def">+%1$d Defense for %2$d hours</string>
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string>
     <string name="church_cost_bones">Costs %1$d bones</string>
@@ -1406,6 +1410,7 @@
     <string name="farming_bean_ready">The beanstalk reaches beyond the clouds. Ready to climb?</string>
     <string name="farming_bean_climb">Climb</string>
     <string name="farming_bean_climbed">You have climbed the beanstalk. A serpent\'s hiss catches your attention…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string>
     <string name="farming_bean_picker_stats" translatable="false">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Magic Beans can only be planted in one plot</string>
 
@@ -1592,7 +1597,7 @@
     <string name="tower_milestone_claim">Claim</string>
     <string name="tower_milestone_claimed">Claimed</string>
     <string name="tower_enemies_this_floor">Enemies</string>
-    <string name="tower_enemy_strength" formatted="false">Enemy strength: %s%</string>
+    <string name="tower_enemy_strength">Enemy strength: %1$s%%</string>
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string>
     <string name="tower_collect_prompt">Collect your tower run</string>
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string>

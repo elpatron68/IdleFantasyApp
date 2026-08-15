@@ -1,3 +1,11 @@
+v1.13.7
+• Clearing a farm patch now names the crop in the confirmation dialog, and clearing a Magic Bean patch shows a message that the bean was returned to your inventory
+• Fixed Church XP blessings showing a raw formatting code instead of the actual XP multiplier
+• Added Polish and Lithuanian to the language picker
+• Fixed Spanish (Spain) translations never loading; selecting it silently fell back to generic Spanish
+• Czech, Irish, Chinese, Polish, and Lithuanian can now also be set from Android per-app language settings
+• Updated Czech and French translations
+
 v1.13.6
 • XP lamps now preview the level each skill would reach and warn when XP would be wasted past 99, with the skill picker organised into sections with icons (thanks Michaelomh!)
 • The foretell next slayer task button is disabled while no task is active so bones can't be wasted (thanks Michaelomh!)

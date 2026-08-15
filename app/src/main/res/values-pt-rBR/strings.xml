@@ -423,6 +423,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Sistema</string>
     <string name="settings_save_data">Dados Salvos</string>
     <string name="settings_export">Exportar Salvamento</string>
@@ -703,7 +705,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d canteiros desbloqueados</string>
     <string name="farming_clear_patch">Limpar Canteiro</string>
-    <string name="farming_clear_desc">Remover a plantação sem nenhuma recompensa?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Colher e Plantar Tudo</string>
     <string name="farming_harvest_all_complete">Todos os canteiros colhidos!</string>
     <string name="farming_no_crops_ready">Nenhuma plantação pronta para colher</string>
@@ -966,7 +970,7 @@
     <string name="church_activate">Ativar</string>
     <string name="church_blessing_bonus">+%1$s da bênção</string>
     <string name="church_blessing_suffix">da bênção</string>
-    <string name="church_effect_xp">×%%1$.2f XP por %2$d horas</string>
+    <string name="church_effect_xp">×%1$.2f XP por %2$d horas</string>
     <string name="church_effect_def">+%1$d de Defesa por %2$d horas</string>
     <string name="church_effect_coins">+%1$d%% de moedas em saques por %2$d horas</string>
     <string name="church_cost_bones">Custa %1$d ossos</string>
@@ -1391,6 +1395,7 @@
     <string name="farming_bean_ready">O pé de feijão atravessa as nuvens. Pronto para subir?</string>
     <string name="farming_bean_climb">Subir</string>
     <string name="farming_bean_climbed">Você subiu o pé de feijão. Algo o espera…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Feijões Mágicos só podem ser plantados em um canteiro</string>
 
@@ -1577,7 +1582,7 @@
     <string name="tower_milestone_claim">Coletar</string>
     <string name="tower_milestone_claimed">Coletado</string>
     <string name="tower_enemies_this_floor">Inimigos</string>
-    <string name="tower_enemy_strength" formatted="false">Força do inimigo: %s%</string>
+    <string name="tower_enemy_strength">Força do inimigo: %1$s%%</string>
     <string name="tower_entry_card_desc">Andares infinitos. Até onde você consegue subir?</string>
     <string name="tower_collect_prompt">Colete sua jornada na torre</string>
     <string name="tower_home_collect_hint">Abra a tela da Torre para coletar esta jornada</string>

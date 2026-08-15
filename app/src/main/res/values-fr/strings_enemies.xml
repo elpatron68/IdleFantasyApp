@@ -91,7 +91,7 @@
     <string name="dungeon_orc_stronghold_name">Forteresse des orcs</string>
     <string name="dungeon_orc_stronghold_desc">Une forteresse orc située au cœur des montagnes. Seuls les braves osent y entrer.</string>
     <string name="dungeon_volcanic_depths_name">Profondeurs volcaniques</string>
-    <string name="dungeon_volcanic_depths_desc">Une cavité brûlante habitée par des chiens de feu et des démons ingnifiants. La chaleur y est insupportable !</string>
+    <string name="dungeon_volcanic_depths_desc">Une cavité brûlante habitée par des chiens de feu et des démons insignifiants. La chaleur y est insupportable !</string>
     <string name="dungeon_dragon_lair_name">Repaire du dragon</string>
     <string name="dungeon_dragon_lair_desc">La demeure légendaire des dragons verts. Seuls les maîtres guerriers survivent à ce défi.</string>
     <string name="dungeon_farm_name">Ferme</string>
@@ -124,7 +124,7 @@
     <string name="boss_demon_lord_desc">Un ancien démon des abysses, maître de la magie noire.</string>
     <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
     <string name="boss_kraken_desc">La terreur des mers profondes, un monstre marin colossal.</string>
-    <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
+    <string name="boss_balrog_name">Braise Gothique</string>
     <string name="boss_balrog_desc">Un ancien démon de flammes et d\'ombres, réveillé de son sommeil profond sous la terre.</string>
     <string name="boss_void_sovereign_name">Le Souverain du Vide</string>
     <string name="boss_void_sovereign_desc">L\'entité primordiale derrière les failles du vide. Ancienne au-delà de toute mesure, elle considère les provocateurs mortels avec mépris.</string>

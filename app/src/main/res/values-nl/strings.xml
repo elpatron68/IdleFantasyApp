@@ -423,6 +423,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Systeem</string>
     <string name="settings_save_data">Data opslaan</string>
     <string name="settings_export">Exporteer opslag</string>
@@ -717,7 +719,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d Percelen ontgrendeld</string>
     <string name="farming_clear_patch">Verwijder Perceel</string>
-    <string name="farming_clear_desc">Verwijder het gewas zonder beloning?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Oogst en Plant Alles</string>
     <string name="farming_harvest_all_complete">Alle percelen geoogst!</string>
     <string name="farming_no_crops_ready">Geen gewassen klaar om te oogsten</string>
@@ -980,7 +984,7 @@
     <string name="church_activate">Activeren</string>
     <string name="church_blessing_bonus">+%1$s van zegen</string>
     <string name="church_blessing_suffix">van zegen</string>
-    <string name="church_effect_xp">×%%1$.2f XP voor %2$d uur</string>
+    <string name="church_effect_xp">×%1$.2f XP voor %2$d uur</string>
     <string name="church_effect_def">+%1$d Verdediging voor %2$d uur</string>
     <string name="church_effect_coins">+%1$d%% Ducatenopbrengst voor %2$d uur</string>
     <string name="church_cost_bones">Kost %1$d botten</string>
@@ -1405,6 +1409,7 @@
     <string name="farming_bean_ready">De bonenrank reikt tot voorbij de wolken. Klaar om te klimmen?</string>
     <string name="farming_bean_climb">Klimmen</string>
     <string name="farming_bean_climbed">Je hebt de bonenrank beklommen. Iets wacht je…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Magische bonen kunnen slechts op één veld worden geplant</string>
 
@@ -1591,7 +1596,7 @@
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
-    <string name="tower_enemy_strength" formatted="false">Enemy strength: %s%</string> <!-- untranslated -->
+    <string name="tower_enemy_strength">Enemy strength: %1$s%%</string> <!-- untranslated -->
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
     <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->

@@ -556,7 +556,7 @@
     <string name="combat_run_progress">Run %1$d/%2$d</string> <!-- untranslated -->
     <string name="combat_xp_on_victory">XP on victory</string> <!-- untranslated -->
     <string name="combat_you_died">¡Has muerto!</string>
-    <string name="combat_died_reward">Recibiste el 10%% de las recompensas.</string>
+    <string name="combat_died_reward" formatted="false">Recibiste el 10% de las recompensas.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d gear</string> <!-- untranslated -->
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -713,7 +713,8 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d Parcelas desbloqueadas</string>
     <string name="farming_clear_patch">Limpiar parcela</string>
-    <string name="farming_clear_desc">Retirar la cosecha sin obtener ninguna recompensa?</string>
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Harvest and Plant All</string> <!-- untranslated -->
     <string name="farming_harvest_all_complete">All Patches Harvested!</string> <!-- untranslated -->
     <string name="farming_no_crops_ready">No crops ready to harvest</string> <!-- untranslated -->
@@ -1082,7 +1083,7 @@
     <string name="slayer_already_owned">Already owned.</string> <!-- untranslated -->
     <string name="slayer_purchased">Added to inventory.</string> <!-- untranslated -->
     <string name="slayer_owned">Owned</string> <!-- untranslated -->
-    <string name="slayer_lamp_purchased">XP added to %1$s!</string>
+    <string name="slayer_lamp_purchased">+%1$s XP added to %2$s!</string> <!-- untranslated -->
     <string name="slayer_lamp_pick_skill">Choose a skill</string> <!-- untranslated -->
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
     <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
@@ -1110,7 +1111,7 @@
     <!-- Prestige system -->
     <string name="prestige">Prestige</string> <!-- untranslated -->
     <string name="prestige_max">Max Prestige</string> <!-- untranslated -->
-    <string name="prestige_confirm_title">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_title" formatted="false">Prestige %s?</string> <!-- untranslated -->
     <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_agility">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus, and your session length will keep shrinking — by level 99 a session will take %3$d min instead of %4$d min.</string> <!-- untranslated -->
@@ -1193,10 +1194,10 @@
     <string name="bone_altar_select_prompt">Select a bone to bury at the altar</string> <!-- untranslated -->
     <string name="bone_altar_tap">Tap to Bury</string> <!-- untranslated -->
     <string name="bone_altar_change_bone">Change</string> <!-- untranslated -->
-    <string name="bone_altar_combo_count">Combo ×%d</string> <!-- untranslated -->
-    <string name="bone_altar_bonus_active">+50%% XP bonus!</string> <!-- untranslated -->
-    <string name="bone_altar_session_xp">+%s XP this session</string> <!-- untranslated -->
-    <string name="bone_altar_buried_count">%d buried</string> <!-- untranslated -->
+    <string name="bone_altar_combo_count" formatted="false">Combo ×%d</string> <!-- untranslated -->
+    <string name="bone_altar_bonus_active" formatted="false">+50% XP bonus!</string> <!-- untranslated -->
+    <string name="bone_altar_session_xp" formatted="false">+%s XP this session</string> <!-- untranslated -->
+    <string name="bone_altar_buried_count" formatted="false">%d buried</string> <!-- untranslated -->
     <string name="bone_altar_no_bones">No bones in inventory</string> <!-- untranslated -->
     <string name="bone_altar_cape_awarded">Prayer cape earned!</string> <!-- untranslated -->
 
@@ -1260,9 +1261,9 @@
     <string name="town_church_no_bonus">Mejora para extender la duración de bendiciones</string>
     <string name="town_building_fairgrounds_name">Fairgrounds</string> <!-- untranslated -->
     <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5%% idle ticket chance</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10%% idle ticket chance</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t1_bonus" formatted="false">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t2_bonus" formatted="false">Unlocks Higher or Lower, +10% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t3_bonus" formatted="false">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string> <!-- untranslated -->
     <string name="town_building_garden_name">Garden</string> <!-- untranslated -->
     <plurals name="town_garden_bonus">
         <item quantity="zero">No extra farm plots yet</item>
@@ -1330,7 +1331,7 @@
     <string name="carnival_queue">Queue Session</string> <!-- untranslated -->
     <string name="carnival_ring_toss">Ring Toss</string> <!-- untranslated -->
     <string name="carnival_active_ring_desc">Time your throw when the indicator hits the golden target zone.</string> <!-- untranslated -->
-    <string name="carnival_ring_target_hint">Aim for the centre (45%%–55%%)</string> <!-- untranslated -->
+    <string name="carnival_ring_target_hint" formatted="false">Aim for the centre (45%–55%)</string> <!-- untranslated -->
     <string name="carnival_throw">Throw!</string> <!-- untranslated -->
     <string name="carnival_hammer_strike">Hammer Strike</string> <!-- untranslated -->
     <string name="carnival_active_hammer_desc">Strike when the power meter is at its peak for maximum score.</string> <!-- untranslated -->
@@ -1363,7 +1364,7 @@
     <string name="carnival_appraisal_wrong">Wrong! The more valuable item was %1$s.</string> <!-- untranslated -->
     <string name="carnival_redeemed">Redeemed: %1$s!</string> <!-- untranslated -->
     <string name="carnival_not_enough_tickets">Not enough tickets.</string> <!-- untranslated -->
-    <string name="carnival_lamp_redeemed">+%1$d XP in %2$s!</string>
+    <string name="carnival_lamp_redeemed">+%1$s XP in %2$s!</string> <!-- untranslated -->
     <string name="carnival_shell_game">Pick-a-Cup</string> <!-- untranslated -->
     <string name="carnival_active_shell_desc">Watch which cup hides the gem, then pick it after the shuffle!</string> <!-- untranslated -->
     <string name="carnival_shell_showing">Watch carefully — gem is under cup %1$d</string> <!-- untranslated -->
@@ -1386,7 +1387,7 @@
     <string name="carnival_difficulty_label">Difficulty</string> <!-- untranslated -->
     <string name="carnival_difficulty_normal">Normal</string> <!-- untranslated -->
     <string name="carnival_difficulty_hard">Hard</string> <!-- untranslated -->
-    <string name="carnival_ring_hard_hint">Hard: 52%%–57%% target, 7 tickets</string> <!-- untranslated -->
+    <string name="carnival_ring_hard_hint" formatted="false">Hard: 52%–57% target, 7 tickets</string> <!-- untranslated -->
 
 
     <!-- ===== Magic Bean / Farming ===== -->
@@ -1401,6 +1402,7 @@
     <string name="farming_bean_ready">The beanstalk reaches beyond the clouds. Ready to climb?</string> <!-- untranslated -->
     <string name="farming_bean_climb">Climb</string> <!-- untranslated -->
     <string name="farming_bean_climbed">You have climbed the beanstalk. Something awaits...</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Magic Beans can only be planted in one plot</string> <!-- untranslated -->
 
@@ -1574,20 +1576,20 @@
 
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
-    <string name="tower_floor_label">Floor %d</string> <!-- untranslated -->
+    <string name="tower_floor_label" formatted="false">Floor %d</string> <!-- untranslated -->
     <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
-    <string name="tower_best_floor">Best: Floor %d</string> <!-- untranslated -->
-    <string name="tower_start_btn">Attempt Floor %d</string> <!-- untranslated -->
+    <string name="tower_best_floor" formatted="false">Best: Floor %d</string> <!-- untranslated -->
+    <string name="tower_start_btn" formatted="false">Attempt Floor %d</string> <!-- untranslated -->
     <string name="tower_milestones">Milestones</string> <!-- untranslated -->
-    <string name="tower_floor_cleared">Floor %d cleared!</string> <!-- untranslated -->
-    <string name="tower_new_best">New best: Floor %d!</string> <!-- untranslated -->
+    <string name="tower_floor_cleared" formatted="false">Floor %d cleared!</string> <!-- untranslated -->
+    <string name="tower_new_best" formatted="false">New best: Floor %d!</string> <!-- untranslated -->
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
-    <string name="tower_death_reset">You fell on floor %d. Resetting to floor 1.</string>
+    <string name="tower_death_reset">You fell on floor %1$d. Resetting to floor %2$d.</string> <!-- untranslated -->
     <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string> <!-- untranslated -->
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
-    <string name="tower_enemy_strength">Enemy strength: %s%%</string> <!-- untranslated -->
+    <string name="tower_enemy_strength">Enemy strength: %1$s%%</string> <!-- untranslated -->
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
     <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
@@ -1708,7 +1710,7 @@
     <string name="journal_hint">Jot down reminders for next time — what to queue, what you\'re grinding toward.</string> <!-- untranslated -->
     <string name="journal_placeholder">Write a note...</string> <!-- untranslated -->
     <string name="profile_banners_empty">No banners earned yet. Complete a Seasonal Event to earn one!</string> <!-- untranslated -->
-    <string name="profile_banners_earned_on">Earned %s</string> <!-- untranslated -->
+    <string name="profile_banners_earned_on" formatted="false">Earned %s</string> <!-- untranslated -->
     <string name="profile_banners_unobtained">(Unobtained)</string> <!-- untranslated -->
     <string name="character_title_label">Title</string> <!-- untranslated -->
     <string name="character_title_none">No Title</string> <!-- untranslated -->
@@ -1811,7 +1813,7 @@
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
     <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
     <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc" formatted="false">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string> <!-- untranslated -->
     <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
     <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->

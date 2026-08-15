@@ -236,7 +236,11 @@ class FarmingViewModel @Inject constructor(
     }
 
     fun clearPatch(patchNumber: Int) {
-        viewModelScope.launch { farmingRepo.clearPatch(patchNumber) }
+        viewModelScope.launch {
+            val wasBean = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber }?.cropType == "magic_bean"
+            farmingRepo.clearPatch(patchNumber)
+            if (wasBean) _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_bean_cleared)) }
+        }
     }
 
     fun harvestResultConsumed() = _extra.update { it.copy(harvestResult = null) }
