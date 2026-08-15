@@ -1,0 +1,7 @@
+• XP lamps now preview the level each skill would reach before you commit, and warn when XP would be wasted past level 99 (thanks Michaelomh!)
+• The lamp skill picker is organised into Gathering, Crafting, Support, and Combat sections with skill icons (thanks Michaelomh!)
+• The foretell next slayer task button is disabled while no task is active so bones can't be wasted on a task you could get for free (thanks Michaelomh!)
+• Restored the official themes' intended colours that shifted after the Material 3 update (thanks CiaranGruber!)
+• Large community translation batches for French, Russian, Italian, and Simplified Chinese (thanks Mortain and every submitter!)
+• Fixed percent signs displaying doubled in item, cape, and town building descriptions, and restored the intended line breaks in seed descriptions
+• Skill sheets for Mining, Fishing, Woodcutting, Firemaking, Runecrafting, and Prayer now show how many of each resource you own, and the Skills tab legend explains the gold dot indicator (thanks xRahul!)

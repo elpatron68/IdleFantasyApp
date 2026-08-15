@@ -22,7 +22,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -82,7 +81,8 @@ fun LampSkillDialog(
                 HorizontalDivider()
                 LampSkillSection(
                     title           = stringResource(R.string.label_combat),
-                    skillKeys       = Skills.COMBAT,
+                    // Prayer is listed under Support; Slayer belongs here (mirrors SkillsScreen).
+                    skillKeys       = Skills.COMBAT.filter { it != Skills.PRAYER } + Skills.SLAYER,
                     skillLevels     = skillLevels,
                     skillXp         = skillXp,
                     sessionXpGain   = sessionXpGain,
@@ -199,18 +199,14 @@ private fun LampSkillRow(
                 ) {
                     val endXp = xp + sessionXpGain
                     val isOverMax = sessionXpGain > 0L && endXp > XpTable.xpForLevel(99)
-                    val xpLineText = remember(skillKey, xp, sessionXpGain) {
-                        if (sessionXpGain <= 0L) null
-                        else {
-                            val levelBefore = XpTable.levelForXp(xp)
-                            val levelAfter = XpTable.levelForXp(endXp)
-                            val levelGain = levelAfter - levelBefore
-                            val pct = (XpTable.progressFraction(endXp) * 100).toInt()
-                            buildString {
-                                append("→  Lv $levelAfter")
-                                if (levelGain > 0) append(" (+$levelGain, $pct%)")
-                                else append(" ($pct%)")
-                            }
+                    val xpLineText = if (sessionXpGain <= 0L) null else {
+                        val levelAfter = XpTable.levelForXp(endXp)
+                        val levelGain = levelAfter - XpTable.levelForXp(xp)
+                        val pct = (XpTable.progressFraction(endXp) * 100).toInt()
+                        if (levelGain > 0) {
+                            stringResource(R.string.slayer_lamp_level_preview_gain, levelAfter, levelGain, pct)
+                        } else {
+                            stringResource(R.string.slayer_lamp_level_preview, levelAfter, pct)
                         }
                     }
                     if (isOverMax) {

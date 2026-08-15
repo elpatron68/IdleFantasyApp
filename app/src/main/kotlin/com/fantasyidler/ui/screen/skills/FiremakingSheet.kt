@@ -145,6 +145,7 @@ internal fun FiremakingSheet(
     // the host's onDismissRequest interception covers the older popup-based sheet.
     BackHandler(enabled = selectedKey != null) { selectedKey = null }
     val selectedLog = selectedKey?.let { availableLogs[it] }
+    val dim = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
     Column(
         modifier = Modifier
@@ -196,9 +197,14 @@ internal fun FiremakingSheet(
                                 }
                                 val ashOwned = inventory[ashKey] ?: 0
                                 Text(
-                                    text  = stringResource(R.string.firemaking_burns_to, ashName) + "  •  ${log.xpPerLog} XP  •  " + stringResource(R.string.firemaking_ashes_owned, ashOwned),
+                                    text  = stringResource(R.string.firemaking_burns_to, ashName) + "  •  ${log.xpPerLog} XP",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = rowAlpha),
+                                )
+                                Text(
+                                    text  = stringResource(R.string.firemaking_ashes_owned, ashOwned),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (ashOwned > 0) MaterialTheme.colorScheme.primary else dim,
                                 )
                             }
                             Text(
@@ -234,9 +240,15 @@ internal fun FiremakingSheet(
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
             Text(
-                text     = "${maxQty} ${stringResource(R.string.firemaking_logs_in_inventory)}  •  " + stringResource(R.string.firemaking_ashes_owned, ashOwned),
+                text     = "${maxQty} ${stringResource(R.string.firemaking_logs_in_inventory)}",
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+            )
+            Text(
+                text     = stringResource(R.string.firemaking_ashes_owned, ashOwned),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = if (ashOwned > 0) MaterialTheme.colorScheme.primary else dim,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
             Spacer(Modifier.height(12.dp))

@@ -125,6 +125,7 @@ internal fun MiningSheet(
     petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    inventory: Map<String, Int> = emptyMap(),
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -170,6 +171,7 @@ internal fun MiningSheet(
                         hasActiveSession = hasActiveSession,
                         isQueueFull      = isQueueFull,
                         questIndicators  = activeQuests["${Skills.MINING}:$key"] ?: emptyList(),
+                        ownedQty         = inventory[key] ?: 0,
                         onClick          = { selectedKey = key },
                     )
                 }
@@ -202,6 +204,7 @@ internal fun WoodcuttingSheet(
     petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    inventory: Map<String, Int> = emptyMap(),
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -241,6 +244,7 @@ internal fun WoodcuttingSheet(
                         hasActiveSession = hasActiveSession,
                         isQueueFull      = isQueueFull,
                         questIndicators  = activeQuests["${Skills.WOODCUTTING}:${tree.logName}"] ?: emptyList(),
+                        ownedQty         = inventory[tree.logName] ?: 0,
                         onClick          = { selectedKey = key },
                     )
                 }
@@ -273,6 +277,7 @@ internal fun FishingSheet(
     petBoostPct: Int = 0,
     xpBonusMult: Float = 1f,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    inventory: Map<String, Int> = emptyMap(),
     onSelect: (String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -312,6 +317,7 @@ internal fun FishingSheet(
                         hasActiveSession = hasActiveSession,
                         isQueueFull      = isQueueFull,
                         questIndicators  = activeQuests["${Skills.FISHING}:$key"] ?: emptyList(),
+                        ownedQty         = inventory[key] ?: 0,
                         onClick          = { selectedKey = key },
                     )
                 }
@@ -366,8 +372,10 @@ internal fun ActivityRow(
     hasActiveSession: Boolean,
     isQueueFull: Boolean,
     questIndicators: List<QuestIndicator> = emptyList(),
+    ownedQty: Int? = null,
     onClick: () -> Unit,
 ) {
+    val dim = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -388,6 +396,13 @@ internal fun ActivityRow(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+            if (ownedQty != null) {
+                Text(
+                    text  = stringResource(R.string.crafting_owned, ownedQty),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = if (ownedQty > 0) MaterialTheme.colorScheme.primary else dim,
+                )
+            }
             if (projectedLabel != null) {
                 Text(
                     text  = projectedLabel,

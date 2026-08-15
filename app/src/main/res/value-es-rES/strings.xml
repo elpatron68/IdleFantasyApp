@@ -625,9 +625,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Level %1$d  •  Entierra huesos o esparce cenizas para la oración. XP</string>
     <string name="skills_no_bones">No hay huesos ni cenizas en el inventario.</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity in inventory -->
-    <string name="skills_bone_qty">%1$d XP cada  •  %2$d en inventario</string>
     <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
+    <string name="skills_xp_each">%1$d XP cada</string>
     <string name="skills_bone_selected">%1$d XP cada  •  %2$d disponible</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP total</string> <!-- untranslated -->

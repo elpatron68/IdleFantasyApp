@@ -615,9 +615,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Nível %1$d  •  Enterre ossos ou espalhe cinzas para ganhar XP de Oração</string>
     <string name="skills_no_bones">Nenhum osso ou cinza no inventário</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity in inventory -->
-    <string name="skills_bone_qty">%1$d XP cada  •  %2$d no inventário</string>
     <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
+    <string name="skills_xp_each">%1$d XP cada</string>
     <string name="skills_bone_selected">%1$d XP cada  •  %2$d disponíveis</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP no total</string>
@@ -658,6 +657,7 @@
     <string name="quest_legend_guild_daily">Diária da guilda</string>
     <string name="quest_legend_guild">Missão da guilda</string>
     <string name="quest_legend_quest">Missão</string>
+    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Ícones esmaecidos ainda não podem ser concluídos (falta nível ou materiais). Um pequeno número elevado indica que várias missões desse tipo pedem a mesma coisa.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d no inventário</string>
@@ -961,7 +961,7 @@
     <string name="church_activate">Ativar</string>
     <string name="church_blessing_bonus">+%1$s da bênção</string>
     <string name="church_blessing_suffix">da bênção</string>
-    <string name="church_effect_xp">×%1$.2f XP por %2$d horas</string>
+    <string name="church_effect_xp">×%%1$.2f XP por %2$d horas</string>
     <string name="church_effect_def">+%1$d de Defesa por %2$d horas</string>
     <string name="church_effect_coins">+%1$d%% de moedas em saques por %2$d horas</string>
     <string name="church_cost_bones">Custa %1$d ossos</string>
@@ -1069,6 +1069,9 @@
     <string name="slayer_owned">Possuído</string>
     <string name="slayer_lamp_purchased">+%1$s XP adicionado a %2$s!</string>
     <string name="slayer_lamp_pick_skill">Escolha uma habilidade</string>
+    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lâmpada de XP (Pequena)</string>
     <string name="slayer_lamp_large">Lâmpada de XP (Grande)</string>
     <string name="slayer_lamp_small_desc">+10.000 XP para qualquer habilidade</string>
@@ -1091,7 +1094,7 @@
     <!-- Prestige system -->
     <string name="prestige">Prestígio</string>
     <string name="prestige_max">Prestígio Máximo</string>
-    <string name="prestige_confirm_title">Dar Prestígio em %s?</string>
+    <string name="prestige_confirm_title" formatted="false">Dar Prestígio em %s?</string>
     <string name="prestige_confirm_message_xp">Seu nível de %1$s vai voltar para 1, mas você vai ganhar um bônus permanente de +%2$d%% de XP nessa habilidade.</string>
     <string name="prestige_confirm_message_stat">Seu nível de %1$s vai voltar para 1, mas você vai ganhar um bônus permanente de +%2$d nos seus atributos.</string>
     <string name="prestige_confirm_message_agility">Seu nível de %1$s vai voltar para 1, mas você vai ganhar um bônus permanente de +%2$d%% de XP, e a duração da sessão vai continuar diminuindo — no nível 99 uma sessão vai levar %3$d min em vez de %4$d min.</string>
@@ -1174,10 +1177,10 @@
     <string name="bone_altar_select_prompt">Selecione um osso para enterrar no altar</string>
     <string name="bone_altar_tap">Toque para Enterrar</string>
     <string name="bone_altar_change_bone">Trocar</string>
-    <string name="bone_altar_combo_count">Combo ×%d</string> <!-- untranslated -->
+    <string name="bone_altar_combo_count" formatted="false">Combo ×%d</string> <!-- untranslated -->
     <string name="bone_altar_bonus_active" formatted="false">+50% de bônus de XP!</string>
-    <string name="bone_altar_session_xp">+%s XP nesta sessão</string>
-    <string name="bone_altar_buried_count">%d enterrados</string>
+    <string name="bone_altar_session_xp" formatted="false">+%s XP nesta sessão</string>
+    <string name="bone_altar_buried_count" formatted="false">%d enterrados</string>
     <string name="bone_altar_no_bones">Nenhum osso no inventário</string>
     <string name="bone_altar_cape_awarded">Capa de Oração conquistada!</string>
 
@@ -1240,9 +1243,9 @@
     <string name="town_church_no_bonus">Melhore para aumentar a duração das bênçãos</string>
     <string name="town_building_fairgrounds_name">Parque de Diversões</string>
     <string name="town_fairgrounds_no_bonus">4 minijogos ativos disponíveis, recarga de 10 minutos</string>
-    <string name="town_fairgrounds_t1_bonus">Desbloqueia Escolha o Copo, recarga reduzida para 7,5 minutos, +5%% de chance de bilhete ocioso</string>
-    <string name="town_fairgrounds_t2_bonus">Desbloqueia Maior ou Menor, +10%% de chance de bilhete ocioso</string>
-    <string name="town_fairgrounds_t3_bonus">Recarga reduzida para 5 minutos, +15%% de chance de bilhete ocioso</string>
+    <string name="town_fairgrounds_t1_bonus" formatted="false">Desbloqueia Escolha o Copo, recarga reduzida para 7,5 minutos, +5% de chance de bilhete ocioso</string>
+    <string name="town_fairgrounds_t2_bonus" formatted="false">Desbloqueia Maior ou Menor, +10% de chance de bilhete ocioso</string>
+    <string name="town_fairgrounds_t3_bonus" formatted="false">Recarga reduzida para 5 minutos, +15% de chance de bilhete ocioso</string>
     <string name="town_building_garden_name">Jardim</string>
     <plurals name="town_garden_bonus">
         <item quantity="zero">Nenhum canteiro extra ainda</item>
@@ -1310,7 +1313,7 @@
     <string name="carnival_queue">Colocar na Fila</string>
     <string name="carnival_ring_toss">Lançamento de Argolas</string>
     <string name="carnival_active_ring_desc">Cronometre seu lançamento para quando o indicador atingir a zona dourada.</string>
-    <string name="carnival_ring_target_hint">Mire no centro (45%%–55%%)</string>
+    <string name="carnival_ring_target_hint" formatted="false">Mire no centro (45%–55%)</string>
     <string name="carnival_throw">Lançar!</string>
     <string name="carnival_hammer_strike">Golpe de Martelo</string>
     <string name="carnival_active_hammer_desc">Golpeie quando o medidor de força estiver no auge para pontuação máxima.</string>
@@ -1366,7 +1369,7 @@
     <string name="carnival_difficulty_label">Dificuldade</string>
     <string name="carnival_difficulty_normal">Normal</string> <!-- untranslated -->
     <string name="carnival_difficulty_hard">Difícil</string>
-    <string name="carnival_ring_hard_hint">Difícil: alvo de 52%%–57%%, 7 bilhetes</string>
+    <string name="carnival_ring_hard_hint" formatted="false">Difícil: alvo de 52%–57%, 7 bilhetes</string>
 
 
     <!-- ===== Magic Bean / Farming ===== -->
@@ -1553,20 +1556,20 @@
 
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Torre Infinita</string>
-    <string name="tower_floor_label">Andar %d</string>
+    <string name="tower_floor_label" formatted="false">Andar %d</string>
     <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
-    <string name="tower_best_floor">Melhor: Andar %d</string>
-    <string name="tower_start_btn">Tentar Andar %d</string>
+    <string name="tower_best_floor" formatted="false">Melhor: Andar %d</string>
+    <string name="tower_start_btn" formatted="false">Tentar Andar %d</string>
     <string name="tower_milestones">Marcos</string>
-    <string name="tower_floor_cleared">Andar %d concluído!</string>
-    <string name="tower_new_best">Novo melhor: Andar %d!</string>
+    <string name="tower_floor_cleared" formatted="false">Andar %d concluído!</string>
+    <string name="tower_new_best" formatted="false">Novo melhor: Andar %d!</string>
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">Você caiu no andar %1$d. Reiniciando para o andar %2$d.</string>
     <string name="tower_not_enough_runes">%1$s insuficiente para ataques de potencial máximo.</string>
     <string name="tower_milestone_claim">Coletar</string>
     <string name="tower_milestone_claimed">Coletado</string>
     <string name="tower_enemies_this_floor">Inimigos</string>
-    <string name="tower_enemy_strength">Força do inimigo: %s%%</string>
+    <string name="tower_enemy_strength" formatted="false">Força do inimigo: %s%</string>
     <string name="tower_entry_card_desc">Andares infinitos. Até onde você consegue subir?</string>
     <string name="tower_collect_prompt">Colete sua jornada na torre</string>
     <string name="tower_home_collect_hint">Abra a tela da Torre para coletar esta jornada</string>
@@ -1687,7 +1690,7 @@
     <string name="journal_hint">Anote lembretes para a próxima vez — o que colocar na fila, o que você está buscando.</string>
     <string name="journal_placeholder">Escreva uma nota...</string>
     <string name="profile_banners_empty">Nenhuma bandeira conquistada ainda. Complete um Evento Sazonal para ganhar uma!</string>
-    <string name="profile_banners_earned_on">Conquistada em %s</string>
+    <string name="profile_banners_earned_on" formatted="false">Conquistada em %s</string>
     <string name="profile_banners_unobtained">(Não obtida)</string>
     <string name="character_title_label">Título</string>
     <string name="character_title_none">Nenhum Título</string>
@@ -1785,7 +1788,7 @@
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
     <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
     <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc" formatted="false">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string> <!-- untranslated -->
     <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
     <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->

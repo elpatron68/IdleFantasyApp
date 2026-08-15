@@ -664,7 +664,7 @@
     <string name="item_strongmans_sigil_name">Sceau de l\'Homme Fort</string>
     <string name="item_strongmans_sigil_desc">Un lourd anneau de fer gravé du sceau du champion des Hommes Forts. Augmente la Force.</string>
     <string name="item_carnival_cape_name">Cape de Carnaval</string>
-    <string name="item_carnival_cape_desc">Une cape éclatante portée par les champions du carnaval. Permet d\'obtenir 5 % de tickets supplémentaires lors des sessions de carnaval.</string>
+    <string name="item_carnival_cape_desc" formatted="false">Une cape éclatante portée par les champions du carnaval. Permet d\'obtenir 5 % de tickets supplémentaires lors des sessions de carnaval.</string>
 
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Bière d’attaque</string>
@@ -732,53 +732,37 @@
 
     <!-- ===== Seed names ===== -->
     <string name="item_potato_seed_name">Graine de pommes de terre</string>
-    <string name="item_potato_seed_desc">Plantez pour cultiver des pommes de terre. Pousse en 2 heures.
-\nNécessite un niveau d\'agriculture de 1.</string>
+    <string name="item_potato_seed_desc">Plantez pour cultiver des pommes de terre. Pousse en 2 heures.\n\nNécessite un niveau d\'agriculture de 1.</string>
     <string name="item_onion_seed_name">Graine d\'oignon</string>
-    <string name="item_onion_seed_desc">Plantez pour cultiver des oignons. Pousse en 3 heures.
-\nNécessite le niveau 5 d\'agriculture.</string>
+    <string name="item_onion_seed_desc">Plantez pour cultiver des oignons. Pousse en 3 heures.\n\nNécessite le niveau 5 d\'agriculture.</string>
     <string name="item_cabbage_seed_name">Graine de chou</string>
-    <string name="item_cabbage_seed_desc">Plantez pour cultiver des choux. Pousse en 4 heures.
-\nNécessite le niveau 10 d\'agriculture.</string>
+    <string name="item_cabbage_seed_desc">Plantez pour cultiver des choux. Pousse en 4 heures.\n\nNécessite le niveau 10 d\'agriculture.</string>
     <string name="item_carrot_seed_name">Graine de carotte</string>
-    <string name="item_carrot_seed_desc">Plantez pour cultiver des carottes. Pousse en 5 heures.
-\nNécessite le niveau 15 d\'agriculture.</string>
+    <string name="item_carrot_seed_desc">Plantez pour cultiver des carottes. Pousse en 5 heures.\n\nNécessite le niveau 15 d\'agriculture.</string>
     <string name="item_tomato_seed_name">Graine de tomate</string>
-    <string name="item_tomato_seed_desc">Plantez pour cultiver des tomates. Pousse en 6 heures.
-\nNécessite le niveau 20 d\'agriculture.</string>
+    <string name="item_tomato_seed_desc">Plantez pour cultiver des tomates. Pousse en 6 heures.\n\nNécessite le niveau 20 d\'agriculture.</string>
     <string name="item_corn_seed_name">Graine de maïs</string>
-    <string name="item_corn_seed_desc">Plantez pour cultiver du maïs. Pousse en 7 heures.
-\nNécessite le niveau 25 d\'agriculture.</string>
+    <string name="item_corn_seed_desc">Plantez pour cultiver du maïs. Pousse en 7 heures.\n\nNécessite le niveau 25 d\'agriculture.</string>
     <string name="item_pumpkin_seed_name">Graine de citrouille</string>
-    <string name="item_pumpkin_seed_desc">Plantez pour cultiver des citrouilles. Pousse en 9 heures.
-\nNécessite le niveau 30 d\'agriculture.</string>
+    <string name="item_pumpkin_seed_desc">Plantez pour cultiver des citrouilles. Pousse en 9 heures.\n\nNécessite le niveau 30 d\'agriculture.</string>
     <string name="item_watermelon_seed_name">Graine de pastèque</string>
-    <string name="item_watermelon_seed_desc">Plantez pour cultiver des pastèques. Pousse en 10 heures.
-\nNécessite le niveau 35 d\'agriculture.</string>
+    <string name="item_watermelon_seed_desc">Plantez pour cultiver des pastèques. Pousse en 10 heures.\n\nNécessite le niveau 35 d\'agriculture.</string>
     <string name="item_strawberry_seed_name">Graine de fraise</string>
-    <string name="item_strawberry_seed_desc">Plantez pour cultiver des fraises. Pousse en 11 heures.
-\nNécessite le niveau 40 d\'agriculture.</string>
+    <string name="item_strawberry_seed_desc">Plantez pour cultiver des fraises. Pousse en 11 heures.\n\nNécessite le niveau 40 d\'agriculture.</string>
     <string name="item_magic_herb_seed_name">Graine d\'herbe magique</string>
-    <string name="item_magic_herb_seed_desc">Plantez pour cultiver des herbes magiques. Pousse en 13 heures.
-\nNécessite le niveau 50 d\'agriculture.</string>
+    <string name="item_magic_herb_seed_desc">Plantez pour cultiver des herbes magiques. Pousse en 13 heures.\n\nNécessite le niveau 50 d\'agriculture.</string>
     <string name="item_dragon_fruit_seed_name">Graine de fruit du dragon</string>
-    <string name="item_dragon_fruit_seed_desc">Plantez pour cultiver des fruits du dragon. Pousse en 14 heures.
-\nNécessite le niveau 55 d\'agriculture.</string>
+    <string name="item_dragon_fruit_seed_desc">Plantez pour cultiver des fruits du dragon. Pousse en 14 heures.\n\nNécessite le niveau 55 d\'agriculture.</string>
     <string name="item_golden_wheat_seed_name">Graine de blé doré</string>
-    <string name="item_golden_wheat_seed_desc">Plantez pour cultiver du blé doré. Pousse en 16 heures.
-\nNécessite le niveau 65 d\'agriculture.</string>
+    <string name="item_golden_wheat_seed_desc">Plantez pour cultiver du blé doré. Pousse en 16 heures.\n\nNécessite le niveau 65 d\'agriculture.</string>
     <string name="item_spirit_seed_name">Graine de l\'esprit</string>
-    <string name="item_spirit_seed_desc">Plantez pour cultiver des herbes spirituelles. Pousse en 19 heures.
-\nNécessite le niveau 75 d\'agriculture.</string>
+    <string name="item_spirit_seed_desc">Plantez pour cultiver des herbes spirituelles. Pousse en 19 heures.\n\nNécessite le niveau 75 d\'agriculture.</string>
     <string name="item_celestial_bloom_seed_name">Graine de fleur céleste</string>
-    <string name="item_celestial_bloom_seed_desc">Plantez pour cultiver des fleurs célestes. Pousse en 21 heures.
-\nNécessite le niveau 85 d\'agriculture.</string>
+    <string name="item_celestial_bloom_seed_desc">Plantez pour cultiver des fleurs célestes. Pousse en 21 heures.\n\nNécessite le niveau 85 d\'agriculture.</string>
     <string name="item_starfruit_seed_name">Graine de fruit d\'étoile</string>
-    <string name="item_starfruit_seed_desc">Plantez pour cultiver des fruits d\'étoile. Pousse en 23 heures.
-\nNécessite le niveau 95 d\'agriculture.</string>
+    <string name="item_starfruit_seed_desc">Plantez pour cultiver des fruits d\'étoile. Pousse en 23 heures.\n\nNécessite le niveau 95 d\'agriculture.</string>
     <string name="item_void_lotus_seed_name">Graine de lotus du vide</string>
-    <string name="item_void_lotus_seed_desc">Plantez pour cultiver des lotus du vide. Pousse en 24 heures.
-\nNécessite le niveau 99 d\'agriculture.</string>
+    <string name="item_void_lotus_seed_desc">Plantez pour cultiver des lotus du vide. Pousse en 24 heures.\n\nNécessite le niveau 99 d\'agriculture.</string>
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
@@ -1108,54 +1092,54 @@
     <string name="item_kraken_tentacle_desc">Un anneau en forme de tentacule enroulé qui canalise le pouvoir arcanique du Kraken.</string>
     <string name="item_tower_cape_name">Cape de la Tour</string>
     <string name="item_tower_cape_desc">Une cape fluide qui rayonne de l\'énergie de la tour.</string>
-    <string name="item_mining_cape_desc">Décerné pour avoir atteint le niveau 99 en Minage. Permet d\'obtenir 10 % de minerai en plus par session.</string>
-    <string name="item_construction_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Bâtisseurs. Permet d\'obtenir 5 % de meubles en plus par session.</string>
-    <string name="item_mining_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Mineurs. Permet d\'obtenir 5 % de minerais en plus par session.</string>
-    <string name="item_fishing_cape_desc">Décerné pour avoir atteint le niveau 99 en Pêche. Permet d\'obtenir 10 % de poisson en plus par session.</string>
-    <string name="item_fishing_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Pêcheurs. Permet d\'obtenir 5 % de poissons en plus par session.</string>
-    <string name="item_woodcutting_cape_desc">Décerné pour avoir atteint le niveau 99 en Bûcheronnage. Permet d\'obtenir 10 % de bûches en plus par session.</string>
-    <string name="item_woodcutting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Bûcherons. Permet d\'obtenir 5 % de bûches en plus par session.</string>
-    <string name="item_farming_cape_desc">Décerné pour avoir atteint le niveau 99 en Agriculture. Permet d\'obtenir 10 % de récolte en plus par session.</string>
-    <string name="item_farming_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Agriculteurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_mining_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Minage. Permet d\'obtenir 10 % de minerai en plus par session.</string>
+    <string name="item_construction_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Bâtisseurs. Permet d\'obtenir 5 % de meubles en plus par session.</string>
+    <string name="item_mining_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Mineurs. Permet d\'obtenir 5 % de minerais en plus par session.</string>
+    <string name="item_fishing_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Pêche. Permet d\'obtenir 10 % de poisson en plus par session.</string>
+    <string name="item_fishing_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Pêcheurs. Permet d\'obtenir 5 % de poissons en plus par session.</string>
+    <string name="item_woodcutting_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Bûcheronnage. Permet d\'obtenir 10 % de bûches en plus par session.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Bûcherons. Permet d\'obtenir 5 % de bûches en plus par session.</string>
+    <string name="item_farming_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Agriculture. Permet d\'obtenir 10 % de récolte en plus par session.</string>
+    <string name="item_farming_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Agriculteurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
     <string name="item_thieving_cape_name">Cape de Voleur</string>
-    <string name="item_thieving_cape_desc">Décerné pour avoir atteint le niveau 99 en Vol à la tire. Permet de réussir 10 % de vols à la tire en plus par session.</string>
-    <string name="item_thieving_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Voleurs. Permet de réussir 5 % de vols à la tire en plus par session.</string>
-    <string name="item_smithing_cape_desc">Décerné pour avoir atteint le niveau 99 en Forge. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
-    <string name="item_smithing_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Forgerons. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
-    <string name="item_cooking_cape_desc">Décerné pour avoir atteint le niveau 99 en Cuisine. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
-    <string name="item_cooking_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Cuisiniers. Permet d\'obtenir 5 % de nourriture en plus par session.</string>
-    <string name="item_fletching_cape_desc">Décerné pour avoir atteint le niveau 99 en Art du bois. Permet d\'obtenir 10 % de flèches en plus par session.</string>
-    <string name="item_fletching_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Artistes du Bois. Permet d\'obtenir 5 % de flèches en plus par session.</string>
-    <string name="item_crafting_cape_desc">Décerné pour avoir atteint le niveau 99 en Artisanat. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
-    <string name="item_crafting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Artisans. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
-    <string name="item_firemaking_cape_desc">Décerné pour avoir atteint le niveau 99 en Incinération. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
-    <string name="item_firemaking_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Brûleurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
-    <string name="item_runecrafting_cape_desc">Décerné pour avoir atteint le niveau 99 en Fabrication de runes. Permet d\'obtenir 10 % de runes en plus par session.</string>
-    <string name="item_runecrafting_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Fabricants de Runes. Permet d\'obtenir 5 % de runes en plus par session.</string>
+    <string name="item_thieving_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Vol à la tire. Permet de réussir 10 % de vols à la tire en plus par session.</string>
+    <string name="item_thieving_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Voleurs. Permet de réussir 5 % de vols à la tire en plus par session.</string>
+    <string name="item_smithing_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Forge. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Forgerons. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
+    <string name="item_cooking_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Cuisine. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
+    <string name="item_cooking_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Cuisiniers. Permet d\'obtenir 5 % de nourriture en plus par session.</string>
+    <string name="item_fletching_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Art du bois. Permet d\'obtenir 10 % de flèches en plus par session.</string>
+    <string name="item_fletching_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Artistes du Bois. Permet d\'obtenir 5 % de flèches en plus par session.</string>
+    <string name="item_crafting_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Artisanat. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_crafting_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Artisans. Permet d\'obtenir 5 % d\'objets en plus par session.</string>
+    <string name="item_firemaking_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Incinération. Permet d\'obtenir 10 % de nourriture en plus par session.</string>
+    <string name="item_firemaking_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Brûleurs. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_runecrafting_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Fabrication de runes. Permet d\'obtenir 10 % de runes en plus par session.</string>
+    <string name="item_runecrafting_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Fabricants de Runes. Permet d\'obtenir 5 % de runes en plus par session.</string>
     <string name="item_herblore_cape_name">Cape d\'Herboriste</string>
-    <string name="item_herblore_cape_desc">Décerné pour avoir atteint le niveau 99 en Herboristerie. Permet d\'obtenir 10 % de potions en plus par session.</string>
-    <string name="item_herblore_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Herboristes. Permet d\'obtenir 5 % de potions en plus par session.</string>
+    <string name="item_herblore_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Herboristerie. Permet d\'obtenir 10 % de potions en plus par session.</string>
+    <string name="item_herblore_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Herboristes. Permet d\'obtenir 5 % de potions en plus par session.</string>
     <string name="item_construction_cape_name">Cape de la Construction</string>
-    <string name="item_construction_cape_desc">Décerné pour avoir atteint le niveau 99 en Construction. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
-    <string name="item_prayer_cape_desc">Décerné pour avoir atteint le niveau 99 en Prière. Augmente de 10% la prière active.</string>
-    <string name="item_prayer_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Prêtres. Augmente de 5% la prière active.</string>
+    <string name="item_construction_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Construction. Permet d\'obtenir 10 % d\'objets en plus par session.</string>
+    <string name="item_prayer_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Prière. Augmente de 10% la prière active.</string>
+    <string name="item_prayer_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Prêtres. Augmente de 5% la prière active.</string>
     <string name="item_mercantile_cape_name">Cape du Marchand</string>
-    <string name="item_mercantile_cape_desc">Décerné pour avoir atteint le niveau 99 en Commerce. Permet d\'obtenir de meilleurs prix en magasin et de gains des routes commerciales, de 10 %.</string>
-    <string name="item_mercantile_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Marchands. Permet d\'obtenir 5 % de récolte en plus par session.</string>
-    <string name="item_agility_cape_desc">Décerné pour avoir atteint le niveau 99 en Agilité. Permet d\'obtenir 10 % d\'XP en plus par session.</string>
-    <string name="item_agility_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Agiles. Permet d\'obtenir 5 % d\'XP en plus par session.</string>
+    <string name="item_mercantile_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Commerce. Permet d\'obtenir de meilleurs prix en magasin et de gains des routes commerciales, de 10 %.</string>
+    <string name="item_mercantile_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Marchands. Permet d\'obtenir 5 % de récolte en plus par session.</string>
+    <string name="item_agility_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Agilité. Permet d\'obtenir 10 % d\'XP en plus par session.</string>
+    <string name="item_agility_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Agiles. Permet d\'obtenir 5 % d\'XP en plus par session.</string>
     <string name="item_slayer_cape_name">Cape de Tueur</string>
-    <string name="item_slayer_cape_desc">Décerné pour avoir atteint le niveau 99 en Tueur. Permet d\'obtenir 10 % de points de Tueur en plus par session.</string>
-    <string name="item_attack_cape_desc">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Attaque de 10 %.</string>
-    <string name="item_strength_cape_desc">Décerné pour avoir atteint le niveau 99 en Force. Permet d\'obtenir un bonus d\'XP en Force de 10 %.</string>
-    <string name="item_defense_cape_desc">Décerné pour avoir atteint le niveau 99 en Défense. Permet d\'obtenir un bonus d\'XP en Défense de 10 %.</string>
-    <string name="item_warriors_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Guerriers. Permet d\'obtenir un bonus de 5 % d\'XP en Attaque, Force et Défense.</string>
-    <string name="item_ranged_cape_desc">Décerné pour avoir atteint le niveau 99 en Tir à Distance. Permet d\'obtenir un bonus d\'XP en Tir à Distance de 10 %.</string>
-    <string name="item_archers_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Archers. Permet d\'obtenir un bonus de 5 % d\'XP en Tir à Distance.</string>
-    <string name="item_magic_cape_desc">Décerné pour avoir atteint le niveau 99 en Magie. Permet d\'obtenir un bonus d\'XP en Magie de 10 %.</string>
-    <string name="item_mages_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Mages. Permet d\'obtenir un bonus de 5 % d\'XP en Magie.</string>
-    <string name="item_slayer_guild_cape_desc">Décerné pour avoir atteint le niveau 10 de la Guilde des Tueurs. Permet d\'obtenir un bonus de 5 % d\'XP en Tueur.</string>
-    <string name="item_hp_cape_desc">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Points de Vie de 10 %.</string>
+    <string name="item_slayer_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Tueur. Permet d\'obtenir 10 % de points de Tueur en plus par session.</string>
+    <string name="item_attack_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Attaque de 10 %.</string>
+    <string name="item_strength_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Force. Permet d\'obtenir un bonus d\'XP en Force de 10 %.</string>
+    <string name="item_defense_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Défense. Permet d\'obtenir un bonus d\'XP en Défense de 10 %.</string>
+    <string name="item_warriors_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Guerriers. Permet d\'obtenir un bonus de 5 % d\'XP en Attaque, Force et Défense.</string>
+    <string name="item_ranged_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Tir à Distance. Permet d\'obtenir un bonus d\'XP en Tir à Distance de 10 %.</string>
+    <string name="item_archers_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Archers. Permet d\'obtenir un bonus de 5 % d\'XP en Tir à Distance.</string>
+    <string name="item_magic_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Magie. Permet d\'obtenir un bonus d\'XP en Magie de 10 %.</string>
+    <string name="item_mages_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Mages. Permet d\'obtenir un bonus de 5 % d\'XP en Magie.</string>
+    <string name="item_slayer_guild_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 10 de la Guilde des Tueurs. Permet d\'obtenir un bonus de 5 % d\'XP en Tueur.</string>
+    <string name="item_hp_cape_desc" formatted="false">Décerné pour avoir atteint le niveau 99 en Attaque. Permet d\'obtenir un bonus d\'XP en Points de Vie de 10 %.</string>
     <string name="item_deep_iron_pickaxe_desc">Forgé à partir de minerai extrait des galeries les plus profondes de la Mine effondrée. Frappe avec une précision surnaturelle.</string>
     <string name="item_dwarven_pickaxe_desc">Une pioche naine de qualité magistrale. Le meilleur outil d\'extraction jamais façonné.</string>
     <string name="item_forge_pickaxe_desc">Trempée dans les flammes de l\'Ancienne Forge elle-même. La pioche la plus rare et la plus puissante qui soit.</string>

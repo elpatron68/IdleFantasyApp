@@ -152,6 +152,10 @@ fun SkillsScreen(
                     ).forEach { (category, labelRes) ->
                         Text("${category.emoji}  ${stringResource(labelRes)}")
                     }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("●  ", color = MaterialTheme.colorScheme.primary)
+                        Text(stringResource(R.string.quest_legend_gold_dot))
+                    }
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text  = stringResource(R.string.quest_legend_notes),
@@ -313,6 +317,7 @@ fun SkillActivitySheet(
                         petBoostPct       = state.petBoosts[Skills.MINING] ?: 0,
                         xpBonusMult       = state.xpBonusMult,
                         activeQuests      = state.activeQuests,
+                        inventory         = state.inventory,
                         onSelect          = { oreKey -> viewModel.startMiningSession(oreKey) },
                     )
                     is SheetState.Woodcutting -> WoodcuttingSheet(
@@ -327,6 +332,7 @@ fun SkillActivitySheet(
                         petBoostPct       = state.petBoosts[Skills.WOODCUTTING] ?: 0,
                         xpBonusMult       = state.xpBonusMult,
                         activeQuests      = state.activeQuests,
+                        inventory         = state.inventory,
                         onSelect          = { treeKey -> viewModel.startWoodcuttingSession(treeKey) },
                     )
                     is SheetState.Fishing -> FishingSheet(
@@ -341,6 +347,7 @@ fun SkillActivitySheet(
                         petBoostPct       = state.petBoosts[Skills.FISHING] ?: 0,
                         xpBonusMult       = state.xpBonusMult,
                         activeQuests      = state.activeQuests,
+                        inventory         = state.inventory,
                         onSelect          = { fishKey -> viewModel.startFishingSession(fishKey) },
                     )
                     is SheetState.Agility -> AgilitySheet(

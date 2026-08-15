@@ -283,6 +283,7 @@ fun WorkerSkillsScreen(
                     sessionDurationMs = state.gatheringDurationMs,
                     currentXp         = state.skillXp[Skills.MINING] ?: 0L,
                     efficiency        = state.miningEfficiency,
+                    inventory         = state.inventory,
                     onSelect          = { viewModel.startMiningSession(it) },
                 )
                 is SheetState.Woodcutting -> WoodcuttingSheet(
@@ -293,6 +294,7 @@ fun WorkerSkillsScreen(
                     sessionDurationMs = state.gatheringDurationMs,
                     currentXp         = state.skillXp[Skills.WOODCUTTING] ?: 0L,
                     efficiency        = state.woodcuttingEfficiency,
+                    inventory         = state.inventory,
                     onSelect          = { viewModel.startWoodcuttingSession(it) },
                 )
                 is SheetState.Fishing -> FishingSheet(
@@ -303,6 +305,7 @@ fun WorkerSkillsScreen(
                     sessionDurationMs = state.gatheringDurationMs,
                     currentXp         = state.skillXp[Skills.FISHING] ?: 0L,
                     efficiency        = state.fishingEfficiency,
+                    inventory         = state.inventory,
                     onSelect          = { viewModel.startFishingSession(it) },
                 )
                 is SheetState.Agility -> AgilitySheet(

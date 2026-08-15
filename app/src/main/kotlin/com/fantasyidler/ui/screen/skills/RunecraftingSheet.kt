@@ -145,6 +145,7 @@ internal fun RunecraftingSheet(
     BackHandler(enabled = selectedKey != null) { selectedKey = null }
     val selectedRune = selectedKey?.let { sheet.availableRunes[it] }
     var selectedAshKey by remember { mutableStateOf<String?>(null) }
+    val dim = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
     Column(
         modifier = Modifier
@@ -216,9 +217,14 @@ internal fun RunecraftingSheet(
                             }
                             val runeOwned = inventory[key] ?: 0
                             Text(
-                                text  = stringResource(R.string.skills_rune_desc, rune.xpPerRune.toInt(), rune.levelRequired) + "  •  " + stringResource(R.string.crafting_owned, runeOwned),
+                                text  = stringResource(R.string.skills_rune_desc, rune.xpPerRune.toInt(), rune.levelRequired),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                            Text(
+                                text  = stringResource(R.string.crafting_owned, runeOwned),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = if (runeOwned > 0) MaterialTheme.colorScheme.primary else dim,
                             )
                         }
                         Text(
@@ -249,9 +255,15 @@ internal fun RunecraftingSheet(
             )
             val ownedRune = selectedKey?.let { inventory[it] } ?: 0
             Text(
-                text     = stringResource(R.string.skills_rune_selected, selectedRune.xpPerRune.toInt(), inventoryMax) + "  •  " + stringResource(R.string.crafting_owned, ownedRune),
+                text     = stringResource(R.string.skills_rune_selected, selectedRune.xpPerRune.toInt(), inventoryMax),
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+            )
+            Text(
+                text     = stringResource(R.string.crafting_owned, ownedRune),
+                style    = MaterialTheme.typography.labelSmall,
+                color    = if (ownedRune > 0) MaterialTheme.colorScheme.primary else dim,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
             )
             Spacer(Modifier.height(12.dp))
