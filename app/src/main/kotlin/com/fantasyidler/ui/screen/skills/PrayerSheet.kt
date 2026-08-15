@@ -146,6 +146,7 @@ internal fun PrayerSheet(
     // the host's onDismissRequest interception covers the older popup-based sheet.
     BackHandler(enabled = selectedKey != null) { selectedKey = null }
     val selectedBone = selectedKey?.let { availableBones[it] }
+    val dim = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
 
     Column(
         modifier = Modifier
@@ -217,9 +218,14 @@ internal fun PrayerSheet(
                                 }
                             }
                             Text(
-                                text  = stringResource(R.string.skills_bone_qty, bone.xpPerBone.toInt(), qty),
+                                text  = stringResource(R.string.skills_xp_each, bone.xpPerBone.toInt()),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                            Text(
+                                text  = stringResource(R.string.crafting_owned, qty),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = if (qty > 0) MaterialTheme.colorScheme.primary else dim,
                             )
                         }
                         Text(stringResource(R.string.btn_select), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)

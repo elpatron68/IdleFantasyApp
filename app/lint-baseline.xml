@@ -5932,17 +5932,6 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;skills_bone_qty&quot; is not translated in &quot;cs&quot; (Czech) or &quot;ga&quot; (Irish)"
-        errorLine1="    &lt;string name=&quot;skills_bone_qty&quot;>%1$d XP each  •  %2$d in inventory&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="586"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
         message="&quot;skills_bone_selected&quot; is not translated in &quot;cs&quot; (Czech)"
         errorLine1="    &lt;string name=&quot;skills_bone_selected&quot;>%1$d XP each  •  %2$d available&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">

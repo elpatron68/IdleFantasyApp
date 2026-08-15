@@ -548,7 +548,7 @@
     <string name="combat_run_progress">Putaran %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP saat menang</string>
     <string name="combat_you_died">Kamu meninggal!</string>
-    <string name="combat_died_reward">Anda menerima 10%% dari hadiah.</string>
+    <string name="combat_died_reward" formatted="false">Anda menerima 10% dari hadiah.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d perlengkapan</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -621,8 +621,7 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Level %1$d  •  Bury bones or scatter ashes for Prayer XP</string> <!-- untranslated -->
     <string name="skills_no_bones">Tidak ada tulang atau abu di inventaris.</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity in inventory -->
-    <string name="skills_bone_qty">%1$d XP each  •  %2$d in inventory</string> <!-- untranslated -->
+    <string name="skills_xp_each">%1$d XP each</string> <!-- untranslated -->
     <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d XP each  •  %2$d available</string> <!-- untranslated -->
     <!-- Translator note: %1$d = total XP -->
@@ -664,6 +663,7 @@
     <string name="quest_legend_guild_daily">Harian guild</string>
     <string name="quest_legend_guild">Quest guild</string>
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
+    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Ikon redup belum bisa diselesaikan (level atau bahan kurang). Angka kecil di atas berarti beberapa quest jenis itu menginginkan hal yang sama.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d di inventaris</string>
@@ -967,7 +967,7 @@
     <string name="church_activate">Mengaktifkan</string>
     <string name="church_blessing_bonus">+%1$s dari berkah</string>
     <string name="church_blessing_suffix">dari berkat</string>
-    <string name="church_effect_xp">×%1$.2f XP selama %2$d jam</string>
+    <string name="church_effect_xp">×%%1$.2f XP selama %2$d jam</string>
     <string name="church_effect_def">+%1$d Pertahanan selama %2$d jam</string>
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
     <string name="church_cost_bones">Biaya %1$d tulang</string>
@@ -1075,6 +1075,9 @@
     <string name="slayer_owned">Dimiliki</string>
     <string name="slayer_lamp_purchased">+%1$s XP ditambahkan ke %2$s!</string>
     <string name="slayer_lamp_pick_skill">Pilih Keahlian</string>
+    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lampu XP (Kecil)</string>
     <string name="slayer_lamp_large">Lampu XP (Besar)</string>
     <string name="slayer_lamp_small_desc">+10.000 XP untuk keahlian apa pun</string>
@@ -1097,7 +1100,7 @@
     <!-- Prestige system -->
     <string name="prestige">Prestise</string>
     <string name="prestige_max">Prestise Maksimum</string>
-    <string name="prestige_confirm_title">Prestise %s?</string>
+    <string name="prestige_confirm_title" formatted="false">Prestise %s?</string>
     <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_stat">Level %1$s Anda akan direset ke 1, tetapi Anda akan mendapatkan bonus +%2$d permanen untuk statistik Anda.</string>
     <string name="prestige_confirm_message_agility">Level %1$s Anda akan direset ke 1, tetapi Anda akan mendapatkan bonus XP permanen +%2$d%%, dan durasi sesi akan terus berkurang — pada level 99 sebuah sesi akan memakan waktu %3$d menit, bukan %4$d menit.</string>
@@ -1180,10 +1183,10 @@
     <string name="bone_altar_select_prompt">Pilihlah tulang untuk dikuburkan di altar.</string>
     <string name="bone_altar_tap">Ketuk untuk Mengubur</string>
     <string name="bone_altar_change_bone">Mengubah</string>
-    <string name="bone_altar_combo_count">Kombo ×%d</string>
-    <string name="bone_altar_bonus_active">Bonus XP +50%% !</string>
-    <string name="bone_altar_session_xp">+%s XP sesi ini</string>
-    <string name="bone_altar_buried_count">%d terkubur</string>
+    <string name="bone_altar_combo_count" formatted="false">Kombo ×%d</string>
+    <string name="bone_altar_bonus_active" formatted="false">Bonus XP +50% !</string>
+    <string name="bone_altar_session_xp" formatted="false">+%s XP sesi ini</string>
+    <string name="bone_altar_buried_count" formatted="false">%d terkubur</string>
     <string name="bone_altar_no_bones">Tidak ada tulang dalam inventaris.</string>
     <string name="bone_altar_cape_awarded">Jubah doa telah didapatkan!</string>
 
@@ -1316,7 +1319,7 @@
     <string name="carnival_queue">Antrian Sesi</string>
     <string name="carnival_ring_toss">Lempar Cincin</string>
     <string name="carnival_active_ring_desc">Atur waktu lemparan Anda saat indikator mengenai zona target emas.</string>
-    <string name="carnival_ring_target_hint">Aim for the centre (45%%–55%%)</string> <!-- untranslated -->
+    <string name="carnival_ring_target_hint" formatted="false">Aim for the centre (45%–55%)</string> <!-- untranslated -->
     <string name="carnival_throw">Lemparr!</string>
     <string name="carnival_hammer_strike">Pukulan Palu</string>
     <string name="carnival_active_hammer_desc">Serang saat indikator daya berada di puncaknya untuk mendapatkan skor maksimal.</string>
@@ -1372,7 +1375,7 @@
     <string name="carnival_difficulty_label">Kesulitan</string>
     <string name="carnival_difficulty_normal">Normal</string> <!-- untranslated -->
     <string name="carnival_difficulty_hard">Hard</string> <!-- untranslated -->
-    <string name="carnival_ring_hard_hint">Hard: 52%%–57%% target, 7 tickets</string> <!-- untranslated -->
+    <string name="carnival_ring_hard_hint" formatted="false">Hard: 52%–57% target, 7 tickets</string> <!-- untranslated -->
 
 
     <!-- ===== Magic Bean / Farming ===== -->
@@ -1559,20 +1562,20 @@
 
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
-    <string name="tower_floor_label">Floor %d</string> <!-- untranslated -->
+    <string name="tower_floor_label" formatted="false">Floor %d</string> <!-- untranslated -->
     <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
-    <string name="tower_best_floor">Best: Floor %d</string> <!-- untranslated -->
-    <string name="tower_start_btn">Attempt Floor %d</string> <!-- untranslated -->
+    <string name="tower_best_floor" formatted="false">Best: Floor %d</string> <!-- untranslated -->
+    <string name="tower_start_btn" formatted="false">Attempt Floor %d</string> <!-- untranslated -->
     <string name="tower_milestones">Milestones</string> <!-- untranslated -->
-    <string name="tower_floor_cleared">Floor %d cleared!</string> <!-- untranslated -->
-    <string name="tower_new_best">New best: Floor %d!</string> <!-- untranslated -->
+    <string name="tower_floor_cleared" formatted="false">Floor %d cleared!</string> <!-- untranslated -->
+    <string name="tower_new_best" formatted="false">New best: Floor %d!</string> <!-- untranslated -->
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">Kamu jatuh di lantai %1$d. Kembali ke lantai %2$d.</string>
     <string name="tower_not_enough_runes">%1$s tidak cukup untuk jumlah serangan maksimal.</string>
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
-    <string name="tower_enemy_strength">Enemy strength: %s%%</string> <!-- untranslated -->
+    <string name="tower_enemy_strength" formatted="false">Enemy strength: %s%</string> <!-- untranslated -->
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
     <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
@@ -1693,7 +1696,7 @@
     <string name="journal_hint">Catat pengingat untuk lain kali — apa yang perlu diantrekan, apa yang sedang kamu kerjakan.</string>
     <string name="journal_placeholder">Tulis catatan...</string>
     <string name="profile_banners_empty">Belum ada spanduk yang didapat. Selesaikan Acara Musiman untuk mendapatkannya!</string>
-    <string name="profile_banners_earned_on">Didapat %s</string>
+    <string name="profile_banners_earned_on" formatted="false">Didapat %s</string>
     <string name="profile_banners_unobtained">(Belum didapat)</string>
     <string name="character_title_label">Title</string> <!-- untranslated -->
     <string name="character_title_none">No Title</string> <!-- untranslated -->
@@ -1791,7 +1794,7 @@
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
     <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
     <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc" formatted="false">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string> <!-- untranslated -->
     <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
     <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->

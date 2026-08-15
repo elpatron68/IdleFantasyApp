@@ -643,8 +643,7 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Level %1$d  •  Bury bones or scatter ashes for Prayer XP</string> <!-- untranslated -->
     <string name="skills_no_bones">No bones or ashes in inventory</string> <!-- untranslated -->
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity in inventory -->
-    <string name="skills_bone_qty">%1$d XP each  •  %2$d in inventory</string> <!-- untranslated -->
+    <string name="skills_xp_each">%1$d XP each</string> <!-- untranslated -->
     <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d taithí gach aon  •  %2$d ar fáill</string>
     <!-- Translator note: %1$d = total XP -->
@@ -686,6 +685,7 @@
     <string name="quest_legend_guild_daily">Guild daily</string> <!-- untranslated -->
     <string name="quest_legend_guild">Guild quest</string> <!-- untranslated -->
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
+    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Dimmed icons can\'t be completed yet (missing level or materials). A small raised number means several quests of that type want the same thing.</string> <!-- untranslated -->
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d in inventory</string> <!-- untranslated -->
@@ -989,7 +989,7 @@
     <string name="church_activate">Activate</string> <!-- untranslated -->
     <string name="church_blessing_bonus">+%1$s from blessing</string> <!-- untranslated -->
     <string name="church_blessing_suffix">from blessing</string> <!-- untranslated -->
-    <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string> <!-- untranslated -->
+    <string name="church_effect_xp">×%%1$.2f XP for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_def">+%1$d Defense for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
     <string name="church_cost_bones">Costs %1$d bones</string> <!-- untranslated -->
@@ -1097,6 +1097,9 @@
     <string name="slayer_owned">Owned</string> <!-- untranslated -->
     <string name="slayer_lamp_purchased">+%1$s XP added to %2$s!</string> <!-- untranslated -->
     <string name="slayer_lamp_pick_skill">Choose a skill</string> <!-- untranslated -->
+    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">XP Lamp (Small)</string> <!-- untranslated -->
     <string name="slayer_lamp_large">XP Lamp (Large)</string> <!-- untranslated -->
     <string name="slayer_lamp_small_desc">+10,000 XP to any skill</string> <!-- untranslated -->
@@ -1119,7 +1122,7 @@
     <!-- Prestige system -->
     <string name="prestige">Prestige</string> <!-- untranslated -->
     <string name="prestige_max">Max Prestige</string> <!-- untranslated -->
-    <string name="prestige_confirm_title">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_title" formatted="false">Prestige %s?</string> <!-- untranslated -->
     <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_stat">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d bonus to your stats.</string> <!-- untranslated -->
     <string name="prestige_confirm_message_agility">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus, and your session length will keep shrinking — by level 99 a session will take %3$d min instead of %4$d min.</string> <!-- untranslated -->
@@ -1202,10 +1205,10 @@
     <string name="bone_altar_select_prompt">Select a bone to bury at the altar</string> <!-- untranslated -->
     <string name="bone_altar_tap">Tap to Bury</string> <!-- untranslated -->
     <string name="bone_altar_change_bone">Change</string> <!-- untranslated -->
-    <string name="bone_altar_combo_count">Combo ×%d</string> <!-- untranslated -->
+    <string name="bone_altar_combo_count" formatted="false">Combo ×%d</string> <!-- untranslated -->
     <string name="bone_altar_bonus_active" formatted="false">+50% XP bonus!</string> <!-- untranslated -->
-    <string name="bone_altar_session_xp">+%s XP this session</string> <!-- untranslated -->
-    <string name="bone_altar_buried_count">%d buried</string> <!-- untranslated -->
+    <string name="bone_altar_session_xp" formatted="false">+%s XP this session</string> <!-- untranslated -->
+    <string name="bone_altar_buried_count" formatted="false">%d buried</string> <!-- untranslated -->
     <string name="bone_altar_no_bones">No bones in inventory</string> <!-- untranslated -->
     <string name="bone_altar_cape_awarded">Prayer cape earned!</string> <!-- untranslated -->
 
@@ -1268,9 +1271,9 @@
     <string name="town_church_no_bonus">Upgrade to extend blessing duration</string> <!-- untranslated -->
     <string name="town_building_fairgrounds_name">Ionad Siamsaíochta</string>
     <string name="town_fairgrounds_no_bonus">4 active minigames available, 10-minute cooldowns</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t1_bonus">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5%% idle ticket chance</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t2_bonus">Unlocks Higher or Lower, +10%% idle ticket chance</string> <!-- untranslated -->
-    <string name="town_fairgrounds_t3_bonus">Cooldowns reduced to 5 minutes, +15%% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t1_bonus" formatted="false">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t2_bonus" formatted="false">Unlocks Higher or Lower, +10% idle ticket chance</string> <!-- untranslated -->
+    <string name="town_fairgrounds_t3_bonus" formatted="false">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string> <!-- untranslated -->
     <string name="town_building_garden_name">Gairdín</string>
     <plurals name="town_garden_bonus">
         <item quantity="zero">Níl aon ceapach breise go fóill</item>
@@ -1587,20 +1590,20 @@
 
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
-    <string name="tower_floor_label">Floor %d</string> <!-- untranslated -->
+    <string name="tower_floor_label" formatted="false">Floor %d</string> <!-- untranslated -->
     <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
-    <string name="tower_best_floor">Best: Floor %d</string> <!-- untranslated -->
-    <string name="tower_start_btn">Attempt Floor %d</string> <!-- untranslated -->
+    <string name="tower_best_floor" formatted="false">Best: Floor %d</string> <!-- untranslated -->
+    <string name="tower_start_btn" formatted="false">Attempt Floor %d</string> <!-- untranslated -->
     <string name="tower_milestones">Milestones</string> <!-- untranslated -->
-    <string name="tower_floor_cleared">Floor %d cleared!</string> <!-- untranslated -->
-    <string name="tower_new_best">New best: Floor %d!</string> <!-- untranslated -->
+    <string name="tower_floor_cleared" formatted="false">Floor %d cleared!</string> <!-- untranslated -->
+    <string name="tower_new_best" formatted="false">New best: Floor %d!</string> <!-- untranslated -->
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">You fell on floor %1$d. Resetting to floor %2$d.</string> <!-- untranslated -->
     <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string> <!-- untranslated -->
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
-    <string name="tower_enemy_strength">Enemy strength: %s%%</string> <!-- untranslated -->
+    <string name="tower_enemy_strength" formatted="false">Enemy strength: %s%</string> <!-- untranslated -->
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
     <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
@@ -1721,7 +1724,7 @@
     <string name="journal_hint">Jot down reminders for next time — what to queue, what you\'re grinding toward.</string> <!-- untranslated -->
     <string name="journal_placeholder">Scríobh nóta...</string>
     <string name="profile_banners_empty">No banners earned yet. Complete a Seasonal Event to earn one!</string> <!-- untranslated -->
-    <string name="profile_banners_earned_on">Tuillte %s</string>
+    <string name="profile_banners_earned_on" formatted="false">Tuillte %s</string>
     <string name="profile_banners_unobtained">(Unobtained)</string> <!-- untranslated -->
     <string name="character_title_label">Teideal</string>
     <string name="character_title_none">Gan Teideal</string>
@@ -1819,7 +1822,7 @@
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
     <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
     <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_desc">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%%.</string> <!-- untranslated -->
+    <string name="pet_juggling_imp_desc" formatted="false">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string> <!-- untranslated -->
     <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
     <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->

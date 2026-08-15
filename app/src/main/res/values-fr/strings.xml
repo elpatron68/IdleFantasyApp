@@ -189,7 +189,7 @@
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
     <string name="format_skill_level">%1$s : Niveau %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
-    <string name="format_xp_boost_percent">+%1$d%%% XP</string>
+    <string name="format_xp_boost_percent">+%1$d%% XP</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
     <!-- Translator note: %1$d = minutes remaining -->
@@ -556,7 +556,7 @@
     <string name="combat_run_progress">Partie %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP à la victoire</string>
     <string name="combat_you_died">Vous êtes mort !</string>
-    <string name="combat_died_reward">Vous avez reçu 10%% des récompenses.</string>
+    <string name="combat_died_reward" formatted="false">Vous avez reçu 10% des récompenses.</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d équipement</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -623,15 +623,14 @@
     <string name="skills_level_req_xp">Niv. %1$d  •  %2$s XP/ressource</string>
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">Outil à ×%1$s de bonus</string>
-    <string name="skills_pet_bonus">+%1$d%%% XP (familier)</string>
+    <string name="skills_pet_bonus">+%1$d%% XP (familier)</string>
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Niv. %1$d  •  Pêche adaptée au niveau</string>
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Niv. %1$d  •  Enterrez des os ou dispersez des cendres pour XP en Prière</string>
     <string name="skills_no_bones">Aucun os ou cendres dans l\'inventaire</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity in inventory -->
-    <string name="skills_bone_qty">%1$d XP par os  •  %2$d dans l\'inventaire</string>
     <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
+    <string name="skills_xp_each">%1$d XP par os</string>
     <string name="skills_bone_selected">%1$d XP par os  •  %2$d disponibles</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP au total</string>
@@ -672,6 +671,7 @@
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
+    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Les icônes estompées ne peuvent pas encore être terminées (niveau ou matériaux manquants). Un petit chiffre en exposant indique que plusieurs quêtes de ce type visent la même chose.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d dans l\'inventaire</string>
@@ -975,9 +975,9 @@
     <string name="church_activate">Activer</string>
     <string name="church_blessing_bonus">+%1$s de la bénédiction</string>
     <string name="church_blessing_suffix">de la bénédiction</string>
-    <string name="church_effect_xp">×%1$.2f XP pendant %2$d heures</string>
+    <string name="church_effect_xp">×%%1$.2f XP pendant %2$d heures</string>
     <string name="church_effect_def">+%1$d Défense pendant %2$d heures</string>
-    <string name="church_effect_coins">+%1$d%%% de butin de pièces pendant %2$d heures</string>
+    <string name="church_effect_coins">+%1$d%% de butin de pièces pendant %2$d heures</string>
     <string name="church_cost_bones">Coûte %1$d os</string>
     <string name="church_confirm_title">Activer la bénédiction ?</string>
     <string name="church_bones_available">Vous avez %1$d os (tous types), soit %2$d pour les bénédictions (les os plus gros comptent plus)</string>
@@ -1083,6 +1083,9 @@
     <string name="slayer_owned">Possédé</string>
     <string name="slayer_lamp_purchased">+%1$s XP ajoutée à %2$s !</string>
     <string name="slayer_lamp_pick_skill">Choisissez une aptitude</string>
+    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lampe XP (Petite)</string>
     <string name="slayer_lamp_large">Lampe XP (Grande)</string>
     <string name="slayer_lamp_small_desc">+10 000 XP à n’importe quelle aptitude</string>
@@ -1105,10 +1108,10 @@
     <!-- Prestige system -->
     <string name="prestige">Prestige</string> <!-- untranslated -->
     <string name="prestige_max">Prestige max</string>
-    <string name="prestige_confirm_title">Prestige %s ?</string>
-    <string name="prestige_confirm_message_xp">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%%% XP pour cette aptitude.</string>
+    <string name="prestige_confirm_title" formatted="false">Prestige %s ?</string>
+    <string name="prestige_confirm_message_xp">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%% XP pour cette aptitude.</string>
     <string name="prestige_confirm_message_stat">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d à vos statistiques.</string>
-    <string name="prestige_confirm_message_agility">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%%% d\'XP, et la durée de vos sessions continuera de diminuer — au niveau 99, une session prendra %3$d min au lieu de %4$d min.</string>
+    <string name="prestige_confirm_message_agility">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%% d\'XP, et la durée de vos sessions continuera de diminuer — au niveau 99, une session prendra %3$d min au lieu de %4$d min.</string>
     <string name="prestige_confirm_message_mercantile">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%% d\'XP, plus un bonus supplémentaire de +%2$d%% sur les gains de pièces des routes commerciales.</string>
 
     <!-- Prestige achievements -->
@@ -1188,10 +1191,10 @@
     <string name="bone_altar_select_prompt">Choisir un os à enterrer</string>
     <string name="bone_altar_tap">Appuyer pour Enterrer</string>
     <string name="bone_altar_change_bone">Changer</string>
-    <string name="bone_altar_combo_count">Combo ×%d</string> <!-- untranslated -->
-    <string name="bone_altar_bonus_active">+50%% bonus XP!</string>
-    <string name="bone_altar_session_xp">+%s XP cette session</string>
-    <string name="bone_altar_buried_count">%d enterrés</string>
+    <string name="bone_altar_combo_count" formatted="false">Combo ×%d</string> <!-- untranslated -->
+    <string name="bone_altar_bonus_active" formatted="false">+50% bonus XP!</string>
+    <string name="bone_altar_session_xp" formatted="false">+%s XP cette session</string>
+    <string name="bone_altar_buried_count" formatted="false">%d enterrés</string>
     <string name="bone_altar_no_bones">Aucun os dans l\'inventaire</string>
     <string name="bone_altar_cape_awarded">Cape de Prière obtenue!</string>
 
@@ -1246,7 +1249,7 @@
     <string name="town_upgrade_fail_level">Nécessite Construction Nv. %1$d</string>
     <string name="town_upgrade_fail_coins">Pas assez de pièces</string>
     <string name="town_upgrade_fail_mats">Matériaux insuffisants</string>
-    <string name="town_inn_active_bonus">+%1$d%%% XP d\'ouvrier par session</string>
+    <string name="town_inn_active_bonus">+%1$d%% XP d\'ouvrier par session</string>
     <string name="town_inn_no_bonus">Améliorez pour donner un bonus XP aux ouvriers</string>
     <string name="town_guild_active_bonus">-%1$d%% exigences de quêtes de guilde</string>
     <string name="town_guild_no_bonus">Améliorez pour réduire les exigences de quête</string>
@@ -1279,7 +1282,7 @@
     <string name="town_artisans_workshop_active_bonus">%1$d%% chance de préserver des matériaux de fabrication secondaires</string>
     <string name="town_building_chronos_spire_name">Flèche du Chrono</string>
     <string name="town_chronos_spire_no_bonus">Améliorez pour réduire le temps des sessions du joueur</string>
-    <string name="town_chronos_spire_active_bonus">%1$d%%% de réduction du temps des sessions du joueur</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% de réduction du temps des sessions du joueur</string>
 
     <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">Première Rénovation</string>
@@ -1324,7 +1327,7 @@
     <string name="carnival_queue">Mettre en file</string>
     <string name="carnival_ring_toss">Lancer d\'anneaux</string>
     <string name="carnival_active_ring_desc">Lancez quand l\'indicateur atteint la zone cible dorée.</string>
-    <string name="carnival_ring_target_hint">Visez le centre (45%%–55%%)</string>
+    <string name="carnival_ring_target_hint" formatted="false">Visez le centre (45%–55%)</string>
     <string name="carnival_throw">Lancer !</string>
     <string name="carnival_hammer_strike">Coup de marteau</string>
     <string name="carnival_active_hammer_desc">Frappez quand le jauge de puissance est à son maximum.</string>
@@ -1503,13 +1506,13 @@
     <string name="bonus_section_skills">Bonus d\'aptitudes</string>
     <string name="bonus_combat_stat_boost">Améliore les stats de combat</string>
     <string name="bonus_combined_xp">XP combiné</string>
-    <string name="bonus_yield">+%1$d%%% rendement</string>
-    <string name="bonus_boost">+%1$d%%% renforcement</string>
+    <string name="bonus_yield">+%1$d%% rendement</string>
+    <string name="bonus_boost">+%1$d%% renforcement</string>
     <string name="bonus_session_shorter">%1$d min de sessions en moins</string>
-    <string name="bonus_coin_return">+%1$d%%% retour de pièces</string>
+    <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
 
-    <string name="bonus_coin_drops">+%1$d%%% pièces obtenues</string>
+    <string name="bonus_coin_drops">+%1$d%% pièces obtenues</string>
     <string name="bonus_hp">+%1$d PV</string>
     <string name="snackbar_added_to_queue">Ajouté à la file : %1$s.</string>
     <string name="snackbar_queue_full">La file est pleine.</string>
@@ -1567,20 +1570,20 @@
 
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Tour de l\'Infini</string>
-    <string name="tower_floor_label">étage %d</string>
+    <string name="tower_floor_label" formatted="false">étage %d</string>
     <string name="tower_floor_desc">Étage %1$d de la Tour de l\'Infini</string>
-    <string name="tower_best_floor">Meilleur : Étage %d</string>
-    <string name="tower_start_btn">Tenter l\'étage %d</string>
+    <string name="tower_best_floor" formatted="false">Meilleur : Étage %d</string>
+    <string name="tower_start_btn" formatted="false">Tenter l\'étage %d</string>
     <string name="tower_milestones">Jalons</string>
-    <string name="tower_floor_cleared">Étage %d nettoyé !</string>
-    <string name="tower_new_best">Nouveau record : étage %d!</string>
+    <string name="tower_floor_cleared" formatted="false">Étage %d nettoyé !</string>
+    <string name="tower_new_best" formatted="false">Nouveau record : étage %d!</string>
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">Tu es tombé à l\'étage %1$d. Retour à l\'étage %2$d.</string>
     <string name="tower_not_enough_runes">Pas assez de %1$s pour le nombre maximal d\'attaques possible.</string>
     <string name="tower_milestone_claim">Réclamer</string>
     <string name="tower_milestone_claimed">Réclamé</string>
     <string name="tower_enemies_this_floor">Ennemis</string>
-    <string name="tower_enemy_strength">Puissance ennemie : %s%%</string>
+    <string name="tower_enemy_strength" formatted="false">Puissance ennemie : %s%</string>
     <string name="tower_entry_card_desc">Des étages sans fin. Jusqu\'où peux-tu grimper ?</string>
     <string name="tower_collect_prompt">Enregistrez votre parcours dans Tour de l\'Infini</string>
     <string name="tower_home_collect_hint">Ouvre l\'écran « Tour » pour enregistrer cette partie</string>
@@ -1701,7 +1704,7 @@
     <string name="journal_hint">Notez des rappels pour la prochaine fois : que mettre dans la file d\'attente, vers quoi vous progressez.</string>
     <string name="journal_placeholder">Écrivez une note...</string>
     <string name="profile_banners_empty">Aucune bannière obtenue pour le moment. Terminez un évènement saisonnier pour en obtenir une !</string>
-    <string name="profile_banners_earned_on">Obtenue le %s</string>
+    <string name="profile_banners_earned_on" formatted="false">Obtenue le %s</string>
     <string name="profile_banners_unobtained">(Non obtenue)</string>
     <string name="character_title_label">Titre</string>
     <string name="character_title_none">Aucun Titre</string>
@@ -1799,7 +1802,7 @@
     <string name="pet_timber_sprite_name">Farfadet des Bois</string>
     <string name="pet_timber_sprite_desc">Un esprit de la forêt s\'est éveillé de la sciure et du bois d\'œuvre. Il sait exactement où doit aller chaque clou.</string>
     <string name="pet_juggling_imp_name">Diablotin Jongleur</string>
-    <string name="pet_juggling_imp_desc">Un diablotin malicieux qui jongle avec vos soucis pour les faire disparaître. Augmente de 3 %% l\'XP de toutes les aptitudes.</string>
+    <string name="pet_juggling_imp_desc" formatted="false">Un diablotin malicieux qui jongle avec vos soucis pour les faire disparaître. Augmente de 3 % l\'XP de toutes les aptitudes.</string>
     <string name="pet_tower_pet_name">Gardien de Pierre</string>
     <string name="pet_tower_pet_desc">Un ancien golem de pierre qui garde les secrets de la tour. Augmente l\'XP de combat.</string>
     <string name="pet_solstice_sprite_name">Farfadet du Solstice</string>
