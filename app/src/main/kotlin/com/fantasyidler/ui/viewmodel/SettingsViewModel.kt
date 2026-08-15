@@ -120,6 +120,14 @@ class SettingsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
+    val showQuestDots: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).showQuestDots }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
     val showJournalButton: StateFlow<Boolean> = playerRepo.playerFlow
         .map { player ->
             if (player == null) return@map true
@@ -187,6 +195,13 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(showRecentActivityLog = enabled))
+        }
+    }
+
+    fun setShowQuestDots(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(showQuestDots = enabled))
         }
     }
 

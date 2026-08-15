@@ -593,6 +593,9 @@ class ShopViewModel @Inject constructor(
             "maple_dresser"  to 160,
             "yew_wardrobe"   to 340,
             "magic_throne"   to 850,
+            "redwood_bench"  to 1050,
+            "redwood_bookcase" to 1400,
+            "redwood_grand_bed" to 1800,
         )
 
         private val TOOL_SLOTS = setOf(

@@ -124,7 +124,7 @@
     <string name="boss_demon_lord_desc">Древний демон из бездны, мастер темной магии.</string>
     <string name="boss_kraken_name">Кракен</string>
     <string name="boss_kraken_desc">Ужас глубоких морей, колоссальный морской монстр.</string>
-    <string name="boss_balrog_name">Балрог</string>
+    <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
     <string name="boss_balrog_desc">Древний демон пламени и тени, пробужденный от сна глубоко под землей.</string>
     <string name="boss_void_sovereign_name">Владыка Пустоты</string>
     <string name="boss_void_sovereign_desc">Первобытная сущность, скрывающаяся за разломами пустоты. Неизмеримо древняя, она с презрением смотрит на смертных.</string>

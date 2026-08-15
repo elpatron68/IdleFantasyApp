@@ -36,29 +36,35 @@ class SessionAlarmReceiver : BroadcastReceiver() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val session = sessionRepository.getSession(sessionId)
-                sessionRepository.markCompleted(sessionId)
-                // Compute how late the alarm fired so the next session can be backdated.
-                val now = System.currentTimeMillis()
-                val backdateMs = if (session != null) maxOf(0L, now - session.endsAt) else 0L
-                if (session?.isWorkerSession == true) {
-                    val slot = session.workerSlot.coerceAtLeast(1)
-                    val workerStarted = workerQueuedSessionStarter.startNextQueued(slot)
-                    if (!workerStarted) notificationManager.showSessionComplete(skillDisplayName)
-                } else {
-                    var catchUpMs = backdateMs
-                    while (catchUpMs > 0) {
-                        val used = try { queuedSessionStarter.insertNextQueuedAsOffline(catchUpMs) } catch (_: Exception) { 0L }
-                        if (used == 0L) break
-                        catchUpMs -= used
-                    }
-                    val started = queuedSessionStarter.startNextQueued(backdateMs = catchUpMs)
-                    if (!started) notificationManager.showSessionComplete(skillDisplayName)
-                }
+                processSessionAlarm(sessionId, skillDisplayName)
             } finally {
                 pending.finish()
                 if (wakeLock.isHeld) wakeLock.release()
             }
+        }
+    }
+
+    internal suspend fun processSessionAlarm(sessionId: String, skillDisplayName: String) {
+        val session = sessionRepository.getSession(sessionId)
+        if (session == null || session.completed) return
+
+        sessionRepository.markCompleted(sessionId)
+        // Compute how late the alarm fired so the next session can be backdated.
+        val now = System.currentTimeMillis()
+        val backdateMs = maxOf(0L, now - session.endsAt)
+        if (session.isWorkerSession) {
+            val slot = session.workerSlot.coerceAtLeast(1)
+            val workerStarted = workerQueuedSessionStarter.startNextQueued(slot)
+            if (!workerStarted) notificationManager.showSessionComplete(skillDisplayName)
+        } else {
+            var catchUpMs = backdateMs
+            while (catchUpMs > 0) {
+                val used = try { queuedSessionStarter.insertNextQueuedAsOffline(catchUpMs) } catch (_: Exception) { 0L }
+                if (used == 0L) break
+                catchUpMs -= used
+            }
+            val started = queuedSessionStarter.startNextQueued(backdateMs = catchUpMs)
+            if (!started) notificationManager.showSessionComplete(skillDisplayName)
         }
     }
 

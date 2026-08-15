@@ -29,6 +29,7 @@ import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
+import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.isGuildCapeForSkill
 import com.fantasyidler.repository.resolveOwnedCapeKeysForSkill
@@ -182,11 +183,12 @@ internal fun BonusesTab(
 
     val agilityPrestige    = state.skillPrestige[Skills.AGILITY] ?: 0
     val mercantilePrestige = state.skillPrestige[Skills.MERCANTILE] ?: 0
+    val builderDiscountPct = (TownRepository.builderDiscount(state.skillLevels[Skills.CONSTRUCTION] ?: 1) * 100).toInt()
 
     // "all" pets with no skill-specific rows: surface them in the Boosts section
     val showAllPetsInBoosts = allPetBoostPct > 0 && specificSkillKeys.isEmpty()
 
-    if (!boostActive && !blessingActive && cape == null && bonusPets.isEmpty() && prestigeEntries.isEmpty()) {
+    if (!boostActive && !blessingActive && cape == null && bonusPets.isEmpty() && prestigeEntries.isEmpty() && builderDiscountPct <= 0) {
         Box(
             modifier         = Modifier.fillMaxSize().padding(32.dp),
             contentAlignment = Alignment.Center,
@@ -266,7 +268,7 @@ internal fun BonusesTab(
             }
         }
 
-        if (skillEntries.isNotEmpty() || agilityPrestige > 0 || mercantilePrestige > 0) {
+        if (skillEntries.isNotEmpty() || agilityPrestige > 0 || mercantilePrestige > 0 || builderDiscountPct > 0) {
             item { SlotSectionHeader(stringResource(R.string.bonus_section_skills)) }
             items(skillEntries, key = { it.skillKey }) { entry ->
                 if (entry.xpPct > 0) {
@@ -318,6 +320,16 @@ internal fun BonusesTab(
                         name  = GameStrings.skillName(context, Skills.MERCANTILE),
                         pct   = stringResource(R.string.bonus_coin_return, mercantilePrestige * 10),
                         scope = "",
+                    )
+                }
+            }
+            if (builderDiscountPct > 0) {
+                item {
+                    BonusRow(
+                        name   = GameStrings.skillName(context, Skills.CONSTRUCTION),
+                        pct    = "-$builderDiscountPct%",
+                        scope  = stringResource(R.string.builder_title),
+                        detail = stringResource(R.string.bonus_builder_discount_detail),
                     )
                 }
             }

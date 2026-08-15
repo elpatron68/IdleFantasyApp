@@ -130,6 +130,7 @@ internal fun MiningSheet(
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
     Column(Modifier.padding(bottom = 24.dp)) {
         Text(
             text     = stringResource(R.string.label_choose_activity),
@@ -158,7 +159,7 @@ internal fun MiningSheet(
             )
         }
         HorizontalDivider()
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(scrollState)) {
             ores.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, ore) ->
@@ -209,6 +210,7 @@ internal fun WoodcuttingSheet(
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
     Column(Modifier.padding(bottom = 24.dp)) {
         Text(
             text     = stringResource(R.string.label_choose_activity),
@@ -231,7 +233,7 @@ internal fun WoodcuttingSheet(
             )
         }
         HorizontalDivider()
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(scrollState)) {
             trees.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, tree) ->
@@ -282,6 +284,7 @@ internal fun FishingSheet(
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
     Column(Modifier.padding(bottom = 24.dp)) {
         Text(
             text     = stringResource(R.string.label_choose_activity),
@@ -304,7 +307,7 @@ internal fun FishingSheet(
             )
         }
         HorizontalDivider()
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(scrollState)) {
             fish.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, f) ->

@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Движение прибыли</string>
     <string name="quest_mercantile_daily_7a_name">Великая торговля</string>
     <string name="quest_mercantile_daily_7b_name">Элитные маршруты</string>
-    <string name="quest_mercantile_daily_7c_name">Мастер биржи</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">Забег удачи</string>
     <string name="quest_mercantile_daily_7e_name">Великая прибыль</string>
     <string name="quest_mining_daily_1a_name">Доставка железа</string>

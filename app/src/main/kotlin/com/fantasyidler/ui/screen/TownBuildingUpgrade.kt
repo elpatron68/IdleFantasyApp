@@ -42,10 +42,14 @@ fun BuildingUpgradeCard(
     val isMaxed = currentTier >= def.tiers.size
     val nextTier = if (!isMaxed) def.tiers[currentTier] else null
 
+    val nextCoinCost  = nextTier?.let { TownRepository.discountedCoins(it.coinCost, constructionLevel) } ?: 0L
+    val nextMaterials = nextTier?.let { TownRepository.discountedMaterials(it.materials, constructionLevel) } ?: emptyMap()
+    val discountPct   = (TownRepository.builderDiscount(constructionLevel) * 100).toInt()
+
     val canUpgrade = nextTier != null &&
         constructionLevel >= nextTier.constructionLevelRequired &&
-        coins >= nextTier.coinCost &&
-        nextTier.materials.all { (k, qty) -> (inventory[k] ?: 0) >= qty }
+        coins >= nextCoinCost &&
+        nextMaterials.all { (k, qty) -> (inventory[k] ?: 0) >= qty }
 
     Surface(
         shape    = RoundedCornerShape(16.dp),
@@ -109,20 +113,27 @@ fun BuildingUpgradeCard(
                         MaterialTheme.colorScheme.error,
                 )
                 Text(
-                    text  = stringResource(R.string.town_upgrade_cost, nextTier.coinCost.formatCoins()),
+                    text  = stringResource(R.string.town_upgrade_cost, nextCoinCost.formatCoins()),
                     style = MaterialTheme.typography.bodySmall,
-                    color = if (coins >= nextTier.coinCost)
+                    color = if (coins >= nextCoinCost)
                         MaterialTheme.colorScheme.onSurface
                     else
                         MaterialTheme.colorScheme.error,
                 )
+                if (discountPct > 0) {
+                    Text(
+                        text  = stringResource(R.string.town_builder_discount, discountPct),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
                 Text(
                     text     = stringResource(R.string.town_upgrade_materials_header),
                     style    = MaterialTheme.typography.labelSmall,
                     color    = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp),
                 )
-                nextTier.materials.forEach { (key, qty) ->
+                nextMaterials.forEach { (key, qty) ->
                     val have = inventory[key] ?: 0
                     Text(
                         text  = "  ${GameStrings.itemName(context, key)}: $have / $qty",

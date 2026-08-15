@@ -76,6 +76,7 @@ fun SettingsScreen(
     onNavigateToHomeScreenSettings: () -> Unit = {},
     onNavigateToThemeSettings: () -> Unit = {},
     onNavigateToSaveSlots: () -> Unit = {},
+    onNavigateToArtCredits: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -311,6 +312,17 @@ fun SettingsScreen(
                 title    = stringResource(R.string.settings_home_screen),
                 subtitle = stringResource(R.string.settings_home_screen_desc),
                 onClick  = onNavigateToHomeScreenSettings,
+            )
+            val showQuestDots by viewModel.showQuestDots.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_quest_dots),
+                subtitle = stringResource(R.string.settings_quest_dots_desc),
+                trailing = {
+                    Switch(
+                        checked         = showQuestDots,
+                        onCheckedChange = { viewModel.setShowQuestDots(it) },
+                    )
+                }
             )
             SettingsRow(
                 title    = stringResource(R.string.settings_profile_layout),
@@ -628,35 +640,11 @@ fun SettingsScreen(
             // Art credits section
             HorizontalDivider()
 
-            SectionHeader(title = stringResource(R.string.settings_art_credits))
-
-            val artCredits = listOf(
-                Triple(
-                    stringResource(R.string.settings_credit_banners_title),
-                    stringResource(R.string.settings_credit_banners_subtitle),
-                    "https://wenrexa.itch.io/banners-kingdoms",
-                ),
-                Triple(
-                    stringResource(R.string.settings_credit_skill_icons_title),
-                    stringResource(R.string.settings_credit_skill_icons_subtitle),
-                    "https://shikashipx.itch.io/shikashis-fantasy-icons-pack",
-                ),
+            SettingsRow(
+                title    = stringResource(R.string.settings_art_credits),
+                subtitle = stringResource(R.string.settings_art_credits_desc),
+                onClick  = onNavigateToArtCredits,
             )
-            artCredits.forEach { (title, subtitle, url) ->
-                SettingsRow(
-                    title    = title,
-                    subtitle = subtitle,
-                    trailing = {
-                        OutlinedButton(
-                            onClick = {
-                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-                            }
-                        ) {
-                            Text(stringResource(R.string.settings_source_open))
-                        }
-                    }
-                )
-            }
         }
     }
 }

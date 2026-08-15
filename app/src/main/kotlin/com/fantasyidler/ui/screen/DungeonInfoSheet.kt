@@ -2,6 +2,7 @@ package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -119,6 +120,7 @@ internal fun DungeonInfoSheet(
     potionEffects: Map<String, Map<String, Int>>,
     selectedPotionKey: String?,
     isStarting: Boolean,
+    isQueueFull: Boolean = false,
     repeatCount: Int,
     enemies: Map<String, EnemyData> = emptyMap(),
     onWeaponSlotSelected: (String) -> Unit,
@@ -177,7 +179,7 @@ internal fun DungeonInfoSheet(
         else       -> "attack"
     }
     val styleLabel = GameStrings.skillName(context, combatStyle)
-    val canStart   = canEnter && !isStarting &&
+    val canStart   = canEnter && !isStarting && !isQueueFull &&
         (combatStyle != "magic" || selectedSpell != null)
 
     Column(
@@ -359,16 +361,30 @@ internal fun DungeonInfoSheet(
             OutlinedButton(onClick = onDismiss, modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.btn_cancel))
             }
-            Button(
-                onClick  = onStart,
-                modifier = Modifier.weight(1f),
-                enabled  = canStart,
-            ) {
-                if (isStarting) CircularProgressIndicator(
-                    modifier  = Modifier.height(20.dp).width(20.dp),
-                    strokeWidth = 2.dp,
-                )
-                else Text(stringResource(R.string.btn_enter_dungeon))
+            val queueFullMessage = stringResource(R.string.snackbar_queue_full)
+            Box(modifier = Modifier.weight(1f)) {
+                Button(
+                    onClick  = onStart,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled  = canStart,
+                ) {
+                    if (isStarting) CircularProgressIndicator(
+                        modifier  = Modifier.height(20.dp).width(20.dp),
+                        strokeWidth = 2.dp,
+                    )
+                    else Text(stringResource(R.string.btn_enter_dungeon))
+                }
+                if (isQueueFull) {
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication        = null,
+                                onClick           = { AppBannerCenter.enqueue(queueFullMessage) },
+                            ),
+                    )
+                }
             }
         }
     }

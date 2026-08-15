@@ -60,6 +60,7 @@ data class TowerUiState(
     val availableSpells: List<SpellData> = emptyList(),
     val selectedPotionKey: String? = null,
     val availablePotions: Map<String, Int> = emptyMap(),
+    val isQueueFull: Boolean = false,
 )
 
 data class TowerMilestone(
@@ -197,6 +198,7 @@ class TowerViewModel @Inject constructor(
                 availableSpells     = gameData.spells.values.filter { it.magicLevelRequired <= magicLevel }.sortedBy { it.magicLevelRequired },
                 selectedPotionKey   = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
                 availablePotions    = inventory.filterKeys { it in gameData.potionEffects },
+                isQueueFull         = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), TowerUiState())

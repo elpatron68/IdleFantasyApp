@@ -11,9 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
@@ -24,6 +27,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -97,10 +101,17 @@ fun BestiaryTab(viewModel: BestiaryViewModel = hiltViewModel()) {
             )
         }
 
+        val enemiesListState = rememberLazyListState()
+        val bossesListState = rememberLazyListState()
+        LaunchedEffect(state.sort) {
+            enemiesListState.scrollToItem(0)
+            bossesListState.scrollToItem(0)
+        }
         val entries = if (selectedSubTab == 0) state.enemies else state.bosses
         BestiaryList(
             entries = entries,
             sort    = state.sort,
+            listState = if (selectedSubTab == 0) enemiesListState else bossesListState,
             onEntryClick = { selectedEntry = it },
         )
     }
@@ -130,10 +141,11 @@ fun BestiaryTab(viewModel: BestiaryViewModel = hiltViewModel()) {
 private fun BestiaryList(
     entries: List<BestiaryEntry>,
     sort: BestiarySort,
+    listState: LazyListState = rememberLazyListState(),
     onEntryClick: (BestiaryEntry) -> Unit,
 ) {
     val otherLabel = stringResource(R.string.bestiary_location_other)
-    LazyColumn(Modifier.fillMaxSize()) {
+    LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
         if (sort == BestiarySort.BY_LOCATION) {
             val grouped = buildLocationGroups(entries, otherLabel)
             grouped.forEach { (groupName, groupEntries) ->
@@ -157,7 +169,7 @@ private fun BestiaryList(
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             }
         }
-        item { Spacer(Modifier.height(16.dp)) }
+        item(key = "bestiary_footer_spacer") { Spacer(Modifier.height(16.dp)) }
     }
 }
 
@@ -193,6 +205,15 @@ private fun BestiaryRow(entry: BestiaryEntry, onClick: () -> Unit) {
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        if (entry.boss != null) {
+            BossIcon(
+                bossId        = entry.boss.id,
+                modifier      = Modifier.size(40.dp),
+                silhouette    = !entry.encountered,
+                fallbackEmoji = entry.boss.emoji,
+            )
+            Spacer(Modifier.width(12.dp))
+        }
         Column(Modifier.weight(1f)) {
             Text(
                 text  = entry.nameLoader(LocalContext.current, entry.key),
@@ -342,12 +363,23 @@ private fun BossDetailContent(
     ) {
         item {
             Row(
+                Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                BossIcon(
+                    bossId        = boss.id,
+                    modifier      = Modifier.size(96.dp),
+                    silhouette    = !entry.encountered,
+                    fallbackEmoji = boss.emoji,
+                )
+            }
+            Row(
                 Modifier.fillMaxWidth().padding(bottom = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment     = Alignment.CenterVertically,
             ) {
                 Text(
-                    text       = "${boss.emoji}  ${GameStrings.bossName(context, boss.id)}",
+                    text       = GameStrings.bossName(context, boss.id),
                     style      = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )

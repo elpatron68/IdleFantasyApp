@@ -275,6 +275,8 @@
     <string name="settings_profile_layout_desc">Escolha entre uma barra lateral ou abas no topo</string>
     <string name="settings_profile_layout_rail">Barra Lateral</string>
     <string name="settings_profile_layout_tabs">Abas</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Tela Inicial</string>
     <string name="settings_home_screen_desc">Escolha o que aparece na tela inicial</string>
     <string name="settings_recent_activity">Registro de Atividade Recente</string>
@@ -314,10 +316,12 @@
     <string name="label_weekly_reset">Reinicia segunda-feira às %1$s</string>
     <string name="weekly_bonus_title">Bônus Semanal!</string>
     <string name="weekly_bonus_claim">Resgatar Bônus Semanal</string>
-    <string name="label_daily_info">Cada missão diária recompensa com moedas. Toda missão também tem 1 chance em 100 de dropar uma peça de equipamento Anão.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Cada desafio semanal recompensa com moedas com base no seu requisito de nível. Complete todos os 5 para ganhar um bônus: 100.000 moedas, ou uma chance de %1$s de ganhar uma peça de equipamento Divino.</string>
     <string name="label_weekly_info_complete">Cada desafio semanal recompensa com moedas com base no seu requisito de nível. Complete todos os 5 para ganhar um bônus: 100.000 moedas. Você já possui todas as peças do equipamento Divino!</string>
-    <string name="label_daily_reward">2.000 moedas (1/100: equipamento Anão)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Missão diária concluída! +2.000 moedas.</string>
     <string name="msg_daily_claimed_dwarven">Missão diária concluída! Você encontrou %1$s!</string>
     <string name="label_hide_completed">Ocultar concluídas</string>
@@ -615,8 +619,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Nível %1$d  •  Enterre ossos ou espalhe cinzas para ganhar XP de Oração</string>
     <string name="skills_no_bones">Nenhum osso ou cinza no inventário</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">%1$d XP cada</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d XP cada  •  %2$d disponíveis</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP no total</string>
@@ -716,6 +720,7 @@
     <string name="character_create_title">Crie Seu Personagem</string>
     <string name="character_edit_title">Editar Personagem</string>
     <string name="character_name_label">Nome do Personagem</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Gênero</string>
     <string name="character_gender_male">Masculino</string>
     <string name="character_gender_female">Feminino</string>
@@ -1070,6 +1075,7 @@
     <string name="slayer_lamp_purchased">+%1$s XP adicionado a %2$s!</string>
     <string name="slayer_lamp_pick_skill">Escolha uma habilidade</string>
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lâmpada de XP (Pequena)</string>
@@ -1229,6 +1235,7 @@
     <string name="town_upgrade_next_label">Próxima Melhoria</string>
     <string name="town_upgrade_constr_req">Requer Construção Nv. %1$d</string>
     <string name="town_upgrade_cost">Custo: %1$s moedas</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Materiais:</string>
     <string name="town_upgrade_btn">Melhorar</string>
     <string name="town_upgrade_success">Edifício melhorado!</string>
@@ -1497,6 +1504,7 @@
     <string name="bonus_session_shorter">%1$d min de sessões mais curtas</string>
     <string name="bonus_coin_return">+%1$d%% retorno de moedas</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1738,10 +1746,15 @@
     <string name="title_master_farmer_name">Mestre Agricultor</string>
     <string name="title_master_farmer_requirement">Alcance o nível máximo na Guilda de Agricultura</string>
     <string name="settings_art_credits">Créditos de Arte</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Bandeiras Sazonais</string>
     <string name="settings_credit_banners_subtitle">Arte por Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Ícones de Habilidades</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Campeão de %1$s</string>
     <string name="title_seasonal_requirement">Complete o Evento Sazonal de %1$s</string>
     <string name="home_welcome_greeting">Bem-vindo de volta,</string>
@@ -1763,7 +1776,7 @@
     <string name="pet_tiny_templar_desc">Um pequeno peixe companheiro que aumenta seu XP de Pesca.</string>
     <string name="pet_tangleroot_name">Raiz Emaranhada</string>
     <string name="pet_tangleroot_desc">Uma criatura vegetal mágica que melhora seu XP de Agricultura.</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1812,6 +1825,7 @@
     <string name="save_slot_combat_level">Nível de combate %1$d</string>
     <string name="save_slot_total_level">Nível total %1$d</string>
     <string name="save_slot_last_played">%1$s atrás</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Trocar de personagem?</string>
     <string name="save_slot_switch_body">Jogar como %1$s? Seu personagem atual é salvo automaticamente.</string>
     <string name="save_slot_switch_btn">Trocar</string>

@@ -94,6 +94,8 @@ data class PlayerFlags(
     @SerialName("weekly_bonus_claimed") val weeklyBonusClaimed: Boolean = false,
     /** Consecutive weekly bonus claims without a Divine gear drop; resets to 0 on a drop. */
     @SerialName("divine_pity_misses") val divinePityMisses: Int = 0,
+    /** Claimed dailies since the last Dwarven gear drop; each narrows the drop odds by 2 (1/100, 1/98, ...). */
+    @SerialName("dwarven_pity_claims") val dwarvenPityClaims: Int = 0,
 
     /** Currently hired worker, or null if none. */
     @SerialName("hired_worker") val hiredWorker: HiredWorker? = null,
@@ -161,6 +163,12 @@ data class PlayerFlags(
     @SerialName("profile_layout") val profileLayout: String = "rail",
     /** Whether session/queue countdowns append the predicted wall-clock completion time. */
     @SerialName("show_session_end_time") val showSessionEndTime: Boolean = true,
+    /** Gold quest dots on the Skills tab icons; some players prefer them off (discussion #1386). */
+    @SerialName("show_quest_dots") val showQuestDots: Boolean = true,
+    /** Epoch ms when this character was created; 0 for pre-existing characters until backfilled
+     *  from their oldest quest completion (sessions are deleted on collect, so quest timestamps
+     *  are the oldest surviving record). */
+    @SerialName("character_created_at") val characterCreatedAt: Long = 0L,
     /** Prestige level per skill: skill key → 0–3. */
     @SerialName("skill_prestige") val skillPrestige: Map<String, Int> = emptyMap(),
     /** Ash fertilizer per farming patch: patchNumber.toString() → ash item key. */
@@ -213,6 +221,8 @@ data class PlayerFlags(
     @SerialName("seasonal_bounty_slots") val seasonalBountySlots: List<String> = emptyList(),
     /** Seasonal Events: slot index (as String) -> epoch ms when a claimed slot rotates in a new task. */
     @SerialName("seasonal_bounty_slot_cooldown") val seasonalBountySlotCooldownUntil: Map<String, Long> = emptyMap(),
+    /** When the bounty board last did its 6am daily rotation of untouched slots. */
+    @SerialName("seasonal_bounty_daily_stamp") val seasonalBountyDailyStamp: Long = 0L,
     /** Seasonal Events: epoch ms when the minigame cooldown expires; 0 = not on cooldown. */
     @SerialName("seasonal_minigame_cooldown_at") val seasonalMinigameCooldownAt: Long = 0L,
     /** Seasonal Events: persistent player choice — longer reaction window, longer cooldown. */

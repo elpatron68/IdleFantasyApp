@@ -1,3 +1,25 @@
+v1.13.6
+• XP lamps now preview the level each skill would reach and warn when XP would be wasted past 99, with the skill picker organised into sections with icons (thanks Michaelomh!)
+• The foretell next slayer task button is disabled while no task is active so bones can't be wasted (thanks Michaelomh!)
+• Restored the official themes' intended colours that shifted after the Material 3 update (thanks CiaranGruber!)
+• Large community translation batches for French, Russian, Italian, Simplified Chinese, and Lithuanian (thanks Mortain and every submitter!)
+• Skill sheets for Mining, Fishing, Woodcutting, Firemaking, Runecrafting, and Prayer show how many of each resource you own, and the Skills legend explains the gold dot (thanks xRahul!)
+• Fixed skill sheet lists locking up mid scroll, and lists now remember your scroll position when opening and closing sheets and detail views (thanks xRahul!)
+• Carnival ring toss shows the target zone on the bar and grades your throw the instant your finger lands, so what you see is what you score
+• Construction late game: Redwood Planks (Fletching 85), Runite Nails (Smithing 85), and three redwood furniture recipes up to level 95 with better XP than the Magic Throne, plus two Builders Guild dailies for them. Every Construction level now takes 0.5% off Builder's Workshop upgrade costs, up to 49.5% at 99
+• Bosses now have pixel art portraits in the bestiary (a mystery silhouette until your first encounter), the boss list, the pre fight sheet, and the fight banner. Art Credits moved to its own Settings page with entries for the new art
+• The bestiary only lists seasonal event bosses and enemies while their event is running, so upcoming events aren't spoiled early
+• Dwarven gear from daily quests now has a pity system: every claimed daily without a drop improves the odds by 2 (1/100, then 1/98, and so on) until a piece drops, with your current odds shown live
+• Session queue: reorder entries by long-pressing and dragging, haptic feedback on the move arrows, every row shares one layout with a leading icon (boss fights show their portrait), and combat activities can no longer be started once the queue is full (thanks Michaelomh!)
+• Daily quest objectives read naturally again ("Cook 20 swordfish", plurals restored across all 24), and the Prayer sheet's quest marker appears on every bone type that counts toward bury quests
+• Merchants Guild fixes: high-rank dailies now require their intended 3/4/5 trades and 100k/200k coins instead of paying multi-trade rewards for a single trade, and the daily sharing a name with a guild quest is now "Quarter Master"
+• The gilded full helmet, platebody, and kiteshield each have their own description, and fixed doubled percent signs plus seed description line breaks
+• Fixed ghost "Session Complete" notifications and the queue skipping ahead when a stale background alarm fired for an already collected session (thanks xRahul!)
+• Character names are capped at 256 characters so extreme names can't break the profile screen (thanks Michaelomh!)
+• The fire raid boss is now the Gothic Ember (name suggested by fredphreak!), along with the Gothic Emberling pet, its whip and wings drops, and the Gothic Ember Bane quest line
+• Event bounties you haven't started re-roll at the 6:00 AM daily reset, and the board only offers bounties your skill levels can actually work on
+• New Settings toggle to hide the gold quest dots on the Skills tab, and the character selector now lists each character on its own row with their age ("Created 2mo 1w ago"), backfilled from your oldest quest completion for existing characters
+
 v1.13.5
 • Large translatability pass (thanks widowild1, Azerliap, and mh-tp for the detailed audit): agility course names, crafting recipe names, the shop's 2× XP boost name, bestiary stat labels and dungeon locations, carnival prize stats and item appraisal names, potion sequence letters (now translator-chosen per language so colours can't collide), farming picker labels and planting messages, daily quest monster names, combat log food names, expedition lore notes, Infinite Tower session names, and cape names in the bonuses tab now all follow your language
 • Added over 350 previously missing translatable entries (item descriptions, seed and crop names, expedition notes) so translators can cover the whole game

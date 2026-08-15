@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -176,22 +177,20 @@ fun SaveSlotsScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    state.slots.forEach { slot ->
-                        SaveSlotCard(
-                            slot     = slot,
-                            enabled  = !state.isSwitching,
-                            onClick  = {
-                                when {
-                                    slot.isActive -> {}
-                                    slot.exists   -> switchSlot = slot
-                                    else          -> createSlot = slot
-                                }
-                            },
-                            onDelete = { deleteSlot = slot },
-                            modifier = Modifier.weight(1f),
-                        )
-                    }
+                state.slots.forEach { slot ->
+                    SaveSlotCard(
+                        slot     = slot,
+                        enabled  = !state.isSwitching,
+                        onClick  = {
+                            when {
+                                slot.isActive -> {}
+                                slot.exists   -> switchSlot = slot
+                                else          -> createSlot = slot
+                            }
+                        },
+                        onDelete = { deleteSlot = slot },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
                 }
             }
 
@@ -223,112 +222,140 @@ private fun SaveSlotCard(
                              else MaterialTheme.colorScheme.surfaceVariant,
         ),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            Text(
-                text  = stringResource(R.string.save_slot_label, slot.slot),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-
-            if (!slot.exists || flags == null) {
+        if (!slot.exists || flags == null) {
+            Row(
+                modifier              = Modifier.fillMaxWidth().padding(12.dp),
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
                 Icon(
                     imageVector        = Icons.Filled.Add,
                     contentDescription = null,
-                    modifier           = Modifier.size(48.dp).padding(vertical = 8.dp),
+                    modifier           = Modifier.size(40.dp),
                     tint               = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                Text(
-                    text      = stringResource(R.string.save_slot_new),
-                    style     = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center,
-                )
-                return@Column
-            }
-
-            CharacterSprite(
-                race       = flags.characterRace.ifBlank { "human" },
-                skinTone   = flags.characterSkinTone,
-                hairStyle  = flags.characterHairStyle,
-                hairColor  = flags.characterHairColor,
-                eyeStyle   = flags.characterEyeStyle,
-                beardStyle = flags.characterBeardStyle,
-                beardColor = flags.characterBeardColor,
-                modifier   = Modifier.height(56.dp).aspectRatio(64f / 36f),
-            )
-
-            Text(
-                text       = flags.characterName.ifBlank { stringResource(R.string.home_adventurer) },
-                style      = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                maxLines   = 1,
-                overflow   = TextOverflow.Ellipsis,
-                textAlign  = TextAlign.Center,
-            )
-
-            if (flags.ironman) {
-                Row(
-                    verticalAlignment     = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(2.dp),
-                ) {
-                    Icon(
-                        imageVector        = Icons.Filled.Shield,
-                        contentDescription = null,
-                        modifier           = Modifier.size(12.dp),
-                        tint               = MaterialTheme.colorScheme.tertiary,
+                Column {
+                    Text(
+                        text  = stringResource(R.string.save_slot_new),
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
-                        text  = stringResource(R.string.save_slot_ironman),
+                        text  = stringResource(R.string.save_slot_label, slot.slot),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.tertiary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+            return@Card
+        }
+
+        Row(
+            modifier          = Modifier.fillMaxWidth().padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                CharacterSprite(
+                    race       = flags.characterRace.ifBlank { "human" },
+                    skinTone   = flags.characterSkinTone,
+                    hairStyle  = flags.characterHairStyle,
+                    hairColor  = flags.characterHairColor,
+                    eyeStyle   = flags.characterEyeStyle,
+                    beardStyle = flags.characterBeardStyle,
+                    beardColor = flags.characterBeardColor,
+                    modifier   = Modifier.height(56.dp).aspectRatio(64f / 36f),
+                )
+                Text(
+                    text  = stringResource(R.string.save_slot_label, slot.slot),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+
+            Spacer(Modifier.width(12.dp))
+
+            Column(
+                modifier            = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Row(
+                    verticalAlignment     = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Text(
+                        text       = flags.characterName.ifBlank { stringResource(R.string.home_adventurer) },
+                        style      = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines   = 1,
+                        overflow   = TextOverflow.Ellipsis,
+                        modifier   = Modifier.weight(1f, fill = false),
+                    )
+                    if (flags.ironman) {
+                        Icon(
+                            imageVector        = Icons.Filled.Shield,
+                            contentDescription = null,
+                            modifier           = Modifier.size(12.dp),
+                            tint               = MaterialTheme.colorScheme.tertiary,
+                        )
+                        Text(
+                            text  = stringResource(R.string.save_slot_ironman),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.tertiary,
+                        )
+                    }
+                }
+                Text(
+                    text  = stringResource(R.string.save_slot_combat_level, combatLevelFrom(slot.skillLevels)) +
+                        "  •  " + stringResource(R.string.save_slot_total_level, totalLevelFrom(slot.skillLevels)),
+                    style = MaterialTheme.typography.labelSmall,
+                )
+                Text(
+                    text  = slot.coins.formatCoins(),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                val createdAt = flags.characterCreatedAt
+                if (createdAt > 0L) {
+                    val age = (System.currentTimeMillis() - createdAt).coerceAtLeast(60_000L)
+                    Text(
+                        text  = stringResource(R.string.save_slot_created, age.formatDurationMs()),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
 
-            Text(
-                text  = stringResource(R.string.save_slot_combat_level, combatLevelFrom(slot.skillLevels)),
-                style = MaterialTheme.typography.labelSmall,
-            )
-            Text(
-                text  = stringResource(R.string.save_slot_total_level, totalLevelFrom(slot.skillLevels)),
-                style = MaterialTheme.typography.labelSmall,
-            )
-            Text(
-                text  = slot.coins.formatCoins(),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            Spacer(Modifier.width(8.dp))
 
-            if (slot.isActive) {
-                Text(
-                    text       = stringResource(R.string.save_slot_playing),
-                    style      = MaterialTheme.typography.labelSmall,
-                    fontWeight = FontWeight.Bold,
-                    color      = MaterialTheme.colorScheme.primary,
-                )
-            } else {
-                val elapsed = (System.currentTimeMillis() - slot.lastPlayedAt).coerceAtLeast(60_000L)
-                Text(
-                    text      = stringResource(R.string.save_slot_last_played, elapsed.formatDurationMs()),
-                    style     = MaterialTheme.typography.labelSmall,
-                    color     = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                )
-                Spacer(Modifier.height(2.dp))
-                IconButton(onClick = onDelete, modifier = Modifier.size(28.dp)) {
-                    Icon(
-                        imageVector        = Icons.Filled.Delete,
-                        contentDescription = stringResource(R.string.save_slot_delete_btn),
-                        modifier           = Modifier.size(18.dp),
-                        tint               = MaterialTheme.colorScheme.error,
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                if (slot.isActive) {
+                    Text(
+                        text       = stringResource(R.string.save_slot_playing),
+                        style      = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color      = MaterialTheme.colorScheme.primary,
                     )
+                } else {
+                    Text(
+                        text  = stringResource(R.string.save_slot_last_played, elapsedSince(slot.lastPlayedAt).formatDurationMs()),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    IconButton(onClick = onDelete, modifier = Modifier.size(28.dp)) {
+                        Icon(
+                            imageVector        = Icons.Filled.Delete,
+                            contentDescription = stringResource(R.string.save_slot_delete_btn),
+                            modifier           = Modifier.size(18.dp),
+                            tint               = MaterialTheme.colorScheme.error,
+                        )
+                    }
                 }
             }
         }
     }
 }
+
+private fun elapsedSince(epochMs: Long): Long =
+    (System.currentTimeMillis() - epochMs).coerceAtLeast(60_000L)

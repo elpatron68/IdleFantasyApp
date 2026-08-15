@@ -124,7 +124,7 @@
     <string name="boss_demon_lord_desc">Starożytny demon z otchłani, mistrz mrocznej magii.</string>
     <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
     <string name="boss_kraken_desc">Postrach głębokich mórz, kolosalny morski potwór.</string>
-    <string name="boss_balrog_name">Balrog</string> <!-- untranslated -->
+    <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
     <string name="boss_balrog_desc">Starożytny demon płomienia i cienia, przebudzony ze snu głęboko pod ziemią.</string>
     <string name="boss_void_sovereign_name" translatable="false">The Void Sovereign</string> <!-- untranslated -->
     <string name="boss_void_sovereign_desc">Pierwotna istota stojąca za szczelinami pustki. Niewyobrażalnie stara, patrzy na śmiertelnych śmiałków z pogardą.</string>

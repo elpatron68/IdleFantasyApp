@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -96,7 +97,8 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
         }
 
         val grouped = buildSlotGroups(state.entries)
-        LazyColumn(Modifier.fillMaxSize()) {
+        val listState = rememberLazyListState()
+        LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
             grouped.forEach { (groupName, entries) ->
                 item(key = "header_$groupName") {
                     Text(
@@ -107,7 +109,7 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
                     )
                     HorizontalDivider()
                 }
-                items(entries, key = { it.key }) { entry ->
+                items(entries, key = { "${groupName}_${it.key}" }) { entry ->
                     ArmoryRow(entry = entry, onClick = { selectedEntry = entry })
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }

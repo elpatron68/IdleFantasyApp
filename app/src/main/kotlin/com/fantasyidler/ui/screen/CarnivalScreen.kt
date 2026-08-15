@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -462,11 +464,13 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                             trackColor       = MaterialTheme.colorScheme.surfaceVariant,
                         )
                         // Drawn after the indicator so its opaque track doesn't hide this marker.
+                        // Padding must precede width: the offset has to displace the box, not
+                        // shrink its content to nothing (issue #1372).
                         Box(
                             modifier = Modifier
-                                .width(maxWidth * (targetEnd - targetStart))
                                 .align(Alignment.CenterStart)
                                 .padding(start = maxWidth * targetStart)
+                                .width(maxWidth * (targetEnd - targetStart))
                                 .height(24.dp)
                                 .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
                         )
@@ -478,8 +482,24 @@ private fun RingTossCard(gameState: ActiveGameState, difficulty: Difficulty, vie
                             stringResource(R.string.carnival_ring_target_hint)
                         Text(hint, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                     }
+                    // Grade the throw where the bar was when the finger LANDED: onClick only
+                    // fires on release, and at 0.5 bar-widths per second that delay alone can
+                    // carry the position out of the target zone (issue #1372).
+                    val throwInteractions = remember { MutableInteractionSource() }
+                    var pressedPosition by remember { mutableFloatStateOf(-1f) }
+                    LaunchedEffect(throwInteractions) {
+                        throwInteractions.interactions.collect { interaction ->
+                            if (interaction is PressInteraction.Press) pressedPosition = position
+                        }
+                    }
                     Button(
-                        onClick  = { haptic.performHapticFeedback(HapticFeedbackType.LongPress); viewModel.submitRingToss(position) },
+                        onClick  = {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            val thrown = if (pressedPosition >= 0f) pressedPosition else position
+                            pressedPosition = -1f
+                            viewModel.submitRingToss(thrown)
+                        },
+                        interactionSource = throwInteractions,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Text(stringResource(R.string.carnival_throw))

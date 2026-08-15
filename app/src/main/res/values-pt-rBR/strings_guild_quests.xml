@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Corrida por Lucro</string>
     <string name="quest_mercantile_daily_7a_name">Grande Negócio</string>
     <string name="quest_mercantile_daily_7b_name">Rotas de Elite</string>
-    <string name="quest_mercantile_daily_7c_name">Mestre das Trocas</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">Corrida da Fortuna</string>
     <string name="quest_mercantile_daily_7e_name">Grande Lucro</string>
     <string name="quest_mining_daily_1a_name">Entrega de Ferro</string>

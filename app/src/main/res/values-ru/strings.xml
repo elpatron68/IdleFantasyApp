@@ -289,6 +289,8 @@
     <string name="settings_profile_layout_desc">Боковая панель или верхние вкладки</string>
     <string name="settings_profile_layout_rail">Панель</string>
     <string name="settings_profile_layout_tabs">Вкладки</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Главный экран</string>
     <string name="settings_home_screen_desc">Выберите, что отображается на главном экране</string>
     <string name="settings_recent_activity">Журнал последней активности</string>
@@ -328,10 +330,12 @@
     <string name="label_weekly_reset">Обновляется в понедельник в %1$s</string>
     <string name="weekly_bonus_title">Недельный бонус!</string>
     <string name="weekly_bonus_claim">Получить недельный бонус</string>
-    <string name="label_daily_info">За каждый ежедневный квест вы получаете монеты. В каждом квесте также есть вероятность 1 из 100, что выпадет часть гномьего снаряжения.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">За каждое еженедельное испытание выдаются монеты в зависимости от требуемого уровня. Выполните все 5, чтобы получить бонус: 100 000 монет или шанс %1$s получить часть Божественного снаряжения.</string>
     <string name="label_weekly_info_complete">За каждое еженедельное испытание выдаются монеты в зависимости от требуемого уровня. Выполните все 5, чтобы получить бонус: 100 000 монет. У вас уже есть всё Божественное снаряжение!</string>
-    <string name="label_daily_reward">2 000 монет (1/100: дварфское снаряжение)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Ежедневный квест выполнен! +2 000 монет.</string>
     <string name="msg_daily_claimed_dwarven">Ежедневный квест выполнен! Вы нашли %1$s!</string>
     <string name="label_hide_completed">Скрыть завершённые</string>
@@ -645,8 +649,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Уровень %1$d  •  Захороните кости или рассейте прах для опыта молитвы</string>
     <string name="skills_no_bones">Нет костей или праха в инвентаре</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">%1$d опыта за шт.</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d опыта за шт.  •  %2$d доступно</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d опыта всего</string>
@@ -746,6 +750,7 @@
     <string name="character_create_title">Создайте персонажа</string>
     <string name="character_edit_title">Редактировать персонажа</string>
     <string name="character_name_label">Имя персонажа</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Пол</string>
     <string name="character_gender_male">Мужской</string>
     <string name="character_gender_female">Женский</string>
@@ -1100,6 +1105,7 @@
     <string name="slayer_lamp_purchased">+%1$s опыта добавлено в %2$s!</string>
     <string name="slayer_lamp_pick_skill">Выберите навык</string>
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Лампа опыта (малая)</string>
@@ -1259,6 +1265,7 @@
     <string name="town_upgrade_next_label">Следующее Улучшение</string>
     <string name="town_upgrade_constr_req">Строительство Ур. %1$d требуется</string>
     <string name="town_upgrade_cost">Стоимость: %1$s монет</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Материалы:</string>
     <string name="town_upgrade_btn">Улучшить</string>
     <string name="town_upgrade_success">Здание улучшено!</string>
@@ -1531,6 +1538,7 @@
     <string name="bonus_session_shorter">На %1$d мин короче сессии</string>
     <string name="bonus_coin_return">+%1$d%% возврат монет</string>
     <string name="bonus_tower">Башня</string>
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% выпадения монет</string>
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1772,10 +1780,15 @@
     <string name="title_master_farmer_name">Мастер-фермер</string>
     <string name="title_master_farmer_requirement">Достигните максимального уровня Гильдии Фермеров</string>
     <string name="settings_art_credits">Авторы графики</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Сезонные баннеры</string>
     <string name="settings_credit_banners_subtitle">Графика: Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Иконки навыков</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Чемпион %1$s</string>
     <string name="title_seasonal_requirement">Завершите Сезонное событие %1$s</string>
     <string name="home_welcome_greeting">С возвращением,</string>
@@ -1797,7 +1810,7 @@
     <string name="pet_tiny_templar_desc">Маленький рыбный спутник, увеличивающий ваш опыт Рыбалки.</string>
     <string name="pet_tangleroot_name">Путаник</string>
     <string name="pet_tangleroot_desc">Магическое растение, усиливающее ваш опыт Фермерства.</string>
-    <string name="pet_baby_balrog_name">Малыш Балрог</string>
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">Крошечный демон огня и тени, который усиливает вашу магию.</string>
     <string name="pet_void_wisp_name">Клочок пустоты</string>
     <string name="pet_void_wisp_desc">Фрагмент сущности Повелителя Пустоты, принадлежащий тем, кто победил его хозяина. Увеличивает боевой опыт.</string>
@@ -1846,6 +1859,7 @@
     <string name="save_slot_combat_level">Боевой уровень %1$d</string>
     <string name="save_slot_total_level">Общий уровень %1$d</string>
     <string name="save_slot_last_played">%1$s назад</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Сменить персонажа?</string>
     <string name="save_slot_switch_body">Играть за %1$s? Текущий персонаж сохранится автоматически.</string>
     <string name="save_slot_switch_btn">Сменить</string>

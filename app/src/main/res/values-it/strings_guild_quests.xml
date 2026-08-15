@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Profitto Innanzitutto</string>
     <string name="quest_mercantile_daily_7a_name">Alto Commercio</string>
     <string name="quest_mercantile_daily_7b_name">Rotte Migliori</string>
-    <string name="quest_mercantile_daily_7c_name">Lupo della Piazza</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">Chi Trova un Tesoro</string>
     <string name="quest_mercantile_daily_7e_name">Ampi Margini di Profitto</string>
     <string name="quest_mining_daily_1a_name">Consegna di Ferro</string>

@@ -96,6 +96,7 @@ data class SkillsUiState(
     /** Timed (daily/weekly/guild daily) quest indicators per skill, for the overview rows. */
     val timedQuestsBySkill: Map<String, List<QuestIndicator>> = emptyMap(),
     val showSessionEndTime: Boolean = true,
+    val showQuestDots: Boolean = true,
     /** Guild dailies plus daily/weekly quests for each sheet skill, keyed by skill (guild keys match skill keys). */
     val sheetQuests: Map<String, List<SheetQuestSummary>> = emptyMap(),
 )
@@ -231,6 +232,7 @@ class SkillsViewModel @Inject constructor(
                     }
                     .filterValues { it.isNotEmpty() },
                 showSessionEndTime    = flags.showSessionEndTime,
+                showQuestDots         = flags.showQuestDots,
                 sheetQuests           = computeSheetQuests(questProgress, flags),
             )
         }
@@ -1286,13 +1288,12 @@ class SkillsViewModel @Inject constructor(
                 }
                 "prayer" -> {
                     if (questSkill == Skills.PRAYER) {
-                        if (questTarget.isNotEmpty()) {
-                            addIndicator(questTarget, questSkill, category, remaining)
-                        } else {
-                            // Ashes give Prayer XP but never count toward prayer quests (issue #1207).
-                            gameData.bones.filterValues { !it.isAsh }.keys
-                                .forEach { addIndicator(it, questSkill, category, remaining) }
-                        }
+                        // Burial progress never filters by the quest's target (recordBuried,
+                        // recordGuildPrayer, applyDailyPrayer), so every bone qualifies and the
+                        // indicator must match (issue #1385). Ashes give Prayer XP but never
+                        // count toward prayer quests (issue #1207).
+                        gameData.bones.filterValues { !it.isAsh }.keys
+                            .forEach { addIndicator(it, questSkill, category, remaining) }
                     }
                 }
                 "trade" -> {

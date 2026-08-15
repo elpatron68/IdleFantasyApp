@@ -23,6 +23,22 @@ class DailyQuestRepository @Inject constructor(
     private val gameData: GameDataRepository,
 ) {
 
+    companion object {
+        const val DWARVEN_BASE_DENOMINATOR = 100
+
+        /** Pity-adjusted Dwarven drop odds, expressed as 1 in the returned value: every claimed
+         *  daily without a drop narrows the denominator by 2 (1/100, 1/98, 1/96, ...) until a
+         *  piece drops, which resets the streak. Floors at 1, i.e. a guaranteed drop. */
+        fun dwarvenDropDenominator(pityClaims: Int): Int =
+            (DWARVEN_BASE_DENOMINATOR - 2 * pityClaims.coerceAtLeast(0)).coerceAtLeast(1)
+    }
+
+    /** Denominator for the quests screen, or null when every piece is owned (nothing can drop). */
+    fun dwarvenDropDenominatorForDisplay(flags: PlayerFlags, ownedItems: Set<String>): Int? {
+        if (dwarvenDropPool.all { it in ownedItems }) return null
+        return dwarvenDropDenominator(flags.dwarvenPityClaims)
+    }
+
     internal val dwarvenDropPool = listOf(
         "dwarven_sword", "dwarven_scimitar", "dwarven_warhammer",
         "dwarven_pickaxe", "dwarven_axe", "dwarven_fishing_rod", "dwarven_hoe",
@@ -178,7 +194,9 @@ class DailyQuestRepository @Inject constructor(
         check(templateId !in flags.dailyQuestClaimed) { "Quest already claimed" }
 
         val missingPieces = dwarvenDropPool.filter { it !in ownedItems }
-        val reward: DailyReward = if (missingPieces.isNotEmpty() && Random.nextInt(100) == 0) {
+        val dropped = missingPieces.isNotEmpty() &&
+            Random.nextInt(dwarvenDropDenominator(flags.dwarvenPityClaims)) == 0
+        val reward: DailyReward = if (dropped) {
             DailyReward.DwarvenItemReward(missingPieces.random())
         } else {
             DailyReward.CoinsReward()
@@ -186,6 +204,12 @@ class DailyQuestRepository @Inject constructor(
 
         val newFlags = flags.copy(
             dailyQuestClaimed = flags.dailyQuestClaimed + templateId,
+            // A drop resets the streak; owning every piece freezes it (nothing left to pity toward).
+            dwarvenPityClaims = when {
+                dropped                 -> 0
+                missingPieces.isEmpty() -> flags.dwarvenPityClaims
+                else                    -> flags.dwarvenPityClaims + 1
+            },
         )
         return newFlags to reward
     }

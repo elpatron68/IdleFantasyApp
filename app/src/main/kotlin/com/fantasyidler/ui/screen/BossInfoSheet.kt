@@ -1,6 +1,8 @@
 package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -123,6 +125,7 @@ internal fun BossInfoSheet(
     potionEffects: Map<String, Map<String, Int>>,
     selectedPotionKey: String?,
     isStarting: Boolean,
+    isQueueFull: Boolean = false,
     repeatCount: Int,
     fullCoinKillsLeft: Int = PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY,
     onWeaponSlotSelected: (String) -> Unit,
@@ -141,7 +144,7 @@ internal fun BossInfoSheet(
         else       -> "attack"
     }
     val styleLabel = GameStrings.skillName(context, combatStyle)
-    val canStart = canFight && !isStarting &&
+    val canStart = canFight && !isStarting && !isQueueFull &&
         (combatStyle != "magic" || selectedSpell != null)
 
     Column(
@@ -153,11 +156,19 @@ internal fun BossInfoSheet(
         Column(modifier = Modifier
             .weight(1f, fill = false)
             .verticalScroll(rememberScrollState())) {
-        Text(
-            text       = "${boss.emoji} ${GameStrings.bossName(context, boss.id)}",
-            style      = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            BossIcon(
+                bossId        = boss.id,
+                modifier      = Modifier.size(48.dp),
+                fallbackEmoji = boss.emoji,
+            )
+            Spacer(Modifier.width(12.dp))
+            Text(
+                text       = GameStrings.bossName(context, boss.id),
+                style      = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+            )
+        }
         Text(
             text  = GameStrings.bossDesc(context, boss.id).takeIf { it.isNotBlank() } ?: boss.description,
             style = MaterialTheme.typography.bodyMedium,
@@ -394,15 +405,29 @@ internal fun BossInfoSheet(
             OutlinedButton(onClick = onDismiss, modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.btn_cancel))
             }
-            Button(
-                onClick  = onStart,
-                modifier = Modifier.weight(1f),
-                enabled  = canStart,
-            ) {
-                if (isStarting) CircularProgressIndicator(
-                    modifier    = Modifier.height(20.dp).width(20.dp),
-                    strokeWidth = 2.dp,
-                ) else Text(stringResource(R.string.btn_fight))
+            val queueFullMessage = stringResource(R.string.snackbar_queue_full)
+            Box(modifier = Modifier.weight(1f)) {
+                Button(
+                    onClick  = onStart,
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled  = canStart,
+                ) {
+                    if (isStarting) CircularProgressIndicator(
+                        modifier    = Modifier.height(20.dp).width(20.dp),
+                        strokeWidth = 2.dp,
+                    ) else Text(stringResource(R.string.btn_fight))
+                }
+                if (isQueueFull) {
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication        = null,
+                                onClick           = { AppBannerCenter.enqueue(queueFullMessage) },
+                            ),
+                    )
+                }
             }
         }
     }

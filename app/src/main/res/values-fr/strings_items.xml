@@ -568,9 +568,9 @@
     <string name="crop_magic_herb_name">Herbe magique</string>
     <string name="crop_dragon_fruit_name">Fruits du dragon</string>
     <string name="crop_golden_wheat_name">Blé doré</string>
-    <string name="crop_spirit_herb_name">Herbe de l’esprit</string>
+    <string name="crop_spirit_herb_name">Herbe Spirituelle</string>
     <string name="crop_spirit_herb_desc">Une herbe rare utilisée en herboristerie de haut niveau.</string>
-    <string name="crop_celestial_bloom_name">Fleur céleste</string>
+    <string name="crop_celestial_bloom_name">Fleur Céleste</string>
     <string name="crop_celestial_bloom_desc">Une fleur éthérée utilisée dans des potions de maître.</string>
     <string name="crop_starfruit_name">Fruit d’étoile</string>
     <string name="crop_void_lotus_name">Lotus du vide</string>
@@ -711,9 +711,11 @@
     <string name="item_maple_plank_name">Planche d\'Érable</string>
     <string name="item_yew_plank_name">Planche d\'If</string>
     <string name="item_magic_plank_name">Planche Magique</string>
+    <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
     <string name="item_iron_nail_name">Clou en Fer</string>
     <string name="item_steel_nail_name">Clou en Acier</string>
     <string name="item_mithril_nail_name">Clou en Mithril</string>
+    <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
     <string name="item_stone_name">Pierre</string>
     <string name="item_stone_desc">Un bloc de pierre. Utilisé pour la construction.</string>
     <string name="item_carved_stone_name">Pierre Sculptée</string>
@@ -728,6 +730,9 @@
     <string name="item_maple_dresser_name">Commode en Érable</string>
     <string name="item_yew_wardrobe_name">Armoire en If</string>
     <string name="item_magic_throne_name">Trône Magique</string>
+    <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
+    <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
+    <string name="item_redwood_grand_bed_name">Redwood Grand Bed</string> <!-- untranslated -->
 
 
     <!-- ===== Seed names ===== -->
@@ -755,9 +760,9 @@
     <string name="item_dragon_fruit_seed_desc">Plantez pour cultiver des fruits du dragon. Pousse en 14 heures.\n\nNécessite le niveau 55 d\'agriculture.</string>
     <string name="item_golden_wheat_seed_name">Graine de blé doré</string>
     <string name="item_golden_wheat_seed_desc">Plantez pour cultiver du blé doré. Pousse en 16 heures.\n\nNécessite le niveau 65 d\'agriculture.</string>
-    <string name="item_spirit_seed_name">Graine de l\'esprit</string>
+    <string name="item_spirit_seed_name">Graine d\'esprit</string>
     <string name="item_spirit_seed_desc">Plantez pour cultiver des herbes spirituelles. Pousse en 19 heures.\n\nNécessite le niveau 75 d\'agriculture.</string>
-    <string name="item_celestial_bloom_seed_name">Graine de fleur céleste</string>
+    <string name="item_celestial_bloom_seed_name">Graine de Fleur Céleste</string>
     <string name="item_celestial_bloom_seed_desc">Plantez pour cultiver des fleurs célestes. Pousse en 21 heures.\n\nNécessite le niveau 85 d\'agriculture.</string>
     <string name="item_starfruit_seed_name">Graine de fruit d\'étoile</string>
     <string name="item_starfruit_seed_desc">Plantez pour cultiver des fruits d\'étoile. Pousse en 23 heures.\n\nNécessite le niveau 95 d\'agriculture.</string>
@@ -984,7 +989,7 @@
     <string name="item_dwarven_warhammer_desc">Un massif marteau nain qui écrase tout sur son passage.</string>
     <string name="item_tower_sword_name">Épée de la Tour</string>
     <string name="item_tower_sword_desc">Une lame qui a fendu d\'innombrables étages de la Tour.</string>
-    <string name="item_balrog_whip_desc">Un fouet d\'une flamme pure, arraché au Balrog lui-même. Brûle d\'un feu éternel.</string>
+    <string name="item_balrog_whip_desc">A whip of pure flame, torn from the Gothic Ember itself. Burns with an eternal fire.</string> <!-- untranslated -->
     <string name="item_divine_sword_name">Épée Divine</string>
     <string name="item_divine_sword_desc">Une lame de pure lumière divine, dont on dit qu\'elle n\'est maniée que par l\'élu.</string>
     <string name="item_divine_greatblade_name">Grande Lame Divine</string>
@@ -1062,7 +1067,7 @@
     <string name="item_tower_boots_desc">Bottes forgées dans la forge la plus profonde de la Tour.</string>
     <string name="item_tower_shield_name">Bouclier de la Tour</string>
     <string name="item_tower_shield_desc">Un bouclier massif taillé dans la pierre de la Tour.</string>
-    <string name="item_balrog_wings_desc">Les ailes puissantes d\'un Balrog, imprégnées d\'une puissance ténébreuse. L\'armure ultime.</string>
+    <string name="item_balrog_wings_desc">The mighty wings of the Gothic Ember, imbued with dark power. The ultimate armor.</string> <!-- untranslated -->
     <string name="item_divine_helm_name">Heaume Divin</string>
     <string name="item_divine_helm_desc">Un heaume rayonnant béni par les dieux. Il détourne les coups qui abattraient n\'importe quel mortel.</string>
     <string name="item_divine_platebody_name">Plastron Divin</string>
@@ -1086,7 +1091,7 @@
     <string name="item_silver_diamond_ring_desc">Une bague en argent avec un diamant. Équilibré pour le combat.</string>
     <string name="item_tower_ring_name">Anneau de la Tour</string>
     <string name="item_tower_ring_desc">Un anneau forgé dans la pierre de la Tour Infinie.</string>
-    <string name="item_ring_of_flame_desc">Forgé dans les feux des profondeurs de la terre. Ceux qui le portent ressentent la force du Balrog.</string>
+    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
     <string name="item_ring_of_dragons_might_desc">Un anneau imprégné du feu de dragon. Augmente considérablement la force au corps à corps.</string>
     <string name="item_ring_of_the_seas_desc">Une bague bénie par les profondeurs marines. Elle améliore la précision et la puissance des tirs à distance.</string>
     <string name="item_kraken_tentacle_desc">Un anneau en forme de tentacule enroulé qui canalise le pouvoir arcanique du Kraken.</string>
@@ -1145,7 +1150,7 @@
     <string name="item_forge_pickaxe_desc">Trempée dans les flammes de l\'Ancienne Forge elle-même. La pioche la plus rare et la plus puissante qui soit.</string>
     <string name="item_ironwood_axe_desc">Taillé dans les bois de fer qui se dressaient autrefois dans les Ruines de la Forêt Ancienne. D\'une durabilité exceptionnelle.</string>
     <string name="item_dwarven_axe_desc">Une hache naine légendaire. Elle abat n\'importe quel arbre avec facilité.</string>
-    <string name="item_sanctum_axe_desc">Forgée dans l\'ombre du Sanctuaire corrompu. Sa lame tranche avec aisance même les bûches imprégnées de magie.</string>
+    <string name="item_sanctum_axe_desc">Forgée dans l\'ombre du Sanctuaire Corrompu. Sa lame tranche avec aisance même les bûches imprégnées de magie.</string>
     <string name="item_blessed_fishing_rod_desc">Façonné à partir de bois flotté récupéré au Temple englouti, béni par d\'anciens rites marins.</string>
     <string name="item_dwarven_fishing_rod_desc">Une canne à pêche de facture naine. Elle sort pratiquement les poissons de l\'eau toute seule.</string>
     <string name="item_abyssal_rod_desc">Tissé à partir de filaments imprégnés du Vide, récupérés dans les Ruines abyssales. Les poissons bondissent littéralement dessus.</string>
@@ -1204,9 +1209,9 @@
     <string name="item_wraithbone_ring_desc">Un anneau pâle taillé dans de l\'os de spectre durant la Sombre Moisson. Il stabilise la main et le cœur.</string>
     <string name="item_reaper_scythe_desc">L\'outil de moisson du Roi Creux. Il ne moissonne pas que du blé.</string>
     <string name="item_gloomweave_cape_desc">Tissé à partir du crépuscule et de la fumée des lanternes au Marché de nuit. Vendu uniquement durant la Sombre Moisson.</string>
-    <string name="item_gilded_full_helmet_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_platebody_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_kiteshield_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_wind_strike_name">Frappe de Vent</string>
     <string name="item_wind_strike_desc">Un sort d\'air élémentaire qui frappe votre adversaire.</string>
     <string name="item_wind_bolt_name">Trait de Vent</string>
@@ -1271,11 +1276,11 @@
     <string name="item_blood_blast_desc">Un puissant sort de sang qui projette une déferlante sur votre adversaire.</string>
     <string name="item_blood_wave_name">Vague de Sang</string>
     <string name="item_blood_wave_desc">Un sort de sang dévastateur qui déferle sur votre adversaire.</string>
-    <string name="item_spirit_herb_name">Spirit Herb</string> <!-- untranslated -->
-    <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_name">Celestial Bloom</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_desc">An ethereal flower used in master potions. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
-    <string name="item_void_lotus_name">Void Lotus</string> <!-- untranslated -->
-    <string name="item_void_lotus_desc">A mysterious lotus used in the rarest concoctions. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
-    <string name="crop_magic_bean_name">Magic Bean</string> <!-- untranslated -->
+    <string name="item_spirit_herb_name">Herbe Spirituelle</string>
+    <string name="item_spirit_herb_desc">Une herbe rare utilisée en herboristerie de haut niveau. Nécessite le niveau 20 en Commerce pour l\'acheter.</string>
+    <string name="item_celestial_bloom_name">Fleur Céleste</string>
+    <string name="item_celestial_bloom_desc">Une fleur éthérée utilisée dans des potions de maître. Nécessite le niveau 40 en Commerce pour l\'acheter.</string>
+    <string name="item_void_lotus_name">Lotus du Vide</string>
+    <string name="item_void_lotus_desc">Un lotus mystérieux utilisé dans les préparations les plus rares. Nécessite le niveau 60 en Commerce pour l\'acheter.</string>
+    <string name="crop_magic_bean_name">Haricot Magique</string>
 </resources>

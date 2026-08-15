@@ -393,14 +393,14 @@
     <string name="quest_kraken_killer_3_objective">Defeat the Kraken 25 times</string>
     <string name="quest_kraken_killer_4_name">Kraken Killer IV</string>
     <string name="quest_kraken_killer_4_objective">Defeat the Kraken 50 times</string>
-    <string name="quest_balrog_bane_1_name">Balrog Bane I</string>
-    <string name="quest_balrog_bane_1_objective">Defeat the Balrog</string>
-    <string name="quest_balrog_bane_2_name">Balrog Bane II</string>
-    <string name="quest_balrog_bane_2_objective">Defeat the Balrog 5 times</string>
-    <string name="quest_balrog_bane_3_name">Balrog Bane III</string>
-    <string name="quest_balrog_bane_3_objective">Defeat the Balrog 25 times</string>
-    <string name="quest_balrog_bane_4_name">Balrog Bane IV</string>
-    <string name="quest_balrog_bane_4_objective">Defeat the Balrog 50 times</string>
+    <string name="quest_balrog_bane_1_name">Gothic Ember Bane I</string>
+    <string name="quest_balrog_bane_1_objective">Defeat the Gothic Ember</string>
+    <string name="quest_balrog_bane_2_name">Gothic Ember Bane II</string>
+    <string name="quest_balrog_bane_2_objective">Defeat the Gothic Ember 5 times</string>
+    <string name="quest_balrog_bane_3_name">Gothic Ember Bane III</string>
+    <string name="quest_balrog_bane_3_objective">Defeat the Gothic Ember 25 times</string>
+    <string name="quest_balrog_bane_4_name">Gothic Ember Bane IV</string>
+    <string name="quest_balrog_bane_4_objective">Defeat the Gothic Ember 50 times</string>
     <string name="quest_sovereign_slayer_1_name">Sovereign Slayer I</string>
     <string name="quest_sovereign_slayer_1_objective">Defeat the Void Sovereign</string>
     <string name="quest_sovereign_slayer_2_name">Sovereign Slayer II</string>
@@ -469,6 +469,33 @@
     <string name="quest_daily_kill_bandit_name">Bandit Buster</string>
     <string name="quest_daily_kill_demon_name">Demon Hunter</string>
     <string name="quest_daily_kill_dragon_name">Dragon Slayer</string>
+
+    <!-- Daily quest objectives — override the generated verb+item text, whose item names
+         read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
+    <string name="quest_daily_mine_iron_objective">Mine 150 iron ore.</string>
+    <string name="quest_daily_mine_coal_objective">Mine 300 coal.</string>
+    <string name="quest_daily_mine_mithril_objective">Mine 50 mithril ore.</string>
+    <string name="quest_daily_mine_runite_objective">Mine 20 runite ore.</string>
+    <string name="quest_daily_fish_salmon_objective">Catch 120 salmon.</string>
+    <string name="quest_daily_fish_lobster_objective">Catch 60 lobsters.</string>
+    <string name="quest_daily_fish_swordfish_objective">Catch 30 swordfish.</string>
+    <string name="quest_daily_fish_shark_objective">Catch 15 sharks.</string>
+    <string name="quest_daily_wc_oak_objective">Chop 100 oak logs.</string>
+    <string name="quest_daily_wc_willow_objective">Chop 70 willow logs.</string>
+    <string name="quest_daily_wc_yew_objective">Chop 25 yew logs.</string>
+    <string name="quest_daily_wc_magic_objective">Chop 10 magic logs.</string>
+    <string name="quest_daily_smith_iron_objective">Smith 40 iron bars.</string>
+    <string name="quest_daily_smith_mithril_objective">Smith 15 mithril bars.</string>
+    <string name="quest_daily_smith_adamantite_objective">Smith 10 adamantite bars.</string>
+    <string name="quest_daily_smith_runite_objective">Smith 5 runite bars.</string>
+    <string name="quest_daily_cook_trout_objective">Cook 100 trout.</string>
+    <string name="quest_daily_cook_salmon_objective">Cook 80 salmon.</string>
+    <string name="quest_daily_cook_lobster_objective">Cook 40 lobsters.</string>
+    <string name="quest_daily_cook_swordfish_objective">Cook 20 swordfish.</string>
+    <string name="quest_daily_kill_goblin_objective">Defeat 80 goblins.</string>
+    <string name="quest_daily_kill_bandit_objective">Defeat 50 bandits.</string>
+    <string name="quest_daily_kill_demon_objective">Defeat 20 demons.</string>
+    <string name="quest_daily_kill_dragon_objective">Defeat 10 dragons.</string>
 
     <!-- Quest objective verb strings for craft skills -->
     <string name="daily_verb_crafting">Craft</string>

@@ -124,6 +124,7 @@ internal fun ThievingSheet(
     onSelect: (String) -> Unit,
 ) {
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
     Column(Modifier.padding(bottom = 24.dp)) {
         Text(
             text     = stringResource(R.string.label_choose_activity),
@@ -146,7 +147,7 @@ internal fun ThievingSheet(
             )
         }
         HorizontalDivider()
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(scrollState)) {
             npcs.values
                 .sortedBy { it.levelRequired }
                 .forEach { npc ->

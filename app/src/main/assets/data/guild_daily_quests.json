@@ -7336,7 +7336,7 @@
     "name": "Grand Trade",
     "type": "trade",
     "target": "merchants_quarter",
-    "amount": 1,
+    "amount": 3,
     "description": "Complete 3 Merchant's Quarter trade routes for the Merchants Guild.",
     "rewards": {
       "coins": 50000,
@@ -7354,7 +7354,7 @@
     "name": "Elite Routes",
     "type": "trade",
     "target": "grand_exchange",
-    "amount": 1,
+    "amount": 4,
     "description": "Complete 4 Grand Exchange trade routes for the Merchants Guild.",
     "rewards": {
       "coins": 70000,
@@ -7369,10 +7369,10 @@
     "guild": "mercantile",
     "guild_level_min": 7,
     "guild_level_max": 10,
-    "name": "Exchange Master",
+    "name": "Quarter Master",
     "type": "trade",
     "target": "merchants_quarter",
-    "amount": 1,
+    "amount": 5,
     "description": "Complete 5 Merchant's Quarter trade routes for the Merchants Guild.",
     "rewards": {
       "coins": 90000,
@@ -7390,7 +7390,7 @@
     "name": "Fortune Run",
     "type": "earn_coins",
     "target": "",
-    "amount": 75000,
+    "amount": 100000,
     "description": "Earn 100,000 coins from trade routes for the Merchants Guild.",
     "rewards": {
       "coins": 75000,
@@ -7408,7 +7408,7 @@
     "name": "Grand Profit",
     "type": "earn_coins",
     "target": "",
-    "amount": 150000,
+    "amount": 200000,
     "description": "Earn 200,000 coins from trade routes for the Merchants Guild.",
     "rewards": {
       "coins": 110000,
@@ -8538,6 +8538,38 @@
     "rewards": {
       "coins": 24000,
       "xp": 120000,
+      "xp_skill": "construction"
+    }
+  },
+  {
+    "id": "construction_daily_5a",
+    "guild": "construction",
+    "guild_level_min": 10,
+    "guild_level_max": 10,
+    "name": "Redwood Contract",
+    "type": "craft",
+    "target": "redwood_bench",
+    "amount": 20,
+    "description": "Build 20 redwood benches for the Builders Guild.",
+    "rewards": {
+      "coins": 35000,
+      "xp": 180000,
+      "xp_skill": "construction"
+    }
+  },
+  {
+    "id": "construction_daily_5b",
+    "guild": "construction",
+    "guild_level_min": 10,
+    "guild_level_max": 10,
+    "name": "Library Commission",
+    "type": "craft",
+    "target": "redwood_bookcase",
+    "amount": 15,
+    "description": "Build 15 redwood bookcases for the Builders Guild.",
+    "rewards": {
+      "coins": 40000,
+      "xp": 200000,
       "xp_skill": "construction"
     }
   },

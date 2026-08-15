@@ -1383,8 +1383,22 @@ class PlayerRepository @Inject constructor(
             skillXp     = json.encode<Map<String, Long>>(Skills.DEFAULT_XP),
             inventory   = json.encode<Map<String, Int>>(defaultInventory),
             equipped    = json.encode<Map<String, String?>>(defaultEquipped),
-            flags       = json.encode<PlayerFlags>(PlayerFlags(ironman = ironman)),
+            flags       = json.encode<PlayerFlags>(
+                PlayerFlags(ironman = ironman, characterCreatedAt = System.currentTimeMillis())
+            ),
         )
+    }
+
+    /**
+     * One-time backfill for characters that predate [PlayerFlags.characterCreatedAt]: their
+     * oldest quest completion is the earliest record that survives (sessions are deleted on
+     * collect). Characters with no completed quests stay unstamped and show no creation line.
+     */
+    suspend fun ensureCharacterCreatedAt() {
+        val flags = getFlags()
+        if (flags.characterCreatedAt > 0L) return
+        val oldest = questProgressDao.getAllProgress().mapNotNull { it.completedAt }.minOrNull() ?: return
+        updateFlags(getFlags().copy(characterCreatedAt = oldest))
     }
 }
 

@@ -135,6 +135,7 @@ internal fun FiremakingSheet(
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
 ) {
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val logScrollState = rememberScrollState()
     if (backStep != null) {
         DisposableEffect(selectedKey) {
             backStep.value = if (selectedKey != null) ({ selectedKey = null }) else null
@@ -171,7 +172,7 @@ internal fun FiremakingSheet(
                     Text(stringResource(R.string.skills_no_logs), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
-                Column(Modifier.verticalScroll(rememberScrollState()).imePadding()) {
+                Column(Modifier.verticalScroll(logScrollState).imePadding()) {
                     availableLogs.entries.sortedBy { it.value.levelRequired }.forEach { (key, log) ->
                         val ashKey = when (key) {
                             "oak_log" -> "oak_ashes"; "willow_log" -> "willow_ashes"
@@ -230,73 +231,81 @@ internal fun FiremakingSheet(
             var qty      by remember(key) { androidx.compose.runtime.mutableIntStateOf(maxQty.coerceAtLeast(1)) }
             var textValue by remember(key) { mutableStateOf(maxQty.coerceAtLeast(1).toString()) }
             val totalXp = selectedLog.xpPerLog * qty
+            val detailScrollState = rememberScrollState()
 
-            TextButton(onClick = { selectedKey = null }, modifier = Modifier.padding(start = 4.dp)) {
-                Text(stringResource(R.string.btn_back_arrow))
-            }
-            Text(
-                text     = GameStrings.itemName(context, key),
-                style    = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(horizontal = 16.dp),
-            )
-            Text(
-                text     = "${maxQty} ${stringResource(R.string.firemaking_logs_in_inventory)}",
-                style    = MaterialTheme.typography.bodySmall,
-                color    = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-            )
-            Text(
-                text     = stringResource(R.string.firemaking_ashes_owned, ashOwned),
-                style    = MaterialTheme.typography.labelSmall,
-                color    = if (ashOwned > 0) MaterialTheme.colorScheme.primary else dim,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
-            )
-            Spacer(Modifier.height(12.dp))
-
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-                androidx.compose.material3.IconButton(onClick = { if (qty > 1) { qty--; textValue = qty.toString() } }, enabled = qty > 1) {
-                    androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Remove, contentDescription = null)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(detailScrollState)
+                    .imePadding(),
+            ) {
+                TextButton(onClick = { selectedKey = null }, modifier = Modifier.padding(start = 4.dp)) {
+                    Text(stringResource(R.string.btn_back_arrow))
                 }
-                androidx.compose.material3.OutlinedTextField(
-                    value         = textValue,
-                    onValueChange = { new ->
-                        val f = new.filter { it.isDigit() }
-                        textValue = f
-                        f.toIntOrNull()?.coerceIn(1, maxQty.coerceAtLeast(1))?.let { qty = it }
-                    },
-                    keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
-                    singleLine    = true,
-                    modifier      = Modifier.width(130.dp),
-                    textStyle     = MaterialTheme.typography.bodyLarge.copy(textAlign = androidx.compose.ui.text.style.TextAlign.Center),
-                )
-                androidx.compose.material3.IconButton(onClick = { if (qty < maxQty) { qty++; textValue = qty.toString() } }, enabled = qty < maxQty) {
-                    androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Add, contentDescription = null)
-                }
-            }
-            QtyQuickButtons(qty, maxQty) { qty = it; textValue = it.toString() }
-            QuestFillRow(questFills[key] ?: emptyList(), qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { qty = it; textValue = it.toString() }
-            Spacer(Modifier.height(8.dp))
-            Text(
-                text       = projectedXpLabel(currentXp, totalXp.toLong()),
-                style      = MaterialTheme.typography.bodyMedium,
-                color      = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.SemiBold,
-                modifier   = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            )
-            val logPerMs = perLogMs[key]?.takeIf { it > 0 } ?: (sessionDurationMs / 60)
-            if (logPerMs > 0) {
                 Text(
-                    text     = "~${(qty.toLong() * logPerMs).formatDurationMs()}",
+                    text     = GameStrings.itemName(context, key),
+                    style    = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                )
+                Text(
+                    text     = "${maxQty} ${stringResource(R.string.firemaking_logs_in_inventory)}",
                     style    = MaterialTheme.typography.bodySmall,
                     color    = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
                 )
+                Text(
+                    text     = stringResource(R.string.firemaking_ashes_owned, ashOwned),
+                    style    = MaterialTheme.typography.labelSmall,
+                    color    = if (ashOwned > 0) MaterialTheme.colorScheme.primary else dim,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+                Spacer(Modifier.height(12.dp))
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
+                    androidx.compose.material3.IconButton(onClick = { if (qty > 1) { qty--; textValue = qty.toString() } }, enabled = qty > 1) {
+                        androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Remove, contentDescription = null)
+                    }
+                    androidx.compose.material3.OutlinedTextField(
+                        value         = textValue,
+                        onValueChange = { new ->
+                            val f = new.filter { it.isDigit() }
+                            textValue = f
+                            f.toIntOrNull()?.coerceIn(1, maxQty.coerceAtLeast(1))?.let { qty = it }
+                        },
+                        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
+                        singleLine    = true,
+                        modifier      = Modifier.width(130.dp),
+                        textStyle     = MaterialTheme.typography.bodyLarge.copy(textAlign = androidx.compose.ui.text.style.TextAlign.Center),
+                    )
+                    androidx.compose.material3.IconButton(onClick = { if (qty < maxQty) { qty++; textValue = qty.toString() } }, enabled = qty < maxQty) {
+                        androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Add, contentDescription = null)
+                    }
+                }
+                QtyQuickButtons(qty, maxQty) { qty = it; textValue = it.toString() }
+                QuestFillRow(questFills[key] ?: emptyList(), qty, maxQty, modifier = Modifier.padding(horizontal = 16.dp)) { qty = it; textValue = it.toString() }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text       = projectedXpLabel(currentXp, totalXp.toLong()),
+                    style      = MaterialTheme.typography.bodyMedium,
+                    color      = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier   = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                )
+                val logPerMs = perLogMs[key]?.takeIf { it > 0 } ?: (sessionDurationMs / 60)
+                if (logPerMs > 0) {
+                    Text(
+                        text     = "~${(qty.toLong() * logPerMs).formatDurationMs()}",
+                        style    = MaterialTheme.typography.bodySmall,
+                        color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    )
+                }
+                Button(
+                    onClick  = { onStart(key, qty); selectedKey = null },
+                    enabled  = !isStarting && maxQty > 0,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                ) { Text(stringResource(R.string.firemaking_burn)) }
             }
-            Button(
-                onClick  = { onStart(key, qty); selectedKey = null },
-                enabled  = !isStarting && maxQty > 0,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            ) { Text(stringResource(R.string.firemaking_burn)) }
         }
     }
 }

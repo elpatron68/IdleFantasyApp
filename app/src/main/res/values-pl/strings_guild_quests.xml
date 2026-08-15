@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Pęd ku Zyskom</string>
     <string name="quest_mercantile_daily_7a_name">Wielka Transakcja</string>
     <string name="quest_mercantile_daily_7b_name">Elitarne Szlaki</string>
-    <string name="quest_mercantile_daily_7c_name">Mistrz Wymiany</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">Bieg po Fortunę</string>
     <string name="quest_mercantile_daily_7e_name">Wielki Zysk</string>
     <string name="quest_mining_daily_1a_name">Dostawa Żelaza</string>

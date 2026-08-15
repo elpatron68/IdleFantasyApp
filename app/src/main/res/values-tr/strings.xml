@@ -275,6 +275,8 @@
     <string name="settings_profile_layout_desc">Kenar cubugu veya ust sekmeler</string>
     <string name="settings_profile_layout_rail">Cubuk</string>
     <string name="settings_profile_layout_tabs">Sekmeler</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Ana Ekran</string>
     <string name="settings_home_screen_desc">Ana ekranda neyin görüneceğini seç</string>
     <string name="settings_recent_activity">Son Aktivite Günlüğü</string>
@@ -314,10 +316,12 @@
     <string name="label_weekly_reset">Her Pazartesi %1$s vaktinde sıfırlanır</string>
     <string name="weekly_bonus_title">Haftalık Ödül!</string>
     <string name="weekly_bonus_claim">Haftalık Ödülü Al</string>
-    <string name="label_daily_info">Her günlük görev altın kazandırır. Ayrıca her görevin yüzde 1 ihtimal ile Dwarven ekipmanı düşürebilir.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın, veya %1$s şans ile bir Divine ekipman parçası.</string>
     <string name="label_weekly_info_complete">Her haftalık görev, seviye gereksinimine bağlı olarak altın kazandırır. Haftalık 5 görevin hepsini tamamlayarak ödül kazan: 100.000 altın. Bütün Divine ekipmanlarına zaten sahipsin!</string>
-    <string name="label_daily_reward">2.000 altın (1/100: Dwarven ekipmanı)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Günlük görev tamamlandı! +2.000 altın.</string>
     <string name="msg_daily_claimed_dwarven">Günlük görev tamamlandı! %1$s ekipmanını buldun!</string>
     <string name="label_hide_completed">Tamamlananları sakla</string>
@@ -629,8 +633,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Seviye %1$d  •  Dua XP\'si için kemikleri göm veya külleri saç</string>
     <string name="skills_no_bones">Envanterde kemik veya kül yok</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">Tanesi %1$d XP</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">Tanesi %1$d XP  •  %2$d adet mevcut</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">Toplam +%1$d XP</string>
@@ -730,6 +734,7 @@
     <string name="character_create_title">Karakterini Oluştur</string>
     <string name="character_edit_title">Karakteri Düzenle</string>
     <string name="character_name_label">Karakter İsmi</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Cinsiyet</string>
     <string name="character_gender_male">Erkek</string>
     <string name="character_gender_female">Kadın</string>
@@ -1084,6 +1089,7 @@
     <string name="slayer_lamp_purchased">+%1$s XP %2$s\'e eklendi!</string>
     <string name="slayer_lamp_pick_skill">Choose a skill</string> <!-- untranslated -->
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">XP Lamp (Small)</string> <!-- untranslated -->
@@ -1243,6 +1249,7 @@
     <string name="town_upgrade_next_label">Sonraki Yükseltme</string>
     <string name="town_upgrade_constr_req">İnşaat Sv. %1$d gerekli</string>
     <string name="town_upgrade_cost">Maliyet: %1$s altın</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Malzemeler:</string>
     <string name="town_upgrade_btn">Yükselt</string>
     <string name="town_upgrade_success">Bina yükseltildi!</string>
@@ -1511,6 +1518,7 @@
     <string name="bonus_session_shorter">%1$d dk daha kısa oturumlar</string>
     <string name="bonus_coin_return">+%1$d%% altın getirisi</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1752,10 +1760,15 @@
     <string name="title_master_farmer_name">Usta Çiftçi</string>
     <string name="title_master_farmer_requirement">Çiftçiler Loncası\'nda maksimum seviyeye ulaş</string>
     <string name="settings_art_credits">Sanat Kredileri</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Sezonluk Sancaklar</string>
     <string name="settings_credit_banners_subtitle">Sanat: Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Yetenek Simgeleri</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">%1$s Şampiyonu</string>
     <string name="title_seasonal_requirement">%1$s Sezonluk Etkinliğini tamamla</string>
     <string name="home_welcome_greeting">Tekrar hoş geldin,</string>
@@ -1777,7 +1790,7 @@
     <string name="pet_tiny_templar_desc">Balıkçılık XP\'nizi artıran küçük bir balık yoldaşı.</string>
     <string name="pet_tangleroot_name">Düğümlü Kök</string>
     <string name="pet_tangleroot_desc">Tarım XP\'nizi geliştiren büyülü bir bitki yaratığı.</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1826,6 +1839,7 @@
     <string name="save_slot_combat_level">Savaş Seviyesi %1$d</string>
     <string name="save_slot_total_level">Toplam Seviye %1$d</string>
     <string name="save_slot_last_played">%1$s önce</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Karakter değiştirilsin mi?</string>
     <string name="save_slot_switch_body">%1$s olarak oynansın mı? Mevcut karakterin otomatik kaydedilir.</string>
     <string name="save_slot_switch_btn">Değiştir</string>

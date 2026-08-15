@@ -1,6 +1,7 @@
 package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -55,17 +56,28 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TextButton
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -357,13 +369,75 @@ internal fun QueueCard(
                 var next = towerCurrentFloor + if (activeSessionSkill == "tower") 1 else 0
                 queue.map { a -> if (a.skillName != "tower") null else { next += 1; next } }
             }
+            val haptic = LocalHapticFeedback.current
+            var draggingIndex by remember { mutableIntStateOf(-1) }
+            var dragOffsetY by remember { mutableFloatStateOf(0f) }
+            val rowHeights = remember { mutableStateMapOf<Int, Int>() }
+            // A completed session can consume a queue entry mid-drag; abandon the drag rather
+            // than dropping against stale indices.
+            LaunchedEffect(queue.size) { draggingIndex = -1; dragOffsetY = 0f }
+
+            fun dropTargetIndex(from: Int, offset: Float): Int {
+                var target = from
+                var remaining = offset
+                while (remaining < 0 && target > 0) {
+                    val h = rowHeights[target - 1] ?: break
+                    if (remaining <= -h / 2f) { remaining += h; target-- } else break
+                }
+                while (remaining > 0 && target < queue.size - 1) {
+                    val h = rowHeights[target + 1] ?: break
+                    if (remaining >= h / 2f) { remaining -= h; target++ } else break
+                }
+                return target
+            }
+
             queue.forEachIndexed { index, action ->
                 if (index > 0) HorizontalDivider(
                     modifier = Modifier.padding(vertical = 4.dp),
                     color    = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
                 )
                 Row(
-                    modifier          = Modifier.fillMaxWidth(),
+                    modifier          = Modifier
+                        .fillMaxWidth()
+                        .onGloballyPositioned { rowHeights[index] = it.size.height }
+                        .zIndex(if (index == draggingIndex) 1f else 0f)
+                        .graphicsLayer {
+                            if (index == draggingIndex) {
+                                translationY    = dragOffsetY
+                                shadowElevation = 8f
+                            }
+                        }
+                        .then(
+                            if (index == draggingIndex)
+                                Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
+                            else Modifier
+                        )
+                        .pointerInput(queue.size) {
+                            detectDragGesturesAfterLongPress(
+                                onDragStart = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    draggingIndex = index
+                                    dragOffsetY   = 0f
+                                },
+                                onDrag = { change, dragAmount ->
+                                    change.consume()
+                                    dragOffsetY += dragAmount.y
+                                },
+                                onDragEnd = {
+                                    val target = dropTargetIndex(index, dragOffsetY)
+                                    if (target != index) {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        onMove(index, target)
+                                    }
+                                    draggingIndex = -1
+                                    dragOffsetY   = 0f
+                                },
+                                onDragCancel = {
+                                    draggingIndex = -1
+                                    dragOffsetY   = 0f
+                                },
+                            )
+                        },
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     val emoji = GameStrings.skillEmoji(action.skillName)
@@ -380,18 +454,28 @@ internal fun QueueCard(
                             GameStrings.itemName(context, action.activityKey)
                                 .takeIf { action.activityKey.isNotEmpty() }
                     }
+                    // Every row gets the same leading 20dp icon slot (issue #1391): boss art for
+                    // bosses, the skill drawable when one exists, and the emoji otherwise (tower).
                     val iconRes = GameStrings.skillIconRes(action.skillName)
-                    if (iconRes != null) {
-                        Image(
-                            painter            = painterResource(iconRes),
-                            contentDescription = null,
-                            modifier           = Modifier.size(20.dp),
-                        )
-                        Spacer(Modifier.width(6.dp))
+                    Box(Modifier.size(20.dp), contentAlignment = Alignment.Center) {
+                        when {
+                            action.skillName == "boss" -> BossIcon(
+                                bossId        = action.activityKey,
+                                modifier      = Modifier.size(20.dp),
+                                fallbackEmoji = emoji,
+                            )
+                            iconRes != null -> Image(
+                                painter            = painterResource(iconRes),
+                                contentDescription = null,
+                                modifier           = Modifier.size(20.dp),
+                            )
+                            else -> Text(emoji, style = MaterialTheme.typography.labelMedium)
+                        }
                     }
+                    Spacer(Modifier.width(6.dp))
                     Column(Modifier.weight(1f)) {
                         Text(
-                            text  = "${if (iconRes == null) "$emoji " else ""}$prefix${if (suffix != null) " — $suffix" else ""}",
+                            text  = "$prefix${if (suffix != null) " — $suffix" else ""}",
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium,
                         )
@@ -437,7 +521,10 @@ internal fun QueueCard(
                     }
                     if (queue.size > 1) {
                         IconButton(
-                            onClick  = { onMove(index, index - 1) },
+                            onClick  = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                onMove(index, index - 1)
+                            },
                             enabled  = index > 0,
                             modifier = Modifier.size(32.dp),
                         ) {
@@ -450,7 +537,10 @@ internal fun QueueCard(
                             )
                         }
                         IconButton(
-                            onClick  = { onMove(index, index + 1) },
+                            onClick  = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                onMove(index, index + 1)
+                            },
                             enabled  = index < queue.size - 1,
                             modifier = Modifier.size(32.dp),
                         ) {

@@ -52,6 +52,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -124,13 +125,12 @@ fun CraftingScreen(
                 else -> viewModel.constructionRecipes
             }
 
-            val scrollState = rememberLazyListState()
-            LaunchedEffect(selectedTab) {
-                scrollState.scrollToItem(viewModel.getScrollIndex(selectedTab))
+            val scrollStates = List(6) { index ->
+                rememberSaveable(key = "craft_tab_scroll_$index", saver = LazyListState.Saver) {
+                    LazyListState()
+                }
             }
-            LaunchedEffect(scrollState.firstVisibleItemIndex) {
-                viewModel.saveScrollIndex(selectedTab, scrollState.firstVisibleItemIndex)
-            }
+            val scrollState = scrollStates.getOrElse(selectedTab) { scrollStates[0] }
 
             RecipeList(
                 recipes    = recipes,
@@ -176,7 +176,7 @@ private fun RecipeList(
     listState: LazyListState = rememberLazyListState(),
 ) {
     LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
-        items(recipes) { recipe ->
+        items(recipes, key = { it.key }) { recipe ->
             RecipeRow(
                 recipe  = recipe,
                 state   = state,
@@ -184,7 +184,7 @@ private fun RecipeList(
                 onTap   = { onTap(recipe) },
             )
         }
-        item { Spacer(Modifier.height(16.dp)) }
+        item(key = "bottom_spacer") { Spacer(Modifier.height(16.dp)) }
     }
 }
 

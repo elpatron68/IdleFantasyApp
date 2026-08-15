@@ -711,9 +711,11 @@
     <string name="item_maple_plank_name">メープルの木板</string>
     <string name="item_yew_plank_name">イチイの木板</string>
     <string name="item_magic_plank_name">魔法の木板</string>
+    <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
     <string name="item_iron_nail_name">鉄の釘</string>
     <string name="item_steel_nail_name">鋼鉄の釘</string>
     <string name="item_mithril_nail_name">ミスリルの釘</string>
+    <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
     <string name="item_stone_name">石材</string>
     <string name="item_stone_desc">A block of stone. Used for construction.</string> <!-- untranslated -->
     <string name="item_carved_stone_name">彫刻された石材</string>
@@ -728,6 +730,9 @@
     <string name="item_maple_dresser_name">メープルのタンス</string>
     <string name="item_yew_wardrobe_name">イチイのクローゼット</string>
     <string name="item_magic_throne_name">魔法の玉座</string>
+    <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
+    <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
+    <string name="item_redwood_grand_bed_name">Redwood Grand Bed</string> <!-- untranslated -->
 
 
     <!-- ===== Seed names ===== -->
@@ -984,7 +989,7 @@
     <string name="item_dwarven_warhammer_desc">A massive dwarven hammer that crushes all in its path.</string> <!-- untranslated -->
     <string name="item_tower_sword_name">Tower Sword</string> <!-- untranslated -->
     <string name="item_tower_sword_desc">A blade that has cleaved through countless tower floors.</string> <!-- untranslated -->
-    <string name="item_balrog_whip_desc">A whip of pure flame, torn from the Balrog itself. Burns with an eternal fire.</string> <!-- untranslated -->
+    <string name="item_balrog_whip_desc">A whip of pure flame, torn from the Gothic Ember itself. Burns with an eternal fire.</string> <!-- untranslated -->
     <string name="item_divine_sword_name">Divine Sword</string> <!-- untranslated -->
     <string name="item_divine_sword_desc">A blade of pure divine light, said to be wielded only by the chosen.</string> <!-- untranslated -->
     <string name="item_divine_greatblade_name">Divine Greatblade</string> <!-- untranslated -->
@@ -1062,7 +1067,7 @@
     <string name="item_tower_boots_desc">Boots forged in the tower\'s deepest forge.</string> <!-- untranslated -->
     <string name="item_tower_shield_name">Tower Shield</string> <!-- untranslated -->
     <string name="item_tower_shield_desc">A massive shield hewn from tower stone.</string> <!-- untranslated -->
-    <string name="item_balrog_wings_desc">The mighty wings of a Balrog, imbued with dark power. The ultimate armor.</string> <!-- untranslated -->
+    <string name="item_balrog_wings_desc">The mighty wings of the Gothic Ember, imbued with dark power. The ultimate armor.</string> <!-- untranslated -->
     <string name="item_divine_helm_name">Divine Helm</string> <!-- untranslated -->
     <string name="item_divine_helm_desc">A radiant helm blessed by the gods. Turns aside blows that would fell any mortal.</string> <!-- untranslated -->
     <string name="item_divine_platebody_name">Divine Platebody</string> <!-- untranslated -->
@@ -1086,7 +1091,7 @@
     <string name="item_silver_diamond_ring_desc">A silver ring with a diamond. Balanced combat.</string> <!-- untranslated -->
     <string name="item_tower_ring_name">Tower Ring</string> <!-- untranslated -->
     <string name="item_tower_ring_desc">A band forged from the stone of the infinite tower.</string> <!-- untranslated -->
-    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Balrog\'s strength.</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
     <string name="item_ring_of_dragons_might_desc">A ring imbued with dragonfire. Greatly increases melee strength.</string> <!-- untranslated -->
     <string name="item_ring_of_the_seas_desc">A ring blessed by the deep sea. Enhances ranged precision and power.</string> <!-- untranslated -->
     <string name="item_kraken_tentacle_desc">A coiling tentacle ring that channels the Kraken\'s arcane power.</string> <!-- untranslated -->
@@ -1204,9 +1209,9 @@
     <string name="item_wraithbone_ring_desc">A pale ring carved from wight bone during the Gloomharvest. Steadies the hand and the heart.</string> <!-- untranslated -->
     <string name="item_reaper_scythe_desc">The Hollow King\'s own harvest tool. It reaps more than wheat.</string> <!-- untranslated -->
     <string name="item_gloomweave_cape_desc">Woven from dusk and lantern smoke at the Night Market. Only sold during the Gloomharvest.</string> <!-- untranslated -->
-    <string name="item_gilded_full_helmet_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_platebody_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_kiteshield_desc">Runite plate wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_wind_strike_name">Wind Strike</string> <!-- untranslated -->
     <string name="item_wind_strike_desc">A basic air spell that strikes your foe.</string> <!-- untranslated -->
     <string name="item_wind_bolt_name">Wind Bolt</string> <!-- untranslated -->

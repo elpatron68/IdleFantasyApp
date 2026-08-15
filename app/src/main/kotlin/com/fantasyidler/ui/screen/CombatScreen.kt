@@ -61,6 +61,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -231,6 +232,7 @@ fun CombatScreen(
                             unlockedDungeons    = state.unlockedDungeons,
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
+                            isQueueFull         = state.isQueueFull,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
@@ -308,6 +310,7 @@ fun CombatScreen(
                             unlockedDungeons    = state.unlockedDungeons,
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
+                            isQueueFull         = state.isQueueFull,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
@@ -391,6 +394,7 @@ fun CombatScreen(
                 potionEffects        = viewModel.potionEffects,
                 selectedPotionKey    = state.selectedPotionKey,
                 isStarting           = state.startingSession,
+                isQueueFull          = state.isQueueFull,
                 repeatCount          = state.selectedBossRepeatCount,
                 fullCoinKillsLeft    = state.bossFullCoinKillsLeft,
                 onWeaponSlotSelected = viewModel::selectWeaponSlot,
@@ -423,6 +427,7 @@ fun CombatScreen(
                 potionEffects        = viewModel.potionEffects,
                 selectedPotionKey    = state.selectedPotionKey,
                 isStarting           = state.startingSession,
+                isQueueFull          = state.isQueueFull,
                 repeatCount          = state.selectedDungeonRepeatCount,
                 enemies              = viewModel.enemyMap,
                 onWeaponSlotSelected = viewModel::selectWeaponSlot,
@@ -471,6 +476,7 @@ private fun CombatSelectionList(
     unlockedDungeons: List<String> = emptyList(),
     towerBestFloor: Int = 0,
     bossKillCounts: Map<String, Int> = emptyMap(),
+    isQueueFull: Boolean = false,
     modifier: Modifier = Modifier,
     onDungeon: (DungeonData) -> Unit,
     onBoss: (BossData) -> Unit,
@@ -480,7 +486,7 @@ private fun CombatSelectionList(
 
     LazyColumn(modifier.fillMaxSize()) {
         item { CombatSectionHeader(stringResource(R.string.label_dungeons_tab)) }
-        item { TowerEntryRow(bestFloor = towerBestFloor, onTap = onTower) }
+        item { TowerEntryRow(bestFloor = towerBestFloor, isQueueFull = isQueueFull, onTap = onTower) }
         items(dungeons) { dungeon ->
             val unlocked = if (dungeon.loreUnlockOnly) {
                 unlockedDungeons.contains(dungeon.name)
@@ -490,6 +496,7 @@ private fun CombatSelectionList(
             DungeonRow(
                 dungeon        = dungeon,
                 unlocked       = unlocked,
+                isQueueFull     = isQueueFull,
                 survivalRating = survivalRatings[dungeon.name],
                 runCount       = dungeonRuns[dungeon.name] ?: 0,
                 lastRunStats   = dungeonLastRunStats[dungeon.name],
@@ -505,6 +512,7 @@ private fun CombatSelectionList(
                 unlocked = combatLvl >= boss.combatLevelRequired,
                 runCount = bossKillCounts[boss.id] ?: 0,
                 onTap    = { onBoss(boss) },
+                isQueueFull = isQueueFull,
             )
         }
         item { Spacer(Modifier.height(16.dp)) }
@@ -901,6 +909,7 @@ private fun CombatSectionHeader(title: String) {
 private fun BossRow(
     boss: BossData,
     unlocked: Boolean,
+    isQueueFull: Boolean,
     runCount: Int = 0,
     onTap: () -> Unit,
 ) {
@@ -917,10 +926,12 @@ private fun BossRow(
             modifier         = Modifier.size(36.dp),
             contentAlignment = Alignment.Center,
         ) {
-            Text(
-                text  = boss.emoji,
-                style = MaterialTheme.typography.titleLarge,
-                color = if (unlocked) MaterialTheme.colorScheme.onSurface else dimColor,
+            BossIcon(
+                bossId        = boss.id,
+                modifier      = Modifier
+                    .size(36.dp)
+                    .then(if (unlocked) Modifier else Modifier.alpha(0.38f)),
+                fallbackEmoji = boss.emoji,
             )
         }
         Spacer(Modifier.width(8.dp))
@@ -947,12 +958,21 @@ private fun BossRow(
             }
         }
         Spacer(Modifier.width(12.dp))
-        Text(
-            text       = "Lv. ${boss.combatLevelRequired}",
-            style      = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.SemiBold,
-            color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
-        )
+        Column(horizontalAlignment = Alignment.End) {
+            Text(
+                text       = "Lv. ${boss.combatLevelRequired}",
+                style      = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.SemiBold,
+                color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
+            )
+            if (isQueueFull) {
+                Text(
+                    text = stringResource(R.string.snackbar_queue_full),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                )
+            }
+        }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 }
@@ -960,6 +980,7 @@ private fun BossRow(
 @Composable
 private fun TowerEntryRow(
     bestFloor: Int,
+    isQueueFull: Boolean,
     onTap: () -> Unit,
 ) {
     Row(
@@ -990,14 +1011,23 @@ private fun TowerEntryRow(
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        if (bestFloor > 0) {
-            Spacer(Modifier.width(12.dp))
-            Text(
-                text       = stringResource(R.string.tower_best_floor, bestFloor),
-                style      = MaterialTheme.typography.labelMedium,
-                fontWeight = FontWeight.SemiBold,
-                color      = MaterialTheme.colorScheme.primary,
-            )
+        Spacer(Modifier.width(12.dp))
+        Column(horizontalAlignment = Alignment.End) {
+            if (bestFloor > 0) {
+                    Text(
+                        text       = stringResource(R.string.tower_best_floor, bestFloor),
+                        style      = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color      = MaterialTheme.colorScheme.primary,
+                    )
+            }
+            if (isQueueFull) {
+                Text(
+                    text  = stringResource(R.string.snackbar_queue_full),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                )
+            }
         }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -1007,6 +1037,7 @@ private fun TowerEntryRow(
 private fun DungeonRow(
     dungeon: DungeonData,
     unlocked: Boolean,
+    isQueueFull: Boolean,
     survivalRating: CombatSimulator.SurvivalRating? = null,
     runCount: Int = 0,
     lastRunStats: com.fantasyidler.data.model.DungeonRunStats? = null,
@@ -1079,12 +1110,21 @@ private fun DungeonRow(
             }
         }
         Spacer(Modifier.width(12.dp))
-        Text(
-            text  = "Lv. ${dungeon.recommendedLevel}",
-            style = MaterialTheme.typography.labelMedium,
-            color = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
-            fontWeight = FontWeight.SemiBold,
-        )
+        Column(horizontalAlignment = Alignment.End) {
+            Text(
+                text = "Lv. ${dungeon.recommendedLevel}",
+                style = MaterialTheme.typography.labelMedium,
+                color = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
+                fontWeight = FontWeight.SemiBold,
+            )
+            if (isQueueFull) {
+                Text(
+                    text = stringResource(R.string.snackbar_queue_full),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                )
+            }
+        }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 }

@@ -289,6 +289,8 @@
     <string name="settings_profile_layout_desc">Wybierz między boczną szyną a górnymi zakładkami</string>
     <string name="settings_profile_layout_rail">Szyna</string>
     <string name="settings_profile_layout_tabs">Zakładki</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Ekran Główny</string>
     <string name="settings_home_screen_desc">Wybierz, co wyświetla się na ekranie głównym</string>
     <string name="settings_recent_activity">Dziennik ostatniej aktywności</string>
@@ -328,10 +330,12 @@
     <string name="label_weekly_reset">Odnawia się w poniedziałek o %1$s</string>
     <string name="weekly_bonus_title">Tygodniowy bonus!</string>
     <string name="weekly_bonus_claim">Odbierz tygodniowy bonus</string>
-    <string name="label_daily_info">Każde zadanie dzienne nagradza monetami. Każde zadanie ma też szansę 1 na 100 na zrzucenie elementu krasnoludzkiego wyposażenia.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Każde tygodniowe wyzwanie nagradza monetami w zależności od wymaganego poziomu. Ukończ wszystkie 5, aby zdobyć bonus: 100 000 monet lub szansę %1$s na element boskiego wyposażenia.</string>
     <string name="label_weekly_info_complete">Każde tygodniowe wyzwanie nagradza monetami w zależności od wymaganego poziomu. Ukończ wszystkie 5, aby zdobyć bonus: 100 000 monet. Posiadasz już cały boski ekwipunek!</string>
-    <string name="label_daily_reward">2000 monet (1/100: krasnoludzkie wyposażenie)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Zadanie dzienne ukończone! +2000 monet.</string>
     <string name="msg_daily_claimed_dwarven">Zadanie dzienne ukończone! Znalazłeś %1$s!</string>
     <string name="label_hide_completed">Ukryj ukończone</string>
@@ -631,8 +635,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Poziom %1$d  •  Zakop kości lub rozsyp popioły, by zdobyć XP Modlitwy</string>
     <string name="skills_no_bones">Brak kości lub popiołów w ekwipunku</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">%1$d XP każda</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d XP każda  •  %2$d dostępnych</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP łącznie</string>
@@ -732,6 +736,7 @@
     <string name="character_create_title">Stwórz swoją postać</string>
     <string name="character_edit_title">Edytuj postać</string>
     <string name="character_name_label">Imię postaci</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Płeć</string>
     <string name="character_gender_male">Mężczyzna</string>
     <string name="character_gender_female">Kobieta</string>
@@ -1086,6 +1091,7 @@
     <string name="slayer_lamp_purchased">+%1$s XP dodano do %2$s!</string>
     <string name="slayer_lamp_pick_skill">Wybierz umiejętność</string>
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lampa XP (Mała)</string>
@@ -1245,6 +1251,7 @@
     <string name="town_upgrade_next_label">Kolejne ulepszenie</string>
     <string name="town_upgrade_constr_req">Wymagany poziom Budownictwa %1$d</string>
     <string name="town_upgrade_cost">Koszt: %1$s monet</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Materiały:</string>
     <string name="town_upgrade_btn">Ulepsz</string>
     <string name="town_upgrade_success">Budynek ulepszony!</string>
@@ -1517,6 +1524,7 @@
     <string name="bonus_session_shorter">%1$d min krótsze sesje</string>
     <string name="bonus_coin_return">+%1$d%% zwrot monet</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1758,10 +1766,15 @@
     <string name="title_master_farmer_name">Mistrz Rolnik</string>
     <string name="title_master_farmer_requirement">Osiągnij maksymalny poziom w Gildii Rolników</string>
     <string name="settings_art_credits">Podziękowania za grafikę</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Banery sezonowe</string>
     <string name="settings_credit_banners_subtitle">Grafika: Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Ikony Umiejętności</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Czempion %1$s</string>
     <string name="title_seasonal_requirement">Ukończ Wydarzenie Sezonowe: %1$s</string>
     <string name="home_welcome_greeting">Witaj z powrotem,</string>
@@ -1783,7 +1796,7 @@
     <string name="pet_tiny_templar_desc">Mały rybi towarzysz, który zwiększa twoje doświadczenie w Wędkarstwie.</string>
     <string name="pet_tangleroot_name">Plątany Korzeń</string>
     <string name="pet_tangleroot_desc">Magiczne stworzenie roślinne, które wzmacnia twoje doświadczenie w Uprawie.</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1832,6 +1845,7 @@
     <string name="save_slot_combat_level">Poziom bojowy %1$d</string>
     <string name="save_slot_total_level">Poziom łączny %1$d</string>
     <string name="save_slot_last_played">%1$s temu</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Zmienić postać?</string>
     <string name="save_slot_switch_body">Grać jako %1$s? Obecna postać zapisze się automatycznie.</string>
     <string name="save_slot_switch_btn">Zmień</string>

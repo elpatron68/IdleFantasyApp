@@ -139,9 +139,10 @@ internal fun CombatSessionBanner(
     onDebugFinish: () -> Unit,
 ) {
     val context = LocalContext.current
+    val sessionBoss = bosses.firstOrNull { it.id == session.activityKey }
     val dungeonName = dungeons.firstOrNull { it.name == session.activityKey }
         ?.let { GameStrings.dungeonName(context, it.name) }
-        ?: bosses.firstOrNull { it.id == session.activityKey }?.let { "${it.emoji} ${GameStrings.bossName(context, it.id)}" }
+        ?: sessionBoss?.let { GameStrings.bossName(context, it.id) }
         ?: run {
             if (session.skillName == "tower") {
                 val floor = session.activityKey.removePrefix("tower_floor_").toIntOrNull()
@@ -241,11 +242,21 @@ internal fun CombatSessionBanner(
             color = if (isDone) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
         )
         Spacer(Modifier.height(8.dp))
-        Text(
-            text  = dungeonName,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (sessionBoss != null) {
+                BossIcon(
+                    bossId        = sessionBoss.id,
+                    modifier      = Modifier.size(28.dp),
+                    fallbackEmoji = sessionBoss.emoji,
+                )
+                Spacer(Modifier.width(8.dp))
+            }
+            Text(
+                text  = dungeonName,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
         if ((isBoss || session.skillName == "combat") && repeatTotal > 1) {
             Spacer(Modifier.height(4.dp))
             Text(

@@ -268,6 +268,8 @@
     <string name="settings_profile_layout_desc">Pilih antara bilah sisi atau tab atas</string>
     <string name="settings_profile_layout_rail">Rail</string> <!-- untranslated -->
     <string name="settings_profile_layout_tabs">Tab</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Layar Beranda</string>
     <string name="settings_home_screen_desc">Pilih apa yang muncul di layar beranda</string>
     <string name="settings_recent_activity">Catatan Aktivitas</string>
@@ -307,10 +309,12 @@
     <string name="label_weekly_reset">Reset Dihari Senin jam %1$s</string>
     <string name="weekly_bonus_title">Bonus Mingguan!</string>
     <string name="weekly_bonus_claim">Klaim Bonus Mingguan</string>
-    <string name="label_daily_info">Setiap misi harian memberikan hadiah berupa koin. Setiap misi juga memiliki peluang 1 banding 100 untuk mendapatkan item perlengkapan Dwarf.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Tantangan mingguan berhadiah koin sesuai level. Selesaikan semua (5/5) untuk bonus: 100.000 koin, atau peluang %1$s dapat Perlengkapan Dewa.</string>
     <string name="label_weekly_info_complete">Tantangan mingguan berhadiah koin sesuai level. Selesaikan semua (5/5) untuk bonus: 100.000 koin. Kamu sudah memiliki semua Perlengkapan Dewa!</string>
-    <string name="label_daily_reward">2.000 koin (1/100: Perlengkapan Kurcaci)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Tugas harian selesai! +2.000 koin.</string>
     <string name="msg_daily_claimed_dwarven">Tugas harian selesai! Kamu menemukan %1$s!</string>
     <string name="label_hide_completed">Belum Selesai</string>
@@ -722,6 +726,7 @@
     <string name="character_create_title">Buat Karaktermu</string>
     <string name="character_edit_title">Edit Karakter</string>
     <string name="character_name_label">Nama Karakter</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Jenis kelamin</string>
     <string name="character_gender_male">Pria</string>
     <string name="character_gender_female">Perempuan</string>
@@ -1076,6 +1081,7 @@
     <string name="slayer_lamp_purchased">+%1$s XP ditambahkan ke %2$s!</string>
     <string name="slayer_lamp_pick_skill">Pilih Keahlian</string>
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">Lampu XP (Kecil)</string>
@@ -1235,6 +1241,7 @@
     <string name="town_upgrade_next_label">Peningkatan Berikutnya</string>
     <string name="town_upgrade_constr_req">Konstruksi Lv. %1$d diperlukan</string>
     <string name="town_upgrade_cost">Harga: %1$s koin</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Material:</string>
     <string name="town_upgrade_btn"></string>
     <string name="town_upgrade_success">Gedung telah ditingkatkan!</string>
@@ -1503,6 +1510,7 @@
     <string name="bonus_session_shorter">%1$d menit sesi lebih singkat</string>
     <string name="bonus_coin_return">+%1$d%% pengembalian koin</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1744,10 +1752,15 @@
     <string name="title_master_farmer_name">Master Farmer</string> <!-- untranslated -->
     <string name="title_master_farmer_requirement">Reach max level in the Farming Guild</string> <!-- untranslated -->
     <string name="settings_art_credits">Kredit Seni</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Spanduk Musiman</string>
     <string name="settings_credit_banners_subtitle">Seni oleh Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Ikon Keahlian</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Champion of %1$s</string> <!-- untranslated -->
     <string name="title_seasonal_requirement">Complete the %1$s Seasonal Event</string> <!-- untranslated -->
     <string name="home_welcome_greeting">Welcome back,</string> <!-- untranslated -->
@@ -1769,7 +1782,7 @@
     <string name="pet_tiny_templar_desc">Sahabat ikan kecil yang meningkatkan XP Memancingmu.</string>
     <string name="pet_tangleroot_name">Akar Kusut</string>
     <string name="pet_tangleroot_desc">Makhluk tumbuhan ajaib yang meningkatkan XP Bertanimu.</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1818,6 +1831,7 @@
     <string name="save_slot_combat_level">Level Tempur %1$d</string>
     <string name="save_slot_total_level">Level Total %1$d</string>
     <string name="save_slot_last_played">%1$s yang lalu</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Ganti karakter?</string>
     <string name="save_slot_switch_body">Bermain sebagai %1$s? Karakter aktifmu disimpan otomatis.</string>
     <string name="save_slot_switch_btn">Ganti</string>

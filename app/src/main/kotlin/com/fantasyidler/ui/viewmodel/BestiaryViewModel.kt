@@ -8,6 +8,7 @@ import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +42,7 @@ data class BestiaryUiState(
 class BestiaryViewModel @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    private val seasonalEventRepo: SeasonalEventRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -54,25 +56,44 @@ class BestiaryViewModel @Inject constructor(
             json.decodeFromString(player.flags) else PlayerFlags()
         val kills = flags.enemyKills
 
-        val enemies = gameData.enemies.map { (key, enemy) ->
-            BestiaryEntry(
-                key         = key,
-                nameLoader  = GameStrings::enemyName,
-                killCount   = kills[key] ?: 0,
-                locations   = gameData.enemyLocations[key] ?: emptyList(),
-                enemy       = enemy,
-            )
-        }.sortedBy { it.key }
+        val activeEventId = seasonalEventRepo.activeEvent()?.id
 
-        val bosses = gameData.bosses.map { (key, boss) ->
-            BestiaryEntry(
-                key         = key,
-                nameLoader  = GameStrings::bossName,
-                killCount   = kills[key] ?: 0,
-                locations   = emptyList(),
-                boss        = boss,
-            )
-        }.sortedBy { it.key }
+        // Enemies that only spawn in event dungeons appear and vanish with their event;
+        // anything that also spawns in a permanent dungeon (or in no dungeon) always shows.
+        val activeSpawns   = mutableSetOf<String>()
+        val inactiveSpawns = mutableSetOf<String>()
+        gameData.dungeons.values.forEach { dungeon ->
+            val target = if (dungeon.eventKey == null || dungeon.eventKey == activeEventId)
+                activeSpawns else inactiveSpawns
+            dungeon.enemySpawns.forEach { target.add(it.enemy) }
+        }
+        val hiddenEventEnemies = inactiveSpawns - activeSpawns
+
+        val enemies = gameData.enemies
+            .filterKeys { it !in hiddenEventEnemies }
+            .map { (key, enemy) ->
+                BestiaryEntry(
+                    key         = key,
+                    nameLoader  = GameStrings::enemyName,
+                    killCount   = kills[key] ?: 0,
+                    locations   = gameData.enemyLocations[key] ?: emptyList(),
+                    enemy       = enemy,
+                )
+            }.sortedBy { it.key }
+
+        // Event bosses only exist in the bestiary while their event runs, mirroring the
+        // combat boss picker's gating in CombatViewModel.bossList().
+        val bosses = gameData.bosses
+            .filterValues { it.eventKey == null || it.eventKey == activeEventId }
+            .map { (key, boss) ->
+                BestiaryEntry(
+                    key         = key,
+                    nameLoader  = GameStrings::bossName,
+                    killCount   = kills[key] ?: 0,
+                    locations   = emptyList(),
+                    boss        = boss,
+                )
+            }.sortedBy { it.key }
 
         BestiaryUiState(enemies = enemies, bosses = bosses, sort = sort)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), BestiaryUiState())

@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -158,6 +160,10 @@ internal fun CraftSkillSheet(
             else list
         }
 
+    val recipeListState = rememberLazyListState()
+    LaunchedEffect(selectedCategory, selectedTier, onlyCraftable) {
+        recipeListState.scrollToItem(0)
+    }
     val selected = craftState.selectedRecipe
 
     if (backStep != null) {
@@ -270,8 +276,8 @@ internal fun CraftSkillSheet(
                     }
                 }
             }
-            LazyColumn(Modifier.fillMaxWidth()) {
-                items(recipes) { recipe ->
+            LazyColumn(state = recipeListState, modifier = Modifier.fillMaxWidth()) {
+                items(recipes, key = { it.key }) { recipe ->
                     CraftRecipeRow(
                         recipe     = recipe,
                         craftState = craftState,
@@ -279,7 +285,7 @@ internal fun CraftSkillSheet(
                         onTap      = { craftingViewModel.openRecipe(recipe) },
                     )
                 }
-                item { Spacer(Modifier.height(8.dp)) }
+                item(key = "bottom_spacer") { Spacer(Modifier.height(8.dp)) }
             }
         }
     }

@@ -20,6 +20,31 @@ class TownRepository @Inject constructor(
     private val questRepo: QuestRepository,
 ) {
 
+    companion object {
+        /**
+         * Builder's discount: 0.5% off Builder's Workshop upgrade costs per Construction level
+         * (49.5% at 99). Integer per-mille math so the transaction, the card display, and the
+         * tests all agree exactly, with no float rounding drift.
+         */
+        fun builderDiscountPerMille(constructionLevel: Int): Int =
+            (constructionLevel.coerceAtLeast(0) * 5).coerceAtMost(495)
+
+        fun builderDiscount(constructionLevel: Int): Float =
+            builderDiscountPerMille(constructionLevel) / 1000f
+
+        fun discountedCoins(cost: Long, constructionLevel: Int): Long =
+            cost * (1000 - builderDiscountPerMille(constructionLevel)) / 1000
+
+        /** Rounds up, and a required material never discounts below one. */
+        fun discountedQty(qty: Int, constructionLevel: Int): Int {
+            val remainingPerMille = qty.toLong() * (1000 - builderDiscountPerMille(constructionLevel))
+            return ((remainingPerMille + 999) / 1000).toInt().coerceAtLeast(1)
+        }
+
+        fun discountedMaterials(materials: Map<String, Int>, constructionLevel: Int): Map<String, Int> =
+            materials.mapValues { (_, qty) -> discountedQty(qty, constructionLevel) }
+    }
+
     // -------------------------------------------------------------------------
     // Bonus accessors — pure functions, safe to call from any context
     // -------------------------------------------------------------------------
@@ -190,15 +215,18 @@ class TownRepository @Inject constructor(
             return@withLock UpgradeBuildingResult.InsufficientLevel
         }
 
-        if (player.coins < tierDef.coinCost) return@withLock UpgradeBuildingResult.InsufficientCoins
+        val coinCost  = discountedCoins(tierDef.coinCost, constructionLevel)
+        val materials = discountedMaterials(tierDef.materials, constructionLevel)
+
+        if (player.coins < coinCost) return@withLock UpgradeBuildingResult.InsufficientCoins
 
         val inventory: Map<String, Int> = kotlinx.serialization.json.Json.decodeFromString(player.inventory)
-        for ((item, qty) in tierDef.materials) {
+        for ((item, qty) in materials) {
             if ((inventory[item] ?: 0) < qty) return@withLock UpgradeBuildingResult.InsufficientMaterials
         }
 
-        playerRepo.consumeItemsUnlocked(tierDef.materials)
-        playerRepo.spendCoinsUnlocked(tierDef.coinCost)
+        playerRepo.consumeItemsUnlocked(materials)
+        playerRepo.spendCoinsUnlocked(coinCost)
 
         val newTiers = flags.townBuildingTiers.toMutableMap()
         newTiers[buildingKey] = currentTier + 1

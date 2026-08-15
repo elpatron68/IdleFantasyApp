@@ -61,6 +61,8 @@ data class QuestsUiState(
     val weeklyBonusClaimed: Boolean = false,
     /** Current pity-adjusted Divine gear drop chance (0-1), or null if every piece is owned. */
     val divineDropChance: Double? = null,
+    /** Current 1-in-N odds of a Dwarven drop per claimed daily, or null when the set is complete. */
+    val dwarvenDropDenominator: Int? = null,
 )
 
 // ---------------------------------------------------------------------------
@@ -138,13 +140,14 @@ class QuestsViewModel @Inject constructor(
             extra.weeklyQuests
         }
 
-        val divineDropChance = if (player != null) {
+        var divineDropChance = extra.divineDropChance
+        var dwarvenDropDenominator = extra.dwarvenDropDenominator
+        if (player != null) {
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-            val ownedItems = inventory.keys + equipped.values.filterNotNull()
-            weeklyQuestRepo.currentDivineDropChanceForDisplay(flags, ownedItems.toSet())
-        } else {
-            extra.divineDropChance
+            val ownedItems = (inventory.keys + equipped.values.filterNotNull()).toSet()
+            divineDropChance = weeklyQuestRepo.currentDivineDropChanceForDisplay(flags, ownedItems)
+            dwarvenDropDenominator = dailyQuestRepo.dwarvenDropDenominatorForDisplay(flags, ownedItems)
         }
 
         extra.copy(
@@ -155,6 +158,7 @@ class QuestsViewModel @Inject constructor(
             dailyQuests        = dailyQuests,
             weeklyQuests       = weeklyQuests,
             divineDropChance   = divineDropChance,
+            dwarvenDropDenominator = dwarvenDropDenominator,
             weeklyBonusClaimed = flags.weeklyBonusClaimed,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuestsUiState())

@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Dorongan Keuntungan</string>
     <string name="quest_mercantile_daily_7a_name">Perdagangan Akbar</string>
     <string name="quest_mercantile_daily_7b_name">Rute Elite</string>
-    <string name="quest_mercantile_daily_7c_name">Master Pertukaran</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">Antar Keberuntungan</string>
     <string name="quest_mercantile_daily_7e_name">Untung Akbar</string>
     <string name="quest_mining_daily_1a_name">Pengiriman Besi</string>

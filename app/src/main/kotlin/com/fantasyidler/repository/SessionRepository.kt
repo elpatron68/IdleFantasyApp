@@ -119,6 +119,7 @@ class SessionRepository @Inject constructor(
     }
 
     suspend fun markCompleted(sessionId: String) {
+        cancelAlarm(sessionId)
         sessionDao.markCompleted(sessionId)
     }
 
@@ -266,6 +267,7 @@ class SessionRepository @Inject constructor(
 
     /** Delete a completed session after rewards have been applied. */
     suspend fun deleteSession(sessionId: String) {
+        cancelAlarm(sessionId)
         sessionDao.delete(sessionId)
     }
 
@@ -317,10 +319,13 @@ class SessionRepository @Inject constructor(
         }
     }
 
-    private fun cancelAlarm(sessionId: String) {
-        val am      = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pending = cancelIntent(sessionId)
-        am.cancel(pending)
+    internal fun cancelAlarm(sessionId: String) {
+        try {
+            val am      = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val pending = cancelIntent(sessionId)
+            am.cancel(pending)
+            pending.cancel()
+        } catch (_: Exception) {}
     }
 
     companion object {

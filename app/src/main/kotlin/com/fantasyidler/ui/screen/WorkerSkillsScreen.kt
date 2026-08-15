@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -132,7 +133,9 @@ fun WorkerSkillsScreen(
             return@Scaffold
         }
 
+        val listState = rememberLazyListState()
         LazyColumn(
+            state = listState,
             contentPadding = padding,
             modifier = Modifier.fillMaxSize(),
         ) {
@@ -140,7 +143,7 @@ fun WorkerSkillsScreen(
             val w1 = state.hiredWorker
             val w2 = state.hiredWorker2
             if (w1 != null && w2 != null) {
-                item {
+                item(key = "slot_selector") {
                     Row(
                         modifier              = Modifier
                             .fillMaxWidth()
@@ -171,7 +174,7 @@ fun WorkerSkillsScreen(
 
             // Tier badge
             if (tierLabel.isNotEmpty()) {
-                item {
+                item(key = "tier_badge") {
                     Text(
                         text  = stringResource(R.string.inn_worker_tier, tierLabel),
                         style = MaterialTheme.typography.labelMedium,
@@ -184,7 +187,7 @@ fun WorkerSkillsScreen(
 
             // Active worker session banner
             state.currentSession?.let { session ->
-                item {
+                item(key = "active_worker_session") {
                     WorkerActiveSessionBanner(
                         session       = session,
                         showEndTime   = state.showSessionEndTime,
@@ -194,8 +197,8 @@ fun WorkerSkillsScreen(
             }
 
             // Gathering skills (no farming, no agility)
-            item { SectionHeader(stringResource(R.string.label_gathering_skills)) }
-            items(Skills.GATHERING.filter { it != Skills.FARMING && it != Skills.AGILITY }) { key ->
+            item(key = "header_gathering") { SectionHeader(stringResource(R.string.label_gathering_skills)) }
+            items(Skills.GATHERING.filter { it != Skills.FARMING && it != Skills.AGILITY }, key = { "worker_gather_$it" }) { key ->
                 val efficiency = when (key) {
                     Skills.MINING      -> state.miningEfficiency
                     Skills.WOODCUTTING -> state.woodcuttingEfficiency
@@ -213,8 +216,8 @@ fun WorkerSkillsScreen(
             }
 
             // Crafting skills
-            item { SectionHeader(stringResource(R.string.label_crafting_skills)) }
-            items(Skills.CRAFTING_SKILLS) { key ->
+            item(key = "header_crafting") { SectionHeader(stringResource(R.string.label_crafting_skills)) }
+            items(Skills.CRAFTING_SKILLS, key = { "worker_craft_$it" }) { key ->
                 SkillRow(
                     skillKey = key,
                     level    = state.skillLevels[key] ?: 1,
@@ -225,8 +228,8 @@ fun WorkerSkillsScreen(
             }
 
             // Support skills
-            item { SectionHeader(stringResource(R.string.label_support_skills)) }
-            item {
+            item(key = "header_support") { SectionHeader(stringResource(R.string.label_support_skills)) }
+            item(key = "worker_support_${Skills.AGILITY}") {
                 SkillRow(
                     skillKey = Skills.AGILITY,
                     level    = state.skillLevels[Skills.AGILITY] ?: 1,
@@ -237,8 +240,8 @@ fun WorkerSkillsScreen(
             }
 
             // Prayer
-            item { SectionHeader(stringResource(R.string.label_prayer)) }
-            item {
+            item(key = "header_prayer") { SectionHeader(stringResource(R.string.label_prayer)) }
+            item(key = "worker_prayer_${Skills.PRAYER}") {
                 SkillRow(
                     skillKey = Skills.PRAYER,
                     level    = state.skillLevels[Skills.PRAYER] ?: 1,
@@ -511,6 +514,11 @@ private fun WorkerCraftSkillSheet(
             else list
         }
 
+    val recipeListState = rememberLazyListState()
+    LaunchedEffect(selectedCategory, selectedTier, onlyCraftable) {
+        recipeListState.scrollToItem(0)
+    }
+
     val selected = state.selectedRecipe
 
     if (selected != null) {
@@ -608,8 +616,8 @@ private fun WorkerCraftSkillSheet(
                     }
                 }
             }
-            LazyColumn(Modifier.fillMaxWidth()) {
-                items(recipes) { recipe ->
+            LazyColumn(state = recipeListState, modifier = Modifier.fillMaxWidth()) {
+                items(recipes, key = { it.key }) { recipe ->
                     WorkerCraftRecipeRow(
                         recipe  = recipe,
                         state   = state,
@@ -617,7 +625,7 @@ private fun WorkerCraftSkillSheet(
                         onTap   = { viewModel.openRecipe(recipe) },
                     )
                 }
-                item { Spacer(Modifier.height(8.dp)) }
+                item(key = "bottom_spacer") { Spacer(Modifier.height(8.dp)) }
             }
         }
     }

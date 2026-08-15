@@ -126,6 +126,7 @@ internal fun AgilitySheet(
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val scrollState = rememberScrollState()
     val currentAgilityLevel = XpTable.levelForXp(currentXp)
     Column(Modifier.padding(bottom = 24.dp)) {
         Text(
@@ -149,7 +150,7 @@ internal fun AgilitySheet(
             )
         }
         HorizontalDivider()
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(scrollState)) {
             courses.entries
                 .sortedBy { it.value.levelRequired }
                 .forEach { (key, course) ->

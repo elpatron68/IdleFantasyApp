@@ -275,6 +275,8 @@
     <string name="settings_profile_layout_desc">サイドバー型か上部タブ型かを選択</string>
     <string name="settings_profile_layout_rail">サイドバー</string>
     <string name="settings_profile_layout_tabs">タブ</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">ホーム画面</string>
     <string name="settings_home_screen_desc">ホーム画面に表示する内容を選択</string>
     <string name="settings_recent_activity">最近の活動ログ</string>
@@ -314,10 +316,12 @@
     <string name="label_weekly_reset">月曜日の%1$sにリセット</string>
     <string name="weekly_bonus_title">ウィークリーボーナス！</string>
     <string name="weekly_bonus_claim">ウィークリーボーナスを受け取る</string>
-    <string name="label_daily_info">デイリークエストをクリアするとコインを獲得できます。また、各クエストには 1/100 の確率で「ドワーフ装備」がドロップするチャンスがあります。</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">ウィークリーチャレンジをクリアすると、必要レベルに応じたコインを獲得できます。5つすべてクリアすると、ボーナスとして100,000コイン、または %1$s の確率で「ディバイン装備」を獲得できます。</string>
     <string name="label_weekly_info_complete">ウィークリーチャレンジをクリアすると、必要レベルに応じたコインを獲得できます。5つすべてクリアすると、ボーナスとして100,000コインを獲得できます。ディバイン装備はすべて入手済みです!</string>
-    <string name="label_daily_reward">2,000コイン（1/100：ドワーフ装備）</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">デイリークエスト完了！ +2,000コイン。</string>
     <string name="msg_daily_claimed_dwarven">デイリークエスト完了！ %1$s を見つけました！</string>
     <string name="label_hide_completed">完了済みを非表示</string>
@@ -615,8 +619,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">レベル %1$d  •  骨を埋葬するか灰を撒いて祈り経験値を獲得</string>
     <string name="skills_no_bones">インベントリに骨や灰がありません</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">各 %1$d XP</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">各 %1$d XP  •  使用可能: %2$d</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">累計 +%1$d XP</string>
@@ -716,6 +720,7 @@
     <string name="character_create_title">キャラクターの作成</string>
     <string name="character_edit_title">キャラクターの編集</string>
     <string name="character_name_label">キャラクター名</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">性別</string>
     <string name="character_gender_male">男性</string>
     <string name="character_gender_female">女性</string>
@@ -1070,6 +1075,7 @@
     <string name="slayer_lamp_purchased">%2$s に +%1$s XPが付与されました！</string>
     <string name="slayer_lamp_pick_skill">スキルを選択してください</string>
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">経験値ランプ (小)</string>
@@ -1229,6 +1235,7 @@
     <string name="town_upgrade_next_label">次のアップグレード</string>
     <string name="town_upgrade_constr_req">必要条件: 建築レベル %1$d</string>
     <string name="town_upgrade_cost">コスト: %1$s コイン</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">必要素材:</string>
     <string name="town_upgrade_btn">アップグレード</string>
     <string name="town_upgrade_success">建物をアップグレードしました！</string>
@@ -1497,6 +1504,7 @@
     <string name="bonus_session_shorter">セッション時間を %1$d 分短縮</string>
     <string name="bonus_coin_return">+%1$d%% コイン獲得</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1738,10 +1746,15 @@
     <string name="title_master_farmer_name">マスターファーマー</string>
     <string name="title_master_farmer_requirement">農業ギルドで最大レベルに到達する</string>
     <string name="settings_art_credits">アートクレジット</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">季節限定バナー</string>
     <string name="settings_credit_banners_subtitle">Art by Wenrexa</string> <!-- untranslated -->
     <string name="settings_credit_skill_icons_title">スキルアイコン</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">%1$sの覇者</string>
     <string name="title_seasonal_requirement">%1$s 季節イベントを完了する</string>
     <string name="home_welcome_greeting">おかえりなさい、</string>
@@ -1763,7 +1776,7 @@
     <string name="pet_tiny_templar_desc">釣り経験値を増加させる小さな魚の相棒。</string>
     <string name="pet_tangleroot_name">タングルルート</string>
     <string name="pet_tangleroot_desc">農業経験値を増加させる魔法の植物クリーチャー。</string>
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1812,6 +1825,7 @@
     <string name="save_slot_combat_level">戦闘レベル%1$d</string>
     <string name="save_slot_total_level">合計レベル%1$d</string>
     <string name="save_slot_last_played">%1$s前</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">キャラクターを切り替えますか？</string>
     <string name="save_slot_switch_body">%1$sでプレイしますか？現在のキャラクターは自動で保存されます。</string>
     <string name="save_slot_switch_btn">切り替え</string>

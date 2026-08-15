@@ -41,6 +41,7 @@ import com.fantasyidler.ui.theme.ScaledSheetContent
 
 internal val CHARACTER_GENDERS = listOf("Male", "Female", "Other")
 internal val CHARACTER_RACES   = listOf("Human", "Elf", "Dwarf", "Orc", "Halfling", "Gnome")
+internal const val CHARACTER_NAME_MAX_LENGTH = 256
 
 /** A title option ready to render — display strings already resolved, whether static or seasonal. */
 data class TitleOption(
@@ -93,11 +94,16 @@ fun CharacterSetupSheet(
                 style = MaterialTheme.typography.titleLarge,
             )
 
+            val nameTooLong = draftName.length > CHARACTER_NAME_MAX_LENGTH
             OutlinedTextField(
                 value         = draftName,
                 onValueChange = { draftName = it },
                 label         = { Text(stringResource(R.string.character_name_label)) },
                 singleLine    = true,
+                isError       = nameTooLong,
+                supportingText = if (nameTooLong) {
+                    { Text(stringResource(R.string.character_name_too_long, CHARACTER_NAME_MAX_LENGTH)) }
+                } else null,
                 modifier      = Modifier.fillMaxWidth(),
             )
 
@@ -267,7 +273,7 @@ fun CharacterSetupSheet(
                     onClick  = {
                         val gender = if (draftGender == "Other" && customGenderText.isNotBlank())
                             customGenderText.trim() else draftGender
-                        onSave(draftName.trim(), gender, draftRace, draftIronman)
+                        onSave(draftName.trim().take(CHARACTER_NAME_MAX_LENGTH), gender, draftRace, draftIronman)
                     },
                     enabled  = draftName.isNotBlank(),
                 ) {

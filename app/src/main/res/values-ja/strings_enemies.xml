@@ -124,7 +124,7 @@
     <string name="boss_demon_lord_desc">深淵から現れた古代の悪魔。暗黒魔法の使い手。</string>
     <string name="boss_kraken_name">クラーケン</string>
     <string name="boss_kraken_desc">深海の恐怖。巨大な海の怪物。</string>
-    <string name="boss_balrog_name">バルログ</string>
+    <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
     <string name="boss_balrog_desc">地中深くの眠りから目覚めた、炎と影をまとう古代の悪魔。</string>
     <string name="boss_void_sovereign_name" translatable="false">ヴォイド・ソブリン</string>
     <string name="boss_void_sovereign_desc">ヴォイドリフトの背後に存在する始原の存在。計り知れない歳月を生きており、挑んでくる凡百の冒険者を軽蔑しています。</string>

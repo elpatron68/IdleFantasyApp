@@ -31,6 +31,7 @@ sealed class SeasonalMinigameResult {
 class SeasonalEventRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
+    private val dailyQuestRepo: DailyQuestRepository,
     @ApplicationContext private val context: Context,
 ) {
 
@@ -62,42 +63,112 @@ class SeasonalEventRepository @Inject constructor(
 
     suspend fun ensureBountySlotsRefreshed() = playerRepo.playerMutex.withLock { ensureBountySlotsRefreshedUnlocked() }
 
+    private val combatSkillNames = listOf("attack", "strength", "defense", "ranged", "magic", "hitpoints")
+
+    /** Level the player needs before [task]'s activity is even available, or null when unknown. */
+    private fun requiredLevelFor(event: SeasonalEventData, task: SeasonalBountyTaskData): Pair<String, Int>? {
+        if (task.type == "kill") {
+            // Event kill targets only spawn in the event expedition; gate on its recommended level.
+            val rec = event.expeditionKeys().mapNotNull { gameData.dungeons[it]?.recommendedLevel }.minOrNull()
+            return rec?.let { "combat" to it }
+        }
+        val skill = task.skill ?: return null
+        val level = when (skill) {
+            "woodcutting"  -> gameData.trees.values.firstOrNull { it.logName == task.target }?.levelRequired
+            "mining"       -> gameData.ores[task.target]?.levelRequired
+            "fishing"      -> gameData.fish[task.target]?.levelRequired
+            "farming"      -> gameData.crops[task.target]?.levelRequired
+            "herblore"     -> gameData.herbloreRecipes[task.target]?.levelRequired
+            "fletching"    -> gameData.fletchingRecipes[task.target]?.levelRequired
+            "smithing"     -> gameData.smithingRecipes[task.target]?.levelRequired
+            "crafting"     -> gameData.craftingRecipes[task.target]?.levelRequired
+            "runecrafting" -> gameData.runes[task.target]?.levelRequired
+            "cooking"      -> gameData.cookingRecipes.values
+                .firstOrNull { it.cookedItem == task.target || it.rawItem == task.target }?.levelRequired
+            else           -> null
+        }
+        return level?.let { skill to it }
+    }
+
+    private fun taskReachable(event: SeasonalEventData, task: SeasonalBountyTaskData, skillLevels: Map<String, Int>): Boolean {
+        val (skill, required) = requiredLevelFor(event, task) ?: return true
+        val playerLevel = if (skill == "combat") combatSkillNames.maxOf { skillLevels[it] ?: 1 }
+                          else skillLevels[skill] ?: 1
+        return playerLevel >= required
+    }
+
+    /** Picks a task the player can actually work on; falls back to the full pool so a slot is never empty. */
+    private fun pickTask(
+        event: SeasonalEventData,
+        candidates: List<SeasonalBountyTaskData>,
+        skillLevels: Map<String, Int>,
+        excludeId: String? = null,
+    ): SeasonalBountyTaskData? {
+        val fresh = candidates.filter { it.id != excludeId }
+        val reachable = fresh.filter { taskReachable(event, it, skillLevels) }
+        return (reachable.ifEmpty { fresh }).randomOrNull()
+            ?: candidates.firstOrNull { it.id == excludeId }
+    }
+
     private suspend fun ensureBountySlotsRefreshedUnlocked(): PlayerFlags {
         val flags = playerRepo.getFlags()
         val event = activeEvent() ?: return flags
         val byType = event.bountyTasks.groupBy { it.type }
         val validIds = event.bountyTasks.map { it.id }.toSet()
+        val skillLevels: Map<String, Int> =
+            kotlinx.serialization.json.Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
+        val now = System.currentTimeMillis()
 
         val slotsValid = flags.seasonalBountyEventId == event.id &&
             flags.seasonalBountySlots.size == byType.size &&
             flags.seasonalBountySlots.all { it in validIds }
 
         if (!slotsValid) {
-            val freshSlots = byType.values.mapNotNull { it.randomOrNull()?.id }
+            val freshSlots = byType.values.mapNotNull { pickTask(event, it, skillLevels)?.id }
             val reseeded = flags.copy(
                 seasonalBountyEventId           = event.id,
                 seasonalBountySlots             = freshSlots,
                 seasonalBountyProgress          = emptyMap(),
                 seasonalBountySlotCooldownUntil = emptyMap(),
+                seasonalBountyDailyStamp        = now,
             )
             playerRepo.updateFlagsUnlocked(reseeded)
             return reseeded
         }
 
-        val now = System.currentTimeMillis()
         val slots = flags.seasonalBountySlots.toMutableList()
         var progress = flags.seasonalBountyProgress
         var cooldowns = flags.seasonalBountySlotCooldownUntil
+        var dailyStamp = flags.seasonalBountyDailyStamp
         var changed = false
 
+        // Claimed slots rotate once their post-claim cooldown expires.
         for ((index, taskId) in flags.seasonalBountySlots.withIndex()) {
             val cooldownUntil = cooldowns[index.toString()] ?: continue
             if (now < cooldownUntil) continue
             val currentTask = event.bountyTasks.first { it.id == taskId }
-            val nextTask = byType[currentTask.type].orEmpty().filter { it.id != taskId }.randomOrNull() ?: currentTask
+            val nextTask = pickTask(event, byType[currentTask.type].orEmpty(), skillLevels, excludeId = taskId) ?: currentTask
             slots[index] = nextTask.id
             progress = progress - taskId
             cooldowns = cooldowns - index.toString()
+            changed = true
+        }
+
+        // Daily 6am rotation: untouched slots re-roll so an out-of-reach bounty never
+        // squats for the whole event. Slots with any progress (or a pending post-claim
+        // cooldown) are left alone to protect in-flight work.
+        if (dailyQuestRepo.shouldRefresh(dailyStamp)) {
+            for ((index, taskId) in slots.withIndex()) {
+                if (cooldowns.containsKey(index.toString())) continue
+                if ((progress[taskId] ?: 0) > 0) continue
+                val currentTask = event.bountyTasks.first { it.id == taskId }
+                val nextTask = pickTask(event, byType[currentTask.type].orEmpty(), skillLevels, excludeId = taskId) ?: continue
+                if (nextTask.id == taskId) continue
+                slots[index] = nextTask.id
+                progress = progress - taskId
+                changed = true
+            }
+            dailyStamp = now
             changed = true
         }
 
@@ -106,6 +177,7 @@ class SeasonalEventRepository @Inject constructor(
             seasonalBountySlots             = slots,
             seasonalBountyProgress          = progress,
             seasonalBountySlotCooldownUntil = cooldowns,
+            seasonalBountyDailyStamp        = dailyStamp,
         )
         playerRepo.updateFlagsUnlocked(rotated)
         return rotated

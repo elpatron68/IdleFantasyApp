@@ -214,7 +214,7 @@
   },
   "balrog": {
     "id": "balrog",
-    "display_name": "Balrog, Ancient Flame of Udûn",
+    "display_name": "Gothic Ember, Ancient Flame of the Deep",
     "emoji": "🔥",
     "description": "An ancient demon of flame and shadow, awakened from its slumber deep beneath the earth.",
     "combat_level_required": 100,
@@ -278,7 +278,7 @@
     ],
     "pet": {
       "id": "baby_balrog",
-      "display_name": "Baby Balrog",
+      "display_name": "Gothic Emberling",
       "emoji": "🔥",
       "chance": 0.005,
       "comment": "1/200 per kill"

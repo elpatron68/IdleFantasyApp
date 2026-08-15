@@ -136,6 +136,7 @@ internal fun PrayerSheet(
 ) {
     val context = LocalContext.current
     var selectedKey by remember { mutableStateOf<String?>(null) }
+    val boneScrollState = rememberScrollState()
     if (backStep != null) {
         DisposableEffect(selectedKey) {
             backStep.value = if (selectedKey != null) ({ selectedKey = null }) else null
@@ -151,86 +152,89 @@ internal fun PrayerSheet(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .imePadding()
             .padding(bottom = 32.dp),
     ) {
-        Text(
-            text     = stringResource(R.string.label_prayer),
-            style    = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-        )
-        Text(
-            text     = stringResource(R.string.skill_prayer_desc),
-            style    = MaterialTheme.typography.bodySmall,
-            color    = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
-        )
-        guildDailyButton?.invoke()
-        HorizontalDivider()
-
         if (selectedBone == null) {
-            // ── Bone selection ───────────────────────────────────────────
-            Row(
-                modifier          = Modifier
+            Column(
+                modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                    .verticalScroll(boneScrollState),
             ) {
                 Text(
-                    text     = stringResource(R.string.skills_prayer_desc, prayerLevel),
+                    text     = stringResource(R.string.label_prayer),
+                    style    = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                )
+                Text(
+                    text     = stringResource(R.string.skill_prayer_desc),
                     style    = MaterialTheme.typography.bodySmall,
                     color    = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.weight(1f).padding(vertical = 8.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
                 )
-                TextButton(onClick = onNavigateToBoneAltar) {
-                    Text(stringResource(R.string.bone_altar_open))
-                }
-            }
-            if (availableBones.isEmpty()) {
-                Box(
-                    modifier         = Modifier.fillMaxWidth().padding(32.dp),
-                    contentAlignment = Alignment.Center,
+                guildDailyButton?.invoke()
+                HorizontalDivider()
+
+                // ── Bone selection ───────────────────────────────────────────
+                Row(
+                    modifier          = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text  = stringResource(R.string.skills_no_bones),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text     = stringResource(R.string.skills_prayer_desc, prayerLevel),
+                        style    = MaterialTheme.typography.bodySmall,
+                        color    = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.weight(1f).padding(vertical = 8.dp),
                     )
+                    TextButton(onClick = onNavigateToBoneAltar) {
+                        Text(stringResource(R.string.bone_altar_open))
+                    }
                 }
-            } else {
-                availableBones.forEach { (key, bone) ->
-                    val qty = inventory[key] ?: 0
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { selectedKey = key }
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
+                if (availableBones.isEmpty()) {
+                    Box(
+                        modifier         = Modifier.fillMaxWidth().padding(32.dp),
+                        contentAlignment = Alignment.Center,
                     ) {
-                        Column(Modifier.weight(1f)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge)
-                                val questIndicators = activeQuests["${Skills.PRAYER}:$key"] ?: emptyList()
-                                if (questIndicators.isNotEmpty()) {
-                                    QuestIndicatorIcons(questIndicators)
+                        Text(
+                            text  = stringResource(R.string.skills_no_bones),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                } else {
+                    availableBones.forEach { (key, bone) ->
+                        val qty = inventory[key] ?: 0
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { selectedKey = key }
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge)
+                                    val questIndicators = activeQuests["${Skills.PRAYER}:$key"] ?: emptyList()
+                                    if (questIndicators.isNotEmpty()) {
+                                        QuestIndicatorIcons(questIndicators)
+                                    }
                                 }
+                                Text(
+                                    text  = stringResource(R.string.skills_xp_each, bone.xpPerBone.toInt()),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
                             }
-                            Text(
-                                text  = stringResource(R.string.skills_xp_each, bone.xpPerBone.toInt()),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
                             Text(
                                 text  = stringResource(R.string.crafting_owned, qty),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = if (qty > 0) MaterialTheme.colorScheme.primary else dim,
                             )
                         }
-                        Text(stringResource(R.string.btn_select), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                     }
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         } else {

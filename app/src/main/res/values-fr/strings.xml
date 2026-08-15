@@ -275,6 +275,8 @@
     <string name="settings_profile_layout_desc">Choisissez entre Liste (latérale) ou Onglets</string>
     <string name="settings_profile_layout_rail">Liste</string>
     <string name="settings_profile_layout_tabs">Onglets</string>
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Écran d\'Accueil</string>
     <string name="settings_home_screen_desc">Choisir ce qui apparaît sur l\'écran d\'accueil</string>
     <string name="settings_recent_activity">Journal d’activité récente</string>
@@ -314,10 +316,12 @@
     <string name="label_weekly_reset">Se réinitialise le lundi à %1$s</string>
     <string name="weekly_bonus_title">Bonus hebdomadaire !</string>
     <string name="weekly_bonus_claim">Réclamer le bonus hebdomadaire</string>
-    <string name="label_daily_info">Chaque quête quotidienne rapporte des pièces. Chaque quête a également 1 chance sur 100 de faire tomber un équipement nanique.</string>
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou %1$s de chance d\'obtenir un équipement divin.</string>
     <string name="label_weekly_info_complete">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces. Vous possédez déjà tout l\'équipement divin !</string>
-    <string name="label_daily_reward">2 000 pièces (1/100 : équipement nanique)</string>
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
     <string name="label_hide_completed">Masquer les tâches terminées</string>
@@ -629,8 +633,8 @@
     <!-- Translator note: %1$d = prayer level -->
     <string name="skills_prayer_desc">Niv. %1$d  •  Enterrez des os ou dispersez des cendres pour XP en Prière</string>
     <string name="skills_no_bones">Aucun os ou cendres dans l\'inventaire</string>
-    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_xp_each">%1$d XP par os</string>
+    <!-- Translator note: %1$d = XP per bone, %2$d = quantity available -->
     <string name="skills_bone_selected">%1$d XP par os  •  %2$d disponibles</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP au total</string>
@@ -671,7 +675,7 @@
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
-    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
+    <string name="quest_legend_gold_dot">Un quête temporaire est disponible.</string>
     <string name="quest_legend_notes">Les icônes estompées ne peuvent pas encore être terminées (niveau ou matériaux manquants). Un petit chiffre en exposant indique que plusieurs quêtes de ce type visent la même chose.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d dans l\'inventaire</string>
@@ -730,6 +734,7 @@
     <string name="character_create_title">Créer votre personnage</string>
     <string name="character_edit_title">Modifier le personnage</string>
     <string name="character_name_label">Nom du personnage</string>
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Genre</string>
     <string name="character_gender_male">Masculin</string>
     <string name="character_gender_female">Féminin</string>
@@ -1037,7 +1042,7 @@
     <string name="skilling_dungeon_shattered_spire_desc">Les vestiges d’une tour de mage réduite à un champ de décombres. L’air crépite encore de magie résiduelle.</string>
     <string name="skilling_dungeon_thieves_den_name">Repaire des Voleurs</string>
     <string name="skilling_dungeon_thieves_den_desc">Un labyrinthe de tunnels sous les rues de la ville, utilisé par un réseau organisé de voleurs.</string>
-    <string name="skilling_dungeon_shadow_vault_name">Coffre-fort de l\'Ombre</string>
+    <string name="skilling_dungeon_shadow_vault_name">Chambre Forte d\'Ombre</string>
     <string name="skilling_dungeon_shadow_vault_desc">Une chambre forte cachée sous le Sanctuaire des Malfrats où les biens les plus précieux de la guilde sont gardés.</string>
 
     <!-- Expeditions -->
@@ -1083,9 +1088,10 @@
     <string name="slayer_owned">Possédé</string>
     <string name="slayer_lamp_purchased">+%1$s XP ajoutée à %2$s !</string>
     <string name="slayer_lamp_pick_skill">Choisissez une aptitude</string>
-    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
-    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
-    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_max_level_warning">⚠ XP sera gachée</string>
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
+    <string name="slayer_lamp_level_preview">→ Niveau %1$d (%2$d%%)</string>
+    <string name="slayer_lamp_level_preview_gain">→ Niveau %1$d (+%2$d, %3$d%%)</string>
     <string name="slayer_lamp_small">Lampe XP (Petite)</string>
     <string name="slayer_lamp_large">Lampe XP (Grande)</string>
     <string name="slayer_lamp_small_desc">+10 000 XP à n’importe quelle aptitude</string>
@@ -1243,6 +1249,7 @@
     <string name="town_upgrade_next_label">Prochaine Amélioration</string>
     <string name="town_upgrade_constr_req">Construction Nv. %1$d requis</string>
     <string name="town_upgrade_cost">Coût : %1$s pièces</string>
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Matériaux :</string>
     <string name="town_upgrade_btn">Améliorer</string>
     <string name="town_upgrade_success">Bâtiment amélioré !</string>
@@ -1272,7 +1279,7 @@
         <item quantity="one">+%1$d emplacement de file supplémentaire</item>
         <item quantity="other">+%1$d emplacements de file supplémentaires</item>
     </plurals>
-    <string name="town_building_cape_rack_name">Rangement à Capes</string>
+    <string name="town_building_cape_rack_name">Râtelier à Capes</string>
     <string name="town_cape_rack_no_bonus">Améliorez pour appliquer passivement les bonus d\'XP et de rendement des aptitudes/capes de guildes possédées</string>
     <string name="town_cape_rack_t1_bonus">Les bonus passifs des capes Tier 1 (de Collecte) sont actives</string>
     <string name="town_cape_rack_t2_bonus">Les bonus passifs des capes Tier 1 &amp; 2 (de Collecte, de Façonnage) sont actives</string>
@@ -1511,6 +1518,7 @@
     <string name="bonus_session_shorter">%1$d min de sessions en moins</string>
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% pièces obtenues</string>
     <string name="bonus_hp">+%1$d PV</string>
@@ -1535,7 +1543,7 @@
     <string name="monument_stage_2_reward">Débloque le toucher quotidien du monument</string>
     <string name="monument_stage_3_reward">Les bénédictions durent 6 heures de plus</string>
     <string name="monument_stage_4_reward" formatted="false">+1 emplacement de file, et l\'Oie Dorée s\'installe (+10% de pièces)</string>
-    <string name="monument_stage_5_reward">Débloque le Gardien de la Chambre forte et le titre Mécène du Royaume</string>
+    <string name="monument_stage_5_reward">Débloque le Gardien de la Chambre Forte et le titre Mécène du Royaume</string>
     <string name="monument_built">Construit</string>
     <string name="monument_build_btn">Construire (%1$s)</string>
     <string name="monument_contribute_label">Nourrissez la Flamme Éternelle</string>
@@ -1550,7 +1558,7 @@
     <string name="monument_touch_blessing">Une bénédiction vous enveloppe pendant une heure.</string>
     <string name="monument_touch_items">Le Monument accorde : %1$s</string>
     <string name="monument_contributed">La flamme brille plus fort !</string>
-    <string name="monument_flame_lit">La Flamme Éternelle est allumée ! Le Gardien de la Chambre forte vous attend.</string>
+    <string name="monument_flame_lit">La Flamme Éternelle est allumée ! Le Gardien de la Chambre Forte vous attend.</string>
     <string name="monument_stage_built">Étape terminée !</string>
     <string name="monument_goose_joined">Étape terminée ! L\'Oie Dorée s\'installe.</string>
     <string name="monument_not_enough_coins">Pas assez de pièces.</string>
@@ -1681,7 +1689,7 @@
     <string name="seasonal_bounty_gloom_runes_name">Façonnez des Runes de Mort pour apaiser les esprits</string>
     <string name="seasonal_bounty_gloom_runes_hint">Façonnage de Runes</string>
     <string name="seasonal_bounty_gloom_wisps_name">Chassez les Feux Follets</string>
-    <string name="seasonal_bounty_gloom_wisps_hint">Disponible uniquement dans le Hollowfen</string>
+    <string name="seasonal_bounty_gloom_wisps_hint">Disponible uniquement dans le Marais Creux</string>
     <string name="seasonal_bounty_gloom_ghouls_name">Éliminez les Goules des Tombes</string>
     <string name="seasonal_bounty_gloom_ghouls_hint">Disponible uniquement dans le Hollowfen</string>
     <string name="seasonal_bounty_gloom_husks_name">Abattez les Horreurs de Paille</string>
@@ -1752,10 +1760,15 @@
     <string name="title_master_farmer_name">Maître Fermier</string>
     <string name="title_master_farmer_requirement">Atteindre le niveau max de la Guilde des Agriculteurs</string>
     <string name="settings_art_credits">Crédits artistiques</string>
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Bannières saisonnières</string>
     <string name="settings_credit_banners_subtitle">Illustrations de Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Icônes des Aptitudes</string>
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Champion de %1$s</string>
     <string name="title_seasonal_requirement">Terminez l\'Événement Saisonnier %1$s</string>
     <string name="home_welcome_greeting">Bon retour,</string>
@@ -1771,15 +1784,15 @@
     <string name="pet_baby_kraken_desc">Un tout petit kraken qui augmente votre XP de Cuisine.</string>
     <string name="pet_rock_golem_name">Golem de Pierre</string>
     <string name="pet_rock_golem_desc">Une formation rocheuse vivante qui augmente votre XP d’Extraction.</string>
-    <string name="pet_ent_name">Ent</string> <!-- untranslated -->
+    <string name="pet_ent_name">Ent</string>
     <string name="pet_ent_desc">Un ancien esprit d’arbre qui booste votre XP de coupe de Bois.</string>
     <string name="pet_tiny_templar_name">Petite templier</string>
     <string name="pet_tiny_templar_desc">Un petit compagnon poisson qui augmente votre XP de Pêche.</string>
     <string name="pet_tangleroot_name">Créature végétale</string>
     <string name="pet_tangleroot_desc">Une créature végétale magique qui améliore votre XP d’Agriculture.</string>
-    <string name="pet_baby_balrog_name">Bébé Balrog</string>
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">Un minuscule démon de feu et d\'ombre qui renforce votre magie.</string>
-    <string name="pet_void_wisp_name">Follet du Vide</string>
+    <string name="pet_void_wisp_name">Feu Follet du Vide</string>
     <string name="pet_void_wisp_desc">Un fragment de l\'essence du Souverain du Vide, lié à ceux qui ont vaincu son maître. Amplifie l\'expérience de combat.</string>
     <string name="pet_graceling_sprite_name">Farfadet Gracieux</string>
     <string name="pet_graceling_sprite_desc">Une fée agile, née de milliers de tours de piste parcourus en silence. Elle guide vos pas avec une grâce saisissante.</string>
@@ -1787,7 +1800,7 @@
     <string name="pet_shadow_fox_desc">Un renard rusé qui a surgi des ombres de mille tentatives de vol à la tire.</string>
     <string name="pet_ember_moth_name">Papillon de Braise</string>
     <string name="pet_ember_moth_desc">Attiré par la flamme si longtemps qu\'il a fini par en devenir une. Ses ailes miroitent sous l\'effet de la chaleur résiduelle.</string>
-    <string name="pet_herb_wisp_name">Follet des Herbes</string>
+    <string name="pet_herb_wisp_name">Feu Follet des Herbes</string>
     <string name="pet_herb_wisp_desc">Un esprit né de la vapeur de mille potions infusées. Sa présence aiguise l\'esprit.</string>
     <string name="pet_rune_sprite_name">Farfadet Runique</string>
     <string name="pet_rune_sprite_desc">Un fragment cristallisé d\'énergie magique qui s\'est échappé de l\'autel de fabrication des runes.</string>
@@ -1795,7 +1808,7 @@
     <string name="pet_gem_golem_desc">Une toute petite créature sculptée à partir d\'éclats de gemmes et de poussière de polissage. Elle garde vos outils bien affûtés.</string>
     <string name="pet_feather_drake_name">Dragon à Plumes</string>
     <string name="pet_feather_drake_desc">Un dragon miniature entièrement constitué d\'empennages de flèches. Étonnamment aérodynamique.</string>
-    <string name="pet_forge_imp_name">Diablotin de la forge</string>
+    <string name="pet_forge_imp_name">Diablotin de forge</string>
     <string name="pet_forge_imp_desc">Un diablotin malicieux qui vit dans la forge. Sa peau durcie par la chaleur est insensible aux brûlures.</string>
     <string name="pet_coin_drake_name">Dragon à Pièces</string>
     <string name="pet_coin_drake_desc">Un dragonceau élevé à un régime de pièces d\'or. Il a un flair étonnant pour le profit.</string>
@@ -1826,6 +1839,7 @@
     <string name="save_slot_combat_level">Niveau de combat %1$d</string>
     <string name="save_slot_total_level">Niveau total %1$d</string>
     <string name="save_slot_last_played">il y a %1$s</string>
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Changer de personnage ?</string>
     <string name="save_slot_switch_body">Jouer avec %1$s ? Votre personnage actuel est sauvegardé automatiquement.</string>
     <string name="save_slot_switch_btn">Changer</string>

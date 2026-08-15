@@ -11,6 +11,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Velocity
 
 /**
  * Carries the user's in-app Text Size preference so it can be re-applied inside dialogs and
@@ -27,6 +28,11 @@ val LocalAppFontScale = compositionLocalOf { 1f }
  * after that -- still the same continuous swipe -- has nothing left for the list to consume, so
  * it's let through immediately, letting one uninterrupted swipe flow from "scroll to the top"
  * straight into "dismiss" (issue #1174), rather than requiring a second, separate swipe.
+ *
+ * Upward leftovers (scroll and fling) are swallowed entirely: a fully expanded sheet can't
+ * move up, so all they do is feed Material3's drag-state settle, which can wedge and lock the
+ * sheet's lists until it is reopened (issue #1365). Downward leftovers still flow to the
+ * sheet so swipe-down-to-dismiss keeps working.
  */
 @Composable
 private fun rememberSheetSwipeConnection(): NestedScrollConnection = remember {
@@ -35,7 +41,10 @@ private fun rememberSheetSwipeConnection(): NestedScrollConnection = remember {
             consumed: Offset,
             available: Offset,
             source: androidx.compose.ui.input.nestedscroll.NestedScrollSource,
-        ): Offset = if (consumed.y != 0f) available else Offset.Zero
+        ): Offset = if (consumed.y != 0f || available.y < 0f) available else Offset.Zero
+
+        override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity =
+            if (available.y < 0f) available else Velocity.Zero
     }
 }
 

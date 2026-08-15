@@ -106,6 +106,7 @@ data class CombatUiState(
     val bossFullCoinKillsLeft: Int = PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY,
     /** True once the Grand Monument's Eternal Flame is lit (unlocks monument-gated bosses). */
     val monumentComplete: Boolean = false,
+    val isQueueFull: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------
@@ -253,6 +254,7 @@ class CombatViewModel @Inject constructor(
                 activeDungeonRepeatTotal = flags.activeDungeonRepeatTotal,
                 bossFullCoinKillsLeft   = playerRepo.bossFullCoinKillsLeft(flags, extra.selectedBoss?.id ?: ""),
                 monumentComplete        = flags.monumentTier >= 5,
+                isQueueFull             = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())

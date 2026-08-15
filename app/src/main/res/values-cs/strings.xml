@@ -275,6 +275,8 @@
     <string name="settings_profile_layout_desc">Choose between a sidebar rail or top tabs</string> <!-- untranslated -->
     <string name="settings_profile_layout_rail">Rail</string> <!-- untranslated -->
     <string name="settings_profile_layout_tabs">Tabs</string> <!-- untranslated -->
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->
     <string name="settings_home_screen_desc">Choose what appears on the home screen</string> <!-- untranslated -->
     <string name="settings_recent_activity">Recent Activity Log</string> <!-- untranslated -->
@@ -314,10 +316,12 @@
     <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
     <string name="weekly_bonus_title">Weekly Bonus!</string> <!-- untranslated -->
     <string name="weekly_bonus_claim">Claim Weekly Bonus</string> <!-- untranslated -->
-    <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string> <!-- untranslated -->
+    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
+    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string> <!-- untranslated -->
     <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string> <!-- untranslated -->
-    <string name="label_daily_reward">2,000 coins (1/100: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
+    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
     <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string> <!-- untranslated -->
     <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string> <!-- untranslated -->
     <string name="label_hide_completed">Hide completed</string> <!-- untranslated -->
@@ -716,6 +720,7 @@
     <string name="character_create_title">Create Your Character</string> <!-- untranslated -->
     <string name="character_edit_title">Edit Character</string> <!-- untranslated -->
     <string name="character_name_label">Character Name</string> <!-- untranslated -->
+    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
     <string name="character_gender">Gender</string> <!-- untranslated -->
     <string name="character_gender_male">Male</string> <!-- untranslated -->
     <string name="character_gender_female">Female</string> <!-- untranslated -->
@@ -1070,6 +1075,7 @@
     <string name="slayer_lamp_purchased">+%1$s XP added to %2$s!</string> <!-- untranslated -->
     <string name="slayer_lamp_pick_skill">Choose a skill</string> <!-- untranslated -->
     <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
     <string name="slayer_lamp_small">XP Lamp (Small)</string> <!-- untranslated -->
@@ -1229,6 +1235,7 @@
     <string name="town_upgrade_next_label">Next Upgrade</string> <!-- untranslated -->
     <string name="town_upgrade_constr_req">Construction Lv. %1$d required</string> <!-- untranslated -->
     <string name="town_upgrade_cost">Cost: %1$s coins</string> <!-- untranslated -->
+    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
     <string name="town_upgrade_materials_header">Materials:</string> <!-- untranslated -->
     <string name="town_upgrade_btn">Upgrade</string> <!-- untranslated -->
     <string name="town_upgrade_success">Building upgraded!</string> <!-- untranslated -->
@@ -1497,6 +1504,7 @@
     <string name="bonus_session_shorter">%1$d min shorter sessions</string> <!-- untranslated -->
     <string name="bonus_coin_return">+%1$d%% coin return</string> <!-- untranslated -->
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
 
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
@@ -1738,10 +1746,15 @@
     <string name="title_master_farmer_name">Master Farmer</string> <!-- untranslated -->
     <string name="title_master_farmer_requirement">Reach max level in the Farming Guild</string> <!-- untranslated -->
     <string name="settings_art_credits">Art Credits</string> <!-- untranslated -->
+    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
     <string name="settings_credit_banners_title">Seasonal Banners</string> <!-- untranslated -->
     <string name="settings_credit_banners_subtitle">Art by Wenrexa</string> <!-- untranslated -->
     <string name="settings_credit_skill_icons_title">Skill Icons</string> <!-- untranslated -->
 
+    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="title_seasonal_champion_of">Champion of %1$s</string> <!-- untranslated -->
     <string name="title_seasonal_requirement">Complete the %1$s Seasonal Event</string> <!-- untranslated -->
     <string name="home_welcome_greeting">Vítej zpět,</string>
@@ -1763,7 +1776,7 @@
     <string name="pet_tiny_templar_desc">A small fish that boosts your fishing expertise.</string> <!-- untranslated -->
     <string name="pet_tangleroot_name">Tangleroot</string> <!-- untranslated -->
     <string name="pet_tangleroot_desc">A magical plant creature that enhances your farming.</string> <!-- untranslated -->
-    <string name="pet_baby_balrog_name">Baby Balrog</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
     <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
     <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
     <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
@@ -1812,6 +1825,7 @@
     <string name="save_slot_combat_level">Combat Lv %1$d</string> <!-- untranslated -->
     <string name="save_slot_total_level">Total Lv %1$d</string> <!-- untranslated -->
     <string name="save_slot_last_played">%1$s ago</string> <!-- untranslated -->
+    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
     <string name="save_slot_switch_title">Switch character?</string> <!-- untranslated -->
     <string name="save_slot_switch_body">Play as %1$s? Your current character is saved automatically.</string> <!-- untranslated -->
     <string name="save_slot_switch_btn">Switch</string> <!-- untranslated -->

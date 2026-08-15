@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,6 +42,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -109,6 +112,7 @@ fun TowerScreen(
                     hasSession           = state.towerSession != null,
                     sessionDone          = state.towerSession?.completed == true,
                     startingSession      = state.startingSession,
+                    isQueueFull          = state.isQueueFull,
                     equippedWeapons      = state.equippedWeapons,
                     selectedWeaponSlot   = state.selectedWeaponSlot,
                     onWeaponSlotSelected = viewModel::selectWeaponSlot,
@@ -159,6 +163,7 @@ private fun TowerHeaderCard(
     hasSession:           Boolean,
     sessionDone:          Boolean,
     startingSession:      Boolean,
+    isQueueFull:          Boolean,
     equippedWeapons:      Map<String, EquipmentData>,
     selectedWeaponSlot:   String?,
     onWeaponSlotSelected: (String) -> Unit,
@@ -348,12 +353,28 @@ private fun TowerHeaderCard(
                     Text(stringResource(R.string.tower_collect_prompt))
                 }
 
-                else        -> Button(
-                    onClick  = onStart,
-                    enabled  = !startingSession,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.tower_start_btn, nextFloorToQueue))
+                else        -> {
+                    val queueFullMessage = stringResource(R.string.snackbar_queue_full)
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Button(
+                            onClick  = onStart,
+                            enabled  = !startingSession && !isQueueFull,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(stringResource(R.string.tower_start_btn, nextFloorToQueue))
+                        }
+                        if (isQueueFull) {
+                            Box(
+                                modifier = Modifier
+                                    .matchParentSize()
+                                    .clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication        = null,
+                                        onClick           = { AppBannerCenter.enqueue(queueFullMessage) },
+                                    ),
+                            )
+                        }
+                    }
                 }
             }
 

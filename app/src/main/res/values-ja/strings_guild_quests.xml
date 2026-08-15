@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">利益追求</string>
     <string name="quest_mercantile_daily_7a_name">大交易</string>
     <string name="quest_mercantile_daily_7b_name">エリート交易路</string>
-    <string name="quest_mercantile_daily_7c_name">交易王</string>
+    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
     <string name="quest_mercantile_daily_7d_name">富の獲得</string>
     <string name="quest_mercantile_daily_7e_name">莫大な利益</string>
     <string name="quest_mining_daily_1a_name">鉄の配達</string>
