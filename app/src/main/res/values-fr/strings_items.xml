@@ -533,7 +533,7 @@
     <string name="item_hellhound_fang_name">Crocs de chien de l’enfer</string>
     <string name="item_hellhound_fang_desc">Une dent brûlée d’un chien de l’enfer.</string>
     <string name="item_demon_horn_name">Corne de démon</string>
-    <string name="item_demon_horn_desc">Une corne déchiquetée d’un démon inférieur.</string>
+    <string name="item_demon_horn_desc">Une corne déchiquetée d’un démon insignifiant.</string>
     <string name="item_troll_bone_name">Os de troll</string>
     <string name="item_troll_bone_desc">Un os massif et noueux d’un troll des montagnes.</string>
 
@@ -711,11 +711,11 @@
     <string name="item_maple_plank_name">Planche d\'Érable</string>
     <string name="item_yew_plank_name">Planche d\'If</string>
     <string name="item_magic_plank_name">Planche Magique</string>
-    <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
+    <string name="item_redwood_plank_name">Planche de Séquoia</string>
     <string name="item_iron_nail_name">Clou en Fer</string>
     <string name="item_steel_nail_name">Clou en Acier</string>
     <string name="item_mithril_nail_name">Clou en Mithril</string>
-    <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
+    <string name="item_runite_nail_name">Clou en Runite</string>
     <string name="item_stone_name">Pierre</string>
     <string name="item_stone_desc">Un bloc de pierre. Utilisé pour la construction.</string>
     <string name="item_carved_stone_name">Pierre Sculptée</string>
@@ -730,9 +730,9 @@
     <string name="item_maple_dresser_name">Commode en Érable</string>
     <string name="item_yew_wardrobe_name">Armoire en If</string>
     <string name="item_magic_throne_name">Trône Magique</string>
-    <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
-    <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
-    <string name="item_redwood_grand_bed_name">Redwood Grand Bed</string> <!-- untranslated -->
+    <string name="item_redwood_bench_name">Banc en Séquoia</string>
+    <string name="item_redwood_bookcase_name">Bibliothèque en Séquoia</string>
+    <string name="item_redwood_grand_bed_name">Grand lit en Séquoia</string>
 
 
     <!-- ===== Seed names ===== -->
@@ -989,7 +989,7 @@
     <string name="item_dwarven_warhammer_desc">Un massif marteau nain qui écrase tout sur son passage.</string>
     <string name="item_tower_sword_name">Épée de la Tour</string>
     <string name="item_tower_sword_desc">Une lame qui a fendu d\'innombrables étages de la Tour.</string>
-    <string name="item_balrog_whip_desc">A whip of pure flame, torn from the Gothic Ember itself. Burns with an eternal fire.</string> <!-- untranslated -->
+    <string name="item_balrog_whip_desc">Un fouet de flammes pures, arraché à la Braise Gothique elle-même. Brûle dans un feu éternel.</string>
     <string name="item_divine_sword_name">Épée Divine</string>
     <string name="item_divine_sword_desc">Une lame de pure lumière divine, dont on dit qu\'elle n\'est maniée que par l\'élu.</string>
     <string name="item_divine_greatblade_name">Grande Lame Divine</string>
@@ -1067,7 +1067,7 @@
     <string name="item_tower_boots_desc">Bottes forgées dans la forge la plus profonde de la Tour.</string>
     <string name="item_tower_shield_name">Bouclier de la Tour</string>
     <string name="item_tower_shield_desc">Un bouclier massif taillé dans la pierre de la Tour.</string>
-    <string name="item_balrog_wings_desc">The mighty wings of the Gothic Ember, imbued with dark power. The ultimate armor.</string> <!-- untranslated -->
+    <string name="item_balrog_wings_desc">Les puissantes ailes de la Braise Gothique, imprégnées d\'une force noire. L\'armure ultime.</string>
     <string name="item_divine_helm_name">Heaume Divin</string>
     <string name="item_divine_helm_desc">Un heaume rayonnant béni par les dieux. Il détourne les coups qui abattraient n\'importe quel mortel.</string>
     <string name="item_divine_platebody_name">Plastron Divin</string>
@@ -1091,7 +1091,7 @@
     <string name="item_silver_diamond_ring_desc">Une bague en argent avec un diamant. Équilibré pour le combat.</string>
     <string name="item_tower_ring_name">Anneau de la Tour</string>
     <string name="item_tower_ring_desc">Un anneau forgé dans la pierre de la Tour Infinie.</string>
-    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_desc">Forgé dans les flammes des profondeurs de la terre. Ceux qui le portent ressentent la force de la Braise Gothique.</string>
     <string name="item_ring_of_dragons_might_desc">Un anneau imprégné du feu de dragon. Augmente considérablement la force au corps à corps.</string>
     <string name="item_ring_of_the_seas_desc">Une bague bénie par les profondeurs marines. Elle améliore la précision et la puissance des tirs à distance.</string>
     <string name="item_kraken_tentacle_desc">Un anneau en forme de tentacule enroulé qui canalise le pouvoir arcanique du Kraken.</string>
@@ -1209,9 +1209,9 @@
     <string name="item_wraithbone_ring_desc">Un anneau pâle taillé dans de l\'os de spectre durant la Sombre Moisson. Il stabilise la main et le cœur.</string>
     <string name="item_reaper_scythe_desc">L\'outil de moisson du Roi Creux. Il ne moissonne pas que du blé.</string>
     <string name="item_gloomweave_cape_desc">Tissé à partir du crépuscule et de la fumée des lanternes au Marché de nuit. Vendu uniquement durant la Sombre Moisson.</string>
-    <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
+    <string name="item_gilded_full_helmet_desc">Un heaume intégral en runite recouvert d\'or monumental. Lâché par le Guardien de la Chambre Forte.</string>
+    <string name="item_gilded_platebody_desc">Une plastron en runite recouvert d\'or monumental. Lâché par le Guardien de la Chambre Forte.</string>
+    <string name="item_gilded_kiteshield_desc">Un écu en runite recouvert d\'or monumental. Lâché par le Guardien de la Chambre Forte.</string>
     <string name="item_wind_strike_name">Frappe de Vent</string>
     <string name="item_wind_strike_desc">Un sort d\'air élémentaire qui frappe votre adversaire.</string>
     <string name="item_wind_bolt_name">Trait de Vent</string>

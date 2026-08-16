@@ -343,7 +343,7 @@
     <string name="quest_mercantile_daily_4e_name">Campagne de profit</string>
     <string name="quest_mercantile_daily_7a_name">Grand commerce</string>
     <string name="quest_mercantile_daily_7b_name">Routes d’élite</string>
-    <string name="quest_mercantile_daily_7c_name">Quarter Master</string> <!-- untranslated -->
+    <string name="quest_mercantile_daily_7c_name">Maître de Quartier</string>
     <string name="quest_mercantile_daily_7d_name">Course à la fortune</string>
     <string name="quest_mercantile_daily_7e_name">Grand profit</string>
     <string name="quest_mining_daily_1a_name">Livraison de fer</string>

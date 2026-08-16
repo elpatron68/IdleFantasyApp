@@ -423,6 +423,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Sistema</string>
     <string name="settings_save_data">Salva</string>
     <string name="settings_export">Esporta Salvataggio</string>
@@ -717,7 +719,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d campi disponibili</string>
     <string name="farming_clear_patch">Estirpa</string>
-    <string name="farming_clear_desc">Rimuovere la coltivazione senza alcuna ricompensa?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Raccogli e Ripianta Tutti</string>
     <string name="farming_harvest_all_complete">Tutti gli appezzamenti raccolti!</string>
     <string name="farming_no_crops_ready">Non ci sono coltivazioni pronte per la raccolta</string>
@@ -980,7 +984,7 @@
     <string name="church_activate">Attiva</string>
     <string name="church_blessing_bonus">+%1$s da benedizione</string>
     <string name="church_blessing_suffix">da benedizione</string>
-    <string name="church_effect_xp">×%%1$.2f XP per %2$d ore</string>
+    <string name="church_effect_xp">×%1$.2f XP per %2$d ore</string>
     <string name="church_effect_def">+%1$d Difesa per %2$d ore</string>
     <string name="church_effect_coins">+%1$d%% monete raccolte per %2$d ore</string>
     <string name="church_cost_bones">Richiede %1$d ossa</string>
@@ -1405,6 +1409,7 @@
     <string name="farming_bean_ready">Il fagiolo magico si estende oltre le nuvole. Pronto a scalare?</string>
     <string name="farming_bean_climb">Scala la pianta</string>
     <string name="farming_bean_climbed">Hai scalato il fagiolo magico. Qualcosa ti aspetta…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">I fagioli magici possono essere piantati solo in un appezzamento</string>
 
@@ -1591,7 +1596,7 @@
     <string name="tower_milestone_claim">Ottieni</string>
     <string name="tower_milestone_claimed">Ottenuto</string>
     <string name="tower_enemies_this_floor">Nemici</string>
-    <string name="tower_enemy_strength" formatted="false">Forza nemica: %s%</string>
+    <string name="tower_enemy_strength">Forza nemica: %1$s%%</string>
     <string name="tower_entry_card_desc">Nessun limite. Per quanto riuscirai a salire?</string>
     <string name="tower_collect_prompt">Raccogli le ricompense</string>
     <string name="tower_home_collect_hint">Apri la schermata della Torre per ottenere le ricompense</string>

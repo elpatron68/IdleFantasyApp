@@ -80,7 +80,7 @@ For **this fork's builds** (Save Viewer sync), see **[FORK.md](FORK.md)**.
 
 ## Translating
 
-The game is available in 16 languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
+The game is available in 17 languages translated through community contributions. Translations live in standard Android string resource files and are Weblate-compatible. See [Translating](/TRANSLATING.md) to add a new language or improve an existing one.
 
 ## Contributing
 
@@ -96,12 +96,12 @@ Fork-specific contributions: see **[FORK.md](FORK.md)**.
 
 **Language:** Kotlin
 **UI:** Jetpack Compose + Material 3  
-**Database:** Room (SQLite)
-**Background work:** WorkManager
+**Database:** Room (SQLite)  
+**Background work:** WorkManager  
 **JSON parsing:** kotlinx.serialization  
 **Architecture:** MVVM + Repository  
-**Dependency injection:** Hilt
-**Notifications:** NotificationCompat
+**Dependency injection:** Hilt  
+**Notifications:** NotificationCompat  
 **Localization:** Android string resources (Weblate-compatible)
 
 No Google Play Services dependency. F-Droid compatible.

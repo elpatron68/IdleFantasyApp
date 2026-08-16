@@ -423,6 +423,8 @@
 
 
 
+
+
     <string name="settings_lang_system">システムデフォルト</string>
     <string name="settings_save_data">セーブデータ</string>
     <string name="settings_export">セーブデータ書き出し</string>
@@ -703,7 +705,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">アンロック済みの畑: %1$d</string>
     <string name="farming_clear_patch">畑をクリア</string>
-    <string name="farming_clear_desc">報酬なしで作物を撤去しますか？</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">すべて収穫して植える</string>
     <string name="farming_harvest_all_complete">すべての畑を収穫しました！</string>
     <string name="farming_no_crops_ready">収穫可能な作物はまだありません</string>
@@ -966,7 +970,7 @@
     <string name="church_activate">有効化</string>
     <string name="church_blessing_bonus">祝福ボーナス: +%1$s</string>
     <string name="church_blessing_suffix">祝福より</string>
-    <string name="church_effect_xp">%2$d 時間の間、経験値 ×%%1$.2f</string>
+    <string name="church_effect_xp">%2$d 時間の間、経験値 ×%1$.2f</string>
     <string name="church_effect_def">%2$d 時間の間、防御 +%1$d</string>
     <string name="church_effect_coins">%2$d 時間の間、コインのドロップ率 +%1$d%%</string>
     <string name="church_cost_bones">コスト: 骨 %1$d 個</string>
@@ -1391,6 +1395,7 @@
     <string name="farming_bean_ready">豆の木は雲の彼方まで達しました。登る準備はできていますか？</string>
     <string name="farming_bean_climb">登る</string>
     <string name="farming_bean_climbed">豆の木を登りきりました。そこには何かが待ち受けています…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">魔法の豆は1つの区画にしか植えられません</string>
 
@@ -1577,7 +1582,7 @@
     <string name="tower_milestone_claim">回収</string>
     <string name="tower_milestone_claimed">回収済み</string>
     <string name="tower_enemies_this_floor">出現する敵</string>
-    <string name="tower_enemy_strength" formatted="false">敵の強さ: %s%</string>
+    <string name="tower_enemy_strength">敵の強さ: %1$s%%</string>
     <string name="tower_entry_card_desc">無限に続く階層。あなたはどこまで登れますか？</string>
     <string name="tower_collect_prompt">塔の挑戦報酬を回収</string>
     <string name="tower_home_collect_hint">塔の画面を開いて、この報酬を回収してください</string>
