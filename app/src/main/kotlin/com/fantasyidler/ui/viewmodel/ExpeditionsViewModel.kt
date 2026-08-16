@@ -96,10 +96,13 @@ class ExpeditionsViewModel @Inject constructor(
                             dungeon.levelRequired,
                         )
                         !prevOk  -> {
-                            val prereq = gameData.skillingDungeons.values
-                                .firstOrNull { it.unlockDungeon == dungeon.requiresPreviousUnlock }
+                            val prereq = gameData.skillingDungeons.entries
+                                .firstOrNull { it.value.unlockDungeon == dungeon.requiresPreviousUnlock }
                             if (prereq != null)
-                                context.getString(R.string.expedition_lock_notes, prereq.displayName)
+                                context.getString(
+                                    R.string.expedition_lock_notes,
+                                    GameStrings.skillingDungeonName(context, prereq.key, prereq.value.displayName),
+                                )
                             else
                                 context.getString(R.string.expedition_lock_prerequisite)
                         }
@@ -142,7 +145,7 @@ class ExpeditionsViewModel @Inject constructor(
                     )
                 )
                 _extra.update {
-                    it.copy(snackbarMessage = if (enqueued) context.getString(R.string.snackbar_added_to_queue, dungeon.displayName) else context.getString(R.string.snackbar_queue_full))
+                    it.copy(snackbarMessage = if (enqueued) context.getString(R.string.snackbar_added_to_queue, GameStrings.skillingDungeonName(context, key, dungeon.displayName)) else context.getString(R.string.snackbar_queue_full))
                 }
                 return@launch
             }
@@ -171,7 +174,7 @@ class ExpeditionsViewModel @Inject constructor(
                 durationMs       = result.durationMs,
                 skillDisplayName = dungeon.displayName,
             )
-            _extra.update { it.copy(snackbarMessage = "${dungeon.displayName} started.") }
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.expedition_started, GameStrings.skillingDungeonName(context, key, dungeon.displayName))) }
         }
     }
 

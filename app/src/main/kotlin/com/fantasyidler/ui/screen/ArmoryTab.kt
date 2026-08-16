@@ -185,7 +185,7 @@ private fun ArmoryDetailContent(entry: ArmoryEntry) {
     val dimmed   = !entry.owned
     val statRows = armoryStatRows(item)
     val reqRows  = item.requirements.map { (skill, lvl) ->
-        skill.replaceFirstChar { it.uppercase() } to "Lv. $lvl"
+        GameStrings.skillName(context, skill) to context.getString(R.string.armory_req_level, lvl)
     }
 
     LazyColumn(

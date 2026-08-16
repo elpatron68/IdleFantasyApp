@@ -771,200 +771,200 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_abyssal_rod_name">Abyssal Rod</string> <!-- untranslated -->
+    <string name="item_adamantite_arrow_tip_name">Adamantite Arrow Tips</string> <!-- untranslated -->
+    <string name="item_adamantite_boots_name">Adamantite Boots</string> <!-- untranslated -->
+    <string name="item_adamantite_chainbody_name">Adamantite Chainbody</string> <!-- untranslated -->
+    <string name="item_adamantite_dagger_name">Adamantite Dagger</string> <!-- untranslated -->
+    <string name="item_adamantite_full_helmet_name">Adamantite Full Helmet</string> <!-- untranslated -->
+    <string name="item_adamantite_kiteshield_name">Adamantite Kiteshield</string> <!-- untranslated -->
+    <string name="item_adamantite_longsword_name">Adamantite Longsword</string> <!-- untranslated -->
+    <string name="item_adamantite_med_helmet_name">Adamantite Med Helmet</string> <!-- untranslated -->
+    <string name="item_adamantite_plateskirt_name">Adamantite Plateskirt</string> <!-- untranslated -->
+    <string name="item_adamantite_square_shield_name">Adamantite Square Shield</string> <!-- untranslated -->
+    <string name="item_agility_cape_name">Agility Cape</string> <!-- untranslated -->
+    <string name="item_agility_guild_cape_name">Agility Guild Cape</string> <!-- untranslated -->
+    <string name="item_amulet_of_fury_name">Amulet Of Fury</string> <!-- untranslated -->
     <string name="item_amulet_of_fury_desc">A powerful amulet granting bonuses to all combat styles. Requires Mercantile level 80 to purchase.</string> <!-- untranslated -->
-
+    <string name="item_amulet_of_strength_name">Amulet Of Strength</string> <!-- untranslated -->
     <string name="item_amulet_of_strength_desc">Increases melee strength bonus. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-
+    <string name="item_amulet_of_the_kraken_name">Amulet Of The Kraken</string> <!-- untranslated -->
     <string name="item_arcane_grappling_hook_name">秘術のグラップリングフック</string>
-
-
-
+    <string name="item_arcane_staff_name">Arcane Staff</string> <!-- untranslated -->
+    <string name="item_archers_guild_cape_name">Archers Guild Cape</string> <!-- untranslated -->
+    <string name="item_archers_ring_name">Archers Ring</string> <!-- untranslated -->
     <string name="item_archers_ring_desc">Increases ranged accuracy. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
-
-
-
-
-
+    <string name="item_attack_cape_name">Attack Cape</string> <!-- untranslated -->
+    <string name="item_baby_kraken_name">Baby Kraken</string> <!-- untranslated -->
+    <string name="item_balrog_name">Gothic Ember, Ancient Flame of the Deep</string> <!-- untranslated -->
+    <string name="item_balrog_whip_name">Gothic Ember\'s Flaming Whip</string> <!-- untranslated -->
+    <string name="item_balrog_wings_name">Gothic Ember Wings</string> <!-- untranslated -->
     <string name="item_beef_name">牛肉</string>
-
+    <string name="item_berserker_ring_name">Berserker Ring</string> <!-- untranslated -->
     <string name="item_berserker_ring_desc">Increases melee strength. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
-
-
-
-
-
-
-
-
-
-
+    <string name="item_blessed_fishing_rod_name">Blessed Fishing Rod</string> <!-- untranslated -->
+    <string name="item_bronze_arrow_tip_name">Bronze Arrow Tips</string> <!-- untranslated -->
+    <string name="item_bronze_boots_name">Bronze Boots</string> <!-- untranslated -->
+    <string name="item_bronze_chainbody_name">Bronze Chainbody</string> <!-- untranslated -->
+    <string name="item_bronze_full_helmet_name">Bronze Full Helmet</string> <!-- untranslated -->
+    <string name="item_bronze_kiteshield_name">Bronze Kiteshield</string> <!-- untranslated -->
+    <string name="item_bronze_longsword_name">Bronze Longsword</string> <!-- untranslated -->
+    <string name="item_bronze_med_helmet_name">Bronze Med Helmet</string> <!-- untranslated -->
+    <string name="item_bronze_plateskirt_name">Bronze Plateskirt</string> <!-- untranslated -->
+    <string name="item_bronze_square_shield_name">Bronze Square Shield</string> <!-- untranslated -->
     <string name="item_chicken_name">鶏肉</string>
-
-
-
-
-
-
-
-
+    <string name="item_construction_guild_cape_name">Construction Guild Cape</string> <!-- untranslated -->
+    <string name="item_cooking_cape_name">Cooking Cape</string> <!-- untranslated -->
+    <string name="item_cooking_guild_cape_name">Cooking Guild Cape</string> <!-- untranslated -->
+    <string name="item_crafting_cape_name">Crafting Cape</string> <!-- untranslated -->
+    <string name="item_crafting_guild_cape_name">Crafting Guild Cape</string> <!-- untranslated -->
+    <string name="item_deep_iron_pickaxe_name">Deep Iron Pickaxe</string> <!-- untranslated -->
+    <string name="item_defense_cape_name">Defense Cape</string> <!-- untranslated -->
+    <string name="item_demon_lord_name">Demon Lord</string> <!-- untranslated -->
     <string name="item_divine_frying_pan_name">神聖なフライパン</string>
     <string name="item_divine_grappling_hook_name">神聖なグラップリングフック</string>
     <string name="item_divine_hammer_name">神聖なハンマー</string>
     <string name="item_divine_hoe_name">神聖なクワ</string>
     <string name="item_divine_lockpick_name">神聖なロックピック</string>
     <string name="item_divine_tinderbox_name">神聖な火打ち石</string>
-
-
-
-
-
-
-
-
+    <string name="item_dragon_amulet_name">Dragon Amulet</string> <!-- untranslated -->
+    <string name="item_dragon_boots_name">Dragon Boots</string> <!-- untranslated -->
+    <string name="item_dragon_longsword_name">Dragon Longsword</string> <!-- untranslated -->
+    <string name="item_dragon_scimitar_name">Dragon Scimitar</string> <!-- untranslated -->
+    <string name="item_dragon_whelp_name">Dragon Whelp</string> <!-- untranslated -->
+    <string name="item_dwarven_axe_name">Dwarven Axe</string> <!-- untranslated -->
+    <string name="item_dwarven_boots_name">Dwarven Boots</string> <!-- untranslated -->
+    <string name="item_dwarven_fishing_rod_name">Dwarven Fishing Rod</string> <!-- untranslated -->
     <string name="item_dwarven_frying_pan_name">ドワーフのフライパン</string>
     <string name="item_dwarven_grappling_hook_name">ドワーフのグラップリングフック</string>
     <string name="item_dwarven_hammer_name">ドワーフのハンマー</string>
-
-
+    <string name="item_dwarven_helm_name">Dwarven Helm</string> <!-- untranslated -->
+    <string name="item_dwarven_hoe_name">Dwarven Hoe</string> <!-- untranslated -->
     <string name="item_dwarven_lockpick_name">ドワーフのロックピック</string>
-
-
-
-
-
-
+    <string name="item_dwarven_pickaxe_name">Dwarven Pickaxe</string> <!-- untranslated -->
+    <string name="item_dwarven_platebody_name">Dwarven Platebody</string> <!-- untranslated -->
+    <string name="item_dwarven_platelegs_name">Dwarven Platelegs</string> <!-- untranslated -->
+    <string name="item_dwarven_scimitar_name">Dwarven Scimitar</string> <!-- untranslated -->
+    <string name="item_dwarven_shield_name">Dwarven Shield</string> <!-- untranslated -->
+    <string name="item_dwarven_sword_name">Dwarven Sword</string> <!-- untranslated -->
     <string name="item_dwarven_tinderbox_name">ドワーフの火打ち石</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_dwarven_warhammer_name">Dwarven Warhammer</string> <!-- untranslated -->
+    <string name="item_ent_name">Ent</string> <!-- untranslated -->
+    <string name="item_farming_cape_name">Farming Cape</string> <!-- untranslated -->
+    <string name="item_farming_guild_cape_name">Farming Guild Cape</string> <!-- untranslated -->
+    <string name="item_firemaking_cape_name">Firemaking Cape</string> <!-- untranslated -->
+    <string name="item_firemaking_guild_cape_name">Firemaking Guild Cape</string> <!-- untranslated -->
+    <string name="item_fishing_cape_name">Fishing Cape</string> <!-- untranslated -->
+    <string name="item_fishing_guild_cape_name">Fishing Guild Cape</string> <!-- untranslated -->
+    <string name="item_flame_heart_amulet_name">Flame Heart Amulet</string> <!-- untranslated -->
+    <string name="item_fletching_cape_name">Fletching Cape</string> <!-- untranslated -->
+    <string name="item_fletching_guild_cape_name">Fletching Guild Cape</string> <!-- untranslated -->
+    <string name="item_forge_pickaxe_name">Forge Pickaxe</string> <!-- untranslated -->
+    <string name="item_hellfire_staff_name">Hellfire Staff</string> <!-- untranslated -->
+    <string name="item_herblore_guild_cape_name">Herblore Guild Cape</string> <!-- untranslated -->
+    <string name="item_hp_cape_name">Hp Cape</string> <!-- untranslated -->
+    <string name="item_imp_pet_name">Imp Pet</string> <!-- untranslated -->
+    <string name="item_iron_arrow_tip_name">Iron Arrow Tips</string> <!-- untranslated -->
+    <string name="item_iron_boots_name">Iron Boots</string> <!-- untranslated -->
+    <string name="item_iron_chainbody_name">Iron Chainbody</string> <!-- untranslated -->
+    <string name="item_iron_full_helmet_name">Iron Full Helmet</string> <!-- untranslated -->
+    <string name="item_iron_kiteshield_name">Iron Kiteshield</string> <!-- untranslated -->
+    <string name="item_iron_longsword_name">Iron Longsword</string> <!-- untranslated -->
+    <string name="item_iron_med_helmet_name">Iron Med Helmet</string> <!-- untranslated -->
+    <string name="item_iron_plateskirt_name">Iron Plateskirt</string> <!-- untranslated -->
+    <string name="item_iron_square_shield_name">Iron Square Shield</string> <!-- untranslated -->
+    <string name="item_ironwood_axe_name">Ironwood Axe</string> <!-- untranslated -->
+    <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
+    <string name="item_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="item_kraken_tentacle_name">Kraken Tentacle</string> <!-- untranslated -->
+    <string name="item_mages_guild_cape_name">Mages Guild Cape</string> <!-- untranslated -->
+    <string name="item_magic_cape_name">Magic Cape</string> <!-- untranslated -->
+    <string name="item_magic_longbow_name">Magic Longbow</string> <!-- untranslated -->
+    <string name="item_magic_shortbow_name">Magic Shortbow</string> <!-- untranslated -->
+    <string name="item_maple_shortbow_name">Maple Shortbow</string> <!-- untranslated -->
+    <string name="item_mercantile_guild_cape_name">Mercantile Guild Cape</string> <!-- untranslated -->
+    <string name="item_mining_cape_name">Mining Cape</string> <!-- untranslated -->
+    <string name="item_mining_guild_cape_name">Mining Guild Cape</string> <!-- untranslated -->
+    <string name="item_mithril_arrow_tip_name">Mithril Arrow Tips</string> <!-- untranslated -->
+    <string name="item_mithril_boots_name">Mithril Boots</string> <!-- untranslated -->
+    <string name="item_mithril_chainbody_name">Mithril Chainbody</string> <!-- untranslated -->
+    <string name="item_mithril_dagger_name">Mithril Dagger</string> <!-- untranslated -->
+    <string name="item_mithril_full_helmet_name">Mithril Full Helmet</string> <!-- untranslated -->
+    <string name="item_mithril_kiteshield_name">Mithril Kiteshield</string> <!-- untranslated -->
+    <string name="item_mithril_longsword_name">Mithril Longsword</string> <!-- untranslated -->
+    <string name="item_mithril_med_helmet_name">Mithril Med Helmet</string> <!-- untranslated -->
+    <string name="item_mithril_plateskirt_name">Mithril Plateskirt</string> <!-- untranslated -->
+    <string name="item_mithril_square_shield_name">Mithril Square Shield</string> <!-- untranslated -->
     <string name="item_mutton_name">マトン肉</string>
-
+    <string name="item_necklace_of_anguish_name">Necklace Of Anguish</string> <!-- untranslated -->
     <string name="item_necklace_of_anguish_desc">Provides exceptional ranged attack bonuses. Requires Mercantile level 99 to purchase.</string> <!-- untranslated -->
-
-
-
-
+    <string name="item_oak_shortbow_name">Oak Shortbow</string> <!-- untranslated -->
+    <string name="item_prayer_cape_name">Prayer Cape</string> <!-- untranslated -->
+    <string name="item_prayer_guild_cape_name">Prayer Guild Cape</string> <!-- untranslated -->
+    <string name="item_ranged_cape_name">Ranged Cape</string> <!-- untranslated -->
     <string name="item_rat_meat_name">ネズミ肉</string>
-
-
-
+    <string name="item_ring_of_dragons_might_name">Ring Of Dragons Might</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_name">Ring Of Flame</string> <!-- untranslated -->
+    <string name="item_ring_of_recoil_name">Ring Of Recoil</string> <!-- untranslated -->
     <string name="item_ring_of_recoil_desc">Returns a portion of damage taken to attackers. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-
+    <string name="item_ring_of_suffering_name">Ring Of Suffering</string> <!-- untranslated -->
     <string name="item_ring_of_suffering_desc">A powerful ring that grants significant defense. Requires Mercantile level 80 to purchase.</string> <!-- untranslated -->
-
-
+    <string name="item_ring_of_the_seas_name">Ring Of The Seas</string> <!-- untranslated -->
+    <string name="item_ring_of_wealth_name">Ring Of Wealth</string> <!-- untranslated -->
     <string name="item_ring_of_wealth_desc">Increases coin drops slightly. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
-
+    <string name="item_rock_golem_name">Rock Golem</string> <!-- untranslated -->
     <string name="item_rogues_lockpick_name">ローグのロックピック</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_runecrafting_cape_name">Runecrafting Cape</string> <!-- untranslated -->
+    <string name="item_runecrafting_guild_cape_name">Runecrafting Guild Cape</string> <!-- untranslated -->
+    <string name="item_runite_arrow_tip_name">Runite Arrow Tips</string> <!-- untranslated -->
+    <string name="item_runite_boots_name">Runite Boots</string> <!-- untranslated -->
+    <string name="item_runite_chainbody_name">Runite Chainbody</string> <!-- untranslated -->
+    <string name="item_runite_dagger_name">Runite Dagger</string> <!-- untranslated -->
+    <string name="item_runite_full_helmet_name">Runite Full Helmet</string> <!-- untranslated -->
+    <string name="item_runite_kiteshield_name">Runite Kiteshield</string> <!-- untranslated -->
+    <string name="item_runite_longsword_name">Runite Longsword</string> <!-- untranslated -->
+    <string name="item_runite_med_helmet_name">Runite Med Helmet</string> <!-- untranslated -->
+    <string name="item_runite_plateskirt_name">Runite Plateskirt</string> <!-- untranslated -->
+    <string name="item_runite_square_shield_name">Runite Square Shield</string> <!-- untranslated -->
+    <string name="item_sanctum_axe_name">Sanctum Axe</string> <!-- untranslated -->
+    <string name="item_seers_ring_name">Seers Ring</string> <!-- untranslated -->
     <string name="item_seers_ring_desc">Increases magic accuracy. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
-
+    <string name="item_shadow_dagger_name">Shadow Dagger</string> <!-- untranslated -->
     <string name="item_shadow_grappling_hook_name">シャドウグラップリングフック</string>
     <string name="item_shadow_lockpick_name">シャドウロックピック</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_shortbow_name">Shortbow</string> <!-- untranslated -->
+    <string name="item_silver_diamond_necklace_name">Silver Diamond Necklace</string> <!-- untranslated -->
+    <string name="item_silver_diamond_ring_name">Silver Diamond Ring</string> <!-- untranslated -->
+    <string name="item_silver_emerald_necklace_name">Silver Emerald Necklace</string> <!-- untranslated -->
+    <string name="item_silver_emerald_ring_name">Silver Emerald Ring</string> <!-- untranslated -->
+    <string name="item_silver_ruby_necklace_name">Silver Ruby Necklace</string> <!-- untranslated -->
+    <string name="item_silver_ruby_ring_name">Silver Ruby Ring</string> <!-- untranslated -->
+    <string name="item_slayer_guild_cape_name">Slayer Guild Cape</string> <!-- untranslated -->
+    <string name="item_smithing_cape_name">Smithing Cape</string> <!-- untranslated -->
+    <string name="item_smithing_guild_cape_name">Smithing Guild Cape</string> <!-- untranslated -->
+    <string name="item_steel_arrow_tip_name">Steel Arrow Tips</string> <!-- untranslated -->
+    <string name="item_steel_boots_name">Steel Boots</string> <!-- untranslated -->
+    <string name="item_steel_chainbody_name">Steel Chainbody</string> <!-- untranslated -->
+    <string name="item_steel_dagger_name">Steel Dagger</string> <!-- untranslated -->
+    <string name="item_steel_full_helmet_name">Steel Full Helmet</string> <!-- untranslated -->
+    <string name="item_steel_kiteshield_name">Steel Kiteshield</string> <!-- untranslated -->
+    <string name="item_steel_longsword_name">Steel Longsword</string> <!-- untranslated -->
+    <string name="item_steel_med_helmet_name">Steel Med Helmet</string> <!-- untranslated -->
+    <string name="item_steel_plateskirt_name">Steel Plateskirt</string> <!-- untranslated -->
+    <string name="item_steel_square_shield_name">Steel Square Shield</string> <!-- untranslated -->
+    <string name="item_strength_cape_name">Strength Cape</string> <!-- untranslated -->
+    <string name="item_tangleroot_name">Tangleroot</string> <!-- untranslated -->
+    <string name="item_thieving_guild_cape_name">Thieving Guild Cape</string> <!-- untranslated -->
+    <string name="item_tiny_templar_name">Tiny Templar</string> <!-- untranslated -->
+    <string name="item_tormented_necklace_name">Tormented Necklace</string> <!-- untranslated -->
     <string name="item_tormented_necklace_desc">Provides exceptional magic bonuses. Requires Mercantile level 99 to purchase.</string> <!-- untranslated -->
-
-
-
-
-
-
-
+    <string name="item_trident_of_the_seas_name">Trident Of The Seas</string> <!-- untranslated -->
+    <string name="item_warriors_guild_cape_name">Warriors Guild Cape</string> <!-- untranslated -->
+    <string name="item_willow_shortbow_name">Willow Shortbow</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_name">Woodcutting Cape</string> <!-- untranslated -->
+    <string name="item_woodcutting_guild_cape_name">Woodcutting Guild Cape</string> <!-- untranslated -->
+    <string name="item_yew_longbow_name">Yew Longbow</string> <!-- untranslated -->
+    <string name="item_yew_shortbow_name">Yew Shortbow</string> <!-- untranslated -->
     <string name="item_void_reaver_name">ヴォイドリーヴァー</string>
     <string name="item_void_reaver_desc">結晶化したヴォイドエネルギーから鍛造された刃。その刃は、まるで布のように鎧を切り裂きます。</string>
     <string name="item_sovereign_crown_name">ソヴリンクラウン</string>

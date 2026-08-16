@@ -896,7 +896,7 @@ class CombatViewModel @Inject constructor(
 
     private fun buildCapeMessage(capes: List<String>): String? {
         if (capes.isEmpty()) return null
-        val names = capes.joinToString(", ") { gameData.itemDisplayName(it) }
+        val names = capes.joinToString(", ") { GameStrings.itemName(context, it) }
         return context.getString(R.string.home_congratulations_received, names)
     }
 

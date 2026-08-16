@@ -664,7 +664,7 @@ private fun QuestRow(
             val rewards = quest.rewards
             val rewardParts = buildList {
                 if (rewards.xp > 0) add("+${rewards.xp.toLong().formatXp()} XP")
-                if (rewards.coins > 0) add("${rewards.coins.toLong().formatCoins()} coins")
+                if (rewards.coins > 0) add(stringResource(R.string.reward_part_coins_plain, rewards.coins.toLong().formatCoins()))
                 rewards.items.forEach { (itemKey, qty) ->
                     add("${GameStrings.itemName(context, itemKey)} ×$qty")
                 }

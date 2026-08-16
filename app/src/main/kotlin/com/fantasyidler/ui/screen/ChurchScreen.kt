@@ -262,7 +262,7 @@ private fun ActiveBlessingBanner(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text  = stringResource(R.string.church_expires_in, remainingMs.formatDurationMs()),
+                text  = stringResource(R.string.church_expires_in, remainingMs.formatDurationMs(context)),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

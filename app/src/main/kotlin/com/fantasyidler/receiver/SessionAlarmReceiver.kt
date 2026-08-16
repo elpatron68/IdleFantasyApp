@@ -4,7 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.PowerManager
+import com.fantasyidler.R
+import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.notification.SessionNotificationManager
+import com.fantasyidler.util.GameStrings
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
@@ -49,13 +52,17 @@ class SessionAlarmReceiver : BroadcastReceiver() {
         if (session == null || session.completed) return
 
         sessionRepository.markCompleted(sessionId)
+        // The intent extra carries the English name baked in at scheduling time; resolve
+        // the localised one from the session at fire time so notifications follow the
+        // current app language (issue #1399).
+        val notifName = localizedSessionName(session, skillDisplayName).ifBlank { skillDisplayName }
         // Compute how late the alarm fired so the next session can be backdated.
         val now = System.currentTimeMillis()
         val backdateMs = maxOf(0L, now - session.endsAt)
         if (session.isWorkerSession) {
             val slot = session.workerSlot.coerceAtLeast(1)
             val workerStarted = workerQueuedSessionStarter.startNextQueued(slot)
-            if (!workerStarted) notificationManager.showSessionComplete(skillDisplayName)
+            if (!workerStarted) notificationManager.showSessionComplete(notifName)
         } else {
             var catchUpMs = backdateMs
             while (catchUpMs > 0) {
@@ -64,7 +71,19 @@ class SessionAlarmReceiver : BroadcastReceiver() {
                 catchUpMs -= used
             }
             val started = queuedSessionStarter.startNextQueued(backdateMs = catchUpMs)
-            if (!started) notificationManager.showSessionComplete(skillDisplayName)
+            if (!started) notificationManager.showSessionComplete(notifName)
+        }
+    }
+
+    private fun localizedSessionName(session: SkillSession, fallback: String): String {
+        val lc = notificationManager.localizedContext()
+        return when (session.skillName) {
+            "combat"     -> GameStrings.dungeonName(lc, session.activityKey)
+            "boss"       -> GameStrings.bossName(lc, session.activityKey)
+            "expedition" -> GameStrings.skillingDungeonName(lc, session.activityKey, fallback)
+            "tower"      -> lc.getString(R.string.tower_title)
+            "carnival"   -> lc.getString(R.string.carnival_title)
+            else         -> GameStrings.skillName(lc, session.skillName)
         }
     }
 

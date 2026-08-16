@@ -195,7 +195,8 @@ class SessionRepository @Inject constructor(
             return
         }
         if (session.completed) {
-            var catchUpMs = maxOf(0L, System.currentTimeMillis() - session.endsAt)
+            val endMs = if (session.skillName == "boss") bossFightEndMs(session) else session.endsAt
+            var catchUpMs = maxOf(0L, System.currentTimeMillis() - endMs)
             while (catchUpMs > 0) {
                 val used = try { starter.insertNextQueuedAsOffline(catchUpMs) } catch (_: Exception) { 0L }
                 if (used == 0L) break
@@ -211,7 +212,16 @@ class SessionRepository @Inject constructor(
             val fightEndMs = bossFightEndMs(session)
             if (System.currentTimeMillis() >= fightEndMs) {
                 markCompleted(session.sessionId)
-                starter.startNextQueued()
+                // Fast-forward the offline window like the generic path below, or a repeat
+                // chain (x100 boss runs) advances only one fight per app launch when the OS
+                // suppresses alarms for a killed app (Discord report, Aug 2026).
+                var catchUpMs = System.currentTimeMillis() - fightEndMs
+                while (catchUpMs > 0) {
+                    val used = try { starter.insertNextQueuedAsOffline(catchUpMs) } catch (_: Exception) { 0L }
+                    if (used == 0L) break
+                    catchUpMs -= used
+                }
+                try { starter.startNextQueued(backdateMs = catchUpMs) } catch (_: Exception) { }
             } else {
                 scheduleAlarm(session.sessionId, fightEndMs, session.skillName)
             }

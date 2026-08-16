@@ -2,11 +2,11 @@ Idle Fantasy is a free and open source offline idle RPG inspired by classic MMOR
 
 <b>Features</b>
 
-• <b>14 trainable skills</b>: Mining, Fishing, Woodcutting, Firemaking, Agility, Runecrafting, Smithing, Cooking, Fletching, Crafting, Prayer, Attack, Strength, Defence, Ranged, Magic, Hitpoints
+• <b>23 trainable skills</b>: Mining, Fishing, Woodcutting, Farming, Thieving, Smithing, Cooking, Fletching, Crafting, Firemaking, Runecrafting, Herblore, Construction, Prayer, Mercantile, Agility, Slayer, Attack, Strength, Defense, Ranged, Magic, and Hitpoints
 
 • <b>Session-based training</b>: Start a session and close the app. Come back up to an hour later to collect your loot and XP. Agility reduces session time.
 
-• <b>12 dungeons</b>: Fight solo bosses and enemies to earn combat XP, coins, and rare drops. Equip weapons and armour to deal more damage.
+• <b>29 dungeons</b>: Fight solo bosses and enemies to earn combat XP, coins, and rare drops. Equip weapons and armour to deal more damage.
 
 • <b>Crafting system</b>: Smelt bars, cook fish, fletch bows and arrows, craft jewellery. Consume gathered materials and earn XP and items.
 
@@ -14,7 +14,7 @@ Idle Fantasy is a free and open source offline idle RPG inspired by classic MMOR
 
 • <b>Equipment system</b>: Equip weapons, armour, tools, and jewellery to boost stats and skill efficiency.
 
-• <b>Quest system</b>: 100+ quests spanning all skills. Earn XP rewards on completion.
+• <b>Quest system</b>: 189 quests spanning all skills. Earn XP rewards on completion.
 
 • <b>Pet system</b>: Rare pets can drop while training skills. Each pet provides a permanent XP boost to their linked skill.
 
@@ -23,6 +23,8 @@ Idle Fantasy is a free and open source offline idle RPG inspired by classic MMOR
 • <b>NPC Shop</b>: Buy supplies and sell your gathered resources for coins.
 
 • <b>No ads. No accounts. No internet required.</b> Your save data stays on your device. Optional: upload saves to the web Save Viewer (Settings → Save Data) — requires internet only for that feature.
+
+• <b>Translations</b>: Partial and full translations available for 17 languages.
 
 Idle Fantasy is free software released under the GPL-3.0 licence. Source code is available on the project repository.
 

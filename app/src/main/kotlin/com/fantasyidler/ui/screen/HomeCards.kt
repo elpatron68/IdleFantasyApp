@@ -158,9 +158,13 @@ internal fun HomeSessionCard(
     }
     val skillEmoji = bossEmoji ?: GameStrings.skillEmoji(session.skillName)
     val activityLabel = when (session.skillName) {
-        "combat"     -> GameStrings.dungeonName(context, session.activityKey)
-        "boss"       -> GameStrings.bossName(context, session.activityKey)
-        "expedition" -> GameStrings.skillingDungeonName(context, session.activityKey, session.activityKey.toTitleCase())
+        "combat"      -> GameStrings.dungeonName(context, session.activityKey)
+        "boss"        -> GameStrings.bossName(context, session.activityKey)
+        "expedition"  -> GameStrings.skillingDungeonName(context, session.activityKey, session.activityKey.toTitleCase())
+        "mercantile"  -> GameStrings.tradeRouteName(context, session.activityKey)
+        "agility"     -> GameStrings.agilityCourse(context, session.activityKey)
+        "woodcutting" -> GameStrings.treeName(context, session.activityKey)
+        "thieving"    -> GameStrings.thievingNpcName(context, session.activityKey)
         "tower"      -> context.getString(R.string.tower_title) + ": " + context.getString(
             R.string.tower_floor_label,
             session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 0,
@@ -241,7 +245,7 @@ internal fun HomeSessionCard(
                         val levelGain   = levelAfter - levelBefore
                         val pct         = (XpTable.progressFraction(endXp) * 100).toInt()
                         buildString {
-                            append("+${sessionXpGain.formatXp()} XP  →  Lv $levelAfter")
+                            append("+${sessionXpGain.formatXp()} XP  →  ${context.getString(R.string.label_lv, levelAfter)}")
                             if (levelGain > 0) append(" (+$levelGain, $pct%)")
                             else append(" ($pct%)")
                         }
@@ -354,7 +358,7 @@ internal fun QueueCard(
                                 append("+${a.estimatedXpGain.formatXp()} XP")
                             }
                             else -> buildString {
-                                append("+${a.estimatedXpGain.formatXp()} XP  →  Lv $levelAfter")
+                                append("+${a.estimatedXpGain.formatXp()} XP  →  ${context.getString(R.string.label_lv, levelAfter)}")
                                 if (levelGain > 0) append(" (+$levelGain, $pct%)")
                                 else append(" ($pct%)")
                             }
@@ -445,11 +449,15 @@ internal fun QueueCard(
                     val labelDungeon    = stringResource(R.string.label_dungeon)
                     val labelBoss       = stringResource(R.string.label_boss)
                     val (prefix, suffix) = when (action.skillName) {
-                        "expedition" -> labelExpedition to GameStrings.skillingDungeonName(context, action.activityKey, action.skillDisplayName)
-                        "combat"     -> labelDungeon    to GameStrings.dungeonName(context, action.activityKey)
-                        "boss"       -> labelBoss       to GameStrings.bossName(context, action.activityKey)
-                        "farming"    -> action.skillDisplayName to null
-                        "tower"      -> stringResource(R.string.tower_title) to stringResource(R.string.tower_floor_label, towerFloorLabels.getOrNull(index) ?: 0)
+                        "expedition"  -> labelExpedition to GameStrings.skillingDungeonName(context, action.activityKey, action.skillDisplayName)
+                        "combat"      -> labelDungeon    to GameStrings.dungeonName(context, action.activityKey)
+                        "boss"        -> labelBoss       to GameStrings.bossName(context, action.activityKey)
+                        "farming"     -> action.skillDisplayName to null
+                        "tower"       -> stringResource(R.string.tower_title) to stringResource(R.string.tower_floor_label, towerFloorLabels.getOrNull(index) ?: 0)
+                        "mercantile"  -> GameStrings.skillName(context, action.skillName) to GameStrings.tradeRouteName(context, action.activityKey)
+                        "agility"     -> GameStrings.skillName(context, action.skillName) to GameStrings.agilityCourse(context, action.activityKey)
+                        "woodcutting" -> GameStrings.skillName(context, action.skillName) to GameStrings.treeName(context, action.activityKey)
+                        "thieving"    -> GameStrings.skillName(context, action.skillName) to GameStrings.thievingNpcName(context, action.activityKey)
                         else         -> GameStrings.skillName(context, action.skillName) to
                             GameStrings.itemName(context, action.activityKey)
                                 .takeIf { action.activityKey.isNotEmpty() }
@@ -573,9 +581,9 @@ internal fun QueueCard(
                 )
                 val remaining = (queueEndsAt - System.currentTimeMillis()).coerceAtLeast(0L)
                 val queueEndsText = if (showEndTime) {
-                    "${stringResource(R.string.home_queue_ends_in, remaining.formatDurationMs())} (${queueEndsAt.toClockTime(context)})"
+                    "${stringResource(R.string.home_queue_ends_in, remaining.formatDurationMs(context))} (${queueEndsAt.toClockTime(context)})"
                 } else {
-                    stringResource(R.string.home_queue_ends_in, remaining.formatDurationMs())
+                    stringResource(R.string.home_queue_ends_in, remaining.formatDurationMs(context))
                 }
                 Text(
                     text  = queueEndsText,

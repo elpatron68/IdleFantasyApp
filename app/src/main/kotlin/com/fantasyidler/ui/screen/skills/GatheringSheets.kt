@@ -357,11 +357,12 @@ internal fun ComingSoonSheet() {
     }
 }
 
+@Composable
 internal fun projectedXpLabel(currentXp: Long, xpGain: Long): String {
     val currentLevel  = XpTable.levelForXp(currentXp)
     val projectedLevel = XpTable.levelForXp(currentXp + xpGain)
     return if (projectedLevel > currentLevel)
-        "+${xpGain.formatXp()} XP → Level $projectedLevel"
+        stringResource(R.string.skills_projected_xp_level, xpGain.formatXp(), projectedLevel)
     else
         "+${xpGain.formatXp()} XP"
 }

@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import com.fantasyidler.util.GameStrings
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -54,7 +55,9 @@ enum class QuestCategory(val emoji: String) {
 
 data class QuestIndicator(
     val category: QuestCategory,
-    val isCompletable: Boolean
+    val isCompletable: Boolean,
+    /** Source quest id, used to dedupe skill-row counts when one quest spans many activities. */
+    val questId: String = "",
 )
 
 // ---------------------------------------------------------------------------
@@ -531,7 +534,7 @@ class CraftingViewModel @Inject constructor(
                 val prereqDone = quest.requiresPrevious == null ||
                         progressById[quest.requiresPrevious]?.completed == true
                 if (remaining > 0 && prereqDone)
-                    fills += QuestFillSuggestion(quest.name, ceilDiv(remaining, recipe.outputQty))
+                    fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), ceilDiv(remaining, recipe.outputQty))
             }
         }
 
@@ -553,7 +556,7 @@ class CraftingViewModel @Inject constructor(
                 val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
                 val remaining = effectiveAmount - progress
                 if (remaining > 0)
-                    fills += QuestFillSuggestion(quest.name, ceilDiv(remaining, recipe.outputQty))
+                    fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), ceilDiv(remaining, recipe.outputQty))
             }
         }
 
@@ -610,7 +613,7 @@ class CraftingViewModel @Inject constructor(
                 if (task.type != "craft" || task.target != recipe.outputKey) continue
                 val remaining = task.amount - taskProgress.progress
                 if (remaining > 0)
-                    fills += QuestFillSuggestion(event.displayName, ceilDiv(remaining, recipe.outputQty))
+                    fills += QuestFillSuggestion(GameStrings.seasonalEventName(context, event.id, event.displayName), ceilDiv(remaining, recipe.outputQty))
             }
         }
 

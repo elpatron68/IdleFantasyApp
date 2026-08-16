@@ -338,7 +338,7 @@ internal fun RunecraftingSheet(
             )
             if (sessionDurationMs > 0) {
                 Text(
-                    text     = "~${(qty.toLong() * (sessionDurationMs / 60)).formatDurationMs()}",
+                    text     = "~${(qty.toLong() * (sessionDurationMs / 60)).formatDurationMs(context)}",
                     style    = MaterialTheme.typography.bodySmall,
                     color    = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),

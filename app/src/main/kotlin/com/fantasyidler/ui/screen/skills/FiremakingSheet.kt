@@ -294,7 +294,7 @@ internal fun FiremakingSheet(
                 val logPerMs = perLogMs[key]?.takeIf { it > 0 } ?: (sessionDurationMs / 60)
                 if (logPerMs > 0) {
                     Text(
-                        text     = "~${(qty.toLong() * logPerMs).formatDurationMs()}",
+                        text     = "~${(qty.toLong() * logPerMs).formatDurationMs(context)}",
                         style    = MaterialTheme.typography.bodySmall,
                         color    = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),

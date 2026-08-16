@@ -830,7 +830,7 @@ class HomeViewModel @Inject constructor(
                         for ((item, qty) in regular) combinedItems[item] = (combinedItems[item] ?: 0) + qty
                         if (session.skillName == Skills.PRAYER) {
                             val count = frames.sumOf { it.kills }
-                            val name  = gameData.bones[session.activityKey]?.displayName ?: session.activityKey
+                            val name  = GameStrings.itemName(context, session.activityKey)
                             combinedBones[name] = (combinedBones[name] ?: 0) + count
                         }
                     }
@@ -850,18 +850,18 @@ class HomeViewModel @Inject constructor(
                     val bossPetKey = boss?.pet?.id
                     val combinedBossRareKeys = bossRareKeys + listOfNotNull(bossPetKey)
                     combinedBossRareKeys.forEach { key ->
-                        rareItemsDisplayNames.add(gameData.itemDisplayName(key))
+                        rareItemsDisplayNames.add(GameStrings.itemName(context,key))
                     }
                 }
                 if (session.skillName == "combat") {
                     val dungeon = gameData.dungeons[session.activityKey]
                     dungeon?.rareDrops?.forEach {
-                        rareItemsDisplayNames.add(gameData.itemDisplayName(it.item))
+                        rareItemsDisplayNames.add(GameStrings.itemName(context,it.item))
                     }
                     dungeon?.enemySpawns?.forEach { spawn ->
                         gameData.enemies[spawn.enemy]?.dropTable?.forEach { entry ->
                             if (entry.chance <= 0.005) {
-                                rareItemsDisplayNames.add(gameData.itemDisplayName(entry.item))
+                                rareItemsDisplayNames.add(GameStrings.itemName(context,entry.item))
                             }
                         }
                     }
@@ -893,29 +893,36 @@ class HomeViewModel @Inject constructor(
             val last = sessions.last()
 
             val title = when {
-                n > 1 -> "$n Sessions Complete!"
+                n > 1 -> context.getString(R.string.home_sessions_complete_title, n)
                 last.sessionId in voidedSessionIds -> context.getString(R.string.home_session_voided)
                 last.skillName == "boss" -> {
                     val bossName = GameStrings.bossName(context, last.activityKey)
-                    if (bossWon == true) "Defeated $bossName!" else "Defeated by $bossName."
+                    if (bossWon == true) context.getString(R.string.home_boss_defeated_title, bossName)
+                    else context.getString(R.string.home_boss_defeated_by_title, bossName)
                 }
                 last.skillName == "combat" -> {
                     val dungeonName = GameStrings.dungeonName(context, last.activityKey)
-                    if (anyDied) "$dungeonName — You Died" else "$dungeonName Complete!"
+                    if (anyDied) context.getString(R.string.home_dungeon_died_title, dungeonName)
+                    else context.getString(R.string.home_dungeon_complete_title, dungeonName)
                 }
                 last.skillName == "expedition" -> {
-                    val expName = gameData.skillingDungeons[last.activityKey]?.displayName ?: last.activityKey
-                    "$expName Expedition Complete"
+                    val expFallback = gameData.skillingDungeons[last.activityKey]?.displayName ?: last.activityKey
+                    val expName = GameStrings.skillingDungeonName(context, last.activityKey, expFallback)
+                    context.getString(R.string.home_expedition_complete_title, expName)
                 }
-                last.skillName == Skills.PRAYER -> "Prayer Session Complete"
-                else -> "${last.skillName.toTitleCase()} Session Complete"
+                else -> context.getString(
+                    R.string.home_skill_session_complete_title,
+                    GameStrings.skillName(context, last.skillName),
+                )
             }
 
             // For single-skill non-combat sessions use the compact totalXpLabel
             val useTotalLabel = n == 1 && combinedXpBySkill.size == 1 && combinedKills.isEmpty()
             val singleXp      = combinedXpBySkill.values.firstOrNull() ?: 0L
             val totalRawXp    = combinedXpBySkill.values.sum()
-            val boneBuriedLines = combinedBones.entries.map { (name, count) -> Pair("$name buried", "×$count") }
+            val boneBuriedLines = combinedBones.entries.map { (name, count) ->
+                Pair(context.getString(R.string.home_bones_buried_row, name), "×$count")
+            }
 
             val displayedCoins    = (combinedCoins.toDouble() * blessingCoinMult).toLong()
             val coinBlessingBonus = displayedCoins - combinedCoins
@@ -934,7 +941,7 @@ class HomeViewModel @Inject constructor(
                 died           = anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (skill, xp) -> Pair(skill.toTitleCase(), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
                 xpLineValues   = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
                                      .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
@@ -942,20 +949,20 @@ class HomeViewModel @Inject constructor(
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
                 totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = combinedItems.entries.sortedByDescending { it.value }
-                                     .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                                     .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 coinsGained    = displayedCoins,
                 killLines      = combinedKills.entries.sortedByDescending { it.value }
                                      .map { (enemy, kills) -> Pair(enemy, "×$kills") },
                 foodConsumedLines = combinedFood.entries.sortedByDescending { it.value }
-                                     .map { (food, qty) -> Pair(gameData.itemDisplayName(food), "×$qty") },
+                                     .map { (food, qty) -> Pair(GameStrings.itemName(context,food), "×$qty") },
                 arrowsConsumedLines  = combinedArrows.entries.sortedByDescending { it.value }
-                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                                         .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 arrowsReclaimedLines = combinedArrowsReclaimed.entries.sortedByDescending { it.value }
-                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "+$qty") },
+                                         .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "+$qty") },
                 runesConsumedLines   = combinedRunes.entries.sortedByDescending { it.value }
-                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                                         .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 runesReclaimedLines  = combinedRunesReclaimed.entries.sortedByDescending { it.value }
-                                         .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "+$qty") },
+                                         .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "+$qty") },
                 boneBuriedLines  = boneBuriedLines,
                 boostWasActive   = boostActive,
                 xpLineBonuses    = xpLineBonuses,
@@ -967,7 +974,7 @@ class HomeViewModel @Inject constructor(
             )
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
-                val names = awardedCapes.joinToString(", ") { gameData.itemDisplayName(it) }
+                val names = awardedCapes.joinToString(", ") { GameStrings.itemName(context,it) }
                 context.getString(R.string.home_congratulations_received, names)
             } else null
             _extra.update { it.copy(
@@ -1088,7 +1095,7 @@ class HomeViewModel @Inject constructor(
                 else -> context.getString(
                     R.string.skill_added_to_queue_activity,
                     GameStrings.skillName(context, session.skillName),
-                    GameStrings.itemName(context, session.activityKey),
+                    GameStrings.activityName(context, session.skillName, session.activityKey),
                 )
             }
             _extra.update {
@@ -1322,16 +1329,20 @@ class HomeViewModel @Inject constructor(
             val n    = sessions.size
             val last = sessions.last()
             val title = when {
-                n > 1 -> "Worker: $n Sessions Complete!"
+                n > 1 -> context.getString(R.string.worker_sessions_complete_title, n)
                 last.skillName == "boss" -> {
                     val bossName = GameStrings.bossName(context, last.activityKey)
-                    "Worker: Defeated $bossName!"
+                    context.getString(R.string.worker_boss_defeated_title, bossName)
                 }
                 last.skillName == "combat" -> {
                     val dungeonName = GameStrings.dungeonName(context, last.activityKey)
-                    if (anyDied) "Worker: $dungeonName — Died" else "Worker: $dungeonName Complete!"
+                    if (anyDied) context.getString(R.string.worker_dungeon_died_title, dungeonName)
+                    else context.getString(R.string.worker_dungeon_complete_title, dungeonName)
                 }
-                else -> "Worker: ${last.skillName.toTitleCase()} Complete"
+                else -> context.getString(
+                    R.string.worker_skill_complete_title,
+                    GameStrings.skillName(context, last.skillName),
+                )
             }
 
             val useTotalLabel    = n == 1 && combinedXpBySkill.size == 1 && combinedKills.isEmpty()
@@ -1353,7 +1364,7 @@ class HomeViewModel @Inject constructor(
                 died           = anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (skill, xp) -> Pair(skill.toTitleCase(), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
                 xpLineValues   = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
                                      .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
@@ -1361,7 +1372,7 @@ class HomeViewModel @Inject constructor(
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
                 totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = combinedItems.entries.sortedByDescending { it.value }
-                                     .map { (key, qty) -> Pair(gameData.itemDisplayName(key), "×$qty") },
+                                     .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 coinsGained    = displayedCoins,
                 killLines      = combinedKills.entries.sortedByDescending { it.value }
                                      .map { (enemy, kills) -> Pair(enemy, "×$kills") },
@@ -1372,7 +1383,7 @@ class HomeViewModel @Inject constructor(
             )
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
-                val names = awardedCapes.joinToString(", ") { gameData.itemDisplayName(it) }
+                val names = awardedCapes.joinToString(", ") { GameStrings.itemName(context,it) }
                 context.getString(R.string.home_congratulations_received, names)
             } else null
             _extra.update { it.copy(

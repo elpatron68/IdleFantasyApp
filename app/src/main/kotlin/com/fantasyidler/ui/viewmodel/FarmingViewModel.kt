@@ -58,6 +58,8 @@ data class FarmingUiState(
     val harvestResult: HarvestResult?          = null,
     /** True once the magic bean has been planted; used to hide it from the seed picker permanently. */
     val magicBeanPlanted: Boolean              = false,
+    /** Shows the persistent beanstalk-climbed dialog until the player dismisses it. */
+    val showBeanClimbDialog: Boolean           = false,
 )
 
 data class HarvestResult(
@@ -207,15 +209,20 @@ class FarmingViewModel @Inject constructor(
     fun climbBeanstalk(patchNumber: Int) {
         viewModelScope.launch {
             farmingRepo.climbBeanstalk(patchNumber)
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_bean_climbed)) }
+            // A dialog rather than a banner: the unlock is easy to miss after a 30-day
+            // grow if the message auto-dismisses (Discord report, Aug 2026).
+            _extra.update { it.copy(showBeanClimbDialog = true) }
         }
     }
+
+    fun beanClimbDialogConsumed() = _extra.update { it.copy(showBeanClimbDialog = false) }
 
     fun harvestPatch(patchNumber: Int) {
         viewModelScope.launch {
             val patch = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber } ?: return@launch
-            if (patch.cropType == "magic_bean") return@launch
-            val crop  = gameData.crops[patch.cropType] ?: return@launch
+            val cropKey = patch.cropType ?: return@launch
+            if (cropKey == "magic_bean") return@launch
+            if (gameData.crops[cropKey] == null) return@launch
 
             // Snapshot inventory before harvest to compute diff
             val invBefore: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
@@ -230,7 +237,7 @@ class FarmingViewModel @Inject constructor(
             val gained = invAfter.mapValues { (k, v) -> v - (invBefore[k] ?: 0) }.filter { it.value > 0 }
             guildRepo.recordGuildGathering(Skills.FARMING, gained)
             _extra.update {
-                it.copy(harvestResult = HarvestResult(crop.displayName, gained, xpAfter - xpBefore))
+                it.copy(harvestResult = HarvestResult(GameStrings.cropName(context, cropKey), gained, xpAfter - xpBefore))
             }
         }
     }

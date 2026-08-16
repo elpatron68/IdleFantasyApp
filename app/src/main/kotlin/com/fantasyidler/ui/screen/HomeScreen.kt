@@ -660,7 +660,7 @@ fun HomeScreen(
                                     BlessingType.COINS   -> "+${(b.magnitude * 100).toInt()}% coins"
                                 }
                             }
-                            val timeLeft = state.activeBlessingRemainingMs.formatDurationMs()
+                            val timeLeft = state.activeBlessingRemainingMs.formatDurationMs(context)
                             val blessingText = if (boostDesc != null) "$blessingName ($boostDesc) - $timeLeft"
                                               else "$blessingName - $timeLeft"
                             Spacer(Modifier.height(4.dp))
@@ -690,7 +690,7 @@ fun HomeScreen(
                                 )
                                 Spacer(Modifier.width(4.dp))
                                 Text(
-                                    text  = stringResource(R.string.home_xp_boost_active, state.xpBoostRemainingMs.formatDurationMs()),
+                                    text  = stringResource(R.string.home_xp_boost_active, state.xpBoostRemainingMs.formatDurationMs(context)),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.tertiary,
                                 )

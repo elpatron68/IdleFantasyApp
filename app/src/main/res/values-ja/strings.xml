@@ -65,6 +65,9 @@
     <string name="label_bosses">ボス</string>
     <string name="label_by_location">エリア別</string>
     <string name="bestiary_not_encountered">未遭遇</string>
+    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
+    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
+    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
     <string name="bestiary_always_drops">確定ドロップ</string>
     <string name="bestiary_rare_drops">レアドロップ</string>
     <string name="bestiary_common_loot">通常ドロップ</string>
@@ -77,12 +80,33 @@
     <string name="label_session_active">アクティブセッション</string>
     <string name="label_no_active_session">アクティブなセッションはありません</string>
     <string name="label_session_complete">セッション完了！</string>
+    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
+    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
+    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
+    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
+    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
+    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
+    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
+    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
+    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
+    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
+    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
+    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
+    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
     <string name="label_training">訓練中</string>
     <string name="label_gathering_skills">採集スキル</string>
     <string name="label_crafting_skills">生産スキル</string>
     <string name="label_choose_activity">アクティビティを選択</string>
     <string name="label_coming_soon">近日公開</string>
     <string name="label_time_remaining">残り時間</string>
+    <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
+    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
+    <string name="duration_days">%1$dd</string> <!-- untranslated -->
+    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
+    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
+    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
+    <string name="duration_complete">Complete</string> <!-- untranslated -->
     <string name="label_session_results">セッション結果</string>
     <string name="label_xp_gained">獲得経験値</string>
     <string name="label_items_collected">回収したアイテム</string>
@@ -190,6 +214,7 @@
     <string name="format_skill_level">%1$s: レベル %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%1$d%% 経験値</string>
+    <string name="format_coin_boost_percent">+%1$d%% コイン</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
     <!-- Translator note: %1$d = minutes remaining -->
@@ -277,6 +302,8 @@
     <string name="settings_profile_layout_tabs">タブ</string>
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
+    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">ホーム画面</string>
     <string name="settings_home_screen_desc">ホーム画面に表示する内容を選択</string>
     <string name="settings_recent_activity">最近の活動ログ</string>
@@ -652,6 +679,13 @@
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">アクティブ</string>
     <string name="shop_sell_junk">ジャンクを売却</string>
+    <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
+    <string name="shop_search_hint">Search items</string> <!-- untranslated -->
+    <string name="shop_filter_all">All</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_none">Nothing to sell.</string> <!-- untranslated -->
     <string name="shop_sell_old_gear">古い装備を売却</string>
     <string name="shop_equipped_label">(装備中)</string>
     <string name="shop_item_locked">%1$sはロックされています。長押しで解除できます。</string>
@@ -665,8 +699,8 @@
     <string name="quest_legend_quest">クエスト</string>
     <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">薄いアイコンはまだ達成できません（レベルや素材が不足）。小さな上付き数字は、同じ対象を求めるクエストがその種類に複数あることを示します。</string>
-    <!-- Translator note: %1$d = quantity -->
-    <string name="shop_qty_in_inv">インベントリ所持数: ×%1$d</string>
+    <!-- Translator note: %1$s = quantity in inventory -->
+    <string name="shop_qty_in_inv">インベントリ所持数: ×%1$s</string>
     <!-- Translator note: %1$s = formatted coin amount -->
     <string name="shop_price_each">各 %1$s コイン</string>
     <!-- Translator note: %1$s = item name -->
@@ -1045,6 +1079,7 @@
     <string name="expedition_lore_notes">%1$d / %2$d 個の伝承メモ</string>
     <string name="expedition_lock_level">%1$s レベル %2$d が必要</string>
     <string name="expedition_lock_notes">アンロックするには %1$s ですべてのメモを見つけてください</string>
+    <string name="expedition_started">%1$s started.</string> <!-- untranslated -->
     <string name="expedition_lock_prerequisite">アンロックするには前提条件を完了してください</string>
     <string name="label_notes">伝承メモ</string>
 
@@ -1306,6 +1341,10 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">カーニバル</string>
     <string name="carnival_desc">ゲーム、賞品、そしてお祭り騒ぎ！</string>
+    <string name="carnival_prize_xp_lamp_small_name">Small XP Lamp</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_small_desc">Grants 10,000 XP to a chosen skill.</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_large_name">Large XP Lamp</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string> <!-- untranslated -->
     <string name="carnival_ticket_balance">チケット所持数: %1$d</string>
     <string name="carnival_idle_tab">放置ゲーム</string>
     <string name="carnival_active_tab">アクティブゲーム</string>
@@ -1395,6 +1434,8 @@
     <string name="farming_bean_ready">豆の木は雲の彼方まで達しました。登る準備はできていますか？</string>
     <string name="farming_bean_climb">登る</string>
     <string name="farming_bean_climbed">豆の木を登りきりました。そこには何かが待ち受けています…</string>
+    <string name="farming_bean_climbed_title">Beanstalk Climbed!</string> <!-- untranslated -->
+    <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string> <!-- untranslated -->
     <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">魔法の豆は1つの区画にしか植えられません</string>
@@ -1521,6 +1562,14 @@
     <string name="combat_select_spell">開始する前にスペルを選択してください。</string>
     <string name="combat_spell_level_required">%2$s には魔法レベル %1$d が必要です。</string>
     <string name="guild_daily_reward_claimed">デイリー報酬を回収しました！</string>
+    <string name="reward_part_coins">+%1$s coins</string> <!-- untranslated -->
+    <string name="reward_part_coins_plain">%1$s coins</string> <!-- untranslated -->
+    <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string> <!-- untranslated -->
+    <string name="quest_claimed_suffix">Claimed: %1$s</string> <!-- untranslated -->
+    <plurals name="plural_reward_items">
+        <item quantity="one">×%1$d item</item>
+        <item quantity="other">×%1$d items</item>
+    </plurals> <!-- untranslated -->
     <string name="monument_title">大記念碑</string>
     <string name="monument_desc">コインを積み上げて築く街の奇跡。各段階が街への贈り物。</string>
     <string name="monument_your_coins">所持コイン：%1$s</string>

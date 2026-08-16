@@ -106,6 +106,20 @@ object GameStrings {
     fun boneName(context: Context, key: String): String =
         context.stringByName("bone_${key}_name") ?: key.toTitleCase()
 
+    fun treeName(context: Context, key: String, fallback: String = key.toTitleCase()): String =
+        context.stringByName("tree_${key}_name") ?: fallback
+
+    /** Localised activity name; each skill keys its activities in a different string domain. */
+    fun activityName(context: Context, skillName: String, activityKey: String): String = when (skillName) {
+        "combat"      -> dungeonName(context, activityKey)
+        "boss"        -> bossName(context, activityKey)
+        "mercantile"  -> tradeRouteName(context, activityKey)
+        "agility"     -> agilityCourse(context, activityKey)
+        "woodcutting" -> treeName(context, activityKey)
+        "thieving"    -> thievingNpcName(context, activityKey)
+        else          -> itemName(context, activityKey)
+    }
+
     fun agilityCourse(context: Context, key: String): String =
         context.stringByName("agility_${key}_name") ?: key.toTitleCase()
 
@@ -209,14 +223,14 @@ object GameStrings {
         when (prizeType) {
             "equipment" -> itemName(context, prize)
             "pet" -> petName(context, prize)
-            else -> fallback
+            else -> context.stringByName("carnival_prize_${prize}_name") ?: fallback
         }
 
     fun carnivalPrizeDesc(context: Context, prizeType: String, prize: String, fallback: String): String =
         when (prizeType) {
             "equipment" -> itemDesc(context, prize)
             "pet" -> petDesc(context, prize)
-            else -> fallback
+            else -> context.stringByName("carnival_prize_${prize}_desc") ?: fallback
         }
 
     fun themeName(context: Context, theme: String): String =

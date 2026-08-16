@@ -1,0 +1,15 @@
+• The Agility Cape's bonus now shows as an XP bonus in Profile > Bonuses instead of a Yield bonus, matching the Armory
+• The Agility session-time row in Profile > Bonuses no longer wraps mid-word or overlaps its description text
+• The Prayer Cape's bonus now shows as a Boost bonus in Profile > Bonuses instead of a Yield bonus, matching the Armory
+• Fixed the Farming panel opening as a stuck sliver and closing itself on the first tap after a fresh app launch
+• Reorganized Fletching filters: categories are now Arrow, Bow, Plank, and Staff, and the second row only lists materials instead of mixing in product names
+• The Plank filter chip is now translated in all languages instead of always showing in English
+• Tower max HP milestone rewards now apply to all combat (dungeons, bosses, and regular fights), not just Tower climbs, including the survival and XP previews
+• The combat log now includes Tower HP rewards in the max HP it displays, so claimed rewards are visible immediately
+• Tower HP milestones now show their real value: +50 max HP per claim, in the Milestones list and Profile > Bonuses
+• In-app popup banners (queue confirmations, guild rewards, and similar) are announced by TalkBack and other screen readers again
+• Added Tower Boots (defense +58, requires Defense 70) to the floor 150 Tower milestone alongside the Tower Greaves; players who already claimed floor 150 receive them automatically on their next visit to the Tower
+• Agility activity previews now account for your grappling hook and pet boost, so the projected XP and level match what sessions actually pay out
+• Mining, Woodcutting, and Fishing activity previews now include pet XP boosts
+• Added the Builders Guild: a Construction guild with a 10-quest progression, 22 daily quests, and the Builders Guild Cape at guild level 10. Every quest is level-appropriate to its tier, and quest XP is doubled compared to other guilds since furniture is slow to build
+• Pick-a-Cup's shuffle now always plays at its intended speed instead of following the system Animator duration scale, which made cups invisible with animations off and the game trivial at 10x

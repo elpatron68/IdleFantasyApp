@@ -214,6 +214,7 @@ private fun SaveSlotCard(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     val flags = slot.flags
     Card(
         modifier = modifier.clickable(enabled = enabled && !slot.isActive, onClick = onClick),
@@ -317,7 +318,7 @@ private fun SaveSlotCard(
                 if (createdAt > 0L) {
                     val age = (System.currentTimeMillis() - createdAt).coerceAtLeast(60_000L)
                     Text(
-                        text  = stringResource(R.string.save_slot_created, age.formatDurationMs()),
+                        text  = stringResource(R.string.save_slot_created, age.formatDurationMs(context)),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -339,7 +340,7 @@ private fun SaveSlotCard(
                     )
                 } else {
                     Text(
-                        text  = stringResource(R.string.save_slot_last_played, elapsedSince(slot.lastPlayedAt).formatDurationMs()),
+                        text  = stringResource(R.string.save_slot_last_played, elapsedSince(slot.lastPlayedAt).formatDurationMs(context)),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

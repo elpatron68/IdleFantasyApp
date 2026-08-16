@@ -53,7 +53,11 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -179,10 +183,27 @@ fun ProfileScreen(
                                 color      = MaterialTheme.colorScheme.tertiary,
                             )
                         }
+                        // Race/gender are stored as canonical English values (or free text for
+                        // custom genders); map the known ones back to their localised labels.
+                        val raceLabel = when (state.characterRace.lowercase()) {
+                            "human"    -> stringResource(R.string.character_race_human)
+                            "elf"      -> stringResource(R.string.character_race_elf)
+                            "dwarf"    -> stringResource(R.string.character_race_dwarf)
+                            "orc"      -> stringResource(R.string.character_race_orc)
+                            "halfling" -> stringResource(R.string.character_race_halfling)
+                            "gnome"    -> stringResource(R.string.character_race_gnome)
+                            else       -> state.characterRace
+                        }
+                        val genderLabel = when (state.characterGender.lowercase()) {
+                            "male"   -> stringResource(R.string.character_gender_male)
+                            "female" -> stringResource(R.string.character_gender_female)
+                            "other"  -> stringResource(R.string.character_gender_other)
+                            else     -> state.characterGender
+                        }
                         val subtitle = buildString {
-                            if (state.characterRace.isNotBlank()) append(state.characterRace)
-                            if (state.characterRace.isNotBlank() && state.characterGender.isNotBlank()) append(" • ")
-                            if (state.characterGender.isNotBlank()) append(state.characterGender)
+                            if (raceLabel.isNotBlank()) append(raceLabel)
+                            if (raceLabel.isNotBlank() && genderLabel.isNotBlank()) append(" • ")
+                            if (genderLabel.isNotBlank()) append(genderLabel)
                         }
                         if (subtitle.isNotBlank()) {
                             Text(
@@ -423,18 +444,23 @@ private fun TabsLayout(
     modifier: Modifier = Modifier,
     content: @Composable (Int) -> Unit,
 ) {
+    val pagerState = rememberPagerState(initialPage = selectedTab) { tabs.size }
+    val scope = rememberCoroutineScope()
+    // Keeps the hoisted selectedTab in sync with swipes, so switching to the
+    // rail layout lands on the same tab.
+    LaunchedEffect(pagerState.currentPage) { onTabSelect(pagerState.currentPage) }
     Column(modifier) {
-        ScrollableTabRow(selectedTabIndex = selectedTab, edgePadding = 0.dp) {
+        ScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 0.dp) {
             tabs.forEachIndexed { index, title ->
                 Tab(
-                    selected = selectedTab == index,
-                    onClick  = { onTabSelect(index) },
+                    selected = pagerState.currentPage == index,
+                    onClick  = { scope.launch { pagerState.animateScrollToPage(index) } },
                     text     = { Text(title) },
                 )
             }
         }
-        Box(Modifier.weight(1f).fillMaxSize()) {
-            content(selectedTab)
+        HorizontalPager(state = pagerState, modifier = Modifier.weight(1f).fillMaxSize()) { page ->
+            content(page)
         }
     }
 }
@@ -719,7 +745,7 @@ private fun buildUnlockMilestones(skillKey: String, vm: InventoryViewModel, cont
         "woodcutting" ->
             vm.trees.entries
                 .sortedBy { it.value.levelRequired }
-                .map { (key, tree) -> UnlockMilestone(tree.levelRequired, GameStrings.itemName(context, key)) }
+                .map { (key, tree) -> UnlockMilestone(tree.levelRequired, GameStrings.treeName(context, key, tree.displayName)) }
 
         "farming" ->
             vm.crops.entries
@@ -1216,7 +1242,11 @@ private fun PetRow(pet: PetData, owned: Boolean) {
             )
         }
         Text(
-            text  = stringResource(R.string.format_xp_boost_percent, pet.boostPercent),
+            text  = stringResource(
+                if (pet.effectType == "coin_boost") R.string.format_coin_boost_percent
+                else R.string.format_xp_boost_percent,
+                pet.boostPercent,
+            ),
             style = MaterialTheme.typography.labelMedium,
             color = (if (owned) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
                 .copy(alpha = alpha),

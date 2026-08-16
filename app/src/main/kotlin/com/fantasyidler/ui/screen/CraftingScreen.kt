@@ -240,7 +240,7 @@ private fun RecipeRow(
             // Combat style (weapons only)
             recipe.outputCombatStyle?.let { style ->
                 Text(
-                    text  = "${context.getString(R.string.label_combat_style)}: ${style.replaceFirstChar { it.uppercase() }}",
+                    text  = "${context.getString(R.string.label_combat_style)}: ${GameStrings.skillName(context, style)}",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant else dimColor,
                 )

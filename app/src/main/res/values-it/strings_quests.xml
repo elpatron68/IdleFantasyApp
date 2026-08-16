@@ -138,18 +138,18 @@
     <string name="quest_combat_kills_5_objective">Sconfiggi 450 nemici</string>
     <string name="quest_combat_kills_6_name">Cacciatore VI</string>
     <string name="quest_combat_kills_6_objective">Sconfiggi 650 nemici</string>
-    <string name="quest_slayer_1_name">Slayer I</string> <!-- untranslated -->
-    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_2_name">Slayer II</string> <!-- untranslated -->
-    <string name="quest_slayer_2_objective">Complete 15 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_3_name">Slayer III</string> <!-- untranslated -->
-    <string name="quest_slayer_3_objective">Complete 40 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_4_name">Slayer IV</string> <!-- untranslated -->
-    <string name="quest_slayer_4_objective">Complete 100 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_5_name">Slayer V</string> <!-- untranslated -->
-    <string name="quest_slayer_5_objective">Complete 250 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_6_name">Slayer VI</string> <!-- untranslated -->
-    <string name="quest_slayer_6_objective">Complete 500 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_1_name">Sicario I</string>
+    <string name="quest_slayer_1_objective">Completa 5 missioni del Sicario</string>
+    <string name="quest_slayer_2_name">Sicario II</string>
+    <string name="quest_slayer_2_objective">Completa 15 missioni del Sicario</string>
+    <string name="quest_slayer_3_name">Sicario III</string>
+    <string name="quest_slayer_3_objective">Completa 40 missioni del Sicario</string>
+    <string name="quest_slayer_4_name">Sicario IV</string>
+    <string name="quest_slayer_4_objective">Completa 100 missioni del Sicario</string>
+    <string name="quest_slayer_5_name">Sicario V</string>
+    <string name="quest_slayer_5_objective">Completa 250 missioni del Sicario</string>
+    <string name="quest_slayer_6_name">Sicario VI</string>
+    <string name="quest_slayer_6_objective">Completa 500 missioni del Sicario</string>
 
     <!-- Dungeon exploration -->
     <string name="quest_dungeon_farm_1_name">Esploratore di Dungeon I</string>
@@ -300,22 +300,22 @@
     <string name="quest_herblore_6_objective">Mischia 1500 Pozioni Super Forza</string>
 
     <!-- Construction -->
-    <string name="quest_construction_1_name">Construction I</string> <!-- untranslated -->
-    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string> <!-- untranslated -->
-    <string name="quest_construction_2_name">Construction II</string> <!-- untranslated -->
-    <string name="quest_construction_2_objective">Build 50 Oak Tables</string> <!-- untranslated -->
-    <string name="quest_construction_3_name">Construction III</string> <!-- untranslated -->
-    <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string> <!-- untranslated -->
-    <string name="quest_construction_4_name">Construction IV</string> <!-- untranslated -->
-    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string> <!-- untranslated -->
-    <string name="quest_construction_5_name">Construction V</string> <!-- untranslated -->
-    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_name">Restore the Church</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string> <!-- untranslated -->
+    <string name="quest_construction_1_name">Construzione I</string>
+    <string name="quest_construction_1_objective">Costruisci 50 Rastrelliere di Legno</string>
+    <string name="quest_construction_2_name">Construzione II</string>
+    <string name="quest_construction_2_objective">Costruisci 50 Tavoli di Quercia</string>
+    <string name="quest_construction_3_name">Construzione III</string>
+    <string name="quest_construction_3_objective">Costruisci 50 Mobiletti in Salice.</string>
+    <string name="quest_construction_4_name">Construzione IV</string>
+    <string name="quest_construction_4_objective">Costruisci 50 Cassettiere in Acero</string>
+    <string name="quest_construction_5_name">Construzione V</string>
+    <string name="quest_construction_5_objective">Costruisci 25 Troni della Magia</string>
+    <string name="quest_construction_upgrade_inn_name">Restaura la Locanda</string>
+    <string name="quest_construction_upgrade_inn_objective">Migliora la Locanda almeno una volta</string>
+    <string name="quest_construction_upgrade_guild_name">Espandi la Gilda</string>
+    <string name="quest_construction_upgrade_guild_objective">Migliora la Sala della Gilda almeno una volta</string>
+    <string name="quest_construction_upgrade_church_name">Riforma la Chiesa</string>
+    <string name="quest_construction_upgrade_church_objective">Migliora la Chiesa almeno una volta</string>
 
     <!-- Thieving -->
     <string name="quest_thieving_1_name">Thieving I</string> <!-- untranslated -->
@@ -508,8 +508,8 @@
     <string name="daily_verb_farming">Raccogli</string>
 
     <!-- Quest objective format strings -->
-    <string name="quest_obj_gather">%1$s %2$d %3$s</string> <!-- untranslated -->
-    <string name="quest_obj_craft">%1$s %2$d %3$s</string> <!-- untranslated -->
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
     <string name="quest_obj_prayer">Seppellisci %1$d ossa di qualsiasi tipo</string>
     <string name="quest_obj_kill">Sconfiggi %1$d nemici</string>
     <string name="quest_obj_kill_enemy">Sconfiggi %1$d %2$s</string>
