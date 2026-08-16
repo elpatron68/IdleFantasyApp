@@ -54,7 +54,7 @@
     <string name="enemy_grave_ghoul_name">Ghoul Oscuro</string>
     <string name="enemy_husk_horror_name">Mostro dell\'Ombra</string>
     <string name="enemy_barrow_wight_name">Anima Errante</string>
-    <string name="enemy_shade_stalker_name">Ombra Perseguitante</string>
+    <string name="enemy_shade_stalker_name">Predatore dell\'Ombra</string>
     <string name="enemy_bone_colossus_name">Colosso delle Ossa</string>
     <string name="enemy_dread_dullahan_name">Dullahan del Timore</string>
     <string name="enemy_void_stalker_name">Predatore del Vuoto</string>
@@ -124,7 +124,7 @@
     <string name="boss_demon_lord_desc">Un antico demone dell\'abisso, maestro della magia oscura.</string>
     <string name="boss_kraken_name">Kraken</string>
     <string name="boss_kraken_desc">Il terrore dei mari profondi, un colossale mostro marino.</string>
-    <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
+    <string name="boss_balrog_name">Fiamma Gotica</string>
     <string name="boss_balrog_desc">Un antico demone di fiamme e ombre, risvegliato dal suo sonno profondo sotto la terra.</string>
     <string name="boss_void_sovereign_name">Sovrano del Vuoto</string>
     <string name="boss_void_sovereign_desc">L\'entità primordiale dietro gli squarci del vuoto. Antica oltre ogni misura, guarda agli sfidanti mortali con disprezzo.</string>
@@ -132,8 +132,8 @@
     <string name="boss_sol_invictus_desc">Un frammento di Sole, liberatosi dal giogo del Pinnacolo del Solstizio. Solo i guerrieri più temerari osano avvicinarsi.</string>
     <string name="boss_the_hollow_king_name">Il Re Vacuo</string>
     <string name="boss_the_hollow_king_desc">Il sovrano decapitato di ogni oscura pianta, uscito dal suo castello nel Bosco Moribondo per giudicare i mortali.</string>
-    <string name="boss_the_vault_guardian_name">The Vault Guardian</string> <!-- untranslated -->
-    <string name="boss_the_vault_guardian_desc">A colossus of living gold, woken by the lighting of the Eternal Flame. Only patrons of the Grand Monument may face it.</string> <!-- untranslated -->
+    <string name="boss_the_vault_guardian_name">Guardiano del Caveau</string>
+    <string name="boss_the_vault_guardian_desc">Colossale creatura d\'oro, risvegliata dalla Fiamma Eterna. Solo chi viene riconosciuto come Mecenate può incontrarlo.</string>
 
     <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Miniera Crollata</string>
@@ -145,15 +145,15 @@
     <string name="dungeon_ancient_forest_ruins_name">Rovine della Foresta Antica</string>
     <string name="dungeon_ancient_forest_ruins_desc">Rovine di pietra inghiottite dalla foresta primordiale, ora infestate da creature feroci e spiriti vendicativi di druidi.</string>
     <string name="dungeon_ancient_forge_name">Antica Fucina</string>
-    <string name="dungeon_ancient_forge_desc">Una vasta fucina nanica che brucia da secoli senza sosta. Elementali del fuoco e guardiani della fucina proteggono i suoi segreti.</string>
+    <string name="dungeon_ancient_forge_desc">Una vasta fucina nanica che brucia da secoli senza sosta. Elementali del fuoco e guardiani delle sale proteggono i suoi segreti.</string>
     <string name="dungeon_arcane_ruins_name">Rovine Arcane</string>
     <string name="dungeon_arcane_ruins_desc">Le camere sotterranee funzionali di una torre di mago distrutta. Componenti magici e guardiani incantati pattugliano ancora i suoi corridoi.</string>
     <string name="dungeon_corrupted_sanctum_name">Santuario Corrotto</string>
     <string name="dungeon_corrupted_sanctum_desc">Un santuario pervaso d\'ombra nel cuore della foresta corrotta. Sacerdoti oscuri e bestie demoniache custodiscono un antico male.</string>
     <string name="dungeon_drowned_temple_name">Tempio Sommerso</string>
-    <string name="dungeon_drowned_temple_desc">Un tempio sommerso sotto la grotta marina, le sue sale sono piene d\'acqua e creature marine che ne hanno fatto la loro dimora.</string>
+    <string name="dungeon_drowned_temple_desc">Un tempio sommerso sotto la grotta marina, le sue sale sono piene d\'acqua e creature che ne hanno fatto la loro dimora.</string>
     <string name="dungeon_rogue_sanctum_name">Santuario dei Briganti</string>
-    <string name="dungeon_rogue_sanctum_desc">Il rifugio interno della gilda, accessibile solo ai membri più fidati.</string>
+    <string name="dungeon_rogue_sanctum_desc">Il rifugio più nascosto della gilda, accessibile solo ai membri più fidati.</string>
     <string name="dungeon_guild_of_shadows_name">Gilda delle Ombre</string>
     <string name="dungeon_guild_of_shadows_desc">L\'area più interna della gilda, protetta da un corpo di guardie speciale.</string>
 </resources>

@@ -543,7 +543,7 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
                 color    = MaterialTheme.colorScheme.primary,
             )
             Text(
-                text      = "Qty",
+                text      = stringResource(R.string.bestiary_qty_header),
                 modifier  = Modifier.width(80.dp),
                 style     = MaterialTheme.typography.labelSmall,
                 color     = MaterialTheme.colorScheme.primary,
@@ -551,7 +551,7 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
             )
             if (hasChance) {
                 Text(
-                    text      = "Chance",
+                    text      = stringResource(R.string.bestiary_chance_header),
                     modifier  = Modifier.width(52.dp),
                     style     = MaterialTheme.typography.labelSmall,
                     color     = MaterialTheme.colorScheme.primary,
@@ -625,7 +625,7 @@ private fun BestiaryProgressBar(encountered: Int, total: Int) {
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text  = "$encountered / $total encountered",
+                text  = stringResource(R.string.bestiary_encountered_progress, encountered, total),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

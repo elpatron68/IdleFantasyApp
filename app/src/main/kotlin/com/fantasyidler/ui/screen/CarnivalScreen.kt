@@ -1051,7 +1051,7 @@ private fun PrizeRow(
                 val reqs = equipData.requirements
                 if (reqs.isNotEmpty()) {
                     Text(
-                        text  = stringResource(R.string.slayer_requires, reqs.entries.joinToString { (s, l) -> "${s.replaceFirstChar { it.uppercase() }} $l" }),
+                        text  = stringResource(R.string.slayer_requires, reqs.entries.joinToString { (s, l) -> "${GameStrings.skillName(context, s)} $l" }),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

@@ -383,7 +383,7 @@ internal fun buildEquipDetail(item: com.fantasyidler.data.json.EquipmentData, co
     }
     if (showReq) {
         for ((skill, lvl) in item.requirements) {
-            parts.add("${context.getString(R.string.profile_req_lv)} $lvl ${skill.replaceFirstChar { it.uppercase() }}")
+            parts.add("${context.getString(R.string.profile_req_lv)} $lvl ${GameStrings.skillName(context, skill)}")
         }
     }
     return parts.joinToString("  •  ")

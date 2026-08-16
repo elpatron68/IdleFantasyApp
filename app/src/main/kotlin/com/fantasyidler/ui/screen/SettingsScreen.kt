@@ -324,6 +324,17 @@ fun SettingsScreen(
                     )
                 }
             )
+            val compactNumbers by viewModel.compactNumbers.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_compact_numbers),
+                subtitle = stringResource(R.string.settings_compact_numbers_desc),
+                trailing = {
+                    Switch(
+                        checked         = compactNumbers,
+                        onCheckedChange = { viewModel.setCompactNumbers(it) },
+                    )
+                }
+            )
             SettingsRow(
                 title    = stringResource(R.string.settings_profile_layout),
                 subtitle = stringResource(R.string.settings_profile_layout_desc),

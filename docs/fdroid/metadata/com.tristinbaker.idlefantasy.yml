@@ -853,9 +853,93 @@ Builds:
     gradle:
       - yes
 
+  - versionName: '1.12.11'
+    versionCode: 123
+    commit: 022659bf458561714853cfbd99563db2f9bff39e
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.12.12'
+    versionCode: 124
+    commit: 0b1fa9a9d6160923dd6869f86e220511694aa96a
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.12.13'
+    versionCode: 125
+    commit: f4a3afac60e7f4500647659f7d2a5a8f07a32dce
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.12.14'
+    versionCode: 126
+    commit: 9c772d2605ffe09641637a9b062a9527007bcb42
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.0'
+    versionCode: 127
+    commit: 729893b0a83763d5f9d6ec1b5e2a029f876c7162
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.1'
+    versionCode: 128
+    commit: 08ad27def1024d069c0d9d6df5204e8c60975596
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.2'
+    versionCode: 129
+    commit: 9be6d2f7b13ebf9d8848598df6518400bd5bd7df
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.3'
+    versionCode: 130
+    commit: 294a32d8b6f67d8378a9d54a566c6bf51b025dc0
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.4'
+    versionCode: 131
+    commit: 40d1265dff3a63da404009706d4f85f8a03c00f2
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.5'
+    versionCode: 132
+    commit: 713a60ed29e894b26f2af9a57c6289add83ec0ad
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.6'
+    versionCode: 133
+    commit: 1a43805581d7224ddd56a9af1c0668c673d620d7
+    subdir: app
+    gradle:
+      - yes
+
+  - versionName: '1.13.7'
+    versionCode: 134
+    commit: 305fd83346dd5603020937b2a5166bab3314f920
+    subdir: app
+    gradle:
+      - yes
+
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.12.10
-CurrentVersionCode: 122
+CurrentVersion: 1.13.7
+CurrentVersionCode: 134

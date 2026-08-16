@@ -226,9 +226,14 @@ class SkillsViewModel @Inject constructor(
                 timedQuestsBySkill    = activeQuests.entries
                     .groupBy({ it.key.substringBefore(':') }, { it.value })
                     .mapValues { (_, lists) ->
-                        lists.flatten().filter {
-                            it.category == QuestCategory.DAILY || it.category == QuestCategory.WEEKLY || it.category == QuestCategory.GUILD_DAILY
-                        }
+                        lists.flatten()
+                            .filter {
+                                it.category == QuestCategory.DAILY || it.category == QuestCategory.WEEKLY || it.category == QuestCategory.GUILD_DAILY
+                            }
+                            // "any"-target quests add one indicator per matching activity
+                            // (e.g. every buriable bone), so collapse back to one per quest.
+                            .groupBy { it.questId }
+                            .map { (_, group) -> group.first().copy(isCompletable = group.any { it.isCompletable }) }
                     }
                     .filterValues { it.isNotEmpty() },
                 showSessionEndTime    = flags.showSessionEndTime,
@@ -489,7 +494,7 @@ class SkillsViewModel @Inject constructor(
             }
 
             if (sessionRepo.getActiveSession() != null) {
-                val actDisplay = runeKey.replace('_', ' ').replaceFirstChar { it.uppercase() }
+                val actDisplay = GameStrings.itemName(context, runeKey)
                 val levels     = json.decodeFromString<Map<String, Int>>(player.skillLevels)
                 val agility    = levels[Skills.AGILITY]      ?: 1
                 val rcLevel    = levels[Skills.RUNECRAFTING]  ?: 1
@@ -522,7 +527,7 @@ class SkillsViewModel @Inject constructor(
                 }
                 _uiState.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, "Runecrafting", actDisplay) else context.getString(R.string.slayer_queue_full),
+                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.RUNECRAFTING), actDisplay) else context.getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -627,7 +632,7 @@ class SkillsViewModel @Inject constructor(
                 if (enqueued) queuedSessionStarter.startNextQueued()
                 _uiState.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, "Prayer", bone.displayName) else context.getString(R.string.slayer_queue_full),
+                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.PRAYER), GameStrings.itemName(context, boneKey)) else context.getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -738,7 +743,7 @@ class SkillsViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         snackbarMessage = if (enqueued)
-                            context.getString(R.string.skill_added_to_queue_activity, "Thieving", npc.displayName)
+                            context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.THIEVING), GameStrings.thievingNpcName(context, npcKey))
                         else
                             context.getString(R.string.slayer_queue_full),
                     )
@@ -791,8 +796,8 @@ class SkillsViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             if (sessionRepo.getActiveSession() != null) {
-                val displayName  = skillName.replaceFirstChar { it.uppercase() }
-                val actDisplay   = activityKey.replace('_', ' ').replaceFirstChar { it.uppercase() }
+                val displayName  = GameStrings.skillName(context, skillName)
+                val actDisplay   = GameStrings.activityName(context, skillName, activityKey)
                 val player       = playerRepo.getOrCreatePlayer()
                 val agility      = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
                 val gatherFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
@@ -971,7 +976,7 @@ class SkillsViewModel @Inject constructor(
             if (remaining <= 0) continue
             val prereqDone = quest.requiresPrevious == null ||
                     questProgress[quest.requiresPrevious]?.completed == true
-            if (prereqDone) fills += QuestFillSuggestion(quest.name, remaining)
+            if (prereqDone) fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), remaining)
         }
 
         val completedIds = questProgress.entries.filter { it.value.completed }.map { it.key }.toSet()
@@ -983,7 +988,7 @@ class SkillsViewModel @Inject constructor(
             if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
-            if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), remaining)
         }
 
         for (daily in dailyQuestRepo.getActiveDailyQuests(flags)) {
@@ -1030,7 +1035,7 @@ class SkillsViewModel @Inject constructor(
             if (remaining <= 0) continue
             val prereqDone = quest.requiresPrevious == null ||
                     questProgress[quest.requiresPrevious]?.completed == true
-            if (prereqDone) fills += QuestFillSuggestion(quest.name, remaining)
+            if (prereqDone) fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), remaining)
         }
 
         val completedIds = questProgress.entries.filter { it.value.completed }.map { it.key }.toSet()
@@ -1041,7 +1046,7 @@ class SkillsViewModel @Inject constructor(
             if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
             val remaining = effectiveAmount - (prog?.progress ?: 0)
-            if (remaining > 0) fills += QuestFillSuggestion(quest.name, remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(GameStrings.questName(context, id, quest.name), remaining)
         }
 
         for (daily in dailyQuestRepo.getActiveDailyQuests(flags)) {
@@ -1194,7 +1199,7 @@ class SkillsViewModel @Inject constructor(
         val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
         val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
 
-        fun addIndicator(key: String, skill: String, category: QuestCategory, remaining: Int) {
+        fun addIndicator(key: String, skill: String, category: QuestCategory, remaining: Int, questId: String) {
             val isCompletable = when (skill) {
                 Skills.RUNECRAFTING -> {
                     val rune = gameData.runes[key]
@@ -1225,33 +1230,33 @@ class SkillsViewModel @Inject constructor(
             // Prefixed by skill: some item keys (e.g. "ashes") are shared between skills
             // (Firemaking byproduct vs. Prayer buriable), and would otherwise leak
             // indicators across their sheets (issue #1014).
-            result.getOrPut("$skill:$key") { mutableListOf() }.add(QuestIndicator(category, isCompletable))
+            result.getOrPut("$skill:$key") { mutableListOf() }.add(QuestIndicator(category, isCompletable, questId))
         }
 
-        fun checkAndAdd(questType: String, questSkill: String, questTarget: String, questAmount: Int, questProgressVal: Int, category: QuestCategory) {
+        fun checkAndAdd(questId: String, questType: String, questSkill: String, questTarget: String, questAmount: Int, questProgressVal: Int, category: QuestCategory) {
             val remaining = questAmount - questProgressVal
             if (remaining <= 0) return
 
             when (questType) {
                 "gather" -> {
-                    addIndicator(questTarget, questSkill, category, remaining)
+                    addIndicator(questTarget, questSkill, category, remaining, questId)
                 }
                 "gather_any" -> {
                     when (questSkill) {
-                        Skills.MINING -> gameData.ores.keys.forEach { addIndicator(it, questSkill, category, remaining) }
-                        Skills.WOODCUTTING -> gameData.trees.keys.forEach { addIndicator(it, questSkill, category, remaining) }
-                        Skills.FISHING -> gameData.fish.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                        Skills.MINING -> gameData.ores.keys.forEach { addIndicator(it, questSkill, category, remaining, questId) }
+                        Skills.WOODCUTTING -> gameData.trees.keys.forEach { addIndicator(it, questSkill, category, remaining, questId) }
+                        Skills.FISHING -> gameData.fish.keys.forEach { addIndicator(it, questSkill, category, remaining, questId) }
                     }
                 }
                 "pickpocket" -> {
-                    addIndicator(questTarget, questSkill, category, remaining)
+                    addIndicator(questTarget, questSkill, category, remaining, questId)
                 }
                 "pickpocket_any" -> {
-                    gameData.thievingNpcs.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                    gameData.thievingNpcs.keys.forEach { addIndicator(it, questSkill, category, remaining, questId) }
                 }
                 "sessions" -> {
                     if (questSkill == Skills.AGILITY) {
-                        addIndicator(questTarget, questSkill, category, remaining)
+                        addIndicator(questTarget, questSkill, category, remaining, questId)
                     }
                 }
                 "burn" -> {
@@ -1261,7 +1266,7 @@ class SkillsViewModel @Inject constructor(
                         "magic_log" to "magic_ashes", "redwood_log" to "redwood_ashes"
                     )
                     val ashKey = logToAsh[questTarget] ?: questTarget
-                    addIndicator(ashKey, questSkill, category, remaining)
+                    addIndicator(ashKey, questSkill, category, remaining, questId)
                 }
                 "burn_any" -> {
                     if (questSkill == Skills.FIREMAKING) {
@@ -1272,18 +1277,21 @@ class SkillsViewModel @Inject constructor(
                                 "magic_log" to "magic_ashes", "redwood_log" to "redwood_ashes"
                             )
                             val ashKey = logToAsh[logKey] ?: logKey
-                            addIndicator(ashKey, questSkill, category, remaining)
+                            addIndicator(ashKey, questSkill, category, remaining, questId)
                         }
                     }
                 }
                 "craft" -> {
-                    if (questSkill == Skills.RUNECRAFTING || questSkill == Skills.FIREMAKING) {
-                        addIndicator(questTarget, questSkill, category, remaining)
-                    }
+                    // Only Runecrafting/Firemaking have per-activity sheets on this screen;
+                    // the other crafting skills' indicators exist solely to feed the skill-row
+                    // icons (timedQuestsBySkill), which no sheet key collides with (issue #1408).
+                    addIndicator(questTarget, questSkill, category, remaining, questId)
                 }
                 "craft_any" -> {
                     if (questSkill == Skills.RUNECRAFTING) {
-                        gameData.runes.keys.forEach { addIndicator(it, questSkill, category, remaining) }
+                        gameData.runes.keys.forEach { addIndicator(it, questSkill, category, remaining, questId) }
+                    } else {
+                        addIndicator(questTarget.ifBlank { "any" }, questSkill, category, remaining, questId)
                     }
                 }
                 "prayer" -> {
@@ -1293,17 +1301,17 @@ class SkillsViewModel @Inject constructor(
                         // indicator must match (issue #1385). Ashes give Prayer XP but never
                         // count toward prayer quests (issue #1207).
                         gameData.bones.filterValues { !it.isAsh }.keys
-                            .forEach { addIndicator(it, questSkill, category, remaining) }
+                            .forEach { addIndicator(it, questSkill, category, remaining, questId) }
                     }
                 }
                 "trade" -> {
                     if (questSkill == Skills.MERCANTILE) {
-                        addIndicator(questTarget, questSkill, category, remaining)
+                        addIndicator(questTarget, questSkill, category, remaining, questId)
                     }
                 }
                 "earn_coins" -> {
                     if (questSkill == Skills.MERCANTILE) {
-                        addIndicator("coins", questSkill, category, remaining)
+                        addIndicator("coins", questSkill, category, remaining, questId)
                     }
                 }
             }
@@ -1316,7 +1324,7 @@ class SkillsViewModel @Inject constructor(
                     progressById[quest.requiresPrevious]?.completed == true
             if (!prereqDone) continue
 
-            checkAndAdd(quest.type, quest.skill, quest.target, quest.amount, prog?.progress ?: 0, QuestCategory.MAIN)
+            checkAndAdd(id, quest.type, quest.skill, quest.target, quest.amount, prog?.progress ?: 0, QuestCategory.MAIN)
         }
 
         for ((id, quest) in gameData.guildQuests) {
@@ -1325,21 +1333,21 @@ class SkillsViewModel @Inject constructor(
             if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
 
             val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
-            checkAndAdd(quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.GUILD)
+            checkAndAdd(id, quest.type, quest.guild, quest.target, effectiveAmount, prog?.progress ?: 0, QuestCategory.GUILD)
         }
 
         for (daily in activeDailies) {
-            checkAndAdd(daily.template.type, daily.template.skill, daily.template.target, daily.template.amount, daily.progress, QuestCategory.DAILY)
+            checkAndAdd(daily.template.id, daily.template.type, daily.template.skill, daily.template.target, daily.template.amount, daily.progress, QuestCategory.DAILY)
         }
 
         for (weekly in activeWeeklies) {
-            checkAndAdd(weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.WEEKLY)
+            checkAndAdd(weekly.template.id, weekly.template.type, weekly.template.skill, weekly.template.target, weekly.template.amount, weekly.progress, QuestCategory.WEEKLY)
         }
 
         for (id in activeGuildDailyIds) {
             val template = guildPool[id] ?: continue
             val progress = flags.guildDailyProgress[id] ?: 0
-            checkAndAdd(template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
+            checkAndAdd(id, template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
         }
 
         return result

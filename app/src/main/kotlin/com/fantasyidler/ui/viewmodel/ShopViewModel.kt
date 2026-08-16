@@ -91,6 +91,9 @@ data class ShopUiState(
     val skillPrestige: Map<String, Int> = emptyMap(),
     /** Ironman characters can only sell — every buy path is blocked. */
     val ironman: Boolean = false,
+    val compactNumbers: Boolean = false,
+    /** Bulk and manual sells always leave one of each item (collector safety). */
+    val keepOneOfEach: Boolean = false,
 ) {
     val xpBoostActive: Boolean get() = xpBoostExpiresAt > System.currentTimeMillis()
 }
@@ -131,6 +134,8 @@ class ShopViewModel @Inject constructor(
                 townBuildingTiers = flags.townBuildingTiers,
                 skillPrestige     = flags.skillPrestige,
                 ironman           = flags.ironman,
+                compactNumbers    = flags.compactNumbers,
+                keepOneOfEach     = flags.shopKeepOneOfEach,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ShopUiState())
@@ -358,6 +363,7 @@ class ShopViewModel @Inject constructor(
             val useful    = gameData.usefulItemKeys
             val locked    = uiState.value.lockedItems
             val junk      = inventory.filterKeys { it != "coins" && it !in useful && it !in locked }
+                .let { if (uiState.value.keepOneOfEach) it.mapValues { (_, qty) -> qty - 1 }.filterValues { qty -> qty > 0 } else it }
             if (junk.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_junk)) }
                 return@launch
@@ -378,6 +384,7 @@ class ShopViewModel @Inject constructor(
 
             val toSell = computeOldEquipmentToSell(equipped, inventory, allEquip)
                 .filterKeys { it !in state.lockedItems }
+                .let { if (state.keepOneOfEach) it.mapValues { (_, qty) -> qty - 1 }.filterValues { qty -> qty > 0 } else it }
 
             if (toSell.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_old_equipment)) }
@@ -387,6 +394,13 @@ class ShopViewModel @Inject constructor(
                 BulkSellItem(key, GameStrings.itemName(context.withAppLocale(), key), qty, sellPriceFor(key))
             }.sortedBy { it.displayName }
             _extra.update { it.copy(pendingBulkSell = BulkSellPreview(R.string.shop_sell_old_gear, R.string.shop_sold_old_equipment, items)) }
+        }
+    }
+
+    fun setKeepOneOfEach(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(shopKeepOneOfEach = enabled))
         }
     }
 
@@ -465,12 +479,14 @@ class ShopViewModel @Inject constructor(
         val have          = state.inventory[itemKey] ?: 0
         val equippedCount = state.equipped.values.count { it == itemKey }
         val reserved      = state.reservedItems[itemKey] ?: 0
-        val sellable      = (have - equippedCount - reserved).coerceAtLeast(0)
+        val keptForCollection = if (state.keepOneOfEach) 1 else 0
+        val sellable      = (have - equippedCount - reserved - keptForCollection).coerceAtLeast(0)
         if (sellable == 0) {
             val reason = when {
-                equippedCount > 0 -> "$displayName is equipped — unequip it first to sell."
-                reserved > 0      -> "$displayName is reserved for a queued task."
-                else              -> "Nothing to sell."
+                equippedCount > 0     -> context.getString(R.string.shop_sell_blocked_equipped, displayName)
+                reserved > 0          -> context.getString(R.string.shop_sell_blocked_reserved, displayName)
+                keptForCollection > 0 && have > 0 -> context.getString(R.string.shop_sell_blocked_keep_one, displayName)
+                else                  -> context.getString(R.string.shop_sell_blocked_none)
             }
             _extra.update { it.copy(snackbarMessage = reason) }
             return
@@ -530,8 +546,8 @@ class ShopViewModel @Inject constructor(
                 it.copy(
                     transaction = null,
                     snackbarMessage = if (success) {
-                        if (t.isBuy) context.getString(R.string.shop_bought_item, t.qty, t.displayName)
-                        else         context.getString(R.string.shop_sold_item, t.qty, t.displayName, t.priceEach * t.qty)
+                        if (t.isBuy) context.getString(R.string.shop_bought_item, t.qty, GameStrings.itemName(context, t.key))
+                        else         context.getString(R.string.shop_sold_item, t.qty, GameStrings.itemName(context, t.key), t.priceEach * t.qty)
                     } else {
                         if (t.isBuy) context.getString(R.string.error_not_enough_coins) else context.getString(R.string.shop_not_enough_in_inventory)
                     },

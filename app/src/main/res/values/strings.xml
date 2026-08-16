@@ -65,6 +65,9 @@
     <string name="label_bosses">Bosses</string>
     <string name="label_by_location">By Location</string>
     <string name="bestiary_not_encountered">Not yet encountered</string>
+    <string name="bestiary_qty_header">Qty</string>
+    <string name="bestiary_chance_header">Chance</string>
+    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string>
     <string name="bestiary_always_drops">Always Drops</string>
     <string name="bestiary_rare_drops">Rare Drops</string>
     <string name="bestiary_common_loot">Common Loot</string>
@@ -77,12 +80,33 @@
     <string name="label_session_active">Session Active</string>
     <string name="label_no_active_session">No Active Session</string>
     <string name="label_session_complete">Session Complete!</string>
+    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string>
+    <string name="home_boss_defeated_title">Defeated %1$s!</string>
+    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string>
+    <string name="home_dungeon_died_title">%1$s — You Died</string>
+    <string name="home_dungeon_complete_title">%1$s Complete!</string>
+    <string name="home_expedition_complete_title">%1$s Expedition Complete</string>
+    <string name="home_skill_session_complete_title">%1$s Session Complete</string>
+    <string name="home_bones_buried_row">%1$s buried</string>
+    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string>
+    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string>
+    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string>
+    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string>
+    <string name="worker_skill_complete_title">Worker: %1$s Complete</string>
     <string name="label_training">Training</string>
     <string name="label_gathering_skills">Gathering</string>
     <string name="label_crafting_skills">Crafting Skills</string>
     <string name="label_choose_activity">Choose Activity</string>
     <string name="label_coming_soon">Coming soon</string>
     <string name="label_time_remaining">Time remaining</string>
+    <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_months">%1$dmo</string>
+    <string name="duration_weeks">%1$dw</string>
+    <string name="duration_days">%1$dd</string>
+    <string name="duration_hours">%1$dh</string>
+    <string name="duration_minutes">%1$dm</string>
+    <string name="duration_seconds">%1$ds</string>
+    <string name="duration_complete">Complete</string>
     <string name="label_session_results">Session Results</string>
     <string name="label_xp_gained">XP gained</string>
     <string name="label_items_collected">Items collected</string>
@@ -190,6 +214,7 @@
     <string name="format_skill_level">%1$s: Level %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%1$d%% XP</string>
+    <string name="format_coin_boost_percent">+%1$d%% Coins</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
     <string name="format_drop_chance" translatable="false">%1$s: %2$d</string>
     <!-- Translator note: %1$d = minutes remaining -->
@@ -277,6 +302,8 @@
     <string name="settings_profile_layout_tabs">Tabs</string>
     <string name="settings_quest_dots">Quest dots on skills</string>
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string>
+    <string name="settings_compact_numbers">Compact Numbers</string>
+    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string>
     <string name="settings_home_screen">Home Screen</string>
     <string name="settings_home_screen_desc">Choose what appears on the home screen</string>
     <string name="settings_recent_activity">Recent Activity Log</string>
@@ -667,6 +694,13 @@
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">ACTIVE</string>
     <string name="shop_sell_junk">Sell Junk</string>
+    <string name="shop_keep_one_toggle">Keep one of each item</string>
+    <string name="shop_search_hint">Search items</string>
+    <string name="shop_filter_all">All</string>
+    <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string>
+    <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string>
+    <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string>
+    <string name="shop_sell_blocked_none">Nothing to sell.</string>
     <string name="shop_sell_old_gear">Sell Old Gear</string>
     <string name="shop_equipped_label">(equipped)</string>
     <string name="shop_item_locked">%1$s is locked. Long-press to unlock.</string>
@@ -680,8 +714,8 @@
     <string name="quest_legend_quest">Quest</string>
     <string name="quest_legend_gold_dot">Timed quest is available.</string>
     <string name="quest_legend_notes">Dimmed icons can\'t be completed yet (missing level or materials). A small raised number means several quests of that type want the same thing.</string>
-    <!-- Translator note: %1$d = quantity -->
-    <string name="shop_qty_in_inv">×%1$d in inventory</string>
+    <!-- Translator note: %1$s = quantity in inventory -->
+    <string name="shop_qty_in_inv">×%1$s in inventory</string>
     <!-- Translator note: %1$s = formatted coin amount -->
     <string name="shop_price_each">%1$s coins ea.</string>
     <!-- Translator note: %1$s = item name -->
@@ -1060,6 +1094,7 @@
     <string name="expedition_lore_notes">%1$d / %2$d lore notes</string>
     <string name="expedition_lock_level">Requires %1$s level %2$d</string>
     <string name="expedition_lock_notes">Find all notes in %1$s to unlock</string>
+    <string name="expedition_started">%1$s started.</string>
     <string name="expedition_lock_prerequisite">Complete a prerequisite to unlock</string>
     <string name="label_notes">Notes</string>
 
@@ -1321,6 +1356,10 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Carnival</string>
     <string name="carnival_desc">Games, prizes, and merriment!</string>
+    <string name="carnival_prize_xp_lamp_small_name">Small XP Lamp</string>
+    <string name="carnival_prize_xp_lamp_small_desc">Grants 10,000 XP to a chosen skill.</string>
+    <string name="carnival_prize_xp_lamp_large_name">Large XP Lamp</string>
+    <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string>
     <string name="carnival_ticket_balance">Tickets: %1$d</string>
     <string name="carnival_idle_tab">Idle Games</string>
     <string name="carnival_active_tab">Active Games</string>
@@ -1410,6 +1449,8 @@
     <string name="farming_bean_ready">The beanstalk reaches beyond the clouds. Ready to climb?</string>
     <string name="farming_bean_climb">Climb</string>
     <string name="farming_bean_climbed">You have climbed the beanstalk. A serpent\'s hiss catches your attention…</string>
+    <string name="farming_bean_climbed_title">Beanstalk Climbed!</string>
+    <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string>
     <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string>
     <string name="farming_bean_picker_stats" translatable="false">\?\?\?  •  \?\?\?  •  \?\?\?</string>
     <string name="farming_magic_bean_one_plot">Magic Beans can only be planted in one plot</string>
@@ -1536,6 +1577,14 @@
     <string name="combat_select_spell">Select a spell before entering.</string>
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="reward_part_coins">+%1$s coins</string>
+    <string name="reward_part_coins_plain">%1$s coins</string>
+    <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string>
+    <string name="quest_claimed_suffix">Claimed: %1$s</string>
+    <plurals name="plural_reward_items">
+        <item quantity="one">×%1$d item</item>
+        <item quantity="other">×%1$d items</item>
+    </plurals>
     <string name="monument_title">Grand Monument</string>
     <string name="monument_desc">A civic wonder raised coin by coin. Every stage is a gift to the town.</string>
     <string name="monument_your_coins">Your coins: %1$s</string>

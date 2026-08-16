@@ -188,7 +188,7 @@ fun FarmingScreen(
                         Spacer(Modifier.height(8.dp))
                         result.itemsGained.forEach { (key, qty) ->
                             Text(
-                                text  = "${GameStrings.cropName(context, key)}: ×$qty",
+                                text  = "${GameStrings.itemName(context, key)}: ×$qty",
                                 style = MaterialTheme.typography.bodyMedium,
                             )
                         }
@@ -202,6 +202,35 @@ fun FarmingScreen(
             },
         )
     }
+
+    if (state.showBeanClimbDialog) {
+        BeanClimbDialog(onDismiss = viewModel::beanClimbDialogConsumed)
+    }
+}
+
+// The beanstalk unlock stays up until dismissed; a transient banner was too easy
+// to miss after the bean's month-long grow.
+@Composable
+private fun BeanClimbDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.farming_bean_climbed_title)) },
+        text = {
+            Text(
+                stringResource(R.string.farming_bean_climbed) + "\n\n" +
+                    stringResource(
+                        R.string.farming_bean_unlock_hint,
+                        GameStrings.dungeonName(context, "cloud_kingdom"),
+                    )
+            )
+        },
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(R.string.btn_close))
+            }
+        },
+    )
 }
 
 // ---------------------------------------------------------------------------
@@ -293,7 +322,7 @@ fun FarmingSheetContent(
                         Spacer(Modifier.height(8.dp))
                         result.itemsGained.forEach { (key, qty) ->
                             Text(
-                                text  = "${GameStrings.cropName(context, key)}: ×$qty",
+                                text  = "${GameStrings.itemName(context, key)}: ×$qty",
                                 style = MaterialTheme.typography.bodyMedium,
                             )
                         }
@@ -306,6 +335,10 @@ fun FarmingSheetContent(
                 }
             },
         )
+    }
+
+    if (state.showBeanClimbDialog) {
+        BeanClimbDialog(onDismiss = viewModel::beanClimbDialogConsumed)
     }
 }
 
@@ -471,7 +504,7 @@ private fun PatchCard(
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text  = context.getString(R.string.farming_ready_in, remaining.formatDurationMs()),
+                            text  = context.getString(R.string.farming_ready_in, remaining.formatDurationMs(context)),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -647,7 +680,7 @@ private fun PlantSheet(
                         )
                         Text(
                             text  = if (crop.id == "magic_bean") stringResource(R.string.farming_bean_picker_stats)
-                                    else stringResource(R.string.farming_crop_picker_stats, crop.levelRequired, (crop.growthTimeHours * 3_600_000L).formatDurationMs(), crop.harvestXp),
+                                    else stringResource(R.string.farming_crop_picker_stats, crop.levelRequired, (crop.growthTimeHours * 3_600_000L).formatDurationMs(context), crop.harvestXp),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )

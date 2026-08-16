@@ -65,6 +65,9 @@
     <string name="label_bosses">Bossové</string>
     <string name="label_by_location">Podle místa</string>
     <string name="bestiary_not_encountered">Dosud nepotkán</string>
+    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
+    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
+    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
     <string name="bestiary_always_drops">Always Drops</string> <!-- untranslated -->
     <string name="bestiary_rare_drops">Rare Drops</string> <!-- untranslated -->
     <string name="bestiary_common_loot">Běžná kořist</string>
@@ -77,12 +80,33 @@
     <string name="label_session_active">Sezení aktivní</string>
     <string name="label_no_active_session">Žádné aktivní sezení</string>
     <string name="label_session_complete">Sezení dokončeno!</string>
+    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
+    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
+    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
+    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
+    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
+    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
+    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
+    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
+    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
+    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
+    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
+    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
+    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
     <string name="label_training">Trénink</string>
     <string name="label_gathering_skills">Sbírání</string>
     <string name="label_crafting_skills">Řemesla</string>
     <string name="label_choose_activity">Zvol si aktivitu</string>
     <string name="label_coming_soon">Již brzy</string>
     <string name="label_time_remaining">Zbývající čas</string>
+    <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
+    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
+    <string name="duration_days">%1$dd</string> <!-- untranslated -->
+    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
+    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
+    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
+    <string name="duration_complete">Complete</string> <!-- untranslated -->
     <string name="label_session_results">Výsledky sezení</string>
     <string name="label_xp_gained">Získané XP</string>
     <string name="label_items_collected">Získané předměty</string>
@@ -177,19 +201,20 @@
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
 
     <!-- Translator note: %1$d = coin amount -->
-    <string name="format_price_coins">%1$d coins</string> <!-- untranslated -->
+    <string name="format_price_coins">%1$d mincí</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
     <string name="format_level_requirement">Requires level %1$d %2$s</string> <!-- untranslated -->
     <!-- Translator note: %1$s = formatted XP amount -->
     <string name="format_xp_per_action">%1$s XP per action</string> <!-- untranslated -->
     <!-- Translator note: %1$d = patch number -->
-    <string name="format_patch_number">Patch %1$d</string> <!-- untranslated -->
+    <string name="format_patch_number">Záhon %1$d</string>
     <!-- Translator note: %1$d = wins, %2$d = losses -->
     <string name="format_arena_record">%1$d výher / %2$d proher</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
     <string name="format_skill_level">%1$s: Úroveň %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="format_coin_boost_percent">+%1$d%% mincí</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
     <!-- Translator note: %1$d = minutes remaining -->
@@ -230,7 +255,7 @@
     <!-- ===== Error messages ===== -->
     <string name="error_no_player">Could not load player data. Please restart the app.</string> <!-- untranslated -->
     <string name="error_session_already_active">You already have an active session. Complete or abandon it first.</string> <!-- untranslated -->
-    <string name="error_not_enough_coins">Not enough coins.</string> <!-- untranslated -->
+    <string name="error_not_enough_coins">Nedostatek mincí.</string>
     <!-- Translator note: %1$s = item display name -->
     <string name="error_not_enough_items">Not enough %1$s.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill display name -->
@@ -246,28 +271,28 @@
     <string name="error_unknown">Something went wrong. Please try again.</string> <!-- untranslated -->
 
     <!-- ===== Session dialogs ===== -->
-    <string name="session_abandon_title">Abandon Session?</string> <!-- untranslated -->
+    <string name="session_abandon_title">Opustit sezení?</string>
     <string name="session_abandon_body">All progress from this session will be lost.</string> <!-- untranslated -->
 
     <!-- ===== Onboarding ===== -->
-    <string name="onboarding_welcome_title">Welcome to Idle Fantasy</string> <!-- untranslated -->
+    <string name="onboarding_welcome_title">Vítej v Idle Fantasy</string>
     <string name="onboarding_welcome_body">Start a skill session and watch your character grow. Sessions run for one hour, even when the app is closed.</string> <!-- untranslated -->
     <string name="onboarding_first_session_hint">Tap any skill to get started.</string> <!-- untranslated -->
 
     <!-- ===== Settings ===== -->
-    <string name="settings_title">Settings</string> <!-- untranslated -->
+    <string name="settings_title">Nastavení</string>
     <string name="settings_notifications">Session Notifications</string> <!-- untranslated -->
     <string name="settings_notifications_desc">Show an alert when your session completes</string> <!-- untranslated -->
     <string name="settings_battery_optimization">Battery Optimization</string> <!-- untranslated -->
     <string name="settings_battery_optimization_desc">Disable battery optimization for Idle Fantasy to receive timely session alerts</string> <!-- untranslated -->
     <string name="settings_battery_optimization_btn">Adjust Setting</string> <!-- untranslated -->
-    <string name="settings_language">Language</string> <!-- untranslated -->
-    <string name="settings_about">About</string> <!-- untranslated -->
-    <string name="settings_open_source_licenses">Open Source Licenses</string> <!-- untranslated -->
+    <string name="settings_language">Jazyk</string>
+    <string name="settings_about">O hře</string>
+    <string name="settings_open_source_licenses">Licence Open Source</string>
 
     <!-- ===== HomeScreen ===== -->
-    <string name="label_player_stats">Player Stats</string> <!-- untranslated -->
-    <string name="label_combat_level">Combat Level</string> <!-- untranslated -->
+    <string name="label_player_stats">Statistiky hráče</string>
+    <string name="label_combat_level">Bojová úroveň</string>
     <string name="label_shop_desc">Buy equipment and sell loot</string> <!-- untranslated -->
     <string name="label_no_session_hint">Head to Skills or Combat to start training.</string> <!-- untranslated -->
     <string name="label_recent_activity">Recent Activity</string> <!-- untranslated -->
@@ -277,6 +302,8 @@
     <string name="settings_profile_layout_tabs">Tabs</string> <!-- untranslated -->
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
+    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->
     <string name="settings_home_screen_desc">Choose what appears on the home screen</string> <!-- untranslated -->
     <string name="settings_recent_activity">Recent Activity Log</string> <!-- untranslated -->
@@ -652,6 +679,13 @@
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">ACTIVE</string> <!-- untranslated -->
     <string name="shop_sell_junk">Sell Junk</string> <!-- untranslated -->
+    <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
+    <string name="shop_search_hint">Search items</string> <!-- untranslated -->
+    <string name="shop_filter_all">All</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_none">Nothing to sell.</string> <!-- untranslated -->
     <string name="shop_sell_old_gear">Sell Old Gear</string> <!-- untranslated -->
     <string name="shop_equipped_label">(equipped)</string> <!-- untranslated -->
     <string name="shop_item_locked">%1$s is locked. Long-press to unlock.</string> <!-- untranslated -->
@@ -665,8 +699,8 @@
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Dimmed icons can\'t be completed yet (missing level or materials). A small raised number means several quests of that type want the same thing.</string> <!-- untranslated -->
-    <!-- Translator note: %1$d = quantity -->
-    <string name="shop_qty_in_inv">×%1$d in inventory</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = quantity in inventory -->
+    <string name="shop_qty_in_inv">×%1$s in inventory</string> <!-- untranslated -->
     <!-- Translator note: %1$s = formatted coin amount -->
     <string name="shop_price_each">%1$s coins ea.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = item name -->
@@ -1045,6 +1079,7 @@
     <string name="expedition_lore_notes">%1$d / %2$d lore notes</string> <!-- untranslated -->
     <string name="expedition_lock_level">Requires %1$s level %2$d</string> <!-- untranslated -->
     <string name="expedition_lock_notes">Find all notes in %1$s to unlock</string> <!-- untranslated -->
+    <string name="expedition_started">%1$s started.</string> <!-- untranslated -->
     <string name="expedition_lock_prerequisite">Complete a prerequisite to unlock</string> <!-- untranslated -->
     <string name="label_notes">Notes</string> <!-- untranslated -->
 
@@ -1306,6 +1341,10 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Carnival</string> <!-- untranslated -->
     <string name="carnival_desc">Games, prizes, and merriment!</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_small_name">Small XP Lamp</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_small_desc">Grants 10,000 XP to a chosen skill.</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_large_name">Large XP Lamp</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string> <!-- untranslated -->
     <string name="carnival_ticket_balance">Tickets: %1$d</string> <!-- untranslated -->
     <string name="carnival_idle_tab">Idle Games</string> <!-- untranslated -->
     <string name="carnival_active_tab">Active Games</string> <!-- untranslated -->
@@ -1395,6 +1434,8 @@
     <string name="farming_bean_ready">The beanstalk reaches beyond the clouds. Ready to climb?</string> <!-- untranslated -->
     <string name="farming_bean_climb">Climb</string> <!-- untranslated -->
     <string name="farming_bean_climbed">You have climbed the beanstalk. A serpent\'s hiss catches your attention…</string> <!-- untranslated -->
+    <string name="farming_bean_climbed_title">Beanstalk Climbed!</string> <!-- untranslated -->
+    <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string> <!-- untranslated -->
     <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Magic Beans can only be planted in one plot</string> <!-- untranslated -->
@@ -1521,6 +1562,14 @@
     <string name="combat_select_spell">Select a spell before entering.</string> <!-- untranslated -->
     <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string> <!-- untranslated -->
     <string name="guild_daily_reward_claimed">Daily reward claimed!</string> <!-- untranslated -->
+    <string name="reward_part_coins">+%1$s coins</string> <!-- untranslated -->
+    <string name="reward_part_coins_plain">%1$s coins</string> <!-- untranslated -->
+    <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string> <!-- untranslated -->
+    <string name="quest_claimed_suffix">Claimed: %1$s</string> <!-- untranslated -->
+    <plurals name="plural_reward_items">
+        <item quantity="one">×%1$d item</item>
+        <item quantity="other">×%1$d items</item>
+    </plurals> <!-- untranslated -->
     <string name="monument_title">Grand Monument</string> <!-- untranslated -->
     <string name="monument_desc">A civic wonder raised coin by coin. Every stage is a gift to the town.</string> <!-- untranslated -->
     <string name="monument_your_coins">Your coins: %1$s</string> <!-- untranslated -->

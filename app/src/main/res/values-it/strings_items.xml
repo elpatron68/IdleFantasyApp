@@ -651,12 +651,12 @@
     <string name="item_runite_tinderbox_name">Acciarino in Runite</string>
 
     <!-- ===== Agility grappling hooks ===== -->
-    <string name="item_bronze_grappling_hook_name">Gancio di Bronzo</string>
-    <string name="item_iron_grappling_hook_name">Gancio di Ferro</string>
-    <string name="item_steel_grappling_hook_name">Gancio d\'Acciaio</string>
-    <string name="item_mithril_grappling_hook_name">Gancio di Mithril</string>
-    <string name="item_adamantite_grappling_hook_name">Gancio d\'Adamantio</string>
-    <string name="item_runite_grappling_hook_name">Gancio di Runite</string>
+    <string name="item_bronze_grappling_hook_name">Rampino di Bronzo</string>
+    <string name="item_iron_grappling_hook_name">Rampino di Ferro</string>
+    <string name="item_steel_grappling_hook_name">Rampino d\'Acciaio</string>
+    <string name="item_mithril_grappling_hook_name">Rampino di Mithril</string>
+    <string name="item_adamantite_grappling_hook_name">Rampino d\'Adamantio</string>
+    <string name="item_runite_grappling_hook_name">Rampino di Runite</string>
 
     <!-- ===== Carnival prizes ===== -->
     <string name="item_tricksters_amulet_name">Amuleto del Giullare</string>
@@ -711,11 +711,11 @@
     <string name="item_maple_plank_name">Asse di Acero</string>
     <string name="item_yew_plank_name">Asse di Tasso</string>
     <string name="item_magic_plank_name">Asse Magica</string>
-    <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
+    <string name="item_redwood_plank_name">Asse di Sequoia</string>
     <string name="item_iron_nail_name">Chiodo di Ferro</string>
     <string name="item_steel_nail_name">Chiodo di Acciaio</string>
     <string name="item_mithril_nail_name">Chiodo di Mithril</string>
-    <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
+    <string name="item_runite_nail_name">Chiodo di Runite</string>
     <string name="item_stone_name">Pietra</string>
     <string name="item_stone_desc">Un blocco di pietra da costruzione.</string>
     <string name="item_carved_stone_name">Pietra Scolpita</string>
@@ -730,9 +730,9 @@
     <string name="item_maple_dresser_name">Cassettiera di Acero</string>
     <string name="item_yew_wardrobe_name">Armadio di Tasso</string>
     <string name="item_magic_throne_name">Trono Magico</string>
-    <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
-    <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
-    <string name="item_redwood_grand_bed_name">Redwood Grand Bed</string> <!-- untranslated -->
+    <string name="item_redwood_bench_name">Panca di Sequoia</string>
+    <string name="item_redwood_bookcase_name">Scaffale di Sequoia</string>
+    <string name="item_redwood_grand_bed_name">Baldacchino di Sequoia</string>
 
 
     <!-- ===== Seed names ===== -->
@@ -771,200 +771,200 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_abyssal_rod_name">Abyssal Rod</string> <!-- untranslated -->
+    <string name="item_adamantite_arrow_tip_name">Adamantite Arrow Tips</string> <!-- untranslated -->
+    <string name="item_adamantite_boots_name">Adamantite Boots</string> <!-- untranslated -->
+    <string name="item_adamantite_chainbody_name">Adamantite Chainbody</string> <!-- untranslated -->
+    <string name="item_adamantite_dagger_name">Adamantite Dagger</string> <!-- untranslated -->
+    <string name="item_adamantite_full_helmet_name">Adamantite Full Helmet</string> <!-- untranslated -->
+    <string name="item_adamantite_kiteshield_name">Adamantite Kiteshield</string> <!-- untranslated -->
+    <string name="item_adamantite_longsword_name">Adamantite Longsword</string> <!-- untranslated -->
+    <string name="item_adamantite_med_helmet_name">Adamantite Med Helmet</string> <!-- untranslated -->
+    <string name="item_adamantite_plateskirt_name">Adamantite Plateskirt</string> <!-- untranslated -->
+    <string name="item_adamantite_square_shield_name">Adamantite Square Shield</string> <!-- untranslated -->
+    <string name="item_agility_cape_name">Agility Cape</string> <!-- untranslated -->
+    <string name="item_agility_guild_cape_name">Agility Guild Cape</string> <!-- untranslated -->
+    <string name="item_amulet_of_fury_name">Amulet Of Fury</string> <!-- untranslated -->
     <string name="item_amulet_of_fury_desc">Un potente amuleto in grado di migliorare le tue doti in battaglia, qualunque sia il tuo stile. Richiede Mercantile lv. 80.</string>
-
+    <string name="item_amulet_of_strength_name">Amulet Of Strength</string> <!-- untranslated -->
     <string name="item_amulet_of_strength_desc">In grado di aumentare la tua forza. Richiede Mercantile lv. 20.</string>
-
+    <string name="item_amulet_of_the_kraken_name">Amulet Of The Kraken</string> <!-- untranslated -->
     <string name="item_arcane_grappling_hook_name">Rampino Arcano</string>
-
-
-
+    <string name="item_arcane_staff_name">Arcane Staff</string> <!-- untranslated -->
+    <string name="item_archers_guild_cape_name">Archers Guild Cape</string> <!-- untranslated -->
+    <string name="item_archers_ring_name">Archers Ring</string> <!-- untranslated -->
     <string name="item_archers_ring_desc">Migliora la tua mira. Richiede Mercantile lv. 60.</string>
-
-
-
-
-
+    <string name="item_attack_cape_name">Attack Cape</string> <!-- untranslated -->
+    <string name="item_baby_kraken_name">Baby Kraken</string> <!-- untranslated -->
+    <string name="item_balrog_name">Gothic Ember, Ancient Flame of the Deep</string> <!-- untranslated -->
+    <string name="item_balrog_whip_name">Gothic Ember\'s Flaming Whip</string> <!-- untranslated -->
+    <string name="item_balrog_wings_name">Gothic Ember Wings</string> <!-- untranslated -->
     <string name="item_beef_name">Bistecca</string>
-
+    <string name="item_berserker_ring_name">Berserker Ring</string> <!-- untranslated -->
     <string name="item_berserker_ring_desc">In grado di aumentare la tua forza. Richiede Mercantile lv. 60.</string>
-
-
-
-
-
-
-
-
-
-
+    <string name="item_blessed_fishing_rod_name">Blessed Fishing Rod</string> <!-- untranslated -->
+    <string name="item_bronze_arrow_tip_name">Bronze Arrow Tips</string> <!-- untranslated -->
+    <string name="item_bronze_boots_name">Bronze Boots</string> <!-- untranslated -->
+    <string name="item_bronze_chainbody_name">Bronze Chainbody</string> <!-- untranslated -->
+    <string name="item_bronze_full_helmet_name">Bronze Full Helmet</string> <!-- untranslated -->
+    <string name="item_bronze_kiteshield_name">Bronze Kiteshield</string> <!-- untranslated -->
+    <string name="item_bronze_longsword_name">Bronze Longsword</string> <!-- untranslated -->
+    <string name="item_bronze_med_helmet_name">Bronze Med Helmet</string> <!-- untranslated -->
+    <string name="item_bronze_plateskirt_name">Bronze Plateskirt</string> <!-- untranslated -->
+    <string name="item_bronze_square_shield_name">Bronze Square Shield</string> <!-- untranslated -->
     <string name="item_chicken_name">Pollo</string>
-
-
-
-
-
-
-
-
+    <string name="item_construction_guild_cape_name">Construction Guild Cape</string> <!-- untranslated -->
+    <string name="item_cooking_cape_name">Cooking Cape</string> <!-- untranslated -->
+    <string name="item_cooking_guild_cape_name">Cooking Guild Cape</string> <!-- untranslated -->
+    <string name="item_crafting_cape_name">Crafting Cape</string> <!-- untranslated -->
+    <string name="item_crafting_guild_cape_name">Crafting Guild Cape</string> <!-- untranslated -->
+    <string name="item_deep_iron_pickaxe_name">Deep Iron Pickaxe</string> <!-- untranslated -->
+    <string name="item_defense_cape_name">Defense Cape</string> <!-- untranslated -->
+    <string name="item_demon_lord_name">Demon Lord</string> <!-- untranslated -->
     <string name="item_divine_frying_pan_name">Padella Divina</string>
     <string name="item_divine_grappling_hook_name">Rampino Divino</string>
     <string name="item_divine_hammer_name">Martello Divino</string>
     <string name="item_divine_hoe_name">Zappa Divina</string>
     <string name="item_divine_lockpick_name">Grimaldello Divino</string>
     <string name="item_divine_tinderbox_name">Acciarino Divino</string>
-
-
-
-
-
-
-
-
+    <string name="item_dragon_amulet_name">Dragon Amulet</string> <!-- untranslated -->
+    <string name="item_dragon_boots_name">Dragon Boots</string> <!-- untranslated -->
+    <string name="item_dragon_longsword_name">Dragon Longsword</string> <!-- untranslated -->
+    <string name="item_dragon_scimitar_name">Dragon Scimitar</string> <!-- untranslated -->
+    <string name="item_dragon_whelp_name">Dragon Whelp</string> <!-- untranslated -->
+    <string name="item_dwarven_axe_name">Dwarven Axe</string> <!-- untranslated -->
+    <string name="item_dwarven_boots_name">Dwarven Boots</string> <!-- untranslated -->
+    <string name="item_dwarven_fishing_rod_name">Dwarven Fishing Rod</string> <!-- untranslated -->
     <string name="item_dwarven_frying_pan_name">Padella Nanica</string>
     <string name="item_dwarven_grappling_hook_name">Rampino Nanico</string>
     <string name="item_dwarven_hammer_name">Martello Nanico</string>
-
-
+    <string name="item_dwarven_helm_name">Dwarven Helm</string> <!-- untranslated -->
+    <string name="item_dwarven_hoe_name">Dwarven Hoe</string> <!-- untranslated -->
     <string name="item_dwarven_lockpick_name">Grimaldello Nanico</string>
-
-
-
-
-
-
+    <string name="item_dwarven_pickaxe_name">Dwarven Pickaxe</string> <!-- untranslated -->
+    <string name="item_dwarven_platebody_name">Dwarven Platebody</string> <!-- untranslated -->
+    <string name="item_dwarven_platelegs_name">Dwarven Platelegs</string> <!-- untranslated -->
+    <string name="item_dwarven_scimitar_name">Dwarven Scimitar</string> <!-- untranslated -->
+    <string name="item_dwarven_shield_name">Dwarven Shield</string> <!-- untranslated -->
+    <string name="item_dwarven_sword_name">Dwarven Sword</string> <!-- untranslated -->
     <string name="item_dwarven_tinderbox_name">Acciarino Nanico</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_dwarven_warhammer_name">Dwarven Warhammer</string> <!-- untranslated -->
+    <string name="item_ent_name">Ent</string> <!-- untranslated -->
+    <string name="item_farming_cape_name">Farming Cape</string> <!-- untranslated -->
+    <string name="item_farming_guild_cape_name">Farming Guild Cape</string> <!-- untranslated -->
+    <string name="item_firemaking_cape_name">Firemaking Cape</string> <!-- untranslated -->
+    <string name="item_firemaking_guild_cape_name">Firemaking Guild Cape</string> <!-- untranslated -->
+    <string name="item_fishing_cape_name">Fishing Cape</string> <!-- untranslated -->
+    <string name="item_fishing_guild_cape_name">Fishing Guild Cape</string> <!-- untranslated -->
+    <string name="item_flame_heart_amulet_name">Flame Heart Amulet</string> <!-- untranslated -->
+    <string name="item_fletching_cape_name">Fletching Cape</string> <!-- untranslated -->
+    <string name="item_fletching_guild_cape_name">Fletching Guild Cape</string> <!-- untranslated -->
+    <string name="item_forge_pickaxe_name">Forge Pickaxe</string> <!-- untranslated -->
+    <string name="item_hellfire_staff_name">Hellfire Staff</string> <!-- untranslated -->
+    <string name="item_herblore_guild_cape_name">Herblore Guild Cape</string> <!-- untranslated -->
+    <string name="item_hp_cape_name">Hp Cape</string> <!-- untranslated -->
+    <string name="item_imp_pet_name">Imp Pet</string> <!-- untranslated -->
+    <string name="item_iron_arrow_tip_name">Iron Arrow Tips</string> <!-- untranslated -->
+    <string name="item_iron_boots_name">Iron Boots</string> <!-- untranslated -->
+    <string name="item_iron_chainbody_name">Iron Chainbody</string> <!-- untranslated -->
+    <string name="item_iron_full_helmet_name">Iron Full Helmet</string> <!-- untranslated -->
+    <string name="item_iron_kiteshield_name">Iron Kiteshield</string> <!-- untranslated -->
+    <string name="item_iron_longsword_name">Iron Longsword</string> <!-- untranslated -->
+    <string name="item_iron_med_helmet_name">Iron Med Helmet</string> <!-- untranslated -->
+    <string name="item_iron_plateskirt_name">Iron Plateskirt</string> <!-- untranslated -->
+    <string name="item_iron_square_shield_name">Iron Square Shield</string> <!-- untranslated -->
+    <string name="item_ironwood_axe_name">Ironwood Axe</string> <!-- untranslated -->
+    <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
+    <string name="item_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="item_kraken_tentacle_name">Kraken Tentacle</string> <!-- untranslated -->
+    <string name="item_mages_guild_cape_name">Mages Guild Cape</string> <!-- untranslated -->
+    <string name="item_magic_cape_name">Magic Cape</string> <!-- untranslated -->
+    <string name="item_magic_longbow_name">Magic Longbow</string> <!-- untranslated -->
+    <string name="item_magic_shortbow_name">Magic Shortbow</string> <!-- untranslated -->
+    <string name="item_maple_shortbow_name">Maple Shortbow</string> <!-- untranslated -->
+    <string name="item_mercantile_guild_cape_name">Mercantile Guild Cape</string> <!-- untranslated -->
+    <string name="item_mining_cape_name">Mining Cape</string> <!-- untranslated -->
+    <string name="item_mining_guild_cape_name">Mining Guild Cape</string> <!-- untranslated -->
+    <string name="item_mithril_arrow_tip_name">Mithril Arrow Tips</string> <!-- untranslated -->
+    <string name="item_mithril_boots_name">Mithril Boots</string> <!-- untranslated -->
+    <string name="item_mithril_chainbody_name">Mithril Chainbody</string> <!-- untranslated -->
+    <string name="item_mithril_dagger_name">Mithril Dagger</string> <!-- untranslated -->
+    <string name="item_mithril_full_helmet_name">Mithril Full Helmet</string> <!-- untranslated -->
+    <string name="item_mithril_kiteshield_name">Mithril Kiteshield</string> <!-- untranslated -->
+    <string name="item_mithril_longsword_name">Mithril Longsword</string> <!-- untranslated -->
+    <string name="item_mithril_med_helmet_name">Mithril Med Helmet</string> <!-- untranslated -->
+    <string name="item_mithril_plateskirt_name">Mithril Plateskirt</string> <!-- untranslated -->
+    <string name="item_mithril_square_shield_name">Mithril Square Shield</string> <!-- untranslated -->
     <string name="item_mutton_name">Carne di Montone</string>
-
+    <string name="item_necklace_of_anguish_name">Necklace Of Anguish</string> <!-- untranslated -->
     <string name="item_necklace_of_anguish_desc">Affina la tua mira e i tuoi sensi. Richiede Mercantile lv. 99.</string>
-
-
-
-
+    <string name="item_oak_shortbow_name">Oak Shortbow</string> <!-- untranslated -->
+    <string name="item_prayer_cape_name">Prayer Cape</string> <!-- untranslated -->
+    <string name="item_prayer_guild_cape_name">Prayer Guild Cape</string> <!-- untranslated -->
+    <string name="item_ranged_cape_name">Ranged Cape</string> <!-- untranslated -->
     <string name="item_rat_meat_name">Carne di Ratto</string>
-
-
-
+    <string name="item_ring_of_dragons_might_name">Ring Of Dragons Might</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_name">Ring Of Flame</string> <!-- untranslated -->
+    <string name="item_ring_of_recoil_name">Ring Of Recoil</string> <!-- untranslated -->
     <string name="item_ring_of_recoil_desc">Riflette una parte del danno ricevuto verso l\'avversario. Richiede Mercantile lv. 20.</string>
-
+    <string name="item_ring_of_suffering_name">Ring Of Suffering</string> <!-- untranslated -->
     <string name="item_ring_of_suffering_desc">Anello in grado di potenziare le tue difese. Richiede Mercantile lv. 80.</string>
-
-
+    <string name="item_ring_of_the_seas_name">Ring Of The Seas</string> <!-- untranslated -->
+    <string name="item_ring_of_wealth_name">Ring Of Wealth</string> <!-- untranslated -->
     <string name="item_ring_of_wealth_desc">Permette di ricevere monete in più come ricompensa. Richiede Mercantile lv. 40.</string>
-
+    <string name="item_rock_golem_name">Rock Golem</string> <!-- untranslated -->
     <string name="item_rogues_lockpick_name">Grimaldello Brigante</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_runecrafting_cape_name">Runecrafting Cape</string> <!-- untranslated -->
+    <string name="item_runecrafting_guild_cape_name">Runecrafting Guild Cape</string> <!-- untranslated -->
+    <string name="item_runite_arrow_tip_name">Runite Arrow Tips</string> <!-- untranslated -->
+    <string name="item_runite_boots_name">Runite Boots</string> <!-- untranslated -->
+    <string name="item_runite_chainbody_name">Runite Chainbody</string> <!-- untranslated -->
+    <string name="item_runite_dagger_name">Runite Dagger</string> <!-- untranslated -->
+    <string name="item_runite_full_helmet_name">Runite Full Helmet</string> <!-- untranslated -->
+    <string name="item_runite_kiteshield_name">Runite Kiteshield</string> <!-- untranslated -->
+    <string name="item_runite_longsword_name">Runite Longsword</string> <!-- untranslated -->
+    <string name="item_runite_med_helmet_name">Runite Med Helmet</string> <!-- untranslated -->
+    <string name="item_runite_plateskirt_name">Runite Plateskirt</string> <!-- untranslated -->
+    <string name="item_runite_square_shield_name">Runite Square Shield</string> <!-- untranslated -->
+    <string name="item_sanctum_axe_name">Sanctum Axe</string> <!-- untranslated -->
+    <string name="item_seers_ring_name">Seers Ring</string> <!-- untranslated -->
     <string name="item_seers_ring_desc">Migliora la precisione delle tue magie. Richiede Mercantile lv. 60.</string>
-
+    <string name="item_shadow_dagger_name">Shadow Dagger</string> <!-- untranslated -->
     <string name="item_shadow_grappling_hook_name">Rampino delle Ombre</string>
     <string name="item_shadow_lockpick_name">Grimaldello delle Ombre</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="item_shortbow_name">Shortbow</string> <!-- untranslated -->
+    <string name="item_silver_diamond_necklace_name">Silver Diamond Necklace</string> <!-- untranslated -->
+    <string name="item_silver_diamond_ring_name">Silver Diamond Ring</string> <!-- untranslated -->
+    <string name="item_silver_emerald_necklace_name">Silver Emerald Necklace</string> <!-- untranslated -->
+    <string name="item_silver_emerald_ring_name">Silver Emerald Ring</string> <!-- untranslated -->
+    <string name="item_silver_ruby_necklace_name">Silver Ruby Necklace</string> <!-- untranslated -->
+    <string name="item_silver_ruby_ring_name">Silver Ruby Ring</string> <!-- untranslated -->
+    <string name="item_slayer_guild_cape_name">Slayer Guild Cape</string> <!-- untranslated -->
+    <string name="item_smithing_cape_name">Smithing Cape</string> <!-- untranslated -->
+    <string name="item_smithing_guild_cape_name">Smithing Guild Cape</string> <!-- untranslated -->
+    <string name="item_steel_arrow_tip_name">Steel Arrow Tips</string> <!-- untranslated -->
+    <string name="item_steel_boots_name">Steel Boots</string> <!-- untranslated -->
+    <string name="item_steel_chainbody_name">Steel Chainbody</string> <!-- untranslated -->
+    <string name="item_steel_dagger_name">Steel Dagger</string> <!-- untranslated -->
+    <string name="item_steel_full_helmet_name">Steel Full Helmet</string> <!-- untranslated -->
+    <string name="item_steel_kiteshield_name">Steel Kiteshield</string> <!-- untranslated -->
+    <string name="item_steel_longsword_name">Steel Longsword</string> <!-- untranslated -->
+    <string name="item_steel_med_helmet_name">Steel Med Helmet</string> <!-- untranslated -->
+    <string name="item_steel_plateskirt_name">Steel Plateskirt</string> <!-- untranslated -->
+    <string name="item_steel_square_shield_name">Steel Square Shield</string> <!-- untranslated -->
+    <string name="item_strength_cape_name">Strength Cape</string> <!-- untranslated -->
+    <string name="item_tangleroot_name">Tangleroot</string> <!-- untranslated -->
+    <string name="item_thieving_guild_cape_name">Thieving Guild Cape</string> <!-- untranslated -->
+    <string name="item_tiny_templar_name">Tiny Templar</string> <!-- untranslated -->
+    <string name="item_tormented_necklace_name">Tormented Necklace</string> <!-- untranslated -->
     <string name="item_tormented_necklace_desc">Potenzia notevolmente le tue magie. Richiede Mercantile lv. 99.</string>
-
-
-
-
-
-
-
+    <string name="item_trident_of_the_seas_name">Trident Of The Seas</string> <!-- untranslated -->
+    <string name="item_warriors_guild_cape_name">Warriors Guild Cape</string> <!-- untranslated -->
+    <string name="item_willow_shortbow_name">Willow Shortbow</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_name">Woodcutting Cape</string> <!-- untranslated -->
+    <string name="item_woodcutting_guild_cape_name">Woodcutting Guild Cape</string> <!-- untranslated -->
+    <string name="item_yew_longbow_name">Yew Longbow</string> <!-- untranslated -->
+    <string name="item_yew_shortbow_name">Yew Shortbow</string> <!-- untranslated -->
     <string name="item_void_reaver_name">Devastatore del Vuoto</string>
     <string name="item_void_reaver_desc">Una lama forgiata da energia del vuoto cristallizzata. Il suo filo taglia l\'armatura come se fosse tessuto.</string>
     <string name="item_sovereign_crown_name">Corona del Sovrano</string>
@@ -973,56 +973,56 @@
     <string name="item_amulet_of_the_void_desc">Un ciondolo di pura essenza del vuoto. Potenzia tutte le statistiche di combattimento del portatore.</string>
     <string name="item_bronze_longsword_desc">Spandone in bronzo.</string>
     <string name="item_iron_longsword_desc">Spadone di ferro.</string>
-    <string name="item_shadow_dagger_desc">A black-bladed dagger recovered from the Shadow Den. Wickedly sharp and perfectly balanced for close work.</string> <!-- untranslated -->
-    <string name="item_steel_dagger_desc">A steel dagger.</string> <!-- untranslated -->
-    <string name="item_steel_longsword_desc">A steel longsword.</string> <!-- untranslated -->
-    <string name="item_mithril_dagger_desc">A mithril dagger.</string> <!-- untranslated -->
-    <string name="item_mithril_longsword_desc">A mithril longsword.</string> <!-- untranslated -->
-    <string name="item_adamantite_dagger_desc">A adamantite dagger.</string> <!-- untranslated -->
-    <string name="item_adamantite_longsword_desc">A adamantite longsword.</string> <!-- untranslated -->
-    <string name="item_runite_dagger_desc">A runite dagger.</string> <!-- untranslated -->
-    <string name="item_runite_longsword_desc">A runite longsword.</string> <!-- untranslated -->
-    <string name="item_dragon_scimitar_desc">A razor-sharp scimitar forged from dragon metal.</string> <!-- untranslated -->
-    <string name="item_dragon_longsword_desc">A powerful longsword forged from dragon metal.</string> <!-- untranslated -->
-    <string name="item_dwarven_sword_desc">An ancient dwarven blade, forged in the depths of the earth.</string> <!-- untranslated -->
-    <string name="item_dwarven_scimitar_desc">A curved dwarven blade, perfect for rapid strikes.</string> <!-- untranslated -->
-    <string name="item_dwarven_warhammer_desc">A massive dwarven hammer that crushes all in its path.</string> <!-- untranslated -->
-    <string name="item_tower_sword_name">Tower Sword</string> <!-- untranslated -->
-    <string name="item_tower_sword_desc">A blade that has cleaved through countless tower floors.</string> <!-- untranslated -->
-    <string name="item_balrog_whip_desc">A whip of pure flame, torn from the Gothic Ember itself. Burns with an eternal fire.</string> <!-- untranslated -->
-    <string name="item_divine_sword_name">Divine Sword</string> <!-- untranslated -->
-    <string name="item_divine_sword_desc">A blade of pure divine light, said to be wielded only by the chosen.</string> <!-- untranslated -->
-    <string name="item_divine_greatblade_name">Divine Greatblade</string> <!-- untranslated -->
-    <string name="item_divine_greatblade_desc">A massive divine blade that channels raw power into every swing.</string> <!-- untranslated -->
-    <string name="item_shortbow_desc">A shortbow crafted from regular logs.</string> <!-- untranslated -->
-    <string name="item_oak_shortbow_desc">A shortbow crafted from oak logs.</string> <!-- untranslated -->
-    <string name="item_willow_shortbow_desc">A shortbow crafted from willow logs.</string> <!-- untranslated -->
-    <string name="item_maple_shortbow_desc">A shortbow crafted from maple logs.</string> <!-- untranslated -->
-    <string name="item_yew_shortbow_desc">A shortbow crafted from yew logs.</string> <!-- untranslated -->
-    <string name="item_yew_longbow_desc">A longbow crafted from yew logs.</string> <!-- untranslated -->
-    <string name="item_magic_shortbow_desc">A shortbow crafted from magic logs.</string> <!-- untranslated -->
-    <string name="item_magic_longbow_desc">A longbow crafted from magic logs.</string> <!-- untranslated -->
-    <string name="item_tower_crossbow_name">Tower Crossbow</string> <!-- untranslated -->
-    <string name="item_tower_crossbow_desc">A precision crossbow wrought from tower metal.</string> <!-- untranslated -->
-    <string name="item_arcane_staff_desc">A staff recovered from the Arcane Ruins, still humming with contained magical energy from the catastrophe that destroyed the spire above.</string> <!-- untranslated -->
-    <string name="item_hellfire_staff_desc">A staff wreathed in demonic flame, torn from the Demon Lord\'s grasp.</string> <!-- untranslated -->
-    <string name="item_void_staff_name">Void Staff</string> <!-- untranslated -->
-    <string name="item_void_staff_desc">A staff of pure void energy. Grants infinite runes for all spells.</string> <!-- untranslated -->
-    <string name="item_trident_of_the_seas_desc">A fearsome trident imbued with the power of the deep, taken from the Kraken\'s lair.</string> <!-- untranslated -->
-    <string name="item_bronze_med_helmet_desc">A bronze med helmet.</string> <!-- untranslated -->
-    <string name="item_bronze_full_helmet_desc">A bronze full helmet.</string> <!-- untranslated -->
-    <string name="item_bronze_chainbody_desc">A bronze chainbody.</string> <!-- untranslated -->
-    <string name="item_bronze_plateskirt_desc">A bronze plateskirt.</string> <!-- untranslated -->
-    <string name="item_bronze_boots_desc">A pair of bronze boots.</string> <!-- untranslated -->
-    <string name="item_bronze_square_shield_desc">A bronze square shield.</string> <!-- untranslated -->
-    <string name="item_bronze_kiteshield_desc">A bronze kiteshield.</string> <!-- untranslated -->
-    <string name="item_iron_med_helmet_desc">A iron med helmet.</string> <!-- untranslated -->
-    <string name="item_iron_full_helmet_desc">A iron full helmet.</string> <!-- untranslated -->
-    <string name="item_iron_chainbody_desc">A iron chainbody.</string> <!-- untranslated -->
-    <string name="item_iron_plateskirt_desc">A iron plateskirt.</string> <!-- untranslated -->
-    <string name="item_iron_boots_desc">A pair of iron boots.</string> <!-- untranslated -->
-    <string name="item_iron_square_shield_desc">A iron square shield.</string> <!-- untranslated -->
-    <string name="item_iron_kiteshield_desc">A iron kiteshield.</string> <!-- untranslated -->
+    <string name="item_shadow_dagger_desc">Una nera lama trovata nella Tana dell Ombre. Affilata come un rasoio, infallibile nel corpo a corpo.</string>
+    <string name="item_steel_dagger_desc">Un pugnale in acciaio.</string>
+    <string name="item_steel_longsword_desc">Uno spadone in acciaio.</string>
+    <string name="item_mithril_dagger_desc">Un pugnale in mithril.</string>
+    <string name="item_mithril_longsword_desc">Uno spadone in mithril.</string>
+    <string name="item_adamantite_dagger_desc">Un pugnale in adamantio.</string>
+    <string name="item_adamantite_longsword_desc">Uno spadone in adamantio.</string>
+    <string name="item_runite_dagger_desc">Un pugnale in runite.</string>
+    <string name="item_runite_longsword_desc">Uno spadone in runite.</string>
+    <string name="item_dragon_scimitar_desc">Affilata scimitarra in metallo draconico.</string>
+    <string name="item_dragon_longsword_desc">Possente spadone in metallo draconico.</string>
+    <string name="item_dwarven_sword_desc">Antica lama nanica, forgiata nelle viscere della terra.</string>
+    <string name="item_dwarven_scimitar_desc">Lama ricurva di fattura nanica, perfetta per fendenti rapidissimi.</string>
+    <string name="item_dwarven_warhammer_desc">Un grande martello creato dai nani, in grado di polverizzare ogni ostacolo.</string>
+    <string name="item_tower_sword_name">Spada della Torre</string>
+    <string name="item_tower_sword_desc">Lama fattasi strada attraverso innumerevoli piani della Torre.</string>
+    <string name="item_balrog_whip_desc">Frusta di puro fuoco, estratta dalla Fiamma Gotica. Niente può estinguere le sue fiamme.</string>
+    <string name="item_divine_sword_name">Spada Divina</string>
+    <string name="item_divine_sword_desc">Lama di luce divina, solo chi è degno la può maneggiare.</string>
+    <string name="item_divine_greatblade_name">Spadone Divino</string>
+    <string name="item_divine_greatblade_desc">Enorme lama in grado di concentrare poteri divini in ogni fendente.</string>
+    <string name="item_shortbow_desc">Piccolo arco di legno.</string>
+    <string name="item_oak_shortbow_desc">Piccolo arco in quercia.</string>
+    <string name="item_willow_shortbow_desc">Piccolo arco in salice.</string>
+    <string name="item_maple_shortbow_desc">Piccolo arco di acero.</string>
+    <string name="item_yew_shortbow_desc">Piccolo arco in tasso.</string>
+    <string name="item_yew_longbow_desc">Grande arco in tasso.</string>
+    <string name="item_magic_shortbow_desc">Piccolo arco in legno magico.</string>
+    <string name="item_magic_longbow_desc">Grande arco in legno magico.</string>
+    <string name="item_tower_crossbow_name">Balestra della Torre</string>
+    <string name="item_tower_crossbow_desc">Balestra altamente efficiente, in metallo estratto dalla Torre.</string>
+    <string name="item_arcane_staff_desc">Bastone trovato nelle Rovine Arcane, impregnato del potere magico che ha annientato gli abitanti di questo luogo.</string>
+    <string name="item_hellfire_staff_desc">Bastone carico del potere delle fiamme del Signore dei Demoni.</string>
+    <string name="item_void_staff_name">Bastone del Vuoto</string>
+    <string name="item_void_staff_desc">Bastone di pura magia del Vuoto. Fornisce infinite rune per ogni incantesimo.</string>
+    <string name="item_trident_of_the_seas_desc">Tridente dotato del potere degli abissi, trovato nella tana del Kraken.</string>
+    <string name="item_bronze_med_helmet_desc">Un elmetto in bronzo.</string>
+    <string name="item_bronze_full_helmet_desc">Un elmo in bronzo.</string>
+    <string name="item_bronze_chainbody_desc">Cotta di maglia in bronzo.</string>
+    <string name="item_bronze_plateskirt_desc">Armatura a piastre di bronzo.</string>
+    <string name="item_bronze_boots_desc">Un paio di stivali in bronzo.</string>
+    <string name="item_bronze_square_shield_desc">Scudo quadrato in bronzo.</string>
+    <string name="item_bronze_kiteshield_desc">Grande scudo in bronzo.</string>
+    <string name="item_iron_med_helmet_desc">Un elmetto in ferro.</string>
+    <string name="item_iron_full_helmet_desc">Un elmo in ferro.</string>
+    <string name="item_iron_chainbody_desc">Cotta di maglia di ferro.</string>
+    <string name="item_iron_plateskirt_desc">Armatura a piastre di ferro.</string>
+    <string name="item_iron_boots_desc">Un paio di stivali in ferro.</string>
+    <string name="item_iron_square_shield_desc">Uno scudo quadrato in ferro.</string>
+    <string name="item_iron_kiteshield_desc">Grande scudo in ferro.</string>
     <string name="item_steel_med_helmet_desc">A steel med helmet.</string> <!-- untranslated -->
     <string name="item_steel_full_helmet_desc">A steel full helmet.</string> <!-- untranslated -->
     <string name="item_steel_chainbody_desc">A steel chainbody.</string> <!-- untranslated -->

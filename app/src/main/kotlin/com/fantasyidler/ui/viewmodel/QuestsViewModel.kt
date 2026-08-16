@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import com.fantasyidler.util.GameStrings
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -222,18 +223,19 @@ class QuestsViewModel @Inject constructor(
             if (rewards.xp > 0) {
                 if (quest.skill == "combat") {
                     val totalFinalXp = breakdowns.values.sumOf { it.finalXp }
-                    add("+${totalFinalXp.formatXp()} combat XP (split across 7 skills)")
+                    add(context.getString(R.string.reward_part_combat_xp, totalFinalXp.formatXp()))
                 } else {
                     val b = breakdowns.getValue(quest.skill)
                     val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                     add("+${b.finalXp.formatXp()} XP$suffix")
                 }
             }
-            if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
-            rewards.items.forEach { (_, qty) -> add("×$qty item${if (qty != 1) "s" else ""}") }
+            if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+            rewards.items.forEach { (_, qty) -> add(context.resources.getQuantityString(R.plurals.plural_reward_items, qty, qty)) }
         }
-        val claimedText = if (parts.isNotEmpty()) " Claimed: ${parts.joinToString(", ")}" else ""
-        _extra.update { it.copy(snackbarMessage = context.getString(R.string.quest_complete_notification, quest.name) + claimedText) }
+        val claimedText = if (parts.isNotEmpty()) " " + context.getString(R.string.quest_claimed_suffix, parts.joinToString(", ")) else ""
+        val questName = GameStrings.questName(context, quest.id, quest.name)
+        _extra.update { it.copy(snackbarMessage = context.getString(R.string.quest_complete_notification, questName) + claimedText) }
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }

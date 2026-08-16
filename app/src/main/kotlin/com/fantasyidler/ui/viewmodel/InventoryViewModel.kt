@@ -222,10 +222,11 @@ class InventoryViewModel @Inject constructor(
         return allIds.distinct().mapNotNull { id ->
             val earned = earnedById[id]
             val event = gameData.seasonalEvents[id]
+            val eventName = event?.let { GameStrings.seasonalEventName(context, id, it.displayName) }
             val label = when {
-                event  != null -> "${event.displayName} ${yearFormat.format(java.util.Date(event.startMs))}"
-                earned != null -> earned.displayText
-                else            -> return@mapNotNull null
+                eventName != null -> "$eventName ${yearFormat.format(java.util.Date(event.startMs))}"
+                earned    != null -> earned.displayText
+                else              -> return@mapNotNull null
             }
             SeasonalBannerDisplay(
                 eventId    = id,
@@ -233,7 +234,7 @@ class InventoryViewModel @Inject constructor(
                 bannerIcon = earned?.bannerIcon ?: event?.bannerIcon,
                 earned     = earned != null,
                 earnedAtMs = earned?.completedAtMs,
-                titleName  = event?.displayName ?: earned?.eventDisplayName?.ifBlank { null } ?: label,
+                titleName  = eventName ?: earned?.eventDisplayName?.ifBlank { null } ?: label,
             )
         }.sortedByDescending { gameData.seasonalEvents[it.eventId]?.startMs ?: it.earnedAtMs ?: 0L }
     }

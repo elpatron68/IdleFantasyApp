@@ -350,7 +350,7 @@ private fun CraftRecipeRow(
             recipe.outputCombatStyle?.let { style ->
 
                 Text(
-                    text  = "${context.getString(R.string.label_combat_style)}: ${style.replaceFirstChar { it.uppercase() }}",
+                    text  = "${context.getString(R.string.label_combat_style)}: ${GameStrings.skillName(context, style)}",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant else dim,
                 )
@@ -541,7 +541,7 @@ private fun CraftQuantityContent(
         val perItemMs = state.craftPerItemMs.takeIf { it > 0 } ?: (sessionDurationMs / 60)
         if (perItemMs > 0) {
             Text(
-                text     = "~${(qty.toLong() * perItemMs).formatDurationMs()}",
+                text     = "~${(qty.toLong() * perItemMs).formatDurationMs(context)}",
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.align(Alignment.CenterHorizontally),

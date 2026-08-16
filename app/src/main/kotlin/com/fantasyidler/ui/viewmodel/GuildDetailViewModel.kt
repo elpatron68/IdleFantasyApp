@@ -26,6 +26,7 @@ import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 data class GuildDetailUiState(
@@ -132,11 +133,11 @@ class GuildDetailViewModel @Inject constructor(
                     }
                     if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
                     guildRepo.ensureGuildDailiesRefreshed()
-                    val questName = gameData.guildQuests[questId]?.name ?: questId
+                    val questName = GameStrings.questName(context, questId, gameData.guildQuests[questId]?.name ?: questId)
                     val parts = buildList {
                         if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
-                        if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
-                        rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
+                        if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+                        rewards.items.forEach { (key, qty) -> add("${GameStrings.itemName(context, key)} x$qty") }
                     }
                     val suffix = if (parts.isNotEmpty()) " (${parts.joinToString(", ")})" else ""
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_quest_complete, questName) + suffix) }
@@ -165,8 +166,8 @@ class GuildDetailViewModel @Inject constructor(
             if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
             val parts = buildList {
                 if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
-                if (rewards.coins > 0) add("+${rewards.coins.toLong().formatCoins()} coins")
-                rewards.items.forEach { (key, qty) -> add("${key.toTitleCase()} x$qty") }
+                if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+                rewards.items.forEach { (key, qty) -> add("${GameStrings.itemName(context, key)} x$qty") }
             }
             val suffix = if (parts.isNotEmpty()) " (${parts.joinToString(", ")})" else ""
             _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_daily_reward_claimed) + suffix) }

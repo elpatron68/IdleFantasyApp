@@ -1,5 +1,6 @@
 package com.fantasyidler.util
 
+import com.fantasyidler.R
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import kotlinx.serialization.json.Json
@@ -29,11 +30,31 @@ fun Long.formatCoins(): String = when {
     else               -> toString()
 }
 
+/** Format an Int coin amount with thousands separators. */
+fun Int.formatCoins(): String = toLong().formatCoins()
+
 /** Abbreviated coin format for compact UI (e.g. 50000 → "50k"). */
 fun Long.formatCoinsBrief(): String = when {
     this >= 1_000_000L -> "%.1fM".format(this / 1_000_000.0)
     this >= 1_000L     -> "${this / 1000}k"
     else               -> toString()
+}
+
+/** Format an integer quantity as a readable string, respecting the [compact] setting. */
+fun Int.formatQuantity(compact: Boolean = false): String = toLong().formatQuantity(compact)
+
+/** Format a Long quantity as a readable string, respecting the [compact] setting. */
+fun Long.formatQuantity(compact: Boolean = false): String = when {
+    compact && this >= 1_000_000L -> {
+        val formatted = "%.2f".format(this / 1_000_000.0).trimEnd('0').trimEnd('.', ',')
+        "${formatted}M"
+    }
+    compact && this >= 1_000L -> {
+        val formatted = "%.1f".format(this / 1_000.0).trimEnd('0').trimEnd('.', ',')
+        "${formatted}k"
+    }
+    this >= 1_000L || this <= -1_000L -> "%,d".format(this)
+    else -> toString()
 }
 
 /** Formats an epoch-ms timestamp as a clock time, respecting the device's 12/24-hour preference. */
@@ -56,11 +77,12 @@ fun dailyResetClockTime(context: android.content.Context): String {
  */
 fun Long.toCountdown(context: android.content.Context, showEndTime: Boolean = true): String {
     val remaining = this - System.currentTimeMillis()
-    if (remaining <= 0) return "Complete"
+    if (remaining <= 0) return context.getString(R.string.duration_complete)
     val totalSeconds = remaining / 1_000
     val seconds = totalSeconds % 60
-    val duration = if (totalSeconds < 60) "${seconds}s"
-                   else "${((totalSeconds / 60) * 60_000).formatDurationMs()} ${seconds}s"
+    val secondsPart = context.getString(R.string.duration_seconds, seconds)
+    val duration = if (totalSeconds < 60) secondsPart
+                   else "${((totalSeconds / 60) * 60_000).formatDurationMs(context)} $secondsPart"
     return if (showEndTime) "$duration (${toClockTime(context)})" else duration
 }
 
@@ -83,12 +105,17 @@ fun Long.toRelativeTime(): String {
 
 /**
  * Format a raw millisecond duration (not an epoch) as a human-readable string, e.g. "2h 30m",
- * "45m", or "1mo 1w 1d 8h 54m". Zero-valued units are omitted; months are 30 days.
+ * "45m", or "1mo 1w 1d 8h 54m". Zero-valued units are omitted; months are 30 days. Unit
+ * suffixes come from string resources so each locale can abbreviate its own way (issue #1399).
  */
-fun Long.formatDurationMs(): String {
+fun Long.formatDurationMs(context: android.content.Context): String =
+    formatDurationMs { resId, value -> context.getString(resId, value) }
+
+/** Testable core of [formatDurationMs]; [unitString] renders one unit from its template resource. */
+internal fun Long.formatDurationMs(unitString: (Int, Long) -> String): String {
     val totalSeconds = this / 1_000
     var rem = totalSeconds / 60
-    if (rem == 0L) return "${totalSeconds}s"
+    if (rem == 0L) return unitString(R.string.duration_seconds, totalSeconds)
     val minutesPerDay = 24L * 60
     val months = rem / (30 * minutesPerDay); rem %= 30 * minutesPerDay
     val weeks  = rem / (7 * minutesPerDay);  rem %= 7 * minutesPerDay
@@ -96,11 +123,11 @@ fun Long.formatDurationMs(): String {
     val hours  = rem / 60
     val minutes = rem % 60
     return buildList {
-        if (months  > 0) add("${months}mo")
-        if (weeks   > 0) add("${weeks}w")
-        if (days    > 0) add("${days}d")
-        if (hours   > 0) add("${hours}h")
-        if (minutes > 0) add("${minutes}m")
+        if (months  > 0) add(unitString(R.string.duration_months, months))
+        if (weeks   > 0) add(unitString(R.string.duration_weeks, weeks))
+        if (days    > 0) add(unitString(R.string.duration_days, days))
+        if (hours   > 0) add(unitString(R.string.duration_hours, hours))
+        if (minutes > 0) add(unitString(R.string.duration_minutes, minutes))
     }.joinToString(" ")
 }
 

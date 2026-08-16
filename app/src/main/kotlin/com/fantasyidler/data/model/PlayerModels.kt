@@ -165,6 +165,10 @@ data class PlayerFlags(
     @SerialName("show_session_end_time") val showSessionEndTime: Boolean = true,
     /** Gold quest dots on the Skills tab icons; some players prefer them off (discussion #1386). */
     @SerialName("show_quest_dots") val showQuestDots: Boolean = true,
+    /** Whether to abbreviate large item quantities/numbers (e.g. 2.46M vs 2,461,940). */
+    @SerialName("compact_numbers") val compactNumbers: Boolean = false,
+    /** Shop: bulk and manual sells always leave one of each item for collectors. */
+    @SerialName("shop_keep_one_of_each") val shopKeepOneOfEach: Boolean = false,
     /** Epoch ms when this character was created; 0 for pre-existing characters until backfilled
      *  from their oldest quest completion (sessions are deleted on collect, so quest timestamps
      *  are the oldest surviving record). */

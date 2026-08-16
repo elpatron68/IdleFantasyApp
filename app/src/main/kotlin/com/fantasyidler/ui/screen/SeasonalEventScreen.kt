@@ -271,6 +271,7 @@ private fun MinigameModeSelector(
     cooldownMs: Long,
     sequenceMode: Boolean = false,
 ) {
+    val context = LocalContext.current
     Column {
         Row(
             modifier              = Modifier.fillMaxWidth(),
@@ -298,7 +299,7 @@ private fun MinigameModeSelector(
         Text(
             text  = stringResource(
                 if (sequenceMode) R.string.seasonal_minigame_sequence_mode_caption else R.string.seasonal_minigame_mode_caption,
-                visibleMs, cooldownMs.formatDurationMs(),
+                visibleMs, cooldownMs.formatDurationMs(context),
             ),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,

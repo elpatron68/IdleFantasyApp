@@ -128,6 +128,14 @@ class SettingsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
+    val compactNumbers: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map false
+            try { json.decodeFromString<PlayerFlags>(player.flags).compactNumbers }
+            catch (_: Exception) { false }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
+
     val showJournalButton: StateFlow<Boolean> = playerRepo.playerFlow
         .map { player ->
             if (player == null) return@map true
@@ -202,6 +210,13 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(showQuestDots = enabled))
+        }
+    }
+
+    fun setCompactNumbers(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(compactNumbers = enabled))
         }
     }
 

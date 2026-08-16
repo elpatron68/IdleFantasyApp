@@ -212,7 +212,7 @@ internal fun BonusesTab(
             item { SlotSectionHeader(stringResource(R.string.bonus_section_boosts)) }
             if (boostActive) {
                 item {
-                    val remaining = (state.xpBoostExpiresAt - now).formatDurationMs()
+                    val remaining = (state.xpBoostExpiresAt - now).formatDurationMs(context)
                     BonusRow(
                         name   = stringResource(R.string.label_xp_boost),
                         pct    = "+100%",
@@ -225,7 +225,7 @@ internal fun BonusesTab(
                 item {
                     val blessingName = context.stringByName("blessing_${state.activeBlessingKey}_name")
                         ?: state.activeBlessingKey.toTitleCase()
-                    val remaining = (state.activeBlessingExpiresAt - now).formatDurationMs()
+                    val remaining = (state.activeBlessingExpiresAt - now).formatDurationMs(context)
                     BonusRow(
                         name   = blessingName,
                         pct    = "+${state.activeBlessingXpPct}%",

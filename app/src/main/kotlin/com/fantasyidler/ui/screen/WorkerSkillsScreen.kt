@@ -687,7 +687,7 @@ private fun WorkerCraftRecipeRow(
             recipe.outputCombatStyle?.let { style ->
 
                 Text(
-                    text  = "${context.getString(R.string.label_combat_style)}: ${style.replaceFirstChar { it.uppercase() }}",
+                    text  = "${context.getString(R.string.label_combat_style)}: ${GameStrings.skillName(context, style)}",
                     style = MaterialTheme.typography.labelSmall,
                     color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant else dim,
                 )
@@ -871,7 +871,7 @@ private fun WorkerCraftQuantityContent(
         )
         if (state.sessionDurationMs > 0) {
             Text(
-                text     = "~${(qty.toLong() * (state.sessionDurationMs / 60)).formatDurationMs()}",
+                text     = "~${(qty.toLong() * (state.sessionDurationMs / 60)).formatDurationMs(context)}",
                 style    = MaterialTheme.typography.bodySmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
