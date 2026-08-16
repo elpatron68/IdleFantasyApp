@@ -73,6 +73,8 @@ def run_update():
 
         clone_wiki(wiki_dir)
         write_pages(wiki_dir, pages)
+        for path, image in get_image_directory().items():
+            shutil.copyfile(path, wiki_dir / image)
         commit_and_push(wiki_dir)
         print("Done.")
 

@@ -87,12 +87,12 @@ See the [contributors graph](https://github.com/tristinbaker/IdleFantasy/graphs/
 
 **Language:** Kotlin
 **UI:** Jetpack Compose + Material 3  
-**Database:** Room (SQLite)
-**Background work:** WorkManager
+**Database:** Room (SQLite)  
+**Background work:** WorkManager  
 **JSON parsing:** kotlinx.serialization  
 **Architecture:** MVVM + Repository  
-**Dependency injection:** Hilt
-**Notifications:** NotificationCompat
+**Dependency injection:** Hilt  
+**Notifications:** NotificationCompat  
 **Localization:** Android string resources (Weblate-compatible)
 
 No Google Play Services dependency. F-Droid compatible.

@@ -437,6 +437,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Systemowy</string>
     <string name="settings_save_data">Dane zapisu</string>
     <string name="settings_export">Eksportuj zapis</string>
@@ -719,7 +721,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">Odblokowanych grządek: %1$d</string>
     <string name="farming_clear_patch">Wyczyść grządkę</string>
-    <string name="farming_clear_desc">Usunąć uprawę bez żadnej nagrody?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Zbierz i zasadź wszystko</string>
     <string name="farming_harvest_all_complete">Zebrano wszystkie poletka!</string>
     <string name="farming_no_crops_ready">Brak upraw gotowych do zbioru</string>
@@ -982,7 +986,7 @@
     <string name="church_activate">Aktywuj</string>
     <string name="church_blessing_bonus">+%1$s z błogosławieństwa</string>
     <string name="church_blessing_suffix">z błogosławieństwa</string>
-    <string name="church_effect_xp">×%%1$.2f XP przez %2$d godz.</string>
+    <string name="church_effect_xp">×%1$.2f XP przez %2$d godz.</string>
     <string name="church_effect_def">+%1$d obrony przez %2$d godz.</string>
     <string name="church_effect_coins">+%1$d%% dropsy z monet przez %2$d godz.</string>
     <string name="church_cost_bones">Koszt: %1$d kości</string>
@@ -1411,6 +1415,7 @@
     <string name="farming_bean_ready">Łodyga fasoli sięga poza chmury. Gotowy się wspiąć?</string>
     <string name="farming_bean_climb">Wspinaj się</string>
     <string name="farming_bean_climbed">Wspiąłeś się po łodydze fasoli. Coś czeka…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Magiczną Fasolę można zasadzić tylko na jednej grządce</string>
 
@@ -1597,7 +1602,7 @@
     <string name="tower_milestone_claim">Odbierz</string>
     <string name="tower_milestone_claimed">Odebrano</string>
     <string name="tower_enemies_this_floor">Wrogowie</string>
-    <string name="tower_enemy_strength" formatted="false">Siła wroga: %s%</string>
+    <string name="tower_enemy_strength">Siła wroga: %1$s%%</string>
     <string name="tower_entry_card_desc">Nieskończone piętra. Jak wysoko się wspiąć?</string>
     <string name="tower_collect_prompt">Odbierz swój przebieg wieży</string>
     <string name="tower_home_collect_hint">Otwórz ekran Wieży, by odebrać ten przebieg</string>

@@ -437,6 +437,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Системный</string>
     <string name="settings_save_data">Сохранение данных</string>
     <string name="settings_export">Экспорт сохранения</string>
@@ -733,7 +735,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d участков открыто</string>
     <string name="farming_clear_patch">Очистить участок</string>
-    <string name="farming_clear_desc">Удалить культуру без награды?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Собрать и посадить всё</string>
     <string name="farming_harvest_all_complete">Все грядки собраны!</string>
     <string name="farming_no_crops_ready">Нет готовых к сбору культур</string>
@@ -996,7 +1000,7 @@
     <string name="church_activate">Активировать</string>
     <string name="church_blessing_bonus">+%1$s от благословения</string>
     <string name="church_blessing_suffix">от благословения</string>
-    <string name="church_effect_xp">×%%1$.2f опыта на %2$d ч.</string>
+    <string name="church_effect_xp">×%1$.2f опыта на %2$d ч.</string>
     <string name="church_effect_def">+%1$d Защиты на %2$d ч.</string>
     <string name="church_effect_coins">+%1$d%% монет с добычи на %2$d ч.</string>
     <string name="church_cost_bones">Стоимость: %1$d костей</string>
@@ -1425,6 +1429,7 @@
     <string name="farming_bean_ready">Бобовый стебель уходит за облака. Готовы взобраться?</string>
     <string name="farming_bean_climb">Взобраться</string>
     <string name="farming_bean_climbed">Вы взобрались по бобовому стеблю. Что-то ждёт вас…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Волшебные бобы можно посадить только на одну грядку</string>
 
@@ -1611,7 +1616,7 @@
     <string name="tower_milestone_claim">Получить</string>
     <string name="tower_milestone_claimed">Получено</string>
     <string name="tower_enemies_this_floor">Враги</string>
-    <string name="tower_enemy_strength" formatted="false">Сила врага: %s%</string>
+    <string name="tower_enemy_strength">Сила врага: %1$s%%</string>
     <string name="tower_entry_card_desc">Бесконечный подъем. Как высоко вы заберетесь?</string>
     <string name="tower_collect_prompt">Собери свой пробег по башне</string>
     <string name="tower_home_collect_hint">Откройте экран «Башня», чтобы собрать этот забег</string>

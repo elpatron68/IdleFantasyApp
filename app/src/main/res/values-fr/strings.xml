@@ -275,8 +275,8 @@
     <string name="settings_profile_layout_desc">Choisissez entre Liste (latérale) ou Onglets</string>
     <string name="settings_profile_layout_rail">Liste</string>
     <string name="settings_profile_layout_tabs">Onglets</string>
-    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
-    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_quest_dots">Point de quête sur aptitudes</string>
+    <string name="settings_quest_dots_desc">Montre un point doré sur les aptitudes qui ont une quête possible</string>
     <string name="settings_home_screen">Écran d\'Accueil</string>
     <string name="settings_home_screen_desc">Choisir ce qui apparaît sur l\'écran d\'accueil</string>
     <string name="settings_recent_activity">Journal d’activité récente</string>
@@ -316,12 +316,12 @@
     <string name="label_weekly_reset">Se réinitialise le lundi à %1$s</string>
     <string name="weekly_bonus_title">Bonus hebdomadaire !</string>
     <string name="weekly_bonus_claim">Réclamer le bonus hebdomadaire</string>
-    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
-    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
+    <string name="label_daily_info_pity">Chaque quête quotidienne donne des pièces. Chaque quête a aussi une chance sur ℅1$d de lâcher une pièce d\'un équipement nain que vous ne possédez pas. Chaque récompense sans objet lâché augment les chances ; un objet lâché les réinitialisent à 1 sur 100.</string>
+    <string name="label_daily_info_complete">"Chaque quête quotidienne donne des pièces. Vous possédez déjà tout l'équipement nain ! "</string>
     <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou %1$s de chance d\'obtenir un équipement divin.</string>
     <string name="label_weekly_info_complete">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces. Vous possédez déjà tout l\'équipement divin !</string>
-    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
-    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
+    <string name="label_daily_reward_pity">2,000 pièces (1/%1$d: équipement nain)</string>
+    <string name="label_daily_reward_complete">2,000 pièces</string>
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
     <string name="label_hide_completed">Masquer les tâches terminées</string>
@@ -408,6 +408,8 @@
     <string name="theme_editor_saved_ok">Thème enregistré et appliqué</string>
     <string name="theme_editor_exported_ok">Thème exporté</string>
     <string name="settings_language_desc">Remplacer la langue d’affichage de l’application</string>
+
+
 
 
 
@@ -675,7 +677,7 @@
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
-    <string name="quest_legend_gold_dot">Un quête temporaire est disponible.</string>
+    <string name="quest_legend_gold_dot">Une quête temporaire est disponible.</string>
     <string name="quest_legend_notes">Les icônes estompées ne peuvent pas encore être terminées (niveau ou matériaux manquants). Un petit chiffre en exposant indique que plusieurs quêtes de ce type visent la même chose.</string>
     <!-- Translator note: %1$d = quantity -->
     <string name="shop_qty_in_inv">×%1$d dans l\'inventaire</string>
@@ -717,7 +719,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d parcelles débloquées</string>
     <string name="farming_clear_patch">Arracher la parcelle</string>
-    <string name="farming_clear_desc">Enlever la culture sans récompense ?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Tout récolter et planter</string>
     <string name="farming_harvest_all_complete">Toutes les parcelles récoltées !</string>
     <string name="farming_no_crops_ready">Aucune culture prête à récolter</string>
@@ -734,7 +738,7 @@
     <string name="character_create_title">Créer votre personnage</string>
     <string name="character_edit_title">Modifier le personnage</string>
     <string name="character_name_label">Nom du personnage</string>
-    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
+    <string name="character_name_too_long">Seul les premières %1$d lettres seront utilisées.</string>
     <string name="character_gender">Genre</string>
     <string name="character_gender_male">Masculin</string>
     <string name="character_gender_female">Féminin</string>
@@ -980,7 +984,7 @@
     <string name="church_activate">Activer</string>
     <string name="church_blessing_bonus">+%1$s de la bénédiction</string>
     <string name="church_blessing_suffix">de la bénédiction</string>
-    <string name="church_effect_xp">×%%1$.2f XP pendant %2$d heures</string>
+    <string name="church_effect_xp">×%1$.2f XP pendant %2$d heures</string>
     <string name="church_effect_def">+%1$d Défense pendant %2$d heures</string>
     <string name="church_effect_coins">+%1$d%% de butin de pièces pendant %2$d heures</string>
     <string name="church_cost_bones">Coûte %1$d os</string>
@@ -1249,7 +1253,7 @@
     <string name="town_upgrade_next_label">Prochaine Amélioration</string>
     <string name="town_upgrade_constr_req">Construction Nv. %1$d requis</string>
     <string name="town_upgrade_cost">Coût : %1$s pièces</string>
-    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
+    <string name="town_builder_discount">Promotion du Constructeur: /%1$d%% en moins</string>
     <string name="town_upgrade_materials_header">Matériaux :</string>
     <string name="town_upgrade_btn">Améliorer</string>
     <string name="town_upgrade_success">Bâtiment amélioré !</string>
@@ -1405,6 +1409,7 @@
     <string name="farming_bean_ready">Le haricot magique s\'étend au-delà des nuages. Prêt à grimper ?</string>
     <string name="farming_bean_climb">Grimper</string>
     <string name="farming_bean_climbed">Vous avez grimpé le haricot magique. Quelque chose vous attend…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Les haricots magiques ne peuvent être plantés que sur une parcelle</string>
 
@@ -1518,7 +1523,7 @@
     <string name="bonus_session_shorter">%1$d min de sessions en moins</string>
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
-    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% en moins sur le coût d\'amélioration de bâtiments</string>
 
     <string name="bonus_coin_drops">+%1$d%% pièces obtenues</string>
     <string name="bonus_hp">+%1$d PV</string>
@@ -1591,7 +1596,7 @@
     <string name="tower_milestone_claim">Réclamer</string>
     <string name="tower_milestone_claimed">Réclamé</string>
     <string name="tower_enemies_this_floor">Ennemis</string>
-    <string name="tower_enemy_strength" formatted="false">Puissance ennemie : %s%</string>
+    <string name="tower_enemy_strength">Puissance ennemie: %1$s%%</string>
     <string name="tower_entry_card_desc">Des étages sans fin. Jusqu\'où peux-tu grimper ?</string>
     <string name="tower_collect_prompt">Enregistrez votre parcours dans Tour de l\'Infini</string>
     <string name="tower_home_collect_hint">Ouvre l\'écran « Tour » pour enregistrer cette partie</string>
@@ -1760,15 +1765,15 @@
     <string name="title_master_farmer_name">Maître Fermier</string>
     <string name="title_master_farmer_requirement">Atteindre le niveau max de la Guilde des Agriculteurs</string>
     <string name="settings_art_credits">Crédits artistiques</string>
-    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
+    <string name="settings_art_credits_desc">L\'artiste derrière l\'art du jeu</string>
     <string name="settings_credit_banners_title">Bannières saisonnières</string>
     <string name="settings_credit_banners_subtitle">Illustrations de Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Icônes des Aptitudes</string>
 
-    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
-    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
-    <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
-    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
+    <string name="settings_credit_characters_title">Animation du personnage</string>
+    <string name="settings_credit_characters_subtitle">Art par Pixylac</string>
+    <string name="settings_credit_bosses_title">Animation des boss</string>
+    <string name="settings_credit_bosses_subtitle">Art par Meg</string>
     <string name="title_seasonal_champion_of">Champion de %1$s</string>
     <string name="title_seasonal_requirement">Terminez l\'Événement Saisonnier %1$s</string>
     <string name="home_welcome_greeting">Bon retour,</string>
@@ -1790,7 +1795,7 @@
     <string name="pet_tiny_templar_desc">Un petit compagnon poisson qui augmente votre XP de Pêche.</string>
     <string name="pet_tangleroot_name">Créature végétale</string>
     <string name="pet_tangleroot_desc">Une créature végétale magique qui améliore votre XP d’Agriculture.</string>
-    <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_name">Braisette Gothique</string>
     <string name="pet_baby_balrog_desc">Un minuscule démon de feu et d\'ombre qui renforce votre magie.</string>
     <string name="pet_void_wisp_name">Feu Follet du Vide</string>
     <string name="pet_void_wisp_desc">Un fragment de l\'essence du Souverain du Vide, lié à ceux qui ont vaincu son maître. Amplifie l\'expérience de combat.</string>
@@ -1839,7 +1844,7 @@
     <string name="save_slot_combat_level">Niveau de combat %1$d</string>
     <string name="save_slot_total_level">Niveau total %1$d</string>
     <string name="save_slot_last_played">il y a %1$s</string>
-    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
+    <string name="save_slot_created">Créé il y a %1$s ans</string>
     <string name="save_slot_switch_title">Changer de personnage ?</string>
     <string name="save_slot_switch_body">Jouer avec %1$s ? Votre personnage actuel est sauvegardé automatiquement.</string>
     <string name="save_slot_switch_btn">Changer</string>

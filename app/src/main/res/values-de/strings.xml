@@ -423,6 +423,8 @@
 
 
 
+
+
     <string name="settings_lang_system">System</string> <!-- untranslated -->
     <string name="settings_save_data">Daten speichern</string>
     <string name="settings_export">Daten exportieren</string>
@@ -717,7 +719,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d Äcker freigeschaltet</string>
     <string name="farming_clear_patch">Acker pflügen</string>
-    <string name="farming_clear_desc">Wollt Ihr diese Saat wirklich vernichten?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Alles ernten und aussähen</string>
     <string name="farming_harvest_all_complete">Alle Felder abgeerntet!</string>
     <string name="farming_no_crops_ready">Nichts zu ernten</string>
@@ -980,7 +984,7 @@
     <string name="church_activate">Segen empfangen</string>
     <string name="church_blessing_bonus">+%1$s durch Segen</string>
     <string name="church_blessing_suffix">durch Segen</string>
-    <string name="church_effect_xp">×%%1$.2f EP für %2$d Stunden</string>
+    <string name="church_effect_xp">×%1$.2f EP für %2$d Stunden</string>
     <string name="church_effect_def">+%1$d Verteidigung für %2$d Stunden</string>
     <string name="church_effect_coins">+%1$d%% mehr Münzen für %2$d Stunden</string>
     <string name="church_cost_bones">Kostet %1$d Knochen</string>
@@ -1405,6 +1409,7 @@
     <string name="farming_bean_ready">Der Bohnenstängel reicht über die Wolken hinaus. Bereit zu klettern?</string>
     <string name="farming_bean_climb">Klettern</string>
     <string name="farming_bean_climbed">Ihr habt den Bohnenstängel erklommen. Etwas wartet…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Magische Bohnen können nur auf einem Feld gepflanzt werden</string>
 
@@ -1591,7 +1596,7 @@
     <string name="tower_milestone_claim">Einfordern</string>
     <string name="tower_milestone_claimed">Eingefordert</string>
     <string name="tower_enemies_this_floor">Gegner</string>
-    <string name="tower_enemy_strength" formatted="false">Gegner-Stärke: %s%</string>
+    <string name="tower_enemy_strength">Gegner-Stärke: %1$s%%</string>
     <string name="tower_entry_card_desc">Endlose Etagen. Wie weit könnt Ihr ihn erklimmen?</string>
     <string name="tower_collect_prompt">Sammelt die Beute Eures Turmbesuchs ein</string>
     <string name="tower_home_collect_hint">Betretet den Turm um Eure Beute einzusammeln</string>

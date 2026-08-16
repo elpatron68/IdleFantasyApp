@@ -416,6 +416,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Sistem</string>
     <string name="settings_save_data">Simpan Data</string>
     <string name="settings_export">Ekspor Simpan</string>
@@ -709,7 +711,9 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d lahan terbuka</string>
     <string name="farming_clear_patch">Kosongkan Lahan</string>
-    <string name="farming_clear_desc">Membuang hasil panen tanpa imbalan apa pun?</string>
+    <!-- Translator note: %1$s = crop name -->
+    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
+    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Panen dan Tanam Semuanya</string>
     <string name="farming_harvest_all_complete">Semua Petak Dipanen!</string>
     <string name="farming_no_crops_ready">Tidak ada tanaman yang siap panen.</string>
@@ -972,7 +976,7 @@
     <string name="church_activate">Mengaktifkan</string>
     <string name="church_blessing_bonus">+%1$s dari berkah</string>
     <string name="church_blessing_suffix">dari berkat</string>
-    <string name="church_effect_xp">×%%1$.2f XP selama %2$d jam</string>
+    <string name="church_effect_xp">×%1$.2f XP selama %2$d jam</string>
     <string name="church_effect_def">+%1$d Pertahanan selama %2$d jam</string>
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
     <string name="church_cost_bones">Biaya %1$d tulang</string>
@@ -1397,6 +1401,7 @@
     <string name="farming_bean_ready">Pohon kacang raksasa itu menjulang hingga melampaui awan. Siap mendaki?</string>
     <string name="farming_bean_climb">Mendaki</string>
     <string name="farming_bean_climbed">Kau telah mendaki pohon kacang raksasa. Sesuatu menanti…</string>
+    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
 
     <string name="farming_magic_bean_one_plot">Kacang Ajaib hanya dapat ditanam di satu petak saja.</string>
 
@@ -1583,7 +1588,7 @@
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Enemies</string> <!-- untranslated -->
-    <string name="tower_enemy_strength" formatted="false">Enemy strength: %s%</string> <!-- untranslated -->
+    <string name="tower_enemy_strength">Enemy strength: %1$s%%</string> <!-- untranslated -->
     <string name="tower_entry_card_desc">Endless floors. How far can you climb?</string> <!-- untranslated -->
     <string name="tower_collect_prompt">Collect your tower run</string> <!-- untranslated -->
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->

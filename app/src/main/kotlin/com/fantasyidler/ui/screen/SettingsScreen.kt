@@ -677,6 +677,8 @@ private fun LanguageSection() {
         "ja"     to stringResource(R.string.settings_lang_japanese),
         "ga"     to stringResource(R.string.settings_lang_irish),
         "cs"     to stringResource(R.string.settings_lang_czech),
+        "pl"     to stringResource(R.string.settings_lang_polish),
+        "lt"     to stringResource(R.string.settings_lang_lithuanian),
         "zh-CN"  to stringResource(R.string.settings_lang_chinese_simplified),
         "system" to stringResource(R.string.settings_lang_system),
     )

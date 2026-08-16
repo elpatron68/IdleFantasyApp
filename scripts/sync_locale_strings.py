@@ -33,6 +33,12 @@ MARKER = "<!-- untranslated -->"
 report = []
 
 
+# Full positional Java format specifier: %1$d, %1$s, but also flag/width/
+# precision forms like %1$.2f or %1$,d. A letter-only tail check would
+# misread those as literal percents and corrupt them into %%.
+SPEC_RE = re.compile(r"%\d+\$[-#+ 0,(]*\d*(?:\.\d+)?[a-zA-Z]")
+
+
 def canon_percents(text, formatted):
     """Collapse %% runs to literal %, then re-escape iff formatted."""
     out, i, n = [], 0, len(text)
@@ -42,10 +48,10 @@ def canon_percents(text, formatted):
             out.append(c)
             i += 1
             continue
-        m = re.match(r"%\d+\$[a-zA-Z]", text[i:])
+        m = SPEC_RE.match(text, i)
         if m:
             out.append(m.group(0))
-            i += len(m.group(0))
+            i = m.end()
             continue
         # A %-run that is not a specifier means literal percents. Consume the
         # run pairwise so a specifier straight after an escape (%%%1$d)
@@ -53,7 +59,7 @@ def canon_percents(text, formatted):
         # any leftover odd % merges into the same single literal.
         j = i
         while j < n and text[j] == "%":
-            if re.match(r"%\d+\$[a-zA-Z]", text[j:]):
+            if SPEC_RE.match(text, j):
                 break
             j += 1
         out.append("%%" if formatted else "%")
