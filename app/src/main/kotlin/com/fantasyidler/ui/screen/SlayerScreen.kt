@@ -77,6 +77,7 @@ private val SHOP_ITEMS = listOf(
     ShopItem("abyssal_whip",       R.string.item_abyssal_whip_name, R.string.item_abyssal_whip_desc,  cost = 300, isEquipment = true),
     ShopItem("slayer_platebody",   R.string.item_slayer_platebody_name, R.string.item_slayer_platebody_desc, cost = 350, isEquipment = true),
     ShopItem("slayer_platelegs",   R.string.item_slayer_platelegs_name, R.string.item_slayer_platelegs_desc, cost = 250, isEquipment = true),
+    ShopItem("slayer_plateskirt",   R.string.item_slayer_plateskirt_name, R.string.item_slayer_plateskirt_desc, cost = 250, isEquipment = true),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

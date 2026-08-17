@@ -67,7 +67,7 @@
     <string name="bestiary_not_encountered">Non ancora incontrato</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="bestiary_encountered_progress">%1$d / %2$d incontrati</string>
     <string name="bestiary_always_drops">Bottino garantito</string>
     <string name="bestiary_rare_drops">Bottino raro</string>
     <string name="bestiary_common_loot">Bottino tipico</string>
@@ -83,8 +83,8 @@
     <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
     <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
     <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
-    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
-    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
+    <string name="home_dungeon_died_title">%1$s — Sei Morto</string>
+    <string name="home_dungeon_complete_title">%1$s Completato!</string>
     <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
     <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
     <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
@@ -149,6 +149,7 @@
     <string name="label_available_quests">Disponibili</string>
     <string name="label_stats">Statistiche</string>
     <string name="label_skills">Abilità</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
     <string name="label_shop">Emporio</string>
     <string name="label_sell_items">Vendi Oggetti</string>
     <string name="label_total_level">Livello Totale</string>
@@ -302,7 +303,9 @@
     <string name="settings_profile_layout_tabs">Schede</string>
     <string name="settings_quest_dots">Indicatori missione</string>
     <string name="settings_quest_dots_desc">Mostra un indicatore quando una missione è disponibile</string>
-    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_compact_numbers">Numeri Compatti</string>
     <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Schermata Principale</string>
     <string name="settings_home_screen_desc">Scegli cosa mostrare nella schermata principale</string>
@@ -695,11 +698,11 @@
     <string name="shop_sell_junk">Vendi Spazzatura</string>
     <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
     <string name="shop_search_hint">Search items</string> <!-- untranslated -->
-    <string name="shop_filter_all">All</string> <!-- untranslated -->
+    <string name="shop_filter_all">Tutti</string>
     <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_none">Nothing to sell.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_none">Niente da vendere.</string>
     <string name="shop_sell_old_gear">Vendi Vecchi Armamenti</string>
     <string name="shop_equipped_label">(equipaggiato)</string>
     <string name="shop_item_locked">%1$s è bloccato. Tieni premuto per sbloccare.</string>
@@ -1826,7 +1829,7 @@
     <string name="title_seasonal_champion_of">Campione di %1$s</string>
     <string name="title_seasonal_requirement">Completa l\'Evento Stagionale %1$s</string>
     <string name="home_welcome_greeting">Bentornato,</string>
-
+    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
     <string name="home_welcome_title">Il %1$s!</string>
 
     <!-- Pet names and descriptions -->

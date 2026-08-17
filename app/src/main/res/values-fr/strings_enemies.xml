@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ===== Enemy names ===== -->
-    <string name="enemy_giant_rat_name">Rat géant</string>
+    <string name="enemy_giant_rat_name">Rat Géant</string>
     <string name="enemy_goblin_name">Gobelin</string>
     <string name="enemy_skeleton_name">Squelette</string>
-    <string name="enemy_zombie_name">Zombie</string> <!-- untranslated -->
-    <string name="enemy_bandit_name">Bandit</string> <!-- untranslated -->
+    <string name="enemy_zombie_name">Zombie</string>
+    <string name="enemy_bandit_name">Bandit</string>
     <string name="enemy_guard_name">Garde</string>
-    <string name="enemy_dark_wizard_name">Sorcier noir</string>
-    <string name="enemy_orc_warrior_name">Guerrier orc</string>
-    <string name="enemy_spider_name">Araignée géante</string>
-    <string name="enemy_wild_monkey_name">Singe sauvage</string>
+    <string name="enemy_dark_wizard_name">Sorcier Noir</string>
+    <string name="enemy_orc_warrior_name">Guerrier Orque</string>
+    <string name="enemy_spider_name">Araignée Géante</string>
+    <string name="enemy_wild_monkey_name">Singe Sauvage</string>
     <string name="enemy_rogue_name">Brigand</string>
     <string name="enemy_knight_name">Chevalier</string>
-    <string name="enemy_hellhound_name">Chien des enfers</string>
-    <string name="enemy_troll_name">Troll des montagnes</string>
+    <string name="enemy_hellhound_name">Chien des Enfers</string>
+    <string name="enemy_troll_name">Troll des Montagnes</string>
     <string name="enemy_demon_name">Démon Insignifiant</string>
-    <string name="enemy_dragon_name">Dragon vert</string>
+    <string name="enemy_dragon_name">Dragon Vert</string>
     <string name="enemy_imp_name">Diablotin</string>
     <string name="enemy_chicken_name">Poulet</string>
     <string name="enemy_sheep_name">Mouton</string>
@@ -70,34 +70,34 @@
     <string name="enemy_abyssal_guardian_name">Gardien Abyssal</string>
     <string name="enemy_shadow_thief_name">Voleur des Ombres</string>
     <string name="enemy_elder_lich_name">Liche Ancienne</string>
-    <string name="enemy_assassin_name">Assassin</string> <!-- untranslated -->
+    <string name="enemy_assassin_name">Assassin</string>
     <string name="enemy_shadow_assassin_name">Assassin de l\'Ombre</string>
     <string name="enemy_vault_guardian_name">Gardien de la Chambre Forte</string>
     <string name="enemy_guild_master_name">Grand Maître de la Guilde</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
-    <string name="dungeon_imp_cavern_name">Caverne des diablotins</string>
+    <string name="dungeon_imp_cavern_name">Caverne des Diablotins</string>
     <string name="dungeon_imp_cavern_desc">Une grotte peu profonde peuplée de petits diablotins espiègles. Idéal pour les débutants !</string>
     <string name="dungeon_goblin_cave_name">Cave des gobelins</string>
-    <string name="dungeon_goblin_cave_desc">Une grotte sombre infestée de gobelins et de rats géants. Un endroit idéal pour que les nouveaux aventuriers s’entraînent.</string>
+    <string name="dungeon_goblin_cave_desc">Une grotte sombre infestée de gobelins et de rats géants. Un endroit idéal pour que les nouveaux aventuriers s\'entraînent.</string>
     <string name="dungeon_spider_den_name">Repaire des araignées</string>
-    <string name="dungeon_spider_den_desc">Une caverne remplie de toiles d’araignées, grouillant d’araignées venimeuses. N’oubliez pas l’antivenin !</string>
+    <string name="dungeon_spider_den_desc">Une caverne remplie de toiles d\'araignées, grouillant d\'araignées venimeuses. N\'oubliez pas l\'antivenin !</string>
     <string name="dungeon_bandit_camp_name">Camp de bandits</string>
     <string name="dungeon_bandit_camp_desc">Un repaire de voleurs et de brigands en pleine nature. Surveillez bien votre bourse !</string>
-    <string name="dungeon_undead_crypt_name">Cryptes des morts-vivants</string>
+    <string name="dungeon_undead_crypt_name">Cryptes des Morts-vivants</string>
     <string name="dungeon_undead_crypt_desc">Une ancienne nécropole où les morts refusent de reposer en paix. Méfiez-vous de la magie noire !</string>
     <string name="dungeon_fortress_ruins_name">Ruines de la forteresse</string>
-    <string name="dungeon_fortress_ruins_desc">Les ruines délabrées d’un ancien château, maintenant gardées par des chevaliers et des soldats.</string>
+    <string name="dungeon_fortress_ruins_desc">Les ruines délabrées d\'un ancien château, maintenant gardées par des chevaliers et des soldats.</string>
     <string name="dungeon_orc_stronghold_name">Forteresse des orcs</string>
     <string name="dungeon_orc_stronghold_desc">Une forteresse orc située au cœur des montagnes. Seuls les braves osent y entrer.</string>
-    <string name="dungeon_volcanic_depths_name">Profondeurs volcaniques</string>
+    <string name="dungeon_volcanic_depths_name">Profondeurs Volcaniques</string>
     <string name="dungeon_volcanic_depths_desc">Une cavité brûlante habitée par des chiens de feu et des démons insignifiants. La chaleur y est insupportable !</string>
-    <string name="dungeon_dragon_lair_name">Repaire du dragon</string>
+    <string name="dungeon_dragon_lair_name">Repaire du Dragon</string>
     <string name="dungeon_dragon_lair_desc">La demeure légendaire des dragons verts. Seuls les maîtres guerriers survivent à ce défi.</string>
     <string name="dungeon_farm_name">Ferme</string>
     <string name="dungeon_farm_desc">Une ferme paisible avec du bétail. Parfait pour les débutants souhaitant récolter de la nourriture !</string>
     <string name="dungeon_infernal_stronghold_name">Forteresse infernale</string>
-    <string name="dungeon_infernal_stronghold_desc">Une forteresse de feu et de soufre, contrôlée par des démons et des chiens de l’enfer. La chaleur seule peut tuer les non préparés.</string>
+    <string name="dungeon_infernal_stronghold_desc">Une forteresse de feu et de soufre, contrôlée par des démons et des chiens de l\'enfer. La chaleur seule peut tuer les non préparés.</string>
     <string name="dungeon_ancient_temple_name">Temple ancien</string>
     <string name="dungeon_ancient_temple_desc">Un temple ancien gardé par les créatures les plus puissantes du royaume. Seuls les guerriers les plus forts osent y entrer.</string>
     <string name="dungeon_void_rift_name">Faille du Vide</string>
@@ -111,18 +111,18 @@
     <string name="dungeon_sunspire_name">La Flèche du Soleil</string>
     <string name="dungeon_sunspire_desc">Les ruines d\'une tour solaire, fendues par le solstice, déversant des esprits de chaleur dans la région. Fait partie de l\'événement du Solstice de la Flèche du Soleil.</string>
     <string name="dungeon_hollowfen_name">Le Marais Creux</string>
-    <string name="dungeon_hollowfen_desc">Un marais noyé de brume, où reposent des tertres engloutis et où les morts de la moisson marchent encore. Fait partie de l’événement de la Sombre Moisson.</string>
+    <string name="dungeon_hollowfen_desc">Un marais noyé de brume, où reposent des tertres engloutis et où les morts de la moisson marchent encore. Fait partie de l\'événement de la Sombre Moisson.</string>
     <string name="dungeon_cloud_kingdom_name">Royaume de Nuage</string>
     <string name="dungeon_cloud_kingdom_desc">Un royaume au-dessus des nuages, que l\'on atteint en grimpant le long d\'un légendaire haricot géant. Des géants arpentent de vastes îles flottantes, des serpents célestes dérivent entre les bancs de nuages ​​et des diablotins de tempête crépitent d\'une énergie agitée. Rares sont ceux qui l\'ont vu. Plus rares encore sont ceux qui en sont revenus pour le raconter.</string>
     <string name="dungeon_blightwood_name">Le Bois Flétri</string>
     <string name="dungeon_blightwood_desc">Une forêt en décomposition située bien au-delà du Marais Creux, où se rassemblent les horreurs les plus redoutables de la Sombre Moisson. Fait partie de l\'événement de la Sombre Moisson.</string>
 
     <!-- ===== Raid bosses ===== -->
-    <string name="boss_king_black_dragon_name">Roi dragon noir</string>
+    <string name="boss_king_black_dragon_name">Roi Dragon Noir</string>
     <string name="boss_king_black_dragon_desc">Le légendaire dragon à trois têtes, craint dans tout le royaume.</string>
-    <string name="boss_demon_lord_name">Seigneur démon</string>
+    <string name="boss_demon_lord_name">Seigneur Démon</string>
     <string name="boss_demon_lord_desc">Un ancien démon des abysses, maître de la magie noire.</string>
-    <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="boss_kraken_name">Kraken</string>
     <string name="boss_kraken_desc">La terreur des mers profondes, un monstre marin colossal.</string>
     <string name="boss_balrog_name">Braise Gothique</string>
     <string name="boss_balrog_desc">Un ancien démon de flammes et d\'ombres, réveillé de son sommeil profond sous la terre.</string>
@@ -136,22 +136,22 @@
     <string name="boss_the_vault_guardian_desc">Un colosse d\'or vivant, éveillé par l\'embrasement de la Flamme éternelle. Seuls les mécènes du Grand Monument peuvent l\'affronter.</string>
 
     <!-- ===== Expedition-unlocked dungeon names ===== -->
-    <string name="dungeon_collapsed_mine_name">Mine effondrée</string>
+    <string name="dungeon_collapsed_mine_name">Mine Effondrée</string>
     <string name="dungeon_collapsed_mine_desc">Une vaste caverne sous les mines de cuivre. Des trolls des cavernes et des golems de pierre hantent les décombres, et de grandes araignées tissent leurs toiles dans les galeries effondrées.</string>
-    <string name="dungeon_shadow_den_name">Repaire des ombres</string>
+    <string name="dungeon_shadow_den_name">Repaire des Ombres</string>
     <string name="dungeon_shadow_den_desc">Un réseau de chambres souterraines utilisé par la guilde des voleurs de la région. Des brigands, des assassins et des créatures des ombres se tapissent dans chaque recoin.</string>
     <string name="dungeon_abyssal_ruins_name">Ruines Abyssales</string>
-    <string name="dungeon_abyssal_ruins_desc">D’anciennes ruines qui existent simultanément au-dessus et en dessous du plan mortel. D’étranges créatures abyssales se matérialisent et disparaissent de la réalité.</string>
+    <string name="dungeon_abyssal_ruins_desc">D\'anciennes ruines qui existent simultanément au-dessus et en dessous du plan mortel. D\'étranges créatures abyssales se matérialisent et disparaissent de la réalité.</string>
     <string name="dungeon_ancient_forest_ruins_name">Ruines de la Forêt Ancienne</string>
     <string name="dungeon_ancient_forest_ruins_desc">Des ruines de pierre engloutries par la forêt primordiale, maintenant hantées par des créatures sauvages et des esprits vengeurs de druides.</string>
     <string name="dungeon_ancient_forge_name">Ancienne Forge</string>
-    <string name="dungeon_ancient_forge_desc">Une immense forge naine qui brûle depuis des siècles sans s’arrêter. Des élémentaires de feu et des gardiens de forge protègent ses secrets.</string>
+    <string name="dungeon_ancient_forge_desc">Une immense forge naine qui brûle depuis des siècles sans s\'arrêter. Des élémentaires de feu et des gardiens de forge protègent ses secrets.</string>
     <string name="dungeon_arcane_ruins_name">Ruines Arcaniques</string>
-    <string name="dungeon_arcane_ruins_desc">Les chambres souterraines fonctionnelles d’une tour de magicien détruite. Des constructions magiques et des gardiens enchantés patrouillent encore ses couloirs.</string>
+    <string name="dungeon_arcane_ruins_desc">Les chambres souterraines fonctionnelles d\'une tour de magicien détruite. Des constructions magiques et des gardiens enchantés patrouillent encore ses couloirs.</string>
     <string name="dungeon_corrupted_sanctum_name">Sanctuaire Corrompu</string>
-    <string name="dungeon_corrupted_sanctum_desc">Un sanctuaire baigné d’ombre au cœur de la canopée corrompue. Des prêtres sombres et des bêtes corrompues gardent un ancien mal.</string>
+    <string name="dungeon_corrupted_sanctum_desc">Un sanctuaire baigné d\'ombre au cœur de la canopée corrompue. Des prêtres sombres et des bêtes corrompues gardent un ancien mal.</string>
     <string name="dungeon_drowned_temple_name">Temple Englouti</string>
-    <string name="dungeon_drowned_temple_desc">Un temple submergé sous la grotte marine, ses salles remplies d’eau et de créatures marines qui en ont fait leur demeure.</string>
+    <string name="dungeon_drowned_temple_desc">Un temple submergé sous la grotte marine, ses salles remplies d\'eau et de créatures marines qui en ont fait leur demeure.</string>
     <string name="dungeon_rogue_sanctum_name">Sanctuaire des Malfrats</string>
     <string name="dungeon_rogue_sanctum_desc">Le refuge intérieur de la guilde, accessible uniquement aux membres éprouvés.</string>
     <string name="dungeon_guild_of_shadows_name">Guilde des Ombres</string>

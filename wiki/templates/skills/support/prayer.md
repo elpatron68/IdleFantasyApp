@@ -4,4 +4,4 @@ Bury bones to earn Prayer XP. Higher-tier bones give more XP. Ashes from Firemak
 
 {prayer_table}
 
-> Tip: Dragon and superior bones give the most XP per session. Farm higher-level dungeons for better bone drops.
+> Tip: Dragon and giant bones give the most XP per session. Farm higher-level dungeons for better bone drops.

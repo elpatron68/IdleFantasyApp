@@ -321,6 +321,8 @@
     <string name="item_slayer_platebody_desc">Ciężka zbroja pokryta runami Slayer.</string>
     <string name="item_slayer_platelegs_name">Nogawice Slayer</string>
     <string name="item_slayer_platelegs_desc">Ochronne nogawice stworzone do długich wypraw do lochów.</string>
+    <string name="item_slayer_plateskirt_name">Slayer Plateskirt</string> <!-- untranslated -->
+    <string name="item_slayer_plateskirt_desc">Protective skirt crafted for extended dungeon runs.</string> <!-- untranslated -->
 
     <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Brązowy Kilof</string>
@@ -1063,6 +1065,8 @@
     <string name="item_tower_body_desc">Impenetrable armour from the tower\'s inner sanctum.</string> <!-- untranslated -->
     <string name="item_tower_legs_name">Tower Greaves</string> <!-- untranslated -->
     <string name="item_tower_legs_desc">Greaves forged in the tower\'s deepest forge.</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_name">Tower Plateskirt</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_desc">A plateskirt forged in the tower\'s deepest forge.</string> <!-- untranslated -->
     <string name="item_tower_boots_name">Tower Boots</string> <!-- untranslated -->
     <string name="item_tower_boots_desc">Boots forged in the tower\'s deepest forge.</string> <!-- untranslated -->
     <string name="item_tower_shield_name">Tower Shield</string> <!-- untranslated -->

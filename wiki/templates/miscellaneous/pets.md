@@ -1,6 +1,6 @@
 # Pets
 
-Pets are rare drops from dungeons and bosses. Each pet provides a permanent passive bonus once collected. Duplicates are automatically converted to coins.
+Pets are rare rewards found throughout the game — raid drops, skill session loot, and prizes from special content like the Carnival shop. Each pet provides a permanent passive bonus once collected.
 
 {pet_table}
 

@@ -170,6 +170,13 @@ fun CombatScreen(
         }
 
         val combatSession = state.combatSession
+        val skillsPrestigeReadyCount = if (state.ironman || !state.showPrestigeNotifications) 0 else COMBAT_SKILLS.count { key ->
+            (state.skillLevels[key] ?: 1) >= 99 && (state.skillPrestige[key] ?: 0) < 3
+        }
+        val skillsTabLabel = if (skillsPrestigeReadyCount > 0)
+            stringResource(R.string.tab_label_with_count, stringResource(R.string.label_skills), skillsPrestigeReadyCount)
+        else
+            stringResource(R.string.label_skills)
         if (combatSession != null) {
             var savedPage by rememberSaveable { mutableIntStateOf(if (startOnGear) 2 else 0) }
             val pagerState = rememberPagerState(initialPage = savedPage, pageCount = { 4 })
@@ -198,7 +205,7 @@ fun CombatScreen(
                     Tab(
                         selected = pagerState.currentPage == 3,
                         onClick  = { scope.launch { pagerState.animateScrollToPage(3) } },
-                        text     = { Text(stringResource(R.string.label_skills)) },
+                        text     = { Text(skillsTabLabel) },
                     )
                 }
                 HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
@@ -295,7 +302,7 @@ fun CombatScreen(
                     Tab(
                         selected = pagerState.currentPage == 2,
                         onClick  = { scope.launch { pagerState.animateScrollToPage(2) } },
-                        text     = { Text(stringResource(R.string.label_skills)) },
+                        text     = { Text(skillsTabLabel) },
                     )
                 }
                 HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->

@@ -2,13 +2,13 @@
 <resources>
     <!-- Weekly quest names and descriptions -->
     <string name="quest_weekly_iron_miner_name">Prospecteur de Fer</string>
-    <string name="quest_weekly_iron_miner_desc">Minez 750 minerais de fer cette semaine.</string>
+    <string name="quest_weekly_iron_miner_desc">Extrayez 750 minerais de fer cette semaine.</string>
     <string name="quest_weekly_coal_miner_name">Baron du Charbon</string>
-    <string name="quest_weekly_coal_miner_desc">Minez 450 charbon cette semaine.</string>
+    <string name="quest_weekly_coal_miner_desc">Extrayez 450 charbon cette semaine.</string>
     <string name="quest_weekly_mithril_miner_name">Chercheur de Mithril</string>
-    <string name="quest_weekly_mithril_miner_desc">Minez 300 minerais de mithril cette semaine.</string>
+    <string name="quest_weekly_mithril_miner_desc">Extrayez 300 minerais de mithril cette semaine.</string>
     <string name="quest_weekly_runite_miner_name">Mineur des Profondeurs</string>
-    <string name="quest_weekly_runite_miner_desc">Minez 150 minerais de runite cette semaine.</string>
+    <string name="quest_weekly_runite_miner_desc">Extrayez 150 minerais de runite cette semaine.</string>
     <string name="quest_weekly_oak_logger_name">Bûcheron de Chêne</string>
     <string name="quest_weekly_oak_logger_desc">Coupez 600 bûches de chêne cette semaine.</string>
     <string name="quest_weekly_yew_logger_name">Abatteur d\'If</string>
@@ -35,7 +35,7 @@
     <string name="quest_weekly_cook_shark_desc">Cuisinez 110 requins cette semaine.</string>
     <string name="quest_weekly_fletch_mithril_name">Fabricant de Flèches</string>
     <string name="quest_weekly_fletch_mithril_desc">Fabriquez 450 flèches en mithril cette semaine.</string>
-    <string name="quest_weekly_fletch_runite_name">Maître Fletcheur</string>
+    <string name="quest_weekly_fletch_runite_name">Maître Concepteur de Flèches</string>
     <string name="quest_weekly_fletch_runite_desc">Fabriquez 300 flèches en runite cette semaine.</string>
     <string name="quest_weekly_goblin_slayer_name">Exterminateur de Gobelins</string>
     <string name="quest_weekly_goblin_slayer_desc">Tuez 750 gobelins cette semaine.</string>

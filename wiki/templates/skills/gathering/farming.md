@@ -1,6 +1,6 @@
 # {icon} Farming
 
-Plant seeds in up to **5 patches** and return after the growth time to harvest.
+Plant seeds in up to **5 patches** and return after the growth time to harvest. A **Garden** building adds up to 2 more patches.
 
 {seed_table}
 

@@ -122,6 +122,8 @@ import com.fantasyidler.ui.viewmodel.QuestCategory
 import com.fantasyidler.ui.viewmodel.QuestFillSuggestion
 import com.fantasyidler.ui.viewmodel.QuestIndicator
 
+private val NON_COMBAT_PRESTIGE_SKILLS = Skills.GATHERING + Skills.CRAFTING_SKILLS + Skills.SUPPORT + listOf(Skills.SLAYER)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SkillsScreen(
@@ -203,10 +205,20 @@ fun SkillsScreen(
         val scope = rememberCoroutineScope()
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
             TabRow(selectedTabIndex = pagerState.currentPage) {
+                val prestigeReadyCount = if (state.ironman || !state.showPrestigeNotifications) 0 else NON_COMBAT_PRESTIGE_SKILLS.count { key ->
+                    (state.skillLevels[key] ?: 1) >= 99 && (state.skillPrestige[key] ?: 0) < 3
+                }
                 Tab(
                     selected = pagerState.currentPage == 0,
                     onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
-                    text     = { Text(stringResource(R.string.nav_skills)) },
+                    text     = {
+                        Text(
+                            if (prestigeReadyCount > 0)
+                                stringResource(R.string.tab_label_with_count, stringResource(R.string.nav_skills), prestigeReadyCount)
+                            else
+                                stringResource(R.string.nav_skills)
+                        )
+                    },
                 )
                 Tab(
                     selected = pagerState.currentPage == 1,

@@ -14,7 +14,7 @@ Upgrading the **Guild Hall** building reduces quest requirements. See the [Build
 
 ## Daily Guild Quests
 
-Each guild also offers a rotating daily quest, refreshed at 6 AM, that counts toward the dailies requirement for your current guild level.
+Each guild also offers up to four rotating daily quests, refreshed at 6 AM, that count toward the dailies requirement for your current guild level.
 
 ---
 

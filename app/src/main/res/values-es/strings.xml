@@ -149,6 +149,7 @@
     <string name="label_available_quests">Disponible</string>
     <string name="label_stats">Stats</string> <!-- untranslated -->
     <string name="label_skills">Habilidades</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
     <string name="label_shop">Tienda</string>
     <string name="label_sell_items">Vender artículos</string>
     <string name="label_total_level">Nivel Total</string>
@@ -302,6 +303,8 @@
     <string name="settings_profile_layout_tabs">Pestanas</string>
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
     <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Pantalla de Inicio</string>
@@ -1821,7 +1824,7 @@
     <string name="title_seasonal_champion_of">Campeón de %1$s</string>
     <string name="title_seasonal_requirement">Completa el Evento de Temporada %1$s</string>
     <string name="home_welcome_greeting">Bienvenido de nuevo,</string>
-
+    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
     <string name="home_welcome_title">El %1$s!</string>
 
     <!-- Pet names and descriptions -->

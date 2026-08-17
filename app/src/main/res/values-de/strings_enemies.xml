@@ -122,7 +122,7 @@
     <string name="boss_king_black_dragon_desc">Der legendäre dreiköpfige Drache, gefürchtet im ganzen Reich.</string>
     <string name="boss_demon_lord_name">Dämonenfürst</string>
     <string name="boss_demon_lord_desc">Ein uralter Dämon aus dem Abgrund, Meister der dunklen Magie.</string>
-    <string name="boss_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="boss_kraken_name">Krake</string>
     <string name="boss_kraken_desc">Der Schrecken der Tiefsee, ein kolossales Seeungeheuer.</string>
     <string name="boss_balrog_name">Gothic Ember</string> <!-- untranslated -->
     <string name="boss_balrog_desc">Ein uralter Dämon aus Flamme und Schatten, erwacht aus seinem Schlaf tief unter der Erde.</string>

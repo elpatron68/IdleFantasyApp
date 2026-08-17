@@ -167,6 +167,8 @@ data class PlayerFlags(
     @SerialName("show_quest_dots") val showQuestDots: Boolean = true,
     /** Whether to abbreviate large item quantities/numbers (e.g. 2.46M vs 2,461,940). */
     @SerialName("compact_numbers") val compactNumbers: Boolean = false,
+    /** Nav bar badge dots for combat/skill prestige availability. */
+    @SerialName("show_prestige_notifications") val showPrestigeNotifications: Boolean = true,
     /** Shop: bulk and manual sells always leave one of each item for collectors. */
     @SerialName("shop_keep_one_of_each") val shopKeepOneOfEach: Boolean = false,
     /** Epoch ms when this character was created; 0 for pre-existing characters until backfilled
