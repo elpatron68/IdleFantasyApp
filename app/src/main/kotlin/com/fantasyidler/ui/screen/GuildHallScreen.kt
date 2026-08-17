@@ -61,15 +61,15 @@ private val GUILD_GROUPS = listOf(
     ),
     GuildGroup(
         headerRes = R.string.label_crafting_skills,
-        keys = listOf("smithing", "cooking", "fletching", "crafting", "runecrafting", "herblore", "firemaking", "construction"),
-    ),
-    GuildGroup(
-        headerRes = R.string.label_combat,
-        keys = listOf("warriors", "archers", "mages", "slayer"),
+        keys = listOf("smithing", "cooking", "fletching", "crafting", "firemaking", "runecrafting", "herblore", "construction"),
     ),
     GuildGroup(
         headerRes = R.string.label_support_skills,
         keys = listOf("prayer", "mercantile", "agility"),
+    ),
+    GuildGroup(
+        headerRes = R.string.label_combat,
+        keys = listOf("warriors", "archers", "mages", "slayer"),
     ),
 )
 

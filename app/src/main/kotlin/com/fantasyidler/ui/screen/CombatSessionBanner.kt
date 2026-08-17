@@ -115,6 +115,8 @@ internal data class CombatLogEntry(
     val damage: Int,
     val enemyName: String,
     val isKill: Boolean = false,
+    /** HP restored by eating this tick; > 0 renders as an eat line (issue #1431). */
+    val heal: Int = 0,
 )
 
 @Composable
@@ -282,14 +284,21 @@ internal fun CombatSessionBanner(
                 val currentBoss = if (isBoss) bosses.firstOrNull { it.id == session.activityKey } else null
                 val divColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.2f)
 
-                // Live player HP (per-tick if hit data exists, else per-frame fallback).
+                // Player HP (per-tick if hit data exists, else per-frame fallback).
                 // Enemy hits display half a tick after player hits, so only count the
                 // newest tick's enemy damage once its log line is visible.
-                val maxHp = ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5 + towerHpBonus) * 10
+                // Max HP comes from the simulation snapshot so mid-run HP level-ups
+                // don't shift an in-flight run's display (issue #1411); live stats are
+                // the fallback for sessions recorded before the snapshot existed.
+                val maxHp = frames.firstOrNull { it.maxHp > 0 }?.maxHp
+                    ?: ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5 + towerHpBonus) * 10
                 val enemyTicksShown = tickInFrame + if (halfTickInFrame >= 2 * tickInFrame + 1) 1 else 0
                 val currentPlayerHp = if (currentFrame?.enemyHits?.isNotEmpty() == true) {
                     val base = frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
-                    (base - currentFrame.enemyHits.take(enemyTicksShown).sum()).coerceAtLeast(0)
+                    // Heals thread per tick alongside enemy damage so HP no longer sags all
+                    // frame and snaps up at the boundary (issue #1431).
+                    (base - currentFrame.enemyHits.take(enemyTicksShown).sum() +
+                        currentFrame.playerHeals.take(enemyTicksShown).sum()).coerceAtLeast(0)
                 } else {
                     frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
                 }
@@ -335,6 +344,8 @@ internal fun CombatSessionBanner(
                                 }
                                 if (i < currentFrameIdx || 2 * t + 1 <= halfTickInFrame) {
                                     f.enemyHits.getOrNull(t)?.let { add(CombatLogEntry(false, it, eName)) }
+                                    f.playerHeals.getOrNull(t)?.takeIf { it > 0 }
+                                        ?.let { add(CombatLogEntry(true, 0, eName, heal = it)) }
                                 }
                             }
                         }
@@ -463,7 +474,12 @@ internal fun CombatSessionBanner(
                         }
 
                         // ── Equipped food ──────────────────────────────────
-                        if (equippedFood.isNotEmpty()) {
+                        // The frame-0 snapshot keeps the list stable if gear food is
+                        // changed mid-run (issue #1411); live gear is the fallback for
+                        // sessions recorded before the snapshot existed.
+                        val foodAtStart = frames.firstOrNull()?.foodAtStart
+                            ?.takeIf { it.isNotEmpty() } ?: equippedFood
+                        if (foodAtStart.isNotEmpty()) {
                             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp), color = divColor)
                             Text(
                                 text  = stringResource(R.string.label_food),
@@ -471,7 +487,7 @@ internal fun CombatSessionBanner(
                                 color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
                             )
                             Spacer(Modifier.height(2.dp))
-                            for ((key, startQty) in equippedFood) {
+                            for ((key, startQty) in foodAtStart) {
                                 val remaining = (startQty - (foodConsumedSoFar[key] ?: 0)).coerceAtLeast(0)
                                 val heal      = foodHealValues[key] ?: 0
                                 val name      = GameStrings.itemName(context, key)
@@ -571,7 +587,13 @@ internal fun CombatSessionBanner(
                             Spacer(Modifier.height(2.dp))
                             Column {
                                 for (entry in combatLog) {
-                                    if (entry.isKill) {
+                                    if (entry.heal > 0) {
+                                        Text(
+                                            text  = stringResource(R.string.combat_log_heal, entry.heal),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color(0xFF4CAF50),
+                                        )
+                                    } else if (entry.isKill) {
                                         Text(
                                             text  = stringResource(R.string.combat_log_kill, entry.enemyName),
                                             style = MaterialTheme.typography.bodySmall,

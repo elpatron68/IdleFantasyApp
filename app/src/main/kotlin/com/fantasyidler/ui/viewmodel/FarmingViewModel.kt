@@ -156,7 +156,7 @@ class FarmingViewModel @Inject constructor(
 
                 val gained = invAfter.mapValues { (k, v) -> v - (invBefore[k] ?: 0) }.filter { it.value > 0 }
                 guildRepo.recordGuildGathering(Skills.FARMING, gained)
-                _extra.update { it.copy(harvestResult = HarvestResult(context.getString(R.string.farming_harvest_and_plant), gained, xpAfter - xpBefore, isBulk = true)) }
+                _extra.update { it.copy(harvestResult = HarvestResult(context.withAppLocale().getString(R.string.farming_harvest_and_plant), gained, xpAfter - xpBefore, isBulk = true)) }
                 delay(300)
             }
 
@@ -164,7 +164,7 @@ class FarmingViewModel @Inject constructor(
             if (emptyPatches.isNotEmpty()) {
                 _extra.update { it.copy(plantingPatchNumber = -1) }
             } else if (finishedPatches.isEmpty()) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_no_crops_ready)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_no_crops_ready)) }
             }
         }
     }
@@ -184,23 +184,23 @@ class FarmingViewModel @Inject constructor(
 
                 if (crop.id == "magic_bean") {
                     val planted = emptyPatches.firstOrNull()?.let { farmingRepo.plantCrop(it, crop, ashKey) } ?: false
-                    val msg = if (planted) context.getString(R.string.farming_magic_bean_one_plot)
-                              else context.getString(R.string.farming_no_seeds_inventory, seedName)
+                    val msg = if (planted) context.withAppLocale().getString(R.string.farming_magic_bean_one_plot)
+                              else context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)
                     _extra.update { it.copy(snackbarMessage = msg) }
                 } else {
                     val plantedCount = farmingRepo.plantCrops(emptyPatches, crop, ashKey)
                     val msg = if (plantedCount == 0) {
-                        if (emptyPatches.isEmpty()) context.getString(R.string.farming_no_empty_patches)
-                        else context.getString(R.string.farming_no_seeds_inventory, seedName)
+                        if (emptyPatches.isEmpty()) context.withAppLocale().getString(R.string.farming_no_empty_patches)
+                        else context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)
                     } else {
-                        val base = context.getString(R.string.farming_planted, plantedCount, seedName)
-                        if (plantedCount < emptyPatches.size) "$base - ${context.getString(R.string.farming_no_seeds_inventory, seedName)}" else base
+                        val base = context.withAppLocale().getString(R.string.farming_planted, plantedCount, seedName)
+                        if (plantedCount < emptyPatches.size) "$base - ${context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)}" else base
                     }
                     _extra.update { it.copy(snackbarMessage = msg) }
                 }
             } else {
                 if (!farmingRepo.plantCrop(patchNumber, crop, ashKey)) {
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_no_seeds_inventory, seedName)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_no_seeds_inventory, seedName)) }
                 }
             }
         }
@@ -246,7 +246,7 @@ class FarmingViewModel @Inject constructor(
         viewModelScope.launch {
             val wasBean = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber }?.cropType == "magic_bean"
             farmingRepo.clearPatch(patchNumber)
-            if (wasBean) _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_bean_cleared)) }
+            if (wasBean) _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.farming_bean_cleared)) }
         }
     }
 

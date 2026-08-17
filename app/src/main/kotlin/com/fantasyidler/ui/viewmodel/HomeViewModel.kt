@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -893,24 +895,24 @@ class HomeViewModel @Inject constructor(
             val last = sessions.last()
 
             val title = when {
-                n > 1 -> context.getString(R.string.home_sessions_complete_title, n)
-                last.sessionId in voidedSessionIds -> context.getString(R.string.home_session_voided)
+                n > 1 -> context.withAppLocale().getString(R.string.home_sessions_complete_title, n)
+                last.sessionId in voidedSessionIds -> context.withAppLocale().getString(R.string.home_session_voided)
                 last.skillName == "boss" -> {
                     val bossName = GameStrings.bossName(context, last.activityKey)
-                    if (bossWon == true) context.getString(R.string.home_boss_defeated_title, bossName)
-                    else context.getString(R.string.home_boss_defeated_by_title, bossName)
+                    if (bossWon == true) context.withAppLocale().getString(R.string.home_boss_defeated_title, bossName)
+                    else context.withAppLocale().getString(R.string.home_boss_defeated_by_title, bossName)
                 }
                 last.skillName == "combat" -> {
                     val dungeonName = GameStrings.dungeonName(context, last.activityKey)
-                    if (anyDied) context.getString(R.string.home_dungeon_died_title, dungeonName)
-                    else context.getString(R.string.home_dungeon_complete_title, dungeonName)
+                    if (anyDied) context.withAppLocale().getString(R.string.home_dungeon_died_title, dungeonName)
+                    else context.withAppLocale().getString(R.string.home_dungeon_complete_title, dungeonName)
                 }
                 last.skillName == "expedition" -> {
                     val expFallback = gameData.skillingDungeons[last.activityKey]?.displayName ?: last.activityKey
                     val expName = GameStrings.skillingDungeonName(context, last.activityKey, expFallback)
-                    context.getString(R.string.home_expedition_complete_title, expName)
+                    context.withAppLocale().getString(R.string.home_expedition_complete_title, expName)
                 }
-                else -> context.getString(
+                else -> context.withAppLocale().getString(
                     R.string.home_skill_session_complete_title,
                     GameStrings.skillName(context, last.skillName),
                 )
@@ -921,7 +923,7 @@ class HomeViewModel @Inject constructor(
             val singleXp      = combinedXpBySkill.values.firstOrNull() ?: 0L
             val totalRawXp    = combinedXpBySkill.values.sum()
             val boneBuriedLines = combinedBones.entries.map { (name, count) ->
-                Pair(context.getString(R.string.home_bones_buried_row, name), "×$count")
+                Pair(context.withAppLocale().getString(R.string.home_bones_buried_row, name), "×$count")
             }
 
             val displayedCoins    = (combinedCoins.toDouble() * blessingCoinMult).toLong()
@@ -968,14 +970,14 @@ class HomeViewModel @Inject constructor(
                 xpLineBonuses    = xpLineBonuses,
                 coinBlessingBonus = coinBlessingBonus,
                 noteLines        = expeditionNoteLines +
-                                     (if (bossCoinsReduced) listOf(context.getString(R.string.session_note_boss_coin_cap)) else emptyList()),
+                                     (if (bossCoinsReduced) listOf(context.withAppLocale().getString(R.string.session_note_boss_coin_cap)) else emptyList()),
                 unlockMessage    = expeditionUnlockMessage,
                 rareItems        = rareItemsDisplayNames,
             )
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
                 val names = awardedCapes.joinToString(", ") { GameStrings.itemName(context,it) }
-                context.getString(R.string.home_congratulations_received, names)
+                context.withAppLocale().getString(R.string.home_congratulations_received, names)
             } else null
             _extra.update { it.copy(
                 sessionSummary  = summary,
@@ -1033,7 +1035,7 @@ class HomeViewModel @Inject constructor(
             if (coinCostForRepeat > 0) {
                 val ok = playerRepo.spendCoins(coinCostForRepeat)
                 if (!ok) {
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.home_not_enough_coins_repeat, displayName)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.home_not_enough_coins_repeat, displayName)) }
                     return@launch
                 }
             }
@@ -1042,7 +1044,7 @@ class HomeViewModel @Inject constructor(
                 val ok = playerRepo.consumeItems(materials)
                 if (!ok) {
                     if (coinCostForRepeat > 0) playerRepo.addCoins(coinCostForRepeat)
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.home_not_enough_materials_repeat, displayName)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.home_not_enough_materials_repeat, displayName)) }
                     return@launch
                 }
             }
@@ -1091,15 +1093,15 @@ class HomeViewModel @Inject constructor(
             // "Fishing — Raw Salmon") that the direct-queue path already shows (issue #1168).
             val queueMessage = when (session.skillName) {
                 "combat", "boss", "expedition", "tower", "carnival" ->
-                    context.getString(R.string.snackbar_added_to_queue, displayName)
-                else -> context.getString(
+                    context.withAppLocale().getString(R.string.snackbar_added_to_queue, displayName)
+                else -> context.withAppLocale().getString(
                     R.string.skill_added_to_queue_activity,
                     GameStrings.skillName(context, session.skillName),
                     GameStrings.activityName(context, session.skillName, session.activityKey),
                 )
             }
             _extra.update {
-                it.copy(snackbarMessage = if (enqueued) queueMessage else context.getString(R.string.snackbar_queue_full))
+                it.copy(snackbarMessage = if (enqueued) queueMessage else context.withAppLocale().getString(R.string.snackbar_queue_full))
             }
         }
     }
@@ -1329,17 +1331,17 @@ class HomeViewModel @Inject constructor(
             val n    = sessions.size
             val last = sessions.last()
             val title = when {
-                n > 1 -> context.getString(R.string.worker_sessions_complete_title, n)
+                n > 1 -> context.withAppLocale().getString(R.string.worker_sessions_complete_title, n)
                 last.skillName == "boss" -> {
                     val bossName = GameStrings.bossName(context, last.activityKey)
-                    context.getString(R.string.worker_boss_defeated_title, bossName)
+                    context.withAppLocale().getString(R.string.worker_boss_defeated_title, bossName)
                 }
                 last.skillName == "combat" -> {
                     val dungeonName = GameStrings.dungeonName(context, last.activityKey)
-                    if (anyDied) context.getString(R.string.worker_dungeon_died_title, dungeonName)
-                    else context.getString(R.string.worker_dungeon_complete_title, dungeonName)
+                    if (anyDied) context.withAppLocale().getString(R.string.worker_dungeon_died_title, dungeonName)
+                    else context.withAppLocale().getString(R.string.worker_dungeon_complete_title, dungeonName)
                 }
-                else -> context.getString(
+                else -> context.withAppLocale().getString(
                     R.string.worker_skill_complete_title,
                     GameStrings.skillName(context, last.skillName),
                 )
@@ -1384,7 +1386,7 @@ class HomeViewModel @Inject constructor(
 
             val capeMessage = if (awardedCapes.isNotEmpty()) {
                 val names = awardedCapes.joinToString(", ") { GameStrings.itemName(context,it) }
-                context.getString(R.string.home_congratulations_received, names)
+                context.withAppLocale().getString(R.string.home_congratulations_received, names)
             } else null
             _extra.update { it.copy(
                 workerSummary   = summary,

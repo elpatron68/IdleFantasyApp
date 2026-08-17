@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -422,7 +424,7 @@ class CombatViewModel @Inject constructor(
                 if (enqueued) queuedSessionStarter.startNextQueued()
                 _extra.update {
                     it.copy(
-                        snackbarMessage    = if (enqueued) context.getString(R.string.snackbar_added_to_queue, dungeonName) else context.getString(R.string.snackbar_queue_full),
+                        snackbarMessage    = if (enqueued) context.withAppLocale().getString(R.string.snackbar_added_to_queue, dungeonName) else context.withAppLocale().getString(R.string.snackbar_queue_full),
                         selectedDungeon    = null,
                         selectedArrowKey   = null,
                         selectedPotionKey  = null,
@@ -494,7 +496,7 @@ class CombatViewModel @Inject constructor(
                 if (combatStyle == "magic") {
                     if (selectedSpell == null) {
                         _extra.update {
-                            it.copy(snackbarMessage = context.getString(R.string.combat_select_spell), startingSession = false)
+                            it.copy(snackbarMessage = context.withAppLocale().getString(R.string.combat_select_spell), startingSession = false)
                         }
                         return@launch
                     }
@@ -502,7 +504,7 @@ class CombatViewModel @Inject constructor(
                     if (magicLevel < selectedSpell.magicLevelRequired) {
                         _extra.update {
                             it.copy(
-                                snackbarMessage = context.getString(R.string.combat_spell_level_required, selectedSpell.magicLevelRequired, selectedSpell.displayName),
+                                snackbarMessage = context.withAppLocale().getString(R.string.combat_spell_level_required, selectedSpell.magicLevelRequired, selectedSpell.displayName),
                                 startingSession = false,
                             )
                         }
@@ -604,7 +606,7 @@ class CombatViewModel @Inject constructor(
                     playerRepo.clearActiveDungeonRepeat()
                 }
             } catch (e: Exception) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
             }
@@ -659,7 +661,7 @@ class CombatViewModel @Inject constructor(
                 if (enqueued) queuedSessionStarter.startNextQueued()
                 _extra.update {
                     it.copy(
-                        snackbarMessage    = if (enqueued) context.getString(R.string.snackbar_added_to_queue, bossName) else context.getString(R.string.snackbar_queue_full),
+                        snackbarMessage    = if (enqueued) context.withAppLocale().getString(R.string.snackbar_added_to_queue, bossName) else context.withAppLocale().getString(R.string.snackbar_queue_full),
                         selectedBoss       = null,
                         selectedArrowKey   = null,
                         selectedPotionKey  = null,
@@ -808,7 +810,7 @@ class CombatViewModel @Inject constructor(
                     playerRepo.clearActiveBossRepeat()
                 }
             } catch (e: Exception) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_start_failed, e.message ?: "")) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.combat_start_failed, e.message ?: "")) }
             } finally {
                 _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
             }
@@ -899,7 +901,7 @@ class CombatViewModel @Inject constructor(
     private fun buildCapeMessage(capes: List<String>): String? {
         if (capes.isEmpty()) return null
         val names = capes.joinToString(", ") { GameStrings.itemName(context, it) }
-        return context.getString(R.string.home_congratulations_received, names)
+        return context.withAppLocale().getString(R.string.home_congratulations_received, names)
     }
 
     // ------------------------------------------------------------------

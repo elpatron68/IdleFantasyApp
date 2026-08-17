@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -91,15 +93,15 @@ class BuilderViewModel @Inject constructor(
             val def = gameData.townBuildings[buildingKey]
             when (townRepo.upgradeBuilding(buildingKey)) {
                 UpgradeBuildingResult.Success ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.town_upgrade_success)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.town_upgrade_success)) }
                 UpgradeBuildingResult.InsufficientLevel -> {
                     val req = def?.tiers?.getOrNull(currentTier)?.constructionLevelRequired ?: 0
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.town_upgrade_fail_level, req)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.town_upgrade_fail_level, req)) }
                 }
                 UpgradeBuildingResult.InsufficientCoins ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.town_upgrade_fail_coins)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.town_upgrade_fail_coins)) }
                 UpgradeBuildingResult.InsufficientMaterials ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.town_upgrade_fail_mats)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.town_upgrade_fail_mats)) }
                 else -> {}
             }
         }

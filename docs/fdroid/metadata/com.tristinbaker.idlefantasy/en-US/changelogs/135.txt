@@ -1,0 +1,14 @@
+• Fixed the Skills tab quest counter counting bury-any-bones guild quests once per bone type, making 4 remaining quests show as 20
+• Fixed the Golden Goose pet showing +10% XP in the pet collection; it now correctly shows +10% Coins
+• Made 166 item names translatable that were previously locked to English (thanks MarcMush!)
+• Many more texts now follow your language: session collect dialog titles, loot and reward names, queue and notification labels, quest chips in skill sheets, bestiary headers, armory requirements, combat styles, expedition lock text, event banners, carnival prizes, and the character race and gender line
+• Tree, trade route, agility course, and thieving target names now translate in session cards, the queue, and the profile
+• Duration unit letters (mo, w, d, h, m, s) can now be translated per language
+• Smithing, Cooking, Fletching, Crafting, and Herblore now show quest indicator icons on the Skills page, matching Firemaking and Runecrafting
+• Shop quantities, prices, and totals now use thousands separators, and a new Compact Numbers option in Settings abbreviates large item stacks (thanks fjordsec!)
+• Updated Italian and French translations
+• Climbing the beanstalk now shows a dialog that stays until dismissed and tells you which dungeon was unlocked, instead of a quickly disappearing message
+• The shop sell tab now has a search box, category filters, and alphabetical sorting
+• New "Keep one of each item" toggle in the shop sell tab: bulk and manual sales always leave one copy for your collection
+• Fixed repeated boss and dungeon runs barely progressing overnight when the system blocked the app's alarms; reopening the app now fast-forwards the whole chain through the time you were away
+• Profile page tabs can now be swiped between, like other sections of the game

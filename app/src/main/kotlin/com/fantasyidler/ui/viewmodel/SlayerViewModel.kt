@@ -105,6 +105,14 @@ class SlayerViewModel @Inject constructor(
                 gameData.dungeons.entries
                     .filter { (_, d) -> d.enemySpawns.any { it.enemy == key } }
                     .filter { (k, d) -> !d.loreUnlockOnly || k in unlockedDungeons }
+                    // Best hunting ground first: the queue shortcut takes the head of this
+                    // list, which was previously just map iteration order and could pick a
+                    // dungeon where the task enemy barely spawns (hellhound report)
+                    .sortedByDescending { (_, d) ->
+                        val total = d.enemySpawns.sumOf { it.weight }
+                        if (total == 0) 0.0
+                        else d.enemySpawns.first { it.enemy == key }.weight.toDouble() / total
+                    }
             } ?: emptyList()
             val taskDungeons     = taskDungeonEntries.map { (key, _) -> GameStrings.dungeonName(context.withAppLocale(), key) }
             val taskDungeonKeys  = taskDungeonEntries.map { (k, _) -> k }
@@ -149,7 +157,7 @@ class SlayerViewModel @Inject constructor(
             if (state.activeTask != null) return@launch
             val success = slayerRepo.assignTask(state.slayerLevel, state.unlockedDungeons)
             if (!success) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_no_eligible_tasks)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_no_eligible_tasks)) }
             }
         }
     }
@@ -159,7 +167,7 @@ class SlayerViewModel @Inject constructor(
             val state = uiState.value
             val success = slayerRepo.skipTask(state.slayerLevel, state.unlockedDungeons)
             if (!success) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_not_enough_points)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_not_enough_points)) }
             }
         }
     }
@@ -178,7 +186,7 @@ class SlayerViewModel @Inject constructor(
     /** Called when the player taps Buy on a lamp — shows the skill picker instead of buying immediately. */
     fun showLampPicker(xpAmount: Long, cost: Int) {
         if (uiState.value.slayerPoints < cost) {
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_not_enough_points)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_not_enough_points)) }
             return
         }
         _extra.update { it.copy(pendingLamp = PendingLamp(xpAmount, cost)) }
@@ -197,8 +205,8 @@ class SlayerViewModel @Inject constructor(
                         val b = result.breakdown!!
                         val skillDisplay = GameStrings.skillName(context, skillKey)
                         val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { s -> " $s" } ?: ""
-                        context.getString(R.string.slayer_lamp_purchased, b.finalXp.formatXp(), skillDisplay) + suffix
-                    } else context.getString(R.string.slayer_not_enough_points)
+                        context.withAppLocale().getString(R.string.slayer_lamp_purchased, b.finalXp.formatXp(), skillDisplay) + suffix
+                    } else context.withAppLocale().getString(R.string.slayer_not_enough_points)
                 )
             }
         }
@@ -208,14 +216,14 @@ class SlayerViewModel @Inject constructor(
         viewModelScope.launch {
             val state = uiState.value
             if ((state.inventory[itemKey] ?: 0) > 0) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_already_owned)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_already_owned)) }
                 return@launch
             }
             val success = slayerRepo.spendPointsForItem(itemKey, cost)
             _extra.update {
                 it.copy(
-                    snackbarMessage = if (success) context.getString(R.string.slayer_purchased)
-                                      else context.getString(R.string.slayer_not_enough_points)
+                    snackbarMessage = if (success) context.withAppLocale().getString(R.string.slayer_purchased)
+                                      else context.withAppLocale().getString(R.string.slayer_not_enough_points)
                 )
             }
         }
@@ -275,8 +283,8 @@ class SlayerViewModel @Inject constructor(
             if (enqueued) queuedSessionStarter.startNextQueued()
             _extra.update {
                 it.copy(
-                    snackbarMessage = if (enqueued) context.getString(R.string.slayer_queue_added, dungeonName)
-                                      else context.getString(R.string.slayer_queue_full)
+                    snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.slayer_queue_added, dungeonName)
+                                      else context.withAppLocale().getString(R.string.slayer_queue_full)
                 )
             }
         }
@@ -306,13 +314,13 @@ class SlayerViewModel @Inject constructor(
             val state = uiState.value
             when (val result = slayerRepo.foretelTask(state.slayerLevel, state.unlockedDungeons)) {
                 is ForetelResult.Success ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_success, GameStrings.enemyName(context, result.task.enemyKey))) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_success, GameStrings.enemyName(context, result.task.enemyKey))) }
                 ForetelResult.QueueFull ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_queue_full)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_queue_full)) }
                 ForetelResult.NoEligibleTasks ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_no_eligible_tasks)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_no_eligible_tasks)) }
                 is ForetelResult.NotEnoughBones ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.slayer_foretell_not_enough_bones, result.costUnits)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_not_enough_bones, result.costUnits)) }
             }
         }
     }

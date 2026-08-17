@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.model.EquipSlot
@@ -392,7 +394,7 @@ class CraftingViewModel @Inject constructor(
         val state  = uiState.value
         val max    = state.maxCraftable(recipe)
         if ((state.skillLevels[recipe.skillName] ?: 1) < recipe.levelRequired || max <= 0) {
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_materials)) }
             return true
         }
         craft(recipe, ceilDiv(remaining, recipe.outputQty).coerceIn(1, max))
@@ -436,7 +438,7 @@ class CraftingViewModel @Inject constructor(
                 }
                 _extra.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.snackbar_added_to_queue, recipe.displayName) else context.getString(R.string.snackbar_queue_full),
+                        snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.snackbar_added_to_queue, recipe.displayName) else context.withAppLocale().getString(R.string.snackbar_queue_full),
                         selectedRecipe  = null,
                     )
                 }
@@ -447,7 +449,7 @@ class CraftingViewModel @Inject constructor(
             // Android's 2 MB CursorWindow per-row limit.
             val freshInv: Map<String, Int> = json.decodeFromString(player.inventory)
             if (!recipe.materials.all { (item, needed) -> (freshInv[item] ?: 0) >= needed * qty }) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_materials)) }
                 return@launch
             }
             val xpMap: Map<String, Long> = json.decodeFromString(player.skillXp)
@@ -571,7 +573,7 @@ class CraftingViewModel @Inject constructor(
                 else        -> false
             }
             if (matches)
-                fills += QuestFillSuggestion(context.getString(R.string.quest_fill_daily), ceilDiv(remaining, recipe.outputQty))
+                fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_daily), ceilDiv(remaining, recipe.outputQty))
         }
 
         // Weekly quests
@@ -585,7 +587,7 @@ class CraftingViewModel @Inject constructor(
                 else        -> false
             }
             if (matches)
-                fills += QuestFillSuggestion(context.getString(R.string.quest_fill_weekly), ceilDiv(remaining, recipe.outputQty))
+                fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_weekly), ceilDiv(remaining, recipe.outputQty))
         }
 
         // Guild daily quests
@@ -602,7 +604,7 @@ class CraftingViewModel @Inject constructor(
                 else        -> false
             }
             if (matches)
-                fills += QuestFillSuggestion(context.getString(R.string.quest_fill_guild), ceilDiv(remaining, recipe.outputQty))
+                fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_guild), ceilDiv(remaining, recipe.outputQty))
         }
 
         // Seasonal Event Bounty Board

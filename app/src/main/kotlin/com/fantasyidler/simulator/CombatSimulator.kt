@@ -150,8 +150,9 @@ object CombatSimulator {
             val savedCarryoverHp = carryoverEnemyHp.also { carryoverEnemyHp = 0 }
             var enemyHp = if (savedCarryoverHp > 0) savedCarryoverHp else enemy.hp
             var kills = 0
-            val framePlayerHits = mutableListOf<Int>()
-            val frameEnemyHits  = mutableListOf<Int>()
+            val framePlayerHits  = mutableListOf<Int>()
+            val frameEnemyHits   = mutableListOf<Int>()
+            val framePlayerHeals = mutableListOf<Int>()
 
             for (tick in 0 until ticksPerFrame) {
                 // Player attacks (ranged is capped by arrow supply)
@@ -211,8 +212,17 @@ object CombatSimulator {
                 frameEnemyHits += eDmg
                 currentHp      -= eDmg
 
+                // Dead characters stop fighting (issue #935). Checked before the eating
+                // phase so food cannot revive a player already at 0 HP (issue #1412).
+                // Safe zones clamp HP back to 1 after the frame, so death never ends those.
+                if (currentHp <= 0 && !dungeon.safeZone) {
+                    framePlayerHeals += 0
+                    break
+                }
+
                 // Always eat the best-tier food still in stock first; only fall back to a
                 // weaker tier once the best one runs out, up to 300 items total.
+                val hpBeforeEating = currentHp
                 var ate = true
                 while (ate && totalFoodEaten < 300) {
                     ate = false
@@ -226,10 +236,7 @@ object CombatSimulator {
                         ate = true
                     }
                 }
-
-                // Dead characters stop fighting (issue #935). Safe zones clamp HP back
-                // to 1 after the frame, so death never ends those.
-                if (currentHp <= 0 && !dungeon.safeZone) break
+                framePlayerHeals += currentHp - hpBeforeEating
             }
 
             // Carry partial-damage enemy into next frame if still alive.
@@ -263,6 +270,9 @@ object CombatSimulator {
                     hpAfter      = currentHp.coerceAtLeast(0),
                     playerHits   = framePlayerHits,
                     enemyHits    = frameEnemyHits,
+                    playerHeals  = framePlayerHeals,
+                    maxHp        = maxHp,
+                    foodAtStart  = if (frames.isEmpty()) equippedFood else emptyMap(),
                 )
             )
             runningTotal += frameXp
@@ -413,6 +423,7 @@ object CombatSimulator {
         outer@ while (frames.size < maxFrames) {
             val pHits       = mutableListOf<Int>()
             val eHits       = mutableListOf<Int>()
+            val pHeals      = mutableListOf<Int>()
             val frameFood   = mutableMapOf<String, Int>()
             val frameArrows = mutableMapOf<String, Int>()
             var frameRunesUsed = 0
@@ -450,10 +461,12 @@ object CombatSimulator {
                         minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                         levelBefore = 0, levelAfter = 0,
                         kills = 1, enemyKey = bossKey,
-                        playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
+                        playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
                         foodConsumed  = frameFood,
                         arrowsConsumed = frameArrows,
                         runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
+                        maxHp          = maxHp,
+                        foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
                     ))
                     break@outer
                 }
@@ -468,8 +481,27 @@ object CombatSimulator {
                 currentHp = (currentHp - bDmg).coerceAtLeast(0)
                 eHits.add(bDmg)
 
+                // Death is checked before the eating phase so food cannot revive a player
+                // already at 0 HP (issue #1412).
+                if (currentHp <= 0) {
+                    pHeals.add(0)
+                    frames.add(SessionFrame(
+                        minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
+                        levelBefore = 0, levelAfter = 0,
+                        kills = 0, enemyKey = bossKey,
+                        playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = 0,
+                        foodConsumed  = frameFood,
+                        arrowsConsumed = frameArrows,
+                        runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
+                        maxHp          = maxHp,
+                        foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
+                    ))
+                    break@outer
+                }
+
                 // Always eat the best-tier food still in stock first; only fall back to a
                 // weaker tier once the best one runs out, up to 300 items total.
+                val hpBeforeEating = currentHp
                 var ate = true
                 while (ate && totalFoodEaten < 300) {
                     ate = false
@@ -483,19 +515,7 @@ object CombatSimulator {
                         ate = true
                     }
                 }
-
-                if (currentHp <= 0) {
-                    frames.add(SessionFrame(
-                        minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
-                        levelBefore = 0, levelAfter = 0,
-                        kills = 0, enemyKey = bossKey,
-                        playerHits = pHits, enemyHits = eHits, hpAfter = 0,
-                        foodConsumed  = frameFood,
-                        arrowsConsumed = frameArrows,
-                        runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
-                    ))
-                    break@outer
-                }
+                pHeals.add(currentHp - hpBeforeEating)
             }
 
             if (frames.size < maxFrames && currentHp > 0 && currentBossHp > 0) {
@@ -503,10 +523,12 @@ object CombatSimulator {
                     minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                     levelBefore = 0, levelAfter = 0,
                     kills = 0, enemyKey = bossKey,
-                    playerHits = pHits, enemyHits = eHits, hpAfter = currentHp,
+                    playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
                     foodConsumed  = frameFood,
                     arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
+                    maxHp          = maxHp,
+                    foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
                 ))
             }
         }
@@ -522,6 +544,8 @@ object CombatSimulator {
                 minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                 levelBefore = 0, levelAfter = 0,
                 kills = if (won) 1 else 0, enemyKey = bossKey, hpAfter = if (won) 1 else 0,
+                maxHp = maxHp,
+                foodAtStart = if (frames.size <= 1) equippedFood else emptyMap(),
             )
             if (frames.isEmpty()) frames.add(stub) else frames[frames.lastIndex] = stub
         }

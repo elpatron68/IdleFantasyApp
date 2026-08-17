@@ -944,9 +944,16 @@ Builds:
     gradle:
       - yes
 
+  - versionName: '1.13.9'
+    versionCode: 136
+    commit: c630915047176e340069b0bf3bab80f709816eed
+    subdir: app
+    gradle:
+      - yes
+
 AllowedAPKSigningKeys: 99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.13.8
-CurrentVersionCode: 135
+CurrentVersion: 1.13.9
+CurrentVersionCode: 136

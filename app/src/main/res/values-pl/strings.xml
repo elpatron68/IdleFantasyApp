@@ -564,6 +564,8 @@
     <string name="combat_log_player_miss">→ Chybiłeś %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s trafił cię: %2$d obr.</string>
     <string name="combat_log_enemy_miss">← %1$s chybił</string>
+    <string name="combat_log_heal">✚ You eat: +%1$d HP</string> <!-- untranslated -->
+    <string name="combat_eat_threshold_warning">Risky: at a low threshold a hard hit can drop you to 0 HP before your character eats.</string> <!-- untranslated -->
     <string name="combat_rec_level">Zalecany poziom walki</string>
     <string name="combat_your_level">Twój poziom walki</string>
     <string name="combat_no_strength_bonus">Brak (bez bonusu siły)</string>
@@ -1570,7 +1572,7 @@
     <string name="bonus_combined_xp">Łączne XP</string>
     <string name="bonus_yield">+%1$d%% wydajność</string>
     <string name="bonus_boost">+%1$d%% wzmocnienie</string>
-    <string name="bonus_session_shorter">%1$d min krótsze sesje</string>
+    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
     <string name="bonus_coin_return">+%1$d%% zwrot monet</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
@@ -1653,6 +1655,25 @@
     <string name="tower_not_enough_runes">Za mało %1$s na ataki z maksymalnym potencjałem.</string>
     <string name="tower_milestone_claim">Odbierz</string>
     <string name="tower_milestone_claimed">Odebrano</string>
+    <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
+    <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_shield">%1$s (defense +80)</string> <!-- untranslated -->
+    <string name="tower_milestone_amulet">%1$s (attack +15, strength +15, defense +10, all styles)</string> <!-- untranslated -->
+    <string name="tower_milestone_hp_50">+50 max HP</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_25k">25,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_helm">%1$s (defense +82, strength +8)</string> <!-- untranslated -->
+    <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
+    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
+    <string name="tower_milestone_plate">%1$s (defense +132)</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_100k">100,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_legs_set">%1$s (defense +125) + %2$s (defense +58) + %3$s (defense +125)</string> <!-- untranslated -->
+    <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
+    <string name="tower_milestone_cape">%1$s (attack/str/def +14, ranged/magic +12) + 500,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_crossbow">%1$s (ranged attack +78, ranged strength +52)</string> <!-- untranslated -->
+    <string name="tower_milestone_staff">%1$s (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Wrogowie</string>
     <string name="tower_enemy_strength">Siła wroga: %1$s%%</string>
     <string name="tower_entry_card_desc">Nieskończone piętra. Jak wysoko się wspiąć?</string>

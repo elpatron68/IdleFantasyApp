@@ -397,6 +397,17 @@ private fun MilestoneRow(
 ) {
     val unlocked = bestFloor >= milestone.floor
     val dimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+    val context  = LocalContext.current
+    // No-arg descriptions bypass formatting: they may hold a literal % (e.g. "+1% tower XP")
+    // that String.format would choke on.
+    val description = if (milestone.itemKeys.isEmpty()) {
+        stringResource(milestone.descriptionRes)
+    } else {
+        stringResource(
+            milestone.descriptionRes,
+            *milestone.itemKeys.map { GameStrings.itemName(context, it) }.toTypedArray(),
+        )
+    }
 
     Row(
         modifier              = Modifier
@@ -413,7 +424,7 @@ private fun MilestoneRow(
                 color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
             )
             Text(
-                text  = milestone.description,
+                text  = description,
                 style = MaterialTheme.typography.bodySmall,
                 color = if (unlocked) MaterialTheme.colorScheme.onSurface else dimColor,
             )

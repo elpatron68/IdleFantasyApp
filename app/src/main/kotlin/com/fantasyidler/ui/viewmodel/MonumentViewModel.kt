@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -66,7 +68,7 @@ class MonumentViewModel @Inject constructor(
                 if (playerRepo.getFlags().monumentTier == 4) R.string.monument_goose_joined
                 else R.string.monument_stage_built
             } else R.string.monument_not_enough_coins
-            _extra.update { it.copy(snackbarMessage = context.getString(message)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(message)) }
         }
     }
 
@@ -77,19 +79,19 @@ class MonumentViewModel @Inject constructor(
                 if (playerRepo.getFlags().monumentTier >= 5 && before < 5) R.string.monument_flame_lit
                 else R.string.monument_contributed
             } else R.string.monument_not_enough_coins
-            _extra.update { it.copy(snackbarMessage = context.getString(message)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(message)) }
         }
     }
 
     fun touchMonument() {
         viewModelScope.launch {
             val message = when (val result = monumentRepo.touchMonument()) {
-                is MonumentTouchResult.Blessing -> context.getString(R.string.monument_touch_blessing)
-                is MonumentTouchResult.Items    -> context.getString(
+                is MonumentTouchResult.Blessing -> context.withAppLocale().getString(R.string.monument_touch_blessing)
+                is MonumentTouchResult.Items    -> context.withAppLocale().getString(
                     R.string.monument_touch_items,
                     result.items.entries.joinToString { (key, qty) -> "$qty× ${GameStrings.itemName(context, key)}" },
                 )
-                MonumentTouchResult.AlreadyTouchedToday -> context.getString(R.string.monument_touched_today)
+                MonumentTouchResult.AlreadyTouchedToday -> context.withAppLocale().getString(R.string.monument_touched_today)
                 MonumentTouchResult.NotUnlocked         -> return@launch
             }
             _extra.update { it.copy(snackbarMessage = message) }

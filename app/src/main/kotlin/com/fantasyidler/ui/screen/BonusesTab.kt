@@ -302,14 +302,18 @@ internal fun BonusesTab(
             if (agilityPrestige > 0) {
                 item {
                     val agilityLevel = state.skillLevels[Skills.AGILITY] ?: 1
-                    val savedMinutes = ((SkillSimulator.sessionDurationMs(agilityLevel, 0) -
-                        SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige)) / 60_000L).toInt()
+                    val baseMinutes     = (SkillSimulator.sessionDurationMs(agilityLevel, 0) / 60_000L).toInt()
+                    val prestigeMinutes = (SkillSimulator.sessionDurationMs(agilityLevel, agilityPrestige) / 60_000L).toInt()
+                    val savedMinutes    = baseMinutes - prestigeMinutes
                     if (savedMinutes > 0) {
                         BonusRow(
                             name   = GameStrings.skillName(context, Skills.AGILITY),
                             pct    = "-" + stringResource(R.string.combat_duration_min, savedMinutes),
                             scope  = stringResource(R.string.bonus_all_skills),
-                            detail = stringResource(R.string.bonus_session_shorter, savedMinutes),
+                            // Spell out that this row is only the prestige slice: the level-based
+                            // reduction is already in baseMinutes, so players at high prestige
+                            // don't read the increment as their total bonus
+                            detail = stringResource(R.string.bonus_agility_prestige_detail, baseMinutes, agilityLevel, prestigeMinutes),
                         )
                     }
                 }

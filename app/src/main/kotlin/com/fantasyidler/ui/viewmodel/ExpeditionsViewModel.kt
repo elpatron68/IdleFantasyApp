@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -90,7 +92,7 @@ class ExpeditionsViewModel @Inject constructor(
                             flags.unlockedDungeons.contains(dungeon.requiresPreviousUnlock)
                     val isAccessible = levelOk && prevOk
                     val lockReason = when {
-                        !levelOk -> context.getString(
+                        !levelOk -> context.withAppLocale().getString(
                             R.string.expedition_lock_level,
                             GameStrings.skillName(context, skill),
                             dungeon.levelRequired,
@@ -99,12 +101,12 @@ class ExpeditionsViewModel @Inject constructor(
                             val prereq = gameData.skillingDungeons.entries
                                 .firstOrNull { it.value.unlockDungeon == dungeon.requiresPreviousUnlock }
                             if (prereq != null)
-                                context.getString(
+                                context.withAppLocale().getString(
                                     R.string.expedition_lock_notes,
                                     GameStrings.skillingDungeonName(context, prereq.key, prereq.value.displayName),
                                 )
                             else
-                                context.getString(R.string.expedition_lock_prerequisite)
+                                context.withAppLocale().getString(R.string.expedition_lock_prerequisite)
                         }
                         else -> null
                     }
@@ -145,7 +147,7 @@ class ExpeditionsViewModel @Inject constructor(
                     )
                 )
                 _extra.update {
-                    it.copy(snackbarMessage = if (enqueued) context.getString(R.string.snackbar_added_to_queue, GameStrings.skillingDungeonName(context, key, dungeon.displayName)) else context.getString(R.string.snackbar_queue_full))
+                    it.copy(snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.snackbar_added_to_queue, GameStrings.skillingDungeonName(context, key, dungeon.displayName)) else context.withAppLocale().getString(R.string.snackbar_queue_full))
                 }
                 return@launch
             }
@@ -174,7 +176,7 @@ class ExpeditionsViewModel @Inject constructor(
                 durationMs       = result.durationMs,
                 skillDisplayName = dungeon.displayName,
             )
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.expedition_started, GameStrings.skillingDungeonName(context, key, dungeon.displayName))) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.expedition_started, GameStrings.skillingDungeonName(context, key, dungeon.displayName))) }
         }
     }
 

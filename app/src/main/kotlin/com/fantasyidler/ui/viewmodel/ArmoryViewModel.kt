@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -119,55 +121,55 @@ class ArmoryViewModel @Inject constructor(
         val map = mutableMapOf<String, String>()
 
         carnivalRepo.prizes.keys.forEach { key ->
-            map[key] = context.getString(R.string.armory_source_carnival)
+            map[key] = context.withAppLocale().getString(R.string.armory_source_carnival)
         }
         gameData.smithingRecipes.keys.forEach { key ->
-            if (key !in map) map[key] = context.getString(R.string.armory_source_smithing)
+            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_smithing)
         }
         gameData.craftingRecipes.keys.forEach { key ->
-            if (key !in map) map[key] = context.getString(R.string.armory_source_crafting)
+            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_crafting)
         }
         gameData.fletchingRecipes.values.forEach { recipe ->
             val key = recipe.itemName
-            if (key !in map) map[key] = context.getString(R.string.armory_source_fletching)
+            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_fletching)
         }
         // Bosses are checked before regular enemies so an item dropped by both (e.g. Ring of
         // Dragon's Might, dropped by both King Black Dragon and Abyssal Lord) resolves to the
         // more notable boss source rather than whichever happened to be registered first.
         gameData.bosses.forEach { (_, boss) ->
             boss.rareDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.bossName(context, boss.id), formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.withAppLocale().getString(R.string.armory_source_drop_chance, GameStrings.bossName(context, boss.id), formatChancePct(drop.chance))
             }
             boss.commonLoot.items.keys.forEach { key ->
-                if (key !in map) map[key] = context.getString(R.string.armory_source_drop, GameStrings.bossName(context, boss.id))
+                if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_drop, GameStrings.bossName(context, boss.id))
             }
         }
         gameData.dungeons.forEach { (_, dungeon) ->
             dungeon.rareDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.dungeonName(context, dungeon.name), formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.withAppLocale().getString(R.string.armory_source_drop_chance, GameStrings.dungeonName(context, dungeon.name), formatChancePct(drop.chance))
             }
         }
         gameData.enemies.forEach { (_, enemy) ->
             enemy.alwaysDrops.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_always, GameStrings.enemyName(context, enemy.name))
+                if (drop.item !in map) map[drop.item] = context.withAppLocale().getString(R.string.armory_source_drop_always, GameStrings.enemyName(context, enemy.name))
             }
             enemy.dropTable.forEach { drop ->
-                if (drop.item !in map) map[drop.item] = context.getString(R.string.armory_source_drop_chance, GameStrings.enemyName(context, enemy.name), formatChancePct(drop.chance))
+                if (drop.item !in map) map[drop.item] = context.withAppLocale().getString(R.string.armory_source_drop_chance, GameStrings.enemyName(context, enemy.name), formatChancePct(drop.chance))
             }
         }
         gameData.marketplace.forEach { (_, category) ->
-            category.items.keys.forEach { key -> if (key !in map) map[key] = context.getString(R.string.armory_source_shop) }
+            category.items.keys.forEach { key -> if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_shop) }
         }
         dailyQuestRepo.dwarvenDropPool.forEach { key ->
-            if (key !in map) map[key] = context.getString(R.string.armory_source_daily_bonus)
+            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_daily_bonus)
         }
         weeklyQuestRepo.divineDropPool.forEach { key ->
-            if (key !in map) map[key] = context.getString(R.string.armory_source_weekly_bonus)
+            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_weekly_bonus)
         }
         Skills.ALL.forEach { skill ->
             val capeKey = capeKeyForSkill(skill) ?: return@forEach
             if (capeKey in gameData.equipment && capeKey !in map) {
-                map[capeKey] = context.getString(R.string.armory_source_skill_cape, GameStrings.skillName(context, skill))
+                map[capeKey] = context.withAppLocale().getString(R.string.armory_source_skill_cape, GameStrings.skillName(context, skill))
             }
         }
 

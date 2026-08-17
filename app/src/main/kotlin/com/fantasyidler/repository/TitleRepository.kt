@@ -1,5 +1,7 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import com.fantasyidler.R
 import com.fantasyidler.data.db.dao.QuestProgressDao
@@ -77,12 +79,12 @@ class TitleRepository @Inject constructor(
     /** Resolves an equipped title id to its localized display name, or null (e.g. "None" equipped). */
     fun displayName(context: Context, id: String?, flags: PlayerFlags): String? {
         if (id == null) return null
-        TitleCatalog.ALL.find { it.id == id }?.let { return context.getString(it.nameRes) }
+        TitleCatalog.ALL.find { it.id == id }?.let { return context.withAppLocale().getString(it.nameRes) }
         if (id.startsWith("seasonal_")) {
             val eventId = id.removePrefix("seasonal_")
             val earned = flags.seasonalBannersEarned.find { it.eventId == eventId } ?: return null
             val shortName = earned.eventDisplayName.ifBlank { gameData.seasonalEvents[eventId]?.displayName ?: return null }
-            return context.getString(R.string.title_seasonal_champion_of, shortName)
+            return context.withAppLocale().getString(R.string.title_seasonal_champion_of, shortName)
         }
         return null
     }

@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -86,7 +88,7 @@ class SeasonalEventViewModel @Inject constructor(
     fun claimRewardTier(tierTokens: Int) {
         viewModelScope.launch {
             if (seasonalEventRepo.claimRewardTier(tierTokens)) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_reward_claim_success)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_reward_claim_success)) }
             }
         }
     }
@@ -94,7 +96,7 @@ class SeasonalEventViewModel @Inject constructor(
     fun purchaseMarketOffer(offerId: String) {
         viewModelScope.launch {
             if (seasonalEventRepo.purchaseMarketOffer(offerId)) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_market_purchase_success)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_market_purchase_success)) }
             }
         }
     }
@@ -120,8 +122,8 @@ class SeasonalEventViewModel @Inject constructor(
     fun submitMinigameAttempt(won: Boolean) {
         viewModelScope.launch {
             when (seasonalEventRepo.submitMinigameAttempt(won)) {
-                is SeasonalMinigameResult.Success -> _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_minigame_success)) }
-                is SeasonalMinigameResult.Failure -> _extra.update { it.copy(snackbarMessage = context.getString(R.string.seasonal_minigame_failure)) }
+                is SeasonalMinigameResult.Success -> _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_minigame_success)) }
+                is SeasonalMinigameResult.Failure -> _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_minigame_failure)) }
                 is SeasonalMinigameResult.OnCooldown, SeasonalMinigameResult.NoActiveEvent -> {}
             }
         }

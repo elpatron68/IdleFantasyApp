@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -87,13 +89,13 @@ class ChurchViewModel @Inject constructor(
             when (val result = churchRepo.activateBlessing(key)) {
                 is BlessingActivateResult.Success -> {}
                 is BlessingActivateResult.AlreadyActive ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.church_already_active)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.church_already_active)) }
                 is BlessingActivateResult.NotEnoughBones ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.church_not_enough_bones, result.needed)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.church_not_enough_bones, result.needed)) }
                 is BlessingActivateResult.LevelTooLow ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.church_locked_level, result.requiredLevel)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.church_locked_level, result.requiredLevel)) }
                 is BlessingActivateResult.IronmanBlocked ->
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_blessing_blocked)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.ironman_blessing_blocked)) }
             }
         }
     }

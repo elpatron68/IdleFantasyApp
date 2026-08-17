@@ -1010,7 +1010,9 @@ private fun BannersTab(banners: List<SeasonalBannerDisplay>) {
     val dateFormat = remember { java.text.SimpleDateFormat("MMM d, yyyy", java.util.Locale.getDefault()) }
     val context = LocalContext.current
     LazyVerticalGrid(
-        columns                = GridCells.Fixed(3),
+        // Adaptive so labels keep enough width to wrap on word boundaries in the
+        // narrow rail layout instead of breaking mid-word (issue #1433)
+        columns                = GridCells.Adaptive(104.dp),
         modifier               = Modifier.fillMaxSize(),
         contentPadding         = PaddingValues(16.dp),
         horizontalArrangement  = Arrangement.spacedBy(12.dp),

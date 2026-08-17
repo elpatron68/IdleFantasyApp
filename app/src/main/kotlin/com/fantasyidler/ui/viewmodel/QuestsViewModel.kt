@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.QuestData
@@ -223,19 +225,19 @@ class QuestsViewModel @Inject constructor(
             if (rewards.xp > 0) {
                 if (quest.skill == "combat") {
                     val totalFinalXp = breakdowns.values.sumOf { it.finalXp }
-                    add(context.getString(R.string.reward_part_combat_xp, totalFinalXp.formatXp()))
+                    add(context.withAppLocale().getString(R.string.reward_part_combat_xp, totalFinalXp.formatXp()))
                 } else {
                     val b = breakdowns.getValue(quest.skill)
                     val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
                     add("+${b.finalXp.formatXp()} XP$suffix")
                 }
             }
-            if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+            if (rewards.coins > 0) add(context.withAppLocale().getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
             rewards.items.forEach { (_, qty) -> add(context.resources.getQuantityString(R.plurals.plural_reward_items, qty, qty)) }
         }
-        val claimedText = if (parts.isNotEmpty()) " " + context.getString(R.string.quest_claimed_suffix, parts.joinToString(", ")) else ""
+        val claimedText = if (parts.isNotEmpty()) " " + context.withAppLocale().getString(R.string.quest_claimed_suffix, parts.joinToString(", ")) else ""
         val questName = GameStrings.questName(context, quest.id, quest.name)
-        _extra.update { it.copy(snackbarMessage = context.getString(R.string.quest_complete_notification, questName) + claimedText) }
+        _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.quest_complete_notification, questName) + claimedText) }
     }
 
     fun snackbarConsumed() = _extra.update { it.copy(snackbarMessage = null) }
@@ -264,10 +266,10 @@ class QuestsViewModel @Inject constructor(
             val message = when (reward) {
                 is DailyReward.CoinsReward -> {
                     playerRepo.addCoins(reward.amount.toLong())
-                    context.getString(R.string.quest_daily_complete_coins, reward.amount.toLong().formatCoins())
+                    context.withAppLocale().getString(R.string.quest_daily_complete_coins, reward.amount.toLong().formatCoins())
                 }
                 is DailyReward.DwarvenItemReward -> {
-                    context.getString(R.string.quest_daily_complete_dwarven)
+                    context.withAppLocale().getString(R.string.quest_daily_complete_dwarven)
                 }
             }
             _extra.update { it.copy(snackbarMessage = message) }
@@ -281,7 +283,7 @@ class QuestsViewModel @Inject constructor(
             val (newFlags, rewardCoins) = weeklyQuestRepo.claimQuest(flags, templateId)
             playerRepo.updateFlags(newFlags)
             playerRepo.addCoins(rewardCoins)
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.quest_weekly_complete, rewardCoins.formatCoins())) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.quest_weekly_complete, rewardCoins.formatCoins())) }
         }
     }
 
@@ -303,10 +305,10 @@ class QuestsViewModel @Inject constructor(
             val message = when (reward) {
                 is WeeklyBonusReward.CoinsReward -> {
                     playerRepo.addCoins(reward.amount)
-                    context.getString(R.string.quest_weekly_bonus_complete_coins, reward.amount.formatCoins())
+                    context.withAppLocale().getString(R.string.quest_weekly_bonus_complete_coins, reward.amount.formatCoins())
                 }
                 is WeeklyBonusReward.DivineItemReward -> {
-                    context.getString(R.string.quest_weekly_bonus_complete_divine)
+                    context.withAppLocale().getString(R.string.quest_weekly_bonus_complete_divine)
                 }
             }
             _extra.update { it.copy(snackbarMessage = message) }

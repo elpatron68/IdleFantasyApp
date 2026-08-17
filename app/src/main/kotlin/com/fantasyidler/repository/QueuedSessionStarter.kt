@@ -1,5 +1,7 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import com.fantasyidler.R
 import com.fantasyidler.data.json.CookingRecipe
@@ -591,8 +593,10 @@ class QueuedSessionStarter @Inject constructor(
             "boss" -> {
                 val bossKey = action.activityKey
                 val boss    = gameData.bosses[bossKey] ?: return
-                val bossEquipped: Map<String, String?> = if (action.equippedSnapshot != null)
-                    json.decodeFromString(action.equippedSnapshot) else equipped
+                // Gear reads live at start so armor changes made while queued apply (issue
+                // #1430); only the entry's explicit combat picks (weapon slot, spell,
+                // arrows, potion) are honored from queue time.
+                val bossEquipped: Map<String, String?> = equipped
                 val bossArrowKey  = action.arrowsKey ?: flags.equippedArrows
                 val bossSpellName = action.spellName ?: flags.activeSpell
                 val bossPotionBonuses = if (action.potionKey != null && (inventory[action.potionKey] ?: 0) > 0) {
@@ -692,8 +696,8 @@ class QueuedSessionStarter @Inject constructor(
             "combat" -> {
                 val dungeonKey = action.activityKey
                 val dungeon    = gameData.dungeons[dungeonKey] ?: return
-                val combatEquipped: Map<String, String?> = if (action.equippedSnapshot != null)
-                    json.decodeFromString(action.equippedSnapshot) else equipped
+                // Live gear at start, same as the boss branch (issue #1430).
+                val combatEquipped: Map<String, String?> = equipped
                 val combatArrowKey  = action.arrowsKey ?: flags.equippedArrows
                 val combatSpellName = action.spellName ?: flags.activeSpell
                 val combatPotBonuses = if (action.potionKey != null && (inventory[action.potionKey] ?: 0) > 0) {
@@ -1016,8 +1020,8 @@ class QueuedSessionStarter @Inject constructor(
 
     private fun buildTowerFloorDungeon(floor: Int): DungeonData = DungeonData(
         name             = "tower_floor_$floor",
-        displayName      = context.getString(R.string.tower_floor_label, floor),
-        description      = context.getString(R.string.tower_floor_desc, floor),
+        displayName      = context.withAppLocale().getString(R.string.tower_floor_label, floor),
+        description      = context.withAppLocale().getString(R.string.tower_floor_desc, floor),
         recommendedLevel = (floor * 2).coerceAtMost(200),
         encounterRate    = 0.65,
         enemySpawns      = towerTierFor(floor),

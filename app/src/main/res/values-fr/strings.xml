@@ -100,12 +100,12 @@
     <string name="label_coming_soon">À venir</string>
     <string name="label_time_remaining">Temps restant</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
+    <string name="duration_months">%1$dmo</string>
     <string name="duration_weeks">%1$dS</string>
     <string name="duration_days">%1$dj</string>
-    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
+    <string name="duration_hours">%1$dh</string>
+    <string name="duration_minutes">%1$dm</string>
+    <string name="duration_seconds">%1$ds</string>
     <string name="duration_complete">Finie</string>
     <string name="label_session_results">Résultats de la Session</string>
     <string name="label_xp_gained">XP gagnés</string>
@@ -149,7 +149,7 @@
     <string name="label_available_quests">Disponible</string>
     <string name="label_stats">Stats</string>
     <string name="label_skills">Aptitudes</string>
-    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
+    <string name="tab_label_with_count">%1$s (%2$d)</string>
     <string name="label_shop">Magasin</string>
     <string name="label_sell_items">Vendre des Objets</string>
     <string name="label_total_level">Total des Niveaux</string>
@@ -303,8 +303,8 @@
     <string name="settings_profile_layout_tabs">Onglets</string>
     <string name="settings_quest_dots">Point de quête sur aptitudes</string>
     <string name="settings_quest_dots_desc">Montre un point doré sur les aptitudes qui ont une quête possible</string>
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Notification de Prestige</string>
+    <string name="settings_prestige_notifications_desc">Montrer une notification quand une aptitude est prête à prestige.</string>
     <string name="settings_compact_numbers">Nombres Compacts</string>
     <string name="settings_compact_numbers_desc">Abréger les grands nombres d\'éléments (par ex. 2,46 M au lieu de 2 461 940).</string>
     <string name="settings_home_screen">Écran d\'Accueil</string>
@@ -550,6 +550,8 @@
     <string name="combat_log_player_miss">→ Vous avez raté %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s vous inflige %2$d dégâts</string>
     <string name="combat_log_enemy_miss">← %1$s a raté</string>
+    <string name="combat_log_heal">✚ You eat: +%1$d HP</string> <!-- untranslated -->
+    <string name="combat_eat_threshold_warning">Risky: at a low threshold a hard hit can drop you to 0 HP before your character eats.</string> <!-- untranslated -->
     <string name="combat_rec_level">Niveau de combat recommandé</string>
     <string name="combat_your_level">Votre niveau de combat</string>
     <string name="combat_no_strength_bonus">Aucun (pas de bonus de force)</string>
@@ -1552,7 +1554,7 @@
     <string name="bonus_combined_xp">XP combiné</string>
     <string name="bonus_yield">+%1$d%% rendement</string>
     <string name="bonus_boost">+%1$d%% renforcement</string>
-    <string name="bonus_session_shorter">%1$d min de sessions en moins</string>
+    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% en moins sur le coût d\'amélioration de bâtiments</string>
@@ -1635,6 +1637,25 @@
     <string name="tower_not_enough_runes">Pas assez de %1$s pour le nombre maximal d\'attaques possible.</string>
     <string name="tower_milestone_claim">Réclamer</string>
     <string name="tower_milestone_claimed">Réclamé</string>
+    <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
+    <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_shield">%1$s (defense +80)</string> <!-- untranslated -->
+    <string name="tower_milestone_amulet">%1$s (attack +15, strength +15, defense +10, all styles)</string> <!-- untranslated -->
+    <string name="tower_milestone_hp_50">+50 max HP</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_25k">25,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_helm">%1$s (defense +82, strength +8)</string> <!-- untranslated -->
+    <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
+    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
+    <string name="tower_milestone_plate">%1$s (defense +132)</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_100k">100,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_legs_set">%1$s (defense +125) + %2$s (defense +58) + %3$s (defense +125)</string> <!-- untranslated -->
+    <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
+    <string name="tower_milestone_cape">%1$s (attack/str/def +14, ranged/magic +12) + 500,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_crossbow">%1$s (ranged attack +78, ranged strength +52)</string> <!-- untranslated -->
+    <string name="tower_milestone_staff">%1$s (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins</string> <!-- untranslated -->
     <string name="tower_enemies_this_floor">Ennemis</string>
     <string name="tower_enemy_strength">Puissance ennemie : %1$s%%</string>
     <string name="tower_entry_card_desc">Des étages sans fin. Jusqu\'où peux-tu grimper ?</string>
@@ -1821,20 +1842,20 @@
     <string name="home_welcome_title">Le %1$s !</string>
 
     <!-- Pet names and descriptions -->
-    <string name="pet_dragon_whelp_name">Jeune dragon</string>
+    <string name="pet_dragon_whelp_name">Dragonnet</string>
     <string name="pet_dragon_whelp_desc">Un jeune dragon qui augmente votre prouesse de combat.</string>
-    <string name="pet_imp_pet_name">Diabolin</string>
+    <string name="pet_imp_pet_name">Diabolin de Compagnie</string>
     <string name="pet_imp_pet_desc">Un diablotin malicieux qui améliore votre entraînement de Prière.</string>
-    <string name="pet_baby_kraken_name">Petit kraken</string>
+    <string name="pet_baby_kraken_name">Petit Kraken</string>
     <string name="pet_baby_kraken_desc">Un tout petit kraken qui augmente votre habilité en Cuisine.</string>
     <string name="pet_rock_golem_name">Golem de Pierre</string>
-    <string name="pet_rock_golem_desc">Une formation rocheuse vivante qui augmente votre XP d\'Extraction.</string>
+    <string name="pet_rock_golem_desc">Une formation rocheuse vivante qui augmente votre prouesse d\'Extraction.</string>
     <string name="pet_ent_name">Ent</string>
-    <string name="pet_ent_desc">Un ancien esprit d\'arbre qui booste votre XP de coupe de Bois.</string>
-    <string name="pet_tiny_templar_name">Petite templier</string>
-    <string name="pet_tiny_templar_desc">Un petit compagnon poisson qui augmente votre XP de Pêche.</string>
-    <string name="pet_tangleroot_name">Créature végétale</string>
-    <string name="pet_tangleroot_desc">Une créature végétale magique qui améliore votre XP d\'Agriculture.</string>
+    <string name="pet_ent_desc">Un ancien esprit d\'arbre qui aide votre bûcheronnage.</string>
+    <string name="pet_tiny_templar_name">Petit Templier</string>
+    <string name="pet_tiny_templar_desc">Un petit compagnon poisson qui augmente votre expertise en Pêche.</string>
+    <string name="pet_tangleroot_name">Racine Enchevêtrée</string>
+    <string name="pet_tangleroot_desc">Une créature végétale magique qui améliore votre Agriculture.</string>
     <string name="pet_baby_balrog_name">Braisette Gothique</string>
     <string name="pet_baby_balrog_desc">Un minuscule démon de feu et d\'ombre qui renforce votre magie.</string>
     <string name="pet_void_wisp_name">Feu Follet du Vide</string>
@@ -1864,7 +1885,7 @@
     <string name="pet_tower_pet_name">Gardien de Pierre</string>
     <string name="pet_tower_pet_desc">Un ancien golem de pierre qui garde les secrets de la tour. Augmente l\'XP de combat.</string>
     <string name="pet_solstice_sprite_name">Farfadet du Solstice</string>
-    <string name="pet_solstice_sprite_desc">Un minuscule esprit de braise issu de l\'événement du Solstice de la Tour Solaire, qui renforce vos prouesses au combat.</string>
+    <string name="pet_solstice_sprite_desc">Un minuscule esprit de braise issu de l\'événement du Solstice de la Flèche Solaire, qui renforce vos prouesses au combat.</string>
     <string name="pet_lantern_wisp_name">Feu Follet-Lanterne</string>
     <string name="pet_lantern_wisp_desc">Une lanterne-citrouille grimaçante, échappée de la couronne du Roi Creux, qui éclaire désormais votre chemin vers la bataille.</string>
     <string name="pet_grave_sprout_name">Germe de Tombe</string>
@@ -1881,8 +1902,8 @@
     <string name="save_slot_new">Nouveau personnage</string>
     <string name="save_slot_playing">En jeu</string>
     <string name="save_slot_ironman">Ironman</string>
-    <string name="save_slot_combat_level">Niveau de combat %1$d</string>
-    <string name="save_slot_total_level">Niveau total %1$d</string>
+    <string name="save_slot_combat_level">Combat Niv %1$d</string>
+    <string name="save_slot_total_level">Total Niv %1$d</string>
     <string name="save_slot_last_played">il y a %1$s</string>
     <string name="save_slot_created">Créé il y a %1$s ans</string>
     <string name="save_slot_switch_title">Changer de personnage ?</string>

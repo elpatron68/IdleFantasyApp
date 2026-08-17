@@ -191,7 +191,14 @@ internal fun HomeSessionCard(
                 val titleColor = if (isDone) MaterialTheme.colorScheme.onPrimaryContainer
                                  else MaterialTheme.colorScheme.onSecondaryContainer
                 val iconRes = GameStrings.skillIconRes(session.skillName)
-                if (iconRes != null) {
+                if (session.skillName == "boss") {
+                    BossIcon(
+                        bossId        = session.activityKey,
+                        modifier      = Modifier.size(20.dp),
+                        fallbackEmoji = skillEmoji,
+                    )
+                    Spacer(Modifier.width(6.dp))
+                } else if (iconRes != null) {
                     Image(
                         painter            = painterResource(iconRes),
                         contentDescription = null,

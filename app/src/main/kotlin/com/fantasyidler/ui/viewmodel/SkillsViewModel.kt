@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.AgilityCourseData
@@ -437,7 +439,7 @@ class SkillsViewModel @Inject constructor(
             val inv: Map<String, Int> = json.decodeFromString(player.inventory)
             val available = inv[logKey] ?: 0
             if (available <= 0) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_no_logs)) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_no_logs)) }
                 return@launch
             }
             val actualQty = qty.coerceIn(1, available)
@@ -465,7 +467,7 @@ class SkillsViewModel @Inject constructor(
                 if (enqueued) queuedSessionStarter.startNextQueued()
                 _uiState.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.slayer_queue_added, "Firemaking") else context.getString(R.string.slayer_queue_full),
+                        snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.slayer_queue_added, "Firemaking") else context.withAppLocale().getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -477,7 +479,7 @@ class SkillsViewModel @Inject constructor(
                 playerRepo.enqueueAction(action)
                 queuedSessionStarter.startNextQueued()
             } catch (e: Exception) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _uiState.update { it.copy(startingSession = false) }
             }
@@ -491,7 +493,7 @@ class SkillsViewModel @Inject constructor(
             val inv: Map<String, Int> = json.decodeFromString(player.inventory)
             val availableEssence = inv["rune_essence"] ?: 0
             if (availableEssence < runeData.essenceCost * qty) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_rune_essence)) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_rune_essence)) }
                 return@launch
             }
 
@@ -529,7 +531,7 @@ class SkillsViewModel @Inject constructor(
                 }
                 _uiState.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.RUNECRAFTING), actDisplay) else context.getString(R.string.slayer_queue_full),
+                        snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.RUNECRAFTING), actDisplay) else context.withAppLocale().getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -597,7 +599,7 @@ class SkillsViewModel @Inject constructor(
                     catalystQty      = consumedAshCost,
                 )
             } catch (e: Exception) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _uiState.update { it.copy(startingSession = false) }
             }
@@ -611,7 +613,7 @@ class SkillsViewModel @Inject constructor(
             val inv: Map<String, Int> = json.decodeFromString(player.inventory)
             val available = inv[boneKey] ?: 0
             if (available < qty) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_item, bone.displayName)) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_item, bone.displayName)) }
                 return@launch
             }
 
@@ -634,7 +636,7 @@ class SkillsViewModel @Inject constructor(
                 if (enqueued) queuedSessionStarter.startNextQueued()
                 _uiState.update {
                     it.copy(
-                        snackbarMessage = if (enqueued) context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.PRAYER), GameStrings.itemName(context, boneKey)) else context.getString(R.string.slayer_queue_full),
+                        snackbarMessage = if (enqueued) context.withAppLocale().getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.PRAYER), GameStrings.itemName(context, boneKey)) else context.withAppLocale().getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -679,7 +681,7 @@ class SkillsViewModel @Inject constructor(
                     skillDisplayName = "Prayer",
                 )
             } catch (e: Exception) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _uiState.update { it.copy(startingSession = false) }
             }
@@ -745,9 +747,9 @@ class SkillsViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         snackbarMessage = if (enqueued)
-                            context.getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.THIEVING), GameStrings.thievingNpcName(context, npcKey))
+                            context.withAppLocale().getString(R.string.skill_added_to_queue_activity, GameStrings.skillName(context, Skills.THIEVING), GameStrings.thievingNpcName(context, npcKey))
                         else
-                            context.getString(R.string.slayer_queue_full),
+                            context.withAppLocale().getString(R.string.slayer_queue_full),
                     )
                 }
                 return@launch
@@ -784,7 +786,7 @@ class SkillsViewModel @Inject constructor(
                     skillDisplayName = "Thieving",
                 )
             } catch (e: Exception) {
-                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _uiState.update { it.copy(startingSession = false) }
             }
@@ -846,11 +848,11 @@ class SkillsViewModel @Inject constructor(
                     it.copy(
                         snackbarMessage = if (enqueued) {
                             if (activityKey.isNotEmpty())
-                                context.getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
+                                context.withAppLocale().getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
                             else
-                                context.getString(R.string.slayer_queue_added, displayName)
+                                context.withAppLocale().getString(R.string.slayer_queue_added, displayName)
                         } else {
-                            context.getString(R.string.slayer_queue_full)
+                            context.withAppLocale().getString(R.string.slayer_queue_full)
                         },
                     )
                 }
@@ -872,7 +874,7 @@ class SkillsViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 _uiState.update {
-                    it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: ""))
+                    it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: ""))
                 }
             } finally {
                 _uiState.update { it.copy(startingSession = false) }
@@ -998,7 +1000,7 @@ class SkillsViewModel @Inject constructor(
             if (daily.template.type != "craft") continue
             if (daily.template.target != itemKey) continue
             val remaining = daily.template.amount - daily.progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_daily), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_daily), remaining)
         }
 
         for (weekly in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
@@ -1006,7 +1008,7 @@ class SkillsViewModel @Inject constructor(
             if (weekly.template.type != "craft") continue
             if (weekly.template.target != itemKey) continue
             val remaining = weekly.template.amount - weekly.progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_weekly), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_weekly), remaining)
         }
 
         val guildPool = gameData.guildDailyPool.associateBy { it.id }
@@ -1017,7 +1019,7 @@ class SkillsViewModel @Inject constructor(
             if (template.target != itemKey) continue
             val progress = flags.guildDailyProgress[id] ?: 0
             val remaining = template.amount - progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_guild), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_guild), remaining)
         }
 
         return fills.sortedBy { it.qty }
@@ -1055,14 +1057,14 @@ class SkillsViewModel @Inject constructor(
             if (daily.claimed) continue
             if (daily.template.type != "prayer") continue
             val remaining = daily.template.amount - daily.progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_daily), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_daily), remaining)
         }
 
         for (weekly in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
             if (weekly.claimed) continue
             if (weekly.template.type != "prayer") continue
             val remaining = weekly.template.amount - weekly.progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_weekly), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_weekly), remaining)
         }
 
         val guildPool = gameData.guildDailyPool.associateBy { it.id }
@@ -1072,7 +1074,7 @@ class SkillsViewModel @Inject constructor(
             if (template.type != "prayer") continue
             val progress = flags.guildDailyProgress[id] ?: 0
             val remaining = template.amount - progress
-            if (remaining > 0) fills += QuestFillSuggestion(context.getString(R.string.quest_fill_guild), remaining)
+            if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_guild), remaining)
         }
 
         return fills.sortedBy { it.qty }
@@ -1177,7 +1179,7 @@ class SkillsViewModel @Inject constructor(
                 val logKey = daily.target.replace("ashes", "log")
                 val owned  = uiState.value.inventory[logKey] ?: 0
                 if (owned <= 0) {
-                    _uiState.update { it.copy(snackbarMessage = context.getString(R.string.skill_not_enough_materials)) }
+                    _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_materials)) }
                     return true
                 }
                 startFiremakingSession(logKey, minOf(remaining, owned))

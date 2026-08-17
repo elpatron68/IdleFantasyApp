@@ -321,8 +321,8 @@
     <string name="item_slayer_platebody_desc">Armure lourde gravée de runes de tueur.</string>
     <string name="item_slayer_platelegs_name">Jambières de Tueur</string>
     <string name="item_slayer_platelegs_desc">Jambières protectrices conçues pour des excursions prolongées en donjon.</string>
-    <string name="item_slayer_plateskirt_name">Slayer Plateskirt</string> <!-- untranslated -->
-    <string name="item_slayer_plateskirt_desc">Protective skirt crafted for extended dungeon runs.</string> <!-- untranslated -->
+    <string name="item_slayer_plateskirt_name">Jupe de Plaques de Tueur</string>
+    <string name="item_slayer_plateskirt_desc">Jupe de protection conçue pour les longues parties de donjons.</string>
 
     <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Pioche en bronze</string>
@@ -1065,8 +1065,8 @@
     <string name="item_tower_body_desc">Une armure impénétrable provenant du sanctuaire intérieur de la tour.</string>
     <string name="item_tower_legs_name">Cnémides de la Tour</string>
     <string name="item_tower_legs_desc">Cnémides forgées dans la forge la plus profonde de la Tour.</string>
-    <string name="item_tower_plateskirt_name">Tower Plateskirt</string> <!-- untranslated -->
-    <string name="item_tower_plateskirt_desc">A plateskirt forged in the tower\'s deepest forge.</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_name">Jupe de Plaques de la Tour</string>
+    <string name="item_tower_plateskirt_desc">Une jupe de plaques forgée dans la plus profonde forge de la Tour</string>
     <string name="item_tower_boots_name">Bottes de la Tour</string>
     <string name="item_tower_boots_desc">Bottes forgées dans la forge la plus profonde de la Tour.</string>
     <string name="item_tower_shield_name">Bouclier de la Tour</string>

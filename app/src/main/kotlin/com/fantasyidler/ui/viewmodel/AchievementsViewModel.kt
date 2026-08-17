@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -134,5 +136,5 @@ class AchievementsViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AchievementsUiState())
 
     private fun ach(id: String, nameRes: Int, descRes: Int, emoji: String, unlocked: Boolean) =
-        Achievement(id = id, name = context.getString(nameRes), description = context.getString(descRes), emoji = emoji, isUnlocked = unlocked)
+        Achievement(id = id, name = context.withAppLocale().getString(nameRes), description = context.withAppLocale().getString(descRes), emoji = emoji, isUnlocked = unlocked)
 }

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ===== Notification channel metadata ===== -->
-    <string name="notif_channel_sessions_name">Session Alerts</string> <!-- untranslated -->
-    <string name="notif_channel_sessions_desc">Notifications when your skill sessions complete</string> <!-- untranslated -->
-    <string name="notif_channel_farming_name">Farming Alerts</string> <!-- untranslated -->
-    <string name="notif_channel_farming_desc">Notifications when your crops are ready to harvest</string> <!-- untranslated -->
+    <string name="notif_channel_sessions_name">活动提醒</string>
+    <string name="notif_channel_sessions_desc">技能活动完成时的通知</string>
+    <string name="notif_channel_farming_name">种植提醒</string>
+    <string name="notif_channel_farming_desc">作物可以收获时的通知</string>
 
     <!-- ===== Session complete ===== -->
-    <string name="notif_session_complete_title">Session Complete!</string> <!-- untranslated -->
+    <string name="notif_session_complete_title">活动完成！</string>
     <!-- Translator note: %1$s = localised skill name (e.g. "Mining") -->
-    <string name="notif_session_complete_body">Your %1$s session has finished. Tap to collect your rewards.</string> <!-- untranslated -->
+    <string name="notif_session_complete_body">你的 %1$s 活动已结束。点击领取奖励。</string>
 
     <!-- ===== Buff alerts ===== -->
-    <string name="notif_channel_buffs_name">Buff Alerts</string> <!-- untranslated -->
-    <string name="notif_channel_buffs_desc">Notifications when your active buffs expire</string> <!-- untranslated -->
-    <string name="notif_xp_boost_expired_title">XP Boost Expired</string> <!-- untranslated -->
-    <string name="notif_xp_boost_expired_body">Your 2x XP boost has run out. Visit the marketplace to reactivate.</string> <!-- untranslated -->
-    <string name="notif_blessing_expired_title">Blessing Expired</string> <!-- untranslated -->
-    <string name="notif_blessing_expired_body">Your church blessing has faded. Visit the Church to renew it.</string> <!-- untranslated -->
+    <string name="notif_channel_buffs_name">增益提醒</string>
+    <string name="notif_channel_buffs_desc">增益效果过期时的通知</string>
+    <string name="notif_xp_boost_expired_title">经验值加成已过期</string>
+    <string name="notif_xp_boost_expired_body">你的双倍经验值加成已失效。前往商城重新激活。</string>
+    <string name="notif_blessing_expired_title">祝福已过期</string>
+    <string name="notif_blessing_expired_body">你的教堂祝福已消退。前往教堂重新获取。</string>
 
     <!-- ===== Farming ready ===== -->
-    <string name="notif_farming_ready_title">Crops Ready!</string> <!-- untranslated -->
+    <string name="notif_farming_ready_title">作物成熟了！</string>
     <!-- Translator note: %1$s = localised crop name (e.g. "Wheat"). Adjust grammar as needed for your language. -->
-    <string name="notif_farming_ready_body">Your %1$s is ready to harvest.</string> <!-- untranslated -->
+    <string name="notif_farming_ready_body">你的 %1$s 可以收获了。</string>
     <!-- Plural variant used when multiple patches are ready -->
     <!-- Translator note: %1$d = number of patches ready -->
-    <string name="notif_farming_ready_body_multi">%1$d patches are ready to harvest.</string> <!-- untranslated -->
+    <string name="notif_farming_ready_body_multi">%1$d 块土地的作物可以收获了。</string>
 </resources>

@@ -215,9 +215,14 @@ echo "==> Locale strings normalized"
 # Copy fastlane changelog into the app asset so the in-app "What's New" dialog shows it
 FASTLANE_CHANGELOG="$REPO_DIR/fastlane/metadata/android/en-US/changelogs/${VERSION_CODE}.txt"
 if [[ -f "$FASTLANE_CHANGELOG" ]]; then
-    { echo "v$VERSION_NAME"; cat "$FASTLANE_CHANGELOG"; echo; cat "$CHANGELOG_ASSET" 2>/dev/null; } > /tmp/changelog_merged.txt
-    mv /tmp/changelog_merged.txt "$CHANGELOG_ASSET"
-    echo "==> Prepended changelog ${VERSION_CODE}.txt to assets/changelog.txt"
+    # Guard against reruns of the pipeline: prepending twice duplicates the block (issue #1414)
+    if [[ "$(head -1 "$CHANGELOG_ASSET" 2>/dev/null)" == "v$VERSION_NAME" ]]; then
+        echo "==> assets/changelog.txt already starts with v$VERSION_NAME, skipping prepend"
+    else
+        { echo "v$VERSION_NAME"; cat "$FASTLANE_CHANGELOG"; echo; cat "$CHANGELOG_ASSET" 2>/dev/null; } > /tmp/changelog_merged.txt
+        mv /tmp/changelog_merged.txt "$CHANGELOG_ASSET"
+        echo "==> Prepended changelog ${VERSION_CODE}.txt to assets/changelog.txt"
+    fi
 else
     echo "WARNING: No fastlane changelog found at $FASTLANE_CHANGELOG"
 fi

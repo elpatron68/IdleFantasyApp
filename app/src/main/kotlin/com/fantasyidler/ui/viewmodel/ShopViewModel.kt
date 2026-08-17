@@ -162,8 +162,8 @@ class ShopViewModel @Inject constructor(
 
         val boost = ShopEntry(
             key          = XP_BOOST_KEY,
-            displayName  = context.getString(R.string.shop_xp_boost_name),
-            description  = context.getString(R.string.item_xp_boost_48h_desc),
+            displayName  = context.withAppLocale().getString(R.string.shop_xp_boost_name),
+            description  = context.withAppLocale().getString(R.string.item_xp_boost_48h_desc),
             price        = PlayerRepository.XP_BOOST_COST.toInt(),
             categoryName = "Special",
         )
@@ -365,7 +365,7 @@ class ShopViewModel @Inject constructor(
             val junk      = inventory.filterKeys { it != "coins" && it !in useful && it !in locked }
                 .let { if (uiState.value.keepOneOfEach) it.mapValues { (_, qty) -> qty - 1 }.filterValues { qty -> qty > 0 } else it }
             if (junk.isEmpty()) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_junk)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_no_junk)) }
                 return@launch
             }
             val items = junk.map { (key, qty) ->
@@ -387,7 +387,7 @@ class ShopViewModel @Inject constructor(
                 .let { if (state.keepOneOfEach) it.mapValues { (_, qty) -> qty - 1 }.filterValues { qty -> qty > 0 } else it }
 
             if (toSell.isEmpty()) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_no_old_equipment)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_no_old_equipment)) }
                 return@launch
             }
             val items = toSell.map { (key, qty) ->
@@ -409,7 +409,7 @@ class ShopViewModel @Inject constructor(
             val nowLocked = playerRepo.toggleItemLock(itemKey)
             val name = GameStrings.itemName(context.withAppLocale(), itemKey)
             _extra.update {
-                it.copy(snackbarMessage = context.getString(
+                it.copy(snackbarMessage = context.withAppLocale().getString(
                     if (nowLocked) R.string.shop_item_lock_on else R.string.shop_item_lock_off, name))
             }
         }
@@ -423,7 +423,7 @@ class ShopViewModel @Inject constructor(
             }
             _extra.update { it.copy(
                 pendingBulkSell = null,
-                snackbarMessage = context.getString(preview.soldMsgRes, preview.totalCoins.toCoinsString()),
+                snackbarMessage = context.withAppLocale().getString(preview.soldMsgRes, preview.totalCoins.toCoinsString()),
             )}
         }
     }
@@ -436,20 +436,20 @@ class ShopViewModel @Inject constructor(
 
     fun openBuy(entry: ShopEntry) {
         if (uiState.value.ironman) {
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.ironman_shop_buy_blocked)) }
             return
         }
         val isXpBoost = entry.key == XP_BOOST_KEY
         if (isXpBoost) {
             val state = uiState.value
             if (state.xpBoostActive) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_xp_boost_already_active)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_xp_boost_already_active)) }
                 return
             }
             if (state.xpBoostLastPurchaseAt > 0 &&
                 System.currentTimeMillis() < weeklyQuestRepo.nextResetMs(state.xpBoostLastPurchaseAt)
             ) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_xp_boost_weekly_limit)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_xp_boost_weekly_limit)) }
                 return
             }
         }
@@ -473,20 +473,21 @@ class ShopViewModel @Inject constructor(
     fun openSell(itemKey: String, displayName: String) {
         val state         = uiState.value
         if (itemKey in state.lockedItems) {
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.shop_item_locked, displayName)) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_item_locked, displayName)) }
             return
         }
         val have          = state.inventory[itemKey] ?: 0
         val equippedCount = state.equipped.values.count { it == itemKey }
         val reserved      = state.reservedItems[itemKey] ?: 0
-        val keptForCollection = if (state.keepOneOfEach) 1 else 0
+        // The equipped copy already serves as the collection keeper (issue #1419)
+        val keptForCollection = if (state.keepOneOfEach && equippedCount == 0) 1 else 0
         val sellable      = (have - equippedCount - reserved - keptForCollection).coerceAtLeast(0)
         if (sellable == 0) {
             val reason = when {
-                equippedCount > 0     -> context.getString(R.string.shop_sell_blocked_equipped, displayName)
-                reserved > 0          -> context.getString(R.string.shop_sell_blocked_reserved, displayName)
-                keptForCollection > 0 && have > 0 -> context.getString(R.string.shop_sell_blocked_keep_one, displayName)
-                else                  -> context.getString(R.string.shop_sell_blocked_none)
+                equippedCount > 0     -> context.withAppLocale().getString(R.string.shop_sell_blocked_equipped, displayName)
+                reserved > 0          -> context.withAppLocale().getString(R.string.shop_sell_blocked_reserved, displayName)
+                keptForCollection > 0 && have > 0 -> context.withAppLocale().getString(R.string.shop_sell_blocked_keep_one, displayName)
+                else                  -> context.withAppLocale().getString(R.string.shop_sell_blocked_none)
             }
             _extra.update { it.copy(snackbarMessage = reason) }
             return
@@ -516,7 +517,7 @@ class ShopViewModel @Inject constructor(
     fun confirmTransaction() {
         val t = _extra.value.transaction ?: return
         if (t.isBuy && uiState.value.ironman) {
-            _extra.update { it.copy(transaction = null, snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+            _extra.update { it.copy(transaction = null, snackbarMessage = context.withAppLocale().getString(R.string.ironman_shop_buy_blocked)) }
             return
         }
         viewModelScope.launch {
@@ -527,10 +528,10 @@ class ShopViewModel @Inject constructor(
                     it.copy(
                         transaction     = null,
                         snackbarMessage = when (result) {
-                            XpBoostPurchaseResult.SUCCESS              -> context.getString(R.string.shop_xp_boost_activated, 48)
-                            XpBoostPurchaseResult.NOT_ENOUGH_COINS     -> context.getString(R.string.error_not_enough_coins)
-                            XpBoostPurchaseResult.ALREADY_ACTIVE       -> context.getString(R.string.shop_xp_boost_already_active)
-                            XpBoostPurchaseResult.WEEKLY_LIMIT_REACHED -> context.getString(R.string.shop_xp_boost_weekly_limit)
+                            XpBoostPurchaseResult.SUCCESS              -> context.withAppLocale().getString(R.string.shop_xp_boost_activated, 48)
+                            XpBoostPurchaseResult.NOT_ENOUGH_COINS     -> context.withAppLocale().getString(R.string.error_not_enough_coins)
+                            XpBoostPurchaseResult.ALREADY_ACTIVE       -> context.withAppLocale().getString(R.string.shop_xp_boost_already_active)
+                            XpBoostPurchaseResult.WEEKLY_LIMIT_REACHED -> context.withAppLocale().getString(R.string.shop_xp_boost_weekly_limit)
                         },
                     )
                 }
@@ -546,10 +547,10 @@ class ShopViewModel @Inject constructor(
                 it.copy(
                     transaction = null,
                     snackbarMessage = if (success) {
-                        if (t.isBuy) context.getString(R.string.shop_bought_item, t.qty, GameStrings.itemName(context, t.key))
-                        else         context.getString(R.string.shop_sold_item, t.qty, GameStrings.itemName(context, t.key), t.priceEach * t.qty)
+                        if (t.isBuy) context.withAppLocale().getString(R.string.shop_bought_item, t.qty, GameStrings.itemName(context, t.key))
+                        else         context.withAppLocale().getString(R.string.shop_sold_item, t.qty, GameStrings.itemName(context, t.key), t.priceEach * t.qty)
                     } else {
-                        if (t.isBuy) context.getString(R.string.error_not_enough_coins) else context.getString(R.string.shop_not_enough_in_inventory)
+                        if (t.isBuy) context.withAppLocale().getString(R.string.error_not_enough_coins) else context.withAppLocale().getString(R.string.shop_not_enough_in_inventory)
                     },
                 )
             }

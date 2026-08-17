@@ -1,6 +1,9 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
@@ -65,7 +68,10 @@ data class TowerUiState(
 
 data class TowerMilestone(
     val floor: Int,
-    val description: String,
+    /** Reward text resource; item display names fill its %s placeholders (issue #1426). */
+    @StringRes val descriptionRes: Int,
+    /** Item keys whose localised names fill the description placeholders, in order. */
+    val itemKeys: List<String> = emptyList(),
 )
 
 @HiltViewModel
@@ -125,31 +131,31 @@ class TowerViewModel @Inject constructor(
         )
 
         val MILESTONES: List<TowerMilestone> = listOf(
-            TowerMilestone(10,  "Tower Ring (attack +6, strength +6)"),
-            TowerMilestone(20,  "+1% tower XP all skills"),
-            TowerMilestone(30,  "5,000 coins"),
-            TowerMilestone(40,  "Tower Shield (defense +80)"),
-            TowerMilestone(50,  "Tower Amulet (attack +15, strength +15, defense +10, all styles)"),
-            TowerMilestone(60,  "+50 max HP"),
-            TowerMilestone(70,  "+2% tower XP all skills"),
-            TowerMilestone(80,  "25,000 coins"),
-            TowerMilestone(90,  "Tower Helm (defense +82, strength +8)"),
-            TowerMilestone(100, "Tower Pet (5% combat XP)"),
-            TowerMilestone(110, "+1% tower coin drops"),
-            TowerMilestone(120, "Tower Plate (defense +132)"),
-            TowerMilestone(130, "+2% tower XP all skills"),
-            TowerMilestone(140, "100,000 coins"),
-            TowerMilestone(150, "Tower Legs (defense +125) + Tower Boots (defense +58) + Tower Plateskirt (defense +125)"),
-            TowerMilestone(160, "+50 max HP"),
-            TowerMilestone(170, "+1% tower coin drops"),
-            TowerMilestone(180, "Tower Sword (attack +72, strength +75)"),
-            TowerMilestone(190, "+2% tower XP all skills"),
-            TowerMilestone(200, "Tower Cape (attack/str/def +14, ranged/magic +12) + 500,000 coins"),
-            TowerMilestone(210, "+50 max HP"),
-            TowerMilestone(220, "Tower Crossbow (ranged attack +78, ranged strength +52)"),
-            TowerMilestone(230, "+1% tower coin drops"),
-            TowerMilestone(240, "+2% tower XP all skills"),
-            TowerMilestone(250, "Void Staff (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins"),
+            TowerMilestone(10,  R.string.tower_milestone_ring, listOf("tower_ring")),
+            TowerMilestone(20,  R.string.tower_milestone_xp_1pct),
+            TowerMilestone(30,  R.string.tower_milestone_coins_5k),
+            TowerMilestone(40,  R.string.tower_milestone_shield, listOf("tower_shield")),
+            TowerMilestone(50,  R.string.tower_milestone_amulet, listOf("tower_amulet")),
+            TowerMilestone(60,  R.string.tower_milestone_hp_50),
+            TowerMilestone(70,  R.string.tower_milestone_xp_2pct),
+            TowerMilestone(80,  R.string.tower_milestone_coins_25k),
+            TowerMilestone(90,  R.string.tower_milestone_helm, listOf("tower_helm")),
+            TowerMilestone(100, R.string.tower_milestone_pet),
+            TowerMilestone(110, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(120, R.string.tower_milestone_plate, listOf("tower_body")),
+            TowerMilestone(130, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(140, R.string.tower_milestone_coins_100k),
+            TowerMilestone(150, R.string.tower_milestone_legs_set, listOf("tower_legs", "tower_boots", "tower_plateskirt")),
+            TowerMilestone(160, R.string.tower_milestone_hp_50),
+            TowerMilestone(170, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(180, R.string.tower_milestone_sword, listOf("tower_sword")),
+            TowerMilestone(190, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(200, R.string.tower_milestone_cape, listOf("tower_cape")),
+            TowerMilestone(210, R.string.tower_milestone_hp_50),
+            TowerMilestone(220, R.string.tower_milestone_crossbow, listOf("tower_crossbow")),
+            TowerMilestone(230, R.string.tower_milestone_coin_drops_1pct),
+            TowerMilestone(240, R.string.tower_milestone_xp_2pct),
+            TowerMilestone(250, R.string.tower_milestone_staff, listOf("void_staff")),
         )
     }
 
@@ -212,8 +218,8 @@ class TowerViewModel @Inject constructor(
 
     private fun buildFloorDungeon(floor: Int): DungeonData = DungeonData(
         name             = "tower_floor_$floor",
-        displayName      = context.getString(R.string.tower_floor_label, floor),
-        description      = context.getString(R.string.tower_floor_desc, floor),
+        displayName      = context.withAppLocale().getString(R.string.tower_floor_label, floor),
+        description      = context.withAppLocale().getString(R.string.tower_floor_desc, floor),
         recommendedLevel = (floor * 2).coerceAtMost(200),
         encounterRate    = 0.65,
         enemySpawns      = tierFor(floor),
@@ -292,9 +298,9 @@ class TowerViewModel @Inject constructor(
                 _extra.update {
                     it.copy(
                         snackbarMessage = if (enqueued)
-                            context.getString(R.string.snackbar_added_to_queue, "Infinite Tower")
+                            context.withAppLocale().getString(R.string.snackbar_added_to_queue, "Infinite Tower")
                         else
-                            context.getString(R.string.snackbar_queue_full),
+                            context.withAppLocale().getString(R.string.snackbar_queue_full),
                     )
                 }
                 return@launch
@@ -373,7 +379,7 @@ class TowerViewModel @Inject constructor(
                 val neededRunes = 60 * CombatSimulator.playerTicksPerFrame(weaponAttackSpeed) * runeCost
                 if (runeKey != null && (inventory[runeKey] ?: 0) < neededRunes) {
                     _extra.update { it.copy(
-                        snackbarMessage = context.getString(R.string.tower_not_enough_runes, GameStrings.itemName(context, runeKey)),
+                        snackbarMessage = context.withAppLocale().getString(R.string.tower_not_enough_runes, GameStrings.itemName(context, runeKey)),
                         startingSession = false,
                     ) }
                     return@launch
@@ -425,7 +431,7 @@ class TowerViewModel @Inject constructor(
                     alarmOffsetMs    = alarmOffsetMs,
                 )
             } catch (e: Exception) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
                 _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
             }
@@ -570,14 +576,14 @@ class TowerViewModel @Inject constructor(
                 val checkpointFloor = (updatedFlags.towerBestFloor / TOWER_CHECKPOINT_INTERVAL) * TOWER_CHECKPOINT_INTERVAL
                 playerRepo.updateFlags(updatedFlags.copy(towerCurrentFloor = checkpointFloor))
                 sessionRepo.deleteSession(session.sessionId)
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.tower_death_reset, floor, checkpointFloor + 1)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.tower_death_reset, floor, checkpointFloor + 1)) }
             } else {
                 val newBest  = maxOf(updatedFlags.towerBestFloor, floor)
                 val isNewBest = floor > updatedFlags.towerBestFloor
                 val msg = if (isNewBest)
-                    context.getString(R.string.tower_new_best, floor)
+                    context.withAppLocale().getString(R.string.tower_new_best, floor)
                 else
-                    context.getString(R.string.tower_floor_cleared, floor)
+                    context.withAppLocale().getString(R.string.tower_floor_cleared, floor)
                 playerRepo.updateFlags(updatedFlags.copy(
                     towerCurrentFloor = floor,
                     towerBestFloor    = newBest,
@@ -586,7 +592,7 @@ class TowerViewModel @Inject constructor(
                 _extra.update { it.copy(snackbarMessage = msg) }
             }
             if (!grantXp) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_session_voided_prestige)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.combat_session_voided_prestige)) }
             }
             session = sessionRepo.getAllCompletedSessions().firstOrNull { it.skillName == "tower" }
             }
@@ -602,7 +608,7 @@ class TowerViewModel @Inject constructor(
                 towerBestFloor    = flags.towerBestFloor + 1
             ))
             _extra.update {
-                it.copy(snackbarMessage = context.getString(R.string.tower_floor_cleared, flags.towerCurrentFloor))
+                it.copy(snackbarMessage = context.withAppLocale().getString(R.string.tower_floor_cleared, flags.towerCurrentFloor))
             }
         }
     }

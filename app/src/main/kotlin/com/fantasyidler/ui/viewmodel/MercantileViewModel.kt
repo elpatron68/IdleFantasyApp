@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.TradeRouteData
@@ -118,7 +120,7 @@ class MercantileViewModel @Inject constructor(
             val player = playerRepo.getOrCreatePlayer()
 
             if (player.coins < route.coinCost) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
                 return@launch
             }
 
@@ -130,7 +132,7 @@ class MercantileViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val spent = playerRepo.spendCoins(route.coinCost.toLong())
                 if (!spent) {
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
                     return@launch
                 }
                 val startXp = xp[Skills.MERCANTILE] ?: 0L
@@ -160,9 +162,9 @@ class MercantileViewModel @Inject constructor(
                 }
                 _extra.update {
                     it.copy(snackbarMessage = if (enqueued)
-                        context.getString(R.string.mercantile_added_to_queue, GameStrings.tradeRouteName(context, routeId))
+                        context.withAppLocale().getString(R.string.mercantile_added_to_queue, GameStrings.tradeRouteName(context, routeId))
                     else
-                        context.getString(R.string.snackbar_queue_full))
+                        context.withAppLocale().getString(R.string.snackbar_queue_full))
                 }
                 return@launch
             }
@@ -171,7 +173,7 @@ class MercantileViewModel @Inject constructor(
             try {
                 val spent = playerRepo.spendCoins(route.coinCost.toLong())
                 if (!spent) {
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.mercantile_not_enough_coins, route.coinCost.toString())) }
                     return@launch
                 }
 
@@ -194,7 +196,7 @@ class MercantileViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 playerRepo.addCoins(route.coinCost.toLong())
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.mercantile_route_start_failed, e.message ?: "")) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.mercantile_route_start_failed, e.message ?: "")) }
             } finally {
                 _extra.update { it.copy(startingSession = false) }
             }

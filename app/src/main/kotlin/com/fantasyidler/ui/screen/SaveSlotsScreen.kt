@@ -304,9 +304,14 @@ private fun SaveSlotCard(
                         )
                     }
                 }
+                // Two lines instead of one bullet-joined line: the joined form wraps
+                // mid-phrase on narrow cards (issue #1433)
                 Text(
-                    text  = stringResource(R.string.save_slot_combat_level, combatLevelFrom(slot.skillLevels)) +
-                        "  •  " + stringResource(R.string.save_slot_total_level, totalLevelFrom(slot.skillLevels)),
+                    text  = stringResource(R.string.save_slot_combat_level, combatLevelFrom(slot.skillLevels)),
+                    style = MaterialTheme.typography.labelSmall,
+                )
+                Text(
+                    text  = stringResource(R.string.save_slot_total_level, totalLevelFrom(slot.skillLevels)),
                     style = MaterialTheme.typography.labelSmall,
                 )
                 Text(

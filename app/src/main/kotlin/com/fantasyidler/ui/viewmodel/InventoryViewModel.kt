@@ -201,9 +201,9 @@ class InventoryViewModel @Inject constructor(
                 activeWeaponSlot        = flags.activeWeaponSlot,
                 foodEatThresholdPct     = flags.foodEatThresholdPct,
                 displayName             = run {
-                    val baseName = flags.characterName.ifBlank { context.getString(R.string.profile_unnamed) }
+                    val baseName = flags.characterName.ifBlank { context.withAppLocale().getString(R.string.profile_unnamed) }
                     val titleName = titleRepo.displayName(context, flags.equippedTitle, flags)
-                    if (titleName != null) context.getString(R.string.character_name_with_title, baseName, titleName) else baseName
+                    if (titleName != null) context.withAppLocale().getString(R.string.character_name_with_title, baseName, titleName) else baseName
                 },
                 isLoading   = false,
             )
@@ -254,7 +254,7 @@ class InventoryViewModel @Inject constructor(
                 val msg = unmetReqs.joinToString(", ") { (skill, lvl) ->
                     "${skill.replaceFirstChar { c -> c.uppercase() }} $lvl"
                 }
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.inventory_requires_to_equip, msg)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.inventory_requires_to_equip, msg)) }
                 return@launch
             }
             val before = playerRepo.getEquipped()

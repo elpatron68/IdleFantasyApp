@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -192,7 +194,7 @@ class BoneAltarViewModel @Inject constructor(
                         totalBuried     = it.totalBuried - (taps.count - result.buried),
                         sessionXp       = it.sessionXp - (taps.xp - result.xpGained),
                         snackbarMessage = if (result.awardedCape != null)
-                            context.getString(R.string.bone_altar_cape_awarded) else it.snackbarMessage,
+                            context.withAppLocale().getString(R.string.bone_altar_cape_awarded) else it.snackbarMessage,
                     )}
                 }
             }

@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -83,20 +85,20 @@ class InnViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             if (flags.ironman) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_inn_blocked)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.ironman_inn_blocked)) }
                 return@launch
             }
             val slot = if (tier == WorkerTier.LONG_LABORER) 1 else 2
 
             val slotOccupied = if (slot == 1) flags.hiredWorker != null else flags.hiredWorker2 != null
             if (slotOccupied) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.inn_worker_already_hired)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.inn_worker_already_hired)) }
                 return@launch
             }
             val otherName = if (slot == 1) flags.hiredWorker2?.dailyName else flags.hiredWorker?.dailyName
             val name = uniqueWorkerName(tier, otherName)
             if (!playerRepo.spendCoins(tier.hireCost)) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.inn_not_enough_coins)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.inn_not_enough_coins)) }
                 return@launch
             }
             sessionRepo.deleteAllWorkerSessions(slot)
@@ -110,14 +112,14 @@ class InnViewModel @Inject constructor(
     fun buyFood(key: String, price: Int, qty: Int = 1) {
         viewModelScope.launch {
             if (playerRepo.getFlags().ironman) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.ironman_shop_buy_blocked)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.ironman_shop_buy_blocked)) }
                 return@launch
             }
             val success = playerRepo.buyItem(key, qty, price)
             _extra.update {
                 it.copy(
-                    snackbarMessage = if (success) context.getString(R.string.inn_food_purchased)
-                                      else context.getString(R.string.inn_not_enough_coins)
+                    snackbarMessage = if (success) context.withAppLocale().getString(R.string.inn_food_purchased)
+                                      else context.withAppLocale().getString(R.string.inn_not_enough_coins)
                 )
             }
         }

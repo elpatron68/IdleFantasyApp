@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.viewmodel
 
+import com.fantasyidler.util.withAppLocale
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -136,11 +138,11 @@ class GuildDetailViewModel @Inject constructor(
                     val questName = GameStrings.questName(context, questId, gameData.guildQuests[questId]?.name ?: questId)
                     val parts = buildList {
                         if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
-                        if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+                        if (rewards.coins > 0) add(context.withAppLocale().getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
                         rewards.items.forEach { (key, qty) -> add("${GameStrings.itemName(context, key)} x$qty") }
                     }
                     val suffix = if (parts.isNotEmpty()) " (${parts.joinToString(", ")})" else ""
-                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_quest_complete, questName) + suffix) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.guild_quest_complete, questName) + suffix) }
                 }
                 else -> Unit
             }
@@ -166,11 +168,11 @@ class GuildDetailViewModel @Inject constructor(
             if (rewards.coins > 0) playerRepo.addCoins(rewards.coins.toLong())
             val parts = buildList {
                 if (rewards.xp > 0) add("+${finalXp.formatXp()} XP$xpSuffix")
-                if (rewards.coins > 0) add(context.getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
+                if (rewards.coins > 0) add(context.withAppLocale().getString(R.string.reward_part_coins, rewards.coins.toLong().formatCoins()))
                 rewards.items.forEach { (key, qty) -> add("${GameStrings.itemName(context, key)} x$qty") }
             }
             val suffix = if (parts.isNotEmpty()) " (${parts.joinToString(", ")})" else ""
-            _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_daily_reward_claimed) + suffix) }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.guild_daily_reward_claimed) + suffix) }
         }
     }
 
@@ -179,7 +181,7 @@ class GuildDetailViewModel @Inject constructor(
             val inventory: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
             val consumed = guildRepo.contributeFarmingDaily(templateId, inventory)
             if (consumed > 0) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_contributed_items, consumed)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.guild_contributed_items, consumed)) }
             }
         }
     }
@@ -189,7 +191,7 @@ class GuildDetailViewModel @Inject constructor(
             val inventory: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
             val consumed = guildRepo.contributeFarmingQuest(questId, inventory)
             if (consumed > 0) {
-                _extra.update { it.copy(snackbarMessage = context.getString(R.string.guild_contributed_items, consumed)) }
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.guild_contributed_items, consumed)) }
             }
         }
     }

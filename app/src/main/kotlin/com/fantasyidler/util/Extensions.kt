@@ -109,7 +109,7 @@ fun Long.toRelativeTime(): String {
  * suffixes come from string resources so each locale can abbreviate its own way (issue #1399).
  */
 fun Long.formatDurationMs(context: android.content.Context): String =
-    formatDurationMs { resId, value -> context.getString(resId, value) }
+    context.withAppLocale().let { ctx -> formatDurationMs { resId, value -> ctx.getString(resId, value) } }
 
 /** Testable core of [formatDurationMs]; [unitString] renders one unit from its template resource. */
 internal fun Long.formatDurationMs(unitString: (Int, Long) -> String): String {

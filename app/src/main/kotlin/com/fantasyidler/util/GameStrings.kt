@@ -258,8 +258,12 @@ fun Context.withAppLocale(): Context {
 // ---------------------------------------------------------------------------
 
 fun Context.stringByName(name: String): String? {
-    val id = resources.getIdentifier(name, "string", packageName)
-    return if (id != 0) getString(id) else null
+    // Resolve against the in-app language, not the caller's locale: ViewModels and
+    // receivers hold the application context, which follows the system language on
+    // pre-33 devices even when the game is set to another language (issue #1434).
+    val ctx = withAppLocale()
+    val id = ctx.resources.getIdentifier(name, "string", ctx.packageName)
+    return if (id != 0) ctx.getString(id) else null
 }
 
 // ---------------------------------------------------------------------------
