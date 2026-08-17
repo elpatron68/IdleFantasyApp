@@ -1,6 +1,6 @@
 # Combat
 
-_Note: The explanations on this page are valid as of v1.12.3 and could be subject to changes in future versions of the game, although we'll do our best to keep this page up-to-date._
+_Note: The explanations on this page are valid as of v1.13.8 and could be subject to changes in future versions of the game, although we'll do our best to keep this page up-to-date._
 
 Combat is a core mechanic of the game allowing you to fight monsters for loot and receive special items only available through combat.
 
@@ -12,7 +12,7 @@ Combat level acts as an overarching level indicating your combat ability. Access
 
 Combat level is calculated using the below formula with a minimum level of at least 1:
 
-$`Combat\ Level = \dfrac{3\times (attackLvl + strengthLvl)}{8} + \dfrac{defenceLvl + hitpointsLvl}{4}`$
+$`Combat\ Level = 0.325 \times (attackLvl + strengthLvl) + 0.25 \times (defenceLvl + hitpointsLvl)`$
 
 ## Dungeons
 
@@ -56,7 +56,7 @@ During the enemy spawning phase, the enemies are spawned from a spawn pool speci
 
 During a single frame, only one enemy type is encountered, and if an enemy is killed during the tick-by-tick combat loop, then the same enemy is respawned repeatedly until the next frame.
 
-If no enemies were killed in a frame then the enemy currently being attacked is carried over to the new frame where combat continues. However, if at least one kill has occurred, any progress towards killing the last enemy is lost once the frame ends.
+If no enemies were killed in a frame then the enemy currently being attacked is carried over to the new frame where combat continues. If at least one kill has occurred, the freshly respawned enemy is only carried over if it took damage before the frame ended — a respawned enemy still at full health is not, so that the session does not become locked onto a single enemy type.
 
 ### Tick-by-tick combat loop
 
@@ -100,7 +100,7 @@ Assuming the player succeeds in hitting the enemy, the damage is a random number
 | Combat Style | Maximum Damage                                                                                              |
 |--------------|-------------------------------------------------------------------------------------------------------------|
 | Melee        | $`maximumDamage = 1 + (playerStrength + weaponStrengthBonus) \times \dfrac{weaponStrengthBonus + 64}{640}`$ |
-| Ranged       | $`maximumDamage = 1 + (playerRanged + arrowStrengthBonus) \times \dfrac{arrowStrengthBonus + 64}{640}`$     |
+| Ranged       | $`maximumDamage = 1 + (playerRanged + rangedGearStrengthBonus + arrowStrengthBonus) \times \dfrac{rangedGearStrengthBonus + arrowStrengthBonus + 64}{640}`$ |
 | Magic        | $`maximumDamage = spellMaxHit`$                                                                             |
 
 #### Phase 2: Enemy respawning / rewards
@@ -128,7 +128,7 @@ $`enemyAttack`$ is calculated as the attack level plus the attack bonus for the 
 
 #### Phase 4: Healing the player
 
-Finally, once both the enemy and the player have had the chance to make hits, the player will heal themselves repeatedly by eating equipped food until the maximum allowed food has been eaten (300) or until there is less missing HP than the food would heal (e.g. the player will stop eating if they have 90/100 HP and the food has > 10 healing power). Additionally, if the enemy can kill the player in a single hit or the current HP is less than half the maximum, the player will also continue to eat.
+Finally, once both the enemy and the player have had the chance to make hits, the player will heal themselves by eating equipped food whenever the current HP is at or below a configurable eat threshold (defaulting to 50% of the player's maximum HP), or whenever the enemy could kill the player in a single hit. Healing is applied up to the player's maximum HP.
 
 Up to a maximum of 300 food can be consumed within a dungeon and the best equipped food (by healing) will be consumed first before lower tier food.
 

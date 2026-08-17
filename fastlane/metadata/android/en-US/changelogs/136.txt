@@ -1,0 +1,3 @@
+• New Slayer Plateskirt in the slayer shop and Tower Plateskirt in the floor 150 milestone, granted retroactively if you already claimed it (thanks wallsocket-boop!)
+• The Skills and Combat tabs now show a badge and count when a skill is ready to prestige, with a toggle in Settings to turn it off (thanks Michaelomh!)
+• Updated French, German, Italian, Russian, and Chinese translations (thanks MarcMush and all translators!)

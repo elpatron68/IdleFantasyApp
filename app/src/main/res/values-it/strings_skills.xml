@@ -58,12 +58,12 @@
     <string name="label_xp_per_kill">%1$s (%2$d XP/scalpo)</string>
 
     <!-- ===== Tree names ===== -->
-    <string name="tree_tree_name">Tree</string> <!-- untranslated -->
-    <string name="tree_oak_tree_name">Oak Tree</string> <!-- untranslated -->
+    <string name="tree_tree_name">Albero</string>
+    <string name="tree_oak_tree_name">Quercia</string>
     <string name="tree_willow_tree_name">Willow Tree</string> <!-- untranslated -->
     <string name="tree_maple_tree_name">Maple Tree</string> <!-- untranslated -->
     <string name="tree_yew_tree_name">Yew Tree</string> <!-- untranslated -->
-    <string name="tree_magic_tree_name">Magic Tree</string> <!-- untranslated -->
+    <string name="tree_magic_tree_name">Albero Magico</string>
     <string name="tree_redwood_tree_name">Redwood Tree</string> <!-- untranslated -->
 
     <!-- ===== Agility course names and descriptions ===== -->

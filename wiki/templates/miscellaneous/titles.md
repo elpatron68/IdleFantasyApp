@@ -4,7 +4,7 @@ Titles are permanent, earned once and kept forever — even if the way you earne
 
 ## Skill Mastery
 
-Awarded for completing every quest in a skill's full quest chain. Combat, Agility, and Farming have no quest chain of their own, so they don't have a skill mastery title — see Guild Mastery below for those two instead.
+Awarded for completing every quest in a skill's full quest chain. Combat has a quest chain but no mastery title of its own, while Agility and Farming have no quest chain — those two instead earn their titles through Guild Mastery below.
 
 {skill_table}
 

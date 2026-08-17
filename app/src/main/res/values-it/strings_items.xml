@@ -321,6 +321,8 @@
     <string name="item_slayer_platebody_desc">Pesante armatura incisa con rune.</string>
     <string name="item_slayer_platelegs_name">Gambali del Sicario</string>
     <string name="item_slayer_platelegs_desc">Protezioni indispensabili per lunghe esplorazioni nei dungeon.</string>
+    <string name="item_slayer_plateskirt_name">Slayer Plateskirt</string> <!-- untranslated -->
+    <string name="item_slayer_plateskirt_desc">Protective skirt crafted for extended dungeon runs.</string> <!-- untranslated -->
 
     <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Piccone di Bronzo</string>
@@ -784,23 +786,23 @@
     <string name="item_adamantite_square_shield_name">Adamantite Square Shield</string> <!-- untranslated -->
     <string name="item_agility_cape_name">Agility Cape</string> <!-- untranslated -->
     <string name="item_agility_guild_cape_name">Agility Guild Cape</string> <!-- untranslated -->
-    <string name="item_amulet_of_fury_name">Amulet Of Fury</string> <!-- untranslated -->
+    <string name="item_amulet_of_fury_name">Amuleto Della Furia</string>
     <string name="item_amulet_of_fury_desc">Un potente amuleto in grado di migliorare le tue doti in battaglia, qualunque sia il tuo stile. Richiede Mercantile lv. 80.</string>
-    <string name="item_amulet_of_strength_name">Amulet Of Strength</string> <!-- untranslated -->
+    <string name="item_amulet_of_strength_name">Amuleto Della Forza</string>
     <string name="item_amulet_of_strength_desc">In grado di aumentare la tua forza. Richiede Mercantile lv. 20.</string>
-    <string name="item_amulet_of_the_kraken_name">Amulet Of The Kraken</string> <!-- untranslated -->
+    <string name="item_amulet_of_the_kraken_name">Amuleto Del Kraken</string>
     <string name="item_arcane_grappling_hook_name">Rampino Arcano</string>
     <string name="item_arcane_staff_name">Arcane Staff</string> <!-- untranslated -->
     <string name="item_archers_guild_cape_name">Archers Guild Cape</string> <!-- untranslated -->
     <string name="item_archers_ring_name">Archers Ring</string> <!-- untranslated -->
     <string name="item_archers_ring_desc">Migliora la tua mira. Richiede Mercantile lv. 60.</string>
     <string name="item_attack_cape_name">Attack Cape</string> <!-- untranslated -->
-    <string name="item_baby_kraken_name">Baby Kraken</string> <!-- untranslated -->
+    <string name="item_baby_kraken_name">Cucciolo di Kraken</string>
     <string name="item_balrog_name">Gothic Ember, Ancient Flame of the Deep</string> <!-- untranslated -->
     <string name="item_balrog_whip_name">Gothic Ember\'s Flaming Whip</string> <!-- untranslated -->
     <string name="item_balrog_wings_name">Gothic Ember Wings</string> <!-- untranslated -->
     <string name="item_beef_name">Bistecca</string>
-    <string name="item_berserker_ring_name">Berserker Ring</string> <!-- untranslated -->
+    <string name="item_berserker_ring_name">Anello Berserker</string>
     <string name="item_berserker_ring_desc">In grado di aumentare la tua forza. Richiede Mercantile lv. 60.</string>
     <string name="item_blessed_fishing_rod_name">Blessed Fishing Rod</string> <!-- untranslated -->
     <string name="item_bronze_arrow_tip_name">Bronze Arrow Tips</string> <!-- untranslated -->
@@ -827,7 +829,7 @@
     <string name="item_divine_hoe_name">Zappa Divina</string>
     <string name="item_divine_lockpick_name">Grimaldello Divino</string>
     <string name="item_divine_tinderbox_name">Acciarino Divino</string>
-    <string name="item_dragon_amulet_name">Dragon Amulet</string> <!-- untranslated -->
+    <string name="item_dragon_amulet_name">Amuleto Draconico</string>
     <string name="item_dragon_boots_name">Dragon Boots</string> <!-- untranslated -->
     <string name="item_dragon_longsword_name">Dragon Longsword</string> <!-- untranslated -->
     <string name="item_dragon_scimitar_name">Dragon Scimitar</string> <!-- untranslated -->
@@ -875,8 +877,8 @@
     <string name="item_iron_square_shield_name">Iron Square Shield</string> <!-- untranslated -->
     <string name="item_ironwood_axe_name">Ironwood Axe</string> <!-- untranslated -->
     <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
-    <string name="item_kraken_name">Kraken</string> <!-- untranslated -->
-    <string name="item_kraken_tentacle_name">Kraken Tentacle</string> <!-- untranslated -->
+    <string name="item_kraken_name">Kraken</string>
+    <string name="item_kraken_tentacle_name">Tebtacolo di Kraken</string>
     <string name="item_mages_guild_cape_name">Mages Guild Cape</string> <!-- untranslated -->
     <string name="item_magic_cape_name">Magic Cape</string> <!-- untranslated -->
     <string name="item_magic_longbow_name">Magic Longbow</string> <!-- untranslated -->
@@ -903,16 +905,16 @@
     <string name="item_prayer_guild_cape_name">Prayer Guild Cape</string> <!-- untranslated -->
     <string name="item_ranged_cape_name">Ranged Cape</string> <!-- untranslated -->
     <string name="item_rat_meat_name">Carne di Ratto</string>
-    <string name="item_ring_of_dragons_might_name">Ring Of Dragons Might</string> <!-- untranslated -->
+    <string name="item_ring_of_dragons_might_name">Anello di Potere Draconico</string>
     <string name="item_ring_of_flame_name">Ring Of Flame</string> <!-- untranslated -->
     <string name="item_ring_of_recoil_name">Ring Of Recoil</string> <!-- untranslated -->
     <string name="item_ring_of_recoil_desc">Riflette una parte del danno ricevuto verso l\'avversario. Richiede Mercantile lv. 20.</string>
-    <string name="item_ring_of_suffering_name">Ring Of Suffering</string> <!-- untranslated -->
+    <string name="item_ring_of_suffering_name">Anello Della Sofferenza</string>
     <string name="item_ring_of_suffering_desc">Anello in grado di potenziare le tue difese. Richiede Mercantile lv. 80.</string>
-    <string name="item_ring_of_the_seas_name">Ring Of The Seas</string> <!-- untranslated -->
-    <string name="item_ring_of_wealth_name">Ring Of Wealth</string> <!-- untranslated -->
+    <string name="item_ring_of_the_seas_name">Anello Dei Mari</string>
+    <string name="item_ring_of_wealth_name">Anello Della Ricchezza</string>
     <string name="item_ring_of_wealth_desc">Permette di ricevere monete in più come ricompensa. Richiede Mercantile lv. 40.</string>
-    <string name="item_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="item_rock_golem_name">Golem di Roccia</string>
     <string name="item_rogues_lockpick_name">Grimaldello Brigante</string>
     <string name="item_runecrafting_cape_name">Runecrafting Cape</string> <!-- untranslated -->
     <string name="item_runecrafting_guild_cape_name">Runecrafting Guild Cape</string> <!-- untranslated -->
@@ -1063,6 +1065,8 @@
     <string name="item_tower_body_desc">Impenetrable armour from the tower\'s inner sanctum.</string> <!-- untranslated -->
     <string name="item_tower_legs_name">Tower Greaves</string> <!-- untranslated -->
     <string name="item_tower_legs_desc">Greaves forged in the tower\'s deepest forge.</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_name">Tower Plateskirt</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_desc">A plateskirt forged in the tower\'s deepest forge.</string> <!-- untranslated -->
     <string name="item_tower_boots_name">Tower Boots</string> <!-- untranslated -->
     <string name="item_tower_boots_desc">Boots forged in the tower\'s deepest forge.</string> <!-- untranslated -->
     <string name="item_tower_shield_name">Tower Shield</string> <!-- untranslated -->
@@ -1276,11 +1280,11 @@
     <string name="item_blood_blast_desc">A powerful blood spell that blasts your foe.</string> <!-- untranslated -->
     <string name="item_blood_wave_name">Blood Wave</string> <!-- untranslated -->
     <string name="item_blood_wave_desc">A devastating blood spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_spirit_herb_name">Spirit Herb</string> <!-- untranslated -->
+    <string name="item_spirit_herb_name">Erba Spirituale</string>
     <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_name">Celestial Bloom</string> <!-- untranslated -->
+    <string name="item_celestial_bloom_name">Bocciolo Celestiale</string>
     <string name="item_celestial_bloom_desc">An ethereal flower used in master potions. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
-    <string name="item_void_lotus_name">Void Lotus</string> <!-- untranslated -->
+    <string name="item_void_lotus_name">Loto del Vuoto</string>
     <string name="item_void_lotus_desc">A mysterious lotus used in the rarest concoctions. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
     <string name="crop_magic_bean_name">Fagiolo Magico</string>
 </resources>

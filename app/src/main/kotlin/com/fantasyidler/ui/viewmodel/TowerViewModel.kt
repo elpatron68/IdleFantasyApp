@@ -83,7 +83,7 @@ class TowerViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-        // Tower Boots joined the floor 150 milestone after many players had already
+        // Tower Boots and Tower Plateskirt joined the floor 150 milestone after many players had already
         // claimed it; grant them once retroactively since milestones can't be re-claimed
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
@@ -91,6 +91,9 @@ class TowerViewModel @Inject constructor(
                 val inventory: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().inventory)
                 if ("tower_boots" !in inventory) {
                     playerRepo.addItems(mapOf("tower_boots" to 1))
+                }
+                if ("tower_plateskirt" !in inventory) {
+                    playerRepo.addItems(mapOf("tower_plateskirt" to 1))
                 }
             }
         }
@@ -136,7 +139,7 @@ class TowerViewModel @Inject constructor(
             TowerMilestone(120, "Tower Plate (defense +132)"),
             TowerMilestone(130, "+2% tower XP all skills"),
             TowerMilestone(140, "100,000 coins"),
-            TowerMilestone(150, "Tower Legs (defense +125) + Tower Boots (defense +58)"),
+            TowerMilestone(150, "Tower Legs (defense +125) + Tower Boots (defense +58) + Tower Plateskirt (defense +125)"),
             TowerMilestone(160, "+50 max HP"),
             TowerMilestone(170, "+1% tower coin drops"),
             TowerMilestone(180, "Tower Sword (attack +72, strength +75)"),
@@ -633,7 +636,7 @@ class TowerViewModel @Inject constructor(
                 120 -> playerRepo.addItems(mapOf("tower_body" to 1))
                 130 -> newFlags = newFlags.copy(towerXpBonusPct = newFlags.towerXpBonusPct + 2)
                 140 -> playerRepo.addCoins(100_000L)
-                150 -> playerRepo.addItems(mapOf("tower_legs" to 1, "tower_boots" to 1))
+                150 -> playerRepo.addItems(mapOf("tower_legs" to 1, "tower_boots" to 1, "tower_plateskirt" to 1))
                 160 -> newFlags = newFlags.copy(towerHpBonus = newFlags.towerHpBonus + 5)
                 170 -> newFlags = newFlags.copy(towerCoinBonusPct = newFlags.towerCoinBonusPct + 1)
                 180 -> playerRepo.addItems(mapOf("tower_sword" to 1))

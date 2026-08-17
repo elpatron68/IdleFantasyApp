@@ -48,7 +48,7 @@
 
     <!-- ===== Skill unlock sheet labels ===== -->
     <string name="label_lv">Lv. %1$d</string>
-    <string name="armory_req_level">Lv. %1$d</string> <!-- untranslated -->
+    <string name="armory_req_level">Lv. %1$d</string>
     <string name="skills_projected_xp_level">+%1$s XP → Level %2$d</string> <!-- untranslated -->
     <string name="skills_agility_course_detail">Lv. %1$d  •  %2$d EP/Runde</string>
     <string name="label_hp_passive">Passiv — erhöht maximale LP</string>
@@ -58,12 +58,12 @@
     <string name="label_xp_per_kill">%1$s (%2$d EP/Abschuss)</string>
 
     <!-- ===== Tree names ===== -->
-    <string name="tree_tree_name">Tree</string> <!-- untranslated -->
-    <string name="tree_oak_tree_name">Oak Tree</string> <!-- untranslated -->
-    <string name="tree_willow_tree_name">Willow Tree</string> <!-- untranslated -->
-    <string name="tree_maple_tree_name">Maple Tree</string> <!-- untranslated -->
-    <string name="tree_yew_tree_name">Yew Tree</string> <!-- untranslated -->
-    <string name="tree_magic_tree_name">Magic Tree</string> <!-- untranslated -->
+    <string name="tree_tree_name">Baum</string>
+    <string name="tree_oak_tree_name">Eiche</string>
+    <string name="tree_willow_tree_name">Weidenbaum</string>
+    <string name="tree_maple_tree_name">Ahornbaum</string>
+    <string name="tree_yew_tree_name">Eibe</string>
+    <string name="tree_magic_tree_name">Magischer Baum</string>
     <string name="tree_redwood_tree_name">Redwood Tree</string> <!-- untranslated -->
 
     <!-- ===== Agility course names and descriptions ===== -->
@@ -99,7 +99,7 @@
     <string name="agility_transcendent_course_desc">Die ultimative Prüfung der Geschicklichkeit, die die Grenzen des Möglichen überschreitet.</string>
 
     <!-- ===== Session skill type labels ===== -->
-    <string name="skill_expedition_name">Expedition</string> <!-- untranslated -->
+    <string name="skill_expedition_name">Entdeckungsreise</string>
     <string name="skill_boss_name">Endgegner</string>
     <string name="skill_mercantile_name">Handel</string>
 </resources>

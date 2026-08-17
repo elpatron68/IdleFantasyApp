@@ -6,8 +6,8 @@ Only the latest release of Idle Fantasy receives security updates.
 
 | Version  | Supported          |
 | -------- | ------------------ |
-| 1.8.12   | :white_check_mark: |
-| < 1.8.12 | :x:                |
+| 1.13.8   | :white_check_mark: |
+| < 1.13.8 | :x:                |
 
 ## Reporting a Vulnerability
 

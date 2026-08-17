@@ -4,16 +4,16 @@
     <!-- Translator note: %1$d = new level number, %2$s = skill display name -->
     <string name="game_level_up">Tu as gagné un niveau ! %1$s est désormais au niveau %2$d !</string>
     <!-- Translator note: %1$s = skill display name, %2$d = new level number -->
-    <string name="game_level_up_short">%1$s → %2$d</string> <!-- untranslated -->
+    <string name="game_level_up_short">%1$s → %2$d</string>
     <string name="game_max_level">Niveau maximum atteint !</string>
 
     <!-- ===== Session result summaries ===== -->
-    <string name="game_session_results_title">Résultats de la session</string>
+    <string name="game_session_results_title">Résultats de la Session</string>
     <!-- Translator note: %1$s = skill display name -->
     <string name="game_session_summary_header">La session %1$s est terminée</string>
     <!-- Translator note: %1$s = formatted XP amount (e.g. "1,234") -->
     <string name="game_session_xp_total">+%1$s XP gagnés</string>
-    <string name="game_session_no_items">Aucun objet n’a été récupéré</string>
+    <string name="game_session_no_items">Aucun objet n\'a été récupéré</string>
     <string name="game_session_no_level_ups">Pas de passage au niveau supérieur pour cette session</string>
     <!-- Translator note: %1$d = number of level ups -->
     <string name="game_session_level_up_count">%1$d niveau supérieur !</string>
@@ -38,7 +38,7 @@
     <string name="game_farming_harvested">Récolté %2$d %1$s.</string>
     <string name="game_farming_all_harvested">Toutes les récoltes sont terminées.</string>
     <string name="game_farming_patch_cleared">Parcelle nettoyée.</string>
-    <string name="game_farming_not_ready">Cette récolte n’est pas encore prête.</string>
+    <string name="game_farming_not_ready">Cette récolte n\'est pas encore prête.</string>
     <!-- Translator note: %1$s = crop display name, %2$s = time remaining -->
     <string name="game_farming_ready_in">%1$s prêt dans %2$s.</string>
 
@@ -56,7 +56,7 @@
 
     <!-- ===== Prayer / burying ===== -->
     <!-- Translator note: %1$s = bone display name, %2$s = formatted XP gained -->
-    <string name="game_bones_buried">Os enterrés : %1$s — +%2$s XP de Prière.</string>
+    <string name="game_bones_buried">%1$s Os enterrés — +%2$s XP de Prière.</string>
 
     <!-- ===== Quest messages ===== -->
     <!-- Translator note: %1$s = quest display name -->
@@ -68,9 +68,9 @@
 
     <!-- ===== XP gain messages (shown in session frame log) ===== -->
     <!-- Translator note: %1$s = formatted XP gained this minute -->
-    <string name="game_xp_gained">+%1$s XP</string> <!-- untranslated -->
+    <string name="game_xp_gained">+%1$s XP</string>
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
-    <string name="game_item_received">+%2$d %1$s</string> <!-- untranslated -->
+    <string name="game_item_received">+%2$d %1$s</string>
 
     <!-- ===== Arena messages ===== -->
     <!-- Translator note: %1$s = opponent display name -->
@@ -82,12 +82,12 @@
 
     <!-- ===== Easter egg / dig ===== -->
     <string name="game_dig_you_dig">Tu creuses la terre…</string>
-    <string name="game_dig_nothing">Tu ne trouves rien d’autre que de la saleté.</string>
+    <string name="game_dig_nothing">Tu ne trouves rien d\'autre que de la saleté.</string>
     <!-- Translator note: %1$s = item display name -->
     <string name="game_dig_found">Tu découvres un(e) %1$s !</string>
     <!-- Translator note: %1$d = current hole depth in metres -->
     <string name="game_dig_depth">Le trou fait %1$d mètres de profondeur.</string>
-    <string name="game_dig_cooldown">Tu as déjà fouillé aujourd’hui. Reviens demain.</string>
+    <string name="game_dig_cooldown">Tu as déjà fouillé aujourd\'hui. Reviens demain.</string>
 
     <!-- ===== Equipment slot names ===== -->
     <string name="equip_slot_weapon_atk">Arme (Attaque)</string>
@@ -98,7 +98,7 @@
     <string name="equip_slot_body">Corps</string>
     <string name="equip_slot_legs">Jambes</string>
     <string name="equip_slot_boots">Bottes</string>
-    <string name="equip_slot_cape">Cape</string> <!-- untranslated -->
+    <string name="equip_slot_cape">Cape</string>
     <string name="equip_slot_ring">Anneau</string>
     <string name="equip_slot_necklace">Collier</string>
     <string name="equip_slot_shield">Bouclier</string>

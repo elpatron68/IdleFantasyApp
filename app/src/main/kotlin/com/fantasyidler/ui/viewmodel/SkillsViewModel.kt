@@ -90,6 +90,7 @@ data class SkillsUiState(
     val firemakingPerLogMs: Map<String, Long> = emptyMap(),
     val skillPrestige: Map<String, Int> = emptyMap(),
     val ironman: Boolean = false,
+    val showPrestigeNotifications: Boolean = true,
     val inventory: Map<String, Int> = emptyMap(),
     val petBoostBySkill: Map<String, Int> = emptyMap(),
     val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
@@ -217,6 +218,7 @@ class SkillsViewModel @Inject constructor(
                 },
                 skillPrestige         = flags.skillPrestige,
                 ironman               = flags.ironman,
+                showPrestigeNotifications = flags.showPrestigeNotifications,
                 inventory             = inv,
                 cropsReadyCount       = cropsReady,
                 petBoostBySkill       = (Skills.GATHERING + Skills.CRAFTING_SKILLS + Skills.SUPPORT + listOf(Skills.AGILITY, Skills.SLAYER))

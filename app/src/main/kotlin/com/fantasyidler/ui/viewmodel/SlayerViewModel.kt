@@ -83,7 +83,7 @@ class SlayerViewModel @Inject constructor(
 
     /** Equipment data keyed by item key, for the shop stats display. */
     val shopEquipment: Map<String, EquipmentData> by lazy {
-        listOf("slayer_helm", "abyssal_whip", "slayer_platebody", "slayer_platelegs")
+        listOf("slayer_helm", "abyssal_whip", "slayer_platebody", "slayer_platelegs", "slayer_plateskirt")
             .mapNotNull { key -> gameData.equipment[key]?.let { key to it } }
             .toMap()
     }

@@ -149,6 +149,7 @@
     <string name="label_available_quests">Mevcut</string>
     <string name="label_stats">İstatistikler</string>
     <string name="label_skills">Yetenekler</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
     <string name="label_shop">Mağaza</string>
     <string name="label_sell_items">Eşya Sat</string>
     <string name="label_total_level">Toplam Seviye</string>
@@ -302,6 +303,8 @@
     <string name="settings_profile_layout_tabs">Sekmeler</string>
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
     <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Ana Ekran</string>
@@ -1826,7 +1829,7 @@
     <string name="title_seasonal_champion_of">%1$s Şampiyonu</string>
     <string name="title_seasonal_requirement">%1$s Sezonluk Etkinliğini tamamla</string>
     <string name="home_welcome_greeting">Tekrar hoş geldin,</string>
-
+    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
     <string name="home_welcome_title">%1$s!</string>
 
     <!-- Pet names and descriptions -->

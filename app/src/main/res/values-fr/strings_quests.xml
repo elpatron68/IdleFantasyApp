@@ -13,7 +13,7 @@
     <string name="quest_mining_4_name">Extraction IV</string>
     <string name="quest_mining_4_objective">Miner 1650 minerais de mithril</string>
     <string name="quest_mining_5_name">Extraction V</string>
-    <string name="quest_mining_5_objective">Miner 2450 minerais d’adamantite</string>
+    <string name="quest_mining_5_objective">Miner 2450 minerais d\'adamantite</string>
     <string name="quest_mining_6_name">Extraction VI</string>
     <string name="quest_mining_6_objective">Miner 3650 minerais de runite</string>
 
@@ -25,9 +25,9 @@
     <string name="quest_woodcutting_3_name">Bûcheronnage III</string>
     <string name="quest_woodcutting_3_objective">Couper 1100 bûches de saule</string>
     <string name="quest_woodcutting_4_name">Bûcheronnage IV</string>
-    <string name="quest_woodcutting_4_objective">Couper 1650 bûches d’érable</string>
+    <string name="quest_woodcutting_4_objective">Couper 1650 bûches d\'érable</string>
     <string name="quest_woodcutting_5_name">Bûcheronnage V</string>
-    <string name="quest_woodcutting_5_objective">Couper 2450 de bûches d’if</string>
+    <string name="quest_woodcutting_5_objective">Couper 2450 de bûches d\'if</string>
     <string name="quest_woodcutting_6_name">Bûcheronnage VI</string>
     <string name="quest_woodcutting_6_objective">Couper 3650 de bûches magiques</string>
 
@@ -51,11 +51,11 @@
     <string name="quest_smithing_2_name">Forge II</string>
     <string name="quest_smithing_2_objective">Fondre 750 lingots de fer</string>
     <string name="quest_smithing_3_name">Forge III</string>
-    <string name="quest_smithing_3_objective">Fondre 1100 lingots d’acier</string>
+    <string name="quest_smithing_3_objective">Fondre 1100 lingots d\'acier</string>
     <string name="quest_smithing_4_name">Forge IV</string>
     <string name="quest_smithing_4_objective">Fondre 1650 lingots de mithril</string>
     <string name="quest_smithing_5_name">Forge V</string>
-    <string name="quest_smithing_5_objective">Fondre 2450 lingots d’adamantite</string>
+    <string name="quest_smithing_5_objective">Fondre 2450 lingots d\'adamantite</string>
     <string name="quest_smithing_6_name">Forge VI</string>
     <string name="quest_smithing_6_objective">Fondre 3650 lingots de runite</string>
 
@@ -152,23 +152,23 @@
     <string name="quest_slayer_6_objective">Terminez 500 tâches de Tueur</string>
 
     <!-- Dungeon exploration -->
-    <string name="quest_dungeon_farm_1_name">Explorateur de donjon I</string>
+    <string name="quest_dungeon_farm_1_name">Explorateur de Donjon I</string>
     <string name="quest_dungeon_farm_1_objective">Terminer le donjon de la Ferme 5 fois</string>
-    <string name="quest_dungeon_goblin_1_name">Explorateur de donjon II</string>
+    <string name="quest_dungeon_goblin_1_name">Explorateur de Donjon II</string>
     <string name="quest_dungeon_goblin_1_objective">Terminer la Caverne des gobelins 5 fois</string>
-    <string name="quest_dungeon_spider_1_name">Explorateur de donjon III</string>
+    <string name="quest_dungeon_spider_1_name">Explorateur de Donjon III</string>
     <string name="quest_dungeon_spider_1_objective">Terminer le Repaire des araignées 5 fois</string>
-    <string name="quest_dungeon_bandit_1_name">Explorateur de donjon IV</string>
+    <string name="quest_dungeon_bandit_1_name">Explorateur de Donjon IV</string>
     <string name="quest_dungeon_bandit_1_objective">Terminer le Camp des bandits 5 fois</string>
-    <string name="quest_dungeon_undead_1_name">Explorateur de donjon V</string>
+    <string name="quest_dungeon_undead_1_name">Explorateur de Donjon V</string>
     <string name="quest_dungeon_undead_1_objective">Terminer la Crypte des morts-vivants 5 fois</string>
-    <string name="quest_dungeon_fortress_1_name">Explorateur de donjon VI</string>
+    <string name="quest_dungeon_fortress_1_name">Explorateur de Donjon VI</string>
     <string name="quest_dungeon_fortress_1_objective">Terminer les Ruines de la forteresse 5 fois</string>
-    <string name="quest_dungeon_orc_1_name">Maître de donjon I</string>
+    <string name="quest_dungeon_orc_1_name">Maître de Donjon I</string>
     <string name="quest_dungeon_orc_1_objective">Terminer la Forteresse des orcs 5 fois</string>
-    <string name="quest_dungeon_volcanic_1_name">Maître de donjon II</string>
+    <string name="quest_dungeon_volcanic_1_name">Maître de Donjon II</string>
     <string name="quest_dungeon_volcanic_1_objective">Terminer les Profondeurs volcaniques 5 fois</string>
-    <string name="quest_dungeon_dragon_1_name">Maître de donjon III</string>
+    <string name="quest_dungeon_dragon_1_name">Maître de Donjon III</string>
     <string name="quest_dungeon_dragon_1_objective">Terminer la Grotte du dragon 5 fois</string>
 
     <!-- Crafting -->
@@ -186,35 +186,35 @@
     <string name="quest_crafting_6_objective">Créer 1500 bagues en diamant en platine</string>
 
     <!-- Monster slayer chains -->
-    <string name="quest_goblin_slayer_1_name">Chasseur de gobelins I</string>
+    <string name="quest_goblin_slayer_1_name">Chasseur de Gobelins I</string>
     <string name="quest_goblin_slayer_1_objective">Vaincre 50 gobelins</string>
-    <string name="quest_goblin_slayer_2_name">Chasseur de gobelins II</string>
+    <string name="quest_goblin_slayer_2_name">Chasseur de Gobelins II</string>
     <string name="quest_goblin_slayer_2_objective">Vaincre 100 gobelins</string>
-    <string name="quest_spider_slayer_1_name">Chasseur d’araignées I</string>
+    <string name="quest_spider_slayer_1_name">Chasseur d\'araignées I</string>
     <string name="quest_spider_slayer_1_objective">Vaincre 40 araignées géantes</string>
-    <string name="quest_spider_slayer_2_name">Chasseur d’araignées II</string>
+    <string name="quest_spider_slayer_2_name">Chasseur d\'araignées II</string>
     <string name="quest_spider_slayer_2_objective">Vaincre 80 araignées géantes</string>
-    <string name="quest_skeleton_slayer_1_name">Chasseur d’ossements I</string>
+    <string name="quest_skeleton_slayer_1_name">Chasseur d\'ossements I</string>
     <string name="quest_skeleton_slayer_1_objective">Vaincre 35 squelettes</string>
-    <string name="quest_skeleton_slayer_2_name">Chasseur d”ossements II</string>
+    <string name="quest_skeleton_slayer_2_name">Chasseur d\'Ossements II</string>
     <string name="quest_skeleton_slayer_2_objective">Vaincre 70 squelettes</string>
-    <string name="quest_bandit_hunter_1_name">Chasseur de bandits I</string>
+    <string name="quest_bandit_hunter_1_name">Chasseur de Bandits I</string>
     <string name="quest_bandit_hunter_1_objective">Vaincre 30 bandits</string>
-    <string name="quest_bandit_hunter_2_name">Chasseur de bandits II</string>
+    <string name="quest_bandit_hunter_2_name">Chasseur de Bandits II</string>
     <string name="quest_bandit_hunter_2_objective">Vaincre 60 bandits</string>
-    <string name="quest_orc_slayer_1_name">Chasseur d’orcs I</string>
+    <string name="quest_orc_slayer_1_name">Chasseur d\'orcs I</string>
     <string name="quest_orc_slayer_1_objective">Vaincre 25 guerriers orcs</string>
-    <string name="quest_orc_slayer_2_name">Chasseur d’orcs II</string>
+    <string name="quest_orc_slayer_2_name">Chasseur d\'orcs II</string>
     <string name="quest_orc_slayer_2_objective">Vaincre 50 guerriers orcs</string>
-    <string name="quest_demon_slayer_1_name">Chasseur de démons I</string>
+    <string name="quest_demon_slayer_1_name">Chasseur de Démons I</string>
     <string name="quest_demon_slayer_1_objective">Vaincre le Seigneur Démon</string>
-    <string name="quest_demon_slayer_2_name">Chasseur de démons II</string>
+    <string name="quest_demon_slayer_2_name">Chasseur de Démons II</string>
     <string name="quest_demon_slayer_2_objective">Vaincre le Seigneur Démon 5 fois</string>
-    <string name="quest_demon_slayer_3_name">Chasseur de démons III</string>
+    <string name="quest_demon_slayer_3_name">Chasseur de Démons III</string>
     <string name="quest_demon_slayer_3_objective">Vaincre le Seigneur Démon 25 fois</string>
-    <string name="quest_dragon_slayer_1_name">Chasseur de dragons I</string>
+    <string name="quest_dragon_slayer_1_name">Chasseur de Dragons I</string>
     <string name="quest_dragon_slayer_1_objective">Vaincre 10 dragons verts</string>
-    <string name="quest_dragon_slayer_2_name">Chasseur de dragons II</string>
+    <string name="quest_dragon_slayer_2_name">Chasseur de Dragons II</string>
     <string name="quest_dragon_slayer_2_objective">Vaincre 25 dragons verts</string>
 
     <!-- Combat style challenges -->
@@ -224,12 +224,12 @@
     <string name="quest_melee_warrior_2_objective">Terminer le Camp des bandits en utilisant uniquement le combat au corps à corps</string>
     <string name="quest_melee_warrior_3_name">Guerrier au corps à corps III</string>
     <string name="quest_melee_warrior_3_objective">Terminer les Ruines de la forteresse en utilisant uniquement le combat au corps à corps</string>
-    <string name="quest_ranger_elite_1_name">Ranger d’élite I</string>
-    <string name="quest_ranger_elite_1_objective">Terminer la Grotte des gobelins en utilisant uniquement l’arc</string>
-    <string name="quest_ranger_elite_2_name">Ranger d’élite II</string>
-    <string name="quest_ranger_elite_2_objective">Terminer le Camp des bandits en utilisant uniquement l’arc</string>
-    <string name="quest_ranger_elite_3_name">Ranger d’élite III</string>
-    <string name="quest_ranger_elite_3_objective">Terminer les Ruines de la forteresse en utilisant uniquement l’arc</string>
+    <string name="quest_ranger_elite_1_name">Ranger d\'élite I</string>
+    <string name="quest_ranger_elite_1_objective">Terminer la Grotte des gobelins en utilisant uniquement l\'arc</string>
+    <string name="quest_ranger_elite_2_name">Ranger d\'élite II</string>
+    <string name="quest_ranger_elite_2_objective">Terminer le Camp des bandits en utilisant uniquement l\'arc</string>
+    <string name="quest_ranger_elite_3_name">Ranger d\'élite III</string>
+    <string name="quest_ranger_elite_3_objective">Terminer les Ruines de la forteresse en utilisant uniquement l\'arc</string>
     <string name="quest_mage_master_1_name">Maître magicien I</string>
     <string name="quest_mage_master_1_objective">Terminer la Caverne des gobelins en utilisant uniquement la magie</string>
     <string name="quest_mage_master_2_name">Maître magicien II</string>
@@ -238,56 +238,56 @@
     <string name="quest_mage_master_3_objective">Terminer les Ruines de la forteresse en utilisant uniquement la magie</string>
 
     <!-- Iron Stomach (no food) challenges -->
-    <string name="quest_iron_stomach_1_name">Estomac en fer I</string>
-    <string name="quest_iron_stomach_1_objective">Terminer le Repaire des araignées sans utiliser de nourriture</string>
-    <string name="quest_iron_stomach_2_name">Estomac en fer II</string>
-    <string name="quest_iron_stomach_2_objective">Terminer la Crypte des morts-vivants sans utiliser de nourriture</string>
-    <string name="quest_iron_stomach_3_name">Estomac en fer III</string>
-    <string name="quest_iron_stomach_3_objective">Terminer la Forteresse des orcs sans utiliser de nourriture</string>
-    <string name="quest_iron_stomach_4_name">Estomac en fer IV</string>
+    <string name="quest_iron_stomach_1_name">Estomac en Fer I</string>
+    <string name="quest_iron_stomach_1_objective">Terminer le Repaire des Araignées sans utiliser de nourriture</string>
+    <string name="quest_iron_stomach_2_name">Estomac en Fer II</string>
+    <string name="quest_iron_stomach_2_objective">Terminer la Crypte des Morts-vivants sans utiliser de nourriture</string>
+    <string name="quest_iron_stomach_3_name">Estomac en Fer III</string>
+    <string name="quest_iron_stomach_3_objective">Terminer la Forteresse des Orques sans utiliser de nourriture</string>
+    <string name="quest_iron_stomach_4_name">Estomac en Fer IV</string>
     <string name="quest_iron_stomach_4_objective">Terminer la Grotte du dragon sans utiliser de nourriture</string>
 
     <!-- Treasure Hunter -->
     <string name="quest_treasure_hunter_1_name">Chasseur de trésors I</string>
-    <string name="quest_treasure_hunter_1_objective">Collecter 20 soies d’araignée lors de combats</string>
+    <string name="quest_treasure_hunter_1_objective">Collecter 20 soies d\'araignée lors de combats</string>
     <string name="quest_treasure_hunter_2_name">Chasseur de trésors II</string>
     <string name="quest_treasure_hunter_2_objective">Collecter 10 cœurs de gobelin lors de combats</string>
-    <string name="quest_treasure_hunter_3_name">Chasseur de trésors III</string>
+    <string name="quest_treasure_hunter_3_name">Chasseur de Trésors III</string>
     <string name="quest_treasure_hunter_3_objective">Collecter 5 cornes de démon lors de combats</string>
-    <string name="quest_treasure_hunter_4_name">Chasseur de trésors IV</string>
+    <string name="quest_treasure_hunter_4_name">Chasseur de Trésors IV</string>
     <string name="quest_treasure_hunter_4_objective">Collecter 3 écailles de dragon lors de combats</string>
 
     <!-- Firemaking -->
-    <string name="quest_firemaking_1_name">Fabrication de Feu I</string>
+    <string name="quest_firemaking_1_name">Incinération I</string>
     <string name="quest_firemaking_1_objective">Brûler 500 bûches</string>
-    <string name="quest_firemaking_2_name">Fabrication de Feu II</string>
+    <string name="quest_firemaking_2_name">Incinération II</string>
     <string name="quest_firemaking_2_objective">Brûler 750 bûches de chêne</string>
-    <string name="quest_firemaking_3_name">Fabrication de Feu III</string>
+    <string name="quest_firemaking_3_name">Incinération III</string>
     <string name="quest_firemaking_3_objective">Brûler 1100 bûches de saule</string>
     <string name="quest_firemaking_4_name">Fabrication de Feu IV</string>
-    <string name="quest_firemaking_4_objective">Brûler 1650 bûches d’érable</string>
+    <string name="quest_firemaking_4_objective">Brûler 1650 bûches d\'érable</string>
     <string name="quest_firemaking_5_name">Fabrication de Feu V</string>
     <string name="quest_firemaking_5_objective">Brûler 2450 bûches de if</string>
-    <string name="quest_firemaking_6_name">Fabrication de Feu VI</string>
+    <string name="quest_firemaking_6_name">Incinération VI</string>
     <string name="quest_firemaking_6_objective">Brûler 3650 bûches magiques</string>
 
     <!-- Runecrafting -->
     <string name="quest_runecrafting_1_name">Création de Runes I</string>
-    <string name="quest_runecrafting_1_objective">Créer 500 Runes d’Air</string>
+    <string name="quest_runecrafting_1_objective">Créer 500 Runes d\'Air</string>
     <string name="quest_runecrafting_2_name">Création de Runes II</string>
-    <string name="quest_runecrafting_2_objective">Créer 750 Runes d’Eau</string>
+    <string name="quest_runecrafting_2_objective">Créer 750 Runes d\'Eau</string>
     <string name="quest_runecrafting_3_name">Création de Runes III</string>
     <string name="quest_runecrafting_3_objective">Créer 1100 Runes de Terre</string>
-    <string name="quest_runecrafting_4_name">Création de Runes IV</string>
+    <string name="quest_runecrafting_4_name">Gravure de Runes IV</string>
     <string name="quest_runecrafting_4_objective">Créer 1650 Runes de Feu</string>
     <string name="quest_runecrafting_5_name">Création de Runes V</string>
-    <string name="quest_runecrafting_5_objective">Créer 2450 Runes de l’Esprit</string>
+    <string name="quest_runecrafting_5_objective">Créer 2450 Runes de l\'Esprit</string>
     <string name="quest_runecrafting_6_name">Création de Runes VI</string>
     <string name="quest_runecrafting_6_objective">Créer 3650 Runes du Chaos</string>
 
     <!-- Herblore -->
     <string name="quest_herblore_1_name">Herboristerie I</string>
-    <string name="quest_herblore_1_objective">Préparer 100 Potions d’Attaque</string>
+    <string name="quest_herblore_1_objective">Préparer 100 Potions d\'Attaque</string>
     <string name="quest_herblore_2_name">Herboristerie II</string>
     <string name="quest_herblore_2_objective">Mélanger 250 Potions de Défense</string>
     <string name="quest_herblore_3_name">Herboristerie III</string>
@@ -300,22 +300,22 @@
     <string name="quest_herblore_6_objective">Mélanger 1500 Potions de Super Force</string>
 
     <!-- Construction -->
-    <string name="quest_construction_1_name">Construction I</string> <!-- untranslated -->
+    <string name="quest_construction_1_name">Construction I</string>
     <string name="quest_construction_1_objective">Construisez 50 Étagères en Bois</string>
-    <string name="quest_construction_2_name">Construction II</string> <!-- untranslated -->
+    <string name="quest_construction_2_name">Construction II</string>
     <string name="quest_construction_2_objective">Construisez 50 Tables en Bois</string>
-    <string name="quest_construction_3_name">Construction III</string> <!-- untranslated -->
+    <string name="quest_construction_3_name">Construction III</string>
     <string name="quest_construction_3_objective">Construisez 50 Armoires en Saule</string>
-    <string name="quest_construction_4_name">Construction IV</string> <!-- untranslated -->
+    <string name="quest_construction_4_name">Construction IV</string>
     <string name="quest_construction_4_objective">Construisez 50 Commodes en Saule</string>
-    <string name="quest_construction_5_name">Construction V</string> <!-- untranslated -->
+    <string name="quest_construction_5_name">Construction V</string>
     <string name="quest_construction_5_objective">Construisez 25 Trônes Magiques</string>
     <string name="quest_construction_upgrade_inn_name">Rénovez l\'Auberge</string>
     <string name="quest_construction_upgrade_inn_objective">Améliorez l\'Auberge au moins une fois</string>
     <string name="quest_construction_upgrade_guild_name">Agrandissez les Guildes</string>
     <string name="quest_construction_upgrade_guild_objective">Améliorez les Guildes au moins une fois</string>
-    <string name="quest_construction_upgrade_church_name">Rénovez l’Église</string>
-    <string name="quest_construction_upgrade_church_objective">Améliorez l’Église au moins une fois</string>
+    <string name="quest_construction_upgrade_church_name">Rénovez l\'Église</string>
+    <string name="quest_construction_upgrade_church_objective">Améliorez l\'Église au moins une fois</string>
 
     <!-- Thieving -->
     <string name="quest_thieving_1_name">Vol à la Tire I</string>
@@ -371,7 +371,7 @@
 
     <!-- Dungeon exploration extended -->
     <string name="quest_dungeon_imp_1_name">Explorateur de Donjon VII</string>
-    <string name="quest_dungeon_imp_1_objective">Terminer la Grotte des diablotins 5 fois</string>
+    <string name="quest_dungeon_imp_1_objective">Terminer la Grotte des Diablotins 5 fois</string>
     <string name="quest_dungeon_infernal_1_name">Maître du Donjon IV</string>
     <string name="quest_dungeon_infernal_1_objective">Terminer la Forteresse Infernale 5 fois</string>
     <string name="quest_dungeon_ancient_1_name">Maître du Donjon V</string>
@@ -412,13 +412,13 @@
 
     <!-- Combat style challenges extended -->
     <string name="quest_melee_warrior_4_name">Guerrier au Corps à Corps IV</string>
-    <string name="quest_melee_warrior_4_objective">Terminer la Forteresse Orc en utilisant uniquement le mêlée</string>
+    <string name="quest_melee_warrior_4_objective">Terminer la Forteresse des Orques en utilisant uniquement le corps à corps</string>
     <string name="quest_melee_warrior_5_name">Guerrier au Corps à Corps V</string>
     <string name="quest_melee_warrior_5_objective">Terminer la Galerie du Dragon en utilisant uniquement le mêlée</string>
-    <string name="quest_ranger_elite_4_name">Chasseur d’Élite IV</string>
-    <string name="quest_ranger_elite_4_objective">Terminer la Forteresse Orc en utilisant uniquement l’arc</string>
-    <string name="quest_ranger_elite_5_name">Chasseur d’Élite V</string>
-    <string name="quest_ranger_elite_5_objective">Terminer la Galerie du Dragon en utilisant uniquement l’arc</string>
+    <string name="quest_ranger_elite_4_name">Chasseur d\'Élite IV</string>
+    <string name="quest_ranger_elite_4_objective">Terminer la Forteresse Orc en utilisant uniquement l\'arc</string>
+    <string name="quest_ranger_elite_5_name">Chasseur d\'Élite V</string>
+    <string name="quest_ranger_elite_5_objective">Terminer la Galerie du Dragon en utilisant uniquement l\'arc</string>
     <string name="quest_mage_master_4_name">Maître Mage IV</string>
     <string name="quest_mage_master_4_objective">Terminer la Forteresse Orc en utilisant uniquement la magie</string>
     <string name="quest_mage_master_5_name">Maître Mage V</string>
@@ -445,26 +445,26 @@
     <string name="daily_verb_combat">Vaincre</string>
 
     <!-- Daily quest names -->
-    <string name="quest_daily_mine_iron_name">Mineur de fer</string>
+    <string name="quest_daily_mine_iron_name">Mineur de Fer</string>
     <string name="quest_daily_mine_coal_name">Charbonnier</string>
     <string name="quest_daily_mine_mithril_name">Prospecteur de mithril</string>
     <string name="quest_daily_mine_runite_name">Ruée du runite</string>
     <string name="quest_daily_fish_salmon_name">Remontée du saumon</string>
     <string name="quest_daily_fish_lobster_name">Prise de homards</string>
-    <string name="quest_daily_fish_swordfish_name">Chasseur d’espadons</string>
+    <string name="quest_daily_fish_swordfish_name">Chasseur d\'espadons</string>
     <string name="quest_daily_fish_shark_name">Dompteur de requins</string>
     <string name="quest_daily_wc_oak_name">Coupeur de chêne</string>
     <string name="quest_daily_wc_willow_name">Travailleur du saule</string>
-    <string name="quest_daily_wc_yew_name">Bûcheron d’if</string>
+    <string name="quest_daily_wc_yew_name">Bûcheron d\'if</string>
     <string name="quest_daily_wc_magic_name">Bûcheron magique</string>
     <string name="quest_daily_smith_iron_name">Forgeron de fer</string>
     <string name="quest_daily_smith_mithril_name">Forgeron de mithril</string>
-    <string name="quest_daily_smith_adamantite_name">Artisan d’adamantite</string>
+    <string name="quest_daily_smith_adamantite_name">Artisan d\'adamantite</string>
     <string name="quest_daily_smith_runite_name">Fondeur de runite</string>
     <string name="quest_daily_cook_trout_name">Chef de la truite</string>
     <string name="quest_daily_cook_salmon_name">Grilleur de saumon</string>
     <string name="quest_daily_cook_lobster_name">Cuisinier de homard</string>
-    <string name="quest_daily_cook_swordfish_name">Cuisinier d’espadon</string>
+    <string name="quest_daily_cook_swordfish_name">Cuisinier d\'espadon</string>
     <string name="quest_daily_kill_goblin_name">Tueur de gobelins</string>
     <string name="quest_daily_kill_bandit_name">Briseur de bandits</string>
     <string name="quest_daily_kill_demon_name">Chasseur de démons</string>
@@ -472,10 +472,10 @@
 
     <!-- Daily quest objectives — override the generated verb+item text, whose item names
          read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
-    <string name="quest_daily_mine_iron_objective">Minez 150 minerais de fer.</string>
-    <string name="quest_daily_mine_coal_objective">Minez 300 charbon.</string>
-    <string name="quest_daily_mine_mithril_objective">Minez 50 minerais de mithril.</string>
-    <string name="quest_daily_mine_runite_objective">Minez 20 minerais de runite.</string>
+    <string name="quest_daily_mine_iron_objective">Extrayez 150 minerais de fer.</string>
+    <string name="quest_daily_mine_coal_objective">Extrayez 300 charbon.</string>
+    <string name="quest_daily_mine_mithril_objective">Extrayez 50 minerais de mithril.</string>
+    <string name="quest_daily_mine_runite_objective">Extrayez 20 minerais de runite.</string>
     <string name="quest_daily_fish_salmon_objective">Attrapez 120 saumons.</string>
     <string name="quest_daily_fish_lobster_objective">Attrapez 60 homards.</string>
     <string name="quest_daily_fish_swordfish_objective">Attrapez 30 espadons.</string>
@@ -485,9 +485,9 @@
     <string name="quest_daily_wc_yew_objective">Coupez 25 bûches d\'if.</string>
     <string name="quest_daily_wc_magic_objective">Coupez 10 bûches magiques.</string>
     <string name="quest_daily_smith_iron_objective">Forgez 40 barres de fer.</string>
-    <string name="quest_daily_smith_mithril_objective">Forgez 15 barres de mithril.</string>
-    <string name="quest_daily_smith_adamantite_objective">Forgez 10 barres d\'adamantite.</string>
-    <string name="quest_daily_smith_runite_objective">Forgez 5 barres en runite.</string>
+    <string name="quest_daily_smith_mithril_objective">Forgez 15 lingots de mithril.</string>
+    <string name="quest_daily_smith_adamantite_objective">Forgez 10 lingots d\'adamantite.</string>
+    <string name="quest_daily_smith_runite_objective">Forgez 5 lingots en runite.</string>
     <string name="quest_daily_cook_trout_objective">Cuisinez 100 truites.</string>
     <string name="quest_daily_cook_salmon_objective">Cuisinez 80 saumons.</string>
     <string name="quest_daily_cook_lobster_objective">Cuisinez 40 homards.</string>
@@ -508,8 +508,8 @@
     <string name="daily_verb_farming">Récolter</string>
 
     <!-- Quest objective format strings -->
-    <string name="quest_obj_gather">%1$s %2$d %3$s</string> <!-- untranslated -->
-    <string name="quest_obj_craft">%1$s %2$d %3$s</string> <!-- untranslated -->
+    <string name="quest_obj_gather">%1$s %2$d %3$s</string>
+    <string name="quest_obj_craft">%1$s %2$d %3$s</string>
     <string name="quest_obj_prayer">Enterrer %1$d os de tout type</string>
     <string name="quest_obj_kill">Vaincre %1$d ennemis</string>
     <string name="quest_obj_kill_enemy">Vaincre %1$d %2$s</string>
@@ -524,7 +524,7 @@
     <string name="quest_obj_collect">Collecter %1$d %2$s en combat</string>
     <string name="quest_obj_slayer_task">Terminer %1$d tâches du Tueur</string>
 
-    <string name="skilling_dungeon_shattered_spire_note_1">De la pierre calcinée et du verre fondu sur une centaine de mètres à la ronde. Quoi qu’il se soit passé ici, ça a été catastrophique.</string>
+    <string name="skilling_dungeon_shattered_spire_note_1">De la pierre calcinée et du verre fondu sur une centaine de mètres à la ronde. Quoi qu\'il se soit passé ici, ça a été catastrophique.</string>
     <string name="skilling_dungeon_shattered_spire_note_2">Une page arrachée d\'un journal de recherche : « L\'expérience de convergence dépasse toutes les prévisions. Nous devons poursuivre. »</string>
     <string name="skilling_dungeon_shattered_spire_note_3">Des matrices arcaniques gravées dans les pans de mur encore debout — un cercle de confinement mal conçu et manifestement soumis à une tension excessive.</string>
     <string name="skilling_dungeon_shattered_spire_note_4">Un passage a été ouvert par explosion vers le bas. Des Créatures se déplacent encore dans les ténèbres en contrebas, suivant d\'anciennes instructions.</string>
@@ -543,7 +543,7 @@
     <string name="skilling_dungeon_dwarven_depths_note_2">Une forge colossale se dresse au bout du passage, ses feux brûlant encore, on ne sait comment, après des siècles.</string>
     <string name="skilling_dungeon_dwarven_depths_note_3">Des Golems de Fer se tiennent immobiles dans les alcôves. Leurs yeux vacillent alors que vous extrayez des ressources à proximité.</string>
     <string name="skilling_dungeon_dwarven_depths_note_4">Les runes de forge sont un avertissement — quelque chose a été enchaîné ici, et cette chose s\'agite.</string>
-    <string name="skilling_dungeon_dwarven_depths_note_5">Les golems s’éveillent pleinement. L\'Ancienne Forge s\'éveille — ses gardiens attendent ceux qui auront le courage d\'y pénétrer.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_5">Les golems s\'éveillent pleinement. L\'Ancienne Forge s\'éveille — ses gardiens attendent ceux qui auront le courage d\'y pénétrer.</string>
     <string name="skilling_dungeon_corrupted_canopy_note_1">Ici, les arbres saignent de l\'ombre là où ils sont entaillés. Le bois se tord et résiste à la lame.</string>
     <string name="skilling_dungeon_corrupted_canopy_note_2">Une bête d\'ombre guette depuis la canopée. Elle n\'attaque pas — elle se contente d\'observer.</string>
     <string name="skilling_dungeon_corrupted_canopy_note_3">De vieilles pierres sacrées sont visibles à travers les troncs tortueux. Quelque chose y vit encore...</string>

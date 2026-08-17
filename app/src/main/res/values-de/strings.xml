@@ -11,7 +11,7 @@
     <string name="nav_profile">Profil</string>
 
     <!-- ===== Common buttons ===== -->
-    <string name="btn_start">Start</string> <!-- untranslated -->
+    <string name="btn_start">Beginnen</string>
     <string name="btn_start_session">Aktivität beginnen</string>
     <string name="btn_abandon_session">Aktivität aufgeben</string>
     <string name="btn_collect_results">Resultate sammeln</string>
@@ -44,7 +44,7 @@
     <string name="btn_save">Speichern</string>
 
     <!-- ===== Common labels ===== -->
-    <string name="label_level">Level</string> <!-- untranslated -->
+    <string name="label_level">Level</string>
     <string name="label_xp">EP</string>
     <string name="label_coins">Münzen</string>
     <string name="label_hp">LP</string>
@@ -65,9 +65,9 @@
     <string name="label_bosses">Endgegner</string>
     <string name="label_by_location">Nach Ort</string>
     <string name="bestiary_not_encountered">Noch nicht angetroffen</string>
-    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
-    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="bestiary_qty_header">Menge</string>
+    <string name="bestiary_chance_header">Chance</string>
+    <string name="bestiary_encountered_progress">%1$d / %2$d angetroffen</string>
     <string name="bestiary_always_drops">Lässt immer fallen</string>
     <string name="bestiary_rare_drops">Seltene Beute</string>
     <string name="bestiary_common_loot">Gewöhnliche Beute</string>
@@ -80,19 +80,19 @@
     <string name="label_session_active">Derzeitige Aktivität</string>
     <string name="label_no_active_session">Keine Aktivitäten</string>
     <string name="label_session_complete">Aktivität abgeschlossen!</string>
-    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
-    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
-    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
-    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
-    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
-    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
-    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
-    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
-    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
-    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
+    <string name="home_sessions_complete_title">%1$d Aktivitäten abgeschlossen!</string>
+    <string name="home_boss_defeated_title">%1$s besiegt!</string>
+    <string name="home_boss_defeated_by_title">Von %1$s besiegt.</string>
+    <string name="home_dungeon_died_title">%1$s — Du bist gestorben</string>
+    <string name="home_dungeon_complete_title">%1$s Abgeschlossen!</string>
+    <string name="home_expedition_complete_title">%1$s Entdeckungsreise abgeschlossen</string>
+    <string name="home_skill_session_complete_title">%1$s Aktivität abgeschlossen</string>
+    <string name="home_bones_buried_row">%1$s vergraben</string>
+    <string name="worker_sessions_complete_title">Arbeiter: %1$d Aktivität abgeschlossen!</string>
+    <string name="worker_boss_defeated_title">Arbeiter: %1$s besiegt!</string>
+    <string name="worker_dungeon_died_title">Arbeiter: %1$s — gestorben</string>
+    <string name="worker_dungeon_complete_title">Arbeiter: %1$s abgeschlossen!</string>
+    <string name="worker_skill_complete_title">Arbeiter: %1$s abgeschlossen</string>
     <string name="label_training">In Ausbildung</string>
     <string name="label_gathering_skills">Sammeln</string>
     <string name="label_crafting_skills">Herstellungsberufe</string>
@@ -100,13 +100,13 @@
     <string name="label_coming_soon">Bald verfügbar</string>
     <string name="label_time_remaining">Verbleibende Zeit</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
-    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
-    <string name="duration_days">%1$dd</string> <!-- untranslated -->
-    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
-    <string name="duration_complete">Complete</string> <!-- untranslated -->
+    <string name="duration_months">%1$dmo</string>
+    <string name="duration_weeks">%1$dw</string>
+    <string name="duration_days">%1$dd</string>
+    <string name="duration_hours">%1$dh</string>
+    <string name="duration_minutes">%1$dm</string>
+    <string name="duration_seconds">%1$ds</string>
+    <string name="duration_complete">Abgeschlossen</string>
     <string name="label_session_results">Ergebnis der Aktivität</string>
     <string name="label_xp_gained">EP erworben</string>
     <string name="label_items_collected">Gesammelte Gegenstände</string>
@@ -149,8 +149,9 @@
     <string name="label_available_quests">Verfügbar</string>
     <string name="label_stats">Statistiken</string>
     <string name="label_skills">Fähigkeiten</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
     <string name="label_shop">Krämer</string>
-    <string name="label_sell_items">Artikel verkaufen</string>
+    <string name="label_sell_items">Gegenstände verkaufen</string>
     <string name="label_total_level">Gesamtlevel</string>
     <string name="label_wins">Siege</string>
     <string name="label_losses">Niederlagen</string>
@@ -186,7 +187,7 @@
     <string name="label_personal_best">Persönliche Bestleistung</string>
     <string name="label_daily_dig">Tägliche Grabung</string>
     <string name="label_dig_depth">Loch-Tiefe</string>
-    <string name="label_version">Version</string> <!-- untranslated -->
+    <string name="label_version">Version</string>
 
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
@@ -211,7 +212,7 @@
     <!-- Translator note: %1$d = wins, %2$d = losses -->
     <string name="format_arena_record">%1$d Gewonnen / %2$d Verloren</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
-    <string name="format_skill_level">%1$s: Level %2$d</string> <!-- untranslated -->
+    <string name="format_skill_level">%1$s: Level %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
     <string name="format_xp_boost_percent">+%1$d%% EP</string>
     <string name="format_coin_boost_percent">+%1$d%% Münzen</string>
@@ -220,7 +221,7 @@
     <!-- Translator note: %1$d = minutes remaining -->
     <string name="format_minutes_remaining">%1$d Minuten verbleibend</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
-    <string name="format_version">Version %1$s</string> <!-- untranslated -->
+    <string name="format_version">Version %1$s</string>
 
     <!-- ===== Plurals ===== -->
     <plurals name="plural_level_ups">
@@ -293,17 +294,19 @@
     <!-- ===== HomeScreen ===== -->
     <string name="label_player_stats">Spielerstatistiken</string>
     <string name="label_combat_level">Kampflevel</string>
-    <string name="label_shop_desc">Artikel kaufen und verkaufen</string>
+    <string name="label_shop_desc">Gegenstände kaufen und verkaufen</string>
     <string name="label_no_session_hint">Begebt Euch zu Fähigkeiten oder Kampf, um mit dem Training zu beginnen.</string>
     <string name="label_recent_activity">Letzte Aktivität</string>
     <string name="settings_profile_layout">Profil-Layout</string>
     <string name="settings_profile_layout_desc">Seitenleiste oder obere Tabs</string>
     <string name="settings_profile_layout_rail">Leiste</string>
     <string name="settings_profile_layout_tabs">Reiter</string>
-    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
-    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
-    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
-    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
+    <string name="settings_quest_dots">Quest-Punkte für Fähigkeiten</string>
+    <string name="settings_quest_dots_desc">Goldenen Punkt auf Fähigkeiten mit offenen Quests anzeigen.</string>
+    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_compact_numbers">Nummern abkürzen</string>
+    <string name="settings_compact_numbers_desc">Große Mengenangaben abkürzen (z. B. 2,46M statt 2.461.940).</string>
     <string name="settings_home_screen">Startbildschirm</string>
     <string name="settings_home_screen_desc">Wählt aus, was auf dem Startbildschirm angezeigt wird</string>
     <string name="settings_recent_activity">Protokoll der letzten Aktivitäten</string>
@@ -343,12 +346,12 @@
     <string name="label_weekly_reset">Wird montags um %1$s zurückgesetzt</string>
     <string name="weekly_bonus_title">Wöchentlicher Bonus!</string>
     <string name="weekly_bonus_claim">Fordert wöchentlichen Bonus ein</string>
-    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
-    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
+    <string name="label_daily_info_pity">Jede tägliche Aufgabe wird mit Münzen entlohnt. Außerdem gibt es dabei immer eine Chance von 1 zu %1$d einen Teil der Zwergenausrüstung zu erhalten welches du noch nicht besitzt. Jeder erfolgreiche Abschluss ohne Fallenlassen verbessert die Gewinnchancen; ein Fallenlassen setzt sie wieder auf 1 zu 100 zurück.</string>
+    <string name="label_daily_info_complete">Jede tägliche Aufgabe wird mit Münzen entlohnt. Du besitzt bereits alle Teile der Zwergenausrüstung!</string>
     <string name="label_weekly_info">Jede wöchentliche Herausforderung wird mit Münzen entsprechend der Schwierigkeit entlohnt. Wenn Ihr alle 5 Herausforderungen meistert, erhaltet eine Sonderzulage: 100.000 Münzen oder mit einer Chance von %1$s ein Teil der göttlichen Ausrüstung.</string>
     <string name="label_weekly_info_complete">Jede wöchentliche Herausforderung wird mit Münzen entsprechend der Schwierigkeit entlohnt. Wenn Ihr alle 5 Herausforderungen meistert, erhaltet eine Sonderzulage: 100.000 Münzen. Ihr besitzt bereits die komplette göttliche Ausrüstung!</string>
-    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
-    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
+    <string name="label_daily_reward_pity">2.000 Münzen (1/%1$d: Zwergenausrüstung)</string>
+    <string name="label_daily_reward_complete">2.000 Münzen</string>
     <string name="msg_daily_claimed_coins">Tagesaufgabe abgeschlossen! +2.000 Münzen.</string>
     <string name="msg_daily_claimed_dwarven">Tagesaufgabe abgeschlossen! Ihr habt %1$s gefunden!</string>
     <string name="label_hide_completed">Verstecke abgeschlossenes</string>
@@ -395,13 +398,13 @@
     <string name="settings_theme">Design</string>
     <string name="settings_theme_desc">Wählt Euer bevorzugtes Farbschema</string>
     <string name="settings_theme_dark">Dunkel</string>
-    <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
+    <string name="settings_theme_midnight">Mitternacht</string>
     <string name="settings_theme_light">Hell</string>
-    <string name="settings_theme_system">System</string> <!-- untranslated -->
+    <string name="settings_theme_system">System</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_font_tiny">Winzig</string>
     <string name="settings_font_small">Klein</string>
-    <string name="settings_font_normal">Normal</string> <!-- untranslated -->
+    <string name="settings_font_normal">Normal</string>
     <string name="settings_font_large">Groß</string>
     <string name="settings_font_huge">Riesig</string>
     <string name="settings_import_theme">Designs importieren</string>
@@ -421,7 +424,7 @@
     <string name="theme_editor_name_reserved">Dieser Name ist für ein offizielles Design reserviert</string>
     <string name="theme_editor_overwrite_hint">Speichern ersetzt „%1$s“</string>
     <string name="theme_editor_base_label">Basisstil</string>
-    <string name="theme_editor_palette_header">Palette</string> <!-- untranslated -->
+    <string name="theme_editor_palette_header">Palette</string>
     <string name="theme_editor_used_for">Verwendet für: %1$s</string>
     <string name="theme_editor_contrast_header">Kontrastwarnungen</string>
     <string name="theme_editor_low_contrast">%1$s ist auf %2$s schwer lesbar (%3$s, mindestens 4,5)</string>
@@ -452,7 +455,7 @@
 
 
 
-    <string name="settings_lang_system">System</string> <!-- untranslated -->
+    <string name="settings_lang_system">System</string>
     <string name="settings_save_data">Daten speichern</string>
     <string name="settings_export">Daten exportieren</string>
     <string name="settings_export_desc">Speichert Eueren Fortschritt in einer Datei</string>
@@ -693,13 +696,13 @@
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">AKTIV</string>
     <string name="shop_sell_junk">Krimskrams verkaufen</string>
-    <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
-    <string name="shop_search_hint">Search items</string> <!-- untranslated -->
+    <string name="shop_keep_one_toggle">Eins von jedem Gegenstand behalten</string>
+    <string name="shop_search_hint">Gegenstand suchen</string>
     <string name="shop_filter_all">All</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_none">Nothing to sell.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_equipped">%1$s ist ausgerüstet. Vor dem Verkauf muss es abgelegt werden.</string>
+    <string name="shop_sell_blocked_reserved">%1$s ist für Auftrag in Warteschlange reserviert.</string>
+    <string name="shop_sell_blocked_keep_one">Den letzten %1$s behalten (Eins von jedem Gegenstand behalten ist aktiv).</string>
+    <string name="shop_sell_blocked_none">Nichts zu verkaufen.</string>
     <string name="shop_sell_old_gear">Alte Ausrüstung verkaufen</string>
     <string name="shop_equipped_label">(ausgerüstet)</string>
     <string name="shop_item_locked">%1$s ist gesperrt. Zum Entsperren lange drücken.</string>
@@ -710,8 +713,8 @@
     <string name="quest_legend_weekly">Wöchentliche Quest</string>
     <string name="quest_legend_guild_daily">Gilden-Tagesquest</string>
     <string name="quest_legend_guild">Gildenquest</string>
-    <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
-    <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
+    <string name="quest_legend_quest">Aufgabe</string>
+    <string name="quest_legend_gold_dot">Aufgabe mit Zeitbegrenzung ist verfügbar.</string>
     <string name="quest_legend_notes">Abgeblendete Symbole können noch nicht abgeschlossen werden (Level oder Materialien fehlen). Eine kleine hochgestellte Zahl bedeutet, dass mehrere Quests dieses Typs dasselbe Ziel haben.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
     <string name="shop_qty_in_inv">×%1$s im Inventar</string>
@@ -754,8 +757,8 @@
     <string name="farming_patches">%1$d Äcker freigeschaltet</string>
     <string name="farming_clear_patch">Acker pflügen</string>
     <!-- Translator note: %1$s = crop name -->
-    <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
-    <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
+    <string name="farming_clear_desc_named">%1$s ohne Belohnung entfernen?</string>
+    <string name="farming_clear_desc_bean">Magische Bohne entfernen? Sie wird wieder in dein Inventar zurückgelegt.</string>
     <string name="farming_harvest_and_plant">Alles ernten und aussähen</string>
     <string name="farming_harvest_all_complete">Alle Felder abgeerntet!</string>
     <string name="farming_no_crops_ready">Nichts zu ernten</string>
@@ -772,7 +775,7 @@
     <string name="character_create_title">Erstellt Euren Charakter</string>
     <string name="character_edit_title">Charakter bearbeiten</string>
     <string name="character_name_label">Name Eures Charakters</string>
-    <string name="character_name_too_long">Only the first %1$d characters will be used.</string> <!-- untranslated -->
+    <string name="character_name_too_long">Nur die ersten %1$d Zeichen werden verwendet.</string>
     <string name="character_gender">Geschlecht</string>
     <string name="character_gender_male">Junker / Männlich</string>
     <string name="character_gender_female">Maid / Weiblich</string>
@@ -780,7 +783,7 @@
     <string name="character_gender_custom_hint">Beschreibt Euer Geschlecht</string>
     <string name="character_race">Rasse</string>
     <string name="character_race_human">Mensch</string>
-    <string name="character_race_elf">Elf</string> <!-- untranslated -->
+    <string name="character_race_elf">Elfe</string>
     <string name="character_race_dwarf">Zwerg</string>
     <string name="character_race_orc">Ork</string>
 
@@ -886,7 +889,7 @@
     <string name="achievement_total_100_desc">Erreicht Gesamtlevel 100</string>
     <string name="achievement_total_250_name">Abgebrüht</string>
     <string name="achievement_total_250_desc">Erreicht Gesamtlevel 250</string>
-    <string name="achievement_total_500_name">Veteran</string> <!-- untranslated -->
+    <string name="achievement_total_500_name">Veteran</string>
     <string name="achievement_total_500_desc">Erreicht Gesamtlevel 500</string>
     <string name="achievement_total_750_name">Meister</string>
     <string name="achievement_total_750_desc">Erreicht Gesamtlevel 750</string>
@@ -905,7 +908,7 @@
     <string name="achievement_combat_30_desc">Erreicht Kampflevel 30</string>
     <string name="achievement_combat_50_name">Meister</string>
     <string name="achievement_combat_50_desc">Erreicht Kampflevel 50</string>
-    <string name="achievement_combat_75_name">Elite</string> <!-- untranslated -->
+    <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Erreicht Kampflevel 75</string>
     <string name="achievement_combat_99_name">Held</string>
     <string name="achievement_combat_99_desc">Erreicht Kampflevel 99</string>
@@ -947,7 +950,7 @@
     <string name="guild_hall_title">Gildenhaus</string>
     <string name="guild_hall_desc">Tretet Gilden bei und erledigt Tagesaufgaben, um aufzusteigen</string>
     <string name="guild_hall_intro">Gilden belohnen Euch für Aktivitäten, die Ihr sowieso erledigt. Erledigt Missionen und Tagesaufgaben, um auch fähigkeitenübergreifend Materialien, Münzen und EP zu erhalten. So können selbst Spezialisten Ressourcen erhalten, in denen sie wenig bewandert sind.</string>
-    <string name="guild_level_label">Level %1$d</string> <!-- untranslated -->
+    <string name="guild_level_label">Level %1$d</string>
     <string name="guild_level_max">Level 10 (Maximum)</string>
     <string name="guild_tab_quests">Missionen</string>
     <string name="guild_tab_dailies">Tagesaufgaben</string>
@@ -1093,7 +1096,7 @@
     <string name="expedition_lore_notes">%1$d / %2$d Aufzeichnungen</string>
     <string name="expedition_lock_level">Erfordert %1$s-Level %2$d</string>
     <string name="expedition_lock_notes">Findet alle Aufzeichnungen in %1$s</string>
-    <string name="expedition_started">%1$s started.</string> <!-- untranslated -->
+    <string name="expedition_started">%1$s begonnen.</string>
     <string name="expedition_lock_prerequisite">Erfüllt erst die Voraussetzung zum Freischalten</string>
     <string name="label_notes">Aufzeichnungen</string>
 
@@ -1105,7 +1108,7 @@
     <string name="slayer_title">Trophäenjagd</string>
     <string name="slayer_card_desc">Aufträge und Belohnungen für Trophäenjagd</string>
     <string name="slayer_desc">Beendet Aufträge, um Trophäenjagd-EP und Punkte zu verdienen. Erhaltet dafür exklusive Ausrüstung im Kontor des Trophäensammlers.</string>
-    <string name="slayer_level_label">Level %1$d</string> <!-- untranslated -->
+    <string name="slayer_level_label">Level %1$d</string>
     <string name="slayer_xp_label">%1$s EP</string>
     <string name="slayer_points">%1$d Pkt.</string>
     <string name="slayer_active_task">Aktive Aufträge</string>
@@ -1127,10 +1130,10 @@
     <string name="slayer_owned">Im Besitz</string>
     <string name="slayer_lamp_purchased">+%1$s EP zu %2$s hinzugefügt!</string>
     <string name="slayer_lamp_pick_skill">Wählt eine Fähigkeit</string>
-    <string name="slayer_lamp_max_level_warning">⚠ XP will be wasted</string> <!-- untranslated -->
+    <string name="slayer_lamp_max_level_warning">⚠ XP wird verschwendet werden</string>
     <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
-    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string> <!-- untranslated -->
-    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string> <!-- untranslated -->
+    <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string>
+    <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string>
     <string name="slayer_lamp_small">EP-Laterne (Klein)</string>
     <string name="slayer_lamp_large">EP-Laterne (Groß)</string>
     <string name="slayer_lamp_small_desc">+10,000 EP für beliebige Fähigkeit</string>
@@ -1151,9 +1154,9 @@
     <string name="slayer_foretell_slot">Eintrag %1$d: %2$s</string>
 
     <!-- Prestige system -->
-    <string name="prestige">Prestige</string> <!-- untranslated -->
+    <string name="prestige">Prestige</string>
     <string name="prestige_max">Max. Prestige</string>
-    <string name="prestige_confirm_title" formatted="false">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_title" formatted="false">Prestige %s?</string>
     <string name="prestige_confirm_message_xp">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings dauerhaft +%2$d%% EP-Bonus für diese Fähigkeit erhalten.</string>
     <string name="prestige_confirm_message_stat">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings einen dauerhaften Bonus von +%2$d%% EP-Bonus für diese Fähigkeit erhalten.</string>
     <string name="prestige_confirm_message_agility">Euer %1$s-Level wird auf 1 zurückgesetzt, Ihr werdet allerdings einen dauerhaften Bonus von +%2$d%% EP erhalten, und Eure Sitzungsdauer wird weiter sinken — auf Level 99 dauert eine Sitzung dann %3$d Min. statt %4$d Min.</string>
@@ -1211,17 +1214,17 @@
     <string name="crafting_cat_potion">Trank</string>
     <string name="crafting_cat_arrow">Pfeil</string>
     <string name="crafting_cat_bow">Bogen</string>
-    <string name="crafting_cat_plank">Planke</string>
+    <string name="crafting_cat_plank">Bohle</string>
     <string name="crafting_cat_staff">Stab</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantit</string>
-    <string name="crafting_tier_bronze">Bronze</string> <!-- untranslated -->
-    <string name="crafting_tier_gold">Gold</string> <!-- untranslated -->
+    <string name="crafting_tier_bronze">Bronze</string>
+    <string name="crafting_tier_gold">Gold</string>
     <string name="crafting_tier_iron">Eisen</string>
     <string name="crafting_tier_magic">Magisch</string>
     <string name="crafting_tier_maple">Ahorn</string>
-    <string name="crafting_tier_mithril">Mithril</string> <!-- untranslated -->
+    <string name="crafting_tier_mithril">Mithril</string>
     <string name="crafting_tier_oak">Eiche</string>
     <string name="crafting_tier_platinum">Platin</string>
     <string name="crafting_tier_runite">Runit</string>
@@ -1288,7 +1291,7 @@
     <string name="town_upgrade_next_label">Nächstes Upgrade</string>
     <string name="town_upgrade_constr_req">Bauen Lv. %1$d erforderlich</string>
     <string name="town_upgrade_cost">Kosten: %1$s Münzen</string>
-    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
+    <string name="town_builder_discount">Rabatt des Erbauers: %1$d%% günstiger</string>
     <string name="town_upgrade_materials_header">Materialien:</string>
     <string name="town_upgrade_btn">Verbessern</string>
     <string name="town_upgrade_success">Gebäude ausgebaut!</string>
@@ -1323,12 +1326,12 @@
     <string name="town_cape_rack_t1_bonus">Passive Boni der Umhänge der Sammelfertigkeiten sind aktiv</string>
     <string name="town_cape_rack_t2_bonus">Passive Boni der Umhänge der Sammelfertigkeiten und Herstellungsberufe sind aktiv</string>
     <string name="town_cape_rack_t3_bonus">Passive Boni aller Umhänge, die Ihr besitzt (Sammeln, Herstellen, Kampf &amp; Gilden), sind aktiv</string>
-    <string name="town_building_artisans_workshop_name">"Artisan's Workshop"</string> <!-- untranslated -->
-    <string name="town_artisans_workshop_no_bonus">Upgrade to grant a chance to preserve secondary crafting materials</string> <!-- untranslated -->
-    <string name="town_artisans_workshop_active_bonus">%1$d%% chance to preserve secondary crafting materials</string> <!-- untranslated -->
-    <string name="town_building_chronos_spire_name">Chronos Spire</string> <!-- untranslated -->
-    <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string> <!-- untranslated -->
-    <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string> <!-- untranslated -->
+    <string name="town_building_artisans_workshop_name">Werkstatt des Handwerkers</string>
+    <string name="town_artisans_workshop_no_bonus">Verbessere für eine Chance, sekundäre Herstellungsmaterialien einzusparen</string>
+    <string name="town_artisans_workshop_active_bonus">%1$d%% Chance, sekundäre Herstellungsmaterialien einzusparen</string>
+    <string name="town_building_chronos_spire_name">Chronos-Turm</string>
+    <string name="town_chronos_spire_no_bonus">Verbessere, um die Dauer der Spieler-Aktivitäten zu verringern</string>
+    <string name="town_chronos_spire_active_bonus">%1$d%% Verringerung der Dauer der Spieler-Aktivitäten</string>
 
     <!-- Town achievements -->
     <string name="achievement_town_first_upgrade_name">Erste Renovierung</string>
@@ -1372,7 +1375,7 @@
     <string name="carnival_idle_desc_wizard">Werft Illusionszauber gegen rivalisierende Magier. Magie-Level erhöht die Ausbeute.</string>
     <string name="carnival_fishing_derby">Angelturnier</string>
     <string name="carnival_idle_desc_fishing">Fangt den größten Fisch im Jahrmarktsteich. Angelkunde-Level erhöht die Ausbeute.</string>
-    <string name="carnival_skill_level">%1$s Lv.%2$d</string> <!-- untranslated -->
+    <string name="carnival_skill_level">%1$s Lv.%2$d</string>
     <string name="carnival_ticket_yield">~%1$d Lose/Sitzung</string>
     <string name="carnival_queue">Sitzung einreihen</string>
     <string name="carnival_ring_toss">Ringewerfen</string>
@@ -1448,9 +1451,9 @@
     <string name="farming_bean_ready">Der Bohnenstängel reicht über die Wolken hinaus. Bereit zu klettern?</string>
     <string name="farming_bean_climb">Klettern</string>
     <string name="farming_bean_climbed">Ihr habt den Bohnenstängel erklommen. Etwas wartet…</string>
-    <string name="farming_bean_climbed_title">Beanstalk Climbed!</string> <!-- untranslated -->
+    <string name="farming_bean_climbed_title">Bohnenstange erklommen!</string>
     <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string> <!-- untranslated -->
-    <string name="farming_bean_cleared">The Magic Bean was returned to your inventory.</string> <!-- untranslated -->
+    <string name="farming_bean_cleared">Die Magische Bohne wurde in dein Inventar zurückgelegt.</string>
 
     <string name="farming_magic_bean_one_plot">Magische Bohnen können nur auf einem Feld gepflanzt werden</string>
 
@@ -1564,7 +1567,7 @@
     <string name="bonus_session_shorter">%1$d Min. kürzere Sitzungen</string>
     <string name="bonus_coin_return">+%1$d%% Münzrückgabe</string>
     <string name="bonus_tower">Turm</string>
-    <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
+    <string name="bonus_builder_discount_detail" formatted="false">0.5% günstigere Gebäude-Verbesserungskosten pro Level</string>
 
     <string name="bonus_coin_drops">+%1$d%% Münzen finden</string>
     <string name="bonus_hp">+%1$d LP</string>
@@ -1576,21 +1579,21 @@
     <string name="combat_select_spell">Wählt einen Zauber vor Betreten.</string>
     <string name="combat_spell_level_required">Benötigt Magie %1$d für %2$s.</string>
     <string name="guild_daily_reward_claimed">Tägliche Belohnung eingefordert!</string>
-    <string name="reward_part_coins">+%1$s coins</string> <!-- untranslated -->
-    <string name="reward_part_coins_plain">%1$s coins</string> <!-- untranslated -->
+    <string name="reward_part_coins">+%1$s Münzen</string>
+    <string name="reward_part_coins_plain">%1$s Münzen</string>
     <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string> <!-- untranslated -->
-    <string name="quest_claimed_suffix">Claimed: %1$s</string> <!-- untranslated -->
+    <string name="quest_claimed_suffix">Eingefordert: %1$s</string>
     <plurals name="plural_reward_items">
-        <item quantity="one">×%1$d item</item>
-        <item quantity="other">×%1$d items</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">×%1$d Gegenstand</item>
+        <item quantity="other">×%1$d Gegenstände</item>
+    </plurals>
     <string name="monument_title">Großes Monument</string>
     <string name="monument_desc">Ein Wunderwerk, Münze für Münze errichtet. Jede Stufe ist ein Geschenk an die Stadt.</string>
     <string name="monument_your_coins">Eure Münzen: %1$s</string>
     <string name="monument_stage_0_name">Leeres Grundstück</string>
     <string name="monument_stage_1_name">Fundament</string>
     <string name="monument_stage_2_name">Säulen</string>
-    <string name="monument_stage_3_name">Statue</string> <!-- untranslated -->
+    <string name="monument_stage_3_name">Statue</string>
     <string name="monument_stage_4_name">Vergoldet</string>
     <string name="monument_stage_5_name">Ewige Flamme</string>
     <string name="monument_stage_1_reward">+1 Ackerfläche</string>
@@ -1633,7 +1636,7 @@
     <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Ewiger Turm</string>
     <string name="tower_floor_label" formatted="false">Etage %d</string>
-    <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
+    <string name="tower_floor_desc">Unendlicher Turm Etage %1$d</string>
     <string name="tower_best_floor" formatted="false">Höchstwert: Etage %d</string>
     <string name="tower_start_btn" formatted="false">Versuche Etage %d</string>
     <string name="tower_milestones">Meilensteine</string>
@@ -1656,13 +1659,13 @@
     <string name="seasonal_event_token_progress">%1$d / %2$d Token</string>
     <string name="seasonal_event_complete">Abgeschlossen!</string>
     <string name="seasonal_bounty_board_title">Aufgabenbrett</string>
-    <string name="seasonal_expedition_title">Expedition</string> <!-- untranslated -->
+    <string name="seasonal_expedition_title">Entdeckungsreise</string>
     <string name="seasonal_boss_title">Endgegner</string>
     <string name="seasonal_go_to_combat">Zum Kampf</string>
     <string name="seasonal_minigame_hint">Trefft %1$d von %2$d Glutfunken, bevor sie verschwinden!</string>
     <string name="seasonal_minigame_round">Runde %1$d / %2$d — Treffer: %3$d</string>
     <string name="seasonal_minigame_mode_label">Modus</string>
-    <string name="seasonal_minigame_mode_normal">Normal</string> <!-- untranslated -->
+    <string name="seasonal_minigame_mode_normal">Normal</string>
     <string name="seasonal_minigame_mode_easy">Einfach</string>
     <string name="seasonal_minigame_mode_caption">%1$dms Fenster, %2$s Abklingzeit</string>
     <string name="seasonal_minigame_success">Perfektes Timing! +1 Token.</string>
@@ -1814,19 +1817,19 @@
     <string name="title_master_farmer_name">Meisterbauer</string>
     <string name="title_master_farmer_requirement">Höchststufe der Bauerngilde erreichen</string>
     <string name="settings_art_credits">Kunst-Credits</string>
-    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
+    <string name="settings_art_credits_desc">Die Künstler hinter der Kunst dieses Spiels</string>
     <string name="settings_credit_banners_title">Saisonbanner</string>
     <string name="settings_credit_banners_subtitle">Kunst von Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Fertigkeitssymbole</string>
 
     <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
-    <string name="settings_credit_characters_subtitle">Art by Pixylac</string> <!-- untranslated -->
+    <string name="settings_credit_characters_subtitle">Kunst von Pixylac</string>
     <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
-    <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
+    <string name="settings_credit_bosses_subtitle">Kunst von Meg</string>
     <string name="title_seasonal_champion_of">Champion von %1$s</string>
     <string name="title_seasonal_requirement">Schließt das Saisonereignis %1$s ab</string>
     <string name="home_welcome_greeting">Willkommen zurück,</string>
-
+    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
     <string name="home_welcome_title">Der %1$s!</string>
 
     <!-- Pet names and descriptions -->
@@ -1838,48 +1841,48 @@
     <string name="pet_baby_kraken_desc">Ein winziger Kraken, der Eure Koch-Erfahrungspunkte erhöht.</string>
     <string name="pet_rock_golem_name">Steingolem</string>
     <string name="pet_rock_golem_desc">Eine lebende Felsformation, die Eure Bergbau-Erfahrungspunkte erhöht.</string>
-    <string name="pet_ent_name">Ent</string> <!-- untranslated -->
+    <string name="pet_ent_name">Ent</string>
     <string name="pet_ent_desc">Ein uralter Baumgeist, der Eure Holzfäller-Erfahrungspunkte erhöht.</string>
     <string name="pet_tiny_templar_name">Kleiner Templer</string>
     <string name="pet_tiny_templar_desc">Ein kleiner Fischbegleiter, der Eure Angel-Erfahrungspunkte erhöht.</string>
     <string name="pet_tangleroot_name">Wurzelgewirr</string>
     <string name="pet_tangleroot_desc">Ein magisches Pflanzenwesen, das Eure Landwirtschafts-Erfahrungspunkte erhöht.</string>
     <string name="pet_baby_balrog_name">Gothic Emberling</string> <!-- untranslated -->
-    <string name="pet_baby_balrog_desc">A tiny demon of fire and shadow that enhances your magic.</string> <!-- untranslated -->
-    <string name="pet_void_wisp_name">Void Wisp</string> <!-- untranslated -->
-    <string name="pet_void_wisp_desc">A fragment of the Void Sovereign\'s essence, bound to those who bested its master. Amplifies combat experience.</string> <!-- untranslated -->
+    <string name="pet_baby_balrog_desc">Ein kleiner Dämon aus Feuer und Schatten, der deine Magie verstärkt.</string>
+    <string name="pet_void_wisp_name">Leerengeist</string>
+    <string name="pet_void_wisp_desc">Ein Fragment der Essenz des Leerenbotschafters, an jene gebunden, die seinen Meister besiegten. Vermehrt Kampf-Erfahrung.</string>
     <string name="pet_graceling_sprite_name">Graceling Sprite</string> <!-- untranslated -->
-    <string name="pet_graceling_sprite_desc">A nimble fairy born from thousands of laps run in silence. Guides your feet with uncanny grace.</string> <!-- untranslated -->
-    <string name="pet_shadow_fox_name">Shadow Fox</string> <!-- untranslated -->
-    <string name="pet_shadow_fox_desc">A cunning fox that materialised from the shadows of a thousand pickpocket attempts.</string> <!-- untranslated -->
-    <string name="pet_ember_moth_name">Ember Moth</string> <!-- untranslated -->
-    <string name="pet_ember_moth_desc">Drawn to flame for so long it became one. Its wings shimmer with residual heat.</string> <!-- untranslated -->
-    <string name="pet_herb_wisp_name">Herb Wisp</string> <!-- untranslated -->
-    <string name="pet_herb_wisp_desc">A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.</string> <!-- untranslated -->
+    <string name="pet_graceling_sprite_desc">Eine flinke, aus tausenden in Stille gelaufenen Runden geborene Fee. Leitet deine Füße mit unheimlicher Gnade.</string>
+    <string name="pet_shadow_fox_name">Schattenfuchs</string>
+    <string name="pet_shadow_fox_desc">Ein listiger Fuchs, aus den Schatten unzähliger Taschendiebstähle materialisiert.</string>
+    <string name="pet_ember_moth_name">Glutmotte</string>
+    <string name="pet_ember_moth_desc">So lange zu den Flammen hingezogen, dass sie selber eine wurde. Ihre Flügel schimmern in der verbleibenden Hitze.</string>
+    <string name="pet_herb_wisp_name">Kräutergeist</string>
+    <string name="pet_herb_wisp_desc">Ein aus den Dämpfen tausender gebrauter Tränke geborener Geist. Seine Anwesenheit schärft deinen Verstand.</string>
     <string name="pet_rune_sprite_name">Rune Sprite</string> <!-- untranslated -->
-    <string name="pet_rune_sprite_desc">A crystallised fragment of magical energy that escaped the Runecrafting altar.</string> <!-- untranslated -->
-    <string name="pet_gem_golem_name">Gem Golem</string> <!-- untranslated -->
-    <string name="pet_gem_golem_desc">A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.</string> <!-- untranslated -->
-    <string name="pet_feather_drake_name">Feather Drake</string> <!-- untranslated -->
-    <string name="pet_feather_drake_desc">A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.</string> <!-- untranslated -->
-    <string name="pet_forge_imp_name">Forge Imp</string> <!-- untranslated -->
-    <string name="pet_forge_imp_desc">A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.</string> <!-- untranslated -->
-    <string name="pet_coin_drake_name">Coin Drake</string> <!-- untranslated -->
-    <string name="pet_coin_drake_desc">A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_desc">Ein kristallieisertes Fragment magischer Energie, das dem Runenherstellungsaltar entfliehen konnte.</string>
+    <string name="pet_gem_golem_name">Edelsteingolem</string>
+    <string name="pet_gem_golem_desc">Eine kleine, aus Edelsteinscherben und Polierstaub geformte Kreatur. Erhält die Schärfe deiner Werkzeuge.</string>
+    <string name="pet_feather_drake_name">Federdrache</string>
+    <string name="pet_feather_drake_desc">Ein winziger Drache, der ausschließlich aus Pfeilbefiederung gemacht ist. Erstaunlich aerodynamisch.</string>
+    <string name="pet_forge_imp_name">Schmiedekobold</string>
+    <string name="pet_forge_imp_desc">Ein boshafter, in der Schmiede lebender Kobold. Seine hitzegehärtete Haut ist unempfindlich gegen Verbrennungen.</string>
+    <string name="pet_coin_drake_name">Münzdrache</string>
+    <string name="pet_coin_drake_desc">Ein Drachenküken, das mit einer Diät aus Goldmünzen aufgezogen wurde. Es hat ein unschlagbares Gespür für Profit.</string>
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
-    <string name="pet_timber_sprite_desc">A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_name">Juggling Imp</string> <!-- untranslated -->
-    <string name="pet_juggling_imp_desc" formatted="false">A mischievous imp that juggles your worries away. Boosts all skill XP by 3%.</string> <!-- untranslated -->
-    <string name="pet_tower_pet_name">Stone Guardian</string> <!-- untranslated -->
-    <string name="pet_tower_pet_desc">An ancient stone golem that guards the tower\'s secrets. Boosts combat XP.</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_desc">Ein Holzgeist, der aus Sägemehl und Holz erwacht ist. Er weiß genau, wo jeder Nagel hingehört.</string>
+    <string name="pet_juggling_imp_name">Jonglierender Kobold</string>
+    <string name="pet_juggling_imp_desc" formatted="false">A verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-XP um 3%.</string>
+    <string name="pet_tower_pet_name">Steinwächter</string>
+    <string name="pet_tower_pet_desc">Ein uralter Steingolem, der die Geheimnisse des Turms bewacht. Erhöht Kampf-XP.</string>
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
-    <string name="pet_solstice_sprite_desc">A tiny ember spirit from the Sunspire Solstice event that boosts your combat prowess.</string> <!-- untranslated -->
-    <string name="pet_lantern_wisp_name">Lantern Wisp</string> <!-- untranslated -->
-    <string name="pet_lantern_wisp_desc">A grinning gourd-light that escaped the Hollow King\'s crown and now lights your way to battle.</string> <!-- untranslated -->
-    <string name="pet_grave_sprout_name">Grave Sprout</string> <!-- untranslated -->
-    <string name="pet_grave_sprout_desc">A stubborn little seedling that took root in a barrow mound. It knows a thing or two about growing.</string> <!-- untranslated -->
-    <string name="pet_golden_goose_name">Golden Goose</string> <!-- untranslated -->
-    <string name="pet_golden_goose_desc">A regal goose that roosts atop the gilded Monument. Coins simply seem to find its keeper.</string> <!-- untranslated -->
+    <string name="pet_solstice_sprite_desc">Ein kleiner Glutgeist aus dem Sonnenwende-Sommerturm-Event, der dein Können im Kampf verbessert.</string>
+    <string name="pet_lantern_wisp_name">Laternengeist</string>
+    <string name="pet_lantern_wisp_desc">Eine grinsende Kürbislaterne, die aus der Krone des Höhlenkönigs entkommen ist und dir nun auf dem Weg in die Schlacht leuchtet.</string>
+    <string name="pet_grave_sprout_name">Grabsprosse</string>
+    <string name="pet_grave_sprout_desc">Ein kleiner, hartnäckiger Sämling, der in einem Grabhügel Wurzeln geschlagen hat. Er weiß das Ein oder Andere übers Wachsen.</string>
+    <string name="pet_golden_goose_name">Goldene Gans</string>
+    <string name="pet_golden_goose_desc">Eine königliche Gans, die auf dem vergoldeten Monument nistet. Münzen scheinen einfach ihren Hüter zu finden.</string>
 
     <!-- Save slots / character manager -->
     <string name="settings_characters">Charaktere</string>
@@ -1889,11 +1892,11 @@
     <string name="save_slot_label">Platz %1$d</string>
     <string name="save_slot_new">Neuer Charakter</string>
     <string name="save_slot_playing">Aktiv</string>
-    <string name="save_slot_ironman">Ironman</string> <!-- untranslated -->
+    <string name="save_slot_ironman">Ironman</string>
     <string name="save_slot_combat_level">Kampf-Level %1$d</string>
     <string name="save_slot_total_level">Gesamt-Level %1$d</string>
     <string name="save_slot_last_played">vor %1$s</string>
-    <string name="save_slot_created">Created %1$s ago</string> <!-- untranslated -->
+    <string name="save_slot_created">Vor %1$s erstellt</string>
     <string name="save_slot_switch_title">Charakter wechseln?</string>
     <string name="save_slot_switch_body">Als %1$s spielen? Euer aktueller Charakter wird automatisch gespeichert.</string>
     <string name="save_slot_switch_btn">Wechseln</string>
@@ -1912,34 +1915,34 @@
     <string name="ironman_inn_blocked">Ironman-Charaktere können keine Arbeiter anheuern.</string>
     <string name="ironman_blessing_blocked">Ironman-Charaktere können nur Segen für Verteidigung erhalten.</string>
     <string name="ironman_bonuses_notice">Ironman: EP-, Ertrags- und Münzboni sind für diesen Charakter deaktiviert.</string>
-    <string name="ironman_badge">Ironman</string> <!-- untranslated -->
+    <string name="ironman_badge">Ironman</string>
     <string name="settings_imported_demoted">Speicherstand importiert. Er wurde außerhalb des Spiels verändert, daher wurde der Ironman-Status entfernt.</string>
     <string name="shop_xp_boost_name">2× XP Boost (48h)</string> <!-- untranslated -->
-    <string name="bestiary_stat_hp">HP</string> <!-- untranslated -->
-    <string name="bestiary_stat_attack">Attack</string> <!-- untranslated -->
-    <string name="bestiary_stat_strength">Strength</string> <!-- untranslated -->
-    <string name="bestiary_stat_defense">Defense</string> <!-- untranslated -->
-    <string name="bestiary_stat_atk_defense">Atk Defense</string> <!-- untranslated -->
-    <string name="bestiary_stat_str_defense">Str Defense</string> <!-- untranslated -->
-    <string name="bestiary_stat_rng_defense">Rng Defense</string> <!-- untranslated -->
-    <string name="bestiary_stat_mag_defense">Mag Defense</string> <!-- untranslated -->
-    <string name="bestiary_stat_xp">XP</string> <!-- untranslated -->
-    <string name="bestiary_stat_required_level">Required Level</string> <!-- untranslated -->
-    <string name="bestiary_stat_xp_reward">XP Reward</string> <!-- untranslated -->
-    <string name="bestiary_stat_duration">Duration</string> <!-- untranslated -->
-    <string name="bestiary_stat_duration_min">%1$d min</string> <!-- untranslated -->
-    <string name="bestiary_kill_count">%1$d kills</string> <!-- untranslated -->
-    <string name="bestiary_location_other">Other</string> <!-- untranslated -->
-    <string name="carnival_stat_atk">ATK +%1$d</string> <!-- untranslated -->
-    <string name="carnival_stat_str">STR +%1$d</string> <!-- untranslated -->
-    <string name="carnival_stat_def">DEF +%1$d</string> <!-- untranslated -->
+    <string name="bestiary_stat_hp">LP</string>
+    <string name="bestiary_stat_attack">Angriff</string>
+    <string name="bestiary_stat_strength">Stärke</string>
+    <string name="bestiary_stat_defense">Verteidigung</string>
+    <string name="bestiary_stat_atk_defense">Ang Verteidugung</string>
+    <string name="bestiary_stat_str_defense">Stä Verteidigung</string>
+    <string name="bestiary_stat_rng_defense">Frn Verteidigung</string>
+    <string name="bestiary_stat_mag_defense">Mag Verteidigung</string>
+    <string name="bestiary_stat_xp">XP</string>
+    <string name="bestiary_stat_required_level">Benötigtes Level</string>
+    <string name="bestiary_stat_xp_reward">XP-Belohnung</string>
+    <string name="bestiary_stat_duration">Dauer</string>
+    <string name="bestiary_stat_duration_min">%1$d min</string>
+    <string name="bestiary_kill_count">%1$d Tötungen</string>
+    <string name="bestiary_location_other">Andere</string>
+    <string name="carnival_stat_atk">ANG +%1$d</string>
+    <string name="carnival_stat_str">STÄ +%1$d</string>
+    <string name="carnival_stat_def">VER +%1$d</string>
     <string name="carnival_stat_yield">Yield</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_green">G</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_blue">B</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_red">R</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_purple">P</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_orange">O</string> <!-- untranslated -->
-    <string name="carnival_potion_letter_cyan">C</string> <!-- untranslated -->
-    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/crop</string> <!-- untranslated -->
-    <string name="farming_seeds_owned">Seeds: %1$d  •  Owned: %2$d</string> <!-- untranslated -->
+    <string name="carnival_potion_letter_green">G</string>
+    <string name="carnival_potion_letter_blue">B</string>
+    <string name="carnival_potion_letter_red">R</string>
+    <string name="carnival_potion_letter_purple">L</string>
+    <string name="carnival_potion_letter_orange">O</string>
+    <string name="carnival_potion_letter_cyan">C</string>
+    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/Pflanze</string>
+    <string name="farming_seeds_owned">Samen: %1$d  •  In Besitz: %2$d</string>
 </resources>

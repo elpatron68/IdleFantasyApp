@@ -814,7 +814,7 @@
     "requirements": {
       "ranged": 50
     },
-    "ranged_strength_bonus": 48  
+    "ranged_strength_bonus": 48
   },
   "magic_shortbow": {
     "name": "magic_shortbow",
@@ -886,7 +886,7 @@
     "defense_bonus": 2,
     "requirements": {
       "magic": 5
-    }  
+    }
   },
   "staff_of_air": {
     "name": "staff_of_air",
@@ -1693,6 +1693,19 @@
       "defense": 45
     }
   },
+  "slayer_plateskirt": {
+    "name": "slayer_plateskirt",
+    "display_name": "Slayer Plateskirt",
+    "slot": "legs",
+    "combat_style": null,
+    "description": "Protective skirt crafted for extended dungeon runs.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 65,
+    "requirements": {
+      "defense": 45
+    }
+  },
   "runite_med_helmet": {
     "name": "runite_med_helmet",
     "display_name": "Runite Med Helmet",
@@ -1917,6 +1930,18 @@
     "display_name": "Tower Greaves",
     "slot": "legs",
     "description": "Greaves forged in the tower's deepest forge.",
+    "attack_bonus": 0,
+    "strength_bonus": 0,
+    "defense_bonus": 125,
+    "requirements": {
+      "defense": 70
+    }
+  },
+  "tower_plateskirt": {
+    "name": "tower_plateskirt",
+    "display_name": "Tower Plateskirt",
+    "slot": "legs",
+    "description": "A plateskirt forged in the tower's deepest forge.",
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 125,

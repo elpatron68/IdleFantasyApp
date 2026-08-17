@@ -1,6 +1,6 @@
-# Translating Fantasy Idler
+# Translating Idle Fantasy
 
-Thank you for helping translate Fantasy Idler! Translations are managed through
+Thank you for helping translate Idle Fantasy! Translations are managed through
 the project's own translation site at
 **[translate.tristinbaker.xyz](https://translate.tristinbaker.xyz)** — no Git
 knowledge required.

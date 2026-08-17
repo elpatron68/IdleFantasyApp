@@ -324,6 +324,17 @@ fun SettingsScreen(
                     )
                 }
             )
+            val showPrestigeNotifications by viewModel.showPrestigeNotifications.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_prestige_notifications),
+                subtitle = stringResource(R.string.settings_prestige_notifications_desc),
+                trailing = {
+                    Switch(
+                        checked         = showPrestigeNotifications,
+                        onCheckedChange = { viewModel.setShowPrestigeNotifications(it) },
+                    )
+                }
+            )
             val compactNumbers by viewModel.compactNumbers.collectAsState()
             SettingsRow(
                 title    = stringResource(R.string.settings_compact_numbers),

@@ -587,10 +587,10 @@ def gen_skills() -> str:
         ("Fishing", "gathering", "Catch fish and aquatic creatures."),
         ("Woodcutting", "gathering", "Chop trees for logs."),
         ("Farming", "gathering", "Plant seeds and harvest crops."),
-        ("Firemaking", "gathering", "Burn logs for XP. Produces ashes for Prayer."),
-        ("Agility", "gathering", "Reduces session time across all skills (60→40 min at level 99)."),
+        ("Firemaking", "crafting", "Burn logs for XP. Produces ashes for Prayer."),
+        ("Agility", "support", "Reduces session time across all skills (60→40 min at level 99)."),
         ("Thieving", "gathering", "Pickpocket NPCs in the Town for coins and loot."),
-        ("Mercantile", "gathering",
+        ("Mercantile", "support",
          "Send trade caravans and explore skilling expeditions for lore and dungeon unlocks."),
         ("Smithing", "crafting", "Smelt ores into bars and forge equipment."),
         ("Cooking", "crafting", "Cook raw food to restore HP in combat."),
@@ -605,7 +605,7 @@ def gen_skills() -> str:
         ("Ranged", "combat", "Attack from a distance with a bow."),
         ("Magic", "combat", "Cast spells using runes."),
         ("Hitpoints", "combat", "Total health. Increases with combat."),
-        ("Prayer", "combat", "Bury bones to unlock combat prayers."),
+        ("Prayer", "support", "Bury bones to unlock combat prayers."),
         ("Slayer", "combat", "Receive tasks from the Slayer Master to kill specific enemies for bonus XP and points."),
     ]
     rows = [
@@ -1379,6 +1379,8 @@ def gen_shop() -> str:
 
 def _pet_boost(pet: dict) -> str:
     if pet.get("boost_percent"):
+        if pet.get("effect_type") == "coin_boost":
+            return f"+{pet['boost_percent']}% Coins"
         if "boosted_skill" in pet:
             try:
                 return f"+{pet['boost_percent']}% {link(pet["boosted_skill"])} XP"
@@ -1414,7 +1416,7 @@ def gen_workers() -> str:
         ("Long Laborer", 8,  0.5,  5_000,  4.0,  "Uncapped (2 min/item)"),
         ("Apprentice",   8,  1.0,  10_000, 8.0,  "480 items"),
         ("Journeyman",   6,  1.5,  20_000, 9.0,  "540 items (40 sec/item)"),
-        ("Master",       4,  2.0,  50_000, 8.0,  "480 items (30 sec/item)"),
+        ("Master",       4,  2.5,  50_000, 10.0,  "600 items (24 sec/item)"),
     ]
     tier_rows = [
         [name, f"{dur}h", f"{eff:.2f}×", f"{cost:,}", f"{gather:.1f}×", craft]
@@ -1740,6 +1742,7 @@ def gen_titles() -> str:
 
     other_rows = [
         ["Godslayer", "Defeat every raid boss at least once"],
+        ["Patron of the Realm", "Complete the Grand Monument"],
     ]
     other_table = table(["Title", "Requirement"], other_rows)
 

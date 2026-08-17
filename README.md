@@ -97,7 +97,7 @@ Fork-specific contributions: see **[FORK.md](FORK.md)**.
 **Language:** Kotlin
 **UI:** Jetpack Compose + Material 3  
 **Database:** Room (SQLite)  
-**Background work:** WorkManager  
+**Background work:** AlarmManager  
 **JSON parsing:** kotlinx.serialization  
 **Architecture:** MVVM + Repository  
 **Dependency injection:** Hilt  
@@ -108,7 +108,7 @@ No Google Play Services dependency. F-Droid compatible.
 
 ### Building from source
 
-Requirements: Android Studio Hedgehog or newer, JDK 17+, Android SDK 34
+Requirements: Android Studio Hedgehog or newer, JDK 17+, Android SDK 35
 
 ```bash
 git clone https://github.com/tristinbaker/IdleFantasy.git

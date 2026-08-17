@@ -136,6 +136,14 @@ class SettingsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
+    val showPrestigeNotifications: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).showPrestigeNotifications }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
     val showJournalButton: StateFlow<Boolean> = playerRepo.playerFlow
         .map { player ->
             if (player == null) return@map true
@@ -217,6 +225,13 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(compactNumbers = enabled))
+        }
+    }
+
+    fun setShowPrestigeNotifications(enabled: Boolean) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(showPrestigeNotifications = enabled))
         }
     }
 

@@ -41,7 +41,7 @@ It's quite common while developing an idea that you come up with lots of additio
 To get started and build the game, you'll need to install [Android Studio](https://developer.android.com/studio). Once done, you'll need to have the following prerequisites:
 
 * JDK 17+
-* Android SDK 34
+* Android SDK 35
 
 Then in the terminal run:
 

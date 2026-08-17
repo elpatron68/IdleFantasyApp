@@ -61,14 +61,14 @@ From there, you can run the following command to see what you can do:
 # Activate the virtual environment (Only run in Windows terminal)
 .venv/Scripts/activate
 # Activate the virtual environment (Only run in bash terminal)
-source .venv/Scripts/activate
+source .venv/bin/activate
 # See help information for program
 python -m wiki.src -h
 ```
 
-The main command you'll need use is `python -m wiki.src write_html`. This writes out the HTML version of the wiki into `out/IdleFantasy-site`. You can then open any of the HTML pages and the website should come up. If you're using Pycharm, I'd recommend opening it using the Live Preview option which should update things more seamlessly.
+The main command you'll need use is `python -m wiki.src write-html`. This writes out the HTML version of the wiki into `out/IdleFantasy-site`. You can then open any of the HTML pages and the website should come up. If you're using Pycharm, I'd recommend opening it using the Live Preview option which should update things more seamlessly.
 
-`python -m wiki.src validate` is the next most common command which you can use to validate the wiki and perform several tests that can help you pick up errors
+`python -m wiki.src validity` is the next most common command which you can use to validate the wiki and perform several tests that can help you pick up errors
 
 ## Wiki code structure
 

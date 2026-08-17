@@ -11,7 +11,7 @@ There are two worker slots:
 
 Every hire is one job per hire: the worker is dismissed as soon as you collect their session, in both slots. Hire a new worker to keep that slot working.
 
-Each worker has a daily name that changes at 6 AM. Firing and rehiring on the same day gives you a new random name from the same pool.
+Each worker's daily name is seeded for the day and changes at 6 AM. Rehiring the same tier on the same day shows the same name again, unless that name is already taken by the other worker slot.
 
 ## Worker Tiers
 
