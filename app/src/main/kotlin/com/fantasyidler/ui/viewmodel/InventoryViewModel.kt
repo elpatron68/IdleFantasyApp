@@ -328,47 +328,50 @@ class InventoryViewModel @Inject constructor(
                 else item.slot == slot
             }
             .filter { item -> item.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl } }
-            .maxByOrNull { item ->
-                when (slot) {
-                    EquipSlot.PICKAXE        -> item.miningEfficiency ?: 0f
-                    EquipSlot.AXE            -> item.woodcuttingEfficiency ?: 0f
-                    EquipSlot.FISHING_ROD    -> item.fishingEfficiency ?: 0f
-                    EquipSlot.HOE            -> item.farmingEfficiency ?: 0f
-                    EquipSlot.HAMMER         -> item.smithingEfficiency ?: 0f
-                    EquipSlot.TINDERBOX      -> item.firemakingEfficiency ?: 0f
-                    EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
-                    EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
-                    EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
-                    else -> if (slot in EquipSlot.WEAPON_SLOTS) {
-                        // Score by the slot's style with the same stat fallbacks the
-                        // simulator uses, then scale by attacks-per-second: a faster
-                        // weapon lands proportionally more hits (issue #1222).
-                        val base = when (style) {
-                            "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: item.attackBonus) * 1.0f + item.defenseBonus * 0.5f
-                            "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
-                            "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 1.0f + item.defenseBonus * 0.5f
-                            else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
-                        }
-                        val speed = (item.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC)
-                            .coerceIn(1.2, CombatSimulator.BASE_ATTACK_SPEED_SEC)
-                        base * (CombatSimulator.BASE_ATTACK_SPEED_SEC / speed).toFloat()
-                    }
-                    else when (activeStyle) {
-                        // Accuracy has diminishing returns once effective attack exceeds enemy
-                        // defense (see CombatSimulator's hit-chance curve), while damage bonus
-                        // adds to max hit linearly with no diminishing returns -- so the damage
-                        // stat outweighs the accuracy stat here (issue #1198). For the strength
-                        // style the accuracy stat is weighted below the damage gap too, so e.g.
-                        // +8 atk cannot outscore +3 str and +2 def (issues #1180, #1230). The
-                        // attack style keeps accuracy primary: that split reflects the player's
-                        // weapon-style choice, not this accuracy-vs-damage tradeoff.
-                        "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
-                        "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
-                        "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 0.5f + item.defenseBonus * 0.5f
-                        else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
-                    }
+            .maxByOrNull { slotScore(it, slot, activeStyle) }
+    }
+
+    private fun slotScore(item: EquipmentData, slot: String, activeStyle: String): Float {
+        val style = EquipSlot.combatStyleForSlot(slot)
+        return when (slot) {
+            EquipSlot.PICKAXE        -> item.miningEfficiency ?: 0f
+            EquipSlot.AXE            -> item.woodcuttingEfficiency ?: 0f
+            EquipSlot.FISHING_ROD    -> item.fishingEfficiency ?: 0f
+            EquipSlot.HOE            -> item.farmingEfficiency ?: 0f
+            EquipSlot.HAMMER         -> item.smithingEfficiency ?: 0f
+            EquipSlot.TINDERBOX      -> item.firemakingEfficiency ?: 0f
+            EquipSlot.GRAPPLING_HOOK -> item.agilityEfficiency ?: 0f
+            EquipSlot.FRYING_PAN     -> item.cookingEfficiency ?: 0f
+            EquipSlot.LOCKPICK       -> item.thievingEfficiency ?: 0f
+            else -> if (slot in EquipSlot.WEAPON_SLOTS) {
+                // Score by the slot's style with the same stat fallbacks the
+                // simulator uses, then scale by attacks-per-second: a faster
+                // weapon lands proportionally more hits (issue #1222).
+                val base = when (style) {
+                    "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: item.attackBonus) * 1.0f + item.defenseBonus * 0.5f
+                    "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                    "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 1.0f + item.defenseBonus * 0.5f
+                    else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
                 }
+                val speed = (item.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC)
+                    .coerceIn(1.2, CombatSimulator.BASE_ATTACK_SPEED_SEC)
+                base * (CombatSimulator.BASE_ATTACK_SPEED_SEC / speed).toFloat()
             }
+            else when (activeStyle) {
+                // Accuracy has diminishing returns once effective attack exceeds enemy
+                // defense (see CombatSimulator's hit-chance curve), while damage bonus
+                // adds to max hit linearly with no diminishing returns -- so the damage
+                // stat outweighs the accuracy stat here (issue #1198). For the strength
+                // style the accuracy stat is weighted below the damage gap too, so e.g.
+                // +8 atk cannot outscore +3 str and +2 def (issues #1180, #1230). The
+                // attack style keeps accuracy primary: that split reflects the player's
+                // weapon-style choice, not this accuracy-vs-damage tradeoff.
+                "ranged"   -> (item.rangedStrengthBonus ?: 0) * 1.5f + (item.rangedAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                "magic"    -> (item.magicDamageBonus ?: 0) * 1.5f + (item.magicAttackBonus ?: 0) * 1.0f + item.defenseBonus * 0.5f
+                "strength" -> item.strengthBonus * 1.5f + item.attackBonus * 0.5f + item.defenseBonus * 0.5f
+                else       -> item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
+            }
+        }
     }
 
     private fun equipBestForSlots(slots: List<String>) {
@@ -388,7 +391,14 @@ class InventoryViewModel @Inject constructor(
                     it != null && it.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl }
                 }
                 when {
-                    best != null -> newEquipped[slot] = best.name
+                    best != null -> {
+                        // On a stat tie, keep what's equipped: swapping to the identically
+                        // scored alternative would override a cosmetic choice (greaves vs skirt).
+                        val current = currentItemKey?.let { equipment[it] }
+                        val keepCurrent = current != null && currentItemValid &&
+                            slotScore(current, slot, activeStyle) >= slotScore(best, slot, activeStyle)
+                        if (!keepCurrent) newEquipped[slot] = best.name
+                    }
                     !currentItemValid -> newEquipped[slot] = null
                 }
             }
@@ -516,6 +526,59 @@ class InventoryViewModel @Inject constructor(
         gameData.crops.keys.toSet()
     }
 
+    fun debugAddXp(skill: String, xp: Long) {
+        viewModelScope.launch {
+            val key = skill.trim()
+            if (key.isEmpty() || xp <= 0) return@launch
+
+            if (key !in Skills.ALL) {
+                _extra.update { it.copy(snackbarMessage = "$key not found") }
+                return@launch
+            }
+
+            playerRepo.applySessionResults(key, xp, emptyMap())
+            val name = GameStrings.skillName(context.withAppLocale(), key)
+            _extra.update { it.copy(snackbarMessage = "$xp XP added to $name") }
+        }
+    }
+
+    fun debugSetXp(skill: String, xp: Long) {
+        viewModelScope.launch {
+            val key = skill.trim()
+            if (key.isEmpty() || xp <= 0) return@launch
+
+            if (key !in Skills.ALL) {
+                _extra.update { it.copy(snackbarMessage = "$key not found") }
+                return@launch
+            }
+
+            val currXp = playerRepo.getSkillXp()[key] ?: 0L
+            if (currXp > xp) {
+                playerRepo.deductSkillXp(key, currXp - xp)
+            } else {
+                playerRepo.debugAddSkillXp(key, xp - currXp)
+            }
+            val name = GameStrings.skillName(context.withAppLocale(), key)
+            _extra.update { it.copy(snackbarMessage = "Set $name XP to $xp") }
+        }
+    }
+
+    fun debugRemoveXp(skill: String, xp: Long) {
+        viewModelScope.launch {
+            val key = skill.trim()
+            if (key.isEmpty() || xp <= 0) return@launch
+
+            if (key !in Skills.ALL) {
+                _extra.update { it.copy(snackbarMessage = "$key not found") }
+                return@launch
+            }
+
+            playerRepo.deductSkillXp(key, xp)
+            val name = GameStrings.skillName(context.withAppLocale(), key)
+            _extra.update { it.copy(snackbarMessage = "Removed up to $xp XP from $name") }
+        }
+    }
+
     fun debugAddItem(itemId: String, amount: Int) {
         viewModelScope.launch {
             val key = itemId.trim()
@@ -529,6 +592,27 @@ class InventoryViewModel @Inject constructor(
             playerRepo.addItem(key, amount)
             val name = GameStrings.itemName(context.withAppLocale(), key)
             _extra.update { it.copy(snackbarMessage = "$amount $name added") }
+        }
+    }
+
+    fun debugSetItem(itemId: String, amount: Int) {
+        viewModelScope.launch {
+            val key = itemId.trim()
+            if (key.isEmpty() || amount <= 0) return@launch
+
+            if (!isKnownItemId(key)) {
+                _extra.update { it.copy(snackbarMessage = "$key not found") }
+                return@launch
+            }
+
+            val currAmount = playerRepo.getInventory()[itemId] ?: 0
+            if (currAmount > amount) {
+                playerRepo.sellItem(key, currAmount - amount, 0)
+            } else {
+                playerRepo.addItem(key, amount - currAmount)
+            }
+            val name = GameStrings.itemName(context.withAppLocale(), key)
+            _extra.update { it.copy(snackbarMessage = "Set $name to $amount") }
         }
     }
 

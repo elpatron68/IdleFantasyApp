@@ -61,10 +61,10 @@ fun Long.formatQuantity(compact: Boolean = false): String = when {
 fun Long.toClockTime(context: android.content.Context): String =
     android.text.format.DateFormat.getTimeFormat(context).format(java.util.Date(this))
 
-/** Formats the game's fixed 6 AM local daily reset time as a clock string, respecting the device's 12/24-hour preference. */
-fun dailyResetClockTime(context: android.content.Context): String {
+/** Formats the player's local daily reset hour as a clock string, respecting the device's 12/24-hour preference. */
+fun dailyResetClockTime(context: android.content.Context, resetHour: Int): String {
     val cal = java.util.Calendar.getInstance().apply {
-        set(java.util.Calendar.HOUR_OF_DAY, 6)
+        set(java.util.Calendar.HOUR_OF_DAY, resetHour)
         set(java.util.Calendar.MINUTE, 0)
         set(java.util.Calendar.SECOND, 0)
     }

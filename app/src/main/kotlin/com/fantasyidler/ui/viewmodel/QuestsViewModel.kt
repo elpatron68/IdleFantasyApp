@@ -93,8 +93,8 @@ class QuestsViewModel @Inject constructor(
             playerRepo.getRefreshedDailyFlags()
             _extra.update { 
                 it.copy(
-                    nextDailyReset = dailyQuestRepo.nextResetMs(),
-                    nextWeeklyReset = weeklyQuestRepo.nextResetMs()
+                    nextDailyReset = dailyQuestRepo.nextResetMs(resetHour = flags.dailyResetHour),
+                    nextWeeklyReset = weeklyQuestRepo.nextResetMs(resetHour = flags.dailyResetHour)
                 )
             }
         }

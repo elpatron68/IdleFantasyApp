@@ -438,7 +438,6 @@ fun SkillActivitySheet(
                             craftState        = craftState,
                             craftingViewModel = craftingViewModel,
                             hasActiveSession  = state.anySessionActive,
-                            isQueueFull       = state.queueSize >= state.maxQueueSize,
                             sessionDurationMs = state.sessionDurationMs,
                             context           = context,
                             onDismiss         = {
@@ -641,10 +640,18 @@ private fun SkillsTabContent(
                 ActiveSessionBanner(
                     skillName     = GameStrings.skillName(context, session.skillName),
                     activityLabel = when (session.skillName) {
-                        "combat"     -> GameStrings.dungeonName(context, session.activityKey)
-                        "boss"       -> GameStrings.bossName(context, session.activityKey)
-                        "expedition" -> GameStrings.skillingDungeonName(context, session.activityKey, session.activityKey.toTitleCase())
-                        else         -> GameStrings.itemName(context, session.activityKey)
+                        "combat"      -> GameStrings.dungeonName(context, session.activityKey)
+                        "boss"        -> GameStrings.bossName(context, session.activityKey)
+                        "expedition"  -> GameStrings.skillingDungeonName(context, session.activityKey, session.activityKey.toTitleCase())
+                        "mercantile"  -> GameStrings.tradeRouteName(context, session.activityKey)
+                        "agility"     -> GameStrings.agilityCourse(context, session.activityKey)
+                        "woodcutting" -> GameStrings.treeName(context, session.activityKey)
+                        "thieving"    -> GameStrings.thievingNpcName(context, session.activityKey)
+                        "tower"       -> context.getString(R.string.tower_title) + ": " + context.getString(
+                            R.string.tower_floor_label,
+                            session.activityKey.removePrefix("tower_floor_").toIntOrNull() ?: 0,
+                        )
+                        else          -> GameStrings.itemName(context, session.activityKey)
                     }.takeIf { session.activityKey.isNotEmpty() },
                     endsAt        = session.endsAt,
                     completed     = session.completed,

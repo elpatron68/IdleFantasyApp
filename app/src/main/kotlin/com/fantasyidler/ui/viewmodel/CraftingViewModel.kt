@@ -127,6 +127,9 @@ data class CraftingUiState(
     val recipeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     /** Actual per-item craft duration for [selectedRecipe], tool efficiency applied. 0 if nothing selected. */
     val craftPerItemMs: Long = 0L,
+    val isQueueFull: Boolean = false,
+    /** Full XP multiplier for [selectedRecipe] (tool efficiency, pet, XP boost, blessing), matching what collection awards. */
+    val craftXpMult: Double = 1.0,
 ) {
     /** Returns how many times [recipe] can be crafted given [effectiveInventory]. */
     fun maxCraftable(recipe: CraftableRecipe): Int {
@@ -189,11 +192,17 @@ class CraftingViewModel @Inject constructor(
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             val effInv = computeEffectiveInventory(inventory)
             val selectedRecipe = extra.selectedRecipe
+            val selectedEff = if (selectedRecipe != null) craftToolEfficiency(selectedRecipe, equipped) else 1.0f
             val perItemMs = if (selectedRecipe != null) {
                 val agility = levels[Skills.AGILITY] ?: 1
-                val eff = craftToolEfficiency(selectedRecipe, equipped)
-                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / eff).toLong()
+                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / selectedEff).toLong()
             } else 0L
+            val xpMult = if (selectedRecipe != null) {
+                val boostMult = if (flags.ironman) 1.0
+                                else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
+                val petPct = petBoostFor(player.pets, selectedRecipe.skillName, flags.ironman)
+                selectedEff * boostMult * (1.0 + petPct / 100.0)
+            } else 1.0
             extra.copy(
                 smithingLevel      = levels[Skills.SMITHING]      ?: 1,
                 cookingLevel       = levels[Skills.COOKING]       ?: 1,
@@ -209,6 +218,8 @@ class CraftingViewModel @Inject constructor(
                 questFills         = computeQuestFills(extra.selectedRecipe, questProgress, flags),
                 recipeQuests       = computeRecipeQuests(allRecipes, questProgress, flags, effInv),
                 craftPerItemMs     = perItemMs,
+                isQueueFull        = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
+                craftXpMult        = xpMult,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CraftingUiState())

@@ -65,8 +65,8 @@
     <string name="label_bosses">Boss</string>
     <string name="label_by_location">Per luogo</string>
     <string name="bestiary_not_encountered">Non ancora incontrato</string>
-    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
-    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
+    <string name="bestiary_qty_header">Q.tà</string>
+    <string name="bestiary_chance_header">Possibilità</string>
     <string name="bestiary_encountered_progress">%1$d / %2$d incontrati</string>
     <string name="bestiary_always_drops">Bottino garantito</string>
     <string name="bestiary_rare_drops">Bottino raro</string>
@@ -80,19 +80,19 @@
     <string name="label_session_active">Sessione Attiva</string>
     <string name="label_no_active_session">Nessuna Sessione Attiva</string>
     <string name="label_session_complete">Sessione Completata!</string>
-    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
+    <string name="home_sessions_complete_title">%1$d Sessioni Completate!</string>
+    <string name="home_boss_defeated_title">Hai sconfitto %1$s!</string>
+    <string name="home_boss_defeated_by_title">%1$s ti ha ucciso.</string>
     <string name="home_dungeon_died_title">%1$s — Sei Morto</string>
     <string name="home_dungeon_complete_title">%1$s Completato!</string>
-    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
-    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
-    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
-    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
-    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
-    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
-    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
+    <string name="home_expedition_complete_title">Spedizione verso %1$s completata</string>
+    <string name="home_skill_session_complete_title">Sessione %1$s completata</string>
+    <string name="home_bones_buried_row">%1$s seppellite</string>
+    <string name="worker_sessions_complete_title">Lavoratore: %1$d Sessioni Completate!</string>
+    <string name="worker_boss_defeated_title">Lavoratore: Sconfitto %1$s!</string>
+    <string name="worker_dungeon_died_title">Lavoratore: %1$s — Morto</string>
+    <string name="worker_dungeon_complete_title">Lavoratore: %1$s Completato!</string>
+    <string name="worker_skill_complete_title">Lavoratore: %1$s Completato</string>
     <string name="label_training">Addestramento</string>
     <string name="label_gathering_skills">Raccolta</string>
     <string name="label_crafting_skills">Mestieri</string>
@@ -100,13 +100,13 @@
     <string name="label_coming_soon">In arrivo</string>
     <string name="label_time_remaining">Tempo rimanente</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
-    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
-    <string name="duration_days">%1$dd</string> <!-- untranslated -->
-    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
-    <string name="duration_complete">Complete</string> <!-- untranslated -->
+    <string name="duration_months">%1$dme</string>
+    <string name="duration_weeks">%1$dsett</string>
+    <string name="duration_days">%1$dg</string>
+    <string name="duration_hours">%1$do</string>
+    <string name="duration_minutes">%1$dm</string>
+    <string name="duration_seconds">%1$ds</string>
+    <string name="duration_complete">Termine</string>
     <string name="label_session_results">Risultati Sessione</string>
     <string name="label_xp_gained">XP guadagnati</string>
     <string name="label_items_collected">Oggetti raccolti</string>
@@ -149,7 +149,7 @@
     <string name="label_available_quests">Disponibili</string>
     <string name="label_stats">Statistiche</string>
     <string name="label_skills">Abilità</string>
-    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
+    <string name="tab_label_with_count">%1$s (%2$d)</string>
     <string name="label_shop">Emporio</string>
     <string name="label_sell_items">Vendi Oggetti</string>
     <string name="label_total_level">Livello Totale</string>
@@ -303,10 +303,13 @@
     <string name="settings_profile_layout_tabs">Schede</string>
     <string name="settings_quest_dots">Indicatori missione</string>
     <string name="settings_quest_dots_desc">Mostra un indicatore quando una missione è disponibile</string>
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Indicatori Onore</string>
+    <string name="settings_prestige_notifications_desc">Mostra un indicatore quando una abilità può essere onorata</string>
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Numeri Compatti</string>
-    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
+    <string name="settings_compact_numbers_desc">Abbrevia grandi quantità (ad es. 2,46M invece che 2.461.940)</string>
     <string name="settings_home_screen">Schermata Principale</string>
     <string name="settings_home_screen_desc">Scegli cosa mostrare nella schermata principale</string>
     <string name="settings_recent_activity">Registro delle ultime attività</string>
@@ -562,8 +565,8 @@
     <string name="combat_log_player_miss">→ Hai mancato %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s ti ha colpito: %2$d danno</string>
     <string name="combat_log_enemy_miss">← %1$s manca il bersaglio</string>
-    <string name="combat_log_heal">✚ You eat: +%1$d HP</string> <!-- untranslated -->
-    <string name="combat_eat_threshold_warning">Risky: at a low threshold a hard hit can drop you to 0 HP before your character eats.</string> <!-- untranslated -->
+    <string name="combat_log_heal">✚ Hai mangiato: +%1$d PS</string>
+    <string name="combat_eat_threshold_warning">Attenzione: a bassi livelli un colpo molto forte può portare alla morte prima di avere tempo di mangiare</string>
     <string name="combat_rec_level">Livello di combattimento consigliato</string>
     <string name="combat_your_level">Il tuo livello di combattimento</string>
     <string name="combat_no_strength_bonus">Nessuno (nessun bonus sulla forza)</string>
@@ -698,12 +701,12 @@
     <!-- ===== ShopScreen ===== -->
     <string name="shop_active">ATTIVO</string>
     <string name="shop_sell_junk">Vendi Spazzatura</string>
-    <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
-    <string name="shop_search_hint">Search items</string> <!-- untranslated -->
+    <string name="shop_keep_one_toggle">Mantieni una copia per ogni oggetto</string>
+    <string name="shop_search_hint">Cerca oggetti</string>
     <string name="shop_filter_all">Tutti</string>
-    <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_equipped">Stai usando %1$s. Non puoi venderlo finché non lo lasci.</string>
+    <string name="shop_sell_blocked_reserved">%1$s è di riserva per un\'azione in coda.</string>
+    <string name="shop_sell_blocked_keep_one">Una copia di %1$s è rimasta (L\'opzione è abilitata).</string>
     <string name="shop_sell_blocked_none">Niente da vendere.</string>
     <string name="shop_sell_old_gear">Vendi Vecchi Armamenti</string>
     <string name="shop_equipped_label">(equipaggiato)</string>
@@ -1098,7 +1101,7 @@
     <string name="expedition_lore_notes">%1$d / %2$d memorie</string>
     <string name="expedition_lock_level">Richiede livello %2$d di %1$s</string>
     <string name="expedition_lock_notes">Trova tutte le memorie in %1$s</string>
-    <string name="expedition_started">%1$s started.</string> <!-- untranslated -->
+    <string name="expedition_started">%1$s ha avuto inizio.</string>
     <string name="expedition_lock_prerequisite">Completa un prerequisito</string>
     <string name="label_notes">Memorie</string>
 
@@ -1360,10 +1363,10 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Fiera</string>
     <string name="carnival_desc">Giochi, premi e allegria!</string>
-    <string name="carnival_prize_xp_lamp_small_name">Small XP Lamp</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_small_desc">Grants 10,000 XP to a chosen skill.</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_large_name">Large XP Lamp</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_small_name">Piccola Lampada XP</string>
+    <string name="carnival_prize_xp_lamp_small_desc">Fornisce 10.000 XP ad una abilità a scelta.</string>
+    <string name="carnival_prize_xp_lamp_large_name">Grande Lampada XP</string>
+    <string name="carnival_prize_xp_lamp_large_desc">Fornisce 50.000 XP ad una abilità a scelta.</string>
     <string name="carnival_ticket_balance">Biglietti: %1$d</string>
     <string name="carnival_idle_tab">Giochi passivi</string>
     <string name="carnival_active_tab">Giochi attivi</string>
@@ -1453,8 +1456,8 @@
     <string name="farming_bean_ready">Il fagiolo magico si estende oltre le nuvole. Pronto a scalare?</string>
     <string name="farming_bean_climb">Scala la pianta</string>
     <string name="farming_bean_climbed">Hai scalato il fagiolo magico. Qualcosa ti aspetta…</string>
-    <string name="farming_bean_climbed_title">Beanstalk Climbed!</string> <!-- untranslated -->
-    <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string> <!-- untranslated -->
+    <string name="farming_bean_climbed_title">Hai scalato il fagiolo magico!</string>
+    <string name="farming_bean_unlock_hint">Hai sbloccato un nuovo dungeon: %1$s. Lo troverai nella lista dei Dungeon.</string>
     <string name="farming_bean_cleared">Il fagiolo magico ritorna tra i tuoi averi.</string>
 
     <string name="farming_magic_bean_one_plot">I fagioli magici possono essere piantati solo in un appezzamento</string>
@@ -1566,7 +1569,7 @@
     <string name="bonus_combined_xp">XP combinata</string>
     <string name="bonus_yield">+%1$d%% alla resa</string>
     <string name="bonus_boost">+%1$d%% bonus</string>
-    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
+    <string name="bonus_agility_prestige_detail">Onore: %1$dm per sessione al livello %2$d diventano %3$dm</string>
     <string name="bonus_coin_return">+%1$d%% ritorno in monete</string>
     <string name="bonus_tower">Torre</string>
     <string name="bonus_builder_discount_detail" formatted="false">Sconto del 0,5% agli edifici per ogni livello</string>
@@ -1581,14 +1584,14 @@
     <string name="combat_select_spell">Seleziona una magia prima di proseguire.</string>
     <string name="combat_spell_level_required">Magia %1$d necessaria per %2$s.</string>
     <string name="guild_daily_reward_claimed">Ottenuta ricompensa giornaliera!</string>
-    <string name="reward_part_coins">+%1$s coins</string> <!-- untranslated -->
-    <string name="reward_part_coins_plain">%1$s coins</string> <!-- untranslated -->
-    <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string> <!-- untranslated -->
-    <string name="quest_claimed_suffix">Claimed: %1$s</string> <!-- untranslated -->
+    <string name="reward_part_coins">+%1$s monete</string>
+    <string name="reward_part_coins_plain">%1$s monete</string>
+    <string name="reward_part_combat_xp">+%1$s XP combattimento (distribuito su tutte le abilità)</string>
+    <string name="quest_claimed_suffix">Ricevuto: %1$s</string>
     <plurals name="plural_reward_items">
-        <item quantity="one">×%1$d item</item>
-        <item quantity="other">×%1$d items</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">×%1$d oggetto</item>
+        <item quantity="other">×%1$d oggetti</item>
+    </plurals>
     <string name="monument_title">Grande Monumento</string>
     <string name="monument_desc">Una meraviglia civica eretta moneta dopo moneta. Ogni fase è un dono alla città.</string>
     <string name="monument_your_coins">Le tue monete: %1$s</string>
@@ -1623,9 +1626,9 @@
     <string name="monument_not_enough_coins">Monete insufficienti.</string>
     <string name="title_patron_of_the_realm_name">Mecenate del Reame</string>
     <string name="title_patron_of_the_realm_requirement">Completa il Grande Monumento</string>
-    <string name="item_gilded_full_helmet_name">Elmo indorato</string>
-    <string name="item_gilded_platebody_name">Corazza dorata</string>
-    <string name="item_gilded_kiteshield_name">Scudo dorato</string>
+    <string name="item_gilded_full_helmet_name">Elmo Indorato</string>
+    <string name="item_gilded_platebody_name">Corazza Dorata</string>
+    <string name="item_gilded_kiteshield_name">Scudo Dorato</string>
     <string name="boss_coin_cap_remaining">Ricompense monetarie complete rimaste per questo boss: %1$d</string>
     <string name="boss_coin_cap_spent">Riceverai meno monete fino a domani</string>
     <string name="bestiary_coin_cap_label">Dopo %1$d uccisioni/giorno</string>
@@ -1650,24 +1653,24 @@
     <string name="tower_milestone_claim">Ottieni</string>
     <string name="tower_milestone_claimed">Ottenuto</string>
     <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
-    <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
-    <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_shield">%1$s (defense +80)</string> <!-- untranslated -->
-    <string name="tower_milestone_amulet">%1$s (attack +15, strength +15, defense +10, all styles)</string> <!-- untranslated -->
-    <string name="tower_milestone_hp_50">+50 max HP</string> <!-- untranslated -->
-    <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_25k">25,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_helm">%1$s (defense +82, strength +8)</string> <!-- untranslated -->
-    <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
-    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
-    <string name="tower_milestone_plate">%1$s (defense +132)</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_100k">100,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_legs_set">%1$s (defense +125) + %2$s (defense +58) + %3$s (defense +125)</string> <!-- untranslated -->
-    <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
-    <string name="tower_milestone_cape">%1$s (attack/str/def +14, ranged/magic +12) + 500,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_crossbow">%1$s (ranged attack +78, ranged strength +52)</string> <!-- untranslated -->
-    <string name="tower_milestone_staff">%1$s (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_ring">%1$s (mischia +6, forza +6)</string>
+    <string name="tower_milestone_xp_1pct" formatted="false">+1% XP Torre su tutte le abilità</string>
+    <string name="tower_milestone_coins_5k">5,000 monete</string>
+    <string name="tower_milestone_shield">%1$s (difesa +80)</string>
+    <string name="tower_milestone_amulet">%1$s (mischia +15, forza +15, difesa +10, tutti gli stili)</string>
+    <string name="tower_milestone_hp_50">+50 PS max</string>
+    <string name="tower_milestone_xp_2pct" formatted="false">+2% XP torre su tutte le abilità</string>
+    <string name="tower_milestone_coins_25k">25,000 monete</string>
+    <string name="tower_milestone_helm">%1$s (difesa +82, forza +8)</string>
+    <string name="tower_milestone_pet" formatted="false">Compagno Torre (5% XP combattimento)</string>
+    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% monete nella Torre</string>
+    <string name="tower_milestone_plate">%1$s (difesa +132)</string>
+    <string name="tower_milestone_coins_100k">100,000 monete</string>
+    <string name="tower_milestone_legs_set">%1$s (difesa +125) + %2$s (difesa +58) + %3$s (difesa +125)</string>
+    <string name="tower_milestone_sword">%1$s (mischia +72, forza +75)</string>
+    <string name="tower_milestone_cape">%1$s (mischia/forza/difesa +14, mira/magia +12) + 500,000 monete</string>
+    <string name="tower_milestone_crossbow">%1$s (attacco distanza +78, forza distanza +52)</string>
+    <string name="tower_milestone_staff">%1$s (attacco magico +68, danno magico +18, rune infinite) + 1,000,000 monete</string>
     <string name="tower_enemies_this_floor">Nemici</string>
     <string name="tower_enemy_strength">Forza nemica: %1$s%%</string>
     <string name="tower_entry_card_desc">Nessun limite. Per quanto riuscirai a salire?</string>
@@ -1850,7 +1853,7 @@
     <string name="title_seasonal_champion_of">Campione di %1$s</string>
     <string name="title_seasonal_requirement">Completa l\'Evento Stagionale %1$s</string>
     <string name="home_welcome_greeting">Bentornato,</string>
-    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
+    <string name="home_welcome_name">%1$s!</string>
     <string name="home_welcome_title">Il %1$s!</string>
 
     <!-- Pet names and descriptions -->

@@ -185,6 +185,7 @@ fun GuildDetailScreen(
                     else -> GuildDailiesTab(
                         dailies       = state.dailies,
                         nextResetMs   = state.nextResetMs,
+                        dailyResetHour = state.dailyResetHour,
                         inventory     = state.inventory,
                         hideCompleted = state.hideCompleted,
                         onClaim       = { viewModel.claimGuildDaily(it) },
@@ -396,6 +397,7 @@ private fun GuildQuestRow(
 private fun GuildDailiesTab(
     dailies: List<GuildDailyWithProgress>,
     nextResetMs: Long,
+    dailyResetHour: Int,
     inventory: Map<String, Int>,
     hideCompleted: Boolean = false,
     onClaim: (String) -> Unit,
@@ -430,7 +432,7 @@ private fun GuildDailiesTab(
         }
         item {
             Text(
-                text     = stringResource(R.string.guild_daily_resets_in, dailyResetClockTime(LocalContext.current)),
+                text     = stringResource(R.string.guild_daily_resets_in, dailyResetClockTime(LocalContext.current, dailyResetHour)),
                 style    = MaterialTheme.typography.labelSmall,
                 color    = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier

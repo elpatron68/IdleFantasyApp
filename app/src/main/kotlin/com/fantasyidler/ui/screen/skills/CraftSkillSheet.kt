@@ -4,7 +4,6 @@ package com.fantasyidler.ui.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -126,7 +125,6 @@ internal fun CraftSkillSheet(
     craftState: CraftingUiState,
     craftingViewModel: CraftingViewModel,
     hasActiveSession: Boolean,
-    isQueueFull: Boolean,
     sessionDurationMs: Long,
     context: android.content.Context,
     onDismiss: () -> Unit,
@@ -181,7 +179,6 @@ internal fun CraftSkillSheet(
             recipe            = selected,
             state             = craftState,
             hasActiveSession  = hasActiveSession,
-            isQueueFull       = isQueueFull,
             sessionDurationMs = sessionDurationMs,
             context           = context,
             onSetAsh          = if (selected.skillName == Skills.HERBLORE) craftingViewModel::setHerbloreAsh else null,
@@ -416,6 +413,13 @@ private fun CraftRecipeRow(
                     color = dim,
                 )
             }
+            if (craftState.isQueueFull) {
+                Text(
+                    text  = stringResource(R.string.snackbar_queue_full),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = dim,
+                )
+            }
         }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -426,7 +430,6 @@ private fun CraftQuantityContent(
     recipe: CraftableRecipe,
     state: CraftingUiState,
     hasActiveSession: Boolean,
-    isQueueFull: Boolean,
     sessionDurationMs: Long,
     context: android.content.Context,
     onSetAsh: ((String?) -> Unit)? = null,
@@ -438,7 +441,7 @@ private fun CraftQuantityContent(
     val max     = state.maxCraftable(recipe)
     var quantity by remember(recipe) { mutableIntStateOf(max.coerceAtLeast(1)) }
     val qty     = quantity.coerceIn(1, max.coerceAtLeast(1))
-    val totalXp = recipe.xpPerItem * qty
+    val totalXp = recipe.xpPerItem * qty * state.craftXpMult
     var textValue by remember(recipe) { mutableStateOf(qty.toString()) }
     val isHerblore = recipe.skillName == Skills.HERBLORE
     fun setQuantity(value: Int) {
@@ -478,7 +481,9 @@ private fun CraftQuantityContent(
             val needed = perItem * qty
             val have   = state.inventory[item] ?: 0
             Row(
-                modifier              = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                modifier              = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 2.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(GameStrings.itemName(context, item), style = MaterialTheme.typography.bodyMedium)
@@ -557,7 +562,10 @@ private fun CraftQuantityContent(
                 val selectedAsh = state.herbloreAshKey
                 (listOf(null) + availableAshes).forEach { ashKey ->
                     Row(
-                        modifier          = Modifier.fillMaxWidth().clickable { onSetAsh(ashKey) }.padding(vertical = 4.dp),
+                        modifier          = Modifier
+                            .fillMaxWidth()
+                            .clickable { onSetAsh(ashKey) }
+                            .padding(vertical = 4.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -583,10 +591,17 @@ private fun CraftQuantityContent(
         }
         Spacer(Modifier.height(20.dp))
         Button(
-            onClick  = { onCraft(qty) },
+            onClick = { onCraft(qty) },
             modifier = Modifier.fillMaxWidth(),
+            enabled = !state.isQueueFull,
         ) {
-            Text(if (hasActiveSession) stringResource(R.string.skills_add_to_queue) else stringResource(R.string.btn_craft))
+            Text(
+                when {
+                    state.isQueueFull -> stringResource(R.string.snackbar_queue_full)
+                    hasActiveSession -> stringResource(R.string.skills_add_to_queue)
+                    else -> stringResource(R.string.btn_craft)
+                }
+            )
         }
     }
 }

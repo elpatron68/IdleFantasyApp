@@ -414,7 +414,7 @@ class SkillsViewModel @Inject constructor(
         )
     }
 
-    fun startAgilitySession(courseKey: String) = startSession(Skills.AGILITY, courseKey) {
+    fun startAgilitySession(courseKey: String, count: Int = 1) = startSession(Skills.AGILITY, courseKey, count) {
         val courseData = gameData.agilityCourses[courseKey]
             ?: throw IllegalArgumentException("Unknown course: $courseKey")
         val player  = playerRepo.getOrCreatePlayer()
@@ -796,44 +796,78 @@ class SkillsViewModel @Inject constructor(
     private fun startSession(
         skillName: String,
         activityKey: String,
+        count: Int = 1,
         simulate: suspend () -> SkillSimulator.Result,
     ) {
         viewModelScope.launch {
-            if (sessionRepo.getActiveSession() != null) {
-                val displayName  = GameStrings.skillName(context, skillName)
-                val actDisplay   = GameStrings.activityName(context, skillName, activityKey)
-                val player       = playerRepo.getOrCreatePlayer()
-                val agility      = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
-                val gatherFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
-                val xpQueueMult = if (gatherFlags.ironman) 1.0 else (if (gatherFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(gatherFlags)
-                val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-                val petBoostPct = petBoostFor(player.pets, skillName, gatherFlags.ironman)
-                val rawXp = when (skillName) {
-                    Skills.MINING      -> SkillSimulator.estimateGatheringXp(
-                        gameData.ores[activityKey]?.xpPerOre ?: 0,
-                        gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE),
+            // One sequential coroutine handles the whole count: a live start when no
+            // session is running, then queued copies for the rest. Callers must not
+            // loop over startSession instead -- concurrent launches would race the
+            // getActiveSession check and start several live sessions.
+            var toQueue = count
+            if (sessionRepo.getActiveSession() == null) {
+                _uiState.update { it.copy(startingSession = true) }
+                try {
+                    val result = simulate()
+                    val framesJson = json.encodeToString(
+                        json.serializersModule.serializer<List<com.fantasyidler.data.model.SessionFrame>>(),
+                        result.frames,
                     )
-                    Skills.WOODCUTTING -> SkillSimulator.estimateGatheringXp(
-                        gameData.trees[activityKey]?.xpPerLog ?: 0,
-                        gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE),
+                    sessionRepo.startSession(
+                        skillName        = skillName,
+                        activityKey      = activityKey,
+                        frames           = framesJson,
+                        durationMs       = result.durationMs,
+                        skillDisplayName = skillName.replaceFirstChar { it.uppercase() },
                     )
-                    Skills.FISHING     -> SkillSimulator.estimateGatheringXp(
-                        gameData.fish[activityKey]?.xpPerCatch ?: 0,
-                        gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD),
-                    )
-                    Skills.AGILITY     -> {
-                        val course = gameData.agilityCourses[activityKey]
-                        SkillSimulator.estimateAgilityXp(
-                            course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility,
-                            gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK),
-                        )
+                    toQueue -= 1
+                } catch (e: Exception) {
+                    _uiState.update {
+                        it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: ""))
                     }
-                    else               -> 0L
+                    return@launch
+                } finally {
+                    _uiState.update { it.copy(startingSession = false) }
                 }
-                val petBoostedXp = if (petBoostPct > 0) (rawXp * (1.0 + petBoostPct / 100.0)).toLong() else rawXp
-                val estimatedXpGain = (petBoostedXp * xpQueueMult).toLong()
-                val agilityPrestige = gatherFlags.skillPrestige[Skills.AGILITY] ?: 0
-                val chronosMult     = townRepo.playerSessionDurationMultiplier(gatherFlags)
+            }
+            if (toQueue <= 0) return@launch
+
+            val displayName  = GameStrings.skillName(context, skillName)
+            val actDisplay   = GameStrings.activityName(context, skillName, activityKey)
+            val player       = playerRepo.getOrCreatePlayer()
+            val agility      = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+            val gatherFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
+            val xpQueueMult = if (gatherFlags.ironman) 1.0 else (if (gatherFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(gatherFlags)
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val petBoostPct = petBoostFor(player.pets, skillName, gatherFlags.ironman)
+            val rawXp = when (skillName) {
+                Skills.MINING      -> SkillSimulator.estimateGatheringXp(
+                    gameData.ores[activityKey]?.xpPerOre ?: 0,
+                    gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE),
+                )
+                Skills.WOODCUTTING -> SkillSimulator.estimateGatheringXp(
+                    gameData.trees[activityKey]?.xpPerLog ?: 0,
+                    gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE),
+                )
+                Skills.FISHING     -> SkillSimulator.estimateGatheringXp(
+                    gameData.fish[activityKey]?.xpPerCatch ?: 0,
+                    gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD),
+                )
+                Skills.AGILITY     -> {
+                    val course = gameData.agilityCourses[activityKey]
+                    SkillSimulator.estimateAgilityXp(
+                        course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility,
+                        gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK),
+                    )
+                }
+                else               -> 0L
+            }
+            val petBoostedXp = if (petBoostPct > 0) (rawXp * (1.0 + petBoostPct / 100.0)).toLong() else rawXp
+            val estimatedXpGain = (petBoostedXp * xpQueueMult).toLong()
+            val agilityPrestige = gatherFlags.skillPrestige[Skills.AGILITY] ?: 0
+            val chronosMult     = townRepo.playerSessionDurationMultiplier(gatherFlags)
+            var enqueuedAny = false
+            for (i in 0 until toQueue) {
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = skillName,
@@ -843,41 +877,21 @@ class SkillsViewModel @Inject constructor(
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige, chronosMult),
                     )
                 )
-                if (enqueued) queuedSessionStarter.startNextQueued()
-                _uiState.update {
-                    it.copy(
-                        snackbarMessage = if (enqueued) {
-                            if (activityKey.isNotEmpty())
-                                context.withAppLocale().getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
-                            else
-                                context.withAppLocale().getString(R.string.slayer_queue_added, displayName)
-                        } else {
-                            context.withAppLocale().getString(R.string.slayer_queue_full)
-                        },
-                    )
-                }
-                return@launch
+                if (!enqueued) break
+                enqueuedAny = true
             }
-            _uiState.update { it.copy(startingSession = true) }
-            try {
-                val result = simulate()
-                val framesJson = json.encodeToString(
-                    json.serializersModule.serializer<List<com.fantasyidler.data.model.SessionFrame>>(),
-                    result.frames,
+            if (enqueuedAny) queuedSessionStarter.startNextQueued()
+            _uiState.update {
+                it.copy(
+                    snackbarMessage = if (enqueuedAny) {
+                        if (activityKey.isNotEmpty())
+                            context.withAppLocale().getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
+                        else
+                            context.withAppLocale().getString(R.string.slayer_queue_added, displayName)
+                    } else {
+                        context.withAppLocale().getString(R.string.slayer_queue_full)
+                    },
                 )
-                sessionRepo.startSession(
-                    skillName        = skillName,
-                    activityKey      = activityKey,
-                    frames           = framesJson,
-                    durationMs       = result.durationMs,
-                    skillDisplayName = skillName.replaceFirstChar { it.uppercase() },
-                )
-            } catch (e: Exception) {
-                _uiState.update {
-                    it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: ""))
-                }
-            } finally {
-                _uiState.update { it.copy(startingSession = false) }
             }
         }
     }
@@ -1168,11 +1182,12 @@ class SkillsViewModel @Inject constructor(
             daily.type == "gather" && daily.guild == Skills.FISHING     -> startFishingSession(daily.target)
             daily.type == "pickpocket"                                  -> startThievingSession(daily.target)
             daily.type == "sessions" && daily.guild == Skills.AGILITY   -> {
+                // Progress only counts on the quest's own course (recordGuildSessions
+                // matches target), so queue that course, not the best unlocked one.
                 val level  = uiState.value.skillLevels[Skills.AGILITY] ?: 1
-                val course = gameData.agilityCourses.entries
-                    .filter { it.value.levelRequired <= level }
-                    .maxByOrNull { it.value.levelRequired }?.key ?: return false
-                startAgilitySession(course)
+                val course = gameData.agilityCourses[daily.target] ?: return false
+                if (course.levelRequired > level) return false
+                startAgilitySession(daily.target, remaining)
             }
             daily.type == "craft" && daily.guild == Skills.RUNECRAFTING -> startRunecraftingSession(daily.target, remaining)
             daily.type == "craft" && daily.guild == Skills.FIREMAKING   -> {

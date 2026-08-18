@@ -78,6 +78,7 @@ data class ShopUiState(
     val equipped: Map<String, String?> = emptyMap(),
     val xpBoostExpiresAt: Long = 0L,
     val xpBoostLastPurchaseAt: Long = 0L,
+    val dailyResetHour: Int = 6,
     val transaction: ShopTransaction? = null,
     val pendingBulkSell: BulkSellPreview? = null,
     val snackbarMessage: String? = null,
@@ -127,6 +128,7 @@ class ShopViewModel @Inject constructor(
                 equipped         = json.decodeFromString(player.equipped),
                 xpBoostExpiresAt = flags.xpBoostExpiresAt,
                 xpBoostLastPurchaseAt = flags.xpBoostLastPurchaseAt,
+                dailyResetHour   = flags.dailyResetHour,
                 isLoading        = false,
                 reservedItems    = computeReserved(flags.sessionQueue),
                 lockedItems      = flags.lockedItems.toSet(),
@@ -447,7 +449,7 @@ class ShopViewModel @Inject constructor(
                 return
             }
             if (state.xpBoostLastPurchaseAt > 0 &&
-                System.currentTimeMillis() < weeklyQuestRepo.nextResetMs(state.xpBoostLastPurchaseAt)
+                System.currentTimeMillis() < weeklyQuestRepo.nextResetMs(state.xpBoostLastPurchaseAt, state.dailyResetHour)
             ) {
                 _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_xp_boost_weekly_limit)) }
                 return

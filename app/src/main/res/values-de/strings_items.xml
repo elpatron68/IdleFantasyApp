@@ -914,7 +914,7 @@
     <string name="item_ring_of_the_seas_name">Ring Of The Seas</string> <!-- untranslated -->
     <string name="item_ring_of_wealth_name">Ring Of Wealth</string> <!-- untranslated -->
     <string name="item_ring_of_wealth_desc">Increases coin drops slightly. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
-    <string name="item_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="item_rock_golem_name">Steingolem</string>
     <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
     <string name="item_runecrafting_cape_name">Runecrafting Cape</string> <!-- untranslated -->
     <string name="item_runecrafting_guild_cape_name">Runecrafting Guild Cape</string> <!-- untranslated -->

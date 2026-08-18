@@ -22,7 +22,7 @@
     <string name="quest_archers_guild_8_name">Occhio d\'Aquila</string>
     <string name="quest_archers_guild_9_name">Spettro</string>
     <string name="quest_construction_guild_1_name">Rack and Ruin</string> <!-- untranslated -->
-    <string name="quest_construction_guild_10_name">Fit for a King</string> <!-- untranslated -->
+    <string name="quest_construction_guild_10_name">Degno di un Re</string>
     <string name="quest_construction_guild_2_name">Shelf Life</string> <!-- untranslated -->
     <string name="quest_construction_guild_3_name">Set in Stone</string> <!-- untranslated -->
     <string name="quest_construction_guild_4_name">Servizio a Tavola</string>
@@ -151,10 +151,10 @@
     <string name="quest_runecrafting_guild_7_name">Lago di Sangue</string>
     <string name="quest_runecrafting_guild_8_name">Caveau di Rune</string>
     <string name="quest_runecrafting_guild_9_name">Riserva Arcana</string>
-    <string name="quest_slayer_guild_1_name">First Contract</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_1_name">Primo Contratto</string>
     <string name="quest_slayer_guild_10_name">Deathbringer</string> <!-- untranslated -->
     <string name="quest_slayer_guild_2_name">Culling Contract</string> <!-- untranslated -->
-    <string name="quest_slayer_guild_3_name">Proven Hunter</string> <!-- untranslated -->
+    <string name="quest_slayer_guild_3_name">Cacciatore Provetto</string>
     <string name="quest_slayer_guild_4_name">Bounty Board</string> <!-- untranslated -->
     <string name="quest_slayer_guild_5_name">Seasoned Tracker</string> <!-- untranslated -->
     <string name="quest_slayer_guild_6_name">Monster Purge</string> <!-- untranslated -->
@@ -177,8 +177,8 @@
     <string name="quest_thieving_guild_3_name">Law Dodger</string> <!-- untranslated -->
     <string name="quest_thieving_guild_4_name">Mani Abili</string>
     <string name="quest_thieving_guild_5_name">Alta Società</string>
-    <string name="quest_thieving_guild_6_name">City Shadow</string> <!-- untranslated -->
-    <string name="quest_thieving_guild_7_name">Armed and Nimble</string> <!-- untranslated -->
+    <string name="quest_thieving_guild_6_name">Ombra Urbana</string>
+    <string name="quest_thieving_guild_7_name">Armato e Agile</string>
     <string name="quest_thieving_guild_8_name">Knights Folly</string> <!-- untranslated -->
     <string name="quest_thieving_guild_9_name">Sacre Tasche</string>
     <string name="quest_warriors_guild_1_name">Primo Sangue</string>

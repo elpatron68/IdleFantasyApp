@@ -144,6 +144,14 @@ class SettingsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
+    val dailyResetHour: StateFlow<Int> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map 6
+            try { json.decodeFromString<PlayerFlags>(player.flags).dailyResetHour }
+            catch (_: Exception) { 6 }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 6)
+
     val showJournalButton: StateFlow<Boolean> = playerRepo.playerFlow
         .map { player ->
             if (player == null) return@map true
@@ -232,6 +240,23 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(showPrestigeNotifications = enabled))
+        }
+    }
+
+    fun setDailyResetHour(hour: Int) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            if (hour == flags.dailyResetHour || hour !in 0..23) return@launch
+            // Re-stamp active quest sets to "generated now" so moving the hour can
+            // never land a boundary in the past and grant an instant extra reset;
+            // the next reset is simply the new hour's next occurrence.
+            val now = System.currentTimeMillis()
+            playerRepo.updateFlags(flags.copy(
+                dailyResetHour         = hour,
+                dailyQuestGeneratedAt  = if (flags.dailyQuestGeneratedAt != 0L) now else 0L,
+                weeklyQuestGeneratedAt = if (flags.weeklyQuestGeneratedAt != 0L) now else 0L,
+                guildDailyGeneratedAt  = if (flags.guildDailyGeneratedAt != 0L) now else 0L,
+            ))
         }
     }
 

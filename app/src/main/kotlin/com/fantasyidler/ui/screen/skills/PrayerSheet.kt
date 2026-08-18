@@ -227,11 +227,20 @@ internal fun PrayerSheet(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
-                            Text(
-                                text  = stringResource(R.string.crafting_owned, qty),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = if (qty > 0) MaterialTheme.colorScheme.primary else dim,
-                            )
+                            Column(horizontalAlignment = Alignment.End) {
+                                Text(
+                                    text  = stringResource(R.string.crafting_owned, qty),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (qty > 0) MaterialTheme.colorScheme.primary else dim,
+                                )
+                                if (isQueueFull) {
+                                    Text(
+                                        text = context.getString(R.string.snackbar_queue_full),
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = dim,
+                                    )
+                                }
+                            }
                         }
                         HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                     }
@@ -331,13 +340,17 @@ internal fun PrayerSheet(
 
             Button(
                 onClick  = { onStart(selectedKey!!, qty) },
-                enabled  = !isStarting && qty > 0 && maxQty > 0,
+                enabled  = !isStarting && qty > 0 && maxQty > 0 && !isQueueFull,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
             ) {
-                if (isStarting) CircularProgressIndicator(Modifier.size(20.dp))
-                else Text(if (hasActiveSession) stringResource(R.string.skills_add_to_queue) else stringResource(R.string.btn_start_burying))
+                when {
+                    isStarting  -> CircularProgressIndicator(Modifier.size(20.dp))
+                    isQueueFull -> Text(stringResource(R.string.snackbar_queue_full))
+                    hasActiveSession -> Text(stringResource(R.string.skills_add_to_queue))
+                    else        -> Text(stringResource(R.string.btn_start_burying))
+                }
             }
         }
     }
@@ -346,4 +359,3 @@ internal fun PrayerSheet(
 // ---------------------------------------------------------------------------
 // Runecrafting sheet
 // ---------------------------------------------------------------------------
-

@@ -50,7 +50,7 @@
     <string name="quest_weekly_kbd_slayer_name">Погибель Дракона</string>
     <string name="quest_weekly_kbd_slayer_desc">Победите Чёрного короля-дракона 5 раз.</string>
     <string name="quest_weekly_void_champion_name">Чемпион Пустоты</string>
-    <string name="quest_weekly_void_champion_desc">Победите Повелителя Пустоты 5 раз.</string>
+    <string name="quest_weekly_void_champion_desc">Победите Владыку пустоты 5 раз.</string>
     <string name="quest_weekly_slayer_novice_name">Искатель Заданий</string>
     <string name="quest_weekly_slayer_novice_desc">Выполните 15 заданий Убийцы на этой неделе.</string>
     <string name="quest_weekly_slayer_master_name">Чемпион Убийц</string>
@@ -59,6 +59,6 @@
     <string name="quest_weekly_devout_desc">Закопайте 450 костей на этой неделе.</string>
     <string name="quest_weekly_farmer_name">Урожай Сезона</string>
     <string name="quest_weekly_farmer_desc">Соберите 30 урожаев на этой неделе.</string>
-    <string name="quest_weekly_guild_supporter_name">Помощник Гильдии</string>
+    <string name="quest_weekly_guild_supporter_name">Помощник гильдии</string>
     <string name="quest_weekly_guild_supporter_desc">Выполните 20 ежедневных заданий гильдии на этой неделе.</string>
 </resources>

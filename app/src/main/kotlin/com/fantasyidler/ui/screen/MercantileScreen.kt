@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -210,6 +212,7 @@ private fun TradeRouteRow(
     val costStr   = route.coinCost.toLong().formatCoins()
     val minReturn = (route.coinRanges.values.minOf { it.min } * 60L * coinReturnMult.toDouble()).toLong()
     val maxReturn = (route.coinRanges.values.maxOf { it.max } * 60L * coinReturnMult.toDouble()).toLong()
+    val queueFullMessage = stringResource(R.string.snackbar_queue_full)
 
     Column(
         modifier = Modifier
@@ -247,15 +250,32 @@ private fun TradeRouteRow(
             )
         }
         Spacer(Modifier.height(8.dp))
-        Button(
-            onClick  = onStart,
-            enabled  = !isStarting && canAfford && (!sessionActive || !queueFull),
-            modifier = Modifier.fillMaxWidth(),
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
-            Text(
-                if (sessionActive && !queueFull) stringResource(R.string.mercantile_queue_label)
-                else stringResource(R.string.mercantile_dispatch_label)
-            )
+            Button(
+                onClick = onStart,
+                enabled = !isStarting && canAfford && (!sessionActive || !queueFull),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    if (sessionActive && !queueFull) stringResource(R.string.mercantile_queue_label)
+                    else stringResource(R.string.mercantile_dispatch_label)
+                )
+            }
+            if (queueFull) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication        = null,
+                            onClick           = { AppBannerCenter.enqueue(queueFullMessage) },
+                        ),
+                )
+            }
         }
     }
 }

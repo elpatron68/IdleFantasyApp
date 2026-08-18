@@ -48,10 +48,10 @@ class DailyQuestRepository @Inject constructor(
         "dwarven_lockpick",
     )
 
-    /** Returns epoch ms of the next 6am in local time after [fromMs]. */
-    fun nextResetMs(fromMs: Long = System.currentTimeMillis()): Long {
+    /** Returns epoch ms of the next daily reset ([resetHour] local time) after [fromMs]. */
+    fun nextResetMs(fromMs: Long = System.currentTimeMillis(), resetHour: Int): Long {
         val cal = Calendar.getInstance().apply { timeInMillis = fromMs }
-        cal.set(Calendar.HOUR_OF_DAY, 6)
+        cal.set(Calendar.HOUR_OF_DAY, resetHour)
         cal.set(Calendar.MINUTE, 0)
         cal.set(Calendar.SECOND, 0)
         cal.set(Calendar.MILLISECOND, 0)
@@ -59,16 +59,9 @@ class DailyQuestRepository @Inject constructor(
         return cal.timeInMillis
     }
 
-    fun shouldRefresh(generatedAt: Long): Boolean {
+    fun shouldRefresh(generatedAt: Long, resetHour: Int): Boolean {
         if (generatedAt == 0L) return true
-        val now = System.currentTimeMillis()
-        val cal = Calendar.getInstance().apply { timeInMillis = generatedAt }
-        cal.set(Calendar.HOUR_OF_DAY, 6)
-        cal.set(Calendar.MINUTE, 0)
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        if (cal.timeInMillis <= generatedAt) cal.add(Calendar.DAY_OF_YEAR, 1)
-        return now >= cal.timeInMillis
+        return System.currentTimeMillis() >= nextResetMs(generatedAt, resetHour)
     }
 
     private val combatSkills = listOf("attack", "strength", "defense", "ranged", "magic", "hitpoints")

@@ -32,6 +32,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.SwitchAccount
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -118,6 +119,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     onNavigateToSettings: () -> Unit = {},
+    onNavigateToSaveSlots: () -> Unit = {},
     onNavigateToShop: () -> Unit = {},
     onNavigateToInn: () -> Unit = {},
     onNavigateToWorkerSkills: (Int) -> Unit = {},
@@ -526,6 +528,11 @@ fun HomeScreen(
                 title   = { Text(stringResource(R.string.app_name)) },
                 actions = {
                     // dropUnlessResumed: ignore ghost taps during nav transitions (issue #1345)
+                    if (!state.isLoading && state.showCharacterSwitch) {
+                        IconButton(onClick = dropUnlessResumed { onNavigateToSaveSlots() }) {
+                            Icon(Icons.Filled.SwitchAccount, contentDescription = stringResource(R.string.label_switch_character))
+                        }
+                    }
                     if (!state.isLoading && state.showRecentActivityLog) {
                         IconButton(onClick = dropUnlessResumed { showRecentLog = true }) {
                             Icon(Icons.Filled.History, contentDescription = stringResource(R.string.label_recent_activity))

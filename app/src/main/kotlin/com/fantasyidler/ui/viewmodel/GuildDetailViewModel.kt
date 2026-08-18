@@ -40,6 +40,7 @@ data class GuildDetailUiState(
     val quests: List<GuildQuestWithProgress> = emptyList(),
     val dailies: List<GuildDailyWithProgress> = emptyList(),
     val nextResetMs: Long = 0L,
+    val dailyResetHour: Int = 6,
     val allCurrentLevelQuestsDone: Boolean = false,
     val questGateBlocked: Boolean = false,
     val snackbarMessage: String? = null,
@@ -64,7 +65,8 @@ class GuildDetailViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             guildRepo.ensureGuildDailiesRefreshed()
-            _extra.update { it.copy(nextResetMs = guildRepo.nextResetMs()) }
+            val resetHour = playerRepo.getFlags().dailyResetHour
+            _extra.update { it.copy(nextResetMs = guildRepo.nextResetMs(resetHour = resetHour), dailyResetHour = resetHour) }
         }
     }
 

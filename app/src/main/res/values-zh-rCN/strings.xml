@@ -305,6 +305,9 @@
     <string name="settings_quest_dots_desc">在有可接任务的技能上显示金色圆点</string>
     <string name="settings_prestige_notifications">威望通知徽章</string>
     <string name="settings_prestige_notifications_desc">当技能可威望时在导航栏显示通知徽章</string>
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">紧凑数字</string>
     <string name="settings_compact_numbers_desc">缩写大数量物品（如2.46M代替2,461,940）</string>
     <string name="settings_home_screen">主页</string>

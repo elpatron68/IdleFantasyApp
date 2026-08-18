@@ -1,6 +1,7 @@
 package com.fantasyidler.ui.screen
 
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -380,10 +381,20 @@ internal fun ActivityRow(
     onClick: () -> Unit,
 ) {
     val dim = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+    val queueFullMessage = stringResource(R.string.snackbar_queue_full)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(enabled = !isStarting, onClick = onClick)
+            .clickable(
+                enabled = !isStarting,
+                onClick = {
+                    if (isQueueFull) {
+                        AppBannerCenter.enqueue(queueFullMessage)
+                    } else {
+                        onClick()
+                    }
+                },
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment     = Alignment.CenterVertically,
@@ -419,9 +430,13 @@ internal fun ActivityRow(
             CircularProgressIndicator(modifier = Modifier.size(20.dp))
         } else {
             Text(
-                text  = if (hasActiveSession) stringResource(R.string.skills_add_to_queue) else stringResource(R.string.btn_start_session),
+                text  = when {
+                    isQueueFull      -> stringResource(R.string.snackbar_queue_full)
+                    hasActiveSession -> stringResource(R.string.skills_add_to_queue)
+                    else             -> stringResource(R.string.btn_start_session)
+                },
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.primary,
+                color = if(isQueueFull) dim else MaterialTheme.colorScheme.primary,
             )
         }
     }
@@ -451,10 +466,17 @@ internal fun ActivityDetailDialog(
             }
         },
         confirmButton = {
+            val queueFullMessage = stringResource(R.string.snackbar_queue_full)
             Button(
-                onClick = { onConfirm(); onDismiss() },
+                onClick = {
+                    if (isQueueFull) {
+                        AppBannerCenter.enqueue(queueFullMessage)
+                    } else {
+                        onConfirm(); onDismiss()
+                    }
+                },
             ) {
-                Text(if (hasActiveSession) stringResource(R.string.skills_add_queue_short) else stringResource(R.string.btn_start_session))
+               Text(if (hasActiveSession) stringResource(R.string.skills_add_queue_short) else stringResource(R.string.btn_start_session))
             }
         },
         dismissButton = {

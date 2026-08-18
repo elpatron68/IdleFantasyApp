@@ -157,7 +157,7 @@ class SeasonalEventRepository @Inject constructor(
         // Daily 6am rotation: untouched slots re-roll so an out-of-reach bounty never
         // squats for the whole event. Slots with any progress (or a pending post-claim
         // cooldown) are left alone to protect in-flight work.
-        if (dailyQuestRepo.shouldRefresh(dailyStamp)) {
+        if (dailyQuestRepo.shouldRefresh(dailyStamp, flags.dailyResetHour)) {
             for ((index, taskId) in slots.withIndex()) {
                 if (cooldowns.containsKey(index.toString())) continue
                 if ((progress[taskId] ?: 0) > 0) continue
