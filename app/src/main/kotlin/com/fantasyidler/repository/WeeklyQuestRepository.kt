@@ -43,14 +43,14 @@ class WeeklyQuestRepository @Inject constructor(
         return currentDivineDropChance(flags.divinePityMisses)
     }
 
-    /** Returns epoch ms of the next Monday 6am in local time after [fromMs]. */
-    fun nextResetMs(fromMs: Long = System.currentTimeMillis()): Long {
+    /** Returns epoch ms of the next Monday [resetHour] in local time after [fromMs]. */
+    fun nextResetMs(fromMs: Long = System.currentTimeMillis(), resetHour: Int): Long {
         val cal = Calendar.getInstance().apply { timeInMillis = fromMs }
-        cal.set(Calendar.HOUR_OF_DAY, 6)
+        cal.set(Calendar.HOUR_OF_DAY, resetHour)
         cal.set(Calendar.MINUTE, 0)
         cal.set(Calendar.SECOND, 0)
         cal.set(Calendar.MILLISECOND, 0)
-        
+
         // If we are exactly at Monday 6am or earlier today, and it is Monday, we advance if we are strictly <= fromMs.
         // Actually, just advance until it's Monday and time > fromMs.
         if (cal.timeInMillis <= fromMs) cal.add(Calendar.DAY_OF_YEAR, 1)
@@ -60,10 +60,10 @@ class WeeklyQuestRepository @Inject constructor(
         return cal.timeInMillis
     }
 
-    fun shouldRefresh(generatedAt: Long): Boolean {
+    fun shouldRefresh(generatedAt: Long, resetHour: Int): Boolean {
         if (generatedAt == 0L) return true
         val now = System.currentTimeMillis()
-        val nextReset = nextResetMs(generatedAt)
+        val nextReset = nextResetMs(generatedAt, resetHour)
         return now >= nextReset
     }
 
@@ -79,11 +79,11 @@ class WeeklyQuestRepository @Inject constructor(
     )
 
     /** Pick 5 distinct quest IDs from the pool using a date-seeded RNG (same quests all week). */
-    fun selectFiveQuests(skillLevels: Map<String, Int>): List<String> {
-        // Seed based on the most recent Monday 6am
+    fun selectFiveQuests(skillLevels: Map<String, Int>, resetHour: Int): List<String> {
+        // Seed based on the most recent Monday reset boundary
         val now = System.currentTimeMillis()
         val cal = Calendar.getInstance().apply { timeInMillis = now }
-        cal.set(Calendar.HOUR_OF_DAY, 6)
+        cal.set(Calendar.HOUR_OF_DAY, resetHour)
         cal.set(Calendar.MINUTE, 0)
         cal.set(Calendar.SECOND, 0)
         cal.set(Calendar.MILLISECOND, 0)
@@ -114,7 +114,7 @@ class WeeklyQuestRepository @Inject constructor(
     }
 
     fun refreshFlags(flags: PlayerFlags, skillLevels: Map<String, Int>): PlayerFlags {
-        val ids = selectFiveQuests(skillLevels)
+        val ids = selectFiveQuests(skillLevels, flags.dailyResetHour)
         return flags.copy(
             weeklyQuestIds = ids,
             weeklyQuestProgress = emptyMap(),

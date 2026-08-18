@@ -488,14 +488,14 @@
     <string name="quest_daily_smith_mithril_objective">Smith 15 mithril bars.</string> <!-- untranslated -->
     <string name="quest_daily_smith_adamantite_objective">Smith 10 adamantite bars.</string> <!-- untranslated -->
     <string name="quest_daily_smith_runite_objective">Smith 5 runite bars.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_trout_objective">Cook 100 trout.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_salmon_objective">Cook 80 salmon.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_lobster_objective">Cook 40 lobsters.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_swordfish_objective">Cook 20 swordfish.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_goblin_objective">Defeat 80 goblins.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_bandit_objective">Defeat 50 bandits.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_demon_objective">Defeat 20 demons.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_dragon_objective">Defeat 10 dragons.</string> <!-- untranslated -->
+    <string name="quest_daily_cook_trout_objective">Cucina 100 trote.</string>
+    <string name="quest_daily_cook_salmon_objective">Cucina 80 salmoni.</string>
+    <string name="quest_daily_cook_lobster_objective">Cucina 40 aragoste.</string>
+    <string name="quest_daily_cook_swordfish_objective">Cucina 20 pescispada.</string>
+    <string name="quest_daily_kill_goblin_objective">Sconfiggi 80 goblin.</string>
+    <string name="quest_daily_kill_bandit_objective">Sconfiggi 50 banditi.</string>
+    <string name="quest_daily_kill_demon_objective">Sconfiggi 20 demoni.</string>
+    <string name="quest_daily_kill_dragon_objective">Sconfiggi 10 draghi.</string>
 
     <!-- Quest objective verb strings for craft skills -->
     <string name="daily_verb_crafting">Crea</string>

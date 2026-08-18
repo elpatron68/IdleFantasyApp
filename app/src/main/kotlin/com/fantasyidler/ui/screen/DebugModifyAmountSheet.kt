@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -33,13 +34,16 @@ import com.fantasyidler.ui.theme.ScaledSheetContent
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun DebugModifyItemCountSheet(
-    onAddItem: (name: String, amount: Int) -> Unit,
-    onRemoveItem: (name: String, amount: Int) -> Unit,
+fun DebugModifyAmountSheet(
+    initialId: String = "",
+    initialAmount: String = "",
+    onAddAmount: (name: String, amount: Long) -> Unit,
+    onSetAmount: (name: String, amount: Long) -> Unit,
+    onRemoveAmount: (name: String, amount: Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    var draftID by remember { mutableStateOf("") }
-    var draftAmountText by remember { mutableStateOf("") }
+    var draftID by remember { mutableStateOf(initialId) }
+    var draftAmountText by remember { mutableStateOf(initialAmount) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
@@ -85,29 +89,29 @@ fun DebugModifyItemCountSheet(
 
             Row(
                 modifier              = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
             ) {
                 TextButton(onClick = onDismiss) {
                     Text("Cancel")
                 }
                 Spacer(Modifier.width(8.dp))
                 Button(
-                    onClick = {
-                        onRemoveItem(draftID.trim(), draftAmountText.toInt())
-                    },
-                    enabled = draftID.isNotBlank() && draftAmountText.isNotBlank() &&
-                            draftAmountText.toInt() > 0,
+                    onClick = { onRemoveAmount(draftID.trim(), draftAmountText.toLong()) },
+                    enabled = draftID.isNotBlank() && draftAmountText.isNotBlank() && draftAmountText.toLong() > 0,
                 ) {
                     Text("Remove")
                 }
                 Button(
-                    onClick  = {
-                        onAddItem(draftID.trim(), draftAmountText.toInt())
-                    },
-                    enabled  = draftID.isNotBlank() && draftAmountText.isNotBlank() &&
-                            draftAmountText.toInt() > 0,
+                    onClick  = { onAddAmount(draftID.trim(), draftAmountText.toLong()) },
+                    enabled  = draftID.isNotBlank() && draftAmountText.isNotBlank() && draftAmountText.toLong() > 0,
                 ) {
                     Text("Add")
+                }
+                Button(
+                    onClick = { onSetAmount(draftID.trim(), draftAmountText.toLong()) },
+                    enabled = draftID.isNotBlank() && draftAmountText.isNotBlank() && draftAmountText.toLong() > 0
+                ) {
+                    Text("Set")
                 }
             }
         }

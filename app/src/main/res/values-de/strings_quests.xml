@@ -138,18 +138,18 @@
     <string name="quest_combat_kills_5_objective">Besiegt 450 Gegner</string>
     <string name="quest_combat_kills_6_name">Bluträcher VI</string>
     <string name="quest_combat_kills_6_objective">Besiegt 650 Gegner</string>
-    <string name="quest_slayer_1_name">Slayer I</string> <!-- untranslated -->
-    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_2_name">Slayer II</string> <!-- untranslated -->
-    <string name="quest_slayer_2_objective">Complete 15 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_3_name">Slayer III</string> <!-- untranslated -->
-    <string name="quest_slayer_3_objective">Complete 40 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_4_name">Slayer IV</string> <!-- untranslated -->
-    <string name="quest_slayer_4_objective">Complete 100 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_5_name">Slayer V</string> <!-- untranslated -->
-    <string name="quest_slayer_5_objective">Complete 250 Slayer tasks</string> <!-- untranslated -->
-    <string name="quest_slayer_6_name">Slayer VI</string> <!-- untranslated -->
-    <string name="quest_slayer_6_objective">Complete 500 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_1_name">Trophäenjäger I</string>
+    <string name="quest_slayer_1_objective">Schließe 5 Trophäenjagd-Aufträge ab</string>
+    <string name="quest_slayer_2_name">Trophäenjäger II</string>
+    <string name="quest_slayer_2_objective">Schließe 15 Trophäenjagd-Aufträge ab</string>
+    <string name="quest_slayer_3_name">Trophäenjäger III</string>
+    <string name="quest_slayer_3_objective">Schließe 40 Trophäenjagd-Aufträge ab</string>
+    <string name="quest_slayer_4_name">Trophäenjäger IV</string>
+    <string name="quest_slayer_4_objective">Schließe 100 Trophäenjagd-Aufträge ab</string>
+    <string name="quest_slayer_5_name">Trophäenjäger V</string>
+    <string name="quest_slayer_5_objective">Schließe 250 Trophäenjagd-Aufträge ab</string>
+    <string name="quest_slayer_6_name">Trophäenjäger VI</string>
+    <string name="quest_slayer_6_objective">Schließe 500 Trophäenjagd-Aufträge ab</string>
 
     <!-- Dungeon exploration -->
     <string name="quest_dungeon_farm_1_name">Verlies-Erforscher I</string>
@@ -300,34 +300,34 @@
     <string name="quest_herblore_6_objective">Mischt 1500 Super-Zaubertränke</string>
 
     <!-- Construction -->
-    <string name="quest_construction_1_name">Construction I</string> <!-- untranslated -->
-    <string name="quest_construction_1_objective">Build 50 Wooden Racks</string> <!-- untranslated -->
-    <string name="quest_construction_2_name">Construction II</string> <!-- untranslated -->
-    <string name="quest_construction_2_objective">Build 50 Oak Tables</string> <!-- untranslated -->
-    <string name="quest_construction_3_name">Construction III</string> <!-- untranslated -->
-    <string name="quest_construction_3_objective">Build 50 Willow Cabinets</string> <!-- untranslated -->
-    <string name="quest_construction_4_name">Construction IV</string> <!-- untranslated -->
-    <string name="quest_construction_4_objective">Build 50 Maple Dressers</string> <!-- untranslated -->
-    <string name="quest_construction_5_name">Construction V</string> <!-- untranslated -->
-    <string name="quest_construction_5_objective">Build 25 Magic Thrones</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_inn_name">Renovate the Inn</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_inn_objective">Upgrade the Inn at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_guild_name">Expand the Guild Hall</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_guild_objective">Upgrade the Guild Hall at least once</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_name">Restore the Church</string> <!-- untranslated -->
-    <string name="quest_construction_upgrade_church_objective">Upgrade the Church at least once</string> <!-- untranslated -->
+    <string name="quest_construction_1_name">Bauwesen I</string>
+    <string name="quest_construction_1_objective">Baut 50 Holzgestelle</string>
+    <string name="quest_construction_2_name">Bauwesen II</string>
+    <string name="quest_construction_2_objective">Baut 50 Eichentische</string>
+    <string name="quest_construction_3_name">Bauwesen III</string>
+    <string name="quest_construction_3_objective">Baut 50 Weidenschränke</string>
+    <string name="quest_construction_4_name">Bauwesen IV</string>
+    <string name="quest_construction_4_objective">Baut 50 Ahornkommoden</string>
+    <string name="quest_construction_5_name">Bauwesen V</string>
+    <string name="quest_construction_5_objective">Baut 25 Magischer Throne</string>
+    <string name="quest_construction_upgrade_inn_name">Renoviere die Schänke</string>
+    <string name="quest_construction_upgrade_inn_objective">Verbessere die Schänke mindestens einmal</string>
+    <string name="quest_construction_upgrade_guild_name">Erweitere das Gildenhaus</string>
+    <string name="quest_construction_upgrade_guild_objective">Verbessere das Gildenhaus mindestens einmal</string>
+    <string name="quest_construction_upgrade_church_name">Stelle die Kirche wieder her</string>
+    <string name="quest_construction_upgrade_church_objective">Verbessere die Kirche mindestens einmal</string>
 
     <!-- Thieving -->
-    <string name="quest_thieving_1_name">Thieving I</string> <!-- untranslated -->
-    <string name="quest_thieving_1_objective">Pickpocket 100 Peasants</string> <!-- untranslated -->
-    <string name="quest_thieving_2_name">Thieving II</string> <!-- untranslated -->
-    <string name="quest_thieving_2_objective">Pickpocket 100 Merchants</string> <!-- untranslated -->
-    <string name="quest_thieving_3_name">Thieving III</string> <!-- untranslated -->
-    <string name="quest_thieving_3_objective">Pickpocket 100 Nobles</string> <!-- untranslated -->
-    <string name="quest_thieving_4_name">Thieving IV</string> <!-- untranslated -->
-    <string name="quest_thieving_4_objective">Steal 5 Gold Necklaces</string> <!-- untranslated -->
-    <string name="quest_thieving_5_name">Thieving V</string> <!-- untranslated -->
-    <string name="quest_thieving_5_objective">Pickpocket 50 High Priests</string> <!-- untranslated -->
+    <string name="quest_thieving_1_name">Diebstahl I</string>
+    <string name="quest_thieving_1_objective">Bestehle 100 Bauern</string>
+    <string name="quest_thieving_2_name">Diebstahl II</string>
+    <string name="quest_thieving_2_objective">Bestehle 100 Händler</string>
+    <string name="quest_thieving_3_name">Diebstahl III</string>
+    <string name="quest_thieving_3_objective">Bestehle 100 Adelige</string>
+    <string name="quest_thieving_4_name">Diebstahl IV</string>
+    <string name="quest_thieving_4_objective">Stehle 5 Goldketten</string>
+    <string name="quest_thieving_5_name">Diebstahl V</string>
+    <string name="quest_thieving_5_objective">Bestehle 50 Hohepriester</string>
 
     <!-- Slayer extended -->
     <string name="quest_combat_kills_7_name">Monsterjäger VII</string>
@@ -401,14 +401,14 @@
     <string name="quest_balrog_bane_3_objective">Defeat the Gothic Ember 25 times</string> <!-- untranslated -->
     <string name="quest_balrog_bane_4_name">Gothic Ember Bane IV</string> <!-- untranslated -->
     <string name="quest_balrog_bane_4_objective">Defeat the Gothic Ember 50 times</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_1_name">Sovereign Slayer I</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_1_objective">Defeat the Void Sovereign</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_2_name">Sovereign Slayer II</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_2_objective">Defeat the Void Sovereign 5 times</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_3_name">Sovereign Slayer III</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_3_objective">Defeat the Void Sovereign 25 times</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_4_name">Sovereign Slayer IV</string> <!-- untranslated -->
-    <string name="quest_sovereign_slayer_4_objective">Defeat the Void Sovereign 50 times</string> <!-- untranslated -->
+    <string name="quest_sovereign_slayer_1_name">Schlächter des Gebieter I</string>
+    <string name="quest_sovereign_slayer_1_objective">Besiegt den Gebieter der Leere</string>
+    <string name="quest_sovereign_slayer_2_name">Schlächter des Gebieter II</string>
+    <string name="quest_sovereign_slayer_2_objective">Besiegt den Gebieter der Leere 5 Mal</string>
+    <string name="quest_sovereign_slayer_3_name">Schlächter des Gebieter III</string>
+    <string name="quest_sovereign_slayer_3_objective">Besiegt den Gebieter der Leere 25 Mal</string>
+    <string name="quest_sovereign_slayer_4_name">Schlächter des Gebieter IV</string>
+    <string name="quest_sovereign_slayer_4_objective">Besiegt den Gebieter der Leere 50 Mal</string>
 
     <!-- Combat style challenges extended -->
     <string name="quest_melee_warrior_4_name">Nahkämpfer IV</string>
@@ -472,30 +472,30 @@
 
     <!-- Daily quest objectives — override the generated verb+item text, whose item names
          read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
-    <string name="quest_daily_mine_iron_objective">Mine 150 iron ore.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_coal_objective">Mine 300 coal.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_mithril_objective">Mine 50 mithril ore.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_runite_objective">Mine 20 runite ore.</string> <!-- untranslated -->
-    <string name="quest_daily_fish_salmon_objective">Catch 120 salmon.</string> <!-- untranslated -->
-    <string name="quest_daily_fish_lobster_objective">Catch 60 lobsters.</string> <!-- untranslated -->
-    <string name="quest_daily_fish_swordfish_objective">Catch 30 swordfish.</string> <!-- untranslated -->
-    <string name="quest_daily_fish_shark_objective">Catch 15 sharks.</string> <!-- untranslated -->
+    <string name="quest_daily_mine_iron_objective">Schürft 150 Eisenerz.</string>
+    <string name="quest_daily_mine_coal_objective">Schürft 300 Kohle.</string>
+    <string name="quest_daily_mine_mithril_objective">Schürft 50 Mithrilerz.</string>
+    <string name="quest_daily_mine_runite_objective">Schürft 20 Runiterz.</string>
+    <string name="quest_daily_fish_salmon_objective">Fangt 120 Lachs.</string>
+    <string name="quest_daily_fish_lobster_objective">Fangt 60 Hummer.</string>
+    <string name="quest_daily_fish_swordfish_objective">Fangt 30 Schwertfisch.</string>
+    <string name="quest_daily_fish_shark_objective">Fangt 15 Haie.</string>
     <string name="quest_daily_wc_oak_objective">Chop 100 oak logs.</string> <!-- untranslated -->
     <string name="quest_daily_wc_willow_objective">Chop 70 willow logs.</string> <!-- untranslated -->
     <string name="quest_daily_wc_yew_objective">Chop 25 yew logs.</string> <!-- untranslated -->
     <string name="quest_daily_wc_magic_objective">Chop 10 magic logs.</string> <!-- untranslated -->
-    <string name="quest_daily_smith_iron_objective">Smith 40 iron bars.</string> <!-- untranslated -->
-    <string name="quest_daily_smith_mithril_objective">Smith 15 mithril bars.</string> <!-- untranslated -->
-    <string name="quest_daily_smith_adamantite_objective">Smith 10 adamantite bars.</string> <!-- untranslated -->
-    <string name="quest_daily_smith_runite_objective">Smith 5 runite bars.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_trout_objective">Cook 100 trout.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_salmon_objective">Cook 80 salmon.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_lobster_objective">Cook 40 lobsters.</string> <!-- untranslated -->
-    <string name="quest_daily_cook_swordfish_objective">Cook 20 swordfish.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_goblin_objective">Defeat 80 goblins.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_bandit_objective">Defeat 50 bandits.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_demon_objective">Defeat 20 demons.</string> <!-- untranslated -->
-    <string name="quest_daily_kill_dragon_objective">Defeat 10 dragons.</string> <!-- untranslated -->
+    <string name="quest_daily_smith_iron_objective">Schmiedet 40 Eisenbarren.</string>
+    <string name="quest_daily_smith_mithril_objective">Schmiedet 15 Mithrilbarren.</string>
+    <string name="quest_daily_smith_adamantite_objective">Schmiedet 10 Adamantitbarren.</string>
+    <string name="quest_daily_smith_runite_objective">Schmiedet 5 Runitbarren.</string>
+    <string name="quest_daily_cook_trout_objective">Kocht 100 Forellen.</string>
+    <string name="quest_daily_cook_salmon_objective">Kocht 80 Lachs.</string>
+    <string name="quest_daily_cook_lobster_objective">Kocht 40 Hummer.</string>
+    <string name="quest_daily_cook_swordfish_objective">Kocht 20 Schwertfisch.</string>
+    <string name="quest_daily_kill_goblin_objective">Besiegt 80 Kobolde.</string>
+    <string name="quest_daily_kill_bandit_objective">Besiegt 50 Räuber.</string>
+    <string name="quest_daily_kill_demon_objective">Besiegt 20 kleine Dämonen.</string>
+    <string name="quest_daily_kill_dragon_objective">Besiegt 10 Drachen.</string>
 
     <!-- Quest objective verb strings for craft skills -->
     <string name="daily_verb_crafting">Fertigt</string>

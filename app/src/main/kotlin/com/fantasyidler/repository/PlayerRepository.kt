@@ -176,6 +176,21 @@ class PlayerRepository @Inject constructor(
         ))
     }
 
+    /** Add XP to a skill with no boosts or multipliers. Recalculates level. */
+    suspend fun debugAddSkillXp(skillName: String, amount: Long) {
+        if (amount <= 0L) return
+        val player = getOrCreatePlayer()
+        val levels: MutableMap<String, Int> = json.decodeFromString(player.skillLevels)
+        val xpMap: MutableMap<String, Long> = json.decodeFromString(player.skillXp)
+        val newXp = (xpMap[skillName] ?: 0L) + amount
+        xpMap[skillName] = newXp
+        levels[skillName] = XpTable.levelForXp(newXp)
+        playerDao.upsert(player.copy(
+            skillLevels = json.encode<Map<String, Int>>(levels),
+            skillXp     = json.encode<Map<String, Long>>(xpMap),
+        ))
+    }
+
     data class BuryBonesResult(val buried: Int, val xpGained: Long, val awardedCape: String?)
 
     /**
@@ -793,7 +808,7 @@ class PlayerRepository @Inject constructor(
         val now = System.currentTimeMillis()
 
         if (flags.xpBoostExpiresAt > now) return XpBoostPurchaseResult.ALREADY_ACTIVE
-        if (flags.xpBoostLastPurchaseAt > 0 && now < weeklyQuestRepo.nextResetMs(flags.xpBoostLastPurchaseAt)) {
+        if (flags.xpBoostLastPurchaseAt > 0 && now < weeklyQuestRepo.nextResetMs(flags.xpBoostLastPurchaseAt, flags.dailyResetHour)) {
             return XpBoostPurchaseResult.WEEKLY_LIMIT_REACHED
         }
         if (player.coins < cost) return XpBoostPurchaseResult.NOT_ENOUGH_COINS
@@ -1225,12 +1240,12 @@ class PlayerRepository @Inject constructor(
         var changed = false
         val skillLevels: Map<String, Int> by lazy { json.decodeFromString(player.skillLevels) }
 
-        if (dailyQuestRepo.shouldRefresh(flags.dailyQuestGeneratedAt)) {
+        if (dailyQuestRepo.shouldRefresh(flags.dailyQuestGeneratedAt, flags.dailyResetHour)) {
             flags = dailyQuestRepo.refreshFlags(flags, skillLevels)
             changed = true
         }
         
-        if (weeklyQuestRepo.shouldRefresh(flags.weeklyQuestGeneratedAt)) {
+        if (weeklyQuestRepo.shouldRefresh(flags.weeklyQuestGeneratedAt, flags.dailyResetHour)) {
             flags = weeklyQuestRepo.refreshFlags(flags, skillLevels)
             changed = true
         }

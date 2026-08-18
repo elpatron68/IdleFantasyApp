@@ -305,6 +305,9 @@
     <string name="settings_quest_dots_desc">Montre un point doré sur les aptitudes qui ont une quête possible</string>
     <string name="settings_prestige_notifications">Notification de Prestige</string>
     <string name="settings_prestige_notifications_desc">Montrer une notification quand une aptitude est prête à prestige.</string>
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Nombres Compacts</string>
     <string name="settings_compact_numbers_desc">Abréger les grands nombres d\'éléments (par ex. 2,46 M au lieu de 2 461 940).</string>
     <string name="settings_home_screen">Écran d\'Accueil</string>

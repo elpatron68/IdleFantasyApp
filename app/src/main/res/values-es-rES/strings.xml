@@ -304,6 +304,9 @@
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
     <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
     <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->

@@ -56,7 +56,7 @@
 
     <!-- ===== Logs ===== -->
     <string name="item_log_name">Брёвна</string>
-    <string name="item_log_desc">Обычные брёвна. Используются в Разжигании огня и Лучном деле.</string>
+    <string name="item_log_desc">Обычные брёвна. Используются во Владении огнём я и Лучном деле.</string>
     <string name="item_oak_log_name">Дубовые брёвна</string>
     <string name="item_oak_log_desc">Брёвна из дуба.</string>
     <string name="item_willow_log_name">Ивовые брёвна</string>
@@ -65,8 +65,8 @@
     <string name="item_maple_log_desc">Плотные брёвна из клёна.</string>
     <string name="item_yew_log_name">Тисовые брёвна</string>
     <string name="item_yew_log_desc">Брёвна из древнего тиса.</string>
-    <string name="item_magic_log_name">Магические брёвна</string>
-    <string name="item_magic_log_desc">Зачарованные брёвна из редких магических деревьев.</string>
+    <string name="item_magic_log_name">Волшебные брёвна</string>
+    <string name="item_magic_log_desc">Зачарованные брёвна из редких волшебных деревьев.</string>
     <string name="item_redwood_log_name">Брёвна секвойи</string>
     <string name="item_redwood_log_desc">Массивные брёвна из самых высоких деревьев секвойи.</string>
 
@@ -155,7 +155,7 @@
     <string name="item_bronze_scimitar_desc">Изогнутый одноручный бронзовый клинок с хорошим бонусом силы.</string>
     <string name="item_bronze_2h_sword_name">Бронзовый двуручный меч</string>
     <string name="item_bronze_2h_sword_desc">Двуручный бронзовый меч. Высокий урон, медленная скорость.</string>
-    <string name="item_bronze_warhammer_name">Бронзовый молот войны</string>
+    <string name="item_bronze_warhammer_name">Бронзовый боевой молот</string>
     <string name="item_bronze_warhammer_desc">Тяжёлый одноручный бронзовый молот.</string>
     <string name="item_bronze_battleaxe_name">Бронзовая секира</string>
     <string name="item_bronze_battleaxe_desc">Грозный одноручный бронзовый топор.</string>
@@ -169,7 +169,7 @@
     <string name="item_iron_scimitar_desc">Изогнутый одноручный железный клинок с хорошим бонусом силы.</string>
     <string name="item_iron_2h_sword_name">Железный двуручный меч</string>
     <string name="item_iron_2h_sword_desc">Двуручный железный меч.</string>
-    <string name="item_iron_warhammer_name">Железный молот войны</string>
+    <string name="item_iron_warhammer_name">Железный боевой молот</string>
     <string name="item_iron_warhammer_desc">Тяжёлый одноручный железный молот.</string>
     <string name="item_iron_battleaxe_name">Железная секира</string>
     <string name="item_iron_battleaxe_desc">Грозный одноручный железный топор.</string>
@@ -183,7 +183,7 @@
     <string name="item_steel_scimitar_desc">Изогнутый одноручный стальной клинок с хорошим бонусом силы.</string>
     <string name="item_steel_2h_sword_name">Стальной двуручный меч</string>
     <string name="item_steel_2h_sword_desc">Двуручный стальной меч.</string>
-    <string name="item_steel_warhammer_name">Стальной молот войны</string>
+    <string name="item_steel_warhammer_name">Стальной боевой молот</string>
     <string name="item_steel_warhammer_desc">Тяжёлый одноручный стальной молот.</string>
     <string name="item_steel_battleaxe_name">Стальная секира</string>
     <string name="item_steel_battleaxe_desc">Грозный одноручный стальной топор.</string>
@@ -195,8 +195,8 @@
     <string name="item_mithril_scimitar_desc">Изогнутый мифриловый клинок, сверхъестественно острый.</string>
     <string name="item_mithril_2h_sword_name">Мифриловый двуручный меч</string>
     <string name="item_mithril_2h_sword_desc">Двуручный мифриловый меч.</string>
-    <string name="item_mithril_warhammer_name">Мифриловый молот войны</string>
-    <string name="item_mithril_warhammer_desc">Легковесный магический молот войны.</string>
+    <string name="item_mithril_warhammer_name">Мифриловый боевой молот</string>
+    <string name="item_mithril_warhammer_desc">Легковесный магический боевой молот.</string>
     <string name="item_mithril_battleaxe_name">Мифриловая секира</string>
     <string name="item_mithril_battleaxe_desc">Мифриловая секира исключительного качества.</string>
 
@@ -207,8 +207,8 @@
     <string name="item_adamantite_scimitar_desc">Невероятно твёрдый изогнутый клинок с отличным бонусом силы.</string>
     <string name="item_adamantite_2h_sword_name">Адамантитовый двуручный меч</string>
     <string name="item_adamantite_2h_sword_desc">Двуручный меч, выкованный из адамантита.</string>
-    <string name="item_adamantite_warhammer_name">Адамантитовый молот войны</string>
-    <string name="item_adamantite_warhammer_desc">Экстремально тяжёлый и твёрдый молот войны.</string>
+    <string name="item_adamantite_warhammer_name">Адамантитовый боевой молот</string>
+    <string name="item_adamantite_warhammer_desc">Экстремально тяжёлый и твёрдый боевой молот.</string>
     <string name="item_adamantite_battleaxe_name">Адамантитовая секира</string>
     <string name="item_adamantite_battleaxe_desc">Разрушительная адамантитовая секира.</string>
 
@@ -219,8 +219,8 @@
     <string name="item_runite_scimitar_desc">Лучший доступный ятаган с исключительным бонусом силы.</string>
     <string name="item_runite_2h_sword_name">Рунитовый двуручный меч</string>
     <string name="item_runite_2h_sword_desc">Лучший доступный двуручный меч.</string>
-    <string name="item_runite_warhammer_name">Рунитовый молот войны</string>
-    <string name="item_runite_warhammer_desc">Лучший доступный молот войны.</string>
+    <string name="item_runite_warhammer_name">Рунитовый боевой молот</string>
+    <string name="item_runite_warhammer_desc">Лучший доступный боевой молот.</string>
     <string name="item_runite_battleaxe_name">Рунитовая секира</string>
     <string name="item_runite_battleaxe_desc">Лучшая доступная секира.</string>
 
@@ -321,8 +321,8 @@
     <string name="item_slayer_platebody_desc">Тяжёлая броня, покрытая рунами убийц.</string>
     <string name="item_slayer_platelegs_name">Поножи убийцы</string>
     <string name="item_slayer_platelegs_desc">Защитные поножи, созданные для длительных походов в подземелья.</string>
-    <string name="item_slayer_plateskirt_name">Slayer Plateskirt</string> <!-- untranslated -->
-    <string name="item_slayer_plateskirt_desc">Protective skirt crafted for extended dungeon runs.</string> <!-- untranslated -->
+    <string name="item_slayer_plateskirt_name">Латная юбка убийцы</string>
+    <string name="item_slayer_plateskirt_desc">Защитная юбка, созданная для длительных пробежек по подземельям.</string>
 
     <!-- ===== Tools — pickaxes ===== -->
     <string name="item_bronze_pickaxe_name">Бронзовая кирка</string>
@@ -530,8 +530,8 @@
     <string name="item_rotten_flesh_desc">Гниющая плоть нежити. Ужасно пахнет.</string>
     <string name="item_lockpick_name">Отмычка</string>
     <string name="item_lockpick_desc">Отмычка, выпадающая из бродяг.</string>
-    <string name="item_magic_bean_name">Магический боб</string>
-    <string name="item_magic_bean_desc">Магический боб с загадочными свойствами.</string>
+    <string name="item_magic_bean_name">Волшебный боб</string>
+    <string name="item_magic_bean_desc">Волшебный боб с загадочными свойствами.</string>
     <string name="item_hellhound_fang_name">Клык адской гончей</string>
     <string name="item_hellhound_fang_desc">Обожжённый клык адской гончей.</string>
     <string name="item_demon_horn_name">Рог демона</string>
@@ -570,7 +570,7 @@
     <string name="crop_magic_herb_name">Магическая трава</string>
     <string name="crop_dragon_fruit_name">Драконий фрукт</string>
     <string name="crop_golden_wheat_name">Золотая пшеница</string>
-    <string name="crop_spirit_herb_name">Духовная трава</string>
+    <string name="crop_spirit_herb_name">Трава духов</string>
     <string name="crop_spirit_herb_desc">Редкое растение, используемое в траволечении высокого уровня.</string>
     <string name="crop_celestial_bloom_name">Небесный цветок</string>
     <string name="crop_celestial_bloom_desc">Неземной цветок, используемый в мастерстве зелий.</string>
@@ -653,12 +653,12 @@
     <string name="item_runite_tinderbox_name">Рунитовое огниво</string>
 
     <!-- ===== Agility grappling hooks ===== -->
-    <string name="item_bronze_grappling_hook_name">Бронзовая кошка</string>
-    <string name="item_iron_grappling_hook_name">Железная кошка</string>
-    <string name="item_steel_grappling_hook_name">Стальная кошка</string>
-    <string name="item_mithril_grappling_hook_name">Мифриловая кошка</string>
-    <string name="item_adamantite_grappling_hook_name">Адамантитовая кошка</string>
-    <string name="item_runite_grappling_hook_name">Рунитовая кошка</string>
+    <string name="item_bronze_grappling_hook_name">Бронзовый крюк-кошка</string>
+    <string name="item_iron_grappling_hook_name">Железный крюк-кошка</string>
+    <string name="item_steel_grappling_hook_name">Стальной крюк-кошка</string>
+    <string name="item_mithril_grappling_hook_name">Мифриловый крюк-кошка</string>
+    <string name="item_adamantite_grappling_hook_name">Адамантитовый крюк-кошка</string>
+    <string name="item_runite_grappling_hook_name">Рунитовый крюк-кошка</string>
 
     <!-- ===== Carnival prizes ===== -->
     <string name="item_tricksters_amulet_name">Амулет обманщика</string>
@@ -773,7 +773,7 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="item_abyssal_rod_name">Бездонный прут</string>
+    <string name="item_abyssal_rod_name">Удочка бездны</string>
     <string name="item_adamantite_arrow_tip_name">Адамантитовые наконечники</string>
     <string name="item_adamantite_boots_name">Адамантитовые сапоги</string>
     <string name="item_adamantite_chainbody_name">Адамантитовая кольчуга</string>
@@ -824,7 +824,7 @@
     <string name="item_defense_cape_name">Плащ защиты</string>
     <string name="item_demon_lord_name">Повелитель демонов</string>
     <string name="item_divine_frying_pan_name">Божественная сковорода</string>
-    <string name="item_divine_grappling_hook_name">Божественный крюк-кошка</string>
+    <string name="item_divine_grappling_hook_name">Божественная крюк-кошка</string>
     <string name="item_divine_hammer_name">Божественный молот</string>
     <string name="item_divine_hoe_name">Божественная мотыга</string>
     <string name="item_divine_lockpick_name">Божественная отмычка</string>
@@ -834,23 +834,23 @@
     <string name="item_dragon_longsword_name">Драконий длинный меч</string>
     <string name="item_dragon_scimitar_name">Драконий ятаган</string>
     <string name="item_dragon_whelp_name">Драконий детёныш</string>
-    <string name="item_dwarven_axe_name">Гномий топор</string>
-    <string name="item_dwarven_boots_name">Гномьи сапоги</string>
-    <string name="item_dwarven_fishing_rod_name">Гномья удочка</string>
-    <string name="item_dwarven_frying_pan_name">Гномья сковорода</string>
-    <string name="item_dwarven_grappling_hook_name">Гномий крюк-кошка</string>
-    <string name="item_dwarven_hammer_name">Гномий молот</string>
-    <string name="item_dwarven_helm_name">Гномий шлем</string>
-    <string name="item_dwarven_hoe_name">Гномья мотыга</string>
-    <string name="item_dwarven_lockpick_name">Гномья отмычка</string>
-    <string name="item_dwarven_pickaxe_name">Гномья кирка</string>
-    <string name="item_dwarven_platebody_name">Гномий нагрудник</string>
-    <string name="item_dwarven_platelegs_name">Гномьи поножи</string>
-    <string name="item_dwarven_scimitar_name">Гномий ятаган</string>
-    <string name="item_dwarven_shield_name">Гномий щит</string>
-    <string name="item_dwarven_sword_name">Гномий меч</string>
-    <string name="item_dwarven_tinderbox_name">Гномье огниво</string>
-    <string name="item_dwarven_warhammer_name">Гномий боевой молот</string>
+    <string name="item_dwarven_axe_name">Топор дварфов</string>
+    <string name="item_dwarven_boots_name">Сапоги дварфов</string>
+    <string name="item_dwarven_fishing_rod_name">Удочка дварфов</string>
+    <string name="item_dwarven_frying_pan_name">Сковорода дварфов</string>
+    <string name="item_dwarven_grappling_hook_name">Крюк-кошка дварфов</string>
+    <string name="item_dwarven_hammer_name">Молот дварфов</string>
+    <string name="item_dwarven_helm_name">Шлем дварфов</string>
+    <string name="item_dwarven_hoe_name">Мотыга дварфов</string>
+    <string name="item_dwarven_lockpick_name">Отмычка дварфов</string>
+    <string name="item_dwarven_pickaxe_name">Кирка дварфов</string>
+    <string name="item_dwarven_platebody_name">Нагрудник дварфов</string>
+    <string name="item_dwarven_platelegs_name">Поножи дварфов</string>
+    <string name="item_dwarven_scimitar_name">Ятаган дварфов</string>
+    <string name="item_dwarven_shield_name">Щит дварфов</string>
+    <string name="item_dwarven_sword_name">Меч дварфов</string>
+    <string name="item_dwarven_tinderbox_name">Огниво дварфов</string>
+    <string name="item_dwarven_warhammer_name">Боевой молот дварфов</string>
     <string name="item_ent_name">Энт</string>
     <string name="item_farming_cape_name">Плащ фермера</string>
     <string name="item_farming_guild_cape_name">Плащ гильдии фермеров</string>
@@ -916,8 +916,8 @@
     <string name="item_ring_of_wealth_desc">Немного увеличивается количество выпадающих монет. Для покупки требуется Торговля 40-го уровня.</string>
     <string name="item_rock_golem_name">Каменный голем</string>
     <string name="item_rogues_lockpick_name">Разбойничья отмычка</string>
-    <string name="item_runecrafting_cape_name">Плащ рунодела</string>
-    <string name="item_runecrafting_guild_cape_name">Плащ гильдии руноделов</string>
+    <string name="item_runecrafting_cape_name">Плащ создателя рун</string>
+    <string name="item_runecrafting_guild_cape_name">Плащ гильдии создателя рун</string>
     <string name="item_runite_arrow_tip_name">Рунитовые наконечники</string>
     <string name="item_runite_boots_name">Рунитовые сапоги</string>
     <string name="item_runite_chainbody_name">Рунитовая кольчуга</string>
@@ -937,7 +937,7 @@
     <string name="item_shortbow_name">Короткий лук</string>
     <string name="item_silver_diamond_necklace_name">Серебряное ожерелье с бриллиантами</string>
     <string name="item_silver_diamond_ring_name">Серебряное кольцо с бриллиантом</string>
-    <string name="item_silver_emerald_necklace_name">Silver Emerald Necklace</string> <!-- untranslated -->
+    <string name="item_silver_emerald_necklace_name">Серебряное ожерелье с изумрудом</string>
     <string name="item_silver_emerald_ring_name">Серебряное ожерелье с изумрудом</string>
     <string name="item_silver_ruby_necklace_name">Серебряное ожерелье с рубином</string>
     <string name="item_silver_ruby_ring_name">Серебряное кольцо с рубином</string>
@@ -970,12 +970,12 @@
     <string name="item_void_reaver_name">Опустошитель Пустоты</string>
     <string name="item_void_reaver_desc">Клинок, выкованный из кристаллизованной энергии пустоты. Его лезвие прорезает броню, словно ткань.</string>
     <string name="item_sovereign_crown_name">Суверенная Корона</string>
-    <string name="item_sovereign_crown_desc">Корона самого Повелителя Пустоты, излучающая мрачное величие. Обеспечивает непревзойдённую защиту.</string>
+    <string name="item_sovereign_crown_desc">Корона самого Владыки пустоты, излучающая мрачное величие. Обеспечивает непревзойдённую защиту.</string>
     <string name="item_amulet_of_the_void_name">Амулет Пустоты</string>
     <string name="item_amulet_of_the_void_desc">Подвеска из чистой сущности пустоты. Усиливает все боевые характеристики носителя.</string>
     <string name="item_bronze_longsword_desc">Бронзовый длинный меч.</string>
     <string name="item_iron_longsword_desc">Железный длинный меч.</string>
-    <string name="item_shadow_dagger_desc">Кинжал с черным лезвием, найденный в Логове Теней. Невероятно острый и идеально сбалансированный для работы в ближнем бою.</string>
+    <string name="item_shadow_dagger_desc">Кинжал с черным лезвием, найденный в Логове теней. Невероятно острый и идеально сбалансированный для работы в ближнем бою.</string>
     <string name="item_steel_dagger_desc">Стальной кинжал.</string>
     <string name="item_steel_longsword_desc">Стальной длинный меч.</string>
     <string name="item_mithril_dagger_desc">Мифриловый кинжал.</string>
@@ -986,9 +986,9 @@
     <string name="item_runite_longsword_desc">Рунитовый длинный меч.</string>
     <string name="item_dragon_scimitar_desc">Острый, как бритва, ятаган, выкованный из драконьего металла.</string>
     <string name="item_dragon_longsword_desc">Мощный длинный меч, выкованный из драконьего металла.</string>
-    <string name="item_dwarven_sword_desc">Древний гномий клинок, выкованный в недрах земли.</string>
-    <string name="item_dwarven_scimitar_desc">Изогнутый гномий клинок, идеально подходящий для быстрых ударов.</string>
-    <string name="item_dwarven_warhammer_desc">Массивный гномий боевой молот, сокрушающий все на своем пути.</string>
+    <string name="item_dwarven_sword_desc">Древний клинок дварфов, выкованный в недрах земли.</string>
+    <string name="item_dwarven_scimitar_desc">Изогнутый клинок дварфов, идеально подходящий для быстрых ударов.</string>
+    <string name="item_dwarven_warhammer_desc">Массивный боевой молот дварфов, сокрушающий всё на своем пути.</string>
     <string name="item_tower_sword_name">Меч башни</string>
     <string name="item_tower_sword_desc">Клинок, который рассекал бесчисленные этажи башни.</string>
     <string name="item_balrog_whip_desc">Хлыст чистого пламени, отобранный у самого Тёмного демона. Горит вечным огнем.</string>
@@ -1053,11 +1053,11 @@
     <string name="item_runite_boots_desc">Пара рунитовых сапог.</string>
     <string name="item_runite_square_shield_desc">Рунитовый квадратный щит.</string>
     <string name="item_runite_kiteshield_desc">Рунитовый каплевидный щит.</string>
-    <string name="item_dwarven_helm_desc">A sturdy dwarven helmet, forged from ancient metals.</string> <!-- untranslated -->
-    <string name="item_dwarven_platebody_desc">Древняя гномья броня, почти непробиваемая.</string>
-    <string name="item_dwarven_platelegs_desc">Гномья броня для ног, идеально сбалансированная для боя.</string>
-    <string name="item_dwarven_boots_desc">Гномьи сапоги ручной работы, тяжелее стали, но почти неразрушимые.</string>
-    <string name="item_dwarven_shield_desc">Щит гномов, который выдержал бесчисленные битвы.</string>
+    <string name="item_dwarven_helm_desc">Крепкий шлем дварфов, выкованный из древних металлов.</string>
+    <string name="item_dwarven_platebody_desc">Древняя броня дварфов, почти непробиваемая.</string>
+    <string name="item_dwarven_platelegs_desc">Броня для ног дварфов, идеально сбалансированная для боя.</string>
+    <string name="item_dwarven_boots_desc">Сапоги ручной работы дварфов, тяжелее стали, но почти неразрушимые.</string>
+    <string name="item_dwarven_shield_desc">Щит дварфов, который выдержал бесчисленные битвы.</string>
     <string name="item_dragon_boots_desc">Пара драконьих сапог.</string>
     <string name="item_tower_helm_name">Шлем башни</string>
     <string name="item_tower_helm_desc">Шлем, найденный на верхних этажах башни.</string>
@@ -1065,8 +1065,8 @@
     <string name="item_tower_body_desc">Непробиваемая броня из внутреннего святилища башни.</string>
     <string name="item_tower_legs_name">Поножи башни</string>
     <string name="item_tower_legs_desc">Поножи, выкованные в самой глубокой кузнице башни.</string>
-    <string name="item_tower_plateskirt_name">Tower Plateskirt</string> <!-- untranslated -->
-    <string name="item_tower_plateskirt_desc">A plateskirt forged in the tower\'s deepest forge.</string> <!-- untranslated -->
+    <string name="item_tower_plateskirt_name">Латная юбка башни</string>
+    <string name="item_tower_plateskirt_desc">Латная юбка, выкованная в глубочайшей кузне башни</string>
     <string name="item_tower_boots_name">Сапоги башни</string>
     <string name="item_tower_boots_desc">Сапоги, выкованные в самой глубокой кузнице башни.</string>
     <string name="item_tower_shield_name">Щит башни</string>
@@ -1099,192 +1099,192 @@
     <string name="item_ring_of_dragons_might_desc">Кольцо, наполненное драконьим огнем. Значительно увеличивает силу в ближнем бою.</string>
     <string name="item_ring_of_the_seas_desc">Кольцо, благословленное морскими глубинами. Повышает точность  и мощность стрельбы.</string>
     <string name="item_kraken_tentacle_desc">Кольцо из извивающихся щупалец, которое направляет тайную силу Кракена.</string>
-    <string name="item_tower_cape_name">Tower Cape</string> <!-- untranslated -->
-    <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
-    <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
-    <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
-    <string name="item_mining_guild_cape_desc" formatted="false">Awarded for reaching Mining Guild level 10. Grants 5% more ore per session.</string> <!-- untranslated -->
-    <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
-    <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
-    <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
-    <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_desc" formatted="false">Awarded for reaching Smithing Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_cooking_cape_desc" formatted="false">Awarded for reaching level 99 Cooking. Grants 10% more food per session.</string> <!-- untranslated -->
-    <string name="item_cooking_guild_cape_desc" formatted="false">Awarded for reaching Cooking Guild level 10. Grants 5% more food per session.</string> <!-- untranslated -->
-    <string name="item_fletching_cape_desc" formatted="false">Awarded for reaching level 99 Fletching. Grants 10% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_fletching_guild_cape_desc" formatted="false">Awarded for reaching Fletching Guild level 10. Grants 5% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_crafting_cape_desc" formatted="false">Awarded for reaching level 99 Crafting. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_crafting_guild_cape_desc" formatted="false">Awarded for reaching Crafting Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_cape_desc" formatted="false">Awarded for reaching level 99 Firemaking. Grants 10% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_guild_cape_desc" formatted="false">Awarded for reaching Firemaking Guild level 10. Grants 5% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_cape_desc" formatted="false">Awarded for reaching level 99 Runecrafting. Grants 10% more runes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_guild_cape_desc" formatted="false">Awarded for reaching Runecrafting Guild level 10. Grants 5% more runes per session.</string> <!-- untranslated -->
-    <string name="item_herblore_cape_name">Herblore Cape</string> <!-- untranslated -->
-    <string name="item_herblore_cape_desc" formatted="false">Awarded for reaching level 99 Herblore. Grants 10% more potions per session.</string> <!-- untranslated -->
-    <string name="item_herblore_guild_cape_desc" formatted="false">Awarded for reaching Herblore Guild level 10. Grants 5% more potions per session.</string> <!-- untranslated -->
-    <string name="item_construction_cape_name">Construction Cape</string> <!-- untranslated -->
-    <string name="item_construction_cape_desc" formatted="false">Awarded for reaching level 99 Construction. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_prayer_cape_desc" formatted="false">Awarded for reaching level 99 Prayer. Strengthens your active blessing by 10%.</string> <!-- untranslated -->
-    <string name="item_prayer_guild_cape_desc" formatted="false">Awarded for reaching Prayer Guild level 10. Strengthens your active blessing by 5%.</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_name">Mercantile Cape</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_agility_cape_desc" formatted="false">Awarded for reaching level 99 Agility. Grants 10% more XP per session.</string> <!-- untranslated -->
-    <string name="item_agility_guild_cape_desc" formatted="false">Awarded for reaching Agility Guild level 10. Grants 5% more XP per session.</string> <!-- untranslated -->
-    <string name="item_slayer_cape_name">Slayer Cape</string> <!-- untranslated -->
-    <string name="item_slayer_cape_desc" formatted="false">Awarded for reaching level 99 Slayer. Grants 10% more Slayer points.</string> <!-- untranslated -->
-    <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
-    <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
-    <string name="item_defense_cape_desc" formatted="false">Awarded for reaching level 99 Defense. Grants 10% bonus Defense XP.</string> <!-- untranslated -->
-    <string name="item_warriors_guild_cape_desc" formatted="false">Awarded for reaching Warriors Guild level 10. Grants 5% bonus Attack, Strength, and Defense XP.</string> <!-- untranslated -->
-    <string name="item_ranged_cape_desc" formatted="false">Awarded for reaching level 99 Ranged. Grants 10% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_archers_guild_cape_desc" formatted="false">Awarded for reaching Archers Guild level 10. Grants 5% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_magic_cape_desc" formatted="false">Awarded for reaching level 99 Magic. Grants 10% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_mages_guild_cape_desc" formatted="false">Awarded for reaching Mages Guild level 10. Grants 5% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_slayer_guild_cape_desc" formatted="false">Awarded for reaching Slayers Guild level 10. Grants 5% bonus Slayer XP.</string> <!-- untranslated -->
-    <string name="item_hp_cape_desc" formatted="false">Awarded for reaching level 99 HP. Grants 10% bonus Hitpoints XP.</string> <!-- untranslated -->
-    <string name="item_deep_iron_pickaxe_desc">Forged from ore found in the Collapsed Mine\'s deepest shafts. Strikes with uncanny precision.</string> <!-- untranslated -->
-    <string name="item_dwarven_pickaxe_desc">A masterwork dwarven pickaxe. The finest mining tool ever crafted.</string> <!-- untranslated -->
-    <string name="item_forge_pickaxe_desc">Tempered in the flames of the Ancient Forge itself. The rarest and most powerful pickaxe in existence.</string> <!-- untranslated -->
-    <string name="item_ironwood_axe_desc">Hewn from the ironwood trees that once stood in the Ancient Forest Ruins. Exceptionally durable.</string> <!-- untranslated -->
-    <string name="item_dwarven_axe_desc">A legendary dwarven axe. Cuts through any tree with ease.</string> <!-- untranslated -->
-    <string name="item_sanctum_axe_desc">Forged in the shadow of the Corrupted Sanctum. Its blade cuts through even magic logs with ease.</string> <!-- untranslated -->
-    <string name="item_blessed_fishing_rod_desc">Crafted from driftwood recovered from the Drowned Temple, blessed by ancient sea rites.</string> <!-- untranslated -->
-    <string name="item_dwarven_fishing_rod_desc">A dwarven-crafted fishing rod. Practically hauls fish out of the water.</string> <!-- untranslated -->
-    <string name="item_abyssal_rod_desc">Woven from void-touched filament recovered from the Abyssal Ruins. Fish practically leap onto it.</string> <!-- untranslated -->
-    <string name="item_bronze_hoe_desc">A basic bronze hoe. Slightly increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_iron_hoe_desc">An iron hoe. Increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_steel_hoe_desc">A steel hoe. Noticeably increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_mithril_hoe_desc">A mithril hoe. Greatly increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_adamantite_hoe_desc">An adamantite hoe. Substantially increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_runite_hoe_desc">A runite hoe. The finest farming tool available.</string> <!-- untranslated -->
-    <string name="item_dwarven_hoe_desc">A legendary dwarven hoe. Doubles the harvest of any crop.</string> <!-- untranslated -->
-    <string name="item_divine_hoe_desc">A hoe blessed by divine light. Crops flourish at its touch.</string> <!-- untranslated -->
-    <string name="item_bronze_hammer_desc">A bronze hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_iron_hammer_desc">An iron hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_steel_hammer_desc">A steel hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_mithril_hammer_desc">A mithril hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_adamantite_hammer_desc">An adamantite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_runite_hammer_desc">A runite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_dwarven_hammer_desc">A dwarven-forged hammer. Strikes true every time.</string> <!-- untranslated -->
-    <string name="item_divine_hammer_desc">A hammer touched by divine light. Metal bends to its will.</string> <!-- untranslated -->
-    <string name="item_bronze_tinderbox_desc">A bronze tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_iron_tinderbox_desc">An iron tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_steel_tinderbox_desc">A steel tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_mithril_tinderbox_desc">A mithril tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_adamantite_tinderbox_desc">An adamantite tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_runite_tinderbox_desc">A runite tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_dwarven_tinderbox_desc">A dwarven-forged tinderbox. Sparks a roaring flame instantly.</string> <!-- untranslated -->
-    <string name="item_divine_tinderbox_desc">A tinderbox touched by divine light. Kindles flame from the faintest spark.</string> <!-- untranslated -->
-    <string name="item_bronze_grappling_hook_desc">A bronze grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_iron_grappling_hook_desc">An iron grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_steel_grappling_hook_desc">A steel grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_mithril_grappling_hook_desc">A mithril grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_adamantite_grappling_hook_desc">An adamantite grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_runite_grappling_hook_desc">A runite grappling hook for agility.</string> <!-- untranslated -->
-    <string name="item_shadow_grappling_hook_desc">A grappling hook woven from shadow. Grips even where there\'s nothing to grip.</string> <!-- untranslated -->
-    <string name="item_dwarven_grappling_hook_desc">A dwarven-forged grappling hook. Never slips.</string> <!-- untranslated -->
-    <string name="item_arcane_grappling_hook_desc">A grappling hook humming with arcane energy. Pulls you across gaps in an instant.</string> <!-- untranslated -->
-    <string name="item_divine_grappling_hook_desc">A grappling hook touched by divine light. Finds purchase anywhere it\'s thrown.</string> <!-- untranslated -->
-    <string name="item_bronze_frying_pan_desc">A bronze frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_iron_frying_pan_desc">An iron frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_steel_frying_pan_desc">A steel frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_mithril_frying_pan_desc">A mithril frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_adamantite_frying_pan_desc">An adamantite frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_runite_frying_pan_desc">A runite frying pan for cooking.</string> <!-- untranslated -->
-    <string name="item_dwarven_frying_pan_desc">A dwarven-forged frying pan. Cooks food to perfection every time.</string> <!-- untranslated -->
-    <string name="item_divine_frying_pan_desc">A frying pan touched by divine light. Never burns a single meal.</string> <!-- untranslated -->
-    <string name="item_bronze_lockpick_desc">A basic bronze lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_iron_lockpick_desc">An iron lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_steel_lockpick_desc">A steel lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_mithril_lockpick_desc">A mithril lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_adamantite_lockpick_desc">An adamantite lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_runite_lockpick_desc">A runite lockpick for thieving.</string> <!-- untranslated -->
-    <string name="item_rogues_lockpick_desc">A well-worn lockpick favored by the guild\'s rogues. Slips into any lock.</string> <!-- untranslated -->
-    <string name="item_dwarven_lockpick_desc">A dwarven-forged lockpick. Finds the tumblers instantly.</string> <!-- untranslated -->
-    <string name="item_shadow_lockpick_desc">A lockpick forged from shadow. No lock can resist it for long.</string> <!-- untranslated -->
-    <string name="item_divine_lockpick_desc">A lockpick touched by divine light. Every lock yields to it.</string> <!-- untranslated -->
-    <string name="item_wraithbone_ring_desc">A pale ring carved from wight bone during the Gloomharvest. Steadies the hand and the heart.</string> <!-- untranslated -->
-    <string name="item_reaper_scythe_desc">The Hollow King\'s own harvest tool. It reaps more than wheat.</string> <!-- untranslated -->
-    <string name="item_gloomweave_cape_desc">Woven from dusk and lantern smoke at the Night Market. Only sold during the Gloomharvest.</string> <!-- untranslated -->
-    <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_wind_strike_name">Wind Strike</string> <!-- untranslated -->
-    <string name="item_wind_strike_desc">A basic air spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_wind_bolt_name">Wind Bolt</string> <!-- untranslated -->
-    <string name="item_wind_bolt_desc">A moderate air spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_wind_blast_name">Wind Blast</string> <!-- untranslated -->
-    <string name="item_wind_blast_desc">A powerful air spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_wind_wave_name">Wind Wave</string> <!-- untranslated -->
-    <string name="item_wind_wave_desc">A devastating air spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_water_strike_name">Water Strike</string> <!-- untranslated -->
-    <string name="item_water_strike_desc">A basic water spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_water_bolt_name">Water Bolt</string> <!-- untranslated -->
-    <string name="item_water_bolt_desc">A moderate water spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_water_blast_name">Water Blast</string> <!-- untranslated -->
-    <string name="item_water_blast_desc">A powerful water spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_water_wave_name">Water Wave</string> <!-- untranslated -->
-    <string name="item_water_wave_desc">A devastating water spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_earth_strike_name">Earth Strike</string> <!-- untranslated -->
-    <string name="item_earth_strike_desc">A basic earth spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_earth_bolt_name">Earth Bolt</string> <!-- untranslated -->
-    <string name="item_earth_bolt_desc">A moderate earth spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_earth_blast_name">Earth Blast</string> <!-- untranslated -->
-    <string name="item_earth_blast_desc">A powerful earth spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_earth_wave_name">Earth Wave</string> <!-- untranslated -->
-    <string name="item_earth_wave_desc">A devastating earth spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_fire_strike_name">Fire Strike</string> <!-- untranslated -->
-    <string name="item_fire_strike_desc">A basic fire spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_fire_bolt_name">Fire Bolt</string> <!-- untranslated -->
-    <string name="item_fire_bolt_desc">A moderate fire spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_fire_blast_name">Fire Blast</string> <!-- untranslated -->
-    <string name="item_fire_blast_desc">A powerful fire spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_fire_wave_name">Fire Wave</string> <!-- untranslated -->
-    <string name="item_fire_wave_desc">A devastating fire spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_mind_strike_name">Mind Strike</string> <!-- untranslated -->
-    <string name="item_mind_strike_desc">A basic mind spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_mind_bolt_name">Mind Bolt</string> <!-- untranslated -->
-    <string name="item_mind_bolt_desc">A moderate mind spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_mind_blast_name">Mind Blast</string> <!-- untranslated -->
-    <string name="item_mind_blast_desc">A powerful mind spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_mind_wave_name">Mind Wave</string> <!-- untranslated -->
-    <string name="item_mind_wave_desc">A devastating mind spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_strike_name">Chaos Strike</string> <!-- untranslated -->
-    <string name="item_chaos_strike_desc">A basic chaos spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_bolt_name">Chaos Bolt</string> <!-- untranslated -->
-    <string name="item_chaos_bolt_desc">A moderate chaos spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_blast_name">Chaos Blast</string> <!-- untranslated -->
-    <string name="item_chaos_blast_desc">A powerful chaos spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_wave_name">Chaos Wave</string> <!-- untranslated -->
-    <string name="item_chaos_wave_desc">A devastating chaos spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_death_strike_name">Death Strike</string> <!-- untranslated -->
-    <string name="item_death_strike_desc">A basic death spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_death_bolt_name">Death Bolt</string> <!-- untranslated -->
-    <string name="item_death_bolt_desc">A moderate death spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_death_blast_name">Death Blast</string> <!-- untranslated -->
-    <string name="item_death_blast_desc">A powerful death spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_death_wave_name">Death Wave</string> <!-- untranslated -->
-    <string name="item_death_wave_desc">A devastating death spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_blood_strike_name">Blood Strike</string> <!-- untranslated -->
-    <string name="item_blood_strike_desc">A basic blood spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_blood_bolt_name">Blood Bolt</string> <!-- untranslated -->
-    <string name="item_blood_bolt_desc">A moderate blood spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_blood_blast_name">Blood Blast</string> <!-- untranslated -->
-    <string name="item_blood_blast_desc">A powerful blood spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_blood_wave_name">Blood Wave</string> <!-- untranslated -->
-    <string name="item_blood_wave_desc">A devastating blood spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_spirit_herb_name">Spirit Herb</string> <!-- untranslated -->
-    <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_name">Celestial Bloom</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_desc">An ethereal flower used in master potions. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
-    <string name="item_void_lotus_name">Void Lotus</string> <!-- untranslated -->
-    <string name="item_void_lotus_desc">A mysterious lotus used in the rarest concoctions. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
-    <string name="crop_magic_bean_name">Magic Bean</string> <!-- untranslated -->
+    <string name="item_tower_cape_name">Плащ башни</string>
+    <string name="item_tower_cape_desc">Развевающаяся накидка, которая излучает энергию башни.</string>
+    <string name="item_mining_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Добычи руды. Дает на 10% больше руды за сессию.</string>
+    <string name="item_construction_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии строителей. Дает на 5% больше мебели за сессию.</string>
+    <string name="item_mining_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии рудокопов. Дает на 5% больше руды за сессию.</string>
+    <string name="item_fishing_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Рыбалки. Дает на 10% больше рыбы за сессию.</string>
+    <string name="item_fishing_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии рыболовов. Дает на 5% больше рыбы за сессию.</string>
+    <string name="item_woodcutting_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Рубки леса. Дает на 10% больше бревен за сессию.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии лесорубов. Дает на 5% больше бревен за сессию.</string>
+    <string name="item_farming_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Фермерства. Дает на 10% больше урожая за сессию.</string>
+    <string name="item_farming_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии фермеров. Дает на 5% больше урожая за сессию.</string>
+    <string name="item_thieving_cape_name">Плащ вора</string>
+    <string name="item_thieving_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Воровства. Увеличивает количество успешных карманных краж на 10% за сессию.</string>
+    <string name="item_thieving_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии воров. Дает на 5% больше успешных карманных краж за сессию.</string>
+    <string name="item_smithing_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Кузнечного дела. Дает на 10% больше предметов за сессию.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии кузнецов. Дает на 5% больше предметов за сессию.</string>
+    <string name="item_cooking_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Кулинарии. Дает на 10% больше еды за каждый сессию.</string>
+    <string name="item_cooking_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии кулинаров. Дает на 5% больше еды за сессию.</string>
+    <string name="item_fletching_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Лучного дела. Дает на 10% больше стрел за сессию.</string>
+    <string name="item_fletching_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии лучников. Дает на 5% больше стрел за сессию.</string>
+    <string name="item_crafting_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Ремесла. Дает на 10% больше предметов за сессию.</string>
+    <string name="item_crafting_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии ремесленников. Дает на 5% больше стрел за сессию.</string>
+    <string name="item_firemaking_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Владения огнём. Дает на 10% больше пепла за сессию.</string>
+    <string name="item_firemaking_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии поджигателей. Дает на 5% больше пепла за сессию.</string>
+    <string name="item_runecrafting_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Создания рун. Дает на 10% больше рун за сессию.</string>
+    <string name="item_runecrafting_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии создателей рун. Дает на 5% больше рун за сессию.</string>
+    <string name="item_herblore_cape_name">Плащ травника</string>
+    <string name="item_herblore_cape_desc" formatted="false">Присуждается за достижение 99-го уровня травничества. Дает на 10% больше зелий за сессию.</string>
+    <string name="item_herblore_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии травников. Дает на 5% больше зелий за сессию.</string>
+    <string name="item_construction_cape_name">Плащ строителя</string>
+    <string name="item_construction_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Строительства. Дает на 10% больше предметов за сессию.</string>
+    <string name="item_prayer_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Молитвы. Усиливает ваше активное благословение на 10%.</string>
+    <string name="item_prayer_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии молитвы. Усиливает ваше активное благословение на 5%.</string>
+    <string name="item_mercantile_cape_name">Плащ торговца</string>
+    <string name="item_mercantile_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Торговля. Повышает цены в магазинах на 10% и прибыль от торговли.</string>
+    <string name="item_mercantile_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии торговцев. Повышает цены в магазинах и прибыль от торговли на 5%.</string>
+    <string name="item_agility_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Ловкости. Дает на 10% больше опыта за сессию.</string>
+    <string name="item_agility_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии ловкости. Дает на 5% больше опыта за сессию.</string>
+    <string name="item_slayer_cape_name">Плащ убийцы</string>
+    <string name="item_slayer_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Убийцы. Дает на 10% больше очков убийцы.</string>
+    <string name="item_attack_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Силы. Дает 10% дополнительного опыта при использовании силы.</string>
+    <string name="item_strength_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Силы. Дает 10% дополнительного опыта при использовании силы.</string>
+    <string name="item_defense_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Защиты. Дает 10% дополнительного опыта при использовании защиты.</string>
+    <string name="item_warriors_guild_cape_desc" formatted="false">Присуждается при достижении 10-го уровня Гильдии воинов. Дает 5% дополнительного опыта в атаке, силе и защите.</string>
+    <string name="item_ranged_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Стрельбы. Дает 10% дополнительного опыта стрельбы.</string>
+    <string name="item_archers_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии лучников. Дает 5% дополнительного опыта стрельбы.</string>
+    <string name="item_magic_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Магии. Дает 10% дополнительного опыта магии.</string>
+    <string name="item_mages_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии магов. Дает 5% дополнительного магического опыта.</string>
+    <string name="item_slayer_guild_cape_desc" formatted="false">Присуждается за достижение 10-го уровня Гильдии убийц. Дает 5% дополнительного опыта убийцы.</string>
+    <string name="item_hp_cape_desc" formatted="false">Присуждается за достижение 99-го уровня Здоровья. Дает 10% дополнительных очков опыта здоровья.</string>
+    <string name="item_deep_iron_pickaxe_desc">Выкован из руды, найденной в самых глубоких штольнях Обрушившейся шахты. Наносит удары со сверхъестественной точностью.</string>
+    <string name="item_dwarven_pickaxe_desc">Мастерски сделанная кирка дварфов. Лучший инструмент для добычи полезных ископаемых, когда-либо созданный.</string>
+    <string name="item_forge_pickaxe_desc">Закаленный в пламени самой Древней кузницы. Самая редкая и мощная кирка из существующих.</string>
+    <string name="item_ironwood_axe_desc">Вырезан из железного дерева, которое когда-то росло на остатках Древнего леса. Исключительно прочный.</string>
+    <string name="item_dwarven_axe_desc">Легендарный топор дварфов. С легкостью разрубает любое дерево.</string>
+    <string name="item_sanctum_axe_desc">Выкован в тени Осквернённого святилища. Его лезвие с легкостью разрубает даже магические бревна.</string>
+    <string name="item_blessed_fishing_rod_desc">Изготовленный из плавучего дерева, найденного в Затопленном храме, освященный древними морскими обрядами.</string>
+    <string name="item_dwarven_fishing_rod_desc">Удочка, изготовленная дварфами. Практически сама вытаскивает рыбу из воды.</string>
+    <string name="item_abyssal_rod_desc">Сделана из соприкасающейся с пустотой нити, найденной в Бездонных руинах. Рыба практически прыгает на неё.</string>
+    <string name="item_bronze_hoe_desc">Обычная бронзовая мотыга. Немного повышает урожайность.</string>
+    <string name="item_iron_hoe_desc">Железная мотыга. Повышает урожайность.</string>
+    <string name="item_steel_hoe_desc">Стальная мотыга. Заметно повышает урожайность.</string>
+    <string name="item_mithril_hoe_desc">Мифриловая мотыга. Значительно повышает урожайность.</string>
+    <string name="item_adamantite_hoe_desc">Адамантитовая мотыга. Существенно повышает урожайность.</string>
+    <string name="item_runite_hoe_desc">Рунная мотыга. Лучший из доступных инструментов для ведения сельского хозяйства.</string>
+    <string name="item_dwarven_hoe_desc">Легендарная мотыга дварфов. Удваивает урожай любой культуры.</string>
+    <string name="item_divine_hoe_desc">Мотыга, благословленная божественным светом. Посевы расцветают от ее прикосновения.</string>
+    <string name="item_bronze_hammer_desc">Бронзовый кузнечный молот.</string>
+    <string name="item_iron_hammer_desc">Железный кузнечный молот.</string>
+    <string name="item_steel_hammer_desc">Стальной кузнечный молот.</string>
+    <string name="item_mithril_hammer_desc">Мифриловый кузнечный молот.</string>
+    <string name="item_adamantite_hammer_desc">Адамантитовый кузнечный молот.</string>
+    <string name="item_runite_hammer_desc">Рунитовый кузнечный молот.</string>
+    <string name="item_dwarven_hammer_desc">Молот, выкованный дварфами. Каждый раз удар попадает точно в цель.</string>
+    <string name="item_divine_hammer_desc">Молот, которого коснулся божественный свет. Металл подчиняется его воле.</string>
+    <string name="item_bronze_tinderbox_desc">Бронзовое огниво для разведения огня.</string>
+    <string name="item_iron_tinderbox_desc">Железное огниво для разведения огня.</string>
+    <string name="item_steel_tinderbox_desc">Стальное огниво для разведения огня.</string>
+    <string name="item_mithril_tinderbox_desc">Мифриловое огниво для разведения огня.</string>
+    <string name="item_adamantite_tinderbox_desc">Адамантитовое огниво для разведения огня.</string>
+    <string name="item_runite_tinderbox_desc">Рунитовое огниво для разведения огня.</string>
+    <string name="item_dwarven_tinderbox_desc">Огниво, выкованное дварфами. Мгновенно распаляет ревущее пламя.</string>
+    <string name="item_divine_tinderbox_desc">Огниво, тронутое божественным светом. Разжигает пламя от малейшей искры.</string>
+    <string name="item_bronze_grappling_hook_desc">Бронзовый крюк-кошка для ловкости.</string>
+    <string name="item_iron_grappling_hook_desc">Железный крюк-кошка для ловкости.</string>
+    <string name="item_steel_grappling_hook_desc">Стальной крюк-кошка для ловкости.</string>
+    <string name="item_mithril_grappling_hook_desc">Мифриловый крюк-кошка для ловкости.</string>
+    <string name="item_adamantite_grappling_hook_desc">Адамантитовый крюк-кошка для ловкости.</string>
+    <string name="item_runite_grappling_hook_desc">Рунитовый крюк-кошка для ловкости.</string>
+    <string name="item_shadow_grappling_hook_desc">Крюк-кошка, сотканный из тени. Захватывает даже там, где не за что хвататься.</string>
+    <string name="item_dwarven_grappling_hook_desc">Крюк-кошка, выкованный дварфами. Никогда не соскальзывает.</string>
+    <string name="item_arcane_grappling_hook_desc">Крюк-кошка, гудящий от магической энергии. Мгновенно переносит вас через пропасти.</string>
+    <string name="item_divine_grappling_hook_desc">Крюк-кошка, которого коснулся божественный свет. Находит опору везде, куда его бросают.</string>
+    <string name="item_bronze_frying_pan_desc">Бронзовая сковорода для приготовления пищи.</string>
+    <string name="item_iron_frying_pan_desc">Железная сковорода для приготовления пищи.</string>
+    <string name="item_steel_frying_pan_desc">Стальная сковорода для приготовления пищи.</string>
+    <string name="item_mithril_frying_pan_desc">Мифриловая сковорода для приготовления пищи.</string>
+    <string name="item_adamantite_frying_pan_desc">Адамантитовая сковорода для приготовления пищи.</string>
+    <string name="item_runite_frying_pan_desc">Рунитовая сковорода для приготовления пищи.</string>
+    <string name="item_dwarven_frying_pan_desc">Сковорода, выкованная дварфами. Каждый раз готовьте блюда идеально.</string>
+    <string name="item_divine_frying_pan_desc">Сковорода, освещенная божественным светом. Ни одно блюдо не подгорает.</string>
+    <string name="item_bronze_lockpick_desc">Обычная бронзовая отмычка для воровства.</string>
+    <string name="item_iron_lockpick_desc">Железная отмычка для воровства.</string>
+    <string name="item_steel_lockpick_desc">Стальная отмычка для воровства.</string>
+    <string name="item_mithril_lockpick_desc">Мифриловая отмычка для воровства.</string>
+    <string name="item_adamantite_lockpick_desc">Адамантитовая отмычка для воровства.</string>
+    <string name="item_runite_lockpick_desc">Рунитовая отмычка для воровства.</string>
+    <string name="item_rogues_lockpick_desc">Хорошо зарекомендовавшая себя отмычка, которой пользуются взломщики гильдии. Подходит к любому замку.</string>
+    <string name="item_dwarven_lockpick_desc">Отмычка, выкованная дварфами. Мгновенно находит рычажки в замках.</string>
+    <string name="item_shadow_lockpick_desc">Отмычка, выкованная из тени. Ни один замок не может долго противостоять ей.</string>
+    <string name="item_divine_lockpick_desc">Отмычка, к которой прикоснулся божественный свет. Любой замок поддается ей.</string>
+    <string name="item_wraithbone_ring_desc">Бледное кольцо, вырезанное из кости мертвецов во время Мрачной жатвы. Укрепляет руку и сердце.</string>
+    <string name="item_reaper_scythe_desc">Инструмент жатвы, принадлежащий Пустоголовому королю. Он собирает не только пшеницу.</string>
+    <string name="item_gloomweave_cape_desc">Сотканный из сумерек и дыма от фонарей на ночном рынке. Продается только во время Мрачной жатвы.</string>
+    <string name="item_gilded_full_helmet_desc">Рунитовый закрытый шлем, украшенный старинным золотом. Оставлен Стражем Хранилища.</string>
+    <string name="item_gilded_platebody_desc">Рунитовый нагрудник, украшенный старинным золотом. Оставлен Стражем Хранилища.</string>
+    <string name="item_gilded_kiteshield_desc">Рунитовый каплевидный щит, украшенный старинным золотом. Оставлен Стражем Хранилища.</string>
+    <string name="item_wind_strike_name">Удар ветра</string>
+    <string name="item_wind_strike_desc">Базовое воздушное заклинание, поражающее вашего врага.</string>
+    <string name="item_wind_bolt_name">Струя ветра</string>
+    <string name="item_wind_bolt_desc">Умеренное воздушное заклинание, поражающее вашего врага молнией.</string>
+    <string name="item_wind_blast_name">Взрыв ветра</string>
+    <string name="item_wind_blast_desc">Мощное воздушное заклинание, которое уничтожает вашего врага.</string>
+    <string name="item_wind_wave_name">Волна ветра</string>
+    <string name="item_wind_wave_desc">Разрушительное воздушное заклинание, которое обрушивается на вашего врага.</string>
+    <string name="item_water_strike_name">Удар воды</string>
+    <string name="item_water_strike_desc">Базовое водное заклинание, поражающее вашего врага.</string>
+    <string name="item_water_bolt_name">Струя воды</string>
+    <string name="item_water_bolt_desc">Умеренное водное заклинание, поражающее вашего врага.</string>
+    <string name="item_water_blast_name">Взрыв воды</string>
+    <string name="item_water_blast_desc">Мощное водное заклинание, которое уничтожает вашего врага.</string>
+    <string name="item_water_wave_name">Волна воды</string>
+    <string name="item_water_wave_desc">Разрушительное водное заклинание, которое обрушивается на вашего врага.</string>
+    <string name="item_earth_strike_name">Удар земли</string>
+    <string name="item_earth_strike_desc">Базовое земляное заклинание, поражающее вашего врага.</string>
+    <string name="item_earth_bolt_name">Струя земли</string>
+    <string name="item_earth_bolt_desc">Умеренное земляное заклинание, поражающее вашего врага.</string>
+    <string name="item_earth_blast_name">Взрыв земли</string>
+    <string name="item_earth_blast_desc">Мощное земляное заклинание, которое уничтожает вашего врага.</string>
+    <string name="item_earth_wave_name">Волна земли</string>
+    <string name="item_earth_wave_desc">Разрушительное земляное заклинание, которое обрушивается на вашего врага.</string>
+    <string name="item_fire_strike_name">Удар огня</string>
+    <string name="item_fire_strike_desc">Базовое огненное заклинание, поражающее вашего врага.</string>
+    <string name="item_fire_bolt_name">Струя огня</string>
+    <string name="item_fire_bolt_desc">Умеренное огненное заклинание, поражающее вашего врага.</string>
+    <string name="item_fire_blast_name">Взрыв огня</string>
+    <string name="item_fire_blast_desc">Мощное огненное заклинание, которое уничтожает вашего врага.</string>
+    <string name="item_fire_wave_name">Волна огня</string>
+    <string name="item_fire_wave_desc">Разрушительное огненное заклинание, которое обрушивается на вашего врага.</string>
+    <string name="item_mind_strike_name">Удар разума</string>
+    <string name="item_mind_strike_desc">Базовое заклинание разума, поражающее вашего врага.</string>
+    <string name="item_mind_bolt_name">Струя разума</string>
+    <string name="item_mind_bolt_desc">Умеренное заклинание разума, поражающее вашего врага.</string>
+    <string name="item_mind_blast_name">Взрыв разума</string>
+    <string name="item_mind_blast_desc">Мощное заклинание разума, которое уничтожает вашего врага.</string>
+    <string name="item_mind_wave_name">Волна разума</string>
+    <string name="item_mind_wave_desc">Разрушительное заклинание разума, которое обрушивается на вашего врага.</string>
+    <string name="item_chaos_strike_name">Удар хаоса</string>
+    <string name="item_chaos_strike_desc">Базовое заклинание хаоса, поражающее вашего врага.</string>
+    <string name="item_chaos_bolt_name">Струя хаоса</string>
+    <string name="item_chaos_bolt_desc">Умеренное заклинание хаоса, поражающее вашего врага.</string>
+    <string name="item_chaos_blast_name">Взрыв хаоса</string>
+    <string name="item_chaos_blast_desc">Мощное заклинание хаоса, которое уничтожает вашего врага.</string>
+    <string name="item_chaos_wave_name">Волна хаоса</string>
+    <string name="item_chaos_wave_desc">Разрушительное заклинание хаоса, которое обрушивается на вашего врага.</string>
+    <string name="item_death_strike_name">Удар смерти</string>
+    <string name="item_death_strike_desc">Базовое заклинание смерти, поражающее вашего врага.</string>
+    <string name="item_death_bolt_name">Струя смерти</string>
+    <string name="item_death_bolt_desc">Умеренное заклинание смерти, поражающее вашего врага.</string>
+    <string name="item_death_blast_name">Взрыв смерти</string>
+    <string name="item_death_blast_desc">Мощное заклинание смерти, которое уничтожает вашего врага.</string>
+    <string name="item_death_wave_name">Волна смерти</string>
+    <string name="item_death_wave_desc">Разрушительное заклинание смерти, которое обрушивается на вашего врага.</string>
+    <string name="item_blood_strike_name">Удар крови</string>
+    <string name="item_blood_strike_desc">Базовое заклинание крови, поражающее вашего врага.</string>
+    <string name="item_blood_bolt_name">Струя крови</string>
+    <string name="item_blood_bolt_desc">Умеренное заклинание крови, поражающее вашего врага.</string>
+    <string name="item_blood_blast_name">Взрыв крови</string>
+    <string name="item_blood_blast_desc">Мощное заклинание крови, которое уничтожает вашего врага.</string>
+    <string name="item_blood_wave_name">Волна крови</string>
+    <string name="item_blood_wave_desc">Разрушительное заклинание крови, которое обрушивается на вашего врага.</string>
+    <string name="item_spirit_herb_name">Трава духов</string>
+    <string name="item_spirit_herb_desc">Редкое растение, используемое в высокоуровневом сборе трав. Для покупки требуется Торговля 20-го уровня.</string>
+    <string name="item_celestial_bloom_name">Небесный цветок</string>
+    <string name="item_celestial_bloom_desc">Неземной цветок, используемый в мастерстве зелий. Для покупки требуется Торговля 40-го уровня.</string>
+    <string name="item_void_lotus_name">Лотос пустоты</string>
+    <string name="item_void_lotus_desc">Таинственный лотос, используемый в самых редких отварах. Для покупки требуется Торговля 60-го уровня.</string>
+    <string name="crop_magic_bean_name">Волшебный боб</string>
 </resources>

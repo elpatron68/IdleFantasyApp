@@ -96,6 +96,8 @@ data class PlayerFlags(
     @SerialName("divine_pity_misses") val divinePityMisses: Int = 0,
     /** Claimed dailies since the last Dwarven gear drop; each narrows the drop odds by 2 (1/100, 1/98, ...). */
     @SerialName("dwarven_pity_claims") val dwarvenPityClaims: Int = 0,
+    /** Local-time hour (0-23) at which dailies, guild dailies, and weeklies reset. */
+    @SerialName("daily_reset_hour") val dailyResetHour: Int = 6,
 
     /** Currently hired worker, or null if none. */
     @SerialName("hired_worker") val hiredWorker: HiredWorker? = null,

@@ -140,7 +140,7 @@ fun AppNavigation(
                                         saveState = true
                                     }
                                     launchSingleTop = true
-                                    restoreState = !isHome && screen !is Screen.Profile
+                                    restoreState = !isHome
                                 }
                             }
                         },
@@ -206,6 +206,7 @@ fun AppNavigation(
             composable(Screen.Home.route)     {
                 HomeScreen(
                     onNavigateToSettings     = { navController.navigate(Screen.Settings.route) },
+                    onNavigateToSaveSlots    = { navController.navigate(Screen.Settings.saveSlotsRoute) },
                     onNavigateToShop         = { navController.navigate(Screen.Shop.route) },
                     onNavigateToInn          = { navController.navigate(Screen.Inn.route) },
                     onNavigateToWorkerSkills = { slot -> navController.navigate(Screen.WorkerSkills.routeWithSlot(slot)) },

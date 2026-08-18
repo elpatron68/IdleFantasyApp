@@ -131,6 +131,7 @@ fun InnScreen(
                     DailyMenuSection(
                         foods = state.dailyFoods,
                         coins = state.coins,
+                        dailyResetHour = state.dailyResetHour,
                         onBuy = { food -> buyDialogFood = food },
                     )
                 }
@@ -256,6 +257,7 @@ fun InnScreen(
 private fun DailyMenuSection(
     foods: List<DailyFoodItem>,
     coins: Long,
+    dailyResetHour: Int,
     onBuy: (DailyFoodItem) -> Unit,
 ) {
     Surface(
@@ -275,7 +277,7 @@ private fun DailyMenuSection(
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
-                    text  = stringResource(R.string.inn_daily_resets, dailyResetClockTime(LocalContext.current)),
+                    text  = stringResource(R.string.inn_daily_resets, dailyResetClockTime(LocalContext.current, dailyResetHour)),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

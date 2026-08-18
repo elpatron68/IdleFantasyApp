@@ -66,8 +66,8 @@
     <string name="label_by_location">Podle místa</string>
     <string name="bestiary_not_encountered">Dosud nepotkán</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
-    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="bestiary_chance_header">Šance</string>
+    <string name="bestiary_encountered_progress">%1$d / %2$d potkáno</string>
     <string name="bestiary_always_drops">Always Drops</string> <!-- untranslated -->
     <string name="bestiary_rare_drops">Rare Drops</string> <!-- untranslated -->
     <string name="bestiary_common_loot">Běžná kořist</string>
@@ -80,19 +80,19 @@
     <string name="label_session_active">Sezení aktivní</string>
     <string name="label_no_active_session">Žádné aktivní sezení</string>
     <string name="label_session_complete">Sezení dokončeno!</string>
-    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
-    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
-    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
-    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
-    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
-    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
-    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
-    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
-    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
-    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
+    <string name="home_sessions_complete_title">%1$d Sezení dokončeno!</string>
+    <string name="home_boss_defeated_title">Porazils %1$s!</string>
+    <string name="home_boss_defeated_by_title">%1$s tě porazil.</string>
+    <string name="home_dungeon_died_title">%1$s — Zemřel jsi</string>
+    <string name="home_dungeon_complete_title">%1$s Dokončeno!</string>
+    <string name="home_expedition_complete_title">%1$s Expedice dokončena</string>
+    <string name="home_skill_session_complete_title">%1$s Sezení dokončeno</string>
+    <string name="home_bones_buried_row">%1$s pohřbeno</string>
+    <string name="worker_sessions_complete_title">Pracovník: %1$d Sezení dokončeno!</string>
+    <string name="worker_boss_defeated_title">Pracovník: Porazil %1$s!</string>
+    <string name="worker_dungeon_died_title">Pracovník: %1$s — Zemřel</string>
+    <string name="worker_dungeon_complete_title">Pracovník: %1$s Dokončeno!</string>
+    <string name="worker_skill_complete_title">Pracovník: %1$s Dokončeno</string>
     <string name="label_training">Trénink</string>
     <string name="label_gathering_skills">Sbírání</string>
     <string name="label_crafting_skills">Řemesla</string>
@@ -100,13 +100,13 @@
     <string name="label_coming_soon">Již brzy</string>
     <string name="label_time_remaining">Zbývající čas</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
-    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
+    <string name="duration_months">%1$dměs</string>
+    <string name="duration_weeks">%1$dt</string>
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
     <string name="duration_hours">%1$dh</string> <!-- untranslated -->
     <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
     <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
-    <string name="duration_complete">Complete</string> <!-- untranslated -->
+    <string name="duration_complete">Dokončeno</string>
     <string name="label_session_results">Výsledky sezení</string>
     <string name="label_xp_gained">Získané XP</string>
     <string name="label_items_collected">Získané předměty</string>
@@ -149,8 +149,169 @@
     <string name="label_available_quests">Dostupné</string>
     <string name="label_stats">Statistiky</string>
     <string name="label_skills">Dovednosti</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
+    <string name="label_shop">Obchod</string>
+    <string name="label_sell_items">Prodat předměty</string>
+    <string name="label_total_level">Celková úroveň</string>
+    <string name="label_wins">Výhry</string>
+    <string name="label_losses">Prohry</string>
+    <string name="label_active">Aktivní</string>
+    <string name="label_inactive">Neaktivní</string>
+    <string name="label_boost">Posílení</string>
+    <string name="label_xp_boost">Posílení XP</string>
+    <string name="label_weapon">Zbraň</string>
+    <string name="label_armour">Zbroj</string>
+    <string name="label_food">Jídlo</string>
+    <string name="label_arrows_consumed">Šípy spotřebované</string>
+    <string name="label_arrows_reclaimed">Šípy sebrané</string>
+    <string name="label_runes_consumed">Runy spotřebované</string>
+    <string name="label_runes_reclaimed">Runy sebrané</string>
+    <string name="label_arrows">Šípy</string>
+    <string name="label_runes">Runy</string>
+    <string name="label_spell">Kouzla</string>
+    <string name="label_none">Žádné</string>
+    <string name="label_melee">Na blízko</string>
+    <string name="label_ranged_style">Na dálku</string>
+    <string name="label_magic_style">Magie</string>
+    <string name="label_gathering">Sbírání</string>
+    <string name="label_crafting">Řemesla</string>
+    <string name="label_jewellery">Šperky</string>
+    <string name="label_combat">Boj</string>
+    <string name="label_recipe">Recept</string>
+    <string name="label_recipes">Recepty</string>
+    <string name="label_ingredients">Ingredience</string>
+    <string name="label_output">Výstup</string>
+    <string name="label_xp_per_action">XP za akci</string>
+    <string name="label_unlocked_at">Odemčeno na úrovni</string>
+    <string name="label_kills">Zabití</string>
+    <string name="label_personal_best">Osobní rekord</string>
+    <string name="label_daily_dig">Denní vykopávky</string>
+    <string name="label_dig_depth">Hloubka jámy</string>
+    <string name="label_version">Verze</string>
+
+
+    <!-- ===== Format strings — all use positional args for Weblate ===== -->
+    <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
+    <string name="format_level_xp">Úroveň %1$d — %2$s XP</string>
+    <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
+    <string name="format_xp_to_next">%1$s XP na úroveň %2$d</string>
+    <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
+    <string name="format_time_remaining">Zbývá %1$s</string>
+    <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
+    <string name="format_started_ago">Započato před %1$s</string>
+    <!-- Translator note: %1$s = item display name, %2$d = quantity -->
+
+    <!-- Translator note: %1$d = coin amount -->
+    <string name="format_price_coins">%1$d mincí</string>
+    <!-- Translator note: %1$d = required level, %2$s = skill display name -->
+    <string name="format_level_requirement">Vyžaduje úroveň %1$d %2$s</string>
+    <!-- Translator note: %1$s = formatted XP amount -->
+    <string name="format_xp_per_action">%1$s XP za akci</string>
+    <!-- Translator note: %1$d = patch number -->
+    <string name="format_patch_number">Záhon %1$d</string>
+    <!-- Translator note: %1$d = wins, %2$d = losses -->
+    <string name="format_arena_record">%1$d výher / %2$d proher</string>
+    <!-- Translator note: %1$s = skill display name, %2$d = level number -->
+    <string name="format_skill_level">%1$s: Úroveň %2$d</string>
+    <!-- Translator note: %1$d = boost percentage -->
+    <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="format_coin_boost_percent">+%1$d%% mincí</string>
+    <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
+
+    <!-- Translator note: %1$d = minutes remaining -->
+    <string name="format_minutes_remaining">%1$d min zbývá</string>
+    <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
+    <string name="format_version">Verze %1$s</string>
+
+    <!-- ===== Plurals ===== -->
+    <plurals name="plural_level_ups">
+        <item quantity="one">%1$d level up</item>
+        <item quantity="other">%1$d level ups</item>
+    </plurals> <!-- untranslated -->
+    <plurals name="plural_items">
+        <item quantity="one">%1$d předmět</item>
+        <item quantity="other">%1$d předmětů</item>
+        <item quantity="two">%1$d předměty</item>
+    </plurals>
+    <plurals name="plural_minutes">
+        <item quantity="one">%1$d minuta</item>
+        <item quantity="other">%1$d minut</item>
+        <item quantity="two">%1$d minuty</item>
+    </plurals>
+    <plurals name="plural_hours">
+        <item quantity="one">%1$d hodina</item>
+        <item quantity="other">%1$d hodin</item>
+        <item quantity="two">%1$d hodiny</item>
+    </plurals>
+    <plurals name="plural_patches">
+        <item quantity="one">%1$d záhon</item>
+        <item quantity="other">%1$d záhonů</item>
+        <item quantity="two">%1$d záhony</item>
+    </plurals>
+    <plurals name="plural_kills">
+        <item quantity="one">%1$d zabití</item>
+        <item quantity="other">%1$d zabití</item>
+    </plurals>
+    <plurals name="plural_quests_completed">
+        <item quantity="one">%1$d quest completed</item>
+        <item quantity="other">%1$d quests completed</item>
+    </plurals> <!-- untranslated -->
+
+    <!-- ===== Error messages ===== -->
+    <string name="error_no_player">Could not load player data. Please restart the app.</string> <!-- untranslated -->
+    <string name="error_session_already_active">You already have an active session. Complete or abandon it first.</string> <!-- untranslated -->
+    <string name="error_not_enough_coins">Nedostatek mincí.</string>
+    <!-- Translator note: %1$s = item display name -->
+    <string name="error_not_enough_items">Not enough %1$s.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = skill display name -->
+    <string name="error_level_too_low">Your %1$s level is too low.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = item display name -->
+    <string name="error_inventory_required">You need %1$s to do this.</string> <!-- untranslated -->
+    <string name="error_patch_occupied">This patch is already planted.</string> <!-- untranslated -->
+    <string name="error_patch_empty">This patch is empty.</string> <!-- untranslated -->
+    <string name="error_crop_not_ready">This crop is not ready yet.</string> <!-- untranslated -->
+    <string name="error_quest_active">You already have an active quest.</string> <!-- untranslated -->
+    <string name="error_quest_requirements_not_met">You don\'t meet the requirements for this quest.</string> <!-- untranslated -->
+    <string name="error_dungeon_level_too_low">Your combat level is too low for this dungeon.</string> <!-- untranslated -->
+    <string name="error_unknown">Something went wrong. Please try again.</string> <!-- untranslated -->
+
+    <!-- ===== Session dialogs ===== -->
+    <string name="session_abandon_title">Opustit sezení?</string>
+    <string name="session_abandon_body">All progress from this session will be lost.</string> <!-- untranslated -->
+
+    <!-- ===== Onboarding ===== -->
+    <string name="onboarding_welcome_title">Vítej v Idle Fantasy</string>
+    <string name="onboarding_welcome_body">Start a skill session and watch your character grow. Sessions run for one hour, even when the app is closed.</string> <!-- untranslated -->
+    <string name="onboarding_first_session_hint">Tap any skill to get started.</string> <!-- untranslated -->
+
+    <!-- ===== Settings ===== -->
+    <string name="settings_title">Nastavení</string>
+    <string name="settings_notifications">Session Notifications</string> <!-- untranslated -->
+    <string name="settings_notifications_desc">Show an alert when your session completes</string> <!-- untranslated -->
+    <string name="settings_battery_optimization">Battery Optimization</string> <!-- untranslated -->
+    <string name="settings_battery_optimization_desc">Disable battery optimization for Idle Fantasy to receive timely session alerts</string> <!-- untranslated -->
+    <string name="settings_battery_optimization_btn">Adjust Setting</string> <!-- untranslated -->
+    <string name="settings_language">Jazyk</string>
+    <string name="settings_about">O hře</string>
+    <string name="settings_open_source_licenses">Licence Open Source</string>
+
+    <!-- ===== HomeScreen ===== -->
+    <string name="label_player_stats">Statistiky hráče</string>
+    <string name="label_combat_level">Bojová úroveň</string>
+    <string name="label_shop_desc">Buy equipment and sell loot</string> <!-- untranslated -->
+    <string name="label_no_session_hint">Head to Skills or Combat to start training.</string> <!-- untranslated -->
+    <string name="label_recent_activity">Recent Activity</string> <!-- untranslated -->
+    <string name="settings_profile_layout">Profile Layout</string> <!-- untranslated -->
+    <string name="settings_profile_layout_desc">Choose between a sidebar rail or top tabs</string> <!-- untranslated -->
+    <string name="settings_profile_layout_rail">Rail</string> <!-- untranslated -->
+    <string name="settings_profile_layout_tabs">Tabs</string> <!-- untranslated -->
+    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
+    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
     <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
     <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
     <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->

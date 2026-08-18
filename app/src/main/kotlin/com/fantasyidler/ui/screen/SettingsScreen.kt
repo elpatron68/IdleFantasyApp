@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.util.dailyResetClockTime
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -335,6 +336,51 @@ fun SettingsScreen(
                     )
                 }
             )
+            val dailyResetHour by viewModel.dailyResetHour.collectAsState()
+            var showResetHourDialog by remember { mutableStateOf(false) }
+            SettingsRow(
+                title    = stringResource(R.string.settings_daily_reset_time),
+                subtitle = stringResource(R.string.settings_daily_reset_time_desc),
+                onClick  = { showResetHourDialog = true },
+                trailing = {
+                    Text(
+                        text  = dailyResetClockTime(context, dailyResetHour),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            )
+            if (showResetHourDialog) {
+                AlertDialog(
+                    onDismissRequest = { showResetHourDialog = false },
+                    title = { Text(stringResource(R.string.settings_daily_reset_time)) },
+                    text  = {
+                        Column(Modifier.verticalScroll(rememberScrollState())) {
+                            (0..23).forEach { hour ->
+                                Text(
+                                    text       = dailyResetClockTime(context, hour),
+                                    style      = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = if (hour == dailyResetHour) FontWeight.Bold else FontWeight.Normal,
+                                    color      = if (hour == dailyResetHour) MaterialTheme.colorScheme.primary
+                                                 else MaterialTheme.colorScheme.onSurface,
+                                    modifier   = Modifier
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            viewModel.setDailyResetHour(hour)
+                                            showResetHourDialog = false
+                                        }
+                                        .padding(vertical = 10.dp),
+                                )
+                            }
+                        }
+                    },
+                    confirmButton = {
+                        TextButton(onClick = { showResetHourDialog = false }) {
+                            Text(stringResource(R.string.btn_cancel))
+                        }
+                    },
+                )
+            }
             val compactNumbers by viewModel.compactNumbers.collectAsState()
             SettingsRow(
                 title    = stringResource(R.string.settings_compact_numbers),

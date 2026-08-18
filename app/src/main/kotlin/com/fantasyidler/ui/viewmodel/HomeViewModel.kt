@@ -24,6 +24,7 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
+import com.fantasyidler.repository.SaveSlotRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.data.model.EquipSlot
@@ -182,6 +183,8 @@ data class HomeUiState(
     val recentSessions: List<com.fantasyidler.data.model.RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
     val showJournalButton: Boolean = true,
+    /** Show the top-bar character switch button; hidden with a single character to not confuse new players. */
+    val showCharacterSwitch: Boolean = false,
     val showSeasonalEvents: Boolean = true,
     val collapsibleTownGrid: Boolean = true,
     val townGridExpanded: Boolean = true,
@@ -227,6 +230,7 @@ class HomeViewModel @Inject constructor(
     private val slayerRepo: SlayerRepository,
     private val seasonalEventRepo: SeasonalEventRepository,
     private val titleRepo: TitleRepository,
+    private val saveSlotRepo: SaveSlotRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -405,6 +409,7 @@ class HomeViewModel @Inject constructor(
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
                 showJournalButton          = flags.showJournalButton,
+                showCharacterSwitch        = saveSlotRepo.hasMultipleCharacters(),
                 showSeasonalEvents         = flags.showSeasonalEvents,
                 collapsibleTownGrid        = flags.collapsibleTownGrid,
                 townGridExpanded           = flags.townGridExpanded,

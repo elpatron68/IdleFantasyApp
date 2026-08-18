@@ -149,7 +149,7 @@
     <string name="label_available_quests">Verfügbar</string>
     <string name="label_stats">Statistiken</string>
     <string name="label_skills">Fähigkeiten</string>
-    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
+    <string name="tab_label_with_count">%1$s (%2$d)</string>
     <string name="label_shop">Krämer</string>
     <string name="label_sell_items">Gegenstände verkaufen</string>
     <string name="label_total_level">Gesamtlevel</string>
@@ -305,6 +305,9 @@
     <string name="settings_quest_dots_desc">Goldenen Punkt auf Fähigkeiten mit offenen Quests anzeigen.</string>
     <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
     <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
+    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
     <string name="settings_compact_numbers">Nummern abkürzen</string>
     <string name="settings_compact_numbers_desc">Große Mengenangaben abkürzen (z. B. 2,46M statt 2.461.940).</string>
     <string name="settings_home_screen">Startbildschirm</string>
@@ -1360,10 +1363,10 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Jahrmarkt</string>
     <string name="carnival_desc">Spiele, Preise und Fröhlichkeit!</string>
-    <string name="carnival_prize_xp_lamp_small_name">Small XP Lamp</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_small_desc">Grants 10,000 XP to a chosen skill.</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_large_name">Large XP Lamp</string> <!-- untranslated -->
-    <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string> <!-- untranslated -->
+    <string name="carnival_prize_xp_lamp_small_name">Kleine EP-Lampe</string>
+    <string name="carnival_prize_xp_lamp_small_desc">Verleiht einer ausgewählten Fähigkeit 10.000 EP.</string>
+    <string name="carnival_prize_xp_lamp_large_name">Große EP-Lampe</string>
+    <string name="carnival_prize_xp_lamp_large_desc">Verleiht einer ausgewählten Fähigkeit 50.000 EP.</string>
     <string name="carnival_ticket_balance">Lose: %1$d</string>
     <string name="carnival_idle_tab">Warteschlangen-Spiele</string>
     <string name="carnival_active_tab">Aktive Spiele</string>
@@ -1454,7 +1457,7 @@
     <string name="farming_bean_climb">Klettern</string>
     <string name="farming_bean_climbed">Ihr habt den Bohnenstängel erklommen. Etwas wartet…</string>
     <string name="farming_bean_climbed_title">Bohnenstange erklommen!</string>
-    <string name="farming_bean_unlock_hint">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string> <!-- untranslated -->
+    <string name="farming_bean_unlock_hint">Neues Verlies freigeschaltet: %1$s. Du findest es unter „Kampf“ in der Liste der Verliese.</string>
     <string name="farming_bean_cleared">Die Magische Bohne wurde in dein Inventar zurückgelegt.</string>
 
     <string name="farming_magic_bean_one_plot">Magische Bohnen können nur auf einem Feld gepflanzt werden</string>
@@ -1652,17 +1655,17 @@
     <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
     <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
     <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_5k">5.000 Münzen</string>
     <string name="tower_milestone_shield">%1$s (defense +80)</string> <!-- untranslated -->
     <string name="tower_milestone_amulet">%1$s (attack +15, strength +15, defense +10, all styles)</string> <!-- untranslated -->
     <string name="tower_milestone_hp_50">+50 max HP</string> <!-- untranslated -->
     <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_25k">25,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_25k">25.000 Münzen</string>
     <string name="tower_milestone_helm">%1$s (defense +82, strength +8)</string> <!-- untranslated -->
     <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
     <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
     <string name="tower_milestone_plate">%1$s (defense +132)</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_100k">100,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_coins_100k">100.000 Münzen</string>
     <string name="tower_milestone_legs_set">%1$s (defense +125) + %2$s (defense +58) + %3$s (defense +125)</string> <!-- untranslated -->
     <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
     <string name="tower_milestone_cape">%1$s (attack/str/def +14, ranged/magic +12) + 500,000 coins</string> <!-- untranslated -->
@@ -1850,7 +1853,7 @@
     <string name="title_seasonal_champion_of">Champion von %1$s</string>
     <string name="title_seasonal_requirement">Schließt das Saisonereignis %1$s ab</string>
     <string name="home_welcome_greeting">Willkommen zurück,</string>
-    <string name="home_welcome_name">%1$s!</string> <!-- untranslated -->
+    <string name="home_welcome_name">%1$s!</string>
     <string name="home_welcome_title">Der %1$s!</string>
 
     <!-- Pet names and descriptions -->

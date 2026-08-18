@@ -133,6 +133,12 @@ class SaveSlotRepository @Inject constructor(
 
     suspend fun activeSlot(): Int = globalStateRepo.getActiveSaveSlot()
 
+    /** True when more than one character exists: the active slot always exists, so any inactive slot file counts. */
+    suspend fun hasMultipleCharacters(): Boolean = withContext(Dispatchers.IO) {
+        val active = globalStateRepo.getActiveSaveSlot()
+        (1..MAX_SLOTS).any { it != active && (metaFile(it).exists() || slotFile(it).exists()) }
+    }
+
     suspend fun slotInfos(): List<SlotInfo> = withContext(Dispatchers.IO) {
         val active = globalStateRepo.getActiveSaveSlot()
         (1..MAX_SLOTS).map { slot ->
