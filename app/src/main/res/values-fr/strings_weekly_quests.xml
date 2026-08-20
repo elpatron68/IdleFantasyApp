@@ -42,7 +42,7 @@
     <string name="quest_weekly_skeleton_hunter_name">Briseur d\'Os</string>
     <string name="quest_weekly_skeleton_hunter_desc">Tuez 450 squelettes cette semaine.</string>
     <string name="quest_weekly_monster_hunter_name">Chasseur de Monstres</string>
-    <string name="quest_weekly_monster_hunter_desc">Tuez 1 500 ennemis de tout type cette semaine.</string>
+    <string name="quest_weekly_monster_hunter_desc">Tuez 1500 ennemis de tout type cette semaine.</string>
     <string name="quest_weekly_demon_slayer_name">Tueur de Démons</string>
     <string name="quest_weekly_demon_slayer_desc">Tuez 225 démons cette semaine.</string>
     <string name="quest_weekly_boss_hunter_name">Chasseur de Boss</string>

@@ -505,7 +505,8 @@ private fun WorkerCraftSkillSheet(
     val categoryFiltered = if (selectedCategory == null) allRecipes
                            else allRecipes.filter { it.category == selectedCategory }
     val tiers = remember(categoryFiltered) {
-        categoryFiltered.map { it.tier }.filter { it.isNotEmpty() }.distinct().sorted()
+        categoryFiltered.map { it.tier }.filter { it.isNotEmpty() }.distinct()
+            .sortedBy { tier -> categoryFiltered.filter { it.tier == tier }.minOf { it.levelRequired } }
     }
     val recipes = categoryFiltered
         .filter { selectedTier == null || it.tier == selectedTier }

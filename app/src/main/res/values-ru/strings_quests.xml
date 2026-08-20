@@ -139,7 +139,7 @@
     <string name="quest_combat_kills_6_name">Охотник на монстров VI</string>
     <string name="quest_combat_kills_6_objective">Победите 650 врагов</string>
     <string name="quest_slayer_1_name">Убийца I</string>
-    <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string> <!-- untranslated -->
+    <string name="quest_slayer_1_objective">Закончите 5 заданий убийцы</string>
     <string name="quest_slayer_2_name">Убийца II</string>
     <string name="quest_slayer_2_objective">Закончите 15 заданий убийцы</string>
     <string name="quest_slayer_3_name">Убийца III</string>

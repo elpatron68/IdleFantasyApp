@@ -1063,9 +1063,9 @@
     "description": "A staff of pure void energy. Grants infinite runes for all spells.",
     "attack_bonus": 0,
     "strength_bonus": 0,
-    "defense_bonus": 0,
-    "magic_attack_bonus": 68,
-    "magic_damage_bonus": 18,
+    "defense_bonus": 15,
+    "magic_attack_bonus": 95,
+    "magic_damage_bonus": 28,
     "infinite_runes": "all",
     "requirements": {
       "magic": 75
@@ -2365,9 +2365,13 @@
     "slot": "necklace",
     "combat_style": null,
     "description": "A pendant of pure void essence. Enhances all combat stats of the wearer.",
-    "attack_bonus": 18,
-    "strength_bonus": 18,
-    "defense_bonus": 18,
+    "attack_bonus": 24,
+    "strength_bonus": 28,
+    "defense_bonus": 20,
+    "ranged_attack_bonus": 24,
+    "ranged_strength_bonus": 10,
+    "magic_attack_bonus": 32,
+    "magic_damage_bonus": 12,
     "requirements": {
       "attack": 80,
       "defense": 80

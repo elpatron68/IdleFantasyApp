@@ -506,13 +506,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Kasaba</string>
     <string name="home_town_desc">Dükkanı, hanı, loncayı, kiliseyi, usta atölyesini, avcı ustasını ve panayırı ziyaret edin</string>
-    <string name="guild_dailies_available">Günlük görevler mevcut</string>
     <string name="guild_not_unlocked">Henüz açılmadı</string>
     <string name="guild_dailies_done_today">Bugünkü günlükler tamamlandı</string>
     <string name="guild_dailies_remaining_today">Bugün %1$d kaldı</string>
     <string name="guild_do_dailies_hint">Bir sonraki rütbeye ilerlemek için günlük görevleri tamamlayın</string>
     <string name="guild_quest_gate_blocked">Rütbenizi yükseltmek için görevleri tamamlayın.</string>
     <string name="guild_quest_required">İlerlemek için görev gerekli</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">Öldün ve kazanımlarının çoğunu kaybettin.</string>
     <string name="home_xp_boost_was_active">2× XP Takviyesi aktifti</string>
     <string name="home_xp_boost_active">2x XP Takviyesi aktif — %1$s kaldı</string>
@@ -962,6 +963,7 @@
     <string name="guild_daily_resets_in">Resets daily at %1$s</string> <!-- untranslated -->
     <string name="guild_locked_hint">Requires Guild Level %1$d</string> <!-- untranslated -->
     <string name="guild_no_dailies">Günlük isteklerin kilidini açmak için lonca görevlerini tamamlayın.</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Envanterden katkıda bulun (%1$d mevcut)</string>
     <string name="guild_quest_desc_gather">%4$s için %2$d %3$s %1$s.</string>
     <string name="guild_quest_desc_kill">%2$s dövüşünde %1$d düşmanı yenin.</string>

@@ -87,6 +87,7 @@ import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.json.SkillingDungeonData
+import com.fantasyidler.ui.component.PlayerStatsBar
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.Achievement
 import com.fantasyidler.ui.viewmodel.AchievementsViewModel
@@ -98,9 +99,9 @@ import com.fantasyidler.ui.viewmodel.TitleCatalog
 import com.fantasyidler.util.drawableByName
 import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
+import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.ui.viewmodel.xpProgressFraction
 import com.fantasyidler.util.GameStrings
-import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.stringByName
 
 private val SKILL_CATEGORY_GROUPS: List<Pair<Int, List<String>>> = listOf(
@@ -160,15 +161,13 @@ fun ProfileScreen(
                 .fillMaxSize()
                 .padding(padding),
         ) {
-            CoinsBanner(state.coins)
-
             // ── Character identity header ────────────────────────────────
             Surface(
                 color    = MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(Modifier.weight(1f)) {
@@ -236,25 +235,17 @@ fun ProfileScreen(
                 color    = MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text  = stringResource(R.string.label_total_level),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Text(
-                        text       = state.totalLevel.toString(),
-                        style      = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
+                PlayerStatsBar(
+                    context                   = context,
+                    combatLevel               = combatLevelFrom(state.skillLevels),
+                    totalLevel                = state.totalLevel,
+                    coins                     = state.coins,
+                    activeBlessingKey         = state.activeBlessingKey,
+                    activeBlessingRemainingMs = (state.activeBlessingExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
+                    xpBoostRemainingMs        = if (state.ironman) 0L else (state.xpBoostExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
+                    modifier                  = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+                )
             }
-
-            HorizontalDivider()
 
             val tabContent: @Composable (Int) -> Unit = { tab ->
                 when (tab) {
@@ -467,36 +458,6 @@ private fun TabsLayout(
         }
         HorizontalPager(state = pagerState, modifier = Modifier.weight(1f).fillMaxSize()) { page ->
             content(page)
-        }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Coins banner (also used by SkillsScreen result sheet)
-// ---------------------------------------------------------------------------
-
-@Composable
-fun CoinsBanner(coins: Long) {
-    Surface(
-        color    = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text  = stringResource(R.string.label_coins),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.width(8.dp))
-            Text(
-                text       = coins.formatCoins(),
-                style      = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color      = MaterialTheme.colorScheme.primary,
-            )
         }
     }
 }

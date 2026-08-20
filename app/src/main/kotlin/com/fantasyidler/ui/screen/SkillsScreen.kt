@@ -1038,9 +1038,6 @@ internal fun SkillRow(
                         )
                         when {
                             onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
-                                // Padded + Role.Button instead of a bare clickable Text: keeps the
-                                // compact row from PR #1347 but restores a usable tap target,
-                                // ripple bounds, and TalkBack button semantics.
                                 Text(
                                     text     = stringResource(R.string.prestige),
                                     style    = MaterialTheme.typography.labelSmall,
@@ -1048,7 +1045,7 @@ internal fun SkillRow(
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(8.dp))
                                         .clickable(role = Role.Button) { showPrestigeConfirm = true }
-                                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                                        .padding(horizontal = 8.dp, vertical = 2.dp),
                                 )
                             }
                             prestigeLevel >= 3 -> {

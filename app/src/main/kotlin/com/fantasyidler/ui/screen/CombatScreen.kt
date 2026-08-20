@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +31,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -44,6 +46,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -868,43 +871,46 @@ private fun CombatSkillRow(
                 color            = MaterialTheme.colorScheme.primary,
                 trackColor       = MaterialTheme.colorScheme.surfaceVariant,
             )
-        }
-    }
-
-        // Prestige section: stars and button, outside the clickable row
-        if (prestigeLevel > 0 || (onPrestige != null && level >= 99)) {
-            Row(
-                modifier              = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 72.dp, end = 16.dp, bottom = 6.dp),
-                verticalAlignment     = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Text(
-                    text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                when {
-                    onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
-                        TextButton(onClick = { showPrestigeConfirm = true }) {
+            if (prestigeLevel > 0 || (onPrestige != null && level >= 99)) {
+                Spacer(Modifier.height(4.dp))
+                Row(
+                    modifier              = Modifier.fillMaxWidth(),
+                    verticalAlignment     = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    when {
+                        onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
+                            CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
+                                TextButton(
+                                    onClick = { showPrestigeConfirm = true },
+                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
+                                    modifier = Modifier.height(24.dp),
+                                ) {
+                                    Text(
+                                        text  = stringResource(R.string.prestige),
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.primary,
+                                    )
+                                }
+                            }
+                        }
+                        prestigeLevel >= 3 -> {
                             Text(
-                                text  = stringResource(R.string.prestige),
+                                text  = stringResource(R.string.prestige_max),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.primary,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
-                    }
-                    prestigeLevel >= 3 -> {
-                        Text(
-                            text  = stringResource(R.string.prestige_max),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
                     }
                 }
             }
         }
+    }
     }
     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 }

@@ -19,8 +19,10 @@ import androidx.compose.ui.unit.Density
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.fantasyidler.notification.SessionNotificationManager
 import com.fantasyidler.repository.BackupScheduler
+import com.fantasyidler.repository.GlobalStateRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.ui.navigation.AppNavigation
 import com.fantasyidler.ui.theme.FantasyIdlerTheme
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     @Inject lateinit var playerRepository: PlayerRepository
     @Inject lateinit var backupScheduler: BackupScheduler
     @Inject lateinit var sessionNotificationManager: SessionNotificationManager
+    @Inject lateinit var globalStateRepository: GlobalStateRepository
 
     private val notificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         if (savedInstanceState == null) {
-            pendingNavigateTo.value = intent?.getStringExtra(SessionNotificationManager.EXTRA_NAVIGATE_TO)
+            resolveNavigateTo(intent)
         }
         enableEdgeToEdge()
         setContent {
@@ -90,7 +93,26 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        pendingNavigateTo.value = intent.getStringExtra(SessionNotificationManager.EXTRA_NAVIGATE_TO)
+        resolveNavigateTo(intent)
+    }
+
+    /**
+     * A farming notification carries the save slot its crop belongs to. If that character is no
+     * longer active, land on the save-slots screen instead of the wrong character's farm
+     * (issue #1471). Slot 0 means a legacy notification with no slot info — treat as matching.
+     */
+    private fun resolveNavigateTo(intent: Intent?) {
+        val target = intent?.getStringExtra(SessionNotificationManager.EXTRA_NAVIGATE_TO) ?: return
+        val slot = intent.getIntExtra(SessionNotificationManager.EXTRA_SAVE_SLOT, 0)
+        if (target == SessionNotificationManager.NAVIGATE_FARMING && slot != 0) {
+            lifecycleScope.launch {
+                pendingNavigateTo.value =
+                    if (slot == globalStateRepository.getActiveSaveSlot()) SessionNotificationManager.NAVIGATE_FARMING
+                    else SessionNotificationManager.NAVIGATE_SAVE_SLOTS
+            }
+        } else {
+            pendingNavigateTo.value = target
+        }
     }
 
     override fun onStart() {

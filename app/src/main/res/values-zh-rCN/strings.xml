@@ -494,13 +494,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">城镇</string>
     <string name="home_town_desc">拜访商店、旅馆、公会、教堂、建筑工坊、猎魔大师和嘉年华</string>
-    <string name="guild_dailies_available">可接每日任务</string>
     <string name="guild_not_unlocked">尚未解锁</string>
     <string name="guild_dailies_done_today">今日已完成每日</string>
     <string name="guild_dailies_remaining_today">今日剩余 %1$d 次</string>
     <string name="guild_do_dailies_hint">完成每日任务以晋升下一等级</string>
     <string name="guild_quest_gate_blocked">完成任务以提升你的等级</string>
     <string name="guild_quest_required">需要完成任务才能晋升</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">你阵亡了，失去了大部分收获。</string>
     <string name="home_xp_boost_was_active">2 倍经验加成已生效</string>
     <string name="home_xp_boost_active">2 倍经验加成生效中 — 剩余 %1$s</string>
@@ -948,6 +949,7 @@
     <string name="guild_daily_resets_in">每日 %1$s 刷新</string>
     <string name="guild_locked_hint">需要公会等级 %1$d</string>
     <string name="guild_no_dailies">完成公会任务以解锁每日请求。</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">从背包捐献（可用 %1$d）</string>
     <string name="guild_quest_desc_gather">为%4$s收集%2$d个%1$s%3$s。</string>
     <string name="guild_quest_desc_kill">使用%2$s战斗击败%1$d个敌人。</string>

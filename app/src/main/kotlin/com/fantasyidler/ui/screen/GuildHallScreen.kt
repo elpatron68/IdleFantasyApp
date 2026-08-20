@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,21 +10,23 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Badge
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -40,11 +44,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
@@ -53,6 +60,13 @@ import com.fantasyidler.ui.viewmodel.GuildSummary
 import com.fantasyidler.util.GameStrings
 
 private data class GuildGroup(val headerRes: Int, val keys: List<String>)
+
+private fun guildIconSkillKey(guildKey: String): String = when (guildKey) {
+    "warriors" -> "attack"
+    "archers"  -> "ranged"
+    "mages"    -> "magic"
+    else       -> guildKey
+}
 
 private val GUILD_GROUPS = listOf(
     GuildGroup(
@@ -157,17 +171,45 @@ private fun GuildCard(
     val context = LocalContext.current
     val claimable = summary.claimableQuestCount + summary.claimableDailyCount
 
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
+        Box(modifier = Modifier.size(44.dp)) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
+                contentAlignment = Alignment.Center,
+            ) {
+                val iconRes = GameStrings.skillIconRes(guildIconSkillKey(summary.guildKey))
+                if (iconRes != null) {
+                    Image(
+                        painter            = painterResource(iconRes),
+                        contentDescription = null,
+                        modifier           = Modifier.size(28.dp),
+                    )
+                }
+            }
+            if (claimable > 0) {
+                ClaimableCountBadge(
+                    count    = claimable,
+                    modifier = Modifier.align(Alignment.TopEnd),
+                )
+            }
+        }
+
+        Column(modifier = Modifier.weight(1f)) {
+            Row(
+                modifier              = Modifier.fillMaxWidth(),
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
                 Row(
                     verticalAlignment      = Alignment.CenterVertically,
                     horizontalArrangement  = Arrangement.spacedBy(8.dp),
@@ -179,48 +221,44 @@ private fun GuildCard(
                     )
                     LevelBadge(level = summary.level)
                 }
-                if (summary.questGateBlocked) {
-                    Text(
-                        text  = stringResource(R.string.guild_quest_required),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.error,
-                    )
-                } else if (summary.hasDailiesAvailable) {
-                    Text(
-                        text  = stringResource(R.string.guild_dailies_available),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                }
-                if (summary.level < 10) {
-                    Spacer(Modifier.height(6.dp))
-                    LinearProgressIndicator(
-                        gapSize = 0.dp,
-                        drawStopIndicator = {},
-                        progress = { (summary.dailiesCompletedThisTier.toFloat() / summary.dailiesRequiredThisTier.toFloat()).coerceIn(0f, 1f) },
-                        modifier = Modifier.fillMaxWidth(),
-                        color    = MaterialTheme.colorScheme.primary,
-                    )
-                    Spacer(Modifier.height(2.dp))
-                    Text(
-                        text  = stringResource(R.string.guild_rep_label, summary.dailiesCompletedThisTier, summary.dailiesRequiredThisTier),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                DailyStatusIndicator(summary = summary)
             }
-
-            if (claimable > 0) {
-                Badge { Text("$claimable") }
+            if (summary.level < 10) {
+                Spacer(Modifier.height(6.dp))
+                LinearProgressIndicator(
+                    gapSize = 0.dp,
+                    drawStopIndicator = {},
+                    progress = { (summary.dailiesCompletedThisTier.toFloat() / summary.dailiesRequiredThisTier.toFloat()).coerceIn(0f, 1f) },
+                    modifier = Modifier.fillMaxWidth(),
+                    color    = MaterialTheme.colorScheme.primary,
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text  = guildProgressCaption(summary),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
         }
+    }
+}
 
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
-            horizontalArrangement = Arrangement.End,
-        ) {
-            DailyStatusIndicator(summary = summary)
-        }
+/** Builds the combined dailies-progress / quest-gate caption shown under a guild's rank bar. */
+@Composable
+private fun guildProgressCaption(summary: GuildSummary): String {
+    val dailiesRemain = summary.dailiesCompletedThisTier < summary.dailiesRequiredThisTier
+    return when {
+        summary.questGateBlocked && dailiesRemain -> stringResource(
+            R.string.guild_progress_dailies_and_quest,
+            summary.dailiesCompletedThisTier,
+            summary.dailiesRequiredThisTier,
+        )
+        !summary.guildUnlocked || summary.questGateBlocked -> stringResource(R.string.guild_quest_required)
+        else -> stringResource(
+            R.string.guild_progress_dailies_only,
+            summary.dailiesCompletedThisTier,
+            summary.dailiesRequiredThisTier,
+        )
     }
 }
 
@@ -245,6 +283,24 @@ private fun DailyStatusIndicator(summary: GuildSummary) {
             text  = stringResource(R.string.guild_dailies_remaining_today, summary.dailiesTodayRemaining),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun ClaimableCountBadge(count: Int, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .defaultMinSize(minWidth = 12.dp, minHeight = 12.dp)
+            .clip(CircleShape)
+            .background(MaterialTheme.colorScheme.error)
+            .padding(horizontal = 2.dp),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            text  = "$count",
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+            color = MaterialTheme.colorScheme.onError,
         )
     }
 }

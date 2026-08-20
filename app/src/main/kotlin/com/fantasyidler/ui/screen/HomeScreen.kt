@@ -91,8 +91,7 @@ import com.fantasyidler.data.model.HiredWorker
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.WorkerTier
-import com.fantasyidler.data.json.BlessingType
-import com.fantasyidler.repository.ChurchRepository
+import com.fantasyidler.ui.component.PlayerStatsBar
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
@@ -103,7 +102,6 @@ import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.util.formatDurationMs
 import com.fantasyidler.util.toCountdown
 import androidx.compose.ui.text.style.TextOverflow
 import kotlinx.coroutines.delay
@@ -626,84 +624,21 @@ fun HomeScreen(
 
             // ── Stats bar ───────────────────────────────────────────────
             if (state.showStatsBar) {
-                val blessingActive = state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0
-                val boostActive = state.xpBoostRemainingMs > 0
                 Surface(
                     shape    = RoundedCornerShape(16.dp),
                     color    = MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
-                        FlowRow(
-                            modifier              = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalArrangement   = Arrangement.spacedBy(4.dp),
-                        ) {
-                            StatInline(
-                                label = stringResource(R.string.label_combat_level),
-                                value = combatLevelFrom(state.skillLevels).toString(),
-                            )
-                            StatInline(
-                                label = stringResource(R.string.label_total_level),
-                                value = totalLevelFrom(state.skillLevels).toString(),
-                            )
-                            StatInline(
-                                label      = stringResource(R.string.label_coins),
-                                value      = state.coins.formatCoins(),
-                                valueColor = MaterialTheme.colorScheme.primary,
-                            )
-                        }
-                        if (blessingActive) {
-                            val context = LocalContext.current
-                            val nameResId = context.resources.getIdentifier(
-                                "blessing_${state.activeBlessingKey}_name", "string", context.packageName,
-                            )
-                            val blessingName = if (nameResId != 0) stringResource(nameResId) else state.activeBlessingKey
-                            val blessingData = ChurchRepository.ALL_BLESSINGS.firstOrNull { it.key == state.activeBlessingKey }
-                            val boostDesc = blessingData?.let { b ->
-                                when (b.type) {
-                                    BlessingType.XP      -> "${b.magnitude}x XP"
-                                    BlessingType.DEFENSE -> "+${b.magnitude.toInt()} DEF"
-                                    BlessingType.COINS   -> "+${(b.magnitude * 100).toInt()}% coins"
-                                }
-                            }
-                            val timeLeft = state.activeBlessingRemainingMs.formatDurationMs(context)
-                            val blessingText = if (boostDesc != null) "$blessingName ($boostDesc) - $timeLeft"
-                                              else "$blessingName - $timeLeft"
-                            Spacer(Modifier.height(4.dp))
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector        = Icons.Filled.Star,
-                                    contentDescription = null,
-                                    tint               = MaterialTheme.colorScheme.primary,
-                                    modifier           = Modifier.size(12.dp),
-                                )
-                                Spacer(Modifier.width(4.dp))
-                                Text(
-                                    text  = blessingText,
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.primary,
-                                )
-                            }
-                        }
-                        if (boostActive) {
-                            Spacer(Modifier.height(4.dp))
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector        = Icons.Filled.Star,
-                                    contentDescription = null,
-                                    tint               = MaterialTheme.colorScheme.tertiary,
-                                    modifier           = Modifier.size(12.dp),
-                                )
-                                Spacer(Modifier.width(4.dp))
-                                Text(
-                                    text  = stringResource(R.string.home_xp_boost_active, state.xpBoostRemainingMs.formatDurationMs(context)),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.tertiary,
-                                )
-                            }
-                        }
-                    }
+                    PlayerStatsBar(
+                        context                    = context,
+                        combatLevel                = combatLevelFrom(state.skillLevels),
+                        totalLevel                 = totalLevelFrom(state.skillLevels),
+                        coins                      = state.coins,
+                        activeBlessingKey          = state.activeBlessingKey,
+                        activeBlessingRemainingMs  = state.activeBlessingRemainingMs,
+                        xpBoostRemainingMs         = state.xpBoostRemainingMs,
+                        modifier                   = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                    )
                 }
             }
 

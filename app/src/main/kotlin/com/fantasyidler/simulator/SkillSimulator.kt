@@ -9,6 +9,7 @@ import com.fantasyidler.data.json.TreeData
 import com.fantasyidler.data.model.SessionFrame
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 import kotlin.random.Random
 
 /**
@@ -412,7 +413,9 @@ object SkillSimulator {
         val fraction = (agilityLevel - 1).coerceIn(0, 98) / 98.0
         val maxReduction = 20.0 + agilityPrestige.coerceIn(0, 3) * (10.0 / 3.0)
         val minutes = (60.0 - maxReduction * fraction) * chronosMultiplier.coerceIn(0.5f, 1.0f)
-        return (minutes.roundToInt() * 60_000L).coerceAtLeast(60_000L)
+        // Millisecond precision: rounding to whole minutes swallowed the 2% Chronos Spire
+        // reduction entirely at many agility levels (issue #1486).
+        return (minutes * 60_000.0).roundToLong().coerceAtLeast(60_000L)
     }
 
     /**

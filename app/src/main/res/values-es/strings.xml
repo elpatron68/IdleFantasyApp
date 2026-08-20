@@ -501,13 +501,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Town</string> <!-- untranslated -->
     <string name="home_town_desc">Visita la tienda, la posada, el gremio, la iglesia, el taller del constructor, el maestro cazador y el carnaval</string>
-    <string name="guild_dailies_available">Dailies available</string> <!-- untranslated -->
     <string name="guild_not_unlocked">Aún no desbloqueado</string>
     <string name="guild_dailies_done_today">Diarias completadas hoy</string>
     <string name="guild_dailies_remaining_today">%1$d restantes hoy</string>
     <string name="guild_do_dailies_hint">Completa misiones diarias para avanzar al siguiente rango</string>
     <string name="guild_quest_gate_blocked">Completa misiones para avanzar de rango.</string>
     <string name="guild_quest_required">Quest required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">Moriste y perdiste la mayor parte de tus ganancias.</string>
     <string name="home_xp_boost_was_active">2× XP Boost was active</string> <!-- untranslated -->
     <string name="home_xp_boost_active">2× XP Boost active — %1$s remaining</string> <!-- untranslated -->
@@ -957,6 +958,7 @@
     <string name="guild_daily_resets_in">Resets daily at %1$s</string> <!-- untranslated -->
     <string name="guild_locked_hint">Requires Guild Level %1$d</string> <!-- untranslated -->
     <string name="guild_no_dailies">Completa misiones de gremio para desbloquear solicitudes diarias.</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Contribuir desde el inventario (%1$d disponible)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s para el %4$s.</string>
     <string name="guild_quest_desc_kill">Derrota %1$d enemigos usando combate %2$s.</string>

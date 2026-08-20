@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_skills">Habilitats</string>
+    <string name="nav_home">Inici</string>
+    <string name="nav_quests">Reptes</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="btn_start">Iniciar</string>
+    <string name="btn_start_session">Iniciar Sessió</string>
+    <string name="btn_abandon_session">Abandonar Sessió</string>
+    <string name="btn_collect_results">Recollir Resultats</string>
+    <string name="btn_cancel">Cancel·lar</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_abandon">Abandonar</string>
+    <string name="btn_repeat_action">Repetir acció</string>
+    <string name="btn_collect">Recollir Recompenses</string>
+    <string name="btn_equip">Equipar</string>
+    <string name="btn_unequip">Desequipar</string>
+    <string name="btn_buy">Comprar</string>
+    <string name="btn_sell">Vendre</string>
+    <string name="btn_plant">Plantar</string>
+    <string name="btn_harvest">Collir</string>
+    <string name="btn_harvest_all">Collir-ho tot</string>
+    <string name="btn_clear">Netejar</string>
+    <string name="btn_clear_all">Netejar Tot</string>
+    <string name="btn_inspect">Inspeccionar</string>
+    <string name="btn_start_quest">Iniciar Repte</string>
+    <string name="btn_abandon_quest">Abandonar Repte</string>
+    <string name="btn_enter_dungeon">Entrar Masmorra</string>
+    <string name="btn_activate">Activar</string>
+    <string name="btn_extend">Extendre</string>
+    <string name="btn_deactivate">Deactivar</string>
+    <string name="btn_close">Tancar</string>
+    <string name="btn_back">Enrere</string>
+    <string name="btn_save">Desar</string>
+    <string name="label_level">Nivell</string>
+    <string name="label_coins">Monedes</string>
+    <string name="label_attack">Atacar</string>
+    <string name="label_defense">Defensar</string>
+    <string name="label_magic">Màgic</string>
+    <string name="label_inventory">Inventari</string>
+</resources>

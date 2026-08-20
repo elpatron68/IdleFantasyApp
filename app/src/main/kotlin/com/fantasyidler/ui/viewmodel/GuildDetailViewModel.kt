@@ -41,8 +41,8 @@ data class GuildDetailUiState(
     val dailies: List<GuildDailyWithProgress> = emptyList(),
     val nextResetMs: Long = 0L,
     val dailyResetHour: Int = 6,
-    val allCurrentLevelQuestsDone: Boolean = false,
     val questGateBlocked: Boolean = false,
+    val guildUnlocked: Boolean = false,
     val snackbarMessage: String? = null,
     val inventory: Map<String, Int> = emptyMap(),
     val hideCompleted: Boolean = false,
@@ -102,8 +102,8 @@ class GuildDetailViewModel @Inject constructor(
         val dailies = guildRepo.getGuildDailiesWithProgress(guild, flags)
 
         val tierQuests = gameData.guildQuests.values.filter { it.guild == guild && it.guildLevelRequired == level }
-        val allCurrentLevelQuestsDone = level >= 1 && tierQuests.all { it.id in completedQuestIds }
-        val questGateBlocked = level < 10 && tierQuests.isNotEmpty() && tierQuests.any { it.id !in completedQuestIds }
+        val guildUnlocked = gameData.guildQuests.values.any { it.guild == guild && it.id in completedQuestIds }
+        val questGateBlocked = guildUnlocked && level < 10 && tierQuests.isNotEmpty() && tierQuests.any { it.id !in completedQuestIds }
 
         extra.copy(
             isLoading                 = false,
@@ -113,8 +113,8 @@ class GuildDetailViewModel @Inject constructor(
             dailiesRequiredThisTier   = dailiesRequiredThisTier,
             quests                    = quests,
             dailies                   = dailies,
-            allCurrentLevelQuestsDone = allCurrentLevelQuestsDone,
             questGateBlocked          = questGateBlocked,
+            guildUnlocked             = guildUnlocked,
             inventory                 = inventory,
             hideCompleted             = flags.hideCompletedQuests,
         )

@@ -933,6 +933,7 @@ def gen_thieving() -> str:
     return get_template("skills/gathering/thieving").format(
         icon=html_image(skill_icon_path("thieving"), "", "text"),
         npc_table=table(["NPC", "Level", "XP / Steal", "Coins", "Possible Loot"], rows),
+        lockpick_table=_tool_table("lockpick", "thieving_efficiency"),
     )
 
 
@@ -1104,7 +1105,7 @@ def gen_equipment() -> str:
     assert isinstance(equip, dict)
     slot_order = ["weapon", "head", "body", "legs", "boots", "cape", "ring", "necklace",
                   "shield", "pickaxe", "axe", "fishing_rod", "hoe",
-                  "hammer", "tinderbox", "grappling_hook", "frying_pan"]
+                  "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick"]
     # Todo: Categories are currently hardcoded in InventoryViewModel and should instead be handled in json files instead (eg. in equipment.json)
     slot_names = {
         "weapon": "Weapons", "head": "Helmets", "body": "Chestplates", "legs": "Legs",
@@ -1113,6 +1114,7 @@ def gen_equipment() -> str:
         "fishing_rod": "Fishing Rods", "hoe": "Hoes",
         "hammer": "Hammers", "tinderbox": "Tinderboxes",
         "grappling_hook": "Grappling Hooks", "frying_pan": "Frying Pans",
+        "lockpick": "Lockpicks",
     }
     by_slot: dict[str, list] = {s: [] for s in slot_order}
     for item in equip.values():
@@ -1127,7 +1129,8 @@ def gen_equipment() -> str:
                 item.get("mining_efficiency") or item.get("woodcutting_efficiency") or
                 item.get("fishing_efficiency") or item.get("farming_efficiency") or
                 item.get("smithing_efficiency") or item.get("firemaking_efficiency") or
-                item.get("agility_efficiency") or item.get("cooking_efficiency") or "—",
+                item.get("agility_efficiency") or item.get("cooking_efficiency") or
+                item.get("thieving_efficiency") or "—",
                 reqs,
             ])
 

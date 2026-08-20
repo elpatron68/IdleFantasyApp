@@ -32,7 +32,7 @@
 
     <!-- Combat skills -->
     <string name="skill_attack_name">Angriff</string>
-    <string name="skill_attack_desc">Verbessert die Genauigkeit Eures Nahkampfes und erhöht Eure Trefferchance.</string>
+    <string name="skill_attack_desc">Verbessert die Zielgenauigkeit eures Nahkampfes und erhöht Eure Trefferchance.</string>
     <string name="skill_strength_name">Stärke</string>
     <string name="skill_strength_desc">Erhöht Euren maximalen Nahkampfschaden pro Treffer.</string>
     <string name="skill_defense_name">Verteidigung</string>

@@ -45,11 +45,12 @@ class SkillSimulatorPureTest {
 
     @Test
     fun `sessionDurationMs scales linearly from 60 to 40 minutes`() {
-        assertEquals(60 * 60_000L, SkillSimulator.sessionDurationMs(1))
-        assertEquals(55 * 60_000L, SkillSimulator.sessionDurationMs(25))
-        assertEquals(50 * 60_000L, SkillSimulator.sessionDurationMs(50))
-        assertEquals(45 * 60_000L, SkillSimulator.sessionDurationMs(75))
-        assertEquals(40 * 60_000L, SkillSimulator.sessionDurationMs(99))
+        // Millisecond precision (issue #1486): mid-scale levels land between whole minutes.
+        assertEquals(3_600_000L, SkillSimulator.sessionDurationMs(1))
+        assertEquals(3_306_122L, SkillSimulator.sessionDurationMs(25))
+        assertEquals(3_000_000L, SkillSimulator.sessionDurationMs(50))
+        assertEquals(2_693_878L, SkillSimulator.sessionDurationMs(75))
+        assertEquals(2_400_000L, SkillSimulator.sessionDurationMs(99))
     }
 
     @Test
@@ -71,13 +72,13 @@ class SkillSimulatorPureTest {
         assertEquals(3_600_000L, baseMs)
 
         // Chronos Spire Tier 1 (-2% reduction -> 0.98 multiplier)
-        // 60 min * 0.98 = 58.8 min -> rounded to 59 min = 3,540,000 ms
+        // 60 min * 0.98 = 58.8 min = 3,528,000 ms (no whole-minute rounding, issue #1486)
         val tier1Ms = SkillSimulator.sessionDurationMs(1, 0, 0.98f)
-        assertEquals(3_540_000L, tier1Ms)
+        assertEquals(3_528_000L, tier1Ms)
 
         // Chronos Spire Tier 3 (-6% reduction -> 0.94 multiplier)
-        // 60 min * 0.94 = 56.4 min -> rounded to 56 min = 3,360,000 ms
+        // 60 min * 0.94 = 56.4 min = 3,384,000 ms
         val tier3Ms = SkillSimulator.sessionDurationMs(1, 0, 0.94f)
-        assertEquals(3_360_000L, tier3Ms)
+        assertEquals(3_384_000L, tier3Ms)
     }
 }

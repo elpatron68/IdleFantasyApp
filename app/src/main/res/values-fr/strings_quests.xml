@@ -173,17 +173,17 @@
 
     <!-- Crafting -->
     <string name="quest_crafting_1_name">Artisanat I</string>
-    <string name="quest_crafting_1_objective">Créer 100 bagues en argent</string>
+    <string name="quest_crafting_1_objective">Fabriquer 100 bagues en argent</string>
     <string name="quest_crafting_2_name">Artisanat II</string>
-    <string name="quest_crafting_2_objective">Créer 250 bagues en or</string>
+    <string name="quest_crafting_2_objective">Fabriquer 250 bagues en or</string>
     <string name="quest_crafting_3_name">Artisanat III</string>
-    <string name="quest_crafting_3_objective">Créer 500 bagues en platine</string>
+    <string name="quest_crafting_3_objective">Fabriquer 500 bagues en platine</string>
     <string name="quest_crafting_4_name">Artisanat IV</string>
-    <string name="quest_crafting_4_objective">Créer 750 bagues en saphir argenté</string>
+    <string name="quest_crafting_4_objective">Fabriquer 750 bagues en saphir argenté</string>
     <string name="quest_crafting_5_name">Artisanat V</string>
-    <string name="quest_crafting_5_objective">Créer 1000 bagues en saphir doré</string>
+    <string name="quest_crafting_5_objective">Fabriquer 1000 bagues en saphir doré</string>
     <string name="quest_crafting_6_name">Artisanat VI</string>
-    <string name="quest_crafting_6_objective">Créer 1500 bagues en diamant en platine</string>
+    <string name="quest_crafting_6_objective">Fabriquer 1500 bagues en diamant en platine</string>
 
     <!-- Monster slayer chains -->
     <string name="quest_goblin_slayer_1_name">Chasseur de Gobelins I</string>
@@ -252,9 +252,9 @@
     <string name="quest_treasure_hunter_1_objective">Collecter 20 soies d\'araignée lors de combats</string>
     <string name="quest_treasure_hunter_2_name">Chasseur de trésors II</string>
     <string name="quest_treasure_hunter_2_objective">Collecter 10 cœurs de gobelin lors de combats</string>
-    <string name="quest_treasure_hunter_3_name">Chasseur de Trésors III</string>
+    <string name="quest_treasure_hunter_3_name">Chasseur de trésors III</string>
     <string name="quest_treasure_hunter_3_objective">Collecter 5 cornes de démon lors de combats</string>
-    <string name="quest_treasure_hunter_4_name">Chasseur de Trésors IV</string>
+    <string name="quest_treasure_hunter_4_name">Chasseur de trésors IV</string>
     <string name="quest_treasure_hunter_4_objective">Collecter 3 écailles de dragon lors de combats</string>
 
     <!-- Firemaking -->
@@ -264,9 +264,9 @@
     <string name="quest_firemaking_2_objective">Brûler 750 bûches de chêne</string>
     <string name="quest_firemaking_3_name">Incinération III</string>
     <string name="quest_firemaking_3_objective">Brûler 1100 bûches de saule</string>
-    <string name="quest_firemaking_4_name">Fabrication de Feu IV</string>
+    <string name="quest_firemaking_4_name">Incinération IV</string>
     <string name="quest_firemaking_4_objective">Brûler 1650 bûches d\'érable</string>
-    <string name="quest_firemaking_5_name">Fabrication de Feu V</string>
+    <string name="quest_firemaking_5_name">Incinération V</string>
     <string name="quest_firemaking_5_objective">Brûler 2450 bûches de if</string>
     <string name="quest_firemaking_6_name">Incinération VI</string>
     <string name="quest_firemaking_6_objective">Brûler 3650 bûches magiques</string>
@@ -502,7 +502,7 @@
     <string name="daily_verb_firemaking">Brûler</string>
     <string name="daily_verb_fletching">Empenner</string>
     <string name="daily_verb_herblore">Brasser</string>
-    <string name="daily_verb_runecrafting">Runes</string>
+    <string name="daily_verb_runecrafting">Fabriquer</string>
     <string name="daily_verb_prayer">Enterrer</string>
     <string name="daily_verb_construction">Construire</string>
     <string name="daily_verb_farming">Récolter</string>
@@ -525,18 +525,18 @@
     <string name="quest_obj_slayer_task">Terminer %1$d tâches du Tueur</string>
 
     <string name="skilling_dungeon_shattered_spire_note_1">De la pierre calcinée et du verre fondu sur une centaine de mètres à la ronde. Quoi qu\'il se soit passé ici, ça a été catastrophique.</string>
-    <string name="skilling_dungeon_shattered_spire_note_2">Une page arrachée d\'un journal de recherche : « L\'expérience de convergence dépasse toutes les prévisions. Nous devons poursuivre. »</string>
+    <string name="skilling_dungeon_shattered_spire_note_2">Une page arrachée d\'un journal de recherche : « L\'expérience de convergence dépasse toutes les prévisions. Nous devons poursuivre. »</string>
     <string name="skilling_dungeon_shattered_spire_note_3">Des matrices arcaniques gravées dans les pans de mur encore debout — un cercle de confinement mal conçu et manifestement soumis à une tension excessive.</string>
     <string name="skilling_dungeon_shattered_spire_note_4">Un passage a été ouvert par explosion vers le bas. Des Créatures se déplacent encore dans les ténèbres en contrebas, suivant d\'anciennes instructions.</string>
     <string name="skilling_dungeon_shattered_spire_note_5">Le passage descend vers des salles intactes situées sous les décombres. Les Ruines Arcaniques fonctionnent encore, tant bien que mal.</string>
     <string name="skilling_dungeon_abyssal_lagoon_note_1">L\'eau ici est sans fond. D\'étranges lumières palpitent depuis des profondeurs impossibles.</string>
-    <string name="skilling_dungeon_abyssal_lagoon_note_2">Les poissons remontés des profondeurs luisent faiblement et se dissolvent en quelques minutes. Qu\'est-ce qui s\'en nourrissait ?</string>
-    <string name="skilling_dungeon_abyssal_lagoon_note_3">Une carte déchirée signale ce lagon par un seul mot : « NE PAS PÊCHER ». Aucune explication n\'est fournie.</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_2">Les poissons remontés des profondeurs luisent faiblement et se dissolvent en quelques minutes. Qu\'est-ce qui s\'en nourrissait ?</string>
+    <string name="skilling_dungeon_abyssal_lagoon_note_3">Une carte déchirée signale ce lagon par un seul mot : « NE PAS PÊCHER ». Aucune explication n\'est fournie.</string>
     <string name="skilling_dungeon_abyssal_lagoon_note_4">Quelque chose remonte à la surface et replonge. Massif. Ancien. Curieux.</string>
     <string name="skilling_dungeon_abyssal_lagoon_note_5">Les eaux sombres s\'écartent. Les Ruines Abyssales se dressent en contrebas — vastes, étrangères et d\'une antiquité incommensurable.</string>
     <string name="skilling_dungeon_sunken_grotto_note_1">D\'étranges piliers de pierre s\'élèvent du sol de la grotte, gravés d\'une écriture qu\'aucun érudit vivant ne peut déchiffrer.</string>
     <string name="skilling_dungeon_sunken_grotto_note_2">Les poissons se dispersent sans prévenir — une forme imposante passe en dessous.</string>
-    <string name="skilling_dungeon_sunken_grotto_note_3">Un journal détrempé passe à la dérive : « Le temple qu\'ils ont découvert sous les eaux n\'était pas abandonné. Il attendait. »</string>
+    <string name="skilling_dungeon_sunken_grotto_note_3">Un journal détrempé passe à la dérive : « Le temple qu\'ils ont découvert sous les eaux n\'était pas abandonné. Il attendait. »</string>
     <string name="skilling_dungeon_sunken_grotto_note_4">Une arche submergée palpite d\'une faible lueur antique. Le courant attire vers elle.</string>
     <string name="skilling_dungeon_sunken_grotto_note_5">La voûte est dégagée. Le Temple Englouti se trouve au-delà — une présence ancienne guette depuis l\'intérieur.</string>
     <string name="skilling_dungeon_dwarven_depths_note_1">Les murs anciens, gravés de runes, palpitent faiblement. Les nains qui ont bâti ce lieu ont disparu depuis longtemps.</string>
@@ -551,27 +551,27 @@
     <string name="skilling_dungeon_corrupted_canopy_note_5">La canopée s\'écarte. Le Sanctuaire Corrompu émerge de la forêt d\'ombre — ses portes s\'ouvrent, dans l\'attente.</string>
     <string name="skilling_dungeon_whispering_grove_note_1">Ici, les arbres murmurent dans une langue plus ancienne que toute langue connue.</string>
     <string name="skilling_dungeon_whispering_grove_note_2">Des fondations en pierre visibles sous les racines — les vestiges d\'une construction antérieure à la forêt.</string>
-    <string name="skilling_dungeon_whispering_grove_note_3">Une mise en garde de druide gravée dans l\'écorce : « La clairière au cœur du bois sacré n\'est plus ce qu\'elle était. Tenez-vous à l\'écart. »</string>
+    <string name="skilling_dungeon_whispering_grove_note_3">Une mise en garde de druide gravée dans l\'écorce : « La clairière au cœur du bois sacré n\'est plus ce qu\'elle était. Tenez-vous à l\'écart. »</string>
     <string name="skilling_dungeon_whispering_grove_note_4">Des lianes corrompues s\'étendent vers vous tandis que vous abattez du bois. Le bosquet résiste à votre présence.</string>
     <string name="skilling_dungeon_whispering_grove_note_5">Une ouverture dans la canopée dévoile des ruines au cœur du bosquet. Les ruines de la forêt ancienne invitent à l\'exploration.</string>
-    <string name="skilling_dungeon_thieves_den_note_1">Une page de registre froissée : des noms, des dates et des chiffres. Quelqu\'un a consigné les paiements destinés à une personne appelée le Gardien.</string>
-    <string name="skilling_dungeon_thieves_den_note_2">Gravé sur le mur : « Pour ceux qui font leurs preuves — le Sanctuaire attend. Ne posez pas de questions. »</string>
+    <string name="skilling_dungeon_thieves_den_note_1">Une page de registre froissée : des noms, des dates et des chiffres. Quelqu\'un a consigné les paiements destinés à une personne appelée le Gardien.</string>
+    <string name="skilling_dungeon_thieves_den_note_2">Gravé sur le mur : « Pour ceux qui font leurs preuves — le Sanctuaire attend. Ne posez pas de questions. »</string>
     <string name="skilling_dungeon_thieves_den_note_3">Une lettre déchirée avertissant un membre de se tenir à l\'écart des tunnels de l\'est. Aucune raison n\'est indiquée.</string>
     <string name="skilling_dungeon_thieves_den_note_4">Un fragment de carte scellé à la cire. Le sceau est inconnu — une ombre derrière une porte verrouillée.</string>
     <string name="skilling_dungeon_thieves_den_note_5">Le dernier passage débouche sur une chambre forte. Au fond, une porte renforcée porte le même sceau. Le Sanctuaire des Malfrats se trouve au-delà.</string>
     <string name="skilling_dungeon_crumbling_watchtower_note_1">Des traces de corde fraîches sur les appuis de fenêtre. Quelqu\'un utilise régulièrement cette tour.</string>
-    <string name="skilling_dungeon_crumbling_watchtower_note_2">Une cache dissimulée dans un mur fissuré : des crochets, une lame courte et un registre codé.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_2">Une cache dissimulée dans un mur fissuré : des crochets, une lame courte et un registre codé.</string>
     <string name="skilling_dungeon_crumbling_watchtower_note_3">Le registre consigne les biens volés et le partage des paiements. Les malfrats opèrent depuis un lieu situé sous la colline.</string>
     <string name="skilling_dungeon_crumbling_watchtower_note_4">Une trappe dans le sol, récemment huilée, aux gonds silencieux. Des traces de bottes usées l\'entourent.</string>
     <string name="skilling_dungeon_crumbling_watchtower_note_5">La trappe s\'ouvre sur un escalier sculpté qui s\'enfonce profondément dans la terre. Le Repaire des Ombres attend en contrebas.</string>
     <string name="skilling_dungeon_copper_caverns_note_1">Des éraflures marquent les parois du tunnel, trop profondes et trop larges pour avoir été causées par une pioche.</string>
     <string name="skilling_dungeon_copper_caverns_note_2">Vieux matériel minier, tordu et déformé. Quiconque se trouvait ici est parti dans la précipitation.</string>
-    <string name="skilling_dungeon_copper_caverns_note_3">Une note déchirée d\'un mineur : « Nous avons percé jusqu\'à quelque chose, en contrebas. Le contremaître a condamné le puits inférieur. Il refuse de dire pourquoi. »</string>
+    <string name="skilling_dungeon_copper_caverns_note_3">Une note déchirée d\'un mineur : « Nous avons percé jusqu\'à quelque chose, en contrebas. Le contremaître a condamné le puits inférieur. Il refuse de dire pourquoi. »</string>
     <string name="skilling_dungeon_copper_caverns_note_4">Des secousses viennent d\'en bas. De la poussière tombe du plafond en lentes vagues. Quelque chose s\'éveille.</string>
     <string name="skilling_dungeon_copper_caverns_note_5">Le puits condamné cède. Une vaste caverne s\'ouvre en contrebas — la mine effondrée se dresse devant vous.</string>
     <string name="skilling_dungeon_shadow_vault_note_1">Un dossier sur chaque grand marchand de la ville. Quelqu\'un compile ces informations depuis des années.</string>
     <string name="skilling_dungeon_shadow_vault_note_2">Une porte de chambre forte, légèrement entrouverte. À l\'intérieur — des caisses d\'armes et d\'armures volées, ainsi que des étuis à parchemins scellés.</string>
     <string name="skilling_dungeon_shadow_vault_note_3">Un étui à parchemin se distingue des autres. Il porte le sceau du trésor royal. Il est vide.</string>
-    <string name="skilling_dungeon_shadow_vault_note_4">Un journal intime : « La Guilde des Ombres n\'est pas qu\'une simple guilde. C\'est un gouvernement. Ils ont toujours observé. »</string>
+    <string name="skilling_dungeon_shadow_vault_note_4">Un journal intime : « La Guilde des Ombres n\'est pas qu\'une simple guilde. C\'est un gouvernement. Ils ont toujours observé. »</string>
     <string name="skilling_dungeon_shadow_vault_note_5">La plus profonde chambre forte n\'est pas verrouillée. Elle est gardée. Ce qui s\'y trouve est le plus grand secret de la Guilde — ainsi que ses protecteurs les plus dangereux.</string>
 </resources>

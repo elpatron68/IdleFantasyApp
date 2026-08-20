@@ -1032,33 +1032,33 @@
     <string name="item_steel_boots_desc">Degli stivali rafforzati in acciaio.</string>
     <string name="item_steel_square_shield_desc">Uno scudo quadrato in acciaio.</string>
     <string name="item_steel_kiteshield_desc">Uno scudo d\'acciaio.</string>
-    <string name="item_mithril_med_helmet_desc">A mithril med helmet.</string> <!-- untranslated -->
-    <string name="item_mithril_full_helmet_desc">A mithril full helmet.</string> <!-- untranslated -->
-    <string name="item_mithril_chainbody_desc">A mithril chainbody.</string> <!-- untranslated -->
-    <string name="item_mithril_plateskirt_desc">A mithril plateskirt.</string> <!-- untranslated -->
+    <string name="item_mithril_med_helmet_desc">Un elmetto di mithril.</string>
+    <string name="item_mithril_full_helmet_desc">Un elmo di mithril.</string>
+    <string name="item_mithril_chainbody_desc">Una cotta di maglia in mithril.</string>
+    <string name="item_mithril_plateskirt_desc">Un\'armatura a piastre di mithril.</string>
     <string name="item_mithril_boots_desc">Un paio di stivali in mithril.</string>
-    <string name="item_mithril_square_shield_desc">A mithril square shield.</string> <!-- untranslated -->
-    <string name="item_mithril_kiteshield_desc">A mithril kiteshield.</string> <!-- untranslated -->
-    <string name="item_adamantite_med_helmet_desc">A adamantite med helmet.</string> <!-- untranslated -->
-    <string name="item_adamantite_full_helmet_desc">A adamantite full helmet.</string> <!-- untranslated -->
-    <string name="item_adamantite_chainbody_desc">A adamantite chainbody.</string> <!-- untranslated -->
-    <string name="item_adamantite_plateskirt_desc">A adamantite plateskirt.</string> <!-- untranslated -->
-    <string name="item_adamantite_boots_desc">A pair of adamantite boots.</string> <!-- untranslated -->
-    <string name="item_adamantite_square_shield_desc">A adamantite square shield.</string> <!-- untranslated -->
-    <string name="item_adamantite_kiteshield_desc">A adamantite kiteshield.</string> <!-- untranslated -->
-    <string name="item_runite_med_helmet_desc">A runite med helmet.</string> <!-- untranslated -->
-    <string name="item_runite_full_helmet_desc">A runite full helmet.</string> <!-- untranslated -->
-    <string name="item_runite_chainbody_desc">A runite chainbody.</string> <!-- untranslated -->
-    <string name="item_runite_plateskirt_desc">A runite plateskirt.</string> <!-- untranslated -->
+    <string name="item_mithril_square_shield_desc">Uno scudo quadrato in mithril.</string>
+    <string name="item_mithril_kiteshield_desc">Uno scudo in mithril.</string>
+    <string name="item_adamantite_med_helmet_desc">Un elmetto in adamantio.</string>
+    <string name="item_adamantite_full_helmet_desc">Un elmo in adamantio.</string>
+    <string name="item_adamantite_chainbody_desc">Una cotta di maglia in adamantio.</string>
+    <string name="item_adamantite_plateskirt_desc">Un\'armatura a piastre di adamantio.</string>
+    <string name="item_adamantite_boots_desc">Un paio di stivali in adamantio.</string>
+    <string name="item_adamantite_square_shield_desc">Uno scudo quadrato in adamantio.</string>
+    <string name="item_adamantite_kiteshield_desc">Uno scudo in adamantio.</string>
+    <string name="item_runite_med_helmet_desc">Un elmetto in runite.</string>
+    <string name="item_runite_full_helmet_desc">Un elmo in runite.</string>
+    <string name="item_runite_chainbody_desc">Una cotta di maglia di runite.</string>
+    <string name="item_runite_plateskirt_desc">Un\'armatura a piastre di runite.</string>
     <string name="item_runite_boots_desc">Un paio di stivali in runite.</string>
-    <string name="item_runite_square_shield_desc">A runite square shield.</string> <!-- untranslated -->
-    <string name="item_runite_kiteshield_desc">A runite kiteshield.</string> <!-- untranslated -->
-    <string name="item_dwarven_helm_desc">A sturdy dwarven helmet, forged from ancient metals.</string> <!-- untranslated -->
-    <string name="item_dwarven_platebody_desc">Ancient dwarven armor, nearly impenetrable.</string> <!-- untranslated -->
-    <string name="item_dwarven_platelegs_desc">Dwarven leg armor, perfectly balanced for combat.</string> <!-- untranslated -->
-    <string name="item_dwarven_boots_desc">Masterwork dwarven boots, heavier than steel but nearly indestructible.</string> <!-- untranslated -->
-    <string name="item_dwarven_shield_desc">A dwarven shield that has withstood countless battles.</string> <!-- untranslated -->
-    <string name="item_dragon_boots_desc">A pair of dragon boots.</string> <!-- untranslated -->
+    <string name="item_runite_square_shield_desc">Uno scudo quadrato di runite.</string>
+    <string name="item_runite_kiteshield_desc">Uno scudo di runite.</string>
+    <string name="item_dwarven_helm_desc">Un elmetto di pregiata fattura, forgiato con antichi metalli.</string>
+    <string name="item_dwarven_platebody_desc">Storica armatura nanica, quasi impenetrabile ai colpi.</string>
+    <string name="item_dwarven_platelegs_desc">Protezione per le gambe di fattura nanica, adatta a ogni tipo di manovra.</string>
+    <string name="item_dwarven_boots_desc">Opera magna dei calzolai nanici, molto pesanti ma quasi indistruttibili.</string>
+    <string name="item_dwarven_shield_desc">Scudo nanico capace di resistere a infinite battaglie.</string>
+    <string name="item_dragon_boots_desc">Un paio di stivali draconici.</string>
     <string name="item_tower_helm_name">Elmo della Torre</string>
     <string name="item_tower_helm_desc">Un elmo ottenuto dai materiali di cui è composta la Torre.</string>
     <string name="item_tower_body_name">Corazza della Torre</string>
@@ -1072,34 +1072,34 @@
     <string name="item_tower_shield_name">Scudo della Torre</string>
     <string name="item_tower_shield_desc">Enorme scudo tratto dalla pietra della Torre.</string>
     <string name="item_balrog_wings_desc">Le possenti ali della Fiamma Gotica, piene di potere oscuro. Niente può trafiggere questa protezione.</string>
-    <string name="item_divine_helm_name">Divine Helm</string> <!-- untranslated -->
-    <string name="item_divine_helm_desc">A radiant helm blessed by the gods. Turns aside blows that would fell any mortal.</string> <!-- untranslated -->
-    <string name="item_divine_platebody_name">Divine Platebody</string> <!-- untranslated -->
-    <string name="item_divine_platebody_desc">Armour forged from celestial metal. Said to be nearly indestructible.</string> <!-- untranslated -->
-    <string name="item_divine_platelegs_name">Divine Platelegs</string> <!-- untranslated -->
-    <string name="item_divine_platelegs_desc">Leg armour of divine craft. Heavier than it looks, lighter than it should be.</string> <!-- untranslated -->
+    <string name="item_divine_helm_name">Elmo Divino</string>
+    <string name="item_divine_helm_desc">Elmo benedetto da una forza divina, capace di respingere colpi altrimenti fatali.</string>
+    <string name="item_divine_platebody_name">Corazza Divina</string>
+    <string name="item_divine_platebody_desc">Corazza in metallo celestiale. Il suo potere la rende quasi indistruttibile.</string>
+    <string name="item_divine_platelegs_name">Gambali Divini</string>
+    <string name="item_divine_platelegs_desc">Protezioni di divina fattura. Più pesanti di quel che sembrano, più leggere di quel che dovrebbero.</string>
     <string name="item_divine_boots_name">Stivali Divini</string>
     <string name="item_divine_boots_desc">Stivali di qualità divina. Non lasciano impronte.</string>
     <string name="item_divine_shield_name">Scudo Divino</string>
-    <string name="item_divine_shield_desc">A blessed shield that radiates a faint golden light.</string> <!-- untranslated -->
-    <string name="item_silver_emerald_necklace_desc">A silver necklace with an emerald. Enhances ranged.</string> <!-- untranslated -->
-    <string name="item_silver_ruby_necklace_desc">A silver necklace with a ruby. Enhances melee.</string> <!-- untranslated -->
-    <string name="item_silver_diamond_necklace_desc">A silver necklace with a diamond. Balanced combat.</string> <!-- untranslated -->
-    <string name="item_tower_amulet_name">Tower Amulet</string> <!-- untranslated -->
+    <string name="item_divine_shield_desc">Scudo santificato, irradia una debole luce dorata.</string>
+    <string name="item_silver_emerald_necklace_desc">Collana d\'argento con uno smeraldo incastonato. Migliora le tue doti d\'attacco a distanza.</string>
+    <string name="item_silver_ruby_necklace_desc">Collana d\'argento con un rubino incastonato. Migliora le tue doti d\'attacco in mischia.</string>
+    <string name="item_silver_diamond_necklace_desc">Collana d\'argento con un diamante incastonato. Migliora le tue doti in battaglia.</string>
+    <string name="item_tower_amulet_name">Amuleto della Torre</string>
     <string name="item_tower_amulet_desc">Un amuleto che emana l\'antico potere della torre.</string>
-    <string name="item_dragon_amulet_desc">A powerful amulet forged from dragon scales. Enhances all combat styles.</string> <!-- untranslated -->
-    <string name="item_flame_heart_amulet_desc">The crystallized heart of an ancient flame demon. Radiates immense power.</string> <!-- untranslated -->
+    <string name="item_dragon_amulet_desc">Potente amuleto intagliato da squame di drago. Ti rende più forte in battaglia.</string>
+    <string name="item_flame_heart_amulet_desc">Cuore cristallizzato di un demone di fuoco. Emette un grande potere.</string>
     <string name="item_amulet_of_the_kraken_desc">Un amuleto oscuro che emana l\'energia magica del Kraken</string>
-    <string name="item_silver_emerald_ring_desc">A silver ring with an emerald. Enhances ranged.</string> <!-- untranslated -->
-    <string name="item_silver_ruby_ring_desc">A silver ring with a ruby. Enhances melee.</string> <!-- untranslated -->
-    <string name="item_silver_diamond_ring_desc">A silver ring with a diamond. Balanced combat.</string> <!-- untranslated -->
-    <string name="item_tower_ring_name">Tower Ring</string> <!-- untranslated -->
-    <string name="item_tower_ring_desc">A band forged from the stone of the infinite tower.</string> <!-- untranslated -->
+    <string name="item_silver_emerald_ring_desc">Anello d\'argento con uno smeraldo incastonato. Migliora le tue doti d\'attacco a distanza.</string>
+    <string name="item_silver_ruby_ring_desc">Anello d\'argento con un rubino incastonato. Migliora le tue doti d\'attacco in mischia.</string>
+    <string name="item_silver_diamond_ring_desc">Anello d\'argento con un diamante incastonato. Migliora le tue doti in battaglia.</string>
+    <string name="item_tower_ring_name">Anello della Torre</string>
+    <string name="item_tower_ring_desc">Gioiello ricavato dalle pietre della Torre dell\'Infinito.</string>
     <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
     <string name="item_ring_of_dragons_might_desc">A ring imbued with dragonfire. Greatly increases melee strength.</string> <!-- untranslated -->
     <string name="item_ring_of_the_seas_desc">A ring blessed by the deep sea. Enhances ranged precision and power.</string> <!-- untranslated -->
     <string name="item_kraken_tentacle_desc">A coiling tentacle ring that channels the Kraken\'s arcane power.</string> <!-- untranslated -->
-    <string name="item_tower_cape_name">Tower Cape</string> <!-- untranslated -->
+    <string name="item_tower_cape_name">Mantello della Torre</string>
     <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
     <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
     <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
@@ -1110,7 +1110,7 @@
     <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
     <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
     <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
+    <string name="item_thieving_cape_name">Mantello da Furfante</string>
     <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
     <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
     <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
@@ -1125,19 +1125,19 @@
     <string name="item_firemaking_guild_cape_desc" formatted="false">Awarded for reaching Firemaking Guild level 10. Grants 5% more ashes per session.</string> <!-- untranslated -->
     <string name="item_runecrafting_cape_desc" formatted="false">Awarded for reaching level 99 Runecrafting. Grants 10% more runes per session.</string> <!-- untranslated -->
     <string name="item_runecrafting_guild_cape_desc" formatted="false">Awarded for reaching Runecrafting Guild level 10. Grants 5% more runes per session.</string> <!-- untranslated -->
-    <string name="item_herblore_cape_name">Herblore Cape</string> <!-- untranslated -->
+    <string name="item_herblore_cape_name">Mantello Officinale</string>
     <string name="item_herblore_cape_desc" formatted="false">Awarded for reaching level 99 Herblore. Grants 10% more potions per session.</string> <!-- untranslated -->
     <string name="item_herblore_guild_cape_desc" formatted="false">Awarded for reaching Herblore Guild level 10. Grants 5% more potions per session.</string> <!-- untranslated -->
-    <string name="item_construction_cape_name">Construction Cape</string> <!-- untranslated -->
+    <string name="item_construction_cape_name">Mantello Architteto</string>
     <string name="item_construction_cape_desc" formatted="false">Awarded for reaching level 99 Construction. Grants 10% more items per session.</string> <!-- untranslated -->
     <string name="item_prayer_cape_desc" formatted="false">Awarded for reaching level 99 Prayer. Strengthens your active blessing by 10%.</string> <!-- untranslated -->
     <string name="item_prayer_guild_cape_desc" formatted="false">Awarded for reaching Prayer Guild level 10. Strengthens your active blessing by 5%.</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_name">Mercantile Cape</string> <!-- untranslated -->
+    <string name="item_mercantile_cape_name">Mantello Imprenditoriale</string>
     <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
     <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
     <string name="item_agility_cape_desc" formatted="false">Awarded for reaching level 99 Agility. Grants 10% more XP per session.</string> <!-- untranslated -->
     <string name="item_agility_guild_cape_desc" formatted="false">Awarded for reaching Agility Guild level 10. Grants 5% more XP per session.</string> <!-- untranslated -->
-    <string name="item_slayer_cape_name">Slayer Cape</string> <!-- untranslated -->
+    <string name="item_slayer_cape_name">Mantello Mercenario</string>
     <string name="item_slayer_cape_desc" formatted="false">Awarded for reaching level 99 Slayer. Grants 10% more Slayer points.</string> <!-- untranslated -->
     <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
     <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
@@ -1216,69 +1216,69 @@
     <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
-    <string name="item_wind_strike_name">Wind Strike</string> <!-- untranslated -->
+    <string name="item_wind_strike_name">Colpo dell\'Aria</string>
     <string name="item_wind_strike_desc">A basic air spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_wind_bolt_name">Wind Bolt</string> <!-- untranslated -->
+    <string name="item_wind_bolt_name">Dardo dell\'Aria</string>
     <string name="item_wind_bolt_desc">A moderate air spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_wind_blast_name">Wind Blast</string> <!-- untranslated -->
+    <string name="item_wind_blast_name">Esplosione dell\'Aria</string>
     <string name="item_wind_blast_desc">A powerful air spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_wind_wave_name">Wind Wave</string> <!-- untranslated -->
+    <string name="item_wind_wave_name">Ondata dell\'Aria</string>
     <string name="item_wind_wave_desc">A devastating air spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_water_strike_name">Water Strike</string> <!-- untranslated -->
+    <string name="item_water_strike_name">Colpo dell\'Acqua</string>
     <string name="item_water_strike_desc">A basic water spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_water_bolt_name">Water Bolt</string> <!-- untranslated -->
+    <string name="item_water_bolt_name">Dardo dell\'Acqua</string>
     <string name="item_water_bolt_desc">A moderate water spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_water_blast_name">Water Blast</string> <!-- untranslated -->
+    <string name="item_water_blast_name">Esplosione dell\'Acqua</string>
     <string name="item_water_blast_desc">A powerful water spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_water_wave_name">Water Wave</string> <!-- untranslated -->
+    <string name="item_water_wave_name">Ondata dell\'Acqua</string>
     <string name="item_water_wave_desc">A devastating water spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_earth_strike_name">Earth Strike</string> <!-- untranslated -->
+    <string name="item_earth_strike_name">Colpo della Terra</string>
     <string name="item_earth_strike_desc">A basic earth spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_earth_bolt_name">Earth Bolt</string> <!-- untranslated -->
+    <string name="item_earth_bolt_name">Dardo della Terra</string>
     <string name="item_earth_bolt_desc">A moderate earth spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_earth_blast_name">Earth Blast</string> <!-- untranslated -->
+    <string name="item_earth_blast_name">Esplosione della Terra</string>
     <string name="item_earth_blast_desc">A powerful earth spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_earth_wave_name">Earth Wave</string> <!-- untranslated -->
+    <string name="item_earth_wave_name">Ondata della Terra</string>
     <string name="item_earth_wave_desc">A devastating earth spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_fire_strike_name">Fire Strike</string> <!-- untranslated -->
+    <string name="item_fire_strike_name">Colpo del Fuoco</string>
     <string name="item_fire_strike_desc">A basic fire spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_fire_bolt_name">Fire Bolt</string> <!-- untranslated -->
+    <string name="item_fire_bolt_name">Dardo del Fuoco</string>
     <string name="item_fire_bolt_desc">A moderate fire spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_fire_blast_name">Fire Blast</string> <!-- untranslated -->
+    <string name="item_fire_blast_name">Esplosione del Fuoco</string>
     <string name="item_fire_blast_desc">A powerful fire spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_fire_wave_name">Fire Wave</string> <!-- untranslated -->
+    <string name="item_fire_wave_name">Ondata del Fuoco</string>
     <string name="item_fire_wave_desc">A devastating fire spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_mind_strike_name">Mind Strike</string> <!-- untranslated -->
+    <string name="item_mind_strike_name">Colpo della Psiche</string>
     <string name="item_mind_strike_desc">A basic mind spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_mind_bolt_name">Mind Bolt</string> <!-- untranslated -->
+    <string name="item_mind_bolt_name">Dardo della Psiche</string>
     <string name="item_mind_bolt_desc">A moderate mind spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_mind_blast_name">Mind Blast</string> <!-- untranslated -->
+    <string name="item_mind_blast_name">Esplosione della Psiche</string>
     <string name="item_mind_blast_desc">A powerful mind spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_mind_wave_name">Mind Wave</string> <!-- untranslated -->
+    <string name="item_mind_wave_name">Ondata della Psiche</string>
     <string name="item_mind_wave_desc">A devastating mind spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_strike_name">Chaos Strike</string> <!-- untranslated -->
+    <string name="item_chaos_strike_name">Colpo del Caos</string>
     <string name="item_chaos_strike_desc">A basic chaos spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_bolt_name">Chaos Bolt</string> <!-- untranslated -->
+    <string name="item_chaos_bolt_name">Dardo del Caos</string>
     <string name="item_chaos_bolt_desc">A moderate chaos spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_blast_name">Chaos Blast</string> <!-- untranslated -->
+    <string name="item_chaos_blast_name">Esplosione del Caos</string>
     <string name="item_chaos_blast_desc">A powerful chaos spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_chaos_wave_name">Chaos Wave</string> <!-- untranslated -->
+    <string name="item_chaos_wave_name">Ondata del Caos</string>
     <string name="item_chaos_wave_desc">A devastating chaos spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_death_strike_name">Death Strike</string> <!-- untranslated -->
+    <string name="item_death_strike_name">Colpo della Morte</string>
     <string name="item_death_strike_desc">A basic death spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_death_bolt_name">Death Bolt</string> <!-- untranslated -->
+    <string name="item_death_bolt_name">Dardo della Morte</string>
     <string name="item_death_bolt_desc">A moderate death spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_death_blast_name">Death Blast</string> <!-- untranslated -->
+    <string name="item_death_blast_name">Esplosione della Morte</string>
     <string name="item_death_blast_desc">A powerful death spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_death_wave_name">Death Wave</string> <!-- untranslated -->
+    <string name="item_death_wave_name">Ondata della Morte</string>
     <string name="item_death_wave_desc">A devastating death spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_blood_strike_name">Blood Strike</string> <!-- untranslated -->
+    <string name="item_blood_strike_name">Colpo del Sangue</string>
     <string name="item_blood_strike_desc">A basic blood spell that strikes your foe.</string> <!-- untranslated -->
-    <string name="item_blood_bolt_name">Blood Bolt</string> <!-- untranslated -->
+    <string name="item_blood_bolt_name">Dardo del Sangue</string>
     <string name="item_blood_bolt_desc">A moderate blood spell that bolts your foe.</string> <!-- untranslated -->
-    <string name="item_blood_blast_name">Blood Blast</string> <!-- untranslated -->
+    <string name="item_blood_blast_name">Esplosione del Sangue</string>
     <string name="item_blood_blast_desc">A powerful blood spell that blasts your foe.</string> <!-- untranslated -->
-    <string name="item_blood_wave_name">Blood Wave</string> <!-- untranslated -->
+    <string name="item_blood_wave_name">Ondata del Sangue</string>
     <string name="item_blood_wave_desc">A devastating blood spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_spirit_herb_name">Erba Spirituale</string>
     <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->

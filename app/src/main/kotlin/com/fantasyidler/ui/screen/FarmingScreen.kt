@@ -70,6 +70,7 @@ import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.FarmingUiState
 import com.fantasyidler.ui.viewmodel.FarmingViewModel
+import com.fantasyidler.ui.viewmodel.QuestIndicator
 import com.fantasyidler.ui.viewmodel.remainingMs
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatDurationMs
@@ -156,11 +157,12 @@ fun FarmingScreen(
         ) {
             ScaledSheetContent {
             PlantSheet(
-                crops          = state.availableCrops,
-                inventory      = state.inventory,
-                onPlant        = { crop, ashKey -> viewModel.plantCrop(patchNum, crop, ashKey) },
-                onDismiss      = viewModel::closePlantSheet,
-                initialAshKey  = state.lastFertilizerKey,
+                crops           = state.availableCrops,
+                inventory       = state.inventory,
+                questIndicators = state.questIndicators,
+                onPlant         = { crop, ashKey -> viewModel.plantCrop(patchNum, crop, ashKey) },
+                onDismiss       = viewModel::closePlantSheet,
+                initialAshKey   = state.lastFertilizerKey,
             )
             }
         }
@@ -291,11 +293,12 @@ fun FarmingSheetContent(
         ) {
             ScaledSheetContent {
             PlantSheet(
-                crops          = state.availableCrops,
-                inventory      = state.inventory,
-                onPlant        = { crop, ashKey -> viewModel.plantCrop(patchNum, crop, ashKey) },
-                onDismiss      = viewModel::closePlantSheet,
-                initialAshKey  = state.lastFertilizerKey,
+                crops           = state.availableCrops,
+                inventory       = state.inventory,
+                questIndicators = state.questIndicators,
+                onPlant         = { crop, ashKey -> viewModel.plantCrop(patchNum, crop, ashKey) },
+                onDismiss       = viewModel::closePlantSheet,
+                initialAshKey   = state.lastFertilizerKey,
             )
             }
         }
@@ -609,6 +612,7 @@ private fun PatchCard(
 private fun PlantSheet(
     crops: List<CropData>,
     inventory: Map<String, Int>,
+    questIndicators: Map<String, List<QuestIndicator>> = emptyMap(),
     onPlant: (CropData, String?) -> Unit,
     onDismiss: () -> Unit,
     initialAshKey: String? = null,
@@ -672,12 +676,15 @@ private fun PlantSheet(
                     verticalAlignment     = Alignment.CenterVertically,
                 ) {
                     Column(Modifier.weight(1f)) {
-                        Text(
-                            text  = "${crop.emoji} ${GameStrings.cropName(context, crop.id)}",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = if (enabled) MaterialTheme.colorScheme.onSurface
-                                    else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text  = "${crop.emoji} ${GameStrings.cropName(context, crop.id)}",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = if (enabled) MaterialTheme.colorScheme.onSurface
+                                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                            )
+                            QuestIndicatorIcons(questIndicators[crop.id] ?: emptyList())
+                        }
                         Text(
                             text  = if (crop.id == "magic_bean") stringResource(R.string.farming_bean_picker_stats)
                                     else stringResource(R.string.farming_crop_picker_stats, crop.levelRequired, (crop.growthTimeHours * 3_600_000L).formatDurationMs(context), crop.harvestXp),

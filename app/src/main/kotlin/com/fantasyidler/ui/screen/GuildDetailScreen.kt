@@ -38,10 +38,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
@@ -53,8 +51,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
-import com.fantasyidler.data.json.GuildDailyTemplate
-import com.fantasyidler.data.json.GuildQuestData
 import com.fantasyidler.repository.GuildDailyWithProgress
 import com.fantasyidler.repository.GuildQuestWithProgress
 import com.fantasyidler.ui.viewmodel.GuildDetailViewModel
@@ -149,8 +145,8 @@ fun GuildDetailScreen(
                 level                     = state.guildLevel,
                 dailiesCompleted          = state.dailiesCompletedThisTier,
                 dailiesRequired           = state.dailiesRequiredThisTier,
-                allCurrentLevelQuestsDone = state.allCurrentLevelQuestsDone,
                 questGateBlocked          = state.questGateBlocked,
+                guildUnlocked             = state.guildUnlocked,
             )
 
             TabRow(selectedTabIndex = pagerState.currentPage) {
@@ -202,8 +198,8 @@ private fun GuildProgressHeader(
     level: Int,
     dailiesCompleted: Int,
     dailiesRequired: Int,
-    allCurrentLevelQuestsDone: Boolean,
     questGateBlocked: Boolean,
+    guildUnlocked: Boolean,
 ) {
     Column(
         modifier = Modifier
@@ -233,20 +229,36 @@ private fun GuildProgressHeader(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             when {
-                questGateBlocked -> {
+                questGateBlocked && dailiesCompleted < dailiesRequired -> {
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        text  = stringResource(R.string.guild_quest_gate_blocked),
+                        text  = stringResource(
+                            R.string.guild_progress_dailies_and_quest,
+                            dailiesCompleted,
+                            dailiesRequired,
+                        ),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.error,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                allCurrentLevelQuestsDone && dailiesCompleted < dailiesRequired -> {
+                !guildUnlocked || questGateBlocked -> {
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        text  = stringResource(R.string.guild_do_dailies_hint),
+                        text  = stringResource(R.string.guild_quest_required),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                else -> {
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text  = stringResource(
+                            R.string.guild_progress_dailies_only,
+                            dailiesCompleted,
+                            dailiesRequired,
+                        ),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
@@ -412,7 +424,10 @@ private fun GuildDailiesTab(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text  = stringResource(R.string.guild_no_dailies),
+                        text  = stringResource(
+                            if (dailies.isEmpty()) R.string.guild_no_dailies
+                            else R.string.guild_dailies_all_done
+                        ),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

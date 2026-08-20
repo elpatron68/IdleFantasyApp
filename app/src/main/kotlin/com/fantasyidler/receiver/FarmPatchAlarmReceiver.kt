@@ -14,12 +14,14 @@ class FarmPatchAlarmReceiver : BroadcastReceiver() {
     companion object {
         const val EXTRA_PATCH_NUMBER = "patch_number"
         const val EXTRA_CROP_NAME   = "crop_display_name"
+        const val EXTRA_SAVE_SLOT   = "save_slot"
     }
 
     @Inject lateinit var notificationManager: SessionNotificationManager
 
     override fun onReceive(context: Context, intent: Intent) {
         val cropKey = intent.getStringExtra(EXTRA_CROP_NAME) ?: return
-        notificationManager.showFarmingReady(GameStrings.cropName(notificationManager.localizedContext(), cropKey))
+        val slot = intent.getIntExtra(EXTRA_SAVE_SLOT, 0)
+        notificationManager.showFarmingReady(GameStrings.cropName(notificationManager.localizedContext(), cropKey), slot)
     }
 }

@@ -265,7 +265,9 @@ private fun TradeRouteRow(
                     else stringResource(R.string.mercantile_dispatch_label)
                 )
             }
-            if (queueFull) {
+            // Only intercept taps when the button is disabled BECAUSE the queue is full;
+            // with no active session the queue state must not block dispatching (issue #1485).
+            if (sessionActive && queueFull) {
                 Box(
                     modifier = Modifier
                         .matchParentSize()

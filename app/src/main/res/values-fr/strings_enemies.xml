@@ -77,25 +77,25 @@
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Caverne des Diablotins</string>
-    <string name="dungeon_imp_cavern_desc">Une grotte peu profonde peuplée de petits diablotins espiègles. Idéal pour les débutants !</string>
+    <string name="dungeon_imp_cavern_desc">Une grotte peu profonde peuplée de petits diablotins espiègles. Idéal pour les débutants !</string>
     <string name="dungeon_goblin_cave_name">Cave des gobelins</string>
     <string name="dungeon_goblin_cave_desc">Une grotte sombre infestée de gobelins et de rats géants. Un endroit idéal pour que les nouveaux aventuriers s\'entraînent.</string>
     <string name="dungeon_spider_den_name">Repaire des araignées</string>
-    <string name="dungeon_spider_den_desc">Une caverne remplie de toiles d\'araignées, grouillant d\'araignées venimeuses. N\'oubliez pas l\'antivenin !</string>
+    <string name="dungeon_spider_den_desc">Une caverne remplie de toiles d\'araignées, grouillant d\'araignées venimeuses. N\'oubliez pas l\'antivenin !</string>
     <string name="dungeon_bandit_camp_name">Camp de bandits</string>
-    <string name="dungeon_bandit_camp_desc">Un repaire de voleurs et de brigands en pleine nature. Surveillez bien votre bourse !</string>
+    <string name="dungeon_bandit_camp_desc">Un repaire de voleurs et de brigands en pleine nature. Surveillez bien votre bourse !</string>
     <string name="dungeon_undead_crypt_name">Cryptes des Morts-vivants</string>
-    <string name="dungeon_undead_crypt_desc">Une ancienne nécropole où les morts refusent de reposer en paix. Méfiez-vous de la magie noire !</string>
+    <string name="dungeon_undead_crypt_desc">Une ancienne nécropole où les morts refusent de reposer en paix. Méfiez-vous de la magie noire !</string>
     <string name="dungeon_fortress_ruins_name">Ruines de la forteresse</string>
     <string name="dungeon_fortress_ruins_desc">Les ruines délabrées d\'un ancien château, maintenant gardées par des chevaliers et des soldats.</string>
     <string name="dungeon_orc_stronghold_name">Forteresse des orcs</string>
     <string name="dungeon_orc_stronghold_desc">Une forteresse orc située au cœur des montagnes. Seuls les braves osent y entrer.</string>
     <string name="dungeon_volcanic_depths_name">Profondeurs Volcaniques</string>
-    <string name="dungeon_volcanic_depths_desc">Une cavité brûlante habitée par des chiens de feu et des démons insignifiants. La chaleur y est insupportable !</string>
+    <string name="dungeon_volcanic_depths_desc">Une cavité brûlante habitée par des chiens de feu et des démons insignifiants. La chaleur y est insupportable !</string>
     <string name="dungeon_dragon_lair_name">Repaire du Dragon</string>
     <string name="dungeon_dragon_lair_desc">La demeure légendaire des dragons verts. Seuls les maîtres guerriers survivent à ce défi.</string>
     <string name="dungeon_farm_name">Ferme</string>
-    <string name="dungeon_farm_desc">Une ferme paisible avec du bétail. Parfait pour les débutants souhaitant récolter de la nourriture !</string>
+    <string name="dungeon_farm_desc">Une ferme paisible avec du bétail. Parfait pour les débutants souhaitant récolter de la nourriture !</string>
     <string name="dungeon_infernal_stronghold_name">Forteresse infernale</string>
     <string name="dungeon_infernal_stronghold_desc">Une forteresse de feu et de soufre, contrôlée par des démons et des chiens de l\'enfer. La chaleur seule peut tuer les non préparés.</string>
     <string name="dungeon_ancient_temple_name">Temple ancien</string>

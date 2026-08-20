@@ -494,13 +494,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">街</string>
     <string name="home_town_desc">ショップ、宿屋、ギルド、教会、建築屋の作業場、スレイヤーマスター、カーニバルを訪れます</string>
-    <string name="guild_dailies_available">デイリー依頼があります</string>
     <string name="guild_not_unlocked">Not yet unlocked</string> <!-- untranslated -->
     <string name="guild_dailies_done_today">Dailies done today</string> <!-- untranslated -->
     <string name="guild_dailies_remaining_today">%1$d left today</string> <!-- untranslated -->
     <string name="guild_do_dailies_hint">次のランクに進むためにデイリー依頼をクリアしましょう</string>
     <string name="guild_quest_gate_blocked">ランクを上げるためにクエストを完了してください</string>
     <string name="guild_quest_required">昇格にはクエストが必要です</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">あなたは死亡し、獲得したものの大部分を失いました。</string>
     <string name="home_xp_boost_was_active">2倍経験値ブーストが有効でした</string>
     <string name="home_xp_boost_active">2倍経験値ブースト有効中 — 残り %1$s</string>
@@ -948,6 +949,7 @@
     <string name="guild_daily_resets_in">毎日%1$sにリセット</string>
     <string name="guild_locked_hint">ギルドレベル %1$d が必要</string>
     <string name="guild_no_dailies">デイリー依頼を解放するには、ギルドクエストを完了してください。</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">インベントリから納品（所持数: %1$d）</string>
     <string name="guild_quest_desc_gather">%4$sのために%3$sを%2$d個%1$sする。</string>
     <string name="guild_quest_desc_kill">%2$s戦闘を使用して敵を%1$d体倒す。</string>

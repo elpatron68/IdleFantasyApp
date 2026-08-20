@@ -319,9 +319,9 @@
     <string name="settings_quest_dots_desc">Показывает золотую точку на навыках, для которых открыт квест</string>
     <string name="settings_prestige_notifications">Значки с уведомлением о престиже</string>
     <string name="settings_prestige_notifications_desc">Показывать значок уведомления при навигации, когда навык готов к получению престижа.</string>
-    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
+    <string name="label_switch_character">Сменить персонажа</string>
+    <string name="settings_daily_reset_time">Время обновления</string>
+    <string name="settings_daily_reset_time_desc">Местное время, в которое будет происходить обновление ежедневных квестов, ежедневные задания гильдий и еженедельные задания. Его изменение не приводит к дополнительному сбросу.</string>
     <string name="settings_compact_numbers">Компактные числа</string>
     <string name="settings_compact_numbers_desc">Сокращать большие значения (например, 2,46М вместо 2 461 940)</string>
     <string name="settings_home_screen">Главный экран</string>
@@ -520,13 +520,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Город</string>
     <string name="home_town_desc">Посетите магазин, таверну, гильдию, церковь, мастерскую строителя, мастера охотника и ярмарку</string>
-    <string name="guild_dailies_available">Ежедневные доступны</string>
     <string name="guild_not_unlocked">Ещё не открыто</string>
     <string name="guild_dailies_done_today">Ежедневные задания выполнены</string>
     <string name="guild_dailies_remaining_today">Осталось %1$d сегодня</string>
     <string name="guild_do_dailies_hint">Выполняйте ежедневные квесты, чтобы перейти на следующий ранг</string>
     <string name="guild_quest_gate_blocked">Завершите квесты для повышения ранга</string>
     <string name="guild_quest_required">Квест необходим для повышения</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">Вы погибли и потеряли большую часть добычи.</string>
     <string name="home_xp_boost_was_active">Бонус ×2 опыта был активен</string>
     <string name="home_xp_boost_active">Бонус ×2 опыта активен — %1$s осталось</string>
@@ -978,6 +979,7 @@
     <string name="guild_daily_resets_in">Обновляется ежедневно в %1$s</string>
     <string name="guild_locked_hint">Требуется уровень гильдии %1$d</string>
     <string name="guild_no_dailies">Завершайте квесты гильдии, чтобы открывать ежедневные поручения.</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Передать из инвентаря (%1$d доступно)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s для %4$s.</string>
     <string name="guild_quest_desc_kill">Победить %1$d врагов в ближнем бою (%2$s).</string>
@@ -1385,7 +1387,7 @@
     <string name="carnival_desc">Игры, призы и веселье!</string>
     <string name="carnival_prize_xp_lamp_small_name">Маленькая лампа опыта</string>
     <string name="carnival_prize_xp_lamp_small_desc">Даёт 10 000 XP выбранному навыку.</string>
-    <string name="carnival_prize_xp_lamp_large_name">Маленькая лампа опыта</string>
+    <string name="carnival_prize_xp_lamp_large_name">Большая лампа опыта</string>
     <string name="carnival_prize_xp_lamp_large_desc">Даёт 50,000 XP выбранному навыку.</string>
     <string name="carnival_ticket_balance">Билеты: %1$d</string>
     <string name="carnival_idle_tab">Пассивные игры</string>
@@ -1687,7 +1689,7 @@
     <string name="tower_milestone_plate">%1$s (защита +132)</string>
     <string name="tower_milestone_coins_100k">100 000 монет</string>
     <string name="tower_milestone_legs_set">%1$s (защита +125) + %2$s (защита +58) + %3$s (защита +125)</string>
-    <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
+    <string name="tower_milestone_sword">%1$s (атака +72, сила +75)</string>
     <string name="tower_milestone_cape">%1$s (атака/сила/защита +14, стрельба/магия +12) + 500 000 монет</string>
     <string name="tower_milestone_crossbow">%1$s (атака от стрельбы +78, защита от стрел +52)</string>
     <string name="tower_milestone_staff">%1$s (магическая атака +68, магический урон +18, бесконечные руны) + 1 000 000 монет</string>

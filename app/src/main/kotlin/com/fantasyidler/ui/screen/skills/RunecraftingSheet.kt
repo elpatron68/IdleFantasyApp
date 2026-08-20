@@ -24,6 +24,7 @@ import androidx.compose.material3.TextButton
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.text.KeyboardActions
@@ -298,8 +299,12 @@ internal fun RunecraftingSheet(
             }
 
             val ashTiers = listOf("ashes","oak_ashes","willow_ashes","maple_ashes","yew_ashes","magic_ashes","redwood_ashes")
-            val availableAshes = ashTiers.filter { (inventory[it] ?: 0) >= (qty + 9) / 10 }
-            if (availableAshes.isNotEmpty()) {
+            val ownedAshes = ashTiers.filter { (inventory[it] ?: 0) > 0 }
+            val ashNeeded = (qty + 9) / 10
+            LaunchedEffect(ashNeeded, inventory) {
+                selectedAshKey?.let { if ((inventory[it] ?: 0) < ashNeeded) selectedAshKey = null }
+            }
+            if (ownedAshes.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
                 Text(stringResource(R.string.catalyst_optional), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
                 Spacer(Modifier.height(4.dp))
@@ -309,7 +314,7 @@ internal fun RunecraftingSheet(
                     rcLevel >= 50 -> 2
                     else          -> 1
                 }
-                (listOf(null) + availableAshes).forEach { ashKey ->
+                (listOf(null) + ownedAshes).forEach { ashKey ->
                     val totalRunes = rcBase + when (ashKey) {
                         "ashes"         -> 1
                         "oak_ashes"     -> 2
@@ -320,18 +325,30 @@ internal fun RunecraftingSheet(
                         "redwood_ashes" -> 7
                         else            -> 0
                     }
+                    val owned      = ashKey?.let { inventory[it] ?: 0 } ?: 0
+                    val affordable = ashKey == null || owned >= ashNeeded
                     Row(
-                        modifier          = Modifier.fillMaxWidth().clickable { selectedAshKey = ashKey }.padding(horizontal = 16.dp, vertical = 4.dp),
+                        modifier          = Modifier.fillMaxWidth().clickable(enabled = affordable) { selectedAshKey = ashKey }.padding(horizontal = 16.dp, vertical = 4.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text  = if (ashKey == null) stringResource(R.string.catalyst_none) else GameStrings.itemName(context, ashKey),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = if (selectedAshKey == ashKey) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                            color = when {
+                                !affordable              -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                                selectedAshKey == ashKey -> MaterialTheme.colorScheme.primary
+                                else                     -> MaterialTheme.colorScheme.onSurface
+                            },
                             fontWeight = if (selectedAshKey == ashKey) FontWeight.SemiBold else FontWeight.Normal,
                         )
-                        if (ashKey != null) Text(stringResource(R.string.catalyst_rune_bonus, totalRunes), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        if (ashKey != null) {
+                            if (affordable) {
+                                Text(stringResource(R.string.catalyst_rune_bonus, totalRunes), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            } else {
+                                Text("$owned / $ashNeeded", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                            }
+                        }
                     }
                 }
             }

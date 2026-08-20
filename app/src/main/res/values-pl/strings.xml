@@ -508,13 +508,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Miasto</string>
     <string name="home_town_desc">Odwiedź sklep, gospodę, gildię, kościół, warsztat budowniczego, mistrza łowców i karnawał</string>
-    <string name="guild_dailies_available">Dostępne dzienne zadania</string>
     <string name="guild_not_unlocked">Jeszcze niedostępne</string>
     <string name="guild_dailies_done_today">Dzienne zadania ukończone</string>
     <string name="guild_dailies_remaining_today">Pozostało %1$d dzisiaj</string>
     <string name="guild_do_dailies_hint">Wykonuj dzienne zadania, aby awansować na kolejny stopień</string>
     <string name="guild_quest_gate_blocked">Ukończ zadania, aby awansować w randze</string>
     <string name="guild_quest_required">Zadanie wymagane do awansu</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">Zginąłeś i straciłeś większość zdobyczy.</string>
     <string name="home_xp_boost_was_active">Wzmocnienie 2× XP było aktywne</string>
     <string name="home_xp_boost_active">Wzmocnienie 2× XP aktywne — pozostało %1$s</string>
@@ -964,6 +965,7 @@
     <string name="guild_daily_resets_in">Odnawia się codziennie o %1$s</string>
     <string name="guild_locked_hint">Wymaga poziomu gildii %1$d</string>
     <string name="guild_no_dailies">Ukończ zadania gildii, by odblokować codzienne prośby.</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Wnieś z ekwipunku (dostępnych: %1$d)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s dla %4$s.</string>
     <string name="guild_quest_desc_kill">Pokonaj %1$d wrogów, używając walki %2$s.</string>

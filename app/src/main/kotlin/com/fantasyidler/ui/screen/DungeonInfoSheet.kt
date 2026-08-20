@@ -1,7 +1,9 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -84,6 +86,7 @@ import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.json.SpellData
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.ui.res.painterResource
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
@@ -185,7 +188,7 @@ internal fun DungeonInfoSheet(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = 20.dp)
             .padding(bottom = 40.dp),
     ) {
         Column(modifier = Modifier
@@ -239,11 +242,17 @@ internal fun DungeonInfoSheet(
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Spacer(Modifier.height(4.dp))
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(
+                modifier              = Modifier
+                    .horizontalScroll(rememberScrollState())
+                    .padding( vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
                 equippedWeapons.forEach { (slot, weaponData) ->
                     val isSelected = slot == (selectedWeaponSlot
                         ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equippedWeapons.containsKey(it) })
+                    val style = EquipSlot.combatStyleForSlot(slot)!!
+                    val iconRes = GameStrings.skillIconRes(style)
                     FilterChip(
                         selected = isSelected,
                         onClick  = { onWeaponSlotSelected(slot) },
@@ -255,6 +264,15 @@ internal fun DungeonInfoSheet(
                                 )
                             }
                         },
+                        leadingIcon = if (iconRes != null) {
+                            {
+                                Image(
+                                    painter = painterResource(iconRes),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp),
+                                )
+                            }
+                        } else null,
                     )
                 }
             }

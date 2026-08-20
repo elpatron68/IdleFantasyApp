@@ -5,15 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.json.CropData
-import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.FarmingPatch
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.FarmingRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.TownRepository
-import com.fantasyidler.simulator.XpTable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +45,7 @@ data class FarmingUiState(
     val fertilizer:     Map<String, String>    = emptyMap(),
     val availableCrops: List<CropData>         = emptyList(),
     val allCrops:       Map<String, CropData>  = emptyMap(),
+    val questIndicators: Map<String, List<QuestIndicator>> = emptyMap(),
     /** Epoch-ms "now" updated every 10 seconds for time-remaining calculations. */
     val now:            Long                   = System.currentTimeMillis(),
     val snackbarMessage: String?               = null,
@@ -81,6 +81,7 @@ class FarmingViewModel @Inject constructor(
     private val guildRepo: GuildRepository,
     private val gameData: GameDataRepository,
     private val townRepo: TownRepository,
+    private val questRepo: QuestRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -99,7 +100,8 @@ class FarmingViewModel @Inject constructor(
         farmingRepo.observePatches(),
         nowFlow,
         _extra,
-    ) { player, patches, now, extra ->
+        questRepo.observeProgress(),
+    ) { player, patches, now, extra, questProgress ->
         if (player == null) return@combine extra.copy(isLoading = true, now = now)
 
         val levels: Map<String, Int>  = json.decodeFromString(player.skillLevels)
@@ -125,6 +127,7 @@ class FarmingViewModel @Inject constructor(
             inventory        = inv,
             availableCrops   = availableCrops,
             allCrops         = gameData.crops,
+            questIndicators  = computeQuestIndicators(questProgress, flags),
             fertilizer       = flags.farmingFertilizer,
             lastFertilizerKey = flags.lastFertilizerKey,
             magicBeanPlanted = flags.magicBeanPlanted,
@@ -252,6 +255,42 @@ class FarmingViewModel @Inject constructor(
 
     fun harvestResultConsumed() = _extra.update { it.copy(harvestResult = null) }
     fun snackbarConsumed()      = _extra.update { it.copy(snackbarMessage = null) }
+
+    private fun computeQuestIndicators(
+        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        flags: com.fantasyidler.data.model.PlayerFlags,
+    ): Map<String, List<QuestIndicator>> {
+        val result = mutableMapOf<String, MutableList<QuestIndicator>>()
+        val progressById = questProgress.associateBy { it.questId }
+        val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
+        val guildPool = gameData.guildDailyPool.associateBy { it.id }
+        val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
+
+        fun addIndicator(cropId: String, category: QuestCategory, questId: String) {
+            result.getOrPut(cropId) { mutableListOf() }.add(QuestIndicator(category, isCompletable = true, questId = questId))
+        }
+
+        for ((id, quest) in gameData.guildQuests) {
+            if (quest.guild != Skills.FARMING || quest.type != "gather") continue
+            val prog = progressById[id]
+            if (prog?.completed == true) continue
+            if (guildRepo.guildLevel(quest.guild, flags.guildDailyTierCounts, completedIds) < quest.guildLevelRequired) continue
+
+            val effectiveAmount = guildRepo.effectiveQuestAmountFromFlags(quest, flags)
+            if (effectiveAmount - (prog?.progress ?: 0) <= 0) continue
+            addIndicator(quest.target, QuestCategory.GUILD, id)
+        }
+
+        for (id in activeGuildDailyIds) {
+            val template = guildPool[id] ?: continue
+            if (template.guild != Skills.FARMING || template.type != "gather") continue
+            val progress = flags.guildDailyProgress[id] ?: 0
+            if (template.amount - progress <= 0) continue
+            addIndicator(template.target, QuestCategory.GUILD_DAILY, id)
+        }
+
+        return result
+    }
 }
 
 /** Remaining ms until a patch is ready. Negative means ready. */

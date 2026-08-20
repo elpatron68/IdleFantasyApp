@@ -7,20 +7,20 @@
     <string name="notif_channel_farming_desc">Des notifications lorsque vos cultures sont prêtes à être récoltées</string>
 
     <!-- ===== Session complete ===== -->
-    <string name="notif_session_complete_title">Session Terminée !</string>
+    <string name="notif_session_complete_title">Session terminée !</string>
     <!-- Translator note: %1$s = localised skill name (e.g. "Mining") -->
     <string name="notif_session_complete_body">Votre session %1$s est terminée. Appuyez ici pour récupérer vos récompenses.</string>
 
     <!-- ===== Buff alerts ===== -->
-    <string name="notif_channel_buffs_name">Alertes Bonus</string>
+    <string name="notif_channel_buffs_name">Alertes bonus</string>
     <string name="notif_channel_buffs_desc">Notifications lorsque vos bonus actifs expirent</string>
-    <string name="notif_xp_boost_expired_title">Boost d\'XP Expiré</string>
-    <string name="notif_xp_boost_expired_body">Votre bonus de 2x XP a expiré. Rendez-vous sur la boutique pour le réactiver.</string>
-    <string name="notif_blessing_expired_title">Bénédiction Expirée</string>
-    <string name="notif_blessing_expired_body">La bénédiction de votre église s\'est finie. Rendez-vous à l\'église pour la renouveler.</string>
+    <string name="notif_xp_boost_expired_title">Boost d\'XP expiré</string>
+    <string name="notif_xp_boost_expired_body">Votre bonus d\'XP ×2 a expiré. Rendez-vous sur la boutique pour le réactiver.</string>
+    <string name="notif_blessing_expired_title">Bénédiction expirée</string>
+    <string name="notif_blessing_expired_body">La bénédiction de l\'église a expiré. Rendez-vous à l\'église pour la renouveler.</string>
 
     <!-- ===== Farming ready ===== -->
-    <string name="notif_farming_ready_title">Récolte Prête !</string>
+    <string name="notif_farming_ready_title">Récolte prête !</string>
     <!-- Translator note: %1$s = localised crop name (e.g. "Wheat"). Adjust grammar as needed for your language. -->
     <string name="notif_farming_ready_body">Votre %1$s est prêt à être récolté.</string>
     <!-- Plural variant used when multiple patches are ready -->

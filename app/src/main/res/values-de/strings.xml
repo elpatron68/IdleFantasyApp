@@ -506,13 +506,14 @@
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Stadt</string>
     <string name="home_town_desc">Besucht den Krämer, die Schänke, das Gildenhaus, die Kirche, die Bauwerkstatt, den Trophäensammler und den Jahrmarkt</string>
-    <string name="guild_dailies_available">Tagesaufgaben verfügbar</string>
     <string name="guild_not_unlocked">Noch nicht freigeschaltet</string>
     <string name="guild_dailies_done_today">Tagesaufgaben heute erledigt</string>
     <string name="guild_dailies_remaining_today">%1$d heute übrig</string>
     <string name="guild_do_dailies_hint">Erledigt Tagesaufgaben, um in den nächsten Rang aufzusteigen</string>
     <string name="guild_quest_gate_blocked">Schließt Missionen ab, um im Rang aufzusteigen</string>
     <string name="guild_quest_required">Mission benötigt, um voranzukommen</string>
+    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
     <string name="home_died_message">Ihr seid verstorben und habt daher den Großteil Eurer Gewinne verloren.</string>
     <string name="home_xp_boost_was_active">2×EP-Hilfe war aktiv</string>
     <string name="home_xp_boost_active">2×EP-Hilfe aktiv — noch %1$s</string>
@@ -962,6 +963,7 @@
     <string name="guild_daily_resets_in">Wird um %1$s zurückgesetzt</string>
     <string name="guild_locked_hint">Erfordert Gildenlevel %1$d</string>
     <string name="guild_no_dailies">Schließt Gildenmissionen ab, um Tagesaufgaben freizuschalten. (Oder Ihr habt Eure Tagesaufgaben schon erfüllt.)</string>
+    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Aus Inventar beisteuern (%1$d verfügbar)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s für die %4$s.</string>
     <string name="guild_quest_desc_kill">Besiegt %1$d Feinde im %2$s-Kampf.</string>
@@ -1135,14 +1137,14 @@
     <string name="slayer_owned">Im Besitz</string>
     <string name="slayer_lamp_purchased">+%1$s EP zu %2$s hinzugefügt!</string>
     <string name="slayer_lamp_pick_skill">Wählt eine Fähigkeit</string>
-    <string name="slayer_lamp_max_level_warning">⚠ XP wird verschwendet werden</string>
+    <string name="slayer_lamp_max_level_warning">⚠ EP wird verschwendet werden</string>
     <!-- Translator note: %1$d = level after using the lamp, %2$d = level gain, last value = progress percent into the level -->
     <string name="slayer_lamp_level_preview">→ Level %1$d (%2$d%%)</string>
     <string name="slayer_lamp_level_preview_gain">→ Level %1$d (+%2$d, %3$d%%)</string>
     <string name="slayer_lamp_small">EP-Laterne (Klein)</string>
     <string name="slayer_lamp_large">EP-Laterne (Groß)</string>
-    <string name="slayer_lamp_small_desc">+10,000 EP für beliebige Fähigkeit</string>
-    <string name="slayer_lamp_large_desc">+50,000 EP für beliebige Fähigkeit</string>
+    <string name="slayer_lamp_small_desc">+10.000 EP für beliebige Fähigkeit</string>
+    <string name="slayer_lamp_large_desc">+50.000 EP für beliebige Fähigkeit</string>
     <string name="slayer_found_in">Begegnet Euch in: %1$s</string>
     <string name="slayer_requires">Erfordert: %1$s</string>
     <string name="slayer_add_dungeon_to_queue">Verlies zur Warteschlange hinzufügen</string>
@@ -1363,9 +1365,9 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Jahrmarkt</string>
     <string name="carnival_desc">Spiele, Preise und Fröhlichkeit!</string>
-    <string name="carnival_prize_xp_lamp_small_name">Kleine EP-Lampe</string>
+    <string name="carnival_prize_xp_lamp_small_name">Kleine EP-Laterne</string>
     <string name="carnival_prize_xp_lamp_small_desc">Verleiht einer ausgewählten Fähigkeit 10.000 EP.</string>
-    <string name="carnival_prize_xp_lamp_large_name">Große EP-Lampe</string>
+    <string name="carnival_prize_xp_lamp_large_name">Große EP-Laterne</string>
     <string name="carnival_prize_xp_lamp_large_desc">Verleiht einer ausgewählten Fähigkeit 50.000 EP.</string>
     <string name="carnival_ticket_balance">Lose: %1$d</string>
     <string name="carnival_idle_tab">Warteschlangen-Spiele</string>
@@ -1741,7 +1743,7 @@
     <string name="seasonal_market_price">%1$s Münzen</string>
     <string name="seasonal_reward_gloomharvest_2026_25_desc">Geldbeutel (50.000 Münzen)</string>
     <string name="seasonal_reward_gloomharvest_2026_60_desc">Geisterknochen-Ring</string>
-    <string name="seasonal_reward_gloomharvest_2026_100_desc">Gratis 48h-XP-Boost</string>
+    <string name="seasonal_reward_gloomharvest_2026_100_desc">Gratis 48h-EP-Hilfe</string>
     <string name="seasonal_reward_gloomharvest_2026_150_desc">Schnittersense</string>
     <string name="seasonal_reward_gloomharvest_2026_200_desc">Geldbeutel (250.000 Münzen)</string>
     <string name="seasonal_reward_gloomharvest_2026_250_desc">Haustier Grabspross</string>
@@ -1896,9 +1898,9 @@
     <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
     <string name="pet_timber_sprite_desc">Ein Holzgeist, der aus Sägemehl und Holz erwacht ist. Er weiß genau, wo jeder Nagel hingehört.</string>
     <string name="pet_juggling_imp_name">Jonglierender Kobold</string>
-    <string name="pet_juggling_imp_desc" formatted="false">A verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-XP um 3%.</string>
+    <string name="pet_juggling_imp_desc" formatted="false">A verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-EP um 3%.</string>
     <string name="pet_tower_pet_name">Steinwächter</string>
-    <string name="pet_tower_pet_desc">Ein uralter Steingolem, der die Geheimnisse des Turms bewacht. Erhöht Kampf-XP.</string>
+    <string name="pet_tower_pet_desc">Ein uralter Steingolem, der die Geheimnisse des Turms bewacht. Erhöht Kampf-EP.</string>
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
     <string name="pet_solstice_sprite_desc">Ein kleiner Glutgeist aus dem Sonnenwende-Sommerturm-Event, der dein Können im Kampf verbessert.</string>
     <string name="pet_lantern_wisp_name">Laternengeist</string>
@@ -1941,7 +1943,7 @@
     <string name="ironman_bonuses_notice">Ironman: EP-, Ertrags- und Münzboni sind für diesen Charakter deaktiviert.</string>
     <string name="ironman_badge">Ironman</string>
     <string name="settings_imported_demoted">Speicherstand importiert. Er wurde außerhalb des Spiels verändert, daher wurde der Ironman-Status entfernt.</string>
-    <string name="shop_xp_boost_name">2× XP Boost (48h)</string> <!-- untranslated -->
+    <string name="shop_xp_boost_name">2× EP-Hilfe (48h)</string>
     <string name="bestiary_stat_hp">LP</string>
     <string name="bestiary_stat_attack">Angriff</string>
     <string name="bestiary_stat_strength">Stärke</string>
@@ -1950,9 +1952,9 @@
     <string name="bestiary_stat_str_defense">Stä Verteidigung</string>
     <string name="bestiary_stat_rng_defense">Frn Verteidigung</string>
     <string name="bestiary_stat_mag_defense">Mag Verteidigung</string>
-    <string name="bestiary_stat_xp">XP</string>
+    <string name="bestiary_stat_xp">EP</string>
     <string name="bestiary_stat_required_level">Benötigtes Level</string>
-    <string name="bestiary_stat_xp_reward">XP-Belohnung</string>
+    <string name="bestiary_stat_xp_reward">EP-Belohnung</string>
     <string name="bestiary_stat_duration">Dauer</string>
     <string name="bestiary_stat_duration_min">%1$d min</string>
     <string name="bestiary_kill_count">%1$d Tötungen</string>
@@ -1967,6 +1969,6 @@
     <string name="carnival_potion_letter_purple">L</string>
     <string name="carnival_potion_letter_orange">O</string>
     <string name="carnival_potion_letter_cyan">C</string>
-    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/Pflanze</string>
+    <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d EP/Pflanze</string>
     <string name="farming_seeds_owned">Samen: %1$d  •  In Besitz: %2$d</string>
 </resources>

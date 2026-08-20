@@ -431,33 +431,33 @@
     <string name="item_platinum_sapphire_necklace_desc">Un collier en platine serti d\'un saphir.</string>
 
     <!-- Jewellery — emerald -->
-    <string name="item_gold_emerald_ring_name">Bague en émeraude en or</string>
+    <string name="item_gold_emerald_ring_name">Bague en or avec émeraude</string>
     <string name="item_gold_emerald_ring_desc">Une bague en or sertie d\'une émeraude.</string>
-    <string name="item_gold_emerald_necklace_name">Collier en émeraude en or</string>
+    <string name="item_gold_emerald_necklace_name">Collier en or avec émeraude</string>
     <string name="item_gold_emerald_necklace_desc">Un collier en or serti d\'une émeraude.</string>
-    <string name="item_platinum_emerald_ring_name">Bague en émeraude en platine</string>
+    <string name="item_platinum_emerald_ring_name">Bague en platine avec émeraude</string>
     <string name="item_platinum_emerald_ring_desc">Une bague en platine sertie d\'une émeraude.</string>
-    <string name="item_platinum_emerald_necklace_name">Collier en émeraude en platine</string>
+    <string name="item_platinum_emerald_necklace_name">Collier en platine avec émeraude</string>
     <string name="item_platinum_emerald_necklace_desc">Un collier en platine serti d\'une émeraude.</string>
 
     <!-- Jewellery — ruby -->
-    <string name="item_gold_ruby_ring_name">Bague en Rubis en or</string>
+    <string name="item_gold_ruby_ring_name">Bague en or avec rubis</string>
     <string name="item_gold_ruby_ring_desc">Une bague en or sertie d\'un rubis.</string>
-    <string name="item_gold_ruby_necklace_name">Collier en Rubis en or</string>
+    <string name="item_gold_ruby_necklace_name">Collier en or avec rubis</string>
     <string name="item_gold_ruby_necklace_desc">Un collier en or serti d\'un rubis.</string>
-    <string name="item_platinum_ruby_ring_name">Bague en Rubis en platine</string>
+    <string name="item_platinum_ruby_ring_name">Bague en platine avec rubis</string>
     <string name="item_platinum_ruby_ring_desc">Une bague en platine sertie d\'un rubis.</string>
-    <string name="item_platinum_ruby_necklace_name">Collier en Rubis en platine</string>
+    <string name="item_platinum_ruby_necklace_name">Collier en platine avec rubis</string>
     <string name="item_platinum_ruby_necklace_desc">Un collier en platine serti d\'un rubis.</string>
 
     <!-- Jewellery — diamond -->
-    <string name="item_gold_diamond_ring_name">Bague en diamant en or</string>
+    <string name="item_gold_diamond_ring_name">Bague en or avec diamant</string>
     <string name="item_gold_diamond_ring_desc">Une bague en or sertie d\'un diamant.</string>
-    <string name="item_gold_diamond_necklace_name">Collier en diamant en or</string>
+    <string name="item_gold_diamond_necklace_name">Collier en or avec diamant</string>
     <string name="item_gold_diamond_necklace_desc">Un collier en or serti d\'un diamant.</string>
-    <string name="item_platinum_diamond_ring_name">Bague en diamant en platine</string>
+    <string name="item_platinum_diamond_ring_name">Bague en platine avec diamant</string>
     <string name="item_platinum_diamond_ring_desc">Une bague en platine sertie d\'un diamant.</string>
-    <string name="item_platinum_diamond_necklace_name">Collier en diamant en platine</string>
+    <string name="item_platinum_diamond_necklace_name">Collier en platine avec diamant</string>
     <string name="item_platinum_diamond_necklace_desc">Un collier en platine serti d\'un diamant.</string>
 
     <!-- Jewellery — other -->
@@ -470,9 +470,9 @@
     <string name="item_flour_name">Farine</string>
     <string name="item_cooked_trout_name">Truite Cuite</string>
     <string name="item_thread_name">Fil</string>
-    <string name="item_ruby_ring_name">Anneau en Rubis</string>
-    <string name="item_diamond_ring_name">Anneau en Diamant</string>
-    <string name="item_diamond_necklace_name">Collier en Diamant</string>
+    <string name="item_ruby_ring_name">Anneau avec Rubis</string>
+    <string name="item_diamond_ring_name">Anneau avec Diamant</string>
+    <string name="item_diamond_necklace_name">Collier avec Diamant</string>
     <string name="item_ancient_treasure_name">Ancien Trésor</string>
     <string name="item_seaweed_name">Algue</string>
     <string name="item_pearl_name">Perle</string>
@@ -546,19 +546,19 @@
     <string name="item_water_rune_desc">Une rune imprégnée du pouvoir de l\'eau.</string>
     <string name="item_earth_rune_name">Rune de terre</string>
     <string name="item_earth_rune_desc">Une rune imprégnée du pouvoir de la terre.</string>
-    <string name="item_fire_rune_name">Rune de Feu</string>
+    <string name="item_fire_rune_name">Rune de feu</string>
     <string name="item_fire_rune_desc">Une rune imprégnée du pouvoir du feu.</string>
     <string name="item_mind_rune_name">Rune de l\'esprit</string>
     <string name="item_mind_rune_desc">Une rune canalysant l\'énergie psychique.</string>
     <string name="item_chaos_rune_name">Rune du chaos</string>
     <string name="item_chaos_rune_desc">Une rune de magie sauvage et chaotique.</string>
-    <string name="item_death_rune_name">Rune de la Mort</string>
+    <string name="item_death_rune_name">Rune de la mort</string>
     <string name="item_death_rune_desc">Une rune infusée du pouvoir de la mort.</string>
-    <string name="item_blood_rune_name">Rune de Sang</string>
+    <string name="item_blood_rune_name">Rune de sang</string>
     <string name="item_blood_rune_desc">Une rune rare alimentée par la magie du sang.</string>
 
     <!-- ===== Crops ===== -->
-    <string name="crop_potato_name">Pommes de Terre</string>
+    <string name="crop_potato_name">Pommes de terre</string>
     <string name="crop_onion_name">Oignon</string>
     <string name="crop_cabbage_name">Chou</string>
     <string name="crop_carrot_name">Carotte</string>
@@ -567,12 +567,12 @@
     <string name="crop_pumpkin_name">Citrouille</string>
     <string name="crop_watermelon_name">Pastèque</string>
     <string name="crop_strawberry_name">Fraise</string>
-    <string name="crop_magic_herb_name">Herbe Magique</string>
-    <string name="crop_dragon_fruit_name">Fruit du Dragon</string>
-    <string name="crop_golden_wheat_name">Blé Doré</string>
-    <string name="crop_spirit_herb_name">Herbe Spirituelle</string>
+    <string name="crop_magic_herb_name">Herbe magique</string>
+    <string name="crop_dragon_fruit_name">Fruit du dragon</string>
+    <string name="crop_golden_wheat_name">Blé doré</string>
+    <string name="crop_spirit_herb_name">Herbe spirituelle</string>
     <string name="crop_spirit_herb_desc">Une herbe rare utilisée en herboristerie de haut niveau.</string>
-    <string name="crop_celestial_bloom_name">Fleur Céleste</string>
+    <string name="crop_celestial_bloom_name">Fleur céleste</string>
     <string name="crop_celestial_bloom_desc">Une fleur éthérée utilisée dans des potions de maître.</string>
     <string name="crop_starfruit_name">Fruit d\'étoile</string>
     <string name="crop_void_lotus_name">Lotus du vide</string>
@@ -877,7 +877,7 @@
     <string name="item_iron_square_shield_name">Bouclier Carré en Fer</string>
     <string name="item_ironwood_axe_name">Hache en Bois de Fer en Fer</string>
     <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
-    <string name="item_kraken_name">Kraken</string> <!-- untranslated -->
+    <string name="item_kraken_name">Kraken</string>
     <string name="item_kraken_tentacle_name">Tentacule du Kraken</string>
     <string name="item_mages_guild_cape_name">Cape de la Guilde des Mages</string>
     <string name="item_magic_cape_name">Cape Magique</string>
@@ -904,7 +904,7 @@
     <string name="item_prayer_cape_name">Cape de Prière</string>
     <string name="item_prayer_guild_cape_name">Cape de la Guilde des Prêtres</string>
     <string name="item_ranged_cape_name">Cape de Tir à Distance</string>
-    <string name="item_rat_meat_name">Viande de rat Cuite</string>
+    <string name="item_rat_meat_name">Viande de rat cuite</string>
     <string name="item_ring_of_dragons_might_name">Anneau De Puissance des Dragons</string>
     <string name="item_ring_of_flame_name">Anneau De Flammes</string>
     <string name="item_ring_of_recoil_name">Anneau De Retournement</string>

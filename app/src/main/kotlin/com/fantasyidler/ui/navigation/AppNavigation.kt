@@ -94,14 +94,25 @@ fun AppNavigation(
     val navController = rememberNavController()
 
     LaunchedEffect(pendingNavigateTo) {
-        if (pendingNavigateTo == SessionNotificationManager.NAVIGATE_FARMING) {
-            navController.navigate(Screen.Skills.route) {
-                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                launchSingleTop = true
-                restoreState = true
+        when (pendingNavigateTo) {
+            SessionNotificationManager.NAVIGATE_FARMING -> {
+                navController.navigate(Screen.Skills.route) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+                navController.navigate(Screen.Farming.route)
+                onNavigateConsumed()
             }
-            navController.navigate(Screen.Farming.route)
-            onNavigateConsumed()
+            SessionNotificationManager.NAVIGATE_SAVE_SLOTS -> {
+                navController.navigate(Screen.Home.route) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+                navController.navigate(Screen.Settings.saveSlotsRoute)
+                onNavigateConsumed()
+            }
         }
     }
 

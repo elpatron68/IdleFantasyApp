@@ -50,6 +50,13 @@ class ExtensionsTest {
     }
 
     @Test
+    fun `formatCoins floors instead of rounds so it never overstates affordability`() {
+        assertEquals("99.9M", 99_960_000L.formatCoins())
+        assertEquals("100.0M", 100_000_000L.formatCoins())
+        assertEquals("100.0M", 100_049_999L.formatCoins())
+    }
+
+    @Test
     fun `formatQuantity formats full and compact numbers correctly`() {
         // Full formatting (compact = false)
         assertEquals("0", 0.formatQuantity(compact = false))

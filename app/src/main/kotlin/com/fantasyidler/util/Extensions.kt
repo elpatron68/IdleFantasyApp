@@ -23,9 +23,14 @@ fun xpMultiplierBreakdown(baseXp: Long, boostActive: Boolean, blessingMult: Floa
     return "(${baseXp.formatXp()} × ${factors.joinToString(" × ")})"
 }
 
-/** Format a coin amount with thousands separators. */
+/**
+ * Format a coin amount with thousands separators. Amounts >= 1M are floored (not rounded) to one
+ * decimal place so the displayed value never overstates what the player actually has — otherwise
+ * e.g. 99.96M would display as "100.0M" and make an affordability-gated button look wrongly
+ * disabled (issue #1470).
+ */
 fun Long.formatCoins(): String = when {
-    this >= 1_000_000L -> "%.1fM".format(this / 1_000_000.0)
+    this >= 1_000_000L -> "%.1fM".format(kotlin.math.floor(this / 100_000.0) / 10.0)
     this >= 1_000L     -> "%,d".format(this)
     else               -> toString()
 }
@@ -35,7 +40,7 @@ fun Int.formatCoins(): String = toLong().formatCoins()
 
 /** Abbreviated coin format for compact UI (e.g. 50000 → "50k"). */
 fun Long.formatCoinsBrief(): String = when {
-    this >= 1_000_000L -> "%.1fM".format(this / 1_000_000.0)
+    this >= 1_000_000L -> "%.1fM".format(kotlin.math.floor(this / 100_000.0) / 10.0)
     this >= 1_000L     -> "${this / 1000}k"
     else               -> toString()
 }

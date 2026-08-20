@@ -496,6 +496,10 @@ class SkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_rune_essence)) }
                 return@launch
             }
+            if (catalystKey != null && (inv[catalystKey] ?: 0) < (qty + 9) / 10) {
+                _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_materials)) }
+                return@launch
+            }
 
             if (sessionRepo.getActiveSession() != null) {
                 val actDisplay = GameStrings.itemName(context, runeKey)

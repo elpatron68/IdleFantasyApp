@@ -28,6 +28,7 @@ class FarmingRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
     private val seasonalEventRepo: SeasonalEventRepository,
+    private val globalStateRepo: GlobalStateRepository,
     private val json: Json,
 ) {
     fun observePatches(): Flow<List<FarmingPatch>> = patchDao.observeAllPatches()
@@ -128,10 +129,17 @@ class FarmingRepository @Inject constructor(
         val player   = playerRepo.getOrCreatePlayer()
         val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
 
-        val hoeMult     = equipped[EquipSlot.HOE]?.let { gameData.equipment[it]?.farmingEfficiency } ?: 1f
-        val capedDouble = equipped[EquipSlot.CAPE] == "farming_cape"
+        val hoeMult = equipped[EquipSlot.HOE]?.let { gameData.equipment[it]?.farmingEfficiency } ?: 1f
 
         val flags = playerRepo.getFlags()
+        // Cape rack tier 1 applies owned gathering capes passively (ironman excluded),
+        // mirroring resolveCapeMultiplier's gates (issue #1483).
+        val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val rackApplies = !flags.ironman &&
+            (flags.townBuildingTiers["cape_rack"] ?: 0) >= 1 &&
+            (inventory["farming_cape"] ?: 0) > 0
+        val capedDouble = equipped[EquipSlot.CAPE] == "farming_cape" || rackApplies
+
         val ashKey = flags.farmingFertilizer[patchNumber.toString()]
         val ashMult = ashYieldMultiplier(ashKey)
 
@@ -214,10 +222,26 @@ class FarmingRepository @Inject constructor(
 
     // ------------------------------------------------------------------
 
-    private fun pendingIntent(patchNumber: Int, cropDisplayName: String): PendingIntent {
+    // Request codes are slot * 100 + patchNumber so each character's alarms are independent —
+    // otherwise planting or harvesting on one character overwrites/cancels another's pending
+    // alarm for the same patch number (issue #1471).
+    private fun pendingIntent(slot: Int, patchNumber: Int, cropDisplayName: String): PendingIntent {
         val intent = Intent(context, FarmPatchAlarmReceiver::class.java).apply {
             putExtra(FarmPatchAlarmReceiver.EXTRA_PATCH_NUMBER, patchNumber)
             putExtra(FarmPatchAlarmReceiver.EXTRA_CROP_NAME, cropDisplayName)
+            putExtra(FarmPatchAlarmReceiver.EXTRA_SAVE_SLOT, slot)
+        }
+        return PendingIntent.getBroadcast(
+            context, slot * 100 + patchNumber, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+    }
+
+    // Alarms scheduled before slot-awareness used the bare patch number as request code.
+    private fun legacyPendingIntent(patchNumber: Int): PendingIntent {
+        val intent = Intent(context, FarmPatchAlarmReceiver::class.java).apply {
+            putExtra(FarmPatchAlarmReceiver.EXTRA_PATCH_NUMBER, patchNumber)
+            putExtra(FarmPatchAlarmReceiver.EXTRA_CROP_NAME, "")
         }
         return PendingIntent.getBroadcast(
             context, patchNumber, intent,
@@ -225,12 +249,16 @@ class FarmingRepository @Inject constructor(
         )
     }
 
-    private fun scheduleAlarm(patchNumber: Int, cropDisplayName: String, triggerAt: Long) {
+    private suspend fun scheduleAlarm(patchNumber: Int, cropDisplayName: String, triggerAt: Long) {
+        val slot = globalStateRepo.getActiveSaveSlot()
         context.getSystemService(AlarmManager::class.java)
-            .setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent(patchNumber, cropDisplayName))
+            .setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent(slot, patchNumber, cropDisplayName))
     }
 
-    private fun cancelAlarm(patchNumber: Int) {
-        context.getSystemService(AlarmManager::class.java).cancel(pendingIntent(patchNumber, ""))
+    private suspend fun cancelAlarm(patchNumber: Int) {
+        val slot = globalStateRepo.getActiveSaveSlot()
+        val mgr = context.getSystemService(AlarmManager::class.java)
+        mgr.cancel(pendingIntent(slot, patchNumber, ""))
+        mgr.cancel(legacyPendingIntent(patchNumber))
     }
 }
