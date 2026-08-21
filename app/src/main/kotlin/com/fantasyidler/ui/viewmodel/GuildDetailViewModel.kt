@@ -130,7 +130,7 @@ class GuildDetailViewModel @Inject constructor(
                     if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
                         val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
                         finalXp = b.finalXp
-                        xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
+                        xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeXpPct)?.let { " $it" } ?: ""
                         playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
                     } else if (rewards.items.isNotEmpty()) {
                         playerRepo.addItems(rewards.items)
@@ -153,16 +153,14 @@ class GuildDetailViewModel @Inject constructor(
 
     fun claimGuildDaily(templateId: String) {
         viewModelScope.launch {
-            val flags = playerRepo.getFlags()
-            val (newFlags, rewards) = guildRepo.claimGuildDaily(flags, templateId) ?: return@launch
-            playerRepo.updateFlags(newFlags)
+            val rewards = guildRepo.claimGuildDaily(templateId) ?: return@launch
             playerRepo.recordWeeklyProgress("guild_daily", "any", 1)
             var xpSuffix = ""
             var finalXp = 0L
             if (rewards.xp > 0 && rewards.xpSkill.isNotBlank()) {
                 val b = playerRepo.previewFlatXpGrant(rewards.xpSkill, rewards.xp.toLong())
                 finalXp = b.finalXp
-                xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { " $it" } ?: ""
+                xpSuffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeXpPct)?.let { " $it" } ?: ""
                 playerRepo.applySessionResults(rewards.xpSkill, rewards.xp.toLong(), rewards.items)
             } else if (rewards.items.isNotEmpty()) {
                 playerRepo.addItems(rewards.items)

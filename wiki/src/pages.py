@@ -580,6 +580,72 @@ def gen_wiki_page_types() -> str:
     return page.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}")
 
 
+
+_PRESTIGE_RACES = ["human", "elf", "dwarf", "orc", "gnome", "halfling"]
+
+
+def _prestige_effect_text(node: dict) -> str:
+    """Wiki wording for a prestige node effect, matching the in-game strings."""
+    v = node.get("value", 0)
+    vs = f"{v:g}"
+    if node["effect"] == "unlock_recipe":
+        return f"Unlocks the {item_name(node.get('unlock', ''))} fletching recipe"
+    return {
+        "xp_pct":                  f"+{vs}% XP in this skill",
+        "yield_pct":               f"+{vs}% items from this skill's sessions",
+        "coin_pct":                f"+{vs}% coins from this skill",
+        "tool_eff_pct":            f"Tool efficiency +{vs}%",
+        "bonus_roll_pct":          f"+{vs}% gem find chance while mining",
+        "flow_rate":               f"Flow-state: +{vs}% yield per interval of continuous activity, up to +100%",
+        "flow_interval_reduction": f"Flow-state interval shortened by {vs} minutes",
+        "combat_stat_flat":        f"+{vs} effective levels in combat",
+        "session_floor_min":       f"Sessions up to {vs} minutes shorter at level 99",
+        "pet_boost_pct":           f"Pet boosts for this skill are {vs}% stronger",
+        "input_save_pct":          f"{vs}% of crafting materials are refunded",
+        "reclaim_pct":             f"+{vs}% chance to recover spent arrows and runes after combat",
+        "sell_price_pct":          f"Shop sell prices +{vs}%",
+        "builder_discount_pct":    f"Town building upgrades cost {vs}% less",
+        "blessing_cost_pct":       f"Church blessings cost {vs}% fewer bones",
+        "blessing_duration_pct":   f"Church blessings last {vs}% longer",
+        "heal_pct":                f"Food heals +{vs}% more in combat",
+        "death_keep_pct":          f"Keep an extra {vs}% of XP and loot when defeated",
+        "success_chance_pct":      f"Pickpocket success chance +{vs}%",
+        "crop_rotation_pct":       f"+{vs}% yield when planting a different crop than the last harvest",
+        "crop_rotation_always":    "The rotation bonus applies to every crop, no rotation needed",
+        "double_hit_pct":          f"{vs}% chance to strike a second melee hit",
+        "second_chance":           "Missed melee attacks are rerolled once",
+        "foretell_slots":          f"+{vs} foretold slayer task slots",
+        "slayer_points_pct":       f"Slayer task points +{vs}%",
+        "slayer_multi_task":       "Dungeon kills also count toward matching foretold tasks",
+        "queue_slot":              f"+{vs} session queue slot",
+        "potion_bonus_flat":       f"Combat potions grant +{vs} more to their stats",
+    }.get(node["effect"], node["effect"])
+
+
+def gen_prestige_race_tables() -> str:
+    trees = load("prestige_paths.json")
+    assert isinstance(trees, list)
+    by_race: dict[str, list] = {r: [] for r in _PRESTIGE_RACES}
+    for tree in trees:
+        for path in tree["paths"]:
+            for node in path["nodes"]:
+                for race in node.get("races") or []:
+                    shared = [r.title() for r in node["races"] if r != race]
+                    by_race[race].append((tree["skill"], node, shared))
+    parts = []
+    for race in _PRESTIGE_RACES:
+        rows = [
+            [
+                skill.replace("_", " ").title(),
+                _prestige_effect_text(node) + (f" (shared with {', '.join(shared)})" if shared else ""),
+                node["cost"],
+            ]
+            for skill, node, shared in by_race[race]
+        ]
+        parts.append(f"#### {race.title()}\n\n" + table(["Skill", "Upgrade", "Cost (points)"], rows))
+    return "\n\n".join(parts)
+
+
 def gen_skills() -> str:
     # Todo: Switch to use game data where possible
     skill_list = [
@@ -613,27 +679,9 @@ def gen_skills() -> str:
         for skill, cat, desc in skill_list
     ]
 
-    agility_rows = [[
-        f"{x}",
-        f"{session_minutes(99, x)} mins",
-        f"{round((session_minutes(99, x) - session_minutes(1, x)) / 9.8, 1)} mins"
-    ] for x in range(4) ]
-
-    # Generate combat prestige rows
-    combat_prestige_rows = [
-        ["Attack",    "+5 Attack per prestige level (up to +15 at prestige 3)"],
-        ["Strength",  "+5 Strength per prestige level (up to +15 at prestige 3)"],
-        ["Defense",   "+5 Defense per prestige level (up to +15 at prestige 3)"],
-        ["Ranged",    "+5 Ranged per prestige level (up to +15 at prestige 3)"],
-        ["Magic",     "+5 Magic per prestige level (up to +15 at prestige 3)"],
-        ["Hitpoints", "+5 Hitpoints per prestige level (+50 max HP per level, up to +150 at prestige 3)"],
-        ["All other skills", "XP bonus only"],
-    ]
-
     return get_template("skills/skills").format(
         skills_table=table(["Skill", "Category", "Description"], rows),
-        agility_prestige_table=table(["Prestige level", "Session time (Lvl 99)", "Change per 10 levels"], agility_rows),
-        combat_prestige_table=table(["Skill", "Bonus (in addition to +10% XP)"], combat_prestige_rows),
+        prestige_race_tables=gen_prestige_race_tables(),
     )
 
 
@@ -752,7 +800,7 @@ def gen_agility() -> str:
     return get_template("skills/support/agility").format(
         icon=html_image(skill_icon_path("agility"), "", "text"),
         session_duration_table=table(["Agility Level", "Session Duration"], duration_rows),
-        prestige_link=link("skills", header="agility-prestige"),
+        prestige_link=link("skills", header="prestige"),
         course_count=len(courses),
         course_table=table(['Course', 'Level Required', 'XP / Lap', 'XP / Min (est.)', 'XP / Session (est.)'], course_rows),
         grappling_hook_table=tool_rows,
@@ -1166,7 +1214,7 @@ def gen_combat_footer() -> str:
         enemy_heading=html_link("enemies"),
         dungeon_links=", ".join(html_link(dungeon["name"]) for dungeon in dungeons),
         boss_links="\n".join(
-            footer_link(html_link(boss_id), boss_icon(boss_id, boss))
+            footer_link(html_link(boss_id), boss_icon(boss_id, boss.get("emoji", "")))
             for boss_id, boss in sorted(bosses.items(), key=lambda x: bosses[x[0]].get("combat_level_required", 0))
         ),
         enemy_links=", ".join(
@@ -1180,17 +1228,23 @@ def gen_combat_footer() -> str:
 def gen_bosses() -> str:
     bosses = load("raid_bosses.json")
     assert isinstance(bosses, dict)
-    rows = [
-        [
-            boss_icon(boss_id, boss.get("emoji", ""), 48),
-            link(boss_id),
-            boss.get("combat_level_required", "—"),
-            boss_desc(boss_id),
+
+    def rows_for(raid: bool) -> list[list]:
+        return [
+            [
+                boss_icon(boss_id, boss.get("emoji", ""), 48),
+                link(boss_id),
+                boss.get("combat_level_required", "—"),
+                boss_desc(boss_id),
+            ]
+            for boss_id, boss in sorted(bosses.items(), key=lambda x: x[1].get("combat_level_required", 0))
+            if bool(boss.get("raid", False)) == raid
         ]
-        for boss_id, boss in sorted(bosses.items(), key=lambda x: x[1].get("combat_level_required", 0))
-    ]
+
+    header = ["", "Boss", "Combat Level", "Description"]
     return get_template("combat/bosses").format(
-        boss_table=table(["", "Boss", "Combat Level", "Description"], rows),
+        boss_table=table(header, rows_for(raid=False)),
+        raid_table=table(header, rows_for(raid=True)),
         combat_footer=gen_combat_footer(),
     )
 
@@ -1744,7 +1798,7 @@ def gen_titles() -> str:
     guild_table = table(["Title", "Requirement"], guild_rows)
 
     other_rows = [
-        ["Godslayer", "Defeat every raid boss at least once"],
+        ["Godslayer", "Defeat every boss at least once"],
         ["Patron of the Realm", "Complete the Grand Monument"],
     ]
     other_table = table(["Title", "Requirement"], other_rows)

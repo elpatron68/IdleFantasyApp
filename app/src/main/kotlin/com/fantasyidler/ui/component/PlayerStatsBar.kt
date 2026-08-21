@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
+import kotlin.math.roundToInt
 import com.fantasyidler.ui.screen.StatInline
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatDurationMs
@@ -36,6 +37,7 @@ fun PlayerStatsBar(
     totalLevel: Int,
     coins: Long,
     activeBlessingKey: String,
+    prayerCapeMult: Float,
     activeBlessingRemainingMs: Long,
     xpBoostRemainingMs: Long,
     modifier: Modifier = Modifier,
@@ -70,10 +72,11 @@ fun PlayerStatsBar(
             val blessingName = if (nameResId != 0) stringResource(nameResId) else activeBlessingKey
             val blessingData = ChurchRepository.ALL_BLESSINGS.firstOrNull { it.key == activeBlessingKey }
             val boostDesc = blessingData?.let { b ->
+                val eff = ChurchRepository.effectiveMagnitude(b, prayerCapeMult)
                 when (b.type) {
-                    BlessingType.XP      -> "${b.magnitude}x XP"
-                    BlessingType.DEFENSE -> "+${b.magnitude.toInt()} DEF"
-                    BlessingType.COINS   -> "+${(b.magnitude * 100).toInt()}% coins"
+                    BlessingType.XP      -> "${(eff * 100).roundToInt() / 100f}x XP"
+                    BlessingType.DEFENSE -> "+${eff.toInt()} DEF"
+                    BlessingType.COINS   -> "+${(eff * 100).roundToInt()}% coins"
                 }
             }
             val timeLeft = activeBlessingRemainingMs.formatDurationMs(context)

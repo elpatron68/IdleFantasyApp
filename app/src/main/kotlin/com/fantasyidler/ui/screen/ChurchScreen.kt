@@ -69,7 +69,7 @@ fun ChurchScreen(
                 "blessing_${blessing.key}_name", "string", context.packageName,
             )
             val name      = if (nameResId != 0) stringResource(nameResId) else blessing.key
-            val cost      = ChurchRepository.boneCostFor(blessing)
+            val cost      = ChurchRepository.discountedBoneCost(blessing, state.blessingCostMult)
             val hasEnough = state.totalBoneEquivalent >= cost
             AlertDialog(
                 onDismissRequest = viewModel::dismissConfirm,
@@ -78,7 +78,7 @@ fun ChurchScreen(
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(text = name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Text(
-                            text = blessingEffectText(blessing, state.blessingDuration),
+                            text = blessingEffectText(blessing, state.blessingDuration, state.prayerCapeMult),
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Spacer(Modifier.height(4.dp))
@@ -157,6 +157,7 @@ fun ChurchScreen(
                 if (anyBlessingActive) {
                     ActiveBlessingBanner(
                         blessing     = state.activeBlessing!!,
+                        prayerCapeMult = state.prayerCapeMult,
                         remainingMs  = state.activeBlessingRemainingMs,
                         totalMs      = state.blessingDuration,
                         onDeactivate = viewModel::deactivateBlessing,
@@ -210,8 +211,9 @@ fun ChurchScreen(
                         isUnlocked        = blessing.key in state.unlockedBlessingKeys,
                         isActive          = blessing.key == state.activeBlessing?.key && state.activeBlessingRemainingMs > 0,
                         anyBlessingActive = anyBlessingActive,
-                        boneCost          = ChurchRepository.boneCostFor(blessing),
+                        boneCost          = ChurchRepository.discountedBoneCost(blessing, state.blessingCostMult),
                         blessingTimeMs    = state.blessingDuration,
+                        prayerCapeMult    = state.prayerCapeMult,
                         onActivate        = { viewModel.activateBlessing(blessing.key) },
                     )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -225,6 +227,7 @@ fun ChurchScreen(
 @Composable
 private fun ActiveBlessingBanner(
     blessing: BlessingData,
+    prayerCapeMult: Float,
     remainingMs: Long,
     totalMs: Long,
     onDeactivate: () -> Unit,
@@ -234,7 +237,7 @@ private fun ActiveBlessingBanner(
         "blessing_${blessing.key}_name", "string", context.packageName,
     )
     val name = if (nameResId != 0) stringResource(nameResId) else blessing.key
-    val effectText = blessingEffectText(blessing, totalMs)
+    val effectText = blessingEffectText(blessing, totalMs, prayerCapeMult)
 
     Row(
         modifier = Modifier
@@ -282,6 +285,7 @@ private fun BlessingRow(
     anyBlessingActive: Boolean,
     boneCost: Int,
     blessingTimeMs: Long,
+    prayerCapeMult: Float,
     onActivate: () -> Unit,
 ) {
     val context   = LocalContext.current
@@ -308,7 +312,7 @@ private fun BlessingRow(
                 color      = nameColor,
             )
             Text(
-                text  = blessingEffectText(blessing, blessingTimeMs),
+                text  = blessingEffectText(blessing, blessingTimeMs, prayerCapeMult),
                 style = MaterialTheme.typography.bodySmall,
                 color = descColor,
             )
@@ -340,11 +344,12 @@ private fun BlessingRow(
 }
 
 @Composable
-private fun blessingEffectText(blessing: BlessingData, blessingTimeMs: Long): String {
+private fun blessingEffectText(blessing: BlessingData, blessingTimeMs: Long, prayerCapeMult: Float): String {
     val hours = blessingTimeMs / 3_600_000
+    val effective = ChurchRepository.effectiveMagnitude(blessing, prayerCapeMult)
     return when (blessing.type) {
-        BlessingType.XP      -> stringResource(R.string.church_effect_xp,   blessing.magnitude, hours)
-        BlessingType.DEFENSE -> stringResource(R.string.church_effect_def,   blessing.magnitude.roundToInt(), hours)
-        BlessingType.COINS   -> stringResource(R.string.church_effect_coins, (blessing.magnitude * 100).roundToInt(), hours)
+        BlessingType.XP      -> stringResource(R.string.church_effect_xp,   effective, hours)
+        BlessingType.DEFENSE -> stringResource(R.string.church_effect_def,   effective.roundToInt(), hours)
+        BlessingType.COINS   -> stringResource(R.string.church_effect_coins, (effective * 100).roundToInt(), hours)
     }
 }

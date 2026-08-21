@@ -5,6 +5,7 @@ import com.fantasyidler.data.json.BoneData
 import com.fantasyidler.data.json.SlayerTaskData
 import com.fantasyidler.data.json.CropData
 import com.fantasyidler.data.json.BossData
+import com.fantasyidler.data.json.MercenaryData
 import com.fantasyidler.data.json.CookingRecipe
 import com.fantasyidler.data.json.CraftingRecipe
 import com.fantasyidler.data.json.DungeonData
@@ -21,6 +22,7 @@ import com.fantasyidler.data.json.LogData
 import com.fantasyidler.data.json.MarketplaceJson
 import com.fantasyidler.data.json.OreData
 import com.fantasyidler.data.json.PetData
+import com.fantasyidler.data.json.PrestigeSkillTreeData
 import com.fantasyidler.data.json.DailyQuestTemplate
 import com.fantasyidler.data.json.WeeklyQuestTemplate
 import com.fantasyidler.data.json.GuildDailyTemplate
@@ -172,6 +174,10 @@ class GameDataRepository @Inject constructor(
         asset("data/raid_bosses.json")
     }
 
+    val mercenaries: List<MercenaryData> by lazy {
+        asset("data/mercenaries.json")
+    }
+
     // ------------------------------------------------------------------ bones (prayer)
 
     val bones: Map<String, BoneData> by lazy {
@@ -237,6 +243,10 @@ class GameDataRepository @Inject constructor(
 
     val townBuildings: Map<String, TownBuildingData> by lazy {
         asset("data/buildings.json")
+    }
+
+    val houseTiles: com.fantasyidler.data.json.HouseTilesData by lazy {
+        asset("data/house_tiles.json")
     }
 
     // ------------------------------------------------------------------ gathering activities
@@ -315,6 +325,13 @@ class GameDataRepository @Inject constructor(
             .sortedBy { it.levelRequired }
     }
 
+    // ------------------------------------------------------------------ prestige trees
+
+    /** Prestige skill trees keyed by skill name (assets/data/prestige_paths.json). */
+    val prestigeTrees: Map<String, PrestigeSkillTreeData> by lazy {
+        asset<List<PrestigeSkillTreeData>>("data/prestige_paths.json").associateBy { it.skill }
+    }
+
     // ------------------------------------------------------------------ official themes
 
     val officialThemes: Map<String, ThemeData> by lazy {
@@ -343,6 +360,7 @@ class GameDataRepository @Inject constructor(
             add("coins")
             add("rune_essence")
             add("carnival_ticket")
+            add("race_change_token")
             addAll(runes.keys)
             // Quest collect targets should not be auto-sold
             quests.values.filter { it.type == "collect" }.forEach { add(it.target) }

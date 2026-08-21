@@ -32,10 +32,22 @@
       "coins_min": 10000,
       "coins_max": 20000,
       "items": {
-        "dragon_bone": {"min": 30, "max": 50},
-        "coal": {"min": 100, "max": 200},
-        "mithril_ore": {"min": 50, "max": 100},
-        "adamantite_ore": {"min": 20, "max": 40}
+        "dragon_bone": {
+          "min": 30,
+          "max": 50
+        },
+        "coal": {
+          "min": 100,
+          "max": 200
+        },
+        "mithril_ore": {
+          "min": 50,
+          "max": 100
+        },
+        "adamantite_ore": {
+          "min": 20,
+          "max": 40
+        }
       }
     },
     "rare_drops": [
@@ -58,6 +70,11 @@
         "item": "ring_of_dragons_might",
         "chance": 0.005,
         "comment": "1/200"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -67,7 +84,9 @@
       "chance": 0.01,
       "comment": "1/100 per kill"
     },
-    "tags": ["dragon"]
+    "tags": [
+      "dragon"
+    ]
   },
   "demon_lord": {
     "id": "demon_lord",
@@ -103,11 +122,26 @@
       "coins_min": 20000,
       "coins_max": 40000,
       "items": {
-        "giant_bones": {"min": 20, "max": 40},
-        "coal": {"min": 150, "max": 300},
-        "adamantite_ore": {"min": 80, "max": 150},
-        "runite_ore": {"min": 30, "max": 60},
-        "fire_rune": {"min": 100, "max": 200}
+        "giant_bones": {
+          "min": 20,
+          "max": 40
+        },
+        "coal": {
+          "min": 150,
+          "max": 300
+        },
+        "adamantite_ore": {
+          "min": 80,
+          "max": 150
+        },
+        "runite_ore": {
+          "min": 30,
+          "max": 60
+        },
+        "fire_rune": {
+          "min": 100,
+          "max": 200
+        }
       }
     },
     "rare_drops": [
@@ -130,6 +164,11 @@
         "item": "berserker_ring",
         "chance": 0.005,
         "comment": "1/200"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -139,7 +178,9 @@
       "chance": 0.01,
       "comment": "1/100 per kill"
     },
-    "tags": ["demon"]
+    "tags": [
+      "demon"
+    ]
   },
   "kraken": {
     "id": "kraken",
@@ -174,12 +215,30 @@
       "coins_min": 50000,
       "coins_max": 100000,
       "items": {
-        "raw_shark": {"min": 100, "max": 200},
-        "dragon_bone": {"min": 50, "max": 100},
-        "coal": {"min": 200, "max": 400},
-        "runite_ore": {"min": 100, "max": 200},
-        "platinum_ore": {"min": 50, "max": 100},
-        "water_rune": {"min": 200, "max": 400}
+        "raw_shark": {
+          "min": 100,
+          "max": 200
+        },
+        "dragon_bone": {
+          "min": 50,
+          "max": 100
+        },
+        "coal": {
+          "min": 200,
+          "max": 400
+        },
+        "runite_ore": {
+          "min": 100,
+          "max": 200
+        },
+        "platinum_ore": {
+          "min": 50,
+          "max": 100
+        },
+        "water_rune": {
+          "min": 200,
+          "max": 400
+        }
       }
     },
     "rare_drops": [
@@ -202,6 +261,11 @@
         "item": "ring_of_the_seas",
         "chance": 0.005,
         "comment": "1/200"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -246,12 +310,30 @@
       "coins_min": 100000,
       "coins_max": 250000,
       "items": {
-        "dragon_bone": {"min": 100, "max": 200},
-        "coal": {"min": 500, "max": 1000},
-        "runite_ore": {"min": 200, "max": 400},
-        "platinum_ore": {"min": 100, "max": 200},
-        "fire_rune": {"min": 500, "max": 1000},
-        "ancient_treasure": {"min": 5, "max": 10}
+        "dragon_bone": {
+          "min": 100,
+          "max": 200
+        },
+        "coal": {
+          "min": 500,
+          "max": 1000
+        },
+        "runite_ore": {
+          "min": 200,
+          "max": 400
+        },
+        "platinum_ore": {
+          "min": 100,
+          "max": 200
+        },
+        "fire_rune": {
+          "min": 500,
+          "max": 1000
+        },
+        "ancient_treasure": {
+          "min": 5,
+          "max": 10
+        }
       }
     },
     "rare_drops": [
@@ -274,6 +356,11 @@
         "item": "balrog_wings",
         "chance": 0.002,
         "comment": "1/500"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -318,12 +405,30 @@
       "coins_min": 200000,
       "coins_max": 500000,
       "items": {
-        "dragon_bone": {"min": 150, "max": 300},
-        "platinum_ore": {"min": 200, "max": 400},
-        "runite_ore": {"min": 300, "max": 600},
-        "blood_rune": {"min": 500, "max": 1000},
-        "death_rune": {"min": 500, "max": 1000},
-        "ancient_treasure": {"min": 10, "max": 20}
+        "dragon_bone": {
+          "min": 150,
+          "max": 300
+        },
+        "platinum_ore": {
+          "min": 200,
+          "max": 400
+        },
+        "runite_ore": {
+          "min": 300,
+          "max": 600
+        },
+        "blood_rune": {
+          "min": 500,
+          "max": 1000
+        },
+        "death_rune": {
+          "min": 500,
+          "max": 1000
+        },
+        "ancient_treasure": {
+          "min": 10,
+          "max": 20
+        }
       }
     },
     "rare_drops": [
@@ -341,6 +446,11 @@
         "item": "amulet_of_the_void",
         "chance": 0.002,
         "comment": "1/500"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -384,9 +494,18 @@
       "coins_min": 15000,
       "coins_max": 30000,
       "items": {
-        "fire_rune": {"min": 100, "max": 200},
-        "adamantite_ore": {"min": 40, "max": 80},
-        "runite_ore": {"min": 10, "max": 20}
+        "fire_rune": {
+          "min": 100,
+          "max": 200
+        },
+        "adamantite_ore": {
+          "min": 40,
+          "max": 80
+        },
+        "runite_ore": {
+          "min": 10,
+          "max": 20
+        }
       }
     },
     "rare_drops": [
@@ -394,6 +513,11 @@
         "item": "runite_bar",
         "chance": 0.02,
         "comment": "1/50"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -457,6 +581,11 @@
         "item": "runite_bar",
         "chance": 0.02,
         "comment": "1/50"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "pet": {
@@ -526,8 +655,205 @@
         "item": "gilded_kiteshield",
         "chance": 0.04,
         "comment": "1/25"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.004,
+        "comment": "1/250 race change token"
       }
     ],
     "requires_monument": true
+  },
+  "obsidian_colossus": {
+    "id": "obsidian_colossus",
+    "display_name": "Obsidian Colossus",
+    "emoji": "🗿",
+    "description": "A mountain given wrath. No lone hero has ever chipped more than a scar into it. Bring a party.",
+    "combat_level_required": 130,
+    "duration_minutes": 60,
+    "hp": 52000,
+    "combat_stats": {
+      "attack_level": 200,
+      "strength_level": 120,
+      "defense_level": 150,
+      "attack_bonus": 40,
+      "strength_bonus": 40
+    },
+    "defensive_stats": {
+      "attack_defense": 250,
+      "strength_defense": 250,
+      "ranged_defense": 240,
+      "magic_defense": 280
+    },
+    "xp_rewards": {
+      "attack": 5000,
+      "strength": 5000,
+      "defense": 5000,
+      "hitpoints": 4000,
+      "magic": 2500,
+      "ranged": 2500
+    },
+    "common_loot": {
+      "coins_min": 40000,
+      "coins_max": 80000,
+      "items": {
+        "runite_bar": {
+          "min": 20,
+          "max": 40
+        },
+        "dragon_bone": {
+          "min": 40,
+          "max": 80
+        },
+        "diamond": {
+          "min": 5,
+          "max": 12
+        }
+      }
+    },
+    "rare_drops": [
+      {
+        "item": "gilded_full_helmet",
+        "chance": 0.015,
+        "comment": "1/67"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.005,
+        "comment": "1/200"
+      }
+    ],
+    "raid": true
+  },
+  "brood_empress": {
+    "id": "brood_empress",
+    "display_name": "Brood Empress",
+    "emoji": "👁️",
+    "description": "Mother of the swarm between the stars. Her brood has ended armies; yours had better be paid well.",
+    "combat_level_required": 140,
+    "duration_minutes": 60,
+    "hp": 56000,
+    "combat_stats": {
+      "attack_level": 205,
+      "strength_level": 125,
+      "defense_level": 170,
+      "attack_bonus": 40,
+      "strength_bonus": 40
+    },
+    "defensive_stats": {
+      "attack_defense": 260,
+      "strength_defense": 260,
+      "ranged_defense": 250,
+      "magic_defense": 170
+    },
+    "xp_rewards": {
+      "attack": 7000,
+      "strength": 7000,
+      "defense": 7000,
+      "hitpoints": 5500,
+      "magic": 3500,
+      "ranged": 3500
+    },
+    "common_loot": {
+      "coins_min": 60000,
+      "coins_max": 120000,
+      "items": {
+        "magic_log": {
+          "min": 40,
+          "max": 80
+        },
+        "dragon_bone": {
+          "min": 60,
+          "max": 100
+        },
+        "diamond": {
+          "min": 8,
+          "max": 16
+        }
+      }
+    },
+    "rare_drops": [
+      {
+        "item": "gilded_platebody",
+        "chance": 0.015,
+        "comment": "1/67"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.008,
+        "comment": "1/125"
+      }
+    ],
+    "raid": true
+  },
+  "the_world_ender": {
+    "id": "the_world_ender",
+    "display_name": "The World Ender",
+    "emoji": "🌋",
+    "description": "When it stirs, kingdoms write their wills. Four names on the contract or none return.",
+    "combat_level_required": 150,
+    "duration_minutes": 60,
+    "hp": 62000,
+    "combat_stats": {
+      "attack_level": 210,
+      "strength_level": 125,
+      "defense_level": 200,
+      "attack_bonus": 40,
+      "strength_bonus": 40
+    },
+    "defensive_stats": {
+      "attack_defense": 270,
+      "strength_defense": 270,
+      "ranged_defense": 260,
+      "magic_defense": 300
+    },
+    "xp_rewards": {
+      "attack": 10000,
+      "strength": 10000,
+      "defense": 10000,
+      "hitpoints": 8000,
+      "magic": 5000,
+      "ranged": 5000
+    },
+    "common_loot": {
+      "coins_min": 100000,
+      "coins_max": 200000,
+      "items": {
+        "runite_bar": {
+          "min": 40,
+          "max": 70
+        },
+        "magic_log": {
+          "min": 60,
+          "max": 100
+        },
+        "dragon_bone": {
+          "min": 80,
+          "max": 140
+        },
+        "diamond": {
+          "min": 12,
+          "max": 24
+        }
+      }
+    },
+    "rare_drops": [
+      {
+        "item": "gilded_kiteshield",
+        "chance": 0.015,
+        "comment": "1/67"
+      },
+      {
+        "item": "gilded_platebody",
+        "chance": 0.01,
+        "comment": "1/100"
+      },
+      {
+        "item": "race_change_token",
+        "chance": 0.01,
+        "comment": "1/100"
+      }
+    ],
+    "raid": true
   }
 }

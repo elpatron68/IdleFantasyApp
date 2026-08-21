@@ -5,6 +5,8 @@ import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.QuestProgressDao
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.*
+import com.fantasyidler.simulator.PrestigeBoosts
+import com.fantasyidler.simulator.PrestigePoints
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
 import kotlin.math.roundToInt
@@ -35,6 +37,8 @@ private fun PlayerFlags.plusSeen(keys: Collection<String>): PlayerFlags =
 
 enum class XpBoostPurchaseResult { SUCCESS, NOT_ENOUGH_COINS, ALREADY_ACTIVE, WEEKLY_LIMIT_REACHED }
 
+enum class PrestigeActionResult { SUCCESS, NOT_ENOUGH_POINTS, LOCKED, COOLDOWN, INVALID, CANT_AFFORD }
+
 @Singleton
 class PlayerRepository @Inject constructor(
     private val playerDao: PlayerDao,
@@ -45,6 +49,7 @@ class PlayerRepository @Inject constructor(
     private val weeklyQuestRepo: WeeklyQuestRepository,
     private val buffNotifScheduler: BuffNotificationScheduler,
     private val gameData: GameDataRepository,
+    private val boostRepo: BoostRepository,
 ) {
     val playerMutex = kotlinx.coroutines.sync.Mutex()
 
@@ -112,6 +117,14 @@ class PlayerRepository @Inject constructor(
      * recalculate level, and merge loot into inventory.
      * Returns the keys of any skill capes awarded (level 99 reached for the first time).
      */
+    private fun prayerCapeMult(player: Player, flags: PlayerFlags): Float =
+        blessingPrayerCapeMult(
+            flags,
+            json.decodeFromString(player.equipped),
+            json.decodeFromString<Map<String, Int>>(player.inventory).keys,
+            gameData,
+        )
+
     suspend fun applySessionResults(
         skillName: String,
         xpGained: Long,
@@ -120,12 +133,9 @@ class PlayerRepository @Inject constructor(
     ): List<String> = playerMutex.withLock {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
         val scaledXp = if (efficiencyMultiplier == 1.0f) xpGained else (xpGained * efficiencyMultiplier).toLong()
-        val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
-        val baseXp = ((if (boostActive) scaledXp * 2 else scaledXp) * blessingMult).toLong()
-        val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skillName] ?: 0
-        val boostedXp = if (prestigeLevel > 0) (baseXp * (1.0 + prestigeLevel * 0.10)).toLong() else baseXp
+        // 2x boost, blessing, and prestige xp nodes combined in one place (ironman-inert).
+        val boostedXp = (scaledXp * boostRepo.xpMultiplier(skillName, flags, prayerCapeMult(player, flags))).toLong()
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
 
@@ -409,7 +419,7 @@ class PlayerRepository @Inject constructor(
 
     /** Base queue size (3) plus any Queue Master town building bonus, plus the Monument's Gilded stage. */
     fun maxQueueSize(flags: PlayerFlags): Int {
-        var extraSlots = 0
+        var extraSlots = boostRepo.extraQueueSlots(flags)
         flags.townBuildingTiers.forEach { (buildingName, tier) ->
             val bonuses = gameData.townBuildings[buildingName]?.tiers?.getOrNull(tier - 1)?.bonuses
             extraSlots += bonuses?.get("queue_slots")?.toInt() ?: 0
@@ -435,7 +445,7 @@ class PlayerRepository @Inject constructor(
         val player = getOrCreatePlayer()
         val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
         val agility = levels[Skills.AGILITY] ?: 1
-        val agilityPrestige = flags.skillPrestige[Skills.AGILITY] ?: 0
+        val agilityFloorReduction = boostRepo.sessionFloorReductionMin(flags)
         val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
         val weaponSlot = flags.activeWeaponSlot
             ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
@@ -448,7 +458,7 @@ class PlayerRepository @Inject constructor(
             skillName           = "combat",
             activityKey         = dungeonKey,
             skillDisplayName    = dungeonDisplayName,
-            estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityPrestige, chronosMult),
+            estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, agilityFloorReduction, chronosMult),
             equippedSnapshot    = player.equipped,
             arrowsKey           = flags.equippedArrows,
             spellName           = flags.activeSpell,
@@ -570,18 +580,99 @@ class PlayerRepository @Inject constructor(
         updateFlags(getFlags().copy(lastSeenVersionCode = versionCode))
     }
 
-    /** [ironman] is only non-null from the first-time creation sheet; edits never change it. */
-    suspend fun updateCharacterProfile(name: String, gender: String, race: String, ironman: Boolean? = null) {
+    /**
+     * [ironman] is only non-null from the first-time creation sheet; edits never change it.
+     * Post-setup race changes are rejected here: they cost a token or coins and go through
+     * [changeCharacterRace]. New ironman characters get their race locked at creation.
+     */
+    suspend fun updateCharacterProfile(name: String, gender: String, race: String, ironman: Boolean? = null): PrestigeActionResult = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val nowIronman = ironman ?: flags.ironman
+        val raceChanged = flags.characterSetupDone &&
+            race.lowercase() != PrestigeBoosts.playerRace(flags)
+        // Post-setup race changes cost a token or coins and go through [changeCharacterRace];
+        // this path only handles first-time setup plus name and gender edits.
+        if (raceChanged) return@withLock PrestigeActionResult.INVALID
         val updated = flags.copy(
             characterName = name,
             characterGender = gender,
             characterRace = race,
             characterSetupDone = true,
-            ironman = ironman ?: flags.ironman,
+            ironman = nowIronman,
+            // New ironman characters can never change race; the choice is final at creation.
+            ironmanRaceLocked = flags.ironmanRaceLocked || (nowIronman && !flags.characterSetupDone),
         )
         playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(updated)))
+        PrestigeActionResult.SUCCESS
+    }
+
+    /**
+     * Race-change bookkeeping: refunds purchased nodes locked to other races
+     * (their point cost returns as unspent) and stamps the change time.
+     */
+    private fun applyRaceChange(flags: PlayerFlags, race: String, now: Long): PlayerFlags {
+        val newRace = race.lowercase()
+        val prunedNodes = flags.prestigeNodes.mapValues { (skill, ids) ->
+            val nodesById = gameData.prestigeTrees[skill]?.paths
+                ?.flatMap { it.nodes }?.associateBy { it.id }.orEmpty()
+            ids.filter { id -> nodesById[id]?.races.let { r -> r == null || newRace in r } }
+        }.filterValues { it.isNotEmpty() }
+        return flags.copy(characterRace = race, raceLastChangedAt = now, prestigeNodes = prunedNodes)
+    }
+
+    /**
+     * Appearance-sheet race change. Costs one Race Change Token (rare boss drop) or
+     * [RACE_CHANGE_COST_COINS], chosen via [useToken]. Ironman characters cannot change
+     * race at all, except one free legacy change while [PlayerFlags.ironmanRaceLocked]
+     * is still false, after which it locks permanently. Same-race saves are free.
+     */
+    suspend fun changeCharacterRace(race: String, useToken: Boolean = false): PrestigeActionResult = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        if (race.lowercase() == PrestigeBoosts.playerRace(flags)) {
+            playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(characterRace = race))))
+            return@withLock PrestigeActionResult.SUCCESS
+        }
+        if (flags.ironman) {
+            if (flags.ironmanRaceLocked) return@withLock PrestigeActionResult.LOCKED
+            val updated = applyRaceChange(flags, race, System.currentTimeMillis())
+            playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(updated.copy(ironmanRaceLocked = true))))
+            return@withLock PrestigeActionResult.SUCCESS
+        }
+        val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        if (useToken) {
+            if ((inventory[RACE_CHANGE_TOKEN_ITEM] ?: 0) < 1) return@withLock PrestigeActionResult.CANT_AFFORD
+        } else {
+            if (player.coins < RACE_CHANGE_COST_COINS) return@withLock PrestigeActionResult.CANT_AFFORD
+        }
+        val updated = applyRaceChange(flags, race, System.currentTimeMillis())
+        if (useToken) {
+            val left = (inventory[RACE_CHANGE_TOKEN_ITEM] ?: 0) - 1
+            if (left <= 0) inventory.remove(RACE_CHANGE_TOKEN_ITEM) else inventory[RACE_CHANGE_TOKEN_ITEM] = left
+            playerDao.upsert(player.copy(
+                inventory = json.encode<Map<String, Int>>(inventory),
+                flags     = json.encode<PlayerFlags>(updated),
+            ))
+        } else {
+            playerDao.upsert(player.copy(
+                coins = player.coins - RACE_CHANGE_COST_COINS,
+                flags = json.encode<PlayerFlags>(updated),
+            ))
+        }
+        PrestigeActionResult.SUCCESS
+    }
+
+    suspend fun debugChangeRaceFree(race: String) {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val prunedNodes = flags.prestigeNodes.mapValues { (skill, ids) ->
+            val nodesById = gameData.prestigeTrees[skill]?.paths
+                ?.flatMap { it.nodes }?.associateBy { it.id }.orEmpty()
+            ids.filter { id -> nodesById[id]?.races.let { r -> r == null || race.lowercase() in r } }
+        }.filterValues { it.isNotEmpty() }
+        val updatedFlags = flags.copy(characterRace = race, prestigeNodes = prunedNodes)
+        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(updatedFlags)))
     }
 
     suspend fun dismissCharacterSetup() {
@@ -724,10 +815,8 @@ class PlayerRepository @Inject constructor(
     ): List<String> {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
-        val boostMult = if (boostActive) 2L else 1L
-        val xpBlessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
-        val coinBlessingMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags) *
+        val capeMult = prayerCapeMult(player, flags)
+        val coinBlessingMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags, capeMult) *
             gooseCoinMultiplier(json.decodeFromString(player.pets)).toFloat()
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
@@ -742,9 +831,7 @@ class PlayerRepository @Inject constructor(
             val scaledXp = if (efficiencyMultiplier == 1.0f) xp else (xp * efficiencyMultiplier).toLong()
             val petPct = if (flags.ironman) 0 else perSkillPetBoostPct[skill] ?: 0
             val withPet = if (petPct > 0) (scaledXp * (1.0 + petPct / 100.0)).toLong() else scaledXp
-            val afterBoostBlessing = (withPet * boostMult * xpBlessingMult).toLong()
-            val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skill] ?: 0
-            val finalXp = if (prestigeLevel > 0) (afterBoostBlessing * (1.0 + prestigeLevel * 0.10)).toLong() else afterBoostBlessing
+            val finalXp = (withPet * boostRepo.xpMultiplier(skill, flags, capeMult)).toLong()
             val newXp = (xpMap[skill] ?: 0L) + finalXp
             xpMap[skill]  = newXp
             levels[skill] = XpTable.levelForXp(newXp)
@@ -777,7 +864,7 @@ class PlayerRepository @Inject constructor(
         val finalXp: Long,
         val boostActive: Boolean,
         val blessingMult: Float,
-        val prestigeLevel: Int,
+        val prestigeXpPct: Int,
     )
 
     /**
@@ -787,14 +874,14 @@ class PlayerRepository @Inject constructor(
      * the real credited XP instead of the pre-multiplier flat amount.
      */
     suspend fun previewFlatXpGrant(skillName: String, baseXp: Long): FlatXpBreakdown {
-        val flags = getFlags()
-        val boostActive = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
-        val boostMult = if (boostActive) 2L else 1L
-        val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags)
-        val afterBoostBlessing = ((baseXp * boostMult) * blessingMult).toLong()
-        val prestigeLevel = if (flags.ironman) 0 else flags.skillPrestige[skillName] ?: 0
-        val finalXp = if (prestigeLevel > 0) (afterBoostBlessing * (1.0 + prestigeLevel * 0.10)).toLong() else afterBoostBlessing
-        return FlatXpBreakdown(baseXp, finalXp, boostActive, blessingMult, prestigeLevel)
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val capeMult = prayerCapeMult(player, flags)
+        val boostActive = boostRepo.xpBoostActive(skillName, flags)
+        val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags, capeMult)
+        val prestigeXpPct = boostRepo.prestigeXpPct(skillName, flags)
+        val finalXp = (baseXp * boostRepo.xpMultiplier(skillName, flags, capeMult)).toLong()
+        return FlatXpBreakdown(baseXp, finalXp, boostActive, blessingMult, prestigeXpPct)
     }
 
     /**
@@ -864,8 +951,10 @@ class PlayerRepository @Inject constructor(
     )
 
     /**
-     * Resets [skillName] back to level 1 and increments its prestige count (max 3).
-     * Guard: skill must be level 99 and prestige count must be < 3.
+     * Resets [skillName] back to level 1, increments its prestige count, and awards
+     * prestige points ([PrestigePoints.pointsForXp]: 2 at level 99, more for banked
+     * XP past 99). Guards: level 99+, not ironman, and lifetime earned points below
+     * the tree's cap for the player's race.
      *
      * Also re-validates every equipped slot against the new (lower) levels: gear that no
      * longer meets its requirements is swapped for the best valid item in inventory, or a
@@ -878,9 +967,14 @@ class PlayerRepository @Inject constructor(
         val flags: PlayerFlags               = json.decodeFromString(player.flags)
 
         val currentPrestige = flags.skillPrestige[skillName] ?: 0
-        // Ironman characters get no XP bonus from a reset, so resetting would only lose levels.
-        if (flags.ironman) return@withLock
-        if ((levels[skillName] ?: 1) < 99 || currentPrestige >= 3) return@withLock
+        if ((levels[skillName] ?: 1) < 99) return@withLock
+        val cap = PrestigeBoosts.pointCapForRace(gameData.prestigeTrees[skillName], PrestigeBoosts.playerRace(flags))
+        val earnedSoFar = flags.prestigePointsEarned[skillName] ?: 0
+        if (cap in 1..earnedSoFar) return@withLock
+
+        val pointsAwarded = PrestigePoints.pointsForXp(xpMap[skillName] ?: 0L)
+        val newEarned = flags.prestigePointsEarned.toMutableMap()
+        newEarned[skillName] = (earnedSoFar + pointsAwarded).let { if (cap > 0) it.coerceAtMost(cap) else it }
 
         levels[skillName] = 1
         xpMap[skillName]  = 0L
@@ -916,7 +1010,24 @@ class PlayerRepository @Inject constructor(
             }
         }
 
-        var newFlags = flags.copy(skillPrestige = newPrestige)
+        var newFlags = flags.copy(
+            skillPrestige        = newPrestige,
+            prestigePointsEarned = newEarned,
+            // Compensation for the banked-dailies reset below: a 48h 2x XP boost for just
+            // this skill, so the fast climb back is a feature instead of an exploit.
+            prestigeXpBoosts     = flags.prestigeXpBoosts +
+                (skillName to System.currentTimeMillis() + PRESTIGE_XP_BOOST_DURATION_MS),
+        )
+        // Completed-but-unclaimed dailies would otherwise bank their flat XP across the
+        // reset and cash it in at level 1 for an outsized jump, so unclaimed progress on
+        // dailies paying this skill's XP is cleared.
+        val bankedDailyIds = gameData.guildDailyPool
+            .filter { it.rewards.xpSkill == skillName && it.id !in flags.guildDailyClaimed }
+            .map { it.id }
+            .toSet()
+        if (bankedDailyIds.isNotEmpty()) {
+            newFlags = newFlags.copy(guildDailyProgress = newFlags.guildDailyProgress - bankedDailyIds)
+        }
         if (skillName == Skills.MAGIC) {
             val magicLevel = levels[Skills.MAGIC] ?: 1
             val activeSpell = newFlags.activeSpell?.let { gameData.spells[it] }
@@ -956,9 +1067,78 @@ class PlayerRepository @Inject constructor(
         )
     }
 
+    /**
+     * Buys a prestige tree node with unspent points. Validates race lock, the
+     * preceding tier in the same path, and available points.
+     */
+    suspend fun purchasePrestigeNode(skillName: String, nodeId: String): PrestigeActionResult = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val tree = gameData.prestigeTrees[skillName] ?: return@withLock PrestigeActionResult.INVALID
+        val path = tree.paths.firstOrNull { p -> p.nodes.any { it.id == nodeId } }
+            ?: return@withLock PrestigeActionResult.INVALID
+        val index = path.nodes.indexOfFirst { it.id == nodeId }
+        val node = path.nodes[index]
+        val owned = flags.prestigeNodes[skillName].orEmpty()
+        if (nodeId in owned) return@withLock PrestigeActionResult.INVALID
+        val race = PrestigeBoosts.playerRace(flags)
+        if (!PrestigeBoosts.isNodeAvailableToRace(node, race)) return@withLock PrestigeActionResult.LOCKED
+        // Prerequisite: the closest preceding node in this path that this race can use.
+        val prereq = path.nodes.take(index).lastOrNull { PrestigeBoosts.isNodeAvailableToRace(it, race) }
+        if (prereq != null && prereq.id !in owned) return@withLock PrestigeActionResult.LOCKED
+        if (PrestigeBoosts.unspentPoints(gameData.prestigeTrees, flags, skillName) < node.cost) {
+            return@withLock PrestigeActionResult.NOT_ENOUGH_POINTS
+        }
+        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(
+            flags.copy(prestigeNodes = flags.prestigeNodes + (skillName to (owned + nodeId)))
+        )))
+        PrestigeActionResult.SUCCESS
+    }
+
+    /** Refunds every purchased node of [skillName] (points return automatically). 24h cooldown per skill. */
+    suspend fun respecPrestige(skillName: String): PrestigeActionResult = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        if (flags.prestigeNodes[skillName].orEmpty().isEmpty()) return@withLock PrestigeActionResult.INVALID
+        val now = System.currentTimeMillis()
+        if (now - (flags.prestigeLastRespecAt[skillName] ?: 0L) < PRESTIGE_RESPEC_COOLDOWN_MS) {
+            return@withLock PrestigeActionResult.COOLDOWN
+        }
+        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(
+            prestigeNodes        = flags.prestigeNodes - skillName,
+            prestigeLastRespecAt = flags.prestigeLastRespecAt + (skillName to now),
+        ))))
+        PrestigeActionResult.SUCCESS
+    }
+
+    /**
+     * One-time v1.14.0 migration: convert legacy prestige levels (which used to grant
+     * automatic bonuses) into unspent prestige points, 2 per level, for free allocation.
+     */
+    suspend fun migrateLegacyPrestigePointsIfNeeded() = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        if (flags.prestigePointsMigrated) return@withLock
+        val granted = flags.skillPrestige.filterValues { it > 0 }
+            .mapValues { (skill, lvl) ->
+                (flags.prestigePointsEarned[skill] ?: 0) + lvl * PrestigePoints.LEGACY_POINTS_PER_LEVEL
+            }
+        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(
+            prestigePointsEarned   = flags.prestigePointsEarned + granted,
+            prestigePointsMigrated = true,
+        ))))
+    }
+
     companion object {
         const val XP_BOOST_COST = 2_500_000L
         const val XP_BOOST_DURATION_MS = 48 * 3_600_000L   // 48 hours
+
+        /** Duration of the skill-specific 2x XP boost granted by each prestige. */
+        const val PRESTIGE_XP_BOOST_DURATION_MS = 48 * 3_600_000L
+
+        const val PRESTIGE_RESPEC_COOLDOWN_MS = 24 * 3_600_000L
+        const val RACE_CHANGE_TOKEN_ITEM = "race_change_token"
+        const val RACE_CHANGE_COST_COINS = 10_000_000L
 
         /** HMAC key for save-file signatures. Public by nature (open source), deterrence only. */
         private const val SAVE_SIG_KEY = "ekEhdMIDo9B63HQSU80U7hvuqVd1HYcciv5Na5d7gEKdaudR4Voa8jkF"
@@ -998,9 +1178,13 @@ class PlayerRepository @Inject constructor(
             if ((inventory[item] ?: 0) < needed * quantity) return false
         }
 
-        // Consume materials
+        // Consume materials; input-save prestige nodes refund a fraction of them.
+        val flagsForSave: PlayerFlags = json.decodeFromString(player.flags)
+        val saveFraction = boostRepo.inputSaveFraction(skillName, flagsForSave)
         for ((item, needed) in materialsPerItem) {
-            val remaining = (inventory[item] ?: 0) - needed * quantity
+            val consumed = needed * quantity
+            val refunded = (consumed * saveFraction).toInt()
+            val remaining = (inventory[item] ?: 0) - consumed + refunded
             if (remaining <= 0) inventory.remove(item) else inventory[item] = remaining
         }
 
@@ -1183,29 +1367,51 @@ class PlayerRepository @Inject constructor(
     // Daily quest helpers
     // ------------------------------------------------------------------
 
+    /**
+     * Runs the 6am daily/weekly refresh plus [transform] on the freshest flags under a single
+     * lock hold. The previous flows read flags, transformed, and wrote back across separate
+     * lock acquisitions, so a concurrent flags writer (e.g. the prestige flow while a session
+     * collect was still recording progress) could clobber either side's update — most visibly
+     * resurrecting already-claimed dailies.
+     */
+    private suspend fun updateRefreshedDailyFlagsAtomically(transform: (PlayerFlags) -> PlayerFlags) = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val original: PlayerFlags = json.decodeFromString(player.flags)
+        var flags = original
+        if (dailyQuestRepo.shouldRefresh(flags.dailyQuestGeneratedAt, flags.dailyResetHour) ||
+            weeklyQuestRepo.shouldRefresh(flags.weeklyQuestGeneratedAt, flags.dailyResetHour)
+        ) {
+            val skillLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            if (dailyQuestRepo.shouldRefresh(flags.dailyQuestGeneratedAt, flags.dailyResetHour)) flags = dailyQuestRepo.refreshFlags(flags, skillLevels)
+            if (weeklyQuestRepo.shouldRefresh(flags.weeklyQuestGeneratedAt, flags.dailyResetHour)) flags = weeklyQuestRepo.refreshFlags(flags, skillLevels)
+        }
+        flags = transform(flags)
+        if (flags != original) updateFlagsUnlocked(flags)
+    }
+
     /** Refresh daily and weekly quests if past 6am, then record progress for a gather session. */
-    suspend fun recordDailyGathering(items: Map<String, Int>) {
-        var flags = getRefreshedDailyFlags()
+    suspend fun recordDailyGathering(items: Map<String, Int>) = updateRefreshedDailyFlagsAtomically { refreshed ->
+        var flags = refreshed
         for ((target, amount) in items) {
             flags = dailyQuestRepo.recordProgress(flags, "gather", target, amount)
             flags = weeklyQuestRepo.recordProgress(flags, "gather", target, amount)
         }
-        updateFlags(flags)
+        flags
     }
 
     /** Refresh daily and weekly quests if past 6am, then record progress for a crafting session. */
-    suspend fun recordDailyCrafting(items: Map<String, Int>) {
-        var flags = getRefreshedDailyFlags()
+    suspend fun recordDailyCrafting(items: Map<String, Int>) = updateRefreshedDailyFlagsAtomically { refreshed ->
+        var flags = refreshed
         for ((target, amount) in items) {
             flags = dailyQuestRepo.recordProgress(flags, "craft", target, amount)
             flags = weeklyQuestRepo.recordProgress(flags, "craft", target, amount)
         }
-        updateFlags(flags)
+        flags
     }
 
     /** Refresh daily and weekly quests if past 6am, then record progress for combat kills. */
-    suspend fun recordDailyKills(killsByEnemy: Map<String, Int>) {
-        var flags = getRefreshedDailyFlags()
+    suspend fun recordDailyKills(killsByEnemy: Map<String, Int>) = updateRefreshedDailyFlagsAtomically { refreshed ->
+        var flags = refreshed
         for ((enemy, count) in killsByEnemy) {
             flags = dailyQuestRepo.recordProgress(flags, "kill_enemy", enemy, count)
             flags = weeklyQuestRepo.recordProgress(flags, "kill_enemy", enemy, count)
@@ -1215,26 +1421,24 @@ class PlayerRepository @Inject constructor(
             for ((enemy, count) in killsByEnemy) updated[enemy] = (updated[enemy] ?: 0) + count
             flags = flags.copy(enemyKills = updated)
         }
-        updateFlags(flags)
+        flags
     }
 
     /** Refresh daily quests if past 6am, then record bones buried. */
-    suspend fun recordDailyPrayer(amount: Int) {
-        var flags = getRefreshedDailyFlags()
+    suspend fun recordDailyPrayer(amount: Int) = updateRefreshedDailyFlagsAtomically { refreshed ->
+        var flags = refreshed
         flags = dailyQuestRepo.recordPrayerProgress(flags, amount)
         flags = weeklyQuestRepo.recordPrayerProgress(flags, amount)
-        updateFlags(flags)
+        flags
     }
 
     /** Record arbitrary weekly progress (for new weekly quest types). */
-    suspend fun recordWeeklyProgress(type: String, target: String, amount: Int) {
-        var flags = getRefreshedDailyFlags()
-        flags = weeklyQuestRepo.recordProgress(flags, type, target, amount)
-        updateFlags(flags)
+    suspend fun recordWeeklyProgress(type: String, target: String, amount: Int) = updateRefreshedDailyFlagsAtomically { refreshed ->
+        weeklyQuestRepo.recordProgress(refreshed, type, target, amount)
     }
 
     /** Returns current flags after refreshing daily and weekly quests if the boundary has passed. */
-    suspend fun getRefreshedDailyFlags(): PlayerFlags {
+    suspend fun getRefreshedDailyFlags(): PlayerFlags = playerMutex.withLock {
         val player = getOrCreatePlayer()
         var flags: PlayerFlags = json.decodeFromString(player.flags)
         var changed = false
@@ -1244,79 +1448,87 @@ class PlayerRepository @Inject constructor(
             flags = dailyQuestRepo.refreshFlags(flags, skillLevels)
             changed = true
         }
-        
+
         if (weeklyQuestRepo.shouldRefresh(flags.weeklyQuestGeneratedAt, flags.dailyResetHour)) {
             flags = weeklyQuestRepo.refreshFlags(flags, skillLevels)
             changed = true
         }
 
         if (changed) {
-            updateFlags(flags)
+            updateFlagsUnlocked(flags)
         }
-        return flags
+        flags
     }
 
     /**
-     * Atomically applies a claimed daily quest reward:
-     * - Updates [PlayerFlags] with the new [newFlags] (which includes the quest marked as claimed).
-     * - If [reward] is [DailyReward.DwarvenItemReward], adds the item to inventory in the SAME write.
+     * Atomically claims a completed daily quest: the flags read, the claimed marker, and any
+     * Dwarven item grant all happen under one lock hold and land in one DB upsert. The previous
+     * flow read flags in the ViewModel and wrote them back afterwards, so a concurrent flags
+     * writer (e.g. the prestige flow) could clobber the claim and let it be claimed again.
      *
-     * This prevents the silent item loss that occurred when [updateFlags] and [addItem] were two
-     * separate DB writes — if anything interrupted between them (crash, concurrent write), the
-     * item was lost even though the notification had already fired.
-     *
-     * Returns the item key that was granted, or null for a coins reward (coins are handled by the
-     * caller since they don't touch the inventory/flags row).
+     * Returns the reward, or null when the quest isn't complete or is already claimed (double
+     * tap). Coin rewards are still credited by the caller — coins don't touch this row.
      */
-    suspend fun claimDailyReward(newFlags: PlayerFlags, reward: DailyReward): String? {
+    suspend fun claimDailyQuest(templateId: String): DailyReward? = playerMutex.withLock {
         val player = getOrCreatePlayer()
-        val flags = newFlags.let { it.plusSeen(
-            if (reward is DailyReward.DwarvenItemReward) listOf(reward.itemKey) else emptyList()
-        ) }
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
-        val grantedKey: String? = if (reward is DailyReward.DwarvenItemReward) {
-            inventory[reward.itemKey] = (inventory[reward.itemKey] ?: 0) + 1
-            reward.itemKey
-        } else null
+        val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val ownedItems = inventory.keys + equipped.values.filterNotNull()
+        val (newFlags, reward) = try {
+            dailyQuestRepo.claimQuest(flags, templateId, ownedItems)
+        } catch (_: IllegalStateException) {
+            return@withLock null
+        }
+        val grantedKey = (reward as? DailyReward.DwarvenItemReward)?.itemKey
+        if (grantedKey != null) inventory[grantedKey] = (inventory[grantedKey] ?: 0) + 1
 
         playerDao.upsert(
             player.copy(
-                flags     = json.encode<PlayerFlags>(flags),
+                flags     = json.encode<PlayerFlags>(newFlags.plusSeen(listOfNotNull(grantedKey))),
                 inventory = json.encode<Map<String, Int>>(inventory),
             )
         )
-        return grantedKey
+        reward
+    }
+
+    /** Atomically claims a completed weekly quest (same lost-update guard as [claimDailyQuest]).
+     *  Returns the coin reward, or null when it isn't complete or is already claimed. */
+    suspend fun claimWeeklyQuest(templateId: String): Long? = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
+        val (newFlags, rewardCoins) = try {
+            weeklyQuestRepo.claimQuest(flags, templateId)
+        } catch (_: IllegalStateException) {
+            return@withLock null
+        }
+        updateFlagsUnlocked(newFlags)
+        rewardCoins
     }
 
     /**
-     * Atomically applies a claimed weekly bonus reward:
-     * - Updates [PlayerFlags] with [newFlags] (weeklyBonusClaimed = true).
-     * - If [reward] is [WeeklyBonusReward.DivineItemReward], adds the item to inventory in the SAME write.
-     *
-     * Mirrors [claimDailyReward]: prevents the silent divine-item loss that occurred when
-     * [updateFlags] and [addItem] were two separate DB writes in [claimWeeklyBonus].
-     *
-     * Returns the item key that was granted, or null for a coins reward (coins are handled by the
-     * caller since they don't touch the inventory/flags row).
+     * Atomically claims the weekly bonus: flags (weeklyBonusClaimed = true) and any Divine item
+     * grant land in one DB upsert under one lock hold (same lost-update guard as
+     * [claimDailyQuest]). Returns the reward, or null when not all weeklies are claimed or the
+     * bonus was already taken. Coin rewards are credited by the caller.
      */
-    suspend fun claimWeeklyBonusReward(newFlags: PlayerFlags, reward: WeeklyBonusReward): String? {
+    suspend fun claimWeeklyBonus(): WeeklyBonusReward? = playerMutex.withLock {
         val player = getOrCreatePlayer()
-        val flags = newFlags.let { it.plusSeen(
-            if (reward is WeeklyBonusReward.DivineItemReward) listOf(reward.itemKey) else emptyList()
-        ) }
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        if (flags.weeklyQuestClaimed.size < 5 || flags.weeklyBonusClaimed) return@withLock null
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
-        val grantedKey: String? = if (reward is WeeklyBonusReward.DivineItemReward) {
-            inventory[reward.itemKey] = (inventory[reward.itemKey] ?: 0) + 1
-            reward.itemKey
-        } else null
+        val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val ownedItems = inventory.keys + equipped.values.filterNotNull()
+        val (newFlags, reward) = weeklyQuestRepo.claimWeeklyBonus(flags, ownedItems)
+        val grantedKey = (reward as? WeeklyBonusReward.DivineItemReward)?.itemKey
+        if (grantedKey != null) inventory[grantedKey] = (inventory[grantedKey] ?: 0) + 1
 
         playerDao.upsert(
             player.copy(
-                flags     = json.encode<PlayerFlags>(flags),
+                flags     = json.encode<PlayerFlags>(newFlags.plusSeen(listOfNotNull(grantedKey))),
                 inventory = json.encode<Map<String, Int>>(inventory),
             )
         )
-        return grantedKey
+        reward
     }
 
     /** Adds [qty] of [itemKey] to inventory. */
@@ -1438,12 +1650,39 @@ internal fun resolveOwnedCapeKeysForSkill(skillName: String): List<String> {
     }
 }
 
+/** Prayer cape multiplier that scales church blessing strength (issue #1491). */
+fun blessingPrayerCapeMult(
+    flags: PlayerFlags,
+    equipped: Map<String, String?>,
+    inventoryKeys: Set<String>,
+    gameData: GameDataRepository,
+): Float {
+    if (flags.ironman) return 1f
+    val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
+    return resolveCapeMultiplier(
+        Skills.PRAYER, equippedCape, inventoryKeys, flags.townBuildingTiers,
+        com.fantasyidler.simulator.PrestigeBoosts.capeScalingBySkill(gameData.prestigeTrees, flags),
+        gameData.equipment, flags.ironman,
+    )
+}
+
+/** [blessingPrayerCapeMult] convenience for call sites holding a raw [Player] row. */
+fun blessingPrayerCapeMult(player: Player, flags: PlayerFlags, gameData: GameDataRepository): Float {
+    if (flags.ironman) return 1f
+    return blessingPrayerCapeMult(
+        flags,
+        kotlinx.serialization.json.Json.decodeFromString(player.equipped),
+        kotlinx.serialization.json.Json.decodeFromString<Map<String, Int>>(player.inventory).keys,
+        gameData,
+    )
+}
+
 fun resolveCapeMultiplier(
     skillName: String,
     equippedCape: EquipmentData?,
     inventoryKeys: Set<String>,
     townBuildingTiers: Map<String, Int>,
-    skillPrestige: Map<String, Int>,
+    capeScaling: Map<String, Int>,
     allEquipment: Map<String, EquipmentData>,
     ironman: Boolean = false,
 ): Float {
@@ -1489,11 +1728,12 @@ fun resolveCapeMultiplier(
     val totalBonus = bestSkillCapeBonus + bestGuildCapeBonus
     if (totalBonus <= 0f) return 1.0f
 
-    val prestigeLevel = skillPrestige[normSkill] ?: 0
+    // Cape Mastery prestige nodes scale non-combat cape bonuses (was prestige level + 1).
+    val scaling = capeScaling[normSkill] ?: 1
     val isCombatSkill = normSkill in setOf("attack", "strength", "defense", "ranged", "magic", "hp", "slayer")
     return if (isCombatSkill) {
         1.0f + totalBonus
     } else {
-        1.0f + totalBonus * (prestigeLevel + 1)
+        1.0f + totalBonus * scaling
     }
 }

@@ -69,6 +69,7 @@ import kotlin.math.roundToInt
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.simulator.CombatSimulator
+import com.fantasyidler.simulator.TowerScaling
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.CookingRecipe
 import com.fantasyidler.data.json.DungeonData
@@ -117,6 +118,8 @@ internal data class CombatLogEntry(
     val isKill: Boolean = false,
     /** HP restored by eating this tick; > 0 renders as an eat line (issue #1431). */
     val heal: Int = 0,
+    /** True when this damage came from the raid mercenary party. */
+    val ally: Boolean = false,
 )
 
 @Composable
@@ -127,7 +130,7 @@ internal fun CombatSessionBanner(
     enemies: Map<String, EnemyData>,
     skillLevels: Map<String, Int>,
     modifier: Modifier = Modifier,
-    skillPrestige: Map<String, Int> = emptyMap(),
+    hpPrestigeBonus: Int = 0,
     towerHpBonus: Int = 0,
     attackBonus: Int,
     strengthBonus: Int,
@@ -137,10 +140,20 @@ internal fun CombatSessionBanner(
     showEndTime: Boolean = true,
     repeatIndex: Int = 0,
     repeatTotal: Int = 0,
+    hiredMercs: List<com.fantasyidler.ui.viewmodel.MercContract> = emptyList(),
     onAbandon: () -> Unit,
     onDebugFinish: () -> Unit,
 ) {
     val context = LocalContext.current
+    // Tower floors above 100 scale enemy stats at simulation time; the banner must fight the
+    // same scaled enemies or every HP-derived display (mid-minute kill estimate, enemy HP bar,
+    // header stats) runs against base values and the kill count sawtooths (issue #1494).
+    @Suppress("NAME_SHADOWING")
+    val enemies = remember(session.sessionId, enemies) {
+        val floor = if (session.skillName == "tower")
+            session.activityKey.removePrefix("tower_floor_").toIntOrNull() else null
+        if (floor != null) TowerScaling.scaledEnemies(floor, enemies) else enemies
+    }
     val sessionBoss = bosses.firstOrNull { it.id == session.activityKey }
     val dungeonName = dungeons.firstOrNull { it.name == session.activityKey }
         ?.let { GameStrings.dungeonName(context, it.name) }
@@ -291,7 +304,7 @@ internal fun CombatSessionBanner(
                 // don't shift an in-flight run's display (issue #1411); live stats are
                 // the fallback for sessions recorded before the snapshot existed.
                 val maxHp = frames.firstOrNull { it.maxHp > 0 }?.maxHp
-                    ?: ((skillLevels[Skills.HITPOINTS] ?: 1) + (skillPrestige[Skills.HITPOINTS] ?: 0) * 5 + towerHpBonus) * 10
+                    ?: ((skillLevels[Skills.HITPOINTS] ?: 1) + hpPrestigeBonus + towerHpBonus) * 10
                 val enemyTicksShown = tickInFrame + if (halfTickInFrame >= 2 * tickInFrame + 1) 1 else 0
                 val currentPlayerHp = if (currentFrame?.enemyHits?.isNotEmpty() == true) {
                     val base = frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
@@ -303,11 +316,13 @@ internal fun CombatSessionBanner(
                     frames.getOrNull(currentFrameIdx - 1)?.hpAfter ?: maxHp
                 }
 
-                // Live enemy HP (cumulative for boss, per-enemy reset for dungeon)
+                // Live enemy HP (cumulative for boss, per-enemy reset for dungeon).
+                // Raid mercenary damage counts toward the boss bar alongside the player's.
                 val currentEnemyHp = when {
                     currentBoss != null -> {
-                        val prevDmg = frames.take(currentFrameIdx).sumOf { it.playerHits.sum() }
-                        val curDmg = currentFrame?.playerHits?.take(tickInFrame + 1)?.sum() ?: 0
+                        val prevDmg = frames.take(currentFrameIdx).sumOf { it.playerHits.sum() + it.allyHits.sum() }
+                        val curDmg = (currentFrame?.playerHits?.take(tickInFrame + 1)?.sum() ?: 0) +
+                            (currentFrame?.allyHits?.take(tickInFrame + 1)?.sum() ?: 0)
                         (currentBoss.hp - prevDmg - curDmg).coerceAtLeast(0)
                     }
                     currentEnemy != null && currentFrame?.playerHits?.isNotEmpty() == true -> {
@@ -342,6 +357,8 @@ internal fun CombatSessionBanner(
                                     hp -= dmg
                                     if (hp <= 0) { add(CombatLogEntry(false, 0, eName, isKill = true)); hp = enemyHp }
                                 }
+                                f.allyHits.getOrNull(t)?.takeIf { it > 0 }
+                                    ?.let { add(CombatLogEntry(true, it, eName, ally = true)) }
                                 if (i < currentFrameIdx || 2 * t + 1 <= halfTickInFrame) {
                                     f.enemyHits.getOrNull(t)?.let { add(CombatLogEntry(false, it, eName)) }
                                     f.playerHeals.getOrNull(t)?.takeIf { it > 0 }
@@ -473,6 +490,73 @@ internal fun CombatSessionBanner(
                             )
                         }
 
+                        // ── Raid party ─────────────────────────────────────
+                        if (currentBoss?.raid == true && hiredMercs.isNotEmpty()) {
+                            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp), color = divColor)
+                            Text(
+                                text  = stringResource(R.string.raid_party_title),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
+                            )
+                            // Frame order matches the contract list the session started with,
+                            // so index i is merc i's HP. Pre-feature sessions lack the
+                            // snapshot and fall back to full HP.
+                            val allyHpNow = frames.getOrNull(currentFrameIdx - 1)?.allyHpAfter
+                            hiredMercs.forEachIndexed { i, contract ->
+                                val m         = contract.merc
+                                val mercMaxHp = m.hp * 10
+                                val mercHpNow = (allyHpNow?.getOrNull(i) ?: mercMaxHp).coerceAtLeast(0)
+                                val downed    = mercHpNow <= 0
+                                val mercHpPct   = if (mercMaxHp > 0) mercHpNow * 100 / mercMaxHp else 0
+                                val mercHpColor = when {
+                                    mercHpPct >= 50 -> Color(0xFF4CAF50)
+                                    mercHpPct >= 20 -> Color(0xFFFFC107)
+                                    else            -> MaterialTheme.colorScheme.error
+                                }
+                                Spacer(Modifier.height(8.dp))
+                                Text(
+                                    text       = "${m.emoji} ${GameStrings.mercName(context, m.id)}",
+                                    style      = MaterialTheme.typography.bodySmall,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color      = if (downed) MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.4f)
+                                                 else MaterialTheme.colorScheme.onSecondaryContainer,
+                                )
+                                Spacer(Modifier.height(2.dp))
+                                Text(
+                                    text       = "${stringResource(R.string.label_hp)}: $mercHpNow / $mercMaxHp",
+                                    style      = MaterialTheme.typography.bodySmall,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color      = mercHpColor,
+                                )
+                                Spacer(Modifier.height(4.dp))
+                                LinearProgressIndicator(
+                                    gapSize = 0.dp,
+                                    drawStopIndicator = {},
+                                    progress  = { if (mercMaxHp > 0) mercHpNow / mercMaxHp.toFloat() else 0f },
+                                    modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                                    color     = mercHpColor,
+                                    trackColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.15f),
+                                )
+                                Spacer(Modifier.height(4.dp))
+                                Text(
+                                    text  = "${m.attackLevel + m.attackBonus} ${stringResource(R.string.combat_atk)}  " +
+                                        "${m.strengthLevel + m.strengthBonus} ${stringResource(R.string.combat_str)}  " +
+                                        "${m.defenseLevel} ${stringResource(R.string.combat_def)}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                )
+                            }
+                            val alliesDownNow = frames.getOrNull(currentFrameIdx - 1)?.alliesDown ?: 0
+                            if (alliesDownNow > 0) {
+                                Spacer(Modifier.height(4.dp))
+                                Text(
+                                    text  = stringResource(R.string.raid_allies_down, alliesDownNow),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.error,
+                                )
+                            }
+                        }
+
                         // ── Equipped food ──────────────────────────────────
                         // The frame-0 snapshot keeps the list stable if gear food is
                         // changed mid-run (issue #1411); live gear is the fallback for
@@ -598,6 +682,12 @@ internal fun CombatSessionBanner(
                                             text  = stringResource(R.string.combat_log_kill, entry.enemyName),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.primary,
+                                        )
+                                    } else if (entry.ally) {
+                                        Text(
+                                            text  = stringResource(R.string.combat_log_ally_hit, entry.enemyName, entry.damage),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color(0xFF64B5F6),
                                         )
                                     } else if (entry.isPlayer) {
                                         val color = if (entry.damage > 0) Color(0xFF4CAF50)

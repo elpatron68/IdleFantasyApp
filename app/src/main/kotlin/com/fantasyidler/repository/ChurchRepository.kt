@@ -22,7 +22,12 @@ class ChurchRepository @Inject constructor(
     private val playerRepo: PlayerRepository,
     private val townRepoProvider: Provider<TownRepository>,
     private val buffNotifScheduler: BuffNotificationScheduler,
+    private val boostRepo: BoostRepository,
 ) {
+    /** Bone cost after the gnome Trickster's Favor prestige discount. */
+    fun discountedBoneCost(blessing: BlessingData, flags: PlayerFlags): Int =
+        discountedBoneCost(blessing, boostRepo.blessingCostMultiplier(flags))
+
     companion object {
         val ALL_BLESSINGS: List<BlessingData> = listOf(
             BlessingData("blessed_focus",      1,  BlessingType.XP,      1.05f),
@@ -65,20 +70,34 @@ class ChurchRepository @Inject constructor(
             return BY_KEY[flags.activeBlessingKey]
         }
 
-        fun xpMultiplier(flags: PlayerFlags): Float {
+        fun xpMultiplier(flags: PlayerFlags, prayerCapeMult: Float): Float {
             val b = activeBlessing(flags) ?: return 1f
-            return if (b.type == BlessingType.XP) b.magnitude else 1f
+            return if (b.type == BlessingType.XP) effectiveMagnitude(b, prayerCapeMult) else 1f
         }
 
-        fun defBonus(flags: PlayerFlags): Int {
+        fun defBonus(flags: PlayerFlags, prayerCapeMult: Float): Int {
             val b = activeBlessing(flags) ?: return 0
-            return if (b.type == BlessingType.DEFENSE) b.magnitude.toInt() else 0
+            return if (b.type == BlessingType.DEFENSE) effectiveMagnitude(b, prayerCapeMult).toInt() else 0
         }
 
-        fun coinMultiplier(flags: PlayerFlags): Float {
+        fun coinMultiplier(flags: PlayerFlags, prayerCapeMult: Float): Float {
             val b = activeBlessing(flags) ?: return 1f
-            return if (b.type == BlessingType.COINS) 1f + b.magnitude else 1f
+            return if (b.type == BlessingType.COINS) 1f + effectiveMagnitude(b, prayerCapeMult) else 1f
         }
+
+        /**
+         * Blessing strength with the prayer cape's multiplier folded in (issue #1491). The
+         * cape scales the blessing's BONUS: for XP the magnitude is a full multiplier (1.5x),
+         * so only the part above 1 grows; DEFENSE/COINS magnitudes are already pure bonuses.
+         */
+        fun effectiveMagnitude(b: BlessingData, prayerCapeMult: Float): Float = when (b.type) {
+            BlessingType.XP -> 1f + (b.magnitude - 1f) * prayerCapeMult
+            BlessingType.DEFENSE, BlessingType.COINS -> b.magnitude * prayerCapeMult
+        }
+
+        /** Pure variant for UI display; [costMult] from BoostRepository.blessingCostMultiplier. */
+        fun discountedBoneCost(blessing: BlessingData, costMult: Double): Int =
+            (boneCostFor(blessing) * costMult + 0.5).toInt().coerceAtLeast(1)
 
         fun boneCostFor(blessing: BlessingData): Int = when {
             blessing.prayerLevelRequired >= 99 -> 300
@@ -133,7 +152,7 @@ class ChurchRepository @Inject constructor(
         if (prayerLevel < blessing.prayerLevelRequired) {
             return@withLock BlessingActivateResult.LevelTooLow(blessing.prayerLevelRequired)
         }
-        val cost      = boneCostFor(blessing)
+        val cost      = discountedBoneCost(blessing, flags)
         val inventory: Map<String, Int> = kotlinx.serialization.json.Json.decodeFromString(player.inventory)
         if (totalBoneXp(inventory) < cost * BASE_BONE_XP) return@withLock BlessingActivateResult.NotEnoughBones(cost)
 
@@ -153,7 +172,8 @@ class ChurchRepository @Inject constructor(
         playerRepo.consumeItemsUnlocked(toConsume)
 
         val now = System.currentTimeMillis()
-        val durationMs = townRepoProvider.get().blessingDurationMs(flags)
+        val durationMs = (townRepoProvider.get().blessingDurationMs(flags) *
+            boostRepo.blessingDurationMultiplier(flags)).toLong()
         val newExpiresAt = if (active != null && active.key == key) {
             flags.activeBlessingExpiresAt + durationMs
         } else {

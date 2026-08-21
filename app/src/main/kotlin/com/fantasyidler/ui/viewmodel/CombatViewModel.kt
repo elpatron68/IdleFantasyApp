@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.json.BossData
+import com.fantasyidler.data.json.MercenaryData
+import com.fantasyidler.repository.MercenaryRepository
+import com.fantasyidler.repository.MercHireResult
 import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EnemyData
 import com.fantasyidler.data.json.EquipmentData
@@ -20,7 +23,9 @@ import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.ChurchRepository
+import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
@@ -87,6 +92,7 @@ data class CombatUiState(
     val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
     val skillPrestige: Map<String, Int> = emptyMap(),
+    val hpPrestigeBonus: Int = 0,
     val ironman: Boolean = false,
     val showPrestigeNotifications: Boolean = true,
     val towerHpBonus: Int = 0,
@@ -110,7 +116,15 @@ data class CombatUiState(
     /** True once the Grand Monument's Eternal Flame is lit (unlocks monument-gated bosses). */
     val monumentComplete: Boolean = false,
     val isQueueFull: Boolean = false,
+    /** Today's hireable raid mercenaries (rotates at the daily reset). */
+    val mercPool: List<MercenaryData> = emptyList(),
+    /** Mercenaries currently under contract (max 3). */
+    val hiredMercs: List<MercContract> = emptyList(),
+    val dailyResetHour: Int = 6,
 )
+
+/** A hired mercenary resolved for display: roster data plus contract expiry. */
+data class MercContract(val merc: MercenaryData, val expiresAt: Long)
 
 // ---------------------------------------------------------------------------
 // ViewModel
@@ -118,6 +132,7 @@ data class CombatUiState(
 
 @HiltViewModel
 class CombatViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
@@ -128,6 +143,7 @@ class CombatViewModel @Inject constructor(
     private val seasonalEventRepo: SeasonalEventRepository,
     private val queuedSessionStarter: QueuedSessionStarter,
     private val townRepo: TownRepository,
+    private val mercRepo: MercenaryRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -244,6 +260,7 @@ class CombatViewModel @Inject constructor(
                 unlockedDungeons        = flags.unlockedDungeons,
                 selectedArrowKey        = if (extra.selectedArrowKey == null) flags.equippedArrows else extra.selectedArrowKey,
                 skillPrestige           = flags.skillPrestige,
+                hpPrestigeBonus         = boostRepo.combatStatBonus(Skills.HITPOINTS, flags),
                 ironman                 = flags.ironman,
                 showPrestigeNotifications = flags.showPrestigeNotifications,
                 towerHpBonus            = flags.towerHpBonus,
@@ -259,6 +276,9 @@ class CombatViewModel @Inject constructor(
                 bossFullCoinKillsLeft   = playerRepo.bossFullCoinKillsLeft(flags, extra.selectedBoss?.id ?: ""),
                 monumentComplete        = flags.monumentTier >= 5,
                 isQueueFull             = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
+                mercPool                = mercRepo.dailyPool(flags),
+                hiredMercs              = mercRepo.activeContracts(flags).map { (m, h) -> MercContract(m, h.expiresAt) },
+                dailyResetHour          = flags.dailyResetHour,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
@@ -274,9 +294,32 @@ class CombatViewModel @Inject constructor(
     fun bossList(monumentComplete: Boolean): List<BossData> {
         val activeEventId = seasonalEventRepo.activeEvent()?.id
         return gameData.bosses.values
+            .filter { !it.raid }
             .filter { it.eventKey == null || it.eventKey == activeEventId }
             .filter { !it.requiresMonument || monumentComplete }
             .sortedBy { it.combatLevelRequired }
+    }
+
+    /** Raid-tier bosses: unbeatable solo, fought with a hired mercenary party. */
+    fun raidBossList(): List<BossData> =
+        gameData.bosses.values.filter { it.raid }.sortedBy { it.combatLevelRequired }
+
+    fun hireMercenary(mercId: String) {
+        viewModelScope.launch {
+            val name = GameStrings.mercName(context.withAppLocale(), mercId)
+            val msgRes = when (mercRepo.hire(mercId)) {
+                MercHireResult.SUCCESS          -> R.string.merc_hired
+                MercHireResult.PARTY_FULL       -> R.string.merc_party_full
+                MercHireResult.ALREADY_HIRED    -> R.string.merc_already_hired
+                MercHireResult.NOT_ENOUGH_COINS -> R.string.merc_not_enough_coins
+                MercHireResult.NOT_IN_POOL      -> R.string.merc_not_available
+            }
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(msgRes, name)) }
+        }
+    }
+
+    fun dismissMercenary(mercId: String) {
+        viewModelScope.launch { mercRepo.dismiss(mercId) }
     }
 
     val enemyMap: Map<String, EnemyData> by lazy { gameData.enemies }
@@ -400,6 +443,7 @@ class CombatViewModel @Inject constructor(
                     dungeonKey    = dungeonKey,
                     weaponSlot    = queuedWeaponSlot,
                     equipped      = equipped,
+                    inventory     = inventory,
                     levels        = queuedLevels,
                     flags         = dungeonFlags,
                     selectedSpell = queuedSpell,
@@ -411,7 +455,7 @@ class CombatViewModel @Inject constructor(
                         skillName           = "combat",
                         activityKey         = dungeonKey,
                         skillDisplayName    = dungeonName,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, dungeonFlags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(dungeonFlags)),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(dungeonFlags), townRepo.playerSessionDurationMultiplier(dungeonFlags)),
                         estimatedXpGain     = previewXp,
                         equippedSnapshot    = player.equipped,
                         arrowsKey           = _extra.value.selectedArrowKey ?: dungeonFlags.equippedArrows,
@@ -519,7 +563,7 @@ class CombatViewModel @Inject constructor(
                 ))
                 val equippedFoodKeys   = flags.equippedFood.keys
                 val availableFood      = inventory.filterKeys { it in equippedFoodKeys }
-                val foodHealValues     = gameData.foodHealValues
+                val foodHealValues     = boostRepo.boostedFoodHeal(flags, gameData.foodHealValues)
 
                 // Arrows: preferred type drains first, then the simulator falls back to other owned tiers
                 val orderedArrowKeys = if (preferredArrow != null)
@@ -537,27 +581,26 @@ class CombatViewModel @Inject constructor(
                 val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    gameData.potionEffects[potionKey] ?: emptyMap()
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
                 } else emptyMap()
 
-                val prestigeMap = flags.skillPrestige
                 val result = CombatSimulator.simulateDungeon(
                     dungeon             = dungeon,
                     enemies             = gameData.enemies,
-                    playerAttack        = (levels[Skills.ATTACK]    ?: 1) + (prestigeMap[Skills.ATTACK]    ?: 0) * 5,
-                    playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + (prestigeMap[Skills.STRENGTH]  ?: 0) * 5,
-                    playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + (prestigeMap[Skills.DEFENSE] ?: 0) * 5,
-                    blessingDefBonus    = ChurchRepository.defBonus(flags),
-                    playerHp            = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMap[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus,
+                    playerAttack        = (levels[Skills.ATTACK]    ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags),
+                    playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags),
+                    playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + boostRepo.combatStatBonus(Skills.DEFENSE, flags),
+                    blessingDefBonus    = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
+                    playerHp            = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags) + flags.towerHpBonus,
                     weaponAttackBonus   = totalAttackBonus,
                     weaponStrengthBonus = totalStrengthBonus,
                     combatStyle         = combatStyle,
-                    playerRanged        = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5,
-                    playerMagic         = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5,
+                    playerRanged        = (levels[Skills.RANGED]    ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags),
+                    playerMagic         = (levels[Skills.MAGIC]     ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags),
                     rangedGearStrengthBonus = totalRangedStrBonus,
                     spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
                     agilityLevel        = levels[Skills.AGILITY]   ?: 1,
-                    agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
+                    floorReductionMin     = boostRepo.sessionFloorReductionMin(flags),
                     petBoostPct         = petBoostFor(player.pets, flags.ironman),
                     equippedFood        = availableFood,
                     foodHealValues      = foodHealValues,
@@ -570,6 +613,8 @@ class CombatViewModel @Inject constructor(
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
                     chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
+                    doubleHitChance     = boostRepo.doubleHitChance(flags),
+                    secondChance        = boostRepo.secondChanceActive(flags),
                 )
 
                 val framesJson = json.encodeToString(
@@ -638,6 +683,7 @@ class CombatViewModel @Inject constructor(
                     bossKey       = bossKey,
                     weaponSlot    = bossWeaponSlot,
                     equipped      = queuedEquipped,
+                    inventory     = queuedInventory,
                     levels        = bossQueuedLevels,
                     flags         = queuedFlags,
                     selectedSpell = bossQueuedSpell,
@@ -689,7 +735,7 @@ class CombatViewModel @Inject constructor(
                 val potionKey     = _extra.value.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    gameData.potionEffects[potionKey] ?: emptyMap()
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
                 } else emptyMap()
 
                 val combatStyle = when (bossWeapon?.combatStyle) {
@@ -745,31 +791,33 @@ class CombatViewModel @Inject constructor(
                 val equippedFoodKeys  = flags.equippedFood.keys
                 val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
 
-                val prestigeMapBoss = flags.skillPrestige
                 val bossFrames = CombatSimulator.simulateBoss(
                     boss               = boss,
                     bossKey            = bossKey,
-                    playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + (prestigeMapBoss[Skills.ATTACK]    ?: 0) * 5,
-                    playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0) + (prestigeMapBoss[Skills.STRENGTH]  ?: 0) * 5,
-                    playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0) + (prestigeMapBoss[Skills.DEFENSE] ?: 0) * 5,
-                    playerHp           = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMapBoss[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus,
+                    playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + boostRepo.combatStatBonus(Skills.ATTACK, flags),
+                    playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0) + boostRepo.combatStatBonus(Skills.STRENGTH, flags),
+                    playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0) + boostRepo.combatStatBonus(Skills.DEFENSE, flags),
+                    playerHp           = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags) + flags.towerHpBonus,
                     weaponAttackBonus  = totalAtkBonus,
                     weaponStrBonus     = totalStrBonus,
                     combatStyle        = combatStyle,
-                    playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + (prestigeMapBoss[Skills.RANGED] ?: 0) * 5,
-                    playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + (prestigeMapBoss[Skills.MAGIC] ?: 0) * 5,
+                    playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + boostRepo.combatStatBonus(Skills.RANGED, flags),
+                    playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + boostRepo.combatStatBonus(Skills.MAGIC, flags),
                     rangedGearStrengthBonus = bossRangedStrBonus,
                     spellMaxHit        = (selectedSpell?.maxHit ?: 0) + bossMagicDmgBonus,
                     availableArrows    = availableArrows,
                     arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
                     equippedFood       = availableFood,
-                    foodHealValues     = gameData.foodHealValues,
-                    blessingDefBonus   = ChurchRepository.defBonus(flags),
+                    foodHealValues     = boostRepo.boostedFoodHeal(flags, gameData.foodHealValues),
+                    blessingDefBonus   = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
                     runeKey            = bossRuneKey,
                     runeCostPerAttack  = bossRuneCost,
                     availableRunes     = if (bossRuneKey != null) inventory[bossRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct    = flags.foodEatThresholdPct,
+                    doubleHitChance     = boostRepo.doubleHitChance(flags),
+                    secondChance        = boostRepo.secondChanceActive(flags),
+                    mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
                 )
 
                 val framesJson = json.encodeToString(
@@ -777,7 +825,7 @@ class CombatViewModel @Inject constructor(
                     bossFrames,
                 )
                 val agilityLevel   = levels[Skills.AGILITY] ?: 1
-                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60L
+                val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
                 sessionRepo.startSession(
                     skillName        = "boss",
@@ -917,7 +965,7 @@ class CombatViewModel @Inject constructor(
             Skills.ATTACK, Skills.STRENGTH, Skills.DEFENSE,
             Skills.HITPOINTS, Skills.RANGED, Skills.MAGIC, Skills.AGILITY,
         ).joinToString(",") { "${it}=${levels[it] ?: 1}" }
-        return "$combatLevels|${player.equipped}|${flags.equippedFood}|$foodQtys|${flags.skillPrestige}|${flags.activeWeaponSlot}|${flags.activeSpell}|${flags.activeBlessingKey}|${flags.activeBlessingExpiresAt}"
+        return "$combatLevels|${player.equipped}|${flags.equippedFood}|$foodQtys|${flags.prestigeNodes},${flags.characterRace}|${flags.activeWeaponSlot}|${flags.activeSpell}|${flags.activeBlessingKey}|${flags.activeBlessingExpiresAt}"
     }
 
     private fun simulateAllDungeons(player: Player): Map<String, CombatSimulator.SurvivalRating> {
@@ -933,7 +981,6 @@ class CombatViewModel @Inject constructor(
         val combatStyle  = when (weapon?.combatStyle) {
             "ranged" -> "ranged"; "magic" -> "magic"; "strength" -> "strength"; else -> "attack"
         }
-        val prestigeMap  = flags.skillPrestige
 
         val armorAtk = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
             val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
@@ -962,12 +1009,12 @@ class CombatViewModel @Inject constructor(
 
         val foodQtys = flags.equippedFood.keys.associateWith { inventory[it] ?: 0 }
 
-        val atk     = (levels[Skills.ATTACK]    ?: 1) + (prestigeMap[Skills.ATTACK]    ?: 0) * 5
-        val str     = (levels[Skills.STRENGTH]  ?: 1) + (prestigeMap[Skills.STRENGTH]  ?: 0) * 5
-        val def     = (levels[Skills.DEFENSE]   ?: 1) + totalDef + (prestigeMap[Skills.DEFENSE] ?: 0) * 5
-        val hp      = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMap[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus
-        val rng     = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5
-        val mgc     = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5
+        val atk     = (levels[Skills.ATTACK]    ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags)
+        val str     = (levels[Skills.STRENGTH]  ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags)
+        val def     = (levels[Skills.DEFENSE]   ?: 1) + totalDef + boostRepo.combatStatBonus(Skills.DEFENSE, flags)
+        val hp      = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags) + flags.towerHpBonus
+        val rng     = (levels[Skills.RANGED]    ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags)
+        val mgc     = (levels[Skills.MAGIC]     ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags)
         val agility = levels[Skills.AGILITY]    ?: 1
 
         return gameData.dungeons.mapValues { (_, dungeon) ->
@@ -979,7 +1026,7 @@ class CombatViewModel @Inject constructor(
                     playerAttack        = atk,
                     playerStrength      = str,
                     playerDefence       = def,
-                    blessingDefBonus    = ChurchRepository.defBonus(flags),
+                    blessingDefBonus    = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
                     playerHp            = hp,
                     weaponAttackBonus   = totalAtk,
                     weaponStrengthBonus = totalStr,
@@ -989,7 +1036,7 @@ class CombatViewModel @Inject constructor(
                     rangedGearStrengthBonus = if (combatStyle == "ranged") totalStr else 0,
                     spellMaxHit         = spellMaxHit,
                     agilityLevel        = agility,
-                    agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
+                    floorReductionMin     = boostRepo.sessionFloorReductionMin(flags),
                     equippedFood        = foodQtys,
                     foodHealValues      = gameData.foodHealValues,
                     availableArrows     = availableArrows,
@@ -998,6 +1045,8 @@ class CombatViewModel @Inject constructor(
                     eatThresholdPct     = flags.foodEatThresholdPct,
                     chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
                     random              = Random.Default,
+                    doubleHitChance     = boostRepo.doubleHitChance(flags),
+                    secondChance        = boostRepo.secondChanceActive(flags),
                 )
                 if (result.frames.none { it.died }) survived++
             }
@@ -1053,6 +1102,7 @@ class CombatViewModel @Inject constructor(
         dungeonKey: String,
         weaponSlot: String,
         equipped: Map<String, String?>,
+        inventory: Map<String, Int>,
         levels: Map<String, Int>,
         flags: PlayerFlags,
         selectedSpell: SpellData?,
@@ -1091,27 +1141,26 @@ class CombatViewModel @Inject constructor(
         else 0
 
         val potionBonuses = potionKey?.let { gameData.potionEffects[it] } ?: emptyMap()
-        val prestigeMap   = flags.skillPrestige
         val staffCoversRune  = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
         val simulatorRuneKey = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
 
         val result = CombatSimulator.simulateDungeon(
             dungeon             = dungeon,
             enemies             = gameData.enemies,
-            playerAttack        = (levels[Skills.ATTACK]    ?: 1) + (prestigeMap[Skills.ATTACK]    ?: 0) * 5,
-            playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + (prestigeMap[Skills.STRENGTH]  ?: 0) * 5,
-            playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + (prestigeMap[Skills.DEFENSE] ?: 0) * 5,
-            blessingDefBonus    = ChurchRepository.defBonus(flags),
-            playerHp            = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMap[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus,
+            playerAttack        = (levels[Skills.ATTACK]    ?: 1) + boostRepo.combatStatBonus(Skills.ATTACK, flags),
+            playerStrength      = (levels[Skills.STRENGTH]  ?: 1) + boostRepo.combatStatBonus(Skills.STRENGTH, flags),
+            playerDefence       = (levels[Skills.DEFENSE]   ?: 1) + totalDefenseBonus + boostRepo.combatStatBonus(Skills.DEFENSE, flags),
+            blessingDefBonus    = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
+            playerHp            = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags) + flags.towerHpBonus,
             weaponAttackBonus   = totalAttackBonus,
             weaponStrengthBonus = totalStrengthBonus,
             combatStyle         = combatStyle,
-            playerRanged        = (levels[Skills.RANGED]    ?: 1) + (prestigeMap[Skills.RANGED]    ?: 0) * 5,
-            playerMagic         = (levels[Skills.MAGIC]     ?: 1) + (prestigeMap[Skills.MAGIC]     ?: 0) * 5,
+            playerRanged        = (levels[Skills.RANGED]    ?: 1) + boostRepo.combatStatBonus(Skills.RANGED, flags),
+            playerMagic         = (levels[Skills.MAGIC]     ?: 1) + boostRepo.combatStatBonus(Skills.MAGIC, flags),
             rangedGearStrengthBonus = totalRangedStrBonus,
             spellMaxHit         = (selectedSpell?.maxHit ?: 0) + totalMagicDmgBonus,
             agilityLevel        = levels[Skills.AGILITY]   ?: 1,
-            agilityPrestige     = prestigeMap[Skills.AGILITY] ?: 0,
+            floorReductionMin     = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct         = petBoostFor(petsJson, flags.ironman),
             equippedFood        = flags.equippedFood.keys.associateWith { Int.MAX_VALUE },
             foodHealValues      = gameData.foodHealValues,
@@ -1124,6 +1173,8 @@ class CombatViewModel @Inject constructor(
             attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
             eatThresholdPct     = flags.foodEatThresholdPct,
             chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
+            doubleHitChance     = boostRepo.doubleHitChance(flags),
+            secondChance        = boostRepo.secondChanceActive(flags),
         )
         return result.frames.sumOf { it.xpGain.toLong() }
     }
@@ -1132,6 +1183,7 @@ class CombatViewModel @Inject constructor(
         bossKey: String,
         weaponSlot: String,
         equipped: Map<String, String?>,
+        inventory: Map<String, Int>,
         levels: Map<String, Int>,
         flags: PlayerFlags,
         selectedSpell: SpellData?,
@@ -1171,34 +1223,36 @@ class CombatViewModel @Inject constructor(
             EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
         else 0
 
-        val prestigeMapBoss = flags.skillPrestige
         val staffCoversRune  = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
         val bossRuneKey      = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
 
         val bossFrames = CombatSimulator.simulateBoss(
             boss               = boss,
             bossKey            = bossKey,
-            playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + (prestigeMapBoss[Skills.ATTACK]    ?: 0) * 5,
-            playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0) + (prestigeMapBoss[Skills.STRENGTH]  ?: 0) * 5,
-            playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0) + (prestigeMapBoss[Skills.DEFENSE] ?: 0) * 5,
-            playerHp           = (levels[Skills.HITPOINTS] ?: 1) + (prestigeMapBoss[Skills.HITPOINTS] ?: 0) * 5 + flags.towerHpBonus,
+            playerAttack       = (levels[Skills.ATTACK]    ?: 1) + (potionBonuses["attack"]   ?: 0) + boostRepo.combatStatBonus(Skills.ATTACK, flags),
+            playerStrength     = (levels[Skills.STRENGTH]  ?: 1) + (potionBonuses["strength"] ?: 0) + boostRepo.combatStatBonus(Skills.STRENGTH, flags),
+            playerDefence      = (levels[Skills.DEFENSE]   ?: 1) + totalDefBonus + (potionBonuses["defense"] ?: 0) + boostRepo.combatStatBonus(Skills.DEFENSE, flags),
+            playerHp           = (levels[Skills.HITPOINTS] ?: 1) + boostRepo.combatStatBonus(Skills.HITPOINTS, flags) + flags.towerHpBonus,
             weaponAttackBonus  = totalAtkBonus,
             weaponStrBonus     = totalStrBonus,
             combatStyle        = combatStyle,
-            playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + (prestigeMapBoss[Skills.RANGED] ?: 0) * 5,
-            playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + (prestigeMapBoss[Skills.MAGIC] ?: 0) * 5,
+            playerRanged       = (levels[Skills.RANGED] ?: 1) + (potionBonuses["ranged"] ?: 0) + boostRepo.combatStatBonus(Skills.RANGED, flags),
+            playerMagic        = magicLevel + (potionBonuses["magic"] ?: 0) + boostRepo.combatStatBonus(Skills.MAGIC, flags),
             rangedGearStrengthBonus = bossRangedStrBonus,
             spellMaxHit        = (selectedSpell?.maxHit ?: 0) + bossMagicDmgBonus,
             availableArrows    = ARROW_TIERS.associateWith { Int.MAX_VALUE },
             arrowStrengthBonuses = ARROW_STRENGTH_BONUS,
             equippedFood       = flags.equippedFood.keys.associateWith { Int.MAX_VALUE },
             foodHealValues     = gameData.foodHealValues,
-            blessingDefBonus   = ChurchRepository.defBonus(flags),
+            blessingDefBonus   = ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
             runeKey            = bossRuneKey,
             runeCostPerAttack  = selectedSpell?.runeCost ?: 1,
             availableRunes     = Int.MAX_VALUE,
             attackSpeedSec     = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
             eatThresholdPct    = flags.foodEatThresholdPct,
+            doubleHitChance     = boostRepo.doubleHitChance(flags),
+            secondChance        = boostRepo.secondChanceActive(flags),
+            mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
         )
         return bossFrames.sumOf { it.xpGain.toLong() }
     }

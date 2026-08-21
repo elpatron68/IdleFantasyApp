@@ -68,9 +68,9 @@
     <string name="quest_firemaking_guild_4_name">Maple Blaze</string> <!-- untranslated -->
     <string name="quest_firemaking_guild_5_name">Yew Inferno</string> <!-- untranslated -->
     <string name="quest_firemaking_guild_6_name">Magic Pyre</string> <!-- untranslated -->
-    <string name="quest_firemaking_guild_7_name">Redwood Bonfire</string> <!-- untranslated -->
+    <string name="quest_firemaking_guild_7_name">Mammutbaum Lagerfeuer</string>
     <string name="quest_firemaking_guild_8_name">Antike Flamme</string>
-    <string name="quest_firemaking_guild_9_name">Redwood Legacy</string> <!-- untranslated -->
+    <string name="quest_firemaking_guild_9_name">Vermächtnis der Mammutbäume</string>
     <string name="quest_fishing_guild_1_name">Shrimp Haul</string> <!-- untranslated -->
     <string name="quest_fishing_guild_10_name">Master Fisher</string> <!-- untranslated -->
     <string name="quest_fishing_guild_2_name">Trout Run</string> <!-- untranslated -->
@@ -198,9 +198,9 @@
     <string name="quest_woodcutting_guild_4_name">Maple Order</string> <!-- untranslated -->
     <string name="quest_woodcutting_guild_5_name">Yew Haul</string> <!-- untranslated -->
     <string name="quest_woodcutting_guild_6_name">Magic Timber</string> <!-- untranslated -->
-    <string name="quest_woodcutting_guild_7_name">Redwood Stockpile</string> <!-- untranslated -->
+    <string name="quest_woodcutting_guild_7_name">Mammutbaum Vorrat</string>
     <string name="quest_woodcutting_guild_8_name">Ancient Timber</string> <!-- untranslated -->
-    <string name="quest_woodcutting_guild_9_name">Redwood Legacy</string> <!-- untranslated -->
+    <string name="quest_woodcutting_guild_9_name">Vermächtnis der Mammutbäume</string>
 
     <!-- Guild daily quest names -->
     <string name="quest_agility_daily_1a_name">Morgenrunde</string>
@@ -274,8 +274,8 @@
     <string name="quest_firemaking_daily_4c_name">Maple Surplus</string> <!-- untranslated -->
     <string name="quest_firemaking_daily_4d_name">Yew Reserve</string> <!-- untranslated -->
     <string name="quest_firemaking_daily_4e_name">Magic Surge</string> <!-- untranslated -->
-    <string name="quest_firemaking_daily_7a_name">Redwood Bonfire</string> <!-- untranslated -->
-    <string name="quest_firemaking_daily_7b_name">Redwood Reserve</string> <!-- untranslated -->
+    <string name="quest_firemaking_daily_7a_name">Mammutbaum Lagerfeuer</string>
+    <string name="quest_firemaking_daily_7b_name">Mammutbaum Vorrat</string>
     <string name="quest_firemaking_daily_7c_name">Ancient Flame</string> <!-- untranslated -->
     <string name="quest_firemaking_daily_7d_name">Eternal Blaze</string> <!-- untranslated -->
     <string name="quest_firemaking_daily_7e_name">Grand Pyre</string> <!-- untranslated -->
@@ -419,7 +419,7 @@
     <string name="quest_woodcutting_daily_4d_name">Maple Surplus</string> <!-- untranslated -->
     <string name="quest_woodcutting_daily_4e_name">Yew Reserve</string> <!-- untranslated -->
     <string name="quest_woodcutting_daily_7a_name">Magic Haul</string> <!-- untranslated -->
-    <string name="quest_woodcutting_daily_7b_name">Redwood Run</string> <!-- untranslated -->
+    <string name="quest_woodcutting_daily_7b_name">Mammutbaum Lauf</string>
     <string name="quest_woodcutting_daily_7c_name">Ancient Timber</string> <!-- untranslated -->
     <string name="quest_woodcutting_daily_7d_name">Redwood Stockpile</string> <!-- untranslated -->
     <string name="quest_woodcutting_daily_7e_name">Master Timber</string> <!-- untranslated -->

@@ -103,6 +103,8 @@ data class PlayerFlags(
     @SerialName("hired_worker") val hiredWorker: HiredWorker? = null,
     /** Second worker slot (Apprentice / Journeyman / Master), or null if none. */
     @SerialName("hired_worker_2") val hiredWorker2: HiredWorker? = null,
+    /** Raid mercenaries under contract (up to 3); expired entries are pruned lazily. */
+    @SerialName("hired_mercenaries") val hiredMercenaries: List<HiredMercenary> = emptyList(),
     /** Persists the "hide completed quests" toggle across sessions. */
     @SerialName("hide_completed_quests") val hideCompletedQuests: Boolean = false,
     /** Last-visited Carnival tab index (0=Idle, 1=Active, 2=Prize Shop). */
@@ -177,8 +179,26 @@ data class PlayerFlags(
      *  from their oldest quest completion (sessions are deleted on collect, so quest timestamps
      *  are the oldest surviving record). */
     @SerialName("character_created_at") val characterCreatedAt: Long = 0L,
-    /** Prestige level per skill: skill key → 0–3. */
+    /** Prestige count per skill (uncapped since v1.14.0; 0–3 under the legacy system). */
     @SerialName("skill_prestige") val skillPrestige: Map<String, Int> = emptyMap(),
+    /** Lifetime prestige points earned per skill. Unspent = earned minus the cost of [prestigeNodes]. */
+    @SerialName("prestige_points_earned") val prestigePointsEarned: Map<String, Int> = emptyMap(),
+    /** Purchased prestige tree node ids per skill. */
+    @SerialName("prestige_nodes") val prestigeNodes: Map<String, List<String>> = emptyMap(),
+    /** Epoch ms of the last prestige-point respec per skill (24h cooldown). */
+    @SerialName("prestige_last_respec_at") val prestigeLastRespecAt: Map<String, Long> = emptyMap(),
+    /** Epoch ms of the last race change (record-keeping; changes cost a token or coins). */
+    @SerialName("race_last_changed_at") val raceLastChangedAt: Long = 0L,
+    /** Whether the one-time legacy prestige-to-points migration has run for this save. */
+    @SerialName("prestige_points_migrated") val prestigePointsMigrated: Boolean = false,
+    /** Per-skill 2x XP boost expiry (epoch ms), granted for 48h on each prestige of that skill.
+     *  Earned rather than bought, so it applies to ironmen; shares the 2x slot with the
+     *  purchased boost (they never stack to 4x). */
+    @SerialName("prestige_xp_boosts") val prestigeXpBoosts: Map<String, Long> = emptyMap(),
+    /** Last crop harvested per farming patch (patchNumber.toString() → crop id), for Crop Rotation nodes. */
+    @SerialName("last_crop_by_patch") val lastCropByPatch: Map<String, String> = emptyMap(),
+    /** Ironman race lock: set at creation for new ironmen; legacy ironmen get one free change, then this locks. */
+    @SerialName("ironman_race_locked") val ironmanRaceLocked: Boolean = false,
     /** Ash fertilizer per farming patch: patchNumber.toString() → ash item key. */
     @SerialName("farming_fertilizer") val farmingFertilizer: Map<String, String> = emptyMap(),
     /** Last-used potion key for combat sessions; persisted across app restarts. */
@@ -264,6 +284,43 @@ data class PlayerFlags(
      * inert, shop buying is blocked, and workers cannot be hired. Never written after creation.
      */
     @SerialName("ironman") val ironman: Boolean = false,
+    /** Player housing: rooms, placed furnishings, and stored (built but unplaced) furnishings. */
+    @SerialName("house") val house: HouseData? = null,
+)
+
+/** The player's house: a set of room rectangles on one shared cell grid. */
+@Serializable
+data class HouseData(
+    @SerialName("rooms") val rooms: List<HouseRoom> = emptyList(),
+    @SerialName("placements") val placements: List<HousePlacement> = emptyList(),
+    /** Furnishings built (paid for) but not currently placed: tile key -> count. */
+    @SerialName("storage") val storage: Map<String, Int> = emptyMap(),
+    /** Outdoor ground texture key (see house_tiles.json "grounds"). */
+    @SerialName("ground") val ground: String = "ground_1",
+    /**
+     * Units per room cell used by placement coordinates. 1 = legacy full-cell saves,
+     * 2 = half-cell placement. Migrated up on load; never written back down.
+     */
+    @SerialName("coord_scale") val coordScale: Int = 1,
+)
+
+/** One rectangular room, in house-grid cells. Rooms never overlap and attach edge-to-edge. */
+@Serializable
+data class HouseRoom(
+    @SerialName("x") val x: Int,
+    @SerialName("y") val y: Int,
+    @SerialName("w") val w: Int,
+    @SerialName("h") val h: Int,
+    /** Floor style key: "dark" (default) or "brick". */
+    @SerialName("floor") val floor: String = "dark",
+)
+
+/** A placed furnishing; (x, y) is the top-left cell of its footprint. */
+@Serializable
+data class HousePlacement(
+    @SerialName("item") val item: String,
+    @SerialName("x") val x: Int,
+    @SerialName("y") val y: Int,
 )
 
 /** A permanent snapshot of a completed Seasonal Event, shown in the Profile Banners tab. */
@@ -395,6 +452,13 @@ data class HiredWorker(
     @SerialName("tier") val tier: WorkerTier,
     @SerialName("daily_name") val dailyName: String,
     @SerialName("session_queue") val sessionQueue: List<QueuedAction> = emptyList(),
+)
+
+/** A raid mercenary under contract until [expiresAt] (the next daily reset at hire time). */
+@Serializable
+data class HiredMercenary(
+    @SerialName("merc_id") val mercId: String,
+    @SerialName("expires_at") val expiresAt: Long,
 )
 
 @Serializable

@@ -43,6 +43,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.activity.compose.BackHandler
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -129,6 +131,7 @@ private val NON_COMBAT_PRESTIGE_SKILLS = Skills.GATHERING + Skills.CRAFTING_SKIL
 fun SkillsScreen(
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBoneAltar: () -> Unit = {},
+    onNavigateToPrestige: (String) -> Unit = {},
     viewModel: SkillsViewModel       = hiltViewModel(),
     craftingViewModel: CraftingViewModel = hiltViewModel(),
     expeditionsViewModel: ExpeditionsViewModel = hiltViewModel(),
@@ -238,6 +241,7 @@ fun SkillsScreen(
                         listState             = skillsListState,
                         onNavigateToSlayer    = onNavigateToSlayer,
                         onNavigateToBoneAltar = onNavigateToBoneAltar,
+                        onNavigateToPrestige  = onNavigateToPrestige,
                     )
                 }
             }
@@ -299,7 +303,19 @@ fun SkillActivitySheet(
             },
             sheetState = sheetState,
             dragHandle = { BottomSheetDefaults.DragHandle() },
+            properties = ModalBottomSheetProperties(shouldDismissOnBackPress = false),
         ) {
+            // With shouldDismissOnBackPress = false the sheet's own callback never consumes back
+            // (the predictive-back gesture used to settle the sheet hidden and close it whole,
+            // issue #1469), so this handler owns every back press: step back one level when a
+            // sheet registered an inner page, close the whole sheet otherwise.
+            BackHandler {
+                val stepBack = sheetBackStep.value
+                if (stepBack != null) stepBack() else {
+                    viewModel.dismissSheet()
+                    craftingViewModel.dismissRecipe()
+                }
+            }
             // Rendered by each sheet under its skill description; only the sheets without
             // a description header (Mercantile, Farming) show it above their content.
             val dailyBanner: @Composable () -> Unit = {
@@ -633,6 +649,7 @@ private fun SkillsTabContent(
     listState: LazyListState = rememberLazyListState(),
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBoneAltar: () -> Unit = {},
+    onNavigateToPrestige: (String) -> Unit = {},
 ) {
     LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
         state.activeSession?.let { session ->
@@ -681,7 +698,7 @@ private fun SkillsTabContent(
                 toolEfficiency = efficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
+                onOpenPrestige = { onNavigateToPrestige(key) },
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
@@ -705,7 +722,7 @@ private fun SkillsTabContent(
                 toolEfficiency = craftEfficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
+                onOpenPrestige = { onNavigateToPrestige(key) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
@@ -722,7 +739,7 @@ private fun SkillsTabContent(
                 toolEfficiency = if (key == Skills.AGILITY) state.agilityEfficiency else 1.0f,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
-                onPrestige     = if (state.ironman) null else ({ viewModel.prestigeSkill(key) }),
+                onOpenPrestige = { onNavigateToPrestige(key) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
@@ -738,7 +755,7 @@ private fun SkillsTabContent(
                 onClick       = onNavigateToSlayer,
                 petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
                 prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
-                onPrestige    = if (state.ironman) null else ({ viewModel.prestigeSkill(Skills.SLAYER) }),
+                onOpenPrestige = { onNavigateToPrestige(Skills.SLAYER) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
             )
@@ -859,7 +876,7 @@ internal fun SkillRow(
     toolEfficiency: Float = 1.0f,
     petBoostPct: Int = 0,
     prestigeLevel: Int = 0,
-    onPrestige: (() -> Unit)? = null,
+    onOpenPrestige: (() -> Unit)? = null,
     cropsReady: Int = 0,
     /** Shows a gold dot when this skill's guild daily is still open and worth doing (guild not maxed). */
     guildDailyOpen: Boolean = false,
@@ -870,36 +887,6 @@ internal fun SkillRow(
     val name     = GameStrings.skillName(context, skillKey)
     val emoji    = GameStrings.skillEmoji(skillKey)
     val progress = xpProgressFraction(xp)
-    var showPrestigeConfirm by remember { mutableStateOf(false) }
-
-    if (showPrestigeConfirm) {
-        val nextPrestige = prestigeLevel + 1
-        val message = when (skillKey) {
-            Skills.AGILITY -> {
-                val currentMinutes = (SkillSimulator.sessionDurationMs(99, prestigeLevel) / 60_000L).toInt()
-                val nextMinutes    = (SkillSimulator.sessionDurationMs(99, nextPrestige) / 60_000L).toInt()
-                stringResource(R.string.prestige_confirm_message_agility, name, nextPrestige * 10, nextMinutes, currentMinutes)
-            }
-            Skills.MERCANTILE -> stringResource(R.string.prestige_confirm_message_mercantile, name, nextPrestige * 10)
-            else -> stringResource(R.string.prestige_confirm_message_xp, name, nextPrestige * 10)
-        }
-        AlertDialog(
-            onDismissRequest = { showPrestigeConfirm = false },
-            title = { Text(stringResource(R.string.prestige_confirm_title, name)) },
-            text  = { Text(message) },
-            confirmButton = {
-                TextButton(onClick = {
-                    showPrestigeConfirm = false
-                    onPrestige?.invoke()
-                }) { Text(stringResource(R.string.prestige)) }
-            },
-            dismissButton = {
-                TextButton(onClick = { showPrestigeConfirm = false }) {
-                    Text(stringResource(R.string.btn_cancel))
-                }
-            },
-        )
-    }
 
     Column(Modifier.fillMaxWidth()) {
         Row(
@@ -1024,7 +1011,7 @@ internal fun SkillRow(
                         }
                     }
                 }
-                if (prestigeLevel > 0 || (onPrestige != null && level >= 99)) {
+                if (prestigeLevel > 0 || (onOpenPrestige != null && level >= 99)) {
                     Spacer(Modifier.height(4.dp))
                     Row(
                         modifier              = Modifier.fillMaxWidth(),
@@ -1032,29 +1019,20 @@ internal fun SkillRow(
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         Text(
-                            text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
+                            text  = "★×$prestigeLevel",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                         )
-                        when {
-                            onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
-                                Text(
-                                    text     = stringResource(R.string.prestige),
-                                    style    = MaterialTheme.typography.labelSmall,
-                                    color    = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .clickable(role = Role.Button) { showPrestigeConfirm = true }
-                                        .padding(horizontal = 8.dp, vertical = 2.dp),
-                                )
-                            }
-                            prestigeLevel >= 3 -> {
-                                Text(
-                                    text  = stringResource(R.string.prestige_max),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            }
+                        if (onOpenPrestige != null) {
+                            Text(
+                                text     = stringResource(R.string.prestige),
+                                style    = MaterialTheme.typography.labelSmall,
+                                color    = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .clickable(role = Role.Button) { onOpenPrestige() }
+                                    .padding(horizontal = 8.dp, vertical = 2.dp),
+                            )
                         }
                     }
                 }

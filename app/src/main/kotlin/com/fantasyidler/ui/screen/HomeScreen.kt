@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Person
@@ -126,6 +127,7 @@ fun HomeScreen(
     onNavigateToMonument: () -> Unit = {},
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBuilder: () -> Unit = {},
+    onNavigateToHouse: () -> Unit = {},
     onNavigateToCarnival: () -> Unit = {},
     onNavigateToSeasonalEvent: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
@@ -477,6 +479,7 @@ fun HomeScreen(
 
     if (!state.isLoading && !state.characterSetupDone) {
         CharacterSetupSheet(
+            raceProficiencies = viewModel.raceProficiencies,
             isFirstTime       = true,
             showIronmanOption = true,
             onSave            = { name, gender, race, ironman -> viewModel.saveCharacterProfile(name, gender, race, ironman) },
@@ -635,6 +638,7 @@ fun HomeScreen(
                         totalLevel                 = totalLevelFrom(state.skillLevels),
                         coins                      = state.coins,
                         activeBlessingKey          = state.activeBlessingKey,
+                        prayerCapeMult             = state.prayerCapeMult,
                         activeBlessingRemainingMs  = state.activeBlessingRemainingMs,
                         xpBoostRemainingMs         = state.xpBoostRemainingMs,
                         modifier                   = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
@@ -654,16 +658,27 @@ fun HomeScreen(
                         TownGridCard(Icons.Filled.ShoppingCart, stringResource(R.string.label_shop),       onClick = onNavigateToShop,      modifier = Modifier.weight(1f))
                         TownGridCard(Icons.Filled.Person,        stringResource(R.string.inn_title),        onClick = onNavigateToInn,       modifier = Modifier.weight(1f))
                         TownGridCard(Icons.Filled.Group,         stringResource(R.string.guild_hall_title), onClick = onNavigateToGuildHall, modifier = Modifier.weight(1f), badgeCount = state.guildClaimableCount)
-                        TownGridCard(Icons.Filled.Star,          stringResource(R.string.church_title),     onClick = onNavigateToChurch,    modifier = Modifier.weight(1f), iconTint = churchTint)
                     }
                     Row(
                         modifier              = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
+                        TownGridCard(Icons.Filled.Star,           stringResource(R.string.church_title),   onClick = onNavigateToChurch,   modifier = Modifier.weight(1f), iconTint = churchTint)
                         TownGridCard(Icons.Filled.Assignment,     stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
                         TownGridCard(Icons.Filled.Shield,         stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
+                    }
+                    Row(
+                        modifier              = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
                         TownGridCard(Icons.Filled.Celebration,    stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
                         TownGridCard(Icons.Filled.AccountBalance, stringResource(R.string.monument_title), onClick = onNavigateToMonument, modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.Filled.Home,           stringResource(R.string.house_title),    onClick = onNavigateToHouse,    modifier = Modifier.weight(1f))
+                    }
+                    Row(
+                        modifier              = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
                         TownGridCard(
                             icon        = Icons.Filled.CloudUpload,
                             name        = stringResource(R.string.home_sync_title),

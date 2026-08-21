@@ -37,6 +37,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
+import androidx.compose.ui.platform.LocalContext
+import com.fantasyidler.util.GameStrings
 import com.fantasyidler.ui.theme.ScaledSheetContent
 
 internal val CHARACTER_GENDERS = listOf("Male", "Female", "Other")
@@ -54,6 +56,7 @@ data class TitleOption(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun CharacterSetupSheet(
+    raceProficiencies: Map<String, List<String>> = emptyMap(),
     isFirstTime: Boolean,
     initialName: String = "",
     initialGender: String = "",
@@ -148,14 +151,56 @@ fun CharacterSetupSheet(
                     "Halfling" to stringResource(R.string.character_race_halfling),
                     "Gnome"    to stringResource(R.string.character_race_gnome),
                 )
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    CHARACTER_RACES.forEach { race ->
-                        FilterChip(
-                            selected = draftRace == race,
-                            onClick  = { draftRace = if (draftRace == race) "" else race },
-                            label    = { Text(raceLabels[race] ?: race) },
+                if (isFirstTime) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        CHARACTER_RACES.forEach { race ->
+                            FilterChip(
+                                selected = draftRace == race,
+                                onClick  = { draftRace = if (draftRace == race) "" else race },
+                                label    = { Text(raceLabels[race] ?: race) },
+                            )
+                        }
+                    }
+                } else {
+                    // Post-setup the race is reference-only here: changes cost a token or
+                    // coins and go through the appearance editor's confirm flow.
+                    Text(
+                        text  = raceLabels[draftRace] ?: draftRace.ifBlank { stringResource(R.string.character_race_human) },
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
+                val setupContext = LocalContext.current
+                val draftKey = draftRace.lowercase()
+                val proficiencyText = when {
+                    draftKey == "human" -> stringResource(R.string.race_proficiency_human)
+                    draftKey.isNotBlank() -> raceProficiencies[draftKey]?.takeIf { it.isNotEmpty() }?.let { skills ->
+                        stringResource(
+                            R.string.race_proficiency_label,
+                            skills.joinToString(", ") { GameStrings.skillName(setupContext, it) },
                         )
                     }
+                    else -> null
+                }
+                if (proficiencyText != null) {
+                    Text(
+                        text  = proficiencyText,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.tertiary,
+                    )
+                }
+                if (!isFirstTime) {
+                    Text(
+                        text  = stringResource(R.string.character_race_edit_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                if (draftIronman) {
+                    Text(
+                        text  = stringResource(R.string.ironman_race_permanent_note),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error,
+                    )
                 }
             }
 

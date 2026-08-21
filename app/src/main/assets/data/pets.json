@@ -114,7 +114,7 @@
     "display_name": "Ember Moth",
     "emoji": "\ud83e\udd8b",
     "description": "Drawn to flame for so long it became one. Its wings shimmer with residual heat.",
-    "source": "Firemaking (1/1000 per craft)",
+    "source": "Firemaking (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "firemaking",
     "boost_percent": 10
@@ -124,7 +124,7 @@
     "display_name": "Herb Wisp",
     "emoji": "\ud83c\udf3f",
     "description": "A spirit born from the vapour of a thousand brewed potions. Its presence sharpens the mind.",
-    "source": "Herblore (1/1000 per craft)",
+    "source": "Herblore (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "herblore",
     "boost_percent": 10
@@ -134,7 +134,7 @@
     "display_name": "Rune Sprite",
     "emoji": "\ud83d\udd2e",
     "description": "A crystallised fragment of magical energy that escaped the Runecrafting altar.",
-    "source": "Runecrafting (1/1000 per craft)",
+    "source": "Runecrafting (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "runecrafting",
     "boost_percent": 10
@@ -144,7 +144,7 @@
     "display_name": "Gem Golem",
     "emoji": "\ud83d\udc8e",
     "description": "A tiny creature sculpted from gem shards and polishing dust. Keeps your tools sharp.",
-    "source": "Crafting (1/1000 per craft)",
+    "source": "Crafting (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "crafting",
     "boost_percent": 10
@@ -154,7 +154,7 @@
     "display_name": "Feather Drake",
     "emoji": "\ud83e\udeb6",
     "description": "A miniature dragon made entirely of arrow fletching. Surprisingly aerodynamic.",
-    "source": "Fletching (1/1000 per craft)",
+    "source": "Fletching (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "fletching",
     "boost_percent": 10
@@ -164,7 +164,7 @@
     "display_name": "Forge Imp",
     "emoji": "\u2692\ufe0f",
     "description": "A mischievous imp that lives inside the forge. Its heat-hardened hide is impervious to burns.",
-    "source": "Smithing (1/1000 per craft)",
+    "source": "Smithing (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "smithing",
     "boost_percent": 10
@@ -174,7 +174,7 @@
     "display_name": "Coin Drake",
     "emoji": "\ud83e\ude99",
     "description": "A dragon hatchling raised on a diet of gold coins. It has an uncanny nose for profit.",
-    "source": "Mercantile (1/1000 per craft)",
+    "source": "Mercantile (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "mercantile",
     "boost_percent": 10
@@ -184,7 +184,7 @@
     "display_name": "Timber Sprite",
     "emoji": "\ud83e\udeb5",
     "description": "A wood spirit awakened from sawdust and lumber. It knows exactly where every nail should go.",
-    "source": "Construction (1/1000 per craft)",
+    "source": "Construction (6% chance per session)",
     "effect_type": "xp_boost",
     "boosted_skill": "construction",
     "boost_percent": 10

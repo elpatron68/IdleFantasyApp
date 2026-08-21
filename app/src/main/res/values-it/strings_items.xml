@@ -878,11 +878,13 @@
     <string name="item_ironwood_axe_name">Ascia in Metallegno</string>
     <string name="item_king_black_dragon_name">Re Drago Nero</string>
     <string name="item_kraken_name">Kraken</string>
-    <string name="item_kraken_tentacle_name">Tebtacolo di Kraken</string>
+    <string name="item_kraken_tentacle_name">Tentacolo di Kraken</string>
     <string name="item_mages_guild_cape_name">Mantello degli Stregoni</string>
     <string name="item_magic_cape_name">Mantello Magico</string>
     <string name="item_magic_longbow_name">Arco Lungo Magico</string>
     <string name="item_magic_shortbow_name">Arco Magico</string>
+    <string name="item_elven_shortbow_name">Elven Shortbow</string> <!-- untranslated -->
+    <string name="item_elven_longbow_name">Elven Longbow</string> <!-- untranslated -->
     <string name="item_maple_shortbow_name">Arco d\'Acero</string>
     <string name="item_mercantile_guild_cape_name">Mantello dei Mercanti</string>
     <string name="item_mining_cape_name">Mantello Minerario</string>
@@ -1004,6 +1006,8 @@
     <string name="item_yew_longbow_desc">Grande arco in tasso.</string>
     <string name="item_magic_shortbow_desc">Piccolo arco in legno magico.</string>
     <string name="item_magic_longbow_desc">Grande arco in legno magico.</string>
+    <string name="item_elven_shortbow_desc">A swift bow strung with elven silk. Only elven hands know the fletching.</string> <!-- untranslated -->
+    <string name="item_elven_longbow_desc">A tall elven warbow of layered redwood. Only elven hands know the fletching.</string> <!-- untranslated -->
     <string name="item_tower_crossbow_name">Balestra della Torre</string>
     <string name="item_tower_crossbow_desc">Balestra altamente efficiente, in metallo estratto dalla Torre.</string>
     <string name="item_arcane_staff_desc">Bastone trovato nelle Rovine Arcane, impregnato del potere magico che ha annientato gli abitanti di questo luogo.</string>
@@ -1095,50 +1099,50 @@
     <string name="item_silver_diamond_ring_desc">Anello d\'argento con un diamante incastonato. Migliora le tue doti in battaglia.</string>
     <string name="item_tower_ring_name">Anello della Torre</string>
     <string name="item_tower_ring_desc">Gioiello ricavato dalle pietre della Torre dell\'Infinito.</string>
-    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
-    <string name="item_ring_of_dragons_might_desc">A ring imbued with dragonfire. Greatly increases melee strength.</string> <!-- untranslated -->
-    <string name="item_ring_of_the_seas_desc">A ring blessed by the deep sea. Enhances ranged precision and power.</string> <!-- untranslated -->
-    <string name="item_kraken_tentacle_desc">A coiling tentacle ring that channels the Kraken\'s arcane power.</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_desc">Creato nel calore del nucleo terrestre, chi lo indossa percepisce il potere della Fiamma Gotica.</string>
+    <string name="item_ring_of_dragons_might_desc">Anello intriso di potere draconico. Potenzia le tue doti in combattimento mischia.</string>
+    <string name="item_ring_of_the_seas_desc">Anello protetto dal potere dei mari. Migliora la tua mira.</string>
+    <string name="item_kraken_tentacle_desc">Questo tentacolo permette di far uso del potere del Kraken.</string>
     <string name="item_tower_cape_name">Mantello della Torre</string>
-    <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
-    <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
-    <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
-    <string name="item_mining_guild_cape_desc" formatted="false">Awarded for reaching Mining Guild level 10. Grants 5% more ore per session.</string> <!-- untranslated -->
-    <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
-    <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
-    <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
+    <string name="item_tower_cape_desc">Mantello tessuto dal potere della Torre.</string>
+    <string name="item_mining_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come minatore. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_construction_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornice un bonus di 5% per sessione.</string>
+    <string name="item_mining_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_fishing_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come pescatore. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_fishing_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_woodcutting_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come taglialegna. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_farming_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come agricoltore. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_farming_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
     <string name="item_thieving_cape_name">Mantello da Furfante</string>
-    <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_desc" formatted="false">Awarded for reaching Smithing Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_cooking_cape_desc" formatted="false">Awarded for reaching level 99 Cooking. Grants 10% more food per session.</string> <!-- untranslated -->
-    <string name="item_cooking_guild_cape_desc" formatted="false">Awarded for reaching Cooking Guild level 10. Grants 5% more food per session.</string> <!-- untranslated -->
-    <string name="item_fletching_cape_desc" formatted="false">Awarded for reaching level 99 Fletching. Grants 10% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_fletching_guild_cape_desc" formatted="false">Awarded for reaching Fletching Guild level 10. Grants 5% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_crafting_cape_desc" formatted="false">Awarded for reaching level 99 Crafting. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_crafting_guild_cape_desc" formatted="false">Awarded for reaching Crafting Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_cape_desc" formatted="false">Awarded for reaching level 99 Firemaking. Grants 10% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_guild_cape_desc" formatted="false">Awarded for reaching Firemaking Guild level 10. Grants 5% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_cape_desc" formatted="false">Awarded for reaching level 99 Runecrafting. Grants 10% more runes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_guild_cape_desc" formatted="false">Awarded for reaching Runecrafting Guild level 10. Grants 5% more runes per session.</string> <!-- untranslated -->
+    <string name="item_thieving_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come furfante. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_thieving_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_smithing_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come fabbro. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_cooking_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come cuoco. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_cooking_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_fletching_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come frecciaio. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_fletching_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_crafting_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come orefice. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_crafting_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_firemaking_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come fuochista. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_firemaking_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
+    <string name="item_runecrafting_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come incisore. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_runecrafting_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
     <string name="item_herblore_cape_name">Mantello Officinale</string>
-    <string name="item_herblore_cape_desc" formatted="false">Awarded for reaching level 99 Herblore. Grants 10% more potions per session.</string> <!-- untranslated -->
-    <string name="item_herblore_guild_cape_desc" formatted="false">Awarded for reaching Herblore Guild level 10. Grants 5% more potions per session.</string> <!-- untranslated -->
+    <string name="item_herblore_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come erborista. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_herblore_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
     <string name="item_construction_cape_name">Mantello Architteto</string>
-    <string name="item_construction_cape_desc" formatted="false">Awarded for reaching level 99 Construction. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_prayer_cape_desc" formatted="false">Awarded for reaching level 99 Prayer. Strengthens your active blessing by 10%.</string> <!-- untranslated -->
-    <string name="item_prayer_guild_cape_desc" formatted="false">Awarded for reaching Prayer Guild level 10. Strengthens your active blessing by 5%.</string> <!-- untranslated -->
+    <string name="item_construction_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come costruttore. Fornisce un bonus del 10% per sessione.</string>
+    <string name="item_prayer_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come devoto. Potenzia del 10% tutte le benedizioni.</string>
+    <string name="item_prayer_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Potenzia del 5% tutte le benedizioni.</string>
     <string name="item_mercantile_cape_name">Mantello Imprenditoriale</string>
-    <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_agility_cape_desc" formatted="false">Awarded for reaching level 99 Agility. Grants 10% more XP per session.</string> <!-- untranslated -->
-    <string name="item_agility_guild_cape_desc" formatted="false">Awarded for reaching Agility Guild level 10. Grants 5% more XP per session.</string> <!-- untranslated -->
+    <string name="item_mercantile_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come mercante. Sconta i prezzi dell\'emporio e aumenta i ricavi commerciali del 10%.</string>
+    <string name="item_mercantile_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Sconta i prezzi dell\'emporio e aumenta i ricavi commerciali del 5%.</string>
+    <string name="item_agility_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come atleta. Fornisce un bonus di 10% all\'XP per sessione.</string>
+    <string name="item_agility_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP per sessione.</string>
     <string name="item_slayer_cape_name">Mantello Mercenario</string>
-    <string name="item_slayer_cape_desc" formatted="false">Awarded for reaching level 99 Slayer. Grants 10% more Slayer points.</string> <!-- untranslated -->
+    <string name="item_slayer_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come sicario. Fornisce un bonus di 10% ai punti ricevuti.</string>
     <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
     <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
     <string name="item_defense_cape_desc" formatted="false">Awarded for reaching level 99 Defense. Grants 10% bonus Defense XP.</string> <!-- untranslated -->
@@ -1210,28 +1214,28 @@
     <string name="item_dwarven_lockpick_desc">A dwarven-forged lockpick. Finds the tumblers instantly.</string> <!-- untranslated -->
     <string name="item_shadow_lockpick_desc">A lockpick forged from shadow. No lock can resist it for long.</string> <!-- untranslated -->
     <string name="item_divine_lockpick_desc">A lockpick touched by divine light. Every lock yields to it.</string> <!-- untranslated -->
-    <string name="item_wraithbone_ring_desc">A pale ring carved from wight bone during the Gloomharvest. Steadies the hand and the heart.</string> <!-- untranslated -->
-    <string name="item_reaper_scythe_desc">The Hollow King\'s own harvest tool. It reaps more than wheat.</string> <!-- untranslated -->
-    <string name="item_gloomweave_cape_desc">Woven from dusk and lantern smoke at the Night Market. Only sold during the Gloomharvest.</string> <!-- untranslated -->
+    <string name="item_wraithbone_ring_desc">Spettrale anello d\'osso maledetto dal Raccolto Oscuro. Nonostante l\'aspetto ti rende più impavido.</string>
+    <string name="item_reaper_scythe_desc">Lo strumento prediletto dal Re Vacuo. Non miete solo grano.</string>
+    <string name="item_gloomweave_cape_desc">Tessuto con fumo delle lanterne e luce del crepuscolo. Venduto durante il Mercato Notturo del Raccolto Oscuro.</string>
     <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_wind_strike_name">Colpo dell\'Aria</string>
-    <string name="item_wind_strike_desc">A basic air spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_wind_strike_desc">Semplice magia d\'elemento Aria.</string>
     <string name="item_wind_bolt_name">Dardo dell\'Aria</string>
-    <string name="item_wind_bolt_desc">A moderate air spell that bolts your foe.</string> <!-- untranslated -->
+    <string name="item_wind_bolt_desc">Magia d\'elemento Aria intermedia.</string>
     <string name="item_wind_blast_name">Esplosione dell\'Aria</string>
-    <string name="item_wind_blast_desc">A powerful air spell that blasts your foe.</string> <!-- untranslated -->
+    <string name="item_wind_blast_desc">Potente magia d\'elemento Aria.</string>
     <string name="item_wind_wave_name">Ondata dell\'Aria</string>
-    <string name="item_wind_wave_desc">A devastating air spell that waves across your foe.</string> <!-- untranslated -->
+    <string name="item_wind_wave_desc">Sferra una potente onda d\'urto di elemento Aria.</string>
     <string name="item_water_strike_name">Colpo dell\'Acqua</string>
-    <string name="item_water_strike_desc">A basic water spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_water_strike_desc">Semplice magia d\'elemento Acqua.</string>
     <string name="item_water_bolt_name">Dardo dell\'Acqua</string>
-    <string name="item_water_bolt_desc">A moderate water spell that bolts your foe.</string> <!-- untranslated -->
+    <string name="item_water_bolt_desc">Magia d\'elemento Acqua intermedia.</string>
     <string name="item_water_blast_name">Esplosione dell\'Acqua</string>
-    <string name="item_water_blast_desc">A powerful water spell that blasts your foe.</string> <!-- untranslated -->
+    <string name="item_water_blast_desc">Potente magia d\'elemento Acqua.</string>
     <string name="item_water_wave_name">Ondata dell\'Acqua</string>
-    <string name="item_water_wave_desc">A devastating water spell that waves across your foe.</string> <!-- untranslated -->
+    <string name="item_water_wave_desc">Sferra una potente onda d\'urto di elemento Acqua.</string>
     <string name="item_earth_strike_name">Colpo della Terra</string>
     <string name="item_earth_strike_desc">A basic earth spell that strikes your foe.</string> <!-- untranslated -->
     <string name="item_earth_bolt_name">Dardo della Terra</string>
@@ -1280,11 +1284,11 @@
     <string name="item_blood_blast_desc">A powerful blood spell that blasts your foe.</string> <!-- untranslated -->
     <string name="item_blood_wave_name">Ondata del Sangue</string>
     <string name="item_blood_wave_desc">A devastating blood spell that waves across your foe.</string> <!-- untranslated -->
-    <string name="item_spirit_herb_name">Erba Spirituale</string>
-    <string name="item_spirit_herb_desc">A rare herb used in high-level herblore. Requires Mercantile level 20 to purchase.</string> <!-- untranslated -->
-    <string name="item_celestial_bloom_name">Bocciolo Celestiale</string>
-    <string name="item_celestial_bloom_desc">An ethereal flower used in master potions. Requires Mercantile level 40 to purchase.</string> <!-- untranslated -->
+    <string name="item_spirit_herb_name">Erba dello Spirito</string>
+    <string name="item_spirit_herb_desc">Erba rara necessaria per pozioni d\'alto rango. Richiede Mercantile livello 20 per l\'acquisto.</string>
+    <string name="item_celestial_bloom_name">Fioritura Celestiale</string>
+    <string name="item_celestial_bloom_desc">Fiore etereo necessario per pozioni d\'alto rango. Richiede Mercantile livello 40 per l\'acquisto.</string>
     <string name="item_void_lotus_name">Loto del Vuoto</string>
-    <string name="item_void_lotus_desc">A mysterious lotus used in the rarest concoctions. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
+    <string name="item_void_lotus_desc">Un loto dalle misteriose proprietà, necessario per pozioni d\'alto rango. Richiede Mercantile livello 60 per l\'acquisto.</string>
     <string name="crop_magic_bean_name">Fagiolo Magico</string>
 </resources>

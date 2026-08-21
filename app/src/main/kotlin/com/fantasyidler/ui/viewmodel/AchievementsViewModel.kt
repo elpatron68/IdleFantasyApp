@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import com.fantasyidler.simulator.PrestigeBoosts
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
@@ -97,11 +98,28 @@ class AchievementsViewModel @Inject constructor(
             ach("pet_all",   R.string.achievement_pet_all_name,   R.string.achievement_pet_all_desc,   "🦁", pets.size >= gameData.pets.size),
         )
 
+        val race = PrestigeBoosts.playerRace(flags)
+        fun raceNodes(nodes: List<com.fantasyidler.data.json.PrestigeNodeData>) =
+            nodes.filter { PrestigeBoosts.isNodeAvailableToRace(it, race) }
+        fun allOwned(skill: String, nodes: List<com.fantasyidler.data.json.PrestigeNodeData>): Boolean {
+            val owned = flags.prestigeNodes[skill].orEmpty().toSet()
+            return nodes.isNotEmpty() && nodes.all { it.id in owned }
+        }
+        val anyNodeOwned    = flags.prestigeNodes.values.any { it.isNotEmpty() }
+        val anyPathComplete = gameData.prestigeTrees.any { (skill, tree) ->
+            tree.paths.any { allOwned(skill, raceNodes(it.nodes)) }
+        }
+        val anyTreeMaxed    = gameData.prestigeTrees.any { (skill, tree) ->
+            allOwned(skill, raceNodes(tree.paths.flatMap { it.nodes }))
+        }
+
         groups["Prestige"] = listOf(
-            ach("prestige_first",   R.string.achievement_prestige_first_name,   R.string.achievement_prestige_first_desc,   "⭐", prestigeMap.values.any { it >= 1 }),
-            ach("prestige_any_3",   R.string.achievement_prestige_any_3_name,   R.string.achievement_prestige_any_3_desc,   "🌟", prestigeMap.values.any { it >= 3 }),
-            ach("prestige_all_1",   R.string.achievement_prestige_all_1_name,   R.string.achievement_prestige_all_1_desc,   "⭐⭐", Skills.ALL.all { (prestigeMap[it] ?: 0) >= 1 }),
-            ach("prestige_all_3",   R.string.achievement_prestige_all_3_name,   R.string.achievement_prestige_all_3_desc,   "👑", Skills.ALL.all { (prestigeMap[it] ?: 0) >= 3 }),
+            ach("prestige_first",         R.string.achievement_prestige_first_name,         R.string.achievement_prestige_first_desc,         "⭐", prestigeMap.values.any { it >= 1 }),
+            ach("prestige_node_first",    R.string.achievement_prestige_node_first_name,    R.string.achievement_prestige_node_first_desc,    "🌱", anyNodeOwned),
+            ach("prestige_path_complete", R.string.achievement_prestige_path_complete_name, R.string.achievement_prestige_path_complete_desc, "🏁", anyPathComplete),
+            ach("prestige_all_1",         R.string.achievement_prestige_all_1_name,         R.string.achievement_prestige_all_1_desc,         "⭐⭐", Skills.ALL.all { (prestigeMap[it] ?: 0) >= 1 }),
+            ach("prestige_tree_one",      R.string.achievement_prestige_tree_one_name,      R.string.achievement_prestige_tree_one_desc,      "🌟", anyTreeMaxed),
+            ach("prestige_all_3",         R.string.achievement_prestige_all_3_name,         R.string.achievement_prestige_all_3_desc,         "👑", Skills.ALL.all { (prestigeMap[it] ?: 0) >= 3 }),
         )
 
         val townTiers = flags.townBuildingTiers
