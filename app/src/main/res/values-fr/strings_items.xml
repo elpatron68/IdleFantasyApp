@@ -581,11 +581,11 @@
     <!-- ===== Spells ===== -->
     <string name="spell_wind_strike_name">Frappe de vent</string>
     <string name="spell_wind_bolt_name">Éclair de vent</string>
-    <string name="spell_wind_blast_name">Souffle de vent</string>
+    <string name="spell_wind_blast_name">Explosion de vent</string>
     <string name="spell_wind_wave_name">Vague de vent</string>
     <string name="spell_water_strike_name">Frappe d\'eau</string>
     <string name="spell_water_bolt_name">Éclair d\'eau</string>
-    <string name="spell_water_blast_name">Implosion d\'eau</string>
+    <string name="spell_water_blast_name">Explosion d\'eau</string>
     <string name="spell_water_wave_name">Vague d\'eau</string>
     <string name="spell_earth_strike_name">Frappe de terre</string>
     <string name="spell_earth_bolt_name">Éclair de terre</string>
@@ -595,10 +595,10 @@
     <string name="spell_fire_bolt_name">Éclair de feu</string>
     <string name="spell_fire_blast_name">Explosion de feu</string>
     <string name="spell_fire_wave_name">Vague de feu</string>
-    <string name="spell_mind_strike_name">Frappe de l\'esprit</string>
-    <string name="spell_mind_bolt_name">Éclair de l\'esprit</string>
-    <string name="spell_mind_blast_name">Explosion de l\'esprit</string>
-    <string name="spell_mind_wave_name">Vague de l\'esprit</string>
+    <string name="spell_mind_strike_name">Frappe d\'esprit</string>
+    <string name="spell_mind_bolt_name">Éclair d\'esprit</string>
+    <string name="spell_mind_blast_name">Explosion d\'esprit</string>
+    <string name="spell_mind_wave_name">Vague d\'esprit</string>
     <string name="spell_chaos_strike_name">Frappe du chaos</string>
     <string name="spell_chaos_bolt_name">Éclair du chaos</string>
     <string name="spell_chaos_blast_name">Explosion du chaos</string>

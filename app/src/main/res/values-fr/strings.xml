@@ -305,9 +305,9 @@
     <string name="settings_quest_dots_desc">Montre un point doré sur les aptitudes qui ont une quête possible</string>
     <string name="settings_prestige_notifications">Notification de prestige</string>
     <string name="settings_prestige_notifications_desc">Montrer une notification quand une aptitude est prête à prestige.</string>
-    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
+    <string name="label_switch_character">Changer de personnage</string>
+    <string name="settings_daily_reset_time">Temps de réinitialisation quotidien</string>
+    <string name="settings_daily_reset_time_desc">Temps local quand les quêtes quotidiennes, les requêtes de guildes et les hebdomadaires sont changées. Changer l\'heure ne donne jamais une réinitialisation supplémentaire.</string>
     <string name="settings_compact_numbers">Nombres compacts</string>
     <string name="settings_compact_numbers_desc">Abréger les grands nombres d\'éléments (par ex. 2,46 M au lieu de 2 461 940).</string>
     <string name="settings_home_screen">Écran d\'accueil</string>
@@ -501,8 +501,8 @@
     <string name="guild_do_dailies_hint">Faites des requêtes quotidiennes pour progresser au rang suivant</string>
     <string name="guild_quest_gate_blocked">Accomplir des quêtes pour monter en grade</string>
     <string name="guild_quest_required">Quête nécessaire pour progresser</string>
-    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d dailies &amp; quests required to advance</string> <!-- untranslated -->
-    <string name="guild_progress_dailies_only">Complete %1$d/%2$d dailies to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_and_quest">Compléter %1$d/%2$d requêtes quotidiennes &amp; quêtes pour avancer</string>
+    <string name="guild_progress_dailies_only">Compléter %1$d/%2$d requêtes quotidiennes pour avancer</string>
     <string name="home_died_message">Vous êtes mort et avez perdu la majorité de vos gains.</string>
     <string name="home_xp_boost_was_active">Le bonus d\'XP ×2 était actif</string>
     <string name="home_xp_boost_active">Bonus XP ×2 actif — %1$s restant</string>
@@ -943,15 +943,15 @@
     <!-- Guild Hall -->
     <string name="guild_hall_title">Guildes</string>
     <string name="guild_hall_desc">Rejoignez des guildes et complétez des quêtes quotidiennes pour progresser</string>
-    <string name="guild_hall_intro">Les guildes vous récompensent pour les activités que vous faites déjà. Terminez des quêtes et des demandes quotidiennes pour gagner des matériaux, des pièces et de l\'XP, de multiples aptitudes, afin que les spécialistes puissent toujours accéder aux ressources des aptitudes qu\'ils ne pratiquent pas.</string>
+    <string name="guild_hall_intro">Les guildes vous récompensent pour les activités que vous faites déjà. Terminez des quêtes et des requêtes quotidiennes pour gagner des matériaux, des pièces et de l\'XP, de multiples aptitudes, afin que les spécialistes puissent toujours accéder aux ressources des aptitudes qu\'ils ne pratiquent pas.</string>
     <string name="guild_level_label">Niveau %1$d</string>
     <string name="guild_level_max">Niveau 10 (Max)</string>
     <string name="guild_tab_quests">Quêtes</string>
-    <string name="guild_tab_dailies">Demandes quotidiennes</string>
+    <string name="guild_tab_dailies">Requêtes quotidiennes</string>
     <string name="guild_daily_resets_in">Réinitialisé chaque jour à %1$s</string>
     <string name="guild_locked_hint">Nécessite le niveau de guilde %1$d</string>
-    <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les demandes quotidiennes.</string>
-    <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
+    <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les requêtes quotidiennes.</string>
+    <string name="guild_dailies_all_done">Toutes les requêtes quotidiennes sont finies. Revenez après la réinitialisation quotidienne.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l\'inventaire (%1$d disponible)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
@@ -1559,7 +1559,7 @@
     <string name="bonus_combined_xp">XP combiné</string>
     <string name="bonus_yield">+%1$d%% rendement</string>
     <string name="bonus_boost">+%1$d%% renforcement</string>
-    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
+    <string name="bonus_agility_prestige_detail">Du prestige: %1$dm sessions au niveau %2$d deviennent %3$dm</string>
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% en moins sur le coût d\'amélioration de bâtiments</string>
@@ -1643,24 +1643,24 @@
     <string name="tower_milestone_claim">Réclamer</string>
     <string name="tower_milestone_claimed">Réclamé</string>
     <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
-    <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
-    <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_shield">%1$s (defense +80)</string> <!-- untranslated -->
-    <string name="tower_milestone_amulet">%1$s (attack +15, strength +15, defense +10, all styles)</string> <!-- untranslated -->
-    <string name="tower_milestone_hp_50">+50 max HP</string> <!-- untranslated -->
-    <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_25k">25,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_helm">%1$s (defense +82, strength +8)</string> <!-- untranslated -->
-    <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
-    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
-    <string name="tower_milestone_plate">%1$s (defense +132)</string> <!-- untranslated -->
-    <string name="tower_milestone_coins_100k">100,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_legs_set">%1$s (defense +125) + %2$s (defense +58) + %3$s (defense +125)</string> <!-- untranslated -->
-    <string name="tower_milestone_sword">%1$s (attack +72, strength +75)</string> <!-- untranslated -->
-    <string name="tower_milestone_cape">%1$s (attack/str/def +14, ranged/magic +12) + 500,000 coins</string> <!-- untranslated -->
-    <string name="tower_milestone_crossbow">%1$s (ranged attack +78, ranged strength +52)</string> <!-- untranslated -->
-    <string name="tower_milestone_staff">%1$s (magic attack +68, magic damage +18, infinite runes) + 1,000,000 coins</string> <!-- untranslated -->
+    <string name="tower_milestone_ring">%1$s (+6 attaque, +6 force)</string>
+    <string name="tower_milestone_xp_1pct" formatted="false">+1% d\'XP de tour à toutes les aptitudes</string>
+    <string name="tower_milestone_coins_5k">5.000 pièces</string>
+    <string name="tower_milestone_shield">%1$s (+80 défense)</string>
+    <string name="tower_milestone_amulet">%1$s (+15 attaque, +15 force, +10 défense, tout styles)</string>
+    <string name="tower_milestone_hp_50">+50 PV max</string>
+    <string name="tower_milestone_xp_2pct" formatted="false">+2% d\'XP de tour à toutes les aptitudes</string>
+    <string name="tower_milestone_coins_25k">25.000 pièces</string>
+    <string name="tower_milestone_helm">%1$s (+82 défense, +8 force)</string>
+    <string name="tower_milestone_pet" formatted="false">Familier de Tour (5% d\'XP de combat)</string>
+    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% de pièces de tour lâchées</string>
+    <string name="tower_milestone_plate">%1$s (+132 défense)</string>
+    <string name="tower_milestone_coins_100k">100.000 pièces</string>
+    <string name="tower_milestone_legs_set">%1$s (+125 défense) + %2$s (+58 défense) + %3$s (+125 défense)</string>
+    <string name="tower_milestone_sword">%1$s (+72 attaque, +75 force)</string>
+    <string name="tower_milestone_cape">%1$s (+14 attaque/for/déf, +12 à distance/magique) + 500.000 pièces</string>
+    <string name="tower_milestone_crossbow">%1$s (+78 attaque à distance, +52 force à distance)</string>
+    <string name="tower_milestone_staff">%1$s (+68 attaque magique, +18 dommages magiques, runes infinies) + 1.000.000 pièces</string>
     <string name="tower_enemies_this_floor">Ennemis</string>
     <string name="tower_enemy_strength">Puissance ennemie : %1$s%%</string>
     <string name="tower_entry_card_desc">Des étages sans fin. Jusqu\'où peux-tu grimper ?</string>
