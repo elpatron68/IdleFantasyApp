@@ -32,6 +32,7 @@ import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.TownRepository
+import com.fantasyidler.simulator.PrestigeBoosts
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
@@ -93,6 +94,8 @@ data class SkillsUiState(
     /** Actual per-log burn duration, tinderbox tier bonus applied. Keyed by log key. */
     val firemakingPerLogMs: Map<String, Long> = emptyMap(),
     val skillPrestige: Map<String, Int> = emptyMap(),
+    /** Skills at 99+ where another prestige still earns points or an XP tier. */
+    val prestigeReadySkills: Set<String> = emptySet(),
     val ironman: Boolean = false,
     val showPrestigeNotifications: Boolean = true,
     val inventory: Map<String, Int> = emptyMap(),
@@ -203,9 +206,9 @@ class SkillsViewModel @Inject constructor(
                 anySessionActive      = session != null,
                 queueSize             = flags.sessionQueue.size,
                 maxQueueSize          = playerRepo.maxQueueSize(flags),
-                miningEfficiency      = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     0) * boostRepo.toolEffMultiplier(Skills.MINING, flags),
-                woodcuttingEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         0) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags),
-                fishingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, 0) * boostRepo.toolEffMultiplier(Skills.FISHING, flags),
+                miningEfficiency      = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     0) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
+                woodcuttingEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         0) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
+                fishingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, 0) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
                 farmingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.HOE],         EquipSlot.HOE,         0),
                 firemakingEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX],      EquipSlot.TINDERBOX,      0),
                 smithingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.HAMMER],         EquipSlot.HAMMER,         0),
@@ -222,6 +225,9 @@ class SkillsViewModel @Inject constructor(
                     (SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60L / toolEff).toLong()
                 },
                 skillPrestige         = flags.skillPrestige,
+                prestigeReadySkills   = Skills.ALL.filterTo(mutableSetOf()) {
+                    (levels[it] ?: 1) >= 99 && PrestigeBoosts.prestigeHasReward(gameData.prestigeTrees, flags, it)
+                },
                 ironman               = flags.ironman,
                 showPrestigeNotifications = flags.showPrestigeNotifications,
                 inventory             = inv,
@@ -387,7 +393,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.MINING, flags, petBoostFor(player.pets, Skills.MINING, flags.ironman)),
-            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags),
+            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
@@ -411,7 +417,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.WOODCUTTING, flags, petBoostFor(player.pets, Skills.WOODCUTTING, flags.ironman)),
-            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags),
+            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
@@ -716,7 +722,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.FISHING, flags, petBoostFor(player.pets, Skills.FISHING, flags.ironman)),
-            rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags),
+            rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             fishingSkillData = gameData.fishingSkillData,

@@ -132,6 +132,7 @@ fun AppNavigation(
         "home"   to setOf("shop", "settings", "inn", Screen.WorkerSkills.route, "guild_hall", "guild_detail/{guild}", "church", "slayer", "carnival", Screen.SeasonalEvent.route),
         "skills" to setOf("farming", "mercantile", Screen.Slayer.route, Screen.BoneAltar.route, Screen.PrestigeDetail.route),
         "combat" to setOf(Screen.Tower.route),
+        "profile" to setOf(Screen.Combat.gearRoute, Screen.PrestigeDetail.route),
     )
 
     Scaffold(
@@ -161,6 +162,12 @@ fun AppNavigation(
                                     }
                                     launchSingleTop = true
                                     restoreState = !isHome
+                                }
+                                if (screen is Screen.Profile) {
+                                    // restoreState can bring back another tab's screen on top of
+                                    // profile (e.g. combat gear, issue #1511); drop it so the
+                                    // Profile button always lands on the profile view itself.
+                                    navController.popBackStack(screen.route, inclusive = false)
                                 }
                             }
                         },

@@ -94,6 +94,7 @@ def add_static_pages():
             ("dungeons", PageInfo("Dungeons", "Dungeons.md", gen_dungeons)),
             ("enemies", PageInfo("Enemies", "Enemies.md", gen_enemies)),
             ("spells", PageInfo("Spells", "Spells.md", gen_spells)),
+            ("mercenaries", PageInfo("Mercenary Camp", "Mercenaries.md", gen_mercenaries)),
         ]],
         ["Town", False, [
             ("shop", PageInfo("Shop", "Shop.md", gen_shop)),
@@ -101,6 +102,7 @@ def add_static_pages():
             ("guilds", PageInfo("Guilds", "Guilds.md", gen_guilds)),
             ("buildings", PageInfo("Buildings", "Buildings.md", gen_buildings)),
             ("carnival", PageInfo("Carnival", "Carnival.md", gen_carnival)),
+            ("housing", PageInfo("Housing", "Housing.md", gen_housing)),
         ]],
         ["Miscellaneous", False, [
             ("expeditions", PageInfo("Expeditions", "Expeditions.md", gen_expeditions, skill_icon_path("expedition"))),
@@ -619,6 +621,7 @@ def _prestige_effect_text(node: dict) -> str:
         "slayer_multi_task":       "Dungeon kills also count toward matching foretold tasks",
         "queue_slot":              f"+{vs} session queue slot",
         "potion_bonus_flat":       f"Combat potions grant +{vs} more to their stats",
+        "per_level_bonus":         f"+{vs} tool or combat bonus per level of this skill",
     }.get(node["effect"], node["effect"])
 
 
@@ -1245,6 +1248,7 @@ def gen_bosses() -> str:
     return get_template("combat/bosses").format(
         boss_table=table(header, rows_for(raid=False)),
         raid_table=table(header, rows_for(raid=True)),
+        mercenaries_link=link("mercenaries"),
         combat_footer=gen_combat_footer(),
     )
 
@@ -1877,6 +1881,71 @@ def gen_boss(boss: dict) -> str:
         loot_table=table(["Item", "Min", "Max"], common_loot_rows) if common_loot_rows else "_No loot defined._",
         rare_drops_table=table(["Item", "Chance"], rare_loot_rows) if rare_loot_rows else "_No rare drops._",
         combat_footer=gen_combat_footer(),
+    )
+
+def _merc_tier_label(tier: str) -> str:
+    key = f"merc_tier_{tier}"
+    return STRINGS.get_string(key) if key in STRINGS else title(tier)
+
+
+_MERC_TIER_ORDER = {"cheap": 0, "seasoned": 1, "elite": 2}
+
+
+def gen_mercenaries() -> str:
+    mercs = load("mercenaries.json")
+    assert isinstance(mercs, list)
+    ordered = sorted(mercs, key=lambda m: (_MERC_TIER_ORDER.get(m["tier"], 99), m["display_name"]))
+    rows = [
+        [
+            f"{merc['emoji']} {merc['display_name']}",
+            _merc_tier_label(merc["tier"]),
+            merc["combat_style"].title(),
+            f"{merc['attack_level']} (+{merc['attack_bonus']})",
+            f"{merc['strength_level']} (+{merc['strength_bonus']})",
+            merc["defense_level"],
+            merc["hp"],
+            fmt_amount(merc["hire_cost"]),
+        ]
+        for merc in ordered
+    ]
+    return get_template("combat/mercenaries").format(
+        merc_table=table(["Mercenary", "Tier", "Style", "Attack", "Strength", "Defence", "HP", "Cost per Day"], rows),
+        bosses_link=link("bosses"),
+    )
+
+
+def gen_housing() -> str:
+    data = load("house_tiles.json")
+    assert isinstance(data, dict)
+    room_rows = [
+        [f"Room {i + 2}", room["level"], fmt_amount(room["coins"]), fmt_materials(room["materials"]), fmt_amount(room["xp"])]
+        for i, room in enumerate(data["rooms"])
+    ]
+    expansion_rows = [
+        [f"Room {i + 1}", fmt_amount(tier["coins"]), fmt_materials(tier["materials"]), fmt_amount(tier["xp"])]
+        for i, tier in enumerate(data["expansion"])
+    ]
+    catalogue = {item_id: item for item_id, item in data["items"].items() if not item.get("hidden")}
+    furniture_rows = sorted(
+        (
+            [
+                item_name(item.get("name_key") or item_id),
+                item.get("category", "").replace("_", " ").title(),
+                item["level_required"],
+                fmt_amount(item["coin_cost"]),
+                fmt_materials(item.get("materials", {})),
+                fmt_amount(item["xp"]),
+            ]
+            for item_id, item in catalogue.items()
+        ),
+        key=lambda row: (row[2], row[0]),
+    )
+    return get_template("town/housing").format(
+        room_table=table(["Room", "Construction Level", "Coins", "Materials", "XP"], room_rows),
+        expansion_table=table(["Room Tier", "Coins per Cell", "Materials per Cell", "XP per Cell"], expansion_rows),
+        furniture_count=len(catalogue),
+        furniture_table=table(["Item", "Category", "Level", "Coins", "Materials", "XP"], furniture_rows),
+        grounds_count=len(data["grounds"]),
     )
 
 # ---------------------------------------------------------------------------

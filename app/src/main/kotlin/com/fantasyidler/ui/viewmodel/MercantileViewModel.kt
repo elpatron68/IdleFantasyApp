@@ -59,6 +59,8 @@ data class MercantileUiState(
     val queueSize: Int = 0,
     val maxQueueSize: Int = 3,
     val activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
+    /** Lowest Mercantile level that unlocks a Merchant's Guild shop item; 0 = none defined. */
+    val guildUnlockLevel: Int = 0,
 )
 
 @HiltViewModel
@@ -112,10 +114,17 @@ class MercantileViewModel @Inject constructor(
                 queueSize        = flags.sessionQueue.size,
                 maxQueueSize     = playerRepo.maxQueueSize(flags),
                 activeQuests     = computeActiveQuests(questProgress, flags, player.coins),
+                guildUnlockLevel = guildUnlockLevel,
             )
         }
     }.flowOn(Dispatchers.Default)
      .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MercantileUiState())
+
+    private val guildUnlockLevel: Int by lazy {
+        gameData.marketplace["merchants_guild"]?.items?.values
+            ?.mapNotNull { item -> item.mercantileLevelRequired.takeIf { it > 0 } }
+            ?.minOrNull() ?: 0
+    }
 
     fun startTradeRoute(routeId: String) {
         viewModelScope.launch {

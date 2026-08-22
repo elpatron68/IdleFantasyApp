@@ -94,7 +94,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     startXp        = xpMap[Skills.MINING] ?: 0L,
                     agilityLevel   = agilityLevel,
                     petBoostPct    = 0,
-                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags),
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
                     petDropKey     = null,
                     petDropChance  = 0.0,
                     gemChanceMult  = boostRepo.bonusRollMultiplier(Skills.MINING, flags),
@@ -109,7 +109,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     startXp        = xpMap[Skills.WOODCUTTING] ?: 0L,
                     agilityLevel   = agilityLevel,
                     petBoostPct    = 0,
-                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags),
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
                     petDropKey     = null,
                     petDropChance  = 0.0,
                 )
@@ -124,7 +124,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     startXp        = xpMap[Skills.FISHING] ?: 0L,
                     agilityLevel   = agilityLevel,
                     petBoostPct    = 0,
-                    rodEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags),
+                    rodEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
                     petDropKey     = null,
                     petDropChance  = 0.0,
                 )

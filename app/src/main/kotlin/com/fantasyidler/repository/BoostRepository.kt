@@ -5,6 +5,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.simulator.PrestigeBoosts
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.roundToInt
 
 /**
  * Single source of truth for every player-facing multiplier (v1.14.0 boost unification).
@@ -52,9 +53,15 @@ class BoostRepository @Inject constructor(
     fun flowMultiplier(skill: String, flags: PlayerFlags, elapsedMs: Long): Double =
         PrestigeBoosts.flowMultiplier(trees, flags, skill, elapsedMs)
 
-    /** Extra effective combat levels for [skill] (replaces the legacy +5 per prestige). */
-    fun combatStatBonus(skill: String, flags: PlayerFlags): Int =
-        effectTotal(skill, flags, PrestigeBoosts.COMBAT_STAT_FLAT).toInt()
+    /**
+     * Extra effective combat levels for [skill] (replaces the legacy +5 per prestige).
+     * [level] is the skill's current base level, feeding the human Resourceful nodes.
+     */
+    fun combatStatBonus(skill: String, flags: PlayerFlags, level: Int): Int =
+        effectTotal(skill, flags, PrestigeBoosts.COMBAT_STAT_FLAT).toInt() +
+            // Rounded, not floored, so max Resourceful reaches +5 at 99 (4.95) instead
+            // of sitting at +4 from level 80 all the way to the cap.
+            (effectTotal(skill, flags, PrestigeBoosts.PER_LEVEL_BONUS) * level).roundToInt()
 
     /** Minutes shaved off the level-99 session floor (agility Endurance nodes). */
     fun sessionFloorReductionMin(flags: PlayerFlags): Double =
@@ -134,9 +141,13 @@ class BoostRepository @Inject constructor(
         return sessionDurationMs * (streak + 1)
     }
 
-    /** Gathering tool efficiency multiplier for [skill] (pickaxe, axe, rod). */
-    fun toolEffMultiplier(skill: String, flags: PlayerFlags): Float =
-        (1.0 + effectTotal(skill, flags, PrestigeBoosts.TOOL_EFF_PCT) / 100.0).toFloat()
+    /**
+     * Gathering tool efficiency multiplier for [skill] (pickaxe, axe, rod).
+     * [level] is the skill's current base level, feeding the human Resourceful nodes.
+     */
+    fun toolEffMultiplier(skill: String, flags: PlayerFlags, level: Int): Float =
+        (1.0 + (effectTotal(skill, flags, PrestigeBoosts.TOOL_EFF_PCT) +
+                effectTotal(skill, flags, PrestigeBoosts.PER_LEVEL_BONUS) * level) / 100.0).toFloat()
 
     /** Flat thieving success-chance bonus (fraction, e.g. 0.10). */
     fun thievingSuccessBonus(flags: PlayerFlags): Double =

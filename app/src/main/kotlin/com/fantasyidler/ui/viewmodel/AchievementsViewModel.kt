@@ -107,10 +107,12 @@ class AchievementsViewModel @Inject constructor(
         }
         val anyNodeOwned    = flags.prestigeNodes.values.any { it.isNotEmpty() }
         val anyPathComplete = gameData.prestigeTrees.any { (skill, tree) ->
-            tree.paths.any { allOwned(skill, raceNodes(it.nodes)) }
+            tree.paths.filterNot { it.auto }.any { allOwned(skill, raceNodes(it.nodes)) }
         }
         val anyTreeMaxed    = gameData.prestigeTrees.any { (skill, tree) ->
-            allOwned(skill, raceNodes(tree.paths.flatMap { it.nodes }))
+            val autoDone = tree.paths.filter { it.auto }
+                .all { (flags.skillPrestige[skill] ?: 0) >= it.nodes.size }
+            autoDone && allOwned(skill, raceNodes(tree.paths.filterNot { it.auto }.flatMap { it.nodes }))
         }
 
         groups["Prestige"] = listOf(

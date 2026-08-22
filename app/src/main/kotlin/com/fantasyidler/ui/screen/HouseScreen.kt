@@ -36,6 +36,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -546,6 +551,45 @@ private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: I
                 HouseCanvasContent(state, viewModel, atlas, context, tiles, ghostCell, movingIndex)
                 if (!editing) ResidentOverlay(state, viewModel, cellDp)
             }
+            // Outside the pan/zoom transform so it stays parked in the corner.
+            if (editing && state.nudgeIndex != null) {
+                NudgePad(
+                    onNudge  = viewModel::nudgeSelected,
+                    onDone   = viewModel::exitNudge,
+                    modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
+                )
+            }
+        }
+    }
+}
+
+/** Corner arrow pad: one-unit nudges for the selected piece without a thumb covering it. */
+@Composable
+private fun NudgePad(onNudge: (Int, Int) -> Unit, onDone: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+        tonalElevation = 2.dp,
+        modifier = modifier,
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(2.dp)) {
+            IconButton(onClick = { onNudge(0, -1) }, modifier = Modifier.size(36.dp)) {
+                Icon(Icons.Filled.KeyboardArrowUp, contentDescription = null)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { onNudge(-1, 0) }, modifier = Modifier.size(36.dp)) {
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = null)
+                }
+                IconButton(onClick = onDone, modifier = Modifier.size(36.dp)) {
+                    Icon(Icons.Filled.Check, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                }
+                IconButton(onClick = { onNudge(1, 0) }, modifier = Modifier.size(36.dp)) {
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null)
+                }
+            }
+            IconButton(onClick = { onNudge(0, 1) }, modifier = Modifier.size(36.dp)) {
+                Icon(Icons.Filled.KeyboardArrowDown, contentDescription = null)
+            }
         }
     }
 }
@@ -637,7 +681,7 @@ private fun HouseCanvasContent(
     Canvas(modifier = Modifier.fillMaxSize()) {
         val cell = size.width / GRID
         drawHouseWorld(state, tiles, atlas, context, { viewModel.houseRepo.tileDef(it) },
-            state.selectedPlacement, movingIndex)
+            state.selectedPlacement ?: state.nudgeIndex, movingIndex)
 
         state.selectedRoom?.let { i ->
             state.house.rooms.getOrNull(i)?.let { room ->
@@ -1294,6 +1338,10 @@ private fun PlacementSheet(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Spacer(Modifier.height(16.dp))
+            OutlinedButton(onClick = { viewModel.enterNudge() }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.house_nudge_item))
+            }
+            Spacer(Modifier.height(8.dp))
             if (viewModel.houseRepo.tileDef(placement.item)?.rotatesTo != null) {
                 OutlinedButton(onClick = { viewModel.rotateSelected() }, modifier = Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.house_rotate_item))

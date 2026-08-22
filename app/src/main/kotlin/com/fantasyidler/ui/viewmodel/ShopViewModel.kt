@@ -13,6 +13,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.repository.XpBoostPurchaseResult
 import com.fantasyidler.repository.resolveCapeMultiplier
+import com.fantasyidler.simulator.MercantilePerks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -323,29 +324,13 @@ class ShopViewModel @Inject constructor(
         (entry.price * mercantileBuyDiscount()).toInt().coerceAtLeast(1)
 
     fun mercantileBuyDiscount(mercantileLevel: Int = uiState.value.mercantileLevel): Float {
-        val base = when {
-            mercantileLevel >= 99 -> 0.75f
-            mercantileLevel >= 80 -> 0.80f
-            mercantileLevel >= 60 -> 0.85f
-            mercantileLevel >= 40 -> 0.90f
-            mercantileLevel >= 20 -> 0.95f
-            else                  -> 1.00f
-        }
+        val base = 1f - MercantilePerks.tradePct(mercantileLevel) / 100f
         val capeBonus = mercantileCapeBonusFromState()
         return (base - capeBonus).coerceAtLeast(0.50f)
     }
 
-    private fun mercantileSellBonus(level: Int): Float {
-        val base = when {
-            level >= 99 -> 1.25f
-            level >= 80 -> 1.20f
-            level >= 60 -> 1.15f
-            level >= 40 -> 1.10f
-            level >= 20 -> 1.05f
-            else        -> 1.00f
-        }
-        return base + mercantileCapeBonusFromState()
-    }
+    private fun mercantileSellBonus(level: Int): Float =
+        1f + MercantilePerks.tradePct(level) / 100f + mercantileCapeBonusFromState()
 
     private fun mercantileCapeBonusFromState(): Float {
         val equippedCape = uiState.value.equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }

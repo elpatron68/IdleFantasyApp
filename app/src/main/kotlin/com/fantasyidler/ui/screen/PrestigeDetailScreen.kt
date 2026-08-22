@@ -97,7 +97,11 @@ fun PrestigeDetailScreen(
         AlertDialog(
             onDismissRequest = { showPrestigeConfirm = false },
             title = { Text(stringResource(R.string.prestige_confirm_title, skillName)) },
-            text  = { Text(stringResource(R.string.prestige_confirm_message_points, skillName, state.pointsOnPrestige)) },
+            text  = { Text(
+                if (state.pointsOnPrestige > 0)
+                    stringResource(R.string.prestige_confirm_message_points, skillName, state.pointsOnPrestige)
+                else stringResource(R.string.prestige_confirm_message_xp_only, skillName)
+            ) },
             confirmButton = {
                 TextButton(onClick = {
                     showPrestigeConfirm = false
@@ -171,14 +175,23 @@ fun PrestigeDetailScreen(
                             else GameStrings.prestigeEffectDesc(context, node.effect, node.value, node.unlock),
                     style = MaterialTheme.typography.bodyLarge,
                 )
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text  = stringResource(R.string.prestige_node_cost, node.cost),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                if (!node.auto) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text  = stringResource(R.string.prestige_node_cost, node.cost),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
                 Spacer(Modifier.height(16.dp))
                 when {
+                    node.auto -> Text(
+                        text  = if (node.owned) stringResource(R.string.prestige_node_auto_earned, node.tier)
+                                else stringResource(R.string.prestige_node_auto_pending, node.tier),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (node.owned) MaterialTheme.colorScheme.primary
+                                else MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     node.owned -> Text(
                         text  = stringResource(R.string.prestige_node_owned),
                         style = MaterialTheme.typography.bodyMedium,
@@ -325,13 +338,17 @@ private fun PrestigeHeaderCard(
             }
             Spacer(Modifier.height(12.dp))
             when {
-                state.atPointCap -> Text(
+                !state.canPrestigeMore -> Text(
                     text  = stringResource(R.string.prestige_maxed_cap),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
                 )
                 state.level >= 99 -> Button(onClick = onPrestige, modifier = Modifier.fillMaxWidth()) {
-                    Text(stringResource(R.string.prestige_button_with_points, state.pointsOnPrestige))
+                    Text(
+                        if (state.pointsOnPrestige > 0)
+                            stringResource(R.string.prestige_button_with_points, state.pointsOnPrestige)
+                        else stringResource(R.string.prestige_button_xp_only)
+                    )
                 }
                 else -> Text(
                     text  = stringResource(R.string.prestige_requires_99, state.level),
@@ -389,6 +406,14 @@ private fun PathBranch(
                     MaterialTheme.colorScheme.onSurfaceVariant
                 else MaterialTheme.colorScheme.onSurface,
             )
+            if (path.auto) {
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    text  = stringResource(R.string.prestige_path_auto_label),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.tertiary,
+                )
+            }
             if (racesLock != null) {
                 Spacer(Modifier.width(6.dp))
                 // Green lock: your race can use this path. Red lock: another race's exclusive.
@@ -408,9 +433,8 @@ private fun PathBranch(
             } else {
                 // Mixed paths (race-locked tiers appended to an open path) still surface
                 // their races here, so e.g. the Gnome farming bonus is findable in the tree.
-                // Human is skipped to match raceProficiencies (XP mastery everywhere).
                 path.nodes.mapNotNull { it.races }
-                    .flatMap { it.filter { race -> race != "human" } }.distinct().forEach { race ->
+                    .flatten().distinct().forEach { race ->
                         Spacer(Modifier.width(6.dp))
                         Icon(
                             Icons.Filled.Lock,
@@ -498,7 +522,7 @@ private fun NodeCircle(node: PrestigeNodeUi, onTap: () -> Unit) {
             }
         }
         Text(
-            text  = "${node.cost}◆",
+            text  = if (node.auto) "★" else "${node.cost}◆",
             style = MaterialTheme.typography.labelSmall,
             color = if (node.owned) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 2.dp),

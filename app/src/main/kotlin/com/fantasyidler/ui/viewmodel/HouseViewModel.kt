@@ -50,6 +50,8 @@ data class HouseUiState(
     val selectedPlacement: Int? = null,
     /** Room index selected in Select mode (tap on empty floor), or null. */
     val selectedRoom: Int? = null,
+    /** Placement index being nudged with the on-canvas arrow pad, or null. */
+    val nudgeIndex: Int? = null,
     /** Seasonal event banners earned by this character (placeable wall trophies). */
     val earnedBanners: List<com.fantasyidler.data.model.SeasonalBannerEarned> = emptyList(),
     /** True while the outdoor-ground picker sheet is open (tap empty ground to open). */
@@ -131,19 +133,26 @@ class HouseViewModel @Inject constructor(
     // ------------------------------------------------------------------ edit modes
 
     fun enterPlaceItem(key: String) = _extra.update {
-        it.copy(mode = HouseEditMode.PlaceItem(key), selectedPlacement = null, selectedRoom = null)
+        it.copy(mode = HouseEditMode.PlaceItem(key), selectedPlacement = null, selectedRoom = null, nudgeIndex = null)
     }
 
     fun enterPlaceRoom() = _extra.update {
-        it.copy(mode = HouseEditMode.PlaceRoom, selectedPlacement = null, selectedRoom = null)
+        it.copy(mode = HouseEditMode.PlaceRoom, selectedPlacement = null, selectedRoom = null, nudgeIndex = null)
     }
 
     fun cancelMode() = _extra.update {
-        it.copy(mode = HouseEditMode.Select, selectedPlacement = null, selectedRoom = null)
+        it.copy(mode = HouseEditMode.Select, selectedPlacement = null, selectedRoom = null, nudgeIndex = null)
     }
 
     fun select(placement: Int?, room: Int?) = _extra.update {
-        it.copy(selectedPlacement = placement, selectedRoom = room)
+        // A tap on empty ground (both null) keeps the nudge pad up; picking
+        // another piece or a room moves focus there and dismisses it.
+        val keepNudge = placement == null && room == null
+        it.copy(
+            selectedPlacement = placement,
+            selectedRoom      = room,
+            nudgeIndex        = if (keepNudge) it.nudgeIndex else null,
+        )
     }
 
     fun setGroundPickerOpen(open: Boolean) = _extra.update { it.copy(groundPickerOpen = open) }
@@ -179,6 +188,21 @@ class HouseViewModel @Inject constructor(
 
     fun moveItem(index: Int, x: Int, y: Int) {
         viewModelScope.launch { report(houseRepo.moveItem(index, x, y)) {} }
+    }
+
+    fun enterNudge() {
+        val index = _extra.value.selectedPlacement ?: return
+        _extra.update { it.copy(selectedPlacement = null, selectedRoom = null, nudgeIndex = index) }
+    }
+
+    fun exitNudge() = _extra.update { it.copy(nudgeIndex = null) }
+
+    /** Moves the nudged piece one placement unit; invalid targets are ignored like invalid drops. */
+    fun nudgeSelected(dx: Int, dy: Int) {
+        val index = _extra.value.nudgeIndex ?: return
+        val placement = uiState.value.house.placements.getOrNull(index) ?: return
+        val (tx, ty) = placement.x + dx to placement.y + dy
+        if (canMoveTo(index, tx, ty)) moveItem(index, tx, ty)
     }
 
     fun rotateSelected() {

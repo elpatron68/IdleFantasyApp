@@ -161,9 +161,8 @@ fun CombatScreen(
         }
 
         val combatSession = state.combatSession
-        val skillsPrestigeReadyCount = if (state.ironman || !state.showPrestigeNotifications) 0 else COMBAT_SKILLS.count { key ->
-            (state.skillLevels[key] ?: 1) >= 99 && (state.skillPrestige[key] ?: 0) < 3
-        }
+        val skillsPrestigeReadyCount = if (!state.showPrestigeNotifications) 0
+            else COMBAT_SKILLS.count { it in state.prestigeReadySkills }
         val skillsTabLabel = if (skillsPrestigeReadyCount > 0)
             stringResource(R.string.tab_label_with_count, stringResource(R.string.label_skills), skillsPrestigeReadyCount)
         else

@@ -999,6 +999,11 @@
     <string name="mercantile_level_label">Level %1$d Mercantile</string> <!-- untranslated -->
     <string name="mercantile_xp_label">XP: %1$s</string> <!-- untranslated -->
     <string name="mercantile_coins_label">Coins: %1$s</string> <!-- untranslated -->
+    <string name="mercantile_perks_title">Perks</string> <!-- untranslated -->
+    <string name="mercantile_perk_trading_locked">Shop trading: cheaper buying and better sell prices from level %1$d.</string> <!-- untranslated -->
+    <string name="mercantile_perk_trading">Shop trading: buy prices -%1$d%%, sell prices +%2$d%%.</string> <!-- untranslated -->
+    <string name="mercantile_perk_trading_next">Next boost at level %1$d.</string> <!-- untranslated -->
+    <string name="mercantile_perk_guild">Merchant\'s Guild: exclusive shop goods unlock from level %1$d.</string> <!-- untranslated -->
     <string name="mercantile_cost_label">Cost: %1$s</string> <!-- untranslated -->
     <string name="mercantile_return_range">Returns: %1$s – %2$s</string> <!-- untranslated -->
     <string name="mercantile_dispatch_label">Dispatch</string> <!-- untranslated -->
@@ -1154,6 +1159,7 @@
     <string name="house_remove_banner">Take down</string> <!-- untranslated -->
     <string name="house_move_hint">Drag it on the grid to move it somewhere else.</string> <!-- untranslated -->
     <string name="house_rotate_item">Rotate</string> <!-- untranslated -->
+    <string name="house_nudge_item">Move with arrows</string> <!-- untranslated -->
     <string name="house_outside_title">Outside</string> <!-- untranslated -->
     <string name="house_outside_hint">Choose what the ground around your house looks like.</string> <!-- untranslated -->
     <string name="house_move_room">Move room</string> <!-- untranslated -->
@@ -2196,6 +2202,11 @@
     <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Cost: %1$d points</string> <!-- untranslated -->
     <string name="prestige_node_owned">Purchased</string> <!-- untranslated -->
+    <string name="prestige_path_auto_label">Earned by prestiging</string> <!-- untranslated -->
+    <string name="prestige_node_auto_earned">Earned at prestige %1$d.</string> <!-- untranslated -->
+    <string name="prestige_node_auto_pending">Unlocks automatically at prestige %1$d.</string> <!-- untranslated -->
+    <string name="prestige_button_xp_only">Prestige now for the next XP tier</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_xp_only">Your %1$s level will reset to 1 and you\'ll unlock the next automatic XP tier. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_only">%1$s only</string> <!-- untranslated -->
     <!-- Translator note: %1$s = list of race names -->
@@ -2225,6 +2236,7 @@
     <string name="prestige_effect_crop_rotation">+%1$d%% yield when planting a different crop than the last harvest.</string> <!-- untranslated -->
     <string name="prestige_effect_crop_rotation_always">The rotation bonus applies to every crop, no rotation needed.</string> <!-- untranslated -->
     <string name="prestige_effect_tool_eff">Tool efficiency +%1$d%%.</string> <!-- untranslated -->
+    <string name="prestige_effect_per_level">+%1$s tool or combat bonus per level of this skill.</string> <!-- untranslated -->
     <string name="prestige_effect_success_chance">Pickpocket success chance +%1$d%%.</string> <!-- untranslated -->
     <string name="prestige_effect_reclaim">+%1$d%% chance to recover spent arrows and runes after combat.</string> <!-- untranslated -->
     <string name="prestige_effect_heal">Food heals +%1$d%% more in combat.</string> <!-- untranslated -->
@@ -2288,6 +2300,7 @@
     <string name="prestige_path_mercantile_coin">Haggler</string> <!-- untranslated -->
 
     <!-- Prestige race branch names -->
+    <string name="prestige_path_race_human">Resourceful</string> <!-- untranslated -->
     <string name="prestige_path_thieving_race_elf">Shadow Step</string> <!-- untranslated -->
     <string name="prestige_path_firemaking_race_dwarf">Ember Heart</string> <!-- untranslated -->
     <string name="prestige_path_fishing_race_halfling">Patient Angler</string> <!-- untranslated -->

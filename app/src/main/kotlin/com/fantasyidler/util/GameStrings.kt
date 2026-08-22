@@ -267,6 +267,7 @@ object GameStrings {
         PrestigeBoosts.CROP_ROTATION_PCT -> context.getString(R.string.prestige_effect_crop_rotation, value.toInt())
         PrestigeBoosts.CROP_ROTATION_ALWAYS -> context.getString(R.string.prestige_effect_crop_rotation_always)
         PrestigeBoosts.TOOL_EFF_PCT      -> context.getString(R.string.prestige_effect_tool_eff, value.toInt())
+        PrestigeBoosts.PER_LEVEL_BONUS   -> context.getString(R.string.prestige_effect_per_level, value.trimmed())
         PrestigeBoosts.SUCCESS_CHANCE_PCT -> context.getString(R.string.prestige_effect_success_chance, value.toInt())
         PrestigeBoosts.RECLAIM_PCT       -> context.getString(R.string.prestige_effect_reclaim, value.toInt())
         PrestigeBoosts.HEAL_PCT          -> context.getString(R.string.prestige_effect_heal, value.toInt())

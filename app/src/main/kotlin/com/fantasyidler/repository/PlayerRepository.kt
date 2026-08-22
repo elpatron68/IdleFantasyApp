@@ -1,5 +1,6 @@
 package com.fantasyidler.repository
 
+import com.fantasyidler.BuildConfig
 import com.fantasyidler.data.db.dao.FarmingPatchDao
 import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.QuestProgressDao
@@ -608,18 +609,11 @@ class PlayerRepository @Inject constructor(
     }
 
     /**
-     * Race-change bookkeeping: refunds purchased nodes locked to other races
-     * (their point cost returns as unspent) and stamps the change time.
+     * Race-change bookkeeping. Purchased nodes are kept, including other races'
+     * branches: racial bonuses accumulate across switches rather than being refunded.
      */
-    private fun applyRaceChange(flags: PlayerFlags, race: String, now: Long): PlayerFlags {
-        val newRace = race.lowercase()
-        val prunedNodes = flags.prestigeNodes.mapValues { (skill, ids) ->
-            val nodesById = gameData.prestigeTrees[skill]?.paths
-                ?.flatMap { it.nodes }?.associateBy { it.id }.orEmpty()
-            ids.filter { id -> nodesById[id]?.races.let { r -> r == null || newRace in r } }
-        }.filterValues { it.isNotEmpty() }
-        return flags.copy(characterRace = race, raceLastChangedAt = now, prestigeNodes = prunedNodes)
-    }
+    private fun applyRaceChange(flags: PlayerFlags, race: String, now: Long): PlayerFlags =
+        flags.copy(characterRace = race, raceLastChangedAt = now)
 
     /**
      * Appearance-sheet race change. Costs one Race Change Token (rare boss drop) or
@@ -666,13 +660,7 @@ class PlayerRepository @Inject constructor(
     suspend fun debugChangeRaceFree(race: String) {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
-        val prunedNodes = flags.prestigeNodes.mapValues { (skill, ids) ->
-            val nodesById = gameData.prestigeTrees[skill]?.paths
-                ?.flatMap { it.nodes }?.associateBy { it.id }.orEmpty()
-            ids.filter { id -> nodesById[id]?.races.let { r -> r == null || race.lowercase() in r } }
-        }.filterValues { it.isNotEmpty() }
-        val updatedFlags = flags.copy(characterRace = race, prestigeNodes = prunedNodes)
-        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(updatedFlags)))
+        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(characterRace = race))))
     }
 
     suspend fun dismissCharacterSetup() {
@@ -953,8 +941,8 @@ class PlayerRepository @Inject constructor(
     /**
      * Resets [skillName] back to level 1, increments its prestige count, and awards
      * prestige points ([PrestigePoints.pointsForXp]: 2 at level 99, more for banked
-     * XP past 99). Guards: level 99+, not ironman, and lifetime earned points below
-     * the tree's cap for the player's race.
+     * XP past 99). Guards: level 99+ and something left to earn (lifetime points
+     * below the tree's cap, or an auto XP tier not yet reached).
      *
      * Also re-validates every equipped slot against the new (lower) levels: gear that no
      * longer meets its requirements is swapped for the best valid item in inventory, or a
@@ -968,9 +956,9 @@ class PlayerRepository @Inject constructor(
 
         val currentPrestige = flags.skillPrestige[skillName] ?: 0
         if ((levels[skillName] ?: 1) < 99) return@withLock
-        val cap = PrestigeBoosts.pointCapForRace(gameData.prestigeTrees[skillName], PrestigeBoosts.playerRace(flags))
+        if (!PrestigeBoosts.prestigeHasReward(gameData.prestigeTrees, flags, skillName)) return@withLock
+        val cap = PrestigeBoosts.pointCapForRace(gameData.prestigeTrees[skillName], PrestigeBoosts.playerRace(flags), flags.ironman)
         val earnedSoFar = flags.prestigePointsEarned[skillName] ?: 0
-        if (cap in 1..earnedSoFar) return@withLock
 
         val pointsAwarded = PrestigePoints.pointsForXp(xpMap[skillName] ?: 0L)
         val newEarned = flags.prestigePointsEarned.toMutableMap()
@@ -1077,6 +1065,7 @@ class PlayerRepository @Inject constructor(
         val tree = gameData.prestigeTrees[skillName] ?: return@withLock PrestigeActionResult.INVALID
         val path = tree.paths.firstOrNull { p -> p.nodes.any { it.id == nodeId } }
             ?: return@withLock PrestigeActionResult.INVALID
+        if (path.auto) return@withLock PrestigeActionResult.INVALID
         val index = path.nodes.indexOfFirst { it.id == nodeId }
         val node = path.nodes[index]
         val owned = flags.prestigeNodes[skillName].orEmpty()
@@ -1360,7 +1349,10 @@ class PlayerRepository @Inject constructor(
     }
 
     suspend fun resetProgression(ironman: Boolean = false) {
-        playerDao.upsert(createDefaultPlayer(ironman))
+        val previousFlags = playerDao.getPlayer()?.let { player ->
+            try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { null }
+        }
+        playerDao.upsert(createDefaultPlayer(ironman, carrySettingsFrom = previousFlags))
     }
 
     // ------------------------------------------------------------------
@@ -1591,7 +1583,7 @@ class PlayerRepository @Inject constructor(
     // Helpers
     // ------------------------------------------------------------------
 
-    private fun createDefaultPlayer(ironman: Boolean = false): Player {
+    private fun createDefaultPlayer(ironman: Boolean = false, carrySettingsFrom: PlayerFlags? = null): Player {
         val defaultEquipped: Map<String, String?> = EquipSlot.ALL.associateWith { null } +
             mapOf(
                 EquipSlot.PICKAXE     to "bronze_pickaxe",
@@ -1605,14 +1597,41 @@ class PlayerRepository @Inject constructor(
             "bronze_fishing_rod" to 1,
             "bronze_boots"       to 1,
         )
+        val base = PlayerFlags(
+            ironman             = ironman,
+            characterCreatedAt  = System.currentTimeMillis(),
+            // A brand-new save has nothing to announce, so What's New stays hidden (issue #1503).
+            lastSeenVersionCode = BuildConfig.VERSION_CODE,
+        )
+        // App/UI preferences follow the player across new characters and resets (issue #1503).
+        // Backup settings deliberately don't: auto-backups share one file, so a fresh character
+        // inheriting them would overwrite the previous character's backup.
+        val flags = if (carrySettingsFrom == null) base else base.copy(
+            themePreference           = carrySettingsFrom.themePreference,
+            fontScale                 = carrySettingsFrom.fontScale,
+            compactNumbers            = carrySettingsFrom.compactNumbers,
+            profileLayout             = carrySettingsFrom.profileLayout,
+            showSessionEndTime        = carrySettingsFrom.showSessionEndTime,
+            showQuestDots             = carrySettingsFrom.showQuestDots,
+            showPrestigeNotifications = carrySettingsFrom.showPrestigeNotifications,
+            showRecentActivityLog     = carrySettingsFrom.showRecentActivityLog,
+            showJournalButton         = carrySettingsFrom.showJournalButton,
+            showSeasonalEvents        = carrySettingsFrom.showSeasonalEvents,
+            showCharacterViewer       = carrySettingsFrom.showCharacterViewer,
+            showStatsBar              = carrySettingsFrom.showStatsBar,
+            collapsibleTownGrid       = carrySettingsFrom.collapsibleTownGrid,
+            hideCompletedQuests       = carrySettingsFrom.hideCompletedQuests,
+            shopKeepOneOfEach         = carrySettingsFrom.shopKeepOneOfEach,
+            foodEatThresholdPct       = carrySettingsFrom.foodEatThresholdPct,
+            dailyResetHour            = carrySettingsFrom.dailyResetHour,
+            batteryPromptShown        = carrySettingsFrom.batteryPromptShown,
+        )
         return Player(
             skillLevels = json.encode<Map<String, Int>>(Skills.DEFAULT_LEVELS),
             skillXp     = json.encode<Map<String, Long>>(Skills.DEFAULT_XP),
             inventory   = json.encode<Map<String, Int>>(defaultInventory),
             equipped    = json.encode<Map<String, String?>>(defaultEquipped),
-            flags       = json.encode<PlayerFlags>(
-                PlayerFlags(ironman = ironman, characterCreatedAt = System.currentTimeMillis())
-            ),
+            flags       = json.encode<PlayerFlags>(flags),
         )
     }
 

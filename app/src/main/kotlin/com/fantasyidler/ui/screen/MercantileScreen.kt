@@ -52,6 +52,7 @@ import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import androidx.compose.ui.draw.alpha
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.simulator.MercantilePerks
 import com.fantasyidler.ui.viewmodel.QuestCategory
 import com.fantasyidler.ui.viewmodel.QuestIndicator
 
@@ -192,6 +193,33 @@ private fun MercantileStatsHeader(state: MercantileUiState) {
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
             )
+            Spacer(Modifier.height(12.dp))
+            Text(
+                text       = stringResource(R.string.mercantile_perks_title),
+                style      = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(Modifier.height(4.dp))
+            val pct = MercantilePerks.tradePct(state.mercantileLevel)
+            val next = MercantilePerks.nextTierLevel(state.mercantileLevel)
+            Text(
+                text  = if (pct == 0)
+                    stringResource(R.string.mercantile_perk_trading_locked, MercantilePerks.TIER_LEVELS.first())
+                else listOfNotNull(
+                    stringResource(R.string.mercantile_perk_trading, pct, pct),
+                    next?.let { stringResource(R.string.mercantile_perk_trading_next, it) },
+                ).joinToString(" "),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            if (state.guildUnlockLevel > 0) {
+                Spacer(Modifier.height(2.dp))
+                Text(
+                    text  = stringResource(R.string.mercantile_perk_guild, state.guildUnlockLevel),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
     }
 }
