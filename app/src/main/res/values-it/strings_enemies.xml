@@ -113,7 +113,7 @@
     <string name="dungeon_hollowfen_name">Hollowfen</string>
     <string name="dungeon_hollowfen_desc">Una palude spettrale dove piante maledette vagano senza meta. Parte dell\'evento \"Raccolto Oscuro\".</string>
     <string name="dungeon_cloud_kingdom_name">Regno delle Nuvole</string>
-    <string name="dungeon_cloud_kingdom_desc">A realm above the clouds, reached by climbing a legendary beanstalk. Giants roam vast floating islands, sky serpents drift between the cloudbanks, and storm imps crackle with restless energy. Few have seen it. Fewer still have returned to speak of it.</string> <!-- untranslated -->
+    <string name="dungeon_cloud_kingdom_desc">Un regno sopra le nuvole che può essere raggiunto solo scalando il gambo di un magico fagiolo. Giganti percorrono le vaste isole volanti, serpenti volanti attraversano le nubi e folletti delle tempeste tuonano di magia. In pochi sono riusciti a esplorare questa landa, ancor meno chi ne ha potuto raccontare la vista.</string>
     <string name="dungeon_blightwood_name">Bosco Moribondo</string>
     <string name="dungeon_blightwood_desc">Foresta dove tutto diventa marcio e putrefatto, casa degli orrori più terribili. Parte dell\'evento \"Raccolto Oscuro\".</string>
 
@@ -134,6 +134,12 @@
     <string name="boss_the_hollow_king_desc">Il sovrano decapitato di ogni oscura pianta, uscito dal suo castello nel Bosco Moribondo per giudicare i mortali.</string>
     <string name="boss_the_vault_guardian_name">Guardiano del Caveau</string>
     <string name="boss_the_vault_guardian_desc">Colossale creatura d\'oro, risvegliata dalla Fiamma Eterna. Solo chi viene riconosciuto come Mecenate può incontrarlo.</string>
+    <string name="boss_obsidian_colossus_name">Obsidian Colossus</string> <!-- untranslated -->
+    <string name="boss_obsidian_colossus_desc">A mountain given wrath. No lone hero has ever chipped more than a scar into it. Bring a party.</string> <!-- untranslated -->
+    <string name="boss_brood_empress_name">Brood Empress</string> <!-- untranslated -->
+    <string name="boss_brood_empress_desc">Mother of the swarm between the stars. Her brood has ended armies; yours had better be paid well.</string> <!-- untranslated -->
+    <string name="boss_the_world_ender_name">The World Ender</string> <!-- untranslated -->
+    <string name="boss_the_world_ender_desc">When it stirs, kingdoms write their wills. Four names on the contract or none return.</string> <!-- untranslated -->
 
     <!-- ===== Expedition-unlocked dungeon names ===== -->
     <string name="dungeon_collapsed_mine_name">Miniera Crollata</string>

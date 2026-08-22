@@ -36,6 +36,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -269,10 +270,16 @@ fun WorkerSkillsScreen(
             },
             sheetState       = sheetState,
             dragHandle       = { BottomSheetDefaults.DragHandle() },
+            properties       = ModalBottomSheetProperties(shouldDismissOnBackPress = false),
         ) {
-            // Dialog-based sheets (material3 1.3+) deliver back presses to in-content handlers;
-            // the onDismissRequest interception above covers the older popup-based sheet.
-            BackHandler(enabled = state.selectedRecipe != null) { viewModel.dismissRecipe() }
+            // With shouldDismissOnBackPress = false the sheet's own callback never consumes back
+            // (the predictive-back gesture used to settle the sheet hidden and close it whole,
+            // issue #1469), so this handler owns every back press: step to the recipe list from
+            // an inner page, close the sheet otherwise.
+            BackHandler {
+                if (state.selectedRecipe != null) viewModel.dismissRecipe()
+                else viewModel.dismissSheet()
+            }
             ScaledSheetContent {
             // For workers: always pass hasActiveSession=true so button says "Add to Queue",
             // and isQueueFull=state.workerQueueFull.
@@ -493,7 +500,7 @@ private fun WorkerCraftSkillSheet(
         Skills.HERBLORE      -> viewModel.herbloreRecipes
         Skills.CONSTRUCTION  -> viewModel.constructionRecipes
         else                 -> viewModel.jewelleryRecipes
-    }
+    }.filter { it.key !in state.hiddenRecipeKeys }
 
     var onlyCraftable    by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf<String?>(null) }

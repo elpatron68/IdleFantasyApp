@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -19,6 +21,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -50,6 +53,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -163,6 +167,7 @@ fun GuildHallScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun GuildCard(
     summary: GuildSummary,
@@ -208,11 +213,12 @@ private fun GuildCard(
             Row(
                 modifier              = Modifier.fillMaxWidth(),
                 verticalAlignment     = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                Row(
-                    verticalAlignment      = Alignment.CenterVertically,
+                FlowRow(
+                    verticalArrangement    = Arrangement.spacedBy(2.dp),
                     horizontalArrangement  = Arrangement.spacedBy(8.dp),
+                    modifier               = Modifier.weight(1f),
                 ) {
                     Text(
                         text       = GameStrings.guildName(context, summary.guildKey),
@@ -280,9 +286,11 @@ private fun DailyStatusIndicator(summary: GuildSummary) {
             modifier           = Modifier.height(20.dp).width(20.dp),
         )
         summary.dailiesTodayTotal > 0 -> Text(
-            text  = stringResource(R.string.guild_dailies_remaining_today, summary.dailiesTodayRemaining),
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            text      = stringResource(R.string.guild_dailies_remaining_today, summary.dailiesTodayRemaining),
+            style     = MaterialTheme.typography.labelSmall,
+            color     = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.End,
+            modifier  = Modifier.widthIn(max = 84.dp),
         )
     }
 }
@@ -319,6 +327,8 @@ private fun LevelBadge(level: Int) {
             style    = MaterialTheme.typography.labelSmall,
             color    = if (level > 0) MaterialTheme.colorScheme.onPrimaryContainer
                        else MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            softWrap = false,
             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
         )
     }

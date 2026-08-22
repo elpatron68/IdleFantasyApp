@@ -61,6 +61,11 @@ fun ArtCreditsScreen(onBack: () -> Unit) {
             subtitle = stringResource(R.string.settings_credit_bosses_subtitle),
             url      = null,
         ),
+        ArtCredit(
+            title    = stringResource(R.string.settings_credit_house_title),
+            subtitle = stringResource(R.string.settings_credit_house_subtitle),
+            url      = "https://elvgames.itch.io/rogue-adventure-interior",
+        ),
     )
 
     Scaffold(

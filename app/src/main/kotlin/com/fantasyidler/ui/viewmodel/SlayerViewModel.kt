@@ -10,6 +10,7 @@ import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.SlayerTask
 import com.fantasyidler.simulator.SkillSimulator
+import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.ForetelResult
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
@@ -64,14 +65,17 @@ data class SlayerUiState(
     val slayerEquippedWeapons: Map<String, EquipmentData> = emptyMap(),
     /** The weapon slot selected in the slayer weapon picker sheet. */
     val slayerSelectedWeaponSlot: String? = null,
-    /** Up to 3 pre-assigned future tasks. */
+    /** Pre-assigned future tasks, up to [maxForetellSlots]. */
     val foretelledTasks: List<SlayerTask> = emptyList(),
     /** Bone cost (units) for the next foretell slot. */
     val nextForetelCostUnits: Int = 10,
+    /** Foretell queue capacity: base 3, extended by Foresight prestige nodes. */
+    val maxForetellSlots: Int = 3,
 )
 
 @HiltViewModel
 class SlayerViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
     private val playerRepo: PlayerRepository,
     private val slayerRepo: SlayerRepository,
     val gameData: GameDataRepository,
@@ -127,7 +131,7 @@ class SlayerViewModel @Inject constructor(
             val equippedWeapons = EquipSlot.WEAPON_SLOTS
                 .mapNotNull { slot -> equipped[slot]?.let { key -> gameData.equipment[key]?.let { slot to it } } }
                 .toMap()
-            val nextForetelCost = when (flags.foretelledTasks.size) { 0 -> 10; 1 -> 25; else -> 50 }
+            val nextForetelCost = slayerRepo.foretelCostUnits(flags.foretelledTasks.size)
             extra.copy(
                 isLoading             = false,
                 slayerLevel           = levels[Skills.SLAYER] ?: 1,
@@ -147,6 +151,7 @@ class SlayerViewModel @Inject constructor(
                 slayerEquippedWeapons = equippedWeapons,
                 foretelledTasks       = flags.foretelledTasks,
                 nextForetelCostUnits  = nextForetelCost,
+                maxForetellSlots      = slayerRepo.maxForetellSlots(flags),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SlayerUiState())
@@ -204,7 +209,7 @@ class SlayerViewModel @Inject constructor(
                     snackbarMessage = if (result.success) {
                         val b = result.breakdown!!
                         val skillDisplay = GameStrings.skillName(context, skillKey)
-                        val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeLevel)?.let { s -> " $s" } ?: ""
+                        val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeXpPct)?.let { s -> " $s" } ?: ""
                         context.withAppLocale().getString(R.string.slayer_lamp_purchased, b.finalXp.formatXp(), skillDisplay) + suffix
                     } else context.withAppLocale().getString(R.string.slayer_not_enough_points)
                 )
@@ -272,7 +277,7 @@ class SlayerViewModel @Inject constructor(
                     skillName           = "combat",
                     activityKey         = dungeonKey,
                     skillDisplayName    = dungeonName,
-                    estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)),
+                    estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)),
                     equippedSnapshot    = player.equipped,
                     arrowsKey           = flags.equippedArrows,
                     spellName           = flags.activeSpell,

@@ -28,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +55,11 @@ import androidx.compose.ui.res.painterResource
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.ui.viewmodel.CombatViewModel.Companion.MAX_BOSS_REPEAT_COUNT
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatDurationMs
+import com.fantasyidler.ui.viewmodel.MercContract
+import com.fantasyidler.util.formatCoins
+import com.fantasyidler.util.formatXp
+import com.fantasyidler.util.toCountdown
 import com.fantasyidler.util.toTitleCase
 
 // ---------------------------------------------------------------------------
@@ -76,6 +82,8 @@ internal fun BossInfoSheet(
     isQueueFull: Boolean = false,
     repeatCount: Int,
     fullCoinKillsLeft: Int = PlayerRepository.BOSS_FULL_COIN_KILLS_PER_DAY,
+    hiredMercs: List<MercContract> = emptyList(),
+    onOpenMercCamp: () -> Unit = {},
     onWeaponSlotSelected: (String) -> Unit,
     onPotionSelected: (String?) -> Unit,
     onRepeatCountChanged: (Int) -> Unit,
@@ -84,7 +92,9 @@ internal fun BossInfoSheet(
 ) {
     val context   = LocalContext.current
     val combatLvl = combatLevel(skillLevels)
-    val canFight  = combatLvl >= boss.combatLevelRequired
+    // Raid bosses show a beyond-player combat level for flavor; the mercenary party is
+    // their real gate, so the level requirement never blocks starting one.
+    val canFight  = boss.raid || combatLvl >= boss.combatLevelRequired
     val combatStyle = when (equippedWeapon?.combatStyle) {
         "ranged"   -> "ranged"
         "magic"    -> "magic"
@@ -365,6 +375,50 @@ internal fun BossInfoSheet(
                         label    = { Text("×$n") },
                     )
                 }
+            }
+        }
+
+        if (boss.raid) {
+            Spacer(Modifier.height(16.dp))
+            Text(
+                text       = stringResource(R.string.raid_party_title),
+                style      = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+            )
+            if (hiredMercs.isEmpty()) {
+                Text(
+                    text  = stringResource(R.string.raid_solo_warning),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error,
+                )
+            } else {
+                hiredMercs.forEach { contract ->
+                    val m = contract.merc
+                    Row(
+                        modifier              = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment     = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text  = "${m.emoji} ${GameStrings.mercName(context, m.id)}",
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        Text(
+                            text  = stringResource(R.string.merc_stats, m.attackLevel + m.attackBonus, m.strengthLevel + m.strengthBonus, m.defenseLevel, m.hp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                val remainingMs = (hiredMercs.minOf { it.expiresAt } - System.currentTimeMillis()).coerceAtLeast(0L)
+                Text(
+                    text  = stringResource(R.string.merc_contract_remaining, remainingMs.formatDurationMs(context)),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            TextButton(onClick = onOpenMercCamp) {
+                Text(stringResource(R.string.merc_camp_open))
             }
         }
 

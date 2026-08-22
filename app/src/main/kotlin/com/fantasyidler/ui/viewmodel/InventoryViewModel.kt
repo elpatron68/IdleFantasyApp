@@ -23,12 +23,17 @@ import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.TreeData
 import android.content.Context
+import com.fantasyidler.BuildConfig
 import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.BoostRepository
+import com.fantasyidler.repository.PrestigeActionResult
+import com.fantasyidler.simulator.PrestigeBoosts
 import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
+import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TitleRepository
@@ -61,6 +66,7 @@ data class SeasonalBannerDisplay(
 
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
@@ -96,14 +102,22 @@ class InventoryViewModel @Inject constructor(
         val skillingDungeonNotes: Map<String, Int> = emptyMap(),
         val unlockedDungeons: List<String> = emptyList(),
         val xpBoostExpiresAt: Long = 0L,
+        val prestigeXpBoosts: Map<String, Long> = emptyMap(),
         val ironman: Boolean = false,
         val activeBlessingKey: String = "",
         val activeBlessingExpiresAt: Long = 0L,
         val activeBlessingXpPct: Int = 0,
+        val prayerCapeMult: Float = 1f,
         val towerXpBonusPct: Int = 0,
         val towerCoinBonusPct: Int = 0,
         val towerHpBonus: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
+        val capeScalingBySkill: Map<String, Int> = emptyMap(),
+        val prestigeUnspentBySkill: Map<String, Int> = emptyMap(),
+        val ironmanRaceLocked: Boolean = false,
+        val raceChangeTokens: Int = 0,
+        /** Active prestige-node effects: skill -> effect key -> total value. */
+        val prestigeEffects: Map<String, Map<String, Double>> = emptyMap(),
         val townBuildingTiers: Map<String, Int> = emptyMap(),
         val seasonalBanners: List<SeasonalBannerDisplay> = emptyList(),
         val unlockedTitles: Set<String> = emptySet(),
@@ -183,17 +197,26 @@ class InventoryViewModel @Inject constructor(
                 skillingDungeonNotes  = flags.skillingDungeonNotes,
                 unlockedDungeons      = flags.unlockedDungeons,
                 xpBoostExpiresAt        = flags.xpBoostExpiresAt,
+                prestigeXpBoosts        = flags.prestigeXpBoosts,
                 ironman                 = flags.ironman,
                 activeBlessingKey       = flags.activeBlessingKey,
                 activeBlessingExpiresAt = flags.activeBlessingExpiresAt,
                 activeBlessingXpPct     = run {
                     val b = ChurchRepository.activeBlessing(flags) ?: return@run 0
-                    if (b.type == BlessingType.XP) ((b.magnitude - 1f) * 100 + 0.5f).toInt() else 0
+                    if (b.type != BlessingType.XP) return@run 0
+                    val mult = blessingPrayerCapeMult(player, flags, gameData)
+                    ((ChurchRepository.effectiveMagnitude(b, mult) - 1f) * 100 + 0.5f).toInt()
                 },
+                prayerCapeMult          = blessingPrayerCapeMult(player, flags, gameData),
                 towerXpBonusPct         = flags.towerXpBonusPct,
                 towerCoinBonusPct       = flags.towerCoinBonusPct,
                 towerHpBonus            = flags.towerHpBonus,
                 skillPrestige           = flags.skillPrestige,
+                capeScalingBySkill      = boostRepo.capeScalingBySkill(flags),
+                prestigeUnspentBySkill  = boostRepo.unspentPointsBySkill(flags),
+                ironmanRaceLocked       = flags.ironmanRaceLocked,
+                raceChangeTokens        = inventory[PlayerRepository.RACE_CHANGE_TOKEN_ITEM] ?: 0,
+                prestigeEffects         = boostRepo.activeEffectsBySkill(flags),
                 townBuildingTiers       = flags.townBuildingTiers,
                 seasonalBanners         = buildSeasonalBannerDisplays(flags),
                 unlockedTitles          = flags.unlockedTitles,
@@ -445,6 +468,7 @@ class InventoryViewModel @Inject constructor(
         beardStyle: Int,
         beardColor: String,
         race: String,
+        useToken: Boolean = false,
     ) {
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
@@ -455,9 +479,26 @@ class InventoryViewModel @Inject constructor(
                 characterEyeStyle   = eyeStyle,
                 characterBeardStyle = beardStyle,
                 characterBeardColor = beardColor,
-                characterRace       = race,
             ))
+            // Free race change during debugging
+            if (BuildConfig.DEBUG) {
+                playerRepo.debugChangeRaceFree(race)
+                return@launch
+            }
+            // Race changes cost a Race Change Token or 10M coins (ironman: one legacy change, then locked).
+            when (playerRepo.changeCharacterRace(race, useToken)) {
+                PrestigeActionResult.LOCKED ->
+                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.race_change_ironman_locked)) }
+                PrestigeActionResult.CANT_AFFORD ->
+                    _extra.update { it.copy(snackbarMessage = context.getString(R.string.race_change_cannot_afford)) }
+                else -> {}
+            }
         }
+    }
+
+    /** Race -> skills with race-locked prestige branches, for the appearance sheet. */
+    val raceProficiencies: Map<String, List<String>> by lazy {
+        PrestigeBoosts.raceProficiencies(gameData.prestigeTrees)
     }
 
     fun equipTitle(id: String?) {

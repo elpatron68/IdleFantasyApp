@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
+import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.ChurchRepository
+import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
@@ -130,6 +132,8 @@ data class CraftingUiState(
     val isQueueFull: Boolean = false,
     /** Full XP multiplier for [selectedRecipe] (tool efficiency, pet, XP boost, blessing), matching what collection awards. */
     val craftXpMult: Double = 1.0,
+    /** Recipe keys gated behind prestige unlock nodes the player does not own. */
+    val hiddenRecipeKeys: Set<String> = emptySet(),
 ) {
     /** Returns how many times [recipe] can be crafted given [effectiveInventory]. */
     fun maxCraftable(recipe: CraftableRecipe): Int {
@@ -157,6 +161,7 @@ data class CraftingUiState(
 
 @HiltViewModel
 class CraftingViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
@@ -195,11 +200,11 @@ class CraftingViewModel @Inject constructor(
             val selectedEff = if (selectedRecipe != null) craftToolEfficiency(selectedRecipe, equipped) else 1.0f
             val perItemMs = if (selectedRecipe != null) {
                 val agility = levels[Skills.AGILITY] ?: 1
-                (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / selectedEff).toLong()
+                (SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60 / selectedEff).toLong()
             } else 0L
             val xpMult = if (selectedRecipe != null) {
                 val boostMult = if (flags.ironman) 1.0
-                                else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
+                                else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData))
                 val petPct = petBoostFor(player.pets, selectedRecipe.skillName, flags.ironman)
                 selectedEff * boostMult * (1.0 + petPct / 100.0)
             } else 1.0
@@ -220,6 +225,7 @@ class CraftingViewModel @Inject constructor(
                 craftPerItemMs     = perItemMs,
                 isQueueFull        = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
                 craftXpMult        = xpMult,
+                hiddenRecipeKeys   = boostRepo.gatedRecipeKeys - boostRepo.unlockedRecipeKeys(flags),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CraftingUiState())
@@ -415,6 +421,7 @@ class CraftingViewModel @Inject constructor(
     /** Starts or enqueues [qty] crafts of [recipe]. */
     fun craft(recipe: CraftableRecipe, qty: Int, ashKey: String? = null) {
         val state = uiState.value
+        if (recipe.key in state.hiddenRecipeKeys) return
 
         viewModelScope.launch {
             val player = playerRepo.getOrCreatePlayer()
@@ -427,9 +434,9 @@ class CraftingViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val agility   = state.skillLevels[Skills.AGILITY] ?: 1
                 val toolEff   = craftToolEfficiency(recipe, json.decodeFromString(player.equipped))
-                val perItemMs = (SkillSimulator.sessionDurationMs(agility, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / toolEff).toLong()
+                val perItemMs = (SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60 / toolEff).toLong()
                 val totalOutput = qty * recipe.outputQty
-                val xpQueueMult = if (flags.ironman) 1.0 else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags)
+                val xpQueueMult = if (flags.ironman) 1.0 else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData))
                 val queuePetPct = petBoostFor(player.pets, recipe.skillName, flags.ironman)
                 val action = QueuedAction(
                     skillName           = recipe.skillName,
@@ -474,6 +481,14 @@ class CraftingViewModel @Inject constructor(
             val levelAfter  = XpTable.levelForXp(xpAfter)
             val outputKey = if (ashKey != null && recipe.skillName == Skills.HERBLORE)
                 "enhanced_${recipe.outputKey}" else recipe.outputKey
+            // Cooking's pet (baby_kraken) is raid-only; every other craft skill rolls its
+            // pet 60 times per session at 1/1000, matching queued crafts.
+            val petDropKey = if (recipe.skillName == Skills.COOKING) null
+                else gameData.pets.values.firstOrNull { it.boostedSkill == recipe.skillName }?.id
+            val petDropped = petDropKey != null &&
+                (0 until 60).any { kotlin.random.Random.nextDouble() < 1.0 / 1000.0 }
+            val craftedItems = mutableMapOf(outputKey to recipe.outputQty * qty)
+            if (petDropped) craftedItems[petDropKey!!] = 1
             val frames = listOf(
                 SessionFrame(
                     minute      = 1,
@@ -482,7 +497,7 @@ class CraftingViewModel @Inject constructor(
                     xpAfter     = xpAfter,
                     levelBefore = levelBefore,
                     levelAfter  = levelAfter,
-                    items       = mapOf(outputKey to recipe.outputQty * qty),
+                    items       = craftedItems,
                     leveledUp   = levelAfter > levelBefore,
                     kills       = qty,
                 )
@@ -491,7 +506,7 @@ class CraftingViewModel @Inject constructor(
             val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val agilityLevel = levels[Skills.AGILITY] ?: 1
             // 1 item per minute, reduced by agility (same formula as gathering skills) and by tool efficiency
-            val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, flags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(flags)) / 60 / efficiency).toLong()
+            val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60 / efficiency).toLong()
 
             val framesJson = json.encodeToString(
                 json.serializersModule.serializer<List<SessionFrame>>(),

@@ -68,17 +68,17 @@ class SkillSimulatorPureTest {
     @Test
     fun `sessionDurationMs applies chronosMultiplier correctly`() {
         // Base 60 minutes = 3,600,000 ms
-        val baseMs = SkillSimulator.sessionDurationMs(1, 0, 1.0f)
+        val baseMs = SkillSimulator.sessionDurationMs(1, 0.0, 1.0f)
         assertEquals(3_600_000L, baseMs)
 
         // Chronos Spire Tier 1 (-2% reduction -> 0.98 multiplier)
         // 60 min * 0.98 = 58.8 min = 3,528,000 ms (no whole-minute rounding, issue #1486)
-        val tier1Ms = SkillSimulator.sessionDurationMs(1, 0, 0.98f)
+        val tier1Ms = SkillSimulator.sessionDurationMs(1, 0.0, 0.98f)
         assertEquals(3_528_000L, tier1Ms)
 
         // Chronos Spire Tier 3 (-6% reduction -> 0.94 multiplier)
         // 60 min * 0.94 = 56.4 min = 3,384,000 ms
-        val tier3Ms = SkillSimulator.sessionDurationMs(1, 0, 0.94f)
+        val tier3Ms = SkillSimulator.sessionDurationMs(1, 0.0, 0.94f)
         assertEquals(3_384_000L, tier3Ms)
     }
 }

@@ -73,6 +73,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
+import com.fantasyidler.repository.MercenaryRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.CookingRecipe
@@ -104,10 +105,12 @@ fun CombatScreen(
     initialDungeonKey:  String?            = null,
     initialBossKey:     String?            = null,
     onNavigateToTower:  () -> Unit         = {},
+    onNavigateToPrestige: (String) -> Unit = {},
 ) {
     val state            by viewModel.uiState.collectAsState()
     val invState         by inventoryVm.uiState.collectAsState()
     val context           = LocalContext.current
+    var showMercCamp     by remember { mutableStateOf(false) }
     val visibleDungeons   = remember(state.unlockedDungeons) {
         viewModel.dungeonList.filter { !it.loreUnlockOnly || it.name in state.unlockedDungeons }
     }
@@ -201,10 +204,13 @@ fun CombatScreen(
                         0 -> CombatSessionBanner(
                             session        = combatSession,
                             dungeons       = visibleDungeons,
-                            bosses         = viewModel.bossList(state.monumentComplete),
+                            // Raid bosses included: the banner resolves the boss's name,
+                            // emoji, and HP panel from this list.
+                            bosses         = viewModel.bossList(state.monumentComplete) + viewModel.raidBossList(),
+                            hiredMercs     = state.hiredMercs,
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
-                            skillPrestige  = state.skillPrestige,
+                            hpPrestigeBonus = state.hpPrestigeBonus,
                             towerHpBonus   = state.towerHpBonus,
                             attackBonus    = state.totalAttackBonus,
                             strengthBonus  = state.totalStrengthBonus,
@@ -228,9 +234,13 @@ fun CombatScreen(
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
                             isQueueFull         = state.isQueueFull,
+                            raidBosses          = viewModel.raidBossList(),
+                            hiredMercCount      = state.hiredMercs.size,
+                            maxParty            = MercenaryRepository.MAX_PARTY,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
+                            onOpenMercCamp      = { showMercCamp = true },
                         )
                         2 -> CombatGearTab(
                             equipped       = invState.equipped,
@@ -262,7 +272,7 @@ fun CombatScreen(
                             totalStrengthBonus = state.totalStrengthBonus,
                             totalDefenseBonus  = state.totalDefenseBonus,
                             skillPrestige      = state.skillPrestige,
-                            onPrestige         = if (state.ironman) null else viewModel::prestigeSkill,
+                            onOpenPrestige     = onNavigateToPrestige,
                         )
                     }
                 }
@@ -306,9 +316,13 @@ fun CombatScreen(
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
                             isQueueFull         = state.isQueueFull,
+                            raidBosses          = viewModel.raidBossList(),
+                            hiredMercCount      = state.hiredMercs.size,
+                            maxParty            = MercenaryRepository.MAX_PARTY,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
+                            onOpenMercCamp      = { showMercCamp = true },
                         )
                         1 -> CombatGearTab(
                             equipped       = invState.equipped,
@@ -340,7 +354,7 @@ fun CombatScreen(
                             totalStrengthBonus = state.totalStrengthBonus,
                             totalDefenseBonus  = state.totalDefenseBonus,
                             skillPrestige      = state.skillPrestige,
-                            onPrestige         = if (state.ironman) null else viewModel::prestigeSkill,
+                            onOpenPrestige     = onNavigateToPrestige,
                         )
                     }
                 }
@@ -369,6 +383,27 @@ fun CombatScreen(
     }
 
 
+    // Mercenary camp sheet (raid hiring)
+    if (showMercCamp) {
+        val mercSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        ModalBottomSheet(
+            onDismissRequest = { showMercCamp = false },
+            sheetState       = mercSheetState,
+            dragHandle       = { BottomSheetDefaults.DragHandle() },
+        ) {
+            ScaledSheetContent {
+                MercenaryCampSheet(
+                    pool           = state.mercPool,
+                    hiredMercs     = state.hiredMercs,
+                    dailyResetHour = state.dailyResetHour,
+                    maxParty       = MercenaryRepository.MAX_PARTY,
+                    onHire         = viewModel::hireMercenary,
+                    onDismissMerc  = viewModel::dismissMercenary,
+                )
+            }
+        }
+    }
+
     // Boss info / confirm sheet
     state.selectedBoss?.let { boss ->
         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -392,6 +427,8 @@ fun CombatScreen(
                 isQueueFull          = state.isQueueFull,
                 repeatCount          = state.selectedBossRepeatCount,
                 fullCoinKillsLeft    = state.bossFullCoinKillsLeft,
+                hiredMercs           = state.hiredMercs,
+                onOpenMercCamp       = { showMercCamp = true },
                 onWeaponSlotSelected = viewModel::selectWeaponSlot,
                 onPotionSelected     = viewModel::selectPotion,
                 onRepeatCountChanged = viewModel::selectBossRepeatCount,
@@ -472,10 +509,14 @@ private fun CombatSelectionList(
     towerBestFloor: Int = 0,
     bossKillCounts: Map<String, Int> = emptyMap(),
     isQueueFull: Boolean = false,
+    raidBosses: List<BossData> = emptyList(),
+    hiredMercCount: Int = 0,
+    maxParty: Int = 3,
     modifier: Modifier = Modifier,
     onDungeon: (DungeonData) -> Unit,
     onBoss: (BossData) -> Unit,
     onTower: () -> Unit = {},
+    onOpenMercCamp: () -> Unit = {},
 ) {
     val combatLvl = combatLevel(skillLevels)
 
@@ -509,6 +550,40 @@ private fun CombatSelectionList(
                 onTap    = { onBoss(boss) },
                 isQueueFull = isQueueFull,
             )
+        }
+        if (raidBosses.isNotEmpty()) {
+            item { CombatSectionHeader(stringResource(R.string.raid_section_title)) }
+            item {
+                Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+                    Text(
+                        text  = stringResource(R.string.raid_section_desc),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text       = stringResource(R.string.raid_party_status, hiredMercCount, maxParty),
+                            style      = MaterialTheme.typography.labelLarge,
+                            color      = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier   = Modifier.weight(1f),
+                        )
+                        TextButton(onClick = onOpenMercCamp) {
+                            Text(stringResource(R.string.merc_camp_open))
+                        }
+                    }
+                }
+            }
+            items(raidBosses) { boss ->
+                BossRow(
+                    boss     = boss,
+                    // Raid levels are flavor, not a gate; hiring mercenaries is the real bar.
+                    unlocked = true,
+                    runCount = bossKillCounts[boss.id] ?: 0,
+                    onTap    = { onBoss(boss) },
+                    isQueueFull = isQueueFull,
+                )
+            }
         }
         item { Spacer(Modifier.height(16.dp)) }
     }
@@ -708,7 +783,7 @@ private fun CombatSkillsTab(
     totalStrengthBonus: Int,
     totalDefenseBonus: Int,
     skillPrestige: Map<String, Int> = emptyMap(),
-    onPrestige: ((String) -> Unit)? = null,
+    onOpenPrestige: ((String) -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var tappedSkill by remember { mutableStateOf<String?>(null) }
@@ -740,7 +815,7 @@ private fun CombatSkillsTab(
                 xp            = skillXp[key]     ?: 0L,
                 gearBonus     = gearBonus,
                 prestigeLevel = skillPrestige[key] ?: 0,
-                onPrestige    = onPrestige?.let { cb -> { cb(key) } },
+                onOpenPrestige = onOpenPrestige?.let { cb -> { cb(key) } },
                 onClick       = { tappedSkill = key },
             )
         }
@@ -755,34 +830,13 @@ private fun CombatSkillRow(
     xp: Long,
     gearBonus: Int = 0,
     prestigeLevel: Int = 0,
-    onPrestige: (() -> Unit)? = null,
+    onOpenPrestige: (() -> Unit)? = null,
     onClick: () -> Unit = {},
 ) {
     val context  = LocalContext.current
     val name     = GameStrings.skillName(context, skillKey)
     val emoji    = GameStrings.skillEmoji(skillKey)
     val progress = xpProgressFraction(xp)
-    var showPrestigeConfirm by remember { mutableStateOf(false) }
-
-    if (showPrestigeConfirm) {
-        val nextPrestige = prestigeLevel + 1
-        AlertDialog(
-            onDismissRequest = { showPrestigeConfirm = false },
-            title = { Text(stringResource(R.string.prestige_confirm_title, name)) },
-            text  = { Text(stringResource(R.string.prestige_confirm_message_stat, name, nextPrestige * 5)) },
-            confirmButton = {
-                TextButton(onClick = {
-                    showPrestigeConfirm = false
-                    onPrestige?.invoke()
-                }) { Text(stringResource(R.string.prestige)) }
-            },
-            dismissButton = {
-                TextButton(onClick = { showPrestigeConfirm = false }) {
-                    Text(stringResource(R.string.btn_cancel))
-                }
-            },
-        )
-    }
 
     Column(Modifier.fillMaxWidth()) {
         Row(
@@ -871,7 +925,7 @@ private fun CombatSkillRow(
                 color            = MaterialTheme.colorScheme.primary,
                 trackColor       = MaterialTheme.colorScheme.surfaceVariant,
             )
-            if (prestigeLevel > 0 || (onPrestige != null && level >= 99)) {
+            if (prestigeLevel > 0 || (onOpenPrestige != null && level >= 99)) {
                 Spacer(Modifier.height(4.dp))
                 Row(
                     modifier              = Modifier.fillMaxWidth(),
@@ -879,32 +933,23 @@ private fun CombatSkillRow(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text  = "★".repeat(prestigeLevel) + "☆".repeat((3 - prestigeLevel).coerceAtLeast(0)),
+                        text  = "★×$prestigeLevel",
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )
-                    when {
-                        onPrestige != null && level >= 99 && prestigeLevel < 3 -> {
-                            CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
-                                TextButton(
-                                    onClick = { showPrestigeConfirm = true },
-                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                                    modifier = Modifier.height(24.dp),
-                                ) {
-                                    Text(
-                                        text  = stringResource(R.string.prestige),
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.primary,
-                                    )
-                                }
+                    if (onOpenPrestige != null) {
+                        CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
+                            TextButton(
+                                onClick = { onOpenPrestige() },
+                                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
+                                modifier = Modifier.height(24.dp),
+                            ) {
+                                Text(
+                                    text  = stringResource(R.string.prestige),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.primary,
+                                )
                             }
-                        }
-                        prestigeLevel >= 3 -> {
-                            Text(
-                                text  = stringResource(R.string.prestige_max),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
                         }
                     }
                 }

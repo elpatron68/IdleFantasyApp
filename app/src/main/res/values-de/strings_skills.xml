@@ -64,7 +64,7 @@
     <string name="tree_maple_tree_name">Ahornbaum</string>
     <string name="tree_yew_tree_name">Eibe</string>
     <string name="tree_magic_tree_name">Magischer Baum</string>
-    <string name="tree_redwood_tree_name">Redwood Tree</string> <!-- untranslated -->
+    <string name="tree_redwood_tree_name">Mammutbaum</string>
 
     <!-- ===== Agility course names and descriptions ===== -->
     <string name="agility_beginner_course_name">Einsteigerkurs</string>

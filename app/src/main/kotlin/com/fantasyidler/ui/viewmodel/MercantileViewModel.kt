@@ -12,7 +12,9 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.ChurchRepository
+import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
@@ -61,6 +63,7 @@ data class MercantileUiState(
 
 @HiltViewModel
 class MercantileViewModel @Inject constructor(
+    private val boostRepo: BoostRepository,
     @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
@@ -94,9 +97,9 @@ class MercantileViewModel @Inject constructor(
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
             val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-            val capeMult     = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, flags.skillPrestige, gameData.equipment, flags.ironman)
-            val prestigeMult = if (flags.ironman) 1f else 1f + (flags.skillPrestige[Skills.MERCANTILE] ?: 0) * 0.10f
-            val blessingCoinMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags) *
+            val capeMult     = resolveCapeMultiplier(Skills.MERCANTILE, equippedCape, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
+            val prestigeMult = boostRepo.coinMultiplier(Skills.MERCANTILE, flags).toFloat()
+            val blessingCoinMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData)) *
                 PlayerRepository.gooseCoinMultiplier(json.decodeFromString<List<OwnedPet>>(player.pets)).toFloat()
             extra.copy(
                 isLoading        = false,
@@ -142,9 +145,8 @@ class MercantileViewModel @Inject constructor(
                 val xpRange = matchedKey?.let { route.xpRanges[it.toString()] } ?: XpRange(1, 1)
 
                 val expectedRawXp = (xpRange.min + xpRange.max) * 30L
-                val xpQueueMult = if (mercFlags.ironman) 1.0 else (if (mercFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(mercFlags)
-                val prestigeLevel = mercFlags.skillPrestige[Skills.MERCANTILE] ?: 0
-                val prestigeMult = 1.0 + prestigeLevel * 0.10
+                val xpQueueMult = if (mercFlags.ironman) 1.0 else (if (mercFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(mercFlags, blessingPrayerCapeMult(player, mercFlags, gameData))
+                val prestigeMult = 1.0 + boostRepo.prestigeXpPct(Skills.MERCANTILE, mercFlags) / 100.0
                 val estimatedXpGain = (expectedRawXp * xpQueueMult * prestigeMult).toLong()
 
                 val enqueued = playerRepo.enqueueAction(
@@ -153,7 +155,7 @@ class MercantileViewModel @Inject constructor(
                         activityKey         = routeId,
                         skillDisplayName    = "Mercantile",
                         estimatedXpGain     = estimatedXpGain,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, mercFlags.skillPrestige[Skills.AGILITY] ?: 0, townRepo.playerSessionDurationMultiplier(mercFlags)),
+                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, boostRepo.sessionFloorReductionMin(mercFlags), townRepo.playerSessionDurationMultiplier(mercFlags)),
                         coinRefund          = route.coinCost.toLong(),
                     )
                 )
@@ -180,7 +182,9 @@ class MercantileViewModel @Inject constructor(
                 val startXp = xp[Skills.MERCANTILE] ?: 0L
                 val result  = MercantileSimulator.simulate(
                     route, startXp, agilityLevel,
-                    agilityPrestige = mercFlags.skillPrestige[Skills.AGILITY] ?: 0,
+                    floorReductionMin = boostRepo.sessionFloorReductionMin(mercFlags),
+                    petDropKey        = gameData.pets.values.firstOrNull { it.boostedSkill == Skills.MERCANTILE }?.id,
+                    petDropChance     = 1.0 / 1000.0,
                     chronosMultiplier = townRepo.playerSessionDurationMultiplier(mercFlags),
                 )
                 val framesJson = json.encodeToString(

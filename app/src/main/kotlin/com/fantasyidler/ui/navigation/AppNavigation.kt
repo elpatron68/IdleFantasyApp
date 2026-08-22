@@ -31,6 +31,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.EnterExitState
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
@@ -41,6 +48,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.notification.SessionNotificationManager
 import com.fantasyidler.ui.screen.AppBannerHost
 import com.fantasyidler.ui.screen.BoneAltarScreen
+import com.fantasyidler.ui.screen.HouseScreen
 import com.fantasyidler.ui.screen.CarnivalScreen
 import com.fantasyidler.ui.screen.TowerScreen
 import com.fantasyidler.ui.screen.ChurchScreen
@@ -50,6 +58,7 @@ import com.fantasyidler.ui.screen.CombatScreen
 import com.fantasyidler.ui.screen.FarmingScreen
 import com.fantasyidler.ui.screen.GuildDetailScreen
 import com.fantasyidler.ui.screen.GuildHallScreen
+import com.fantasyidler.ui.screen.PrestigeDetailScreen
 import com.fantasyidler.ui.screen.HomeScreen
 import com.fantasyidler.ui.screen.InnScreen
 import com.fantasyidler.ui.screen.OnboardingScreen
@@ -121,7 +130,7 @@ fun AppNavigation(
 
     val tabSubScreens: Map<String, Set<String>> = mapOf(
         "home"   to setOf("shop", "settings", "inn", Screen.WorkerSkills.route, "guild_hall", "guild_detail/{guild}", "church", "slayer", "carnival", Screen.SeasonalEvent.route),
-        "skills" to setOf("farming", "mercantile", Screen.Slayer.route, Screen.BoneAltar.route),
+        "skills" to setOf("farming", "mercantile", Screen.Slayer.route, Screen.BoneAltar.route, Screen.PrestigeDetail.route),
         "combat" to setOf(Screen.Tower.route),
     )
 
@@ -204,17 +213,23 @@ fun AppNavigation(
             startDestination = Screen.Home.route,
             modifier         = Modifier.padding(innerPadding),
         ) {
-            composable(Screen.Skills.route)   {
+            paneComposable(Screen.Skills.route)   {
                 SkillsScreen(
                     onNavigateToSlayer    = { navController.navigate(Screen.Slayer.route) },
                     onNavigateToBoneAltar = { navController.navigate(Screen.BoneAltar.route) },
+                    onNavigateToPrestige  = { skill -> navController.navigate(Screen.PrestigeDetail.createRoute(skill)) },
                 )
             }
-            composable(Screen.Farming.route) { entry ->
+            paneComposable(Screen.Farming.route) { entry ->
                 FarmingScreen(onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() })
             }
-            composable(Screen.Combat.route)   { CombatScreen(onNavigateToTower = { navController.navigate(Screen.Tower.route) }) }
-            composable(Screen.Home.route)     {
+            paneComposable(Screen.Combat.route)   {
+                CombatScreen(
+                    onNavigateToTower    = { navController.navigate(Screen.Tower.route) },
+                    onNavigateToPrestige = { skill -> navController.navigate(Screen.PrestigeDetail.createRoute(skill)) },
+                )
+            }
+            paneComposable(Screen.Home.route)     {
                 HomeScreen(
                     onNavigateToSettings     = { navController.navigate(Screen.Settings.route) },
                     onNavigateToSaveSlots    = { navController.navigate(Screen.Settings.saveSlotsRoute) },
@@ -226,26 +241,32 @@ fun AppNavigation(
                     onNavigateToMonument     = { navController.navigate(Screen.Monument.route) },
                     onNavigateToSlayer       = { navController.navigate(Screen.Slayer.route) },
                     onNavigateToBuilder      = { navController.navigate(Screen.Builder.route) },
+                    onNavigateToHouse        = { navController.navigate(Screen.House.route) },
                     onNavigateToCarnival     = { navController.navigate(Screen.Carnival.route) },
                     onNavigateToSeasonalEvent = { navController.navigate(Screen.SeasonalEvent.route) },
                 )
             }
-            composable(Screen.Quests.route)   { QuestsScreen() }
-            composable(Screen.Profile.route)  { ProfileScreen(onNavigateToCombat = { navController.navigate(Screen.Combat.gearRoute) }) }
-            composable(Screen.Combat.gearRoute) { CombatScreen(startOnGear = true) }
-            composable(
+            paneComposable(Screen.Quests.route)   { QuestsScreen() }
+            paneComposable(Screen.Profile.route)  {
+                ProfileScreen(
+                    onNavigateToCombat   = { navController.navigate(Screen.Combat.gearRoute) },
+                    onNavigateToPrestige = { skill -> navController.navigate(Screen.PrestigeDetail.createRoute(skill)) },
+                )
+            }
+            paneComposable(Screen.Combat.gearRoute) { CombatScreen(startOnGear = true) }
+            paneComposable(
                 route     = Screen.Combat.presetDungeonRoute,
                 arguments = listOf(navArgument("dungeonKey") { type = NavType.StringType }),
             ) { entry ->
                 CombatScreen(initialDungeonKey = entry.arguments?.getString("dungeonKey"))
             }
-            composable(
+            paneComposable(
                 route     = Screen.Combat.presetBossRoute,
                 arguments = listOf(navArgument("bossKey") { type = NavType.StringType }),
             ) { entry ->
                 CombatScreen(initialBossKey = entry.arguments?.getString("bossKey"))
             }
-            composable(Screen.Settings.route) { entry ->
+            paneComposable(Screen.Settings.route) { entry ->
                 SettingsScreen(
                     onBack                         = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onReopenTutorial               = { onboardingVm.reopen() },
@@ -255,12 +276,12 @@ fun AppNavigation(
                     onNavigateToArtCredits         = { navController.navigate(Screen.Settings.artCreditsRoute) },
                 )
             }
-            composable(Screen.Settings.homeScreenRoute) { entry ->
+            paneComposable(Screen.Settings.homeScreenRoute) { entry ->
                 HomeScreenSettingsScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Settings.saveSlotsRoute) { entry ->
+            paneComposable(Screen.Settings.saveSlotsRoute) { entry ->
                 SaveSlotsScreen(
                     onBack     = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onSwitched = {
@@ -271,18 +292,18 @@ fun AppNavigation(
                     },
                 )
             }
-            composable(Screen.Settings.artCreditsRoute) { entry ->
+            paneComposable(Screen.Settings.artCreditsRoute) { entry ->
                 ArtCreditsScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Settings.themeSettingsRoute) { entry ->
+            paneComposable(Screen.Settings.themeSettingsRoute) { entry ->
                 ThemeSettingsScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onNavigateToThemeEditor = { source, blank -> navController.navigate(Screen.Settings.themeEditorRouteWithSource(source, blank)) },
                 )
             }
-            composable(
+            paneComposable(
                 route     = Screen.Settings.themeEditorRoute,
                 arguments = listOf(
                     navArgument("source") { type = NavType.StringType; defaultValue = "dark" },
@@ -295,10 +316,10 @@ fun AppNavigation(
                     onBack    = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Shop.route) { entry ->
+            paneComposable(Screen.Shop.route) { entry ->
                 ShopScreen(onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() })
             }
-            composable(Screen.Inn.route) { entry ->
+            paneComposable(Screen.Inn.route) { entry ->
                 InnScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onNavigateToWorkerSkills = { slot ->
@@ -307,7 +328,7 @@ fun AppNavigation(
                     },
                 )
             }
-            composable(
+            paneComposable(
                 route     = Screen.WorkerSkills.route,
                 arguments = listOf(navArgument("initialSlot") { type = NavType.IntType; defaultValue = 1 }),
             ) { entry ->
@@ -317,53 +338,63 @@ fun AppNavigation(
                     onBack      = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.GuildHall.route) { entry ->
+            paneComposable(Screen.PrestigeDetail.route) { entry ->
+                PrestigeDetailScreen(
+                    onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                )
+            }
+            paneComposable(Screen.GuildHall.route) { entry ->
                 GuildHallScreen(
                     onBack             = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onNavigateToGuild  = { guild -> navController.navigate(Screen.GuildDetail.createRoute(guild)) },
                 )
             }
-            composable(Screen.GuildDetail.route) { entry ->
+            paneComposable(Screen.GuildDetail.route) { entry ->
                 GuildDetailScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Church.route) { entry ->
+            paneComposable(Screen.Church.route) { entry ->
                 ChurchScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Monument.route) { entry ->
+            paneComposable(Screen.Monument.route) { entry ->
                 MonumentScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Slayer.route) { entry ->
+            paneComposable(Screen.Slayer.route) { entry ->
                 SlayerScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.BoneAltar.route) { entry ->
+            paneComposable(Screen.BoneAltar.route) { entry ->
                 BoneAltarScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Builder.route) { entry ->
+            paneComposable(Screen.Builder.route) { entry ->
                 BuilderScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Carnival.route) { entry ->
+            paneComposable(Screen.House.route) { entry ->
+                HouseScreen(
+                    onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
+                )
+            }
+            paneComposable(Screen.Carnival.route) { entry ->
                 CarnivalScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.Tower.route) { entry ->
+            paneComposable(Screen.Tower.route) { entry ->
                 TowerScreen(
                     onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                 )
             }
-            composable(Screen.SeasonalEvent.route) { entry ->
+            paneComposable(Screen.SeasonalEvent.route) { entry ->
                 SeasonalEventScreen(
                     onBack               = { if (navController.currentBackStackEntry == entry) navController.popBackStack() },
                     onNavigateToExpedition = { key -> navController.navigate(Screen.Combat.presetDungeonRoute(key)) },
@@ -373,4 +404,33 @@ fun AppNavigation(
         }
     }
     AppBannerHost()
+}
+
+/**
+ * Like [composable], but eats all touch input while the pane is animating out, so taps
+ * during a navigation transition can't reach the outgoing screen's buttons (issue #1497).
+ */
+private fun NavGraphBuilder.paneComposable(
+    route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
+) {
+    composable(route, arguments) { entry ->
+        Box {
+            content(entry)
+            if (transition.targetState == EnterExitState.PostExit) {
+                Box(
+                    Modifier
+                        .matchParentSize()
+                        .pointerInput(Unit) {
+                            awaitPointerEventScope {
+                                while (true) {
+                                    awaitPointerEvent(PointerEventPass.Initial).changes.forEach { it.consume() }
+                                }
+                            }
+                        }
+                )
+            }
+        }
+    }
 }

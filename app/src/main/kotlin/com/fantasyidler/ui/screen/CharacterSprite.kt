@@ -26,9 +26,66 @@ private val SMALL_RACES = setOf("halfling", "gnome", "dwarf")
 private val HGD_RACES   = setOf("halfling", "gnome", "dwarf")
 private val ELF_GNOME   = setOf("elf", "gnome")
 
-private fun loadLayer(context: Context, path: String): ImageBitmap? =
+internal fun loadLayer(context: Context, path: String): ImageBitmap? =
     try { context.assets.open(path).use { BitmapFactory.decodeStream(it) }?.asImageBitmap() }
     catch (_: Exception) { null }
+
+/** Asset paths for one static character frame, in draw order. */
+internal data class CharacterLayerPaths(
+    val body: String,
+    val eyes: String,
+    val head: String?,
+    val beard: String?,
+    val action: String,
+    /** Small races draw eyes/hair/beard shifted down by 2 source pixels. */
+    val smallRace: Boolean,
+) {
+    companion object {
+        const val FRAME_W = 64
+        const val FRAME_H = 36
+    }
+}
+
+internal fun characterLayerPaths(
+    race: String,
+    skinTone: Int,
+    hairStyle: Int,
+    hairColor: String,
+    eyeStyle: Int,
+    beardStyle: Int,
+    beardColor: String,
+): CharacterLayerPaths {
+    val raceKey    = race.lowercase()
+    val isSmall    = raceKey in SMALL_RACES
+    val isHgd      = raceKey in HGD_RACES
+    val isElfGnome = raceKey in ELF_GNOME
+
+    val base         = "sprites/characters/generic"
+    val hairFolder   = if (isElfGnome) "hair/elf_gnome" else "hair/standard"
+    val beardFolder  = if (isElfGnome) "beard/elf_gnome" else "beard/generic"
+    val actionFolder = if (isHgd) "action/hgd" else "action/standard"
+    val actionPrefix = if (isHgd) "action_generic_hgd" else "action_generic"
+    val hairNum  = hairStyle.toString().padStart(2, '0')
+    val eyeNum   = eyeStyle.toString().padStart(2, '0')
+    val beardNum = beardStyle.toString().padStart(2, '0')
+
+    return CharacterLayerPaths(
+        body = "$base/body/${raceKey}_skin$skinTone.png",
+        eyes = "$base/eyes/eyes$eyeNum.png",
+        head = when {
+            hairStyle == 0 -> null
+            isElfGnome -> "$base/$hairFolder/Hair${hairNum}_eg_${hairColor}_skin$skinTone.png"
+            else -> "$base/$hairFolder/Hair${hairNum}_${hairColor}_skin$skinTone.png"
+        },
+        beard = when {
+            beardStyle == 0 -> null
+            isElfGnome -> "$base/$beardFolder/Beard${beardNum}_eg_$beardColor.png"
+            else -> "$base/$beardFolder/Beard${beardNum}_$beardColor.png"
+        },
+        action = "$base/$actionFolder/${actionPrefix}_skin$skinTone.png",
+        smallRace = isSmall,
+    )
+}
 
 @Composable
 fun CharacterSprite(
