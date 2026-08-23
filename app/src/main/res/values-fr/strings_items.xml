@@ -797,8 +797,8 @@
     <string name="item_archers_ring_name">Anneau des Archers</string>
     <string name="item_archers_ring_desc">Augmente la précision à distance. Nécessite le niveau 60 en Commerce pour l\'acheter.</string>
     <string name="item_attack_cape_name">Cape d\'Attaque</string>
-    <string name="item_baby_kraken_name">Baby Kraken</string> <!-- untranslated -->
-    <string name="item_balrog_name">Gothic Ember, Ancient Flame of the Deep</string> <!-- untranslated -->
+    <string name="item_baby_kraken_name">Bébé Kraken</string>
+    <string name="item_balrog_name">Braisette Gothique, Ancienne Flamme des Profondeurs</string>
     <string name="item_balrog_whip_name">Fouet Enflammé de Braise Gothique</string>
     <string name="item_balrog_wings_name">Ailes de Braise Gothique</string>
     <string name="item_beef_name">Bœuf Cuit</string>
@@ -822,7 +822,7 @@
     <string name="item_crafting_guild_cape_name">Cape de la Guilde des Artisans</string>
     <string name="item_deep_iron_pickaxe_name">Pioche des Profondeurs en Fer</string>
     <string name="item_defense_cape_name">Cape de Défense</string>
-    <string name="item_demon_lord_name">Demon Lord</string> <!-- untranslated -->
+    <string name="item_demon_lord_name">Seigneur Démon</string>
     <string name="item_divine_frying_pan_name">Poêle à Frire Divine</string>
     <string name="item_divine_grappling_hook_name">Grappin Divin</string>
     <string name="item_divine_hammer_name">Marteau Divin</string>
@@ -833,7 +833,7 @@
     <string name="item_dragon_boots_name">Bottes de Dragon</string>
     <string name="item_dragon_longsword_name">Épée Longue de Dragon</string>
     <string name="item_dragon_scimitar_name">Cimeterre de Dragon</string>
-    <string name="item_dragon_whelp_name">Dragon Whelp</string> <!-- untranslated -->
+    <string name="item_dragon_whelp_name">Dragonnet</string>
     <string name="item_dwarven_axe_name">Hache Naine</string>
     <string name="item_dwarven_boots_name">Bottes Naines</string>
     <string name="item_dwarven_fishing_rod_name">Canne à Pêche Naine</string>
@@ -851,7 +851,7 @@
     <string name="item_dwarven_sword_name">Épée Naine</string>
     <string name="item_dwarven_tinderbox_name">Briquet à Amadou Nain</string>
     <string name="item_dwarven_warhammer_name">Marteau de Guerre Nain</string>
-    <string name="item_ent_name">Ent</string> <!-- untranslated -->
+    <string name="item_ent_name">Ent</string>
     <string name="item_farming_cape_name">Cape d\'Agriculture</string>
     <string name="item_farming_guild_cape_name">Cape de la Guilde des Agriculteurs</string>
     <string name="item_firemaking_cape_name">Cape d\'Incinération</string>
@@ -865,7 +865,7 @@
     <string name="item_hellfire_staff_name">Bâton de Flammes Infernales</string>
     <string name="item_herblore_guild_cape_name">Cape de la Guilde des Herboristes</string>
     <string name="item_hp_cape_name">Cape de PV</string>
-    <string name="item_imp_pet_name">Imp Pet</string> <!-- untranslated -->
+    <string name="item_imp_pet_name">Diablotin de Compagnie</string>
     <string name="item_iron_arrow_tip_name">Pointes de Flèche en Fer</string>
     <string name="item_iron_boots_name">Bottes en Fer</string>
     <string name="item_iron_chainbody_name">Cotte de Maille en Fer</string>
@@ -876,15 +876,15 @@
     <string name="item_iron_plateskirt_name">Jupe de Plaques en Fer</string>
     <string name="item_iron_square_shield_name">Bouclier Carré en Fer</string>
     <string name="item_ironwood_axe_name">Hache en Bois de Fer en Fer</string>
-    <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
+    <string name="item_king_black_dragon_name">Roi Dragon Noir</string>
     <string name="item_kraken_name">Kraken</string>
     <string name="item_kraken_tentacle_name">Tentacule du Kraken</string>
     <string name="item_mages_guild_cape_name">Cape de la Guilde des Mages</string>
     <string name="item_magic_cape_name">Cape Magique</string>
     <string name="item_magic_longbow_name">Arc Long Magique</string>
     <string name="item_magic_shortbow_name">Arc Court Magique</string>
-    <string name="item_elven_shortbow_name">Elven Shortbow</string> <!-- untranslated -->
-    <string name="item_elven_longbow_name">Elven Longbow</string> <!-- untranslated -->
+    <string name="item_elven_shortbow_name">Arc Court elfique</string>
+    <string name="item_elven_longbow_name">Arc Long Elfique</string>
     <string name="item_maple_shortbow_name">Arc Court en Érable</string>
     <string name="item_mercantile_guild_cape_name">Cape de la Guilde des Marchands</string>
     <string name="item_mining_cape_name">Cape d\'Extraction</string>
@@ -916,7 +916,7 @@
     <string name="item_ring_of_the_seas_name">Anneau Des Mers</string>
     <string name="item_ring_of_wealth_name">Anneau De Richesse</string>
     <string name="item_ring_of_wealth_desc">Augmente légèrement le nombre de pièces obtenues. Nécessite le niveau 40 en Commerce pour l\'acheter.</string>
-    <string name="item_rock_golem_name">Rock Golem</string> <!-- untranslated -->
+    <string name="item_rock_golem_name">Golem de Pierre</string>
     <string name="item_rogues_lockpick_name">Rossignol des Malfrats</string>
     <string name="item_runecrafting_cape_name">Cape de Gravure de Runes</string>
     <string name="item_runecrafting_guild_cape_name">Cape de la Guilde des Graveurs de Runes</string>
@@ -957,9 +957,9 @@
     <string name="item_steel_plateskirt_name">Jupe de Plaques en Acier</string>
     <string name="item_steel_square_shield_name">Bouclier Carré en Acier</string>
     <string name="item_strength_cape_name">Cape de Force en Acier</string>
-    <string name="item_tangleroot_name">Tangleroot</string> <!-- untranslated -->
+    <string name="item_tangleroot_name">Racine Enchevêtrée</string>
     <string name="item_thieving_guild_cape_name">Cape de la Guilde des Voleurs</string>
-    <string name="item_tiny_templar_name">Tiny Templar</string> <!-- untranslated -->
+    <string name="item_tiny_templar_name">Petit Templier</string>
     <string name="item_tormented_necklace_name">Collier Tourmenté</string>
     <string name="item_tormented_necklace_desc">Confère des bonus magiques exceptionnels. Nécessite le niveau 99 en Commerce pour l\'acheter.</string>
     <string name="item_trident_of_the_seas_name">Trident Des Mers</string>
@@ -1006,8 +1006,8 @@
     <string name="item_yew_longbow_desc">Un arc long façonné à partir de bûches d\'if.</string>
     <string name="item_magic_shortbow_desc">Un arc court façonné à partir de bûches magiques.</string>
     <string name="item_magic_longbow_desc">Un arc long façonné à partir de bûches magiques.</string>
-    <string name="item_elven_shortbow_desc">A swift bow strung with elven silk. Only elven hands know the fletching.</string> <!-- untranslated -->
-    <string name="item_elven_longbow_desc">A tall elven warbow of layered redwood. Only elven hands know the fletching.</string> <!-- untranslated -->
+    <string name="item_elven_shortbow_desc">Un arc rapide dont la corde est faite de soie elfique. Seules les mains des elfes connaissent cet art du bois.</string>
+    <string name="item_elven_longbow_desc">Un grand arc de guerre elfique en bois rouge stratifié. Seules les mains des elfes connaissent cet art du bois.</string>
     <string name="item_tower_crossbow_name">Arbalète de la Tour</string>
     <string name="item_tower_crossbow_desc">Une arbalète de précision façonnée à partir de métal de la Tour.</string>
     <string name="item_arcane_staff_desc">Un bâton récupéré dans les Ruines des Arcanes, vibrant encore de l\'énergie magique contenue issue de la catastrophe qui a détruit la flèche située au-dessus.</string>

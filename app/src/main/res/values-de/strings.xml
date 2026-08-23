@@ -1127,7 +1127,7 @@
     <string name="house_rooms_owned">Räume: %1$d</string>
     <string name="house_construction_level">Construction level %1$d</string> <!-- untranslated -->
     <string name="house_add_room">Raum hinzufügen (%1$s)</string>
-    <string name="house_add_room_locked">Raum hinzufügen (Lv %1$s)</string>
+    <string name="house_add_room_locked">Raum hinzufügen (Lv %1$d)</string>
     <string name="house_mode_place_item">%1$s platzieren. Ziehe oder tippe auf eine Stelle in deinem Haus.</string>
     <string name="house_mode_place_room">Einen neuen 3x3-Raum platzieren. Er muss an einen bestehenden Raum angrenzen.</string>
     <string name="house_error_level">Your Construction level is too low.</string> <!-- untranslated -->

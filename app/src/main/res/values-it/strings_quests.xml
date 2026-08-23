@@ -437,12 +437,12 @@
     <string name="quest_treasure_hunter_6_objective">Raccogli 15 Ossa di Troll dai tuoi combattimenti</string>
 
     <!-- Daily quest verbs -->
-    <string name="daily_verb_mining">Estrarre</string>
-    <string name="daily_verb_fishing">Pescare</string>
-    <string name="daily_verb_woodcutting">Tagliare</string>
-    <string name="daily_verb_smithing">Forgiare</string>
-    <string name="daily_verb_cooking">Cucinare</string>
-    <string name="daily_verb_combat">Sconfiggere</string>
+    <string name="daily_verb_mining">Estrai</string>
+    <string name="daily_verb_fishing">Pesca</string>
+    <string name="daily_verb_woodcutting">Taglia</string>
+    <string name="daily_verb_smithing">Forgia</string>
+    <string name="daily_verb_cooking">Cucina</string>
+    <string name="daily_verb_combat">Sconfiggi</string>
 
     <!-- Daily quest names -->
     <string name="quest_daily_mine_iron_name">Minatore di Ferro</string>
