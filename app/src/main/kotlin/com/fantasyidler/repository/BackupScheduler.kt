@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.DocumentsContract
 import android.net.Uri
+import android.util.Log
 import com.fantasyidler.data.model.toExport
 import com.fantasyidler.receiver.BackupAlarmReceiver
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -74,7 +75,10 @@ class BackupScheduler @Inject constructor(
     suspend fun performBackup(playerRepo: PlayerRepository, frequency: String = ""): Boolean {
         val flags = playerRepo.getFlags()
         if (flags.backupFolderUri.isEmpty()) return false
-        return try {
+        var tempUri: Uri? = null
+        var oldDocsDeleted = false
+        var failureMsg = ""
+        val ok = try {
             val sessions = buildList {
                 sessionRepo.getActiveSession()?.let { add(it.toExport()) }
                 addAll(sessionRepo.getAllCompletedSessions().map { it.toExport() })
@@ -88,38 +92,100 @@ class BackupScheduler @Inject constructor(
             val treeDocId = DocumentsContract.getTreeDocumentId(treeUri)
             val cr        = context.contentResolver
 
-            val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, treeDocId)
-            var existingDocId: String? = null
-            cr.query(
-                childrenUri,
-                arrayOf(DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME),
-                null, null, null,
-            )?.use { cursor ->
-                while (cursor.moveToNext()) {
-                    val name = cursor.getString(cursor.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
-                    if (name == "fantasyidler_auto.json" || name == "fantasyidler_auto") {
-                        existingDocId = cursor.getString(cursor.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DOCUMENT_ID))
-                        break
-                    }
+            val created = DocumentsContract.createDocument(
+                cr,
+                DocumentsContract.buildDocumentUriUsingTree(treeUri, treeDocId),
+                "application/json",
+                TEMP_DISPLAY_NAME,
+            ) ?: throw IllegalStateException("backup provider refused to create temp document")
+            tempUri = created
+
+            cr.openOutputStream(created, "w")?.use { it.write(jsonBytes) }
+                ?: throw IllegalStateException("backup provider would not open output stream")
+
+            val verified = cr.openInputStream(created)?.use { input ->
+                val cap = ByteArray(jsonBytes.size + 1)
+                var filled = 0
+                while (filled < cap.size) {
+                    val read = input.read(cap, filled, cap.size - filled)
+                    if (read < 0) break
+                    filled += read
                 }
+                cap.copyOf(filled)
+            } ?: throw IllegalStateException("backup provider would not reopen temp document for verification")
+            if (!verified.contentEquals(jsonBytes)) {
+                throw IllegalStateException("temp document bytes differ from exported save")
             }
 
-            // Delete the existing file before creating a fresh one to avoid SAF truncation issues
-            // that leave old bytes after the new JSON on some devices.
-            existingDocId?.let { docId ->
+            val currentTempId = DocumentsContract.getDocumentId(created)
+            val doomedIds = childDocuments(cr, treeUri, treeDocId)
+                .filter { (docId, name) ->
+                    docId != currentTempId &&
+                        (name.startsWith(TEMP_DISPLAY_NAME) || name.startsWith(FINAL_DISPLAY_NAME))
+                }
+                .map { it.first }
+            oldDocsDeleted = true
+            doomedIds.forEach { docId ->
                 DocumentsContract.deleteDocument(cr, DocumentsContract.buildDocumentUriUsingTree(treeUri, docId))
             }
-            val docUri  = DocumentsContract.buildDocumentUriUsingTree(treeUri, treeDocId)
-            val fileUri = DocumentsContract.createDocument(cr, docUri, "application/json", "fantasyidler_auto")
-            fileUri?.let { cr.openOutputStream(it, "w")?.use { s -> s.write(jsonBytes) } }
 
-            // Schedule the next occurrence. setExactAndAllowWhileIdle is one-shot so
-            // each firing must manually reschedule the next alarm.
-            val effectiveFreq = frequency.ifEmpty { flags.backupFrequency }
-            if (effectiveFreq.isNotEmpty()) reschedule(effectiveFreq)
+            DocumentsContract.renameDocument(cr, created, FINAL_DISPLAY_NAME)
+                ?: throw IllegalStateException("backup provider failed to swap temp document to final name")
+            tempUri = null
+
+            val swappedIn = childDocuments(cr, treeUri, treeDocId)
+                .any { it.second.startsWith(FINAL_DISPLAY_NAME) && !it.second.startsWith(TEMP_DISPLAY_NAME) }
+            if (!swappedIn) {
+                throw IllegalStateException("renamed backup document not found after swap")
+            }
+            try {
+                val effectiveFreq = frequency.ifEmpty { flags.backupFrequency }
+                if (effectiveFreq.isNotEmpty()) reschedule(effectiveFreq)
+            } catch (e: Exception) {
+                Log.w(TAG, "Post-swap backup steps failed", e)
+            }
 
             true
-        } catch (_: Exception) { false }
+        } catch (e: Exception) {
+            Log.w(TAG, "Auto-backup failed", e)
+            failureMsg = e.message ?: e.javaClass.simpleName
+            false
+        }
+
+        if (!ok && !oldDocsDeleted) {
+            tempUri?.let { temp ->
+                try { DocumentsContract.deleteDocument(context.contentResolver, temp) } catch (_: Exception) {}
+            }
+        }
+
+        try {
+            playerRepo.updateFlagsAtomically { f ->
+                f.copy(
+                    lastBackupAt    = System.currentTimeMillis(),
+                    lastBackupOk    = ok,
+                    lastBackupError = failureMsg,
+                )
+            }
+        } catch (_: Exception) {}
+
+        return ok
+    }
+
+    private fun childDocuments(cr: android.content.ContentResolver, treeUri: Uri, treeDocId: String): List<Pair<String, String>> {
+        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, treeDocId)
+        val docs = mutableListOf<Pair<String, String>>()
+        cr.query(
+            childrenUri,
+            arrayOf(DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME),
+            null, null, null,
+        )?.use { cursor ->
+            while (cursor.moveToNext()) {
+                val docId = cursor.getString(cursor.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DOCUMENT_ID))
+                val name  = cursor.getString(cursor.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
+                docs += docId to name
+            }
+        }
+        return docs
     }
 
     /**
@@ -139,6 +205,9 @@ class BackupScheduler @Inject constructor(
     }.timeInMillis
 
     companion object {
+        private const val TAG = "BackupScheduler"
+        private const val TEMP_DISPLAY_NAME = "fantasyidler_auto.tmp"
+        private const val FINAL_DISPLAY_NAME = "fantasyidler_auto"
         private const val REQUEST_CODE = 9001
         const val EXTRA_FREQUENCY = "backup_frequency"
     }

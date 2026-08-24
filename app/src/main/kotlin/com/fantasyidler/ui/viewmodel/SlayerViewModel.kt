@@ -209,7 +209,7 @@ class SlayerViewModel @Inject constructor(
                     snackbarMessage = if (result.success) {
                         val b = result.breakdown!!
                         val skillDisplay = GameStrings.skillName(context, skillKey)
-                        val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeXpPct)?.let { s -> " $s" } ?: ""
+                        val suffix = xpMultiplierBreakdown(b.baseXp, b.boostFactor, b.blessingMult, b.prestigeXpPct)?.let { s -> " $s" } ?: ""
                         context.withAppLocale().getString(R.string.slayer_lamp_purchased, b.finalXp.formatXp(), skillDisplay) + suffix
                     } else context.withAppLocale().getString(R.string.slayer_not_enough_points)
                 )
@@ -321,7 +321,7 @@ class SlayerViewModel @Inject constructor(
                 is ForetelResult.Success ->
                     _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_success, GameStrings.enemyName(context, result.task.enemyKey))) }
                 ForetelResult.QueueFull ->
-                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_queue_full)) }
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_foretell_queue_full, state.maxForetellSlots)) }
                 ForetelResult.NoEligibleTasks ->
                     _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.slayer_no_eligible_tasks)) }
                 is ForetelResult.NotEnoughBones ->

@@ -502,7 +502,7 @@ private fun ForetellSection(
                 }
             } else {
                 Text(
-                    text  = stringResource(R.string.slayer_foretell_queue_full),
+                    text  = stringResource(R.string.slayer_foretell_queue_full, maxForetellSlots),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

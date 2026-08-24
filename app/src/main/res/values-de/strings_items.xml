@@ -666,7 +666,7 @@
     <string name="item_strongmans_sigil_name">Siegel des Machthabers</string>
     <string name="item_strongmans_sigil_desc">Ein schwerer eiserner Ring, in den das Zeichen des Champions des Machthabers eingeätzt ist. Erhöht Stärke.</string>
     <string name="item_carnival_cape_name">Jahrmarkt-Umhang</string>
-    <string name="item_carnival_cape_desc" formatted="false">A vibrant cape worn by carnival champions. Grants 5% more tickets from Carnival sessions.</string> <!-- untranslated -->
+    <string name="item_carnival_cape_desc" formatted="false">Ein farbenfroher Umhang, der von Karnevalsmeistern getragen wird. Gewährt 5% mehr Tickets aus Karnevalsaktivitäten.</string>
 
     <!-- Herblore potions -->
     <string name="item_attack_brew_name">Angriffs-Gebräu</string>
@@ -918,8 +918,8 @@
     <string name="item_ring_of_wealth_desc">Erhöht die Anzahl der fallengelassenen Münzen geringfügig. Zum Kauf ist Handel-Level 40 erforderlich.</string>
     <string name="item_rock_golem_name">Steingolem</string>
     <string name="item_rogues_lockpick_name">Gaunerdietrich</string>
-    <string name="item_runecrafting_cape_name">Runecrafting Cape</string> <!-- untranslated -->
-    <string name="item_runecrafting_guild_cape_name">Runecrafting Guild Cape</string> <!-- untranslated -->
+    <string name="item_runecrafting_cape_name">Umhang der Runenherstellung</string>
+    <string name="item_runecrafting_guild_cape_name">Umhang der Runenhersteller Gilde</string>
     <string name="item_runite_arrow_tip_name">Runitpfeilspitzen</string>
     <string name="item_runite_boots_name">Runit-Stiefel</string>
     <string name="item_runite_chainbody_name">Runite Chainbody</string> <!-- untranslated -->
@@ -943,7 +943,7 @@
     <string name="item_silver_emerald_ring_name">Silver Emerald Ring</string> <!-- untranslated -->
     <string name="item_silver_ruby_necklace_name">Silver Ruby Necklace</string> <!-- untranslated -->
     <string name="item_silver_ruby_ring_name">Silver Ruby Ring</string> <!-- untranslated -->
-    <string name="item_slayer_guild_cape_name">Slayer Guild Cape</string> <!-- untranslated -->
+    <string name="item_slayer_guild_cape_name">Umhang der Trophäenjägergilde</string>
     <string name="item_smithing_cape_name">Smithing Cape</string> <!-- untranslated -->
     <string name="item_smithing_guild_cape_name">Smithing Guild Cape</string> <!-- untranslated -->
     <string name="item_steel_arrow_tip_name">Stahlpfeilspitzen</string>
@@ -956,17 +956,17 @@
     <string name="item_steel_med_helmet_name">Steel Med Helmet</string> <!-- untranslated -->
     <string name="item_steel_plateskirt_name">Steel Plateskirt</string> <!-- untranslated -->
     <string name="item_steel_square_shield_name">Steel Square Shield</string> <!-- untranslated -->
-    <string name="item_strength_cape_name">Strength Cape</string> <!-- untranslated -->
+    <string name="item_strength_cape_name">Umhang der Stärke</string>
     <string name="item_tangleroot_name">Tangleroot</string> <!-- untranslated -->
-    <string name="item_thieving_guild_cape_name">Thieving Guild Cape</string> <!-- untranslated -->
+    <string name="item_thieving_guild_cape_name">Umhang der Diebesgilde</string>
     <string name="item_tiny_templar_name">Tiny Templar</string> <!-- untranslated -->
     <string name="item_tormented_necklace_name">Halskette der Pein</string>
     <string name="item_tormented_necklace_desc">Bietet außergewöhnliche Magie-Boni. Zum Kauf ist Handel-Level 99 erforderlich.</string>
     <string name="item_trident_of_the_seas_name">Trident Of The Seas</string> <!-- untranslated -->
-    <string name="item_warriors_guild_cape_name">Warriors Guild Cape</string> <!-- untranslated -->
+    <string name="item_warriors_guild_cape_name">Umhang der Kriegergilde</string>
     <string name="item_willow_shortbow_name">Willow Shortbow</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_name">Woodcutting Cape</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_name">Woodcutting Guild Cape</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_name">Umhang der Holzfällerei</string>
+    <string name="item_woodcutting_guild_cape_name">Umhang der Holzfällergilde</string>
     <string name="item_yew_longbow_name">Yew Longbow</string> <!-- untranslated -->
     <string name="item_yew_shortbow_name">Yew Shortbow</string> <!-- untranslated -->
     <string name="item_void_reaver_name">Leeren-Spalter</string>
@@ -1075,7 +1075,7 @@
     <string name="item_tower_boots_desc">Stiefel, geschmiedet in der tiefsten Schmiede des Turms.</string>
     <string name="item_tower_shield_name">Schild des Turms</string>
     <string name="item_tower_shield_desc">Ein massiver Schild, aus Turmstein gehauen.</string>
-    <string name="item_balrog_wings_desc">The mighty wings of the Gothic Ember, imbued with dark power. The ultimate armor.</string> <!-- untranslated -->
+    <string name="item_balrog_wings_desc">Die mächtigen Flügel der Gothischen Glut, erfüllt von dunkler Macht. Die ultimative Rüstung.</string>
     <string name="item_divine_helm_name">Göttlicher Helm</string>
     <string name="item_divine_helm_desc">Ein strahlender Helm, von den Göttern gesegnet. Er wehrt Schläge ab, die jeden Sterblichen zu Fall bringen würden.</string>
     <string name="item_divine_platebody_name">Divine Platebody</string> <!-- untranslated -->
@@ -1099,60 +1099,60 @@
     <string name="item_silver_diamond_ring_desc">A silver ring with a diamond. Balanced combat.</string> <!-- untranslated -->
     <string name="item_tower_ring_name">Ring des Turms</string>
     <string name="item_tower_ring_desc">Ein Ring, geschmiedet aus dem Stein des unendlichen Turms.</string>
-    <string name="item_ring_of_flame_desc">Forged in the fires of the deep earth. Those who wear it feel the Gothic Ember\'s strength.</string> <!-- untranslated -->
+    <string name="item_ring_of_flame_desc">Geschmiedet im Feuer der Tiefen der Erde. Wer es trägt, spürt die Kraft der Gothischen Glut.</string>
     <string name="item_ring_of_dragons_might_desc">Ein Ring, der mit Drachenfeuer erfüllt ist. Erhöht die Nahkampfstärke erheblich.</string>
     <string name="item_ring_of_the_seas_desc">Ein Ring, der von der Tiefsee gesegnet wurde. Verbessert die Präzision und Kraft bei Fernangriffen.</string>
     <string name="item_kraken_tentacle_desc">Ein sich windender Tentakelring, der die arkane Kraft des Kraken bündelt.</string>
-    <string name="item_tower_cape_name">Tower Cape</string> <!-- untranslated -->
-    <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
-    <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
-    <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
-    <string name="item_mining_guild_cape_desc" formatted="false">Awarded for reaching Mining Guild level 10. Grants 5% more ore per session.</string> <!-- untranslated -->
-    <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
-    <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
-    <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
-    <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
-    <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_desc" formatted="false">Awarded for reaching Smithing Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_cooking_cape_desc" formatted="false">Awarded for reaching level 99 Cooking. Grants 10% more food per session.</string> <!-- untranslated -->
-    <string name="item_cooking_guild_cape_desc" formatted="false">Awarded for reaching Cooking Guild level 10. Grants 5% more food per session.</string> <!-- untranslated -->
-    <string name="item_fletching_cape_desc" formatted="false">Awarded for reaching level 99 Fletching. Grants 10% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_fletching_guild_cape_desc" formatted="false">Awarded for reaching Fletching Guild level 10. Grants 5% more arrows per session.</string> <!-- untranslated -->
-    <string name="item_crafting_cape_desc" formatted="false">Awarded for reaching level 99 Crafting. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_crafting_guild_cape_desc" formatted="false">Awarded for reaching Crafting Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_cape_desc" formatted="false">Awarded for reaching level 99 Firemaking. Grants 10% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_firemaking_guild_cape_desc" formatted="false">Awarded for reaching Firemaking Guild level 10. Grants 5% more ashes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_cape_desc" formatted="false">Awarded for reaching level 99 Runecrafting. Grants 10% more runes per session.</string> <!-- untranslated -->
-    <string name="item_runecrafting_guild_cape_desc" formatted="false">Awarded for reaching Runecrafting Guild level 10. Grants 5% more runes per session.</string> <!-- untranslated -->
-    <string name="item_herblore_cape_name">Herblore Cape</string> <!-- untranslated -->
-    <string name="item_herblore_cape_desc" formatted="false">Awarded for reaching level 99 Herblore. Grants 10% more potions per session.</string> <!-- untranslated -->
-    <string name="item_herblore_guild_cape_desc" formatted="false">Awarded for reaching Herblore Guild level 10. Grants 5% more potions per session.</string> <!-- untranslated -->
-    <string name="item_construction_cape_name">Construction Cape</string> <!-- untranslated -->
-    <string name="item_construction_cape_desc" formatted="false">Awarded for reaching level 99 Construction. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_prayer_cape_desc" formatted="false">Awarded for reaching level 99 Prayer. Strengthens your active blessing by 10%.</string> <!-- untranslated -->
-    <string name="item_prayer_guild_cape_desc" formatted="false">Awarded for reaching Prayer Guild level 10. Strengthens your active blessing by 5%.</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_name">Mercantile Cape</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_agility_cape_desc" formatted="false">Awarded for reaching level 99 Agility. Grants 10% more XP per session.</string> <!-- untranslated -->
-    <string name="item_agility_guild_cape_desc" formatted="false">Awarded for reaching Agility Guild level 10. Grants 5% more XP per session.</string> <!-- untranslated -->
-    <string name="item_slayer_cape_name">Slayer Cape</string> <!-- untranslated -->
-    <string name="item_slayer_cape_desc" formatted="false">Awarded for reaching level 99 Slayer. Grants 10% more Slayer points.</string> <!-- untranslated -->
-    <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
-    <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
-    <string name="item_defense_cape_desc" formatted="false">Awarded for reaching level 99 Defense. Grants 10% bonus Defense XP.</string> <!-- untranslated -->
-    <string name="item_warriors_guild_cape_desc" formatted="false">Awarded for reaching Warriors Guild level 10. Grants 5% bonus Attack, Strength, and Defense XP.</string> <!-- untranslated -->
-    <string name="item_ranged_cape_desc" formatted="false">Awarded for reaching level 99 Ranged. Grants 10% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_archers_guild_cape_desc" formatted="false">Awarded for reaching Archers Guild level 10. Grants 5% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_magic_cape_desc" formatted="false">Awarded for reaching level 99 Magic. Grants 10% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_mages_guild_cape_desc" formatted="false">Awarded for reaching Mages Guild level 10. Grants 5% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_slayer_guild_cape_desc" formatted="false">Awarded for reaching Slayers Guild level 10. Grants 5% bonus Slayer XP.</string> <!-- untranslated -->
-    <string name="item_hp_cape_desc" formatted="false">Awarded for reaching level 99 HP. Grants 10% bonus Hitpoints XP.</string> <!-- untranslated -->
+    <string name="item_tower_cape_name">Umhang des Turms</string>
+    <string name="item_tower_cape_desc">Ein fließender Umhang, der die Energie des Turms ausstrahlt.</string>
+    <string name="item_mining_cape_desc" formatted="false">Umhang des Bergbau</string>
+    <string name="item_construction_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Baumeistergilde verliehen. Gewährt 5% mehr Möbel pro Aktivität.</string>
+    <string name="item_mining_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Bergbaugilde verliehen. Gewährt 5% mehr Erz pro Aktivität.</string>
+    <string name="item_fishing_cape_desc" formatted="false">Umhang der Anglerei</string>
+    <string name="item_fishing_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Anglergilde vergeben. Gewährt 5% mehr Fisch pro Aktivität.</string>
+    <string name="item_woodcutting_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 im Holzfällen vergeben. Gewährt 10% mehr Holzscheite pro Aktivität.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Holzfällergilde vergeben. Gewährt 5% mehr Holz pro Aktivität.</string>
+    <string name="item_farming_cape_desc" formatted="false">Wird für das Erreichen von Level 99 in Landwirtschaft verliehen. Gewährt 10% mehr Ernte pro Aktivität.</string>
+    <string name="item_farming_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Bauerngilde verliehen. Gewährt 5% mehr Ertrag pro Ernte.</string>
+    <string name="item_thieving_cape_name">Umhang des Diebstahls</string>
+    <string name="item_thieving_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Stehlen vergeben. Gewährt 10% mehr erfolgreiche Taschendiebstähle pro Aktivität.</string>
+    <string name="item_thieving_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Diebesgilde vergeben. Gewährt 5% mehr erfolgreiche Taschendiebstähle pro Aktivität.</string>
+    <string name="item_smithing_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Schmieden vergeben. Gewährt 10% mehr Gegenstände pro Aktivität.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Schmiedegilde vergeben. Gewährt 5% mehr Gegenstände pro Aktivität.</string>
+    <string name="item_cooking_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Kochen vergeben. Gewährt 10% mehr Nahrung pro Aktivität.</string>
+    <string name="item_cooking_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Küchengilde vergeben. Gewährt 5% mehr Nahrung pro Aktivität.</string>
+    <string name="item_fletching_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Pfeilbau vergeben. Gewährt 10% mehr Pfeile pro Aktivität.</string>
+    <string name="item_fletching_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Gilde der Pfeilmacher vergeben. Gewährt 5% mehr Pfeile pro Aktivität.</string>
+    <string name="item_crafting_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Schmuckfertigung vergeben. Gewährt 10% mehr Gegenstände pro Aktivität.</string>
+    <string name="item_crafting_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Kunsthandwerksgilde vergeben. Gewährt 5% mehr Pfeile pro Aktivität.</string>
+    <string name="item_firemaking_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Feuermachen vergeben. Gewährt 10% mehr Asche pro Aktivität.</string>
+    <string name="item_firemaking_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Gilde der Feuermacher vergeben. Gewährt 5% mehr Asche pro Aktivität.</string>
+    <string name="item_runecrafting_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in der Runenherstellung vergeben. Gewährt 10% mehr Runen pro Aktivität.</string>
+    <string name="item_runecrafting_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 in der Gilde der Runenhersteller vergeben. Gewährt 5% mehr Runen pro Aktivität.</string>
+    <string name="item_herblore_cape_name">Umhang der Kräuterkunde</string>
+    <string name="item_herblore_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Kräuterkunde vergeben. Gewährt 10% mehr Tränke pro Sitzung.</string>
+    <string name="item_herblore_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 in der Alchemistengilde vergeben. Gewährt 5% mehr Tränke pro Aktivität.</string>
+    <string name="item_construction_cape_name">Umhang des Bauen</string>
+    <string name="item_construction_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Bauen vergeben. Gewährt 10% mehr Gegenstände pro Aktivität.</string>
+    <string name="item_prayer_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Gebete vergeben. Verstärkt deinen aktiven Segen um 10%.</string>
+    <string name="item_prayer_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Gilde der Betenden vergeben. Verstärkt deinen aktiven Segen um 5%.</string>
+    <string name="item_mercantile_cape_name">Umhang der Händler</string>
+    <string name="item_mercantile_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 im Handel vergeben. Gewährt 10% bessere Ladenpreise und Handelserträge.</string>
+    <string name="item_mercantile_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Handelsgilde verliehen. Gewährt 5% bessere Ladenpreise und Handelserträge.</string>
+    <string name="item_agility_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Beweglichkeit vergeben. Gewährt 10% mehr EP pro Aktivität.</string>
+    <string name="item_agility_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Gilde der Geschickten vergeben. Gewährt 5% mehr EP pro Aktivität.</string>
+    <string name="item_slayer_cape_name">Umhang der Trophäenjäger</string>
+    <string name="item_slayer_cape_desc" formatted="false">Wird für das Erreichen von Level 99 in Trophäenjagd vergeben. Gewährt 10% mehr Trophäenjagd-Punkte.</string>
+    <string name="item_attack_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Angriff vergeben. Gewährt 10% mehr Angriff-EP pro Aktivität.</string>
+    <string name="item_strength_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Stärke vergeben. Gewährt 10% mehr Stärke-EP pro Aktivität.</string>
+    <string name="item_defense_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Verteidung vergeben. Gewährt 10% mehr Verteidigung-EP pro Aktivität.</string>
+    <string name="item_warriors_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Kriegergilde vergeben. Gewährt einen Bonus von 5% auf Angriff-, Stärke- und Verteidigung-EP.</string>
+    <string name="item_ranged_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 im Fernkampf vergeben. Gewährt einen Bonus von 10% auf die Fernkampf-EP.</string>
+    <string name="item_archers_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Gilde der Bogenschützen verliehen. Gewährt einen Bonus von 5% auf Fernkampf-EP.</string>
+    <string name="item_magic_cape_desc" formatted="false">Wird für das Erreichen von Stufe 99 in Magie vergeben. Gewährt einen Bonus von 10% auf Magie-EP.</string>
+    <string name="item_mages_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Magiergilde vergeben. Gewährt einen Bonus von 5% auf Magie-EP.</string>
+    <string name="item_slayer_guild_cape_desc" formatted="false">Wird für das Erreichen von Stufe 10 der Trophäenjägergilde vergeben. Gewährt einen Bonus von 5% auf Trophäenjagd-EP.</string>
+    <string name="item_hp_cape_desc" formatted="false">Wird für das Erreichen von 99 in Lebenspunkte vergeben. Gewährt einen Bonus von 10% auf die Lebenspunkte-EP.</string>
     <string name="item_deep_iron_pickaxe_desc">Forged from ore found in the Collapsed Mine\'s deepest shafts. Strikes with uncanny precision.</string> <!-- untranslated -->
     <string name="item_dwarven_pickaxe_desc">Eine meisterhaft gefertigte Zwergen-Spitzhacke. Das beste Bergbauwerkzeug, das je hergestellt wurde.</string>
     <string name="item_forge_pickaxe_desc">Tempered in the flames of the Ancient Forge itself. The rarest and most powerful pickaxe in existence.</string> <!-- untranslated -->
@@ -1216,7 +1216,7 @@
     <string name="item_divine_lockpick_desc">A lockpick touched by divine light. Every lock yields to it.</string> <!-- untranslated -->
     <string name="item_wraithbone_ring_desc">A pale ring carved from wight bone during the Gloomharvest. Steadies the hand and the heart.</string> <!-- untranslated -->
     <string name="item_reaper_scythe_desc">The Hollow King\'s own harvest tool. It reaps more than wheat.</string> <!-- untranslated -->
-    <string name="item_gloomweave_cape_desc">Woven from dusk and lantern smoke at the Night Market. Only sold during the Gloomharvest.</string> <!-- untranslated -->
+    <string name="item_gloomweave_cape_desc">Gewebt aus der Abenddämmerung und dem Rauch der Laternen auf dem Nachtmarkt. Wird nur während der Düsterernte verkauft.</string>
     <string name="item_gilded_full_helmet_desc">A runite full helmet wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_platebody_desc">A runite platebody wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->
     <string name="item_gilded_kiteshield_desc">A runite kiteshield wrapped in monument gold. Dropped by the Vault Guardian.</string> <!-- untranslated -->

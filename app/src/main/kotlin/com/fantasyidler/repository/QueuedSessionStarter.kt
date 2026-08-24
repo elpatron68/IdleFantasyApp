@@ -294,11 +294,16 @@ class QueuedSessionStarter @Inject constructor(
         val prayerCapeMult   = resolveCapeMultiplier("prayer", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
         // Recorded on the session so collection can detect a mid-session prestige reset
         // (isSkillSessionStillEligible) instead of gating on an unrelated difficulty formula.
-        val levelAtStart = when (action.skillName) {
-            "boss", "combat", "tower" -> combatLevelFrom(levels)
-            "expedition" -> gameData.skillingDungeons[action.activityKey]?.skill?.let { levels[it] } ?: 1
-            else -> levels[action.skillName] ?: 1
-        }
+        // Floored at the queue-time level: a prestige after queueing must not launder the
+        // pre-prestige plan into level-1 sessions that pay out untouched.
+        val levelAtStart = maxOf(
+            when (action.skillName) {
+                "boss", "combat", "tower" -> combatLevelFrom(levels)
+                "expedition" -> gameData.skillingDungeons[action.activityKey]?.skill?.let { levels[it] } ?: 1
+                else -> levels[action.skillName] ?: 1
+            },
+            action.levelAtQueue,
+        )
 
         when (action.skillName) {
             Skills.MINING -> {

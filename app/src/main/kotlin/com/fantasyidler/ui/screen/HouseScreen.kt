@@ -42,10 +42,13 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -80,6 +83,8 @@ import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -88,6 +93,7 @@ import com.fantasyidler.R
 import com.fantasyidler.data.json.HouseSpriteRect
 import com.fantasyidler.data.json.HouseTileDef
 import com.fantasyidler.data.model.HouseRoom
+import com.fantasyidler.repository.HouseBillLine
 import com.fantasyidler.repository.HouseDirection
 import com.fantasyidler.repository.HouseRepository
 import com.fantasyidler.ui.viewmodel.HouseEditMode
@@ -96,6 +102,7 @@ import com.fantasyidler.ui.viewmodel.HouseViewModel
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.drawableByName
 import com.fantasyidler.util.formatCoins
+import com.fantasyidler.util.formatXp
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.unit.Density
@@ -259,7 +266,7 @@ fun HouseScreen(
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
     val atlas = remember { loadHouseAtlas(context) }
-    var editing by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(false) }
+    val editing = state.editing
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
 
@@ -277,8 +284,7 @@ fun HouseScreen(
                     if (atlas != null && !state.isLoading) {
                         if (editing) {
                             TextButton(onClick = {
-                                viewModel.cancelMode()
-                                editing = false
+                                viewModel.setEditing(false)
                             }) { Text(stringResource(R.string.house_done)) }
                         } else {
                             IconButton(onClick = {
@@ -288,7 +294,7 @@ fun HouseScreen(
                             }) {
                                 Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.house_share))
                             }
-                            TextButton(onClick = { editing = true }) {
+                            TextButton(onClick = { viewModel.setEditing(true) }) {
                                 Text(stringResource(R.string.house_edit))
                             }
                         }
@@ -314,6 +320,7 @@ fun HouseScreen(
             HouseCanvas(state, viewModel, atlas, editing)
             if (editing) {
                 ModeBanner(state, viewModel)
+                BillBar(state, viewModel)
                 HousePalette(state, viewModel, atlas)
             }
             Spacer(Modifier.height(24.dp))
@@ -328,6 +335,29 @@ fun HouseScreen(
     }
     if (state.groundPickerOpen && atlas != null) {
         GroundSheet(state, viewModel, atlas)
+    }
+    if (state.billSheetOpen) {
+        BillSheet(state, viewModel)
+    }
+    if (state.blueprintSheetOpen) {
+        BlueprintSheet(state, viewModel)
+    }
+    if (state.discardConfirmOpen) {
+        AlertDialog(
+            onDismissRequest = { viewModel.setDiscardConfirmOpen(false) },
+            title = { Text(stringResource(R.string.house_discard_confirm_title)) },
+            text = { Text(stringResource(R.string.house_discard_confirm_message)) },
+            confirmButton = {
+                TextButton(onClick = viewModel::discardDraft) {
+                    Text(stringResource(R.string.house_discard_build), color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.setDiscardConfirmOpen(false) }) {
+                    Text(stringResource(R.string.btn_cancel))
+                }
+            },
+        )
     }
 }
 
@@ -359,13 +389,11 @@ private fun HouseHeaderRow(state: HouseUiState, viewModel: HouseViewModel) {
         }
         if (nextRoom != null) {
             val cost = viewModel.discountedTier(nextRoom, 1, state)
-            OutlinedButton(
-                onClick = { viewModel.enterPlaceRoom() },
-                enabled = state.constructionLevel >= nextRoom.level,
-            ) {
+            OutlinedButton(onClick = { viewModel.enterPlaceRoom() }) {
                 Text(
                     if (state.constructionLevel >= nextRoom.level)
-                        stringResource(R.string.house_add_room, cost.coins.formatCoins())
+                        stringResource(R.string.house_add_room,
+                            stringResource(R.string.house_cost_coins, cost.coins.formatCoins()))
                     else stringResource(R.string.house_add_room_locked, nextRoom.level)
                 )
             }
@@ -383,7 +411,11 @@ private fun ModeBanner(state: HouseUiState, viewModel: HouseViewModel) {
         is HouseEditMode.MoveRoom -> stringResource(R.string.house_mode_move_room)
         HouseEditMode.Select -> return
     }
-    val costLine = (mode as? HouseEditMode.PlaceItem)?.let { viewModel.costSummary(it.key, state) }
+    val costLine = when (mode) {
+        is HouseEditMode.PlaceItem -> viewModel.costSummary(mode.key, state)
+        HouseEditMode.PlaceRoom -> viewModel.roomCostSummary(state)
+        else -> null
+    }
     Surface(
         shape = RoundedCornerShape(12.dp),
         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -409,6 +441,291 @@ private fun ModeBanner(state: HouseUiState, viewModel: HouseViewModel) {
                 Text(stringResource(R.string.btn_cancel))
             }
         }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Bill of sale + blueprints
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun BillBar(state: HouseUiState, viewModel: HouseViewModel) {
+    val bill = state.bill ?: return
+    val affordable = viewModel.canAffordBill(bill, state)
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp),
+    ) {
+        Row(
+            modifier = Modifier.padding(start = 12.dp, end = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = when {
+                    !bill.isEmpty -> stringResource(R.string.house_bill_cost, bill.netCoins.formatCoins())
+                    state.hasDraftChanges -> stringResource(R.string.house_bill_changes_free)
+                    else -> stringResource(R.string.house_bill_no_changes)
+                },
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = if (!bill.isEmpty) FontWeight.Bold else null,
+                color = when {
+                    !bill.isEmpty && !affordable -> MaterialTheme.colorScheme.error
+                    !bill.isEmpty || state.hasDraftChanges -> MaterialTheme.colorScheme.onSurface
+                    else -> MaterialTheme.colorScheme.onSurfaceVariant
+                },
+                modifier = Modifier.weight(1f),
+            )
+            TextButton(
+                onClick = { viewModel.setBillSheetOpen(true) },
+                enabled = !bill.isEmpty || state.hasDraftChanges,
+            ) { Text(stringResource(R.string.house_bill_open)) }
+            TextButton(onClick = { viewModel.setBlueprintSheetOpen(true) }) {
+                Text(stringResource(R.string.house_blueprints))
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun BillSheet(state: HouseUiState, viewModel: HouseViewModel) {
+    val bill = state.bill ?: return
+    val context = LocalContext.current
+    val affordable = viewModel.canAffordBill(bill, state)
+    ModalBottomSheet(onDismissRequest = { viewModel.setBillSheetOpen(false) }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp)
+                .padding(bottom = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.house_bill_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            if (bill.lines.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.house_bill_changes_free),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            bill.lines.forEach { line ->
+                val credit = line.kind == HouseBillLine.Kind.SHRINK_CREDIT
+                val label = when (line.kind) {
+                    HouseBillLine.Kind.ITEM ->
+                        "${viewModel.itemDisplayName(line.itemKey ?: "")} x${line.units}"
+                    HouseBillLine.Kind.NEW_ROOM ->
+                        stringResource(R.string.house_bill_new_room, line.roomNumber)
+                    HouseBillLine.Kind.EXPAND ->
+                        stringResource(R.string.house_bill_expand_room, line.roomNumber, line.units)
+                    HouseBillLine.Kind.SHRINK_CREDIT ->
+                        stringResource(R.string.house_bill_shrink_credit, line.roomNumber, line.units)
+                }
+                val costParts = buildList {
+                    if (line.coins > 0) add(stringResource(R.string.house_cost_coins, line.coins.formatCoins()))
+                    line.materials.forEach { (k, v) -> add("$v ${GameStrings.itemName(context, k)}") }
+                }
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(label, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                    Text(
+                        text = (if (credit) "+" else "") + costParts.joinToString(", "),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = if (credit) MaterialTheme.colorScheme.tertiary
+                                else MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.weight(1.4f),
+                    )
+                }
+            }
+            val netMaterials = bill.netMaterials().filterValues { it > 0 }
+            if (bill.netCoins > 0 || netMaterials.isNotEmpty()) {
+                HorizontalDivider()
+                Text(
+                    text = stringResource(R.string.house_bill_materials_header),
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                if (bill.netCoins > 0) {
+                    val enough = state.coins >= bill.netCoins
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            stringResource(R.string.house_bill_coins_total, bill.netCoins.formatCoins()),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (enough) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.error,
+                        )
+                        Text(
+                            state.coins.formatCoins(),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                netMaterials.entries.sortedBy { it.key }.forEach { (key, need) ->
+                    val have = state.inventory[key] ?: 0
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            GameStrings.itemName(context, key),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (have >= need) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.error,
+                        )
+                        Text(
+                            "$have / $need",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (have >= need) MaterialTheme.colorScheme.onSurfaceVariant
+                                    else MaterialTheme.colorScheme.error,
+                        )
+                    }
+                }
+            }
+            if (bill.xp > 0) {
+                Text(
+                    text = stringResource(R.string.house_bill_xp_total, bill.xp.formatXp()),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.tertiary,
+                )
+            }
+            if (state.constructionLevel < bill.requiredLevel) {
+                Text(
+                    text = stringResource(R.string.house_bill_level_required, bill.requiredLevel),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Spacer(Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                OutlinedButton(
+                    onClick = { viewModel.setDiscardConfirmOpen(true) },
+                    enabled = state.hasDraftChanges || !bill.isEmpty,
+                    modifier = Modifier.weight(1f),
+                ) { Text(stringResource(R.string.house_discard_build), color = MaterialTheme.colorScheme.error) }
+                Button(
+                    onClick = viewModel::purchaseBuild,
+                    enabled = affordable && (state.hasDraftChanges || !bill.isEmpty),
+                    modifier = Modifier.weight(1f),
+                ) {
+                    Text(stringResource(
+                        if (bill.isEmpty) R.string.house_apply_changes else R.string.house_purchase_build))
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun BlueprintSheet(state: HouseUiState, viewModel: HouseViewModel) {
+    var nameDialogSlot by remember { mutableStateOf<Int?>(null) }
+    var loadConfirmSlot by remember { mutableStateOf<Int?>(null) }
+    ModalBottomSheet(onDismissRequest = { viewModel.setBlueprintSheetOpen(false) }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+                .padding(bottom = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.house_blueprints),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            (0 until HouseRepository.BLUEPRINT_SLOTS).forEach { slot ->
+                val bp = state.blueprints.firstOrNull { it.slot == slot }
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Row(
+                        modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 2.dp, bottom = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = bp?.name ?: stringResource(R.string.house_blueprint_slot_empty),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = if (bp != null) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f),
+                        )
+                        TextButton(onClick = { nameDialogSlot = slot }) {
+                            Text(stringResource(R.string.house_blueprint_save))
+                        }
+                        TextButton(onClick = { loadConfirmSlot = slot }, enabled = bp != null) {
+                            Text(stringResource(R.string.house_blueprint_load))
+                        }
+                        TextButton(onClick = { viewModel.deleteBlueprint(slot) }, enabled = bp != null) {
+                            Text(stringResource(R.string.house_blueprint_delete),
+                                color = if (bp != null) MaterialTheme.colorScheme.error
+                                        else MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    nameDialogSlot?.let { slot ->
+        var name by remember(slot) {
+            mutableStateOf(state.blueprints.firstOrNull { it.slot == slot }?.name ?: "")
+        }
+        AlertDialog(
+            onDismissRequest = { nameDialogSlot = null },
+            title = { Text(stringResource(R.string.house_blueprint_save)) },
+            text = {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it.take(24) },
+                    label = { Text(stringResource(R.string.house_blueprint_name_hint)) },
+                    singleLine = true,
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.saveBlueprint(slot, name.trim())
+                        nameDialogSlot = null
+                    },
+                    enabled = name.isNotBlank(),
+                ) { Text(stringResource(R.string.house_blueprint_save)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { nameDialogSlot = null }) {
+                    Text(stringResource(R.string.btn_cancel))
+                }
+            },
+        )
+    }
+    loadConfirmSlot?.let { slot ->
+        val bp = state.blueprints.firstOrNull { it.slot == slot } ?: return@let
+        AlertDialog(
+            onDismissRequest = { loadConfirmSlot = null },
+            title = { Text(stringResource(R.string.house_blueprint_load_title)) },
+            text = { Text(stringResource(R.string.house_blueprint_load_message, bp.name)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.loadBlueprint(slot)
+                    loadConfirmSlot = null
+                }) { Text(stringResource(R.string.house_blueprint_load)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { loadConfirmSlot = null }) {
+                    Text(stringResource(R.string.btn_cancel))
+                }
+            },
+        )
     }
 }
 
@@ -639,6 +956,15 @@ private fun DrawScope.drawHouseWorld(
     state.house.rooms.forEach { room -> drawFloor(room, cell, atlas, tiles.structural) }
     state.house.rooms.forEach { room -> drawWallFace(room, state.house.rooms, cell, atlas, tiles.structural) }
 
+    // Unpurchased draft area (new rooms, expansion strips) gets a translucent tint.
+    state.draftRoomTints.forEach { r ->
+        drawRect(
+            color = Color(0x40FFD54F),
+            topLeft = Offset(r.x * cell, (r.y + TOP_MARGIN_CELLS) * cell),
+            size = Size(r.w * cell, r.h * cell),
+        )
+    }
+
     val placements = state.house.placements.withIndex().sortedBy { (_, p) ->
         val def = tileDef(p.item)
         when {
@@ -662,7 +988,8 @@ private fun DrawScope.drawHouseWorld(
             }
         } else {
             drawPlacement(def, p.x, p.y, room, cell, atlas,
-                highlight = index == selectedPlacement)
+                highlight = index == selectedPlacement,
+                alpha = if (index in state.ghostPlacements) 0.55f else 1f)
         }
     }
 }
@@ -1208,7 +1535,9 @@ private fun BannerPaletteCard(icon: String, state: HouseUiState, viewModel: Hous
             Text(
                 text = viewModel.itemDisplayName(key),
                 style = MaterialTheme.typography.labelSmall,
-                maxLines = 1,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = if (placed) stringResource(R.string.house_banner_placed)
@@ -1275,7 +1604,9 @@ private fun PaletteCard(
             Text(
                 text = viewModel.itemDisplayName(key),
                 style = MaterialTheme.typography.labelSmall,
-                maxLines = 1,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
             val context = LocalContext.current
             val costColor = when {
@@ -1301,7 +1632,9 @@ private fun PaletteCard(
                     cost.materials.forEach { (k, v) ->
                         Text(
                             text = "$v ${GameStrings.itemName(context, k)}",
-                            style = MaterialTheme.typography.labelSmall, color = costColor, maxLines = 1,
+                            style = MaterialTheme.typography.labelSmall, color = costColor,
+                            textAlign = TextAlign.Center, maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
                         )
                     }
                 }

@@ -24,22 +24,23 @@ class BoostRepository @Inject constructor(
         PrestigeBoosts.effectTotal(trees, flags, skill, effect)
 
     /**
-     * Whether a 2x XP boost applies to [skill]: the purchased 48h boost (non-ironman only)
-     * or the post-prestige 48h boost for this skill (earned, so ironmen included). The two
-     * share one slot — together they still mean 2x, never 4x.
+     * Combined 2x-boost factor for [skill]: the purchased 48h boost (non-ironman only)
+     * and the post-prestige 48h boost for this skill (earned, so ironmen included)
+     * stack multiplicatively — 1, 2, or 4 (issue #1523).
      */
-    fun xpBoostActive(skill: String, flags: PlayerFlags, now: Long = System.currentTimeMillis()): Boolean =
-        (!flags.ironman && flags.xpBoostExpiresAt > now) || (flags.prestigeXpBoosts[skill] ?: 0L) > now
+    fun xpBoostFactor(skill: String, flags: PlayerFlags, now: Long = System.currentTimeMillis()): Long =
+        (if (!flags.ironman && flags.xpBoostExpiresAt > now) 2L else 1L) *
+            (if ((flags.prestigeXpBoosts[skill] ?: 0L) > now) 2L else 1L)
 
     /**
-     * Combined XP multiplier for [skill]: 2x boost (purchased or post-prestige), church
+     * Combined XP multiplier for [skill]: purchased and post-prestige 2x boosts, church
      * blessing, and prestige xp_pct nodes. Purchases and blessings are inert for ironmen.
      */
     fun xpMultiplier(skill: String, flags: PlayerFlags, prayerCapeMult: Float, now: Long = System.currentTimeMillis()): Double {
         val prestigeMult = 1.0 + effectTotal(skill, flags, PrestigeBoosts.XP_PCT) / 100.0
-        val boostMult = if (xpBoostActive(skill, flags, now)) 2.0 else 1.0
+        val boostMult = xpBoostFactor(skill, flags, now).toDouble()
         // Prestige effects are earned, not bought, so they apply to ironmen too; the
-        // purchased boost (excluded in xpBoostActive) and church blessings stay inert.
+        // purchased boost (excluded in xpBoostFactor) and church blessings stay inert.
         if (flags.ironman) return boostMult * prestigeMult
         val blessingMult = ChurchRepository.xpMultiplier(flags, prayerCapeMult).toDouble()
         return boostMult * blessingMult * prestigeMult

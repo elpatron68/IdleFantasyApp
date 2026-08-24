@@ -159,7 +159,7 @@
     <string name="label_inactive">Inattivo</string>
     <string name="label_boost">Potenziamento</string>
     <string name="label_xp_boost">Potenziamento XP</string>
-    <string name="label_prestige_xp_boost">Bonus XP da onore</string>
+    <string name="label_prestige_xp_boost">Qty</string>
     <string name="label_weapon">Arma</string>
     <string name="label_armour">Armatura</string>
     <string name="label_food">Cibo</string>
@@ -500,6 +500,9 @@
     <string name="settings_backup_weekly">Settimanale</string>
     <string name="settings_backup_at_5am">alle 05:00</string>
     <string name="settings_backup_now">Esegui Backup Ora</string>
+    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
+    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
+    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
     <string name="settings_backup_success">Backup salvato.</string>
     <string name="settings_backup_failed">Backup fallito.</string>
     <string name="settings_backup_folder_set">Cartella di backup impostata.</string>
@@ -518,6 +521,7 @@
     <string name="home_died_message">Sei morto e hai perso la maggior parte dei tuoi guadagni.</string>
     <string name="home_xp_boost_was_active">Il bonus 2× XP era attivo</string>
     <string name="home_xp_boost_active">Bonus 2× XP attivo — %1$s rimasti</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
     <string name="home_loot">Bottino</string>
     <string name="home_food_consumed">Cibo Consumato</string>
     <string name="home_bones_buried">Ossa seppellite</string>
@@ -1128,8 +1132,39 @@
     <string name="house_construction_level">Livello costruzione %1$d</string>
     <string name="house_add_room">Aggiungi una stanza (%1$s)</string>
     <string name="house_add_room_locked">Aggiungi una stanza (Liv. %1$d)</string>
-    <string name="house_mode_place_item">Trascina o tocca un punto della casa per aggiungere %1$s.</string>
-    <string name="house_mode_place_room">Stai aggiungendo una stanza 3x3. Deve toccare una stanza esistente.</string>
+    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
+    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
+    <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
+    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
+    <string name="house_bill_open">Bill</string> <!-- untranslated -->
+    <string name="house_bill_new_room">New room %1$d</string> <!-- untranslated -->
+    <string name="house_bill_expand_room">Expand room %1$d (+%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_materials_header">Materials needed</string> <!-- untranslated -->
+    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
+    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
+    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_bill_coins_total">Total: %1$s coins</string> <!-- untranslated -->
+    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
+    <string name="house_apply_changes">Apply Changes</string> <!-- untranslated -->
+    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
+    <string name="house_changes_applied">Changes applied.</string> <!-- untranslated -->
+    <string name="house_discard_build">Discard</string> <!-- untranslated -->
+    <string name="house_discard_confirm_title">Discard changes?</string> <!-- untranslated -->
+    <string name="house_discard_confirm_message">All unpurchased changes will be lost.</string> <!-- untranslated -->
+    <string name="house_blueprints">Blueprints</string> <!-- untranslated -->
+    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
+    <string name="house_blueprint_save">Save</string> <!-- untranslated -->
+    <string name="house_blueprint_load">Load</string> <!-- untranslated -->
+    <string name="house_blueprint_delete">Delete</string> <!-- untranslated -->
+    <string name="house_blueprint_name_hint">Blueprint name</string> <!-- untranslated -->
+    <string name="house_blueprint_saved">Blueprint saved.</string> <!-- untranslated -->
+    <string name="house_blueprint_loaded">Blueprint loaded into the editor.</string> <!-- untranslated -->
+    <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
+    <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
+    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
+    <string name="house_mode_place_item">Posizionamento di %1$s. Trascina o tocca un punto nella tua casa.</string>
+    <string name="house_mode_place_room">Stai aggiungendo una nuova stanza 3x3. Deve toccare una stanza esistente.</string>
     <string name="house_error_level">Il tuo livello Costruzione è troppo basso.</string>
     <string name="house_error_coins">Non hai abbastanza monete.</string>
     <string name="house_error_materials">Non hai abbastanza materiali.</string>
@@ -1138,7 +1173,7 @@
     <string name="house_error_max_size">Non puoi espandere la stanza ulteriormente.</string>
     <string name="house_stored_count">In magazzino: %1$d</string>
     <string name="house_level_short">Liv. %1$d</string>
-    <string name="house_store_hint">I mobili in magazzino possono essere aggiunti di nuovo in seguito.</string>
+    <string name="house_store_hint">I mobili in magazzino conservano i materiali e possono essere riposti in seguito.</string>
     <string name="house_store_item">Sposta nel magazzino.</string>
     <string name="house_room_n">Stanza %1$d</string>
     <string name="house_room_size">%1$d x %2$d celle</string>
@@ -1168,17 +1203,17 @@
     <string name="house_error_already_placed">Lo stendardo è già in mostra.</string>
     <string name="house_remove_banner">Togli</string>
     <string name="house_move_hint">Trascinalo sulla griglia per muoverlo.</string>
-    <string name="house_rotate_item">Ruota.</string>
+    <string name="house_rotate_item">Ruota</string>
     <string name="house_nudge_item">Sposta usando le frecce.</string>
     <string name="house_outside_title">Esterno</string>
     <string name="house_outside_hint">Scegli l\'aspetto del terreno all\'esterno.</string>
     <string name="house_move_room">Sposta stanza</string>
-    <string name="house_demolish_room">Abbatti</string>
+    <string name="house_demolish_room">Demolisci</string>
     <string name="house_demolish_confirm_title">Demolire questa stanza?</string>
     <string name="house_demolish_confirm_message">I mobili andranno in magazzino, ma il costo di costruzione non verrà rimborsato.</string>
     <string name="house_mode_move_room">Stai spostando una stanza. Trascinala or tocca dove vuoi che vada.</string>
-    <string name="house_error_last_room">Non puoi demolire l\'unica stanza.</string>
-    <string name="house_item_bed_default">Letto semplice.</string>
+    <string name="house_error_last_room">Non puoi demolire l\'ultima stanza.</string>
+    <string name="house_item_bed_default">Letto Semplice</string>
     <string name="house_item_bed_default_alt">Letto semplice (color pesca)</string>
     <string name="house_item_bed_light">Letto chiaro</string>
     <string name="house_item_bed_light_alt">Letto chiaro (color pesca)</string>
@@ -1209,17 +1244,17 @@
     <string name="house_sub_table_decor">Centrotavola</string>
     <string name="house_sub_nightstands">Comodini</string>
     <string name="house_sub_wardrobes">Armadi</string>
-    <string name="house_item_tabledecor_silver_cup">Tazza d\'argento</string>
+    <string name="house_item_tabledecor_silver_cup">Silver Cup</string>
     <string name="house_item_tabledecor_silver_cups">Tazze d\'argento</string>
     <string name="house_item_tabledecor_silver_jug">Brocca d\'argento</string>
     <string name="house_item_tabledecor_silver_narrow_pitcher">Boccale d\'argento</string>
-    <string name="house_item_tabledecor_silver_plate">Piatto d\'argento</string>
+    <string name="house_item_tabledecor_silver_plate">Piatto d\'Argento</string>
     <string name="house_item_tabledecor_silver_plates">Pila di piatti d\'argento</string>
     <string name="house_item_tabledecor_silver_tall_pitcher">Caraffa d\'argento</string>
     <string name="house_item_tabledecor_silver_wide_pitcher">Ampio boccale d\'argento</string>
-    <string name="house_item_table_default_small">Tavolino</string>
-    <string name="house_item_table_default_large">Tavolo</string>
-    <string name="house_item_table_default_long_v">Tavolo lungo</string>
+    <string name="house_item_table_default_small">Tavolo Piccolo</string>
+    <string name="house_item_table_default_large">Tavolo Grande</string>
+    <string name="house_item_table_default_long_v">Tavolo Lungo</string>
     <string name="house_item_table_default_cloth">Tavolo con tovaglia</string>
     <string name="house_item_table_default_cloth_long_v">Tavolo lungo con tovaglia</string>
     <string name="house_item_table_light_small">Tavolino chiaro</string>
@@ -1247,7 +1282,7 @@
     <string name="house_item_bookshelf_dark_2">Libreria scura II</string>
     <string name="house_item_bookshelf_dark_3">Libreria scura III</string>
     <string name="house_item_bookshelf_dark_4">Libreria scura IV</string>
-    <string name="house_sub_paintings">Quadri</string>
+    <string name="house_sub_paintings">Dipinti</string>
     <string name="house_sub_wall_shelves">Mensole</string>
     <string name="house_sub_quest_boards">Bacheca</string>
     <string name="house_item_wallshelf_1">Mensola I</string>
@@ -1261,15 +1296,15 @@
     <string name="house_item_questboard_1">Bacheca I</string>
     <string name="house_item_questboard_2">Bacheca II</string>
     <string name="house_item_questboard_3">Bacheca III</string>
-    <string name="house_sub_other">Altro</string>
+    <string name="house_sub_other">Altri</string>
     <string name="house_item_gold_chest">Baule d\'oro</string>
     <string name="house_item_gold_nugget">Pepite d\'oro</string>
-    <string name="house_item_gold_pile">Tesoro sepolto</string>
+    <string name="house_item_gold_pile">Tesoro Sepolto</string>
     <string name="house_item_gold_pile_gems">Ammasso di gemme</string>
-    <string name="house_item_wall_art_default_sunshine_grass">Campo soleggiato</string>
-    <string name="house_item_wall_art_default_sunshine_ocean">Giornata al mare</string>
-    <string name="house_item_wall_art_default_starry_night_grass">Campo stellato</string>
-    <string name="house_item_wall_art_default_starry_night_ocean">Astri in riva al mare</string>
+    <string name="house_item_wall_art_default_sunshine_grass">Prato Soleggiato</string>
+    <string name="house_item_wall_art_default_sunshine_ocean">Mari Soleggiati</string>
+    <string name="house_item_wall_art_default_starry_night_grass">Prato Stellato</string>
+    <string name="house_item_wall_art_default_starry_night_ocean">Mari Stellati</string>
     <string name="house_item_wall_art_light_sunshine_grass">Campo soleggiato (cornice chiara)</string>
     <string name="house_item_wall_art_light_sunshine_ocean">Giornata al mare (cornice chiara)</string>
     <string name="house_item_wall_art_light_starry_night_grass">Campo stellato (cornice chiara)</string>
@@ -1281,8 +1316,8 @@
     <string name="house_item_helmet_trophy">Elmo decorativo</string>
     <string name="house_item_shield_round">Scudo rotondo decorativo</string>
     <string name="house_item_shield_kite">Scudo decorativo</string>
-    <string name="house_item_swords_crossed">Spade incrociate</string>
-    <string name="house_item_lamp">Lanterna</string>
+    <string name="house_item_swords_crossed">Spade Incrociate</string>
+    <string name="house_item_lamp">Lanterna da Muro</string>
     <string name="slayer_title">Sicario</string>
     <string name="slayer_card_desc">Incarichi e ricompense per i sicari</string>
     <string name="slayer_desc">Completa gli incarichi per ottenere XP e punti. Puoi ottenere armamenti unici spendendo i punti accumulati.</string>
@@ -1325,7 +1360,7 @@
     <string name="slayer_foretell_desc">Assegna automaticamente il prossimo incarico usando ossa. Inizierà al termine del tuo incarico attuale.</string>
     <string name="slayer_foretell_queue_empty">Nessun incarico in coda.</string>
     <string name="slayer_foretell_queue_btn">+ Accoda</string>
-    <string name="slayer_foretell_queue_full">Coda divinatoria piena (3/3).</string>
+    <string name="slayer_foretell_queue_full">Coda divinatoria piena (%1$d/%1$d).</string>
     <string name="slayer_foretell_not_enough_bones">Non hai abbastanza ossa (costo: %1$d ossa).</string>
     <string name="slayer_foretell_success">Divinato il prossimo incarico: %1$s!</string>
     <string name="slayer_foretell_btn">Divina Incarico (%1$d ossa)</string>
@@ -1333,6 +1368,7 @@
 
     <!-- Prestige system -->
     <string name="prestige">Onore</string>
+    <string name="prestige_skill_tree">Skill Tree</string> <!-- untranslated -->
     <string name="prestige_max">Onore Massimo</string>
     <string name="prestige_confirm_title" formatted="false">Onora %s?</string>
     <string name="prestige_confirm_message_xp">Il livello di %1$s tornerà a 1, ma otterrai un bonus permanente di +%2$d%% XP per questa abilità.</string>
@@ -1843,7 +1879,7 @@
     <string name="merc_cost_per_day">%1$s monete al giorno</string>
     <string name="merc_bran_the_sellsword_name">Bran the Sellsword</string> <!-- untranslated -->
     <string name="merc_wren_the_stray_name">Wren the Stray</string> <!-- untranslated -->
-    <string name="merc_tam_the_grey_name">Tam the Grey</string> <!-- untranslated -->
+    <string name="merc_tam_the_grey_name">Tam il Grigio</string>
     <string name="merc_nix_the_cutpurse_name">Nix the Cutpurse</string> <!-- untranslated -->
     <string name="merc_sera_ironsong_name">Sera Ironsong</string> <!-- untranslated -->
     <string name="merc_kael_emberhand_name">Kael Emberhand</string> <!-- untranslated -->
@@ -2272,17 +2308,17 @@
     <string name="prestige_path_cooking_hearty">Hearty Meals</string> <!-- untranslated -->
     <string name="prestige_path_smithing_thrift">Careful Smith</string> <!-- untranslated -->
     <string name="prestige_path_crafting_thrift">Steady Hands</string> <!-- untranslated -->
-    <string name="prestige_path_herblore_potency">Potent Potions</string> <!-- untranslated -->
+    <string name="prestige_path_herblore_potency">Pozioni Potenti</string>
     <string name="prestige_path_runecrafting_runethrift">Essence Bond</string> <!-- untranslated -->
     <string name="prestige_path_magic_runethrift">Rune Thrift</string> <!-- untranslated -->
-    <string name="prestige_path_construction_efficient">Efficient Builder</string> <!-- untranslated -->
-    <string name="prestige_path_prayer_devotion">Devotion</string> <!-- untranslated -->
-    <string name="prestige_path_mercantile_trade">Trade Baron</string> <!-- untranslated -->
-    <string name="prestige_path_slayer_bounty">Bounty Hunter</string> <!-- untranslated -->
+    <string name="prestige_path_construction_efficient">Costruttore Efficiente</string>
+    <string name="prestige_path_prayer_devotion">Devozione</string>
+    <string name="prestige_path_mercantile_trade">Barone del Commercio</string>
+    <string name="prestige_path_slayer_bounty">Cacciatore di Taglie</string>
     <string name="prestige_path_ranged_quiver">Quiver Care</string> <!-- untranslated -->
     <string name="prestige_path_defense_laststand">Last Stand</string> <!-- untranslated -->
     <string name="prestige_path_hitpoints_constitution">Constitution</string> <!-- untranslated -->
-    <string name="prestige_path_strength_double_hit">Double Hit</string> <!-- untranslated -->
+    <string name="prestige_path_strength_double_hit">Doppio Colpo</string>
     <string name="prestige_path_ranged_bows">Better Bows</string> <!-- untranslated -->
     <string name="prestige_path_slayer_foresight">Foresight</string> <!-- untranslated -->
 
@@ -2292,21 +2328,21 @@
     <string name="prestige_path_flow">Flow-state</string> <!-- untranslated -->
     <string name="prestige_path_endurance">Endurance</string> <!-- untranslated -->
     <string name="prestige_path_gem">Gem Hunter</string> <!-- untranslated -->
-    <string name="prestige_path_rotation">Crop Rotation</string> <!-- untranslated -->
+    <string name="prestige_path_rotation">Rotazione delle Colture</string>
 
     <!-- Prestige path names (skill flavored) -->
     <string name="prestige_path_mining_yield">Purer Ore</string> <!-- untranslated -->
-    <string name="prestige_path_fishing_yield">More Fish</string> <!-- untranslated -->
+    <string name="prestige_path_fishing_yield">Più Pesce</string>
     <string name="prestige_path_woodcutting_yield">Sharper Axe</string> <!-- untranslated -->
     <string name="prestige_path_thieving_yield">Faster Picking</string> <!-- untranslated -->
-    <string name="prestige_path_slayer_yield">Hunter\'s Instinct</string> <!-- untranslated -->
-    <string name="prestige_path_attack_prowess">Precision</string> <!-- untranslated -->
-    <string name="prestige_path_strength_prowess">Might</string> <!-- untranslated -->
+    <string name="prestige_path_slayer_yield">Istinto del Cacciatore</string>
+    <string name="prestige_path_attack_prowess">Precisione</string>
+    <string name="prestige_path_strength_prowess">Potenza</string>
     <string name="prestige_path_defense_prowess">Bulwark</string> <!-- untranslated -->
     <string name="prestige_path_ranged_prowess">Deadeye</string> <!-- untranslated -->
     <string name="prestige_path_magic_prowess">Attunement</string> <!-- untranslated -->
-    <string name="prestige_path_hitpoints_prowess">Vitality</string> <!-- untranslated -->
-    <string name="prestige_path_thieving_coin">Silver Tongue</string> <!-- untranslated -->
+    <string name="prestige_path_hitpoints_prowess">Vitalità</string>
+    <string name="prestige_path_thieving_coin">Lingua d\'Argento</string>
     <string name="prestige_path_mercantile_coin">Haggler</string> <!-- untranslated -->
 
     <!-- Prestige race branch names -->
@@ -2316,14 +2352,14 @@
     <string name="prestige_path_fishing_race_halfling">Patient Angler</string> <!-- untranslated -->
     <string name="prestige_path_woodcutting_race_halfling">Forest Kin</string> <!-- untranslated -->
     <string name="prestige_path_farming_race_halfling">Bountiful Harvest</string> <!-- untranslated -->
-    <string name="prestige_path_cooking_race_halfling">Home Cook</string> <!-- untranslated -->
+    <string name="prestige_path_cooking_race_halfling">Cucina Casalinga</string>
     <string name="prestige_path_construction_race_halfling">Cozy Builder</string> <!-- untranslated -->
     <string name="prestige_path_fishing_race_gnome">Clever Lures</string> <!-- untranslated -->
     <string name="prestige_path_fletching_race_gnome">Tinker\'s Touch</string> <!-- untranslated -->
     <string name="prestige_path_firemaking_race_gnome">Spark Wright</string> <!-- untranslated -->
     <string name="prestige_path_construction_race_gnome">Gadget Works</string> <!-- untranslated -->
     <string name="prestige_path_prayer_race_gnome">Trickster\'s Favor</string> <!-- untranslated -->
-    <string name="prestige_path_hitpoints_race_orc">Thick Hide</string> <!-- untranslated -->
+    <string name="prestige_path_hitpoints_race_orc">Pelle Spessa</string>
 
     <!-- Race change -->
     <string name="race_change_confirm_title">Change race?</string> <!-- untranslated -->
@@ -2331,9 +2367,10 @@
     <string name="item_race_change_token_desc">A rare boss drop that lets you change your character\'s race once.</string> <!-- untranslated -->
     <!-- Translator note: %1$d = number of tokens owned -->
     <string name="race_change_pay_token">Use Race Change Token (%1$d)</string> <!-- untranslated -->
-    <string name="race_change_pay_coins">Pay 10,000,000 coins</string> <!-- untranslated -->
+    <string name="race_change_pay_coins">Paga 10,000,000 monete</string>
     <string name="race_change_cannot_afford">You need a Race Change Token (rare boss drop) or 10,000,000 coins to change race.</string> <!-- untranslated -->
     <string name="race_change_ironman_locked">Ironman characters cannot change their race.</string> <!-- untranslated -->
+    <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
     <string name="race_change_ironman_once">As an ironman, this is your one and only race change. Afterwards your race is locked forever.</string> <!-- untranslated -->
     <string name="ironman_race_permanent_note">Ironman characters cannot change their race later. Choose carefully!</string> <!-- untranslated -->
     <!-- Translator note: %1$s = comma-separated list of skill names -->

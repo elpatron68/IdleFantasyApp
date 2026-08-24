@@ -159,7 +159,7 @@
     <string name="label_inactive">Inactif</string>
     <string name="label_boost">Bonus</string>
     <string name="label_xp_boost">Bonus d\'XP</string>
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string> <!-- untranslated -->
+    <string name="label_prestige_xp_boost">Boost d\'XP de Prestige</string>
     <string name="label_weapon">Arme</string>
     <string name="label_armour">Armure</string>
     <string name="label_food">Nourriture</string>
@@ -490,6 +490,9 @@
     <string name="settings_backup_weekly">chaque semaine</string>
     <string name="settings_backup_at_5am">à 5h00</string>
     <string name="settings_backup_now">Sauvegarder maintenant</string>
+    <string name="settings_backup_status">Dernière sauvegarde</string>
+    <string name="settings_backup_never">Jamais sauvegardé</string>
+    <string name="settings_backup_failed_with">A échoué: %1$s</string>
     <string name="settings_backup_success">Sauvegarde enregistrée.</string>
     <string name="settings_backup_failed">Échec de la sauvegarde.</string>
     <string name="settings_backup_folder_set">Dossier de sauvegarde défini.</string>
@@ -507,6 +510,7 @@
     <string name="home_died_message">Vous êtes mort et avez perdu la majorité de vos gains.</string>
     <string name="home_xp_boost_was_active">Le bonus d\'XP ×2 était actif</string>
     <string name="home_xp_boost_active">Bonus XP ×2 actif — %1$s restant</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
     <string name="home_loot">Butin</string>
     <string name="home_food_consumed">Nourriture consommée</string>
     <string name="home_bones_buried">Os enterrés</string>
@@ -1116,6 +1120,37 @@
     <string name="house_construction_level">Construction niveau %1$d</string>
     <string name="house_add_room">Ajouter une salle (%1$s)</string>
     <string name="house_add_room_locked">Ajouter une salle (Niv %1$d)</string>
+    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
+    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
+    <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
+    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
+    <string name="house_bill_open">Bill</string> <!-- untranslated -->
+    <string name="house_bill_new_room">New room %1$d</string> <!-- untranslated -->
+    <string name="house_bill_expand_room">Expand room %1$d (+%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_materials_header">Materials needed</string> <!-- untranslated -->
+    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
+    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
+    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_bill_coins_total">Total: %1$s coins</string> <!-- untranslated -->
+    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
+    <string name="house_apply_changes">Apply Changes</string> <!-- untranslated -->
+    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
+    <string name="house_changes_applied">Changes applied.</string> <!-- untranslated -->
+    <string name="house_discard_build">Discard</string> <!-- untranslated -->
+    <string name="house_discard_confirm_title">Discard changes?</string> <!-- untranslated -->
+    <string name="house_discard_confirm_message">All unpurchased changes will be lost.</string> <!-- untranslated -->
+    <string name="house_blueprints">Blueprints</string> <!-- untranslated -->
+    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
+    <string name="house_blueprint_save">Save</string> <!-- untranslated -->
+    <string name="house_blueprint_load">Load</string> <!-- untranslated -->
+    <string name="house_blueprint_delete">Delete</string> <!-- untranslated -->
+    <string name="house_blueprint_name_hint">Blueprint name</string> <!-- untranslated -->
+    <string name="house_blueprint_saved">Blueprint saved.</string> <!-- untranslated -->
+    <string name="house_blueprint_loaded">Blueprint loaded into the editor.</string> <!-- untranslated -->
+    <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
+    <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
+    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
     <string name="house_mode_place_item">Placez %1$s. Faites glisser ou appuyez sur un endroit de votre maison.</string>
     <string name="house_mode_place_room">Placez une nouvelle salle de 3x3. Elle doit toucher une salle existante.</string>
     <string name="house_error_level">Votre niveau de Construction est trop bas.</string>
@@ -1157,7 +1192,7 @@
     <string name="house_remove_banner">Enlever</string>
     <string name="house_move_hint">Faites glisser sur la grille pour déplacer autre part.</string>
     <string name="house_rotate_item">Tourner</string>
-    <string name="house_nudge_item">Move with arrows</string> <!-- untranslated -->
+    <string name="house_nudge_item">Bouger avec les flèches</string>
     <string name="house_outside_title">Extérieur</string>
     <string name="house_outside_hint">Choisissez à quoi le sol autour de votre maison ressemblera.</string>
     <string name="house_move_room">Bouger une salle</string>
@@ -1313,7 +1348,7 @@
     <string name="slayer_foretell_desc">Demandez à l\'avance les prochaines tâches à votre mentor en payant des os. Elles sont attribuées automatiquement lorsque votre tâche actuelle est terminée.</string>
     <string name="slayer_foretell_queue_empty">Aucune tâche en attente.</string>
     <string name="slayer_foretell_queue_btn">+ file d\'attente</string>
-    <string name="slayer_foretell_queue_full">La file d\'attente d\'anticipation est pleine (3/3).</string>
+    <string name="slayer_foretell_queue_full">La file d\'attente d\'anticipation est pleine (%1$d/%1$d).</string>
     <string name="slayer_foretell_not_enough_bones">Pas assez d\'os (coût : %1$d os).</string>
     <string name="slayer_foretell_success">Tâche annoncée : %1$s !</string>
     <string name="slayer_foretell_btn">Anticiper la prochaine tâche (%1$d os)</string>
@@ -1321,6 +1356,7 @@
 
     <!-- Prestige system -->
     <string name="prestige">Prestige</string>
+    <string name="prestige_skill_tree">Arbre de compétences</string>
     <string name="prestige_max">Prestige max</string>
     <string name="prestige_confirm_title" formatted="false">Prestige %s ?</string>
     <string name="prestige_confirm_message_xp">Votre niveau %1$s sera réinitialisé à 1, mais vous gagnerez un bonus permanent de +%2$d%% XP pour cette aptitude.</string>
@@ -1493,8 +1529,8 @@
     </plurals>
     <string name="town_building_cape_rack_name">Râtelier à Capes</string>
     <string name="town_cape_rack_no_bonus">Améliorez pour appliquer passivement les bonus d\'XP et de rendement des aptitudes/capes de guildes possédées</string>
-    <string name="town_cape_rack_t1_bonus">Les bonus passifs des capes Tier 1 (de Collecte) sont actives</string>
-    <string name="town_cape_rack_t2_bonus">Les bonus passifs des capes Tier 1 &amp; 2 (de Collecte, de Fabrication) sont actives</string>
+    <string name="town_cape_rack_t1_bonus">Les bonus passifs des capes de Palier 1 (de Collecte) sont actives</string>
+    <string name="town_cape_rack_t2_bonus">Les bonus passifs des capes de Palier 1 &amp; 2 (de Collecte, de Fabrication) sont actives</string>
     <string name="town_cape_rack_t3_bonus">Les bonus passifs de toutes les capes possédées (de Collecte, de Fabrication, de Combat &amp; de Guildes) sont actives</string>
     <string name="town_building_artisans_workshop_name">Atelier de l\'Artisan</string>
     <string name="town_artisans_workshop_no_bonus">Améliorez pour avoir une chance de préserver des matériaux de fabrication secondaires</string>
@@ -1507,11 +1543,11 @@
     <string name="achievement_town_first_upgrade_name">Première Rénovation</string>
     <string name="achievement_town_first_upgrade_desc">Améliorez n\'importe quel bâtiment de ville pour la première fois</string>
     <string name="achievement_town_all_tier1_name">Améliorateur de Ville</string>
-    <string name="achievement_town_all_tier1_desc">Améliorez tous les bâtiments de ville au moins au Niveau 1</string>
+    <string name="achievement_town_all_tier1_desc">Améliorez tous les bâtiments de ville au moins au Palier 1</string>
     <string name="achievement_town_one_maxed_name">Maître Bâtisseur</string>
-    <string name="achievement_town_one_maxed_desc">Améliorez n\'importe quel bâtiment au niveau maximum</string>
+    <string name="achievement_town_one_maxed_desc">Améliorez n\'importe quel bâtiment au palier maximum</string>
     <string name="achievement_town_all_maxed_name">Ville Légendaire</string>
-    <string name="achievement_town_all_maxed_desc">Améliorez tous les bâtiments de ville au niveau maximum</string>
+    <string name="achievement_town_all_maxed_desc">Améliorez tous les bâtiments de ville au palier maximum</string>
     <string name="achievement_tower_first_floor_name">Première étape</string>
     <string name="achievement_tower_first_floor_desc">Termine ton premier étage de la Tour de l\'Infini</string>
     <string name="achievement_tower_floor_10_name">Initié de la Tour</string>
@@ -1591,7 +1627,7 @@
     <string name="carnival_shell_pick">Sous quel gobelet est-il ?</string>
     <string name="carnival_shell_won">Correct ! +%1$d tickets</string>
     <string name="carnival_shell_missed">Faux ! La gemme était sous le gobelet %1$d.</string>
-    <string name="carnival_shell_locked">Améliorez la kermesse au niveau 1 pour débloquer</string>
+    <string name="carnival_shell_locked">Améliorez la kermesse au Palier 1 pour débloquer</string>
     <string name="carnival_higher_lower">Plus haut ou plus bas</string>
     <string name="carnival_active_higher_desc">Devine si le prochain nombre sera plus grand ou plus petit que l\'actuel.</string>
 
@@ -1600,7 +1636,7 @@
     <string name="carnival_higher_lower_btn_higher">Plus haut</string>
     <string name="carnival_higher_lower_btn_lower">Plus bas</string>
     <string name="carnival_higher_lower_result">%1$d/%2$d correct — +%3$d tickets</string>
-    <string name="carnival_higher_lower_locked">Améliorez la kermesse au niveau 2 pour débloquer</string>
+    <string name="carnival_higher_lower_locked">Améliorez la kermesse au Palier 2 pour débloquer</string>
     <string name="carnival_higher_lower_last_card">Dernière carte : %1$d</string>
     <string name="carnival_higher_lower_continue">Continuer</string>
     <string name="carnival_difficulty_label">Difficulté</string>
@@ -2200,16 +2236,16 @@
     <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Coût : %1$d points</string>
     <string name="prestige_node_owned">Acheté</string>
-    <string name="prestige_path_auto_label">Earned by prestiging</string> <!-- untranslated -->
-    <string name="prestige_node_auto_earned">Earned at prestige %1$d.</string> <!-- untranslated -->
-    <string name="prestige_node_auto_pending">Unlocks automatically at prestige %1$d.</string> <!-- untranslated -->
-    <string name="prestige_button_xp_only">Prestige now for the next XP tier</string> <!-- untranslated -->
-    <string name="prestige_confirm_message_xp_only">Your %1$s level will reset to 1 and you\'ll unlock the next automatic XP tier. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
+    <string name="prestige_path_auto_label">Gagné par obtention de prestige</string>
+    <string name="prestige_node_auto_earned">Gagné au prestige %1$d.</string>
+    <string name="prestige_node_auto_pending">Débloque automatiquement au prestige %1$d.</string>
+    <string name="prestige_button_xp_only">Obtenez le prestige maintenant pour le prochain palier d\'XP</string>
+    <string name="prestige_confirm_message_xp_only">Votre niveau %1$s sera réinitialisé à 1 et vous débloquerez votre prochain palier d\'XP automatique. L\'équipement qui ne répondra plus aux prérequis sera remplacé, et la progression non récupérée des quêtes quotidiennes de %1$s sera réinitialisée. Vous bénéficierez également de 2× l\'XP de %1$s pendant 48 heures pour accélérer votre remontée en niveau.</string>
     <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_only">%1$s seulement</string>
     <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_locked_desc">Seul les personnages %1$s peuvent apprendre cette amélioration.</string>
-    <string name="prestige_node_prereq_locked">Requiers le tier précédent de ce chemin.</string>
+    <string name="prestige_node_prereq_locked">Requiers le palier précédent de ce chemin.</string>
     <string name="prestige_node_hidden">Débloquez l\'amélioration précédente en premier.</string>
     <string name="character_race_edit_hint">Les changements de race sont faits dans l\'éditeur d\'apparence.</string>
     <string name="prestige_node_not_enough">Pas assez de points</string>
@@ -2234,7 +2270,7 @@
     <string name="prestige_effect_crop_rotation">+%1$d%% de rendement quand une plante différente est plantée de la dernière récolte.</string>
     <string name="prestige_effect_crop_rotation_always">Le bonus de rotation s\'applique sur chaque culture, pas de rotation requise.</string>
     <string name="prestige_effect_tool_eff">+%1$d%% d\'efficacité d\'outil.</string>
-    <string name="prestige_effect_per_level">+%1$s tool or combat bonus per level of this skill.</string> <!-- untranslated -->
+    <string name="prestige_effect_per_level">+%1$s de bonus d\'outil ou de combat par niveau de cette aptitude.</string>
     <string name="prestige_effect_success_chance">+%1$d%% chance de succès du vol à la tire.</string>
     <string name="prestige_effect_reclaim">+%1$d%% chance de récupérer les flèches consommées et les runes après le combat.</string>
     <string name="prestige_effect_heal">La nourriture soigne +%1$d%% plus durant le combat.</string>
@@ -2298,7 +2334,7 @@
     <string name="prestige_path_mercantile_coin">Marchandeur</string>
 
     <!-- Prestige race branch names -->
-    <string name="prestige_path_race_human">Resourceful</string> <!-- untranslated -->
+    <string name="prestige_path_race_human">Plein de Ressources</string>
     <string name="prestige_path_thieving_race_elf">Pas d\'Ombre</string>
     <string name="prestige_path_firemaking_race_dwarf">Cœur de Braise</string>
     <string name="prestige_path_fishing_race_halfling">Pêcheur Patient</string>
@@ -2322,10 +2358,11 @@
     <string name="race_change_pay_coins">Payer 10.000.000 pièces</string>
     <string name="race_change_cannot_afford">Vous avez besoin d\'un Jeton de Changement de Race (butin de boss rare) ou 10.000.000 pièces pour changer de race.</string>
     <string name="race_change_ironman_locked">Les personnages Ironman ne peuvent pas changer de race.</string>
+    <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
     <string name="race_change_ironman_once">Comme un ironman, c\'est votre seule et unique changement de race. Après cela votre race sera inchangeable pour toujours</string>
     <string name="ironman_race_permanent_note">Les personnages Ironman ne peuvent pas changer de race plus tard. Choisissez attentivement !</string>
     <!-- Translator note: %1$s = comma-separated list of skill names -->
     <string name="race_proficiency_label">Arbre d\'aptitude de race : %1$s</string>
-    <string name="race_proficiency_human">Bonus de race: un tier de maîtrise exclusif d\'XP pour chaque aptitude.</string>
+    <string name="race_proficiency_human">Bonus de race: un palier de maîtrise exclusif d\'XP pour chaque aptitude.</string>
     <string name="race_change_confirm_message">Votre race donne des améliorations de prestige uniques. Changer de race rembourse tous les points dépensés dans les branches des autres races, et vous pouvez uniquement changer de race toute les 24 heures.</string>
 </resources>

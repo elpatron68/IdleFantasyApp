@@ -116,8 +116,12 @@ data class SessionSummary(
     val runesReclaimedLines: List<Pair<String, String>> = emptyList(),
     /** Bone type display name + count per type — prayer only */
     val boneBuriedLines: List<Pair<String, String>> = emptyList(),
-    /** Whether the 2× XP boost was active during this session. */
+    /** Whether any 2× XP boost was active during this session. */
     val boostWasActive: Boolean = false,
+    /** Per-row 2x-boost factor (1, 2, or 4: purchased and prestige boosts stack) — parallel to xpLines. */
+    val xpLineBoostFactors: List<Long> = emptyList(),
+    /** 2x-boost factor for the single-skill totalXpLabel case. */
+    val totalXpBoostFactor: Long = 1L,
     /** Per-row XP bonus from active prayer blessing — parallel to xpLines, 0 if no blessing. */
     val xpLineBonuses: List<Long> = emptyList(),
     /** Per-row total XP (after boost + blessing) as Long — parallel to xpLines, for breakdown display. */
@@ -183,6 +187,8 @@ data class HomeUiState(
     val prayerCapeMult: Float = 1f,
     val activeBlessingRemainingMs: Long = 0L,
     val xpBoostRemainingMs: Long = 0L,
+    /** Skill → remaining ms for active post-prestige 48h boosts (earned, so shown for ironmen too). */
+    val prestigeBoostsRemainingMs: Map<String, Long> = emptyMap(),
     val ironman: Boolean = false,
     val recentSessions: List<com.fantasyidler.data.model.RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
@@ -412,6 +418,9 @@ class HomeViewModel @Inject constructor(
                 prayerCapeMult             = blessingPrayerCapeMult(player, flags, gameData),
                 activeBlessingRemainingMs  = (flags.activeBlessingExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
                 xpBoostRemainingMs         = if (flags.ironman) 0L else (flags.xpBoostExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
+                prestigeBoostsRemainingMs  = flags.prestigeXpBoosts
+                    .mapValues { (it.value - System.currentTimeMillis()).coerceAtLeast(0L) }
+                    .filterValues { it > 0L },
                 ironman                    = flags.ironman,
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
@@ -482,7 +491,7 @@ class HomeViewModel @Inject constructor(
           try {
             // If the latest session timed out but its alarm hasn't fired yet, mark it completed now.
             val latest = sessionRepo.getActiveSession()
-            if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt) {
+            if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt && sessionRepo.hasTrustedClock(latest)) {
                 sessionRepo.markCompleted(latest.sessionId)
             }
 
@@ -503,8 +512,7 @@ class HomeViewModel @Inject constructor(
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
             val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-            val boostActive      = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
-            val xpMult           = if (boostActive) 2L else 1L
+            val boostFactorFor   = { skill: String -> boostRepo.xpBoostFactor(skill, flags) }
             val blessingCapeMult = blessingPrayerCapeMult(player, flags, gameData)
             val blessingXpMult   = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags, blessingCapeMult)
             val blessingCoinMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags, blessingCapeMult) *
@@ -633,12 +641,13 @@ class HomeViewModel @Inject constructor(
             val displayedCoins    = (acc.combinedCoins.toDouble() * blessingCoinMult).toLong()
             val coinBlessingBonus = displayedCoins - acc.combinedCoins
             val sortedXpEntries   = acc.combinedXpBySkill.entries.sortedByDescending { it.value }
-            val xpLineBonuses     = sortedXpEntries.map { (_, xp) ->
-                val base = xp * xpMult
+            val singleXpFactor    = acc.combinedXpBySkill.keys.firstOrNull()?.let(boostFactorFor) ?: 1L
+            val xpLineBonuses     = sortedXpEntries.map { (skill, xp) ->
+                val base = xp * boostFactorFor(skill)
                 ((base.toDouble() * blessingXpMult).toLong() - base).coerceAtLeast(0L)
             }
             val singleXpBonus = run {
-                val base = singleXp * xpMult
+                val base = singleXp * singleXpFactor
                 ((base.toDouble() * blessingXpMult).toLong() - base).coerceAtLeast(0L)
             }
 
@@ -647,13 +656,13 @@ class HomeViewModel @Inject constructor(
                 died           = acc.anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * boostFactorFor(skill)).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
                 xpLineValues   = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
-                totalXpLabel      = if (useTotalLabel) "+${((singleXp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
+                                     .map { (skill, xp) -> ((xp * boostFactorFor(skill)).toDouble() * blessingXpMult).toLong() },
+                totalXpLabel      = if (useTotalLabel) "+${((singleXp * singleXpFactor).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
-                totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
+                totalXpValue      = if (useTotalLabel) ((singleXp * singleXpFactor).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = acc.combinedItems.entries.sortedByDescending { it.value }
                                      .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 coinsGained    = displayedCoins,
@@ -670,7 +679,10 @@ class HomeViewModel @Inject constructor(
                 runesReclaimedLines  = acc.combinedRunesReclaimed.entries.sortedByDescending { it.value }
                                          .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "+$qty") },
                 boneBuriedLines  = boneBuriedLines,
-                boostWasActive   = boostActive,
+                boostWasActive   = acc.combinedXpBySkill.keys.any { boostFactorFor(it) > 1L },
+                xpLineBoostFactors = if (useTotalLabel) emptyList()
+                                     else sortedXpEntries.map { (skill, _) -> boostFactorFor(skill) },
+                totalXpBoostFactor = if (useTotalLabel) singleXpFactor else 1L,
                 xpLineBonuses    = xpLineBonuses,
                 coinBlessingBonus = coinBlessingBonus,
                 noteLines        = acc.expeditionNoteLines +
@@ -1038,7 +1050,7 @@ class HomeViewModel @Inject constructor(
     fun onSessionExpiredLocally(sessionId: String) {
         viewModelScope.launch {
             val session = sessionRepo.getSession(sessionId) ?: return@launch
-            if (!session.completed) {
+            if (!session.completed && sessionRepo.hasTrustedClock(session)) {
                 sessionRepo.markCompleted(sessionId)
                 queuedSessionStarter.startNextQueued()
             }
@@ -1195,7 +1207,7 @@ class HomeViewModel @Inject constructor(
     fun onWorkerSessionExpiredLocally(sessionId: String) {
         viewModelScope.launch {
             val session = sessionRepo.getSession(sessionId) ?: return@launch
-            if (!session.completed) {
+            if (!session.completed && sessionRepo.hasTrustedClock(session)) {
                 sessionRepo.markCompleted(sessionId)
                 workerStarter.startNextQueued(session.workerSlot.coerceAtLeast(1))
             }
@@ -1207,7 +1219,7 @@ class HomeViewModel @Inject constructor(
             sessionRepo.markAllExpiredWorkerSessions()
             for (slot in 1..2) {
                 val latest = sessionRepo.getActiveWorkerSession(slot)
-                if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt) {
+                if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt && sessionRepo.hasTrustedClock(latest)) {
                     sessionRepo.markCompleted(latest.sessionId)
                 }
             }
@@ -1220,8 +1232,7 @@ class HomeViewModel @Inject constructor(
             val petIds = gameData.pets.keys
             val workerPlayer = playerRepo.getOrCreatePlayer()
             val flags: PlayerFlags = json.decodeFromString(workerPlayer.flags)
-            val boostActive      = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
-            val xpMult           = if (boostActive) 2L else 1L
+            val boostFactorFor   = { skill: String -> boostRepo.xpBoostFactor(skill, flags) }
             val workerCapeMult   = blessingPrayerCapeMult(workerPlayer, flags, gameData)
             val blessingXpMult   = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags, workerCapeMult)
             val blessingCoinMult = if (flags.ironman) 1.0f else ChurchRepository.coinMultiplier(flags, workerCapeMult) *
@@ -1408,12 +1419,13 @@ class HomeViewModel @Inject constructor(
             val displayedCoins   = (combinedCoins.toDouble() * blessingCoinMult).toLong()
             val coinBlessingBonus = displayedCoins - combinedCoins
             val sortedXpEntries   = combinedXpBySkill.entries.sortedByDescending { it.value }
-            val xpLineBonuses     = sortedXpEntries.map { (_, xp) ->
-                val base = xp * xpMult
+            val singleXpFactor    = combinedXpBySkill.keys.firstOrNull()?.let(boostFactorFor) ?: 1L
+            val xpLineBonuses     = sortedXpEntries.map { (skill, xp) ->
+                val base = xp * boostFactorFor(skill)
                 ((base.toDouble() * blessingXpMult).toLong() - base).coerceAtLeast(0L)
             }
             val singleXpBonus = run {
-                val base = singleXp * xpMult
+                val base = singleXp * singleXpFactor
                 ((base.toDouble() * blessingXpMult).toLong() - base).coerceAtLeast(0L)
             }
 
@@ -1422,20 +1434,23 @@ class HomeViewModel @Inject constructor(
                 died           = anyDied,
                 xpLines        = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
+                                     .map { (skill, xp) -> Pair(GameStrings.skillName(context, skill), "+${((xp * boostFactorFor(skill)).toDouble() * blessingXpMult).toLong().formatXp()} XP") },
                 xpLineValues   = if (useTotalLabel) emptyList()
                                  else sortedXpEntries
-                                     .map { (_, xp) -> ((xp * xpMult).toDouble() * blessingXpMult).toLong() },
-                totalXpLabel      = if (useTotalLabel) "+${((singleXp * xpMult).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
+                                     .map { (skill, xp) -> ((xp * boostFactorFor(skill)).toDouble() * blessingXpMult).toLong() },
+                totalXpLabel      = if (useTotalLabel) "+${((singleXp * singleXpFactor).toDouble() * blessingXpMult).toLong().formatXp()} XP" else "",
                 totalXpLabelBonus = if (useTotalLabel) singleXpBonus else 0L,
-                totalXpValue      = if (useTotalLabel) ((singleXp * xpMult).toDouble() * blessingXpMult).toLong() else 0L,
+                totalXpValue      = if (useTotalLabel) ((singleXp * singleXpFactor).toDouble() * blessingXpMult).toLong() else 0L,
                 itemLines      = combinedItems.entries.sortedByDescending { it.value }
                                      .map { (key, qty) -> Pair(GameStrings.itemName(context,key), "×$qty") },
                 coinsGained    = displayedCoins,
                 killLines      = combinedKills.entries.sortedByDescending { it.value }
                                      .map { (enemy, kills) -> Pair(enemy, "×$kills") },
                 foodConsumedLines = emptyList(),
-                boostWasActive   = boostActive,
+                boostWasActive   = combinedXpBySkill.keys.any { boostFactorFor(it) > 1L },
+                xpLineBoostFactors = if (useTotalLabel) emptyList()
+                                     else sortedXpEntries.map { (skill, _) -> boostFactorFor(skill) },
+                totalXpBoostFactor = if (useTotalLabel) singleXpFactor else 1L,
                 xpLineBonuses    = xpLineBonuses,
                 coinBlessingBonus = coinBlessingBonus,
             )

@@ -26,6 +26,7 @@ import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.repository.ChurchRepository
 import kotlin.math.roundToInt
 import com.fantasyidler.ui.screen.StatInline
+import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatDurationMs
 
@@ -40,6 +41,7 @@ fun PlayerStatsBar(
     prayerCapeMult: Float,
     activeBlessingRemainingMs: Long,
     xpBoostRemainingMs: Long,
+    prestigeBoostsRemainingMs: Map<String, Long> = emptyMap(),
     modifier: Modifier = Modifier,
 ) {
     val blessingActive = activeBlessingKey.isNotEmpty() && activeBlessingRemainingMs > 0
@@ -110,6 +112,27 @@ fun PlayerStatsBar(
                 Spacer(Modifier.width(4.dp))
                 Text(
                     text  = stringResource(R.string.home_xp_boost_active, xpBoostRemainingMs.formatDurationMs(context)),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.tertiary,
+                )
+            }
+        }
+        prestigeBoostsRemainingMs.entries.sortedBy { it.key }.forEach { (skill, remainingMs) ->
+            Spacer(Modifier.height(4.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector        = Icons.Filled.Star,
+                    contentDescription = null,
+                    tint               = MaterialTheme.colorScheme.tertiary,
+                    modifier           = Modifier.size(12.dp),
+                )
+                Spacer(Modifier.width(4.dp))
+                Text(
+                    text  = stringResource(
+                        R.string.home_prestige_xp_boost_active,
+                        GameStrings.skillName(context, skill),
+                        remainingMs.formatDurationMs(context),
+                    ),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.tertiary,
                 )

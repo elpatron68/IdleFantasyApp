@@ -113,15 +113,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 
-internal fun xpBreakdownText(total: Long, bonus: Long, boostWasActive: Boolean): String? {
-    if (bonus <= 0L) return null
+internal fun xpBreakdownText(total: Long, bonus: Long, boostFactor: Long): String? {
+    if (bonus <= 0L && boostFactor <= 1L) return null
     val afterBoost = total - bonus
     if (afterBoost <= 0L) return null
-    val base = afterBoost / (if (boostWasActive) 2L else 1L)
+    val base = afterBoost / boostFactor.coerceAtLeast(1L)
     val blessMult = total.toDouble() / afterBoost
-    val blessStr = "%.2f".format(blessMult).trimEnd('0').trimEnd('.')
-    return if (boostWasActive) "(${base.formatXp()} × 2 × $blessStr)"
-           else "(${base.formatXp()} × $blessStr)"
+    val factors = buildList {
+        if (boostFactor > 1L) add("$boostFactor")
+        if (bonus > 0L) add("%.2f".format(blessMult).trimEnd('0').trimEnd('.'))
+    }
+    if (factors.isEmpty()) return null
+    return "(${base.formatXp()} × ${factors.joinToString(" × ")})"
 }
 
 @Composable

@@ -42,8 +42,8 @@ fi
 # Read version from build.gradle.kts
 # ---------------------------------------------------------------------------
 
-VERSION_NAME=$(grep '^\s*versionName\s*=' "$GRADLE_FILE" | sed 's/.*"\(.*\)".*/\1/')
-VERSION_CODE=$(grep '^\s*versionCode\s*=' "$GRADLE_FILE" | grep -oP '\d+')
+VERSION_NAME=$(grep '^\s*versionName\s*=' "$GRADLE_FILE" | head -1 | sed 's/.*"\(.*\)".*/\1/')
+VERSION_CODE=$(grep '^\s*versionCode\s*=' "$GRADLE_FILE" | head -1 | grep -oP '\d+')
 TAG="v$VERSION_NAME"
 
 echo "==> Release: $TAG (versionCode $VERSION_CODE)"
