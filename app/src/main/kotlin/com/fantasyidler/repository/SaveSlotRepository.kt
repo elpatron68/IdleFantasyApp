@@ -1,6 +1,7 @@
 package com.fantasyidler.repository
 
 import android.content.Context
+import android.os.SystemClock
 import com.fantasyidler.data.model.PlayerExport
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.SkillSessionExport
@@ -108,12 +109,16 @@ class SaveSlotRepository @Inject constructor(
         val now = System.currentTimeMillis()
         val exportedAt = export.exportedAt.takeIf { it > 0L } ?: now
         export.sessions.forEach { s ->
-            val session = if (s.completed || !freezeSessionTimers) {
+            val restored = if (s.completed || !freezeSessionTimers) {
                 s.toSkillSession()
             } else {
                 val remainingMs = (s.endsAt - exportedAt).coerceAtLeast(0L)
                 s.toSkillSession().copy(endsAt = now + remainingMs)
             }
+            val session = if (s.completed) restored else restored.copy(
+                startElapsedMs = SystemClock.elapsedRealtime() - (System.currentTimeMillis() - s.startedAt),
+                startBootCount = sessionRepo.currentBootCount(),
+            )
             try {
                 sessionRepo.insertSession(session)
             } catch (_: Exception) {

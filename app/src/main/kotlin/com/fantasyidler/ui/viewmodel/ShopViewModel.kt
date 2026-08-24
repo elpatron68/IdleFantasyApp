@@ -375,9 +375,9 @@ class ShopViewModel @Inject constructor(
             val inventory = state.inventory
             val allEquip  = gameData.equipment
 
-            val toSell = computeOldEquipmentToSell(equipped, inventory, allEquip)
+            val toSell = computeOldEquipmentToSell(
+                equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems)
                 .filterKeys { it !in state.lockedItems }
-                .let { if (state.keepOneOfEach) it.mapValues { (_, qty) -> qty - 1 }.filterValues { qty -> qty > 0 } else it }
 
             if (toSell.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_no_old_equipment)) }
@@ -608,12 +608,6 @@ class ShopViewModel @Inject constructor(
             "redwood_grand_bed" to 1800,
         )
 
-        private val TOOL_SLOTS = setOf(
-            EquipSlot.PICKAXE, EquipSlot.AXE, EquipSlot.FISHING_ROD, EquipSlot.HOE,
-            EquipSlot.HAMMER, EquipSlot.TINDERBOX, EquipSlot.GRAPPLING_HOOK, EquipSlot.FRYING_PAN,
-            EquipSlot.LOCKPICK,
-        )
-
         /**
          * Pure logic for computing which old equipment items to suggest selling.
          * Extracted from [previewSellOldEquipment] for testability.
@@ -623,77 +617,30 @@ class ShopViewModel @Inject constructor(
          * @param allEquip  all equipment data: item key → [EquipmentData]
          * @return map of item key → quantity to sell
          */
+        /**
+         * Every equippable in the inventory is sellable except: copies currently equipped,
+         * copies reserved by queued actions, skill capes (rare level-99 rewards, issue #821),
+         * and one keeper per item when [keepOneOfEach] is on and none is equipped (the
+         * equipped copy already serves as the collection keeper, issue #1419). Selling gear
+         * that is not strictly outclassed is intentional since the keep-one toggle exists.
+         */
         fun computeOldEquipmentToSell(
             equipped: Map<String, String?>,
             inventory: Map<String, Int>,
             allEquip: Map<String, com.fantasyidler.data.json.EquipmentData>,
+            keepOneOfEach: Boolean = false,
+            reserved: Map<String, Int> = emptyMap(),
         ): Map<String, Int> {
             val toSell = mutableMapOf<String, Int>()
-            for (slot in EquipSlot.ALL) {
-                val equippedKey  = equipped[slot] ?: continue
-                val equippedItem = allEquip[equippedKey] ?: continue
-
-                val allKeysInSlot = buildList {
-                    add(equippedKey)
-                    inventory.keys
-                        .filter { k -> k != equippedKey && allEquip[k]?.slot == slot }
-                        .forEach { add(it) }
-                }
-
-                for ((itemKey, qty) in inventory) {
-                    if (itemKey == equippedKey) continue
-                    val item = allEquip[itemKey] ?: continue
-                    if (item.slot != slot) continue
-
-                    // Skill capes are rare level-99 rewards — never auto-sell them (issue #821)
-                    if (item.capeSkill != null) continue
-
-                    val shouldSell = if (slot in TOOL_SLOTS) {
-                        scoreForItem(item, slot) < scoreForItem(equippedItem, slot)
-                    } else {
-                        allKeysInSlot
-                            .filter { it != itemKey }
-                            .any { k -> allEquip[k]?.let { o -> combatDominatesStatic(o, item) } == true }
-                    }
-                    if (shouldSell) toSell[itemKey] = (toSell[itemKey] ?: 0) + qty
-                }
-            }
-
-            // Suggest selling extra copies of equipped items (you only need 1)
-            for ((itemKey, inInv) in inventory) {
+            for ((itemKey, qty) in inventory) {
+                val item = allEquip[itemKey] ?: continue
+                if (item.capeSkill != null) continue
                 val equippedCount = equipped.values.count { it == itemKey }
-                if (equippedCount == 0) continue
-                val extras = inInv - equippedCount
-                if (extras > 0) toSell[itemKey] = (toSell[itemKey] ?: 0) + extras
+                val keeper = if (keepOneOfEach && equippedCount == 0) 1 else 0
+                val extras = qty - equippedCount - (reserved[itemKey] ?: 0) - keeper
+                if (extras > 0) toSell[itemKey] = extras
             }
-
             return toSell
-        }
-
-        private fun scoreForItem(item: com.fantasyidler.data.json.EquipmentData, slot: String): Float = when (slot) {
-            EquipSlot.PICKAXE     -> item.miningEfficiency ?: 0f
-            EquipSlot.AXE         -> item.woodcuttingEfficiency ?: 0f
-            EquipSlot.FISHING_ROD -> item.fishingEfficiency ?: 0f
-            EquipSlot.HOE         -> item.farmingEfficiency ?: 0f
-            EquipSlot.LOCKPICK    -> item.thievingEfficiency ?: 0f
-            else                  -> (item.attackBonus + item.strengthBonus + item.defenseBonus).toFloat()
-        }
-
-        private fun combatDominatesStatic(a: com.fantasyidler.data.json.EquipmentData, b: com.fantasyidler.data.json.EquipmentData): Boolean {
-            if (a.attackBonus          < b.attackBonus)                       return false
-            if (a.strengthBonus        < b.strengthBonus)                     return false
-            if (a.defenseBonus         < b.defenseBonus)                      return false
-            if ((a.rangedAttackBonus   ?: 0) < (b.rangedAttackBonus   ?: 0)) return false
-            if ((a.rangedStrengthBonus ?: 0) < (b.rangedStrengthBonus ?: 0)) return false
-            if ((a.magicAttackBonus    ?: 0) < (b.magicAttackBonus    ?: 0)) return false
-            if ((a.magicDamageBonus    ?: 0) < (b.magicDamageBonus    ?: 0)) return false
-            return a.attackBonus > b.attackBonus ||
-                   a.strengthBonus > b.strengthBonus ||
-                   a.defenseBonus > b.defenseBonus ||
-                   (a.rangedAttackBonus   ?: 0) > (b.rangedAttackBonus   ?: 0) ||
-                   (a.rangedStrengthBonus ?: 0) > (b.rangedStrengthBonus ?: 0) ||
-                   (a.magicAttackBonus    ?: 0) > (b.magicAttackBonus    ?: 0) ||
-                   (a.magicDamageBonus    ?: 0) > (b.magicDamageBonus    ?: 0)
         }
 
         private val FISH_KEYS = setOf(

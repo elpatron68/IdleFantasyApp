@@ -191,7 +191,7 @@ fun HomeScreen(
                         summary.xpLines.forEachIndexed { i, (skill, label) ->
                             val bonus = summary.xpLineBonuses.getOrNull(i) ?: 0L
                             val total = summary.xpLineValues.getOrNull(i) ?: 0L
-                            val breakdown = xpBreakdownText(total, bonus, summary.boostWasActive)
+                            val breakdown = xpBreakdownText(total, bonus, summary.xpLineBoostFactors.getOrNull(i) ?: 1L)
                             Row(
                                 modifier              = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -222,7 +222,7 @@ fun HomeScreen(
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(summary.totalXpLabel, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.boostWasActive)
+                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.totalXpBoostFactor)
                                 if (breakdown != null) {
                                     Spacer(Modifier.width(4.dp))
                                     Text(
@@ -347,7 +347,7 @@ fun HomeScreen(
                         summary.xpLines.forEachIndexed { i, (skill, label) ->
                             val bonus = summary.xpLineBonuses.getOrNull(i) ?: 0L
                             val total = summary.xpLineValues.getOrNull(i) ?: 0L
-                            val breakdown = xpBreakdownText(total, bonus, summary.boostWasActive)
+                            val breakdown = xpBreakdownText(total, bonus, summary.xpLineBoostFactors.getOrNull(i) ?: 1L)
                             Row(
                                 modifier              = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -378,7 +378,7 @@ fun HomeScreen(
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(summary.totalXpLabel, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.boostWasActive)
+                                val breakdown = xpBreakdownText(summary.totalXpValue, summary.totalXpLabelBonus, summary.totalXpBoostFactor)
                                 if (breakdown != null) {
                                     Spacer(Modifier.width(4.dp))
                                     Text(
@@ -641,6 +641,7 @@ fun HomeScreen(
                         prayerCapeMult             = state.prayerCapeMult,
                         activeBlessingRemainingMs  = state.activeBlessingRemainingMs,
                         xpBoostRemainingMs         = state.xpBoostRemainingMs,
+                        prestigeBoostsRemainingMs  = state.prestigeBoostsRemainingMs,
                         modifier                   = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
                     )
                 }

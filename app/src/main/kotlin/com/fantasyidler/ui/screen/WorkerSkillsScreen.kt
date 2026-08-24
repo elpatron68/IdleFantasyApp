@@ -862,7 +862,9 @@ private fun WorkerCraftQuantityContent(
                     textAlign  = TextAlign.Center,
                 ),
                 singleLine = true,
-                modifier   = Modifier.width(90.dp),
+                // 130dp matches the player crafting sheet; 90dp clipped and scrolled the
+                // Long Laborer's five-digit quantities (issue #1533).
+                modifier   = Modifier.width(130.dp),
             )
             IconButton(onClick = { setQuantity(qty + 1) }, enabled = qty < max) {
                 Icon(Icons.Filled.Add, contentDescription = "Increase")

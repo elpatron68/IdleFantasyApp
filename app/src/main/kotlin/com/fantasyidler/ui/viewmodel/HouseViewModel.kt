@@ -6,12 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.json.HouseCostTier
 import com.fantasyidler.data.json.HouseTileDef
+import com.fantasyidler.data.model.HouseBlueprint
 import com.fantasyidler.data.model.HouseData
+import com.fantasyidler.data.model.HouseRoom
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.HouseActionResult
+import com.fantasyidler.repository.HouseBill
 import com.fantasyidler.repository.HouseDirection
 import com.fantasyidler.repository.HouseRepository
 import com.fantasyidler.repository.PlayerRepository
@@ -56,6 +59,20 @@ data class HouseUiState(
     val earnedBanners: List<com.fantasyidler.data.model.SeasonalBannerEarned> = emptyList(),
     /** True while the outdoor-ground picker sheet is open (tap empty ground to open). */
     val groundPickerOpen: Boolean = false,
+    /** True while the editor is open; [house] is then the draft layout, not the built house. */
+    val editing: Boolean = false,
+    /** True when the draft layout differs from the built house. */
+    val hasDraftChanges: Boolean = false,
+    /** Priced diff between built house and draft; null outside the editor. */
+    val bill: HouseBill? = null,
+    /** Draft placement indices that are unpurchased (rendered ghosted). */
+    val ghostPlacements: Set<Int> = emptySet(),
+    /** Room-cell rects of unpurchased draft area (rendered tinted). */
+    val draftRoomTints: List<HouseRoom> = emptyList(),
+    val blueprints: List<HouseBlueprint> = emptyList(),
+    val billSheetOpen: Boolean = false,
+    val blueprintSheetOpen: Boolean = false,
+    val discardConfirmOpen: Boolean = false,
     /** Character appearance, for the resident shown in view mode. */
     val characterRace: String = "",
     val characterSkinTone: Int = 1,
@@ -93,13 +110,25 @@ class HouseViewModel @Inject constructor(
         val flags: PlayerFlags          = json.decodeFromString(player.flags)
         val levels: Map<String, Int>    = json.decodeFromString(player.skillLevels)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val built = flags.house ?: HouseData()
+        val draft = flags.houseDraft
+        val level = levels[Skills.CONSTRUCTION] ?: 1
+        val perMille = boostRepo.builderDiscountPerMille(flags)
+        val showDraft = extra.editing && draft != null
         extra.copy(
             isLoading         = flags.house == null,
-            house             = flags.house ?: HouseData(),
-            constructionLevel = levels[Skills.CONSTRUCTION] ?: 1,
+            house             = if (showDraft) draft!!.layout.copy(
+                                    storage = houseRepo.draftStorageView(built, draft.layout))
+                                else built,
+            hasDraftChanges   = draft != null && houseRepo.hasLayoutChanges(built, draft.layout),
+            bill              = if (showDraft) houseRepo.computeBill(built, draft!!, level, perMille) else null,
+            ghostPlacements   = if (showDraft) houseRepo.ghostPlacements(built, draft!!.layout) else emptySet(),
+            draftRoomTints    = if (showDraft) houseRepo.draftRoomTints(built, draft!!) else emptyList(),
+            blueprints        = flags.houseBlueprints,
+            constructionLevel = level,
             coins             = player.coins,
             inventory         = inventory,
-            discountPerMille  = boostRepo.builderDiscountPerMille(flags),
+            discountPerMille  = perMille,
             earnedBanners     = flags.seasonalBannersEarned.filter { it.bannerIcon != null },
             characterRace     = flags.characterRace,
             characterSkinTone = flags.characterSkinTone,
@@ -156,6 +185,78 @@ class HouseViewModel @Inject constructor(
     }
 
     fun setGroundPickerOpen(open: Boolean) = _extra.update { it.copy(groundPickerOpen = open) }
+
+    // ------------------------------------------------------------------ draft + bill
+
+    fun setEditing(editing: Boolean) {
+        _extra.update {
+            it.copy(
+                editing = editing, mode = HouseEditMode.Select,
+                selectedPlacement = null, selectedRoom = null, nudgeIndex = null,
+                billSheetOpen = false, blueprintSheetOpen = false, discardConfirmOpen = false,
+            )
+        }
+        if (editing) viewModelScope.launch { houseRepo.beginEdit() }
+    }
+
+    fun setBillSheetOpen(open: Boolean) = _extra.update { it.copy(billSheetOpen = open) }
+    fun setBlueprintSheetOpen(open: Boolean) = _extra.update { it.copy(blueprintSheetOpen = open) }
+    fun setDiscardConfirmOpen(open: Boolean) = _extra.update { it.copy(discardConfirmOpen = open) }
+
+    /** Whether the whole bill is purchasable: level requirement met, coins and materials covered. */
+    fun canAffordBill(bill: HouseBill, state: HouseUiState): Boolean =
+        state.constructionLevel >= bill.requiredLevel &&
+            state.coins >= bill.netCoins &&
+            bill.netMaterials().all { (k, v) -> v <= 0 || (state.inventory[k] ?: 0) >= v }
+
+    fun purchaseBuild() {
+        val hadCost = uiState.value.bill?.isEmpty == false
+        viewModelScope.launch {
+            report(houseRepo.purchaseBuild()) {
+                _extra.update {
+                    it.copy(
+                        billSheetOpen = false, discardConfirmOpen = false,
+                        snackbarMessage = context.getString(
+                            if (hadCost) R.string.house_purchase_success else R.string.house_changes_applied),
+                    )
+                }
+            }
+        }
+    }
+
+    fun discardDraft() {
+        viewModelScope.launch {
+            houseRepo.discardDraft()
+            houseRepo.beginEdit()
+            _extra.update { it.copy(billSheetOpen = false, discardConfirmOpen = false) }
+        }
+    }
+
+    // ------------------------------------------------------------------ blueprints
+
+    fun saveBlueprint(slot: Int, name: String) {
+        viewModelScope.launch {
+            report(houseRepo.saveBlueprint(slot, name)) {
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.house_blueprint_saved)) }
+            }
+        }
+    }
+
+    fun loadBlueprint(slot: Int) {
+        viewModelScope.launch {
+            val dropped = houseRepo.loadBlueprint(slot)
+            val msg = when {
+                dropped == null -> null
+                dropped > 0 -> context.getString(R.string.house_blueprint_skipped, dropped)
+                else -> context.getString(R.string.house_blueprint_loaded)
+            }
+            _extra.update { it.copy(blueprintSheetOpen = false, snackbarMessage = msg ?: it.snackbarMessage) }
+        }
+    }
+
+    fun deleteBlueprint(slot: Int) {
+        viewModelScope.launch { report(houseRepo.deleteBlueprint(slot)) {} }
+    }
 
     // ------------------------------------------------------------------ actions
 
@@ -326,7 +427,16 @@ class HouseViewModel @Inject constructor(
         if ((state.house.storage[key] ?: 0) > 0)
             return context.getString(R.string.house_stored_count, state.house.storage[key])
         val def = houseRepo.tileDef(key) ?: return ""
-        val cost = itemCost(def, state)
+        return tierSummary(itemCost(def, state))
+    }
+
+    /** Discounted cost line for the next room purchase, shown while placing a room. */
+    fun roomCostSummary(state: HouseUiState): String {
+        val tier = houseRepo.nextRoomCost(state.roomCount) ?: return ""
+        return tierSummary(discountedTier(tier, 1, state))
+    }
+
+    private fun tierSummary(cost: HouseCostTier): String {
         val parts = buildList {
             if (cost.coins > 0) add(context.getString(R.string.house_cost_coins, cost.coins.formatCoins()))
             cost.materials.forEach { (k, v) -> add("$v ${GameStrings.itemName(context, k)}") }

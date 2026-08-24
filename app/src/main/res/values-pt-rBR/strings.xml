@@ -488,6 +488,9 @@
     <string name="settings_backup_weekly">Semanalmente</string>
     <string name="settings_backup_at_5am">às 5:00</string>
     <string name="settings_backup_now">Fazer Backup Agora</string>
+    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
+    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
+    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
     <string name="settings_backup_success">Backup salvo.</string>
     <string name="settings_backup_failed">Falha no backup.</string>
     <string name="settings_backup_folder_set">Pasta de backup definida.</string>
@@ -506,6 +509,7 @@
     <string name="home_died_message">Você morreu e perdeu a maior parte dos seus ganhos.</string>
     <string name="home_xp_boost_was_active">Impulso de 2× XP estava ativo</string>
     <string name="home_xp_boost_active">Impulso de 2× XP ativo — %1$s restantes</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
     <string name="home_loot">Saque</string>
     <string name="home_food_consumed">Comida Consumida</string>
     <string name="home_bones_buried">Ossos enterrados</string>
@@ -1114,6 +1118,37 @@
     <string name="house_construction_level">Construction level %1$d</string> <!-- untranslated -->
     <string name="house_add_room">Add room (%1$s)</string> <!-- untranslated -->
     <string name="house_add_room_locked">Add room (Lv %1$d)</string> <!-- untranslated -->
+    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
+    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
+    <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
+    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
+    <string name="house_bill_open">Bill</string> <!-- untranslated -->
+    <string name="house_bill_new_room">New room %1$d</string> <!-- untranslated -->
+    <string name="house_bill_expand_room">Expand room %1$d (+%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_materials_header">Materials needed</string> <!-- untranslated -->
+    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
+    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
+    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_bill_coins_total">Total: %1$s coins</string> <!-- untranslated -->
+    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
+    <string name="house_apply_changes">Apply Changes</string> <!-- untranslated -->
+    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
+    <string name="house_changes_applied">Changes applied.</string> <!-- untranslated -->
+    <string name="house_discard_build">Discard</string> <!-- untranslated -->
+    <string name="house_discard_confirm_title">Discard changes?</string> <!-- untranslated -->
+    <string name="house_discard_confirm_message">All unpurchased changes will be lost.</string> <!-- untranslated -->
+    <string name="house_blueprints">Blueprints</string> <!-- untranslated -->
+    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
+    <string name="house_blueprint_save">Save</string> <!-- untranslated -->
+    <string name="house_blueprint_load">Load</string> <!-- untranslated -->
+    <string name="house_blueprint_delete">Delete</string> <!-- untranslated -->
+    <string name="house_blueprint_name_hint">Blueprint name</string> <!-- untranslated -->
+    <string name="house_blueprint_saved">Blueprint saved.</string> <!-- untranslated -->
+    <string name="house_blueprint_loaded">Blueprint loaded into the editor.</string> <!-- untranslated -->
+    <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
+    <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
+    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
     <string name="house_mode_place_item">Placing %1$s. Drag or tap a spot in your house.</string> <!-- untranslated -->
     <string name="house_mode_place_room">Placing a new 3x3 room. It must touch an existing room.</string> <!-- untranslated -->
     <string name="house_error_level">Your Construction level is too low.</string> <!-- untranslated -->
@@ -1311,7 +1346,7 @@
     <string name="slayer_foretell_desc">Reserve tarefas de Extermínio futuras pagando com ossos. Elas são atribuídas automaticamente quando sua tarefa atual for concluída.</string>
     <string name="slayer_foretell_queue_empty">Nenhuma tarefa na fila.</string>
     <string name="slayer_foretell_queue_btn">+ Fila</string>
-    <string name="slayer_foretell_queue_full">A fila de previsão está cheia (3/3).</string>
+    <string name="slayer_foretell_queue_full">A fila de previsão está cheia (%1$d/%1$d).</string>
     <string name="slayer_foretell_not_enough_bones">Ossos insuficientes (custo: %1$d ossos).</string>
     <string name="slayer_foretell_success">Tarefa prevista: %1$s!</string>
     <string name="slayer_foretell_btn">Prever Próxima Tarefa (%1$d ossos)</string>
@@ -1319,6 +1354,7 @@
 
     <!-- Prestige system -->
     <string name="prestige">Prestígio</string>
+    <string name="prestige_skill_tree">Skill Tree</string> <!-- untranslated -->
     <string name="prestige_max">Prestígio Máximo</string>
     <string name="prestige_confirm_title" formatted="false">Dar Prestígio em %s?</string>
     <string name="prestige_confirm_message_xp">Seu nível de %1$s vai voltar para 1, mas você vai ganhar um bônus permanente de +%2$d%% de XP nessa habilidade.</string>
@@ -2320,6 +2356,7 @@
     <string name="race_change_pay_coins">Pay 10,000,000 coins</string> <!-- untranslated -->
     <string name="race_change_cannot_afford">You need a Race Change Token (rare boss drop) or 10,000,000 coins to change race.</string> <!-- untranslated -->
     <string name="race_change_ironman_locked">Ironman characters cannot change their race.</string> <!-- untranslated -->
+    <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
     <string name="race_change_ironman_once">As an ironman, this is your one and only race change. Afterwards your race is locked forever.</string> <!-- untranslated -->
     <string name="ironman_race_permanent_note">Ironman characters cannot change their race later. Choose carefully!</string> <!-- untranslated -->
     <!-- Translator note: %1$s = comma-separated list of skill names -->

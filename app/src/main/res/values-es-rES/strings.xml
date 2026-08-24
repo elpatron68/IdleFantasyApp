@@ -493,6 +493,9 @@
     <string name="settings_backup_weekly">Weekly</string> <!-- untranslated -->
     <string name="settings_backup_at_5am">at 5:00 AM</string> <!-- untranslated -->
     <string name="settings_backup_now">Back Up Now</string> <!-- untranslated -->
+    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
+    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
+    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
     <string name="settings_backup_success">Backup saved.</string> <!-- untranslated -->
     <string name="settings_backup_failed">Backup failed.</string> <!-- untranslated -->
     <string name="settings_backup_folder_set">Backup folder set.</string> <!-- untranslated -->
@@ -511,6 +514,7 @@
     <string name="home_died_message">Moriste y perdiste la mayor parte de tus ganancias.</string>
     <string name="home_xp_boost_was_active">2× XP Boost was active</string> <!-- untranslated -->
     <string name="home_xp_boost_active">2× XP Boost active — %1$s remaining</string> <!-- untranslated -->
+    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
     <string name="home_loot">Botín</string>
     <string name="home_food_consumed">Alimentos consumidos</string>
     <string name="home_bones_buried">Huesos enterrados</string>
@@ -1118,6 +1122,37 @@
     <string name="house_construction_level">Construction level %1$d</string> <!-- untranslated -->
     <string name="house_add_room">Add room (%1$s)</string> <!-- untranslated -->
     <string name="house_add_room_locked">Add room (Lv %1$d)</string> <!-- untranslated -->
+    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
+    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
+    <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
+    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
+    <string name="house_bill_open">Bill</string> <!-- untranslated -->
+    <string name="house_bill_new_room">New room %1$d</string> <!-- untranslated -->
+    <string name="house_bill_expand_room">Expand room %1$d (+%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_materials_header">Materials needed</string> <!-- untranslated -->
+    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
+    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
+    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_bill_coins_total">Total: %1$s coins</string> <!-- untranslated -->
+    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
+    <string name="house_apply_changes">Apply Changes</string> <!-- untranslated -->
+    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
+    <string name="house_changes_applied">Changes applied.</string> <!-- untranslated -->
+    <string name="house_discard_build">Discard</string> <!-- untranslated -->
+    <string name="house_discard_confirm_title">Discard changes?</string> <!-- untranslated -->
+    <string name="house_discard_confirm_message">All unpurchased changes will be lost.</string> <!-- untranslated -->
+    <string name="house_blueprints">Blueprints</string> <!-- untranslated -->
+    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
+    <string name="house_blueprint_save">Save</string> <!-- untranslated -->
+    <string name="house_blueprint_load">Load</string> <!-- untranslated -->
+    <string name="house_blueprint_delete">Delete</string> <!-- untranslated -->
+    <string name="house_blueprint_name_hint">Blueprint name</string> <!-- untranslated -->
+    <string name="house_blueprint_saved">Blueprint saved.</string> <!-- untranslated -->
+    <string name="house_blueprint_loaded">Blueprint loaded into the editor.</string> <!-- untranslated -->
+    <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
+    <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
+    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
     <string name="house_mode_place_item">Placing %1$s. Drag or tap a spot in your house.</string> <!-- untranslated -->
     <string name="house_mode_place_room">Placing a new 3x3 room. It must touch an existing room.</string> <!-- untranslated -->
     <string name="house_error_level">Your Construction level is too low.</string> <!-- untranslated -->
@@ -1315,7 +1350,7 @@
     <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string> <!-- untranslated -->
     <string name="slayer_foretell_queue_empty">No tasks queued.</string> <!-- untranslated -->
     <string name="slayer_foretell_queue_btn">+ Queue</string> <!-- untranslated -->
-    <string name="slayer_foretell_queue_full">Foretell queue is full (3/3).</string> <!-- untranslated -->
+    <string name="slayer_foretell_queue_full">Foretell queue is full (%1$d/%1$d).</string> <!-- untranslated -->
     <string name="slayer_foretell_not_enough_bones">Not enough bones (cost: %1$d bones).</string> <!-- untranslated -->
     <string name="slayer_foretell_success">Task foretold: %1$s!</string> <!-- untranslated -->
     <string name="slayer_foretell_btn">Foretell Next Task (%1$d bones)</string> <!-- untranslated -->
@@ -1323,6 +1358,7 @@
 
     <!-- Prestige system -->
     <string name="prestige">Prestige</string> <!-- untranslated -->
+    <string name="prestige_skill_tree">Skill Tree</string> <!-- untranslated -->
     <string name="prestige_max">Max Prestige</string> <!-- untranslated -->
     <string name="prestige_confirm_title" formatted="false">Prestige %s?</string> <!-- untranslated -->
     <string name="prestige_confirm_message_xp">Your %1$s level will reset to 1, but you\'ll earn a permanent +%2$d%% XP bonus for this skill.</string> <!-- untranslated -->
@@ -2286,6 +2322,7 @@
     <string name="race_change_pay_coins">Pay 10,000,000 coins</string> <!-- untranslated -->
     <string name="race_change_cannot_afford">You need a Race Change Token (rare boss drop) or 10,000,000 coins to change race.</string> <!-- untranslated -->
     <string name="race_change_ironman_locked">Ironman characters cannot change their race.</string> <!-- untranslated -->
+    <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
     <string name="race_change_ironman_once">As an ironman, this is your one and only race change. Afterwards your race is locked forever.</string> <!-- untranslated -->
     <string name="ironman_race_permanent_note">Ironman characters cannot change their race later. Choose carefully!</string> <!-- untranslated -->
     <string name="race_proficiency_label">Racial skill trees: %1$s</string> <!-- untranslated -->

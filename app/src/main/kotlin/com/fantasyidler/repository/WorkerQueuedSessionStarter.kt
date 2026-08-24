@@ -73,10 +73,14 @@ class WorkerQueuedSessionStarter @Inject constructor(
         val rangedCapeMult   = resolveCapeMultiplier("ranged", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
         val magicCapeMult    = resolveCapeMultiplier("magic", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
         val prayerCapeMult   = resolveCapeMultiplier("prayer", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
-        val levelAtStart = when (action.skillName) {
-            "boss", "combat" -> combatLevelFrom(levels)
-            else -> levels[action.skillName] ?: 1
-        }
+        // Floored at the queue-time level so a prestige after queueing still voids the XP.
+        val levelAtStart = maxOf(
+            when (action.skillName) {
+                "boss", "combat" -> combatLevelFrom(levels)
+                else -> levels[action.skillName] ?: 1
+            },
+            action.levelAtQueue,
+        )
 
         val isGathering = action.skillName in GATHERING_SKILLS
         val efficiencyMultiplier = if (isGathering) tier.combinedGatheringMultiplier else 1.0f

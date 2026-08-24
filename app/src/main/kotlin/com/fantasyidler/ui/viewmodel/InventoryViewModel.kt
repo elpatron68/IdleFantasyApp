@@ -38,6 +38,7 @@ import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatDurationMs
 import com.fantasyidler.util.stringByName
 import com.fantasyidler.util.withAppLocale
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -116,6 +117,8 @@ class InventoryViewModel @Inject constructor(
         val prestigeUnspentBySkill: Map<String, Int> = emptyMap(),
         val ironmanRaceLocked: Boolean = false,
         val raceChangeTokens: Int = 0,
+        /** Epoch ms of the last race change; the 24h cooldown is derived from it. */
+        val raceLastChangedAt: Long = 0L,
         /** Active prestige-node effects: skill -> effect key -> total value. */
         val prestigeEffects: Map<String, Map<String, Double>> = emptyMap(),
         val townBuildingTiers: Map<String, Int> = emptyMap(),
@@ -216,6 +219,7 @@ class InventoryViewModel @Inject constructor(
                 prestigeUnspentBySkill  = boostRepo.unspentPointsBySkill(flags),
                 ironmanRaceLocked       = flags.ironmanRaceLocked,
                 raceChangeTokens        = inventory[PlayerRepository.RACE_CHANGE_TOKEN_ITEM] ?: 0,
+                raceLastChangedAt       = flags.raceLastChangedAt,
                 prestigeEffects         = boostRepo.activeEffectsBySkill(flags),
                 townBuildingTiers       = flags.townBuildingTiers,
                 seasonalBanners         = buildSeasonalBannerDisplays(flags),
@@ -491,6 +495,12 @@ class InventoryViewModel @Inject constructor(
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.race_change_ironman_locked)) }
                 PrestigeActionResult.CANT_AFFORD ->
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.race_change_cannot_afford)) }
+                PrestigeActionResult.COOLDOWN -> {
+                    val remaining = (uiState.value.raceLastChangedAt +
+                        PlayerRepository.RACE_CHANGE_COOLDOWN_MS - System.currentTimeMillis()).coerceAtLeast(0L)
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(
+                        R.string.race_change_cooldown_wait, remaining.formatDurationMs(context))) }
+                }
                 else -> {}
             }
         }

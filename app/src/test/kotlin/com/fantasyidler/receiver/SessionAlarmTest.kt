@@ -39,7 +39,7 @@ class SessionAlarmTest {
             .build()
         val json = Json { ignoreUnknownKeys = true }
         val gameData = GameDataRepository(context, json)
-        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData)
+        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData, db.playerDao())
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     }
 

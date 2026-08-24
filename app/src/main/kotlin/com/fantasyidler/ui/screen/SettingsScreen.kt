@@ -87,6 +87,7 @@ fun SettingsScreen(
     val backupFolderUri  by viewModel.backupFolderUri.collectAsState()
     val backupFrequency  by viewModel.backupFrequency.collectAsState()
     val viewerUrl        by viewModel.viewerUrl.collectAsState()
+    val backupStatus     by viewModel.backupStatus.collectAsState()
     var notificationsEnabled by remember { mutableStateOf(false) }
     var isViewerUploading  by remember { mutableStateOf(false) }
     var showResetConfirm1    by remember { mutableStateOf(false) }
@@ -623,6 +624,18 @@ fun SettingsScreen(
                         }
                     }
                 }
+            )
+
+            val statusSubtitle = if (backupStatus.lastBackupAt == 0L) {
+                stringResource(R.string.settings_backup_never)
+            } else {
+                java.text.DateFormat.getDateTimeInstance().format(java.util.Date(backupStatus.lastBackupAt))
+            }
+            SettingsRow(
+                title    = stringResource(R.string.settings_backup_status),
+                subtitle = if (!backupStatus.lastBackupOk && backupStatus.lastBackupError.isNotEmpty())
+                    "${statusSubtitle}\n${stringResource(R.string.settings_backup_failed_with, backupStatus.lastBackupError)}"
+                else statusSubtitle
             )
 
             OutlinedButton(

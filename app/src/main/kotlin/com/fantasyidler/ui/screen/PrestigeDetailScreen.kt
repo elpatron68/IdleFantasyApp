@@ -168,11 +168,10 @@ fun PrestigeDetailScreen(
                     }
                 }
                 Spacer(Modifier.height(8.dp))
-                // Other races see "???" so race-locked effects stay a surprise (debug shows all).
-                val effectHidden = node.raceLocked && !node.owned && !BuildConfig.DEBUG
+                // Race-locked effects stay visible to other races so players can judge
+                // whether a race change is worth it.
                 Text(
-                    text  = if (effectHidden) "???"
-                            else GameStrings.prestigeEffectDesc(context, node.effect, node.value, node.unlock),
+                    text  = GameStrings.prestigeEffectDesc(context, node.effect, node.value, node.unlock),
                     style = MaterialTheme.typography.bodyLarge,
                 )
                 if (!node.auto) {

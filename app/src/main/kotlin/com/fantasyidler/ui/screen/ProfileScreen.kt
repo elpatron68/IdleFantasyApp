@@ -245,6 +245,9 @@ fun ProfileScreen(
                     prayerCapeMult            = state.prayerCapeMult,
                     activeBlessingRemainingMs = (state.activeBlessingExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
                     xpBoostRemainingMs        = if (state.ironman) 0L else (state.xpBoostExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
+                    prestigeBoostsRemainingMs = state.prestigeXpBoosts
+                        .mapValues { (it.value - System.currentTimeMillis()).coerceAtLeast(0L) }
+                        .filterValues { it > 0L },
                     modifier                  = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
                 )
             }
@@ -331,6 +334,9 @@ fun ProfileScreen(
             ironman           = state.ironman,
             ironmanRaceLocked = state.ironmanRaceLocked,
             raceChangeTokens  = state.raceChangeTokens,
+            raceCooldownRemainingMs = (state.raceLastChangedAt +
+                com.fantasyidler.repository.PlayerRepository.RACE_CHANGE_COOLDOWN_MS -
+                System.currentTimeMillis()).coerceAtLeast(0L),
             coins             = state.coins,
             raceProficiencies = viewModel.raceProficiencies,
             initialSkin       = state.characterSkinTone,

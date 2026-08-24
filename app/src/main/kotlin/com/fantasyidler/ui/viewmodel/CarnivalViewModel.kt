@@ -633,7 +633,7 @@ class CarnivalViewModel @Inject constructor(
                 it.copy(snackbarMessage = if (result.success) {
                     val b = result.breakdown!!
                     val skillDisplay = GameStrings.skillName(context, skillKey)
-                    val suffix = xpMultiplierBreakdown(b.baseXp, b.boostActive, b.blessingMult, b.prestigeXpPct)?.let { s -> " $s" } ?: ""
+                    val suffix = xpMultiplierBreakdown(b.baseXp, b.boostFactor, b.blessingMult, b.prestigeXpPct)?.let { s -> " $s" } ?: ""
                     context.withAppLocale().getString(R.string.carnival_lamp_redeemed, b.finalXp.formatXp(), skillDisplay) + suffix
                 } else
                     context.withAppLocale().getString(R.string.carnival_not_enough_tickets))

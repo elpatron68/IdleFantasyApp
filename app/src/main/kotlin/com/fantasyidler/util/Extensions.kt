@@ -13,10 +13,10 @@ fun Long.formatXp(): String = when {
 }
 
 /** Parenthetical multiplier breakdown for a flat XP grant, e.g. "(50,000 × 2 × 1.28)", or null if no bonus applied. */
-fun xpMultiplierBreakdown(baseXp: Long, boostActive: Boolean, blessingMult: Float, prestigeXpPct: Int = 0): String? {
-    if (!boostActive && blessingMult <= 1f && prestigeXpPct <= 0) return null
+fun xpMultiplierBreakdown(baseXp: Long, boostFactor: Long, blessingMult: Float, prestigeXpPct: Int = 0): String? {
+    if (boostFactor <= 1L && blessingMult <= 1f && prestigeXpPct <= 0) return null
     val factors = buildList {
-        if (boostActive) add("2")
+        if (boostFactor > 1L) add("$boostFactor")
         if (blessingMult > 1f) add("%.2f".format(blessingMult).trimEnd('0').trimEnd('.'))
         if (prestigeXpPct > 0) add("%.2f".format(1.0 + prestigeXpPct / 100.0).trimEnd('0').trimEnd('.'))
     }

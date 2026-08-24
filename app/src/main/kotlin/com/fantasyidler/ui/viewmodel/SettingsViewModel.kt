@@ -34,6 +34,12 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import javax.inject.Inject
 
+data class BackupStatus(
+    val lastBackupAt: Long = 0L,
+    val lastBackupOk: Boolean = true,
+    val lastBackupError: String = "",
+)
+
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -111,6 +117,16 @@ class SettingsViewModel @Inject constructor(
             catch (_: Exception) { "" }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), "")
+
+    val backupStatus: StateFlow<BackupStatus> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map BackupStatus()
+            try {
+                val flags = json.decodeFromString<PlayerFlags>(player.flags)
+                BackupStatus(flags.lastBackupAt, flags.lastBackupOk, flags.lastBackupError)
+            } catch (_: Exception) { BackupStatus() }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), BackupStatus())
 
     val showRecentActivityLog: StateFlow<Boolean> = playerRepo.playerFlow
         .map { player ->

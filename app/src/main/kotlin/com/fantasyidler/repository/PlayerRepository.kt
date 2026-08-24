@@ -1,6 +1,8 @@
 package com.fantasyidler.repository
 
+import androidx.room.withTransaction
 import com.fantasyidler.BuildConfig
+import com.fantasyidler.data.db.AppDatabase
 import com.fantasyidler.data.db.dao.FarmingPatchDao
 import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.QuestProgressDao
@@ -51,6 +53,7 @@ class PlayerRepository @Inject constructor(
     private val buffNotifScheduler: BuffNotificationScheduler,
     private val gameData: GameDataRepository,
     private val boostRepo: BoostRepository,
+    private val appDatabase: AppDatabase,
 ) {
     val playerMutex = kotlinx.coroutines.sync.Mutex()
 
@@ -435,8 +438,22 @@ class PlayerRepository @Inject constructor(
     private suspend fun enqueueActionUnlocked(action: QueuedAction): Boolean {
         val flags = getFlags()
         if (flags.sessionQueue.size >= maxQueueSize(flags)) return false
-        updateFlagsUnlocked(flags.copy(sessionQueue = flags.sessionQueue + action))
+        updateFlagsUnlocked(flags.copy(
+            sessionQueue = flags.sessionQueue + action.copy(levelAtQueue = queueLevelFor(action))))
         return true
+    }
+
+    /**
+     * Relevant level for a queued action's prestige-void floor. Mirrors the levelAtStart
+     * mapping in the queue starters so a prestige between queueing and collection is caught.
+     */
+    private suspend fun queueLevelFor(action: QueuedAction): Int {
+        val levels = getSkillLevels()
+        return when (action.skillName) {
+            "boss", "combat", "tower" -> com.fantasyidler.ui.viewmodel.combatLevelFrom(levels)
+            "expedition" -> gameData.skillingDungeons[action.activityKey]?.skill?.let { levels[it] } ?: 1
+            else -> levels[action.skillName] ?: 1
+        }
     }
 
     /** Creates and enqueues a combat (dungeon) session for a Slayer task's auto-advance. Returns false if queue is full. */
@@ -497,7 +514,8 @@ class PlayerRepository @Inject constructor(
         val flags = getFlags()
         val worker = flags.workerForSlot(slot) ?: return false
         if (worker.sessionQueue.size >= 1) return false
-        updateFlagsUnlocked(flags.withWorkerForSlot(slot, worker.copy(sessionQueue = worker.sessionQueue + action)))
+        updateFlagsUnlocked(flags.withWorkerForSlot(slot, worker.copy(
+            sessionQueue = worker.sessionQueue + action.copy(levelAtQueue = queueLevelFor(action)))))
         return true
     }
 
@@ -628,6 +646,8 @@ class PlayerRepository @Inject constructor(
             playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(characterRace = race))))
             return@withLock PrestigeActionResult.SUCCESS
         }
+        if (System.currentTimeMillis() - flags.raceLastChangedAt < RACE_CHANGE_COOLDOWN_MS)
+            return@withLock PrestigeActionResult.COOLDOWN
         if (flags.ironman) {
             if (flags.ironmanRaceLocked) return@withLock PrestigeActionResult.LOCKED
             val updated = applyRaceChange(flags, race, System.currentTimeMillis())
@@ -850,7 +870,7 @@ class PlayerRepository @Inject constructor(
     data class FlatXpBreakdown(
         val baseXp: Long,
         val finalXp: Long,
-        val boostActive: Boolean,
+        val boostFactor: Long,
         val blessingMult: Float,
         val prestigeXpPct: Int,
     )
@@ -865,11 +885,11 @@ class PlayerRepository @Inject constructor(
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val capeMult = prayerCapeMult(player, flags)
-        val boostActive = boostRepo.xpBoostActive(skillName, flags)
+        val boostFactor = boostRepo.xpBoostFactor(skillName, flags)
         val blessingMult = if (flags.ironman) 1.0f else ChurchRepository.xpMultiplier(flags, capeMult)
         val prestigeXpPct = boostRepo.prestigeXpPct(skillName, flags)
         val finalXp = (baseXp * boostRepo.xpMultiplier(skillName, flags, capeMult)).toLong()
-        return FlatXpBreakdown(baseXp, finalXp, boostActive, blessingMult, prestigeXpPct)
+        return FlatXpBreakdown(baseXp, finalXp, boostFactor, blessingMult, prestigeXpPct)
     }
 
     /**
@@ -1128,6 +1148,7 @@ class PlayerRepository @Inject constructor(
         const val PRESTIGE_RESPEC_COOLDOWN_MS = 24 * 3_600_000L
         const val RACE_CHANGE_TOKEN_ITEM = "race_change_token"
         const val RACE_CHANGE_COST_COINS = 10_000_000L
+        const val RACE_CHANGE_COOLDOWN_MS = 24L * 60L * 60L * 1000L
 
         /** HMAC key for save-file signatures. Public by nature (open source), deterrence only. */
         private const val SAVE_SIG_KEY = "ekEhdMIDo9B63HQSU80U7hvuqVd1HYcciv5Na5d7gEKdaudR4Voa8jkF"
@@ -1285,7 +1306,7 @@ class PlayerRepository @Inject constructor(
      * An ironman save whose signature is missing or does not match its core fields was edited
      * outside the game; it still imports, but as a regular (non-ironman) character.
      */
-    suspend fun importSave(jsonString: String): ImportedSave {
+    suspend fun importSave(jsonString: String): ImportedSave = playerMutex.withLock {
         var export = json.decodeFromString<PlayerExport>(stripJsonGarbage(jsonString))
         var ironmanDemoted = false
         val importedFlags = try { json.decodeFromString<PlayerFlags>(export.flags) } catch (_: Exception) { null }
@@ -1293,23 +1314,25 @@ class PlayerRepository @Inject constructor(
             export = export.copy(flags = json.encode<PlayerFlags>(importedFlags.copy(ironman = false)))
             ironmanDemoted = true
         }
-        val player = getOrCreatePlayer()
-        playerDao.upsert(
-            player.copy(
-                skillLevels = export.skillLevels,
-                skillXp     = export.skillXp,
-                inventory   = export.inventory,
-                equipped    = export.equipped,
-                flags       = export.flags,
-                pets        = export.pets,
-                coins       = export.coins,
+        appDatabase.withTransaction {
+            val player = getOrCreatePlayer()
+            playerDao.upsert(
+                player.copy(
+                    skillLevels = export.skillLevels,
+                    skillXp     = export.skillXp,
+                    inventory   = export.inventory,
+                    equipped    = export.equipped,
+                    flags       = export.flags,
+                    pets        = export.pets,
+                    coins       = export.coins,
+                )
             )
-        )
-        questProgressDao.deleteAll()
-        export.questProgress.forEach { questProgressDao.upsert(it) }
-        farmingPatchDao.clearAll()
-        export.farmingPatches.forEach { farmingPatchDao.upsert(it) }
-        return ImportedSave(export, ironmanDemoted)
+            questProgressDao.deleteAll()
+            export.questProgress.forEach { questProgressDao.upsert(it) }
+            farmingPatchDao.clearAll()
+            export.farmingPatches.forEach { farmingPatchDao.upsert(it) }
+        }
+        ImportedSave(export, ironmanDemoted)
     }
 
     /**

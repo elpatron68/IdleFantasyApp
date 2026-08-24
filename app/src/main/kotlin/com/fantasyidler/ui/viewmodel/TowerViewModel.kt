@@ -443,7 +443,7 @@ class TowerViewModel @Inject constructor(
     fun collectFloor() {
         viewModelScope.launch {
             val latest = sessionRepo.getActiveSession()
-            if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt) {
+            if (latest != null && !latest.completed && System.currentTimeMillis() >= latest.endsAt && sessionRepo.hasTrustedClock(latest)) {
                 sessionRepo.markCompleted(latest.sessionId)
             }
             var session: SkillSession? =

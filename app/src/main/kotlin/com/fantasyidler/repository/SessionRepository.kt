@@ -4,7 +4,11 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.SystemClock
+import android.provider.Settings
+import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.SkillSessionDao
+import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.receiver.SessionAlarmReceiver
@@ -24,6 +28,7 @@ class SessionRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json,
     private val gameData: GameDataRepository,
+    private val playerDao: PlayerDao,
 ) {
     val activeSessionFlow: Flow<SkillSession?> = sessionDao.observeActiveSession()
     val completedCountFlow: Flow<Int> = sessionDao.observeCompletedCount()
@@ -81,6 +86,8 @@ class SessionRepository @Inject constructor(
             catalystKey  = catalystKey,
             catalystQty  = catalystQty,
             levelAtStart = levelAtStart,
+            startElapsedMs = if (insertAsCompleted) null else SystemClock.elapsedRealtime() - backdateMs,
+            startBootCount = if (insertAsCompleted) null else currentBootCount(),
         )
         sessionDao.insert(session)
         if (!insertAsCompleted) {
@@ -112,6 +119,8 @@ class SessionRepository @Inject constructor(
             efficiencyMultiplier = efficiencyMultiplier,
             workerSlot           = workerSlot,
             levelAtStart         = levelAtStart,
+            startElapsedMs       = SystemClock.elapsedRealtime(),
+            startBootCount       = currentBootCount(),
         )
         sessionDao.insert(session)
         scheduleAlarm(session.sessionId, session.endsAt, skillDisplayName)
@@ -135,6 +144,31 @@ class SessionRepository @Inject constructor(
         if (offset != null) minOf(session.endsAt, session.startedAt + offset) else session.endsAt
     } catch (_: Exception) { session.endsAt }
 
+    /**
+     * True when [session]'s completion time is consistent with its monotonic anchor.
+     * Enforced for ironman characters only — normal characters always pass; anchors are
+     * still stamped for everyone so enforcement decisions stay possible later. Fails open
+     * when the anchor or boot count is missing, or when the device rebooted since the
+     * session started (elapsedRealtime restarts at boot, making the anchor meaningless).
+     */
+    suspend fun hasTrustedClock(session: SkillSession): Boolean {
+        val anchor = session.startElapsedMs ?: return true
+        if (!isIronman()) return true
+        val bootCount = currentBootCount()
+        if (session.startBootCount == null || bootCount == null || bootCount != session.startBootCount) return true
+        val elapsedSinceStart = SystemClock.elapsedRealtime() - anchor
+        if (elapsedSinceStart < 0L) return true
+        return System.currentTimeMillis() - session.startedAt <= elapsedSinceStart + CLOCK_SKEW_TOLERANCE_MS
+    }
+
+    private suspend fun isIronman(): Boolean = try {
+        playerDao.getPlayer()?.let { json.decodeFromString<PlayerFlags>(it.flags).ironman } ?: false
+    } catch (_: Exception) { false }
+
+    internal fun currentBootCount(): Int? = try {
+        Settings.Global.getInt(context.contentResolver, Settings.Global.BOOT_COUNT)
+    } catch (_: Exception) { null }
+
     private val watchdogMutex = Mutex()
 
     /**
@@ -152,7 +186,7 @@ class SessionRepository @Inject constructor(
         val session = getActiveSession()
         if (session != null && !session.completed) {
             val endMs = if (session.skillName == "boss") bossFightEndMs(session) else session.endsAt
-            if (now >= endMs) {
+            if (now >= endMs && hasTrustedClock(session)) {
                 markCompleted(session.sessionId)
                 var catchUpMs = now - endMs
                 while (catchUpMs > 0) {
@@ -171,7 +205,7 @@ class SessionRepository @Inject constructor(
         if (workerStarter != null) {
             for (slot in 1..2) {
                 val ws = getActiveWorkerSession(slot)
-                if (ws != null && !ws.completed && now >= ws.endsAt) {
+                if (ws != null && !ws.completed && now >= ws.endsAt && hasTrustedClock(ws)) {
                     markCompleted(ws.sessionId)
                     try { workerStarter.startNextQueued(slot) } catch (_: Exception) {}
                 }
@@ -180,7 +214,14 @@ class SessionRepository @Inject constructor(
     }
 
     suspend fun markAllExpiredWorkerSessions() {
-        sessionDao.markAllExpiredWorkerSessions(System.currentTimeMillis())
+        sessionDao.markAllExpiredWorkerSessions(
+            System.currentTimeMillis(),
+            SystemClock.elapsedRealtime(),
+            CLOCK_SKEW_TOLERANCE_MS,
+            enforceClock = isIronman(),
+            // -1 never matches a stored boot count, so an unreadable setting fails open.
+            bootCount = currentBootCount() ?: -1,
+        )
     }
 
     /**
@@ -195,6 +236,7 @@ class SessionRepository @Inject constructor(
             return
         }
         if (session.completed) {
+            if (!hasTrustedClock(session)) return
             val endMs = if (session.skillName == "boss") bossFightEndMs(session) else session.endsAt
             var catchUpMs = maxOf(0L, System.currentTimeMillis() - endMs)
             while (catchUpMs > 0) {
@@ -210,7 +252,7 @@ class SessionRepository @Inject constructor(
         // never on endsAt.
         if (session.skillName == "boss") {
             val fightEndMs = bossFightEndMs(session)
-            if (System.currentTimeMillis() >= fightEndMs) {
+            if (System.currentTimeMillis() >= fightEndMs && hasTrustedClock(session)) {
                 markCompleted(session.sessionId)
                 // Fast-forward the offline window like the generic path below, or a repeat
                 // chain (x100 boss runs) advances only one fight per app launch when the OS
@@ -229,7 +271,7 @@ class SessionRepository @Inject constructor(
         }
         val now = System.currentTimeMillis()
         try {
-            if (now >= session.endsAt) {
+            if (now >= session.endsAt && hasTrustedClock(session)) {
                 markCompleted(session.sessionId)
                 var catchUpMs = now - session.endsAt
                 while (catchUpMs > 0) {
@@ -242,7 +284,7 @@ class SessionRepository @Inject constructor(
                 scheduleAlarm(session.sessionId, session.endsAt, session.skillName)
             }
         } catch (_: Exception) {
-            markCompleted(session.sessionId)
+            if (hasTrustedClock(session)) markCompleted(session.sessionId)
         }
     }
 
@@ -257,14 +299,14 @@ class SessionRepository @Inject constructor(
         }
         val now = System.currentTimeMillis()
         try {
-            if (now >= session.endsAt) {
+            if (now >= session.endsAt && hasTrustedClock(session)) {
                 markCompleted(session.sessionId)
                 workerStarter.startNextQueued(slot)
             } else {
                 scheduleAlarm(session.sessionId, session.endsAt, session.skillName)
             }
         } catch (_: Exception) {
-            markCompleted(session.sessionId)
+            if (hasTrustedClock(session)) markCompleted(session.sessionId)
         }
     }
 
@@ -340,5 +382,6 @@ class SessionRepository @Inject constructor(
 
     companion object {
         const val SESSION_DURATION_MS = 60L * 60L * 1_000L  // 1 hour
+        const val CLOCK_SKEW_TOLERANCE_MS = 120_000L
     }
 }
