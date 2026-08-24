@@ -1013,11 +1013,11 @@
     <string name="mercantile_level_label">Livello Mercante %1$d</string>
     <string name="mercantile_xp_label">XP: %1$s</string>
     <string name="mercantile_coins_label">Monete: %1$s</string>
-    <string name="mercantile_perks_title">Chance</string>
-    <string name="mercantile_perk_trading_locked">%1$d Sessions Complete!</string>
-    <string name="mercantile_perk_trading">Defeated %1$s!</string>
-    <string name="mercantile_perk_trading_next">Defeated by %1$s.</string>
-    <string name="mercantile_perk_guild">%1$s Expedition Complete</string>
+    <string name="mercantile_perks_title">Talenti</string>
+    <string name="mercantile_perk_trading_locked">Negoziatore: sconti e profitti migliori a partire dal livello %1$d.</string>
+    <string name="mercantile_perk_trading">Negoziatore: sconti del -%1$d%%, profitti dalle vendite +%2$d%%.</string>
+    <string name="mercantile_perk_trading_next">Prossimo bonus al livello %1$d.</string>
+    <string name="mercantile_perk_guild">Gilda dei Mercanti: oggetti esclusivi nell\'emporio a partire dal livello %1$d.</string>
     <string name="mercantile_cost_label">Costo: %1$s</string>
     <string name="mercantile_return_range">Ricavo: %1$s – %2$s</string>
     <string name="mercantile_dispatch_label">Spedisci</string>
@@ -1124,14 +1124,14 @@
     <string name="builder_card_desc">Migliora la Locanda, la Gilda e la Chiesa</string>
 
     <!-- Player housing -->
-    <string name="house_title" formatted="false">%1$s Session Complete</string>
-    <string name="house_edit" formatted="false">%1$s buried</string>
-    <string name="house_done" formatted="false">Worker: %1$d Sessions Complete!</string>
-    <string name="house_share" formatted="false">Worker: Defeated %1$s!</string>
-    <string name="house_rooms_owned">Worker: %1$s — Died</string>
-    <string name="house_construction_level">Worker: %1$s Complete!</string>
-    <string name="house_add_room">Worker: %1$s Complete</string>
-    <string name="house_add_room_locked">%1$dmo</string>
+    <string name="house_title">Casa</string>
+    <string name="house_edit">Modifica</string>
+    <string name="house_done">Fatto</string>
+    <string name="house_share">Condividi la tua abitazione!</string>
+    <string name="house_rooms_owned">Stanze: %1$d</string>
+    <string name="house_construction_level">Livello costruzione %1$d</string>
+    <string name="house_add_room">Aggiungi una stanza (%1$s)</string>
+    <string name="house_add_room_locked">Aggiungi una stanza (Liv. %1$d)</string>
     <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
     <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
     <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
@@ -1163,35 +1163,35 @@
     <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
     <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
     <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
-    <string name="house_mode_place_item">%1$dw</string>
-    <string name="house_mode_place_room" formatted="false">%1$dd</string>
-    <string name="house_error_level" formatted="false">%1$dh</string>
-    <string name="house_error_coins" formatted="false">%1$dm</string>
-    <string name="house_error_materials" formatted="false">%1$ds</string>
-    <string name="house_error_spot">Complete</string>
-    <string name="house_error_max_rooms" formatted="false">%1$s (%2$d)</string>
-    <string name="house_error_max_size">Prestige Notification Badges</string>
-    <string name="house_stored_count">Show a notification badge on navigation when a skill is ready to prestige</string>
-    <string name="house_level_short">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string>
-    <string name="house_store_hint" formatted="false">✚ You eat: +%1$d HP</string>
-    <string name="house_store_item">Risky: at a low threshold a hard hit can drop you to 0 HP before your character eats.</string>
-    <string name="house_room_n">Keep one of each item</string>
-    <string name="house_room_size">Cerca oggetti</string>
-    <string name="house_expand_title" formatted="false">%1$s is equipped. Unequip it first to sell.</string>
-    <string name="house_shrink_title" formatted="false">%1$s is reserved for a queued task.</string>
-    <string name="house_shrink_hint" formatted="false">Keeping your last %1$s (Keep one of each item is on).</string>
-    <string name="house_error_min_size" formatted="false">%1$s started.</string>
-    <string name="house_dir_north">Lampada XP Piccola</string>
-    <string name="house_dir_south">Grants 10,000 XP to a chosen skill.</string>
-    <string name="house_dir_east">Lampada XP Grande</string>
-    <string name="house_dir_west">Grants 50,000 XP to a chosen skill.</string>
-    <string name="house_floor_title">Beanstalk Climbed!</string>
-    <string name="house_floor_dark" formatted="false">New dungeon unlocked: %1$s. Find it under Combat, in the Dungeons list.</string>
-    <string name="house_floor_brick" formatted="false">From prestige: %1$dm sessions at level %2$d become %3$dm</string>
-    <string name="house_floor_brick_locked">+%1$s monete</string>
-    <string name="house_cat_furniture" formatted="false">%1$s monete</string>
-    <string name="house_cat_walls" formatted="false">+%1$s combat XP (split across 7 skills)</string>
-    <string name="house_cat_wealth" formatted="false">Claimed: %1$s</string>
+    <string name="house_mode_place_item">Posizionamento di %1$s. Trascina o tocca un punto nella tua casa.</string>
+    <string name="house_mode_place_room">Stai aggiungendo una nuova stanza 3x3. Deve toccare una stanza esistente.</string>
+    <string name="house_error_level">Il tuo livello Costruzione è troppo basso.</string>
+    <string name="house_error_coins">Non hai abbastanza monete.</string>
+    <string name="house_error_materials">Non hai abbastanza materiali.</string>
+    <string name="house_error_spot">Non puoi metterlo lì.</string>
+    <string name="house_error_max_rooms">Non puoi aggiungere altre stanze.</string>
+    <string name="house_error_max_size">Non puoi espandere la stanza ulteriormente.</string>
+    <string name="house_stored_count">In magazzino: %1$d</string>
+    <string name="house_level_short">Liv. %1$d</string>
+    <string name="house_store_hint">I mobili in magazzino conservano i materiali e possono essere riposti in seguito.</string>
+    <string name="house_store_item">Sposta nel magazzino.</string>
+    <string name="house_room_n">Stanza %1$d</string>
+    <string name="house_room_size">%1$d x %2$d celle</string>
+    <string name="house_expand_title">Espandi</string>
+    <string name="house_shrink_title">Riduci</string>
+    <string name="house_shrink_hint">Rimuove una riga da questo lato. Il costo di espansione verrà rimborsato e i mobili spostati in magazzino.</string>
+    <string name="house_error_min_size">Le stanze non possono essere più piccole di 3x3.</string>
+    <string name="house_dir_north">Nord</string>
+    <string name="house_dir_south">Sud</string>
+    <string name="house_dir_east">Est</string>
+    <string name="house_dir_west">Ovest</string>
+    <string name="house_floor_title">Pavimento</string>
+    <string name="house_floor_dark">Parquet scuro</string>
+    <string name="house_floor_brick">Mattonelle</string>
+    <string name="house_floor_brick_locked">Mattonelle (Liv. %1$d)</string>
+    <string name="house_cat_furniture">Mobili</string>
+    <string name="house_cat_walls">Muri</string>
+    <string name="house_cat_wealth">Ricchezze</string>
     <string name="house_item_wall_v">Muro (verticale)</string>
     <string name="house_item_wall_h">Muro (orizzontale)</string>
     <string name="house_cat_wall">Decorazioni</string>
