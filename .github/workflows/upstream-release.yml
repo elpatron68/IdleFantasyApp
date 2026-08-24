@@ -116,7 +116,7 @@ jobs:
         if: steps.skip.outputs.skip != 'true'
         id: needs_sync
         run: |
-          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')"
+          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | head -1 | sed 's/.*"\(.*\)".*/\1/')"
           EXPECTED="${{ steps.upstream.outputs.version }}"
           if [[ "$VERSION_NAME" == "$EXPECTED" ]]; then
             echo "needs_sync=false" >> "$GITHUB_OUTPUT"
@@ -144,7 +144,7 @@ jobs:
         if: steps.skip.outputs.skip != 'true'
         id: gradle_version
         run: |
-          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')"
+          VERSION_NAME="$(grep '^\s*versionName\s*=' app/build.gradle.kts | head -1 | sed 's/.*"\(.*\)".*/\1/')"
           EXPECTED="${{ steps.upstream.outputs.version }}"
           if [[ "$VERSION_NAME" != "$EXPECTED" ]]; then
             echo "::error::versionName '$VERSION_NAME' != upstream release '$EXPECTED' — sync may be incomplete"
