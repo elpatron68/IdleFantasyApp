@@ -413,6 +413,15 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    /** Suggested per-character export file name, e.g. fantasyidler_save_2_IronDragon.json. */
+    fun exportSuggestedName(onReady: (String) -> Unit) {
+        viewModelScope.launch {
+            val slot = saveSlotRepo.activeSlot()
+            val name = playerRepo.getFlags().characterName
+            onReady(BackupScheduler.exportFileName(slot, name))
+        }
+    }
+
     fun importSave(jsonString: String, onDone: (success: Boolean, ironmanDemoted: Boolean) -> Unit) {
         viewModelScope.launch {
             try {

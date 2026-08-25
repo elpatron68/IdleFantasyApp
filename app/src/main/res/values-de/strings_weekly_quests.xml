@@ -58,7 +58,7 @@
     <string name="quest_weekly_devout_name">Ergeben</string>
     <string name="quest_weekly_devout_desc">Vergrabt diese Woche 450 Knochen.</string>
     <string name="quest_weekly_farmer_name">Ernte der Saison</string>
-    <string name="quest_weekly_farmer_desc">Erntet diese Woche 30mal Feldfrüchte.</string>
+    <string name="quest_weekly_farmer_desc">Erntet diese Woche 30 Feldfrüchte.</string>
     <string name="quest_weekly_guild_supporter_name">Gildenförderer</string>
     <string name="quest_weekly_guild_supporter_desc">Schließt diese Woche 20 tägliche Gildenaufträge ab.</string>
 </resources>

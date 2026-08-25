@@ -2,6 +2,7 @@ package com.fantasyidler.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.EquipSlot
@@ -11,12 +12,16 @@ import com.fantasyidler.data.model.Skills
 import com.fantasyidler.data.model.SlayerTask
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.repository.BoostRepository
+import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.ForetelResult
 import com.fantasyidler.repository.GameDataRepository
+import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.repository.TownRepository
+import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.withAppLocale
@@ -71,6 +76,8 @@ data class SlayerUiState(
     val nextForetelCostUnits: Int = 10,
     /** Foretell queue capacity: base 3, extended by Foresight prestige nodes. */
     val maxForetellSlots: Int = 3,
+    /** Guild daily / daily / weekly quests tied to the Slayer guild, for the "Quests" button. */
+    val slayerQuests: List<SheetQuestSummary> = emptyList(),
 )
 
 @HiltViewModel
@@ -82,6 +89,10 @@ class SlayerViewModel @Inject constructor(
     private val queuedSessionStarter: QueuedSessionStarter,
     @ApplicationContext private val context: Context,
     private val townRepo: TownRepository,
+    private val questRepo: QuestRepository,
+    private val guildRepo: GuildRepository,
+    private val dailyQuestRepo: DailyQuestRepository,
+    private val weeklyQuestRepo: WeeklyQuestRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -97,7 +108,8 @@ class SlayerViewModel @Inject constructor(
     val uiState: StateFlow<SlayerUiState> = combine(
         playerRepo.playerFlow,
         _extra,
-    ) { player, extra ->
+        questRepo.observeProgress(),
+    ) { player, extra, questProgress ->
         if (player == null) extra.copy(isLoading = true)
         else {
             val levels:    Map<String, Int>  = json.decodeFromString(player.skillLevels)
@@ -128,8 +140,9 @@ class SlayerViewModel @Inject constructor(
                     dungeonKeys.all { it in gameData.expeditionLockedDungeons && it !in unlockedDungeons }
             } ?: false
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
             val equippedWeapons = EquipSlot.WEAPON_SLOTS
-                .mapNotNull { slot -> equipped[slot]?.let { key -> gameData.equipment[key]?.let { slot to it } } }
+                .mapNotNull { slot -> equipped[slot]?.let { key -> equipMap[key]?.let { slot to it } } }
                 .toMap()
             val nextForetelCost = slayerRepo.foretelCostUnits(flags.foretelledTasks.size)
             extra.copy(
@@ -152,9 +165,73 @@ class SlayerViewModel @Inject constructor(
                 foretelledTasks       = flags.foretelledTasks,
                 nextForetelCostUnits  = nextForetelCost,
                 maxForetellSlots      = slayerRepo.maxForetellSlots(flags),
+                slayerQuests          = computeSlayerQuests(questProgress, flags),
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SlayerUiState())
+
+    /** Retrieve guild daily / daily / weekly quests tied to the Slayer guild, for the "Quests" button. */
+    private fun computeSlayerQuests(
+        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        flags: PlayerFlags,
+    ): List<SheetQuestSummary> {
+        val completedIds = questProgress.filter { it.completed }.map { it.questId }.toSet()
+        val result = mutableListOf<SheetQuestSummary>()
+
+        val dailies = guildRepo.getGuildDailiesWithProgress(Skills.SLAYER, flags)
+        if (dailies.isNotEmpty()) {
+            val level = guildRepo.guildLevel(Skills.SLAYER, flags.guildDailyTierCounts, completedIds)
+            val maxed = level >= GuildRepository.DAILIES_REQUIRED_PER_TIER.size
+            result += dailies.map { daily ->
+                SheetQuestSummary(
+                    questId    = daily.template.id,
+                    questName  = daily.template.name,
+                    guild      = Skills.SLAYER,
+                    type       = daily.template.type,
+                    target     = daily.template.target,
+                    progress   = daily.progress.coerceAtMost(daily.template.amount),
+                    amount     = daily.template.amount,
+                    claimed    = daily.claimed,
+                    source     = SheetQuestSource.GUILD,
+                    guildMaxed = maxed,
+                )
+            }
+        }
+
+        for (dq in dailyQuestRepo.getActiveDailyQuests(flags)) {
+            if (dq.template.skill != Skills.SLAYER) continue
+            result += SheetQuestSummary(
+                questId     = dq.template.id,
+                questName   = dq.template.displayName,
+                guild       = Skills.SLAYER,
+                type        = dq.template.type,
+                target      = dq.template.target,
+                progress    = dq.progress.coerceAtMost(dq.template.amount),
+                amount      = dq.template.amount,
+                claimed     = dq.claimed,
+                source      = SheetQuestSource.DAILY,
+                description = dq.template.description,
+            )
+        }
+
+        for (wq in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
+            if (wq.template.skill != Skills.SLAYER) continue
+            result += SheetQuestSummary(
+                questId     = wq.template.id,
+                questName   = wq.template.displayName,
+                guild       = Skills.SLAYER,
+                type        = wq.template.type,
+                target      = wq.template.target,
+                progress    = wq.progress.coerceAtMost(wq.template.amount),
+                amount      = wq.template.amount,
+                claimed     = wq.claimed,
+                source      = SheetQuestSource.WEEKLY,
+                description = wq.template.description,
+            )
+        }
+
+        return result
+    }
 
     fun getNewTask() {
         viewModelScope.launch {
@@ -265,19 +342,39 @@ class SlayerViewModel @Inject constructor(
             val state = uiState.value
             val dungeonName = GameStrings.dungeonName(context, dungeonKey)
             val player   = playerRepo.getOrCreatePlayer()
-            val agility  = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+            val levels: Map<String, Int>       = json.decodeFromString(player.skillLevels)
+            val agility  = levels[Skills.AGILITY] ?: 1
             val flags: PlayerFlags             = json.decodeFromString(player.flags)
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
             val resolvedWeaponSlot = weaponSlot
                 ?: flags.activeWeaponSlot
                 ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                 ?: EquipSlot.WEAPON_ATK
+            val rememberedSpell  = flags.activeSpell?.let { gameData.spells[it] }
+            val rememberedPotion = flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
+            val previewXp = estimateDungeonPreviewXp(
+                gameData      = gameData,
+                boostRepo     = boostRepo,
+                townRepo      = townRepo,
+                json          = json,
+                dungeonKey    = dungeonKey,
+                weaponSlot    = resolvedWeaponSlot,
+                equipped      = equipped,
+                inventory     = inventory,
+                levels        = levels,
+                flags         = flags,
+                selectedSpell = rememberedSpell,
+                potionKey     = rememberedPotion,
+                petsJson      = player.pets,
+            )
             val enqueued = playerRepo.enqueueAction(
                 QueuedAction(
                     skillName           = "combat",
                     activityKey         = dungeonKey,
                     skillDisplayName    = dungeonName,
                     estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)),
+                    estimatedXpGain     = previewXp,
                     equippedSnapshot    = player.equipped,
                     arrowsKey           = flags.equippedArrows,
                     spellName           = flags.activeSpell,

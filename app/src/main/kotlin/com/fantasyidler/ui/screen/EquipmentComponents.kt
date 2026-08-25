@@ -84,6 +84,7 @@ import com.fantasyidler.ui.viewmodel.InventoryViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
 import com.fantasyidler.ui.viewmodel.slotDisplayName
 import com.fantasyidler.ui.viewmodel.xpProgressFraction
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.stringByName
@@ -194,6 +195,7 @@ internal fun EquipSlotRow(
     itemKey: String?,
     xpLabel: String? = null,
     equipment: com.fantasyidler.data.json.EquipmentData? = null,
+    heirloomXp: Map<String, Long>? = null,
     onTap: () -> Unit,
     onUnequip: () -> Unit,
 ) {
@@ -223,7 +225,7 @@ internal fun EquipSlotRow(
                     overflow   = TextOverflow.Ellipsis,
                 )
                 if (equipment != null) {
-                    val detail = buildEquipDetail(equipment, context, showReq = false)
+                    val detail = buildEquipDetail(equipment, context, showReq = false, heirloomXp = heirloomXp)
                     if (detail.isNotEmpty()) {
                         Text(
                             text  = detail,
@@ -262,6 +264,7 @@ internal fun EquipPickerSheet(
     slot: String,
     candidates: List<com.fantasyidler.data.json.EquipmentData>,
     context: android.content.Context,
+    heirloomXp: Map<String, Long>? = null,
     onEquip: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -318,7 +321,7 @@ internal fun EquipPickerSheet(
                             displayName,
                             style = MaterialTheme.typography.bodyLarge,
                         )
-                        val detail = buildEquipDetail(item, context)
+                        val detail = buildEquipDetail(item, context, heirloomXp = heirloomXp)
                         if (detail.isNotEmpty()) {
                             Text(
                                 text  = detail,
@@ -352,8 +355,17 @@ private val COMBAT_CAPE_SKILLS = setOf(
     "warriors", "archers", "mages",
 )
 
-internal fun buildEquipDetail(item: com.fantasyidler.data.json.EquipmentData, context: android.content.Context, showReq: Boolean = true): String {
+internal fun buildEquipDetail(
+    item: com.fantasyidler.data.json.EquipmentData,
+    context: android.content.Context,
+    showReq: Boolean = true,
+    /** Pass the player's heirloom XP map to prefix heirloom items with their current level; null hides it. */
+    heirloomXp: Map<String, Long>? = null,
+): String {
     val parts = mutableListOf<String>()
+    if (item.heirloomSkill != null && heirloomXp != null) {
+        parts.add(context.getString(R.string.heirloom_level_label, HeirloomStats.level(heirloomXp[item.name] ?: 0L)))
+    }
     item.miningEfficiency?.let      { parts.add("${context.getString(R.string.profile_stat_mining)} ×${"%.2f".format(it)}") }
     item.woodcuttingEfficiency?.let { parts.add("${context.getString(R.string.profile_stat_wc)} ×${"%.2f".format(it)}") }
     item.fishingEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_fishing)} ×${"%.2f".format(it)}") }

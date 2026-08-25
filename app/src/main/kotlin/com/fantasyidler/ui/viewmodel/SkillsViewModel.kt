@@ -206,22 +206,22 @@ class SkillsViewModel @Inject constructor(
                 anySessionActive      = session != null,
                 queueSize             = flags.sessionQueue.size,
                 maxQueueSize          = playerRepo.maxQueueSize(flags),
-                miningEfficiency      = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     0) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
-                woodcuttingEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         0) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
-                fishingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, 0) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
-                farmingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.HOE],         EquipSlot.HOE,         0),
-                firemakingEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX],      EquipSlot.TINDERBOX,      0),
-                smithingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.HAMMER],         EquipSlot.HAMMER,         0),
-                agilityEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, 0),
-                thievingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK],       EquipSlot.LOCKPICK,       0),
-                cookingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0),
+                miningEfficiency      = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     0, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
+                woodcuttingEfficiency = gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         0, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
+                fishingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, 0, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
+                farmingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.HOE],         EquipSlot.HOE,         0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                firemakingEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX],      EquipSlot.TINDERBOX,      0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                smithingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.HAMMER],         EquipSlot.HAMMER,         0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                agilityEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, 0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                thievingEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK],       EquipSlot.LOCKPICK,       0, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                cookingEfficiency     = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 xpBonusMult           = if (flags.ironman) 1.0f
                                         else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(flags, equipped, inv.keys, gameData)),
                 petBoosts             = listOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
                     .associateWith { if (flags.ironman) 0 else petBoostFor(player.pets, it) },
                 sessionDurationMs     = SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)),
                 firemakingPerLogMs    = gameData.logs.mapValues { (_, log) ->
-                    val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, log.levelRequired)
+                    val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, log.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                     (SkillSimulator.sessionDurationMs(levels[Skills.AGILITY] ?: 1, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60L / toolEff).toLong()
                 },
                 skillPrestige         = flags.skillPrestige,
@@ -393,7 +393,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.MINING, flags, petBoostFor(player.pets, Skills.MINING, flags.ironman)),
-            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
+            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
@@ -417,7 +417,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.WOODCUTTING, flags, petBoostFor(player.pets, Skills.WOODCUTTING, flags.ironman)),
-            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
+            toolEfficiency   = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
@@ -439,7 +439,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel    = levels[Skills.AGILITY] ?: 1,
             floorReductionMin = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct     = boostRepo.boostedPetPct(Skills.AGILITY, flags, petBoostFor(player.pets, Skills.AGILITY, flags.ironman)),
-            toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired),
+            toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
             petDropKey      = petKey,
             petDropChance   = petChance,
             chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
@@ -461,7 +461,7 @@ class SkillsViewModel @Inject constructor(
             val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val logData = gameData.logs[logKey]
-            val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData?.levelRequired ?: 0)
+            val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData?.levelRequired ?: 0, skillLevels = levels, heirloomXp = flags.heirloomXp)
             val perLogMs = (SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60L / toolEff).toLong()
             val logXp = logData?.xpPerLog?.toLong() ?: 0L
             val xpQueueMult = if (flags.ironman) 1.0 else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData))
@@ -722,7 +722,7 @@ class SkillsViewModel @Inject constructor(
             agilityLevel     = levels[Skills.AGILITY] ?: 1,
             floorReductionMin  = boostRepo.sessionFloorReductionMin(flags),
             petBoostPct      = boostRepo.boostedPetPct(Skills.FISHING, flags, petBoostFor(player.pets, Skills.FISHING, flags.ironman)),
-            rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
+            rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
             petDropKey       = petKey,
             petDropChance    = petChance,
             fishingSkillData = gameData.fishingSkillData,
@@ -741,7 +741,7 @@ class SkillsViewModel @Inject constructor(
                 val levels = json.decodeFromString<Map<String, Int>>(player.skillLevels)
                 val thievingLevel = levels[Skills.THIEVING] ?: 1
                 val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-                val lockpickEff = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired)
+                val lockpickEff = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired, skillLevels = levels, heirloomXp = thievingFlags.heirloomXp)
                 val successChance = (0.40 + (thievingLevel - npc.levelRequired) * 0.02 * lockpickEff +
                     boostRepo.thievingSuccessBonus(thievingFlags)).coerceIn(0.10, 0.98)
                 val petBoostPct = petBoostFor(player.pets, Skills.THIEVING, thievingFlags.ironman)
@@ -788,7 +788,7 @@ class SkillsViewModel @Inject constructor(
                     petBoostPct     = boostRepo.boostedPetPct(Skills.THIEVING, flags, petBoostFor(player.pets, Skills.THIEVING, flags.ironman)),
                     petDropKey      = petKey,
                     petDropChance   = petChance,
-                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
+                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
                     chronosMultiplier = townRepo.playerSessionDurationMultiplier(flags),
                     successBonus = boostRepo.thievingSuccessBonus(flags),
                 )
@@ -853,7 +853,8 @@ class SkillsViewModel @Inject constructor(
             val displayName  = GameStrings.skillName(context, skillName)
             val actDisplay   = GameStrings.activityName(context, skillName, activityKey)
             val player       = playerRepo.getOrCreatePlayer()
-            val agility      = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
+            val gatherLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val agility      = gatherLevels[Skills.AGILITY] ?: 1
             val gatherFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
             val xpQueueMult = if (gatherFlags.ironman) 1.0 else (if (gatherFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(gatherFlags, blessingPrayerCapeMult(player, gatherFlags, gameData))
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
@@ -861,21 +862,21 @@ class SkillsViewModel @Inject constructor(
             val rawXp = when (skillName) {
                 Skills.MINING      -> SkillSimulator.estimateGatheringXp(
                     gameData.ores[activityKey]?.xpPerOre ?: 0,
-                    gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE),
+                    gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, skillLevels = gatherLevels, heirloomXp = gatherFlags.heirloomXp),
                 )
                 Skills.WOODCUTTING -> SkillSimulator.estimateGatheringXp(
                     gameData.trees[activityKey]?.xpPerLog ?: 0,
-                    gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE),
+                    gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, skillLevels = gatherLevels, heirloomXp = gatherFlags.heirloomXp),
                 )
                 Skills.FISHING     -> SkillSimulator.estimateGatheringXp(
                     gameData.fish[activityKey]?.xpPerCatch ?: 0,
-                    gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD),
+                    gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, skillLevels = gatherLevels, heirloomXp = gatherFlags.heirloomXp),
                 )
                 Skills.AGILITY     -> {
                     val course = gameData.agilityCourses[activityKey]
                     SkillSimulator.estimateAgilityXp(
                         course?.xpPerSuccess ?: 0, course?.levelRequired ?: 1, agility,
-                        gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK),
+                        gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, skillLevels = gatherLevels, heirloomXp = gatherFlags.heirloomXp),
                     )
                 }
                 else               -> 0L

@@ -13,6 +13,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.simulator.CarnivalSimulator
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.MercantileSimulator
@@ -282,6 +283,7 @@ class QueuedSessionStarter @Inject constructor(
         val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
         val inventory: Map<String, Int>    = json.decodeFromString(player.inventory)
         val flags: PlayerFlags             = json.decodeFromString(player.flags)
+        val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
         val agilityLevel    = levels[Skills.AGILITY] ?: 1
         val floorReductionMin = boostRepo.sessionFloorReductionMin(flags)
         val chronosMult     = townRepo.playerSessionDurationMultiplier(flags)
@@ -317,7 +319,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityLevel    = agilityLevel,
                     floorReductionMin = floorReductionMin,
                     petBoostPct     = boostRepo.boostedPetPct(Skills.MINING, flags, gatheringPetBoost(player.pets, Skills.MINING, flags.ironman)),
-                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
+                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.PICKAXE], EquipSlot.PICKAXE, oreData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.MINING, flags, levels[Skills.MINING] ?: 1),
                     petDropKey      = petDropKey(Skills.MINING),
                     petDropChance   = petDropChance(Skills.MINING),
                     chronosMultiplier = chronosMult,
@@ -334,7 +336,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityLevel    = agilityLevel,
                     floorReductionMin = floorReductionMin,
                     petBoostPct     = boostRepo.boostedPetPct(Skills.WOODCUTTING, flags, gatheringPetBoost(player.pets, Skills.WOODCUTTING, flags.ironman)),
-                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
+                    toolEfficiency  = gameData.toolEfficiency(equipped[EquipSlot.AXE], EquipSlot.AXE, treeData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.WOODCUTTING, flags, levels[Skills.WOODCUTTING] ?: 1),
                     petDropKey      = petDropKey(Skills.WOODCUTTING),
                     petDropChance   = petDropChance(Skills.WOODCUTTING),
                     chronosMultiplier = chronosMult,
@@ -351,7 +353,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityLevel     = agilityLevel,
                     floorReductionMin  = floorReductionMin,
                     petBoostPct      = boostRepo.boostedPetPct(Skills.FISHING, flags, gatheringPetBoost(player.pets, Skills.FISHING, flags.ironman)),
-                    rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
+                    rodEfficiency    = gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, fishData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp) * boostRepo.toolEffMultiplier(Skills.FISHING, flags, levels[Skills.FISHING] ?: 1),
                     petDropKey       = petDropKey(Skills.FISHING),
                     petDropChance    = petDropChance(Skills.FISHING),
                     fishingSkillData = gameData.fishingSkillData,
@@ -368,7 +370,7 @@ class QueuedSessionStarter @Inject constructor(
                     agilityLevel    = agilityLevel,
                     floorReductionMin = floorReductionMin,
                     petBoostPct  = boostRepo.boostedPetPct(Skills.AGILITY, flags, gatheringPetBoost(player.pets, Skills.AGILITY, flags.ironman)),
-                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired),
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
                     petDropKey   = petDropKey(Skills.AGILITY),
                     petDropChance = petDropChance(Skills.AGILITY),
                     chronosMultiplier = chronosMult,
@@ -388,7 +390,7 @@ class QueuedSessionStarter @Inject constructor(
                     petBoostPct   = boostRepo.boostedPetPct(Skills.THIEVING, flags, gatheringPetBoost(player.pets, Skills.THIEVING, flags.ironman)),
                     petDropKey    = petDropKey(Skills.THIEVING),
                     petDropChance = petDropChance(Skills.THIEVING),
-                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired),
+                    toolEfficiency = gameData.toolEfficiency(equipped[EquipSlot.LOCKPICK], EquipSlot.LOCKPICK, npc.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
                     chronosMultiplier = chronosMult,
                     successBonus = boostRepo.thievingSuccessBonus(flags),
                 )
@@ -408,7 +410,7 @@ class QueuedSessionStarter @Inject constructor(
                 val logData = gameData.logs[logKey] ?: return
                 val qty     = action.qty.takeIf { it > 0 } ?: return
                 val ashKey  = ashForLog(logKey)
-                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData.levelRequired)
+                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                 val frames  = buildCraftFrames(xpMap[Skills.FIREMAKING] ?: 0L, qty, logData.xpPerLog.toDouble(), 1, ashKey,
                     efficiency = efficiency,
                     petDropKey = petDropKey(Skills.FIREMAKING), petDropChance = petDropChance(Skills.FIREMAKING))
@@ -519,7 +521,7 @@ class QueuedSessionStarter @Inject constructor(
             Skills.SMITHING -> {
                 val r   = gameData.smithingRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
-                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, r.levelRequired)
+                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                 val frames = buildCraftFrames(xpMap[Skills.SMITHING] ?: 0L, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
                     efficiency = efficiency, petBoostPct = boostRepo.boostedPetPct(Skills.SMITHING, flags, gatheringPetBoost(player.pets, Skills.SMITHING, flags.ironman)),
                     petDropKey = petDropKey(Skills.SMITHING), petDropChance = petDropChance(Skills.SMITHING))
@@ -529,7 +531,7 @@ class QueuedSessionStarter @Inject constructor(
             Skills.COOKING -> {
                 val r: CookingRecipe = gameData.cookingRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
-                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired)
+                val efficiency = gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                 val frames = buildCraftFrames(xpMap[Skills.COOKING] ?: 0L, qty, r.xpPerItem, 1, r.cookedItem,
                     efficiency = efficiency, petBoostPct = boostRepo.boostedPetPct(Skills.COOKING, flags, gatheringPetBoost(player.pets, Skills.COOKING, flags.ironman)))
                 val perItemMs = (SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult) / 60 / efficiency).toLong()
@@ -615,7 +617,7 @@ class QueuedSessionStarter @Inject constructor(
                 val bossWeaponSlot = action.weaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { bossEquipped[it] != null }
                     ?: EquipSlot.WEAPON
-                val bossWeapon = bossEquipped[bossWeaponSlot]?.let { gameData.equipment[it] }
+                val bossWeapon = bossEquipped[bossWeaponSlot]?.let { equipMap[it] }
                 val combatStyle = when (bossWeapon?.combatStyle) {
                     "ranged"   -> "ranged"
                     "magic"    -> "magic"
@@ -623,14 +625,14 @@ class QueuedSessionStarter @Inject constructor(
                     else       -> "melee"
                 }
                 val totalAtkBonus    = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
-                    val eq = gameData.equipment[bossEquipped[slot]]
+                    val eq = equipMap[bossEquipped[slot]]
                     when (combatStyle) { "ranged" -> eq?.rangedAttackBonus ?: 0; "magic" -> eq?.magicAttackBonus ?: 0; else -> eq?.attackBonus ?: 0 }
                 } + when (combatStyle) { "ranged" -> bossWeapon?.rangedAttackBonus ?: bossWeapon?.attackBonus ?: 0; "magic" -> bossWeapon?.magicAttackBonus ?: 0; else -> bossWeapon?.attackBonus ?: 0 }
-                val totalStrBonus    = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
-                val totalDefBonus    = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
-                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0) else 0
+                val totalStrBonus    = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[bossEquipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
+                val totalDefBonus    = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[bossEquipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
+                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { equipMap[bossEquipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0) else 0
                 val totalRangedStrBonus = if (combatStyle == "ranged") {
-                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.rangedStrengthBonus ?: 0 } + (bossWeapon?.rangedStrengthBonus ?: 0)
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[bossEquipped[it]]?.rangedStrengthBonus ?: 0 } + (bossWeapon?.rangedStrengthBonus ?: 0)
                 } else 0
                 val equippedFoodKeys  = flags.equippedFood.keys
                 val prevFoodConsumed  = pendingFoodConsumed()
@@ -669,6 +671,7 @@ class QueuedSessionStarter @Inject constructor(
                     // Queued raids use the contracts valid when the session actually starts,
                     // matching how queued sessions already use the current armor.
                     mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
+                    blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory),
                 )
                 val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -690,9 +693,9 @@ class QueuedSessionStarter @Inject constructor(
                 val dungeonKey = action.activityKey
                 val dungeon    = gameData.skillingDungeons[dungeonKey] ?: return
                 val toolEfficiency: Float = when (dungeon.skill) {
-                    Skills.MINING      -> gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     dungeon.levelRequired)
-                    Skills.WOODCUTTING -> gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         dungeon.levelRequired)
-                    Skills.FISHING     -> gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, dungeon.levelRequired)
+                    Skills.MINING      -> gameData.toolEfficiency(equipped[EquipSlot.PICKAXE],     EquipSlot.PICKAXE,     dungeon.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
+                    Skills.WOODCUTTING -> gameData.toolEfficiency(equipped[EquipSlot.AXE],         EquipSlot.AXE,         dungeon.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
+                    Skills.FISHING     -> gameData.toolEfficiency(equipped[EquipSlot.FISHING_ROD], EquipSlot.FISHING_ROD, dungeon.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                     else               -> 1.0f
                 }
                 val result = SkillingDungeonSimulator.simulate(
@@ -721,7 +724,7 @@ class QueuedSessionStarter @Inject constructor(
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { combatEquipped[it] != null }
                     ?: EquipSlot.WEAPON
                 val weaponKey  = combatEquipped[activeWeaponSlot]
-                val weapon     = weaponKey?.let { gameData.equipment[it] }
+                val weapon     = weaponKey?.let { equipMap[it] }
                 val combatStyle = when (weapon?.combatStyle) {
                     "ranged"   -> "ranged"
                     "magic"    -> "magic"
@@ -740,14 +743,14 @@ class QueuedSessionStarter @Inject constructor(
                     .filterValues { it > 0 }
                 val spell = gameData.spells[combatSpellName]
                 val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
-                    val eq = gameData.equipment[combatEquipped[slot]]
+                    val eq = equipMap[combatEquipped[slot]]
                     when (combatStyle) { "ranged" -> eq?.rangedAttackBonus ?: 0; "magic" -> eq?.magicAttackBonus ?: 0; else -> eq?.attackBonus ?: 0 }
                 } + when (combatStyle) { "ranged" -> weapon?.rangedAttackBonus ?: weapon?.attackBonus ?: 0; "magic" -> weapon?.magicAttackBonus ?: 0; else -> weapon?.attackBonus ?: 0 }
-                val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
-                val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
-                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0) else 0
+                val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[combatEquipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
+                val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[combatEquipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
+                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { equipMap[combatEquipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0) else 0
                 val totalRangedStrBonus = if (combatStyle == "ranged") {
-                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[combatEquipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
                 } else 0
                 val staffCoversRune = combatStyle == "magic" && spell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == spell.runeType)
                 val queueRuneKey  = if (combatStyle == "magic" && spell != null && !staffCoversRune) spell.runeType else null
@@ -807,7 +810,7 @@ class QueuedSessionStarter @Inject constructor(
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                     ?: EquipSlot.WEAPON
                 val weaponKey   = equipped[activeWeaponSlot]
-                val weapon      = weaponKey?.let { gameData.equipment[it] }
+                val weapon      = weaponKey?.let { equipMap[it] }
                 val combatStyle = when (weapon?.combatStyle) {
                     "ranged"   -> "ranged"
                     "magic"    -> "magic"
@@ -815,14 +818,14 @@ class QueuedSessionStarter @Inject constructor(
                     else       -> "attack"
                 }
                 val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
-                    val eq = gameData.equipment[equipped[slot]]
+                    val eq = equipMap[equipped[slot]]
                     when (combatStyle) { "ranged" -> eq?.rangedAttackBonus ?: 0; "magic" -> eq?.magicAttackBonus ?: 0; else -> eq?.attackBonus ?: 0 }
                 } + when (combatStyle) { "ranged" -> weapon?.rangedAttackBonus ?: weapon?.attackBonus ?: 0; "magic" -> weapon?.magicAttackBonus ?: 0; else -> weapon?.attackBonus ?: 0 }
-                val totalStrBonus     = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
-                val totalDefBonus     = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
-                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0) else 0
+                val totalStrBonus     = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
+                val totalDefBonus     = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
+                val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0) else 0
                 val totalRangedStrBonus = if (combatStyle == "ranged") {
-                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
                 } else 0
                 val preferredArrow  = flags.equippedArrows?.takeIf { (inventory[it] ?: 0) > 0 }
                 val orderedTowerArrowKeys = if (preferredArrow != null)

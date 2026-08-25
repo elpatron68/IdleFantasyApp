@@ -378,6 +378,7 @@ class ShopViewModel @Inject constructor(
             val toSell = computeOldEquipmentToSell(
                 equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems)
                 .filterKeys { it !in state.lockedItems }
+                .filterKeys { allEquip[it]?.heirloomSkill == null }
 
             if (toSell.isEmpty()) {
                 _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_no_old_equipment)) }
@@ -467,6 +468,10 @@ class ShopViewModel @Inject constructor(
         val state         = uiState.value
         if (itemKey in state.lockedItems) {
             _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_item_locked, displayName)) }
+            return
+        }
+        if (gameData.equipment[itemKey]?.heirloomSkill != null) {
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.shop_sell_blocked_heirloom, displayName)) }
             return
         }
         val have          = state.inventory[itemKey] ?: 0

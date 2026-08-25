@@ -1,23 +1,27 @@
 #!/usr/bin/env bash
-# nightly.sh — publish a nightly build to the self-hosted F-Droid nightly repo
+# nightly.sh — publish a nightly build as a GitHub pre-release
 #
 # Usage: ./nightly.sh [nightly-number]
 #   With no argument, uses one more than the highest nightly already
-#   published locally for the current stable base (1 if none).
+#   released on GitHub for the current stable base (1 if none).
 #
 # What it does:
 #   1. Reads the stable versionName + versionCode from app/build.gradle.kts
 #      (stable codes are multiples of 1000; nightly N publishes as
 #      <versionName>.N with versionCode <versionCode>+N)
 #   2. Runs unit tests and builds a release-signed APK from the current
-#      working tree via -PnightlyBuild=N (no commit, no tag, no clean clone)
-#   3. Stages the APK into docs/fdroid-nightly/ (gitignored working repo,
-#      scaffolded on first run from docs/fdroid), pruning old nightlies
-#   4. Runs fdroid update and deploys to gh-pages/fdroid-nightly
+#      working tree via -PnightlyBuild=N (no commit, no version bump)
+#   3. Publishes the APK as GitHub pre-release nightly-<versionName>.N,
+#      with the pending next-release changelog as the notes
+#   4. Prunes nightly pre-releases beyond the newest KEEP_NIGHTLIES
 #
-# Testers subscribe to: https://idlefantasy.tristinbaker.xyz/fdroid-nightly/repo
-# Nothing on main is committed or tagged; the stable pipeline (release.sh)
-# is untouched.
+# Testers subscribe with Obtainium: add this GitHub repo as a source and
+# enable "Include prereleases" for the app. Stable users are untouched:
+# pre-releases never show as Latest, and the official F-Droid checkupdates
+# (UpdateCheckMode: Tags) reads the committed gradle file at each tag,
+# which always carries the stable version, so nightly tags are inert.
+#
+# Nothing on main is committed; the stable pipeline (release.sh) is untouched.
 
 set -euo pipefail
 
@@ -25,11 +29,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GRADLE_FILE="$REPO_DIR/app/build.gradle.kts"
-STABLE_FDROID_DIR="$REPO_DIR/docs/fdroid"
-NIGHTLY_DIR="$REPO_DIR/docs/fdroid-nightly"
-METADATA_FILE="$REPO_DIR/metadata/com.tristinbaker.idlefantasy.yml"
-FASTLANE_DIR="$REPO_DIR/fastlane/metadata/android"
-APP_ID="com.tristinbaker.idlefantasy"
+CHANGELOG_DIR="$REPO_DIR/fastlane/metadata/android/en-US/changelogs"
 KEEP_NIGHTLIES=7
 
 # ---------------------------------------------------------------------------
@@ -41,7 +41,6 @@ VERSION_CODE=$(grep '^\s*versionCode\s*=' "$GRADLE_FILE" | head -1 | grep -oP '\
 
 if (( VERSION_CODE % 1000 != 0 )); then
     echo "ERROR: stable versionCode ($VERSION_CODE) is not a multiple of 1000."
-    echo "Nightlies start with the 1.14.2 release (versionCode 141000)."
     exit 1
 fi
 
@@ -50,32 +49,21 @@ if [[ -z "${DEFIDE_STORE_PASSWORD:-}" || -z "${DEFIDE_KEY_PASSWORD:-}" ]]; then
     exit 1
 fi
 
-if ! command -v fdroid &>/dev/null; then
-    echo "ERROR: fdroid not found on PATH (looked in $PATH)"
-    exit 1
-fi
-
-if [[ ! -f "$STABLE_FDROID_DIR/config.yml" ]]; then
-    echo "ERROR: $STABLE_FDROID_DIR/config.yml not found (needed to scaffold the nightly repo)"
+if ! command -v gh &>/dev/null; then
+    echo "ERROR: gh CLI not found on PATH"
     exit 1
 fi
 
 # ---------------------------------------------------------------------------
-# Determine the nightly number
+# Determine the nightly number (from existing GitHub nightly releases)
 # ---------------------------------------------------------------------------
 
 if [[ -n "${1:-}" ]]; then
     NIGHTLY_NUM="$1"
 else
-    LAST=0
-    for apk in "$NIGHTLY_DIR"/repo/${APP_ID}_*.apk; do
-        [[ -e "$apk" ]] || continue
-        code=$(basename "$apk" .apk | grep -oP '\d+$')
-        if (( code > VERSION_CODE && code < VERSION_CODE + 1000 && code - VERSION_CODE > LAST )); then
-            LAST=$((code - VERSION_CODE))
-        fi
-    done
-    NIGHTLY_NUM=$((LAST + 1))
+    LAST=$(gh release list --limit 100 --json tagName --jq '.[].tagName' \
+        | grep -oP "^nightly-\Q$VERSION_NAME\E\.\K\d+" | sort -n | tail -1 || true)
+    NIGHTLY_NUM=$(( ${LAST:-0} + 1 ))
 fi
 
 if (( NIGHTLY_NUM < 1 || NIGHTLY_NUM > 999 )); then
@@ -85,8 +73,14 @@ fi
 
 NIGHTLY_CODE=$((VERSION_CODE + NIGHTLY_NUM))
 NIGHTLY_NAME="$VERSION_NAME.$NIGHTLY_NUM"
+TAG="nightly-$NIGHTLY_NAME"
 
-echo "==> Nightly: $NIGHTLY_NAME (versionCode $NIGHTLY_CODE)"
+if gh release view "$TAG" &>/dev/null; then
+    echo "ERROR: release $TAG already exists on GitHub. Pass an explicit number to override."
+    exit 1
+fi
+
+echo "==> Nightly: $NIGHTLY_NAME (versionCode $NIGHTLY_CODE, tag $TAG)"
 
 # ---------------------------------------------------------------------------
 # Test + build from the working tree
@@ -99,67 +93,56 @@ APK=$(find "$REPO_DIR/app/build/outputs/apk/release/" -name "*.apk" | head -1)
 echo "==> Built $APK"
 
 # ---------------------------------------------------------------------------
-# Scaffold the nightly working repo on first run (whole dir is gitignored)
+# Compose release notes: build provenance + the pending next-release changelog
 # ---------------------------------------------------------------------------
 
-mkdir -p "$NIGHTLY_DIR/repo" "$NIGHTLY_DIR/metadata"
-
-if [[ ! -f "$NIGHTLY_DIR/config.yml" ]]; then
-    sed -e 's|/fdroid/repo|/fdroid-nightly/repo|' \
-        -e 's|/fdroid/archive|/fdroid-nightly/archive|' \
-        -e 's|repo_name: "Idle Fantasy"|repo_name: "Idle Fantasy Nightly"|' \
-        -e 's|repo_description: ".*"|repo_description: "Idle Fantasy nightly builds — untested development versions for playtesters."|' \
-        -e 's|archive_name: ".*"|archive_name: "Idle Fantasy Nightly Archive"|' \
-        "$STABLE_FDROID_DIR/config.yml" > "$NIGHTLY_DIR/config.yml"
-    chmod 600 "$NIGHTLY_DIR/config.yml"
-    echo "==> Scaffolded $NIGHTLY_DIR/config.yml"
+COMMIT=$(git -C "$REPO_DIR" rev-parse --short HEAD)
+DIRTY=""
+if [[ -n "$(git -C "$REPO_DIR" status --porcelain)" ]]; then
+    DIRTY=" plus uncommitted changes"
 fi
 
-cp "$STABLE_FDROID_DIR/icon.png" "$NIGHTLY_DIR/icon.png"
+# The pending changelog is the highest-numbered file above the stable code.
+PENDING_CHANGELOG=$(ls "$CHANGELOG_DIR"/*.txt 2>/dev/null \
+    | grep -oP '\d+(?=\.txt$)' | awk -v c="$VERSION_CODE" '$1 > c' | sort -n | tail -1 || true)
 
-# App metadata: reuse the stable file with the nightly version as current
-sed -e "s/^CurrentVersion:.*/CurrentVersion: $NIGHTLY_NAME/" \
-    -e "s/^CurrentVersionCode:.*/CurrentVersionCode: $NIGHTLY_CODE/" \
-    "$METADATA_FILE" > "$NIGHTLY_DIR/metadata/${APP_ID}.yml"
-rsync -a --delete "$FASTLANE_DIR/" "$NIGHTLY_DIR/metadata/${APP_ID}/"
+NOTES_FILE=$(mktemp)
+{
+    echo "Untested nightly build for playtesters, built from the working tree on top of stable v$VERSION_NAME."
+    echo
+    echo "Built: $(date '+%Y-%m-%d %H:%M %Z') at commit $COMMIT$DIRTY"
+    echo
+    if [[ -n "$PENDING_CHANGELOG" && -f "$CHANGELOG_DIR/$PENDING_CHANGELOG.txt" ]]; then
+        echo "Changes staged for the next release:"
+        echo
+        cat "$CHANGELOG_DIR/$PENDING_CHANGELOG.txt"
+        echo
+    fi
+    echo "Install with Obtainium: add this repository as a source and enable Include prereleases."
+} > "$NOTES_FILE"
 
 # ---------------------------------------------------------------------------
-# Stage APK, prune old nightlies, regenerate signed index
+# Publish the pre-release and prune old nightlies
 # ---------------------------------------------------------------------------
 
-cp "$APK" "$NIGHTLY_DIR/repo/${APP_ID}_${NIGHTLY_CODE}.apk"
+gh release create "$TAG" "$APK" \
+    --prerelease \
+    --title "Nightly v$NIGHTLY_NAME" \
+    --notes-file "$NOTES_FILE"
+rm -f "$NOTES_FILE"
 
-PRUNE=$(ls "$NIGHTLY_DIR"/repo/${APP_ID}_*.apk 2>/dev/null | sed 's/.*_\([0-9]*\)\.apk/\1/' | sort -n | head -n -"$KEEP_NIGHTLIES" || true)
-for code in $PRUNE; do
-    rm -f "$NIGHTLY_DIR/repo/${APP_ID}_${code}.apk"
-    echo "==> Pruned nightly versionCode $code"
+RELEASE_URL=$(gh release view "$TAG" --json url --jq '.url')
+
+PRUNE=$(gh release list --limit 100 --json tagName,createdAt \
+    --jq '[.[] | select(.tagName | startswith("nightly-"))] | sort_by(.createdAt) | reverse | .['"$KEEP_NIGHTLIES"':] | .[].tagName' || true)
+for tag in $PRUNE; do
+    gh release delete "$tag" --cleanup-tag --yes
+    echo "==> Pruned old nightly $tag"
 done
 
-cd "$NIGHTLY_DIR"
-fdroid update --clean --pretty
-
-# ---------------------------------------------------------------------------
-# Deploy to gh-pages (fdroid-nightly/, mirrored with --delete so pruned
-# nightlies disappear from the served repo too)
-# ---------------------------------------------------------------------------
-
-GH_PAGES_WORK="/tmp/gh-pages-fdroid-nightly-deploy"
-rm -rf "$GH_PAGES_WORK"
-cd "$REPO_DIR"
-git worktree add "$GH_PAGES_WORK" gh-pages
-git -C "$GH_PAGES_WORK" pull --rebase origin gh-pages
-mkdir -p "$GH_PAGES_WORK/fdroid-nightly/repo"
-rsync -a --delete "$NIGHTLY_DIR/repo/" "$GH_PAGES_WORK/fdroid-nightly/repo/"
-cd "$GH_PAGES_WORK"
-git add fdroid-nightly/
-git diff --cached --quiet || git commit -m "Nightly $NIGHTLY_NAME"
-git push origin gh-pages
-cd "$REPO_DIR"
-git worktree remove "$GH_PAGES_WORK"
-
-echo ""
+echo
 echo "======================================================"
 echo "  Nightly $NIGHTLY_NAME published (versionCode $NIGHTLY_CODE)"
-echo "  APK:  $APK"
-echo "  Repo: https://idlefantasy.tristinbaker.xyz/fdroid-nightly/repo"
+echo "  APK:     $APK"
+echo "  Release: $RELEASE_URL"
 echo "======================================================"

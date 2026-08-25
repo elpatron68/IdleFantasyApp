@@ -495,7 +495,7 @@ fun SettingsScreen(
                 title    = stringResource(R.string.settings_export),
                 subtitle = stringResource(R.string.settings_export_desc),
                 trailing = {
-                    OutlinedButton(onClick = { exportLauncher.launch("fantasyidler_save.json") }) {
+                    OutlinedButton(onClick = { viewModel.exportSuggestedName { exportLauncher.launch(it) } }) {
                         Text(stringResource(R.string.settings_export_btn))
                     }
                 }

@@ -87,6 +87,7 @@ def add_static_pages():
         ]],
         ["Inventory", False, [
             ("equipment", PageInfo("Equipment", "Equipment.md", gen_equipment)),
+            ("heirlooms", PageInfo("Heirlooms", "Heirlooms.md", gen_heirlooms)),
         ]],
         ["Combat", False, [
             ("combat", PageInfo("Combat", "Combat.md", gen_combat_page)),
@@ -1193,7 +1194,75 @@ def gen_equipment() -> str:
         rows.sort(key=lambda r: r[0])
         sections.append(f"## {slot_names.get(slot, title(slot))}\n\n{table(['Item', 'Atk', 'Str', 'Def', 'Efficiency', 'Requirements'], rows)}")
 
-    return get_template("inventory/equipment").format(equipment="\n\n".join(sections))
+    return get_template("inventory/equipment").format(
+        equipment="\n\n".join(sections),
+        heirlooms_link=link("heirlooms"),
+    )
+
+
+def gen_heirlooms() -> str:
+    equip = load("equipment.json")
+    bosses = load("raid_bosses.json")
+    assert isinstance(equip, dict)
+    assert isinstance(bosses, dict)
+    heirlooms = {k: v for k, v in equip.items() if v.get("heirloom_skill")}
+
+    # Which raid boss drops each heirloom, and at what chance
+    dropped_by: dict[str, tuple[str, float]] = {}
+    for boss_id, boss in bosses.items():
+        for drop in boss.get("rare_drops", []):
+            if drop["item"] in heirlooms:
+                dropped_by[drop["item"]] = (boss_id, drop["chance"])
+
+    def skill_link(skill: str) -> str:
+        # Combat skills (attack, strength, ...) have no page of their own
+        return link(skill) if skill in PAGE_DIRECTORY else skill_name(skill)
+
+    drop_rows = []
+    for key, item in heirlooms.items():
+        boss_id, chance = dropped_by.get(key, (None, 0.0))
+        drop_rows.append([
+            item_name(key),
+            skill_link(item["heirloom_skill"]),
+            link(boss_id) if boss_id else "?",
+            f"1 in {round(1 / chance):,}" if chance else "?",
+            item_desc(key),
+        ])
+
+    combat_stats = [
+        ("attack_bonus", "Atk"), ("strength_bonus", "Str"), ("defense_bonus", "Def"),
+        ("ranged_attack_bonus", "Ranged Atk"), ("ranged_strength_bonus", "Ranged Str"),
+        ("magic_attack_bonus", "Magic Atk"), ("magic_damage_bonus", "Magic Dmg"),
+    ]
+
+    tool_rows, combat_rows = [], []
+    for key, item in heirlooms.items():
+        base = item.get("heirloom_base", {})
+        efficiency_key = next((k for k in item if k.endswith("_efficiency") and item[k]), None)
+        if efficiency_key:
+            tool_rows.append([
+                item_name(key),
+                title(item["slot"]),
+                skill_link(item["heirloom_skill"]),
+                f"{base.get('efficiency', 1.0):.2f}×",
+                f"{item[efficiency_key]:.2f}×",
+            ])
+        else:
+            present = [(stat, label) for stat, label in combat_stats if item.get(stat)]
+            combat_rows.append([
+                item_name(key),
+                title(item.get("combat_style") or ""),
+                ", ".join(f"{base.get(stat, 0)} {label}" for stat, label in present),
+                ", ".join(f"{item[stat]} {label}" for stat, label in present),
+            ])
+
+    return get_template("inventory/heirlooms").format(
+        gate_level=85,  # mirrors HeirloomStats.GATE_LEVEL
+        drop_table=table(["Heirloom", "Governing Skill", "Dropped By", "Drop Chance", "Description"], drop_rows),
+        tool_table=table(["Heirloom", "Slot", "Governing Skill", "Efficiency at Item Lv 1", "Efficiency at Item Lv 99"], tool_rows),
+        combat_table=table(["Heirloom", "Combat Style", "Stats at Item Lv 1", "Stats at Item Lv 99"], combat_rows),
+        equipment_link=link("equipment"),
+    )
 
 
 def footer_link(text: str, icon: str | None = None) -> str:

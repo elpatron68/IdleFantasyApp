@@ -159,7 +159,7 @@
     <string name="label_inactive">Inattivo</string>
     <string name="label_boost">Potenziamento</string>
     <string name="label_xp_boost">Potenziamento XP</string>
-    <string name="label_prestige_xp_boost">Qty</string>
+    <string name="label_prestige_xp_boost">Prestige XP Boost</string>
     <string name="label_weapon">Arma</string>
     <string name="label_armour">Armatura</string>
     <string name="label_food">Cibo</string>
@@ -500,9 +500,9 @@
     <string name="settings_backup_weekly">Settimanale</string>
     <string name="settings_backup_at_5am">alle 05:00</string>
     <string name="settings_backup_now">Esegui Backup Ora</string>
-    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
-    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
-    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
+    <string name="settings_backup_status">Ultimo Backup</string>
+    <string name="settings_backup_never">Nessun backup</string>
+    <string name="settings_backup_failed_with">Fallito: %1$s</string>
     <string name="settings_backup_success">Backup salvato.</string>
     <string name="settings_backup_failed">Backup fallito.</string>
     <string name="settings_backup_folder_set">Cartella di backup impostata.</string>
@@ -521,7 +521,7 @@
     <string name="home_died_message">Sei morto e hai perso la maggior parte dei tuoi guadagni.</string>
     <string name="home_xp_boost_was_active">Il bonus 2× XP era attivo</string>
     <string name="home_xp_boost_active">Bonus 2× XP attivo — %1$s rimasti</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="home_prestige_xp_boost_active">Bonus 2× %1$s XP - %2$s rimasti</string>
     <string name="home_loot">Bottino</string>
     <string name="home_food_consumed">Cibo Consumato</string>
     <string name="home_bones_buried">Ossa seppellite</string>
@@ -1132,37 +1132,37 @@
     <string name="house_construction_level">Livello costruzione %1$d</string>
     <string name="house_add_room">Aggiungi una stanza (%1$s)</string>
     <string name="house_add_room_locked">Aggiungi una stanza (Liv. %1$d)</string>
-    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
-    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
-    <string name="house_bill_no_changes">No pending changes</string> <!-- untranslated -->
-    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
-    <string name="house_bill_open">Bill</string> <!-- untranslated -->
-    <string name="house_bill_new_room">New room %1$d</string> <!-- untranslated -->
-    <string name="house_bill_expand_room">Expand room %1$d (+%2$d cells)</string> <!-- untranslated -->
-    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
-    <string name="house_bill_materials_header">Materials needed</string> <!-- untranslated -->
-    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
-    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
-    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
-    <string name="house_bill_coins_total">Total: %1$s coins</string> <!-- untranslated -->
-    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
-    <string name="house_apply_changes">Apply Changes</string> <!-- untranslated -->
-    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
-    <string name="house_changes_applied">Changes applied.</string> <!-- untranslated -->
-    <string name="house_discard_build">Discard</string> <!-- untranslated -->
-    <string name="house_discard_confirm_title">Discard changes?</string> <!-- untranslated -->
-    <string name="house_discard_confirm_message">All unpurchased changes will be lost.</string> <!-- untranslated -->
-    <string name="house_blueprints">Blueprints</string> <!-- untranslated -->
-    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
-    <string name="house_blueprint_save">Save</string> <!-- untranslated -->
-    <string name="house_blueprint_load">Load</string> <!-- untranslated -->
-    <string name="house_blueprint_delete">Delete</string> <!-- untranslated -->
-    <string name="house_blueprint_name_hint">Blueprint name</string> <!-- untranslated -->
-    <string name="house_blueprint_saved">Blueprint saved.</string> <!-- untranslated -->
-    <string name="house_blueprint_loaded">Blueprint loaded into the editor.</string> <!-- untranslated -->
-    <string name="house_blueprint_skipped">Blueprint loaded; %1$d pieces no longer exist and were skipped.</string> <!-- untranslated -->
-    <string name="house_blueprint_load_title">Load blueprint?</string> <!-- untranslated -->
-    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
+    <string name="house_bill_title">Preventivo</string>
+    <string name="house_bill_cost">Costo per costruire: %1$s</string>
+    <string name="house_bill_no_changes">Nessun cambiamento</string>
+    <string name="house_bill_changes_free">Modifiche non confermate</string>
+    <string name="house_bill_open">Preventivo</string>
+    <string name="house_bill_new_room">Nuova stanza %1$d</string>
+    <string name="house_bill_expand_room">Espandi %1$d (+%2$d celle)</string>
+    <string name="house_bill_shrink_credit">Contrai %1$d credit (%2$d celle)</string>
+    <string name="house_bill_materials_header">Materiali richiesti</string>
+    <string name="house_bill_credit_header">Accreditati durante l\'acquisto</string>
+    <string name="house_bill_xp_total">+%1$s XP Costruzione all\'acquisto</string>
+    <string name="house_bill_level_required">Richiede livello Costruzione %1$d</string>
+    <string name="house_bill_coins_total">Totale: %1$s monete</string>
+    <string name="house_purchase_build">Acquista</string>
+    <string name="house_apply_changes">Conferma modifiche</string>
+    <string name="house_purchase_success">Acquistato!</string>
+    <string name="house_changes_applied">Modifiche applicate</string>
+    <string name="house_discard_build">Scarta</string>
+    <string name="house_discard_confirm_title">Scartare le modifiche?</string>
+    <string name="house_discard_confirm_message">Tutte le modifiche non acquistate verranno scartate.</string>
+    <string name="house_blueprints">Planimetria</string>
+    <string name="house_blueprint_slot_empty">Vuoto</string>
+    <string name="house_blueprint_save">Salva</string>
+    <string name="house_blueprint_load">Carica</string>
+    <string name="house_blueprint_delete">Elimina</string>
+    <string name="house_blueprint_name_hint">Nome planimetria</string>
+    <string name="house_blueprint_saved">Planimetria salvata</string>
+    <string name="house_blueprint_loaded">Planimetria caricata nell\'editor.</string>
+    <string name="house_blueprint_skipped">Planimetria caricata; %1$d oggetti non esistono più e sono stati scartati.</string>
+    <string name="house_blueprint_load_title">Carica planimetria?</string>
+    <string name="house_blueprint_load_message">Le modifiche non acquistate verranno sostituite da \"%1$s\".</string>
     <string name="house_mode_place_item">Posizionamento di %1$s. Trascina o tocca un punto nella tua casa.</string>
     <string name="house_mode_place_room">Stai aggiungendo una nuova stanza 3x3. Deve toccare una stanza esistente.</string>
     <string name="house_error_level">Il tuo livello Costruzione è troppo basso.</string>
@@ -1368,7 +1368,7 @@
 
     <!-- Prestige system -->
     <string name="prestige">Onore</string>
-    <string name="prestige_skill_tree">Skill Tree</string> <!-- untranslated -->
+    <string name="prestige_skill_tree">Albero delle abilità</string>
     <string name="prestige_max">Onore Massimo</string>
     <string name="prestige_confirm_title" formatted="false">Onora %s?</string>
     <string name="prestige_confirm_message_xp">Il livello di %1$s tornerà a 1, ma otterrai un bonus permanente di +%2$d%% XP per questa abilità.</string>
@@ -1379,12 +1379,12 @@
     <!-- Prestige achievements -->
     <string name="achievement_prestige_first_name">Primo Reset</string>
     <string name="achievement_prestige_first_desc">Onora un\'Abilità qualunque per la prima volta</string>
-    <string name="achievement_prestige_node_first_name">Branching Out</string> <!-- untranslated -->
-    <string name="achievement_prestige_node_first_desc">Purchase your first prestige tree upgrade</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_name">End of the Line</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_desc">Purchase every upgrade in one prestige path</string> <!-- untranslated -->
-    <string name="achievement_prestige_tree_one_name">Mastered</string> <!-- untranslated -->
-    <string name="achievement_prestige_tree_one_desc">Purchase every upgrade in one skill\'s prestige tree</string> <!-- untranslated -->
+    <string name="achievement_prestige_node_first_name">Ramificazione</string>
+    <string name="achievement_prestige_node_first_desc">Acquista il primo bonus onore</string>
+    <string name="achievement_prestige_path_complete_name">Traguardo</string>
+    <string name="achievement_prestige_path_complete_desc">Acquista tutti i bonus onore di un singolo percorso.</string>
+    <string name="achievement_prestige_tree_one_name">Omnibus Viribus</string>
+    <string name="achievement_prestige_tree_one_desc">Acquista tutti i bonus onore di una singola abilità</string>
     <string name="achievement_prestige_all_1_name">Tabula Rasa</string>
     <string name="achievement_prestige_all_1_desc">Onora tutte le Abilità almeno una volta</string>
     <string name="achievement_prestige_all_3_name">Onore agli Eroi</string>
@@ -1524,7 +1524,7 @@
     <string name="town_church_no_bonus">Potenzia per estendere la durata delle benedizioni</string>
     <string name="town_building_fairgrounds_name">Giostre</string>
     <string name="town_fairgrounds_no_bonus">4 mini-giochi di abilità, 10 minuti di attesa prima di giocare di nuovo</string>
-    <string name="town_fairgrounds_t1_bonus" formatted="false">Sblocca Scegli-Bicchiere, attesa ridotta a 7.5 minutes, +5% probabilità di ottenere biglietti</string>
+    <string name="town_fairgrounds_t1_bonus" formatted="false">Sblocca Scegli-Bicchiere, attesa ridotta a 7.5 minuti, +5% probabilità di ottenere biglietti</string>
     <string name="town_fairgrounds_t2_bonus" formatted="false">Sblocca Grande-o-Piccolo, +10% probabilità di ottenere biglietti</string>
     <string name="town_fairgrounds_t3_bonus" formatted="false">Attesa ridotta a 5 minuti, +15% probabilità di ottenere biglietti</string>
     <string name="town_building_garden_name">Giardino</string>
@@ -1877,18 +1877,18 @@
     <string name="merc_tier_elite">Campione</string>
     <string name="merc_stats">Att %1$d  Frz %2$d  Dif %3$d  PS %4$d</string>
     <string name="merc_cost_per_day">%1$s monete al giorno</string>
-    <string name="merc_bran_the_sellsword_name">Bran the Sellsword</string> <!-- untranslated -->
-    <string name="merc_wren_the_stray_name">Wren the Stray</string> <!-- untranslated -->
+    <string name="merc_bran_the_sellsword_name">Bran il Cercadenaro</string>
+    <string name="merc_wren_the_stray_name">Wren della landa</string>
     <string name="merc_tam_the_grey_name">Tam il Grigio</string>
-    <string name="merc_nix_the_cutpurse_name">Nix the Cutpurse</string> <!-- untranslated -->
-    <string name="merc_sera_ironsong_name">Sera Ironsong</string> <!-- untranslated -->
-    <string name="merc_kael_emberhand_name">Kael Emberhand</string> <!-- untranslated -->
-    <string name="merc_dorn_shieldbreaker_name">Dorn Shieldbreaker</string> <!-- untranslated -->
-    <string name="merc_fenna_swiftarrow_name">Fenna Swiftarrow</string> <!-- untranslated -->
-    <string name="merc_grimjaw_the_colossus_name">Grimjaw the Colossus</string> <!-- untranslated -->
-    <string name="merc_sylvara_trueshot_name">Sylvara Trueshot</string> <!-- untranslated -->
-    <string name="merc_vex_the_undying_name">Vex the Undying</string> <!-- untranslated -->
-    <string name="merc_thane_dawnbringer_name">Thane Dawnbringer</string> <!-- untranslated -->
+    <string name="merc_nix_the_cutpurse_name">Nix il Furfante</string>
+    <string name="merc_sera_ironsong_name">Sera la Cantaspade</string>
+    <string name="merc_kael_emberhand_name">Kael Mano di Fuoco</string>
+    <string name="merc_dorn_shieldbreaker_name">Dorn lo Spaccaferro</string>
+    <string name="merc_fenna_swiftarrow_name">Fenna Frecciarapida</string>
+    <string name="merc_grimjaw_the_colossus_name">Grimjaw il Colosso</string>
+    <string name="merc_sylvara_trueshot_name">Sylvara Occhio di Lince</string>
+    <string name="merc_vex_the_undying_name">Vex il Sopravvissuto</string>
+    <string name="merc_thane_dawnbringer_name">Thane dell\'Alba</string>
 
     <string name="tower_title">Torre dell\'Infinito</string>
     <string name="tower_floor_label" formatted="false">Piano %d</string>
@@ -2101,7 +2101,7 @@
     <string name="settings_credit_characters_subtitle">Pixylac</string>
     <string name="settings_credit_bosses_title">Sprite dei boss</string>
     <string name="settings_credit_bosses_subtitle">Meg</string>
-    <string name="settings_credit_house_title">House Interiors</string> <!-- untranslated -->
+    <string name="settings_credit_house_title">Oggetti per la casa</string>
 
     <string name="title_seasonal_champion_of">Campione di %1$s</string>
     <string name="title_seasonal_requirement">Completa l\'Evento Stagionale %1$s</string>
@@ -2193,7 +2193,7 @@
     <string name="ironman_blessing_blocked">I personaggi \"Superuomo\" possono ricevere solo benedizioni difensive.</string>
     <string name="ironman_bonuses_notice">Superuomo: i potenziamenti di XP, resa e monete sono disattivati per questo personaggio.</string>
     <string name="ironman_badge">Superuomo</string>
-    <string name="settings_imported_demoted">Salvataggio importato. È stato modificato fuori dal gioco, quindi lo stato Ironman è stato rimosso.</string>
+    <string name="settings_imported_demoted">Salvataggio importato. È stato modificato fuori dal gioco, quindi lo stato Superuomo è stato rimosso.</string>
     <string name="shop_xp_boost_name">Potenziamento 2× XP (48 ore)</string>
     <string name="bestiary_stat_hp">PS</string>
     <string name="bestiary_stat_attack">Attacco</string>
@@ -2270,13 +2270,13 @@
     <string name="prestige_effect_xp_pct">+%1$d%% XP per questa abilità.</string>
     <string name="prestige_effect_yield_pct">+%1$d%% oggetti per questa sessione.</string>
     <!-- Translator note: %1$s = yield percent per interval (may be fractional) -->
-    <string name="prestige_effect_flow_rate">Flow-state: +%1$s%% yield per interval of continuous activity, up to +100%%.</string> <!-- untranslated -->
+    <string name="prestige_effect_flow_rate">Catena di montaggio: +%1$s%% alla resa per attività senza interruzioni, massimo +100%%.</string>
     <!-- Translator note: %1$d = minutes removed from the flow interval -->
-    <string name="prestige_effect_flow_interval">Flow-state interval shortened by %1$d minutes.</string> <!-- untranslated -->
-    <string name="prestige_effect_combat_stat">+%1$d effective levels in combat.</string> <!-- untranslated -->
+    <string name="prestige_effect_flow_interval">Intervallo catena di montaggio ridotto di %1$d minuti.</string>
+    <string name="prestige_effect_combat_stat">+%1$d livelli durante le battaglie.</string>
     <!-- Translator note: %1$s = minutes (may be fractional) -->
-    <string name="prestige_effect_session_floor">Sessions up to %1$s minutes shorter at level 99.</string> <!-- untranslated -->
-    <string name="prestige_effect_cape_scaling">Cape bonuses for this skill multiplied ×%1$d.</string> <!-- untranslated -->
+    <string name="prestige_effect_session_floor">Sessioni ridotte fino a  %1$s minuti al livello 99.</string>
+    <string name="prestige_effect_cape_scaling">Bonus da mantelli per questa abilità moltiplicati per ×%1$d.</string>
     <string name="prestige_effect_bonus_roll">+%1$d%% gem find chance while mining.</string> <!-- untranslated -->
     <string name="prestige_effect_coin_pct">+%1$d%% coins from this skill.</string> <!-- untranslated -->
     <string name="prestige_effect_crop_rotation">+%1$d%% yield when planting a different crop than the last harvest.</string> <!-- untranslated -->
@@ -2362,19 +2362,54 @@
     <string name="prestige_path_hitpoints_race_orc">Pelle Spessa</string>
 
     <!-- Race change -->
-    <string name="race_change_confirm_title">Change race?</string> <!-- untranslated -->
-    <string name="item_race_change_token_name">Race Change Token</string> <!-- untranslated -->
-    <string name="item_race_change_token_desc">A rare boss drop that lets you change your character\'s race once.</string> <!-- untranslated -->
+    <string name="race_change_confirm_title">Cambia razza?</string>
+    <string name="item_race_change_token_name">Gettone Cambio Razza</string>
+    <string name="item_race_change_token_desc">Raramente lasciato cadere dai boss, ti permette di cambiare la razza del tuo personaggio.</string>
     <!-- Translator note: %1$d = number of tokens owned -->
-    <string name="race_change_pay_token">Use Race Change Token (%1$d)</string> <!-- untranslated -->
+    <string name="race_change_pay_token">Usa gettone (%1$d)</string>
     <string name="race_change_pay_coins">Paga 10,000,000 monete</string>
-    <string name="race_change_cannot_afford">You need a Race Change Token (rare boss drop) or 10,000,000 coins to change race.</string> <!-- untranslated -->
-    <string name="race_change_ironman_locked">Ironman characters cannot change their race.</string> <!-- untranslated -->
-    <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
-    <string name="race_change_ironman_once">As an ironman, this is your one and only race change. Afterwards your race is locked forever.</string> <!-- untranslated -->
-    <string name="ironman_race_permanent_note">Ironman characters cannot change their race later. Choose carefully!</string> <!-- untranslated -->
+    <string name="race_change_cannot_afford">Ti servono un Gettone Cambio Razza oppure 10.000.000 monete.</string>
+    <string name="race_change_ironman_locked">I personaggi Superuomo non possono cambiare razza.</string>
+    <string name="race_change_cooldown_wait">Puoi cambiare razza di nuovo tra %1$s.</string>
+    <string name="race_change_ironman_once">Come Superuomo questa è la tua unica possibilità di cambiare razza.</string>
+    <string name="ironman_race_permanent_note">I personaggi Superuomo non possono cambiare razza in seguito, assicurati delle tue scelte!</string>
     <!-- Translator note: %1$s = comma-separated list of skill names -->
-    <string name="race_proficiency_label">Racial skill trees: %1$s</string> <!-- untranslated -->
-    <string name="race_proficiency_human">Racial bonus: an exclusive XP mastery tier in every skill</string> <!-- untranslated -->
-    <string name="race_change_confirm_message">Your race grants race-locked prestige upgrades. Changing race refunds any points spent in other races\' branches, and you can only change race once every 24 hours.</string> <!-- untranslated -->
+    <string name="race_proficiency_label">Albero abilità di razza: %1$s</string>
+    <string name="race_proficiency_human">Bonus razza: talento XP esclusivo per ogni rango in ogni abilità</string>
+    <string name="race_change_confirm_message">La tua razza ti offre determinati bonus onore. Cambiarla ripristinerà i punti spesi nei talenti delle altre razze. Puoi cambiare razza ogni 24 ore.</string>
+    <!-- Heirloom items (raid boss rare drops that level up with use) -->
+    <string name="item_heirloom_pickaxe_name">Heirloom Pickaxe</string> <!-- untranslated -->
+    <string name="item_heirloom_pickaxe_desc">A family pickaxe passed down through generations. It remembers every ore its bearers ever broke.</string> <!-- untranslated -->
+    <string name="item_heirloom_axe_name">Heirloom Axe</string> <!-- untranslated -->
+    <string name="item_heirloom_axe_desc">A woodsman\'s axe worn smooth by a hundred hands. Every felled tree sharpens it a little more.</string> <!-- untranslated -->
+    <string name="item_heirloom_fishing_rod_name">Heirloom Fishing Rod</string> <!-- untranslated -->
+    <string name="item_heirloom_fishing_rod_desc">An old rod that has landed catches beyond counting. It learns the water with every cast.</string> <!-- untranslated -->
+    <string name="item_heirloom_hoe_name">Heirloom Hoe</string> <!-- untranslated -->
+    <string name="item_heirloom_hoe_desc">A humble hoe that has turned soil for generations. Each harvest leaves it keener than before.</string> <!-- untranslated -->
+    <string name="item_heirloom_hammer_name">Heirloom Hammer</string> <!-- untranslated -->
+    <string name="item_heirloom_hammer_desc">A smith\'s hammer black with the soot of a thousand forges. It grows truer with every strike.</string> <!-- untranslated -->
+    <string name="item_heirloom_tinderbox_name">Heirloom Tinderbox</string> <!-- untranslated -->
+    <string name="item_heirloom_tinderbox_desc">A battered tinderbox that has never failed to spark. Every fire it lights burns a little brighter.</string> <!-- untranslated -->
+    <string name="item_heirloom_grappling_hook_name">Heirloom Grappling Hook</string> <!-- untranslated -->
+    <string name="item_heirloom_grappling_hook_desc">A climber\'s hook that has held on ledges beyond counting. It grows surer with every course.</string> <!-- untranslated -->
+    <string name="item_heirloom_frying_pan_name">Heirloom Frying Pan</string> <!-- untranslated -->
+    <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
+    <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
+    <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
+    <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
+    <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->
+    <string name="item_heirloom_greathammer_desc">A colossal warhammer of forgotten make. Each blow it lands adds to its legend.</string> <!-- untranslated -->
+    <string name="item_heirloom_longbow_name">Heirloom Longbow</string> <!-- untranslated -->
+    <string name="item_heirloom_longbow_desc">A bow strung and restrung across generations of archers. Every arrow teaches it something.</string> <!-- untranslated -->
+    <string name="item_heirloom_staff_name">Heirloom Staff</string> <!-- untranslated -->
+    <string name="item_heirloom_staff_desc">A staff steeped in the castings of every mage who ever bore it. Its power still deepens.</string> <!-- untranslated -->
+    <string name="heirloom_section_title">Heirloom</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = the heirloom item\'s current level (1-99) -->
+    <string name="heirloom_level_label">Heirloom Lv. %1$d</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = a skill name, used twice -->
+    <string name="heirloom_desc">Grows with %1$s XP up to Lv. 99. Its power also scales with your %1$s level, reaching full effect at level 85. Stats shown are its full potential.</string> <!-- untranslated -->
+    <string name="shop_sell_blocked_heirloom">%1$s is an heirloom and cannot be sold.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = a dungeon or boss name -->
+    <string name="repeat_blocked_level">Your combat level is too low to repeat %1$s.</string> <!-- untranslated -->
 </resources>

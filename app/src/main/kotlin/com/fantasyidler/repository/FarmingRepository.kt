@@ -9,6 +9,7 @@ import com.fantasyidler.data.db.AppDatabase
 import com.fantasyidler.data.db.dao.FarmingPatchDao
 import com.fantasyidler.data.json.CropData
 import com.fantasyidler.data.model.EquipSlot
+import com.fantasyidler.util.toolEfficiency
 import com.fantasyidler.data.model.FarmingPatch
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.receiver.FarmPatchAlarmReceiver
@@ -129,10 +130,10 @@ class FarmingRepository @Inject constructor(
 
         val player   = playerRepo.getOrCreatePlayer()
         val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
-
-        val hoeMult = equipped[EquipSlot.HOE]?.let { gameData.equipment[it]?.farmingEfficiency } ?: 1f
-
         val flags = playerRepo.getFlags()
+
+        val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+        val hoeMult = gameData.toolEfficiency(equipped[EquipSlot.HOE], EquipSlot.HOE, skillLevels = levels, heirloomXp = flags.heirloomXp)
         // Cape rack tier 1 applies owned gathering capes passively (ironman excluded),
         // mirroring resolveCapeMultiplier's gates (issue #1483).
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)

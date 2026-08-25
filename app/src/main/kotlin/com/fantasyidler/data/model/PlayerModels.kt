@@ -30,6 +30,8 @@ data class PlayerFlags(
     @SerialName("magic_loadout_spell_name") val magicLoadoutSpellName: String? = null,
     /** Global "start eating" threshold as % of max HP. Default 50 preserves the prior hardcoded behavior. */
     @SerialName("food_eat_threshold_pct") val foodEatThresholdPct: Int = 50,
+    /** Heirloom item key -> accumulated item XP (capped at the level-99 threshold). Never reset by prestige. */
+    @SerialName("heirloom_xp") val heirloomXp: Map<String, Long> = emptyMap(),
     @SerialName("battery_prompt_shown") val batteryPromptShown: Boolean = false,
     /** Epoch ms when the 2× XP boost expires; 0 = not active. */
     @SerialName("xp_boost_expires_at") val xpBoostExpiresAt: Long = 0L,
