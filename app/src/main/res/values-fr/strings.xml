@@ -28,8 +28,8 @@
     <string name="btn_plant">Planter</string>
     <string name="btn_harvest">Récolte</string>
     <string name="btn_harvest_all">Tout récolter</string>
-    <string name="btn_clear">Nettoyer</string>
-    <string name="btn_clear_all">Tout nettoyer</string>
+    <string name="btn_clear">Arracher</string>
+    <string name="btn_clear_all">Tout arracher</string>
     <string name="btn_inspect">Inspecter</string>
     <string name="btn_view_drops">Voir le butin</string>
     <string name="btn_start_quest">Commencer une quête</string>
@@ -961,7 +961,7 @@
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
     <string name="guild_quest_desc_prayer">Enterrez %1$d os pour la %2$s.</string>
-    <string name="guild_quest_desc_sessions">Terminez %1$d sessions d\'%2$s pour la %3$s.</string>
+    <string name="guild_quest_desc_sessions">Terminez %1$d sessions de %2$s pour la %3$s.</string>
     <string name="guild_quest_desc_trade">Effectuez %1$d route(s) commerciale(s) %2$s pour la %3$s.</string>
     <string name="guild_quest_desc_earn_coins">Gagnez %1$s pièces via les routes commerciales pour la %2$s.</string>
     <string name="guild_quest_desc_pickpocket">Dérobez le %2$s %1$d fois pour le %3$s.</string>
@@ -1497,7 +1497,7 @@
     <string name="town_upgrade_next_label">Prochaine amélioration</string>
     <string name="town_upgrade_constr_req">Construction Niv. %1$d requis</string>
     <string name="town_upgrade_cost">Coût : %1$s pièces</string>
-    <string name="town_builder_discount">Promotion du constructeur : /%1$d%% en moins</string>
+    <string name="town_builder_discount">Promotion du constructeur : %1$d%% en moins</string>
     <string name="town_upgrade_materials_header">Matériaux :</string>
     <string name="town_upgrade_btn">Améliorer</string>
     <string name="town_upgrade_success">Bâtiment amélioré !</string>
