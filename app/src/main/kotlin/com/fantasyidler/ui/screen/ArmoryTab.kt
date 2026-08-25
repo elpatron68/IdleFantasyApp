@@ -45,6 +45,8 @@ import com.fantasyidler.ui.viewmodel.ArmoryFilter
 import com.fantasyidler.ui.viewmodel.ArmorySort
 import com.fantasyidler.ui.viewmodel.ArmoryViewModel
 import com.fantasyidler.ui.theme.ScaledSheetContent
+import com.fantasyidler.simulator.HeirloomStats
+import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.util.GameStrings
 
 private val COMBAT_CAPE_SKILLS = setOf(
@@ -124,7 +126,7 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
             sheetState       = sheetState,
         ) {
             ScaledSheetContent {
-            ArmoryDetailContent(entry = entry)
+            ArmoryDetailContent(entry = entry, heirloomXp = state.heirloomXp)
             }
         }
     }
@@ -179,7 +181,7 @@ private fun ArmoryRow(entry: ArmoryEntry, onClick: () -> Unit) {
 // ---------------------------------------------------------------------------
 
 @Composable
-private fun ArmoryDetailContent(entry: ArmoryEntry) {
+private fun ArmoryDetailContent(entry: ArmoryEntry, heirloomXp: Map<String, Long>) {
     val context = LocalContext.current
     val item     = entry.item
     val dimmed   = !entry.owned
@@ -221,6 +223,34 @@ private fun ArmoryDetailContent(entry: ArmoryEntry) {
                 )
             }
             Spacer(Modifier.height(16.dp))
+        }
+
+        if (item.heirloomSkill != null) {
+            item {
+                ArmorySectionHeader(stringResource(R.string.heirloom_section_title))
+                Spacer(Modifier.height(4.dp))
+                if (entry.owned) {
+                    val xp  = heirloomXp[item.name] ?: 0L
+                    val lvl = HeirloomStats.level(xp)
+                    Text(
+                        text       = stringResource(R.string.heirloom_level_label, lvl),
+                        style      = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    LinearProgressIndicator(
+                        progress = { XpTable.progressFraction(xp) },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                }
+                Text(
+                    text  = stringResource(R.string.heirloom_desc, GameStrings.skillName(context, item.heirloomSkill!!)),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(Modifier.height(16.dp))
+            }
         }
 
         if (reqRows.isNotEmpty()) {

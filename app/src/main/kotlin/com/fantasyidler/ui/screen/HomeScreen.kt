@@ -8,7 +8,6 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -23,7 +22,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
@@ -35,7 +33,6 @@ import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.SwitchAccount
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Assignment
@@ -44,9 +41,7 @@ import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
-import com.fantasyidler.data.model.RecentSession
 import com.fantasyidler.util.drawableByName
-import com.fantasyidler.util.toTitleCase
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.foundation.rememberScrollState
@@ -60,7 +55,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.ui.draw.clip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -71,7 +65,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -87,12 +80,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
-import com.fantasyidler.data.model.EquipSlot
-import com.fantasyidler.data.model.HiredWorker
-import com.fantasyidler.data.model.QueuedAction
-import com.fantasyidler.data.model.SkillSession
-import com.fantasyidler.data.model.WorkerTier
-import com.fantasyidler.ui.component.PlayerStatsBar
+import com.fantasyidler.ui.components.PlayerStatsBar
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
@@ -101,12 +89,8 @@ import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.ui.viewmodel.totalLevelFrom
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
-import com.fantasyidler.util.formatXp
-import com.fantasyidler.simulator.XpTable
-import com.fantasyidler.util.toCountdown
 import androidx.compose.ui.text.style.TextOverflow
 import kotlinx.coroutines.delay
-import kotlinx.serialization.decodeFromString
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.ui.graphics.Color

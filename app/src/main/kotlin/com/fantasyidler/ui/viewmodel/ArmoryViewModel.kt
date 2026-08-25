@@ -45,6 +45,8 @@ data class ArmoryUiState(
     val totalOwned: Int = 0,
     val totalCount: Int = 0,
     val isLoading: Boolean = true,
+    /** Heirloom item key -> accumulated item XP, for the detail sheet. */
+    val heirloomXp: Map<String, Long> = emptyMap(),
 )
 
 @HiltViewModel
@@ -111,6 +113,7 @@ class ArmoryViewModel @Inject constructor(
             totalOwned = allEntries.count { it.owned },
             totalCount = allEntries.size,
             isLoading  = false,
+            heirloomXp = flags.heirloomXp,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ArmoryUiState())
 

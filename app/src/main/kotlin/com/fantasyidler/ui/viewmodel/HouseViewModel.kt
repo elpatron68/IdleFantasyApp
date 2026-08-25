@@ -414,7 +414,15 @@ class HouseViewModel @Inject constructor(
         if (key.startsWith(HouseRepository.BANNER_PREFIX)) {
             val icon = key.removePrefix(HouseRepository.BANNER_PREFIX)
             val banner = uiState.value.earnedBanners.firstOrNull { it.bannerIcon == icon }
-            return banner?.eventDisplayName?.takeIf { it.isNotBlank() }
+            // The name frozen at earn time is only a fallback for events whose data was later
+            // removed; live events re-resolve so translation updates apply (issue #1546).
+            val currentName = banner?.let { b ->
+                gameData.seasonalEvents[b.eventId]?.let { event ->
+                    GameStrings.seasonalEventName(context, b.eventId, event.displayName)
+                }
+            }
+            return currentName
+                ?: banner?.eventDisplayName?.takeIf { it.isNotBlank() }
                 ?: banner?.displayText
                 ?: context.getString(R.string.house_cat_banner)
         }

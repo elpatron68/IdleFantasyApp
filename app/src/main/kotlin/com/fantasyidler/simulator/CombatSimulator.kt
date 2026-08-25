@@ -99,54 +99,62 @@ object CombatSimulator {
             val frameArrows = mutableMapOf<String, Int>()
             var frameRunesUsed = 0
 
-            val enemyKey = carryoverEnemyKey ?: spawnPool[rnd.nextInt(spawnPool.size)]
+            var enemyKey = carryoverEnemyKey ?: spawnPool[rnd.nextInt(spawnPool.size)]
             carryoverEnemyKey = null
-            val enemy    = enemies[enemyKey] ?: continue
+            var enemy    = enemies[enemyKey] ?: continue
+            val frameStartEnemyKey = enemyKey
+            val frameKillsByEnemy  = mutableMapOf<String, Int>()
 
-            // --- Player combat stats for this enemy ---
+            // --- Per-enemy combat stats, recomputed on every spawn: each kill rolls a fresh
+            // enemy type mid-frame so spawns follow their weights instead of locking one type
+            // per frame and chaining it via carryover (issue #1557) ---
             // Ranged max hit is recomputed per shot below (not here), since it depends on
             // whichever arrow tier is actually being fired that tick (issue #1018).
-            var playerMaxHit: Int
-            val playerEffAtk: Int
-            val enemyDefStat: Int
+            var playerMaxHit    = 0
+            var playerHitChance = 0.0
+            var enemyMaxHit     = 0
+            var enemyHitChance  = 0.0
 
-            when (combatStyle) {
-                "ranged" -> {
-                    playerMaxHit = rangedMaxHit(effRanged, rangedGearStrengthBonus, 0)
-                    playerEffAtk = effRanged + weaponAttackBonus
-                    enemyDefStat = enemy.defensiveStats.rangedDefense
+            fun refreshCombatStats() {
+                val playerEffAtk: Int
+                val enemyDefStat: Int
+                when (combatStyle) {
+                    "ranged" -> {
+                        playerMaxHit = rangedMaxHit(effRanged, rangedGearStrengthBonus, 0)
+                        playerEffAtk = effRanged + weaponAttackBonus
+                        enemyDefStat = enemy.defensiveStats.rangedDefense
+                    }
+                    "magic" -> {
+                        playerMaxHit = spellMaxHit.coerceAtLeast(1)
+                        playerEffAtk = effMagic + weaponAttackBonus
+                        enemyDefStat = enemy.defensiveStats.magicDefense
+                    }
+                    else -> {
+                        val effStr   = effStrength + weaponStrengthBonus
+                        playerMaxHit = max(1, 1 + effStr * (weaponStrengthBonus + 64) / 640)
+                        playerEffAtk = effAttack + weaponAttackBonus
+                        enemyDefStat = if (combatStyle == "strength") enemy.defensiveStats.strengthDefense
+                                       else enemy.defensiveStats.attackDefense
+                    }
                 }
-                "magic" -> {
-                    playerMaxHit = spellMaxHit.coerceAtLeast(1)
-                    playerEffAtk = effMagic + weaponAttackBonus
-                    enemyDefStat = enemy.defensiveStats.magicDefense
-                }
-                else -> {
-                    val effStr   = effStrength + weaponStrengthBonus
-                    playerMaxHit = max(1, 1 + effStr * (weaponStrengthBonus + 64) / 640)
-                    playerEffAtk = effAttack + weaponAttackBonus
-                    enemyDefStat = if (combatStyle == "strength") enemy.defensiveStats.strengthDefense
-                                   else enemy.defensiveStats.attackDefense
-                }
+                playerHitChance = when {
+                    playerEffAtk > enemyDefStat ->
+                        1.0 - enemyDefStat / (2.0 * playerEffAtk.coerceAtLeast(1))
+                    else ->
+                        playerEffAtk / (2.0 * enemyDefStat.coerceAtLeast(1))
+                }.coerceIn(0.15, 0.95)
+
+                val enemyEffStr = enemy.combatStats.strengthLevel + enemy.combatStats.strengthBonus
+                enemyMaxHit     = if (enemyEffStr == 0) 0 else max(0, 1 + enemyEffStr * (enemy.combatStats.strengthBonus + 64) / 640)
+                val enemyEffAtk = enemy.combatStats.attackLevel + enemy.combatStats.attackBonus
+                enemyHitChance  = when {
+                    enemyEffAtk > effDefence ->
+                        1.0 - effDefence / (2.0 * enemyEffAtk.coerceAtLeast(1))
+                    else ->
+                        enemyEffAtk / (2.0 * effDefence.coerceAtLeast(1))
+                }.coerceIn(0.10, 0.95)
             }
-
-            val playerHitChance = when {
-                playerEffAtk > enemyDefStat ->
-                    1.0 - enemyDefStat / (2.0 * playerEffAtk.coerceAtLeast(1))
-                else ->
-                    playerEffAtk / (2.0 * enemyDefStat.coerceAtLeast(1))
-            }.coerceIn(0.15, 0.95)
-
-            // --- Enemy combat stats ---
-            val enemyEffStr    = enemy.combatStats.strengthLevel + enemy.combatStats.strengthBonus
-            val enemyMaxHit    = if (enemyEffStr == 0) 0 else max(0, 1 + enemyEffStr * (enemy.combatStats.strengthBonus + 64) / 640)
-            val enemyEffAtk    = enemy.combatStats.attackLevel + enemy.combatStats.attackBonus
-            val enemyHitChance = when {
-                enemyEffAtk > effDefence ->
-                    1.0 - effDefence / (2.0 * enemyEffAtk.coerceAtLeast(1))
-                else ->
-                    enemyEffAtk / (2.0 * effDefence.coerceAtLeast(1))
-            }.coerceIn(0.10, 0.95)
+            refreshCombatStats()
 
             // --- Tick-by-tick combat loop ---
             val savedCarryoverHp = carryoverEnemyHp.also { carryoverEnemyHp = 0 }
@@ -194,6 +202,7 @@ object CombatSimulator {
                 enemyHp -= pDmg
                 if (enemyHp <= 0) {
                     kills++
+                    frameKillsByEnemy[enemyKey] = (frameKillsByEnemy[enemyKey] ?: 0) + 1
                     for (drop in enemy.alwaysDrops) {
                         frameItems[drop.item] = (frameItems[drop.item] ?: 0) + drop.quantity
                     }
@@ -210,6 +219,9 @@ object CombatSimulator {
                         frameXpBySkill[skill] = (frameXpBySkill[skill] ?: 0L) + skillXp
                     }
                     frameXp += xp
+                    enemyKey = spawnPool[rnd.nextInt(spawnPool.size)]
+                    enemy    = enemies[enemyKey] ?: enemy
+                    refreshCombatStats()
                     enemyHp  = enemy.hp
                 }
 
@@ -250,13 +262,11 @@ object CombatSimulator {
                 framePlayerHeals += currentHp - hpBeforeEating
             }
 
-            // Carry partial-damage enemy into next frame if still alive.
-            // A kill resets enemyHp to enemy.hp, so guard against carrying over
-            // a freshly-reset (full-HP) enemy — that would lock the session onto
-            // one enemy type for all 60 frames.
-            val freshlyKilled = kills > 0 && enemyHp == enemy.hp
-            carryoverEnemyKey = if (enemyHp > 0 && !freshlyKilled) enemyKey else null
-            carryoverEnemyHp  = if (enemyHp > 0 && !freshlyKilled) enemyHp  else 0
+            // Carry only a genuinely in-progress fight into the next frame; an untouched
+            // fresh spawn re-rolls there instead (same weighted distribution either way).
+            val fightInProgress = enemyHp in 1 until enemy.hp
+            carryoverEnemyKey = if (fightInProgress) enemyKey else null
+            carryoverEnemyHp  = if (fightInProgress) enemyHp  else 0
 
             if (dungeon.safeZone) currentHp = currentHp.coerceAtLeast(1)
             val diedThisMinute = currentHp <= 0
@@ -272,12 +282,12 @@ object CombatSimulator {
                     items        = frameItems,
                     xpBySkill    = frameXpBySkill,
                     kills        = kills,
-                    killsByEnemy = if (kills > 0) mapOf(enemyKey to kills) else emptyMap(),
+                    killsByEnemy = frameKillsByEnemy.toMap(),
                     died           = diedThisMinute,
                     foodConsumed   = frameFood,
                     arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
-                    enemyKey       = enemyKey,
+                    enemyKey       = frameStartEnemyKey,
                     hpAfter      = currentHp.coerceAtLeast(0),
                     playerHits   = framePlayerHits,
                     enemyHits    = frameEnemyHits,
@@ -387,6 +397,8 @@ object CombatSimulator {
         doubleHitChance: Double = 0.0,
         secondChance: Boolean = false,
         mercenaries: List<MercCombatant> = emptyList(),
+        /** Rare-drop item keys that must not roll (heirlooms the player already owns). */
+        blockedRareDrops: Set<String> = emptySet(),
         random: Random = Random.Default,
     ): List<SessionFrame> {
         val speed = attackSpeedSec.coerceIn(1.2, BASE_ATTACK_SPEED_SEC)
@@ -663,7 +675,8 @@ object CombatSimulator {
                               else rnd.nextInt(range.min, range.max + 1)
             }
             for (rare in boss.rareDrops)
-                if (rnd.nextDouble() < rare.chance) items[rare.item] = (items[rare.item] ?: 0) + 1
+                if (rare.item !in blockedRareDrops && rnd.nextDouble() < rare.chance)
+                    items[rare.item] = (items[rare.item] ?: 0) + 1
             boss.pet?.let { pet -> if (rnd.nextDouble() < pet.chance) items[pet.id] = 1 }
             for ((skill, xp) in boss.xpRewards) xpBySkill[skill] = xp.toLong()
         }

@@ -713,6 +713,26 @@
     },
     "rare_drops": [
       {
+        "item": "heirloom_pickaxe",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_axe",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_fishing_rod",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_hoe",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
         "item": "gilded_full_helmet",
         "chance": 0.015,
         "comment": "1/67"
@@ -773,6 +793,31 @@
       }
     },
     "rare_drops": [
+      {
+        "item": "heirloom_hammer",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_tinderbox",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_frying_pan",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_lockpick",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_grappling_hook",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
       {
         "item": "gilded_platebody",
         "chance": 0.015,
@@ -838,6 +883,26 @@
       }
     },
     "rare_drops": [
+      {
+        "item": "heirloom_blade",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_greathammer",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_longbow",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
+      {
+        "item": "heirloom_staff",
+        "chance": 0.01,
+        "comment": "1/100 unique heirloom, skipped if already owned"
+      },
       {
         "item": "gilded_kiteshield",
         "chance": 0.015,

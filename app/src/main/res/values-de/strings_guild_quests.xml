@@ -89,8 +89,8 @@
     <string name="quest_fletching_guild_5_name">Mithril Rain</string> <!-- untranslated -->
     <string name="quest_fletching_guild_6_name">Adamantite Arsenal</string> <!-- untranslated -->
     <string name="quest_fletching_guild_7_name">Runite Quiver</string> <!-- untranslated -->
-    <string name="quest_fletching_guild_8_name">Yew Longbows</string> <!-- untranslated -->
-    <string name="quest_fletching_guild_9_name">Magic Longbows</string> <!-- untranslated -->
+    <string name="quest_fletching_guild_8_name">Eiben-Langbögen</string>
+    <string name="quest_fletching_guild_9_name">Magische Langbögen</string>
     <string name="quest_herblore_guild_1_name">Attack Brews</string> <!-- untranslated -->
     <string name="quest_herblore_guild_10_name">Master Herbalist</string> <!-- untranslated -->
     <string name="quest_herblore_guild_2_name">Attack Potions</string> <!-- untranslated -->
@@ -302,10 +302,10 @@
     <string name="quest_fletching_daily_4a_name">Mithril Volley</string> <!-- untranslated -->
     <string name="quest_fletching_daily_4b_name">Adamantite Quiver</string> <!-- untranslated -->
     <string name="quest_fletching_daily_4c_name">Runite Arrows</string> <!-- untranslated -->
-    <string name="quest_fletching_daily_4d_name">Yew Shortbow</string> <!-- untranslated -->
-    <string name="quest_fletching_daily_4e_name">Magic Shortbow</string> <!-- untranslated -->
-    <string name="quest_fletching_daily_7a_name">Yew Longbows</string> <!-- untranslated -->
-    <string name="quest_fletching_daily_7b_name">Magic Longbows</string> <!-- untranslated -->
+    <string name="quest_fletching_daily_4d_name">Eiben Kurzbogen</string>
+    <string name="quest_fletching_daily_4e_name">Magische Kurzbogen</string>
+    <string name="quest_fletching_daily_7a_name">Eiben-Langbögen</string>
+    <string name="quest_fletching_daily_7b_name">Magische Langbögen</string>
     <string name="quest_fletching_daily_7c_name">Runite Quiver</string> <!-- untranslated -->
     <string name="quest_fletching_daily_7d_name">Grand Arsenal</string> <!-- untranslated -->
     <string name="quest_herblore_daily_1a_name">Attack Brews</string> <!-- untranslated -->

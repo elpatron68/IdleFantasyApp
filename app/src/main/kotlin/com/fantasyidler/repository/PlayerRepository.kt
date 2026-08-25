@@ -8,6 +8,7 @@ import com.fantasyidler.data.db.dao.PlayerDao
 import com.fantasyidler.data.db.dao.QuestProgressDao
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.*
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.simulator.PrestigeBoosts
 import com.fantasyidler.simulator.PrestigePoints
 import com.fantasyidler.simulator.SkillSimulator
@@ -129,6 +130,35 @@ class PlayerRepository @Inject constructor(
             gameData,
         )
 
+    /**
+     * Mirrors awarded skill XP into the equipped heirloom whose governing skill matches.
+     * Item XP is capped at the level-99 threshold and is never reset by prestige.
+     */
+    private fun mirrorHeirloomXp(
+        flags: PlayerFlags,
+        equipped: Map<String, String?>,
+        xpBySkill: Map<String, Long>,
+    ): PlayerFlags {
+        var updated: MutableMap<String, Long>? = null
+        for ((skill, xp) in xpBySkill) {
+            if (xp <= 0L) continue
+            val slot = HeirloomStats.slotForSkill(skill) ?: continue
+            val itemKey = equipped[slot] ?: continue
+            if (gameData.equipment[itemKey]?.heirloomSkill != skill) continue
+            val map = updated ?: flags.heirloomXp.toMutableMap().also { updated = it }
+            map[itemKey] = ((map[itemKey] ?: 0L) + xp).coerceAtMost(HeirloomStats.XP_CAP)
+        }
+        return updated?.let { flags.copy(heirloomXp = it) } ?: flags
+    }
+
+    /** Adds loot to the inventory; heirlooms are unique and never stack past one. */
+    private fun grantItems(inventory: MutableMap<String, Int>, items: Map<String, Int>) {
+        for ((item, qty) in items) {
+            inventory[item] = if (gameData.equipment[item]?.heirloomSkill != null) 1
+                              else (inventory[item] ?: 0) + qty
+        }
+    }
+
     suspend fun applySessionResults(
         skillName: String,
         xpGained: Long,
@@ -146,6 +176,7 @@ class PlayerRepository @Inject constructor(
         val levels: MutableMap<String, Int>  = json.decodeFromString(player.skillLevels)
         val xpMap: MutableMap<String, Long>  = json.decodeFromString(player.skillXp)
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
 
         val oldLevel = XpTable.levelForXp(xpMap[skillName] ?: 0L)
         val newXp = (xpMap[skillName] ?: 0L) + boostedXp
@@ -161,16 +192,15 @@ class PlayerRepository @Inject constructor(
             }
         }
 
-        for ((item, qty) in scaledItems) {
-            inventory[item] = (inventory[item] ?: 0) + qty
-        }
+        grantItems(inventory, scaledItems)
 
+        val newFlags = mirrorHeirloomXp(flags, equipped, mapOf(skillName to boostedXp))
         playerDao.upsert(
             player.copy(
                 skillLevels = json.encode<Map<String, Int>>(levels),
                 skillXp     = json.encode<Map<String, Long>>(xpMap),
                 inventory   = json.encode<Map<String, Int>>(inventory),
-                flags       = json.encode<PlayerFlags>(flags.plusSeen(scaledItems.keys + awardedCapes)),
+                flags       = json.encode<PlayerFlags>(newFlags.plusSeen(scaledItems.keys + awardedCapes)),
             )
         )
         return awardedCapes
@@ -832,14 +862,17 @@ class PlayerRepository @Inject constructor(
         val levels:    MutableMap<String, Int>  = json.decodeFromString(player.skillLevels)
         val xpMap:     MutableMap<String, Long> = json.decodeFromString(player.skillXp)
         val inventory: MutableMap<String, Int>  = json.decodeFromString(player.inventory)
+        val equipped:  Map<String, String?>     = json.decodeFromString(player.equipped)
 
         val awardedCapes = mutableListOf<String>()
+        val awardedXp = mutableMapOf<String, Long>()
         for ((skill, xp) in xpPerSkill) {
             val oldLevel = XpTable.levelForXp(xpMap[skill] ?: 0L)
             val scaledXp = if (efficiencyMultiplier == 1.0f) xp else (xp * efficiencyMultiplier).toLong()
             val petPct = if (flags.ironman) 0 else perSkillPetBoostPct[skill] ?: 0
             val withPet = if (petPct > 0) (scaledXp * (1.0 + petPct / 100.0)).toLong() else scaledXp
             val finalXp = (withPet * boostRepo.xpMultiplier(skill, flags, capeMult)).toLong()
+            awardedXp[skill] = finalXp
             val newXp = (xpMap[skill] ?: 0L) + finalXp
             xpMap[skill]  = newXp
             levels[skill] = XpTable.levelForXp(newXp)
@@ -851,17 +884,16 @@ class PlayerRepository @Inject constructor(
                 }
             }
         }
-        for ((item, qty) in scaledItems) {
-            inventory[item] = (inventory[item] ?: 0) + qty
-        }
+        grantItems(inventory, scaledItems)
 
+        val newFlags = mirrorHeirloomXp(flags, equipped, awardedXp)
         playerDao.upsert(
             player.copy(
                 skillLevels = json.encode<Map<String, Int>>(levels),
                 skillXp     = json.encode<Map<String, Long>>(xpMap),
                 inventory   = json.encode<Map<String, Int>>(inventory),
                 coins       = player.coins + (coinsGained * coinBlessingMult).toLong(),
-                flags       = json.encode<PlayerFlags>(flags.plusSeen(scaledItems.keys + awardedCapes)),
+                flags       = json.encode<PlayerFlags>(newFlags.plusSeen(scaledItems.keys + awardedCapes)),
             )
         )
         return awardedCapes
@@ -1208,11 +1240,14 @@ class PlayerRepository @Inject constructor(
         xpMap[skillName]    = newXp
         levels[skillName]   = XpTable.levelForXp(newXp)
 
+        val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val newFlags = mirrorHeirloomXp(flagsForSave, equipped, mapOf(skillName to xpGained))
         playerDao.upsert(
             player.copy(
                 inventory   = json.encode<Map<String, Int>>(inventory),
                 skillLevels = json.encode<Map<String, Int>>(levels),
                 skillXp     = json.encode<Map<String, Long>>(xpMap),
+                flags       = json.encode<PlayerFlags>(newFlags),
             )
         )
         return true

@@ -1,6 +1,8 @@
 """site.py -- HTML static site generator for the Idle Fantasy wiki."""
 from __future__ import annotations
 
+import html as html_lib
+import json
 import re
 
 import markdown as md_lib
@@ -86,6 +88,45 @@ def _md_to_html(text: str, active_page_id: str | None) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Search index
+# ---------------------------------------------------------------------------
+
+def _collect_search_entries(page_html: str, page_title: str, html_filename: str) -> list[dict]:
+    """Search entries for one rendered page: the page itself plus every id'd table row.
+
+    Entry keys are kept short to keep search-index.js small:
+    n = display name, u = target url, p = containing page (rows only), t = 1 for pages.
+    """
+    entries = [{"n": page_title, "u": html_filename, "t": 1}]
+    for m in re.finditer(r'<tr id="([^"]+)">(.*?)</tr>', page_html, re.DOTALL):
+        slug, tr_inner = m.group(1), m.group(2)
+        first_td = re.search(r'<td>(.*?)</td>', tr_inner, re.DOTALL)
+        if not first_td:
+            continue
+        text = html_lib.unescape(re.sub(r'<[^>]+>', '', first_td.group(1))).strip()
+        # Skip empty cells and link-list rows (e.g. the combat footer), which are
+        # navigation aids rather than searchable entities.
+        if not text or len(text) > 60:
+            continue
+        entries.append({"n": text, "u": f"{html_filename}#{slug}", "p": page_title})
+    return entries
+
+
+def _build_search_index(entries: list[dict]) -> str:
+    """Deduplicated search index as a JS file assigning window.WIKI_SEARCH_INDEX."""
+    seen: set[tuple[str, str]] = set()
+    unique = []
+    for entry in entries:
+        key = (entry["n"].lower(), entry["u"])
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(entry)
+    payload = json.dumps(unique, separators=(",", ":"), ensure_ascii=False)
+    return f"window.WIKI_SEARCH_INDEX = {payload};\n"
+
+
+# ---------------------------------------------------------------------------
 # Sidebar nav builder
 # ---------------------------------------------------------------------------
 
@@ -123,6 +164,7 @@ def get_html_pages() -> dict[str, str]:
     md_pages = get_pages()
     image_directory = get_image_directory()
     html_pages: dict[str, str] = {}
+    search_entries: list[dict] = []
 
     for md_filename, md_content in md_pages.items():
         if md_filename.startswith("_"):
@@ -137,6 +179,7 @@ def get_html_pages() -> dict[str, str]:
 
         content_html = _md_to_html(md_content, page_id)
         nav_html = _build_nav(page_id)
+        search_entries += _collect_search_entries(content_html, page_title, html_filename)
 
         html_pages[html_filename] = base.render(
             page_title=page_title,
@@ -144,6 +187,9 @@ def get_html_pages() -> dict[str, str]:
             nav=nav_html,
             icon=image_directory.get(PAGE_DIRECTORY[page_id].icon, "default_icon.png")
         )
+
+    # Client-side search index (assets/ is copied before pages are written)
+    html_pages["assets/search-index.js"] = _build_search_index(search_entries)
 
     # index.html as alias for Home
     if "Home.html" in html_pages:

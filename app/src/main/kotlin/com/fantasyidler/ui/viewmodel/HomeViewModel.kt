@@ -35,6 +35,7 @@ import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.simulator.SkillSimulator
 import kotlin.math.roundToInt
+import com.fantasyidler.ui.screen.UNLOCK_TOLERANCE
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.craftDurationEfficiency
 import com.fantasyidler.util.formatXp
@@ -316,7 +317,7 @@ class HomeViewModel @Inject constructor(
                                        // dungeon runs (issue #1194).
                                        it.skillName == "boss" -> it.estimatedDurationMs * it.repeatCount
                                        it.qty > 0 -> {
-                                           val eff = gameData.craftDurationEfficiency(it.skillName, it.activityKey, equipped)
+                                           val eff = gameData.craftDurationEfficiency(it.skillName, it.activityKey, equipped, skillLevels = levels, heirloomXp = flags.heirloomXp)
                                            it.qty.toLong() * (perItemMs / eff).toLong()
                                        }
                                        else -> sessionMs * it.repeatCount
@@ -1067,6 +1068,22 @@ class HomeViewModel @Inject constructor(
     fun repeatActiveSession() {
         viewModelScope.launch {
             val session = sessionRepo.getActiveSession() ?: return@launch
+            // Repeat must respect the same combat level gate as starting fresh, or a
+            // prestiged player can chain content far above their level (issue #1542).
+            // Raid bosses are exempt: their level is flavor, mercenaries are the bar.
+            if (session.skillName == "combat" || session.skillName == "boss") {
+                val gateLevels: Map<String, Int> = json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
+                val requiredLvl = when (session.skillName) {
+                    "combat" -> gameData.dungeons[session.activityKey]?.let { it.recommendedLevel - UNLOCK_TOLERANCE }
+                    else     -> gameData.bosses[session.activityKey]?.takeIf { !it.raid }?.combatLevelRequired
+                }
+                if (requiredLvl != null && combatLevelFrom(gateLevels) < requiredLvl) {
+                    val blockedName = if (session.skillName == "combat") GameStrings.dungeonName(context, session.activityKey)
+                                      else GameStrings.bossName(context, session.activityKey)
+                    _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.repeat_blocked_level, blockedName)) }
+                    return@launch
+                }
+            }
             val craftingSkills = setOf(Skills.SMITHING, Skills.COOKING, Skills.FLETCHING,
                 Skills.CRAFTING, Skills.HERBLORE, Skills.FIREMAKING, Skills.RUNECRAFTING, Skills.PRAYER,
                 Skills.CONSTRUCTION)

@@ -8,6 +8,7 @@ import com.fantasyidler.data.json.CookingRecipe
 import com.fantasyidler.data.json.CraftingRecipe
 import com.fantasyidler.data.json.CropData
 import com.fantasyidler.data.json.EquipmentData
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.data.json.FishData
 import com.fantasyidler.data.json.FletchingRecipe
 import com.fantasyidler.data.json.HerbloreRecipe
@@ -130,8 +131,14 @@ class InventoryViewModel @Inject constructor(
         val activeWeaponSlot: String? = null,
         /** Global "start eating" threshold as % of max HP. */
         val foodEatThresholdPct: Int = 50,
+        /** Heirloom item key -> accumulated item XP. */
+        val heirloomXp: Map<String, Long> = emptyMap(),
     ) {
         val totalLevel: Int get() = skillLevels.values.sum()
+
+        /** [allEquipment] with heirloom entries replaced by their effective stats for this player. */
+        fun resolvedEquipment(allEquipment: Map<String, EquipmentData>): Map<String, EquipmentData> =
+            HeirloomStats.resolveAll(allEquipment, skillLevels, heirloomXp)
 
         /** Items in inventory that can go into [pickingSlot]. */
         fun candidatesFor(slot: String, allEquipment: Map<String, EquipmentData>): List<EquipmentData> {
@@ -227,6 +234,7 @@ class InventoryViewModel @Inject constructor(
                 equippedTitle           = flags.equippedTitle,
                 activeWeaponSlot        = flags.activeWeaponSlot,
                 foodEatThresholdPct     = flags.foodEatThresholdPct,
+                heirloomXp              = flags.heirloomXp,
                 displayName             = run {
                     val baseName = flags.characterName.ifBlank { context.withAppLocale().getString(R.string.profile_unnamed) }
                     val titleName = titleRepo.displayName(context, flags.equippedTitle, flags)

@@ -247,7 +247,8 @@ fun CombatScreen(
                             equippedFood   = invState.equippedFood,
                             foodHealValues = inventoryVm.foodHealValues,
                             cookingRecipes = inventoryVm.cookingRecipes,
-                            allEquipment   = inventoryVm.allEquipment,
+                            allEquipment   = invState.resolvedEquipment(inventoryVm.allEquipment),
+                            heirloomXp     = invState.heirloomXp,
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
@@ -329,7 +330,8 @@ fun CombatScreen(
                             equippedFood   = invState.equippedFood,
                             foodHealValues = inventoryVm.foodHealValues,
                             cookingRecipes = inventoryVm.cookingRecipes,
-                            allEquipment   = inventoryVm.allEquipment,
+                            allEquipment   = invState.resolvedEquipment(inventoryVm.allEquipment),
+                            heirloomXp     = invState.heirloomXp,
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
@@ -372,8 +374,9 @@ fun CombatScreen(
             ScaledSheetContent {
             EquipPickerSheet(
                 slot       = slot,
-                candidates = invState.candidatesFor(slot, inventoryVm.allEquipment),
+                candidates = invState.candidatesFor(slot, invState.resolvedEquipment(inventoryVm.allEquipment)),
                 context    = context,
+                heirloomXp = invState.heirloomXp,
                 onEquip    = { itemKey -> inventoryVm.equip(itemKey, slot) },
                 onDismiss  = inventoryVm::dismissSlotPicker,
             )
@@ -523,11 +526,10 @@ private fun CombatSelectionList(
         item { CombatSectionHeader(stringResource(R.string.label_dungeons_tab)) }
         item { TowerEntryRow(bestFloor = towerBestFloor, isQueueFull = isQueueFull, onTap = onTower) }
         items(dungeons) { dungeon ->
-            val unlocked = if (dungeon.loreUnlockOnly) {
-                unlockedDungeons.contains(dungeon.name)
-            } else {
-                combatLvl >= dungeon.recommendedLevel - UNLOCK_TOLERANCE
-            }
+            // Lore dungeons need discovery on top of the level gate, not instead of it,
+            // or a prestiged player keeps access far below the requirement (issue #1542).
+            val discovered = !dungeon.loreUnlockOnly || unlockedDungeons.contains(dungeon.name)
+            val unlocked = discovered && combatLvl >= dungeon.recommendedLevel - UNLOCK_TOLERANCE
             DungeonRow(
                 dungeon        = dungeon,
                 unlocked       = unlocked,
@@ -536,7 +538,7 @@ private fun CombatSelectionList(
                 runCount       = dungeonRuns[dungeon.name] ?: 0,
                 lastRunStats   = dungeonLastRunStats[dungeon.name],
                 onTap          = { onDungeon(dungeon) },
-                loreLockedHint = if (dungeon.loreUnlockOnly && !unlocked)
+                loreLockedHint = if (!discovered)
                     dungeon.loreHint ?: stringResource(R.string.expedition_discover_hint) else null,
             )
         }
@@ -601,6 +603,7 @@ private fun CombatGearTab(
     foodHealValues: Map<String, Int>,
     cookingRecipes: Map<String, CookingRecipe>,
     allEquipment: Map<String, EquipmentData>,
+    heirloomXp: Map<String, Long>,
     context: android.content.Context,
     activeWeaponSlot: String?,
     foodEatThresholdPct: Int,
@@ -662,6 +665,7 @@ private fun CombatGearTab(
                 itemKey   = equipped[weaponSlot],
                 xpLabel   = weaponXpLabel(allEquipment[equipped[weaponSlot]]?.combatStyle, context),
                 equipment = allEquipment[equipped[weaponSlot]],
+                heirloomXp = heirloomXp,
                 onTap     = { onSlotTap(weaponSlot) },
                 onUnequip = { onUnequip(weaponSlot) },
             )
@@ -695,6 +699,7 @@ private fun CombatGearTab(
                 slotName  = slotDisplayName(context, slot),
                 itemKey   = equipped[slot],
                 equipment = allEquipment[equipped[slot]],
+                heirloomXp = heirloomXp,
                 onTap     = { onSlotTap(slot) },
                 onUnequip = { onUnequip(slot) },
             )

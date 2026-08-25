@@ -67,10 +67,11 @@ class BackupSchedulerTest {
             BoostRepository(gameData),
             db,
         )
-        scheduler = BackupScheduler(context, sessionRepo)
+        scheduler = BackupScheduler(context, sessionRepo, GlobalStateRepository(db.globalStateDao()))
 
         docs = FakeDocsProvider(TEST_AUTHORITY)
-        docs.seed(OLD_DOC_ID, LEGACY_BACKUP_NAME)
+        docs.seed(OLD_DOC_ID, OLD_BACKUP_NAME)
+        docs.seed(LEGACY_DOC_ID, LEGACY_BACKUP_NAME)
         val info = ProviderInfo().apply { authority = TEST_AUTHORITY }
         docs.attachInfo(context, info)
         ShadowContentResolver.registerProviderInternal(TEST_AUTHORITY, docs)
@@ -92,7 +93,8 @@ class BackupSchedulerTest {
         assertEquals(listOf(OLD_DOC_ID), docs.deletedDocIds)
         assertEquals(1, docs.renamedFrom.size)
         assertFalse(docs.children.containsKey(OLD_DOC_ID))
-        assertEquals(FINAL_BACKUP_NAME, docs.children.values.single())
+        assertEquals(LEGACY_BACKUP_NAME, docs.children[LEGACY_DOC_ID])
+        assertEquals(listOf(LEGACY_BACKUP_NAME, FINAL_BACKUP_NAME), docs.children.values.sorted())
         assertEquals(
             normalized(playerRepo.exportSave()),
             normalized(String(docs.bufferFor(docs.createdUris.single()))),
@@ -122,7 +124,7 @@ class BackupSchedulerTest {
         assertFalse(ok)
         assertTrue(docs.createdUris.isEmpty())
         assertTrue(docs.deletedDocIds.isEmpty())
-        assertEquals(LEGACY_BACKUP_NAME, docs.children[OLD_DOC_ID])
+        assertEquals(OLD_BACKUP_NAME, docs.children[OLD_DOC_ID])
         val flags = playerRepo.getFlags()
         assertFalse(flags.lastBackupOk)
         assertTrue(flags.lastBackupError.isNotEmpty())
@@ -136,7 +138,7 @@ class BackupSchedulerTest {
 
         assertFalse(ok)
         assertTrue(docs.deletedDocIds.contains(DocumentsContract.getDocumentId(docs.createdUris.single())))
-        assertEquals(LEGACY_BACKUP_NAME, docs.children[OLD_DOC_ID])
+        assertEquals(OLD_BACKUP_NAME, docs.children[OLD_DOC_ID])
         assertTrue(docs.renamedFrom.isEmpty())
         val flags = playerRepo.getFlags()
         assertFalse(flags.lastBackupOk)
@@ -151,7 +153,7 @@ class BackupSchedulerTest {
 
         assertFalse(ok)
         assertTrue(docs.deletedDocIds.contains(DocumentsContract.getDocumentId(docs.createdUris.single())))
-        assertEquals(LEGACY_BACKUP_NAME, docs.children[OLD_DOC_ID])
+        assertEquals(OLD_BACKUP_NAME, docs.children[OLD_DOC_ID])
         assertTrue(docs.renamedFrom.isEmpty())
         val flags = playerRepo.getFlags()
         assertFalse(flags.lastBackupOk)
@@ -168,7 +170,7 @@ class BackupSchedulerTest {
         val tempId = DocumentsContract.getDocumentId(docs.createdUris.single())
         assertFalse(docs.deletedDocIds.contains(tempId))
         assertTrue(docs.deletedDocIds.contains(OLD_DOC_ID))
-        assertEquals("fantasyidler_auto.tmp", docs.children[tempId])
+        assertEquals("fantasyidler_auto_1.tmp", docs.children[tempId])
         val flags = playerRepo.getFlags()
         assertFalse(flags.lastBackupOk)
         assertTrue(flags.lastBackupError.isNotEmpty())
@@ -176,7 +178,7 @@ class BackupSchedulerTest {
 
     @Test
     fun `stale temp documents are swept during the swap`() = runBlocking {
-        docs.seed("doc_stale_tmp", "fantasyidler_auto.tmp")
+        docs.seed("doc_stale_tmp", "fantasyidler_auto_1.tmp")
 
         val ok = scheduler.performBackup(playerRepo)
 
@@ -185,7 +187,7 @@ class BackupSchedulerTest {
         assertTrue(docs.deletedDocIds.contains(OLD_DOC_ID))
         val tempId = DocumentsContract.getDocumentId(docs.createdUris.single())
         assertFalse(docs.deletedDocIds.contains(tempId))
-        assertEquals("fantasyidler_auto", docs.children[tempId])
+        assertEquals("fantasyidler_auto_1", docs.children[tempId])
         assertFalse(docs.children.containsKey("doc_stale_tmp"))
     }
 
@@ -202,7 +204,7 @@ class BackupSchedulerTest {
         assertNotEquals(0L, flags.lastBackupAt)
         val tempId = DocumentsContract.getDocumentId(docs.createdUris.single())
         assertFalse(docs.deletedDocIds.contains(tempId))
-        assertEquals("fantasyidler_auto", docs.children[tempId])
+        assertEquals("fantasyidler_auto_1", docs.children[tempId])
         assertTrue(docs.deletedDocIds.contains(OLD_DOC_ID))
     }
 
@@ -218,7 +220,7 @@ class BackupSchedulerTest {
         assertTrue(flags.lastBackupError.isNotEmpty())
         val tempId = DocumentsContract.getDocumentId(docs.createdUris.single())
         assertFalse(docs.deletedDocIds.contains(tempId))
-        assertEquals("fantasyidler_auto.tmp", docs.children[tempId])
+        assertEquals("fantasyidler_auto_1.tmp", docs.children[tempId])
         assertTrue(docs.deletedDocIds.contains(OLD_DOC_ID))
     }
 
@@ -242,8 +244,10 @@ class BackupSchedulerTest {
         private const val TEST_AUTHORITY = "com.fantasyidler.test.documents"
         private const val TREE_DOC_ID = "root:primary"
         private const val OLD_DOC_ID = "doc_old"
-        private const val LEGACY_BACKUP_NAME = "fantasyidler_auto.json"
-        private const val FINAL_BACKUP_NAME = "fantasyidler_auto"
+        private const val OLD_BACKUP_NAME = "fantasyidler_auto_1_Old"
+        private const val LEGACY_DOC_ID = "doc_legacy"
+        private const val LEGACY_BACKUP_NAME = "fantasyidler_auto"
+        private const val FINAL_BACKUP_NAME = "fantasyidler_auto_1"
     }
 }
 

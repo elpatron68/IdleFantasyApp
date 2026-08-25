@@ -18,6 +18,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.repository.QuestRepository
+import com.fantasyidler.repository.SaveSlotRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -60,11 +61,30 @@ class BoneAltarViewModel @Inject constructor(
     private val questRepo: QuestRepository,
     private val guildRepo: GuildRepository,
     private val gameData: GameDataRepository,
+    private val saveSlotRepo: SaveSlotRepository,
     private val json: Json,
     @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     private val _extra = MutableStateFlow(BoneAltarUiState())
+
+    init {
+        // Session tallies belong to the character that buried the bones; without this reset
+        // they survive a save-slot switch and show under the next character (issue #1550).
+        viewModelScope.launch {
+            saveSlotRepo.switchEvents.collect {
+                _extra.update {
+                    it.copy(
+                        sessionXp       = 0L,
+                        totalBuried     = 0,
+                        combo           = 0,
+                        lastTapMs       = 0L,
+                        selectedBoneKey = null,
+                    )
+                }
+            }
+        }
+    }
 
     // Rapid taps are counted optimistically in the UI and written to the DB in adaptive
     // batches: while one batch is being written, new taps accumulate into the next one.

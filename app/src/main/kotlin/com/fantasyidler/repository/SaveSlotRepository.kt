@@ -9,6 +9,8 @@ import com.fantasyidler.data.model.toExport
 import com.fantasyidler.data.model.toSkillSession
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -170,6 +172,15 @@ class SaveSlotRepository @Inject constructor(
      * the fresh flags have characterSetupDone=false, so the Home screen shows the setup sheet.
      * Returns true if the loaded slot held an edited ironman save that was demoted.
      */
+    /**
+     * Fires after every successful character switch. ViewModels caching per-character UI
+     * selections (active spell, arrow, potion, weapon style) must reset on it, or the old
+     * character's picks override the new character's saved loadout (issue: spell leaking
+     * across save slots).
+     */
+    private val _switchEvents = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val switchEvents: SharedFlow<Unit> = _switchEvents
+
     suspend fun switchTo(targetSlot: Int, createIronman: Boolean = false): Boolean = withContext(Dispatchers.IO) {
         require(targetSlot in 1..MAX_SLOTS) { "Invalid slot $targetSlot" }
         val current = globalStateRepo.getActiveSaveSlot()
@@ -190,6 +201,7 @@ class SaveSlotRepository @Inject constructor(
             rescheduleAlarmsFromFlags()
         }
         globalStateRepo.setActiveSaveSlot(targetSlot)
+        _switchEvents.tryEmit(Unit)
         ironmanDemoted
     }
 

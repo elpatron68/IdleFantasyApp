@@ -19,6 +19,7 @@ import javax.inject.Singleton
 class BackupScheduler @Inject constructor(
     @ApplicationContext private val context: Context,
     private val sessionRepo: SessionRepository,
+    private val globalStateRepo: GlobalStateRepository,
 ) {
     private val alarmManager = context.getSystemService(AlarmManager::class.java)
 
@@ -75,6 +76,12 @@ class BackupScheduler @Inject constructor(
     suspend fun performBackup(playerRepo: PlayerRepository, frequency: String = ""): Boolean {
         val flags = playerRepo.getFlags()
         if (flags.backupFolderUri.isEmpty()) return false
+        // Per-character file names: each save slot keeps its own backup, so switching
+        // characters no longer overwrites another character's auto backup.
+        val activeSlot = globalStateRepo.getActiveSaveSlot()
+        val slotPrefix = autoBackupSlotPrefix(activeSlot)
+        val finalName  = autoBackupFileName(activeSlot, flags.characterName)
+        val tempName   = finalName + TEMP_SUFFIX
         var tempUri: Uri? = null
         var oldDocsDeleted = false
         var failureMsg = ""
@@ -96,7 +103,7 @@ class BackupScheduler @Inject constructor(
                 cr,
                 DocumentsContract.buildDocumentUriUsingTree(treeUri, treeDocId),
                 "application/json",
-                TEMP_DISPLAY_NAME,
+                tempName,
             ) ?: throw IllegalStateException("backup provider refused to create temp document")
             tempUri = created
 
@@ -120,8 +127,7 @@ class BackupScheduler @Inject constructor(
             val currentTempId = DocumentsContract.getDocumentId(created)
             val doomedIds = childDocuments(cr, treeUri, treeDocId)
                 .filter { (docId, name) ->
-                    docId != currentTempId &&
-                        (name.startsWith(TEMP_DISPLAY_NAME) || name.startsWith(FINAL_DISPLAY_NAME))
+                    docId != currentTempId && name.startsWith(slotPrefix)
                 }
                 .map { it.first }
             oldDocsDeleted = true
@@ -129,12 +135,12 @@ class BackupScheduler @Inject constructor(
                 DocumentsContract.deleteDocument(cr, DocumentsContract.buildDocumentUriUsingTree(treeUri, docId))
             }
 
-            DocumentsContract.renameDocument(cr, created, FINAL_DISPLAY_NAME)
+            DocumentsContract.renameDocument(cr, created, finalName)
                 ?: throw IllegalStateException("backup provider failed to swap temp document to final name")
             tempUri = null
 
             val swappedIn = childDocuments(cr, treeUri, treeDocId)
-                .any { it.second.startsWith(FINAL_DISPLAY_NAME) && !it.second.startsWith(TEMP_DISPLAY_NAME) }
+                .any { it.second.startsWith(finalName) && !it.second.endsWith(TEMP_SUFFIX) }
             if (!swappedIn) {
                 throw IllegalStateException("renamed backup document not found after swap")
             }
@@ -206,9 +212,30 @@ class BackupScheduler @Inject constructor(
 
     companion object {
         private const val TAG = "BackupScheduler"
-        private const val TEMP_DISPLAY_NAME = "fantasyidler_auto.tmp"
-        private const val FINAL_DISPLAY_NAME = "fantasyidler_auto"
+        private const val AUTO_BASE   = "fantasyidler_auto"
+        private const val EXPORT_BASE = "fantasyidler_save"
+        private const val TEMP_SUFFIX = ".tmp"
         private const val REQUEST_CODE = 9001
         const val EXTRA_FREQUENCY = "backup_frequency"
+
+        /** Letters and digits only, so every storage provider accepts the display name. */
+        private fun sanitizeCharacterName(name: String): String =
+            name.filter { it.isLetterOrDigit() }.take(24)
+
+        /** Slot prefix scoping backup cleanup: one backup per slot, other slots' files untouched. */
+        internal fun autoBackupSlotPrefix(slot: Int) = "${AUTO_BASE}_$slot"
+
+        /** Per-character backup name, e.g. fantasyidler_auto_2_IronDragon (name part omitted when blank). */
+        internal fun autoBackupFileName(slot: Int, characterName: String): String {
+            val clean = sanitizeCharacterName(characterName)
+            return if (clean.isEmpty()) autoBackupSlotPrefix(slot) else "${autoBackupSlotPrefix(slot)}_$clean"
+        }
+
+        /** Suggested export name, e.g. fantasyidler_save_2_IronDragon.json. */
+        fun exportFileName(slot: Int, characterName: String): String {
+            val clean = sanitizeCharacterName(characterName)
+            val base = if (clean.isEmpty()) "${EXPORT_BASE}_$slot" else "${EXPORT_BASE}_${slot}_$clean"
+            return "$base.json"
+        }
     }
 }

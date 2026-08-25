@@ -27,8 +27,10 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QueuedSessionStarter
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.SaveSlotRepository
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.repository.TownRepository
+import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.TowerScaling
@@ -88,8 +90,26 @@ class TowerViewModel @Inject constructor(
     private val guildRepo: GuildRepository,
     private val slayerRepo: SlayerRepository,
     private val townRepo: TownRepository,
+    private val saveSlotRepo: SaveSlotRepository,
     private val json: Json,
 ) : ViewModel() {
+
+    init {
+        // Transient loadout picks belong to the character that made them; without this reset
+        // the cached values override the next character's saved loadout after a slot switch.
+        viewModelScope.launch {
+            saveSlotRepo.switchEvents.collect {
+                _extra.update {
+                    it.copy(
+                        selectedSpell      = null,
+                        selectedArrowKey   = null,
+                        selectedPotionKey  = null,
+                        selectedWeaponSlot = null,
+                    )
+                }
+            }
+        }
+    }
 
     init {
         // Tower Boots and Tower Plateskirt joined the floor 150 milestone after many players had already
@@ -169,9 +189,10 @@ class TowerViewModel @Inject constructor(
             val equipped: Map<String, String?> = try { json.decodeFromString(player.equipped) } catch (_: Exception) { emptyMap() }
             val levels: Map<String, Int> = try { json.decodeFromString(player.skillLevels) } catch (_: Exception) { emptyMap() }
             val inventory: Map<String, Int> = try { json.decodeFromString(player.inventory) } catch (_: Exception) { emptyMap() }
+            val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
             val equippedWeapons = EquipSlot.WEAPON_SLOTS.mapNotNull { slot ->
                 val key = equipped[slot] ?: return@mapNotNull null
-                val data = gameData.equipment[key] ?: return@mapNotNull null
+                val data = equipMap[key] ?: return@mapNotNull null
                 slot to data
             }.toMap()
             val claimable = MILESTONES.map { it.floor }.filter { floor ->
@@ -268,6 +289,7 @@ class TowerViewModel @Inject constructor(
                 val equipped:  Map<String, String?>  = json.decodeFromString(player.equipped)
                 val inventory: Map<String, Int>      = json.decodeFromString(player.inventory)
                 val flags: PlayerFlags               = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+                val equipMap = HeirloomStats.resolveAll(gameData.equipment, levels, flags.heirloomXp)
 
                 val floor = flags.towerCurrentFloor + 1
 
@@ -276,7 +298,7 @@ class TowerViewModel @Inject constructor(
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
                     ?: EquipSlot.WEAPON
                 val weaponKey = equipped[activeWeaponSlot]
-                val weapon    = weaponKey?.let { gameData.equipment[it] }
+                val weapon    = weaponKey?.let { equipMap[it] }
                 val combatStyle = when (weapon?.combatStyle) {
                     "ranged"   -> "ranged"
                     "magic"    -> "magic"
@@ -285,7 +307,7 @@ class TowerViewModel @Inject constructor(
                 }
 
                 val totalAttackBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
-                    val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
+                    val eq = equipMap[equipped[slot]] ?: return@sumOf 0
                     eq.attackBonus + when (combatStyle) {
                         "ranged" -> eq.rangedAttackBonus ?: 0
                         "magic"  -> eq.magicAttackBonus  ?: 0
@@ -296,13 +318,13 @@ class TowerViewModel @Inject constructor(
                     "magic"  -> weapon?.magicAttackBonus  ?: 0
                     else     -> 0
                 }
-                val totalStrengthBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
-                val totalDefenseBonus  = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
+                val totalStrengthBonus = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
+                val totalDefenseBonus  = EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
                 val totalRangedStrBonus = if (combatStyle == "ranged") {
-                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.rangedStrengthBonus ?: 0 } + (weapon?.rangedStrengthBonus ?: 0)
                 } else 0
                 val totalMagicDmgBonus = if (combatStyle == "magic") {
-                    EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
+                    EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0)
                 } else 0
 
                 val selectedSpell = _extra.value.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }

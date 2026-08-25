@@ -2,17 +2,17 @@
 <resources>
     <!-- ===== Ores ===== -->
     <string name="item_copper_ore_name">Minerai de cuivre</string>
-    <string name="item_copper_ore_desc">Minerai courant. Se combine avec du minerai d\'étain pour fondre des barres de bronze.</string>
+    <string name="item_copper_ore_desc">Minerai courant. Se combine avec du minerai d\'étain pour fondre des lingots de bronze.</string>
     <string name="item_tin_ore_name">Minerai d\'étain</string>
-    <string name="item_tin_ore_desc">Minerai courant. Se combine avec du minerai de cuivre pour fondre des barres de bronze.</string>
+    <string name="item_tin_ore_desc">Minerai courant. Se combine avec du minerai de cuivre pour fondre des lingots de bronze.</string>
     <string name="item_iron_ore_name">Minerai de fer</string>
-    <string name="item_iron_ore_desc">Minerai polyvalent utilisé pour fondre des barres de fer et d\'acier.</string>
+    <string name="item_iron_ore_desc">Minerai polyvalent utilisé pour fondre des lingots de fer et d\'acier.</string>
     <string name="item_coal_name">Charbon</string>
-    <string name="item_coal_desc">Utilisé comme combustible lors de la fonte d\'acier et de barres de niveau supérieur.</string>
+    <string name="item_coal_desc">Utilisé comme combustible lors de la fonte d\'acier et de lingots de niveau supérieur.</string>
     <string name="item_silver_ore_name">Minerai d\'argent</string>
-    <string name="item_silver_ore_desc">Minerai précieux utilisé pour fabriquer des barres d\'argent et des bijoux.</string>
+    <string name="item_silver_ore_desc">Minerai précieux utilisé pour fabriquer des lingots d\'argent et des bijoux.</string>
     <string name="item_gold_ore_name">Minerai d\'or</string>
-    <string name="item_gold_ore_desc">Minerai précieux utilisé pour fabriquer des barres d\'or et des bijoux.</string>
+    <string name="item_gold_ore_desc">Minerai précieux utilisé pour fabriquer des lingots d\'or et des bijoux.</string>
     <string name="item_mithril_ore_name">Minerai de mithril</string>
     <string name="item_mithril_ore_desc">Un minerai rare doté de propriétés magiques.</string>
     <string name="item_adamantite_ore_name">Minerai d\'adamantite</string>
@@ -487,7 +487,7 @@
 
     <!-- ===== Miscellaneous drops ===== -->
     <string name="item_ashes_name">Cendres</string>
-    <string name="item_ashes_desc">Restes brûlés de bois normaux. À disperser dans la compétence Prière pour gagner des XP en Prière.</string>
+    <string name="item_ashes_desc">Restes brûlés de bois normaux. À disperser dans l\'aptitude Prière pour gagner des XP en Prière.</string>
     <string name="item_oak_ashes_name">Cendres de chêne</string>
     <string name="item_oak_ashes_desc">Restes brûlés de bois de chêne. À disperser pour plus d\'XP en Prière que les cendres normales.</string>
     <string name="item_willow_ashes_name">Cendres de saule</string>
@@ -511,7 +511,7 @@
     <string name="item_dragon_scale_name">Écaille de dragon</string>
     <string name="item_dragon_scale_desc">Une écaille résistante d\'un dragon vert. Rare et précieuse.</string>
     <string name="item_coins_name">Pièces</string>
-    <string name="item_coins_desc">La monnaie du royaume. À dépenser à la boutique.</string>
+    <string name="item_coins_desc">La monnaie du royaume. À dépenser dans le magasin.</string>
     <string name="item_goblin_mail_name">Maille de Gobelin</string>
     <string name="item_goblin_mail_desc">Armure endommagée laissée par des gobelins. Se vend bien.</string>
     <string name="item_imp_hide_name">Peau de diablotin</string>

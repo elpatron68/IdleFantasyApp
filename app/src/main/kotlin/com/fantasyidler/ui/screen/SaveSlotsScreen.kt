@@ -278,19 +278,21 @@ private fun SaveSlotCard(
                 modifier            = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
-                Row(
-                    verticalAlignment     = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    Text(
-                        text       = flags.characterName.ifBlank { stringResource(R.string.home_adventurer) },
-                        style      = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        maxLines   = 1,
-                        overflow   = TextOverflow.Ellipsis,
-                        modifier   = Modifier.weight(1f, fill = false),
-                    )
-                    if (flags.ironman) {
+                // Name on its own line: sharing a row with the badge let the badge (and the
+                // unweighted right column) squeeze the name down to a few characters on
+                // narrow screens (issue #1552).
+                Text(
+                    text       = flags.characterName.ifBlank { stringResource(R.string.home_adventurer) },
+                    style      = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    maxLines   = 1,
+                    overflow   = TextOverflow.Ellipsis,
+                )
+                if (flags.ironman) {
+                    Row(
+                        verticalAlignment     = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
                         Icon(
                             imageVector        = Icons.Filled.Shield,
                             contentDescription = null,

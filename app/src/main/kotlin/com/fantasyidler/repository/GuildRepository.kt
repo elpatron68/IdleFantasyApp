@@ -584,24 +584,33 @@ class GuildRepository @Inject constructor(
             val chosen = mutableListOf<GuildDailyTemplate>()
             val chosenIds = mutableSetOf<String>()
             val chosenTargets = mutableSetOf<String>()
-            val stages = listOf(reachableInBracket.shuffled(rng), reachableBestFirst, guildPool.shuffled(rng))
-            // Distinct target items first: a thin bracket must not fill the whole day with
-            // one item (issue #1500 -- four "craft platinum diamond ring" dailies). Only when
-            // the guild runs out of distinct items do duplicates fill the remaining slots.
-            for (allowDuplicateTargets in listOf(false, true)) {
-                for (candidates in stages) {
-                    if (chosen.size >= 4) break
-                    candidates
-                        .filter { it.id !in chosenIds }
-                        .filter { allowDuplicateTargets || it.target.isBlank() || it.target !in chosenTargets }
-                        .forEach {
-                            if (chosen.size < 4) {
-                                chosen.add(it)
-                                chosenIds.add(it.id)
-                                chosenTargets.add(it.target)
-                            }
+            val reachableStages = listOf(reachableInBracket.shuffled(rng), reachableBestFirst)
+            // Last resort when the guild has fewer than 4 skill-reachable templates: deal the
+            // lowest tiers first so the top-up quests become completable soonest while the
+            // player relevels (a freshly prestiged construction player was dealt a level-65
+            // yew wardrobe daily from a random draw here).
+            val unreachableLowestFirst = guildPool.shuffled(rng).sortedBy { it.guildLevelMin }
+            fun fill(candidates: List<GuildDailyTemplate>, allowDuplicateTargets: Boolean) {
+                candidates
+                    .filter { it.id !in chosenIds }
+                    .filter { allowDuplicateTargets || it.target.isBlank() || it.target !in chosenTargets }
+                    .forEach {
+                        if (chosen.size < 4) {
+                            chosen.add(it)
+                            chosenIds.add(it.id)
+                            chosenTargets.add(it.target)
                         }
-                }
+                    }
+            }
+            // Distinct target items first: a thin bracket must not fill the whole day with
+            // one item (issue #1500 -- four "craft platinum diamond ring" dailies). Every
+            // reachable template, even with a duplicate target, ranks ahead of anything the
+            // player's skill level cannot do yet.
+            for (allowDuplicateTargets in listOf(false, true)) {
+                reachableStages.forEach { fill(it, allowDuplicateTargets) }
+            }
+            for (allowDuplicateTargets in listOf(false, true)) {
+                fill(unreachableLowestFirst, allowDuplicateTargets)
             }
             selectedIds.addAll(chosen.map { it.id })
         }
