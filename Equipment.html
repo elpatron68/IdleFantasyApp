@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Equipment — Idle Fantasy Wiki</title>
-  <link rel="stylesheet" href="assets/style.css?v=3">
+  <link rel="stylesheet" href="assets/style.css?v=4">
   <link rel="icon" type="image/x-icon" href="assets/images/default_icon.png">
   <script data-goatcounter="https://idlefantasy.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
@@ -24,6 +24,11 @@
       Idle Fantasy Wiki
     </a>
     <span class="site-tagline">Community reference for all skills, combat, and crafting</span>
+    <div id="search" class="search">
+      <input id="search-input" class="search-input" type="search" placeholder="Search…"
+             autocomplete="off" spellcheck="false" aria-label="Search the wiki">
+      <ul id="search-results" class="search-results" hidden></ul>
+    </div>
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
   </header>
 
@@ -68,6 +73,7 @@
 </ul></li>
 <li class="nav-section"><span class="nav-label">Inventory</span><ul>
 <li><a href="Equipment.html" class="active">Equipment</a></li>
+<li><a href="Heirlooms.html">Heirlooms</a></li>
 </ul></li>
 <li class="nav-section"><span class="nav-label">Combat</span><ul>
 <li><a href="Combat.html">Combat</a></li>
@@ -75,6 +81,7 @@
 <li><a href="Dungeons.html">Dungeons</a></li>
 <li><a href="Enemies.html">Enemies</a></li>
 <li><a href="Spells.html">Spells</a></li>
+<li><a href="Mercenaries.html">Mercenary Camp</a></li>
 </ul></li>
 <li class="nav-section"><span class="nav-label">Town</span><ul>
 <li><a href="Shop.html">Shop</a></li>
@@ -82,6 +89,7 @@
 <li><a href="Guilds.html">Guilds</a></li>
 <li><a href="Buildings.html">Buildings</a></li>
 <li><a href="Carnival.html">Carnival</a></li>
+<li><a href="Housing.html">Housing</a></li>
 </ul></li>
 <li class="nav-section"><span class="nav-label">Miscellaneous</span><ul>
 <li><a href="Expeditions.html">Expeditions</a></li>
@@ -96,6 +104,7 @@
     <main class="content">
       <h1 id="equipment">Equipment</h1>
 <p>All wearable gear in Idle Fantasy, grouped by slot.</p>
+<p>Heirloom items are listed here at their full potential (item level 99 with the skill gate fully open). See <a href="Heirlooms.html#">Heirlooms</a> for how they scale.</p>
 <h2 id="weapons">Weapons</h2>
 <table>
 <thead>
@@ -332,6 +341,38 @@
 <td>0</td>
 <td>—</td>
 <td>Attack 80, Strength 80</td>
+</tr>
+<tr id="heirloom_blade">
+<td>Heirloom Blade</td>
+<td>128</td>
+<td>143</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr id="heirloom_greathammer">
+<td>Heirloom Greathammer</td>
+<td>180</td>
+<td>195</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr id="heirloom_longbow">
+<td>Heirloom Longbow</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr id="heirloom_staff">
+<td>Heirloom Staff</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
 </tr>
 <tr id="hellfire_staff">
 <td>Hellfire Staff</td>
@@ -2388,6 +2429,14 @@
 <td>3.25</td>
 <td>Mining 70</td>
 </tr>
+<tr id="heirloom_pickaxe">
+<td>Heirloom Pickaxe</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5.25</td>
+<td>—</td>
+</tr>
 <tr id="iron_pickaxe">
 <td>Iron Pickaxe</td>
 <td>0</td>
@@ -2466,6 +2515,14 @@
 <td>0</td>
 <td>2.75</td>
 <td>Woodcutting 60</td>
+</tr>
+<tr id="heirloom_axe">
+<td>Heirloom Axe</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5.25</td>
+<td>—</td>
 </tr>
 <tr id="iron_axe">
 <td>Iron Axe</td>
@@ -2578,6 +2635,14 @@
 <td>2.75</td>
 <td>Fishing 60</td>
 </tr>
+<tr id="heirloom_fishing_rod">
+<td>Heirloom Fishing Rod</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5.25</td>
+<td>—</td>
+</tr>
 <tr id="iron_fishing_rod">
 <td>Iron Fishing Rod</td>
 <td>0</td>
@@ -2656,6 +2721,14 @@
 <td>0</td>
 <td>2.75</td>
 <td>Farming 60</td>
+</tr>
+<tr id="heirloom_hoe">
+<td>Heirloom Hoe</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4.5</td>
+<td>—</td>
 </tr>
 <tr id="iron_hoe">
 <td>Iron Hoe</td>
@@ -2736,6 +2809,14 @@
 <td>2.5</td>
 <td>Smithing 60</td>
 </tr>
+<tr id="heirloom_hammer">
+<td>Heirloom Hammer</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4.5</td>
+<td>—</td>
+</tr>
 <tr id="iron_hammer">
 <td>Iron Hammer</td>
 <td>0</td>
@@ -2814,6 +2895,14 @@
 <td>0</td>
 <td>2.5</td>
 <td>Firemaking 60</td>
+</tr>
+<tr id="heirloom_tinderbox">
+<td>Heirloom Tinderbox</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4.5</td>
+<td>—</td>
 </tr>
 <tr id="iron_tinderbox">
 <td>Iron Tinderbox</td>
@@ -2902,6 +2991,14 @@
 <td>2.75</td>
 <td>Agility 60</td>
 </tr>
+<tr id="heirloom_grappling_hook">
+<td>Heirloom Grappling Hook</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5.25</td>
+<td>—</td>
+</tr>
 <tr id="iron_grappling_hook">
 <td>Iron Grappling Hook</td>
 <td>0</td>
@@ -2989,6 +3086,14 @@
 <td>2.5</td>
 <td>Cooking 60</td>
 </tr>
+<tr id="heirloom_frying_pan">
+<td>Heirloom Frying Pan</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4.5</td>
+<td>—</td>
+</tr>
 <tr id="iron_frying_pan">
 <td>Iron Frying Pan</td>
 <td>0</td>
@@ -3068,6 +3173,14 @@
 <td>2.75</td>
 <td>Thieving 60</td>
 </tr>
+<tr id="heirloom_lockpick">
+<td>Heirloom Lockpick</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5.25</td>
+<td>—</td>
+</tr>
 <tr id="iron_lockpick">
 <td>Iron Lockpick</td>
 <td>0</td>
@@ -3129,6 +3242,7 @@
     <a href="https://github.com/tristinbaker/IdleFantasy" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
+  <script src="assets/search-index.js"></script>
   <script>
     (function() {
       // ---- Dark mode ----
@@ -3164,6 +3278,124 @@
       backdrop.addEventListener('click', closeNav);
       sidebar.addEventListener('click', function(e) {
         if (e.target.tagName === 'A') closeNav();
+      });
+
+      // ---- Search ----
+      var searchBox     = document.getElementById('search');
+      var searchInput   = document.getElementById('search-input');
+      var searchResults = document.getElementById('search-results');
+      var searchIndex   = window.WIKI_SEARCH_INDEX || [];
+      var MAX_RESULTS   = 10;
+      var selected      = -1;
+
+      function hideResults() {
+        searchResults.hidden = true;
+        searchResults.innerHTML = '';
+        selected = -1;
+      }
+
+      // Lower score = better match. -1 = no match.
+      function scoreEntry(entry, query) {
+        var name = entry.n.toLowerCase();
+        if (name === query) return 0;
+        if (name.lastIndexOf(query, 0) === 0) return 1;
+        if (name.indexOf(' ' + query) !== -1) return 2;
+        if (name.indexOf(query) !== -1) return 3;
+        return -1;
+      }
+
+      function updateSelection() {
+        var items = searchResults.children;
+        for (var i = 0; i < items.length; i++)
+          items[i].classList.toggle('selected', i === selected);
+        if (selected >= 0 && items[selected])
+          items[selected].scrollIntoView({ block: 'nearest' });
+      }
+
+      function runSearch() {
+        var query = searchInput.value.trim().toLowerCase();
+        if (query.length < 2) { hideResults(); return; }
+        var matches = [];
+        for (var i = 0; i < searchIndex.length; i++) {
+          var s = scoreEntry(searchIndex[i], query);
+          if (s >= 0) matches.push([s, searchIndex[i]]);
+        }
+        matches.sort(function(a, b) {
+          return (a[0] - b[0])                       // better score first
+              || ((b[1].t || 0) - (a[1].t || 0))     // pages before item rows
+              || (a[1].n.length - b[1].n.length)     // shorter names first
+              || a[1].n.localeCompare(b[1].n);
+        });
+        searchResults.innerHTML = '';
+        if (!matches.length) {
+          var empty = document.createElement('li');
+          empty.className = 'search-empty';
+          empty.textContent = 'No results';
+          searchResults.appendChild(empty);
+        }
+        for (var j = 0; j < matches.length && j < MAX_RESULTS; j++) {
+          var entry = matches[j][1];
+          var li = document.createElement('li');
+          var a  = document.createElement('a');
+          a.href = entry.u;
+          var name = document.createElement('span');
+          name.textContent = entry.n;
+          a.appendChild(name);
+          if (entry.p) {
+            var context = document.createElement('span');
+            context.className = 'search-context';
+            context.textContent = entry.p;
+            a.appendChild(context);
+          }
+          li.appendChild(a);
+          searchResults.appendChild(li);
+        }
+        selected = -1;
+        searchResults.hidden = false;
+      }
+
+      searchInput.addEventListener('input', runSearch);
+      searchInput.addEventListener('focus', function() {
+        if (searchInput.value.trim().length >= 2) runSearch();
+      });
+
+      searchInput.addEventListener('keydown', function(e) {
+        var links = searchResults.querySelectorAll('li > a');
+        if (e.key === 'ArrowDown' && links.length) {
+          e.preventDefault();
+          selected = (selected + 1) % links.length;
+          updateSelection();
+        } else if (e.key === 'ArrowUp' && links.length) {
+          e.preventDefault();
+          selected = (selected - 1 + links.length) % links.length;
+          updateSelection();
+        } else if (e.key === 'Enter' && links.length) {
+          e.preventDefault();
+          links[selected >= 0 ? selected : 0].click();
+        } else if (e.key === 'Escape') {
+          hideResults();
+          searchInput.blur();
+        }
+      });
+
+      // Navigating to a row on the current page: hash change alone won't rerun
+      // :target styling reliably in every browser, so just close the dropdown.
+      searchResults.addEventListener('click', function(e) {
+        if (e.target.closest('a')) hideResults();
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!searchBox.contains(e.target)) hideResults();
+      });
+
+      // Press "/" anywhere to focus search
+      document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && document.activeElement !== searchInput &&
+            !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
       });
     })();
   </script>
