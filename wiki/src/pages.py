@@ -742,6 +742,7 @@ def gen_woodcutting() -> str:
 
 def gen_farming() -> str:
     # Todo: Add detail about using ashes to improve yield
+    # Load crops
     crops = load("crops.json")
     assert isinstance(crops, dict)
     rows = sorted(
@@ -757,21 +758,34 @@ def gen_farming() -> str:
         ] for c in crops.values() if c["id"] != "magic_bean"],
         key=lambda r: r[1]
     )
+    # Hoes table
     equipment = load("equipment.json")
     assert isinstance(equipment, dict)
     hoes = sorted(
         [v for v in equipment.values() if v.get("slot") == "hoe" and "farming_efficiency" in v],
         key=lambda v: list(v.get("requirements", {}).values() or [0])[0]
     )
-    hoe_rows = [[h["display_name"], list(h.get("requirements", {}).values() or [1])[0], f"+{int(h['farming_efficiency'] * 100)}%"] for h in hoes]
+    hoe_rows = [[h["display_name"], list(h.get("requirements", {}).values() or [1])[0], f"+{int((h['farming_efficiency'] - 1) * 100)}%"] for h in hoes]
+
+    # Ashes tables
+    # Todo: Switch to avoid being hardcoded
+    ash_rows = []
+    ash_amounts = [("ashes", 1.1), ("oak_ashes", 1.25), ("willow_ashes", 1.35), ("maple_ashes", 1.5), ("yew_ashes", 1.75),
+                   ("magic_ashes", 2), ("redwood_ashes", 2.5)]
+    for ash, bonus in ash_amounts:
+        ash_rows.append([item_name(ash), f"+{int((bonus - 1) * 100)}%"])
+
     magic_bean_note = (
         "Obtaining one requires patience. A lucky harvest may be all it takes. "
         "Plant it in any empty patch when you are ready. Do not expect a quick answer."
     )
     return get_template("skills/gathering/farming").format(
         icon=html_image(skill_icon_path("farming"), "", "text"),
+        garden_link=link("buildings", "Garden", "garden"),
+        thieving_link=link("thieving", "stealing"),
         seed_table=table(['Crop','Level','Seed','Seed Cost','Growth Time','Planting XP','Harvest XP','Yield'], rows),
         hoe_table=table(['Hoe','Level Required','Yield Bonus'], hoe_rows),
+        ashes_table=table(["Ash", "Yield bonus"], ash_rows),
         magic_bean_section=magic_bean_note,
     )
 

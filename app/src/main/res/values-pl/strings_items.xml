@@ -56,7 +56,7 @@
 
     <!-- ===== Logs ===== -->
     <string name="item_log_name">Kłody</string>
-    <string name="item_log_desc">Podstawowe kłody ze zwykłych drzew. Używane w Rozpalaniu Ognia i Płatnerstwie.</string>
+    <string name="item_log_desc">Podstawowe kłody ze zwykłych drzew. Używane w Rozpalaniu Ognia i Łuczarstwie.</string>
     <string name="item_oak_log_name">Kłody Dębowe</string>
     <string name="item_oak_log_desc">Kłody z dębów.</string>
     <string name="item_willow_log_name">Kłody Wierzbowe</string>

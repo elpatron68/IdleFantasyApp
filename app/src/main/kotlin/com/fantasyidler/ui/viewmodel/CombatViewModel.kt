@@ -94,10 +94,10 @@ data class CombatUiState(
     val dungeonRuns: Map<String, Int> = emptyMap(),
     val dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     val unlockedDungeons: List<String> = emptyList(),
-    val skillPrestige: Map<String, Int> = emptyMap(),
+    val skillPrestigeLevels: Map<String, Int> = emptyMap(),
+    val combatPrestigeBonus: Map<String, Int> = emptyMap(),
     /** Combat skills at 99+ where another prestige still earns points or an XP tier. */
     val prestigeReadySkills: Set<String> = emptySet(),
-    val hpPrestigeBonus: Int = 0,
     val ironman: Boolean = false,
     val showPrestigeNotifications: Boolean = true,
     val towerHpBonus: Int = 0,
@@ -262,6 +262,7 @@ class CombatViewModel @Inject constructor(
                 else     -> equippedWeapon?.strengthBonus ?: 0
             }
             val totalDef = armorDef + (equippedWeapon?.defenseBonus  ?: 0)
+            val skillLevels = playerRepo.getSkillLevels()
             extra.copy(
                 isLoading               = false,
                 skillLevels             = levels,
@@ -284,20 +285,22 @@ class CombatViewModel @Inject constructor(
                 dungeonRuns             = flags.dungeonRuns,
                 dungeonLastRunStats     = flags.dungeonLastRunStats,
                 unlockedDungeons        = flags.unlockedDungeons,
-                selectedArrowKey        = if (extra.selectedArrowKey == null) flags.equippedArrows else extra.selectedArrowKey,
-                skillPrestige           = flags.skillPrestige,
+                selectedArrowKey        = extra.selectedArrowKey ?: flags.equippedArrows,
+                skillPrestigeLevels     = flags.skillPrestige,
+                combatPrestigeBonus     = Skills.COMBAT.associateWithTo(mutableMapOf()) {
+                    boostRepo.combatStatBonus(it, flags, skillLevels[it] ?: 0)
+                },
                 prestigeReadySkills     = Skills.ALL.filterTo(mutableSetOf()) {
                     (levels[it] ?: 1) >= 99 && PrestigeBoosts.prestigeHasReward(gameData.prestigeTrees, flags, it)
                 },
-                hpPrestigeBonus         = boostRepo.combatStatBonus(Skills.HITPOINTS, flags, levels[Skills.HITPOINTS] ?: 1),
                 ironman                 = flags.ironman,
                 showPrestigeNotifications = flags.showPrestigeNotifications,
                 towerHpBonus            = flags.towerHpBonus,
                 towerBestFloor          = flags.towerBestFloor,
                 showSessionEndTime      = flags.showSessionEndTime,
                 bossKillCounts          = flags.enemyKills,
-                selectedSpell           = if (extra.selectedSpell == null) flags.activeSpell?.let { gameData.spells[it] } else extra.selectedSpell,
-                selectedPotionKey       = if (extra.selectedPotionKey == null) flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 } else extra.selectedPotionKey,
+                selectedSpell           = extra.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] },
+                selectedPotionKey       = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
                 activeBossRepeatIndex   = flags.activeBossRepeatIndex,
                 activeBossRepeatTotal   = flags.activeBossRepeatTotal,
                 activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex,

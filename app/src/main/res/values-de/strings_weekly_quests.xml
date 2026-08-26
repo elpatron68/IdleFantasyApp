@@ -52,9 +52,9 @@
     <string name="quest_weekly_void_champion_name">Leerenchampion</string>
     <string name="quest_weekly_void_champion_desc">Besiegt den Leerenherrscher 5-mal.</string>
     <string name="quest_weekly_slayer_novice_name">Auftragnehmer</string>
-    <string name="quest_weekly_slayer_novice_desc">Schließt diese Woche 15 Trophäensammler-Aufträge ab.</string>
+    <string name="quest_weekly_slayer_novice_desc">Schließt diese Woche 15 Trophäenjäger-Aufträge ab.</string>
     <string name="quest_weekly_slayer_master_name">Jäger-Champion</string>
-    <string name="quest_weekly_slayer_master_desc">Schließt diese Woche 30 Trophäensammler-Aufträge ab.</string>
+    <string name="quest_weekly_slayer_master_desc">Schließt diese Woche 30 Trophäenjäger-Aufträge ab.</string>
     <string name="quest_weekly_devout_name">Ergeben</string>
     <string name="quest_weekly_devout_desc">Vergrabt diese Woche 450 Knochen.</string>
     <string name="quest_weekly_farmer_name">Ernte der Saison</string>

@@ -209,7 +209,7 @@ fun CombatScreen(
                             hiredMercs     = state.hiredMercs,
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
-                            hpPrestigeBonus = state.hpPrestigeBonus,
+                            hpPrestigeBonus = state.combatPrestigeBonus[Skills.HITPOINTS] ?: 0,
                             towerHpBonus   = state.towerHpBonus,
                             attackBonus    = state.totalAttackBonus,
                             strengthBonus  = state.totalStrengthBonus,
@@ -266,13 +266,14 @@ fun CombatScreen(
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
                         )
                         else -> CombatSkillsTab(
-                            skillLevels        = state.skillLevels,
-                            skillXp            = state.skillXp,
-                            totalAttackBonus   = state.totalAttackBonus,
-                            totalStrengthBonus = state.totalStrengthBonus,
-                            totalDefenseBonus  = state.totalDefenseBonus,
-                            skillPrestige      = state.skillPrestige,
-                            onOpenPrestige     = onNavigateToPrestige,
+                            skillLevels         = state.skillLevels,
+                            skillXp             = state.skillXp,
+                            totalAttackBonus    = state.totalAttackBonus,
+                            totalStrengthBonus  = state.totalStrengthBonus,
+                            totalDefenseBonus   = state.totalDefenseBonus,
+                            skillPrestigeLevels = state.skillPrestigeLevels,
+                            combatPrestigeBonus = state.combatPrestigeBonus,
+                            onOpenPrestige      = onNavigateToPrestige,
                         )
                     }
                 }
@@ -349,13 +350,13 @@ fun CombatScreen(
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
                         )
                         else -> CombatSkillsTab(
-                            skillLevels        = state.skillLevels,
-                            skillXp            = state.skillXp,
-                            totalAttackBonus   = state.totalAttackBonus,
-                            totalStrengthBonus = state.totalStrengthBonus,
-                            totalDefenseBonus  = state.totalDefenseBonus,
-                            skillPrestige      = state.skillPrestige,
-                            onOpenPrestige     = onNavigateToPrestige,
+                            skillLevels         = state.skillLevels,
+                            skillXp             = state.skillXp,
+                            totalAttackBonus    = state.totalAttackBonus,
+                            totalStrengthBonus  = state.totalStrengthBonus,
+                            totalDefenseBonus   = state.totalDefenseBonus,
+                            skillPrestigeLevels = state.skillPrestigeLevels,
+                            onOpenPrestige      = onNavigateToPrestige,
                         )
                     }
                 }
@@ -786,7 +787,8 @@ private fun CombatSkillsTab(
     totalAttackBonus: Int,
     totalStrengthBonus: Int,
     totalDefenseBonus: Int,
-    skillPrestige: Map<String, Int> = emptyMap(),
+    skillPrestigeLevels: Map<String, Int> = emptyMap(),
+    combatPrestigeBonus: Map<String, Int> = emptyMap(),
     onOpenPrestige: ((String) -> Unit)? = null,
 ) {
     val context = LocalContext.current
@@ -818,7 +820,8 @@ private fun CombatSkillsTab(
                 level         = skillLevels[key] ?: 1,
                 xp            = skillXp[key]     ?: 0L,
                 gearBonus     = gearBonus,
-                prestigeLevel = skillPrestige[key] ?: 0,
+                prestigeLevel = skillPrestigeLevels[key] ?: 0,
+                prestigeBonus = combatPrestigeBonus[key] ?: 0,
                 onOpenPrestige = onOpenPrestige?.let { cb -> { cb(key) } },
                 onClick       = { tappedSkill = key },
             )
@@ -834,6 +837,7 @@ private fun CombatSkillRow(
     xp: Long,
     gearBonus: Int = 0,
     prestigeLevel: Int = 0,
+    prestigeBonus: Int = 0,
     onOpenPrestige: (() -> Unit)? = null,
     onClick: () -> Unit = {},
 ) {
@@ -902,10 +906,10 @@ private fun CombatSkillRow(
                             color = MaterialTheme.colorScheme.primary,
                         )
                     }
-                    if (prestigeLevel > 0) {
+                    if (prestigeBonus > 0) {
                         Spacer(Modifier.width(6.dp))
                         Text(
-                            text  = stringResource(R.string.combat_prestige_bonus, prestigeLevel * 5),
+                            text  = stringResource(R.string.combat_prestige_bonus, prestigeBonus),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary,
                         )

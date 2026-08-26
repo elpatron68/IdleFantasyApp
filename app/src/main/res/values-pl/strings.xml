@@ -1724,7 +1724,7 @@
     <string name="armory_source_carnival">Sklep z nagrodami Karnawału</string>
     <string name="armory_source_smithing">Kowalstwo</string>
     <string name="armory_source_crafting">Wytwarzanie</string>
-    <string name="armory_source_fletching">Płatnerstwo łuków</string>
+    <string name="armory_source_fletching">Łuczarstwo</string>
     <string name="armory_source_drop_always">Zrzucane przez %1$s (Zawsze)</string>
     <string name="armory_source_drop_chance">Zrzucane przez %1$s (%2$s)</string>
     <string name="armory_source_drop">Zrzucane przez %1$s</string>
@@ -1970,7 +1970,7 @@
     <string name="seasonal_bounty_sunspire_embers_brew_name">Uwarz Mikstury Ataku na wartę przesilenia</string>
     <string name="seasonal_bounty_sunspire_embers_brew_hint">Zielarstwo</string>
     <string name="seasonal_bounty_sunspire_sunfire_arrows_name">Wykonaj mithrilowe strzały, by odeprzeć wisps</string>
-    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Płatnerstwo łuków</string>
+    <string name="seasonal_bounty_sunspire_sunfire_arrows_hint">Łuczarstwo</string>
     <string name="seasonal_bounty_sunspire_wisps_name">Odeprzyj Słoneczne Wisps</string>
     <string name="seasonal_bounty_sunspire_wisps_hint">Występuje tylko w Wyprawie Słonecznej Iglicy</string>
     <string name="seasonal_bounty_sunspire_hounds_name">Odeprzyj Ogniste Psy</string>
@@ -2066,7 +2066,7 @@
     <string name="title_master_woodcutter_name">Mistrz Drwal</string>
     <string name="title_master_woodcutter_requirement">Ukończ wszystkie zadania Drwalstwa</string>
     <string name="title_master_fletcher_name">Mistrz Płatnerz Łuków</string>
-    <string name="title_master_fletcher_requirement">Ukończ wszystkie zadania Płatnerstwa Łuków</string>
+    <string name="title_master_fletcher_requirement">Ukończ wszystkie zadania Łuczarstwa</string>
     <string name="title_master_artisan_name">Mistrz Rzemieślnik</string>
     <string name="title_master_artisan_requirement">Ukończ wszystkie zadania Wytwarzania</string>
     <string name="title_runemaster_name">Mistrz Run</string>

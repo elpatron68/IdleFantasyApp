@@ -509,7 +509,7 @@
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Stadt</string>
-    <string name="home_town_desc">Besucht den Krämer, die Schänke, das Gildenhaus, die Kirche, die Bauwerkstatt, den Trophäensammler und den Jahrmarkt</string>
+    <string name="home_town_desc">Besucht den Krämer, die Schänke, das Gildenhaus, die Kirche, die Bauwerkstatt, den Trophäenjäger und den Jahrmarkt</string>
     <string name="guild_not_unlocked">Noch nicht freigeschaltet</string>
     <string name="guild_dailies_done_today">Tagesaufgaben heute erledigt</string>
     <string name="guild_dailies_remaining_today">%1$d heute übrig</string>
@@ -1119,7 +1119,7 @@
 
     <!-- Slayer -->
     <string name="skill_slayer_name">Trophäenjagd</string>
-    <string name="skill_slayer_desc">Erhaltet in der Stadt Aufträge vom Trophäensammler.</string>
+    <string name="skill_slayer_desc">Erhaltet in der Stadt Aufträge vom Trophäenjäger.</string>
     <string name="builder_title">Werkstatt des Erbauers</string>
     <string name="builder_card_desc">Schänke, Gildenhaus und Kirche ausbauen</string>
 
@@ -1320,7 +1320,7 @@
     <string name="house_item_lamp">Wandlaterne</string>
     <string name="slayer_title">Trophäenjagd</string>
     <string name="slayer_card_desc">Aufträge und Belohnungen für Trophäenjagd</string>
-    <string name="slayer_desc">Beendet Aufträge, um Trophäenjagd-EP und Punkte zu verdienen. Erhaltet dafür exklusive Ausrüstung im Kontor des Trophäensammlers.</string>
+    <string name="slayer_desc">Beendet Aufträge, um Trophäenjagd-EP und Punkte zu verdienen. Erhaltet dafür exklusive Ausrüstung im Kontor des Trophäenjäger.</string>
     <string name="slayer_level_label">Level %1$d</string>
     <string name="slayer_xp_label">%1$s EP</string>
     <string name="slayer_points">%1$d Pkt.</string>
@@ -1332,10 +1332,10 @@
     <string name="slayer_task_stuck">Dieser Gegner kann nur auf einer Entdeckungsreise in einem Verlies angetroffen werden, das Ihr noch nicht erkundet habt. Würfelt erneut ohne zu zahlen.</string>
     <string name="slayer_reroll_free">Würfelt erneut (kostenlos)</string>
     <string name="slayer_no_eligible_tasks">Euer derzeitiges Trophäenjagd-Level berechtigt Euch zu keinen weiteren Aufträgen.</string>
-    <string name="slayer_task_complete">Auftrag abgeschlossen! Besucht den Trophäensammler, um eine neuen Auftrag zu erhalten.</string>
+    <string name="slayer_task_complete">Auftrag abgeschlossen! Besucht den Trophäenjäger, um eine neuen Auftrag zu erhalten.</string>
     <string name="slayer_xp_per_kill">%1$d EP/Monster</string>
     <string name="slayer_points_on_complete">+%1$d Pkt. bei Abschluss</string>
-    <string name="slayer_shop_title">Kontor des Trophäensammler</string>
+    <string name="slayer_shop_title">Kontor des Trophäenjäger</string>
     <string name="slayer_shop_cost">%1$d Pkt.</string>
     <string name="slayer_not_enough_points">Nicht genug Trophäenjagd-Punkte.</string>
     <string name="slayer_already_owned">Bereits im Besitz.</string>
@@ -1839,7 +1839,7 @@
     <string name="monument_not_enough_coins">Nicht genug Münzen.</string>
     <string name="title_patron_of_the_realm_name">Schirmherr des Reiches</string>
     <string name="title_patron_of_the_realm_requirement">Vollendet das Große Monument</string>
-    <string name="item_gilded_full_helmet_name">Vergoldeter Vollhelm</string>
+    <string name="item_gilded_full_helmet_name">Vergoldeter Vollvisierhelm</string>
     <string name="item_gilded_platebody_name">Vergoldeter Plattenpanzer</string>
     <string name="item_gilded_kiteshield_name">Vergoldeter Langspitzschild</string>
     <string name="boss_coin_cap_remaining">Volle Münzbeute heute noch für diesen Boss: %1$d</string>
@@ -2075,7 +2075,7 @@
     <string name="title_master_thief_requirement">Alle Diebstahl-Aufgaben abschließen</string>
     <string name="title_flamekeeper_name">Flammenwächter</string>
     <string name="title_flamekeeper_requirement">Alle Feuermach-Aufgaben abschließen</string>
-    <string name="title_slayer_name">Trophäensammler</string>
+    <string name="title_slayer_name">Trophäenjäger</string>
     <string name="title_slayer_requirement">Alle Trophäenjagd-Aufgaben abschließen</string>
     <string name="title_godslayer_name">Götterbezwinger</string>
     <string name="title_godslayer_requirement">Jeden Endgegner mindestens einmal besiegen</string>
@@ -2378,38 +2378,38 @@
     <string name="race_proficiency_human">Racial bonus: an exclusive XP mastery tier in every skill</string> <!-- untranslated -->
     <string name="race_change_confirm_message">Your race grants race-locked prestige upgrades. Changing race refunds any points spent in other races\' branches, and you can only change race once every 24 hours.</string> <!-- untranslated -->
     <!-- Heirloom items (raid boss rare drops that level up with use) -->
-    <string name="item_heirloom_pickaxe_name">Heirloom Pickaxe</string> <!-- untranslated -->
-    <string name="item_heirloom_pickaxe_desc">A family pickaxe passed down through generations. It remembers every ore its bearers ever broke.</string> <!-- untranslated -->
-    <string name="item_heirloom_axe_name">Heirloom Axe</string> <!-- untranslated -->
-    <string name="item_heirloom_axe_desc">A woodsman\'s axe worn smooth by a hundred hands. Every felled tree sharpens it a little more.</string> <!-- untranslated -->
-    <string name="item_heirloom_fishing_rod_name">Heirloom Fishing Rod</string> <!-- untranslated -->
-    <string name="item_heirloom_fishing_rod_desc">An old rod that has landed catches beyond counting. It learns the water with every cast.</string> <!-- untranslated -->
-    <string name="item_heirloom_hoe_name">Heirloom Hoe</string> <!-- untranslated -->
-    <string name="item_heirloom_hoe_desc">A humble hoe that has turned soil for generations. Each harvest leaves it keener than before.</string> <!-- untranslated -->
-    <string name="item_heirloom_hammer_name">Heirloom Hammer</string> <!-- untranslated -->
-    <string name="item_heirloom_hammer_desc">A smith\'s hammer black with the soot of a thousand forges. It grows truer with every strike.</string> <!-- untranslated -->
-    <string name="item_heirloom_tinderbox_name">Heirloom Tinderbox</string> <!-- untranslated -->
-    <string name="item_heirloom_tinderbox_desc">A battered tinderbox that has never failed to spark. Every fire it lights burns a little brighter.</string> <!-- untranslated -->
-    <string name="item_heirloom_grappling_hook_name">Heirloom Grappling Hook</string> <!-- untranslated -->
-    <string name="item_heirloom_grappling_hook_desc">A climber\'s hook that has held on ledges beyond counting. It grows surer with every course.</string> <!-- untranslated -->
-    <string name="item_heirloom_frying_pan_name">Heirloom Frying Pan</string> <!-- untranslated -->
-    <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
-    <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
-    <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
-    <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
-    <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
-    <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->
-    <string name="item_heirloom_greathammer_desc">A colossal warhammer of forgotten make. Each blow it lands adds to its legend.</string> <!-- untranslated -->
-    <string name="item_heirloom_longbow_name">Heirloom Longbow</string> <!-- untranslated -->
-    <string name="item_heirloom_longbow_desc">A bow strung and restrung across generations of archers. Every arrow teaches it something.</string> <!-- untranslated -->
-    <string name="item_heirloom_staff_name">Heirloom Staff</string> <!-- untranslated -->
-    <string name="item_heirloom_staff_desc">A staff steeped in the castings of every mage who ever bore it. Its power still deepens.</string> <!-- untranslated -->
-    <string name="heirloom_section_title">Heirloom</string> <!-- untranslated -->
+    <string name="item_heirloom_pickaxe_name">Erbstück-Spitzhacke</string>
+    <string name="item_heirloom_pickaxe_desc">Eine Familien-Spitzhacke, die seit Generationen weitergegeben wird. Sie erinnert sich an jedes Erz, das ihre Besitzer jemals abgebaut haben.</string>
+    <string name="item_heirloom_axe_name">Erbstück-Axt</string>
+    <string name="item_heirloom_axe_desc">Die Axt eines Holzfällers, die von hundert Händen glatt geschliffen wurde. Jeder gefällte Baum schärft sie ein wenig mehr.</string>
+    <string name="item_heirloom_fishing_rod_name">Erbstück-Angelrute</string>
+    <string name="item_heirloom_fishing_rod_desc">Eine alte Angelrute, mit der unzählige Fänge gelandet sind. Mit jedem Wurf lernt sie das Gewässer besser kennen.</string>
+    <string name="item_heirloom_hoe_name">Erbstück-Hacke</string>
+    <string name="item_heirloom_hoe_desc">Eine bescheidene Hacke, die seit Generationen den Boden auflockert. Mit jeder Ernte wird sie noch schärfer als zuvor.</string>
+    <string name="item_heirloom_hammer_name">Erbstück-Hammer</string>
+    <string name="item_heirloom_hammer_desc">Ein Schmiedehammer, schwarz vom Ruß tausender Schmieden. Mit jedem Schlag wird er präziser.</string>
+    <string name="item_heirloom_tinderbox_name">Erbstück-Zunderbüchse</string>
+    <string name="item_heirloom_tinderbox_desc">Eine ramponierte Zunderbüchse, die noch nie versagt hat, einen Funken zu entfachen. Jedes Feuer, das sie entzündet, brennt ein wenig heller.</string>
+    <string name="item_heirloom_grappling_hook_name">Erbstück-Greifhaken</string>
+    <string name="item_heirloom_grappling_hook_desc">Ein Greifhaken, der schon an unzähligen Felsvorsprüngen Halt gefunden hat. Mit jedem Zug wird er sicherer.</string>
+    <string name="item_heirloom_frying_pan_name">Erbstück-Bratpfanne</string>
+    <string name="item_heirloom_frying_pan_desc">Eine bewährte Pfanne, die in einer Familie von Köchen von Generation zu Generation weitergegeben wurde. Mit jeder Mahlzeit gewinnt sie an Würze.</string>
+    <string name="item_heirloom_lockpick_name">Erbstück-Dietrich</string>
+    <string name="item_heirloom_lockpick_desc">Ein Dietrich, der schon unzählige Schlösser leise geöffnet hat. Mit jedem Auftrag wird er noch raffinierter.</string>
+    <string name="item_heirloom_blade_name">Erbstück-Klinge</string>
+    <string name="item_heirloom_blade_desc">Eine uralte Klinge, die mit jedem Kampf, den ihre Linie übersteht, ein wenig mehr zum Leben erwacht.</string>
+    <string name="item_heirloom_greathammer_name">Erbstück-Kriegshammer</string>
+    <string name="item_heirloom_greathammer_desc">Ein gewaltiger Kriegshammer unbekannter Herkunft. Jeder Schlag, den er versetzt, trägt zu seiner Legende bei.</string>
+    <string name="item_heirloom_longbow_name">Erbstück-Langbogen</string>
+    <string name="item_heirloom_longbow_desc">Ein Bogen, der über Generationen von Bogenschützen hinweg gespannt und neu bespannt wurde. Jeder Pfeil lehrt ihn etwas.</string>
+    <string name="item_heirloom_staff_name">Erbstück-Stab</string>
+    <string name="item_heirloom_staff_desc">Ein Stab, der von den Zaubersprüchen jedes Magiers, der ihn jemals getragen hat, durchdrungen ist. Seine Kraft nimmt immer noch zu.</string>
+    <string name="heirloom_section_title">Erbstücke</string>
     <!-- Translator note: %1$d = the heirloom item\'s current level (1-99) -->
-    <string name="heirloom_level_label">Heirloom Lv. %1$d</string> <!-- untranslated -->
+    <string name="heirloom_level_label">Erbstück Lv. %1$d</string>
     <!-- Translator note: %1$s = a skill name, used twice -->
-    <string name="heirloom_desc">Grows with %1$s XP up to Lv. 99. Its power also scales with your %1$s level, reaching full effect at level 85. Stats shown are its full potential.</string> <!-- untranslated -->
-    <string name="shop_sell_blocked_heirloom">%1$s is an heirloom and cannot be sold.</string> <!-- untranslated -->
+    <string name="heirloom_desc">Wächst mit %1$s EP bis Stufe 99. Seine Stärke skaliert zudem mit deiner %1$s-Stufe und erreicht ihre volle Wirkung auf Stufe 85. Die angezeigten Werte entsprechen seinem vollen Potenzial.</string>
+    <string name="shop_sell_blocked_heirloom">%1$s ist ein Erbstück und kann nicht verkauft werden.</string>
     <!-- Translator note: %1$s = a dungeon or boss name -->
-    <string name="repeat_blocked_level">Your combat level is too low to repeat %1$s.</string> <!-- untranslated -->
+    <string name="repeat_blocked_level">Dein Kampflevel ist zu niedrig, um %1$s zu wiederholen.</string>
 </resources>
