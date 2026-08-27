@@ -286,6 +286,10 @@ def agility_course_name(course: str) -> str:
     return _standard_string_resolution(course, "agility_{}_name", SimpleWarnType.AGILITY_COURSE_NAME)
 
 
+def tree_name(tree: str) -> str:
+    return _standard_string_resolution(tree, "tree_{}_name", SimpleWarnType.TREE_NAME)
+
+
 def trade_route_name(trade_route: str) -> str:
     return _standard_string_resolution(trade_route, "trade_route_{}_name", SimpleWarnType.TRADE_ROUTE_NAME)
 
@@ -320,6 +324,22 @@ def pet_name(pet: str) -> str:
 
 def pet_desc(pet: str) -> str:
     return _standard_string_resolution(pet, "pet_{}_desc", SimpleWarnType.PET_DESC, "")
+
+
+def merc_name(merc: str) -> str:
+    return _standard_string_resolution(merc, "merc_{}_name", SimpleWarnType.MERC_NAME)
+
+
+def race_name(race: str) -> str:
+    return _standard_string_resolution(race, "character_race_{}", SimpleWarnType.RACE_NAME)
+
+
+def carnival_prize_name(prize: str) -> str:
+    return _standard_string_resolution(prize, "carnival_prize_{}_name", SimpleWarnType.CARNIVAL_PRIZE_NAME)
+
+
+def carnival_prize_desc(prize: str) -> str:
+    return _standard_string_resolution(prize, "carnival_prize_{}_desc", SimpleWarnType.CARNIVAL_PRIZE_DESC, "")
 
 
 def boss_name(boss: str) -> str:
@@ -384,7 +404,7 @@ def prestige_effect_desc(effect: str, value: float, unlock: str | None = None) -
         LOGGER.simple_warn(SimpleWarnType.PRESTIGE_EFFECT_DESC, effect)
         return ""
     if effect == "unlock_recipe":
-        return STRINGS.get_string(key, item_name(unlock))
+        return STRINGS.get_string(key, item_name(unlock or NotImplemented))
     formatted = int(value) if value == int(value) else value
     return STRINGS.get_string(key, formatted)
 

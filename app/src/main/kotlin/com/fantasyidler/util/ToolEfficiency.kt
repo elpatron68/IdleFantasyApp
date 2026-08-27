@@ -35,7 +35,7 @@ fun GameDataRepository.toolEfficiency(
         EquipSlot.PICKAXE        -> eq.miningEfficiency      ?: 1.0f
         EquipSlot.AXE            -> eq.woodcuttingEfficiency ?: 1.0f
         EquipSlot.FISHING_ROD    -> eq.fishingEfficiency     ?: 1.0f
-        EquipSlot.HOE            -> eq.farmingEfficiency       ?: 1.0f
+        EquipSlot.HOE            -> eq.farmingEfficiency     ?: 1.0f
         EquipSlot.HAMMER         -> eq.smithingEfficiency    ?: 1.0f
         EquipSlot.TINDERBOX      -> eq.firemakingEfficiency  ?: 1.0f
         EquipSlot.GRAPPLING_HOOK -> eq.agilityEfficiency     ?: 1.0f

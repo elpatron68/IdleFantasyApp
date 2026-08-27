@@ -8,6 +8,7 @@ class SimpleWarnType(Enum):
     BUILDING_BONUS = "building_bonus"
     MISSING_BUILDING_DESCRIPTION = "missing_building_description"
     MISSING_PRIZE_TYPE = "missing_prize_type"
+    MULTIPLE_HEIRLOOMS = "multiple_heirlooms"
     # Game string loaders
     SKILL_NAME = "skill_name"
     ITEM_NAME = "item_name"
@@ -15,6 +16,11 @@ class SimpleWarnType(Enum):
     HOUSE_ITEM_NAME = "house_item_name"
     ENEMY_NAME = "enemy_name"
     GUILD_NAME = "guild_name"
+    TREE_NAME = "tree_name"
+    MERC_NAME = "merc_name"
+    RACE_NAME = "race_name"
+    CARNIVAL_PRIZE_NAME = "carnival_prize_name"
+    CARNIVAL_PRIZE_DESC = "carnival_prize_desc"
     AGILITY_COURSE_NAME = "agility_course_name"
     TRADE_ROUTE_NAME = "trade_route_name"
     TRADE_ROUTE_DESC = "trade_route_desc"
@@ -52,12 +58,19 @@ class WikiLogger:
             SimpleWarnType.BUILDING_BONUS: (set(), "The bonus `{}` was not specially formatted on the buildings page"),
             SimpleWarnType.MISSING_BUILDING_DESCRIPTION: (set(), "The building `{}` is missing a description in the buildings page"),
             SimpleWarnType.MISSING_PRIZE_TYPE: (set(), "The prize type `{}` was not specially formatted on the carnival page"),
+            SimpleWarnType.MULTIPLE_HEIRLOOMS: (set(), "Only the first available heirloom for skill `{}` was selected as only one was expected"
+                                                       "- _tool_efficiency_section should be adjusted to handle multiple heirloom items"),
             # Game string loaders
             SimpleWarnType.SKILL_NAME: default_warning("skill", "strings.xml"),
             SimpleWarnType.ITEM_NAME: default_warning("item", "strings_items.xml"),
             SimpleWarnType.ITEM_DESC: default_warning("item", "strings_items.xml", "description"),
             SimpleWarnType.ENEMY_NAME: default_warning("enemy", "strings_enemies.xml"),
             SimpleWarnType.GUILD_NAME: default_warning("guild"),
+            SimpleWarnType.TREE_NAME: default_warning("tree", "strings_skills.xml"),
+            SimpleWarnType.MERC_NAME: default_warning("mercenary"),
+            SimpleWarnType.RACE_NAME: default_warning("race"),
+            SimpleWarnType.CARNIVAL_PRIZE_NAME: default_warning("carnival prize"),
+            SimpleWarnType.CARNIVAL_PRIZE_DESC: default_warning("carnival prize", missing_element="description"),
             SimpleWarnType.AGILITY_COURSE_NAME: default_warning("agility course"),
             SimpleWarnType.TRADE_ROUTE_NAME: default_warning("trade route"),
             SimpleWarnType.TRADE_ROUTE_DESC: default_warning("trade route", missing_element="description"),

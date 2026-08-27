@@ -8,7 +8,7 @@ import re
 import markdown as md_lib
 from jinja2 import Environment, FileSystemLoader
 
-from wiki.src import WIKI_ROOT
+from wiki.src import WIKI_ROOT, DEFAULT_ICON
 from wiki.src.page_hierarchy import PageHierarchy
 from wiki.src.pages import get_pages, PAGE_DIRECTORY, PAGE_HIERARCHY, get_image_directory
 
@@ -38,19 +38,14 @@ def _fix_page_links(html: str, active_page_id: str | None) -> str:
 
     pages.py emits [text](PageStem) Markdown links and html_link() anchors.
     After the markdown library converts links to <a href="PageStem">text</a> we
-    need to turn PageStem into PageStem.html (or PageStem.html#slug for item cross-links).
+    need to turn PageStem#slug into PageStem.html#slug.
     """
     def fix(m: re.Match) -> str:
         start, href, slug, end, text = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
         if href not in _PAGE_BY_URL:
             return m.group(0)
-        is_page_link = _PAGE_BY_URL[href] == text
         css = ' class="active"' if (active_page_id and active_page_id in PAGE_DIRECTORY
                                     and href == PAGE_DIRECTORY[active_page_id].url[:-3]) else ""
-        if is_page_link:
-            return f'<a{start}href="{href}.html#{slug}"{end}{css}>{text}</a>'
-        # Existing slug intentionally overwritten if page does not exist
-        slug = _slugify(text)
         return f'<a{start}href="{href}.html#{slug}"{end}{css}>{text}</a>'
 
     # Match <a href="Stem">display text</a> -- display may include emoji/spaces
@@ -185,7 +180,7 @@ def get_html_pages() -> dict[str, str]:
             page_title=page_title,
             content=content_html,
             nav=nav_html,
-            icon=image_directory.get(PAGE_DIRECTORY[page_id].icon, "default_icon.png")
+            icon=image_directory.get(PAGE_DIRECTORY[page_id].icon or DEFAULT_ICON, None)
         )
 
     # Client-side search index (assets/ is copied before pages are written)

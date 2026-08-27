@@ -15,9 +15,7 @@ An heirloom's power is also gated by your own level in its governing skill. The 
 
 Putting both together, an heirloom's effective stats are:
 
-```
-effective stat = base + (max - base) * (item level - 1) / 98 * min(skill level, {gate_level}) / {gate_level}
-```
+$`Effective\ stat = base + \dfrac{(max - base) \times (item\ level - 1)}{98} \times \dfrac{min(skill\ level, {gate_level})}{{gate_level}}`$
 
 Prestiging the governing skill temporarily weakens the heirloom (your skill level drops below the gate again), but the heirloom's item level and XP are never lost, so it returns to full strength as you level the skill back up.
 

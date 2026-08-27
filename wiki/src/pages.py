@@ -9,17 +9,18 @@ from __future__ import annotations
 import logging
 import re
 import traceback
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from logging import log
 from pathlib import Path
 from typing import Callable
 
-from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO
+from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO, DEFAULT_ICON, IMAGES_DIR
 from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name, skill_name, enemy_name, guild_name, \
     trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
     pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
-    expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc
+    expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc, tree_name, merc_name, race_name, \
+    carnival_prize_name, carnival_prize_desc
 from wiki.src.page_hierarchy import PageHierarchy
 from wiki.src.wiki_logs import LOGGER, SimpleWarnType
 
@@ -32,8 +33,18 @@ from wiki.src.wiki_logs import LOGGER, SimpleWarnType
 class PageInfo:
     title: str
     url: str
-    generate: Callable[[], str] | NotImplemented
+    _generator_func: Callable[[], str] | NotImplemented
     icon: Path | None = None
+    _string_cache: str | None = field(init=False)
+
+    def __post_init__(self):
+        self._string_cache = None
+
+    def generate(self) -> str:
+        generated = self._string_cache
+        if generated is None:
+            generated = self._string_cache = self._generator_func()
+        return generated
 
 
 PAGE_DIRECTORY: dict[str, PageInfo] = {}
@@ -60,29 +71,29 @@ def add_static_pages():
         ["Skills", False, [
             ("skills", PageInfo("Skills", "Skills.md", gen_skills)),
             ["Gathering", False, [
-                ("mining", PageInfo("Mining", "Mining.md", gen_mining, skill_icon_path("mining"))),
-                ("fishing", PageInfo("Fishing", "Fishing.md", gen_fishing, skill_icon_path("fishing"))),
-                ("woodcutting", PageInfo("Woodcutting", "Woodcutting.md", gen_woodcutting, skill_icon_path("woodcutting"))),
-                ("farming", PageInfo("Farming", "Farming.md", gen_farming, skill_icon_path("farming"))),
-                ("thieving", PageInfo("Thieving", "Thieving.md", gen_thieving, skill_icon_path("thieving")))
+                ("mining", PageInfo(skill_name("mining"), "Mining.md", gen_mining, skill_icon_path("mining"))),
+                ("fishing", PageInfo(skill_name("fishing"), "Fishing.md", gen_fishing, skill_icon_path("fishing"))),
+                ("woodcutting", PageInfo(skill_name("woodcutting"), "Woodcutting.md", gen_woodcutting, skill_icon_path("woodcutting"))),
+                ("farming", PageInfo(skill_name("farming"), "Farming.md", gen_farming, skill_icon_path("farming"))),
+                ("thieving", PageInfo(skill_name("thieving"), "Thieving.md", gen_thieving, skill_icon_path("thieving")))
             ]],
             ["Crafting", False, [
-                ("smithing", PageInfo("Smithing", "Smithing.md", gen_smithing, skill_icon_path("smithing"))),
-                ("cooking", PageInfo("Cooking", "Cooking.md", gen_cooking, skill_icon_path("cooking"))),
-                ("fletching", PageInfo("Fletching", "Fletching.md", gen_fletching, skill_icon_path("fletching"))),
-                ("crafting", PageInfo("Crafting", "Crafting.md", gen_crafting, skill_icon_path("crafting"))),
-                ("firemaking", PageInfo("Firemaking", "Firemaking.md", gen_firemaking, skill_icon_path("firemaking"))),
-                ("runecrafting", PageInfo("Runecrafting", "Runecrafting.md", gen_runecrafting, skill_icon_path("runecrafting"))),
-                ("herblore", PageInfo("Herblore", "Herblore.md", gen_herblore, skill_icon_path("herblore"))),
-                ("construction", PageInfo("Construction", "Construction.md", gen_construction, skill_icon_path("construction")))
+                ("smithing", PageInfo(skill_name("smithing"), "Smithing.md", gen_smithing, skill_icon_path("smithing"))),
+                ("cooking", PageInfo(skill_name("cooking"), "Cooking.md", gen_cooking, skill_icon_path("cooking"))),
+                ("fletching", PageInfo(skill_name("fletching"), "Fletching.md", gen_fletching, skill_icon_path("fletching"))),
+                ("crafting", PageInfo(skill_name("crafting"), "Crafting.md", gen_crafting, skill_icon_path("crafting"))),
+                ("firemaking", PageInfo(skill_name("firemaking"), "Firemaking.md", gen_firemaking, skill_icon_path("firemaking"))),
+                ("runecrafting", PageInfo(skill_name("runecrafting"), "Runecrafting.md", gen_runecrafting, skill_icon_path("runecrafting"))),
+                ("herblore", PageInfo(skill_name("herblore"), "Herblore.md", gen_herblore, skill_icon_path("herblore"))),
+                ("construction", PageInfo(skill_name("construction"), "Construction.md", gen_construction, skill_icon_path("construction")))
             ]],
             ["Support", False, [
-                ("prayer", PageInfo("Prayer", "Prayer.md", gen_prayer, skill_icon_path("prayer"))),
-                ("mercantile", PageInfo("Mercantile", "Mercantile.md", gen_mercantile, skill_icon_path("mercantile"))),
-                ("agility", PageInfo("Agility", "Agility.md", gen_agility, skill_icon_path("agility"))),
+                ("prayer", PageInfo(skill_name("prayer"), "Prayer.md", gen_prayer, skill_icon_path("prayer"))),
+                ("mercantile", PageInfo(skill_name("mercantile"), "Mercantile.md", gen_mercantile, skill_icon_path("mercantile"))),
+                ("agility", PageInfo(skill_name("agility"), "Agility.md", gen_agility, skill_icon_path("agility"))),
             ]],
             ["Combat", False, [
-                ("slayer", PageInfo("Slayer", "Slayer.md", gen_slayer, skill_icon_path("slayer"))),
+                ("slayer", PageInfo(skill_name("slayer"), "Slayer.md", gen_slayer, skill_icon_path("slayer"))),
             ]],
         ]],
         ["Inventory", False, [
@@ -180,7 +191,7 @@ def add_dungeon_pages():
     )
     dungeon_pages = {
         dungeon["name"]: PageInfo(
-            dungeon["display_name"],
+            dungeon_name(dungeon["name"]),
             f"{dungeon['name']}.md",
             lambda entry=dungeon: gen_dungeon(entry),
         )
@@ -202,7 +213,7 @@ def add_expedition_pages():
     )
     expedition_pages = {
         exp["name"]: PageInfo(
-            exp["display_name"],
+            expedition_name(exp["name"]),
             f"{exp['name']}.md",
             lambda entry=exp: gen_expedition(entry),
         )
@@ -218,7 +229,7 @@ def add_trade_route_pages():
     )
     trade_route_pages = {
         tr["id"]: PageInfo(
-            tr["display_name"],
+            trade_route_name(tr["id"]),
             f"{tr['id']}.md",
             lambda entry=tr: gen_trade_route(entry)
         )
@@ -250,9 +261,15 @@ def get_pages() -> dict[str, str]:
     return pages
 
 
+_IMAGE_DIR: dict[Path, str] | None = None
+
+
 def get_image_directory() -> dict[Path, str]:
+    global _IMAGE_DIR
+    if _IMAGE_DIR is not None:
+        return _IMAGE_DIR
     image_id = 0
-    image_directory: dict[Path, str] = {}
+    image_directory: dict[Path, str] = {DEFAULT_ICON: f"favicon.png"}
     # Add page favicons
     for icon in [v.icon for v in PAGE_DIRECTORY.values() if v.icon is not None]:
         if icon not in image_directory:
@@ -271,6 +288,8 @@ def get_image_directory() -> dict[Path, str]:
         image_paths = re.findall(r'!\[[^]]*]\(([^)]*)\)', page_content)
         image_paths += re.findall(r"<img[^>]*src=['\"]([^'\"]*)['\"][^>]*>", page_content)
         image_id = _add_image_paths(image_id, image_paths)
+    # Construct _IMAGE_DIR for more effective generation in later calls
+    _IMAGE_DIR = image_directory
     return image_directory
 
 
@@ -474,11 +493,18 @@ def build_page_map() -> dict[str, str]:
     return m
 
 
+def _slugify(text: str) -> str:
+    """Convert a display name to a row-id slug: 'Silver Ore' -> 'silver_ore'."""
+    text = re.sub(r'<[^>]+>', '', text)      # strip HTML tags
+    text = re.sub("['\\u2018\\u2019]", '', text)  # strip apostrophes (straight + curly)
+    return re.sub(r'[^a-z0-9]+', '_', text.lower()).strip('_')
+
+
 def item_link(key: str) -> str:
     """Returns a markdown link to the page where this item is documented, or plain title if unknown."""
     page_id = build_page_map().get(key)
     if page_id:
-        return link(page_id, item_name(key))
+        return link(page_id, item_name(key), _slugify(item_name(key)))
     return item_name(key)
 
 
@@ -515,7 +541,7 @@ def gen_table_of_contents(page_content: str, max_level: int = 4, min_level: int 
     return "\n".join(lines)
 
 
-def make_latex_safe(content: str, escape_levels: int = 1) -> str:
+def make_latex_safe(content: str, escape_levels: int = 1, ignore_keys: list[str] | None = None) -> str:
     """Escape braces inside inline LaTeX (``$...$``) so ``str.format`` leaves them intact.
 
     Expressions such as ``$\\dfrac{a}{b}$`` contain braces that ``str.format`` would
@@ -523,7 +549,8 @@ def make_latex_safe(content: str, escape_levels: int = 1) -> str:
     (level 1 → ``{{`` / ``}}``, level 2 → ``{{{{`` / ``}}}}``, and so on).
 
     :param content: Text that may contain inline LaTeX maths.
-    :param escape_levels: Number of ``.format`` passes the content will go through.
+    :param escape_levels: Number of ``.format`` passes the content will go through after this function is run.
+    :param ignore_keys: List of keys to ignore - useful if the latex has template fields inside of it. Only fields within latex formulas need to be included (See gen_heirlooms for example).
     :return: Content with LaTeX braces escaped for the given format depth.
     """
     open_brace = "{" * (2 ** escape_levels)
@@ -531,9 +558,12 @@ def make_latex_safe(content: str, escape_levels: int = 1) -> str:
 
     def _escape_math(match: re.Match[str]) -> str:
         body = match.group(1).replace("{", open_brace).replace("}", close_brace)
-        return f"${body}$"
+        return f"$`{body}`$"
 
-    return re.sub(r"\$([^$]+)\$", _escape_math, content)
+    safe_latex = re.sub(r"\$`([^$]+)`\$", _escape_math, content)
+    for key in ignore_keys or []:
+        safe_latex = safe_latex.replace(open_brace + key + close_brace, "{" + key + "}")
+    return safe_latex
 
 
 
@@ -595,52 +625,52 @@ def gen_prestige_race_tables() -> str:
         for path in tree["paths"]:
             for node in path["nodes"]:
                 for race in node.get("races") or []:
-                    shared = [r.title() for r in node["races"] if r != race]
+                    shared = [race_name(r) for r in node["races"] if r != race]
                     by_race[race].append((tree["skill"], node, shared))
     parts = []
     for race in _PRESTIGE_RACES:
         rows = [
             [
-                skill.replace("_", " ").title(),
+                skill_name(skill),
                 prestige_effect_desc(node["effect"], node.get("value", 0), node.get("unlock")) + (f" (shared with {', '.join(shared)})" if shared else ""),
                 node["cost"],
             ]
             for skill, node, shared in by_race[race]
         ]
-        parts.append(f"#### {race.title()}\n\n" + table(["Skill", "Upgrade", "Cost (points)"], rows))
+        parts.append(f"#### {race_name(race)}\n\n" + table(["Skill", "Upgrade", "Cost (points)"], rows))
     return "\n\n".join(parts)
 
 
 def gen_skills() -> str:
     # Todo: Switch to use game data where possible
     skill_list = [
-        ("Mining", "gathering", "Extract ores and gems from the earth."),
-        ("Fishing", "gathering", "Catch fish and aquatic creatures."),
-        ("Woodcutting", "gathering", "Chop trees for logs."),
-        ("Farming", "gathering", "Plant seeds and harvest crops."),
-        ("Firemaking", "crafting", "Burn logs for XP. Produces ashes for Prayer."),
-        ("Agility", "support", "Reduces session time across all skills (60→40 min at level 99)."),
-        ("Thieving", "gathering", "Pickpocket NPCs in the Town for coins and loot."),
-        ("Mercantile", "support",
+        ("mining", "gathering", "Extract ores and gems from the earth."),
+        ("fishing", "gathering", "Catch fish and aquatic creatures."),
+        ("woodcutting", "gathering", "Chop trees for logs."),
+        ("farming", "gathering", "Plant seeds and harvest crops."),
+        ("firemaking", "crafting", "Burn logs for XP. Produces ashes for Prayer."),
+        ("agility", "support", "Reduces session time across all skills (60→40 min at level 99)."),
+        ("thieving", "gathering", "Pickpocket NPCs in the Town for coins and loot."),
+        ("mercantile", "support",
          "Send trade caravans and explore skilling expeditions for lore and dungeon unlocks."),
-        ("Smithing", "crafting", "Smelt ores into bars and forge equipment."),
-        ("Cooking", "crafting", "Cook raw food to restore HP in combat."),
-        ("Fletching", "crafting", "Craft bows and arrows."),
-        ("Crafting", "crafting", "Make jewellery and other items."),
-        ("Runecrafting", "crafting", "Craft runes from rune essence."),
-        ("Herblore", "crafting", "Brew potions for combat stat boosts."),
-        ("Construction", "crafting", "Build furniture used to upgrade town buildings (Inn, Guild Hall, Church)."),
-        ("Attack", "combat", "Increases melee accuracy."),
-        ("Strength", "combat", "Increases max melee damage."),
-        ("Defense", "combat", "Reduces damage taken."),
-        ("Ranged", "combat", "Attack from a distance with a bow."),
-        ("Magic", "combat", "Cast spells using runes."),
-        ("Hitpoints", "combat", "Total health. Increases with combat."),
-        ("Prayer", "support", "Bury bones to unlock combat prayers."),
-        ("Slayer", "combat", "Receive tasks from the Slayer Master to kill specific enemies for bonus XP and points."),
+        ("smithing", "crafting", "Smelt ores into bars and forge equipment."),
+        ("cooking", "crafting", "Cook raw food to restore HP in combat."),
+        ("fletching", "crafting", "Craft bows and arrows."),
+        ("crafting", "crafting", "Make jewellery and other items."),
+        ("runecrafting", "crafting", "Craft runes from rune essence."),
+        ("herblore", "crafting", "Brew potions for combat stat boosts."),
+        ("construction", "crafting", "Build furniture used to upgrade town buildings (Inn, Guild Hall, Church)."),
+        ("attack", "combat", "Increases melee accuracy."),
+        ("strength", "combat", "Increases max melee damage."),
+        ("defense", "combat", "Reduces damage taken."),
+        ("ranged", "combat", "Attack from a distance with a bow."),
+        ("magic", "combat", "Cast spells using runes."),
+        ("hitpoints", "combat", "Total health. Increases with combat."),
+        ("prayer", "support", "Bury bones to unlock combat prayers."),
+        ("slayer", "combat", "Receive tasks from the Slayer Master to kill specific enemies for bonus XP and points."),
     ]
     rows = [
-        [f"{html_image(skill_icon_path(skill), "", "text")} {link(skill.lower()) if skill.lower() in PAGE_DIRECTORY else skill}", cat, desc]
+        [f"{html_image(skill_icon_path(skill), "", "text")} {link(skill) if skill in PAGE_DIRECTORY else skill_name(skill)}", cat, desc]
         for skill, cat, desc in skill_list
     ]
 
@@ -655,8 +685,8 @@ def gen_mining() -> str:
     assert isinstance(ores, dict)
     # Todo: Add information about how ore amounts change depending on pickaxe, etc
     rows = sorted(
-        [[o["display_name"], o["level_required"], o["xp_per_ore"]]
-         for o in ores.values()],
+        [[item_name(k), o["level_required"], o["xp_per_ore"]]
+         for k, o in ores.items()],
         key=lambda r: r[1]
     )
     tool_rows = _tool_table("pickaxe", "mining_efficiency")
@@ -689,8 +719,8 @@ def gen_woodcutting() -> str:
     trees = load("trees.json")
     assert isinstance(trees, dict)
     rows = sorted(
-        [[t["display_name"], t["level_required"], t["xp_per_log"], t["log_display_name"]]
-         for t in trees.values()],
+        [[tree_name(k), t["level_required"], t["xp_per_log"], item_name(t["log_name"])]
+         for k, t in trees.items()],
         key=lambda r: r[1]
     )
     tool_rows = _tool_table("axe", "woodcutting_efficiency")
@@ -702,13 +732,12 @@ def gen_woodcutting() -> str:
 
 
 def gen_farming() -> str:
-    # Todo: Add detail about using ashes to improve yield
     # Load crops
     crops = load("crops.json")
     assert isinstance(crops, dict)
     rows = sorted(
         [[
-            f"{c.get('emoji', '')} {c['display_name']}",
+            f"{c.get('emoji', '')} {item_name(c['id'])}",
             c["farming_level_required"],
             item_name(c["seed_name"]),
             c.get("seed_cost", "—"),
@@ -726,7 +755,7 @@ def gen_farming() -> str:
         [v for v in equipment.values() if v.get("slot") == "hoe" and "farming_efficiency" in v],
         key=lambda v: list(v.get("requirements", {}).values() or [0])[0]
     )
-    hoe_rows = [[h["display_name"], list(h.get("requirements", {}).values() or [1])[0], f"+{int((h['farming_efficiency'] - 1) * 100)}%"] for h in hoes]
+    hoe_rows = [[item_name(h["name"]), list(h.get("requirements", {}).values() or [1])[0], f"+{int((h['farming_efficiency'] - 1) * 100)}%"] for h in hoes]
 
     # Ashes tables
     # Todo: Switch to avoid being hardcoded
@@ -763,7 +792,7 @@ def gen_agility() -> str:
         xp_per_min   = round(laps_per_min * c["xp_per_success"] * success_rate)
         xp_per_session = xp_per_min * 60
         course_rows.append([
-            c["display_name"],
+            agility_course_name(c["name"]),
             c["level_required"],
             c["xp_per_success"],
             f"~{xp_per_min:,}",
@@ -786,6 +815,72 @@ def gen_agility() -> str:
     )
 
 
+def _tool_eff_mult(tool_tier: int, item_tier: int) -> str:
+    return "—" if tool_tier <= item_tier else f"×{1 + 0.25 * (tool_tier - item_tier)}"
+
+
+def _mult_table(tier_levels: list[int]) -> str:
+    return f"""<table class="small">
+        <thead>
+            <tr>
+                <th colspan="2"></th>
+                <th colspan="{len(tier_levels)}" style="text-align: center">Tool tier</th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                {"\n".join(f"<th>{tool_tier + 1}</th>" for tool_tier in range(len(tier_levels)))}
+            </tr>
+        </thead>
+        <tbody>
+            {"\n".join(f"""<tr>
+                {"" if item_tier != 0 else f"""<th rowspan="{len(tier_levels)}" style="vertical-align: middle">
+                        <span style="writing-mode: vertical-lr; transform: rotate(180deg)">Item Tier</span>
+                    </th>\n"""}<th>{item_tier + 1}</th>
+                {"\n".join(f"<td>{_tool_eff_mult(tool_tier, item_tier)}</td>" for tool_tier in range(len(tier_levels)))}
+            </tr>""" for item_tier in range(len(tier_levels)))}
+        </tbody>
+    </table>"""
+
+
+def _tool_efficiency_section(verb: str, skill: str, tool_slot: str) -> str:
+    # Get tools associated with the designated tool slot
+    equipment = load("equipment.json")
+    assert isinstance(equipment, dict)
+    tools = {k: v for k, v in equipment.items() if v["slot"] == tool_slot}
+    # Get heirloom items and exclude from tool list
+    heirloom_items = {k: v for k, v in tools.items() if v.get("heirloom_skill") == skill}
+    if len(heirloom_items) > 1:
+        LOGGER.simple_warn(SimpleWarnType.MULTIPLE_HEIRLOOMS, skill)
+    for item in heirloom_items.keys():
+        tools.pop(item)
+    heirloom_item = list(heirloom_items.items())[0][0]
+    # Calculate tier rows
+    tier_rows = []
+    tier_levels = [1, 15, 30, 55, 70, 85]
+    for i, min_level in enumerate(tier_levels):
+        max_level = tier_levels[i + 1] if i + 1 < len(tier_levels) else None
+        tools_in_tier = sorted([
+            k for k, v in tools.items()
+            if (i == 0 or v.get("requirements", {}).get(skill, 1) >= min_level)
+               and (max_level is None or v.get("requirements", {}).get(skill, 0) < max_level)],
+            key=lambda x: tools[x].get("requirements", {}).get(skill, 0)
+        )
+        tier_rows.append([
+            i + 1,
+            f"≥{min_level}" if max_level is None else f"{min_level}-{max_level - 1}",
+            ", ".join(item_link(tool) for tool in tools_in_tier),
+        ])
+
+    return make_latex_safe(get_template("skills/crafting/tool_efficiency_section")).format(
+        verb=verb,
+        skill_name=skill,
+        heirloom_tool=item_link(heirloom_item),
+        heirloom_link=link("heirlooms", header="how-heirlooms-grow"),
+        tier_table=table(["Tier", "Level Range", "Tools"], tier_rows),
+        mult_table=_mult_table(tier_rows),
+    )
+
+
 def gen_smithing() -> str:
     recipes = load("recipes/smithing.json")
     assert isinstance(recipes, dict)
@@ -798,7 +893,7 @@ def gen_smithing() -> str:
             g = "weapon" if equip.get(key, {}).get("slot") == "weapon" else "armour"
         else:
             g = t if t in groups else "other"
-        groups[g].append([r["display_name"], r["level_required"], fmt_materials(r["materials"]), r["xp_per_item"]])
+        groups[g].append([item_name(key), r["level_required"], fmt_materials(r["materials"]), fmt_amount(r["xp_per_item"])])
 
     if len(groups["other"]) > 0:
         log(logging.WARNING, "Some smithing items were in the 'other' group which are not shown on the page")
@@ -808,18 +903,13 @@ def gen_smithing() -> str:
     for group_key, group_name in order:
         rows = sorted(groups[group_key], key=lambda x: x[1])
         if rows:
-            sections.append(f"## {group_name}\n\n{table(['Item','Level','Materials','XP / Item'], rows)}")
-
-    sections.append(
-        "## Hammers\n\n"
-        "Equip a hammer to multiply how many items you can smith per session. "
-        "Higher-tier hammers require a higher Smithing level.\n\n"
-        f"{_tool_table('hammer', 'smithing_efficiency')}"
-    )
+            sections.append(f"### {group_name}\n\n{table(['Item','Level','Materials','XP / Item'], rows)}")
 
     return get_template("skills/crafting/smithing").format(
         icon=html_image(skill_icon_path("smithing"), "", "text"),
+        tool_efficiency_section=_tool_efficiency_section("smithing", "smithing", "hammer"),
         sections="\n\n".join(sections),
+        hammer_table=_tool_table('hammer', 'smithing_efficiency'),
     )
 
 
@@ -827,8 +917,8 @@ def gen_cooking() -> str:
     recipes = load("recipes/cooking.json")
     assert isinstance(recipes, dict)
     rows = sorted(
-        [[r["display_name"], r["level_required"], item_link(r["raw_item"]), r["xp_per_item"], r.get("healing_value", "—")]
-         for r in recipes.values()],
+        [[item_name(i), r["level_required"], item_link(r["raw_item"]), fmt_amount(r["xp_per_item"]), r.get("healing_value", "—")]
+         for i, r in recipes.items()],
         key=lambda r: r[1]
     )
     tool_rows = _tool_table("frying_pan", "cooking_efficiency")
@@ -836,6 +926,7 @@ def gen_cooking() -> str:
         icon=html_image(skill_icon_path("cooking"), "", "text"),
         food_table=table(['Food','Level','Raw Ingredient','XP / Item','HP Healed'], rows),
         frying_pan_table=tool_rows,
+        tool_efficiency_section=_tool_efficiency_section("cooking", "cooking", "frying_pan"),
     )
 
 
@@ -843,8 +934,8 @@ def gen_fletching() -> str:
     recipes = load("recipes/fletching.json")
     assert isinstance(recipes, dict)
     rows = sorted(
-        [[r["display_name"], r["level_required"], fmt_materials(r["materials"]), r["xp_per_item"]]
-         for r in recipes.values()],
+        [[item_name(i), r["level_required"], fmt_materials(r["materials"]), fmt_amount(r["xp_per_item"])]
+         for i, r in recipes.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/fletching").format(
@@ -857,8 +948,8 @@ def gen_crafting() -> str:
     recipes = load("recipes/crafting.json")
     assert isinstance(recipes, dict)
     rows = sorted(
-        [[r["display_name"], r["level_required"], fmt_materials(r["materials"]), r["xp_per_item"]]
-         for r in recipes.values()],
+        [[item_name(i), r["level_required"], fmt_materials(r["materials"]), fmt_amount(r["xp_per_item"])]
+         for i, r in recipes.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/crafting").format(
@@ -872,35 +963,44 @@ def gen_firemaking() -> str:
     logs = load("logs.json")
     assert isinstance(logs, dict)
     rows = sorted(
-        [[l["display_name"], l["level_required"], l["xp_per_log"]]
-         for l in logs.values()],
+        [[item_name(k), l["level_required"], fmt_amount(l["xp_per_log"])]
+         for k, l in logs.items()],
         key=lambda r: r[1]
     )
     tool_rows = _tool_table("tinderbox", "firemaking_efficiency")
     return get_template("skills/crafting/firemaking").format(
         icon=html_image(skill_icon_path("firemaking"), "", "text"),
+        farming_link=link("farming", "farming", "ashes"),
+        herblore_link=link("herblore", "herblore"),
+        runecrafting_link=link("runecrafting", "runecrafting", "bonus-crafted-runes"),
         item_table=table(['Log','Level Required','XP / Log Burned'], rows),
         tinderbox_table=tool_rows,
+        tool_efficiency_section=_tool_efficiency_section("burning", "firemaking", "tinderbox"),
     )
 
 
 def gen_runecrafting() -> str:
-    # Todo: Add details for using ashes
     runes = load("runes.json")
     assert isinstance(runes, dict)
-    rows = sorted(
+    runes_rows = sorted(
         [[
-            r["display_name"],
+            item_name(k),
             r["level_required"],
             r["essence_cost"],
-            r["xp_per_rune"],
-            "×2 at 50 / ×3 at 75",
-        ] for r in runes.values()],
+            fmt_amount(r["xp_per_rune"]),
+        ] for k, r in runes.items()],
         key=lambda r: r[1]
     )
+    bonuses_rows = [["No ash", 1, 2, 3]]
+    bonuses_rows += [[item_link(k), i + 2, i + 3, i + 4]
+        for i, k in
+        enumerate(["ashes", "oak_ashes", "willow_ashes", "maple_ashes", "yew_ashes", "magic_ashes", "redwood_ashes"])
+    ]
+
     return get_template("skills/crafting/runecrafting").format(
         icon=html_image(skill_icon_path("runecrafting"), "", "text"),
-        runes_table=table(['Rune','Level Required','Essence / Rune','XP / Rune','Output Multiplier'], rows),
+        runes_table=table(['Rune','Level Required','Essence / Rune','XP / Rune'], runes_rows),
+        bonuses_table=table(["Ash", "Level 1-49", "Level 50-74", "Level >75"], bonuses_rows)
     )
 
 
@@ -909,12 +1009,12 @@ def gen_herblore() -> str:
     assert isinstance(recipes, dict)
     rows = sorted(
         [[
-            r["display_name"],
+            item_name(k),
             r["level_required"],
             fmt_materials(r["materials"]),
             ", ".join(f"{stat.title()} +{val}" for stat, val in r.get("effects", {}).items()),
             r["xp_per_item"],
-        ] for r in recipes.values()],
+        ] for k, r in recipes.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/herblore").format(
@@ -928,8 +1028,8 @@ def gen_construction() -> str:
     assert isinstance(recipes, dict)
     rows = sorted(
         [
-            [r["display_name"], r["level_required"], fmt_materials(r["materials"]), int(r["xp_per_item"])]
-            for r in recipes.values()
+            [item_name(k), r["level_required"], fmt_materials(r["materials"]), int(r["xp_per_item"])]
+            for k, r in recipes.items()
         ],
         key=lambda r: r[1],
     )
@@ -951,7 +1051,7 @@ def gen_thieving() -> str:
                 qty_str = f" ({entry['min_qty']}-{entry['max_qty']})"
             loot_parts.append(f"{fmt_pct(entry['chance'])} {item_link(entry['item'])}{qty_str}")
         rows.append([
-            npc["display_name"],
+            thieving_npc_name(npc["key"]),
             npc["level_required"],
             npc["base_xp"],
             f"{npc['coins_min']}-{npc['coins_max']}",
@@ -969,8 +1069,8 @@ def gen_prayer() -> str:
     bones = load("bones.json")
     assert isinstance(bones, dict)
     rows = sorted(
-        [[b["display_name"], b["xp_per_bone"]]
-         for b in bones.values()],
+        [[item_name(k), b["xp_per_bone"]]
+         for k, b in bones.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/support/prayer").format(
@@ -1149,7 +1249,7 @@ def gen_equipment() -> str:
         if slot in by_slot:
             reqs = ", ".join(f"{skill_name(sk)} {lv}" for sk, lv in item.get("requirements", {}).items()) or "—"
             by_slot[slot].append([
-                item["display_name"],
+                item_name(item["name"]),
                 item.get("attack_bonus", 0) or 0,
                 item.get("strength_bonus", 0) or 0,
                 item.get("defense_bonus", 0) or 0,
@@ -1231,7 +1331,7 @@ def gen_heirlooms() -> str:
                 ", ".join(f"{item[stat]} {label}" for stat, label in present),
             ])
 
-    return get_template("inventory/heirlooms").format(
+    return make_latex_safe(get_template("inventory/heirlooms"), ignore_keys=["gate_level"]).format(
         gate_level=85,  # mirrors HeirloomStats.GATE_LEVEL
         drop_table=table(["Heirloom", "Governing Skill", "Dropped By", "Drop Chance", "Description"], drop_rows),
         tool_table=table(["Heirloom", "Slot", "Governing Skill", "Efficiency at Item Lv 1", "Efficiency at Item Lv 99"], tool_rows),
@@ -1261,7 +1361,7 @@ def gen_combat_footer() -> str:
         enemy_heading=html_link("enemies"),
         dungeon_links=", ".join(html_link(dungeon["name"]) for dungeon in dungeons),
         boss_links="\n".join(
-            footer_link(html_link(boss_id), boss_icon(boss_id, boss.get("emoji", "")))
+            footer_link(html_link(boss_id), boss_icon(boss_id, boss.get("emoji", ""), 20))
             for boss_id, boss in sorted(bosses.items(), key=lambda x: bosses[x[0]].get("combat_level_required", 0))
         ),
         enemy_links=", ".join(
@@ -1379,7 +1479,7 @@ def gen_enemies() -> str:
             link(enemy_id),
             enemy["hp"],
             enemy.get("xp_drops", {}).get("combat", "—"),
-            ", ".join(dungeon["display_name"] for dungeon, _ in _get_dungeons_by_enemy(enemy_id)) or "—",
+            ", ".join(dungeon_name(dungeon["name"]) for dungeon, _ in _get_dungeons_by_enemy(enemy_id)) or "—",
         ]
         for enemy_id, enemy in sorted(enemies.items(), key=lambda x: x[1]["hp"])
     ]
@@ -1425,7 +1525,7 @@ def gen_enemy(enemy: dict) -> str:
     dungeon_rows = _enemy_dungeon_rows(enemy["name"])
 
     return get_template("combat/enemy").format(
-        name=enemy["display_name"],
+        name=enemy_name(enemy["name"]),
         hp=f"{hp:,}" if isinstance(hp, int) else hp,
         xp=f"{xp:,}" if isinstance(xp, int) else xp,
         attack=combat_stats.get("attack_level", 0) + combat_stats.get("attack_bonus", 0),
@@ -1443,8 +1543,8 @@ def gen_spells() -> str:
     spells = load("spells.json")
     assert isinstance(spells, dict)
     rows = sorted([
-        [s["display_name"], s["magic_level_required"], item_link(s["rune_type"]), s["rune_cost"], s["max_hit"]]
-        for s in spells.values()
+        [item_name(k), s["magic_level_required"], item_link(s["rune_type"]), s["rune_cost"], s["max_hit"]]
+        for k, s in spells.items()
     ], key=lambda r: r[1])
     return get_template("combat/spells").format(
         spell_table=table(["Spell", "Magic Level", "Rune", "Runes / Cast", "Max Hit"], rows),
@@ -1454,12 +1554,12 @@ def gen_spells() -> str:
 
 def _shop_item_rows(category: dict) -> list[list]:
     rows = []
-    for item in category.get("items", {}).values():
+    for item_id, item in category.get("items", {}).items():
         stock = item.get("stock", "unlimited")
         lvl_req = item.get("mercantile_level_required")
         req_str = f"Mercantile {lvl_req}" if lvl_req else "—"
         rows.append([
-            item["display_name"],
+            item_name(item_id),
             f"{item['price']:,}",
             stock.title() if isinstance(stock, str) else str(stock),
             req_str,
@@ -1533,12 +1633,12 @@ def gen_workers() -> str:
     )
 
     # Allowed skills (mirrors WorkerSkillsScreen: GATHERING minus FARMING, all CRAFTING_SKILLS, Prayer)
-    gathering_skills = ["Mining", "Fishing", "Woodcutting", "Agility", "Thieving"]
-    crafting_skills  = ["Smithing", "Cooking", "Fletching", "Crafting", "Firemaking", "Runecrafting", "Herblore", "Construction"]
+    gathering_skills = ["mining", "fishing", "woodcutting", "agility", "thieving"]
+    crafting_skills  = ["smithing", "cooking", "fletching", "crafting", "firemaking", "runecrafting", "herblore", "construction"]
     skill_rows = (
-        [["Gathering", s] for s in gathering_skills] +
-        [["Crafting",  s] for s in crafting_skills] +
-        [["Support",   "Prayer"]]
+        [["Gathering", skill_name(s)] for s in gathering_skills] +
+        [["Crafting",  skill_name(s)] for s in crafting_skills] +
+        [["Support",   skill_name("prayer")]]
     )
     skill_table = table(["Category", "Skill"], skill_rows)
 
@@ -1722,10 +1822,10 @@ def gen_carnival() -> str:
             case "pet":
                 prize_rows.append([link("pets", pet_name(key)), fmt_amount(prize["ticket_cost"]), pet_desc(key)])
             case "xp_lamp":
-                prize_rows.append([prize["display_name"], fmt_amount(prize["ticket_cost"]), prize["description"]])
+                prize_rows.append([carnival_prize_name(key), fmt_amount(prize["ticket_cost"]), carnival_prize_desc(key)])
             case _:
                 LOGGER.simple_warn(SimpleWarnType.MISSING_PRIZE_TYPE, key)
-                prize_rows.append([prize["display_name"], fmt_amount(prize["ticket_cost"]), prize["description"]])
+                prize_rows.append([carnival_prize_name(key), fmt_amount(prize["ticket_cost"]), carnival_prize_desc(key)])
 
     # Idle chance formula and active-game rewards mirrored from CarnivalSimulator /
     # CarnivalViewModel; only 4 active minigames are available at Fairgrounds tier 0
@@ -1938,10 +2038,10 @@ _MERC_TIER_ORDER = {"cheap": 0, "seasoned": 1, "elite": 2}
 def gen_mercenaries() -> str:
     mercs = load("mercenaries.json")
     assert isinstance(mercs, list)
-    ordered = sorted(mercs, key=lambda m: (_MERC_TIER_ORDER.get(m["tier"], 99), m["display_name"]))
+    ordered = sorted(mercs, key=lambda m: (_MERC_TIER_ORDER.get(m["tier"], 99), merc_name(m["id"])))
     rows = [
         [
-            f"{merc['emoji']} {merc['display_name']}",
+            f"{merc['emoji']} {merc_name(merc['id'])}",
             _merc_tier_label(merc["tier"]),
             merc["combat_style"].title(),
             f"{merc['attack_level']} (+{merc['attack_bonus']})",
