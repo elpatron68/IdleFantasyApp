@@ -36,7 +36,6 @@ import com.fantasyidler.util.formatCoins
 internal fun MercenaryCampSheet(
     pool: List<MercenaryData>,
     hiredMercs: List<MercContract>,
-    dailyResetHour: Int,
     maxParty: Int,
     onHire: (String) -> Unit,
     onDismissMerc: (String) -> Unit,
@@ -57,7 +56,7 @@ internal fun MercenaryCampSheet(
             fontWeight = FontWeight.Bold,
         )
         Text(
-            text  = stringResource(R.string.merc_camp_desc, dailyResetClockTime(context, dailyResetHour)),
+            text  = stringResource(R.string.merc_camp_desc),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -69,7 +68,7 @@ internal fun MercenaryCampSheet(
             fontWeight = FontWeight.SemiBold,
         )
         Spacer(Modifier.height(8.dp))
-        pool.forEach { merc ->
+        pool.sortedBy { it.hireCost }.forEach { merc ->
             val hired = merc.id in hiredIds
             Row(
                 modifier              = Modifier.fillMaxWidth().padding(vertical = 6.dp),

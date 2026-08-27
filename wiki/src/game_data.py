@@ -243,6 +243,10 @@ def item_name(item: str) -> str:
     return item_title
 
 
+def house_item_name(item: str) -> str:
+    return _standard_string_resolution(item, "house_item_{}", SimpleWarnType.HOUSE_ITEM_NAME)
+
+
 def item_desc(item: str) -> str:
     # Find item description
     item_description = None
@@ -372,6 +376,17 @@ def seasonal_reward_desc(event: str, tokens: int) -> str:
 
 def seasonal_market_name(offer: str) -> str:
     return _standard_string_resolution(offer, "seasonal_market_{}_name", SimpleWarnType.SEASONAL_MARKET_NAME)
+
+
+def prestige_effect_desc(effect: str, value: float, unlock: str | None = None) -> str:
+    key = f"prestige_effect_{effect}"
+    if key not in STRINGS:
+        LOGGER.simple_warn(SimpleWarnType.PRESTIGE_EFFECT_DESC, effect)
+        return ""
+    if effect == "unlock_recipe":
+        return STRINGS.get_string(key, item_name(unlock))
+    formatted = int(value) if value == int(value) else value
+    return STRINGS.get_string(key, formatted)
 
 
 # ---------------------------------------------------------------------------

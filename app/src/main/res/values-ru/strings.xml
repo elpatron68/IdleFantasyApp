@@ -7,7 +7,7 @@
     <string name="nav_combat">Битва</string>
     <string name="nav_home">Домой</string>
     <string name="nav_crafting">Изготовление</string>
-    <string name="nav_quests">Квесты</string>
+    <string name="nav_quests">Задания</string>
     <string name="nav_profile">Профиль</string>
 
     <!-- ===== Common buttons ===== -->
@@ -32,8 +32,8 @@
     <string name="btn_clear_all">Очистить всё</string>
     <string name="btn_inspect">Осмотреть</string>
     <string name="btn_view_drops">Посмотреть добычу</string>
-    <string name="btn_start_quest">Начать квест</string>
-    <string name="btn_abandon_quest">Прервать квест</string>
+    <string name="btn_start_quest">Начать задание</string>
+    <string name="btn_abandon_quest">Прервать задание</string>
     <string name="btn_enter_dungeon">Войти в подземелье</string>
     <string name="btn_enter_arena">Войти на арену</string>
     <string name="btn_activate">Активировать</string>
@@ -92,7 +92,7 @@
     <string name="worker_boss_defeated_title">Работник: Побеждён %1$s!</string>
     <string name="worker_dungeon_died_title">Работник: %1$s — умер</string>
     <string name="worker_dungeon_complete_title">Работник: %1$s подземелье пройдено!</string>
-    <string name="worker_skill_complete_title">Worker: %1$s работа завершена</string>
+    <string name="worker_skill_complete_title">Работник: %1$s работа завершена</string>
     <string name="label_training">Тренировка</string>
     <string name="label_gathering_skills">Добыча</string>
     <string name="label_crafting_skills">Навыки изготовления</string>
@@ -262,10 +262,12 @@
         <item quantity="other">%1$d убийств</item>
     </plurals>
     <plurals name="plural_quests_completed">
-        <item quantity="one">%1$d квест завершён</item>
-        <item quantity="few">%1$d квеста завершено</item>
-        <item quantity="many">%1$d квестов завершено</item>
-        <item quantity="other">%1$d квестов завершено</item>
+        <item quantity="one">%1$d задание завершено</item>
+        <item quantity="few">%1$d заданий завершено</item>
+        <item quantity="many">%1$d заданий завершено</item>
+        <item quantity="other">%1$d заданий завершено</item>
+        <item quantity="zero">%1$d заданий завершено</item>
+        <item quantity="two">%1$d задания завершено</item>
     </plurals>
 
     <!-- ===== Error messages ===== -->
@@ -281,8 +283,8 @@
     <string name="error_patch_occupied">Этот участок уже засажен.</string>
     <string name="error_patch_empty">Этот участок пуст.</string>
     <string name="error_crop_not_ready">Этот урожай ещё не готов.</string>
-    <string name="error_quest_active">У вас уже есть активный квест.</string>
-    <string name="error_quest_requirements_not_met">Вы не соответствуете требованиям этого квеста.</string>
+    <string name="error_quest_active">У вас уже есть активное задание.</string>
+    <string name="error_quest_requirements_not_met">Вы не соответствуете требованиям этого задания.</string>
     <string name="error_dungeon_level_too_low">Ваш боевой уровень слишком низкий для этого подземелья.</string>
     <string name="error_unknown">Что-то пошло не так. Пожалуйста, попробуйте снова.</string>
 
@@ -316,13 +318,13 @@
     <string name="settings_profile_layout_desc">Боковая панель или верхние вкладки</string>
     <string name="settings_profile_layout_rail">Панель</string>
     <string name="settings_profile_layout_tabs">Вкладки</string>
-    <string name="settings_quest_dots">Точки квестов на навыке</string>
-    <string name="settings_quest_dots_desc">Показывает золотую точку на навыках, для которых открыт квест</string>
+    <string name="settings_quest_dots">Точки заданий на навыке</string>
+    <string name="settings_quest_dots_desc">Показывает золотую точку на навыках, для которых открыто задание</string>
     <string name="settings_prestige_notifications">Значки с уведомлением о престиже</string>
     <string name="settings_prestige_notifications_desc">Показывать значок уведомления при навигации, когда навык готов к получению престижа.</string>
     <string name="label_switch_character">Сменить персонажа</string>
     <string name="settings_daily_reset_time">Время обновления</string>
-    <string name="settings_daily_reset_time_desc">Местное время, в которое будет происходить обновление ежедневных квестов, ежедневные задания гильдий и еженедельные задания. Его изменение не приводит к дополнительному сбросу.</string>
+    <string name="settings_daily_reset_time_desc">Местное время, в которое будет происходить обновление ежедневных заданий, ежедневные задания гильдий и еженедельные задания. Его изменение не приводит к дополнительному сбросу.</string>
     <string name="settings_compact_numbers">Компактные числа</string>
     <string name="settings_compact_numbers_desc">Сокращать большие значения (например, 2,46М вместо 2 461 940)</string>
     <string name="settings_home_screen">Главный экран</string>
@@ -359,7 +361,7 @@
     <string name="label_daily">Ежедневные</string>
     <string name="label_weekly">Еженедельно</string>
     <string name="label_timed">Временные</string>
-    <string name="label_daily_quests">Ежедневные квесты</string>
+    <string name="label_daily_quests">Ежедневные задания</string>
     <string name="label_daily_reset">Обновление в %1$s</string>
     <string name="label_weekly_reset">Обновляется в понедельник в %1$s</string>
     <string name="weekly_bonus_title">Недельный бонус!</string>
@@ -370,8 +372,8 @@
     <string name="label_weekly_info_complete">За каждое еженедельное испытание выдаются монеты в зависимости от требуемого уровня. Выполните все 5, чтобы получить бонус: 100 000 монет. У вас уже есть всё Божественное снаряжение!</string>
     <string name="label_daily_reward_pity">2 000 монет (1/%1$d: снаряжение дварфов)</string>
     <string name="label_daily_reward_complete">2 000 монет</string>
-    <string name="msg_daily_claimed_coins">Ежедневный квест выполнен! +2 000 монет.</string>
-    <string name="msg_daily_claimed_dwarven">Ежедневный квест выполнен! Вы нашли %1$s!</string>
+    <string name="msg_daily_claimed_coins">Ежедневное задание выполнено! +2 000 монет.</string>
+    <string name="msg_daily_claimed_dwarven">Ежедневное задание выполнено! Вы нашли %1$s!</string>
     <string name="label_hide_completed">Скрыть завершённые</string>
 
     <!-- ===== OnboardingScreen ===== -->
@@ -391,10 +393,10 @@
     <string name="settings_changelog_btn">Просмотр</string>
     <string name="settings_foss_desc">Idle Fantasy — свободное программное обеспечение с открытым исходным кодом.</string>
     <string name="settings_reset_title">Сбросить прогресс</string>
-    <string name="settings_reset_desc">Удалить все навыки, предметы, квесты и монеты</string>
+    <string name="settings_reset_desc">Удалить все навыки, предметы, задания и монеты</string>
     <string name="settings_reset_btn">Сбросить</string>
     <string name="reset_confirm1_title">Сбросить весь прогресс?</string>
-    <string name="reset_confirm1_body">Это удалит весь опыт навыков, предметы, монеты и прогресс квестов. Это нельзя отменить.</string>
+    <string name="reset_confirm1_body">Это удалит весь опыт навыков, предметы, монеты и прогресс заданий. Это нельзя отменить.</string>
     <string name="reset_confirm2_title">Вы уверены?</string>
     <string name="reset_confirm2_body">Всё будет потеряно. Вы начнёте с самого начала.</string>
     <string name="reset_confirm2_btn">Да, сбросить всё</string>
@@ -527,11 +529,11 @@
     <string name="guild_not_unlocked">Ещё не открыто</string>
     <string name="guild_dailies_done_today">Ежедневные задания выполнены</string>
     <string name="guild_dailies_remaining_today">Осталось %1$d сегодня</string>
-    <string name="guild_do_dailies_hint">Выполняйте ежедневные квесты, чтобы перейти на следующий ранг</string>
-    <string name="guild_quest_gate_blocked">Завершите квесты для повышения ранга</string>
-    <string name="guild_quest_required">Квест необходим для повышения</string>
-    <string name="guild_progress_dailies_and_quest">Завершено %1$d/%2$d ежедневных запросов и квестов для продвижения</string>
-    <string name="guild_progress_dailies_only">Завершено %1$d/%2$d ежедневных запросов для продвижения</string>
+    <string name="guild_do_dailies_hint">Выполняйте ежедневные задания, чтобы перейти на следующий ранг</string>
+    <string name="guild_quest_gate_blocked">Завершите задания для повышения ранга</string>
+    <string name="guild_quest_required">Задание необходимое для повышения</string>
+    <string name="guild_progress_dailies_and_quest">Завершено %1$d/%2$d ежедневных поручения и заданий для продвижения</string>
+    <string name="guild_progress_dailies_only">Завершено %1$d/%2$d ежедневных поручений для продвижения</string>
     <string name="home_died_message">Вы погибли и потеряли большую часть добычи.</string>
     <string name="home_xp_boost_was_active">Бонус ×2 опыта был активен</string>
     <string name="home_xp_boost_active">Бонус ×2 опыта активен — %1$s осталось</string>
@@ -741,7 +743,7 @@
     <string name="quest_legend_guild_daily">Ежедневное задание гильдии</string>
     <string name="quest_legend_guild">Задание гильдии</string>
     <string name="quest_legend_quest">Задание</string>
-    <string name="quest_legend_gold_dot">Доступен временный квест.</string>
+    <string name="quest_legend_gold_dot">Доступно временное задание.</string>
     <string name="quest_legend_notes">Тусклые значки пока нельзя выполнить (не хватает уровня или материалов). Маленькая надстрочная цифра означает, что несколько заданий этого типа требуют одного и того же.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
     <string name="shop_qty_in_inv">×%1$s в инвентаре</string>
@@ -770,7 +772,7 @@
     <string name="crafting_needed_have">%1$d (есть %2$d)</string>
     <!-- Translator note: %1$d = quantity in inventory -->
     <string name="crafting_in_inventory">В инвентаре: ×%1$d</string>
-    <string name="crafting_quest_targets">Цели квеста</string>
+    <string name="crafting_quest_targets">Цели задания</string>
     <string name="quest_fill_daily">Ежедневно</string>
     <string name="quest_fill_weekly">Еженедельно</string>
     <string name="quest_fill_guild">Гильдия</string>
@@ -796,7 +798,7 @@
     <string name="farming_planted">Посажено %1$d %2$s</string>
 
     <!-- ===== QuestsScreen ===== -->
-    <string name="quests_none_in_category">Нет квестов в этой категории.</string>
+    <string name="quests_none_in_category">Нет заданий в этой категории.</string>
 
     <!-- ===== CharacterSetupSheet ===== -->
     <string name="character_create_title">Создайте персонажа</string>
@@ -831,8 +833,8 @@
     <string name="onboarding_sessions_desc">Выберите навык и начните тренировочную сессию. Сессии работают в фоне, даже когда приложение закрыто. Возвращайтесь, чтобы забрать добычу и опыт.</string>
     <string name="onboarding_progress_title">Поднимайтесь выше</string>
     <string name="onboarding_progress_desc">Добывайте руду, чтобы плавить слитки, затем куйте лучшее оружие и броню. Надевайте крепкое снаряжение, чтобы проходить подземелья и боссов. Лучшие инструменты ускоряют добычу, а снаряжение высокого уровня открывает контент, где слабое не выживет.</string>
-    <string name="onboarding_quests_title">Квесты и питомцы</string>
-    <string name="onboarding_quests_desc">Выполняйте квесты за опыт. Редкие питомцы могут появиться при тренировке навыков и дают постоянный бонус опыта.</string>
+    <string name="onboarding_quests_title">Задания и питомцы</string>
+    <string name="onboarding_quests_desc">Выполняйте задания для получения опыта. Редкие питомцы могут появиться при тренировке навыков и дают постоянный бонус опыта.</string>
     <string name="onboarding_welcome_desc">RPG в стиле ожидания, вдохновлённая классическими MMORPG. Тренируйте навыки, сражайтесь в подземельях, изготовляйте снаряжение. Всё офлайн, без аккаунтов и рекламы.</string>
 
     <!-- Quantity picker quick buttons -->
@@ -907,7 +909,7 @@
     <!-- ===== Achievements ===== -->
     <string name="achievement_group_levelling">Уровни</string>
     <string name="achievement_group_combat">Бой</string>
-    <string name="achievement_group_quests">Квесты</string>
+    <string name="achievement_group_quests">Задания</string>
     <string name="achievement_group_collection">Коллекция</string>
 
     <string name="achievement_total_50_name">Авантюрист</string>
@@ -942,16 +944,16 @@
     <string name="achievement_combat_113_name">Максимальный боец</string>
     <string name="achievement_combat_113_desc">Достичь максимального боевого уровня 113</string>
 
-    <string name="achievement_quest_1_name">Решатель квестов</string>
-    <string name="achievement_quest_1_desc">Выполнить 1 квест</string>
+    <string name="achievement_quest_1_name">Решала</string>
+    <string name="achievement_quest_1_desc">Выполнить 1 задание</string>
     <string name="achievement_quest_5_name">Усердный</string>
-    <string name="achievement_quest_5_desc">Выполнить 5 квестов</string>
-    <string name="achievement_quest_25_name">Охотник за квестами</string>
-    <string name="achievement_quest_25_desc">Выполнить 25 квестов</string>
-    <string name="achievement_quest_50_name">Мастер квестов</string>
-    <string name="achievement_quest_50_desc">Выполнить 50 квестов</string>
-    <string name="achievement_quest_all_name">Чемпион квестов</string>
-    <string name="achievement_quest_all_desc">Выполнить все квесты</string>
+    <string name="achievement_quest_5_desc">Выполнить 5 заданий</string>
+    <string name="achievement_quest_25_name">Охотник за заданиями</string>
+    <string name="achievement_quest_25_desc">Выполнить 25 заданий</string>
+    <string name="achievement_quest_50_name">Мастер заданий</string>
+    <string name="achievement_quest_50_desc">Выполнить 50 заданий</string>
+    <string name="achievement_quest_all_name">Чемпион заданий</string>
+    <string name="achievement_quest_all_desc">Выполнить все задания</string>
 
     <string name="achievement_pet_first_name">Друг животных</string>
     <string name="achievement_pet_first_desc">Найти первого питомца</string>
@@ -976,15 +978,15 @@
     <!-- Guild Hall -->
     <string name="guild_hall_title">Зал гильдий</string>
     <string name="guild_hall_desc">Вступайте в гильдии и выполняйте ежедневные поручения, чтобы повышать ранг</string>
-    <string name="guild_hall_intro">Гильдии награждают за действия, которые вы уже выполняете. Завершайте квесты и ежедневные поручения, чтобы получать межнавыковые материалы, монеты и опыт — специалисты получат ресурсы даже от навыков, которые не тренируют.</string>
+    <string name="guild_hall_intro">Гильдии награждают за действия, которые вы уже выполняете. Завершайте задания и ежедневные поручения, чтобы заработать материалы, монеты и опыт — специалисты получат ресурсы даже от навыков, которые не тренируют.</string>
     <string name="guild_level_label">Уровень %1$d</string>
     <string name="guild_level_max">Уровень 10 (Макс.)</string>
-    <string name="guild_tab_quests">Квесты</string>
+    <string name="guild_tab_quests">Задания</string>
     <string name="guild_tab_dailies">Ежедневные поручения</string>
     <string name="guild_daily_resets_in">Обновляется ежедневно в %1$s</string>
     <string name="guild_locked_hint">Требуется уровень гильдии %1$d</string>
-    <string name="guild_no_dailies">Завершайте квесты гильдии, чтобы открывать ежедневные поручения.</string>
-    <string name="guild_dailies_all_done">Все ежедневные запросы на сегодняшний день выполнены. Вернитесь после обновления дня.</string>
+    <string name="guild_no_dailies">Завершайте задания гильдии, чтобы открывать ежедневные поручения.</string>
+    <string name="guild_dailies_all_done">Все ежедневные поручения на сегодняшний день выполнены. Завтра они снова обновятся.</string>
     <string name="guild_contribute_inventory">Передать из инвентаря (%1$d доступно)</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s для %4$s.</string>
     <string name="guild_quest_desc_kill">Победить %1$d врагов в ближнем бою (%2$s).</string>
@@ -992,12 +994,12 @@
     <string name="guild_quest_desc_sessions">Завершить %1$d сессий %2$s для %3$s.</string>
     <string name="guild_quest_desc_trade">Завершить %1$d торговых маршрутов %2$s для %3$s.</string>
     <string name="guild_quest_desc_earn_coins">Заработать %1$s монет через торговые маршруты для %2$s.</string>
-    <string name="guild_quest_desc_pickpocket">Обкрадите %2$s %1$d раз для %3$s.</string>
+    <string name="guild_quest_desc_pickpocket">Обокрасть %2$s %1$d раз для %3$s.</string>
     <string name="guild_combat_warriors">ближний бой</string>
     <string name="guild_combat_archers">дальний бой</string>
     <string name="guild_combat_mages">магия</string>
     <string name="guild_rep_label">%1$d / %2$d поручений</string>
-    <string name="guild_quest_complete">Квест завершён: %1$s</string>
+    <string name="guild_quest_complete">Задание завершён: %1$s</string>
     <string name="guild_daily_complete">Награда за ежедневное поручение получена!</string>
     <string name="guild_name_mining">Гильдия рудокопов</string>
     <string name="guild_name_fishing">Гильдия рыболовов</string>
@@ -1300,7 +1302,7 @@
     <string name="house_item_bookshelf_dark_4">Тёмная книжная полка IV</string>
     <string name="house_sub_paintings">Картины</string>
     <string name="house_sub_wall_shelves">Полки</string>
-    <string name="house_sub_quest_boards">Доска для квестов</string>
+    <string name="house_sub_quest_boards">Доска заданий</string>
     <string name="house_item_wallshelf_1">Настенная полка I</string>
     <string name="house_item_wallshelf_2">Настенная полка II</string>
     <string name="house_item_wallshelf_3">Настенная полка III</string>
@@ -1309,9 +1311,9 @@
     <string name="house_item_wallshelf_6">Настенная полка VI</string>
     <string name="house_item_wallshelf_7">Настенная полка VII</string>
     <string name="house_item_wallshelf_8">Настенная полка VIII</string>
-    <string name="house_item_questboard_1">Доска для квестов I</string>
-    <string name="house_item_questboard_2">Доска для квестов II</string>
-    <string name="house_item_questboard_3">Доска для квестовIII</string>
+    <string name="house_item_questboard_1">Доска заданий I</string>
+    <string name="house_item_questboard_2">Доска заданий II</string>
+    <string name="house_item_questboard_3">Доска заданий III</string>
     <string name="house_sub_other">Другое</string>
     <string name="house_item_gold_chest">Позолоченный сундук</string>
     <string name="house_item_gold_nugget">Золотые самородки</string>
@@ -1534,8 +1536,8 @@
     <string name="town_upgrade_fail_mats">Недостаточно материалов</string>
     <string name="town_inn_active_bonus">+%1$d%% XP работника за сессию</string>
     <string name="town_inn_no_bonus">Улучшите для бонуса XP работникам</string>
-    <string name="town_guild_active_bonus">-%1$d%% требований квестов гильдии</string>
-    <string name="town_guild_no_bonus">Улучшите для снижения требований квестов</string>
+    <string name="town_guild_active_bonus">-%1$d%% к требованиям заданий от гильдий</string>
+    <string name="town_guild_no_bonus">Улучшите для снижения требований к заданиям гильдий</string>
     <string name="town_church_active_bonus">Благословения длятся %1$dh (по умолчанию: 24ч)</string>
     <string name="town_church_no_bonus">Улучшите для продления благословений</string>
     <string name="town_building_fairgrounds_name">Ярмарочная площадь</string>
@@ -1881,7 +1883,7 @@
     <string name="raid_no_mercs">Нет нанятых наемников.</string>
     <string name="merc_camp_open">Нанять наемников</string>
     <string name="merc_camp_title">Лагерь наемников</string>
-    <string name="merc_camp_desc">Контракты действуют до ежедневного сброса в %1$s. Каждый день прибывает новый набор наемников.</string>
+    <string name="merc_camp_desc">Contracts last for 24 hours after hiring. Каждый день прибывает новый набор наемников.</string> <!-- untranslated -->
     <string name="merc_hire">Нанять</string>
     <string name="merc_dismiss">Уволить</string>
     <string name="merc_hired">%1$s присоединяется к вашей группе до тех пор, пока не начнется ежедневная сброс.</string>
@@ -1890,13 +1892,13 @@
     <string name="merc_not_enough_coins">Не хватает монет, чтобы нанять %1$s.</string>
     <string name="merc_not_available">%1$s сегодня он недоступен.</string>
     <string name="merc_contract_remaining">Контракты: %1$s осталось</string>
-    <string name="combat_log_ally_hit">Ваши наемники нанесли удар %1$s по %2$d</string>
+    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="raid_allies_down">Наемники повержены: %1$d</string>
     <string name="merc_tier_cheap">Наемник</string>
     <string name="merc_tier_seasoned">Ветеран</string>
     <string name="merc_tier_elite">Чемпион</string>
     <string name="merc_stats">Атк %1$d  Сил %2$d  Защ %3$d  HP %4$d</string>
-    <string name="merc_cost_per_day">%1$s монет в день</string>
+    <string name="merc_cost_per_day">%1$s coins</string> <!-- untranslated -->
     <string name="merc_bran_the_sellsword_name">Бран Наёмник</string>
     <string name="merc_wren_the_stray_name">Рен Бродяга</string>
     <string name="merc_tam_the_grey_name">Тэм Серый</string>
@@ -2255,7 +2257,7 @@
     <string name="prestige_requires_99">Достигните 99-го уровня для увеличения престижа (сейчас %1$d).</string>
     <string name="prestige_maxed_cap">Достигнут максимальный уровень престижа. Каждое очко, которое может заработать этот навык, принадлежит вам.</string>
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
-    <string name="prestige_confirm_message_points">Ваш уровень %1$s будет сброшен до 1, и вы заработаете %2$d очка престижа, которые можно потратить в дереве навыков. Снаряжение, которое больше не соответствует предъявляемым требованиям, будет заменено, а невостребованный ежедневный квест %1$s будет сброшен. Вы также получите 2x %1$s опыта на 48 часов, чтобы ускорить повышение.</string>
+    <string name="prestige_confirm_message_points">Ваш уровень %1$s будет сброшен до 1, и вы заработаете %2$d очка престижа, которые можно потратить в дереве навыков. Снаряжение, которое больше не соответствует предъявляемым требованиям, будет заменено, а невостребованное ежедневное задание %1$s будет сброшено. Вы также получите 2x %1$s опыта на 48 часов, чтобы ускорить повышение.</string>
     <string name="prestige_respec">Сбросить очки</string>
     <!-- Translator note: %1$s = formatted remaining cooldown -->
     <string name="prestige_respec_available_in">Сброс доступен через %1$s</string>
@@ -2292,34 +2294,34 @@
     <!-- Translator note: %1$s = yield percent per interval (may be fractional) -->
     <string name="prestige_effect_flow_rate">Поток: +%1$s%% выгода за период или постоянную активность, достигает до +100%%.</string>
     <!-- Translator note: %1$d = minutes removed from the flow interval -->
-    <string name="prestige_effect_flow_interval">Период потока уменьшен до %1$d минут</string>
-    <string name="prestige_effect_combat_stat">+%1$d эффективные уровни в бою.</string>
+    <string name="prestige_effect_flow_interval_reduction">Период потока уменьшен до %1$d минут</string>
+    <string name="prestige_effect_combat_stat_flat">+%1$d эффективные уровни в бою.</string>
     <!-- Translator note: %1$s = minutes (may be fractional) -->
-    <string name="prestige_effect_session_floor">Сессии до %1$s минут короче на уровне 99.</string>
+    <string name="prestige_effect_session_floor_min">Сессии до %1$s минут короче на уровне 99.</string>
     <string name="prestige_effect_cape_scaling">Бонусы плаща за этот навык умножаются ×%1$d.</string>
-    <string name="prestige_effect_bonus_roll">+%1$d%% шанс найти драгоценный камень во время добычи руды.</string>
+    <string name="prestige_effect_bonus_roll_pct">+%1$d%% шанс найти драгоценный камень во время добычи руды.</string>
     <string name="prestige_effect_coin_pct">+%1$d%% монет за этот навык.</string>
-    <string name="prestige_effect_crop_rotation">+%1$d%% урожайность при посадке культуры, отличной от предыдущего урожая.</string>
+    <string name="prestige_effect_crop_rotation_pct">+%1$d%% урожайность при посадке культуры, отличной от предыдущего урожая.</string>
     <string name="prestige_effect_crop_rotation_always">Бонус за севооборот распространяется на все культуры, при этом севооборот не требуется.</string>
-    <string name="prestige_effect_tool_eff">Эффективность инструмента +%1$d%%.</string>
-    <string name="prestige_effect_per_level">+%1$s инструментов или боевой бонус за каждый уровень этого навыка.</string>
-    <string name="prestige_effect_success_chance">Шанс успешной кражи +%1$d%%.</string>
-    <string name="prestige_effect_reclaim">+%1$d%% шанс восстановить потраченные стрелы и руны после боя.</string>
-    <string name="prestige_effect_heal">Еда лечит на +%1$d%% больше в бою.</string>
-    <string name="prestige_effect_death_keep">Сохранить дополнительно %1$d%% опыта и добычи при поражении.</string>
+    <string name="prestige_effect_tool_eff_pct">Эффективность инструмента +%1$d%%.</string>
+    <string name="prestige_effect_per_level_bonus">+%1$s инструментов или боевой бонус за каждый уровень этого навыка.</string>
+    <string name="prestige_effect_success_chance_pct">Шанс успешной кражи +%1$d%%.</string>
+    <string name="prestige_effect_reclaim_pct">+%1$d%% шанс восстановить потраченные стрелы и руны после боя.</string>
+    <string name="prestige_effect_heal_pct">Еда лечит на +%1$d%% больше в бою.</string>
+    <string name="prestige_effect_death_keep_pct">Сохранить дополнительно %1$d%% опыта и добычи при поражении.</string>
     <string name="prestige_effect_queue_slot">+%1$d слот очереди сессий.</string>
-    <string name="prestige_effect_pet_boost">Питомец делает этот навык на %1$d%% сильнее.</string>
-    <string name="prestige_effect_blessing_duration">Благословение Церкви длится на %1$d%% дольше.</string>
-    <string name="prestige_effect_blessing_cost">Стоимость благословения Церкви требует на %1$d%% меньше костей.</string>
-    <string name="prestige_effect_potion_bonus">Боевые зелья дают на +%1$d больше к своим статам.</string>
-    <string name="prestige_effect_input_save">%1$d%% материалов возврается.</string>
-    <string name="prestige_effect_builder_discount">Стоимость модернизации городских зданий на %1$d%% меньше.</string>
-    <string name="prestige_effect_sell_price">Стоимость продажи в магазине +%1$d%%.</string>
-    <string name="prestige_effect_slayer_points">Очков убийцы +%1$d%%.</string>
-    <string name="prestige_effect_double_hit">%1$d%% шанс нанести второй удар в ближнем бою.</string>
+    <string name="prestige_effect_pet_boost_pct">Питомец делает этот навык на %1$d%% сильнее.</string>
+    <string name="prestige_effect_blessing_duration_pct">Благословение Церкви длится на %1$d%% дольше.</string>
+    <string name="prestige_effect_blessing_cost_pct">Стоимость благословения Церкви требует на %1$d%% меньше костей.</string>
+    <string name="prestige_effect_potion_bonus_flat">Боевые зелья дают на +%1$d больше к своим статам.</string>
+    <string name="prestige_effect_input_save_pct">%1$d%% материалов возврается.</string>
+    <string name="prestige_effect_builder_discount_pct">Стоимость модернизации городских зданий на %1$d%% меньше.</string>
+    <string name="prestige_effect_sell_price_pct">Стоимость продажи в магазине +%1$d%%.</string>
+    <string name="prestige_effect_slayer_points_pct">Очков убийцы +%1$d%%.</string>
+    <string name="prestige_effect_double_hit_pct">%1$d%% шанс нанести второй удар в ближнем бою.</string>
     <string name="prestige_effect_second_chance">Промахи в ближнем бою повторяются один раз.</string>
     <string name="prestige_effect_foretell_slots">+%1$d слотов предсказаний для заданий убийцы.</string>
-    <string name="prestige_effect_multi_task">Убийства в подземельях также учитываются при выполнении предсказанных заданий.</string>
+    <string name="prestige_effect_slayer_multi_task">Убийства в подземельях также учитываются при выполнении предсказанных заданий.</string>
     <string name="prestige_effect_unlock_recipe">Разблокирует рецепт оперения %1$s.</string>
 
     <!-- New distinctive base path names (variety pass) -->

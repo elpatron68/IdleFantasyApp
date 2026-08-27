@@ -125,7 +125,6 @@ data class CombatUiState(
     val mercPool: List<MercenaryData> = emptyList(),
     /** Mercenaries currently under contract (max 3). */
     val hiredMercs: List<MercContract> = emptyList(),
-    val dailyResetHour: Int = 6,
 )
 
 /** A hired mercenary resolved for display: roster data plus contract expiry. */
@@ -310,7 +309,6 @@ class CombatViewModel @Inject constructor(
                 isQueueFull             = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
                 mercPool                = mercRepo.dailyPool(flags),
                 hiredMercs              = mercRepo.activeContracts(flags).map { (m, h) -> MercContract(m, h.expiresAt) },
-                dailyResetHour          = flags.dailyResetHour,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())

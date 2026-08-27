@@ -1006,8 +1006,8 @@
     <string name="item_yew_longbow_desc">Grande arco in tasso.</string>
     <string name="item_magic_shortbow_desc">Piccolo arco in legno magico.</string>
     <string name="item_magic_longbow_desc">Grande arco in legno magico.</string>
-    <string name="item_elven_shortbow_desc">A swift bow strung with elven silk. Only elven hands know the fletching.</string> <!-- untranslated -->
-    <string name="item_elven_longbow_desc">A tall elven warbow of layered redwood. Only elven hands know the fletching.</string> <!-- untranslated -->
+    <string name="item_elven_shortbow_desc">Un arco tirato con seta elfica. Solo le sapienti mani elfiche possono costruirlo.</string>
+    <string name="item_elven_longbow_desc">Un grande arco di sequoia. Solo le sapienti mani elfiche possono costruirlo.</string>
     <string name="item_tower_crossbow_name">Balestra della Torre</string>
     <string name="item_tower_crossbow_desc">Balestra altamente efficiente, in metallo estratto dalla Torre.</string>
     <string name="item_arcane_staff_desc">Bastone trovato nelle Rovine Arcane, impregnato del potere magico che ha annientato gli abitanti di questo luogo.</string>
@@ -1143,7 +1143,7 @@
     <string name="item_agility_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP per sessione.</string>
     <string name="item_slayer_cape_name">Mantello Mercenario</string>
     <string name="item_slayer_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come sicario. Fornisce un bonus di 10% ai punti ricevuti.</string>
-    <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
+    <string name="item_attack_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in combattimento di mischia. Fornisce un bonus del 10% all\'XP in mischia.</string>
     <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
     <string name="item_defense_cape_desc" formatted="false">Awarded for reaching level 99 Defense. Grants 10% bonus Defense XP.</string> <!-- untranslated -->
     <string name="item_warriors_guild_cape_desc" formatted="false">Awarded for reaching Warriors Guild level 10. Grants 5% bonus Attack, Strength, and Defense XP.</string> <!-- untranslated -->

@@ -60,5 +60,5 @@
     <string name="quest_weekly_farmer_name">Урожай Сезона</string>
     <string name="quest_weekly_farmer_desc">Соберите 30 урожаев на этой неделе.</string>
     <string name="quest_weekly_guild_supporter_name">Помощник гильдии</string>
-    <string name="quest_weekly_guild_supporter_desc">Выполните 20 ежедневных заданий гильдии на этой неделе.</string>
+    <string name="quest_weekly_guild_supporter_desc">Выполните 20 ежедневных поручений гильдии на этой неделе.</string>
 </resources>

@@ -16,10 +16,10 @@ from pathlib import Path
 from typing import Callable
 
 from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO
-from wiki.src.game_data import STRINGS, load, title, item_name, skill_name, enemy_name, guild_name, trade_route_name, \
-    thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, pet_name, boss_name, \
-    boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, expedition_desc, \
-    seasonal_event_name, seasonal_reward_desc
+from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name, skill_name, enemy_name, guild_name, \
+    trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
+    pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
+    expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc
 from wiki.src.page_hierarchy import PageHierarchy
 from wiki.src.wiki_logs import LOGGER, SimpleWarnType
 
@@ -587,45 +587,6 @@ def gen_wiki_page_types() -> str:
 _PRESTIGE_RACES = ["human", "elf", "dwarf", "orc", "gnome", "halfling"]
 
 
-def _prestige_effect_text(node: dict) -> str:
-    """Wiki wording for a prestige node effect, matching the in-game strings."""
-    v = node.get("value", 0)
-    vs = f"{v:g}"
-    if node["effect"] == "unlock_recipe":
-        return f"Unlocks the {item_name(node.get('unlock', ''))} fletching recipe"
-    return {
-        "xp_pct":                  f"+{vs}% XP in this skill",
-        "yield_pct":               f"+{vs}% items from this skill's sessions",
-        "coin_pct":                f"+{vs}% coins from this skill",
-        "tool_eff_pct":            f"Tool efficiency +{vs}%",
-        "bonus_roll_pct":          f"+{vs}% gem find chance while mining",
-        "flow_rate":               f"Flow-state: +{vs}% yield per interval of continuous activity, up to +100%",
-        "flow_interval_reduction": f"Flow-state interval shortened by {vs} minutes",
-        "combat_stat_flat":        f"+{vs} effective levels in combat",
-        "session_floor_min":       f"Sessions up to {vs} minutes shorter at level 99",
-        "pet_boost_pct":           f"Pet boosts for this skill are {vs}% stronger",
-        "input_save_pct":          f"{vs}% of crafting materials are refunded",
-        "reclaim_pct":             f"+{vs}% chance to recover spent arrows and runes after combat",
-        "sell_price_pct":          f"Shop sell prices +{vs}%",
-        "builder_discount_pct":    f"Town building upgrades cost {vs}% less",
-        "blessing_cost_pct":       f"Church blessings cost {vs}% fewer bones",
-        "blessing_duration_pct":   f"Church blessings last {vs}% longer",
-        "heal_pct":                f"Food heals +{vs}% more in combat",
-        "death_keep_pct":          f"Keep an extra {vs}% of XP and loot when defeated",
-        "success_chance_pct":      f"Pickpocket success chance +{vs}%",
-        "crop_rotation_pct":       f"+{vs}% yield when planting a different crop than the last harvest",
-        "crop_rotation_always":    "The rotation bonus applies to every crop, no rotation needed",
-        "double_hit_pct":          f"{vs}% chance to strike a second melee hit",
-        "second_chance":           "Missed melee attacks are rerolled once",
-        "foretell_slots":          f"+{vs} foretold slayer task slots",
-        "slayer_points_pct":       f"Slayer task points +{vs}%",
-        "slayer_multi_task":       "Dungeon kills also count toward matching foretold tasks",
-        "queue_slot":              f"+{vs} session queue slot",
-        "potion_bonus_flat":       f"Combat potions grant +{vs} more to their stats",
-        "per_level_bonus":         f"+{vs} tool or combat bonus per level of this skill",
-    }.get(node["effect"], node["effect"])
-
-
 def gen_prestige_race_tables() -> str:
     trees = load("prestige_paths.json")
     assert isinstance(trees, list)
@@ -641,7 +602,7 @@ def gen_prestige_race_tables() -> str:
         rows = [
             [
                 skill.replace("_", " ").title(),
-                _prestige_effect_text(node) + (f" (shared with {', '.join(shared)})" if shared else ""),
+                prestige_effect_desc(node["effect"], node.get("value", 0), node.get("unlock")) + (f" (shared with {', '.join(shared)})" if shared else ""),
                 node["cost"],
             ]
             for skill, node, shared in by_race[race]
@@ -2012,7 +1973,7 @@ def gen_housing() -> str:
     furniture_rows = sorted(
         (
             [
-                item_name(item.get("name_key") or item_id),
+                house_item_name(item.get("name_key") or item_id),
                 item.get("category", "").replace("_", " ").title(),
                 item["level_required"],
                 fmt_amount(item["coin_cost"]),

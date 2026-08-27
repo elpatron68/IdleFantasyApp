@@ -60,9 +60,9 @@
 
     <!-- ===== Quest messages ===== -->
     <!-- Translator note: %1$s = quest display name -->
-    <string name="game_quest_started">Квест начат: %1$s</string>
-    <string name="game_quest_completed">Квест завершён: %1$s</string>
-    <string name="game_quest_abandoned">Квест отменён.</string>
+    <string name="game_quest_started">Начато задание: %1$s</string>
+    <string name="game_quest_completed">Завершено задание: %1$s</string>
+    <string name="game_quest_abandoned">Задание отменено.</string>
     <!-- Translator note: %1$d = current progress, %2$d = target amount -->
     <string name="game_quest_progress">Прогресс: %1$d / %2$d</string>
 

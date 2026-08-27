@@ -62,6 +62,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -743,7 +744,7 @@ private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: I
     val mode = state.mode
 
     // View transform: pinch to zoom, two-finger pan. One finger stays for editing.
-    var viewScale by remember { mutableStateOf(1f) }
+    var viewScale by remember { mutableFloatStateOf(1f) }
     var viewOffset by remember { mutableStateOf(Offset.Zero) }
 
     // Maps a screen-space touch point back into untransformed canvas space.

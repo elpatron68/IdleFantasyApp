@@ -398,7 +398,6 @@ fun CombatScreen(
                 MercenaryCampSheet(
                     pool           = state.mercPool,
                     hiredMercs     = state.hiredMercs,
-                    dailyResetHour = state.dailyResetHour,
                     maxParty       = MercenaryRepository.MAX_PARTY,
                     onHire         = viewModel::hireMercenary,
                     onDismissMerc  = viewModel::dismissMercenary,
