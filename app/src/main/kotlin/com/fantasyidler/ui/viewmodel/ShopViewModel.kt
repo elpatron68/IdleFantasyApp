@@ -87,6 +87,8 @@ data class ShopUiState(
     val isLoading: Boolean = true,
     /** Items reserved by queued actions — cannot be sold. */
     val reservedItems: Map<String, Int> = emptyMap(),
+    /** Per-style remembered armor loadouts; their gear counts as equipped for selling. */
+    val armorLoadouts: Map<String, Map<String, String?>> = emptyMap(),
     /** Items the player locked against selling. */
     val lockedItems: Set<String> = emptySet(),
     val mercantileLevel: Int = 0,
@@ -136,6 +138,7 @@ class ShopViewModel @Inject constructor(
                 dailyResetHour   = flags.dailyResetHour,
                 isLoading        = false,
                 reservedItems    = computeReserved(flags.sessionQueue),
+                armorLoadouts    = flags.armorLoadouts,
                 lockedItems      = flags.lockedItems.toSet(),
                 mercantileLevel  = levels[Skills.MERCANTILE] ?: 0,
                 townBuildingTiers = flags.townBuildingTiers,
@@ -376,7 +379,7 @@ class ShopViewModel @Inject constructor(
             val allEquip  = gameData.equipment
 
             val toSell = computeOldEquipmentToSell(
-                equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems)
+                equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems, state.armorLoadouts)
                 .filterKeys { it !in state.lockedItems }
                 .filterKeys { allEquip[it]?.heirloomSkill == null }
 
@@ -475,7 +478,11 @@ class ShopViewModel @Inject constructor(
             return
         }
         val have          = state.inventory[itemKey] ?: 0
-        val equippedCount = state.equipped.values.count { it == itemKey }
+        // Gear remembered in a non-active style's loadout counts as equipped (issue #1597).
+        val equippedCount = maxOf(
+            state.equipped.values.count { it == itemKey },
+            if (state.armorLoadouts.values.any { itemKey in it.values }) 1 else 0,
+        )
         val reserved      = state.reservedItems[itemKey] ?: 0
         // The equipped copy already serves as the collection keeper (issue #1419)
         val keptForCollection = if (state.keepOneOfEach && equippedCount == 0) 1 else 0
@@ -624,6 +631,8 @@ class ShopViewModel @Inject constructor(
          */
         /**
          * Every equippable in the inventory is sellable except: copies currently equipped,
+         * copies remembered in any combat style's armor loadout (only one style's gear is in
+         * [equipped] at a time, so loadout gear would otherwise be sold, issue #1597),
          * copies reserved by queued actions, skill capes (rare level-99 rewards, issue #821),
          * and one keeper per item when [keepOneOfEach] is on and none is equipped (the
          * equipped copy already serves as the collection keeper, issue #1419). Selling gear
@@ -635,12 +644,19 @@ class ShopViewModel @Inject constructor(
             allEquip: Map<String, com.fantasyidler.data.json.EquipmentData>,
             keepOneOfEach: Boolean = false,
             reserved: Map<String, Int> = emptyMap(),
+            armorLoadouts: Map<String, Map<String, String?>> = emptyMap(),
         ): Map<String, Int> {
+            val loadoutKeys = armorLoadouts.values.flatMapTo(mutableSetOf()) { it.values.filterNotNull() }
             val toSell = mutableMapOf<String, Int>()
             for ((itemKey, qty) in inventory) {
                 val item = allEquip[itemKey] ?: continue
                 if (item.capeSkill != null) continue
-                val equippedCount = equipped.values.count { it == itemKey }
+                // A loadout reference protects at most one copy: styles swap over the same
+                // physical item, so one kept copy serves every loadout that remembers it.
+                val equippedCount = maxOf(
+                    equipped.values.count { it == itemKey },
+                    if (itemKey in loadoutKeys) 1 else 0,
+                )
                 val keeper = if (keepOneOfEach && equippedCount == 0) 1 else 0
                 val extras = qty - equippedCount - (reserved[itemKey] ?: 0) - keeper
                 if (extras > 0) toSell[itemKey] = extras

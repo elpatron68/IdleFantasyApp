@@ -207,7 +207,7 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Subtract XP from a skill, flooring at 0. Recalculates level. */
-    suspend fun deductSkillXp(skillName: String, amount: Long) {
+    suspend fun deductSkillXp(skillName: String, amount: Long) = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val levels: MutableMap<String, Int> = json.decodeFromString(player.skillLevels)
         val xpMap:  MutableMap<String, Long> = json.decodeFromString(player.skillXp)
@@ -221,7 +221,7 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Add XP to a skill with no boosts or multipliers. Recalculates level. */
-    suspend fun debugAddSkillXp(skillName: String, amount: Long) {
+    suspend fun debugAddSkillXp(skillName: String, amount: Long) = playerMutex.withLock {
         if (amount <= 0L) return
         val player = getOrCreatePlayer()
         val levels: MutableMap<String, Int> = json.decodeFromString(player.skillLevels)
@@ -242,7 +242,7 @@ class PlayerRepository @Inject constructor(
      * prayer XP (scaled down proportionally if fewer bones were available). One DB write
      * regardless of [count] — the Bone Altar accumulates rapid taps into batches.
      */
-    suspend fun buryBonesAtomic(boneKey: String, count: Int, xpToAward: Long): BuryBonesResult {
+    suspend fun buryBonesAtomic(boneKey: String, count: Int, xpToAward: Long): BuryBonesResult = playerMutex.withLock {
         val player    = getOrCreatePlayer()
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
         val available = inventory[boneKey] ?: 0
@@ -575,14 +575,14 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Removes and returns the queued item at [index], or null if out of range. */
-    suspend fun removeFromQueue(index: Int): QueuedAction? {
-        val flags = getFlags()
+    suspend fun removeFromQueue(index: Int): QueuedAction? = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
         val queue = flags.sessionQueue
-        if (index < 0 || index >= queue.size) return null
+        if (index < 0 || index >= queue.size) return@withLock null
         val removed = queue[index]
         val newQueue = queue.toMutableList().apply { removeAt(index) }
-        updateFlags(flags.copy(sessionQueue = renumberTowerQueue(newQueue, flags.towerCurrentFloor)))
-        return removed
+        updateFlagsUnlocked(flags.copy(sessionQueue = renumberTowerQueue(newQueue, flags.towerCurrentFloor)))
+        removed
     }
 
     /**
@@ -602,31 +602,31 @@ class PlayerRepository @Inject constructor(
         }
     }
 
-    suspend fun evictQueueForSkill(skillName: String): List<QueuedAction> {
-        val flags = getFlags()
+    suspend fun evictQueueForSkill(skillName: String): List<QueuedAction> = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
         val (evicted, remaining) = flags.sessionQueue.partition { it.skillName == skillName }
-        if (evicted.isNotEmpty()) updateFlags(flags.copy(sessionQueue = remaining))
-        return evicted
+        if (evicted.isNotEmpty()) updateFlagsUnlocked(flags.copy(sessionQueue = remaining))
+        evicted
     }
 
-    suspend fun moveQueueItem(fromIndex: Int, toIndex: Int) {
-        val flags = getFlags()
+    suspend fun moveQueueItem(fromIndex: Int, toIndex: Int) = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
         val queue = flags.sessionQueue.toMutableList()
-        if (fromIndex < 0 || toIndex < 0 || fromIndex >= queue.size || toIndex >= queue.size) return
+        if (fromIndex < 0 || toIndex < 0 || fromIndex >= queue.size || toIndex >= queue.size) return@withLock
         val item = queue.removeAt(fromIndex)
         queue.add(toIndex, item)
-        updateFlags(flags.copy(sessionQueue = queue))
+        updateFlagsUnlocked(flags.copy(sessionQueue = queue))
     }
 
-    suspend fun incrementDungeonRun(activityKey: String) {
-        val flags = getFlags()
+    suspend fun incrementDungeonRun(activityKey: String) = playerMutex.withLock {
+        val flags = getFlagsUnlocked()
         val updated = flags.dungeonRuns.toMutableMap()
         updated[activityKey] = (updated[activityKey] ?: 0) + 1
-        updateFlags(flags.copy(dungeonRuns = updated))
+        updateFlagsUnlocked(flags.copy(dungeonRuns = updated))
     }
 
-    suspend fun markWhatsNewSeen(versionCode: Int) {
-        updateFlags(getFlags().copy(lastSeenVersionCode = versionCode))
+    suspend fun markWhatsNewSeen(versionCode: Int) = playerMutex.withLock {
+        updateFlagsUnlocked(getFlagsUnlocked().copy(lastSeenVersionCode = versionCode))
     }
 
     /**
@@ -707,22 +707,25 @@ class PlayerRepository @Inject constructor(
         PrestigeActionResult.SUCCESS
     }
 
-    suspend fun debugChangeRaceFree(race: String) {
+    suspend fun debugChangeRaceFree(race: String) = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(characterRace = race))))
     }
 
-    suspend fun dismissCharacterSetup() {
+    suspend fun dismissCharacterSetup() = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags.copy(characterSetupDone = true))))
     }
 
-    suspend fun updateEquipped(equipped: Map<String, String?>) {
+    internal suspend fun updateEquippedUnlocked(equipped: Map<String, String?>) {
         val player = getOrCreatePlayer()
         playerDao.upsert(player.copy(equipped = json.encode<Map<String, String?>>(equipped)))
     }
+
+    suspend fun updateEquipped(equipped: Map<String, String?>) =
+        playerMutex.withLock { updateEquippedUnlocked(equipped) }
 
     /**
      * Re-applies [style]'s remembered loadout: armor (EquipSlot.ARMOR_SLOTS; weapons are
@@ -732,7 +735,7 @@ class PlayerRepository @Inject constructor(
      * style's complete loadout so the next switch is deterministic. Entries referencing an item
      * the player no longer owns, or doesn't meet the level requirement for, are skipped silently.
      */
-    suspend fun applyLoadout(style: String, equipment: Map<String, EquipmentData>) {
+    suspend fun applyLoadout(style: String, equipment: Map<String, EquipmentData>) = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
@@ -740,14 +743,16 @@ class PlayerRepository @Inject constructor(
         val currentEquipped: Map<String, String?> = json.decodeFromString(player.equipped)
         val newEquipped = currentEquipped.toMutableMap()
 
+        // If this style's own weapon is two-handed, SHIELD must come off. Clearing it (not
+        // just skipping the restore) matters: the previous style's shield is still in
+        // newEquipped, so it would show equipped alongside the 2H weapon and the snapshot
+        // below would record it into this style's loadout (issue #1601).
+        val weaponSlotForStyle = EquipSlot.WEAPON_SLOTS.firstOrNull { EquipSlot.combatStyleForSlot(it) == style }
+        val twoHanded = equipment[currentEquipped[weaponSlotForStyle]]?.twoHanded == true
+        if (twoHanded) newEquipped[EquipSlot.SHIELD] = null
+
         val loadout = flags.armorLoadouts[style]
         if (!loadout.isNullOrEmpty()) {
-            // If this style's own weapon is two-handed, SHIELD must stay off -- mirrors the existing
-            // two-handed/shield exclusivity rule in InventoryViewModel.equip(), which never fires here
-            // since applying a loadout never touches a weapon slot.
-            val weaponSlotForStyle = EquipSlot.WEAPON_SLOTS.firstOrNull { EquipSlot.combatStyleForSlot(it) == style }
-            val twoHanded = equipment[currentEquipped[weaponSlotForStyle]]?.twoHanded == true
-
             for (slot in EquipSlot.ARMOR_SLOTS) {
                 if (!loadout.containsKey(slot)) continue
                 if (slot == EquipSlot.SHIELD && twoHanded) continue
@@ -763,7 +768,7 @@ class PlayerRepository @Inject constructor(
                 }
             }
         }
-        if (newEquipped != currentEquipped) updateEquipped(newEquipped)
+        if (newEquipped != currentEquipped) updateEquippedUnlocked(newEquipped)
 
         var newFlags = flags
         // Snapshot the applied result as this style's complete loadout. Legacy sparse
@@ -780,16 +785,16 @@ class PlayerRepository @Inject constructor(
             val spellName = flags.magicLoadoutSpellName
             if (spellName != null) newFlags = newFlags.copy(activeSpell = spellName)
         }
-        if (newFlags != flags) updateFlags(newFlags)
+        if (newFlags != flags) updateFlagsUnlocked(newFlags)
     }
 
-    suspend fun updatePets(pets: List<OwnedPet>) {
+    suspend fun updatePets(pets: List<OwnedPet>) = playerMutex.withLock {
         val player = getOrCreatePlayer()
         playerDao.upsert(player.copy(pets = json.encode<List<OwnedPet>>(pets)))
     }
 
     /** Buy [qty] of [itemKey] at [priceEach] coins. Returns false if insufficient coins. */
-    suspend fun buyItem(itemKey: String, qty: Int, priceEach: Int): Boolean {
+    suspend fun buyItem(itemKey: String, qty: Int, priceEach: Int): Boolean = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val total  = priceEach.toLong() * qty
         if (player.coins < total) return false
@@ -807,7 +812,7 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Sell [qty] of [itemKey] for [priceEach] coins each. Returns false if not enough in inventory. Unequips the item if no copies remain. */
-    suspend fun sellItem(itemKey: String, qty: Int, priceEach: Int): Boolean {
+    suspend fun sellItem(itemKey: String, qty: Int, priceEach: Int): Boolean = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
         if ((inventory[itemKey] ?: 0) < qty) return false
@@ -929,7 +934,7 @@ class PlayerRepository @Inject constructor(
      * (no stacking) and limited to one purchase per weekly reset (Monday 6am, same clock as
      * weekly quests). Deducts [cost] coins on success.
      */
-    suspend fun activateXpBoost(durationMs: Long, cost: Long = XP_BOOST_COST): XpBoostPurchaseResult {
+    suspend fun activateXpBoost(durationMs: Long, cost: Long = XP_BOOST_COST): XpBoostPurchaseResult = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val now = System.currentTimeMillis()
@@ -959,7 +964,7 @@ class PlayerRepository @Inject constructor(
      * Grants [durationMs] of 2× XP boost as a reward (seasonal event tiers). No cost, exempt
      * from the purchase limits, and extends any boost already running so the reward is never lost.
      */
-    suspend fun grantXpBoost(durationMs: Long) {
+    internal suspend fun grantXpBoostUnlocked(durationMs: Long) {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val now        = System.currentTimeMillis()
@@ -972,6 +977,8 @@ class PlayerRepository @Inject constructor(
         buffNotifScheduler.cancelXpBoostExpiry()
         buffNotifScheduler.scheduleXpBoostExpiry(newExpiry)
     }
+
+    suspend fun grantXpBoost(durationMs: Long) = playerMutex.withLock { grantXpBoostUnlocked(durationMs) }
 
     /** Bronze/starter fallback item granted to a slot if prestige invalidates its gear and nothing else in inventory qualifies. */
     private val prestigeStarterGearForSlot = mapOf(

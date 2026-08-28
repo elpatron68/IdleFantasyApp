@@ -447,8 +447,10 @@ class GuildRepository @Inject constructor(
                 level("herblore") >= (gameData.herbloreRecipes[template.target]?.levelRequired ?: 1)
             template.guild == "smithing" && template.type == "craft" ->
                 level("smithing") >= (gameData.smithingRecipes[template.target]?.levelRequired ?: 1)
-            template.guild == "cooking" && template.type == "craft" ->
-                level("cooking") >= (gameData.cookingRecipes[template.target]?.levelRequired ?: 1)
+            template.guild == "cooking" && template.type == "craft" -> {
+                if (level("cooking") < (gameData.cookingRecipes[template.target]?.levelRequired ?: 1)) return false
+                level("fishing") >= gameData.fishingLevelForCooking(template.target)
+            }
             template.guild == "crafting" && template.type == "craft" ->
                 level("crafting") >= (gameData.craftingRecipes[template.target]?.levelRequired ?: 1)
             template.guild == "runecrafting" && template.type == "craft" ->

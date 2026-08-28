@@ -523,6 +523,8 @@
     <string name="home_xp_boost_was_active">2× XP Boost was active</string>
     <string name="home_xp_boost_active">2× XP Boost active — %1$s remaining</string>
     <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string>
+    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string>
+    <string name="boosts_show_less">Show less</string>
     <string name="home_loot">Loot</string>
     <string name="home_food_consumed">Food Consumed</string>
     <string name="home_bones_buried">Bones buried</string>
@@ -569,6 +571,7 @@
     <string name="combat_log_you_missed">You missed</string>
     <string name="combat_log_kill">☠ %1$s defeated</string>
     <string name="combat_log_player_hit">→ You hit %1$s: %2$d dmg</string>
+    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string>
     <string name="combat_log_player_miss">→ You missed %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s hit you: %2$d dmg</string>
     <string name="combat_log_enemy_miss">← %1$s missed</string>
@@ -1866,7 +1869,7 @@
     <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string>
     <string name="merc_hire">Hire</string>
     <string name="merc_dismiss">Dismiss</string>
-    <string name="merc_hired">%1$s joins your party until the daily reset.</string>
+    <string name="merc_hired">%1$s joins your party for 24 hours.</string>
     <string name="merc_party_full">Your party is full.</string>
     <string name="merc_already_hired">%1$s is already under contract.</string>
     <string name="merc_not_enough_coins">Not enough coins to hire %1$s.</string>

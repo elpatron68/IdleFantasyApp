@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -52,6 +53,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -240,7 +242,22 @@ fun PrestigeDetailScreen(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
-                title = { Text("${GameStrings.skillEmoji(skill)} $skillName") },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        val iconRes = GameStrings.skillIconRes(skill)
+                        if (iconRes != null) {
+                            Image(
+                                painter            = painterResource(iconRes),
+                                contentDescription = null,
+                                modifier           = Modifier.size(28.dp),
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(skillName)
+                        } else {
+                            Text("${GameStrings.skillEmoji(skill)} $skillName")
+                        }
+                    }
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)

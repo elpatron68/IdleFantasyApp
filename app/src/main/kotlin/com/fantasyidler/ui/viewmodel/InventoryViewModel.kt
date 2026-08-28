@@ -298,11 +298,14 @@ class InventoryViewModel @Inject constructor(
             if (slot in EquipSlot.WEAPON_SLOTS && itemData?.twoHanded == true) {
                 current[EquipSlot.SHIELD] = null
             } else if (slot == EquipSlot.SHIELD) {
-                for (weaponSlot in EquipSlot.WEAPON_SLOTS) {
-                    val equipped = current[weaponSlot]
-                    if (equipped != null && gameData.equipment[equipped]?.twoHanded == true) {
-                        current[weaponSlot] = null
-                    }
+                // Only the active style's weapon conflicts with the shield right now; other
+                // styles keep their 2H weapons and drop the shield when switched to via
+                // applyLoadout, instead of losing their weapons here (issue #1601).
+                val activeSlot = playerRepo.getFlags().activeWeaponSlot
+                    ?: EquipSlot.WEAPON_SLOTS.firstOrNull { current[it] != null }
+                    ?: EquipSlot.WEAPON_ATK
+                if (gameData.equipment[current[activeSlot]]?.twoHanded == true) {
+                    current[activeSlot] = null
                 }
             }
             playerRepo.updateEquipped(current)
@@ -412,13 +415,27 @@ class InventoryViewModel @Inject constructor(
     private fun equipBestForSlots(slots: List<String>) {
         viewModelScope.launch {
             val state = uiState.value
-            val equipment = allEquipment
+            // Score heirlooms at their current effective stats, not their level-99
+            // potential, so a fresh heirloom can't outrank stronger gear (issue #1595).
+            val equipment = state.resolvedEquipment(allEquipment)
             val before = playerRepo.getEquipped()
             val newEquipped = before.toMutableMap()
             val skillLevels = state.skillLevels
             val activeStyle = resolveActiveStyle(playerRepo.getFlags(), before)
 
             for (slot in slots) {
+                // Weapon slots precede SHIELD in EquipSlot.ALL, so the chosen weapons are
+                // already in newEquipped: keep equip()'s two-handed/shield exclusivity,
+                // letting the best weapons win over the shield (issue #1564). Scoped to the
+                // active style's weapon: another style's 2H weapon (e.g. a bow) must not
+                // strip the shield from this style's gear (issue #1601).
+                val activeWeaponSlot = EquipSlot.WEAPON_SLOTS.firstOrNull { EquipSlot.combatStyleForSlot(it) == activeStyle }
+                if (slot == EquipSlot.SHIELD &&
+                    activeWeaponSlot != null && equipment[newEquipped[activeWeaponSlot]]?.twoHanded == true
+                ) {
+                    newEquipped[slot] = null
+                    continue
+                }
                 val best = bestItemForSlot(slot, skillLevels, state.inventory, equipment, activeStyle)
                 val currentItemKey = newEquipped[slot]
                 val currentItemValid = currentItemKey == null || run {
@@ -440,7 +457,46 @@ class InventoryViewModel @Inject constructor(
 
             playerRepo.updateEquipped(newEquipped)
             recordArmorLoadoutChanges(before, newEquipped)
+            if (EquipSlot.ARMOR_SLOTS.any { it in slots }) {
+                updateBestArmorLoadouts(newEquipped, skillLevels, state.inventory, equipment, activeStyle)
+            }
         }
+    }
+
+    /**
+     * Writes each non-active style's remembered armor loadout with the best armor scored
+     * for that style, so "Equip Best Gear" upgrades every loadout the way it already
+     * upgrades every weapon slot (issue #1565). Scored per style, not with the active
+     * style, because the armor weights differ (ranged/magic bonuses vs melee).
+     */
+    private suspend fun updateBestArmorLoadouts(
+        newEquipped: Map<String, String?>,
+        skillLevels: Map<String, Int>,
+        inventory: Map<String, Int>,
+        equipment: Map<String, EquipmentData>,
+        activeStyle: String,
+    ) {
+        val flags = playerRepo.getFlags()
+        val updated = flags.armorLoadouts.toMutableMap()
+        for (weaponSlot in EquipSlot.WEAPON_SLOTS) {
+            val style = EquipSlot.combatStyleForSlot(weaponSlot) ?: continue
+            if (style == activeStyle) continue
+            val twoHanded = equipment[newEquipped[weaponSlot]]?.twoHanded == true
+            val current = flags.armorLoadouts[style] ?: emptyMap()
+            updated[style] = EquipSlot.ARMOR_SLOTS.associateWith { slot ->
+                if (slot == EquipSlot.SHIELD && twoHanded) return@associateWith null
+                val best = bestItemForSlot(slot, skillLevels, inventory, equipment, style)
+                val currentKey  = current[slot]
+                val currentItem = currentKey?.let { equipment[it] }
+                // Same tie-keep rule as equipBestForSlots: an equal score keeps the
+                // remembered (possibly cosmetic) choice.
+                val keepCurrent = currentItem != null && (inventory[currentKey] ?: 0) > 0 &&
+                    currentItem.requirements.all { (skill, lvl) -> (skillLevels[skill] ?: 1) >= lvl } &&
+                    (best == null || slotScore(currentItem, slot, style) >= slotScore(best, slot, style))
+                if (keepCurrent) currentKey else best?.name
+            }
+        }
+        playerRepo.updateFlags(flags.copy(armorLoadouts = updated))
     }
 
     fun equipBestGear() = equipBestForSlots(EquipSlot.ALL)

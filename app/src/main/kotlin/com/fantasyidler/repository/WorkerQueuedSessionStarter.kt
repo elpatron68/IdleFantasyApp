@@ -45,14 +45,21 @@ class WorkerQueuedSessionStarter @Inject constructor(
             mutex.withLock {
                 val current = sessionRepo.getActiveWorkerSession(slot)
                 if (current != null && !current.completed) return@withLock false
-                val next = playerRepo.dequeueNextWorkerActionUnlocked(slot) ?: return@withLock false
-                try {
-                    startQueuedAction(slot, next)
-                    true
-                } catch (_: Exception) {
-                    playerRepo.requeueWorkerActionAtFrontUnlocked(slot, next)
-                    false
+                var next = playerRepo.dequeueNextWorkerActionUnlocked(slot)
+                while (next != null) {
+                    try {
+                        startQueuedAction(slot, next)
+                        return@withLock true
+                    } catch (_: ActionNoLongerQualifiesException) {
+                        // Level gate no longer met (post-prestige): discard and try the next
+                        // action instead of requeueing it to block the worker (issue #1605).
+                        next = playerRepo.dequeueNextWorkerActionUnlocked(slot)
+                    } catch (_: Exception) {
+                        playerRepo.requeueWorkerActionAtFrontUnlocked(slot, next)
+                        return@withLock false
+                    }
                 }
+                false
             }
         }
     }
@@ -75,14 +82,19 @@ class WorkerQueuedSessionStarter @Inject constructor(
         val rangedCapeMult   = resolveCapeMultiplier("ranged", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
         val magicCapeMult    = resolveCapeMultiplier("magic", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
         val prayerCapeMult   = resolveCapeMultiplier("prayer", equippedCapeData, inventory.keys, flags.townBuildingTiers, boostRepo.capeScalingBySkill(flags), gameData.equipment, flags.ironman)
-        // Floored at the queue-time level so a prestige after queueing still voids the XP.
-        val levelAtStart = maxOf(
-            when (action.skillName) {
-                "boss", "combat" -> combatLevelFrom(levels)
-                else -> levels[action.skillName] ?: 1
-            },
-            action.levelAtQueue,
-        )
+        // Same post-prestige rule as QueuedSessionStarter (issue #1605): still qualifying at
+        // the current level runs and pays at that level, no longer qualifying drops the
+        // action, and gate-less activities keep the queue-time floor (XP zeroed).
+        val currentLevel = when (action.skillName) {
+            "boss", "combat" -> combatLevelFrom(levels)
+            else -> levels[action.skillName] ?: 1
+        }
+        val requiredLevel = queuedActionRequiredLevel(action, gameData)
+        val levelAtStart = when {
+            requiredLevel == null        -> maxOf(currentLevel, action.levelAtQueue)
+            currentLevel < requiredLevel -> throw ActionNoLongerQualifiesException()
+            else                         -> currentLevel
+        }
 
         val isGathering = action.skillName in GATHERING_SKILLS
         val efficiencyMultiplier = if (isGathering) tier.combinedGatheringMultiplier else 1.0f

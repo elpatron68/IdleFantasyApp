@@ -11,6 +11,7 @@ class SimpleWarnType(Enum):
     MULTIPLE_HEIRLOOMS = "multiple_heirlooms"
     # Game string loaders
     SKILL_NAME = "skill_name"
+    SKILL_DESC = "skill_desc"
     ITEM_NAME = "item_name"
     ITEM_DESC = "item_desc"
     HOUSE_ITEM_NAME = "house_item_name"
@@ -61,7 +62,8 @@ class WikiLogger:
             SimpleWarnType.MULTIPLE_HEIRLOOMS: (set(), "Only the first available heirloom for skill `{}` was selected as only one was expected"
                                                        "- _tool_efficiency_section should be adjusted to handle multiple heirloom items"),
             # Game string loaders
-            SimpleWarnType.SKILL_NAME: default_warning("skill", "strings.xml"),
+            SimpleWarnType.SKILL_NAME: default_warning("skill", "strings_skills.xml"),
+            SimpleWarnType.SKILL_DESC: default_warning("skill", "strings_skills.xml", "description"),
             SimpleWarnType.ITEM_NAME: default_warning("item", "strings_items.xml"),
             SimpleWarnType.ITEM_DESC: default_warning("item", "strings_items.xml", "description"),
             SimpleWarnType.ENEMY_NAME: default_warning("enemy", "strings_enemies.xml"),

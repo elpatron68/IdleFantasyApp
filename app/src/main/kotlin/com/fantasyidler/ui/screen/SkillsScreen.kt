@@ -568,7 +568,7 @@ private fun GuildDailySheetBanner(
                                         color = MaterialTheme.colorScheme.primary,
                                     )
                                 }
-                                if (!quest.claimed && quest.progress < quest.amount && quest.canQueue()) {
+                                if (!quest.claimed && quest.progress < quest.amount && quest.canQueue() && quest.meetsLevel) {
                                     IconButton(onClick = {
                                         onQueueDaily(quest)
                                         showDialog = false

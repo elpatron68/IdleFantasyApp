@@ -99,6 +99,7 @@
     <string name="label_choose_activity">Elegir actividad</string>
     <string name="label_coming_soon">Coming soon</string> <!-- untranslated -->
     <string name="label_time_remaining">Tiempo restante</string>
+    <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -456,6 +457,8 @@
 
 
 
+
+
     <string name="settings_lang_system">Sístema</string>
     <string name="settings_save_data">Save Data</string> <!-- untranslated -->
     <string name="settings_export">Export Save</string> <!-- untranslated -->
@@ -515,6 +518,8 @@
     <string name="home_xp_boost_was_active">2× XP Boost was active</string> <!-- untranslated -->
     <string name="home_xp_boost_active">2× XP Boost active — %1$s remaining</string> <!-- untranslated -->
     <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
+    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">Botín</string>
     <string name="home_food_consumed">Alimentos consumidos</string>
     <string name="home_bones_buried">Huesos enterrados</string>
@@ -561,9 +566,11 @@
     <string name="combat_log_you_missed">Has fallado</string>
     <string name="combat_log_kill">☠ %1$s defeated</string> <!-- untranslated -->
     <string name="combat_log_player_hit">→ You hit %1$s: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_player_miss">→ You missed %1$s</string> <!-- untranslated -->
     <string name="combat_log_enemy_hit">← %1$s hit you: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_enemy_miss">← %1$s missed</string> <!-- untranslated -->
+    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_heal">✚ You eat: +%1$d HP</string> <!-- untranslated -->
     <string name="combat_eat_threshold_warning">Risky: at a low threshold a hard hit can drop you to 0 HP before your character eats.</string> <!-- untranslated -->
     <string name="combat_rec_level">Nivel de combate recomendado</string>
@@ -720,7 +727,7 @@
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Dimmed icons can\'t be completed yet (missing level or materials). A small raised number means several quests of that type want the same thing.</string> <!-- untranslated -->
-    <!-- Translator note: %1$d = quantity -->
+    <!-- Translator note: %1$s = quantity in inventory -->
     <string name="shop_qty_in_inv">×%1$s en inventario</string>
     <!-- Translator note: %1$s = formatted coin amount -->
     <string name="shop_price_each">%1$s monedas cada una.</string>
@@ -760,6 +767,7 @@
     <!-- Translator note: %1$d = patch count -->
     <string name="farming_patches">%1$d Parcelas desbloqueadas</string>
     <string name="farming_clear_patch">Limpiar parcela</string>
+    <!-- Translator note: %1$s = crop name -->
     <string name="farming_clear_desc_named">Remove the %1$s without any reward?</string> <!-- untranslated -->
     <string name="farming_clear_desc_bean">Remove the Magic Bean? It will be returned to your inventory.</string> <!-- untranslated -->
     <string name="farming_harvest_and_plant">Harvest and Plant All</string> <!-- untranslated -->
@@ -1114,6 +1122,8 @@
     <string name="skill_slayer_desc">Receive tasks from the Slayer Master in Town.</string> <!-- untranslated -->
     <string name="builder_title">Taller del Constructor</string>
     <string name="builder_card_desc">Mejora la Posada, el Gremio y la Iglesia</string>
+
+    <!-- Player housing -->
     <string name="house_title">My House</string> <!-- untranslated -->
     <string name="house_edit">Edit</string> <!-- untranslated -->
     <string name="house_done">Done</string> <!-- untranslated -->
@@ -1791,6 +1801,10 @@
     <string name="reward_part_coins_plain">%1$s coins</string> <!-- untranslated -->
     <string name="reward_part_combat_xp">+%1$s combat XP (split across 7 skills)</string> <!-- untranslated -->
     <string name="quest_claimed_suffix">Claimed: %1$s</string> <!-- untranslated -->
+    <plurals name="plural_reward_items">
+        <item quantity="one">×%1$d item</item>
+        <item quantity="other">×%1$d items</item>
+    </plurals> <!-- untranslated -->
     <string name="monument_title">Grand Monument</string> <!-- untranslated -->
     <string name="monument_desc">A civic wonder raised coin by coin. Every stage is a gift to the town.</string> <!-- untranslated -->
     <string name="monument_your_coins">Your coins: %1$s</string> <!-- untranslated -->
@@ -1836,6 +1850,9 @@
     <string name="guild_daily_banner_claimable">Guild daily complete! Claim it in the Guild Hall</string> <!-- untranslated -->
     <string name="guild_daily_banner_claimed">Guild daily claimed today</string> <!-- untranslated -->
     <string name="guild_daily_rank_maxed">Guild rank maxed</string> <!-- untranslated -->
+
+    <!-- ===== Infinite Tower ===== -->
+    <!-- Raids and mercenaries -->
     <string name="raid_section_title">Raids</string> <!-- untranslated -->
     <string name="raid_section_desc">Bosses no lone hero can fell. Hire a mercenary party first.</string> <!-- untranslated -->
     <string name="raid_party_status">Mercenaries: %1$d/%2$d hired</string> <!-- untranslated -->
@@ -1847,13 +1864,12 @@
     <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string> <!-- untranslated -->
     <string name="merc_hire">Hire</string> <!-- untranslated -->
     <string name="merc_dismiss">Dismiss</string> <!-- untranslated -->
-    <string name="merc_hired">%1$s joins your party until the daily reset.</string> <!-- untranslated -->
+    <string name="merc_hired">%1$s joins your party for 24 hours.</string> <!-- untranslated -->
     <string name="merc_party_full">Your party is full.</string> <!-- untranslated -->
     <string name="merc_already_hired">%1$s is already under contract.</string> <!-- untranslated -->
     <string name="merc_not_enough_coins">Not enough coins to hire %1$s.</string> <!-- untranslated -->
     <string name="merc_not_available">%1$s is not available today.</string> <!-- untranslated -->
     <string name="merc_contract_remaining">Contract: %1$s left</string> <!-- untranslated -->
-    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="raid_allies_down">Mercenaries down: %1$d</string> <!-- untranslated -->
     <string name="merc_tier_cheap">Sellsword</string> <!-- untranslated -->
     <string name="merc_tier_seasoned">Veteran</string> <!-- untranslated -->
@@ -1873,7 +1889,6 @@
     <string name="merc_vex_the_undying_name">Vex the Undying</string> <!-- untranslated -->
     <string name="merc_thane_dawnbringer_name">Thane Dawnbringer</string> <!-- untranslated -->
 
-    <!-- ===== Infinite Tower ===== -->
     <string name="tower_title">Infinite Tower</string> <!-- untranslated -->
     <string name="tower_floor_label" formatted="false">Floor %d</string> <!-- untranslated -->
     <string name="tower_floor_desc">Infinite Tower floor %1$d</string> <!-- untranslated -->
@@ -1887,6 +1902,7 @@
     <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string> <!-- untranslated -->
     <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
     <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
+    <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
     <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
     <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
     <string name="tower_milestone_coins_5k">5,000 coins</string> <!-- untranslated -->
@@ -2085,6 +2101,7 @@
     <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
     <string name="settings_credit_bosses_subtitle">Art by Meg</string> <!-- untranslated -->
     <string name="settings_credit_house_title">House Interiors</string> <!-- untranslated -->
+
     <string name="title_seasonal_champion_of">Champion of %1$s</string> <!-- untranslated -->
     <string name="title_seasonal_requirement">Complete the %1$s Seasonal Event</string> <!-- untranslated -->
     <string name="home_welcome_greeting">Welcome back,</string> <!-- untranslated -->
@@ -2204,20 +2221,30 @@
     <string name="carnival_potion_letter_cyan">C</string> <!-- untranslated -->
     <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d XP/crop</string> <!-- untranslated -->
     <string name="farming_seeds_owned">Seeds: %1$d  •  Owned: %2$d</string> <!-- untranslated -->
+    <!-- ============ Prestige overhaul (v1.14.0) ============ -->
     <string name="prestige_title">Prestige</string> <!-- untranslated -->
     <string name="prestige_open_tree">View tree</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = unspent prestige points -->
     <string name="prestige_points_available">%1$d points available</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = lifetime points earned, %2$d = maximum points for this skill -->
     <string name="prestige_points_lifetime">%1$d of %2$d lifetime points earned</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = points the reset would award right now -->
     <string name="prestige_button_with_points">Prestige now for +%1$d points</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Reach level 99 to prestige (currently %1$d).</string> <!-- untranslated -->
     <string name="prestige_maxed_cap">Maximum prestige reached. Every point this skill can earn is yours.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Your %1$s level will reset to 1 and you\'ll earn %2$d prestige points to spend in this skill\'s tree. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
     <string name="prestige_respec">Reset points</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = formatted remaining cooldown -->
     <string name="prestige_respec_available_in">Reset available in %1$s</string> <!-- untranslated -->
     <string name="prestige_respec_confirm_title">Reset prestige points?</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = skill name -->
     <string name="prestige_respec_confirm_message">All purchased %1$s upgrades will be refunded for their full point cost. You can reset this skill\'s points again in 24 hours.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = skill name -->
     <string name="prestige_respec_done">%1$s prestige points refunded.</string> <!-- untranslated -->
     <string name="prestige_respec_on_cooldown">Points were reset recently. Try again later.</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Cost: %1$d points</string> <!-- untranslated -->
     <string name="prestige_node_owned">Purchased</string> <!-- untranslated -->
     <string name="prestige_path_auto_label">Earned by prestiging</string> <!-- untranslated -->
@@ -2225,19 +2252,28 @@
     <string name="prestige_node_auto_pending">Unlocks automatically at prestige %1$d.</string> <!-- untranslated -->
     <string name="prestige_button_xp_only">Prestige now for the next XP tier</string> <!-- untranslated -->
     <string name="prestige_confirm_message_xp_only">Your %1$s level will reset to 1 and you\'ll unlock the next automatic XP tier. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_only">%1$s only</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_locked_desc">Only %1$s characters can learn this upgrade.</string> <!-- untranslated -->
     <string name="prestige_node_prereq_locked">Requires the previous tier in this path.</string> <!-- untranslated -->
     <string name="prestige_node_hidden">Unlock the previous upgrade first.</string> <!-- untranslated -->
     <string name="character_race_edit_hint">Race changes are made in the appearance editor.</string> <!-- untranslated -->
     <string name="prestige_node_not_enough">Not enough points</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = node name -->
     <string name="prestige_node_purchased">%1$s purchased!</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_buy">Purchase for %1$d points</string> <!-- untranslated -->
+
+    <!-- Prestige effect descriptions -->
     <string name="prestige_effect_xp_pct">+%1$d%% XP in this skill.</string> <!-- untranslated -->
     <string name="prestige_effect_yield_pct">+%1$d%% items from this skill\'s sessions.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = yield percent per interval (may be fractional) -->
     <string name="prestige_effect_flow_rate">Flow-state: +%1$s%% yield per interval of continuous activity, up to +100%%.</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = minutes removed from the flow interval -->
     <string name="prestige_effect_flow_interval_reduction">Flow-state interval shortened by %1$d minutes.</string> <!-- untranslated -->
     <string name="prestige_effect_combat_stat_flat">+%1$d effective levels in combat.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = minutes (may be fractional) -->
     <string name="prestige_effect_session_floor_min">Sessions up to %1$s minutes shorter at level 99.</string> <!-- untranslated -->
     <string name="prestige_effect_cape_scaling">Cape bonuses for this skill multiplied ×%1$d.</string> <!-- untranslated -->
     <string name="prestige_effect_bonus_roll_pct">+%1$d%% gem find chance while mining.</string> <!-- untranslated -->
@@ -2264,6 +2300,8 @@
     <string name="prestige_effect_foretell_slots">+%1$d foretold slayer task slots.</string> <!-- untranslated -->
     <string name="prestige_effect_slayer_multi_task">Dungeon kills also count toward matching foretold tasks.</string> <!-- untranslated -->
     <string name="prestige_effect_unlock_recipe">Unlocks the %1$s fletching recipe.</string> <!-- untranslated -->
+
+    <!-- New distinctive base path names (variety pass) -->
     <string name="prestige_path_fishing_rod">Sturdy Rod</string> <!-- untranslated -->
     <string name="prestige_path_woodcutting_axe">Honed Edge</string> <!-- untranslated -->
     <string name="prestige_path_cooking_hearty">Hearty Meals</string> <!-- untranslated -->
@@ -2282,12 +2320,16 @@
     <string name="prestige_path_strength_double_hit">Double Hit</string> <!-- untranslated -->
     <string name="prestige_path_ranged_bows">Better Bows</string> <!-- untranslated -->
     <string name="prestige_path_slayer_foresight">Foresight</string> <!-- untranslated -->
+
+    <!-- Prestige path names (generic) -->
     <string name="prestige_path_xp">XP Boost</string> <!-- untranslated -->
     <string name="prestige_path_yield">Yield</string> <!-- untranslated -->
     <string name="prestige_path_flow">Flow-state</string> <!-- untranslated -->
     <string name="prestige_path_endurance">Endurance</string> <!-- untranslated -->
     <string name="prestige_path_gem">Gem Hunter</string> <!-- untranslated -->
     <string name="prestige_path_rotation">Crop Rotation</string> <!-- untranslated -->
+
+    <!-- Prestige path names (skill flavored) -->
     <string name="prestige_path_mining_yield">Purer Ore</string> <!-- untranslated -->
     <string name="prestige_path_fishing_yield">More Fish</string> <!-- untranslated -->
     <string name="prestige_path_woodcutting_yield">Sharper Axe</string> <!-- untranslated -->
@@ -2301,6 +2343,8 @@
     <string name="prestige_path_hitpoints_prowess">Vitality</string> <!-- untranslated -->
     <string name="prestige_path_thieving_coin">Silver Tongue</string> <!-- untranslated -->
     <string name="prestige_path_mercantile_coin">Haggler</string> <!-- untranslated -->
+
+    <!-- Prestige race branch names -->
     <string name="prestige_path_race_human">Resourceful</string> <!-- untranslated -->
     <string name="prestige_path_thieving_race_elf">Shadow Step</string> <!-- untranslated -->
     <string name="prestige_path_firemaking_race_dwarf">Ember Heart</string> <!-- untranslated -->
@@ -2315,9 +2359,12 @@
     <string name="prestige_path_construction_race_gnome">Gadget Works</string> <!-- untranslated -->
     <string name="prestige_path_prayer_race_gnome">Trickster\'s Favor</string> <!-- untranslated -->
     <string name="prestige_path_hitpoints_race_orc">Thick Hide</string> <!-- untranslated -->
+
+    <!-- Race change -->
     <string name="race_change_confirm_title">Change race?</string> <!-- untranslated -->
     <string name="item_race_change_token_name">Race Change Token</string> <!-- untranslated -->
     <string name="item_race_change_token_desc">A rare boss drop that lets you change your character\'s race once.</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = number of tokens owned -->
     <string name="race_change_pay_token">Use Race Change Token (%1$d)</string> <!-- untranslated -->
     <string name="race_change_pay_coins">Pay 10,000,000 coins</string> <!-- untranslated -->
     <string name="race_change_cannot_afford">You need a Race Change Token (rare boss drop) or 10,000,000 coins to change race.</string> <!-- untranslated -->
@@ -2325,9 +2372,11 @@
     <string name="race_change_cooldown_wait">You can change race again in %1$s.</string> <!-- untranslated -->
     <string name="race_change_ironman_once">As an ironman, this is your one and only race change. Afterwards your race is locked forever.</string> <!-- untranslated -->
     <string name="ironman_race_permanent_note">Ironman characters cannot change their race later. Choose carefully!</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = comma-separated list of skill names -->
     <string name="race_proficiency_label">Racial skill trees: %1$s</string> <!-- untranslated -->
     <string name="race_proficiency_human">Racial bonus: an exclusive XP mastery tier in every skill</string> <!-- untranslated -->
     <string name="race_change_confirm_message">Your race grants race-locked prestige upgrades. Changing race refunds any points spent in other races\' branches, and you can only change race once every 24 hours.</string> <!-- untranslated -->
+    <!-- Heirloom items (raid boss rare drops that level up with use) -->
     <string name="item_heirloom_pickaxe_name">Heirloom Pickaxe</string> <!-- untranslated -->
     <string name="item_heirloom_pickaxe_desc">A family pickaxe passed down through generations. It remembers every ore its bearers ever broke.</string> <!-- untranslated -->
     <string name="item_heirloom_axe_name">Heirloom Axe</string> <!-- untranslated -->
@@ -2355,8 +2404,11 @@
     <string name="item_heirloom_staff_name">Heirloom Staff</string> <!-- untranslated -->
     <string name="item_heirloom_staff_desc">A staff steeped in the castings of every mage who ever bore it. Its power still deepens.</string> <!-- untranslated -->
     <string name="heirloom_section_title">Heirloom</string> <!-- untranslated -->
+    <!-- Translator note: %1$d = the heirloom item\'s current level (1-99) -->
     <string name="heirloom_level_label">Heirloom Lv. %1$d</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = a skill name, used twice -->
     <string name="heirloom_desc">Grows with %1$s XP up to Lv. 99. Its power also scales with your %1$s level, reaching full effect at level 85. Stats shown are its full potential.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_heirloom">%1$s is an heirloom and cannot be sold.</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = a dungeon or boss name -->
     <string name="repeat_blocked_level">Your combat level is too low to repeat %1$s.</string> <!-- untranslated -->
 </resources>

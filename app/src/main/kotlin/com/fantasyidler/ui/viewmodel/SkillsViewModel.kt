@@ -126,6 +126,8 @@ data class SheetQuestSummary(
     val description: String = "",
     /** Guild dailies only: true once the guild's rank is capped, so dailies no longer advance tier progression. */
     val guildMaxed: Boolean = false,
+    /** False when the player's skill level no longer meets the target activity's requirement (e.g. after prestige). */
+    val meetsLevel: Boolean = true,
 )
 
 sealed class SheetState {
@@ -251,7 +253,7 @@ class SkillsViewModel @Inject constructor(
                     .filterValues { it.isNotEmpty() },
                 showSessionEndTime    = flags.showSessionEndTime,
                 showQuestDots         = flags.showQuestDots,
-                sheetQuests           = computeSheetQuests(questProgress, flags),
+                sheetQuests           = computeSheetQuests(questProgress, flags, levels),
             )
         }
     }.flowOn(Dispatchers.Default)
@@ -1124,7 +1126,10 @@ class SkillsViewModel @Inject constructor(
     private fun computeSheetQuests(
         questProgress: List<com.fantasyidler.data.model.QuestProgress>,
         flags: PlayerFlags,
+        skillLevels: Map<String, Int>,
     ): Map<String, List<SheetQuestSummary>> {
+        fun meetsLevel(type: String, skill: String, target: String): Boolean =
+            (skillLevels[skill] ?: 1) >= sheetQuestLevelRequired(type, skill, target)
         val completedIds = questProgress.filter { it.completed }.map { it.questId }.toSet()
         val result = mutableMapOf<String, MutableList<SheetQuestSummary>>()
         for (guild in skillGuilds) {
@@ -1145,6 +1150,7 @@ class SkillsViewModel @Inject constructor(
                     claimed    = daily.claimed,
                     source     = SheetQuestSource.GUILD,
                     guildMaxed = maxed,
+                    meetsLevel = meetsLevel(daily.template.type, guild, daily.template.target),
                 )
             }
         }
@@ -1162,6 +1168,7 @@ class SkillsViewModel @Inject constructor(
                 claimed     = dq.claimed,
                 source      = SheetQuestSource.DAILY,
                 description = dq.template.description,
+                meetsLevel  = meetsLevel(dq.template.type, skill, dq.template.target),
             )
         }
         for (wq in weeklyQuestRepo.getActiveWeeklyQuests(flags)) {
@@ -1178,6 +1185,7 @@ class SkillsViewModel @Inject constructor(
                 claimed     = wq.claimed,
                 source      = SheetQuestSource.WEEKLY,
                 description = wq.template.description,
+                meetsLevel  = meetsLevel(wq.template.type, skill, wq.template.target),
             )
         }
         return result
@@ -1189,6 +1197,10 @@ class SkillsViewModel @Inject constructor(
      * trade); craft-guild dailies are routed through CraftingViewModel instead.
      */
     fun queueDailySession(daily: SheetQuestSummary): Boolean {
+        // Guild dailies can outlive the level that rolled them (prestige resets the
+        // skill), so re-check the activity requirement here (issue #1563).
+        val level = uiState.value.skillLevels[daily.guild] ?: 1
+        if (sheetQuestLevelRequired(daily.type, daily.guild, daily.target) > level) return false
         val remaining = (daily.amount - daily.progress).coerceAtLeast(1)
         when {
             daily.type == "gather" && daily.guild == Skills.MINING      -> startMiningSession(daily.target)
@@ -1203,9 +1215,7 @@ class SkillsViewModel @Inject constructor(
             daily.type == "sessions" && daily.guild == Skills.AGILITY   -> {
                 // Progress only counts on the quest's own course (recordGuildSessions
                 // matches target), so queue that course, not the best unlocked one.
-                val level  = uiState.value.skillLevels[Skills.AGILITY] ?: 1
-                val course = gameData.agilityCourses[daily.target] ?: return false
-                if (course.levelRequired > level) return false
+                if (daily.target !in gameData.agilityCourses) return false
                 startAgilitySession(daily.target, remaining)
             }
             daily.type == "craft" && daily.guild == Skills.RUNECRAFTING -> startRunecraftingSession(daily.target, remaining)
@@ -1222,6 +1232,21 @@ class SkillsViewModel @Inject constructor(
         }
         return true
     }
+
+    /**
+     * Level needed in [guild] for the activity the quick-add "+" maps [type]/[target] to.
+     * Craft-guild recipes are gated in CraftingViewModel.queueCraftForDaily instead.
+     */
+    private fun sheetQuestLevelRequired(type: String, guild: String, target: String): Int = when {
+        type == "gather" && guild == Skills.MINING      -> gameData.ores[target]?.levelRequired
+        type == "gather" && guild == Skills.WOODCUTTING -> gameData.trees.values.firstOrNull { it.logName == target }?.levelRequired
+        type == "gather" && guild == Skills.FISHING     -> gameData.fish[target]?.levelRequired
+        type == "pickpocket"                            -> gameData.thievingNpcs[target]?.levelRequired
+        type == "sessions" && guild == Skills.AGILITY   -> gameData.agilityCourses[target]?.levelRequired
+        type == "craft" && guild == Skills.RUNECRAFTING -> gameData.runes[target]?.levelRequired
+        type == "craft" && guild == Skills.FIREMAKING   -> gameData.logs[target.replace("ashes", "log")]?.levelRequired
+        else -> null
+    } ?: 1
 
     private fun computeActiveQuests(
         questProgress: List<com.fantasyidler.data.model.QuestProgress>,

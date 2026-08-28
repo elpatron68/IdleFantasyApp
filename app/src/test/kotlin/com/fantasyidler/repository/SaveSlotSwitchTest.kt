@@ -69,7 +69,7 @@ class SaveSlotSwitchTest {
         val questRepo = QuestRepository(db.questProgressDao(), gameData)
         globalStateRepo = GlobalStateRepository(db.globalStateDao())
         val townRepo = TownRepository(gameData, playerRepo, questRepo, boostRepo)
-        val mercRepo = MercenaryRepository(playerRepo, gameData, dailyQuestRepo)
+        val mercRepo = MercenaryRepository(playerRepo, gameData)
         val queuedSessionStarter = QueuedSessionStarter(
             boostRepo, context, playerRepo, sessionRepo, townRepo, gameData, mercRepo, json,
         )
