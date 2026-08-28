@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Callable
 
 from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO, DEFAULT_ICON, IMAGES_DIR
-from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name, skill_name, enemy_name, guild_name, \
+from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name, skill_name, skill_desc, enemy_name, guild_name, \
     trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
     pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
     expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc, tree_name, merc_name, race_name, \
@@ -152,7 +152,7 @@ def add_boss_pages():
     bosses = load("raid_bosses.json")
     assert isinstance(bosses, dict)
     boss_pages = {
-        boss_id: PageInfo(boss_name(boss_id), f"{boss_id}.md", lambda x=bosses[boss_id]: gen_boss(x))
+        boss_id: PageInfo(boss_name(boss_id), f"{boss_id}.md", lambda x=bosses[boss_id]: gen_boss(x), boss_sprite(boss_id))
         for boss_id in bosses.keys()
     }
     PAGE_DIRECTORY.update(boss_pages)
@@ -421,10 +421,15 @@ def skill_icon_path(skill: str) -> Path:
     return icon_path(f"skill_{skill.lower()}")
 
 
+def boss_sprite(boss_id: str) -> Path | None:
+    boss_sprite_path = SPRITES / "bosses" / f"{boss_id}.png"
+    return boss_sprite_path if boss_sprite_path.is_file() else None
+
+
 def boss_icon(boss_id: str, fallback: str, width: int | None = None) -> str:
     """Boss art image, falling back to the emoji for bosses without a sprite."""
-    sprite = SPRITES / "bosses" / f"{boss_id}.png"
-    if sprite.is_file():
+    sprite = boss_sprite(boss_id)
+    if sprite:
         return html_image(sprite, boss_name(boss_id), width=width)
     return fallback
 
@@ -467,15 +472,8 @@ def build_page_map() -> dict[str, str]:
     _add(list(load("runes.json").keys()), "runecrafting")
     # Smithing outputs → smithing
     _add(list(load("recipes/smithing.json").keys()), "smithing")
-    # Fish and raw fishing drops → fishing (before cooking so raw fish link here, not to cooking)
-    fishing_data = load("skills/fishing.json")
-    fish_items: list[str] = []
-    for dt in fishing_data.get("drop_tables", {}).values():
-        entries = dt if isinstance(dt, list) else dt.get("items", [])
-        for drop in entries:
-            if isinstance(drop, dict) and "item" in drop:
-                fish_items.append(drop["item"])
-    _add(fish_items, "fishing")
+    # Raw fish → fishing (before cooking so raw fish link here, not to cooking)
+    _add(list(load("fish.json").keys()), "fishing")
     # Cooked food outputs → cooking (raw ingredients intentionally excluded so raw fish link to fishing)
     _add(list(load("recipes/cooking.json").keys()), "cooking")
     # Fletching outputs → fletching
@@ -642,36 +640,34 @@ def gen_prestige_race_tables() -> str:
 
 
 def gen_skills() -> str:
-    # Todo: Switch to use game data where possible
     skill_list = [
-        ("mining", "gathering", "Extract ores and gems from the earth."),
-        ("fishing", "gathering", "Catch fish and aquatic creatures."),
-        ("woodcutting", "gathering", "Chop trees for logs."),
-        ("farming", "gathering", "Plant seeds and harvest crops."),
-        ("firemaking", "crafting", "Burn logs for XP. Produces ashes for Prayer."),
-        ("agility", "support", "Reduces session time across all skills (60→40 min at level 99)."),
-        ("thieving", "gathering", "Pickpocket NPCs in the Town for coins and loot."),
-        ("mercantile", "support",
-         "Send trade caravans and explore skilling expeditions for lore and dungeon unlocks."),
-        ("smithing", "crafting", "Smelt ores into bars and forge equipment."),
-        ("cooking", "crafting", "Cook raw food to restore HP in combat."),
-        ("fletching", "crafting", "Craft bows and arrows."),
-        ("crafting", "crafting", "Make jewellery and other items."),
-        ("runecrafting", "crafting", "Craft runes from rune essence."),
-        ("herblore", "crafting", "Brew potions for combat stat boosts."),
-        ("construction", "crafting", "Build furniture used to upgrade town buildings (Inn, Guild Hall, Church)."),
-        ("attack", "combat", "Increases melee accuracy."),
-        ("strength", "combat", "Increases max melee damage."),
-        ("defense", "combat", "Reduces damage taken."),
-        ("ranged", "combat", "Attack from a distance with a bow."),
-        ("magic", "combat", "Cast spells using runes."),
-        ("hitpoints", "combat", "Total health. Increases with combat."),
-        ("prayer", "support", "Bury bones to unlock combat prayers."),
-        ("slayer", "combat", "Receive tasks from the Slayer Master to kill specific enemies for bonus XP and points."),
+        ("mining", "gathering"),
+        ("fishing", "gathering"),
+        ("woodcutting", "gathering"),
+        ("farming", "gathering"),
+        ("firemaking", "crafting"),
+        ("agility", "support"),
+        ("thieving", "gathering"),
+        ("mercantile", "support"),
+        ("smithing", "crafting"),
+        ("cooking", "crafting"),
+        ("fletching", "crafting"),
+        ("crafting", "crafting"),
+        ("runecrafting", "crafting"),
+        ("herblore", "crafting"),
+        ("construction", "crafting"),
+        ("attack", "combat"),
+        ("strength", "combat"),
+        ("defense", "combat"),
+        ("ranged", "combat"),
+        ("magic", "combat"),
+        ("hitpoints", "combat"),
+        ("prayer", "support"),
+        ("slayer", "combat"),
     ]
     rows = [
-        [f"{html_image(skill_icon_path(skill), "", "text")} {link(skill) if skill in PAGE_DIRECTORY else skill_name(skill)}", cat, desc]
-        for skill, cat, desc in skill_list
+        [f"{html_image(skill_icon_path(skill), "", "text")} {link(skill) if skill in PAGE_DIRECTORY else skill_name(skill)}", cat.title(), skill_desc(skill)]
+        for skill, cat in skill_list
     ]
 
     return get_template("skills/skills").format(
@@ -681,37 +677,65 @@ def gen_skills() -> str:
 
 
 def gen_mining() -> str:
+    # Create ore table
     ores = load("ores.json")
     assert isinstance(ores, dict)
-    # Todo: Add information about how ore amounts change depending on pickaxe, etc
-    rows = sorted(
-        [[item_name(k), o["level_required"], o["xp_per_ore"]]
+    ore_rows = sorted(
+        [[item_name(k), o["level_required"], o["xp_per_ore"], item_desc(k)]
          for k, o in ores.items()],
         key=lambda r: r[1]
     )
-    tool_rows = _tool_table("pickaxe", "mining_efficiency")
+    # Create gem table
+    gems = load("gems.json")
+    assert isinstance(gems, dict)
+    gem_rows = [
+        [item_name(k), fmt_pct(g["drop_rate"]), item_desc(k)]
+        for k, g in sorted(gems.items(), key=lambda x: x[1]["drop_rate"], reverse=True)
+    ]
+    # Return filled template
     return get_template("skills/gathering/mining").format(
         icon=html_image(skill_icon_path("mining"), "", "text"),
-        ore_table=table(['Ore','Level Required','XP / Ore'], rows),
-        pickaxe_table=tool_rows
+        ore_table=table(['Ore', 'Level Required', 'XP / Ore', "Description"], ore_rows),
+        gem_table=table(["Gems", "Drop Rate", "Description"], gem_rows),
+        pickaxe_table=_tool_table("pickaxe", "mining_efficiency"),
+        tool_efficiency_section=_gathering_tool_eff_section(
+            "mining", "pickaxe", "mining", "pickaxe", "Ores",
+            {item_name(k): o["level_required"] for k, o in ores.items()}
+        ),
     )
 
 
 def gen_fishing() -> str:
-    fish_data = load("skills/fishing.json")
+    # Create fish rows
+    fish_data = load("fish.json")
     assert isinstance(fish_data, dict)
-    # Todo: Adjust based upon new fishing mechanics
-    xp_ranges = fish_data.get("xp_ranges", {})
-    rows = sorted(
-        [[f"Level {k}+", v["min"], v["max"], f"{round((v['min']+v['max'])/2*60):,}"]
-         for k, v in xp_ranges.items()],
-        key=lambda r: int(r[0].split()[1].rstrip("+"))
+    fish_rows = sorted(
+        [[item_name(k), v["level_required"], v["xp_per_catch"]] for k, v in fish_data.items()],
+        key=lambda r: r[1]
     )
-    tool_rows = _tool_table("fishing_rod", "fishing_efficiency")
+    # Create fishing rare drops tables
+    fishing_session_data = load("skills/fishing.json")
+    assert isinstance(fishing_session_data, dict)
+    rare_item_rows = []
+    drop_tables = sorted(
+        [(int(lvl), items) for lvl, items in fishing_session_data["drop_tables"].items()],
+        key=lambda r: r[0]
+    )
+    for i, (min_level, drops) in enumerate(drop_tables):
+        max_level = drop_tables[i + 1][0] - 1 if i < len(drop_tables) - 1 else None
+        level_range = f"{min_level}-{max_level}" if max_level else f">{min_level}"
+        drop_list = [(item_link(v["item"]), fmt_pct(v["chance"])) for v in sorted(drops, key=lambda x: x["chance"], reverse=True)]
+        rare_item_rows.append([level_range, ", ".join(f"{c} {i}" for i, c in drop_list)])
+    # Return filled template
     return get_template("skills/gathering/fishing").format(
         icon=html_image(skill_icon_path("fishing"), "", "text"),
-        fish_table=table(['Level Tier','Min XP / Min','Max XP / Min','Avg XP / Session'], rows),
-        rod_table=tool_rows
+        fish_table=table(['Fish', 'Level required','XP per catch'], fish_rows),
+        rare_item_table=table(["Fishing level", "Drops"], rare_item_rows),
+        rod_table=_tool_table("fishing_rod", "fishing_efficiency"),
+        tool_efficiency_section=_gathering_tool_eff_section(
+            "fishing", "fishing rod", "fishing", "fishing_rod", "Fish",
+            {item_name(k): v["level_required"] for k, v in fish_data.items()}
+        ),
     )
 
 
@@ -727,7 +751,11 @@ def gen_woodcutting() -> str:
     return get_template("skills/gathering/woodcutting").format(
         icon=html_image(skill_icon_path("woodcutting"), "", "text"),
         tree_table=table(['Tree','Level Required','XP / Log','Log'], rows),
-        axe_table=tool_rows
+        axe_table=tool_rows,
+        tool_efficiency_section=_gathering_tool_eff_section(
+            "chopping", "axe", "woodcutting", "axe", "Trees",
+            {tree_name(k): v["level_required"] for k, v in trees.items()}
+        ),
     )
 
 
@@ -737,7 +765,7 @@ def gen_farming() -> str:
     assert isinstance(crops, dict)
     rows = sorted(
         [[
-            f"{c.get('emoji', '')} {item_name(c['id'])}",
+            f"{c.get('emoji', '')} {item_name(k)}",
             c["farming_level_required"],
             item_name(c["seed_name"]),
             c.get("seed_cost", "—"),
@@ -745,7 +773,7 @@ def gen_farming() -> str:
             c.get("planting_xp", "—"),
             c.get("harvest_xp", "—"),
             f"{c.get('yield_min', 1)}–{c.get('yield_max', 1)}",
-        ] for c in crops.values() if c["id"] != "magic_bean"],
+        ] for k, c in crops.items() if k != "magic_bean"],
         key=lambda r: r[1]
     )
     # Hoes table
@@ -777,6 +805,10 @@ def gen_farming() -> str:
         hoe_table=table(['Hoe','Level Required','Yield Bonus'], hoe_rows),
         ashes_table=table(["Ash", "Yield bonus"], ash_rows),
         magic_bean_section=magic_bean_note,
+        tool_efficiency_section=_gathering_tool_eff_section(
+            "harvesting", "hoe", "farming", "hoe", "crops",
+            {item_name(k): v["farming_level_required"] for k, v in crops.items()}
+        ),
     )
 
 
@@ -819,7 +851,7 @@ def _tool_eff_mult(tool_tier: int, item_tier: int) -> str:
     return "—" if tool_tier <= item_tier else f"×{1 + 0.25 * (tool_tier - item_tier)}"
 
 
-def _mult_table(tier_levels: list[int]) -> str:
+def _mult_table(tier_levels: list[int], tier_name: str) -> str:
     return f"""<table class="small">
         <thead>
             <tr>
@@ -834,7 +866,7 @@ def _mult_table(tier_levels: list[int]) -> str:
         <tbody>
             {"\n".join(f"""<tr>
                 {"" if item_tier != 0 else f"""<th rowspan="{len(tier_levels)}" style="vertical-align: middle">
-                        <span style="writing-mode: vertical-lr; transform: rotate(180deg)">Item Tier</span>
+                        <span style="writing-mode: vertical-lr; transform: rotate(180deg)">{tier_name}</span>
                     </th>\n"""}<th>{item_tier + 1}</th>
                 {"\n".join(f"<td>{_tool_eff_mult(tool_tier, item_tier)}</td>" for tool_tier in range(len(tier_levels)))}
             </tr>""" for item_tier in range(len(tier_levels)))}
@@ -842,7 +874,10 @@ def _mult_table(tier_levels: list[int]) -> str:
     </table>"""
 
 
-def _tool_efficiency_section(verb: str, skill: str, tool_slot: str) -> str:
+_TOOL_TIER_LEVELS = [1, 15, 30, 55, 70, 85]
+
+
+def _crafting_tool_eff_section(verb: str, skill: str, tool_slot: str) -> str:
     # Get tools associated with the designated tool slot
     equipment = load("equipment.json")
     assert isinstance(equipment, dict)
@@ -856,9 +891,8 @@ def _tool_efficiency_section(verb: str, skill: str, tool_slot: str) -> str:
     heirloom_item = list(heirloom_items.items())[0][0]
     # Calculate tier rows
     tier_rows = []
-    tier_levels = [1, 15, 30, 55, 70, 85]
-    for i, min_level in enumerate(tier_levels):
-        max_level = tier_levels[i + 1] if i + 1 < len(tier_levels) else None
+    for i, min_level in enumerate(_TOOL_TIER_LEVELS):
+        max_level = _TOOL_TIER_LEVELS[i + 1] if i + 1 < len(_TOOL_TIER_LEVELS) else None
         tools_in_tier = sorted([
             k for k, v in tools.items()
             if (i == 0 or v.get("requirements", {}).get(skill, 1) >= min_level)
@@ -871,13 +905,61 @@ def _tool_efficiency_section(verb: str, skill: str, tool_slot: str) -> str:
             ", ".join(item_link(tool) for tool in tools_in_tier),
         ])
 
-    return make_latex_safe(get_template("skills/crafting/tool_efficiency_section")).format(
+    return make_latex_safe(get_template("skills/crafting/crafting_tool_eff_section")).format(
         verb=verb,
         skill_name=skill,
         heirloom_tool=item_link(heirloom_item),
         heirloom_link=link("heirlooms", header="how-heirlooms-grow"),
         tier_table=table(["Tier", "Level Range", "Tools"], tier_rows),
-        mult_table=_mult_table(tier_rows),
+        mult_table=_mult_table(tier_rows, "Item Tier"),
+    )
+
+
+def _gathering_tool_eff_section(verb: str, tool_name: str, skill: str, tool_slot: str, activity_name: str,
+                                activity_lbl_to_level: dict[str, int]) -> str:
+    # Get tools associated with the designated tool slot
+    equipment = load("equipment.json")
+    assert isinstance(equipment, dict)
+    tools = {k: v for k, v in equipment.items() if v["slot"] == tool_slot}
+    # Get heirloom items and exclude from tool list
+    heirloom_items = {k: v for k, v in tools.items() if v.get("heirloom_skill") == skill}
+    if len(heirloom_items) > 1:
+        LOGGER.simple_warn(SimpleWarnType.MULTIPLE_HEIRLOOMS, skill)
+    for item in heirloom_items.keys():
+        tools.pop(item)
+    heirloom_item = list(heirloom_items.items())[0][0]
+    # Calculate tier rows
+    tier_rows = []
+    for i, min_level in enumerate(_TOOL_TIER_LEVELS):
+        max_level = _TOOL_TIER_LEVELS[i + 1] if i + 1 < len(_TOOL_TIER_LEVELS) else None
+
+        def _in_level(level: int) -> bool:
+            return (i == 0 or level >= min_level) and (max_level is None or level < max_level)
+
+        tools_in_tier = sorted([
+            k for k, v in tools.items()
+            if _in_level(v.get("requirements", {}).get(skill, 1))
+        ], key=lambda x: tools[x].get("requirements", {}).get(skill, 0))
+        activity_lbl_in_tier = sorted([
+            k for k, v in activity_lbl_to_level.items()
+            if _in_level(activity_lbl_to_level[k])
+        ], key=lambda x: activity_lbl_to_level[x])
+        tier_rows.append([
+            i + 1,
+            f"≥{min_level}" if max_level is None else f"{min_level}-{max_level - 1}",
+            ", ".join(item_link(tool) for tool in tools_in_tier),
+            ", ".join(k for k in activity_lbl_in_tier),
+        ])
+
+    return make_latex_safe(get_template("skills/gathering/gathering_tool_eff_section"), ignore_keys=["activity_name"]).format(
+        tool_type=tool_name,
+        verb=verb,
+        activity_name=activity_name.lower(),
+        skill_name=skill,
+        heirloom_tool=item_link(heirloom_item),
+        heirloom_link=link("heirlooms", header="how-heirlooms-grow"),
+        tier_table=table(["Tier", "Level Range", "Tools", activity_name], tier_rows),
+        mult_table=_mult_table(tier_rows, f"{activity_name} Tier"),
     )
 
 
@@ -907,7 +989,7 @@ def gen_smithing() -> str:
 
     return get_template("skills/crafting/smithing").format(
         icon=html_image(skill_icon_path("smithing"), "", "text"),
-        tool_efficiency_section=_tool_efficiency_section("smithing", "smithing", "hammer"),
+        tool_efficiency_section=_crafting_tool_eff_section("smithing", "smithing", "hammer"),
         sections="\n\n".join(sections),
         hammer_table=_tool_table('hammer', 'smithing_efficiency'),
     )
@@ -926,7 +1008,7 @@ def gen_cooking() -> str:
         icon=html_image(skill_icon_path("cooking"), "", "text"),
         food_table=table(['Food','Level','Raw Ingredient','XP / Item','HP Healed'], rows),
         frying_pan_table=tool_rows,
-        tool_efficiency_section=_tool_efficiency_section("cooking", "cooking", "frying_pan"),
+        tool_efficiency_section=_crafting_tool_eff_section("cooking", "cooking", "frying_pan"),
     )
 
 
@@ -959,7 +1041,6 @@ def gen_crafting() -> str:
 
 
 def gen_firemaking() -> str:
-    # Todo: Add details about using ashes for Rune Crafting, etc
     logs = load("logs.json")
     assert isinstance(logs, dict)
     rows = sorted(
@@ -975,7 +1056,7 @@ def gen_firemaking() -> str:
         runecrafting_link=link("runecrafting", "runecrafting", "bonus-crafted-runes"),
         item_table=table(['Log','Level Required','XP / Log Burned'], rows),
         tinderbox_table=tool_rows,
-        tool_efficiency_section=_tool_efficiency_section("burning", "firemaking", "tinderbox"),
+        tool_efficiency_section=_crafting_tool_eff_section("burning", "firemaking", "tinderbox"),
     )
 
 
@@ -1061,6 +1142,10 @@ def gen_thieving() -> str:
         icon=html_image(skill_icon_path("thieving"), "", "text"),
         npc_table=table(["NPC", "Level", "XP / Steal", "Coins", "Possible Loot"], rows),
         lockpick_table=_tool_table("lockpick", "thieving_efficiency"),
+        tool_efficiency_section=_gathering_tool_eff_section(
+            "pickpocketing", "lockpick", "thieving", "lockpick", "NPCs",
+            {thieving_npc_name(npc["key"]): npc["level_required"] for npc in npcs}
+        ),
     )
 
 

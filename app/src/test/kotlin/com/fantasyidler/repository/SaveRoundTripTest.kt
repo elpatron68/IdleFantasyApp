@@ -65,7 +65,7 @@ class SaveRoundTripTest {
         val questRepo = QuestRepository(db.questProgressDao(), gameData)
         val globalStateRepo = GlobalStateRepository(db.globalStateDao())
         val townRepo = TownRepository(gameData, playerRepo, questRepo, boostRepo)
-        val mercRepo = MercenaryRepository(playerRepo, gameData, dailyQuestRepo)
+        val mercRepo = MercenaryRepository(playerRepo, gameData)
         val queuedSessionStarter = QueuedSessionStarter(
             boostRepo, context, playerRepo, sessionRepo, townRepo, gameData, mercRepo, json,
         )

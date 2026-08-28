@@ -510,6 +510,8 @@
     <string name="home_xp_boost_was_active">2 倍经验加成已生效</string>
     <string name="home_xp_boost_active">2 倍经验加成生效中 — 剩余 %1$s</string>
     <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
+    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">战利品</string>
     <string name="home_food_consumed">消耗食物</string>
     <string name="home_bones_buried">已埋葬骨头</string>
@@ -554,9 +556,11 @@
     <string name="combat_log_you_missed">你未命中</string>
     <string name="combat_log_kill">☠ %1$s 被击败</string>
     <string name="combat_log_player_hit">→ 你命中 %1$s：%2$d 伤害</string>
+    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_player_miss">→ 你未命中 %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s 命中你：%2$d 伤害</string>
     <string name="combat_log_enemy_miss">← %1$s 未命中</string>
+    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_heal">✚ 你食用了：+%1$d 生命</string>
     <string name="combat_eat_threshold_warning">⚠ 食物即将耗尽</string>
     <string name="combat_rec_level">推荐战斗等级</string>
@@ -1850,13 +1854,12 @@
     <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string> <!-- untranslated -->
     <string name="merc_hire">Hire</string> <!-- untranslated -->
     <string name="merc_dismiss">Dismiss</string> <!-- untranslated -->
-    <string name="merc_hired">%1$s joins your party until the daily reset.</string> <!-- untranslated -->
+    <string name="merc_hired">%1$s joins your party for 24 hours.</string> <!-- untranslated -->
     <string name="merc_party_full">Your party is full.</string> <!-- untranslated -->
     <string name="merc_already_hired">%1$s is already under contract.</string> <!-- untranslated -->
     <string name="merc_not_enough_coins">Not enough coins to hire %1$s.</string> <!-- untranslated -->
     <string name="merc_not_available">%1$s is not available today.</string> <!-- untranslated -->
     <string name="merc_contract_remaining">Contract: %1$s left</string> <!-- untranslated -->
-    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="raid_allies_down">Mercenaries down: %1$d</string> <!-- untranslated -->
     <string name="merc_tier_cheap">Sellsword</string> <!-- untranslated -->
     <string name="merc_tier_seasoned">Veteran</string> <!-- untranslated -->

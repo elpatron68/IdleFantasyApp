@@ -475,7 +475,9 @@
     <string name="item_diamond_necklace_name">钻石项链</string>
     <string name="item_ancient_treasure_name">古代宝藏</string>
     <string name="item_seaweed_name">海藻</string>
+    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
     <string name="item_pearl_name">珍珠</string>
+    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
     <string name="item_nature_rune_name">自然符文</string>
     <string name="item_herb_name">草药</string>
     <string name="item_mahogany_log_name">红木原木</string>

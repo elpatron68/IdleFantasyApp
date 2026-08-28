@@ -62,6 +62,15 @@ object CombatSimulator {
         val effDefence  = playerDefence  + (potionBonuses["defense"]  ?: 0) + blessingDefBonus
         val effRanged   = playerRanged   + (potionBonuses["ranged"]   ?: 0)
         val effMagic    = playerMagic    + (potionBonuses["magic"]    ?: 0)
+        val statsAtStart = mapOf(
+            "atk" to when (combatStyle) { "ranged" -> effRanged; "magic" -> effMagic; else -> effAttack } + weaponAttackBonus,
+            "str" to when (combatStyle) {
+                "ranged" -> effRanged + rangedGearStrengthBonus
+                "magic"  -> spellMaxHit
+                else     -> effStrength + weaponStrengthBonus
+            },
+            "def" to effDefence,
+        )
 
         val frames = mutableListOf<SessionFrame>()
 
@@ -163,6 +172,7 @@ object CombatSimulator {
             val framePlayerHits  = mutableListOf<Int>()
             val frameEnemyHits   = mutableListOf<Int>()
             val framePlayerHeals = mutableListOf<Int>()
+            val frameDoubleHitTicks = mutableListOf<Int>()
 
             for (tick in 0 until ticksPerFrame) {
                 // Player attacks (ranged is capped by arrow supply)
@@ -194,7 +204,10 @@ object CombatSimulator {
                         // Double Hit only strikes a still-living enemy (no overkill carry).
                         if (doubleHitChance > 0 && enemyHp - dmg > 0 &&
                             rnd.nextDouble() < doubleHitChance && rnd.nextDouble() < playerHitChance
-                        ) dmg += rnd.nextInt(0, playerMaxHit + 1)
+                        ) {
+                            dmg += rnd.nextInt(0, playerMaxHit + 1)
+                            frameDoubleHitTicks += tick
+                        }
                         dmg
                     }
                 }
@@ -290,10 +303,12 @@ object CombatSimulator {
                     enemyKey       = frameStartEnemyKey,
                     hpAfter      = currentHp.coerceAtLeast(0),
                     playerHits   = framePlayerHits,
+                    doubleHitTicks = frameDoubleHitTicks,
                     enemyHits    = frameEnemyHits,
                     playerHeals  = framePlayerHeals,
                     maxHp        = maxHp,
                     foodAtStart  = if (frames.isEmpty()) equippedFood else emptyMap(),
+                    statsAtStart = if (frames.isEmpty()) statsAtStart else emptyMap(),
                 )
             )
             runningTotal += frameXp
@@ -437,14 +452,27 @@ object CombatSimulator {
             else                 -> effAtk / (2.0 * bossDefence.coerceAtLeast(1))
         }.coerceIn(0.10, 0.95)
 
+        // Raid-tier enrage: below a full party (player + MercenaryRepository.MAX_PARTY mercs)
+        // the boss hits proportionally harder and more often, so a maxed solo player cannot
+        // out-heal it with the 300-food cap (issue #1578). A full party fights it unscaled.
+        val partyScale = if (boss.raid) RAID_FULL_PARTY.toDouble() / (1 + mercenaries.size) else 1.0
         val bossEffStr = boss.combatStats.strengthLevel + boss.combatStats.strengthBonus
-        val bossMax    = if (bossEffStr == 0) 0 else max(0, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640)
+        val bossMax    = if (bossEffStr == 0) 0 else (max(0, 1 + bossEffStr * (boss.combatStats.strengthBonus + 64) / 640) * partyScale).roundToInt()
         val bossEffAtk = boss.combatStats.attackLevel + boss.combatStats.attackBonus
         val effPlayerDefence = playerDefence + blessingDefBonus
-        val bossHitChance = when {
+        val statsAtStart = mapOf(
+            "atk" to effAtk,
+            "str" to when (combatStyle) {
+                "ranged" -> playerRanged + rangedGearStrengthBonus
+                "magic"  -> spellMaxHit
+                else     -> playerStrength + weaponStrBonus
+            },
+            "def" to effPlayerDefence,
+        )
+        val bossHitChance = (when {
             bossEffAtk > effPlayerDefence -> 1.0 - effPlayerDefence / (2.0 * bossEffAtk.coerceAtLeast(1))
             else                          -> bossEffAtk / (2.0 * effPlayerDefence.coerceAtLeast(1))
-        }.coerceIn(0.10, 0.95)
+        } * partyScale).coerceIn(0.10, 0.95)
 
         val maxHp         = playerHp * 10
         var currentHp     = maxHp
@@ -474,10 +502,10 @@ object CombatSimulator {
             }.coerceIn(0.10, 0.95)
         }
         val bossHitChanceVsMerc = mercenaries.map { m ->
-            when {
+            (when {
                 bossEffAtk > m.defense -> 1.0 - m.defense / (2.0 * bossEffAtk.coerceAtLeast(1))
                 else                   -> bossEffAtk / (2.0 * m.defense.coerceAtLeast(1))
-            }.coerceIn(0.10, 0.95)
+            } * partyScale).coerceIn(0.10, 0.95)
         }
         val mercHp = IntArray(mercenaries.size) { mercenaries[it].hpLevel * 10 }
 
@@ -488,6 +516,7 @@ object CombatSimulator {
             val eHits       = mutableListOf<Int>()
             val aHits       = mutableListOf<Int>()
             val pHeals      = mutableListOf<Int>()
+            val pDoubleHitTicks = mutableListOf<Int>()
             val frameFood   = mutableMapOf<String, Int>()
             val frameArrows = mutableMapOf<String, Int>()
             var frameRunesUsed = 0
@@ -521,7 +550,10 @@ object CombatSimulator {
                         // Double Hit only strikes a still-living boss (no overkill carry).
                         if (doubleHitChance > 0 && currentBossHp - dmg > 0 &&
                             rnd.nextDouble() < doubleHitChance && rnd.nextDouble() < playerHitChance
-                        ) dmg += rnd.nextInt(0, playerMax + 1)
+                        ) {
+                            dmg += rnd.nextInt(0, playerMax + 1)
+                            pDoubleHitTicks += tick
+                        }
                         dmg
                     }
                 }
@@ -549,12 +581,13 @@ object CombatSimulator {
                         minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                         levelBefore = 0, levelAfter = 0,
                         kills = 1, enemyKey = bossKey,
-                        playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
+                        playerHits = pHits, doubleHitTicks = pDoubleHitTicks, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
                         foodConsumed  = frameFood,
                         arrowsConsumed = frameArrows,
                         runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                         maxHp          = maxHp,
                         foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
+                        statsAtStart   = if (frames.isEmpty()) statsAtStart else emptyMap(),
                         allyHits       = aHits,
                         alliesDown     = mercHp.count { it <= 0 },
                         allyHpAfter    = mercHp.toList(),
@@ -594,12 +627,13 @@ object CombatSimulator {
                         minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                         levelBefore = 0, levelAfter = 0,
                         kills = 0, enemyKey = bossKey,
-                        playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = 0,
+                        playerHits = pHits, doubleHitTicks = pDoubleHitTicks, enemyHits = eHits, playerHeals = pHeals, hpAfter = 0,
                         foodConsumed  = frameFood,
                         arrowsConsumed = frameArrows,
                         runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                         maxHp          = maxHp,
                         foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
+                        statsAtStart   = if (frames.isEmpty()) statsAtStart else emptyMap(),
                         allyHits       = aHits,
                         alliesDown     = mercHp.count { it <= 0 },
                         allyHpAfter    = mercHp.toList(),
@@ -631,12 +665,13 @@ object CombatSimulator {
                     minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                     levelBefore = 0, levelAfter = 0,
                     kills = 0, enemyKey = bossKey,
-                    playerHits = pHits, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
+                    playerHits = pHits, doubleHitTicks = pDoubleHitTicks, enemyHits = eHits, playerHeals = pHeals, hpAfter = currentHp,
                     foodConsumed  = frameFood,
                     arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     maxHp          = maxHp,
                     foodAtStart    = if (frames.isEmpty()) equippedFood else emptyMap(),
+                    statsAtStart   = if (frames.isEmpty()) statsAtStart else emptyMap(),
                     allyHits       = aHits,
                     alliesDown     = mercHp.count { it <= 0 },
                     allyHpAfter    = mercHp.toList(),
@@ -661,6 +696,7 @@ object CombatSimulator {
                 kills = if (won) 1 else 0, enemyKey = bossKey, hpAfter = if (won) 1 else 0,
                 maxHp = maxHp,
                 foodAtStart = if (frames.size <= 1) equippedFood else emptyMap(),
+                statsAtStart = if (frames.size <= 1) statsAtStart else emptyMap(),
             )
             if (frames.isEmpty()) frames.add(stub) else frames[frames.lastIndex] = stub
         }
@@ -704,6 +740,9 @@ object CombatSimulator {
 
     /** Default/enemy attack speed in seconds; player weapons may attack faster via their attackSpeed field. */
     const val BASE_ATTACK_SPEED_SEC = 2.4
+
+    /** Full raid party size (player + MercenaryRepository.MAX_PARTY mercenaries); raid bosses scale up against smaller parties. */
+    const val RAID_FULL_PARTY = 4
 
     /** Number of player attack ticks in a 60-second frame at the given attack speed. */
     fun playerTicksPerFrame(attackSpeedSec: Double): Int = (60.0 / attackSpeedSec).roundToInt()

@@ -145,6 +145,29 @@ class SellOldEquipmentTest {
     }
 
     @Test
+    fun `gear remembered in a non-active loadout is kept`() {
+        // Issue #1597: boots saved in the strength loadout were sold while ranged was active.
+        val allEquip = mapOf(
+            "dragon_boots" to EquipmentData(
+                name = "dragon_boots", displayName = "Dragon Boots",
+                slot = EquipSlot.BOOTS, defenseBonus = 12,
+            ),
+        )
+        val equipped = mapOf(EquipSlot.BOOTS to null)
+        val inventory = mapOf("dragon_boots" to 2)
+        val loadouts = mapOf(
+            "strength" to mapOf(EquipSlot.BOOTS to "dragon_boots"),
+            "ranged"   to mapOf(EquipSlot.BOOTS to "dragon_boots"),
+        )
+
+        val toSell = ShopViewModel.computeOldEquipmentToSell(
+            equipped, inventory, allEquip, armorLoadouts = loadouts)
+
+        // Two loadouts share the single physical copy: exactly one is protected.
+        assertEquals(1, toSell["dragon_boots"])
+    }
+
+    @Test
     fun `non-equipment inventory is ignored`() {
         val allEquip = mapOf("bronze_platebody" to body("bronze_platebody", defense = 3))
         val inventory = mapOf("iron_ore" to 500, "bronze_platebody" to 1)

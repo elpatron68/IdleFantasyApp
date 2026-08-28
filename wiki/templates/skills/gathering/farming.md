@@ -12,6 +12,10 @@ Equip a hoe to increase your harvest yield. The bonus is applied on top of the b
 
 {hoe_table}
 
+### Hoe tier efficiency multiplier
+
+{tool_efficiency_section}
+
 ## Ashes
 
 Ashes can provide additional bonuses for farming yield which can significantly increase overall yield at higher tiers.

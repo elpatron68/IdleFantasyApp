@@ -475,7 +475,9 @@
     <string name="item_diamond_necklace_name">Diamantcollier</string>
     <string name="item_ancient_treasure_name">Antiker Schatz</string>
     <string name="item_seaweed_name">Seetang</string>
+    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
     <string name="item_pearl_name">Perle</string>
+    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
     <string name="item_nature_rune_name">Naturrune</string>
     <string name="item_herb_name">Kraut</string>
     <string name="item_mahogany_log_name">MahagonischeitLog</string>

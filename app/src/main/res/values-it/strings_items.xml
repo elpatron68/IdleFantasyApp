@@ -475,7 +475,9 @@
     <string name="item_diamond_necklace_name">Collana di Diamanti</string>
     <string name="item_ancient_treasure_name">Tesoro Antico</string>
     <string name="item_seaweed_name">Alga</string>
+    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
     <string name="item_pearl_name">Perla</string>
+    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
     <string name="item_nature_rune_name">Runa della Natura</string>
     <string name="item_herb_name">Pianta Officinale</string>
     <string name="item_mahogany_log_name">Legno di Mogano</string>

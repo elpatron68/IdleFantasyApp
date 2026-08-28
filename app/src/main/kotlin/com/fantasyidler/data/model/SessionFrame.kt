@@ -51,6 +51,8 @@ data class SessionFrame(
     @SerialName("hp_after") val hpAfter: Int = 0,
     /** Combat only — player's damage dealt each tick (0 = miss), in tick order. */
     @SerialName("player_hits") val playerHits: List<Int> = emptyList(),
+    /** Combat only — tick indices where a prestige Double Hit landed, so the log can show it (issue #1567). */
+    @SerialName("double_hit_ticks") val doubleHitTicks: List<Int> = emptyList(),
     /** Combat only — enemy's damage dealt each tick (0 = miss), in tick order. */
     @SerialName("enemy_hits") val enemyHits: List<Int> = emptyList(),
     /** Combat only — HP restored by eating each tick (0 = no eating), in tick order (issue #1431). */
@@ -63,4 +65,8 @@ data class SessionFrame(
     /** Combat only — food supply captured at simulation time, set on frame 0 only
      *  (empty = not recorded). Keeps the banner stable if gear food changes mid-run (issue #1411). */
     @SerialName("food_at_start") val foodAtStart: Map<String, Int> = emptyMap(),
+    /** Combat only — effective "atk"/"str"/"def" the simulation fought with (levels, gear,
+     *  potions, blessings, prestige), set on frame 0 only (empty = not recorded; the banner
+     *  falls back to gear bonuses). Potions aren't recoverable from live state (issue #1569). */
+    @SerialName("stats_at_start") val statsAtStart: Map<String, Int> = emptyMap(),
 )

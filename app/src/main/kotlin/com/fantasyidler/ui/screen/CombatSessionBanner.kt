@@ -49,6 +49,7 @@ import com.fantasyidler.simulator.TowerScaling
 import com.fantasyidler.ui.viewmodel.MercContract
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatXp
+import com.fantasyidler.util.toClockTime
 import com.fantasyidler.util.toCountdown
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
@@ -78,6 +79,8 @@ internal data class CombatLogEntry(
     val heal: Int = 0,
     /** True when this damage came from the raid mercenary party. */
     val ally: Boolean = false,
+    /** True when a prestige Double Hit landed this tick (issue #1567). */
+    val doubleHit: Boolean = false,
 )
 
 @Composable
@@ -244,7 +247,19 @@ internal fun CombatSessionBanner(
 
         if (!isDone) {
             Text(
-                text       = remember(now, showEndTime) { endsAt.toCountdown(context, showEndTime) },
+                text       = remember(now, showEndTime) {
+                    if (isBoss && sessionBoss != null) {
+                        // Agility/Chronospire compress the playback, but the boss always gets
+                        // its full durationMinutes of simulated fight: show the fight clock so
+                        // a shorter playback doesn't read as less time to beat the boss
+                        // (issue #1590). The real completion time stays in the parentheses.
+                        val actualMs = (endsAt - session.startedAt).coerceAtLeast(1L)
+                        val fightRemainingMs = (endsAt - now).coerceAtLeast(0L) *
+                            (sessionBoss.durationMinutes * 60_000L) / actualMs
+                        (now + fightRemainingMs).toCountdown(context, showEndTime = false) +
+                            if (showEndTime) " (${endsAt.toClockTime(context)})" else ""
+                    } else endsAt.toCountdown(context, showEndTime)
+                },
                 style      = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold,
                 color      = MaterialTheme.colorScheme.primary,
@@ -311,7 +326,7 @@ internal fun CombatSessionBanner(
                             val lastTick = if (i < currentFrameIdx) maxOf(f.playerHits.size, f.enemyHits.size) - 1 else tickInFrame
                             for (t in 0..lastTick) {
                                 f.playerHits.getOrNull(t)?.let { dmg ->
-                                    add(CombatLogEntry(true, dmg, eName))
+                                    add(CombatLogEntry(true, dmg, eName, doubleHit = t in f.doubleHitTicks))
                                     hp -= dmg
                                     if (hp <= 0) { add(CombatLogEntry(false, 0, eName, isKill = true)); hp = enemyHp }
                                 }
@@ -434,7 +449,14 @@ internal fun CombatSessionBanner(
                         val atkLabel = stringResource(R.string.combat_atk)
                         val strLabel = stringResource(R.string.combat_str)
                         val defLabel = stringResource(R.string.combat_def)
-                        val bonusParts = buildList {
+                        // Effective stats the simulation fought with (levels, gear, potions,
+                        // blessings, prestige), stamped on frame 0 (issue #1569). Sessions
+                        // simulated before the stamp existed fall back to gear bonuses.
+                        val statsAtStart = frames.firstOrNull()?.statsAtStart ?: emptyMap()
+                        val bonusParts = if (statsAtStart.isNotEmpty()) {
+                            listOf("atk" to atkLabel, "str" to strLabel, "def" to defLabel)
+                                .mapNotNull { (key, label) -> statsAtStart[key]?.let { "$label $it" } }
+                        } else buildList {
                             if (attackBonus   != 0) add("+$attackBonus $atkLabel")
                             if (strengthBonus != 0) add("+$strengthBonus $strLabel")
                             if (defenseBonus  != 0) add("+$defenseBonus $defLabel")
@@ -650,10 +672,14 @@ internal fun CombatSessionBanner(
                                     } else if (entry.isPlayer) {
                                         val color = if (entry.damage > 0) Color(0xFF4CAF50)
                                                     else MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.45f)
-                                        val text = if (entry.damage > 0)
-                                            stringResource(R.string.combat_log_player_hit, entry.enemyName, entry.damage)
-                                        else
-                                            stringResource(R.string.combat_log_player_miss, entry.enemyName)
+                                        val text = when {
+                                            entry.doubleHit && entry.damage > 0 ->
+                                                stringResource(R.string.combat_log_player_double_hit, entry.enemyName, entry.damage)
+                                            entry.damage > 0 ->
+                                                stringResource(R.string.combat_log_player_hit, entry.enemyName, entry.damage)
+                                            else ->
+                                                stringResource(R.string.combat_log_player_miss, entry.enemyName)
+                                        }
                                         Text(text = text, style = MaterialTheme.typography.bodySmall, color = color)
                                     } else {
                                         val color = if (entry.damage > 0) MaterialTheme.colorScheme.error

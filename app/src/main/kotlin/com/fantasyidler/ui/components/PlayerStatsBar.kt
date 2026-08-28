@@ -1,6 +1,7 @@
 package com.fantasyidler.ui.components
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -9,17 +10,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -121,18 +124,17 @@ fun PlayerStatsBar(
 
         if (boostLines.isNotEmpty()) {
             Spacer(Modifier.height(4.dp))
-            val scrollable = boostLines.size > MAX_VISIBLE_BOOST_LINES
+            // Whole lines plus an explicit "+N more" toggle instead of an inner scroll: a
+            // fixed-height scroll area cut lines mid-height and its drag spilled into the
+            // page scroll on the Home screen (issue #1579).
+            var expanded by rememberSaveable { mutableStateOf(false) }
+            val collapsible = boostLines.size > MAX_VISIBLE_BOOST_LINES
+            val visibleLines = if (collapsible && !expanded) boostLines.take(MAX_VISIBLE_BOOST_LINES) else boostLines
             Column(
-                modifier = if (scrollable) {
-                    Modifier
-                        .heightIn(max = 16.dp * MAX_VISIBLE_BOOST_LINES + 5.dp * (MAX_VISIBLE_BOOST_LINES - 1))
-                        .verticalScroll(rememberScrollState())
-                } else {
-                    Modifier
-                },
+                modifier = if (collapsible) Modifier.clickable { expanded = !expanded } else Modifier,
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
-                boostLines.forEach { line ->
+                visibleLines.forEach { line ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector        = Icons.Filled.Star,
@@ -147,6 +149,15 @@ fun PlayerStatsBar(
                             color = line.tint,
                         )
                     }
+                }
+                if (collapsible) {
+                    Text(
+                        text  = if (expanded) stringResource(R.string.boosts_show_less)
+                                else stringResource(R.string.boosts_show_more, boostLines.size - MAX_VISIBLE_BOOST_LINES),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = tertiaryTint,
+                        modifier = Modifier.padding(start = 16.dp),
+                    )
                 }
             }
         }

@@ -276,7 +276,7 @@ class SeasonalEventRepository @Inject constructor(
         }
         // Ironman characters never receive the XP boost component (boosts are inert for them);
         // the tier's other rewards are still granted.
-        if (tier.xpBoost && !flags.ironman) playerRepo.grantXpBoost(PlayerRepository.XP_BOOST_DURATION_MS)
+        if (tier.xpBoost && !flags.ironman) playerRepo.grantXpBoostUnlocked(PlayerRepository.XP_BOOST_DURATION_MS)
 
         // The grants above rewrite the flags column (seen items, boost expiry) — re-read before recording the claim.
         val latest = playerRepo.getFlagsUnlocked()

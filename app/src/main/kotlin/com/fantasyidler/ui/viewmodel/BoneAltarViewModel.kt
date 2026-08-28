@@ -41,7 +41,7 @@ data class BoneAltarUiState(
     val inventory: Map<String, Int> = emptyMap(),
     val prayerLevel: Int = 1,
     val prayerXp: Long = 0L,
-    val boostActive: Boolean = false,
+    val boostFactor: Float = 1f,
     val prayerCapeMult: Float = 1f,
     val churchMult: Float = 1f,
     val prestigeMult: Float = 1f,
@@ -115,19 +115,17 @@ class BoneAltarViewModel @Inject constructor(
             .entries.sortedByDescending { it.value.xpPerBone }
             .associate { it.key to it.value }
 
-        val boostActive    = !flags.ironman && flags.xpBoostExpiresAt > System.currentTimeMillis()
+        // Canonical 2x-boost factor (purchased + post-prestige 48h, stacking to 4x,
+        // ironman-aware) — the altar previously only honored the purchased boost, so the
+        // earned post-prestige boost did nothing here (issue #1593).
+        val boostFactor    = boostRepo.xpBoostFactor(Skills.PRAYER, flags).toFloat()
         val equippedCape   = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
-        // skillPrestige is intentionally omitted here (not flags.skillPrestige): prestige is
-        // already applied as its own separate factor below (prestigeMult), multiplied together
-        // with prayerCapeMult at collection time. Passing the real prestige map here would fold
-        // (prestige + 1) into the cape multiplier too, double-counting prestige for any player
-        // who has prestiged Prayer and owns/equips a prayer cape.
         val prayerCapeMult = resolveCapeMultiplier(
             skillName = Skills.PRAYER,
             equippedCape = equippedCape,
             inventoryKeys = inventory.keys,
             townBuildingTiers = flags.townBuildingTiers,
-            capeScaling = emptyMap(),
+            capeScaling = boostRepo.capeScalingBySkill(flags),
             allEquipment = gameData.equipment,
             ironman = flags.ironman,
         )
@@ -144,7 +142,7 @@ class BoneAltarViewModel @Inject constructor(
             inventory       = inventory,
             prayerLevel     = levels[Skills.PRAYER] ?: 1,
             prayerXp        = xpMap[Skills.PRAYER] ?: 0L,
-            boostActive     = boostActive,
+            boostFactor     = boostFactor,
             prayerCapeMult  = prayerCapeMult,
             churchMult      = churchMult,
             prestigeMult    = prestigeMult,
@@ -177,7 +175,7 @@ class BoneAltarViewModel @Inject constructor(
                        else (state.combo + 1).coerceAtMost(99)
         val comboMult = if (newCombo >= COMBO_THRESHOLD) COMBO_XP_MULT else 1.0f
 
-        val boostMult   = if (state.boostActive) 2.0f else 1.0f
+        val boostMult   = state.boostFactor
         val petMult     = 1.0f + state.petBoostPct / 100.0f
         val effectiveXp = (bone.xpPerBone * comboMult * boostMult *
             state.churchMult * state.prayerCapeMult * state.prestigeMult * petMult)

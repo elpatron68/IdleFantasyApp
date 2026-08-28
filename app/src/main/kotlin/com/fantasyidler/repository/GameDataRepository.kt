@@ -204,6 +204,16 @@ class GameDataRepository @Inject constructor(
         asset("data/recipes/cooking.json")
     }
 
+    /**
+     * Fishing level needed to catch the raw input of cooking recipe [target]; 1 when the
+     * input isn't a fish (farm meats). Cooking quests must not ask for fish the player
+     * can't catch yet (issue #1573).
+     */
+    fun fishingLevelForCooking(target: String): Int {
+        val raw = cookingRecipes[target]?.rawItem ?: return 1
+        return fish[raw]?.levelRequired ?: 1
+    }
+
     val fletchingRecipes: Map<String, FletchingRecipe> by lazy {
         asset("data/recipes/fletching.json")
     }

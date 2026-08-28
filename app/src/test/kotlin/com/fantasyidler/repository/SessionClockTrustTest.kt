@@ -61,7 +61,7 @@ class SessionClockTrustTest {
             sessionRepo,
             TownRepository(gameData, playerRepo, QuestRepository(db.questProgressDao(), gameData), boostRepo),
             gameData,
-            MercenaryRepository(playerRepo, gameData, dailyQuestRepo),
+            MercenaryRepository(playerRepo, gameData),
             json,
         )
         workerStarter = WorkerQueuedSessionStarter(boostRepo, playerRepo, sessionRepo, gameData, json)

@@ -43,7 +43,7 @@ class BackupScheduler @Inject constructor(
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, firstFire, pi)
     }
 
-    /** Reschedule the next alarm occurrence after a successful backup firing. */
+    /** Reschedule the next alarm occurrence after a backup firing (successful or not). */
     fun reschedule(frequency: String) {
         if (frequency.isEmpty()) return
         val intent = Intent(context, BackupAlarmReceiver::class.java)
@@ -52,7 +52,12 @@ class BackupScheduler @Inject constructor(
             context, REQUEST_CODE, intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        val nextFire = System.currentTimeMillis() + intervalMs(frequency)
+        // Anchor daily/weekly to the 5am slot rather than "now + interval": a manual
+        // Back Up Now used to shift the next auto fire to the time of the tap, and a
+        // Doze-delayed firing shifted it permanently, so the 5am backup quietly stopped
+        // happening at 5am (playtester report after v1.14.3).
+        val nextFire = if (frequency == "hourly") System.currentTimeMillis() + intervalMs(frequency)
+                       else nextFiveAm(frequency)
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextFire, pi)
     }
 
@@ -75,6 +80,14 @@ class BackupScheduler @Inject constructor(
 
     suspend fun performBackup(playerRepo: PlayerRepository, frequency: String = ""): Boolean {
         val flags = playerRepo.getFlags()
+        // Keep the periodic chain alive no matter how this run ends: a failed or skipped
+        // firing used to end the sequence until the next cold app launch re-registered it.
+        val effectiveFreq = frequency.ifEmpty { flags.backupFrequency }
+        try {
+            if (effectiveFreq.isNotEmpty()) reschedule(effectiveFreq)
+        } catch (e: Exception) {
+            Log.w(TAG, "Backup reschedule failed", e)
+        }
         if (flags.backupFolderUri.isEmpty()) return false
         // Per-character file names: each save slot keeps its own backup, so switching
         // characters no longer overwrites another character's auto backup.
@@ -143,12 +156,6 @@ class BackupScheduler @Inject constructor(
                 .any { it.second.startsWith(finalName) && !it.second.endsWith(TEMP_SUFFIX) }
             if (!swappedIn) {
                 throw IllegalStateException("renamed backup document not found after swap")
-            }
-            try {
-                val effectiveFreq = frequency.ifEmpty { flags.backupFrequency }
-                if (effectiveFreq.isNotEmpty()) reschedule(effectiveFreq)
-            } catch (e: Exception) {
-                Log.w(TAG, "Post-swap backup steps failed", e)
             }
 
             true

@@ -366,6 +366,7 @@ internal fun buildEquipDetail(
     if (item.heirloomSkill != null && heirloomXp != null) {
         parts.add(context.getString(R.string.heirloom_level_label, HeirloomStats.level(heirloomXp[item.name] ?: 0L)))
     }
+    val partsBeforeEfficiency = parts.size
     item.miningEfficiency?.let      { parts.add("${context.getString(R.string.profile_stat_mining)} ×${"%.2f".format(it)}") }
     item.woodcuttingEfficiency?.let { parts.add("${context.getString(R.string.profile_stat_wc)} ×${"%.2f".format(it)}") }
     item.fishingEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_fishing)} ×${"%.2f".format(it)}") }
@@ -375,7 +376,9 @@ internal fun buildEquipDetail(
     item.agilityEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_agility)} ×${"%.2f".format(it)}") }
     item.cookingEfficiency?.let     { parts.add("${context.getString(R.string.profile_stat_cooking)} ×${"%.2f".format(it)}") }
     item.thievingEfficiency?.let    { parts.add("${context.getString(R.string.profile_stat_thieving)} ×${"%.2f".format(it)}") }
-    if (parts.isEmpty()) {
+    // Tools with efficiency stats hide their melee bonuses; keyed off the efficiency
+    // block alone so the heirloom level label doesn't suppress them (issue #1594).
+    if (parts.size == partsBeforeEfficiency) {
         if (item.attackBonus   != 0) parts.add("${context.getString(R.string.profile_stat_atk)} +${item.attackBonus}")
         if (item.strengthBonus != 0) parts.add("${context.getString(R.string.profile_stat_str)} +${item.strengthBonus}")
         if (item.defenseBonus  != 0) parts.add("${context.getString(R.string.profile_stat_def)} +${item.defenseBonus}")

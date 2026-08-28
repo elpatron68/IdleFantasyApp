@@ -510,11 +510,6 @@
     },
     "rare_drops": [
       {
-        "item": "runite_bar",
-        "chance": 0.02,
-        "comment": "1/50"
-      },
-      {
         "item": "race_change_token",
         "chance": 0.004,
         "comment": "1/250 race change token"
@@ -577,11 +572,6 @@
       }
     },
     "rare_drops": [
-      {
-        "item": "runite_bar",
-        "chance": 0.02,
-        "comment": "1/50"
-      },
       {
         "item": "race_change_token",
         "chance": 0.004,

@@ -475,7 +475,9 @@
     <string name="item_diamond_necklace_name">Diamond Necklace</string> <!-- untranslated -->
     <string name="item_ancient_treasure_name">Ancient Treasure</string> <!-- untranslated -->
     <string name="item_seaweed_name">Seaweed</string> <!-- untranslated -->
+    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
     <string name="item_pearl_name">Pearl</string> <!-- untranslated -->
+    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
     <string name="item_nature_rune_name">Nature Rune</string> <!-- untranslated -->
     <string name="item_herb_name">Herb</string> <!-- untranslated -->
     <string name="item_mahogany_log_name">Mahogany Log</string> <!-- untranslated -->

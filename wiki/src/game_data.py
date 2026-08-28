@@ -266,12 +266,16 @@ def _standard_string_resolution(value: str, key_string: str, warn_type: SimpleWa
     value_title = STRINGS.get_string(key_string.format(value)) if key_string.format(value) in STRINGS else None
     if value_title is None:
         LOGGER.simple_warn(warn_type, value)
-        return default_value if default_value else title(value)
+        return default_value if default_value is not None else title(value)
     return value_title
 
 
 def skill_name(skill: str) -> str:
     return _standard_string_resolution(skill, "skill_{}_name", SimpleWarnType.SKILL_NAME)
+
+
+def skill_desc(skill: str) -> str:
+    return _standard_string_resolution(skill, "skill_{}_desc", SimpleWarnType.SKILL_DESC, "")
 
 
 def enemy_name(enemy: str) -> str:
