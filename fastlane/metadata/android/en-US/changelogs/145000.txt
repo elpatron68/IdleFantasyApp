@@ -1,0 +1,17 @@
+Improvements
+• The combat arrow dropdown now shows each arrow's ranged strength, and the spell dropdown shows every spell with its Magic level requirement, including ones you haven't unlocked yet
+• Dangerous session actions are now red with bigger buttons to help avoid misclicks
+• Collection progress bars in the profile tabs now share one design, and Achievements gained a real progress bar
+• Active boosts now have a distinct icon per type, consistent formatting, and a larger tap area
+• Daily and Weekly quests now sit directly in the main quest tab bar instead of behind the Timed tab
+• Prestige tier numerals now go up to X, so tier 6 no longer shows as 'Precision 6'
+
+Bug Fixes
+• The notification icon in the status bar is now a clean shield silhouette instead of a distorted white blob
+• Changing the loadout when starting a slayer task is now remembered app-wide like the Combat screen's picker, instead of resetting for every task (thanks for the report)
+• Queued boss fights in Up Next now show the boss's own icon instead of a generic gamepad when the boss has no portrait art yet (thanks for the report)
+• The enemy panel in the combat log no longer shows the old emoji next to the enemy name; the portrait at the top of the page already covers it (thanks for the report)
+• The seasonal event screen now calls its boss a Boss instead of a Raid Boss, since raid bosses are their own thing now (thanks for the report)
+
+Translations
+• Updated Russian, Italian, Polish, and Chinese translations (thanks to the community translators)

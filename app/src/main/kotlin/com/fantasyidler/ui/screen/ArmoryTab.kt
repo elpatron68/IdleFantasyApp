@@ -47,6 +47,7 @@ import com.fantasyidler.ui.viewmodel.ArmoryViewModel
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.simulator.XpTable
+import com.fantasyidler.ui.components.CompletionProgressBar
 import com.fantasyidler.util.GameStrings
 
 private val COMBAT_CAPE_SKILLS = setOf(
@@ -63,10 +64,10 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
 
     Column(Modifier.fillMaxSize()) {
         if (!state.isLoading && state.totalCount > 0) {
-            CollectionProgressBar(
-                obtained = state.totalOwned,
-                total    = state.totalCount,
-                label    = stringResource(R.string.armory_progress_bar),
+            CompletionProgressBar(
+                completed = state.totalOwned,
+                total = state.totalCount,
+                label = stringResource(R.string.armory_progress_bar)
             )
         }
         Row(
@@ -427,43 +428,6 @@ private fun slotLabel(slot: String): String = when (slot) {
     "tinderbox"   -> stringResource(R.string.equip_slot_tinderbox)
     "lockpick"    -> stringResource(R.string.equip_slot_lockpick)
     else          -> slot.replaceFirstChar { it.uppercase() }
-}
-
-@Composable
-private fun CollectionProgressBar(obtained: Int, total: Int, label: String) {
-    val fraction = if (total > 0) obtained.toFloat() / total else 0f
-    val pct = (fraction * 100).toInt()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text  = "$obtained / $total $label",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text  = "$pct%",
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary,
-            )
-        }
-        Spacer(Modifier.height(4.dp))
-        LinearProgressIndicator(
-            gapSize = 0.dp,
-            drawStopIndicator = {},
-            progress = { fraction },
-            modifier = Modifier.fillMaxWidth(),
-            color    = MaterialTheme.colorScheme.primary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
-    }
 }
 
 @Composable

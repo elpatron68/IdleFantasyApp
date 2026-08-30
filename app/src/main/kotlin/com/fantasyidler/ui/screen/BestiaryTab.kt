@@ -2,7 +2,6 @@ package com.fantasyidler.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -52,8 +51,8 @@ import com.fantasyidler.ui.viewmodel.BestiaryViewModel
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.ui.components.CompletionProgressBar
 import com.fantasyidler.util.formatCoinsBrief
-import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,7 +81,11 @@ fun BestiaryTab(viewModel: BestiaryViewModel = hiltViewModel()) {
         val totalEncountered   = encounteredEnemies + encounteredBosses
         val totalAll           = state.enemies.size + state.bosses.size
         if (totalAll > 0) {
-            BestiaryProgressBar(encountered = totalEncountered, total = totalAll)
+            CompletionProgressBar(
+                completed = totalEncountered,
+                total = totalAll,
+                label = stringResource(R.string.bestiary_progress_bar)
+            )
         }
 
         Row(
@@ -604,47 +607,6 @@ private fun BestiaryDropTable(rows: List<Triple<String, String, String?>>) {
                 )
             }
         }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Progress bar
-// ---------------------------------------------------------------------------
-
-@Composable
-private fun BestiaryProgressBar(encountered: Int, total: Int) {
-    val fraction = if (total > 0) encountered.toFloat() / total else 0f
-    val pct = (fraction * 100).toInt()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text  = stringResource(R.string.bestiary_encountered_progress, encountered, total),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text       = "$pct%",
-                style      = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.SemiBold,
-                color      = MaterialTheme.colorScheme.primary,
-            )
-        }
-        Spacer(Modifier.height(4.dp))
-        LinearProgressIndicator(
-            gapSize = 0.dp,
-            drawStopIndicator = {},
-            progress  = { fraction },
-            modifier  = Modifier.fillMaxWidth(),
-            color     = MaterialTheme.colorScheme.primary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
     }
 }
 

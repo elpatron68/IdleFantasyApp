@@ -367,7 +367,7 @@ internal fun CombatSessionBanner(
                         // ── Enemy ──────────────────────────────────────────
                         if (currentBoss != null) {
                             Text(
-                                text       = "${currentBoss.emoji} ${GameStrings.bossName(context, currentBoss.id)}",
+                                text       = GameStrings.bossName(context, currentBoss.id),
                                 style      = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color      = MaterialTheme.colorScheme.onSecondaryContainer,

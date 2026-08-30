@@ -341,6 +341,16 @@ class SlayerViewModel @Inject constructor(
         viewModelScope.launch {
             val state = uiState.value
             val dungeonName = GameStrings.dungeonName(context, dungeonKey)
+            // Persist an explicit picker choice app-wide like the Combat screen's
+            // selectWeaponSlot does, before reading player state so the queued
+            // snapshot/spell/preview reflect the applied loadout (issue #1617).
+            if (weaponSlot != null) {
+                val priorFlags: PlayerFlags = json.decodeFromString(playerRepo.getOrCreatePlayer().flags)
+                if (priorFlags.activeWeaponSlot != weaponSlot) {
+                    playerRepo.updateFlags(priorFlags.copy(activeWeaponSlot = weaponSlot))
+                    EquipSlot.combatStyleForSlot(weaponSlot)?.let { style -> playerRepo.applyLoadout(style, gameData.equipment) }
+                }
+            }
             val player   = playerRepo.getOrCreatePlayer()
             val levels: Map<String, Int>       = json.decodeFromString(player.skillLevels)
             val agility  = levels[Skills.AGILITY] ?: 1

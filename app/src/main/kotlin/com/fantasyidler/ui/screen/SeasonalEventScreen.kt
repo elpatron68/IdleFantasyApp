@@ -192,7 +192,7 @@ fun SeasonalEventScreen(
             }
 
             if ("boss" in event.pillars && event.bossKey != null) {
-                SectionCard(title = stringResource(R.string.seasonal_boss_title)) {
+                SectionCard(title = stringResource(R.string.label_boss)) {
                     Text(GameStrings.bossName(context, event.bossKey), style = MaterialTheme.typography.bodyLarge)
                     Spacer(Modifier.height(8.dp))
                     Button(onClick = { onNavigateToBoss(event.bossKey) }, modifier = Modifier.fillMaxWidth()) {

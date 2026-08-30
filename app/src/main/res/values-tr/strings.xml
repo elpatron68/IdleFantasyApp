@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Henüz karşılaşılmadı</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">edinildi</string>
+    <string name="bestiary_progress_bar">encountered</string> <!-- untranslated -->
     <string name="bestiary_always_drops">Her zaman düşer</string>
     <string name="bestiary_rare_drops">Nadir düşüşler</string>
     <string name="bestiary_common_loot">Yaygın ganimet</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">Ödülü Al</string>
     <string name="label_daily">Günlük</string>
     <string name="label_weekly">Haftalık</string>
-    <string name="label_timed">Süreli</string>
     <string name="label_daily_quests">Günlük Görevler</string>
     <string name="label_daily_reset">%1$s vaktinde sıfırlanır</string>
     <string name="label_weekly_reset">Her Pazartesi %1$s vaktinde sıfırlanır</string>
@@ -519,9 +520,9 @@
     <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
     <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
     <string name="home_died_message">Öldün ve kazanımlarının çoğunu kaybettin.</string>
-    <string name="home_xp_boost_was_active">2× XP Takviyesi aktifti</string>
-    <string name="home_xp_boost_active">2x XP Takviyesi aktif — %1$s kaldı</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">Tüm beceriler XP 2× artışı etkindi</string>
+    <string name="home_xp_boost_active">2× XP tüm beceriler - %1$s</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
     <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">Ganimet</string>
@@ -583,6 +584,7 @@
     <string name="combat_best_arrow">En iyi ok</string>
     <string name="combat_arrow_auto">Otomatik (mevcut olan en iyisi)</string>
     <string name="combat_label_arrow">Ok</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Ekipman Setini Seç</string>
     <string name="combat_enemies">Düşmanlar</string>
     <string name="combat_no_spells">Büyü seviyene uygun büyü yok.</string>
@@ -590,6 +592,8 @@
     <string name="combat_max_hit">Maksimum vuruş</string>
     <string name="combat_you_have_runes">(%1$d %2$s var)</string>
     <string name="combat_infinite_runes">(sonsuz %1$s)</string>
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">İksir Yok</string>
     <string name="combat_req_level">Gereken savaş seviyesi</string>
     <string name="combat_duration">Süre</string>
@@ -1938,7 +1942,6 @@
     <string name="seasonal_event_complete">Tamamlandı!</string>
     <string name="seasonal_bounty_board_title">Görev Panosu</string>
     <string name="seasonal_expedition_title">Sefer</string>
-    <string name="seasonal_boss_title">Baskın Patronu</string>
     <string name="seasonal_go_to_combat">Savaşa Git</string>
     <string name="seasonal_minigame_hint">Sönmeden önce %2$d korden %1$d\'ine dokun!</string>
     <string name="seasonal_minigame_round">Tur %1$d / %2$d — Vuruş: %3$d</string>

@@ -252,7 +252,8 @@ fun CombatScreen(
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
-                            availableSpells  = viewModel.availableSpells(state.skillLevels),
+                            availableSpells  = viewModel.availableSpells(),
+                            magicLevel       = state.skillLevels[Skills.MAGIC] ?: 1,
                             selectedArrowKey = state.selectedArrowKey,
                             selectedSpell    = state.selectedSpell,
                             onSlotTap      = inventoryVm::openSlotPicker,
@@ -336,7 +337,8 @@ fun CombatScreen(
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
-                            availableSpells  = viewModel.availableSpells(state.skillLevels),
+                            availableSpells  = viewModel.availableSpells(),
+                            magicLevel       = state.skillLevels[Skills.MAGIC] ?: 1,
                             selectedArrowKey = state.selectedArrowKey,
                             selectedSpell    = state.selectedSpell,
                             onSlotTap      = inventoryVm::openSlotPicker,
@@ -608,6 +610,7 @@ private fun CombatGearTab(
     activeWeaponSlot: String?,
     foodEatThresholdPct: Int,
     availableSpells: List<SpellData>,
+    magicLevel: Int,
     selectedArrowKey: String?,
     selectedSpell: SpellData?,
     onSlotTap: (String) -> Unit,
@@ -670,27 +673,30 @@ private fun CombatGearTab(
                 onUnequip = { onUnequip(weaponSlot) },
             )
         }
-        if (EquipSlot.combatStyleForSlot(activeWeaponSlot ?: "") == "ranged") {
+        val loadoutStyle = EquipSlot.combatStyleForSlot(activeWeaponSlot ?: "")
+        if (loadoutStyle == "ranged" || loadoutStyle == "magic") {
             item {
-                ArrowLoadoutPicker(
-                    selectedArrowKey = selectedArrowKey,
-                    inventory        = inventory,
-                    context          = context,
-                    onArrowSelected  = onArrowSelected,
-                )
-            }
-        }
-        if (EquipSlot.combatStyleForSlot(activeWeaponSlot ?: "") == "magic") {
-            item {
-                val weaponSlot = activeWeaponSlot ?: EquipSlot.WEAPON_ATK
-                SpellLoadoutPicker(
-                    selectedSpell   = selectedSpell,
-                    availableSpells = availableSpells,
-                    inventory       = inventory,
-                    equippedWeapon  = allEquipment[equipped[weaponSlot]],
-                    context         = context,
-                    onSpellSelected = onSpellSelected,
-                )
+                Column(Modifier.padding(vertical = 12.dp)) {
+                    if (loadoutStyle == "ranged") {
+                        ArrowLoadoutPicker(
+                            selectedArrowKey = selectedArrowKey,
+                            inventory        = inventory,
+                            context          = context,
+                            onArrowSelected  = onArrowSelected,
+                        )
+                    } else {
+                        val weaponSlot = activeWeaponSlot ?: EquipSlot.WEAPON_ATK
+                        SpellLoadoutPicker(
+                            selectedSpell   = selectedSpell,
+                            availableSpells = availableSpells,
+                            magicLevel      = magicLevel,
+                            inventory       = inventory,
+                            equippedWeapon  = allEquipment[equipped[weaponSlot]],
+                            context         = context,
+                            onSpellSelected = onSpellSelected,
+                        )
+                    }
+                }
             }
         }
         item { SlotSectionHeader(stringResource(R.string.profile_combat_gear)) }
@@ -1208,4 +1214,14 @@ internal const val UNLOCK_TOLERANCE = 5
 internal val ARROW_TIERS = listOf(
     "runite_arrow", "adamantite_arrow", "mithril_arrow",
     "steel_arrow", "iron_arrow", "bronze_arrow",
+)
+
+/** Ranged strength each arrow tier contributes — mirrors CombatViewModel.ARROW_STRENGTH_BONUS. */
+internal val ARROW_STRENGTH_BONUS = mapOf(
+    "bronze_arrow"     to 7,
+    "iron_arrow"       to 10,
+    "steel_arrow"      to 16,
+    "mithril_arrow"    to 22,
+    "adamantite_arrow" to 31,
+    "runite_arrow"     to 49,
 )

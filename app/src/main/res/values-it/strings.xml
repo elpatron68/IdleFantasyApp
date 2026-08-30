@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Non ancora incontrato</string>
     <string name="bestiary_qty_header">Q.tà</string>
     <string name="bestiary_chance_header">Possibilità</string>
-    <string name="bestiary_encountered_progress">%1$d / %2$d incontrati</string>
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">ottenuti</string>
+    <string name="bestiary_progress_bar">incontrati</string>
     <string name="bestiary_always_drops">Bottino garantito</string>
     <string name="bestiary_rare_drops">Bottino raro</string>
     <string name="bestiary_common_loot">Bottino tipico</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">Riscuoti Ricompensa</string>
     <string name="label_daily">Giornaliere</string>
     <string name="label_weekly">Settimanali</string>
-    <string name="label_timed">A Tempo</string>
     <string name="label_daily_quests">Missioni Del Giorno</string>
     <string name="label_daily_reset">Nuove missioni alle %1$s</string>
     <string name="label_weekly_reset">Nuove missioni ogni Lunedì alle %1$s</string>
@@ -519,11 +520,11 @@
     <string name="guild_progress_dailies_and_quest">Completa %1$d/%2$d incarichi per avanzare</string>
     <string name="guild_progress_dailies_only">Completa %1$d/%2$d giornaliere per avanzare</string>
     <string name="home_died_message">Sei morto e hai perso la maggior parte dei tuoi guadagni.</string>
-    <string name="home_xp_boost_was_active">Il bonus 2× XP era attivo</string>
-    <string name="home_xp_boost_active">Bonus 2× XP attivo — %1$s rimasti</string>
-    <string name="home_prestige_xp_boost_active">Bonus 2× %1$s XP - %2$s rimasti</string>
-    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
-    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">Il potenziamento XP 2× di tutte le abilità era attivo</string>
+    <string name="home_xp_boost_active">2× XP tutte le abilità - %1$s</string>
+    <string name="home_prestige_xp_boost_active">2× XP %1$s - %2$s</string>
+    <string name="boosts_show_more">+%1$d altri bonus (tocca per mostrare)</string>
+    <string name="boosts_show_less">Nascondi</string>
     <string name="home_loot">Bottino</string>
     <string name="home_food_consumed">Cibo Consumato</string>
     <string name="home_bones_buried">Ossa seppellite</string>
@@ -570,7 +571,7 @@
     <string name="combat_log_you_missed">Hai mancato</string>
     <string name="combat_log_kill">☠ %1$s sconfitto</string>
     <string name="combat_log_player_hit">→ Hai colpito %1$s: %2$d danno</string>
-    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_player_double_hit">→ Combo! Colpisci %1$s due volte: %2$d danni</string>
     <string name="combat_log_player_miss">→ Hai mancato %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s ti ha colpito: %2$d danno</string>
     <string name="combat_log_enemy_miss">← %1$s manca il bersaglio</string>
@@ -583,6 +584,7 @@
     <string name="combat_best_arrow">Miglior freccia</string>
     <string name="combat_arrow_auto">Usa migliore</string>
     <string name="combat_label_arrow">Freccia</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Seleziona Equipaggiamento</string>
     <string name="combat_enemies">Nemici</string>
     <string name="combat_no_spells">Nessun incantesimo disponibile al tuo livello di magia.</string>
@@ -590,6 +592,8 @@
     <string name="combat_max_hit">danni massimi</string>
     <string name="combat_you_have_runes">(hai %1$d %2$s)</string>
     <string name="combat_infinite_runes">(%1$s infinite)</string>
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Nessuna pozione</string>
     <string name="combat_req_level">Livello di combattimento richiesto</string>
     <string name="combat_duration">Durata</string>
@@ -1868,7 +1872,7 @@
     <string name="merc_camp_desc">Un contratto dura 24 ore dopo l\'assunzione. Un nuovo gruppo di mercenari arriverà ogni giorno.</string>
     <string name="merc_hire">Assumi</string>
     <string name="merc_dismiss">Congeda</string>
-    <string name="merc_hired">%1$s joins your party for 24 hours.</string> <!-- untranslated -->
+    <string name="merc_hired">"%1$s si unisce alla squadra per 24 ore "</string>
     <string name="merc_party_full">La tua squadra ha raggiunto il limite.</string>
     <string name="merc_already_hired">%1$s è già sotto contratto.</string>
     <string name="merc_not_enough_coins">Non hai abbastanza monete per assumere %1$s.</string>
@@ -1938,7 +1942,6 @@
     <string name="seasonal_event_complete">Completato!</string>
     <string name="seasonal_bounty_board_title">Bacheca Missioni</string>
     <string name="seasonal_expedition_title">Spedizione</string>
-    <string name="seasonal_boss_title">Assalto al Boss</string>
     <string name="seasonal_go_to_combat">Vai al Combattimento</string>
     <string name="seasonal_minigame_hint">Colpisci %1$d fiammelle su %2$d prima che si spengano!</string>
     <string name="seasonal_minigame_round">Round %1$d / %2$d — Colpi: %3$d</string>
@@ -2391,8 +2394,8 @@
     <string name="item_heirloom_hoe_desc">Questa zappa ha preparato la terra per la semina fin da tempo immemore. Nessuna zolla rimarrà senza nutrienti.</string>
     <string name="item_heirloom_hammer_name">Martello Cimelio</string>
     <string name="item_heirloom_hammer_desc">Questo martello si è annerito dalla cenere di infinite fucine. Ogni colpo è sempre più preciso.</string>
-    <string name="item_heirloom_tinderbox_name">Heirloom Tinderbox</string> <!-- untranslated -->
-    <string name="item_heirloom_tinderbox_desc">A battered tinderbox that has never failed to spark. Every fire it lights burns a little brighter.</string> <!-- untranslated -->
+    <string name="item_heirloom_tinderbox_name">Acciarino Cimelio</string>
+    <string name="item_heirloom_tinderbox_desc">Vecchio acciarino consumato ma infallibile. Ogni fiamma arde con più vigore.</string>
     <string name="item_heirloom_grappling_hook_name">Heirloom Grappling Hook</string> <!-- untranslated -->
     <string name="item_heirloom_grappling_hook_desc">A climber\'s hook that has held on ledges beyond counting. It grows surer with every course.</string> <!-- untranslated -->
     <string name="item_heirloom_frying_pan_name">Heirloom Frying Pan</string> <!-- untranslated -->

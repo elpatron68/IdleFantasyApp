@@ -69,7 +69,7 @@ import androidx.compose.ui.graphics.Color
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatDurationMs
 
-private val TIER_NUMERALS = listOf("I", "II", "III", "IV", "V")
+private val TIER_NUMERALS = listOf("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X")
 
 // Same success green as the quest/guild checkmarks; "your race" on race locks.
 private val RaceLockGreen = Color(0xFF4CAF50)

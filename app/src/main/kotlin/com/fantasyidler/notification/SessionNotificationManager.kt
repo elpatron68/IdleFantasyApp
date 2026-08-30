@@ -105,7 +105,7 @@ class SessionNotificationManager @Inject constructor(
     fun showSessionComplete(skillDisplayName: String) {
         val lc = localizedContext()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_SESSIONS)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(lc.getString(R.string.notif_session_complete_title))
             .setContentText(lc.getString(R.string.notif_session_complete_body, skillDisplayName))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -120,7 +120,7 @@ class SessionNotificationManager @Inject constructor(
     fun showFarmingReady(cropDisplayName: String, saveSlot: Int = 0) {
         val lc = localizedContext()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_FARMING)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(lc.getString(R.string.notif_farming_ready_title))
             .setContentText(lc.getString(R.string.notif_farming_ready_body, cropDisplayName))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -135,7 +135,7 @@ class SessionNotificationManager @Inject constructor(
     fun showXpBoostExpired() {
         val lc = localizedContext()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_BUFFS)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(lc.getString(R.string.notif_xp_boost_expired_title))
             .setContentText(lc.getString(R.string.notif_xp_boost_expired_body))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -149,7 +149,7 @@ class SessionNotificationManager @Inject constructor(
     fun showBlessingExpired() {
         val lc = localizedContext()
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_BUFFS)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(lc.getString(R.string.notif_blessing_expired_title))
             .setContentText(lc.getString(R.string.notif_blessing_expired_body))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

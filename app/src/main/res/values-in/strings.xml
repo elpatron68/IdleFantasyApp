@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Belum pernah ditemui</string>
     <string name="bestiary_qty_header">Qty</string>
     <string name="bestiary_chance_header">Peluang</string>
-    <string name="bestiary_encountered_progress">%1$d / %2$d ditemui</string>
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">obtained</string>
+    <string name="bestiary_progress_bar">ditemui</string>
     <string name="bestiary_always_drops">Jatuhan Selalu</string>
     <string name="bestiary_rare_drops">Jatuhan Langka</string>
     <string name="bestiary_common_loot">Jarahan Biasa</string>
@@ -337,7 +339,6 @@
     <string name="label_claim_reward">Klaim Hadiah</string>
     <string name="label_daily">Harian</string>
     <string name="label_weekly">Mingguan</string>
-    <string name="label_timed">Waktu</string>
     <string name="label_daily_quests">Tugas Harian</string>
     <string name="label_daily_reset">Direset pada pukul %1$s</string>
     <string name="label_weekly_reset">Reset Dihari Senin jam %1$s</string>
@@ -512,9 +513,9 @@
     <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
     <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
     <string name="home_died_message">Anda meninggal dan kehilangan sebagian besar keuntungan Anda.</string>
-    <string name="home_xp_boost_was_active">Bonus XP 2x aktif.</string>
-    <string name="home_xp_boost_active">2x XP Boost aktif — %1$s tersisa</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">Peningkat XP 2× semua skill sedang aktif</string>
+    <string name="home_xp_boost_active">2× XP semua skill - %1$s</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
     <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">Jarahan</string>
@@ -575,6 +576,7 @@
     <string name="combat_best_arrow">Anak panah terbaik</string>
     <string name="combat_arrow_auto">Otomatis (pilihan terbaik)</string>
     <string name="combat_label_arrow">Anak panah</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Pilih Perlengkapan</string>
     <string name="combat_enemies">Musuh</string>
     <string name="combat_no_spells">Mantra tidak tersedia di level sihir mu</string>
@@ -582,6 +584,8 @@
     <string name="combat_max_hit">pukulan maksimal</string>
     <string name="combat_you_have_runes">(Anda memiliki %1$d %2$s)</string>
     <string name="combat_infinite_runes">(infinite %1$s)</string> <!-- untranslated -->
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Tidak ada ramuan</string>
     <string name="combat_req_level">Level tempur yang dibutuhkan</string>
     <string name="combat_duration">Durasi</string>
@@ -1930,7 +1934,6 @@
     <string name="seasonal_event_complete">Selesai!</string>
     <string name="seasonal_bounty_board_title">Papan Buruan</string>
     <string name="seasonal_expedition_title">Ekspedisi</string>
-    <string name="seasonal_boss_title">Bos Raid</string>
     <string name="seasonal_go_to_combat">Ke Combat</string>
     <string name="seasonal_minigame_hint">Kenai %1$d dari %2$d bara sebelum padam!</string>
     <string name="seasonal_minigame_round">Ronde %1$d / %2$d — Kena: %3$d</string>

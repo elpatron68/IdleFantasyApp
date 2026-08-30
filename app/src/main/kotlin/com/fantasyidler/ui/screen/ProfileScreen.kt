@@ -87,6 +87,7 @@ import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.json.SkillingDungeonData
+import com.fantasyidler.ui.components.CompletionProgressBar
 import com.fantasyidler.ui.components.PlayerStatsBar
 import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.Achievement
@@ -1147,28 +1148,11 @@ private fun AchievementsTab(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
-            Surface(
-                color    = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text  = stringResource(R.string.label_achievements),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Text(
-                        text       = "$unlockedCount / $totalCount",
-                        style      = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Bold,
-                        color      = MaterialTheme.colorScheme.primary,
-                    )
-                }
-            }
+            CompletionProgressBar(
+                completed = unlockedCount,
+                total = totalCount,
+                label = stringResource(R.string.achievements_progress_bar)
+            )
         }
         byGroup.forEach { (group, achievements) ->
             item(key = "hdr_$group") {

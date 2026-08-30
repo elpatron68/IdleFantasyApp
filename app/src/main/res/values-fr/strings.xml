@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Pas encore rencontré</string>
     <string name="bestiary_qty_header">Qté</string>
     <string name="bestiary_chance_header">Chance</string>
-    <string name="bestiary_encountered_progress">%1$d / %2$d croisés</string>
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">obtenus</string>
+    <string name="bestiary_progress_bar">croisés</string>
     <string name="bestiary_always_drops">Donne Toujours</string>
     <string name="bestiary_rare_drops">Donne Rarement</string>
     <string name="bestiary_common_loot">Butin Commun</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">Réclamer la récompense</string>
     <string name="label_daily">Quotidien</string>
     <string name="label_weekly">Hebdomadaire</string>
-    <string name="label_timed">Temporaire</string>
     <string name="label_daily_quests">Quêtes quotidiennes</string>
     <string name="label_daily_reset">Se réinitialise à %1$s</string>
     <string name="label_weekly_reset">Se réinitialise le lundi à %1$s</string>
@@ -508,9 +509,9 @@
     <string name="guild_progress_dailies_and_quest">Compléter %1$d/%2$d requêtes quotidiennes &amp; quêtes pour avancer</string>
     <string name="guild_progress_dailies_only">Compléter %1$d/%2$d requêtes quotidiennes pour avancer</string>
     <string name="home_died_message">Vous êtes mort et avez perdu la majorité de vos gains.</string>
-    <string name="home_xp_boost_was_active">Le bonus d\'XP ×2 était actif</string>
-    <string name="home_xp_boost_active">Bonus XP ×2 actif — %1$s restant</string>
-    <string name="home_prestige_xp_boost_active">Bonus d\'XP 2× %1$s - %2$s restant</string>
+    <string name="home_xp_boost_was_active">Le bonus d’XP ×2 de toutes les compétences était actif</string>
+    <string name="home_xp_boost_active">×2 XP toutes les compétences - %1$s</string>
+    <string name="home_prestige_xp_boost_active">×2 XP %1$s - %2$s</string>
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
     <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">Butin</string>
@@ -571,6 +572,7 @@
     <string name="combat_best_arrow">Meilleure flèche</string>
     <string name="combat_arrow_auto">Auto (meilleure disponible)</string>
     <string name="combat_label_arrow">Flèche</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Choisir l\'équipement</string>
     <string name="combat_enemies">Ennemis</string>
     <string name="combat_no_spells">Aucun sort disponible à votre niveau de magie.</string>
@@ -578,6 +580,8 @@
     <string name="combat_max_hit">dégâts max</string>
     <string name="combat_you_have_runes">(vous avez %1$d %2$s)</string>
     <string name="combat_infinite_runes">(%1$s infinies)</string>
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Pas de potion</string>
     <string name="combat_req_level">Niveau de combat requis</string>
     <string name="combat_duration">Durée</string>
@@ -1926,7 +1930,6 @@
     <string name="seasonal_event_complete">Terminé !</string>
     <string name="seasonal_bounty_board_title">Tableau des primes</string>
     <string name="seasonal_expedition_title">Expédition</string>
-    <string name="seasonal_boss_title">Boss de Raid</string>
     <string name="seasonal_go_to_combat">Aller au combat</string>
     <string name="seasonal_minigame_hint">Touchez %1$d braises sur %2$d avant qu\'elles ne s\'éteignent !</string>
     <string name="seasonal_minigame_round">Manche %1$d / %2$d — Réussites : %3$d</string>

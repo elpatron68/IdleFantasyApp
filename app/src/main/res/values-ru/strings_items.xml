@@ -475,9 +475,9 @@
     <string name="item_diamond_necklace_name">Бриллиантовое ожерелье</string>
     <string name="item_ancient_treasure_name">Древнее сокровище</string>
     <string name="item_seaweed_name">Морские водоросли</string>
-    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
+    <string name="item_old_boot_name">Старый ботинок</string>
     <string name="item_pearl_name">Жемчужина</string>
-    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
+    <string name="item_black_pearl_name">Черный жемчуг</string>
     <string name="item_nature_rune_name">Природная руна</string>
     <string name="item_herb_name">Трава</string>
     <string name="item_mahogany_log_name">Бревно из красного дерева</string>

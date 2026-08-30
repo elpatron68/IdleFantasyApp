@@ -1,5 +1,8 @@
 package com.fantasyidler.ui.screen
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenuItem
@@ -14,8 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Column
 import com.fantasyidler.R
@@ -66,14 +71,34 @@ internal fun ArrowLoadoutPicker(
             onDismissRequest = { expanded = false },
         ) {
             arrowOptions.forEach { key ->
-                val label = if (key == null) {
-                    stringResource(R.string.combat_arrow_auto)
-                } else {
-                    val qty = inventory[key] ?: 0
-                    "${GameStrings.itemName(context, key)} ($qty)"
-                }
                 DropdownMenuItem(
-                    text    = { Text(label) },
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                    text = {
+                        if (key == null) {
+                            Text(stringResource(R.string.combat_arrow_auto))
+                        } else {
+                            Row(
+                                modifier              = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment     = Alignment.CenterVertically,
+                            ) {
+                                val qty = inventory[key] ?: 0
+                                Text(
+                                    text  = "${GameStrings.itemName(context, key)} ($qty)",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                )
+                                Text(
+                                    text  = stringResource(
+                                        R.string.combat_arrow_ranged_str,
+                                        ARROW_STRENGTH_BONUS[key] ?: 0,
+                                    ),
+                                    style     = MaterialTheme.typography.bodySmall,
+                                    color     = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.End,
+                                )
+                            }
+                        }
+                    },
                     onClick = { onArrowSelected(key); expanded = false },
                 )
             }
@@ -86,6 +111,7 @@ internal fun ArrowLoadoutPicker(
 internal fun SpellLoadoutPicker(
     selectedSpell: SpellData?,
     availableSpells: List<SpellData>,
+    magicLevel: Int,
     inventory: Map<String, Int>,
     equippedWeapon: EquipmentData?,
     context: android.content.Context,
@@ -126,32 +152,57 @@ internal fun SpellLoadoutPicker(
             onDismissRequest = { expanded = false },
         ) {
             availableSpells.forEach { spell ->
+                val locked   = spell.magicLevelRequired > magicLevel
+                val infinite = equippedWeapon?.infiniteRunes == "all" || equippedWeapon?.infiniteRunes == spell.runeType
+                val held     = inventory[spell.runeType] ?: 0
+                val runeName = GameStrings.itemName(context, spell.runeType)
                 DropdownMenuItem(
+                    enabled        = !locked,
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                     text = {
-                        Column {
-                            Text(
-                                text  = GameStrings.spellName(context, spell.name),
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                            Text(
-                                text  = "${spell.runeCost}× ${GameStrings.itemName(context, spell.runeType)}  •  ${stringResource(R.string.combat_max_hit)} ${spell.maxHit}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                            val infinite = equippedWeapon?.infiniteRunes == "all" || equippedWeapon?.infiniteRunes == spell.runeType
-                            if (infinite) {
+                        Row(
+                            modifier              = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment     = Alignment.Top,
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Row(verticalAlignment = Alignment.Bottom) {
+                                    Text(
+                                        text  = GameStrings.spellName(context, spell.name),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                    Text(
+                                        text  = "  " + if (infinite) {
+                                            stringResource(R.string.combat_infinite_runes, runeName)
+                                        } else {
+                                            stringResource(R.string.combat_you_have_runes, held, runeName)
+                                        },
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = if (infinite || held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
+                                                else MaterialTheme.colorScheme.error,
+                                    )
+                                }
                                 Text(
-                                    text  = stringResource(R.string.combat_infinite_runes, GameStrings.itemName(context, spell.runeType)),
-                                    style = MaterialTheme.typography.labelSmall,
+                                    text  = "${spell.runeCost}× $runeName",
+                                    style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
-                            } else {
-                                val held = inventory[spell.runeType] ?: 0
+                            }
+                            Column(horizontalAlignment = Alignment.End) {
                                 Text(
-                                    text  = stringResource(R.string.combat_you_have_runes, held, GameStrings.itemName(context, spell.runeType)),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = if (held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
-                                            else MaterialTheme.colorScheme.error,
+                                    text  = "${stringResource(R.string.combat_max_hit)} ${spell.maxHit}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                                Text(
+                                    text      = if (locked) {
+                                        stringResource(R.string.combat_spell_locked, spell.magicLevelRequired)
+                                    } else {
+                                        stringResource(R.string.combat_spell_level_met, spell.magicLevelRequired)
+                                    },
+                                    style     = MaterialTheme.typography.labelSmall,
+                                    color     = if (locked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                                    textAlign = TextAlign.End,
                                 )
                             }
                         }

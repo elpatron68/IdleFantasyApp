@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">未遭遇</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="label_completion_progress">%3$s %1$d / %2$d</string>
+    <string name="achievements_progress_bar">獲得済み</string>
+    <string name="bestiary_progress_bar">encountered</string> <!-- untranslated -->
     <string name="bestiary_always_drops">確定ドロップ</string>
     <string name="bestiary_rare_drops">レアドロップ</string>
     <string name="bestiary_common_loot">通常ドロップ</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">報酬を受け取る</string>
     <string name="label_daily">デイリー</string>
     <string name="label_weekly">ウィークリー</string>
-    <string name="label_timed">期間限定</string>
     <string name="label_daily_quests">デイリークエスト</string>
     <string name="label_daily_reset">%1$sにリセット</string>
     <string name="label_weekly_reset">月曜日の%1$sにリセット</string>
@@ -507,9 +508,9 @@
     <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
     <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
     <string name="home_died_message">あなたは死亡し、獲得したものの大部分を失いました。</string>
-    <string name="home_xp_boost_was_active">2倍経験値ブーストが有効でした</string>
-    <string name="home_xp_boost_active">2倍経験値ブースト有効中 — 残り %1$s</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">全スキルXP 2倍が有効でした</string>
+    <string name="home_xp_boost_active">全スキルXP 2倍 - %1$s</string>
+    <string name="home_prestige_xp_boost_active">%1$s XP 2倍 - %2$s</string>
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
     <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">戦利品</string>
@@ -569,6 +570,7 @@
     <string name="combat_best_arrow">最良の矢</string>
     <string name="combat_arrow_auto">自動 (使用可能な最良の矢)</string>
     <string name="combat_label_arrow">矢</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">装備セットを選択</string>
     <string name="combat_enemies">敵</string>
     <string name="combat_no_spells">あなたの魔法レベルでは使用できるスペルがありません。</string>
@@ -576,6 +578,8 @@
     <string name="combat_max_hit">最大ダメージ</string>
     <string name="combat_you_have_runes">(所持数: %2$s ×%1$d)</string>
     <string name="combat_infinite_runes">(無限 %1$s)</string>
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">ポーションなし</string>
     <string name="combat_req_level">必要戦闘レベル</string>
     <string name="combat_duration">所要時間</string>
@@ -1924,7 +1928,6 @@
     <string name="seasonal_event_complete">完了！</string>
     <string name="seasonal_bounty_board_title">バウンティボード</string>
     <string name="seasonal_expedition_title">遠征</string>
-    <string name="seasonal_boss_title">レイドボス</string>
     <string name="seasonal_go_to_combat">戦闘画面へ</string>
     <string name="seasonal_minigame_hint">消える前に %1$d / %2$d 個の消えかけの炭火をタップしてください！</string>
     <string name="seasonal_minigame_round">ラウンド %1$d / %2$d — ヒット数: %3$d</string>

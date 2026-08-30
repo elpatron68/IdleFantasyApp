@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Aún no encontrado</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">obtained</string>
+    <string name="bestiary_progress_bar">encountered</string> <!-- untranslated -->
     <string name="bestiary_always_drops">Siempre cae</string>
     <string name="bestiary_rare_drops">Objetos raros</string>
     <string name="bestiary_common_loot">Botín común</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">Reclama tu recompensa</string>
     <string name="label_daily">Daily</string> <!-- untranslated -->
     <string name="label_weekly">Weekly</string> <!-- untranslated -->
-    <string name="label_timed">Temporal</string>
     <string name="label_daily_quests">Daily Quests</string> <!-- untranslated -->
     <string name="label_daily_reset">Resets at 6:00 AM</string>
     <string name="label_weekly_reset">Resets Monday at 6am</string>
@@ -515,9 +516,9 @@
     <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
     <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
     <string name="home_died_message">Moriste y perdiste la mayor parte de tus ganancias.</string>
-    <string name="home_xp_boost_was_active">2× XP Boost was active</string> <!-- untranslated -->
-    <string name="home_xp_boost_active">2× XP Boost active — %1$s remaining</string> <!-- untranslated -->
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">2× All skills XP was active</string> <!-- untranslated -->
+    <string name="home_xp_boost_active">2× All skills XP - %1$s</string> <!-- untranslated -->
+    <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
     <string name="boosts_show_less">Show less</string> <!-- untranslated -->
     <string name="home_loot">Botín</string>
@@ -579,6 +580,7 @@
     <string name="combat_best_arrow">Mejor flecha</string>
     <string name="combat_arrow_auto">Auto (best available)</string> <!-- untranslated -->
     <string name="combat_label_arrow">Arrow</string> <!-- untranslated -->
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Select Loadout</string> <!-- untranslated -->
     <string name="combat_enemies">Enemigos</string>
     <string name="combat_no_spells">No tienes hechizos disponibles con tu nivel de magia.</string>
@@ -586,6 +588,8 @@
     <string name="combat_max_hit">max hit</string> <!-- untranslated -->
     <string name="combat_you_have_runes">(tienes %1$d %2$s)</string>
     <string name="combat_infinite_runes">(infinite %1$s)</string> <!-- untranslated -->
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Sin poción</string>
     <string name="combat_req_level">Nivel de combate requerido</string>
     <string name="combat_duration">Duracion</string>
@@ -1934,7 +1938,6 @@
     <string name="seasonal_event_complete">Complete!</string> <!-- untranslated -->
     <string name="seasonal_bounty_board_title">Bounty Board</string> <!-- untranslated -->
     <string name="seasonal_expedition_title">Expedition</string> <!-- untranslated -->
-    <string name="seasonal_boss_title">Raid Boss</string> <!-- untranslated -->
     <string name="seasonal_go_to_combat">Go to Combat</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">Land %1$d of %2$d embers before they fade out!</string> <!-- untranslated -->
     <string name="seasonal_minigame_round">Round %1$d / %2$d — Hits: %3$d</string> <!-- untranslated -->

@@ -67,7 +67,9 @@
     <string name="bestiary_not_encountered">Nog niet tegengekomen</string>
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
-    <string name="bestiary_encountered_progress">%1$d / %2$d encountered</string> <!-- untranslated -->
+    <string name="label_completion_progress">%1$d / %2$d %3$s</string>
+    <string name="achievements_progress_bar">verkregen</string>
+    <string name="bestiary_progress_bar">tegengekomen</string>
     <string name="bestiary_always_drops">Altijd dropt</string>
     <string name="bestiary_rare_drops">Zeldzame drops</string>
     <string name="bestiary_common_loot">Gewone buit</string>
@@ -344,7 +346,6 @@
     <string name="label_claim_reward">Beloning claimen</string>
     <string name="label_daily">Per Dag</string>
     <string name="label_weekly">Wekelijks</string>
-    <string name="label_timed">Tijdelijk</string>
     <string name="label_daily_quests">Dagelijkse Quests</string>
     <string name="label_daily_reset">Reset om %1$s</string>
     <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
@@ -519,11 +520,11 @@
     <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
     <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
     <string name="home_died_message">Je bent dood en hebt het grootste deel van je voortgang verloren.</string>
-    <string name="home_xp_boost_was_active">2× XP Boost was actief</string>
-    <string name="home_xp_boost_active">2× XP-boost actief — nog %1$s</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP Boost - %2$s remaining</string> <!-- untranslated -->
-    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
-    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
+    <string name="home_xp_boost_was_active">2× Alle vaardigheden XP was actief</string>
+    <string name="home_xp_boost_active">2× Alle vaardigheden XP - %1$s</string>
+    <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
+    <string name="boosts_show_more">+%1$d extra boosts (tik om weer te geven)</string>
+    <string name="boosts_show_less">Minder tonen</string>
     <string name="home_loot">Buit</string>
     <string name="home_food_consumed">Gegeten voedsel</string>
     <string name="home_bones_buried">Begraven botten</string>
@@ -583,6 +584,7 @@
     <string name="combat_best_arrow">Beste pijlen</string>
     <string name="combat_arrow_auto">Automatisch (beste beschikbare)</string>
     <string name="combat_label_arrow">Pijl</string>
+    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Uitrusting kiezen</string>
     <string name="combat_enemies">Vijanden</string>
     <string name="combat_no_spells">Geen spreuken beschikbaar op jouw magielevel.</string>
@@ -590,6 +592,8 @@
     <string name="combat_max_hit">maximale hit</string>
     <string name="combat_you_have_runes">(je hebt %1$d %2$s)</string>
     <string name="combat_infinite_runes">(oneindig %1$s)</string>
+    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Geen drank</string>
     <string name="combat_req_level">Vereist gevechtslevel</string>
     <string name="combat_duration">Duur</string>
@@ -1938,7 +1942,6 @@
     <string name="seasonal_event_complete">Voltooid!</string>
     <string name="seasonal_bounty_board_title">Beloningsbord</string>
     <string name="seasonal_expedition_title">Expeditie</string>
-    <string name="seasonal_boss_title">Raidboss</string>
     <string name="seasonal_go_to_combat">Naar Gevecht</string>
     <string name="seasonal_minigame_hint">Raak %1$d van de %2$d sintels voordat ze doven!</string>
     <string name="seasonal_minigame_round">Ronde %1$d / %2$d — Raak: %3$d</string>

@@ -243,7 +243,7 @@
     <string name="item_staff_of_earth_desc">Un bastone elementale infuso con il potere della terra.</string>
     <string name="item_staff_of_fire_name">Bastone del Fuoco</string>
     <string name="item_staff_of_fire_desc">Un bastone elementale infuso con il potere del fuoco.</string>
-    <string name="item_staff_of_mind_name">Bastone della Mente</string>
+    <string name="item_staff_of_mind_name">Bastone della Psiche</string>
     <string name="item_staff_of_mind_desc">Un bastone infuso con energia psichica.</string>
     <string name="item_staff_of_chaos_name">Bastone del Caos</string>
     <string name="item_staff_of_chaos_desc">Un bastone caotico pulsante di incontrollabile energia magica.</string>
@@ -475,9 +475,9 @@
     <string name="item_diamond_necklace_name">Collana di Diamanti</string>
     <string name="item_ancient_treasure_name">Tesoro Antico</string>
     <string name="item_seaweed_name">Alga</string>
-    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
+    <string name="item_old_boot_name">Vecchio Scarpone</string>
     <string name="item_pearl_name">Perla</string>
-    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
+    <string name="item_black_pearl_name">Perla Nera</string>
     <string name="item_nature_rune_name">Runa della Natura</string>
     <string name="item_herb_name">Pianta Officinale</string>
     <string name="item_mahogany_log_name">Legno di Mogano</string>

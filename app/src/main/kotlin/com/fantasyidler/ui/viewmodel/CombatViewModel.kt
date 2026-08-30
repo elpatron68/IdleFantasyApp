@@ -437,11 +437,11 @@ class CombatViewModel @Inject constructor(
         }
     }
 
-    /** Returns spells available at the player's current magic level. */
-    fun availableSpells(skillLevels: Map<String, Int>): List<SpellData> {
-        val magicLevel = skillLevels[Skills.MAGIC] ?: 1
+    /**
+     * All spells, sorted by Magic level requirement.
+     */
+    fun availableSpells(): List<SpellData> {
         return gameData.spells.values
-            .filter { it.magicLevelRequired <= magicLevel }
             .sortedBy { it.magicLevelRequired }
     }
 

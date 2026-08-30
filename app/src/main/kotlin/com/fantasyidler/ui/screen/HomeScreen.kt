@@ -857,6 +857,7 @@ fun HomeScreen(
                     activeSessionXpGain = state.activeSessionXpGain,
                     towerCurrentFloor   = state.towerCurrentFloor,
                     showEndTime         = state.showSessionEndTime,
+                    bossEmoji           = viewModel::bossEmoji,
                     onRemove            = viewModel::removeFromQueue,
                     onMove              = viewModel::moveQueueItem,
                 )
