@@ -163,6 +163,12 @@ class PlayerRepository @Inject constructor(
      * entries are kept only for the style actually fighting ([weaponSlot]).
      */
     suspend fun stampHeirloomMirrorTargets(sessionId: String, weaponSlot: String?) = playerMutex.withLock {
+        stampHeirloomMirrorTargetsUnlocked(sessionId, weaponSlot)
+    }
+
+    /** Lock-free variant for callers already inside [playerMutex] (the queue starters);
+     * playerMutex is not reentrant, so calling the locked version there deadlocks (1.14.5). */
+    internal suspend fun stampHeirloomMirrorTargetsUnlocked(sessionId: String, weaponSlot: String?) {
         val player = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val equipped: Map<String, String?> = json.decodeFromString(player.equipped)

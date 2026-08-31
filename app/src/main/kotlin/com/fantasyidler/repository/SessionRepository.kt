@@ -74,6 +74,7 @@ class SessionRepository @Inject constructor(
         catalystQty: Int = 0,
         levelAtStart: Int = 0,
         weaponSlot: String? = null,
+        playerMutexHeld: Boolean = false,
     ): SkillSession {
         val now = System.currentTimeMillis()
         val startedAt = now - backdateMs
@@ -92,7 +93,8 @@ class SessionRepository @Inject constructor(
             startBootCount = if (insertAsCompleted) null else currentBootCount(),
         )
         sessionDao.insert(session)
-        playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
+        if (playerMutexHeld) playerRepo.stampHeirloomMirrorTargetsUnlocked(session.sessionId, weaponSlot)
+        else playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
         if (!insertAsCompleted) {
             val alarmAt = if (alarmOffsetMs != null) startedAt + alarmOffsetMs else session.endsAt
             scheduleAlarm(session.sessionId, alarmAt, skillDisplayName)
@@ -110,6 +112,7 @@ class SessionRepository @Inject constructor(
         efficiencyMultiplier: Float,
         levelAtStart: Int = 0,
         weaponSlot: String? = null,
+        playerMutexHeld: Boolean = false,
     ): SkillSession {
         val now = System.currentTimeMillis()
         val session = SkillSession(
@@ -127,7 +130,8 @@ class SessionRepository @Inject constructor(
             startBootCount       = currentBootCount(),
         )
         sessionDao.insert(session)
-        playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
+        if (playerMutexHeld) playerRepo.stampHeirloomMirrorTargetsUnlocked(session.sessionId, weaponSlot)
+        else playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
         scheduleAlarm(session.sessionId, session.endsAt, skillDisplayName)
         return session
     }

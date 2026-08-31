@@ -394,7 +394,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
             efficiencyMultiplier = efficiencyMultiplier,
             levelAtStart         = levelAtStart,
             weaponSlot           = action.weaponSlot,
-        )
+         playerMutexHeld = true,)
     }
 
     private fun encodeFrames(frames: List<SessionFrame>): String =

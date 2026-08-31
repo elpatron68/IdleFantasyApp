@@ -5,6 +5,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.fantasyidler.data.db.AppDatabase
+import com.fantasyidler.data.model.QueuedAction
+import com.fantasyidler.data.model.Skills
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -88,5 +90,21 @@ class OfflineCatchUpMutexTest {
         assertNotNull("offline catch-up did not finish after lock release (re-entry deadlock)", finishedAfterRelease)
 
         holder.cancel()
+    }
+
+    @Test
+    fun `startNextQueued starts a queued action without re-entering playerMutex`() = runBlocking {
+        // Regression for the 1.14.5 deadlock: startNextQueued holds playerMutex while
+        // startSession stamps heirloom mirror targets, which must use the unlocked variant.
+        playerRepo.enqueueAction(
+            QueuedAction(
+                skillName        = Skills.MINING,
+                activityKey      = "copper_ore",
+                skillDisplayName = "Mining",
+            )
+        )
+        val started = withTimeoutOrNull(10_000) { starter.startNextQueued() }
+        assertNotNull("startNextQueued deadlocked (playerMutex re-entry via heirloom stamp)", started)
+        assertTrue("queued action failed to start", started == true)
     }
 }
