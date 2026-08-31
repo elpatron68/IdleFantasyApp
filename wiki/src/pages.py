@@ -1877,7 +1877,7 @@ def gen_buildings() -> str:
         "garden": f"Grants extra {link("farming")} plots for growing crops.",
         "queue_master": "Grants extra queue slots allowing you to queue more items than the default 3 slots.",
         "cape_rack": "Enables effects from specific capes even when not equipped.",
-        "artisans_workshop": "Allows you to present secondary crafting materials such as ashes during crafting.",
+        "artisans_workshop": "Allows you to preserve secondary crafting materials such as ashes during crafting.",
         "chronos_spire": "Provides further reductions to the session time (excludes Inn workers).",
     }
     # Add title/description to buildings dictionary

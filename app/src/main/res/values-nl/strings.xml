@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Binnenkort Beschikbaar</string>
     <string name="label_time_remaining">Resterende Tijd</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1727,6 +1728,8 @@
     <string name="armory_source_smithing">Smeden</string>
     <string name="armory_source_crafting">Ambacht</string>
     <string name="armory_source_fletching">Pijlmakers</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Gevallen van %1$s (Altijd)</string>
     <string name="armory_source_drop_chance">Gevallen van %1$s (%2$s)</string>
     <string name="armory_source_drop">Gevallen van %1$s</string>
@@ -1826,7 +1829,7 @@
     <string name="monument_stage_2_reward">Ontgrendelt de dagelijkse aanraking van het monument</string>
     <string name="monument_stage_3_reward">Zegeningen duren 6 uur langer</string>
     <string name="monument_stage_4_reward" formatted="false">+1 wachtrijplek, en de Gouden Gans nestelt zich (+10% muntdrops)</string>
-    <string name="monument_stage_5_reward">Ontgrendelt de Kluisbewaker en de titel Beschermheer van het Rijk</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Gebouwd</string>
     <string name="monument_build_btn">Bouw (%1$s)</string>
     <string name="monument_contribute_label">Voed de Eeuwige Vlam</string>

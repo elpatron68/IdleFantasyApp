@@ -38,7 +38,6 @@ class SessionClockTrustTest {
             .build()
         val json = Json { ignoreUnknownKeys = true }
         val gameData = GameDataRepository(context, json)
-        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData, db.playerDao())
         val boostRepo = BoostRepository(gameData)
         val dailyQuestRepo = DailyQuestRepository(gameData)
         val weeklyQuestRepo = WeeklyQuestRepository(gameData)
@@ -54,6 +53,7 @@ class SessionClockTrustTest {
             boostRepo,
             db,
         )
+        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData, db.playerDao(), playerRepo)
         starter = QueuedSessionStarter(
             boostRepo,
             context,

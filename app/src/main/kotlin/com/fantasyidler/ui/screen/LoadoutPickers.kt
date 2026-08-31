@@ -34,6 +34,20 @@ import com.fantasyidler.util.GameStrings
 // a separate sheet, so switching style and editing its loadout happen in place.
 // ---------------------------------------------------------------------------
 
+internal val ARROW_TIERS = listOf(
+    "runite_arrow", "adamantite_arrow", "mithril_arrow",
+    "steel_arrow", "iron_arrow", "bronze_arrow",
+)
+
+internal val ARROW_STRENGTH_BONUS = mapOf(
+    "bronze_arrow"     to 7,
+    "iron_arrow"       to 10,
+    "steel_arrow"      to 16,
+    "mithril_arrow"    to 22,
+    "adamantite_arrow" to 31,
+    "runite_arrow"     to 49,
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ArrowLoadoutPicker(
@@ -49,12 +63,11 @@ internal fun ArrowLoadoutPicker(
         text     = stringResource(R.string.combat_label_arrow),
         style    = MaterialTheme.typography.labelMedium,
         color    = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = Modifier.padding(vertical = 4.dp),
     )
     ExposedDropdownMenuBox(
         expanded         = expanded,
         onExpandedChange = { expanded = it },
-        modifier         = Modifier.padding(horizontal = 16.dp),
     ) {
         OutlinedTextField(
             value         = if (selectedArrowKey == null) stringResource(R.string.combat_arrow_auto)
@@ -122,21 +135,19 @@ internal fun SpellLoadoutPicker(
         text     = stringResource(R.string.label_spell),
         style    = MaterialTheme.typography.labelMedium,
         color    = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+        modifier = Modifier.padding(vertical = 4.dp),
     )
     if (availableSpells.isEmpty()) {
         Text(
-            text     = stringResource(R.string.combat_no_spells),
-            style    = MaterialTheme.typography.bodySmall,
-            color    = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(horizontal = 16.dp),
+            text  = stringResource(R.string.combat_no_spells),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         return
     }
     ExposedDropdownMenuBox(
         expanded         = expanded,
         onExpandedChange = { expanded = it },
-        modifier         = Modifier.padding(horizontal = 16.dp),
     ) {
         OutlinedTextField(
             value         = selectedSpell?.let { GameStrings.spellName(context, it.name) } ?: "",

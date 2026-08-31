@@ -102,6 +102,7 @@
     <string name="label_coming_soon">In arrivo</string>
     <string name="label_time_remaining">Tempo rimanente</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dme</string>
     <string name="duration_weeks">%1$dsett</string>
     <string name="duration_days">%1$dg</string>
@@ -1727,6 +1728,8 @@
     <string name="armory_source_smithing">Forgia</string>
     <string name="armory_source_crafting">Oreficeria</string>
     <string name="armory_source_fletching">Frecciaio</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Bottino da %1$s (Sempre)</string>
     <string name="armory_source_drop_chance">Bottino da %1$s (%2$s)</string>
     <string name="armory_source_drop">Bottino da %1$s</string>
@@ -1826,7 +1829,7 @@
     <string name="monument_stage_2_reward">Puoi toccare il monumento giornalmente</string>
     <string name="monument_stage_3_reward">Le benedizioni durano 6 ore in più</string>
     <string name="monument_stage_4_reward" formatted="false">+1 slot alla coda, l\'Oca d\'oro farà il suo nido (+10% alle monete ricevute)</string>
-    <string name="monument_stage_5_reward">Sblocca il Guardiano del Caveau e il titolo Mecenate del Reame</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Costruito</string>
     <string name="monument_build_btn">Costruisci (%1$s)</string>
     <string name="monument_contribute_label">Alimenta la Fiamma Eterna</string>

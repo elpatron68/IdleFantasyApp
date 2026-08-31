@@ -120,21 +120,55 @@ class ArmoryViewModel @Inject constructor(
     fun setFilter(filter: ArmoryFilter) { _filter.value = filter }
     fun setSort(sort: ArmorySort) { _sort.value = sort }
 
+    private data class RecipeGate(val label: String, val races: List<String>?)
+
+    private val TIER_NUMERALS = listOf("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X")
+
+    private fun buildRecipeGates(): Map<String, RecipeGate> {
+        val gates = mutableMapOf<String, RecipeGate>()
+        gameData.prestigeTrees.forEach { (skill, tree) ->
+            tree.paths.forEach { path ->
+                path.nodes.forEachIndexed { idx, node ->
+                    val unlock = node.unlock ?: return@forEachIndexed
+                    val label = GameStrings.prestigePathDisplayName(context, skill, path.key) +
+                        " " + (TIER_NUMERALS.getOrNull(idx) ?: (idx + 1).toString())
+                    gates[unlock] = RecipeGate(label, node.races)
+                }
+            }
+        }
+        return gates
+    }
+
     private fun buildSourceMap(): Map<String, String> {
         val map = mutableMapOf<String, String>()
+        val gates = buildRecipeGates()
+
+        // Recipes gated behind an unlock_recipe prestige node show the perk (and race lock)
+        // needed to craft them instead of looking like ordinary recipes (issue #1631).
+        fun craftSource(key: String, baseRes: Int): String {
+            val base = context.withAppLocale().getString(baseRes)
+            val gate = gates[key] ?: return base
+            return if (gate.races.isNullOrEmpty())
+                context.withAppLocale().getString(R.string.armory_source_prestige_locked_any, base, gate.label)
+            else
+                context.withAppLocale().getString(
+                    R.string.armory_source_prestige_locked, base, gate.label,
+                    GameStrings.raceNames(context, gate.races),
+                )
+        }
 
         carnivalRepo.prizes.keys.forEach { key ->
             map[key] = context.withAppLocale().getString(R.string.armory_source_carnival)
         }
         gameData.smithingRecipes.keys.forEach { key ->
-            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_smithing)
+            if (key !in map) map[key] = craftSource(key, R.string.armory_source_smithing)
         }
         gameData.craftingRecipes.keys.forEach { key ->
-            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_crafting)
+            if (key !in map) map[key] = craftSource(key, R.string.armory_source_crafting)
         }
         gameData.fletchingRecipes.values.forEach { recipe ->
             val key = recipe.itemName
-            if (key !in map) map[key] = context.withAppLocale().getString(R.string.armory_source_fletching)
+            if (key !in map) map[key] = craftSource(key, R.string.armory_source_fletching)
         }
         // Bosses are checked before regular enemies so an item dropped by both (e.g. Ring of
         // Dragon's Might, dropped by both King Black Dragon and Abyssal Lord) resolves to the

@@ -117,11 +117,12 @@ fun TowerScreen(
                     selectedWeaponSlot   = state.selectedWeaponSlot,
                     onWeaponSlotSelected = viewModel::selectWeaponSlot,
                     selectedArrowKey     = state.selectedArrowKey,
-                    availableArrows      = state.availableArrows,
                     onArrowSelected      = viewModel::selectArrow,
                     selectedSpell        = state.selectedSpell,
                     availableSpells      = state.availableSpells,
                     onSpellSelected      = viewModel::selectSpell,
+                    magicLevel           = state.magicLevel,
+                    inventory            = state.inventory,
                     selectedPotionKey    = state.selectedPotionKey,
                     availablePotions     = state.availablePotions,
                     onPotionSelected     = viewModel::selectPotion,
@@ -168,11 +169,12 @@ private fun TowerHeaderCard(
     selectedWeaponSlot:   String?,
     onWeaponSlotSelected: (String) -> Unit,
     selectedArrowKey:     String?,
-    availableArrows:      List<String>,
     onArrowSelected:      (String?) -> Unit,
     selectedSpell:        com.fantasyidler.data.json.SpellData?,
     availableSpells:      List<com.fantasyidler.data.json.SpellData>,
     onSpellSelected:      (com.fantasyidler.data.json.SpellData?) -> Unit,
+    magicLevel:           Int,
+    inventory:            Map<String, Int>,
     selectedPotionKey:    String?,
     availablePotions:     Map<String, Int>,
     onPotionSelected:     (String?) -> Unit,
@@ -258,59 +260,28 @@ private fun TowerHeaderCard(
             }
 
             // Arrow picker — ranged combat style only
-            if (combatStyle == "ranged" && availableArrows.isNotEmpty()) {
+            if (combatStyle == "ranged") {
                 Spacer(Modifier.height(12.dp))
-                Text(
-                    text  = stringResource(R.string.combat_label_arrow),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                ArrowLoadoutPicker(
+                    selectedArrowKey  = selectedArrowKey,
+                    inventory         = inventory,
+                    context           = context,
+                    onArrowSelected   = onArrowSelected,
                 )
-                Spacer(Modifier.height(4.dp))
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement   = Arrangement.spacedBy(4.dp),
-                ) {
-                    val effectiveArrow = selectedArrowKey ?: availableArrows.firstOrNull()
-                    availableArrows.forEach { key ->
-                        FilterChip(
-                            selected = key == effectiveArrow,
-                            onClick  = { onArrowSelected(key) },
-                            label    = { Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodySmall) },
-                        )
-                    }
-                }
             }
 
             // Spell picker — magic combat style only
             if (combatStyle == "magic") {
                 Spacer(Modifier.height(12.dp))
-                Text(
-                    text  = stringResource(R.string.label_active_spell),
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                SpellLoadoutPicker(
+                    selectedSpell     = selectedSpell,
+                    availableSpells   = availableSpells,
+                    magicLevel        = magicLevel,
+                    inventory         = inventory,
+                    equippedWeapon    = equippedWeapons[effectiveWeaponSlot],
+                    context           = context,
+                    onSpellSelected   = onSpellSelected,
                 )
-                Spacer(Modifier.height(4.dp))
-                if (availableSpells.isEmpty()) {
-                    Text(
-                        text  = stringResource(R.string.combat_no_spells),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                } else {
-                    FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement   = Arrangement.spacedBy(4.dp),
-                    ) {
-                        val effectiveSpell = selectedSpell ?: availableSpells.firstOrNull()
-                        availableSpells.forEach { spell ->
-                            FilterChip(
-                                selected = spell.name == effectiveSpell?.name,
-                                onClick  = { onSpellSelected(spell) },
-                                label    = { Text(GameStrings.spellName(context, spell.name), style = MaterialTheme.typography.bodySmall) },
-                            )
-                        }
-                    }
-                }
             }
 
             // Potion picker

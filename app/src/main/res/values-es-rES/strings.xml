@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Coming soon</string> <!-- untranslated -->
     <string name="label_time_remaining">Tiempo restante</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1723,6 +1724,8 @@
     <string name="armory_source_smithing">Smithing</string> <!-- untranslated -->
     <string name="armory_source_crafting">Crafting</string> <!-- untranslated -->
     <string name="armory_source_fletching">Fletching</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Dropped by %1$s (Always)</string> <!-- untranslated -->
     <string name="armory_source_drop_chance">Dropped by %1$s (%2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop">Dropped by %1$s</string> <!-- untranslated -->
@@ -1822,7 +1825,7 @@
     <string name="monument_stage_2_reward">Unlocks the daily monument touch</string> <!-- untranslated -->
     <string name="monument_stage_3_reward">Church blessings last 6 hours longer</string> <!-- untranslated -->
     <string name="monument_stage_4_reward" formatted="false">+1 action queue slot, and the Golden Goose takes roost (+10% coin drops)</string> <!-- untranslated -->
-    <string name="monument_stage_5_reward">Unlocks the Vault Guardian raid boss and the Patron of the Realm title</string> <!-- untranslated -->
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Built</string> <!-- untranslated -->
     <string name="monument_build_btn">Build (%1$s)</string> <!-- untranslated -->
     <string name="monument_contribute_label">Feed the Eternal Flame</string> <!-- untranslated -->

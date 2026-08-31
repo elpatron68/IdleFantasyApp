@@ -54,7 +54,6 @@ class BackupSchedulerTest {
             .allowMainThreadQueries()
             .build()
         val gameData = GameDataRepository(context, json)
-        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData, db.playerDao())
         playerRepo = PlayerRepository(
             db.playerDao(),
             db.questProgressDao(),
@@ -67,6 +66,7 @@ class BackupSchedulerTest {
             BoostRepository(gameData),
             db,
         )
+        sessionRepo = SessionRepository(db.skillSessionDao(), context, json, gameData, db.playerDao(), playerRepo)
         scheduler = BackupScheduler(context, sessionRepo, GlobalStateRepository(db.globalStateDao()))
 
         docs = FakeDocsProvider(TEST_AUTHORITY)

@@ -676,7 +676,7 @@ private fun CombatGearTab(
         val loadoutStyle = EquipSlot.combatStyleForSlot(activeWeaponSlot ?: "")
         if (loadoutStyle == "ranged" || loadoutStyle == "magic") {
             item {
-                Column(Modifier.padding(vertical = 12.dp)) {
+                Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                     if (loadoutStyle == "ranged") {
                         ArrowLoadoutPicker(
                             selectedArrowKey = selectedArrowKey,
@@ -794,7 +794,7 @@ private fun CombatSkillsTab(
     totalDefenseBonus: Int,
     skillPrestigeLevels: Map<String, Int> = emptyMap(),
     combatPrestigeBonus: Map<String, Int> = emptyMap(),
-    onOpenPrestige: ((String) -> Unit)? = null,
+    onOpenPrestige: (String) -> Unit = {},
 ) {
     val context = LocalContext.current
     var tappedSkill by remember { mutableStateOf<String?>(null) }
@@ -802,7 +802,18 @@ private fun CombatSkillsTab(
     tappedSkill?.let { key ->
         AlertDialog(
             onDismissRequest = { tappedSkill = null },
-            title = { Text(GameStrings.skillName(context, key)) },
+            title = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(GameStrings.skillName(context, key))
+                    TextButton(onClick = { tappedSkill = null; onOpenPrestige(key) }) {
+                        Text(stringResource(R.string.prestige_skill_tree))
+                    }
+                }
+            },
             text  = { Text(GameStrings.skillDesc(context, key)) },
             confirmButton = {
                 TextButton(onClick = { tappedSkill = null }) {
@@ -827,7 +838,7 @@ private fun CombatSkillsTab(
                 gearBonus     = gearBonus,
                 prestigeLevel = skillPrestigeLevels[key] ?: 0,
                 prestigeBonus = combatPrestigeBonus[key] ?: 0,
-                onOpenPrestige = onOpenPrestige?.let { cb -> { cb(key) } },
+                onOpenPrestige = onOpenPrestige.let { cb -> { cb(key) } },
                 onClick       = { tappedSkill = key },
             )
         }
@@ -1209,19 +1220,3 @@ private fun DungeonRow(
 
 /** Dungeons within this many levels of the recommendation are still enterable. */
 internal const val UNLOCK_TOLERANCE = 5
-
-/** Arrow tiers from best to worst — mirrors CombatViewModel.ARROW_TIERS. */
-internal val ARROW_TIERS = listOf(
-    "runite_arrow", "adamantite_arrow", "mithril_arrow",
-    "steel_arrow", "iron_arrow", "bronze_arrow",
-)
-
-/** Ranged strength each arrow tier contributes — mirrors CombatViewModel.ARROW_STRENGTH_BONUS. */
-internal val ARROW_STRENGTH_BONUS = mapOf(
-    "bronze_arrow"     to 7,
-    "iron_arrow"       to 10,
-    "steel_arrow"      to 16,
-    "mithril_arrow"    to 22,
-    "adamantite_arrow" to 31,
-    "runite_arrow"     to 49,
-)

@@ -51,6 +51,9 @@ interface SkillSessionDao {
 
     // ── Shared ───────────────────────────────────────────────────────────────
 
+    @Query("SELECT * FROM skill_sessions WHERE user_id = 1")
+    suspend fun getAllSessions(): List<SkillSession>
+
     @Query("SELECT * FROM skill_sessions WHERE session_id = :sessionId")
     suspend fun getSession(sessionId: String): SkillSession?
 

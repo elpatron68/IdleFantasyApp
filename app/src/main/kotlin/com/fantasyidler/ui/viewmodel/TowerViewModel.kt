@@ -62,9 +62,10 @@ data class TowerUiState(
     val selectedWeaponSlot: String? = null,
     val equippedWeapons: Map<String, EquipmentData> = emptyMap(),
     val selectedArrowKey: String? = null,
-    val availableArrows: List<String> = emptyList(),
     val selectedSpell: SpellData? = null,
     val availableSpells: List<SpellData> = emptyList(),
+    val magicLevel: Int = 1,
+    val inventory: Map<String, Int> = emptyMap(),
     val selectedPotionKey: String? = null,
     val availablePotions: Map<String, Int> = emptyMap(),
     val isQueueFull: Boolean = false,
@@ -218,9 +219,10 @@ class TowerViewModel @Inject constructor(
                 equippedWeapons     = equippedWeapons,
                 selectedWeaponSlot  = extra.selectedWeaponSlot ?: flags.activeWeaponSlot,
                 selectedArrowKey    = extra.selectedArrowKey ?: flags.equippedArrows,
-                availableArrows     = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 },
                 selectedSpell       = extra.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] },
                 availableSpells     = gameData.spells.values.filter { it.magicLevelRequired <= magicLevel }.sortedBy { it.magicLevelRequired },
+                magicLevel          = magicLevel,
+                inventory           = inventory,
                 selectedPotionKey   = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
                 availablePotions    = inventory.filterKeys { it in gameData.potionEffects },
                 isQueueFull         = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
@@ -408,6 +410,7 @@ class TowerViewModel @Inject constructor(
                     durationMs       = result.durationMs,
                     skillDisplayName = "Infinite Tower: Floor $floor",
                     alarmOffsetMs    = alarmOffsetMs,
+                    weaponSlot       = activeWeaponSlot,
                 )
             } catch (e: Exception) {
                 _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
@@ -532,7 +535,7 @@ class TowerViewModel @Inject constructor(
             val xpForRepo = if (grantXp) totalXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() } else emptyMap()
             coinsGained   = (coinsGained * towerCoinMult).toLong()
 
-            playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained)
+            playerRepo.applyMultiSkillResults(xpForRepo, allItems, coinsGained, sessionId = session.sessionId)
 
             val skillLevels = json.decodeFromString<Map<String, Int>>(playerRepo.getOrCreatePlayer().skillLevels)
             val rangedLevel = skillLevels[Skills.RANGED] ?: 1

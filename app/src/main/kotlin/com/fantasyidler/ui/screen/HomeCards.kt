@@ -893,6 +893,7 @@ internal fun StatInline(
 @Composable
 internal fun RecentSessionsSheet(
     sessions: List<RecentSession>,
+    bossEmoji: (String) -> String? = { null },
     onDismiss: () -> Unit,
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -944,15 +945,26 @@ internal fun RecentSessionsSheet(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         val iconRes = GameStrings.skillIconRes(entry.skillName)
-                        if (iconRes != null) {
-                            Image(
-                                painter            = painterResource(iconRes),
-                                contentDescription = null,
-                                modifier           = Modifier.size(18.dp),
-                            )
-                            Spacer(Modifier.width(6.dp))
-                        } else {
-                            Text(
+                        when {
+                            // Boss rows: sprite art, or the boss's own emoji when it has no art;
+                            // skillEmoji("boss") is the generic gamepad fallback (issue #1633).
+                            entry.skillName == "boss" -> {
+                                BossIcon(
+                                    bossId        = entry.activityKey,
+                                    modifier      = Modifier.size(18.dp),
+                                    fallbackEmoji = bossEmoji(entry.activityKey) ?: GameStrings.skillEmoji(entry.skillName),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                            }
+                            iconRes != null -> {
+                                Image(
+                                    painter            = painterResource(iconRes),
+                                    contentDescription = null,
+                                    modifier           = Modifier.size(18.dp),
+                                )
+                                Spacer(Modifier.width(6.dp))
+                            }
+                            else -> Text(
                                 text  = "${GameStrings.skillEmoji(entry.skillName)} ",
                                 style = MaterialTheme.typography.bodyMedium,
                             )

@@ -732,7 +732,7 @@ class QueuedSessionStarter @Inject constructor(
                     // Queued raids use the contracts valid when the session actually starts,
                     // matching how queued sessions already use the current armor.
                     mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
-                    blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory),
+                    blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory) + sessionRepo.pendingHeirloomKeys(),
                 )
                 val frameMs        = SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult) / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs
@@ -748,6 +748,7 @@ class QueuedSessionStarter @Inject constructor(
                     insertAsCompleted = offline,
                     backdateMs        = backdateMs,
                     levelAtStart      = levelAtStart,
+                    weaponSlot        = bossWeaponSlot,
                 )
             }
             "expedition" -> {
@@ -942,6 +943,7 @@ class QueuedSessionStarter @Inject constructor(
                     insertAsCompleted = offline,
                     backdateMs        = backdateMs,
                     levelAtStart      = levelAtStart,
+                    weaponSlot        = activeWeaponSlot,
                 )
             }
             "carnival" -> {
@@ -980,6 +982,7 @@ class QueuedSessionStarter @Inject constructor(
             insertAsCompleted = offline,
             backdateMs        = backdateMs,
             levelAtStart      = levelAtStart,
+            weaponSlot        = action.weaponSlot,
         )
     }
 
