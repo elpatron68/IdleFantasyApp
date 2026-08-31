@@ -26,22 +26,35 @@ jobs:
       - name: Install dependencies
         run: pip install -r wiki/requirements.txt
 
+      # Markdown wiki output is only pushed to tristinbaker/IdleFantasy's GitHub Wiki.
+      # This fork has no *.wiki repo, so skip to avoid clone failures.
       - name: Generate wiki pages
+        if: github.repository == 'tristinbaker/IdleFantasy'
         run: python -m wiki.src write
 
       - name: Generate HTML site
         run: python -m wiki.src write-html
 
       - name: Update GitHub Wiki
+        if: github.repository == 'tristinbaker/IdleFantasy'
         uses: Andrew-Chen-Wang/github-wiki-action@v4
         with:
           path: out/IdleFantasy-wiki
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (upstream)
+        if: github.repository == 'tristinbaker/IdleFantasy'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: out/IdleFantasy-site
           cname: idlefantasy.tristinbaker.xyz
+          keep_files: true
+
+      - name: Deploy to GitHub Pages (fork)
+        if: github.repository != 'tristinbaker/IdleFantasy'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out/IdleFantasy-site
           keep_files: true
