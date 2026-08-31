@@ -134,6 +134,18 @@ class SellOldEquipmentTest {
     }
 
     @Test
+    fun `gear referenced by a queued session snapshot is kept`() {
+        // Issue #1630: a staff waiting in a queued dungeon's gear snapshot must not be sold.
+        val allEquip = mapOf("bronze_platebody" to body("bronze_platebody", defense = 3))
+        val inventory = mapOf("bronze_platebody" to 2)
+
+        val toSell = ShopViewModel.computeOldEquipmentToSell(
+            emptyMap(), inventory, allEquip, queuedGearKeys = setOf("bronze_platebody"))
+
+        assertEquals(1, toSell["bronze_platebody"])
+    }
+
+    @Test
     fun `reserved copies are not sold`() {
         val allEquip = mapOf("bronze_platebody" to body("bronze_platebody", defense = 3))
         val inventory = mapOf("bronze_platebody" to 2)

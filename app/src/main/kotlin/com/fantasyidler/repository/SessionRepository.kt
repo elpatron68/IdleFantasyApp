@@ -29,6 +29,7 @@ class SessionRepository @Inject constructor(
     private val json: Json,
     private val gameData: GameDataRepository,
     private val playerDao: PlayerDao,
+    private val playerRepo: PlayerRepository,
 ) {
     val activeSessionFlow: Flow<SkillSession?> = sessionDao.observeActiveSession()
     val completedCountFlow: Flow<Int> = sessionDao.observeCompletedCount()
@@ -72,6 +73,7 @@ class SessionRepository @Inject constructor(
         catalystKey: String? = null,
         catalystQty: Int = 0,
         levelAtStart: Int = 0,
+        weaponSlot: String? = null,
     ): SkillSession {
         val now = System.currentTimeMillis()
         val startedAt = now - backdateMs
@@ -90,6 +92,7 @@ class SessionRepository @Inject constructor(
             startBootCount = if (insertAsCompleted) null else currentBootCount(),
         )
         sessionDao.insert(session)
+        playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
         if (!insertAsCompleted) {
             val alarmAt = if (alarmOffsetMs != null) startedAt + alarmOffsetMs else session.endsAt
             scheduleAlarm(session.sessionId, alarmAt, skillDisplayName)
@@ -106,6 +109,7 @@ class SessionRepository @Inject constructor(
         skillDisplayName: String,
         efficiencyMultiplier: Float,
         levelAtStart: Int = 0,
+        weaponSlot: String? = null,
     ): SkillSession {
         val now = System.currentTimeMillis()
         val session = SkillSession(
@@ -123,6 +127,7 @@ class SessionRepository @Inject constructor(
             startBootCount       = currentBootCount(),
         )
         sessionDao.insert(session)
+        playerRepo.stampHeirloomMirrorTargets(session.sessionId, weaponSlot)
         scheduleAlarm(session.sessionId, session.endsAt, skillDisplayName)
         return session
     }
@@ -143,6 +148,23 @@ class SessionRepository @Inject constructor(
         val offset     = CombatSimulator.bossEndAlarmOffsetMs(frames, durMin, perFrameMs)
         if (offset != null) minOf(session.endsAt, session.startedAt + offset) else session.endsAt
     } catch (_: Exception) { session.endsAt }
+
+    /**
+     * Heirloom item keys already rolled inside any stored session's frames (active or
+     * completed-but-uncollected, player or worker). Boss simulations must block these
+     * alongside owned heirlooms, otherwise two queued sessions can each roll the same
+     * unique before the first is collected (issue #1618).
+     */
+    suspend fun pendingHeirloomKeys(): Set<String> {
+        val heirloomKeys = gameData.equipment.filterValues { it.heirloomSkill != null }.keys
+        if (heirloomKeys.isEmpty()) return emptySet()
+        return sessionDao.getAllSessions().flatMapTo(mutableSetOf()) { session ->
+            try {
+                val frames: List<SessionFrame> = json.decodeFromString(session.frames)
+                frames.flatMap { frame -> frame.items.keys.filter { it in heirloomKeys } }
+            } catch (_: Exception) { emptyList() }
+        }
+    }
 
     /**
      * True when [session]'s completion time is consistent with its monotonic anchor.
@@ -315,15 +337,23 @@ class SessionRepository @Inject constructor(
     suspend fun abandonSession(sessionId: String) {
         cancelAlarm(sessionId)
         sessionDao.delete(sessionId)
+        pruneMirrorStamps()
     }
 
     /** Delete a completed session after rewards have been applied. */
     suspend fun deleteSession(sessionId: String) {
         cancelAlarm(sessionId)
         sessionDao.delete(sessionId)
+        pruneMirrorStamps()
     }
 
-    suspend fun deleteAllSessions() = sessionDao.deleteAll()
+    suspend fun deleteAllSessions() {
+        sessionDao.deleteAll()
+        pruneMirrorStamps()
+    }
+
+    private suspend fun pruneMirrorStamps() =
+        playerRepo.pruneHeirloomMirrorTargets(sessionDao.getAllSessions().mapTo(mutableSetOf()) { it.sessionId })
 
     suspend fun insertSession(session: SkillSession) = sessionDao.insert(session)
 

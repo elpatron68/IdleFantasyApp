@@ -80,6 +80,7 @@ class ExtensionsTest {
     // The context overload just resolves string resources; the ladder logic under test lives in
     // the lambda-based core, exercised here with the English unit templates.
     private val englishUnits = mapOf(
+        com.fantasyidler.R.string.duration_years   to "y",
         com.fantasyidler.R.string.duration_months  to "mo",
         com.fantasyidler.R.string.duration_weeks   to "w",
         com.fantasyidler.R.string.duration_days    to "d",
@@ -113,6 +114,7 @@ class ExtensionsTest {
         assertEquals("2mo", 60 * 24 * hour)
         assertEquals("1mo 1w 1d 8h 54m", 920 * hour + 54 * 60_000L)
         assertEquals("1mo 1m", 30 * 24 * hour + 60_000L)     // interior zero units skipped
+        assertEquals("1y 1mo 1w 1d 8h 54m", 9680 * hour + 54 * 60_000L)  // years are 365 days
     }
 
     private fun assertEquals(expected: String, ms: Long) =

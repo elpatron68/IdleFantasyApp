@@ -754,7 +754,7 @@ class HomeViewModel @Inject constructor(
         val towerXpForRepo   = if (grantXp) towerXpPerSkill.mapValues { (_, xp) -> (xp * towerXpMult).toLong() } else emptyMap()
         val towerCoinsGained = (towerCoinsRaw * towerCoinMult).toLong()
 
-        playerRepo.applyMultiSkillResults(towerXpForRepo, towerAllItems, towerCoinsGained)
+        playerRepo.applyMultiSkillResults(towerXpForRepo, towerAllItems, towerCoinsGained, sessionId = session.sessionId)
 
         val skillLvls = playerRepo.getSkillLevels()
         val arrowsReclaimed = towerArrows.mapValues { (_, qty) -> (qty * (reclaimChance(skillLvls[Skills.RANGED] ?: 1) + boostRepo.arrowReclaimBonus(ctx.flags)).coerceAtMost(0.95)).toInt() }.filterValues { it > 0 }
@@ -830,7 +830,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }.filterValues { it > 0 }
-        acc.awardedCapes += playerRepo.applyMultiSkillResults(bossXpBySkill, loot, coins, perSkillPetBoostPct = perSkillPetBoostPct)
+        acc.awardedCapes += playerRepo.applyMultiSkillResults(bossXpBySkill, loot, coins, perSkillPetBoostPct = perSkillPetBoostPct, sessionId = session.sessionId)
         if (allFoodConsumed.isNotEmpty())   playerRepo.consumeItems(allFoodConsumed)
         if (allArrowsConsumed.isNotEmpty()) playerRepo.consumeItems(allArrowsConsumed)
         if (bossArrowsRec.isNotEmpty())     playerRepo.addItems(bossArrowsRec)
@@ -905,7 +905,7 @@ class HomeViewModel @Inject constructor(
         if (slayerXp > 0L) xpPerSkill[Skills.SLAYER] = (xpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
         val combatStyle = detectCombatStyle(xpPerSkill)
         if (!grantXp) xpPerSkill.clear()
-        acc.awardedCapes += playerRepo.applyMultiSkillResults(xpPerSkill, loot, coins)
+        acc.awardedCapes += playerRepo.applyMultiSkillResults(xpPerSkill, loot, coins, sessionId = session.sessionId)
         for ((id, _) in pets) {
             val pd = gameData.pets[id] ?: continue
             if (playerRepo.addPetIfNew(id, pd.boostPercent))
@@ -968,7 +968,7 @@ class HomeViewModel @Inject constructor(
         // shown total without it ever landing in the real balance (issue #1192).
         val coinReturnPreBlessing = (coinReturn.toDouble() * mercantileCapeMult * mercantilePrestigeMult).toLong()
         val coinReturnBoosted = (coinReturnPreBlessing * ctx.blessingCoinMult).toLong()
-        acc.awardedCapes += playerRepo.applySessionResults(Skills.MERCANTILE, totalXp, emptyMap())
+        acc.awardedCapes += playerRepo.applySessionResults(Skills.MERCANTILE, totalXp, emptyMap(), sessionId = session.sessionId)
         playerRepo.addCoins(coinReturnBoosted)
         guildRepo.recordGuildTrade(session.activityKey, coinReturnBoosted)
         playerRepo.recordWeeklyProgress("mercantile", session.activityKey, frames.size)
@@ -996,7 +996,7 @@ class HomeViewModel @Inject constructor(
         val itemMult    = (if (capeMult > 1f && rawRegular.isNotEmpty()) capeMult.toDouble() else 1.0) * prestigeItemMult
         val effectiveXp = if (capeMult > 1f && rawRegular.isEmpty()) (totalXp.toDouble() * capeMult).toLong() else totalXp
         val regular     = if (itemMult > 1.0 && rawRegular.isNotEmpty()) rawRegular.mapValues { (_, qty) -> (qty * itemMult).roundToInt().coerceAtLeast(qty) } else rawRegular
-        acc.awardedCapes += playerRepo.applySessionResults(session.skillName, effectiveXp, regular)
+        acc.awardedCapes += playerRepo.applySessionResults(session.skillName, effectiveXp, regular, sessionId = session.sessionId)
         when (session.skillName) {
             in COLLECT_GATHERING_SKILLS -> {
                 questRepo.recordGathering(session.skillName, regular)
@@ -1301,7 +1301,7 @@ class HomeViewModel @Inject constructor(
                                     }
                                 }
                             }.filterValues { it > 0 }
-                            awardedCapes += playerRepo.applyMultiSkillResults(workerBossXp, loot, coins, mult, workerBossPetBoost)
+                            awardedCapes += playerRepo.applyMultiSkillResults(workerBossXp, loot, coins, mult, workerBossPetBoost, sessionId = session.sessionId)
                             for ((id, _) in pets) {
                                 val pd = gameData.pets[id] ?: continue
                                 if (playerRepo.addPetIfNew(id, pd.boostPercent))
@@ -1338,7 +1338,7 @@ class HomeViewModel @Inject constructor(
                         val coins = (its.remove("coins")?.toLong() ?: 0L).let { if (died) maxOf(0L, (it * boostRepo.deathKeepFraction(flags)).toLong()) else it }
                         val pets  = its.filterKeys { it in petIds }
                         val loot  = its.filterKeys { it !in petIds }
-                        awardedCapes += playerRepo.applyMultiSkillResults(xpPerSkill, loot, coins, mult)
+                        awardedCapes += playerRepo.applyMultiSkillResults(xpPerSkill, loot, coins, mult, sessionId = session.sessionId)
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
@@ -1364,7 +1364,7 @@ class HomeViewModel @Inject constructor(
                         val pets    = its.filterKeys { it in petIds }
                         val regular = its.filterKeys { !it.startsWith("note_") && it !in petIds }
                         val skillName = dungeonData?.skill ?: Skills.MINING
-                        awardedCapes += playerRepo.applySessionResults(skillName, totalXp, regular, mult)
+                        awardedCapes += playerRepo.applySessionResults(skillName, totalXp, regular, mult, sessionId = session.sessionId)
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))
@@ -1393,7 +1393,7 @@ class HomeViewModel @Inject constructor(
                         val prestigeItemMult = boostRepo.yieldMultiplier(session.skillName, flags) *
                             boostRepo.flowMultiplier(session.skillName, flags, boostRepo.flowElapsedMs(flags, session.skillName, sessionDurMs))
                         val regular = if (prestigeItemMult > 1.0) rawRegular.mapValues { (_, qty) -> (qty * prestigeItemMult).roundToInt().coerceAtLeast(qty) } else rawRegular
-                        awardedCapes += playerRepo.applySessionResults(session.skillName, totalXp, regular, mult)
+                        awardedCapes += playerRepo.applySessionResults(session.skillName, totalXp, regular, mult, sessionId = session.sessionId)
                         for ((id, _) in pets) {
                             val pd = gameData.pets[id] ?: continue
                             if (playerRepo.addPetIfNew(id, pd.boostPercent))

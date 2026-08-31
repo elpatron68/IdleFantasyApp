@@ -110,8 +110,8 @@ fun Long.toRelativeTime(): String {
 
 /**
  * Format a raw millisecond duration (not an epoch) as a human-readable string, e.g. "2h 30m",
- * "45m", or "1mo 1w 1d 8h 54m". Zero-valued units are omitted; months are 30 days. Unit
- * suffixes come from string resources so each locale can abbreviate its own way (issue #1399).
+ * "45m", or "4y 1mo 1w 1d 8h 54m". Zero-valued units are omitted; months are 30 days, years 365.
+ * Unit suffixes come from string resources so each locale can abbreviate its own way (issue #1399).
  */
 fun Long.formatDurationMs(context: android.content.Context): String =
     context.withAppLocale().let { ctx -> formatDurationMs { resId, value -> ctx.getString(resId, value) } }
@@ -122,12 +122,14 @@ internal fun Long.formatDurationMs(unitString: (Int, Long) -> String): String {
     var rem = totalSeconds / 60
     if (rem == 0L) return unitString(R.string.duration_seconds, totalSeconds)
     val minutesPerDay = 24L * 60
-    val months = rem / (30 * minutesPerDay); rem %= 30 * minutesPerDay
-    val weeks  = rem / (7 * minutesPerDay);  rem %= 7 * minutesPerDay
-    val days   = rem / minutesPerDay;        rem %= minutesPerDay
+    val years  = rem / (365 * minutesPerDay); rem %= 365 * minutesPerDay  // this does allow 1y 12mo 4 days, which is acceptable
+    val months = rem / (30 * minutesPerDay);  rem %= 30 * minutesPerDay
+    val weeks  = rem / (7 * minutesPerDay);   rem %= 7 * minutesPerDay
+    val days   = rem / minutesPerDay;         rem %= minutesPerDay
     val hours  = rem / 60
     val minutes = rem % 60
     return buildList {
+        if (years   > 0) add(unitString(R.string.duration_years, years))
         if (months  > 0) add(unitString(R.string.duration_months, months))
         if (weeks   > 0) add(unitString(R.string.duration_weeks, weeks))
         if (days    > 0) add(unitString(R.string.duration_days, days))

@@ -481,6 +481,7 @@ fun HomeScreen(
             ScaledSheetContent {
             RecentSessionsSheet(
                 sessions  = state.recentSessions,
+                bossEmoji = viewModel::bossEmoji,
                 onDismiss = { showRecentLog = false },
             )
             }

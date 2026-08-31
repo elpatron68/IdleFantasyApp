@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Coming soon</string>
     <string name="label_time_remaining">Time remaining</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string>
     <string name="duration_months">%1$dmo</string>
     <string name="duration_weeks">%1$dw</string>
     <string name="duration_days">%1$dd</string>
@@ -1728,6 +1729,8 @@
     <string name="armory_source_smithing">Smithing</string>
     <string name="armory_source_crafting">Crafting</string>
     <string name="armory_source_fletching">Fletching</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string>
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string>
     <string name="armory_source_drop_always">Dropped by %1$s (Always)</string>
     <string name="armory_source_drop_chance">Dropped by %1$s (%2$s)</string>
     <string name="armory_source_drop">Dropped by %1$s</string>
@@ -1827,7 +1830,7 @@
     <string name="monument_stage_2_reward">Unlocks the daily monument touch</string>
     <string name="monument_stage_3_reward">Church blessings last 6 hours longer</string>
     <string name="monument_stage_4_reward" formatted="false">+1 action queue slot, and the Golden Goose takes roost (+10% coin drops)</string>
-    <string name="monument_stage_5_reward">Unlocks the Vault Guardian raid boss and the Patron of the Realm title</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string>
     <string name="monument_built">Built</string>
     <string name="monument_build_btn">Build (%1$s)</string>
     <string name="monument_contribute_label">Feed the Eternal Flame</string>

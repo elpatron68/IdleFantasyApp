@@ -280,6 +280,7 @@
     "id": "balrog",
     "display_name": "Gothic Ember, Ancient Flame of the Deep",
     "emoji": "🔥",
+    "tags": ["demon"],
     "description": "An ancient demon of flame and shadow, awakened from its slumber deep beneath the earth.",
     "combat_level_required": 100,
     "duration_minutes": 120,

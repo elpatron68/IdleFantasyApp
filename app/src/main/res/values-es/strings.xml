@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Próximamente</string>
     <string name="label_time_remaining">Tiempo restante</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1722,6 +1723,8 @@
     <string name="armory_source_smithing">Herrería</string>
     <string name="armory_source_crafting">Artesanía</string>
     <string name="armory_source_fletching">Flechería</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Soltado por %1$s (Siempre)</string>
     <string name="armory_source_drop_chance">Soltado por %1$s (%2$s)</string>
     <string name="armory_source_drop">Soltado por %1$s</string>
@@ -1821,7 +1824,7 @@
     <string name="monument_stage_2_reward">Desbloquea el toque diario del monumento</string>
     <string name="monument_stage_3_reward">Las bendiciones duran 6 horas más</string>
     <string name="monument_stage_4_reward" formatted="false">+1 espacio de cola, y la Oca Dorada anida (+10% de monedas)</string>
-    <string name="monument_stage_5_reward">Desbloquea al Guardián de la Cámara y el título Mecenas del Reino</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Construido</string>
     <string name="monument_build_btn">Construir (%1$s)</string>
     <string name="monument_contribute_label">Alimenta la Llama Eterna</string>

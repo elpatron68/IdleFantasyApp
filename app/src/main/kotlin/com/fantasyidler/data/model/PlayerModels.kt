@@ -32,6 +32,9 @@ data class PlayerFlags(
     @SerialName("food_eat_threshold_pct") val foodEatThresholdPct: Int = 50,
     /** Heirloom item key -> accumulated item XP (capped at the level-99 threshold). Never reset by prestige. */
     @SerialName("heirloom_xp") val heirloomXp: Map<String, Long> = emptyMap(),
+    /** Session id -> (skill -> heirloom item key) captured at session start, so heirloom XP goes
+     * to the gear that actually ran the session rather than whatever is equipped at collection. */
+    @SerialName("heirloom_mirror_targets") val heirloomMirrorTargets: Map<String, Map<String, String>> = emptyMap(),
     @SerialName("battery_prompt_shown") val batteryPromptShown: Boolean = false,
     /** Epoch ms when the 2× XP boost expires; 0 = not active. */
     @SerialName("xp_boost_expires_at") val xpBoostExpiresAt: Long = 0L,

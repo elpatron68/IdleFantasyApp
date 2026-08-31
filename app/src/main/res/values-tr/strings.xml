@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Çok yakında</string>
     <string name="label_time_remaining">Kalan süre</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1727,6 +1728,8 @@
     <string name="armory_source_smithing">Demircilik</string>
     <string name="armory_source_crafting">El sanatları</string>
     <string name="armory_source_fletching">Ok yapımı</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">%1$s tarafından düşürüldü (Her zaman)</string>
     <string name="armory_source_drop_chance">%1$s tarafından düşürüldü (%2$s)</string>
     <string name="armory_source_drop">%1$s tarafından düşürüldü</string>
@@ -1826,7 +1829,7 @@
     <string name="monument_stage_2_reward">Günlük anıt dokunuşunu açar</string>
     <string name="monument_stage_3_reward">Kutsamalar 6 saat daha uzun sürer</string>
     <string name="monument_stage_4_reward" formatted="false">+1 kuyruk yeri ve Altın Kaz yuva kurar (+10% altın)</string>
-    <string name="monument_stage_5_reward">Kasa Muhafızı baskınını ve Diyarın Hamisi unvanını açar</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">İnşa edildi</string>
     <string name="monument_build_btn">İnşa et (%1$s)</string>
     <string name="monument_contribute_label">Sonsuz Alevi besle</string>

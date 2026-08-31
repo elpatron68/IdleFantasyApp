@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Em breve</string>
     <string name="label_time_remaining">Tempo restante</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1713,6 +1714,8 @@
     <string name="armory_source_smithing">Ferraria</string>
     <string name="armory_source_crafting">Artesanato</string>
     <string name="armory_source_fletching">Fabricação de Flechas</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Derrubado por %1$s (Sempre)</string>
     <string name="armory_source_drop_chance">Derrubado por %1$s (%2$s)</string>
     <string name="armory_source_drop">Derrubado por %1$s</string>
@@ -1812,7 +1815,7 @@
     <string name="monument_stage_2_reward">Desbloqueia o toque diário do monumento</string>
     <string name="monument_stage_3_reward">Bênçãos duram 6 horas a mais</string>
     <string name="monument_stage_4_reward" formatted="false">+1 espaço na fila, e o Ganso Dourado se instala (+10% de moedas)</string>
-    <string name="monument_stage_5_reward">Desbloqueia o Guardião do Cofre e o título Patrono do Reino</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Construído</string>
     <string name="monument_build_btn">Construir (%1$s)</string>
     <string name="monument_contribute_label">Alimente a Chama Eterna</string>

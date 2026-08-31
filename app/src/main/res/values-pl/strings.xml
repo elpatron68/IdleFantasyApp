@@ -102,6 +102,7 @@
     <string name="label_coming_soon">Wkrótce</string>
     <string name="label_time_remaining">Pozostały czas</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string> <!-- untranslated -->
     <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
@@ -1733,6 +1734,8 @@
     <string name="armory_source_smithing">Kowalstwo</string>
     <string name="armory_source_crafting">Wytwarzanie</string>
     <string name="armory_source_fletching">Łuczarstwo</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Zrzucane przez %1$s (Zawsze)</string>
     <string name="armory_source_drop_chance">Zrzucane przez %1$s (%2$s)</string>
     <string name="armory_source_drop">Zrzucane przez %1$s</string>
@@ -1832,7 +1835,7 @@
     <string name="monument_stage_2_reward">Odblokowuje codzienne dotknięcie monumentu</string>
     <string name="monument_stage_3_reward">Błogosławieństwa trwają 6 godzin dłużej</string>
     <string name="monument_stage_4_reward" formatted="false">+1 miejsce w kolejce, a Złota Gęś zamieszkuje (+10% monet)</string>
-    <string name="monument_stage_5_reward">Odblokowuje Strażnika Skarbca i tytuł Mecenas Królestwa</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Zbudowano</string>
     <string name="monument_build_btn">Zbuduj (%1$s)</string>
     <string name="monument_contribute_label">Zasil Wieczny Płomień</string>

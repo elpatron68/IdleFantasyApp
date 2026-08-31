@@ -102,6 +102,7 @@
     <string name="label_coming_soon">À venir</string>
     <string name="label_time_remaining">Temps restant</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$dmo</string>
     <string name="duration_weeks">%1$dS</string>
     <string name="duration_days">%1$dj</string>
@@ -1715,6 +1716,8 @@
     <string name="armory_source_smithing">Forge</string>
     <string name="armory_source_crafting">Artisanat</string>
     <string name="armory_source_fletching">Art du bois</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">Laché par %1$s (toujours)</string>
     <string name="armory_source_drop_chance">Laché par %1$s (%2$s)</string>
     <string name="armory_source_drop">Laché par %1$s</string>
@@ -1814,7 +1817,7 @@
     <string name="monument_stage_2_reward">Débloque le toucher quotidien du monument</string>
     <string name="monument_stage_3_reward">Les bénédictions durent 6 heures de plus</string>
     <string name="monument_stage_4_reward" formatted="false">+1 emplacement de file, et l\'Oie Dorée s\'installe (+10% de pièces)</string>
-    <string name="monument_stage_5_reward">Débloque le Gardien de la Chambre Forte et le titre Mécène du Royaume</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">Construit</string>
     <string name="monument_build_btn">Construire (%1$s)</string>
     <string name="monument_contribute_label">Nourrissez la Flamme Éternelle</string>

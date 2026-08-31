@@ -664,6 +664,7 @@ class CombatViewModel @Inject constructor(
                     durationMs       = result.durationMs,
                     skillDisplayName = GameStrings.dungeonName(context, dungeonKey),
                     alarmOffsetMs    = alarmOffsetMs,
+                    weaponSlot       = activeWeaponSlot,
                 )
                 if (repeatCount > 1) {
                     val dungeonSnapshot = QueuedAction(
@@ -854,7 +855,7 @@ class CombatViewModel @Inject constructor(
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),
                     mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
-                    blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory),
+                    blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory) + sessionRepo.pendingHeirloomKeys(),
                 )
 
                 val framesJson = json.encodeToString(
@@ -873,6 +874,7 @@ class CombatViewModel @Inject constructor(
                     // endsAt is cosmetic (full duration, no outcome spoiler); the alarm
                     // ends the session at the exact death tick within the final frame.
                     alarmOffsetMs    = CombatSimulator.bossEndAlarmOffsetMs(bossFrames, boss.durationMinutes, frameMs),
+                    weaponSlot       = activeWeaponSlot,
                 )
                 if (repeatCount > 1) {
                     val bossSnapshot = QueuedAction(

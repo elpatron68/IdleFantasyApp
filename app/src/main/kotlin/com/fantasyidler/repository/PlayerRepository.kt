@@ -138,18 +138,50 @@ class PlayerRepository @Inject constructor(
         flags: PlayerFlags,
         equipped: Map<String, String?>,
         xpBySkill: Map<String, Long>,
+        targetsOverride: Map<String, String>? = null,
     ): PlayerFlags {
         var updated: MutableMap<String, Long>? = null
         for ((skill, xp) in xpBySkill) {
             if (xp <= 0L) continue
-            val slot = HeirloomStats.slotForSkill(skill) ?: continue
-            val itemKey = equipped[slot] ?: continue
-            if (gameData.equipment[itemKey]?.heirloomSkill != skill) continue
+            val itemKey = if (targetsOverride != null) {
+                targetsOverride[skill] ?: continue
+            } else {
+                val slot = HeirloomStats.slotForSkill(skill) ?: continue
+                val key = equipped[slot] ?: continue
+                if (gameData.equipment[key]?.heirloomSkill != skill) continue
+                key
+            }
             val map = updated ?: flags.heirloomXp.toMutableMap().also { updated = it }
             map[itemKey] = ((map[itemKey] ?: 0L) + xp).coerceAtMost(HeirloomStats.XP_CAP)
         }
         return updated?.let { flags.copy(heirloomXp = it) } ?: flags
     }
+
+    /**
+     * Records which equipped heirlooms may mirror XP from session [sessionId], captured at start
+     * so swapping gear before collection can't redirect the XP (issue #1632). Weapon-skill
+     * entries are kept only for the style actually fighting ([weaponSlot]).
+     */
+    suspend fun stampHeirloomMirrorTargets(sessionId: String, weaponSlot: String?) = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+        val targets = mutableMapOf<String, String>()
+        for ((slot, itemKey) in equipped) {
+            if (itemKey == null) continue
+            val skill = gameData.equipment[itemKey]?.heirloomSkill ?: continue
+            if (HeirloomStats.slotForSkill(skill) != slot) continue
+            if (slot in EquipSlot.WEAPON_SLOTS && slot != weaponSlot) continue
+            targets[skill] = itemKey
+        }
+        updateFlagsUnlocked(flags.copy(heirloomMirrorTargets = flags.heirloomMirrorTargets + (sessionId to targets)))
+    }
+
+    /** Drops mirror-target stamps for sessions that no longer exist. */
+    suspend fun pruneHeirloomMirrorTargets(validSessionIds: Set<String>) =
+        updateFlagsAtomically { flags ->
+            flags.copy(heirloomMirrorTargets = flags.heirloomMirrorTargets.filterKeys { it in validSessionIds })
+        }
 
     /** Adds loot to the inventory; heirlooms are unique and never stack past one. */
     private fun grantItems(inventory: MutableMap<String, Int>, items: Map<String, Int>) {
@@ -164,6 +196,7 @@ class PlayerRepository @Inject constructor(
         xpGained: Long,
         itemsGained: Map<String, Int>,
         efficiencyMultiplier: Float = 1.0f,
+        sessionId: String? = null,
     ): List<String> = playerMutex.withLock {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
@@ -194,7 +227,13 @@ class PlayerRepository @Inject constructor(
 
         grantItems(inventory, scaledItems)
 
-        val newFlags = mirrorHeirloomXp(flags, equipped, mapOf(skillName to boostedXp))
+        var newFlags = mirrorHeirloomXp(
+            flags, equipped, mapOf(skillName to boostedXp),
+            targetsOverride = sessionId?.let { flags.heirloomMirrorTargets[it] },
+        )
+        if (sessionId != null && sessionId in newFlags.heirloomMirrorTargets) {
+            newFlags = newFlags.copy(heirloomMirrorTargets = newFlags.heirloomMirrorTargets - sessionId)
+        }
         playerDao.upsert(
             player.copy(
                 skillLevels = json.encode<Map<String, Int>>(levels),
@@ -845,8 +884,9 @@ class PlayerRepository @Inject constructor(
         coinsGained: Long = 0L,
         efficiencyMultiplier: Float = 1.0f,
         perSkillPetBoostPct: Map<String, Int> = emptyMap(),
+        sessionId: String? = null,
     ): List<String> = playerMutex.withLock {
-        applyMultiSkillResultsUnlocked(xpPerSkill, itemsGained, coinsGained, efficiencyMultiplier, perSkillPetBoostPct)
+        applyMultiSkillResultsUnlocked(xpPerSkill, itemsGained, coinsGained, efficiencyMultiplier, perSkillPetBoostPct, sessionId)
     }
 
     internal suspend fun applyMultiSkillResultsUnlocked(
@@ -855,6 +895,7 @@ class PlayerRepository @Inject constructor(
         coinsGained: Long = 0L,
         efficiencyMultiplier: Float = 1.0f,
         perSkillPetBoostPct: Map<String, Int> = emptyMap(),
+        sessionId: String? = null,
     ): List<String> {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
@@ -891,7 +932,13 @@ class PlayerRepository @Inject constructor(
         }
         grantItems(inventory, scaledItems)
 
-        val newFlags = mirrorHeirloomXp(flags, equipped, awardedXp)
+        var newFlags = mirrorHeirloomXp(
+            flags, equipped, awardedXp,
+            targetsOverride = sessionId?.let { flags.heirloomMirrorTargets[it] },
+        )
+        if (sessionId != null && sessionId in newFlags.heirloomMirrorTargets) {
+            newFlags = newFlags.copy(heirloomMirrorTargets = newFlags.heirloomMirrorTargets - sessionId)
+        }
         playerDao.upsert(
             player.copy(
                 skillLevels = json.encode<Map<String, Int>>(levels),

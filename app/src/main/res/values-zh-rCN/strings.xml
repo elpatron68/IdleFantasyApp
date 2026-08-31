@@ -102,6 +102,7 @@
     <string name="label_coming_soon">即将推出</string>
     <string name="label_time_remaining">剩余时间</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
+    <string name="duration_years">%1$dy</string> <!-- untranslated -->
     <string name="duration_months">%1$d月</string>
     <string name="duration_weeks">%1$d周</string>
     <string name="duration_days">%1$d天</string>
@@ -1713,6 +1714,8 @@
     <string name="armory_source_smithing">锻造</string>
     <string name="armory_source_crafting">工艺</string>
     <string name="armory_source_fletching">制箭</string>
+    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
     <string name="armory_source_drop_always">%1$s 掉落（必定）</string>
     <string name="armory_source_drop_chance">%1$s 掉落（%2$s）</string>
     <string name="armory_source_drop">%1$s 掉落</string>
@@ -1812,7 +1815,7 @@
     <string name="monument_stage_2_reward">解锁每日纪念碑触摸</string>
     <string name="monument_stage_3_reward">教堂祝福延长6小时</string>
     <string name="monument_stage_4_reward" formatted="false">+1 action queue slot, and the Golden Goose takes roost (+10% coin drops)</string> <!-- untranslated -->
-    <string name="monument_stage_5_reward">解锁宝库守卫Raid Boss和"王国守护者"称号</string>
+    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
     <string name="monument_built">已建造</string>
     <string name="monument_build_btn">建造 (%1$s)</string>
     <string name="monument_contribute_label">供奉永恒之火</string>

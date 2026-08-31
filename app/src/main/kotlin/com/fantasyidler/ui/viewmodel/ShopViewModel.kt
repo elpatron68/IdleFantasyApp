@@ -378,8 +378,16 @@ class ShopViewModel @Inject constructor(
             val inventory = state.inventory
             val allEquip  = gameData.equipment
 
+            // Gear referenced only by a queued action's start-of-session snapshot is still
+            // in use once that session fires; never sell its last copy (issue #1630).
+            val queuedGearKeys = playerRepo.getFlags().sessionQueue.flatMapTo(mutableSetOf()) { action ->
+                action.equippedSnapshot?.let {
+                    try { json.decodeFromString<Map<String, String?>>(it).values.filterNotNull() }
+                    catch (_: Exception) { emptyList() }
+                } ?: emptyList()
+            }
             val toSell = computeOldEquipmentToSell(
-                equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems, state.armorLoadouts)
+                equipped, inventory, allEquip, state.keepOneOfEach, state.reservedItems, state.armorLoadouts, queuedGearKeys)
                 .filterKeys { it !in state.lockedItems }
                 .filterKeys { allEquip[it]?.heirloomSkill == null }
 
@@ -645,8 +653,9 @@ class ShopViewModel @Inject constructor(
             keepOneOfEach: Boolean = false,
             reserved: Map<String, Int> = emptyMap(),
             armorLoadouts: Map<String, Map<String, String?>> = emptyMap(),
+            queuedGearKeys: Set<String> = emptySet(),
         ): Map<String, Int> {
-            val loadoutKeys = armorLoadouts.values.flatMapTo(mutableSetOf()) { it.values.filterNotNull() }
+            val loadoutKeys = armorLoadouts.values.flatMapTo(mutableSetOf()) { it.values.filterNotNull() } + queuedGearKeys
             val toSell = mutableMapOf<String, Int>()
             for ((itemKey, qty) in inventory) {
                 val item = allEquip[itemKey] ?: continue

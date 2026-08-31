@@ -46,7 +46,7 @@
     <string name="quest_weekly_demon_slayer_name">恶魔猎杀者</string>
     <string name="quest_weekly_demon_slayer_desc">本周击杀 225 个恶魔。</string>
     <string name="quest_weekly_boss_hunter_name">首领猎手</string>
-    <string name="quest_weekly_boss_hunter_desc">本周击败 10 个团队首领。</string>
+    <string name="quest_weekly_boss_hunter_desc">Defeat 10 bosses this week.</string> <!-- untranslated -->
     <string name="quest_weekly_kbd_slayer_name">屠龙者</string>
     <string name="quest_weekly_kbd_slayer_desc">击败黑魔龙王 5 次。</string>
     <string name="quest_weekly_void_champion_name">虚空斗士</string>
