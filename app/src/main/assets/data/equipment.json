@@ -3753,7 +3753,7 @@
   },
   "abyssal_rod": {
     "name": "abyssal_rod",
-    "display_name": "Abyssal Rod",
+    "display_name": "Abyssal Fishing Rod",
     "slot": "fishing_rod",
     "combat_style": null,
     "description": "Woven from void-touched filament recovered from the Abyssal Ruins. Fish practically leap onto it.",
@@ -3784,10 +3784,11 @@
     "display_name": "Bronze Hoe",
     "slot": "hoe",
     "combat_style": null,
-    "description": "A basic bronze hoe. Slightly increases harvest yield.",
+    "description": "A basic hoe for Farming.",
     "attack_bonus": 0,
     "strength_bonus": 0,
     "defense_bonus": 0,
+    "farming_efficiency": 1.0,
     "requirements": {}
   },
   "iron_hoe": {

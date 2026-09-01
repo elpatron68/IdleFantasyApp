@@ -102,7 +102,7 @@
     <string name="label_coming_soon">Скоро</string>
     <string name="label_time_remaining">Осталось времени</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
+    <string name="duration_years">%1$dг</string>
     <string name="duration_months">%1$dмес</string>
     <string name="duration_weeks">%1$dн</string>
     <string name="duration_days">%1$dд</string>
@@ -603,7 +603,7 @@
     <string name="combat_best_arrow">Лучшая стрела</string>
     <string name="combat_arrow_auto">Авто (лучшая доступная)</string>
     <string name="combat_label_arrow">Стрела</string>
-    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
+    <string name="combat_arrow_ranged_str">+%1$d дальнобойная сила</string>
     <string name="combat_select_loadout">Выбрать комплект</string>
     <string name="combat_enemies">Враги</string>
     <string name="combat_no_spells">Нет доступных заклинаний на вашем уровне магии.</string>
@@ -611,8 +611,8 @@
     <string name="combat_max_hit">макс. удар</string>
     <string name="combat_you_have_runes">(у вас %1$d %2$s)</string>
     <string name="combat_infinite_runes">(бесконечно %1$s)</string>
-    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
-    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_locked">Требуется Магия уровня %1$d</string>
+    <string name="combat_spell_level_met">Уровень магии %1$d</string>
     <string name="combat_no_potion">Без зелья</string>
     <string name="combat_req_level">Требуемый боевой уровень</string>
     <string name="combat_duration">Длительность</string>
@@ -1750,8 +1750,8 @@
     <string name="armory_source_smithing">Кузнечное дело</string>
     <string name="armory_source_crafting">Ремесло</string>
     <string name="armory_source_fletching">Оперение стрел</string>
-    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
-    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked">%1$s (требуется перк престижа %2$s, %3$s только)</string>
+    <string name="armory_source_prestige_locked_any">%1$s (требуется перк престижа %2$s)</string>
     <string name="armory_source_drop_always">Выпало от %1$s (Всегда)</string>
     <string name="armory_source_drop_chance">Выпало от %1$s (%2$s)</string>
     <string name="armory_source_drop">Выпало от %1$s</string>
@@ -1851,7 +1851,7 @@
     <string name="monument_stage_2_reward">Открывает ежедневное прикосновение к монументу</string>
     <string name="monument_stage_3_reward">Благословения длятся на 6 часов дольше</string>
     <string name="monument_stage_4_reward" formatted="false">+1 место в очереди, и Золотой гусь поселяется рядом (+10% монет)</string>
-    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
+    <string name="monument_stage_5_reward">Открывает босса Страж Хранилища и титул Покровителя королевства.</string>
     <string name="monument_built">Построено</string>
     <string name="monument_build_btn">Построить (%1$s)</string>
     <string name="monument_contribute_label">Питайте Вечное пламя</string>
@@ -1968,6 +1968,14 @@
     <string name="seasonal_bounty_board_title">Доска заданий</string>
     <string name="seasonal_expedition_title">Экспедиция</string>
     <string name="seasonal_go_to_combat">В бой</string>
+    <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
+    <string name="treasure_open">Open</string> <!-- untranslated -->
+    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
+    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
+    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
+    <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
+    <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
+    <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">Попадите по %1$d из %2$d угольков, пока они не погасли!</string>
     <string name="seasonal_minigame_round">Раунд %1$d / %2$d — Попаданий: %3$d</string>
     <string name="seasonal_minigame_mode_label">Режим</string>

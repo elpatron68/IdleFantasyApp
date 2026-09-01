@@ -252,7 +252,16 @@ class SeasonalEventRepository @Inject constructor(
     suspend fun recordBossDefeat(bossKey: String) = playerRepo.playerMutex.withLock {
         val event = activeEvent() ?: return@withLock
         if ("boss" !in event.pillars || event.bossKey != bossKey) return@withLock
-        playerRepo.updateFlagsUnlocked(awardTokenUnlocked(playerRepo.getFlags(), event))
+        val flags = playerRepo.getFlags()
+        val day = playerRepo.gameDay(flags.dailyResetHour)
+        val earnedToday = if (flags.seasonalBossTokenDay == day) flags.seasonalBossTokensToday else 0
+        if (earnedToday >= BOSS_TOKENS_PER_DAY) return@withLock
+        playerRepo.updateFlagsUnlocked(
+            awardTokenUnlocked(flags, event).copy(
+                seasonalBossTokenDay    = day,
+                seasonalBossTokensToday = earnedToday + 1,
+            )
+        )
     }
 
     // -------------------------------------------------------------------------
@@ -342,6 +351,11 @@ class SeasonalEventRepository @Inject constructor(
     // -------------------------------------------------------------------------
     // Shared token award — must only be called while already holding playerMutex.
     // -------------------------------------------------------------------------
+
+    companion object {
+        /** Daily soft cap on tokens from the event boss, resetting at the daily reset hour. */
+        const val BOSS_TOKENS_PER_DAY = 25
+    }
 
     private fun awardTokenUnlocked(flags: PlayerFlags, event: SeasonalEventData): PlayerFlags {
         val newCount = (flags.seasonalTokensByEvent[event.id] ?: 0) + 1

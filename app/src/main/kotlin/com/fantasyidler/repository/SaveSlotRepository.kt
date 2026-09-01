@@ -186,6 +186,11 @@ class SaveSlotRepository @Inject constructor(
         val current = globalStateRepo.getActiveSaveSlot()
         if (targetSlot == current) return@withContext false
 
+        // Back up the outgoing character to its own external file while it is still live,
+        // so an inactive character always has a fresh backup to restore from (issue #1640:
+        // a cleared app storage lost the character whose backup never fired while active).
+        backupScheduler.performBackup(playerRepo)
+
         snapshotCurrent(current)
 
         val target = slotFile(targetSlot)

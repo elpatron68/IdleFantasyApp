@@ -39,6 +39,7 @@ import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatDurationMs
 import com.fantasyidler.util.stringByName
 import com.fantasyidler.util.withAppLocale
@@ -276,6 +277,18 @@ class InventoryViewModel @Inject constructor(
 
     // ------------------------------------------------------------------
 
+    fun openAncientTreasures(all: Boolean) {
+        viewModelScope.launch {
+            val (opened, coins, gems) = playerRepo.openAncientTreasures(if (all) Int.MAX_VALUE else 1) ?: return@launch
+            val ctx = context.withAppLocale()
+            val message = if (gems.isEmpty())
+                ctx.getString(R.string.treasure_open_result, opened, coins.formatCoins())
+            else
+                ctx.getString(R.string.treasure_open_result_gems, opened, coins.formatCoins(), gems.values.sum())
+            _extra.update { it.copy(snackbarMessage = message) }
+        }
+    }
+
     fun openSlotPicker(slot: String) = _extra.update { it.copy(pickingSlot = slot) }
     fun dismissSlotPicker()          = _extra.update { it.copy(pickingSlot = null) }
 
@@ -499,7 +512,7 @@ class InventoryViewModel @Inject constructor(
         playerRepo.updateFlags(flags.copy(armorLoadouts = updated))
     }
 
-    fun equipBestGear() = equipBestForSlots(EquipSlot.ALL)
+    fun equipBestGear() = equipBestForSlots(EquipSlot.COMBAT_SLOTS)
 
     fun equipBestTools() = equipBestForSlots(EquipSlot.TOOL_SLOTS)
 

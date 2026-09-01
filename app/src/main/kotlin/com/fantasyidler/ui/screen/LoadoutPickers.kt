@@ -177,26 +177,24 @@ internal fun SpellLoadoutPicker(
                             verticalAlignment     = Alignment.Top,
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                Row(verticalAlignment = Alignment.Bottom) {
-                                    Text(
-                                        text  = GameStrings.spellName(context, spell.name),
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                    Text(
-                                        text  = "  " + if (infinite) {
-                                            stringResource(R.string.combat_infinite_runes, runeName)
-                                        } else {
-                                            stringResource(R.string.combat_you_have_runes, held, runeName)
-                                        },
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = if (infinite || held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
-                                                else MaterialTheme.colorScheme.error,
-                                    )
-                                }
+                                Text(
+                                    text  = GameStrings.spellName(context, spell.name),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                )
                                 Text(
                                     text  = "${spell.runeCost}× $runeName",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                                Text(
+                                    text  = if (infinite) {
+                                        stringResource(R.string.combat_infinite_runes, runeName)
+                                    } else {
+                                        stringResource(R.string.combat_you_have_runes, held, runeName)
+                                    },
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (infinite || held >= spell.runeCost) MaterialTheme.colorScheme.onSurfaceVariant
+                                            else MaterialTheme.colorScheme.error,
                                 )
                             }
                             Column(horizontalAlignment = Alignment.End) {

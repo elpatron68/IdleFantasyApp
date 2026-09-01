@@ -66,6 +66,7 @@ import com.fantasyidler.data.json.NightMarketOfferData
 import com.fantasyidler.data.json.SeasonalMinigameConfig
 import com.fantasyidler.data.json.SeasonalRewardTierData
 import com.fantasyidler.repository.SeasonalBountyTaskWithProgress
+import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
 import com.fantasyidler.ui.viewmodel.SeasonalEventViewModel
 import com.fantasyidler.ui.viewmodel.SkillsViewModel
@@ -180,6 +181,12 @@ fun SeasonalEventScreen(
             val expeditionKeys = event.expeditionKeys()
             if ("expedition" in event.pillars && expeditionKeys.isNotEmpty()) {
                 SectionCard(title = stringResource(R.string.label_dungeon)) {
+                    Text(
+                        text  = stringResource(R.string.seasonal_expedition_token_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.height(8.dp))
                     expeditionKeys.forEachIndexed { index, dungeonKey ->
                         if (index > 0) Spacer(Modifier.height(12.dp))
                         Text(GameStrings.dungeonName(context, dungeonKey), style = MaterialTheme.typography.bodyLarge)
@@ -194,6 +201,12 @@ fun SeasonalEventScreen(
             if ("boss" in event.pillars && event.bossKey != null) {
                 SectionCard(title = stringResource(R.string.label_boss)) {
                     Text(GameStrings.bossName(context, event.bossKey), style = MaterialTheme.typography.bodyLarge)
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text  = stringResource(R.string.seasonal_boss_token_hint, SeasonalEventRepository.BOSS_TOKENS_PER_DAY),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     Spacer(Modifier.height(8.dp))
                     Button(onClick = { onNavigateToBoss(event.bossKey) }, modifier = Modifier.fillMaxWidth()) {
                         Text(stringResource(R.string.seasonal_go_to_combat))

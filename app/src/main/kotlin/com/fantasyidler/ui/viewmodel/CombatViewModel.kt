@@ -313,12 +313,15 @@ class CombatViewModel @Inject constructor(
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CombatUiState())
 
-    val dungeonList: List<DungeonData> by lazy {
-        val activeEventId = seasonalEventRepo.activeEvent()?.id
-        gameData.dungeons.values
-            .filter { it.eventKey == null || it.eventKey == activeEventId }
-            .sortedBy { it.recommendedLevel }
-    }
+    // Re-read per access, not lazy: the ViewModel outlives a seasonal event switch while
+    // the app stays open, and a cached list kept serving the old event's dungeon (issue #1651).
+    val dungeonList: List<DungeonData>
+        get() {
+            val activeEventId = seasonalEventRepo.activeEvent()?.id
+            return gameData.dungeons.values
+                .filter { it.eventKey == null || it.eventKey == activeEventId }
+                .sortedBy { it.recommendedLevel }
+        }
 
     /** Monument-gated bosses appear only once the Eternal Flame is lit, so this reads flags per call. */
     fun bossList(monumentComplete: Boolean): List<BossData> {
@@ -943,8 +946,7 @@ class CombatViewModel @Inject constructor(
 
     fun debugFinishSession() {
         viewModelScope.launch {
-            val session = sessionRepo.getActiveSession() ?: return@launch
-            sessionRepo.markCompleted(session.sessionId)
+            queuedSessionStarter.debugFinishActiveSessionWithRepeats()
         }
     }
 

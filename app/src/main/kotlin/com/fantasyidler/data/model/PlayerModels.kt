@@ -163,6 +163,8 @@ data class PlayerFlags(
     @SerialName("show_journal_button") val showJournalButton: Boolean = true,
     /** Whether to show the active Seasonal Event banner/card on the home screen. */
     @SerialName("show_seasonal_events") val showSeasonalEvents: Boolean = true,
+    /** Event id that already forced the banner back on, so each new event re-shows it once. */
+    @SerialName("seasonal_banner_reshown_event_id") val seasonalBannerReshownEventId: String = "",
     /** Whether to show the character sprite viewer on the home screen. */
     @SerialName("show_character_viewer") val showCharacterViewer: Boolean = true,
     /** Whether to show the stats bar (Combat Level, Total Level, Coins) on the home screen. */
@@ -249,6 +251,10 @@ data class PlayerFlags(
     @SerialName("tower_coin_bonus_pct") val towerCoinBonusPct: Int = 0,
     /** Seasonal Events: tokens earned so far per event id, toward that event's token_goal. */
     @SerialName("seasonal_tokens_by_event") val seasonalTokensByEvent: Map<String, Int> = emptyMap(),
+    /** Game-day stamp (rolls at the daily reset hour) [seasonalBossTokensToday] counts for. */
+    @SerialName("seasonal_boss_token_day") val seasonalBossTokenDay: Int = 0,
+    /** Event boss tokens earned on [seasonalBossTokenDay], capped per day. */
+    @SerialName("seasonal_boss_tokens_today") val seasonalBossTokensToday: Int = 0,
     /** Seasonal Events: progress map taskId -> count accumulated since that slot last rotated. */
     @SerialName("seasonal_bounty_progress") val seasonalBountyProgress: Map<String, Int> = emptyMap(),
     /** Seasonal Events: id of the event the current Bounty Board slots were seeded for; reseeded when this changes. */

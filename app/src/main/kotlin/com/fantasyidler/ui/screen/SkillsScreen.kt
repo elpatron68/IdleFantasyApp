@@ -947,11 +947,15 @@ internal fun SkillRow(
                     modifier             = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier          = Modifier.weight(1f, fill = false),
+                    ) {
                         Text(
                             text       = name,
                             style      = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium,
+                            modifier   = Modifier.weight(1f, fill = false),
                         )
                         QuestIndicatorIcons(questIndicators)
                     }

@@ -331,6 +331,35 @@ class QueuedSessionStarter @Inject constructor(
         }
     }
 
+    /**
+     * Debug helper: completes the active session and fast-forwards any remaining
+     * boss/dungeon repeat runs as completed sessions so Collect gathers all of them.
+     */
+    suspend fun debugFinishActiveSessionWithRepeats() {
+        playerRepo.playerMutex.withLock {
+            mutex.withLock {
+                sessionRepo.getActiveSession()?.let { if (!it.completed) sessionRepo.markCompleted(it.sessionId) }
+
+                var flags = playerRepo.getFlagsUnlocked()
+                val snapshot = flags.activeBossRepeatSnapshot ?: flags.activeDungeonRepeatSnapshot ?: return@withLock
+                val isBoss = flags.activeBossRepeatSnapshot != null
+                val remaining = (if (isBoss) flags.activeBossRepeatTotal - flags.activeBossRepeatIndex
+                                 else flags.activeDungeonRepeatTotal - flags.activeDungeonRepeatIndex).coerceAtLeast(0)
+
+                repeat(remaining.coerceAtMost(250)) { i ->
+                    try {
+                        startQueuedAction(snapshot, offline = true, backdateMs = (remaining - i).toLong() * 86_400_000L)
+                        flags = if (isBoss) flags.copy(activeBossRepeatIndex = flags.activeBossRepeatIndex + 1)
+                                else flags.copy(activeDungeonRepeatIndex = flags.activeDungeonRepeatIndex + 1)
+                        playerRepo.updateFlagsUnlocked(flags)
+                    } catch (_: Exception) {
+                        return@withLock
+                    }
+                }
+            }
+        }
+    }
+
     private suspend fun startQueuedAction(action: QueuedAction, offline: Boolean = false, backdateMs: Long = 0L) {
         val player    = playerRepo.getOrCreatePlayer()
         val levels:   Map<String, Int>     = json.decodeFromString(player.skillLevels)

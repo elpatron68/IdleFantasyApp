@@ -942,8 +942,7 @@ class SkillsViewModel @Inject constructor(
 
     fun debugFinishSession() {
         viewModelScope.launch {
-            val session = sessionRepo.getActiveSession() ?: return@launch
-            sessionRepo.markCompleted(session.sessionId)
+            queuedSessionStarter.debugFinishActiveSessionWithRepeats()
         }
     }
 

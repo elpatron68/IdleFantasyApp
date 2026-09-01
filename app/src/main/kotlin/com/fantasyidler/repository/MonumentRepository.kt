@@ -42,7 +42,9 @@ class MonumentRepository @Inject constructor(
             mapOf("maple_log" to 30),
         )
 
-        private fun today(): Int = Calendar.getInstance().let {
+        /** yyyymmdd stamp of the current game day, rolling over at [resetHour] rather than midnight. */
+        private fun today(resetHour: Int): Int = Calendar.getInstance().let {
+            if (it.get(Calendar.HOUR_OF_DAY) < resetHour) it.add(Calendar.DAY_OF_YEAR, -1)
             it.get(Calendar.YEAR) * 10000 + it.get(Calendar.MONTH) * 100 + it.get(Calendar.DAY_OF_MONTH)
         }
     }
@@ -85,7 +87,7 @@ class MonumentRepository @Inject constructor(
     suspend fun touchMonument(): MonumentTouchResult = playerRepo.playerMutex.withLock {
         val flags = playerRepo.getFlagsUnlocked()
         if (flags.monumentTier < 2) return@withLock MonumentTouchResult.NotUnlocked
-        val day = today()
+        val day = today(flags.dailyResetHour)
         if (flags.monumentTouchDay == day) return@withLock MonumentTouchResult.AlreadyTouchedToday
 
         // Ironman characters never receive blessing boons (all XP/coin multipliers are inert);
@@ -111,5 +113,5 @@ class MonumentRepository @Inject constructor(
         MonumentTouchResult.Items(boon)
     }
 
-    fun touchedToday(flags: PlayerFlags): Boolean = flags.monumentTouchDay == today()
+    fun touchedToday(flags: PlayerFlags): Boolean = flags.monumentTouchDay == today(flags.dailyResetHour)
 }

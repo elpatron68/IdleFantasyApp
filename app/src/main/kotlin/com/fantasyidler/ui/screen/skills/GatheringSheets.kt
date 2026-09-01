@@ -401,7 +401,7 @@ internal fun ActivityRow(
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(name, style = MaterialTheme.typography.bodyLarge)
+                Text(name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f, fill = false))
                 if (questIndicators.isNotEmpty()) {
                     QuestIndicatorIcons(questIndicators)
                 }

@@ -78,10 +78,13 @@ class FarmingRepository @Inject constructor(
         patchDao.upsert(FarmingPatch(patchNumber = patchNumber, cropType = crop.id, plantedAt = plantedAt))
 
         if (crop.plantingXp > 0) {
+            // Raw XP so clearPatch's base-value deduction reverses it exactly; boosted
+            // planting XP made plant-and-clear cycles net positive (issue #1645).
             playerRepo.applySessionResults(
-                skillName   = Skills.FARMING,
-                xpGained    = crop.plantingXp.toLong(),
-                itemsGained = emptyMap(),
+                skillName     = Skills.FARMING,
+                xpGained      = crop.plantingXp.toLong(),
+                itemsGained   = emptyMap(),
+                applyXpBoosts = false,
             )
         }
 

@@ -314,6 +314,7 @@ private fun CraftRecipeRow(
                     style      = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color      = if (enabled) MaterialTheme.colorScheme.onSurface else dim,
+                    modifier   = Modifier.weight(1f, fill = false),
                 )
                 val questIndicators = craftState.recipeQuests[recipe.outputKey] ?: emptyList()
                 if (questIndicators.isNotEmpty()) {

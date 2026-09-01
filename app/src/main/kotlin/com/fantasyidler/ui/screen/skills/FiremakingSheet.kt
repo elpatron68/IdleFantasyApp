@@ -118,7 +118,7 @@ internal fun FiremakingSheet(
                         ) {
                             Column(Modifier.weight(1f)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface.copy(alpha = rowAlpha))
+                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface.copy(alpha = rowAlpha), modifier = Modifier.weight(1f, fill = false))
                                     val questIndicators = activeQuests["${Skills.FIREMAKING}:$ashKey"] ?: emptyList()
                                     if (questIndicators.isNotEmpty()) {
                                         QuestIndicatorIcons(questIndicators)

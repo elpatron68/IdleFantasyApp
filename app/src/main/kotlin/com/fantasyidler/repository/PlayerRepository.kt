@@ -203,12 +203,16 @@ class PlayerRepository @Inject constructor(
         itemsGained: Map<String, Int>,
         efficiencyMultiplier: Float = 1.0f,
         sessionId: String? = null,
+        applyXpBoosts: Boolean = true,
     ): List<String> = playerMutex.withLock {
         val player    = getOrCreatePlayer()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
         val scaledXp = if (efficiencyMultiplier == 1.0f) xpGained else (xpGained * efficiencyMultiplier).toLong()
         // 2x boost, blessing, and prestige xp nodes combined in one place (ironman-inert).
-        val boostedXp = (scaledXp * boostRepo.xpMultiplier(skillName, flags, prayerCapeMult(player, flags))).toLong()
+        // applyXpBoosts=false grants raw XP with no heirloom mirror, for grants that must be
+        // exactly reversible by deductSkillXp (crop planting XP, issue #1645).
+        val boostedXp = if (applyXpBoosts) (scaledXp * boostRepo.xpMultiplier(skillName, flags, prayerCapeMult(player, flags))).toLong()
+                        else scaledXp
         val scaledItems = if (efficiencyMultiplier == 1.0f) itemsGained
             else itemsGained.mapValues { (_, v) -> (v * efficiencyMultiplier).roundToInt().coerceAtLeast(1) }
 
@@ -233,10 +237,10 @@ class PlayerRepository @Inject constructor(
 
         grantItems(inventory, scaledItems)
 
-        var newFlags = mirrorHeirloomXp(
+        var newFlags = if (applyXpBoosts) mirrorHeirloomXp(
             flags, equipped, mapOf(skillName to boostedXp),
             targetsOverride = sessionId?.let { flags.heirloomMirrorTargets[it] },
-        )
+        ) else flags
         if (sessionId != null && sessionId in newFlags.heirloomMirrorTargets) {
             newFlags = newFlags.copy(heirloomMirrorTargets = newFlags.heirloomMirrorTargets - sessionId)
         }
@@ -344,6 +348,32 @@ class PlayerRepository @Inject constructor(
         return true
     }
 
+    /**
+     * Opens up to [count] held Ancient Treasures: each pays [TREASURE_COIN_MIN]..[TREASURE_COIN_MAX]
+     * coins with a [TREASURE_GEM_CHANCE] chance of a random gem. Returns (opened, coins, gems),
+     * or null when none are held.
+     */
+    suspend fun openAncientTreasures(count: Int): Triple<Int, Long, Map<String, Int>>? = playerMutex.withLock {
+        val player = getOrCreatePlayer()
+        val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val opened = minOf(count, inventory[ANCIENT_TREASURE_KEY] ?: 0)
+        if (opened <= 0) return@withLock null
+        val gemKeys = gameData.gems.keys.toList()
+        var coins = 0L
+        val gems = mutableMapOf<String, Int>()
+        repeat(opened) {
+            coins += kotlin.random.Random.nextLong(TREASURE_COIN_MIN, TREASURE_COIN_MAX + 1)
+            if (gemKeys.isNotEmpty() && kotlin.random.Random.nextDouble() < TREASURE_GEM_CHANCE) {
+                val gem = gemKeys.random()
+                gems[gem] = (gems[gem] ?: 0) + 1
+            }
+        }
+        consumeItemsUnlocked(mapOf(ANCIENT_TREASURE_KEY to opened))
+        addCoinsUnlocked(coins)
+        if (gems.isNotEmpty()) addItemsUnlocked(gems)
+        Triple(opened, coins, gems)
+    }
+
     suspend fun addCoins(amount: Long) = playerMutex.withLock { addCoinsUnlocked(amount) }
 
     internal suspend fun addCoinsUnlocked(amount: Long) {
@@ -406,9 +436,7 @@ class PlayerRepository @Inject constructor(
      */
     suspend fun rollBossCoinSoftCap(bossKey: String): Double = playerMutex.withLock {
         val flags = getFlagsUnlocked()
-        val today = java.util.Calendar.getInstance().let {
-            it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
-        }
+        val today = gameDay(flags.dailyResetHour)
         val counts = if (flags.bossCoinDay == today) flags.bossCoinKillsByBoss else emptyMap()
         val count = counts[bossKey] ?: 0
         updateFlagsUnlocked(flags.copy(bossCoinDay = today, bossCoinKillsByBoss = counts + (bossKey to count + 1)))
@@ -427,11 +455,15 @@ class PlayerRepository @Inject constructor(
 
     /** Full-coin kills still available today for [bossKey], for display. */
     fun bossFullCoinKillsLeft(flags: PlayerFlags, bossKey: String): Int {
-        val today = java.util.Calendar.getInstance().let {
-            it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
-        }
+        val today = gameDay(flags.dailyResetHour)
         val count = if (flags.bossCoinDay == today) flags.bossCoinKillsByBoss[bossKey] ?: 0 else 0
         return (BOSS_FULL_COIN_KILLS_PER_DAY - count).coerceAtLeast(0)
+    }
+
+    /** yyyymmdd stamp of the current game day, rolling over at [resetHour] rather than midnight. */
+    fun gameDay(resetHour: Int): Int = java.util.Calendar.getInstance().let {
+        if (it.get(java.util.Calendar.HOUR_OF_DAY) < resetHour) it.add(java.util.Calendar.DAY_OF_YEAR, -1)
+        it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
     }
 
     suspend fun updateFlags(flags: PlayerFlags) = playerMutex.withLock { updateFlagsUnlocked(flags) }
@@ -1248,6 +1280,11 @@ class PlayerRepository @Inject constructor(
         /** Kills of each boss per day that pay full coin drops; kills beyond pay [BOSS_COIN_SOFT_CAP_MULT]. */
         const val BOSS_FULL_COIN_KILLS_PER_DAY = 3
         const val BOSS_COIN_SOFT_CAP_MULT = 0.25
+
+        const val ANCIENT_TREASURE_KEY = "ancient_treasure"
+        const val TREASURE_COIN_MIN = 150L
+        const val TREASURE_COIN_MAX = 400L
+        const val TREASURE_GEM_CHANCE = 0.25
 
         /** Coin-drop multiplier from the Golden Goose pet (Monument stage 4); applies wherever Fortune blessings do. */
         fun gooseCoinMultiplier(pets: List<OwnedPet>): Double =

@@ -257,6 +257,16 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { playerRepo.ensureCharacterCreatedAt() }
         viewModelScope.launch { guildRepo.migrateLegacyGuildReputation() }
         viewModelScope.launch { playerRepo.migrateLegacyPrestigePointsIfNeeded() }
+        // A newly started seasonal event re-shows the banner once, so players who hid
+        // it still learn the event exists (issue #1650 follow-up).
+        viewModelScope.launch {
+            val event = seasonalEventRepo.activeEvent() ?: return@launch
+            if (playerRepo.getFlags().seasonalBannerReshownEventId != event.id) {
+                playerRepo.updateFlagsAtomically {
+                    it.copy(showSeasonalEvents = true, seasonalBannerReshownEventId = event.id)
+                }
+            }
+        }
         // AlarmManager delivery can be deferred by Doze for hours (issue 517: overnight
         // sessions frozen until their late alarms fire). While the app is open this
         // ticker completes overdue sessions and workers within a second.
@@ -1152,7 +1162,7 @@ class HomeViewModel @Inject constructor(
                 qty                 = qty,
                 repeatCount         = repeatCount,
                 estimatedDurationMs = session.endsAt - session.startedAt,
-                estimatedXpGain     = if (session.skillName in listOf("carnival", "expedition")) 0L
+                estimatedXpGain     = if (session.skillName in listOf("carnival", "expedition", "tower")) 0L
                                       else (rawXpGain * xpQueueMult).toLong(),
                 weaponSlot          = weaponSlot,
                 equippedSnapshot    = if (isCombat) player.equipped else null,
@@ -1209,8 +1219,7 @@ class HomeViewModel @Inject constructor(
 
     fun debugFinishSession() {
         viewModelScope.launch {
-            val session = sessionRepo.getActiveSession() ?: return@launch
-            sessionRepo.markCompleted(session.sessionId)
+            queuedSessionStarter.debugFinishActiveSessionWithRepeats()
         }
     }
 

@@ -733,7 +733,6 @@ fun HomeScreen(
                     shape    = RoundedCornerShape(16.dp),
                     color    = MaterialTheme.colorScheme.surfaceVariant,
                     modifier = Modifier.fillMaxWidth(),
-                    enabled  = !eventComplete,
                     onClick  = onNavigateToSeasonalEvent,
                 ) {
                     Row(

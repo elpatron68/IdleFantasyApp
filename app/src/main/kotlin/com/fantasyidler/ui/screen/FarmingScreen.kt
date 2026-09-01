@@ -678,10 +678,11 @@ private fun PlantSheet(
                     Column(Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text  = "${crop.emoji} ${GameStrings.cropName(context, crop.id)}",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = if (enabled) MaterialTheme.colorScheme.onSurface
-                                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                                text     = "${crop.emoji} ${GameStrings.cropName(context, crop.id)}",
+                                style    = MaterialTheme.typography.bodyLarge,
+                                color    = if (enabled) MaterialTheme.colorScheme.onSurface
+                                           else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                                modifier = Modifier.weight(1f, fill = false),
                             )
                             QuestIndicatorIcons(questIndicators[crop.id] ?: emptyList())
                         }

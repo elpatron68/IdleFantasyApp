@@ -156,7 +156,7 @@ internal fun RunecraftingSheet(
                         ) {
                             Column(Modifier.weight(1f)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge)
+                                    Text(GameStrings.itemName(context, key), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f, fill = false))
                                     val questIndicators = activeQuests["${Skills.RUNECRAFTING}:$key"] ?: emptyList()
                                     if (questIndicators.isNotEmpty()) {
                                         QuestIndicatorIcons(questIndicators)

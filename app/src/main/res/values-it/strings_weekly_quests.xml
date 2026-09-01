@@ -46,7 +46,7 @@
     <string name="quest_weekly_demon_slayer_name">Cacciatore di Demoni</string>
     <string name="quest_weekly_demon_slayer_desc">Uccidi 225 demoni minori questa settimana.</string>
     <string name="quest_weekly_boss_hunter_name">Capo dei Capi</string>
-    <string name="quest_weekly_boss_hunter_desc">Defeat 10 bosses this week.</string> <!-- untranslated -->
+    <string name="quest_weekly_boss_hunter_desc">Sconfiggi 10 boss questa settimana.</string>
     <string name="quest_weekly_kbd_slayer_name">Flagello del Drago</string>
     <string name="quest_weekly_kbd_slayer_desc">Sconfiggi il Drago Nero Regale 5 volte.</string>
     <string name="quest_weekly_void_champion_name">Spirito Sovrano</string>

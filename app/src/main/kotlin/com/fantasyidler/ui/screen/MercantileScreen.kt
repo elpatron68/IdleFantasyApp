@@ -252,6 +252,7 @@ private fun TradeRouteRow(
                 text       = GameStrings.tradeRouteName(context, route.id, route.displayName),
                 style      = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.SemiBold,
+                modifier   = Modifier.weight(1f, fill = false),
             )
             if (questIndicators.isNotEmpty()) {
                 QuestIndicatorIcons(questIndicators)

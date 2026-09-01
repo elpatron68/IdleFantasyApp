@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ElevatedCard
@@ -87,6 +88,7 @@ import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.PetData
 import com.fantasyidler.data.json.SkillingDungeonData
+import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.ui.components.CompletionProgressBar
 import com.fantasyidler.ui.components.PlayerStatsBar
 import com.fantasyidler.ui.theme.ScaledSheetContent
@@ -108,8 +110,8 @@ import com.fantasyidler.util.stringByName
 private val SKILL_CATEGORY_GROUPS: List<Pair<Int, List<String>>> = listOf(
     R.string.label_gathering      to listOf("mining", "fishing", "woodcutting", "farming", "thieving"),
     R.string.label_crafting       to listOf("smithing", "cooking", "fletching", "crafting", "runecrafting", "herblore", "firemaking", "construction"),
-    R.string.label_support_skills to listOf("prayer", "mercantile", "agility", "slayer"),
-    R.string.label_combat         to listOf("attack", "strength", "defense", "ranged", "magic", "hitpoints"),
+    R.string.label_support_skills to listOf("prayer", "mercantile", "agility"),
+    R.string.label_combat         to listOf("attack", "strength", "defense", "ranged", "magic", "hitpoints", "slayer"),
 )
 
 private data class UnlockMilestone(val level: Int, val description: String)
@@ -265,7 +267,7 @@ fun ProfileScreen(
                         ironman        = state.ironman,
                         onOpenPrestige = onNavigateToPrestige,
                     )
-                    1    -> InventoryTab(state.inventory, context, viewModel::categoryFor) { showAddItemSheet = true }
+                    1    -> InventoryTab(state.inventory, context, viewModel::categoryFor, viewModel::openAncientTreasures) { showAddItemSheet = true }
                     2    -> EquipmentTab(
                         equipped           = state.equipped,
                         context            = context,
@@ -930,10 +932,35 @@ private fun InventoryTab(
     inventory: Map<String, Int>,
     context: android.content.Context,
     categoryFor: (String) -> InventoryCategory,
+    onOpenTreasure: (Boolean) -> Unit,
     onDebugAddItem: () -> Unit,
 ) {
     var sortAlpha by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf<InventoryCategory?>(null) }
+    var treasureDialogQty by remember { mutableStateOf<Int?>(null) }
+
+    treasureDialogQty?.let { qty ->
+        AlertDialog(
+            onDismissRequest = { treasureDialogQty = null },
+            title = { Text(GameStrings.itemName(context, PlayerRepository.ANCIENT_TREASURE_KEY)) },
+            text  = { Text(stringResource(R.string.treasure_open_message)) },
+            confirmButton = {
+                TextButton(onClick = { onOpenTreasure(true); treasureDialogQty = null }) {
+                    Text(
+                        if (qty > 1) stringResource(R.string.treasure_open_all, qty)
+                        else stringResource(R.string.treasure_open)
+                    )
+                }
+            },
+            dismissButton = if (qty > 1) {
+                {
+                    TextButton(onClick = { onOpenTreasure(false); treasureDialogQty = null }) {
+                        Text(stringResource(R.string.treasure_open_one))
+                    }
+                }
+            } else null,
+        )
+    }
 
     val allGroups: List<Pair<InventoryCategory, List<Map.Entry<String, Int>>>> =
         remember(inventory, sortAlpha) {
@@ -1019,7 +1046,13 @@ private fun InventoryTab(
                         )
                     }
                     items(catItems, key = { it.key }) { entry ->
-                        InventoryRow(name = GameStrings.itemName(context, entry.key), qty = entry.value)
+                        InventoryRow(
+                            name    = GameStrings.itemName(context, entry.key),
+                            qty     = entry.value,
+                            onClick = if (entry.key == PlayerRepository.ANCIENT_TREASURE_KEY) {
+                                { treasureDialogQty = entry.value }
+                            } else null,
+                        )
                     }
                 }
                 item { Spacer(Modifier.height(16.dp)) }
@@ -1045,10 +1078,11 @@ private fun categoryLabel(cat: InventoryCategory): String = stringResource(when 
 })
 
 @Composable
-private fun InventoryRow(name: String, qty: Int) {
+private fun InventoryRow(name: String, qty: Int, onClick: (() -> Unit)? = null) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
             .padding(horizontal = 16.dp, vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment     = Alignment.CenterVertically,

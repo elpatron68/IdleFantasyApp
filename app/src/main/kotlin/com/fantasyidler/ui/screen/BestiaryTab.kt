@@ -53,6 +53,7 @@ import com.fantasyidler.util.GameStrings
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.ui.components.CompletionProgressBar
 import com.fantasyidler.util.formatCoinsBrief
+import java.text.Collator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -148,9 +149,15 @@ private fun BestiaryList(
     onEntryClick: (BestiaryEntry) -> Unit,
 ) {
     val otherLabel = stringResource(R.string.bestiary_location_other)
+    val context = LocalContext.current
+    val collator = remember(context) { Collator.getInstance(context.resources.configuration.locales[0]) }
+    // Sort by the translated names the rows display, not the English keys (issue #1647).
+    val sortedEntries = remember(entries, collator) {
+        entries.sortedWith(compareBy(collator) { it.nameLoader(context, it.key) })
+    }
     LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
         if (sort == BestiarySort.BY_LOCATION) {
-            val grouped = buildLocationGroups(entries, otherLabel)
+            val grouped = buildLocationGroups(sortedEntries, otherLabel, collator)
             grouped.forEach { (groupName, groupEntries) ->
                 item(key = "header_$groupName") {
                     Text(
@@ -167,7 +174,7 @@ private fun BestiaryList(
                 }
             }
         } else {
-            items(entries, key = { it.key }) { entry ->
+            items(sortedEntries, key = { it.key }) { entry ->
                 BestiaryRow(entry = entry, onClick = { onEntryClick(entry) })
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             }
@@ -179,6 +186,7 @@ private fun BestiaryList(
 private fun buildLocationGroups(
     entries: List<BestiaryEntry>,
     otherLabel: String,
+    collator: Collator,
 ): List<Pair<String, List<BestiaryEntry>>> {
     val grouped = mutableMapOf<String, MutableList<BestiaryEntry>>()
     entries.forEach { entry ->
@@ -186,8 +194,8 @@ private fun buildLocationGroups(
         locs.forEach { loc -> grouped.getOrPut(loc) { mutableListOf() }.add(entry) }
     }
     return grouped.entries
-        .sortedWith(compareBy({ it.key == otherLabel }, { it.key }))
-        .map { it.key to it.value.sortedBy { e -> e.key } }
+        .sortedWith(compareBy<Map.Entry<String, List<BestiaryEntry>>> { it.key == otherLabel }.thenBy(collator) { it.key })
+        .map { it.key to it.value.toList() }
 }
 
 @Composable

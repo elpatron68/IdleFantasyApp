@@ -214,6 +214,7 @@ private fun RecipeRow(
                     style      = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color      = if (enabled) MaterialTheme.colorScheme.onSurface else dimColor,
+                    modifier   = Modifier.weight(1f, fill = false),
                 )
                 if (recipe.outputQty > 1) {
                     Text(

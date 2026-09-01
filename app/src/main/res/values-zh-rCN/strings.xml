@@ -1932,6 +1932,14 @@
     <string name="seasonal_bounty_board_title">赏金板</string>
     <string name="seasonal_expedition_title">远征</string>
     <string name="seasonal_go_to_combat">前往战斗</string>
+    <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
+    <string name="treasure_open">Open</string> <!-- untranslated -->
+    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
+    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
+    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
+    <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
+    <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
+    <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">在余烬熄灭前命中 %1$d / %2$d 个！</string>
     <string name="seasonal_minigame_round">第 %1$d / %2$d 轮——命中：%3$d</string>
     <string name="seasonal_minigame_mode_label">模式</string>
