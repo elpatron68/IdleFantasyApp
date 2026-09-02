@@ -490,6 +490,7 @@
     <string name="settings_viewer_upload_network">Network error — check your connection</string>
     <string name="settings_viewer_upload_not_found">Viewer not found — check the URL</string>
     <string name="settings_viewer_upload_parse">Could not parse save on the server</string>
+    <string name="settings_viewer_upload_server">Save Viewer unavailable — try again later</string>
     <string name="settings_viewer_upload_rate_limit">Too many uploads — try again later</string>
     <string name="settings_viewer_open">Open viewer</string>
     <string name="settings_backup_title">Automatic Backup</string>
