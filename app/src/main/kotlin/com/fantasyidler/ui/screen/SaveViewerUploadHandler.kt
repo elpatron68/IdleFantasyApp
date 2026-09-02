@@ -86,7 +86,7 @@ fun triggerSaveViewerUpload(
                     is SaveViewerError.RateLimit ->
                         context.getString(R.string.settings_viewer_upload_rate_limit)
                     is SaveViewerError.ServerError ->
-                        context.getString(R.string.settings_viewer_upload_parse)
+                        context.getString(R.string.settings_viewer_upload_server)
                     else ->
                         context.getString(R.string.settings_viewer_upload_network)
                 }

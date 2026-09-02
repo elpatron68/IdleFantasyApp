@@ -489,6 +489,7 @@
     <string name="settings_viewer_upload_network">Netzwerkfehler – Verbindung prüfen</string>
     <string name="settings_viewer_upload_not_found">Viewer nicht gefunden – URL prüfen</string>
     <string name="settings_viewer_upload_parse">Save konnte auf dem Server nicht gelesen werden</string>
+    <string name="settings_viewer_upload_server">Save Viewer nicht erreichbar – bitte später erneut versuchen</string>
     <string name="settings_viewer_upload_rate_limit">Zu viele Uploads – später erneut versuchen</string>
     <string name="settings_viewer_open">Viewer öffnen</string>
     <string name="settings_backup_title">Automatische Sicherung</string>
