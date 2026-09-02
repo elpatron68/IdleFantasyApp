@@ -1748,6 +1748,8 @@
     <string name="shop_sold_old_equipment">Menjual peralatan lama seharga %1$s koin</string>
     <string name="shop_bulk_sell_total">Total</string> <!-- untranslated -->
     <string name="shop_bulk_sell_confirm">Jual Semua</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">Peningkatan XP 2x diaktifkan hanya dengan %1$dh!</string>
     <string name="shop_xp_boost_already_active">Peningkatan XP 2x sudah aktif.</string>
     <string name="shop_xp_boost_weekly_limit">Batas satu peningkatan XP 2x per minggu. Tersedia lagi setelah reset mingguan.</string>
@@ -1957,6 +1959,8 @@
     <string name="seasonal_tap">Ketuk!</string>
     <string name="seasonal_claim">Klaim</string>
     <string name="seasonal_bounty_cooldown">Buruan baru dalam %1$dm %2$ds</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Pergi</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
     <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->

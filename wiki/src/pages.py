@@ -15,14 +15,16 @@ from logging import log
 from pathlib import Path
 from typing import Callable
 
-from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO, DEFAULT_ICON, IMAGES_DIR
+import yaml
+
+from wiki.src import ASSETS, SPRITES, TEMPLATES, RESOURCES, REPO_ROOT, GITHUB_REPO, DEFAULT_ICON, IMAGES_DIR, GUIDES
 from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name, skill_name, skill_desc, enemy_name, guild_name, \
     trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
     pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
     expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc, tree_name, merc_name, race_name, \
     carnival_prize_name, carnival_prize_desc
 from wiki.src.page_hierarchy import PageHierarchy
-from wiki.src.wiki_logs import LOGGER, SimpleWarnType
+from wiki.src.wiki_logs import LOGGER
 
 
 # ---------------------------------------------------------------------------
@@ -49,7 +51,6 @@ class PageInfo:
 
 PAGE_DIRECTORY: dict[str, PageInfo] = {}
 PAGE_HIERARCHY: PageHierarchy = PageHierarchy()
-
 
 def add_static_pages():
     """Registers all static wiki pages."""
@@ -123,6 +124,9 @@ def add_static_pages():
             ("titles", PageInfo("Titles", "Titles.md", gen_titles)),
             ("seasonal_events", PageInfo("Seasonal Events", "SeasonalEvents.md", gen_seasonal_events)),
         ]],
+        ["Guides", False, [
+            ("how_to_make_player_guides", PageInfo("How to add strategy guides to the wiki", "how_to_make_guides.md", gen_how_to_make_player_guides))
+        ]]
     ]
 
     # Convert into form suitable for hierarchy merge function
@@ -146,6 +150,92 @@ def add_static_pages():
             pages += item[2]
         else: # Add page
             PAGE_DIRECTORY.update({item[0]: item[1]})
+
+
+def _gen_guide_content(guide_id: str, images: set[str], page_links: set[str]):
+    if any(x.split(".", 1)[0] in page_links for x in images):
+        LOGGER.warn_by_id(guide_id, f"Failed to generate guide `{guide_id}: Guide lists images and pages with the same ID (Check guides.yml)")
+        return f"Content failed to generate (Check conflicting images and page IDs in guides.yml)"
+    if any(x not in PAGE_DIRECTORY for x in page_links):
+        LOGGER.warn_by_id(guide_id, f"Failed to generate guide `{guide_id}: Guide lists page IDs which don't exist")
+        return f"Content failed to generate (Check listed pages in guides.yml)"
+    content = get_template(f"guides/{guide_id}").format(
+        **({
+            **{v.split(".", 1)[0]: html_image(IMAGES_DIR / "guides" / v, classes="guide-img") for v in images},
+            **{v: link(v) for v in page_links}
+        }),
+        table_of_contents="{table_of_contents}"
+    )
+    if "{table_of_contents}" in content:
+        return content.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(content)}")
+    return content
+
+
+def add_player_guides():
+    # Load player guides
+    with open(TEMPLATES / "guides" / "guides.yml", "r") as f:
+        guide_list = yaml.safe_load(f)
+    # No player guides to add
+    if not guide_list:
+        return
+    # Retrieve and validate guides
+    guides = {}
+    for gid, guide in guide_list.items():
+        g_title = guide.get("title")
+        author = guide.get("author")
+        last_updated = guide.get("last_updated")
+        images = guide.get("images") or []
+        page_links = guide.get("page_links") or []
+        related_pages = guide.get("related_pages") or []
+        # Validate data
+        required_fields = {"title": g_title, "author": author, "last_updated": last_updated}
+        custom_generator = guide.get("custom_generator")
+        # Ensure all fields are present
+        missing_fields = [label for label, value in required_fields.items() if value is None]
+        if len(missing_fields) > 0:
+            LOGGER.warn_by_id(f"guide:{gid}", f"Skipping guide `{gid}`. The following required fields were missing in `guilds.yml`: {",".join(missing_fields)}")
+            continue
+        # Ensure custom generator exists if present
+        if custom_generator:
+            if custom_generator not in PLAYER_GUIDE_GENERATORS:
+                LOGGER.warn_by_id(f"guide:{gid}", f"Skipping guide `{gid}`: a custom generator was specified but couldn't be found in pages.py. Check the docs")
+                continue
+            if images or page_links:
+                LOGGER.warn_by_id(f"guide:{gid}", f"Skipping guide `{gid}`: Must remove images, page_links, or table_of_contents config options when using a custom generator")
+                continue
+            custom_generator = PLAYER_GUIDE_GENERATORS[custom_generator]
+        # Check the guide file actually exists
+        if not (GUIDES / f"{gid}.md").is_file():
+            LOGGER.warn_by_id(f"guide:{gid}", f"Skipping guide `{gid}`: `{(GUIDES / f"{gid}.md").relative_to(REPO_ROOT)}` was missing.`")
+            continue
+        guides[gid] = g_title, author, last_updated, images, page_links, related_pages, custom_generator
+    # Create generators
+    guide_to_generator: dict[str, tuple[str, Callable[[str], str]]] = {}
+    for gid, (gtitle, author, last_updated, images, page_links, related_pages, custom_generator) in guides.items():
+        if custom_generator:
+            gen = lambda i=gid: custom_generator(get_template(f"guides/{i}"))
+        else:
+            gen = lambda guide_id=gid, i=frozenset(images), pl=frozenset(page_links): _gen_guide_content(guide_id, i, pl)
+
+        def _gen_guide(i, t, a, ut, rel_pages, g):
+            if any(x not in PAGE_DIRECTORY for x in rel_pages):
+                LOGGER.warn_by_id(i, f"Failed to generate guide `{i}: Guide lists page IDs which don't exist")
+                return f"Content failed to generate (Check listed pages in guides.yml)"
+            return get_template("guides/guide_template").format(
+                guide_title=t,
+                author=a,
+                update_time=ut,
+                guide_content=g(),
+                related_link_list=f"## Related pages\n\n{"\n".join(f"- {link(page)}" for page in sorted(rel_pages))}" if rel_pages else "",
+                guide_howto=link("how_to_make_player_guides")
+            )
+
+        guide_to_generator[gid] = gtitle, lambda i=gid, t=gtitle, a=author, ut=last_updated, r=frozenset(related_pages), g=gen: _gen_guide(i, t, a, ut, r, g)
+    # Add guides to page directory
+    PAGE_DIRECTORY.update({f"guide_{k}": PageInfo(t, f"guide_{k}.md", f) for k, (t, f) in guide_to_generator.items()})
+    # Add guides to page hierarchy
+    PAGE_HIERARCHY.merge([["Guides", True, [f"guide_{x}" for x in guide_to_generator.keys()]]])
+
 
 
 def add_boss_pages():
@@ -351,18 +441,31 @@ def get_template(name: str) -> str:
 
 
 def fmt_materials(mats: dict) -> str:
+    """Formats a dictionary of materials, generating item links for each of them"""
     return ", ".join(f"{fmt_amount(qty)}× {item_link(item)}" for item, qty in mats.items())
 
 
 def fmt_pct(chance: float) -> str:
+    """Formats a percentage into a string
+
+    :param chance: The percentage chance (represented as a decimal. E.g. 0.1 → 10%)
+    :return: The formatted string
+    """
     pct = chance * 100
     return f"{pct:.1f}%" if pct < 1 else f"{pct:.0f}%"
 
 
 def fmt_amount(amount: int) -> str:
+    """Formats an integer amount into the appropriate string format"""
     return f"{amount:,}"
 
 def table(headers: list[str], rows: list[list]) -> str:
+    """Formats a markdown table from a set of rows
+
+    :param headers: The list of headers for the table
+    :param rows: A list of rows (of which each row is a list of cells). Each row should be the same size as the header
+    :return: A string representing a markdown-formatted table
+    """
     sep = " | "
     header_row  = sep.join(headers)
     divider_row = sep.join("---" for _ in headers)
@@ -378,18 +481,28 @@ def session_minutes(level: int, prestige: int = 0, chronos_mult: float = 1) -> i
 
 
 def github_issue_link(issue_num: int, display_name: str | None = None) -> str:
+    """Links to the relevant GitHub issue (only works for the main IdleFantasy repo)"""
     return f"[{display_name if display_name else f"#{issue_num}"}]({GITHUB_REPO}/issues/{issue_num})"
 
 
 def github_pull_request_link(pr_num: int, display_name: str | None = None) -> str:
+    """Links to the relevant GitHub pull request (only works for the main IdleFantasy repo)"""
     return f"[{display_name if display_name else f"#{pr_num}"}]({GITHUB_REPO}/pull/{pr_num})"
 
 
 def github_discussion_link(disc_num: int, display_name: str | None = None) -> str:
+    """Links to the relevant GitHub discussion (only works for the main IdleFantasy repo)"""
     return f"[{display_name if display_name else f"#{disc_num}"}]({GITHUB_REPO}/discussions/{disc_num})"
 
 
 def link(page_id: str, display_name: str | None = None, header: str | None = None):
+    """Links to a page within the wiki
+
+    :param page_id: The page ID of the page to link to. This is the key for the PAGE_DIRECTORY
+    :param display_name: The display name to show for the link
+    :param header: The specific header or id in the page that you are linking to
+    :return: A markdown-formatted link to the specified page
+    """
     page = PAGE_DIRECTORY[page_id]
     return f"[{page.title if display_name is None else display_name}]({page.url.removesuffix('.md')}{f"#{header}" if header else ""})"
 
@@ -402,26 +515,43 @@ def html_link(page_id: str, display_name: str | None = None) -> str:
 
 
 def html_image(image_path: Path, alt_tag: str | None = None, classes: str | None = None, width: int | None = None) -> str:
+    """Formats an HTML image for the image at the specified path. This image should be present somewhere in the repo
+
+    :param image_path: The path to the image
+    :param alt_tag: The alt tag describing what the image shows. Defaults to the name of the image if left blank
+    :param classes: Any CSS classes that the image should use
+    :param width: A specified width for the image - this is often overridden by the CSS class except in the GitHub wiki
+    :return: A formatted HTML image tag pointing to the specified image
+    """
     # width is an HTML attribute rather than CSS so sizing survives the GitHub
     # wiki's tag sanitizer, which strips class and style attributes.
-    return (f"<img src='{image_path.relative_to(REPO_ROOT).as_posix()}' alt='{"" if alt_tag is None else alt_tag}'"
+    return (f"<img src='{image_path.relative_to(REPO_ROOT).as_posix()}' alt='{image_path.name if alt_tag is None else alt_tag}'"
             f"{f" class='{classes}'" if classes else ""}"
             f"{f" width='{width}'" if width else ""}>")
 
 
 def image(image_path: Path, alt_tag: str | None = None) -> str:
+    """Generates a standard markdown image from the specified path
+
+    :param image_path: The path to the image. This should be somewhere in the repo
+    :param alt_tag: The alt tag describing the image
+    :return: A formatted markdown image tag pointing to the specified image
+    """
     return f"![{image_path.name if alt_tag is None else alt_tag}]({image_path.relative_to(REPO_ROOT).as_posix()})"
 
 
 def icon_path(icon_name: str) -> Path:
+    """Gets the path to the specified game icon"""
     return RESOURCES / "drawable" / f"{icon_name}.png"
 
 
 def skill_icon_path(skill: str) -> Path:
+    """Gets the path to the specified skill icon"""
     return icon_path(f"skill_{skill.lower()}")
 
 
 def boss_sprite(boss_id: str) -> Path | None:
+    """Gets the path to the specified boss sprite"""
     boss_sprite_path = SPRITES / "bosses" / f"{boss_id}.png"
     return boss_sprite_path if boss_sprite_path.is_file() else None
 
@@ -435,6 +565,7 @@ def boss_icon(boss_id: str, fallback: str, width: int | None = None) -> str:
 
 
 def _tool_table(slot: str, efficiency_key: str) -> str:
+    """Gets the list of tools used in a number of pages"""
     equipment = load("equipment.json")
     assert isinstance(equipment, dict)
     tools = sorted(
@@ -444,10 +575,12 @@ def _tool_table(slot: str, efficiency_key: str) -> str:
     rows = [[item_name(t["name"]), list(t.get("requirements", {}).values() or [1])[0], f"{t[efficiency_key]:.2f}×"] for t in tools]
     return table(["Tool", "Level Required", "Efficiency"], rows)
 
+
 _PAGE_MAP: dict[str, str] | None = None
 
 
 def build_page_map() -> dict[str, str]:
+    """Builds the page map used for linking items in pages"""
     global _PAGE_MAP
     if _PAGE_MAP is not None:
         return _PAGE_MAP
@@ -592,6 +725,7 @@ def gen_sidebar() -> str:
 
 def gen_getting_started_game() -> str:
     page = get_template("contributing/getting_started_game").format(
+        table_of_contents="{table_of_contents}",
         wiki_contribution_link=link("getting_started_wiki", "Contributing to the wiki")
     )
     return page.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}")
@@ -600,6 +734,7 @@ def gen_getting_started_game() -> str:
 def gen_getting_started_wiki() -> str:
     page = get_template("contributing/getting_started_wiki").format(
         page_types_link=link("wiki_page_types"),
+        table_of_contents="{table_of_contents}",
         editing_a_page_link=github_pull_request_link(1353, "Guide: Fixing an out-of-date wiki page"),
         game_contribution_link=link("getting_started_game", "how to contribute to the game")
     )
@@ -610,6 +745,15 @@ def gen_wiki_page_types() -> str:
     page = get_template("contributing/wiki_page_types")
     return page.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}")
 
+
+def gen_how_to_make_player_guides() -> str:
+    page = get_template("guides/how_to_make_player_guides").format(
+        getting_started_wiki_link=link("getting_started_wiki"),
+        table_of_contents="{table_of_contents}",
+    )
+    return page.format(
+        table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}"
+    )
 
 
 _PRESTIGE_RACES = ["human", "elf", "dwarf", "orc", "gnome", "halfling"]
@@ -885,7 +1029,7 @@ def _crafting_tool_eff_section(verb: str, skill: str, tool_slot: str) -> str:
     # Get heirloom items and exclude from tool list
     heirloom_items = {k: v for k, v in tools.items() if v.get("heirloom_skill") == skill}
     if len(heirloom_items) > 1:
-        LOGGER.simple_warn(SimpleWarnType.MULTIPLE_HEIRLOOMS, skill)
+        LOGGER.warn_by_id(f"multiple_heirlooms:{skill}", f"Only the first available heirloom for skill `{skill}` was selected as only one was expected — _tool_efficiency_section should be adjusted to handle multiple heirloom items")
     for item in heirloom_items.keys():
         tools.pop(item)
     heirloom_item = list(heirloom_items.items())[0][0]
@@ -924,7 +1068,7 @@ def _gathering_tool_eff_section(verb: str, tool_name: str, skill: str, tool_slot
     # Get heirloom items and exclude from tool list
     heirloom_items = {k: v for k, v in tools.items() if v.get("heirloom_skill") == skill}
     if len(heirloom_items) > 1:
-        LOGGER.simple_warn(SimpleWarnType.MULTIPLE_HEIRLOOMS, skill)
+        LOGGER.warn_by_id(f"multiple_heirlooms:{skill}", f"Only the first available heirloom for skill `{skill}` was selected as only one was expected — _tool_efficiency_section should be adjusted to handle multiple heirloom items")
     for item in heirloom_items.keys():
         tools.pop(item)
     heirloom_item = list(heirloom_items.items())[0][0]
@@ -1762,7 +1906,7 @@ def _localised_quest_desc(quest_type: str, target: str, amount: int, guild: str)
         case "slayer_kill":
             return STRINGS.get_string("guild_quest_desc_slayer_kill", amount)
         case _:
-            LOGGER.simple_warn(SimpleWarnType.GUILD_QUEST_TYPE, quest_type)
+            LOGGER.warn_by_id(f"guild_quest_type:{quest_type}", f"The guild quest `{quest_type}` was not appropriately managed when generating the guilds page")
             return f"{amount}× {title(target)}"
 
 
@@ -1846,7 +1990,7 @@ def gen_buildings() -> str:
             case "player_session_speed_reduction":
                 return STRINGS.get_string("town_chronos_spire_active_bonus", round(amount * 100))
             case _:
-                LOGGER.simple_warn(SimpleWarnType.BUILDING_BONUS, bonus)
+                LOGGER.warn_by_id(f"building_bonus:{bonus}", f"The bonus `{bonus}` was not specially formatted on the buildings page")
                 return f"+{amount} {bonus.replace("_", " ").title()}"
 
     # Building tiers mirrored from TownBuildingDef / TownRepository
@@ -1883,7 +2027,7 @@ def gen_buildings() -> str:
     # Add title/description to buildings dictionary
     for building_key, data in buildings.items():
         if building_key not in additional_info:
-            LOGGER.simple_warn(SimpleWarnType.MISSING_BUILDING_DESCRIPTION, building_key)
+            LOGGER.warn_by_id(f"missing_building_description:{building_key}", f"The building `{building_key}` is missing a description in the buildings page")
         data["description"] = additional_info.get(building_key, "No description provided")
 
     sections = []
@@ -1909,7 +2053,7 @@ def gen_carnival() -> str:
             case "xp_lamp":
                 prize_rows.append([carnival_prize_name(key), fmt_amount(prize["ticket_cost"]), carnival_prize_desc(key)])
             case _:
-                LOGGER.simple_warn(SimpleWarnType.MISSING_PRIZE_TYPE, key)
+                LOGGER.warn_by_id(f"missing_prize_type:{key}", f"The prize type `{key}` was not specially formatted on the carnival page")
                 prize_rows.append([carnival_prize_name(key), fmt_amount(prize["ticket_cost"]), carnival_prize_desc(key)])
 
     # Idle chance formula and active-game rewards mirrored from CarnivalSimulator /
@@ -2047,6 +2191,7 @@ def gen_combat_page() -> str:
     page = make_latex_safe(get_template("combat/combat"), 2).format(
         bosses_link=link("bosses"),
         dungeons_link=link("dungeons"),
+        table_of_contents="{table_of_contents}",
         wiki_contribution_link=link("getting_started_wiki", "Contributing to the wiki"),
         combat_footer=gen_combat_footer()
     )
@@ -2178,11 +2323,41 @@ def gen_housing() -> str:
     )
 
 # ---------------------------------------------------------------------------
+# Custom generators for player guides
+# ---------------------------------------------------------------------------
+
+# Add generators here if you want to reference game data
+PLAYER_GUIDE_GENERATORS: dict[str, Callable[[str], str]] = {
+    # guide_the_infinite_tower: gen_guide_the_infinite_tower(),
+}
+
+# Example player guides
+#
+# In this example, the JSON file for the fish in the game is getting loaded in and then being used to create a table
+#     which can then be referenced in the guide using the {fish_table} field
+# This also shows how you can include tables of content in your pages. Adding the table_of_content="{table_of_content}"
+#     is necessary to ensure it doesn't cause any errors in Python when formatting the string twice
+#
+# def gen_guide_the_infinite_tower(guide: str) -> str:
+#     fish_data = load("fish.json")
+#     assert isinstance(fish_data, dict)
+#     fish_rows = sorted(
+#         [[item_name(k), v["level_required"], v["xp_per_catch"]] for k, v in fish_data.items()],
+#         key=lambda r: r[1]
+#     )
+#     content = guide.format(
+#         fish_table=table(["Fish", "Level req.", "XP / Fish"], fish_rows),
+#         table_of_contents="{table_of_contents}"
+#     )
+#     return content.format(table_of_contents=gen_table_of_contents(content))
+
+# ---------------------------------------------------------------------------
 # Adding pages to the directory/hierarchy
 # ---------------------------------------------------------------------------
 
 # Add all relevant pages to the hierarchy and page directory
 add_static_pages()
+add_player_guides()
 add_boss_pages()
 add_enemy_pages()
 add_dungeon_pages()

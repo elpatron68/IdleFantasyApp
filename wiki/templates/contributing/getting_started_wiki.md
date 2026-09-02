@@ -6,7 +6,7 @@ If you want to make changes to the game itself, check out {game_contribution_lin
 
 If you find examples much easier to work with, there are pull request guides available [here](#pull-request-guides) where you can see an actual example of editing the wiki.
 
-{{table_of_contents}}
+{table_of_contents}
 
 ## How the wiki works
 

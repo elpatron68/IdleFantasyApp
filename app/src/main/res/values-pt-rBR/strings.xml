@@ -1742,6 +1742,8 @@
     <string name="shop_sold_old_equipment">Equipamento antigo vendido por %1$s moedas</string>
     <string name="shop_bulk_sell_total">Total</string> <!-- untranslated -->
     <string name="shop_bulk_sell_confirm">Vender Tudo</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">Impulso de 2× XP ativado por %1$dh!</string>
     <string name="shop_xp_boost_already_active">Um impulso de 2× XP já está ativo.</string>
     <string name="shop_xp_boost_weekly_limit">Limite de um impulso de 2× XP por semana. Disponível novamente após a redefinição semanal.</string>
@@ -1951,6 +1953,8 @@
     <string name="seasonal_tap">Toque!</string>
     <string name="seasonal_claim">Coletar</string>
     <string name="seasonal_bounty_cooldown">Nova recompensa em %1$dm %2$ds</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Ir</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
     <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->

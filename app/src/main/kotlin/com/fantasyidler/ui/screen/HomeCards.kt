@@ -366,7 +366,8 @@ internal fun QueueCard(
                 if (activeSessionSkill.isNotEmpty() && activeSessionXpGain > 0L)
                     cumul[activeSessionSkill] = (cumul[activeSessionSkill] ?: 0L) + activeSessionXpGain
                 queue.map { a ->
-                    if (a.estimatedXpGain <= 0L) null
+                    val duration = if (a.estimatedDurationMs > 0L) a.estimatedDurationMs.formatDurationMs(context) else null
+                    val xpPart = if (a.estimatedXpGain <= 0L) null
                     else {
                         val startXp    = cumul[a.skillName] ?: 0L
                         val endXp      = startXp + a.estimatedXpGain
@@ -385,6 +386,11 @@ internal fun QueueCard(
                                 else append(" ($pct%)")
                             }
                         }
+                    }
+                    when {
+                        xpPart != null && duration != null -> "$xpPart  •  $duration"
+                        xpPart != null                     -> xpPart
+                        else                               -> duration
                     }
                 }
             }

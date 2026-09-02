@@ -135,7 +135,7 @@ class InventoryViewModel @Inject constructor(
         /** Heirloom item key -> accumulated item XP. */
         val heirloomXp: Map<String, Long> = emptyMap(),
     ) {
-        val totalLevel: Int get() = skillLevels.values.sum()
+        val totalLevel: Int get() = totalLevelFrom(skillLevels)
 
         /** [allEquipment] with heirloom entries replaced by their effective stats for this player. */
         fun resolvedEquipment(allEquipment: Map<String, EquipmentData>): Map<String, EquipmentData> =

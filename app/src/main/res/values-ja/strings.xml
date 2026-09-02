@@ -1742,6 +1742,8 @@
     <string name="shop_sold_old_equipment">古い装備を売却し、%1$s コイン獲得しました</string>
     <string name="shop_bulk_sell_total">合計</string>
     <string name="shop_bulk_sell_confirm">すべて売却</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">%1$d時間の間、2倍経験値ブーストが有効になりました！</string>
     <string name="shop_xp_boost_already_active">2倍経験値ブーストはすでに有効です。</string>
     <string name="shop_xp_boost_weekly_limit">2倍経験値ブーストは週に1回まで購入できます。週間リセット後に再度購入可能になります。</string>
@@ -1951,6 +1953,8 @@
     <string name="seasonal_tap">タップ！</string>
     <string name="seasonal_claim">受け取る</string>
     <string name="seasonal_bounty_cooldown">新しい手配書まで: %1$d分 %2$d秒</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">挑戦</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">サンスパイアの至点</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">サンスパイアの至点 2026 に参加</string>

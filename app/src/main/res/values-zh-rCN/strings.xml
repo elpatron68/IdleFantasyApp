@@ -102,7 +102,7 @@
     <string name="label_coming_soon">即将推出</string>
     <string name="label_time_remaining">剩余时间</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
+    <string name="duration_years">%1$d年</string>
     <string name="duration_months">%1$d月</string>
     <string name="duration_weeks">%1$d周</string>
     <string name="duration_days">%1$d天</string>
@@ -162,7 +162,7 @@
     <string name="label_inactive">未启用</string>
     <string name="label_boost">加成</string>
     <string name="label_xp_boost">经验加成</string>
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string> <!-- untranslated -->
+    <string name="label_prestige_xp_boost">转生经验加成</string>
     <string name="label_weapon">武器</string>
     <string name="label_armour">护甲</string>
     <string name="label_food">食物</string>
@@ -492,7 +492,7 @@
     <string name="settings_backup_now">立即备份</string>
     <string name="settings_backup_status">最新备份</string>
     <string name="settings_backup_never">永不备份</string>
-    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
+    <string name="settings_backup_failed_with">备份失败: %1$s</string>
     <string name="settings_backup_success">备份已保存。</string>
     <string name="settings_backup_failed">备份失败。</string>
     <string name="settings_backup_folder_set">备份文件夹已设置。</string>
@@ -506,14 +506,14 @@
     <string name="guild_do_dailies_hint">完成每日任务以晋升下一等级</string>
     <string name="guild_quest_gate_blocked">完成任务以提升你的等级</string>
     <string name="guild_quest_required">需要完成任务才能晋升</string>
-    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
-    <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
+    <string name="guild_progress_dailies_and_quest">完成 %1$d/%2$d 个每日任务 &amp; 委托以晋升</string>
+    <string name="guild_progress_dailies_only">完成 %1$d/%2$d 个每日任务以晋升</string>
     <string name="home_died_message">你阵亡了，失去了大部分收获。</string>
     <string name="home_xp_boost_was_active">2 倍经验加成已生效</string>
     <string name="home_xp_boost_active">2 倍经验加成生效中 - 剩余 %1$s</string>
-    <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
-    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
-    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
+    <string name="home_prestige_xp_boost_active">2 倍 %1$s 经验 - %2$s</string>
+    <string name="boosts_show_more">+%1$d 项额外增益 (点击查看)</string>
+    <string name="boosts_show_less">收起</string>
     <string name="home_loot">战利品</string>
     <string name="home_food_consumed">消耗食物</string>
     <string name="home_bones_buried">已埋葬骨头</string>
@@ -598,7 +598,7 @@
     <string name="combat_run_progress">第 %1$d/%2$d 次</string>
     <string name="combat_xp_on_victory">胜利经验</string>
     <string name="combat_you_died">你阵亡了！</string>
-    <string name="combat_died_reward" formatted="false">You received 10% of the rewards.</string> <!-- untranslated -->
+    <string name="combat_died_reward" formatted="false">你获得了 10% 的奖励。</string>
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d 装备</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
@@ -1008,7 +1008,7 @@
     <string name="mercantile_level_label">商贸等级 %1$d</string>
     <string name="mercantile_xp_label">经验：%1$s</string>
     <string name="mercantile_coins_label">金币：%1$s</string>
-    <string name="mercantile_perks_title">Perks</string> <!-- untranslated -->
+    <string name="mercantile_perks_title">天赋</string>
     <string name="mercantile_perk_trading_locked">Shop trading: cheaper buying and better sell prices from level %1$d.</string> <!-- untranslated -->
     <string name="mercantile_perk_trading">Shop trading: buy prices -%1$d%%, sell prices +%2$d%%.</string> <!-- untranslated -->
     <string name="mercantile_perk_trading_next">Next boost at level %1$d.</string> <!-- untranslated -->
@@ -1363,9 +1363,9 @@
 
     <!-- Prestige system -->
     <string name="prestige">转生</string>
-    <string name="prestige_skill_tree">Skill Tree</string> <!-- untranslated -->
+    <string name="prestige_skill_tree">技能树</string>
     <string name="prestige_max">满转生</string>
-    <string name="prestige_confirm_title" formatted="false">Prestige %s?</string> <!-- untranslated -->
+    <string name="prestige_confirm_title" formatted="false">转生 %s?</string>
     <string name="prestige_confirm_message_xp">你的 %1$s 等级将重置为1级，但你将获得该技能永久 +%2$d%% 经验加成。</string>
     <string name="prestige_confirm_message_stat">你的 %1$s 等级将重置为1级，但你将获得永久 +%2$d 属性加成。</string>
     <string name="prestige_confirm_message_agility">你的 %1$s 等级将重置为1级，但你将获得永久 +%2$d%% 经验加成，并且训练时长将持续缩短——到99级时单次训练只需 %3$d 分钟，而非 %4$d 分钟。</string>
@@ -1742,6 +1742,8 @@
     <string name="shop_sold_old_equipment">出售旧装备获得 %1$s 金币</string>
     <string name="shop_bulk_sell_total">合计</string>
     <string name="shop_bulk_sell_confirm">全部出售</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">2倍经验增益已激活，持续 %1$d 小时！</string>
     <string name="shop_xp_boost_already_active">双倍经验加成已在生效中。</string>
     <string name="shop_xp_boost_weekly_limit">每周限购一次双倍经验加成。每周重置后可再次购买。</string>
@@ -1951,6 +1953,8 @@
     <string name="seasonal_tap">点击！</string>
     <string name="seasonal_claim">领取</string>
     <string name="seasonal_bounty_cooldown">新赏金在 %1$d 分 %2$d 秒后</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">前往</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">日尖塔夏至节</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">参与了 2026 日尖塔夏至节</string>
@@ -2226,10 +2230,10 @@
     <string name="farming_crop_picker_stats">等级 %1$d  •  %2$s  •  %3$d 经验/作物</string>
     <string name="farming_seeds_owned">种子：%1$d  •  持有：%2$d</string>
     <!-- ============ Prestige overhaul (v1.14.0) ============ -->
-    <string name="prestige_title">Prestige</string> <!-- untranslated -->
-    <string name="prestige_open_tree">View tree</string> <!-- untranslated -->
+    <string name="prestige_title">转生</string>
+    <string name="prestige_open_tree">查看分支</string>
     <!-- Translator note: %1$d = unspent prestige points -->
-    <string name="prestige_points_available">%1$d points available</string> <!-- untranslated -->
+    <string name="prestige_points_available">%1$d 可用点数</string>
     <!-- Translator note: %1$d = lifetime points earned, %2$d = maximum points for this skill -->
     <string name="prestige_points_lifetime">%1$d of %2$d lifetime points earned</string> <!-- untranslated -->
     <!-- Translator note: %1$d = points the reset would award right now -->
@@ -2239,10 +2243,10 @@
     <string name="prestige_maxed_cap">Maximum prestige reached. Every point this skill can earn is yours.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Your %1$s level will reset to 1 and you\'ll earn %2$d prestige points to spend in this skill\'s tree. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
-    <string name="prestige_respec">Reset points</string> <!-- untranslated -->
+    <string name="prestige_respec">重置点数</string>
     <!-- Translator note: %1$s = formatted remaining cooldown -->
     <string name="prestige_respec_available_in">Reset available in %1$s</string> <!-- untranslated -->
-    <string name="prestige_respec_confirm_title">Reset prestige points?</string> <!-- untranslated -->
+    <string name="prestige_respec_confirm_title">确定重置转生点数吗?</string>
     <!-- Translator note: %1$s = skill name -->
     <string name="prestige_respec_confirm_message">All purchased %1$s upgrades will be refunded for their full point cost. You can reset this skill\'s points again in 24 hours.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name -->
@@ -2250,7 +2254,7 @@
     <string name="prestige_respec_on_cooldown">Points were reset recently. Try again later.</string> <!-- untranslated -->
     <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Cost: %1$d points</string> <!-- untranslated -->
-    <string name="prestige_node_owned">Purchased</string> <!-- untranslated -->
+    <string name="prestige_node_owned">已加点</string>
     <string name="prestige_path_auto_label">Earned by prestiging</string> <!-- untranslated -->
     <string name="prestige_node_auto_earned">Earned at prestige %1$d.</string> <!-- untranslated -->
     <string name="prestige_node_auto_pending">Unlocks automatically at prestige %1$d.</string> <!-- untranslated -->

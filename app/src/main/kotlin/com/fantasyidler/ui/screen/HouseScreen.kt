@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -927,9 +928,11 @@ private fun ResidentOverlay(state: HouseUiState, viewModel: HouseViewModel, cell
         beardStyle = state.characterBeardStyle,
         beardColor = state.characterBeardColor,
         modifier   = Modifier
-            .padding(
-                start = cellDp * spot.first - spriteW / 2,
-                top = cellDp * (spot.second + TOP_MARGIN_CELLS) - spriteH,
+            // offset, not padding: the sprite is wider than a cell, so a spot in the two
+            // leftmost columns puts this x below zero (negative padding crashes, issue on 1.14.4).
+            .offset(
+                x = cellDp * spot.first - spriteW / 2,
+                y = cellDp * (spot.second + TOP_MARGIN_CELLS) - spriteH,
             )
             .height(spriteH)
             .aspectRatio(64f / 36f),

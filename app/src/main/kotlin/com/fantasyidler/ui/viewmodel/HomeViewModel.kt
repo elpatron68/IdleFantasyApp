@@ -981,6 +981,12 @@ class HomeViewModel @Inject constructor(
         acc.awardedCapes += playerRepo.applySessionResults(Skills.MERCANTILE, totalXp, emptyMap(), sessionId = session.sessionId)
         playerRepo.addCoins(coinReturnBoosted)
         guildRepo.recordGuildTrade(session.activityKey, coinReturnBoosted)
+        val pets = frames.asSequence().flatMap { it.items.keys }.filter { it in ctx.petIds }.toSet()
+        for (id in pets) {
+            val pd = gameData.pets[id] ?: continue
+            if (playerRepo.addPetIfNew(id, pd.boostPercent))
+                acc.petFoundName = GameStrings.petName(context, pd.id)
+        }
         playerRepo.recordWeeklyProgress("mercantile", session.activityKey, frames.size)
         acc.combinedXpBySkill[Skills.MERCANTILE] = (acc.combinedXpBySkill[Skills.MERCANTILE] ?: 0L) + totalXp
         acc.combinedCoins += coinReturnPreBlessing
@@ -1699,8 +1705,10 @@ fun combatLevelFrom(levels: Map<String, Int>): Int {
     return (((atk + str) * 0.325) + (def + hp) * 0.25).toInt().coerceAtLeast(1)
 }
 
+// Sums only canonical skills: saves from before v1.1.5 can carry a stale "combat"
+// entry (old combat-quest claims), which must not inflate the total.
 fun totalLevelFrom(levels: Map<String, Int>): Int =
-    levels.values.sum()
+    levels.filterKeys { it in Skills.ALL }.values.sum()
 
 /** Infer the combat style used in a session from XP distribution. */
 private val COLLECT_GATHERING_SKILLS = setOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)

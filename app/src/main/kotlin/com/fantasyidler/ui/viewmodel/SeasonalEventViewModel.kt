@@ -85,6 +85,21 @@ class SeasonalEventViewModel @Inject constructor(
         viewModelScope.launch { seasonalEventRepo.claimBountyTask(taskId) }
     }
 
+    fun rerollBountyTask(taskId: String) {
+        viewModelScope.launch {
+            if (seasonalEventRepo.rerollBountyTask(taskId) == SeasonalEventRepository.RerollResult.NOT_ENOUGH_COINS) {
+                _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.error_not_enough_coins)) }
+            }
+        }
+    }
+
+    /** Expedition dungeon that spawns [enemyKey], falling back to the event's first expedition. */
+    fun expeditionKeyForKillTarget(event: SeasonalEventData, enemyKey: String): String? {
+        val keys = event.expeditionKeys()
+        return keys.firstOrNull { key -> gameData.dungeons[key]?.enemySpawns?.any { it.enemy == enemyKey } == true }
+            ?: keys.firstOrNull()
+    }
+
     fun claimRewardTier(tierTokens: Int) {
         viewModelScope.launch {
             if (seasonalEventRepo.claimRewardTier(tierTokens)) {

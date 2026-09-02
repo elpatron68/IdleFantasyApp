@@ -58,7 +58,7 @@ class AchievementsViewModel @Inject constructor(
         } catch (_: Exception) { emptyList() }
         val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
         val completedQuests = questProgress.count { it.completed && gameData.quests.keys.contains(it.questId)  }
-        val totalLevel  = levels.values.sum()
+        val totalLevel  = totalLevelFrom(levels)
         val combatLevel = combatLevelFrom(levels)
         val prestigeMap = flags.skillPrestige
 

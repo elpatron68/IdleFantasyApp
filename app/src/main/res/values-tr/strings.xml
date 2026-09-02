@@ -1756,6 +1756,8 @@
     <string name="shop_sold_old_equipment">Eski ekipman %1$s altına satıldı</string>
     <string name="shop_bulk_sell_total">Toplam</string>
     <string name="shop_bulk_sell_confirm">Hepsini sat</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">2× XP bonusu %1$d saat için aktifleştirildi!</string>
     <string name="shop_xp_boost_already_active">2× XP bonusu zaten aktif.</string>
     <string name="shop_xp_boost_weekly_limit">Haftada yalnızca bir 2× XP bonusu alınabilir. Haftalık sıfırlamadan sonra tekrar kullanılabilir.</string>
@@ -1965,6 +1967,8 @@
     <string name="seasonal_tap">Dokun!</string>
     <string name="seasonal_claim">Talep Et</string>
     <string name="seasonal_bounty_cooldown">%1$ddk %2$dsn içinde yeni görev</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Git</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
     <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->

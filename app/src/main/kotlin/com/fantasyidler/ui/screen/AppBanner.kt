@@ -96,6 +96,19 @@ fun AppBannerEffect(message: String?, onConsumed: () -> Unit) {
     }
 }
 
+/**
+ * Keying on the message alone drops a message re-posted with identical text before the
+ * previous one was consumed (rapid mercantile queue taps): the state flow skips the
+ * equal value, so the effect never re-runs. Callers that can re-post the same text pass
+ * a counter bumped on every post as [key] so each one shows.
+ */
+@Composable
+fun AppBannerEffect(message: String?, key: Any?, onConsumed: () -> Unit) {
+    LaunchedEffect(key) {
+        message?.let { AppBannerCenter.enqueue(it, onConsumed) }
+    }
+}
+
 private const val BANNER_DISPLAY_MS = 2_500L
 private const val BANNER_ACTION_DISPLAY_MS = 5_000L
 

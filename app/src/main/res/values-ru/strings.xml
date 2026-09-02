@@ -1778,6 +1778,8 @@
     <string name="shop_sold_old_equipment">Старое снаряжение продано за %1$s монет</string>
     <string name="shop_bulk_sell_total">Итого</string>
     <string name="shop_bulk_sell_confirm">Продать всё</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">Бонус XP 2× активирован на %1$d ч!</string>
     <string name="shop_xp_boost_already_active">Бонус XP 2× уже активен.</string>
     <string name="shop_xp_boost_weekly_limit">Не более одного бонуса XP 2× в неделю. Снова доступен после еженедельного сброса.</string>
@@ -1987,6 +1989,8 @@
     <string name="seasonal_tap">Нажать!</string>
     <string name="seasonal_claim">Забрать</string>
     <string name="seasonal_bounty_cooldown">Новое задание через %1$dм %2$dс</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Перейти</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Солнцестояние солнечного шпиля</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Участие в событии Солнцестояние солнечного шпиля 2026</string>

@@ -1762,6 +1762,8 @@
     <string name="shop_sold_old_equipment">Sprzedano stare wyposażenie za %1$s monet</string>
     <string name="shop_bulk_sell_total">Razem</string>
     <string name="shop_bulk_sell_confirm">Sprzedaj wszystko</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">Wzmocnienie 2× XP aktywowane na %1$dh!</string>
     <string name="shop_xp_boost_already_active">Wzmocnienie 2× XP jest już aktywne.</string>
     <string name="shop_xp_boost_weekly_limit">Limit jednego wzmocnienia 2× XP na tydzień. Ponownie dostępne po tygodniowym resecie.</string>
@@ -1971,6 +1973,8 @@
     <string name="seasonal_tap">Dotknij!</string>
     <string name="seasonal_claim">Odbierz</string>
     <string name="seasonal_bounty_cooldown">Nowe zlecenie za %1$dm %2$ds</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Idź</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Przesilenie Słonecznej Iglicy</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Wzięto udział w Przesileniu Słonecznej Iglicy 2026</string>

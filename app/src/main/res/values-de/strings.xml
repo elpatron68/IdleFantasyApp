@@ -1756,6 +1756,8 @@
     <string name="shop_sold_old_equipment">Alte Ausrüstung für %1$s Münzen verkauft</string>
     <string name="shop_bulk_sell_total">Gesamt</string>
     <string name="shop_bulk_sell_confirm">Alles verkaufen</string>
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">2×-EP-Verstärkung für %1$d Stunden aktiviert!</string>
     <string name="shop_xp_boost_already_active">Eine 2×-EP-Verstärkung ist bereits aktiv.</string>
     <string name="shop_xp_boost_weekly_limit">Nur eine 2×-EP-Verstärkung pro Woche. Nach dem wöchentlichen Reset wieder verfügbar.</string>
@@ -1965,6 +1967,8 @@
     <string name="seasonal_tap">Tippen!</string>
     <string name="seasonal_claim">Einlösen</string>
     <string name="seasonal_bounty_cooldown">Neue Aufgabe in %1$dm %2$ds</string>
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Los</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sonnenwende-Sommerturm</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Teilgenommen an Sonnenwende-Sommerturm 2026</string>

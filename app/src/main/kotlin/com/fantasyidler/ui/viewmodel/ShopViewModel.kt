@@ -3,6 +3,7 @@ package com.fantasyidler.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.data.json.MarketplaceItem
+import com.fantasyidler.data.model.BulkSellReceipt
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
@@ -101,6 +102,7 @@ data class ShopUiState(
     val compactNumbers: Boolean = false,
     /** Bulk and manual sells always leave one of each item (collector safety). */
     val keepOneOfEach: Boolean = false,
+    val bulkSellReceipts: List<BulkSellReceipt> = emptyList(),
 ) {
     val xpBoostActive: Boolean get() = xpBoostExpiresAt > System.currentTimeMillis()
 }
@@ -148,6 +150,7 @@ class ShopViewModel @Inject constructor(
                 ironman           = flags.ironman,
                 compactNumbers    = flags.compactNumbers,
                 keepOneOfEach     = flags.shopKeepOneOfEach,
+                bulkSellReceipts  = flags.bulkSellReceipts,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ShopUiState())
@@ -423,14 +426,60 @@ class ShopViewModel @Inject constructor(
     fun confirmBulkSell() {
         val preview = _extra.value.pendingBulkSell ?: return
         viewModelScope.launch {
+            // The dialog can sit open while the world changes (a queued session starting
+            // swaps gear, issue #1630), so previewed quantities are only an upper bound:
+            // each line is re-capped against the live player state before selling.
+            val sold = mutableMapOf<String, Int>()
+            var coins = 0L
             for (item in preview.items) {
-                playerRepo.sellItem(item.key, item.qty, item.priceEach)
+                val qty = minOf(item.qty, currentSellableCap(item.key))
+                if (qty <= 0) continue
+                if (playerRepo.sellItem(item.key, qty, item.priceEach, protectEquipped = true)) {
+                    sold[item.key] = qty
+                    coins += item.priceEach.toLong() * qty
+                }
+            }
+            if (sold.isNotEmpty()) {
+                val flags = playerRepo.getFlags()
+                val receipt = BulkSellReceipt(atMs = System.currentTimeMillis(), items = sold, coins = coins)
+                playerRepo.updateFlags(flags.copy(
+                    bulkSellReceipts = (listOf(receipt) + flags.bulkSellReceipts).take(MAX_BULK_SELL_RECEIPTS)))
             }
             _extra.update { it.copy(
                 pendingBulkSell = null,
-                snackbarMessage = context.withAppLocale().getString(preview.soldMsgRes, preview.totalCoins.toCoinsString()),
+                snackbarMessage = context.withAppLocale().getString(preview.soldMsgRes, coins.toCoinsString()),
             )}
         }
+    }
+
+    /**
+     * How many copies of [itemKey] may be sold RIGHT NOW, applying every protection the
+     * previews apply (locks, heirlooms, capes, equipped and loadout copies, queue
+     * reservations and snapshots, the keep-one keeper) against the live player state.
+     */
+    private suspend fun currentSellableCap(itemKey: String): Int {
+        val player = playerRepo.getOrCreatePlayer()
+        val flags: PlayerFlags = json.decodeFromString(player.flags)
+        if (itemKey in flags.lockedItems) return 0
+        val equipData = gameData.equipment[itemKey]
+        if (equipData?.heirloomSkill != null) return 0
+        if (equipData?.capeSkill != null) return 0
+        val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
+        val have = inventory[itemKey] ?: 0
+        val equippedCount = if (equipData != null) {
+            val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
+            val queuedGearKeys = flags.sessionQueue.flatMapTo(mutableSetOf()) { action ->
+                action.equippedSnapshot?.let {
+                    try { json.decodeFromString<Map<String, String?>>(it).values.filterNotNull() }
+                    catch (_: Exception) { emptyList() }
+                } ?: emptyList()
+            }
+            val loadoutKeys = flags.armorLoadouts.values.flatMapTo(mutableSetOf()) { it.values.filterNotNull() } + queuedGearKeys
+            maxOf(equipped.values.count { it == itemKey }, if (itemKey in loadoutKeys) 1 else 0)
+        } else 0
+        val reserved = computeReserved(flags.sessionQueue)[itemKey] ?: 0
+        val keeper = if (flags.shopKeepOneOfEach && equippedCount == 0) 1 else 0
+        return (have - equippedCount - reserved - keeper).coerceAtLeast(0)
     }
 
     fun dismissBulkSell() = _extra.update { it.copy(pendingBulkSell = null) }
@@ -605,6 +654,7 @@ class ShopViewModel @Inject constructor(
 
     companion object {
         const val XP_BOOST_KEY = "xp_boost_48h"
+        const val MAX_BULK_SELL_RECEIPTS = 5
 
         /**
          * Construction furniture otherwise falls to the generic 5-coin fallback (issue #1337).

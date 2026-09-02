@@ -889,14 +889,29 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Sell [qty] of [itemKey] for [priceEach] coins each. Returns false if not enough in inventory. Unequips the item if no copies remain. */
-    suspend fun sellItem(itemKey: String, qty: Int, priceEach: Int): Boolean = playerMutex.withLock {
+    /**
+     * With [protectEquipped] the sale is refused outright unless [qty] copies can go while
+     * every equipped or loadout-remembered copy stays: the bulk-sell paths pass it so a
+     * preview gone stale (gear swapped by a queued session while its dialog was open) can
+     * never strip worn gear and silently unequip it (issue #1630).
+     */
+    suspend fun sellItem(itemKey: String, qty: Int, priceEach: Int, protectEquipped: Boolean = false): Boolean = playerMutex.withLock {
         val player = getOrCreatePlayer()
         val inventory: MutableMap<String, Int> = json.decodeFromString(player.inventory)
+        val equipped: MutableMap<String, String?> = json.decodeFromString(player.equipped)
         if ((inventory[itemKey] ?: 0) < qty) return false
+        if (protectEquipped) {
+            val flags: PlayerFlags = json.decodeFromString(player.flags)
+            val loadoutReferenced = flags.armorLoadouts.values.any { itemKey in it.values }
+            val protectedCopies = maxOf(
+                equipped.values.count { it == itemKey },
+                if (loadoutReferenced) 1 else 0,
+            )
+            if ((inventory[itemKey] ?: 0) - qty < protectedCopies) return false
+        }
         val remaining = (inventory[itemKey] ?: 0) - qty
         if (remaining <= 0) inventory.remove(itemKey) else inventory[itemKey] = remaining
 
-        val equipped: MutableMap<String, String?> = json.decodeFromString(player.equipped)
         if (!inventory.containsKey(itemKey)) {
             equipped.entries.forEach { if (it.value == itemKey) it.setValue(null) }
         }

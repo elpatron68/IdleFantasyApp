@@ -29,8 +29,11 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
@@ -194,6 +197,7 @@ fun ShopScreen(
                         onToggleLock       = viewModel::toggleItemLock,
                         onSellJunk         = viewModel::previewSellJunk,
                         onSellOldEquipment = viewModel::previewSellOldEquipment,
+                        receipts           = state.bulkSellReceipts,
                     )
                     else -> BuyList(
                         entries            = viewModel.buyEntries.filter { it.mercantileLevelRequired <= state.mercantileLevel },
@@ -367,9 +371,50 @@ private fun SellList(
     onSellJunk: () -> Unit,
     onSellOldEquipment: () -> Unit,
     onKeepOneChange: (Boolean) -> Unit,
+    receipts: List<com.fantasyidler.data.model.BulkSellReceipt> = emptyList(),
 ) {
     var query by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf<String?>(null) }
+    var showReceipts by remember { mutableStateOf(false) }
+
+    if (showReceipts) {
+        AlertDialog(
+            onDismissRequest = { showReceipts = false },
+            confirmButton    = {
+                TextButton(onClick = { showReceipts = false }) { Text(stringResource(R.string.home_got_it)) }
+            },
+            title = { Text(stringResource(R.string.shop_recent_bulk_sales)) },
+            text  = {
+                if (receipts.isEmpty()) {
+                    Text(stringResource(R.string.shop_recent_bulk_sales_empty))
+                } else {
+                    Column(Modifier.verticalScroll(rememberScrollState())) {
+                        receipts.forEachIndexed { index, receipt ->
+                            if (index > 0) Spacer(Modifier.height(12.dp))
+                            Text(
+                                text  = android.text.format.DateUtils.getRelativeTimeSpanString(receipt.atMs).toString(),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                            receipt.items.entries
+                                .sortedBy { GameStrings.itemName(context, it.key) }
+                                .forEach { (key, qty) ->
+                                    Text(
+                                        text  = stringResource(R.string.format_item_quantity, GameStrings.itemName(context, key), qty),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                }
+                            Text(
+                                text  = stringResource(R.string.reward_part_coins_plain, receipt.coins.formatCoins()),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                }
+            },
+        )
+    }
 
     val grouped = remember(inventory, query, selectedCategory) {
         inventory.entries
@@ -421,6 +466,10 @@ private fun SellList(
                     onCheckedChange = onKeepOneChange,
                 )
             }
+            TextButton(
+                onClick  = { showReceipts = true },
+                modifier = Modifier.padding(horizontal = 8.dp),
+            ) { Text(stringResource(R.string.shop_recent_bulk_sales)) }
             OutlinedTextField(
                 value         = query,
                 onValueChange = { query = it },

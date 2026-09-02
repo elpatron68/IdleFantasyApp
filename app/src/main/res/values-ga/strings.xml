@@ -1776,6 +1776,8 @@
     <string name="shop_sold_old_equipment">Sold old equipment for %1$s coins</string> <!-- untranslated -->
     <string name="shop_bulk_sell_total">Total</string> <!-- untranslated -->
     <string name="shop_bulk_sell_confirm">Sell All</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
     <string name="shop_xp_boost_activated">2× XP boost activated for %1$dh!</string> <!-- untranslated -->
     <string name="shop_xp_boost_already_active">A 2× XP boost is already active.</string> <!-- untranslated -->
     <string name="shop_xp_boost_weekly_limit">Limit one 2× XP boost per week. Available again after the weekly reset.</string> <!-- untranslated -->
@@ -1985,6 +1987,8 @@
     <string name="seasonal_tap">Tapáil!</string>
     <string name="seasonal_claim">Maigh ar</string>
     <string name="seasonal_bounty_cooldown">New bounty in %1$dm %2$ds</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
     <string name="seasonal_go">Féach</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
     <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->

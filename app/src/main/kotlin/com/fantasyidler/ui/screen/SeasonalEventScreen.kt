@@ -23,6 +23,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -167,8 +169,9 @@ fun SeasonalEventScreen(
                         BountyTaskRow(
                             taskProgress       = taskProgress,
                             onClaim            = { viewModel.claimBountyTask(taskProgress.task.id) },
+                            onReroll           = { viewModel.rerollBountyTask(taskProgress.task.id) },
                             onGo               = {
-                                if (taskProgress.task.type == "kill") event.expeditionKeys().firstOrNull()?.let(onNavigateToExpedition)
+                                if (taskProgress.task.type == "kill") viewModel.expeditionKeyForKillTarget(event, taskProgress.task.target)?.let(onNavigateToExpedition)
                                 else taskProgress.task.skill?.let(skillsViewModel::onSkillTapped)
                             },
                             onCooldownExpired  = viewModel::refreshBountySlots,
@@ -424,10 +427,27 @@ private fun BountyTaskRow(
     taskProgress: SeasonalBountyTaskWithProgress,
     onClaim: () -> Unit,
     onGo: () -> Unit,
+    onReroll: () -> Unit,
     onCooldownExpired: () -> Unit,
 ) {
     val task = taskProgress.task
     val context = LocalContext.current
+    var showRerollConfirm by remember { mutableStateOf(false) }
+    if (showRerollConfirm) {
+        AlertDialog(
+            onDismissRequest = { showRerollConfirm = false },
+            title            = { Text(stringResource(R.string.seasonal_bounty_reroll)) },
+            text             = { Text(stringResource(R.string.seasonal_bounty_reroll_confirm, SeasonalEventRepository.BOUNTY_REROLL_COST.formatCoins())) },
+            confirmButton    = {
+                TextButton(onClick = { showRerollConfirm = false; onReroll() }) {
+                    Text(stringResource(R.string.seasonal_bounty_reroll))
+                }
+            },
+            dismissButton    = {
+                TextButton(onClick = { showRerollConfirm = false }) { Text(stringResource(R.string.btn_cancel)) }
+            },
+        )
+    }
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -452,7 +472,16 @@ private fun BountyTaskRow(
             taskProgress.progress >= task.amount -> Button(onClick = onClaim) {
                 Text(stringResource(if (task.type == "turn_in") R.string.seasonal_donate else R.string.seasonal_claim))
             }
-            else -> TextButton(onClick = onGo) { Text(stringResource(R.string.seasonal_go)) }
+            else -> Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { showRerollConfirm = true }) {
+                    Icon(
+                        Icons.Filled.Refresh,
+                        contentDescription = stringResource(R.string.seasonal_bounty_reroll),
+                        tint               = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                TextButton(onClick = onGo) { Text(stringResource(R.string.seasonal_go)) }
+            }
         }
     }
 }

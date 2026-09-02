@@ -1108,7 +1108,7 @@
     <string name="item_tower_cape_name">Mantello della Torre</string>
     <string name="item_tower_cape_desc">Mantello tessuto dal potere della Torre.</string>
     <string name="item_mining_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come minatore. Fornisce un bonus del 10% per sessione.</string>
-    <string name="item_construction_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornice un bonus di 5% per sessione.</string>
+    <string name="item_construction_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
     <string name="item_mining_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
     <string name="item_fishing_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come pescatore. Fornisce un bonus del 10% per sessione.</string>
     <string name="item_fishing_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% per sessione.</string>
@@ -1145,49 +1145,49 @@
     <string name="item_agility_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP per sessione.</string>
     <string name="item_slayer_cape_name">Mantello Mercenario</string>
     <string name="item_slayer_cape_desc" formatted="false">Ricompensa per aver raggiunto il livello 99 come sicario. Fornisce un bonus di 10% ai punti ricevuti.</string>
-    <string name="item_attack_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in combattimento di mischia. Fornisce un bonus del 10% all\'XP in mischia.</string>
-    <string name="item_strength_cape_desc" formatted="false">Awarded for reaching level 99 Strength. Grants 10% bonus Strength XP.</string> <!-- untranslated -->
-    <string name="item_defense_cape_desc" formatted="false">Awarded for reaching level 99 Defense. Grants 10% bonus Defense XP.</string> <!-- untranslated -->
-    <string name="item_warriors_guild_cape_desc" formatted="false">Awarded for reaching Warriors Guild level 10. Grants 5% bonus Attack, Strength, and Defense XP.</string> <!-- untranslated -->
-    <string name="item_ranged_cape_desc" formatted="false">Awarded for reaching level 99 Ranged. Grants 10% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_archers_guild_cape_desc" formatted="false">Awarded for reaching Archers Guild level 10. Grants 5% bonus Ranged XP.</string> <!-- untranslated -->
-    <string name="item_magic_cape_desc" formatted="false">Awarded for reaching level 99 Magic. Grants 10% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_mages_guild_cape_desc" formatted="false">Awarded for reaching Mages Guild level 10. Grants 5% bonus Magic XP.</string> <!-- untranslated -->
-    <string name="item_slayer_guild_cape_desc" formatted="false">Awarded for reaching Slayers Guild level 10. Grants 5% bonus Slayer XP.</string> <!-- untranslated -->
-    <string name="item_hp_cape_desc" formatted="false">Awarded for reaching level 99 HP. Grants 10% bonus Hitpoints XP.</string> <!-- untranslated -->
-    <string name="item_deep_iron_pickaxe_desc">Forged from ore found in the Collapsed Mine\'s deepest shafts. Strikes with uncanny precision.</string> <!-- untranslated -->
-    <string name="item_dwarven_pickaxe_desc">A masterwork dwarven pickaxe. The finest mining tool ever crafted.</string> <!-- untranslated -->
-    <string name="item_forge_pickaxe_desc">Tempered in the flames of the Ancient Forge itself. The rarest and most powerful pickaxe in existence.</string> <!-- untranslated -->
-    <string name="item_ironwood_axe_desc">Hewn from the ironwood trees that once stood in the Ancient Forest Ruins. Exceptionally durable.</string> <!-- untranslated -->
-    <string name="item_dwarven_axe_desc">A legendary dwarven axe. Cuts through any tree with ease.</string> <!-- untranslated -->
-    <string name="item_sanctum_axe_desc">Forged in the shadow of the Corrupted Sanctum. Its blade cuts through even magic logs with ease.</string> <!-- untranslated -->
-    <string name="item_blessed_fishing_rod_desc">Crafted from driftwood recovered from the Drowned Temple, blessed by ancient sea rites.</string> <!-- untranslated -->
-    <string name="item_dwarven_fishing_rod_desc">A dwarven-crafted fishing rod. Practically hauls fish out of the water.</string> <!-- untranslated -->
-    <string name="item_abyssal_rod_desc">Woven from void-touched filament recovered from the Abyssal Ruins. Fish practically leap onto it.</string> <!-- untranslated -->
-    <string name="item_bronze_hoe_desc">A basic hoe for Farming.</string> <!-- untranslated -->
-    <string name="item_iron_hoe_desc">An iron hoe. Increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_steel_hoe_desc">A steel hoe. Noticeably increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_mithril_hoe_desc">A mithril hoe. Greatly increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_adamantite_hoe_desc">An adamantite hoe. Substantially increases harvest yield.</string> <!-- untranslated -->
-    <string name="item_runite_hoe_desc">A runite hoe. The finest farming tool available.</string> <!-- untranslated -->
-    <string name="item_dwarven_hoe_desc">A legendary dwarven hoe. Doubles the harvest of any crop.</string> <!-- untranslated -->
-    <string name="item_divine_hoe_desc">A hoe blessed by divine light. Crops flourish at its touch.</string> <!-- untranslated -->
-    <string name="item_bronze_hammer_desc">A bronze hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_iron_hammer_desc">An iron hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_steel_hammer_desc">A steel hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_mithril_hammer_desc">A mithril hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_adamantite_hammer_desc">An adamantite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_runite_hammer_desc">A runite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_dwarven_hammer_desc">A dwarven-forged hammer. Strikes true every time.</string> <!-- untranslated -->
-    <string name="item_divine_hammer_desc">A hammer touched by divine light. Metal bends to its will.</string> <!-- untranslated -->
-    <string name="item_bronze_tinderbox_desc">A bronze tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_iron_tinderbox_desc">An iron tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_steel_tinderbox_desc">A steel tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_mithril_tinderbox_desc">A mithril tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_adamantite_tinderbox_desc">An adamantite tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_runite_tinderbox_desc">A runite tinderbox for firemaking.</string> <!-- untranslated -->
-    <string name="item_dwarven_tinderbox_desc">A dwarven-forged tinderbox. Sparks a roaring flame instantly.</string> <!-- untranslated -->
-    <string name="item_divine_tinderbox_desc">A tinderbox touched by divine light. Kindles flame from the faintest spark.</string> <!-- untranslated -->
+    <string name="item_attack_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in combattimento di mischia. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_strength_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in forza. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_defense_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in difesa. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_warriors_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus del 5% all\'XP guadagnata per Mischia, Forza e Difesa.</string>
+    <string name="item_ranged_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in attacco a distanza. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_archers_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP guadagnata.</string>
+    <string name="item_magic_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in magia. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_mages_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP guadagnata.</string>
+    <string name="item_slayer_guild_cape_desc" formatted="false">Ricompensa per aver raggiunto il massimo rango della gilda. Fornisce un bonus di 5% all\'XP guadagnata.</string>
+    <string name="item_hp_cape_desc" formatted="false">Ricompensa per aver raggiunto il liv. 99 in salute. Fornisce un bonus del 10% all\'XP guadagnata.</string>
+    <string name="item_deep_iron_pickaxe_desc">Forgiato dal metallo degli anfratti più profondi della Miniera Crollata. Nessun colpo va a vuoto.</string>
+    <string name="item_dwarven_pickaxe_desc">Un capolavoro della maestria nanica. Il miglior piccone mai creato.</string>
+    <string name="item_forge_pickaxe_desc">Rinforzato dalle fiamme dell\'Antica Fucina, niente può superare questo piccone unico nel suo genere.</string>
+    <string name="item_ironwood_axe_desc">Costruita con il legno degli alberi della Foresta Antica, più resistente di qualsiasi metallo.</string>
+    <string name="item_dwarven_axe_desc">Leggendaria ascia nanica. Taglia ogni albero come fosse di burro.</string>
+    <string name="item_sanctum_axe_desc">Creata all\'interno del Santuario Corrotto, la sua lama non incontra resistenza alcuna.</string>
+    <string name="item_blessed_fishing_rod_desc">Il suo corpo proviene da legno sacro proveniente dal Tempio Sommerso, che le correnti hanno trasportato per tutto il mondo.</string>
+    <string name="item_dwarven_fishing_rod_desc">Canna da pesca di fattura nanica. Nessun pesce è troppo pesante.</string>
+    <string name="item_abyssal_rod_desc">Ogni componente ha in sé una parte di potere del Vuoto. Costruita da entità ormai perdute nelle Rovine Abissali.</string>
+    <string name="item_bronze_hoe_desc">Una zappa per i campi.</string>
+    <string name="item_iron_hoe_desc">Una zappa con punta di ferro. Migliora il raccolto.</string>
+    <string name="item_steel_hoe_desc">Una zappa con punta d\'acciaio. Migliora considerevolmente il raccolto.</string>
+    <string name="item_mithril_hoe_desc">Una zappa con punta di mithril. Migliora il raccolto in gran quantità.</string>
+    <string name="item_adamantite_hoe_desc">Una zappa con punta di adamantio. Migliora la resa dei campi come non mai.</string>
+    <string name="item_runite_hoe_desc">Una zappa con punta di runite. Il miglior strumento che puoi desiderare.</string>
+    <string name="item_dwarven_hoe_desc">Leggendaria zappa dei nani. Raddoppia la resa di ogni coltura.</string>
+    <string name="item_divine_hoe_desc">Zappa benedetta da luce divina. Le piante straripano di energia vitale.</string>
+    <string name="item_bronze_hammer_desc">Martello in bronzo per fabbri.</string>
+    <string name="item_iron_hammer_desc">Martello in ferro per fabbri.</string>
+    <string name="item_steel_hammer_desc">Martello in acciaio per fabbri.</string>
+    <string name="item_mithril_hammer_desc">Martello in mithril per fabbri.</string>
+    <string name="item_adamantite_hammer_desc">Martello in adamantio per fabbri.</string>
+    <string name="item_runite_hammer_desc">Martello in runite per fabbri.</string>
+    <string name="item_dwarven_hammer_desc">Martello per fabbri di fattura nanica. Usato dai suoi creatori per forgiare armi leggendarie.</string>
+    <string name="item_divine_hammer_desc">Martello per fabbri benedetto da luce divina. Il metallo sembra quasi piegarsi da solo al suo cospetto.</string>
+    <string name="item_bronze_tinderbox_desc">Acciarino in bronzo.</string>
+    <string name="item_iron_tinderbox_desc">Acciarino in ferro.</string>
+    <string name="item_steel_tinderbox_desc">Acciarino in acciaio.</string>
+    <string name="item_mithril_tinderbox_desc">Acciarino in mithril.</string>
+    <string name="item_adamantite_tinderbox_desc">Acciarino in adamantio.</string>
+    <string name="item_runite_tinderbox_desc">Acciarino in runite.</string>
+    <string name="item_dwarven_tinderbox_desc">Acciarino creato da esperti fabbri nani. Ogni fiamma si accende istantaneamente.</string>
+    <string name="item_divine_tinderbox_desc">Acciarino benedetto da luce divina. Anche la più piccola scintilla accende un fuoco.</string>
     <string name="item_bronze_grappling_hook_desc">A bronze grappling hook for agility.</string> <!-- untranslated -->
     <string name="item_iron_grappling_hook_desc">An iron grappling hook for agility.</string> <!-- untranslated -->
     <string name="item_steel_grappling_hook_desc">A steel grappling hook for agility.</string> <!-- untranslated -->

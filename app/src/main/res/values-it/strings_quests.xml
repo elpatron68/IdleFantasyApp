@@ -549,11 +549,11 @@
     <string name="skilling_dungeon_corrupted_canopy_note_3">Old sanctum stones are visible through the twisted trunks. Something still lives there.</string> <!-- untranslated -->
     <string name="skilling_dungeon_corrupted_canopy_note_4">The corruption spreads as you work. The canopy hungers for something unnamed.</string> <!-- untranslated -->
     <string name="skilling_dungeon_corrupted_canopy_note_5">The canopy parts. The Corrupted Sanctum rises from the shadow-wood — its doors open, waiting.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_whispering_grove_note_1">The trees here whisper in a language older than any known tongue.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_whispering_grove_note_2">Stone foundations visible beneath the roots — the remains of something built long before the forest.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_whispering_grove_note_3">A druid\'s warning carved in bark: \'The clearing at the grove\'s heart is not what it was. Stay away.\'</string> <!-- untranslated -->
-    <string name="skilling_dungeon_whispering_grove_note_4">Corrupted vines reach toward you as you chop. The grove resists your presence.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_whispering_grove_note_5">A gap in the canopy reveals ruins at the grove\'s heart. The Ancient Forest Ruins call to be explored.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_whispering_grove_note_1">Gli alberi sussurrano in una lingua ormai dimenticata.</string>
+    <string name="skilling_dungeon_whispering_grove_note_2">Costruzioni di pietra si mostrano tra le radici. Resti di qualcosa costruito prima che la natura tornasse sovrana.</string>
+    <string name="skilling_dungeon_whispering_grove_note_3">Un druido ha inciso un avvertimento nella corteccia: «Il cuore del bosco non è più quello di un tempo. Allontanati.»</string>
+    <string name="skilling_dungeon_whispering_grove_note_4">Rami corrotti sbarrano il tuo cammino. La foresta rifiuta la tua presenza.</string>
+    <string name="skilling_dungeon_whispering_grove_note_5">Uno spiraglio tra le piante rivela delle rovine. Le Rovine della Foresta Antica ti attendono.</string>
     <string name="skilling_dungeon_thieves_den_note_1">A crumpled ledger page: names, dates, and numbers. Someone has been tracking payments to a person called the Warden.</string> <!-- untranslated -->
     <string name="skilling_dungeon_thieves_den_note_2">Scratched into the wall: \'For those who prove themselves — the Sanctum awaits. Ask no questions.\'</string> <!-- untranslated -->
     <string name="skilling_dungeon_thieves_den_note_3">A torn letter warning a member to stay away from the eastern tunnels. No reason is given.</string> <!-- untranslated -->

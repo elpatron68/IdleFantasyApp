@@ -185,6 +185,8 @@ data class PlayerFlags(
     @SerialName("show_prestige_notifications") val showPrestigeNotifications: Boolean = true,
     /** Shop: bulk and manual sells always leave one of each item for collectors. */
     @SerialName("shop_keep_one_of_each") val shopKeepOneOfEach: Boolean = false,
+    /** Newest-first record of recent bulk sells, so "item X vanished" reports can be checked against facts (issue #1630). */
+    @SerialName("bulk_sell_receipts") val bulkSellReceipts: List<BulkSellReceipt> = emptyList(),
     /** Epoch ms when this character was created; 0 for pre-existing characters until backfilled
      *  from their oldest quest completion (sessions are deleted on collect, so quest timestamps
      *  are the oldest surviving record). */
@@ -304,6 +306,15 @@ data class PlayerFlags(
     @SerialName("house_draft") val houseDraft: HouseDraft? = null,
     /** Saved house layouts, at most one per slot (slots 0..2). */
     @SerialName("house_blueprints") val houseBlueprints: List<HouseBlueprint> = emptyList(),
+)
+
+/** One completed bulk sell: what was sold and what it paid. */
+@Serializable
+data class BulkSellReceipt(
+    @SerialName("at_ms") val atMs: Long = 0L,
+    /** Item key -> quantity actually sold. */
+    @SerialName("items") val items: Map<String, Int> = emptyMap(),
+    @SerialName("coins") val coins: Long = 0L,
 )
 
 /** The player's house: a set of room rectangles on one shared cell grid. */
