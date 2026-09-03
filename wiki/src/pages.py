@@ -22,7 +22,7 @@ from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name,
     trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
     pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
     expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc, tree_name, merc_name, race_name, \
-    carnival_prize_name, carnival_prize_desc
+    carnival_prize_name, carnival_prize_desc, slot_name
 from wiki.src.page_hierarchy import PageHierarchy
 from wiki.src.wiki_logs import LOGGER
 
@@ -54,8 +54,6 @@ PAGE_HIERARCHY: PageHierarchy = PageHierarchy()
 
 def add_static_pages():
     """Registers all static wiki pages."""
-    # Todo: Add combat page with strategy information explaining what attack, etc, does - link in boss and enemy pages
-
     # Add pages not in the hierarchy
     PAGE_DIRECTORY.update({
         "sidebar": PageInfo("Sidebar", "_Sidebar.md", gen_sidebar)
@@ -71,6 +69,7 @@ def add_static_pages():
         ]],
         ["Skills", False, [
             ("skills", PageInfo("Skills", "Skills.md", gen_skills)),
+            ("quest_icons", PageInfo("Quest Icons", "QuestIcons.md", gen_quest_icons)),
             ["Gathering", False, [
                 ("mining", PageInfo(skill_name("mining"), "Mining.md", gen_mining, skill_icon_path("mining"))),
                 ("fishing", PageInfo(skill_name("fishing"), "Fishing.md", gen_fishing, skill_icon_path("fishing"))),
@@ -736,6 +735,7 @@ def gen_getting_started_wiki() -> str:
         page_types_link=link("wiki_page_types"),
         table_of_contents="{table_of_contents}",
         editing_a_page_link=github_pull_request_link(1353, "Guide: Fixing an out-of-date wiki page"),
+        adding_quest_icons_page=github_pull_request_link(1669, "PR: Adding the quest icons page to the wiki"),
         game_contribution_link=link("getting_started_game", "how to contribute to the game")
     )
     return page.format(table_of_contents=f"## Table of contents\n\n{gen_table_of_contents(page)}")
@@ -817,6 +817,14 @@ def gen_skills() -> str:
     return get_template("skills/skills").format(
         skills_table=table(["Skill", "Category", "Description"], rows),
         prestige_race_tables=gen_prestige_race_tables(),
+    )
+
+
+def gen_quest_icons() -> str:
+    return get_template("skills/quest_icons").format(
+        skills_link=link("skills"),
+        guilds_link=link("guilds"),
+        quests_link=link("quests"),
     )
 
 
@@ -1462,16 +1470,8 @@ def gen_equipment() -> str:
     slot_order = ["weapon", "head", "body", "legs", "boots", "cape", "ring", "necklace",
                   "shield", "pickaxe", "axe", "fishing_rod", "hoe",
                   "hammer", "tinderbox", "grappling_hook", "frying_pan", "lockpick"]
-    # Todo: Categories are currently hardcoded in InventoryViewModel and should instead be handled in json files instead (eg. in equipment.json)
-    slot_names = {
-        "weapon": "Weapons", "head": "Helmets", "body": "Chestplates", "legs": "Legs",
-        "boots": "Boots", "cape": "Capes", "ring": "Rings", "necklace": "Necklaces",
-        "shield": "Shields", "pickaxe": "Pickaxes", "axe": "Axes",
-        "fishing_rod": "Fishing Rods", "hoe": "Hoes",
-        "hammer": "Hammers", "tinderbox": "Tinderboxes",
-        "grappling_hook": "Grappling Hooks", "frying_pan": "Frying Pans",
-        "lockpick": "Lockpicks",
-    }
+    # Todo: Categories are currently hardcoded in InventoryViewModel and should instead be handled in json files instead (eg. in equipment.json).
+    # These should replace the current method using slot names
     by_slot: dict[str, list] = {s: [] for s in slot_order}
     for item in equip.values():
         slot = item.get("slot", "other")
@@ -1496,7 +1496,7 @@ def gen_equipment() -> str:
         if not rows:
             continue
         rows.sort(key=lambda r: r[0])
-        sections.append(f"## {slot_names.get(slot, title(slot))}\n\n{table(['Item', 'Atk', 'Str', 'Def', 'Efficiency', 'Requirements'], rows)}")
+        sections.append(f"## {slot_name(slot)}\n\n{table(['Item', 'Atk', 'Str', 'Def', 'Efficiency', 'Requirements'], rows)}")
 
     return get_template("inventory/equipment").format(
         equipment="\n\n".join(sections),
@@ -1546,7 +1546,7 @@ def gen_heirlooms() -> str:
         if efficiency_key:
             tool_rows.append([
                 item_name(key),
-                title(item["slot"]),
+                slot_name(item["slot"]),
                 skill_link(item["heirloom_skill"]),
                 f"{base.get('efficiency', 1.0):.2f}×",
                 f"{item[efficiency_key]:.2f}×",

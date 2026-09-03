@@ -73,7 +73,7 @@
     <string name="bestiary_always_drops">Bottino garantito</string>
     <string name="bestiary_rare_drops">Bottino raro</string>
     <string name="bestiary_common_loot">Bottino tipico</string>
-    <string name="bestiary_pet_drop">Bottino da compagno</string>
+    <string name="bestiary_pet_drop">Compagni</string>
     <string name="bestiary_atk_def">Dif. Mischia</string>
     <string name="bestiary_str_def">Dif. Forza</string>
     <string name="bestiary_rng_def">Dif. Distanza</string>
@@ -461,6 +461,9 @@
 
 
 
+
+
+
     <string name="settings_lang_system">Sistema</string>
     <string name="settings_save_data">Salva</string>
     <string name="settings_export">Esporta Salvataggio</string>
@@ -607,7 +610,7 @@
     <string name="combat_fight_progress">Combattimento %1$d/%2$d</string>
     <string name="combat_run_count_label">Numero di tentativi</string>
     <!-- Translator note: %1$d = number of queued repeat dungeon runs, e.g. "×24 runs" -->
-    <string name="combat_run_count_suffix">×%1$d run</string>
+    <string name="combat_run_count_suffix">×%1$d iter</string>
     <!-- Translator note: %1$d = current run number, %2$d = total runs requested, e.g. "Run 12/24" -->
     <string name="combat_run_progress">Iter %1$d/%2$d</string>
     <string name="combat_xp_on_victory">XP alla vittoria</string>
@@ -690,7 +693,7 @@
     <string name="skills_bone_selected">%1$d XP ciascuno  •  %2$d disponibili</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="skills_xp_total">+%1$d XP totali</string>
-    <string name="skills_no_essence">Non hai Essenza di Rune con te — estraine un po\'</string>
+    <string name="skills_no_essence">Non hai Essenza di Runa con te — estraine un po\'</string>
     <string name="skills_no_runes">Non hai ancora sbloccato alcun tipo di runa</string>
     <!-- Translator note: %1$d = essence quantity -->
     <string name="skills_essence_qty">Hai %1$d Essenza di Runa</string>
@@ -735,7 +738,7 @@
     <string name="quest_legend_guild">Missione di gilda</string>
     <string name="quest_legend_quest">Missione</string>
     <string name="quest_legend_gold_dot">Una missione a tempo è disponibile.</string>
-    <string name="quest_legend_notes">Le icone attenuate non possono ancora essere completate (livello o materiali mancanti). Un piccolo numero in apice indica che più missioni di quel tipo richiedono la stessa cosa.</string>
+    <string name="quest_legend_notes">Le missioni con icone attenuate non possono ancora essere completate (livello o materiali mancanti). Un numerino in apice indica che più missioni richiedono la stessa azione.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
     <string name="shop_qty_in_inv">Hai ×%1$s</string>
     <!-- Translator note: %1$s = formatted coin amount -->
@@ -858,7 +861,7 @@
         <item>Wren</item>
         <item>Xander</item>
         <item>Yara</item>
-    </string-array> <!-- untranslated -->
+    </string-array>
     <string name="inn_title">Locanda</string>
     <string name="inn_desc">Assumi un lavoratore per aiutarti nell\'addestramento, o compra cibo dal menù del giorno. I lavoratori non contano per le tue missioni.</string>
     <string name="inn_worker_already_hired">Hai già assunto un lavoratore.</string>
@@ -1023,10 +1026,10 @@
     <string name="mercantile_xp_label">XP: %1$s</string>
     <string name="mercantile_coins_label">Monete: %1$s</string>
     <string name="mercantile_perks_title">Talenti</string>
-    <string name="mercantile_perk_trading_locked">Negoziatore: sconti e profitti migliori a partire dal livello %1$d.</string>
-    <string name="mercantile_perk_trading">Negoziatore: sconti del -%1$d%%, profitti dalle vendite +%2$d%%.</string>
+    <string name="mercantile_perk_trading_locked">Contrattazione: sconti e offerte migliori a partire dal livello %1$d.</string>
+    <string name="mercantile_perk_trading">Contrattazione: sconti del -%1$d%%, ricavi del +%2$d%%.</string>
     <string name="mercantile_perk_trading_next">Prossimo bonus al livello %1$d.</string>
-    <string name="mercantile_perk_guild">Gilda dei Mercanti: oggetti esclusivi nell\'emporio a partire dal livello %1$d.</string>
+    <string name="mercantile_perk_guild">Gilda dei Mercanti: oggetti esclusivi disponibili dal livello %1$d.</string>
     <string name="mercantile_cost_label">Costo: %1$s</string>
     <string name="mercantile_return_range">Ricavo: %1$s – %2$s</string>
     <string name="mercantile_dispatch_label">Spedisci</string>
@@ -1133,10 +1136,10 @@
     <string name="builder_card_desc">Migliora la Locanda, la Gilda e la Chiesa</string>
 
     <!-- Player housing -->
-    <string name="house_title">Casa</string>
-    <string name="house_edit">Modifica</string>
-    <string name="house_done">Fatto</string>
-    <string name="house_share">Condividi una foto della tua casa.</string>
+    <string name="house_title" formatted="false">Casa</string>
+    <string name="house_edit" formatted="false">Modifica</string>
+    <string name="house_done" formatted="false">Fine</string>
+    <string name="house_share" formatted="false">Condividi una foto della tua casa.</string>
     <string name="house_rooms_owned">Stanze: %1$d</string>
     <string name="house_construction_level">Livello costruzione %1$d</string>
     <string name="house_add_room">Aggiungi una stanza (%1$s)</string>
@@ -1172,35 +1175,35 @@
     <string name="house_blueprint_skipped">Planimetria caricata; %1$d oggetti non esistono più e sono stati scartati.</string>
     <string name="house_blueprint_load_title">Carica planimetria?</string>
     <string name="house_blueprint_load_message">Le modifiche non acquistate verranno sostituite da \"%1$s\".</string>
-    <string name="house_mode_place_item">Posizionamento di %1$s. Trascina o tocca un punto nella tua casa.</string>
-    <string name="house_mode_place_room">Stai aggiungendo una nuova stanza 3x3. Deve toccare una stanza esistente.</string>
-    <string name="house_error_level">Il tuo livello Costruzione è troppo basso.</string>
-    <string name="house_error_coins">Non hai abbastanza monete.</string>
-    <string name="house_error_materials">Non hai abbastanza materiali.</string>
-    <string name="house_error_spot">Non puoi metterlo lì.</string>
-    <string name="house_error_max_rooms">Non puoi aggiungere altre stanze.</string>
-    <string name="house_error_max_size">Non puoi espandere la stanza ulteriormente.</string>
+    <string name="house_mode_place_item">Stai piazzando %1$s. Trascina o tocca un punto della tua casa.</string>
+    <string name="house_mode_place_room" formatted="false">Stai piazzando una stanza 3x3. Deve essere adiacente a una stanza esistente.</string>
+    <string name="house_error_level" formatted="false">Il tuo livello Costruzione è troppo basso.</string>
+    <string name="house_error_coins" formatted="false">Non hai abbastanza monete.</string>
+    <string name="house_error_materials" formatted="false">Non hai abbastanza materiali.</string>
+    <string name="house_error_spot">Non puoi usare questa locazione.</string>
+    <string name="house_error_max_rooms" formatted="false">Non puoi aggiungere altre stanze.</string>
+    <string name="house_error_max_size">Non puoi espandere questa stanza ulteriormente.</string>
     <string name="house_stored_count">In magazzino: %1$d</string>
     <string name="house_level_short">Liv. %1$d</string>
-    <string name="house_store_hint">I mobili in magazzino conservano i materiali e possono essere riposti in seguito.</string>
-    <string name="house_store_item">Sposta nel magazzino.</string>
+    <string name="house_store_hint" formatted="false">I mobili in magazzino possono essere piazzati in seguito.</string>
+    <string name="house_store_item">Sposta nel magazzino</string>
     <string name="house_room_n">Stanza %1$d</string>
     <string name="house_room_size">%1$d x %2$d celle</string>
-    <string name="house_expand_title">Espandi</string>
-    <string name="house_shrink_title">Riduci</string>
-    <string name="house_shrink_hint">Rimuove una riga da questo lato. Il costo di espansione verrà rimborsato e i mobili spostati in magazzino.</string>
-    <string name="house_error_min_size">Le stanze non possono essere più piccole di 3x3.</string>
+    <string name="house_expand_title" formatted="false">Espandi</string>
+    <string name="house_shrink_title" formatted="false">Contrai</string>
+    <string name="house_shrink_hint" formatted="false">Rimpicciolisce la stanza di una riga di celle. I materiali usati verranno restituiti e i mobili spostati in magazzino.</string>
+    <string name="house_error_min_size" formatted="false">Una stanza non può essere più piccola di 3x3.</string>
     <string name="house_dir_north">Nord</string>
     <string name="house_dir_south">Sud</string>
     <string name="house_dir_east">Est</string>
     <string name="house_dir_west">Ovest</string>
     <string name="house_floor_title">Pavimento</string>
-    <string name="house_floor_dark">Parquet scuro</string>
-    <string name="house_floor_brick">Mattonelle</string>
+    <string name="house_floor_dark" formatted="false">Parquet</string>
+    <string name="house_floor_brick" formatted="false">Mattonelle</string>
     <string name="house_floor_brick_locked">Mattonelle (Liv. %1$d)</string>
-    <string name="house_cat_furniture">Mobili</string>
-    <string name="house_cat_walls">Muri</string>
-    <string name="house_cat_wealth">Ricchezze</string>
+    <string name="house_cat_furniture" formatted="false">Mobili</string>
+    <string name="house_cat_walls" formatted="false">Mura</string>
+    <string name="house_cat_wealth" formatted="false">Ricchezze</string>
     <string name="house_item_wall_v">Muro (verticale)</string>
     <string name="house_item_wall_h">Muro (orizzontale)</string>
     <string name="house_cat_wall">Decorazioni</string>
@@ -1585,9 +1588,9 @@
     <!-- ===== Carnival ===== -->
     <string name="carnival_title">Fiera</string>
     <string name="carnival_desc">Giochi, premi e allegria!</string>
-    <string name="carnival_prize_xp_lamp_small_name">Piccola Lampada XP</string>
+    <string name="carnival_prize_xp_lamp_small_name">Lampada XP (Piccola)</string>
     <string name="carnival_prize_xp_lamp_small_desc">Fornisce 10.000 XP ad una abilità a scelta.</string>
-    <string name="carnival_prize_xp_lamp_large_name">Grande Lampada XP</string>
+    <string name="carnival_prize_xp_lamp_large_name">Lampada XP (Grande)</string>
     <string name="carnival_prize_xp_lamp_large_desc">Fornisce 50.000 XP ad una abilità a scelta.</string>
     <string name="carnival_ticket_balance">Biglietti: %1$d</string>
     <string name="carnival_idle_tab">Giochi passivi</string>
@@ -1645,7 +1648,7 @@
     <string name="carnival_active_shell_desc">Osserva quale bicchiere nasconde la gemma, poi sceglilo dopo essere stato mischiato con gli altri!</string>
     <string name="carnival_shell_showing">Osserva bene — la gemma è nel bicchere %1$d</string>
     <string name="carnival_shell_watch">Osserva attentamente…</string>
-    <string name="carnival_shell_pick">Dove si trova la gemma??</string>
+    <string name="carnival_shell_pick">Dove si trova la gemma?</string>
     <string name="carnival_shell_won">Esatto! +%1$d biglietti</string>
     <string name="carnival_shell_missed">Peccato! La gemma era sotto il bicchere %1$d.</string>
     <string name="carnival_shell_locked">Migliora le giostre al Grado 1 per sbloccare</string>
@@ -1741,14 +1744,14 @@
 
     <!-- Session / queue messages (issue #596) -->
     <string name="skill_no_logs">Nessun tronco nell\'inventario</string>
-    <string name="skill_not_enough_rune_essence">Essenza di Rune insufficiente</string>
+    <string name="skill_not_enough_rune_essence">Essenza di Runa insufficiente</string>
     <string name="skill_not_enough_item">%1$s insufficiente</string>
     <string name="skill_not_enough_materials">Materiali insufficienti</string>
     <string name="skill_session_start_failed">Impossibile avviare la sessione: %1$s</string>
     <string name="skill_added_to_queue_activity">Aggiunto alla coda: %1$s — %2$s.</string>
     <string name="worker_already_busy">Il lavoratore è già occupato.</string>
     <string name="worker_not_enough_logs">Tronchi insufficienti.</string>
-    <string name="worker_not_enough_rune_essence">Essenza di Rune insufficiente.</string>
+    <string name="worker_not_enough_rune_essence">Essenza di Runa insufficiente.</string>
     <string name="worker_not_enough_materials">Materiali insufficienti.</string>
     <string name="shop_no_junk">Nessun oggetto da vendere</string>
     <string name="shop_sold_junk">Oggetti venduti per %1$s monete</string>
@@ -1756,8 +1759,8 @@
     <string name="shop_sold_old_equipment">Equipaggiamento obsoleto venduto per %1$s monete</string>
     <string name="shop_bulk_sell_total">Totale</string>
     <string name="shop_bulk_sell_confirm">Vendi tutto</string>
-    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
-    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">Ultime vendite in blocco</string>
+    <string name="shop_recent_bulk_sales_empty">Non hai ancora venduto niente in blocco.</string>
     <string name="shop_xp_boost_activated">Potenziamento XP 2× attivato per %1$d ore!</string>
     <string name="shop_xp_boost_already_active">Un potenziamento XP 2× è già attivo.</string>
     <string name="shop_xp_boost_weekly_limit">Limite di un potenziamento XP 2× a settimana. Di nuovo disponibile dopo il reset settimanale.</string>
@@ -1852,7 +1855,7 @@
     <string name="monument_not_enough_coins">Monete insufficienti.</string>
     <string name="title_patron_of_the_realm_name">Mecenate del Reame</string>
     <string name="title_patron_of_the_realm_requirement">Completa il Grande Monumento</string>
-    <string name="item_gilded_full_helmet_name">Elmo Indorato</string>
+    <string name="item_gilded_full_helmet_name">Elmo Dorato</string>
     <string name="item_gilded_platebody_name">Corazza Dorata</string>
     <string name="item_gilded_kiteshield_name">Scudo Dorato</string>
     <string name="boss_coin_cap_remaining">Ricompense monetarie complete rimaste per questo boss: %1$d</string>
@@ -1967,8 +1970,8 @@
     <string name="seasonal_tap">Tocca!</string>
     <string name="seasonal_claim">Riscatta</string>
     <string name="seasonal_bounty_cooldown">Nuova missione in %1$dm %2$ds</string>
-    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
-    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll">Cambia missione</string>
+    <string name="seasonal_bounty_reroll_confirm">Cambiare missione per %1$s monete? Perderai i progressi fatti finora.</string>
     <string name="seasonal_go">Vai</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Pinnacolo del Solstizio</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Hai partecipato all\'evento Pinnacolo del Solstizio 2026</string>
@@ -2177,7 +2180,7 @@
     <string name="pet_solstice_sprite_desc">Uno spirito infuocato proveniente dal Pinnacolo del Solstizio. Migliora le tue doti in battaglia.</string>
     <string name="pet_lantern_wisp_name">Spirito della lanterna</string>
     <string name="pet_lantern_wisp_desc">Una lanterna vivente fuggita al controllo del Re Vacuo, ora illumina il tuo cammino.</string>
-    <string name="pet_grave_sprout_name">Germoglio della fossa</string>
+    <string name="pet_grave_sprout_name">Germoglio Tombale</string>
     <string name="pet_grave_sprout_desc">Questa pianticella ha messo radici in un cumulo di terra abbandonato. Sa il fatto suo su come si sopravvive.</string>
     <string name="pet_golden_goose_name">Oca d\'oro</string>
     <string name="pet_golden_goose_desc">Oca d\'alto lignaggio che siede in cima al Monumento d\'orato. Le monete sembrano arrivare a lei da sole.</string>

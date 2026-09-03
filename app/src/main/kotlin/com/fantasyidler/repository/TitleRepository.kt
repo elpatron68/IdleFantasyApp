@@ -7,6 +7,7 @@ import com.fantasyidler.R
 import com.fantasyidler.data.db.dao.QuestProgressDao
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.ui.viewmodel.TitleCatalog
+import com.fantasyidler.util.GameStrings
 import javax.inject.Inject
 import javax.inject.Singleton
 

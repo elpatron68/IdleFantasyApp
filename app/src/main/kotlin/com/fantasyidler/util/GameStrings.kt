@@ -249,7 +249,7 @@ object GameStrings {
     fun raceNames(context: Context, races: List<String>): String =
         races.joinToString(" & ") { raceName(context, it) }
 
-    fun prestigePathDisplayName(context: Context, skill: String, pathKey: String) =
+    fun prestigePathName(context: Context, skill: String, pathKey: String) =
         context.stringByName("prestige_path_${skill}_${pathKey}")
             ?: context.stringByName("prestige_path_${pathKey}")
             ?: pathKey.toTitleCase()

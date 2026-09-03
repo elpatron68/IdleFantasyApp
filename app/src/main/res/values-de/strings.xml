@@ -461,6 +461,9 @@
 
 
 
+
+
+
     <string name="settings_lang_system">System</string>
     <string name="settings_save_data">Daten speichern</string>
     <string name="settings_export">Daten exportieren</string>
@@ -1889,7 +1892,7 @@
     <string name="merc_tier_seasoned">Veteran</string> <!-- untranslated -->
     <string name="merc_tier_elite">Champion</string> <!-- untranslated -->
     <string name="merc_stats">Ang %1$d Stä %2$d Ver %3$d LP %4$d</string>
-    <string name="merc_cost_per_day">%1$s coins</string> <!-- untranslated -->
+    <string name="merc_cost_per_day">%1$s Münzen</string>
     <string name="merc_bran_the_sellsword_name">Bran der Söldner</string>
     <string name="merc_wren_the_stray_name">Wren die Verirrte</string>
     <string name="merc_tam_the_grey_name">Tam der Graue</string>
@@ -1949,12 +1952,12 @@
     <string name="seasonal_bounty_board_title">Aufgabenbrett</string>
     <string name="seasonal_expedition_title">Entdeckungsreise</string>
     <string name="seasonal_go_to_combat">Zum Kampf</string>
-    <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
-    <string name="treasure_open">Open</string> <!-- untranslated -->
-    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
-    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
-    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
-    <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
+    <string name="treasure_open_message">Mach es auf, um Münzen und vielleicht sogar Edelsteine zu finden.</string>
+    <string name="treasure_open">Öffnen</string>
+    <string name="treasure_open_one">1 Öffnen</string>
+    <string name="treasure_open_all">Alle öffnen (%1$d)</string>
+    <string name="treasure_open_result">%1$d geöffnet: +%2$s Münzen</string>
+    <string name="treasure_open_result_gems">%1$d geöffnet: +%2$s Münzen und %3$d Edelsteine</string>
     <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
     <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">Trefft %1$d von %2$d Glutfunken, bevor sie verschwinden!</string>

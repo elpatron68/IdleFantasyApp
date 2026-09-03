@@ -262,15 +262,8 @@ def item_desc(item: str) -> str:
     return item_description
 
 
-def _standard_string_resolution(
-    value: str,
-    key_string: str,
-    warn_category: str,
-    warning_type: str,
-    expected_file: str = "strings.xml",
-    missing_element: str = "name",
-    default_value: str | None = None,
-) -> str:
+def _standard_string_resolution(value: str, key_string: str, warn_category: str, warning_type: str, expected_file: str = "strings.xml",
+    missing_element: str = "name", default_value: str | None = None) -> str:
     value_title = STRINGS.get_string(key_string.format(value)) if key_string.format(value) in STRINGS else None
     if value_title is None:
         LOGGER.warn_by_id(f"{warn_category}:{value}", default_warning(value, warning_type, expected_file, missing_element))
@@ -284,6 +277,10 @@ def skill_name(skill: str) -> str:
 
 def skill_desc(skill: str) -> str:
     return _standard_string_resolution(skill, "skill_{}_desc", "skill_desc", "skill", "strings_skills.xml", "description", "")
+
+
+def slot_name(slot: str) -> str:
+    return _standard_string_resolution(slot, "equip_slot_{}", "slot_name", "equip slot", "strings_game.xml")
 
 
 def enemy_name(enemy: str) -> str:

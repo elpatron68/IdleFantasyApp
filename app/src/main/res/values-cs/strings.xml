@@ -65,15 +65,15 @@
     <string name="label_bosses">Bossové</string>
     <string name="label_by_location">Podle místa</string>
     <string name="bestiary_not_encountered">Dosud nepotkán</string>
-    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
+    <string name="bestiary_qty_header">Množství</string>
     <string name="bestiary_chance_header">Šance</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
     <string name="achievements_progress_bar">obtained</string>
     <string name="bestiary_progress_bar">potkáno</string>
-    <string name="bestiary_always_drops">Always Drops</string> <!-- untranslated -->
-    <string name="bestiary_rare_drops">Rare Drops</string> <!-- untranslated -->
+    <string name="bestiary_always_drops">Vždy dává</string>
+    <string name="bestiary_rare_drops">Výjimečně dává</string>
     <string name="bestiary_common_loot">Běžná kořist</string>
-    <string name="bestiary_pet_drop">Pet Drop</string> <!-- untranslated -->
+    <string name="bestiary_pet_drop">Zvířátko</string>
     <string name="bestiary_atk_def">Útk Obr</string>
     <string name="bestiary_str_def">Síl Obr</string>
     <string name="bestiary_rng_def">Dál Obr</string>
@@ -102,13 +102,13 @@
     <string name="label_coming_soon">Již brzy</string>
     <string name="label_time_remaining">Zbývající čas</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
+    <string name="duration_years">%1$dr</string>
     <string name="duration_months">%1$dměs</string>
     <string name="duration_weeks">%1$dt</string>
-    <string name="duration_days">%1$dd</string> <!-- untranslated -->
-    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
+    <string name="duration_days">%1$dd</string>
+    <string name="duration_hours">%1$dh</string>
+    <string name="duration_minutes">%1$dm</string>
+    <string name="duration_seconds">%1$ds</string>
     <string name="duration_complete">Dokončeno</string>
     <string name="label_session_results">Výsledky sezení</string>
     <string name="label_xp_gained">Získané XP</string>
@@ -152,7 +152,7 @@
     <string name="label_available_quests">Dostupné</string>
     <string name="label_stats">Statistiky</string>
     <string name="label_skills">Dovednosti</string>
-    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
+    <string name="tab_label_with_count">%1$s (%2$d)</string>
     <string name="label_shop">Obchod</string>
     <string name="label_sell_items">Prodat předměty</string>
     <string name="label_total_level">Celková úroveň</string>
@@ -162,7 +162,7 @@
     <string name="label_inactive">Neaktivní</string>
     <string name="label_boost">Posílení</string>
     <string name="label_xp_boost">Posílení XP</string>
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string> <!-- untranslated -->
+    <string name="label_prestige_xp_boost">Bonus XP po povýšení</string>
     <string name="label_weapon">Zbraň</string>
     <string name="label_armour">Zbroj</string>
     <string name="label_food">Jídlo</string>
@@ -218,7 +218,7 @@
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
     <string name="format_skill_level">%1$s: Úroveň %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
-    <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="format_xp_boost_percent">+%1$d%% XP</string>
     <string name="format_coin_boost_percent">+%1$d%% mincí</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
@@ -229,9 +229,13 @@
 
     <!-- ===== Plurals ===== -->
     <plurals name="plural_level_ups">
-        <item quantity="one">%1$d level up</item>
-        <item quantity="other">%1$d level ups</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d úroveň nahoru</item>
+        <item quantity="other">%1$d úrovní nahoru</item>
+        <item quantity="zero">%1$d úrovní nahoru</item>
+        <item quantity="two">%1$d úrovně nahoru</item>
+        <item quantity="few">%1$d úrovně nahoru</item>
+        <item quantity="many">%1$d úrovní nahoru</item>
+    </plurals>
     <plurals name="plural_items">
         <item quantity="one">%1$d předmět</item>
         <item quantity="other">%1$d předmětů</item>
@@ -257,44 +261,48 @@
         <item quantity="other">%1$d zabití</item>
     </plurals>
     <plurals name="plural_quests_completed">
-        <item quantity="one">%1$d quest completed</item>
-        <item quantity="other">%1$d quests completed</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d úkol dokončen</item>
+        <item quantity="other">%1$d úkolů dokončeno</item>
+        <item quantity="zero">%1$d úkolů dokončeno</item>
+        <item quantity="two">%1$d úkoly dokončeny</item>
+        <item quantity="few">%1$d úkoly dokončeny</item>
+        <item quantity="many">%1$d úkolů dokončeno</item>
+    </plurals>
 
     <!-- ===== Error messages ===== -->
-    <string name="error_no_player">Could not load player data. Please restart the app.</string> <!-- untranslated -->
-    <string name="error_session_already_active">You already have an active session. Complete or abandon it first.</string> <!-- untranslated -->
+    <string name="error_no_player">Nelze nahrát data hráče. Restartujte prosím aplikaci.</string>
+    <string name="error_session_already_active">Už se účastníš jiné aktivity. Nejdřív ji dokonči, nebo opusť.</string>
     <string name="error_not_enough_coins">Nedostatek mincí.</string>
     <!-- Translator note: %1$s = item display name -->
-    <string name="error_not_enough_items">Not enough %1$s.</string> <!-- untranslated -->
+    <string name="error_not_enough_items">Nedostatek %1$s.</string>
     <!-- Translator note: %1$s = skill display name -->
-    <string name="error_level_too_low">Your %1$s level is too low.</string> <!-- untranslated -->
+    <string name="error_level_too_low">Tvá úroveň %1$s je příliš nízká.</string>
     <!-- Translator note: %1$s = item display name -->
-    <string name="error_inventory_required">You need %1$s to do this.</string> <!-- untranslated -->
-    <string name="error_patch_occupied">This patch is already planted.</string> <!-- untranslated -->
-    <string name="error_patch_empty">This patch is empty.</string> <!-- untranslated -->
-    <string name="error_crop_not_ready">This crop is not ready yet.</string> <!-- untranslated -->
-    <string name="error_quest_active">You already have an active quest.</string> <!-- untranslated -->
-    <string name="error_quest_requirements_not_met">You don\'t meet the requirements for this quest.</string> <!-- untranslated -->
-    <string name="error_dungeon_level_too_low">Your combat level is too low for this dungeon.</string> <!-- untranslated -->
-    <string name="error_unknown">Something went wrong. Please try again.</string> <!-- untranslated -->
+    <string name="error_inventory_required">K dokončení potřebuješ %1$s.</string>
+    <string name="error_patch_occupied">Tento záhonek je již zasetý.</string>
+    <string name="error_patch_empty">Tento záhonek je prázdný.</string>
+    <string name="error_crop_not_ready">Úroda ještě není připravena.</string>
+    <string name="error_quest_active">Již máš aktivní úkol.</string>
+    <string name="error_quest_requirements_not_met">Pro tento úkol nesplňuješ požadavky.</string>
+    <string name="error_dungeon_level_too_low">Pro tuto výpravu potřebuješ vyšší bojovou úroveň.</string>
+    <string name="error_unknown">Něco se pokazilo. Zkus to prosím znovu.</string>
 
     <!-- ===== Session dialogs ===== -->
     <string name="session_abandon_title">Opustit sezení?</string>
-    <string name="session_abandon_body">All progress from this session will be lost.</string> <!-- untranslated -->
+    <string name="session_abandon_body">Veškeré výnosy z této aktivity se ztratí.</string>
 
     <!-- ===== Onboarding ===== -->
     <string name="onboarding_welcome_title">Vítej v Idle Fantasy</string>
-    <string name="onboarding_welcome_body">Start a skill session and watch your character grow. Sessions run for one hour, even when the app is closed.</string> <!-- untranslated -->
-    <string name="onboarding_first_session_hint">Tap any skill to get started.</string> <!-- untranslated -->
+    <string name="onboarding_welcome_body">Začni trénovat dovednost a sleduj, jak se zlepšuješ. Aktivita poběží jednu hodinu, i když aplikaci zavřeš.</string>
+    <string name="onboarding_first_session_hint">Pro začátek klepni na libovolnou dovednost.</string>
 
     <!-- ===== Settings ===== -->
     <string name="settings_title">Nastavení</string>
-    <string name="settings_notifications">Session Notifications</string> <!-- untranslated -->
-    <string name="settings_notifications_desc">Show an alert when your session completes</string> <!-- untranslated -->
-    <string name="settings_battery_optimization">Battery Optimization</string> <!-- untranslated -->
-    <string name="settings_battery_optimization_desc">Disable battery optimization for Idle Fantasy to receive timely session alerts</string> <!-- untranslated -->
-    <string name="settings_battery_optimization_btn">Adjust Setting</string> <!-- untranslated -->
+    <string name="settings_notifications">Oznámení o aktivitě</string>
+    <string name="settings_notifications_desc">Zobrazit upozornění, když aktivita skončí</string>
+    <string name="settings_battery_optimization">Optimalizace baterie</string>
+    <string name="settings_battery_optimization_desc">Vypni optimalizaci baterie, abys včas dostával upozornění na aktivity</string>
+    <string name="settings_battery_optimization_btn">Uprav nastavení</string>
     <string name="settings_language">Jazyk</string>
     <string name="settings_about">O hře</string>
     <string name="settings_open_source_licenses">Licence Open Source</string>
@@ -302,152 +310,152 @@
     <!-- ===== HomeScreen ===== -->
     <string name="label_player_stats">Statistiky hráče</string>
     <string name="label_combat_level">Bojová úroveň</string>
-    <string name="label_shop_desc">Buy equipment and sell loot</string> <!-- untranslated -->
-    <string name="label_no_session_hint">Head to Skills or Combat to start training.</string> <!-- untranslated -->
-    <string name="label_recent_activity">Recent Activity</string> <!-- untranslated -->
-    <string name="settings_profile_layout">Profile Layout</string> <!-- untranslated -->
-    <string name="settings_profile_layout_desc">Choose between a sidebar rail or top tabs</string> <!-- untranslated -->
-    <string name="settings_profile_layout_rail">Rail</string> <!-- untranslated -->
-    <string name="settings_profile_layout_tabs">Tabs</string> <!-- untranslated -->
-    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
-    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
-    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
-    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
-    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
-    <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->
-    <string name="settings_home_screen_desc">Choose what appears on the home screen</string> <!-- untranslated -->
-    <string name="settings_recent_activity">Recent Activity Log</string> <!-- untranslated -->
-    <string name="settings_recent_activity_desc">Show Recent Activity button in the home screen header</string> <!-- untranslated -->
-    <string name="settings_journal_button">Journal Button</string> <!-- untranslated -->
-    <string name="settings_journal_button_desc">Show a Journal button in the home screen\'s top bar for jotting down notes</string> <!-- untranslated -->
-    <string name="settings_seasonal_events">Seasonal Events</string> <!-- untranslated -->
-    <string name="settings_seasonal_events_desc">Show the active Seasonal Event banner on the home screen</string> <!-- untranslated -->
-    <string name="settings_collapsible_town_grid">Collapsible Town Grid</string> <!-- untranslated -->
-    <string name="settings_collapsible_town_grid_desc">Show the Town section (Shop, Inn, Guild, etc.) as a card you can collapse on the home screen</string> <!-- untranslated -->
-    <string name="settings_character_viewer">Character Viewer</string> <!-- untranslated -->
-    <string name="settings_character_viewer_desc">Show your character sprite on the home screen</string> <!-- untranslated -->
-    <string name="settings_stats_bar">Stats Bar</string> <!-- untranslated -->
-    <string name="settings_stats_bar_desc">Show Combat Level, Total Level, and Coins on the home screen</string> <!-- untranslated -->
-    <string name="settings_session_end_time">Session End Time</string> <!-- untranslated -->
-    <string name="settings_session_end_time_desc">Show the predicted completion clock time next to session and queue countdowns</string> <!-- untranslated -->
-    <string name="label_no_sessions_yet">No sessions completed yet.</string> <!-- untranslated -->
+    <string name="label_shop_desc">Nakup vybavení a prodej kořist</string>
+    <string name="label_no_session_hint">Pro začátek tréninku jdi do Dovedností nebo Boje.</string>
+    <string name="label_recent_activity">Poslední aktivity</string>
+    <string name="settings_profile_layout">Rozložení profilu</string>
+    <string name="settings_profile_layout_desc">Zvol si mezi postranní lištou, nebo horními záložkami</string>
+    <string name="settings_profile_layout_rail">Lišta</string>
+    <string name="settings_profile_layout_tabs">Záložky</string>
+    <string name="settings_quest_dots">Upozornění na úkol na dovednostech</string>
+    <string name="settings_quest_dots_desc">Zobrazit zlatou tečku na dovednostech, kde jsou možné úkoly</string>
+    <string name="settings_prestige_notifications">Upozornění na možné povýšení</string>
+    <string name="settings_prestige_notifications_desc">Zobrazit upozornění v navigaci, když je dovednost připravena k povýšení</string>
+    <string name="label_switch_character">Přepnout postavu</string>
+    <string name="settings_daily_reset_time">Denní čas obnovy</string>
+    <string name="settings_daily_reset_time_desc">Určuje, kdy se podle tvého místního času obnoví denní úkoly, denní úkoly cechu a týdenní úkoly. Změna nastavení nevyvolá další obnovu.</string>
+    <string name="settings_compact_numbers">Úsporný zápis čísel</string>
+    <string name="settings_compact_numbers_desc">Zkracovat velká množství předmětů (např. 2,46 M místo 2 461 940).</string>
+    <string name="settings_home_screen">Domovská obrazovka</string>
+    <string name="settings_home_screen_desc">Zvol si, co se zobrazí na domovské obrazovce</string>
+    <string name="settings_recent_activity">Přehled posledních aktivit</string>
+    <string name="settings_recent_activity_desc">Zobrazit tlačítko Nedávné aktivity v záhlaví domovské obrazovky.</string>
+    <string name="settings_journal_button">Tlačítko Zápisník</string>
+    <string name="settings_journal_button_desc">Zobrazit tlačítko Zápisník v horní liště domovské obrazovky pro zapisování poznámek.</string>
+    <string name="settings_seasonal_events">Sezónní akce</string>
+    <string name="settings_seasonal_events_desc">Zobrazit probíhající sezónní akci na domovské obrazovce.</string>
+    <string name="settings_collapsible_town_grid">Sbalitelná karta Město</string>
+    <string name="settings_collapsible_town_grid_desc">Zobrazit sekci Město (obchod, hostinec, cech apod.) jako sbalitelnou kartu na domovské obrazovce.</string>
+    <string name="settings_character_viewer">Prohlížeč postavy</string>
+    <string name="settings_character_viewer_desc">Zobrazit obrázek postavy na domovské obrazovce</string>
+    <string name="settings_stats_bar">Statistiky</string>
+    <string name="settings_stats_bar_desc">Zobrazit bojovou úroveň, celkovou úroveň a zlaté na domovské obrazovce</string>
+    <string name="settings_session_end_time">Konec aktivity</string>
+    <string name="settings_session_end_time_desc">Zobrazit předpokládaný čas dokončení vedle odpočtu aktivity a fronty</string>
+    <string name="label_no_sessions_yet">Zatím nebyla dokončena žádná aktivita.</string>
 
     <!-- ===== CombatScreen ===== -->
-    <string name="label_dungeons_tab">Dungeons</string> <!-- untranslated -->
-    <string name="btn_fight">Fight!</string> <!-- untranslated -->
+    <string name="label_dungeons_tab">Výpravy</string>
+    <string name="btn_fight">Boj!</string>
 
     <!-- ===== SkillsScreen ===== -->
-    <string name="btn_back_arrow">← Back</string> <!-- untranslated -->
-    <string name="btn_start_burying">Start Burying</string> <!-- untranslated -->
-    <string name="btn_start_crafting">Start Crafting</string> <!-- untranslated -->
-    <string name="btn_select">Select</string> <!-- untranslated -->
-    <string name="label_special">Special</string> <!-- untranslated -->
+    <string name="btn_back_arrow">← Zpět</string>
+    <string name="btn_start_burying">Začít pohřbívat</string>
+    <string name="btn_start_crafting">Začít vyrábět</string>
+    <string name="btn_select">Zvolit</string>
+    <string name="label_special">Zvláštní</string>
 
     <!-- ===== QuestsScreen ===== -->
-    <string name="label_claim_reward">Claim Reward</string> <!-- untranslated -->
-    <string name="label_daily">Daily</string> <!-- untranslated -->
-    <string name="label_weekly">Weekly</string> <!-- untranslated -->
-    <string name="label_daily_quests">Daily Quests</string> <!-- untranslated -->
-    <string name="label_daily_reset">Resets at %1$s</string> <!-- untranslated -->
-    <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
-    <string name="weekly_bonus_title">Weekly Bonus!</string> <!-- untranslated -->
-    <string name="weekly_bonus_claim">Claim Weekly Bonus</string> <!-- untranslated -->
-    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
-    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string> <!-- untranslated -->
-    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string> <!-- untranslated -->
-    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
-    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string> <!-- untranslated -->
-    <string name="label_hide_completed">Hide completed</string> <!-- untranslated -->
+    <string name="label_claim_reward">Vyzvednout odměnu</string>
+    <string name="label_daily">Denní</string>
+    <string name="label_weekly">Týdenní</string>
+    <string name="label_daily_quests">Denní úkoly</string>
+    <string name="label_daily_reset">Obnoví se v %1$s</string>
+    <string name="label_weekly_reset">Obnoví se v pondělí v %1$s</string>
+    <string name="weekly_bonus_title">Týdenní bonus!</string>
+    <string name="weekly_bonus_claim">Vyzvednout týdenní bonus</string>
+    <string name="label_daily_info_pity">Za každý denní úkol získáš zlaté. Při každém úkolu máš také šanci 1 ku %1$d získat kus trpasličího vybavení, který ještě nemáš. Pokud při vyzvednutí odměny žádný nezískáš, šance se zvýší. Po získání vybavení se vrátí na 1 ku 100.</string>
+    <string name="label_daily_info_complete">Za každý denní úkol získáš zlaté. Už máš všechny kusy trpasličího vybavení!</string>
+    <string name="label_weekly_info">Za každou týdenní výzvu získáš zlaté podle požadované úrovně. Dokonči všech pět a získej bonus: 100 000 zlatých, nebo šanci %1$s na kus božského vybavení.</string>
+    <string name="label_weekly_info_complete">Za každou týdenní výzvu získáš zlaté podle požadované úrovně. Dokonči všech pět a získej bonus 100 000 zlatých. Všechny kusy božského vybavení už máš!</string>
+    <string name="label_daily_reward_pity">2 000 zlatých (1/%1$d: trpasličí vybavení)</string>
+    <string name="label_daily_reward_complete">2 000 zlatých</string>
+    <string name="msg_daily_claimed_coins">Denní úkol splněn! +2 000 zlatých.</string>
+    <string name="msg_daily_claimed_dwarven">Denní úkol splněn! Získáváš: %1$s!</string>
+    <string name="label_hide_completed">Skryj dokončené</string>
 
     <!-- ===== OnboardingScreen ===== -->
-    <string name="onboarding_lets_go">Let\'s go!</string> <!-- untranslated -->
-    <string name="onboarding_skip">Skip</string> <!-- untranslated -->
-    <string name="onboarding_next">Next</string> <!-- untranslated -->
+    <string name="onboarding_lets_go">Jdeme na to!</string>
+    <string name="onboarding_skip">Přeskočit</string>
+    <string name="onboarding_next">Další</string>
 
     <!-- ===== Settings ===== -->
-    <string name="settings_notifications_header">Notifications</string> <!-- untranslated -->
-    <string name="settings_performance_header">Performance</string> <!-- untranslated -->
-    <string name="settings_general_header">General</string> <!-- untranslated -->
-    <string name="settings_tutorial_title">Tutorial</string> <!-- untranslated -->
-    <string name="settings_tutorial_desc">Show the introduction again</string> <!-- untranslated -->
-    <string name="settings_reopen">Reopen</string> <!-- untranslated -->
-    <string name="settings_changelog_title">What\'s New</string> <!-- untranslated -->
-    <string name="settings_changelog_desc">View the latest update changes</string> <!-- untranslated -->
-    <string name="settings_changelog_btn">View</string> <!-- untranslated -->
-    <string name="settings_foss_desc">Idle Fantasy is free and open source software.</string> <!-- untranslated -->
-    <string name="settings_reset_title">Reset Progression</string> <!-- untranslated -->
-    <string name="settings_reset_desc">Erase all skills, items, quests, and coins</string> <!-- untranslated -->
-    <string name="settings_reset_btn">Reset</string> <!-- untranslated -->
-    <string name="reset_confirm1_title">Reset all progression?</string> <!-- untranslated -->
-    <string name="reset_confirm1_body">This will erase all skill XP, items, coins, and quest progress. This cannot be undone.</string> <!-- untranslated -->
-    <string name="reset_confirm2_title">Are you sure?</string> <!-- untranslated -->
-    <string name="reset_confirm2_body">Everything will be lost. You will start over from scratch.</string> <!-- untranslated -->
-    <string name="reset_confirm2_btn">Yes, reset everything</string> <!-- untranslated -->
+    <string name="settings_notifications_header">Oznámení</string>
+    <string name="settings_performance_header">Výkon</string>
+    <string name="settings_general_header">Obecné</string>
+    <string name="settings_tutorial_title">Průvodce</string>
+    <string name="settings_tutorial_desc">Zobraz znovu úvod</string>
+    <string name="settings_reopen">Znovu otevřít</string>
+    <string name="settings_changelog_title">Co je nového</string>
+    <string name="settings_changelog_desc">Zobrazit změny v poslední aktualizaci</string>
+    <string name="settings_changelog_btn">Zobrazit</string>
+    <string name="settings_foss_desc">Idle Fantasy je svobodná hra s otevřeným zdrojovým kódem, dostupná zdarma.</string>
+    <string name="settings_reset_title">Resetovat postup</string>
+    <string name="settings_reset_desc">Smazat všechny dovednosti, předměty, úkoly a zlaté.</string>
+    <string name="settings_reset_btn">Reset</string>
+    <string name="reset_confirm1_title">Smazat veškerý postup?</string>
+    <string name="reset_confirm1_body">Nenávratně smažeš všechny XP dovedností, předměty, zlaté a postup v úkolech. Tuto akci nelze vrátit zpět.</string>
+    <string name="reset_confirm2_title">Opravdu chceš pokračovat?</string>
+    <string name="reset_confirm2_body">Ztratíš veškerý postup a začneš znovu od začátku.</string>
+    <string name="reset_confirm2_btn">Ano, smazat vše</string>
 
     <!-- ===== Battery prompt dialog ===== -->
-    <string name="battery_prompt_title">Keep sessions running</string> <!-- untranslated -->
-    <string name="battery_prompt_body">For the best experience, allow Idle Fantasy to run in the background so you receive timely session notifications.</string> <!-- untranslated -->
-    <string name="battery_prompt_open_settings">Open Settings</string> <!-- untranslated -->
-    <string name="battery_prompt_dismiss">Not now</string> <!-- untranslated -->
+    <string name="battery_prompt_title">Ponechat aktivity spuštěné</string>
+    <string name="battery_prompt_body">Povol Idle Fantasy běžet na pozadí, aby ti včas chodila upozornění na dokončené aktivity.</string>
+    <string name="battery_prompt_open_settings">Otevřít nastavení</string>
+    <string name="battery_prompt_dismiss">Teď ne</string>
 
     <!-- ===== Easter egg ===== -->
-    <string name="dig_action">Dig</string> <!-- untranslated -->
-    <string name="dig_result">You dig deeper into the earth…</string> <!-- untranslated -->
+    <string name="dig_action">Kopat</string>
+    <string name="dig_result">Kopeš hlouběji do země…</string>
     <!-- Translator note: %1$d = total hole depth in metres -->
-    <string name="dig_depth_format">The hole is %1$d metres deep.</string> <!-- untranslated -->
+    <string name="dig_depth_format">Jáma je hluboká %1$d metrů.</string>
 
     <!-- ===== Settings — appearance / language / save data ===== -->
-    <string name="settings_appearance">Appearance</string> <!-- untranslated -->
-    <string name="settings_theme">Theme</string> <!-- untranslated -->
-    <string name="settings_theme_desc">Choose your preferred colour scheme</string> <!-- untranslated -->
-    <string name="settings_theme_dark">Dark</string> <!-- untranslated -->
-    <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
-    <string name="settings_theme_light">Light</string> <!-- untranslated -->
-    <string name="settings_theme_system">System</string> <!-- untranslated -->
-    <string name="settings_font_size">Font Size</string> <!-- untranslated -->
-    <string name="settings_font_tiny">Tiny</string> <!-- untranslated -->
-    <string name="settings_font_small">Small</string> <!-- untranslated -->
-    <string name="settings_font_normal">Normal</string> <!-- untranslated -->
-    <string name="settings_font_large">Large</string> <!-- untranslated -->
-    <string name="settings_font_huge">Huge</string> <!-- untranslated -->
-    <string name="settings_import_theme">Import themes</string> <!-- untranslated -->
-    <string name="settings_import_theme_desc">Import custom themes from a file</string> <!-- untranslated -->
-    <string name="settings_delete_theme_btn">Delete theme</string> <!-- untranslated -->
-    <string name="settings_theme_imported_ok">Theme file imported successfully</string> <!-- untranslated -->
-    <string name="settings_theme_imported_fail">Failed to import: invalid file</string> <!-- untranslated -->
-    <string name="settings_theme_editor">Theme editor</string> <!-- untranslated -->
-    <string name="theme_editor_new_btn">New theme</string> <!-- untranslated -->
-    <string name="theme_editor_edit_btn">Edit theme</string> <!-- untranslated -->
-    <string name="theme_editor_preview_header">Preview</string> <!-- untranslated -->
-    <string name="theme_editor_sample_title">Sample card</string> <!-- untranslated -->
-    <string name="theme_editor_sample_body">Body text and muted text on a surface</string> <!-- untranslated -->
-    <string name="theme_editor_sample_button">Button</string> <!-- untranslated -->
-    <string name="theme_editor_sample_error">Error text</string> <!-- untranslated -->
-    <string name="theme_editor_name_label">Theme name</string> <!-- untranslated -->
-    <string name="theme_editor_name_reserved">This name is reserved for an official theme</string> <!-- untranslated -->
-    <string name="theme_editor_overwrite_hint">Saving will replace \"%1$s\"</string> <!-- untranslated -->
-    <string name="theme_editor_base_label">Base style</string> <!-- untranslated -->
-    <string name="theme_editor_palette_header">Palette</string> <!-- untranslated -->
-    <string name="theme_editor_used_for">Used for: %1$s</string> <!-- untranslated -->
-    <string name="theme_editor_contrast_header">Contrast warnings</string> <!-- untranslated -->
-    <string name="theme_editor_low_contrast">%1$s is hard to read on %2$s (%3$s, needs 4.5)</string> <!-- untranslated -->
+    <string name="settings_appearance">Vzhled</string>
+    <string name="settings_theme">Motiv</string>
+    <string name="settings_theme_desc">Vyber si preferované barevné schéma.</string>
+    <string name="settings_theme_dark">Tmavé</string>
+    <string name="settings_theme_midnight">Půlnoční</string>
+    <string name="settings_theme_light">Světlé</string>
+    <string name="settings_theme_system">Systémové</string>
+    <string name="settings_font_size">Velikost písma</string>
+    <string name="settings_font_tiny">Drobná</string>
+    <string name="settings_font_small">Malá</string>
+    <string name="settings_font_normal">Normální</string>
+    <string name="settings_font_large">Velká</string>
+    <string name="settings_font_huge">Obrovská</string>
+    <string name="settings_import_theme">Importovat motivy</string>
+    <string name="settings_import_theme_desc">Importovat vlastní motivy ze souboru</string>
+    <string name="settings_delete_theme_btn">Smazat motiv</string>
+    <string name="settings_theme_imported_ok">Soubor s motivem byl úspěšně importován.</string>
+    <string name="settings_theme_imported_fail">Import se nezdařil: neplatný soubor.</string>
+    <string name="settings_theme_editor">Editor motivů</string>
+    <string name="theme_editor_new_btn">Nový motiv</string>
+    <string name="theme_editor_edit_btn">Upravit motiv</string>
+    <string name="theme_editor_preview_header">Náhled</string>
+    <string name="theme_editor_sample_title">Vzorová karta</string>
+    <string name="theme_editor_sample_body">Hlavní a tlumený text na ploše</string>
+    <string name="theme_editor_sample_button">Tlačítko</string>
+    <string name="theme_editor_sample_error">Chybový text</string>
+    <string name="theme_editor_name_label">Název motivu</string>
+    <string name="theme_editor_name_reserved">Tento název je vyhrazen pro oficiální motiv.</string>
+    <string name="theme_editor_overwrite_hint">Uložením nahradíš \"%1$s\".</string>
+    <string name="theme_editor_base_label">Základní styl</string>
+    <string name="theme_editor_palette_header">Paleta</string>
+    <string name="theme_editor_used_for">Použito pro: %1$s</string>
+    <string name="theme_editor_contrast_header">Upozornění na nedostatečný kontrast</string>
+    <string name="theme_editor_low_contrast">\"%1$s\" je na \"%2$s\" špatně čitelné (%3$s; vyžadováno: 4,5).</string>
     <string name="theme_editor_add_roles">Add colour roles</string> <!-- untranslated -->
-    <string name="theme_editor_hex_label">Hex colour (AARRGGBB)</string> <!-- untranslated -->
-    <string name="theme_editor_copy_hex">Copy hex colour</string> <!-- untranslated -->
-    <string name="theme_editor_paste_hex">Paste hex colour</string> <!-- untranslated -->
-    <string name="theme_editor_remove_colour">Remove colour</string> <!-- untranslated -->
-    <string name="theme_editor_save">Save theme</string> <!-- untranslated -->
-    <string name="theme_editor_export">Export</string> <!-- untranslated -->
-    <string name="theme_editor_saved_ok">Theme saved and applied</string> <!-- untranslated -->
-    <string name="theme_editor_exported_ok">Theme exported</string> <!-- untranslated -->
-    <string name="settings_language_desc">Override the app display language</string> <!-- untranslated -->
+    <string name="theme_editor_hex_label">Hex barva (AARRGGBB)</string>
+    <string name="theme_editor_copy_hex">Kopírovat HEX barvu</string>
+    <string name="theme_editor_paste_hex">Vložit HEX barvu</string>
+    <string name="theme_editor_remove_colour">Odebrat barvu</string>
+    <string name="theme_editor_save">Uložit motiv</string>
+    <string name="theme_editor_export">Exportovat</string>
+    <string name="theme_editor_saved_ok">Motiv uložen a nastaven</string>
+    <string name="theme_editor_exported_ok">Motiv exportován</string>
+    <string name="settings_language_desc">Použít vlastní jazyk aplikace</string>
 
 
 
@@ -465,55 +473,58 @@
 
 
 
-    <string name="settings_lang_system">System</string> <!-- untranslated -->
-    <string name="settings_save_data">Save Data</string> <!-- untranslated -->
-    <string name="settings_export">Export Save</string> <!-- untranslated -->
-    <string name="settings_export_desc">Save your progress to a file</string> <!-- untranslated -->
-    <string name="settings_export_btn">Export</string> <!-- untranslated -->
-    <string name="settings_import">Import Save</string> <!-- untranslated -->
-    <string name="settings_import_desc">Restore progress from a file</string> <!-- untranslated -->
-    <string name="settings_import_btn">Import</string> <!-- untranslated -->
-    <string name="settings_source_code">Source Code</string> <!-- untranslated -->
-
-    <string name="settings_source_open">Open</string> <!-- untranslated -->
 
 
 
+    <string name="settings_lang_system">Systémový</string>
+    <string name="settings_save_data">Uložit data</string>
+    <string name="settings_export">Exportovat uloženou hru</string>
+    <string name="settings_export_desc">Uložit pokrok do souboru</string>
+    <string name="settings_export_btn">Exportovat</string>
+    <string name="settings_import">Importovat uloženou hru</string>
+    <string name="settings_import_desc">Obnovit pokrok ze souboru</string>
+    <string name="settings_import_btn">Importovat</string>
+    <string name="settings_source_code">Zdrojový kód</string>
 
-    <string name="settings_exported_ok">Save exported</string> <!-- untranslated -->
-    <string name="settings_imported_ok">Save imported successfully</string> <!-- untranslated -->
-    <string name="settings_imported_fail">Failed to import — invalid file</string> <!-- untranslated -->
-    <string name="settings_backup_title">Automatic Backup</string> <!-- untranslated -->
-    <string name="settings_backup_folder">Backup Folder</string> <!-- untranslated -->
-    <string name="settings_backup_no_folder">No folder selected</string> <!-- untranslated -->
-    <string name="settings_backup_choose">Choose</string> <!-- untranslated -->
-    <string name="settings_backup_frequency">Frequency</string> <!-- untranslated -->
-    <string name="settings_backup_off">Off</string> <!-- untranslated -->
-    <string name="settings_backup_hourly">Hourly</string> <!-- untranslated -->
-    <string name="settings_backup_daily">Daily</string> <!-- untranslated -->
-    <string name="settings_backup_weekly">Weekly</string> <!-- untranslated -->
-    <string name="settings_backup_at_5am">at 5:00 AM</string> <!-- untranslated -->
-    <string name="settings_backup_now">Back Up Now</string> <!-- untranslated -->
-    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
-    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
-    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
-    <string name="settings_backup_success">Backup saved.</string> <!-- untranslated -->
-    <string name="settings_backup_failed">Backup failed.</string> <!-- untranslated -->
-    <string name="settings_backup_folder_set">Backup folder set.</string> <!-- untranslated -->
+    <string name="settings_source_open">Otevřít</string>
+
+
+
+
+    <string name="settings_exported_ok">Hra uložena</string>
+    <string name="settings_imported_ok">Hra úspěšně načtena</string>
+    <string name="settings_imported_fail">Načtení selhalo - neplatný soubor</string>
+    <string name="settings_backup_title">Automatická záloha</string>
+    <string name="settings_backup_folder">Složka zálohy</string>
+    <string name="settings_backup_no_folder">Nebyla vybrána žádná složka</string>
+    <string name="settings_backup_choose">Vybrat</string>
+    <string name="settings_backup_frequency">Četnost</string>
+    <string name="settings_backup_off">Vypnuto</string>
+    <string name="settings_backup_hourly">Každou hodinu</string>
+    <string name="settings_backup_daily">Denně</string>
+    <string name="settings_backup_weekly">Týdně</string>
+    <string name="settings_backup_at_5am">v 5:00 ráno</string>
+    <string name="settings_backup_now">Zálohovat teď</string>
+    <string name="settings_backup_status">Poslední záloha</string>
+    <string name="settings_backup_never">Nikdy nezálohováno</string>
+    <string name="settings_backup_failed_with">Selhalo: %1$s</string>
+    <string name="settings_backup_success">Záloha uložena.</string>
+    <string name="settings_backup_failed">Záloha se nezdařila.</string>
+    <string name="settings_backup_folder_set">Nastavena složka pro zálohu.</string>
 
     <!-- ===== HomeScreen ===== -->
-    <string name="home_town_title">Town</string> <!-- untranslated -->
-    <string name="home_town_desc">Visit the shop, inn, guild, church, builder\'s workshop, slayer master, and carnival</string> <!-- untranslated -->
-    <string name="guild_not_unlocked">Not yet unlocked</string> <!-- untranslated -->
+    <string name="home_town_title">Město</string>
+    <string name="home_town_desc">Navštiv obchod, krčmu, cech, kostel, městskou výstavbu, popravčího a karneval</string>
+    <string name="guild_not_unlocked">Ještě nebylo odemčeno</string>
     <string name="guild_dailies_done_today">Dailies done today</string> <!-- untranslated -->
-    <string name="guild_dailies_remaining_today">%1$d left today</string> <!-- untranslated -->
-    <string name="guild_do_dailies_hint">Do dailies to advance to the next rank</string> <!-- untranslated -->
-    <string name="guild_quest_gate_blocked">Complete quests to advance your rank</string> <!-- untranslated -->
-    <string name="guild_quest_required">Quest required to advance</string> <!-- untranslated -->
-    <string name="guild_progress_dailies_and_quest">Complete %1$d/%2$d daily requests &amp; quests to advance</string> <!-- untranslated -->
-    <string name="guild_progress_dailies_only">Complete %1$d/%2$d daily requests to advance</string> <!-- untranslated -->
-    <string name="home_died_message">You died and lost most of your gains.</string> <!-- untranslated -->
-    <string name="home_xp_boost_was_active">2× All skills XP was active</string> <!-- untranslated -->
+    <string name="guild_dailies_remaining_today">%1$d dnes zbývá</string>
+    <string name="guild_do_dailies_hint">Plň denní úkoly a postoupíš do další hodnosti</string>
+    <string name="guild_quest_gate_blocked">Plň úkoly a postoupíš do další hodnosti</string>
+    <string name="guild_quest_required">K postupu je nutné splnit úkol</string>
+    <string name="guild_progress_dailies_and_quest">Pro postup splň %1$d/%2$d denních zakázek a úkolů.</string>
+    <string name="guild_progress_dailies_only">Pro postup splň %1$d/%2$d denních zakázek.</string>
+    <string name="home_died_message">Zemřel jsi a ztratil jsi většinu získaného.</string>
+    <string name="home_xp_boost_was_active">Byl aktivní 2× bonus XP pro všechny dovednosti.</string>
     <string name="home_xp_boost_active">2× All skills XP - %1$s</string> <!-- untranslated -->
     <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
