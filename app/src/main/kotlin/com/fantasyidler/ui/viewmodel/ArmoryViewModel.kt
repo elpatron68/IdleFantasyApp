@@ -3,7 +3,6 @@ package com.fantasyidler.ui.viewmodel
 import com.fantasyidler.util.withAppLocale
 
 import android.content.Context
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
@@ -130,7 +129,7 @@ class ArmoryViewModel @Inject constructor(
             tree.paths.forEach { path ->
                 path.nodes.forEachIndexed { idx, node ->
                     val unlock = node.unlock ?: return@forEachIndexed
-                    val label = GameStrings.prestigePathDisplayName(context, skill, path.key) +
+                    val label = GameStrings.prestigePathName(context, skill, path.key) +
                         " " + (TIER_NUMERALS.getOrNull(idx) ?: (idx + 1).toString())
                     gates[unlock] = RecipeGate(label, node.races)
                 }

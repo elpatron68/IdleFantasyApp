@@ -775,7 +775,7 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="item_abyssal_rod_name">Asta Abissale</string>
+    <string name="item_abyssal_rod_name">Canna da Pesca Abissale</string>
     <string name="item_adamantite_arrow_tip_name">Punte di Freccia in Adamantio</string>
     <string name="item_adamantite_boots_name">Stivali in Adamantio</string>
     <string name="item_adamantite_chainbody_name">Cotta di Maglia in Adamantio</string>
@@ -1161,7 +1161,7 @@
     <string name="item_ironwood_axe_desc">Costruita con il legno degli alberi della Foresta Antica, più resistente di qualsiasi metallo.</string>
     <string name="item_dwarven_axe_desc">Leggendaria ascia nanica. Taglia ogni albero come fosse di burro.</string>
     <string name="item_sanctum_axe_desc">Creata all\'interno del Santuario Corrotto, la sua lama non incontra resistenza alcuna.</string>
-    <string name="item_blessed_fishing_rod_desc">Il suo corpo proviene da legno sacro proveniente dal Tempio Sommerso, che le correnti hanno trasportato per tutto il mondo.</string>
+    <string name="item_blessed_fishing_rod_desc">Il suo corpo proviene da legno sacro del Tempio Sommerso, che le correnti hanno trasportato per tutto il mondo.</string>
     <string name="item_dwarven_fishing_rod_desc">Canna da pesca di fattura nanica. Nessun pesce è troppo pesante.</string>
     <string name="item_abyssal_rod_desc">Ogni componente ha in sé una parte di potere del Vuoto. Costruita da entità ormai perdute nelle Rovine Abissali.</string>
     <string name="item_bronze_hoe_desc">Una zappa per i campi.</string>
@@ -1239,7 +1239,7 @@
     <string name="item_water_wave_name">Ondata dell\'Acqua</string>
     <string name="item_water_wave_desc">Sferra una potente onda d\'urto di elemento Acqua.</string>
     <string name="item_earth_strike_name">Colpo della Terra</string>
-    <string name="item_earth_strike_desc">A basic earth spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_earth_strike_desc">Semplice magia d\'elemento Terra.</string>
     <string name="item_earth_bolt_name">Dardo della Terra</string>
     <string name="item_earth_bolt_desc">A moderate earth spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_earth_blast_name">Esplosione della Terra</string>
@@ -1247,7 +1247,7 @@
     <string name="item_earth_wave_name">Ondata della Terra</string>
     <string name="item_earth_wave_desc">A devastating earth spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_fire_strike_name">Colpo del Fuoco</string>
-    <string name="item_fire_strike_desc">A basic fire spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_fire_strike_desc">Semplice magia d\'elemento Fuoco.</string>
     <string name="item_fire_bolt_name">Dardo del Fuoco</string>
     <string name="item_fire_bolt_desc">A moderate fire spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_fire_blast_name">Esplosione del Fuoco</string>
@@ -1255,7 +1255,7 @@
     <string name="item_fire_wave_name">Ondata del Fuoco</string>
     <string name="item_fire_wave_desc">A devastating fire spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_mind_strike_name">Colpo della Psiche</string>
-    <string name="item_mind_strike_desc">A basic mind spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_mind_strike_desc">Semplice magia d\'elemento Psiche.</string>
     <string name="item_mind_bolt_name">Dardo della Psiche</string>
     <string name="item_mind_bolt_desc">A moderate mind spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_mind_blast_name">Esplosione della Psiche</string>
@@ -1263,7 +1263,7 @@
     <string name="item_mind_wave_name">Ondata della Psiche</string>
     <string name="item_mind_wave_desc">A devastating mind spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_chaos_strike_name">Colpo del Caos</string>
-    <string name="item_chaos_strike_desc">A basic chaos spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_chaos_strike_desc">Semplice magia d\'elemento Caos.</string>
     <string name="item_chaos_bolt_name">Dardo del Caos</string>
     <string name="item_chaos_bolt_desc">A moderate chaos spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_chaos_blast_name">Esplosione del Caos</string>
@@ -1271,7 +1271,7 @@
     <string name="item_chaos_wave_name">Ondata del Caos</string>
     <string name="item_chaos_wave_desc">A devastating chaos spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_death_strike_name">Colpo della Morte</string>
-    <string name="item_death_strike_desc">A basic death spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_death_strike_desc">Semplice magia d\'elemento Morte.</string>
     <string name="item_death_bolt_name">Dardo della Morte</string>
     <string name="item_death_bolt_desc">A moderate death spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_death_blast_name">Esplosione della Morte</string>
@@ -1279,7 +1279,7 @@
     <string name="item_death_wave_name">Ondata della Morte</string>
     <string name="item_death_wave_desc">A devastating death spell that waves across your foe.</string> <!-- untranslated -->
     <string name="item_blood_strike_name">Colpo del Sangue</string>
-    <string name="item_blood_strike_desc">A basic blood spell that strikes your foe.</string> <!-- untranslated -->
+    <string name="item_blood_strike_desc">Semplice magia d\'elemento Sangue.</string>
     <string name="item_blood_bolt_name">Dardo del Sangue</string>
     <string name="item_blood_bolt_desc">A moderate blood spell that bolts your foe.</string> <!-- untranslated -->
     <string name="item_blood_blast_name">Esplosione del Sangue</string>

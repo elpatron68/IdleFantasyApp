@@ -122,7 +122,7 @@
     <string name="label_quantity">数量</string>
     <string name="label_price">价格</string>
     <string name="label_available">可用</string>
-    <string name="label_patch">版本</string>
+    <string name="label_patch">田地</string>
     <string name="label_growth_time">生长时间</string>
     <string name="label_ready_to_harvest">可以收获</string>
     <string name="label_empty">空</string>
@@ -212,7 +212,7 @@
     <!-- Translator note: %1$s = formatted XP amount -->
     <string name="format_xp_per_action">每次操作 %1$s 经验</string>
     <!-- Translator note: %1$d = patch number -->
-    <string name="format_patch_number">版本 %1$d</string>
+    <string name="format_patch_number">田地 %1$d</string>
     <!-- Translator note: %1$d = wins, %2$d = losses -->
     <string name="format_arena_record">%1$d 胜 / %2$d 负</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
@@ -245,8 +245,8 @@
         <item quantity="other">%1$d hours</item>
     </plurals>
     <plurals name="plural_patches">
-        <item quantity="one">%1$d patch</item>
-        <item quantity="other">%1$d patches</item>
+        <item quantity="one">%1$d 田地</item>
+        <item quantity="other">%1$d 田地</item>
     </plurals>
     <plurals name="plural_kills">
         <item quantity="one">%1$d kill</item>
@@ -267,8 +267,8 @@
     <string name="error_level_too_low">你的 %1$s 等级不足。</string>
     <!-- Translator note: %1$s = item display name -->
     <string name="error_inventory_required">你需要 %1$s 才能进行此操作。</string>
-    <string name="error_patch_occupied">这块地已经种了作物。</string>
-    <string name="error_patch_empty">这块地是空的。</string>
+    <string name="error_patch_occupied">这块田地已经种了作物。</string>
+    <string name="error_patch_empty">这块田地是空的。</string>
     <string name="error_crop_not_ready">作物还未成熟。</string>
     <string name="error_quest_active">你已有正在进行的任务。</string>
     <string name="error_quest_requirements_not_met">你未满足此任务的要求。</string>
@@ -307,8 +307,8 @@
     <string name="settings_profile_layout_tabs">标签页</string>
     <string name="settings_quest_dots">技能上的任务标记</string>
     <string name="settings_quest_dots_desc">在有可接任务的技能上显示金色圆点</string>
-    <string name="settings_prestige_notifications">威望通知徽章</string>
-    <string name="settings_prestige_notifications_desc">当技能可威望时在导航栏显示通知徽章</string>
+    <string name="settings_prestige_notifications">转生通知徽章</string>
+    <string name="settings_prestige_notifications_desc">当技能可转生时在导航栏显示通知徽章</string>
     <string name="label_switch_character">切换角色</string>
     <string name="settings_daily_reset_time">每日重置时间</string>
     <string name="settings_daily_reset_time_desc">每日任务、公会每日和每周任务的本地重置时间。更改不会获得额外的重置。</string>
@@ -461,6 +461,9 @@
 
 
 
+
+
+
     <string name="settings_lang_system">跟随系统</string>
     <string name="settings_save_data">存档数据</string>
     <string name="settings_export">导出存档</string>
@@ -564,7 +567,7 @@
     <string name="combat_log_enemy_miss">← %1$s 未命中</string>
     <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
     <string name="combat_log_heal">✚ 你食用了：+%1$d 生命</string>
-    <string name="combat_eat_threshold_warning">⚠ 食物即将耗尽</string>
+    <string name="combat_eat_threshold_warning">⚠ 有风险：阈值较低时，一次重击可能在角色进食前将你打到 0 生命值。</string>
     <string name="combat_rec_level">推荐战斗等级</string>
     <string name="combat_your_level">你的战斗等级</string>
     <string name="combat_no_strength_bonus">无（无力量加成）</string>
@@ -602,7 +605,7 @@
     <!-- Translator note: %1$d = gear bonus value -->
     <string name="combat_gear_bonus">+%1$d 装备</string>
     <!-- Translator note: %1$d = permanent prestige stat bonus value -->
-    <string name="combat_prestige_bonus">+%1$d 声望</string>
+    <string name="combat_prestige_bonus">+%1$d 转生</string>
 
     <!-- ===== ProfileScreen ===== -->
     <string name="profile_unnamed">无名冒险者</string>
@@ -643,12 +646,12 @@
     <string name="profile_stat_mining">采矿</string>
     <string name="profile_stat_wc">伐木</string>
     <string name="profile_stat_fishing">钓鱼</string>
-    <string name="profile_stat_farming">农耕</string>
+    <string name="profile_stat_farming">农业</string>
     <string name="profile_stat_smithing">锻造</string>
     <string name="profile_stat_firemaking">生火</string>
     <string name="profile_stat_agility">敏捷</string>
     <string name="profile_stat_cooking">烹饪</string>
-    <string name="profile_stat_thieving">偷窃</string>
+    <string name="profile_stat_thieving">盗窃</string>
     <string name="profile_stat_def">防御</string>
     <string name="profile_req_lv">需要等级</string>
 
@@ -857,9 +860,9 @@
     <string name="worker_journeyman">熟练工</string>
     <string name="worker_master">大师</string>
     <string name="inn_long_laborer_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，0.5倍效率，制作数量不限。他虽慢，但什么都肯干。</string>
-    <string name="inn_apprentice_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，1倍效率。制作、祈祷和制符每场最多480件。</string>
-    <string name="inn_journeyman_desc">每次雇佣完成一项任务，领取后遣散。6小时采集，1.5倍效率。制作、祈祷和制符每场最多540件。</string>
-    <string name="inn_master_desc">每次雇佣完成一项任务，领取后遣散。4小时采集，2.5倍效率。制作、祈祷和制符每场最多600件。</string>
+    <string name="inn_apprentice_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，1倍效率。制作、祈祷和制符每次训练最多480件。</string>
+    <string name="inn_journeyman_desc">每次雇佣完成一项任务，领取后遣散。6小时采集，1.5倍效率。制作、祈祷和制符每次训练最多540件。</string>
+    <string name="inn_master_desc">每次雇佣完成一项任务，领取后遣散。4小时采集，2.5倍效率。制作、祈祷和制符每次训练最多600件。</string>
     <string name="inn_gathering_note">采集：训练时长 × 效率倍率，影响战利品和经验</string>
     <string name="inn_crafting_note">制作/祈祷/制符：每阶有数量上限；长工无上限</string>
     <string name="worker_skills_title">工人：%1$s</string>
@@ -986,7 +989,7 @@
     <string name="guild_name_agility">敏捷公会</string>
     <string name="guild_name_smithing">锻造公会</string>
     <string name="guild_name_cooking">烹饪公会</string>
-    <string name="guild_name_fletching">箭术公会</string>
+    <string name="guild_name_fletching">制箭公会</string>
     <string name="guild_name_crafting">工艺公会</string>
     <string name="guild_name_runecrafting">制符公会</string>
     <string name="guild_name_herblore">草药公会</string>
@@ -997,8 +1000,8 @@
     <string name="guild_name_thieving">盗贼公会</string>
     <string name="guild_name_mercantile">商人公会</string>
     <string name="guild_name_construction">建筑公会</string>
-    <string name="guild_name_slayer">杀手公会</string>
-    <string name="guild_quest_desc_slayer_task">为 %2$s 完成 %1$d 个杀手任务。</string>
+    <string name="guild_name_slayer">讨伐公会</string>
+    <string name="guild_quest_desc_slayer_task">为 %2$s 完成 %1$d 个讨伐任务。</string>
     <string name="guild_quest_desc_slayer_kill">在杀手任务期间击败 %1$d 个敌人。</string>
 
     <!-- Mercantile skill -->
@@ -1478,7 +1481,7 @@
 
     <!-- Thieving skill -->
     <string name="skill_thieving_name">盗窃</string>
-    <string name="skill_thieving_desc">每回合对NPC进行扒窃。成功率取决于你的等级与目标等级的对比。失败会使你眩晕一回合。更高阶的目标可掉落稀有物品和大钱袋。</string>
+    <string name="skill_thieving_desc">每次训练对NPC进行扒窃。成功率取决于你的等级与目标等级的对比。失败会使你眩晕一回合。更高阶的目标可掉落稀有物品和大钱袋。</string>
     <string name="thieving_npc_detail">等级 %1$d • %2$d 经验 • %3$d%% 成功率</string>
     <string name="thieving_npc_coins">每次成功 %1$d–%2$d 金币</string>
 
@@ -1511,7 +1514,7 @@
     <string name="town_upgrade_fail_level">需要建造等级 %1$d</string>
     <string name="town_upgrade_fail_coins">金币不足</string>
     <string name="town_upgrade_fail_mats">缺少材料</string>
-    <string name="town_inn_active_bonus">每回合工人经验 +%1$d%%</string>
+    <string name="town_inn_active_bonus">每次训练工人经验 +%1$d%%</string>
     <string name="town_inn_no_bonus">升级后为工人提供经验加成</string>
     <string name="town_guild_active_bonus">公会任务需求 -%1$d%%</string>
     <string name="town_guild_no_bonus">升级后降低任务需求</string>
@@ -1572,14 +1575,14 @@
     <string name="carnival_title">嘉年华</string>
     <string name="carnival_desc">游戏、奖品和欢乐！</string>
     <string name="carnival_prize_xp_lamp_small_name">小型经验灯</string>
-    <string name="carnival_prize_xp_lamp_small_desc">一盏蕴含少量经验的魔法灯。</string>
+    <string name="carnival_prize_xp_lamp_small_desc">为指定技能增加 10,000 经验。</string>
     <string name="carnival_prize_xp_lamp_large_name">大型经验灯</string>
-    <string name="carnival_prize_xp_lamp_large_desc">一盏蕴含大量经验的魔法灯。</string>
+    <string name="carnival_prize_xp_lamp_large_desc">为指定技能增加 50,000 经验。</string>
     <string name="carnival_ticket_balance">门票：%1$d</string>
     <string name="carnival_idle_tab">挂机游戏</string>
     <string name="carnival_active_tab">主动游戏</string>
     <string name="carnival_shop_tab">奖品商店</string>
-    <string name="carnival_idle_hint">排队一次活动来赚取门票。相关技能等级越高，每回合获得的门票越多。</string>
+    <string name="carnival_idle_hint">排队一次活动来赚取门票。相关技能等级越高，每次活动获得的门票越多。</string>
     <string name="carnival_archery_range">射箭场</string>
     <string name="carnival_idle_desc_archery">射击移动靶。远程等级提升门票收益。</string>
     <string name="carnival_strongman_competition">力量竞赛</string>
@@ -1730,7 +1733,7 @@
     <string name="skill_not_enough_rune_essence">符文精华不足</string>
     <string name="skill_not_enough_item">%1$s 不足</string>
     <string name="skill_not_enough_materials">材料不足</string>
-    <string name="skill_session_start_failed">活动启动失败：%1$s</string>
+    <string name="skill_session_start_failed">训练启动失败：%1$s</string>
     <string name="skill_added_to_queue_activity">已加入队列：%1$s — %2$s。</string>
     <string name="worker_already_busy">工人正忙。</string>
     <string name="worker_not_enough_logs">原木不足。</string>
@@ -1767,7 +1770,7 @@
     <string name="pet_found_title">新宠物！</string>
     <string name="home_congratulations_received">恭喜！你获得了：%1$s</string>
     <!-- Translator note: shown when a session's rewards were voided (e.g. a level requirement changed mid-session) and any materials it consumed were refunded -->
-    <string name="home_session_voided">活动已作废——材料已退还</string>
+    <string name="home_session_voided">经验已作废（转生）。其余奖励照常发放。</string>
     <string name="home_not_enough_coins_repeat">金币不足，无法重复 %1$s。</string>
     <string name="home_not_enough_materials_repeat">材料不足，无法重复 %1$s。</string>
     <string name="combat_no_food_title">未装备食物</string>
@@ -1791,8 +1794,8 @@
     <string name="snackbar_added_to_queue">已加入队列：%1$s。</string>
     <string name="snackbar_queue_full">队列已满。</string>
     <string name="combat_start_failed">无法开始：%1$s</string>
-    <string name="skill_session_voided_prestige">你的 %1$s 等级不再满足此活动的要求（可能由于转生）——其奖励已作废，所用材料已退还。</string>
-    <string name="combat_session_voided_prestige">你的战斗等级不再满足此遭遇的要求（可能由于转生）——其奖励已作废。</string>
+    <string name="skill_session_voided_prestige">你的 %1$s 等级不再满足此训练的要求（可能由于转生）——其奖励已作废，所用材料已退还。</string>
+    <string name="combat_session_voided_prestige">转生后你的等级下降，本次训练的经验已作废，其余奖励照常发放。</string>
     <string name="combat_select_spell">进入前请先选择一个法术。</string>
     <string name="combat_spell_level_required">需要魔法等级 %1$d 才能使用 %2$s。</string>
     <string name="guild_daily_reward_claimed">每日奖励已领取！</string>
@@ -1813,7 +1816,7 @@
     <string name="monument_stage_3_name">雕像</string>
     <string name="monument_stage_4_name">镀金</string>
     <string name="monument_stage_5_name">永恒之火</string>
-    <string name="monument_stage_1_reward">+1 农田</string>
+    <string name="monument_stage_1_reward">+1 田地</string>
     <string name="monument_stage_2_reward">解锁每日纪念碑触摸</string>
     <string name="monument_stage_3_reward">教堂祝福延长6小时</string>
     <string name="monument_stage_4_reward" formatted="false">+1 action queue slot, and the Golden Goose takes roost (+10% coin drops)</string> <!-- untranslated -->
@@ -1841,10 +1844,10 @@
     <string name="item_gilded_full_helmet_name">镀金全罩头盔</string>
     <string name="item_gilded_platebody_name">镀金板甲</string>
     <string name="item_gilded_kiteshield_name">镀金鸢盾</string>
-    <string name="boss_coin_cap_remaining">今日该Boss金币掉落剩余：%1$d</string>
+    <string name="boss_coin_cap_remaining">今日该首领金币掉落剩余：%1$d</string>
     <string name="boss_coin_cap_spent">已花费金币上限</string>
     <string name="bestiary_coin_cap_label">%1$d 次击杀/天后</string>
-    <string name="session_note_boss_coin_cap">金币掉落减少（该Boss每日上限）</string>
+    <string name="session_note_boss_coin_cap">金币掉落减少（该首领每日上限）</string>
     <string name="guild_daily_button">公会每日</string>
     <string name="guild_daily_banner_claimable">可领取</string>
     <string name="guild_daily_banner_claimed">已领取</string>
@@ -2082,10 +2085,10 @@
     <string name="title_master_thief_requirement">完成所有盗窃任务</string>
     <string name="title_flamekeeper_name">守火人</string>
     <string name="title_flamekeeper_requirement">完成所有生火任务</string>
-    <string name="title_slayer_name">屠魔者</string>
-    <string name="title_slayer_requirement">完成所有屠魔任务</string>
+    <string name="title_slayer_name">讨伐者</string>
+    <string name="title_slayer_requirement">完成所有讨伐任务</string>
     <string name="title_godslayer_name">弑神者</string>
-    <string name="title_godslayer_requirement">至少击败每个突袭Boss一次</string>
+    <string name="title_godslayer_requirement">至少击败每个突袭首领一次</string>
     <string name="title_warlord_name">战争领主</string>
     <string name="title_warlord_requirement">在战士公会达到最高等级</string>
     <string name="title_marksman_name">神射手</string>
@@ -2106,14 +2109,14 @@
 
     <string name="settings_credit_characters_title">角色精灵</string>
     <string name="settings_credit_characters_subtitle">美术：Pixylac</string>
-    <string name="settings_credit_bosses_title">Boss精灵</string>
+    <string name="settings_credit_bosses_title">首领精灵</string>
     <string name="settings_credit_bosses_subtitle">美术：Meg</string>
     <string name="settings_credit_house_title">House Interiors</string> <!-- untranslated -->
 
     <string name="title_seasonal_champion_of">%1$s 冠军</string>
     <string name="title_seasonal_requirement">完成 %1$s 季节活动</string>
     <string name="home_welcome_greeting">欢迎回来，</string>
-    <string name="home_welcome_name">欢迎回来，%1$s</string>
+    <string name="home_welcome_name">%1$s</string>
     <string name="home_welcome_title">%1$s！</string>
 
     <!-- Pet names and descriptions -->
@@ -2194,7 +2197,7 @@
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">铁人</string>
-    <string name="character_ironman_desc">铁人模式</string>
+    <string name="character_ironman_desc">经验与产量加成被禁用，物品无法购买，工人无法雇佣。永久生效：创建后不可更改。编辑存档文件将移除铁人状态。</string>
     <string name="ironman_shop_buy_blocked">铁人角色无法购买物品。</string>
     <string name="ironman_inn_blocked">铁人角色无法雇用工人。</string>
     <string name="ironman_blessing_blocked">铁人角色只能接受防御祝福。</string>

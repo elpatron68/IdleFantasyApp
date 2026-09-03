@@ -89,41 +89,41 @@
     <string name="item_raw_lobster_desc">生龙虾。烹饪后食用。</string>
     <string name="item_raw_swordfish_name">生旗鱼</string>
     <string name="item_raw_swordfish_desc">生旗鱼。烹饪后食用。</string>
-    <string name="item_raw_monkfish_name">生 Monkfish</string>
-    <string name="item_raw_monkfish_desc">生 Monkfish。烹饪后食用。</string>
+    <string name="item_raw_monkfish_name">生安康鱼</string>
+    <string name="item_raw_monkfish_desc">生安康鱼。烹饪后食用。</string>
     <string name="item_raw_shark_name">生鲨鱼</string>
     <string name="item_raw_shark_desc">生鲨鱼。烹饪后食用。</string>
-    <string name="item_raw_sea_turtle_name">生海龟肉</string>
-    <string name="item_raw_sea_turtle_desc">生海龟肉。烹饪后食用。</string>
+    <string name="item_raw_sea_turtle_name">生海龟</string>
+    <string name="item_raw_sea_turtle_desc">生海龟。烹饪后食用。</string>
     <string name="item_raw_manta_ray_name">生蝠鲼</string>
     <string name="item_raw_manta_ray_desc">生蝠鲼。烹饪后食用。</string>
 
     <!-- ===== Cooked fish ===== -->
-    <string name="item_shrimp_name">虾</string>
+    <string name="item_shrimp_name">熟虾</string>
     <string name="item_shrimp_desc">烹熟的虾。恢复少量生命值。</string>
-    <string name="item_sardine_name">沙丁鱼</string>
+    <string name="item_sardine_name">熟沙丁鱼</string>
     <string name="item_sardine_desc">烹熟的沙丁鱼。食用后恢复生命值。</string>
-    <string name="item_herring_name">鲱鱼</string>
+    <string name="item_herring_name">熟鲱鱼</string>
     <string name="item_herring_desc">烹熟的鲱鱼。食用后恢复生命值。</string>
-    <string name="item_mackerel_name">鲭鱼</string>
+    <string name="item_mackerel_name">熟鲭鱼</string>
     <string name="item_mackerel_desc">烹熟的鲭鱼。食用后恢复生命值。</string>
-    <string name="item_trout_name">鳟鱼</string>
+    <string name="item_trout_name">熟鳟鱼</string>
     <string name="item_trout_desc">烹熟的鳟鱼。食用后恢复生命值。</string>
-    <string name="item_salmon_name">三文鱼</string>
+    <string name="item_salmon_name">熟三文鱼</string>
     <string name="item_salmon_desc">烹熟的三文鱼。食用后恢复生命值。</string>
-    <string name="item_tuna_name">金枪鱼</string>
+    <string name="item_tuna_name">熟金枪鱼</string>
     <string name="item_tuna_desc">烹熟的金枪鱼。食用后恢复生命值。</string>
-    <string name="item_lobster_name">龙虾</string>
+    <string name="item_lobster_name">熟龙虾</string>
     <string name="item_lobster_desc">烹熟的龙虾。恢复可观的生命值。</string>
-    <string name="item_swordfish_name">旗鱼</string>
+    <string name="item_swordfish_name">熟旗鱼</string>
     <string name="item_swordfish_desc">烹熟的旗鱼。恢复大量生命值。</string>
-    <string name="item_monkfish_name">Monkfish</string>
-    <string name="item_monkfish_desc">烹熟的 Monkfish。恢复相当多的生命值。</string>
-    <string name="item_shark_name">鲨鱼</string>
+    <string name="item_monkfish_name">熟安康鱼</string>
+    <string name="item_monkfish_desc">烹熟的安康鱼。恢复相当多的生命值。</string>
+    <string name="item_shark_name">熟鲨鱼</string>
     <string name="item_shark_desc">烹熟的鲨鱼。恢复大量生命值。</string>
-    <string name="item_sea_turtle_name">海龟肉</string>
-    <string name="item_sea_turtle_desc">烹熟的海龟肉。恢复极多的生命值。</string>
-    <string name="item_manta_ray_name">蝠鲼</string>
+    <string name="item_sea_turtle_name">熟海龟</string>
+    <string name="item_sea_turtle_desc">烹熟的海龟。恢复极多的生命值。</string>
+    <string name="item_manta_ray_name">熟蝠鲼</string>
     <string name="item_manta_ray_desc">烹熟的蝠鲼。最好的食物之一。</string>
 
     <!-- ===== Raw meat ===== -->
@@ -139,7 +139,7 @@
     <string name="item_raw_meat_desc">来历不明的生肉。烹饪后食用。</string>
 
     <!-- ===== Cooked meat ===== -->
-    <string name="item_cooked_rat_meat_name">鼠肉</string>
+    <string name="item_cooked_rat_meat_name">熟鼠肉</string>
     <string name="item_cooked_rat_meat_desc">烹熟的鼠肉。勉强能吃，恢复极少的生命值。</string>
     <string name="item_cooked_chicken_name">熟鸡肉</string>
     <string name="item_cooked_chicken_desc">烹熟的鸡肉。食用后恢复生命值。</string>
@@ -313,15 +313,15 @@
     <string name="item_runite_shield_desc">可用的最精良盾牌。</string>
 
     <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
-    <string name="item_slayer_helm_name">杀手头盔</string>
-    <string name="item_slayer_helm_desc">老练杀手佩戴的坚固头盔。</string>
+    <string name="item_slayer_helm_name">讨伐头盔</string>
+    <string name="item_slayer_helm_desc">老练讨伐者佩戴的坚固头盔。</string>
     <string name="item_abyssal_whip_name">深渊鞭</string>
     <string name="item_abyssal_whip_desc">由深渊能量锻造的鞭子，非常适合力量训练。</string>
-    <string name="item_slayer_platebody_name">杀手板甲</string>
-    <string name="item_slayer_platebody_desc">刻有杀手符文的重甲。</string>
-    <string name="item_slayer_platelegs_name">杀手板腿甲</string>
+    <string name="item_slayer_platebody_name">讨伐板甲</string>
+    <string name="item_slayer_platebody_desc">刻有讨伐符文的重甲。</string>
+    <string name="item_slayer_platelegs_name">讨伐板腿甲</string>
     <string name="item_slayer_platelegs_desc">为长时间地牢探索打造的护腿。</string>
-    <string name="item_slayer_plateskirt_name">杀手板裙甲</string>
+    <string name="item_slayer_plateskirt_name">讨伐板裙甲</string>
     <string name="item_slayer_plateskirt_desc">为长时间地牢探索打造的护裙。</string>
 
     <!-- ===== Tools — pickaxes ===== -->
@@ -945,7 +945,7 @@
     <string name="item_silver_emerald_ring_name">银祖母绿戒指</string>
     <string name="item_silver_ruby_necklace_name">银红宝石项链</string>
     <string name="item_silver_ruby_ring_name">银红宝石戒指</string>
-    <string name="item_slayer_guild_cape_name">杀手公会披风</string>
+    <string name="item_slayer_guild_cape_name">讨伐公会披风</string>
     <string name="item_smithing_cape_name">锻造披风</string>
     <string name="item_smithing_guild_cape_name">锻造公会披风</string>
     <string name="item_steel_arrow_tip_name">钢箭头</string>
@@ -1138,12 +1138,12 @@
     <string name="item_construction_cape_desc" formatted="false">建造等级达到 99 级时授予，每轮建造物件产出 + 10%</string>
     <string name="item_prayer_cape_desc" formatted="false">祈祷等级达到 99 级时授予，你生效的祝福效果增强 10%</string>
     <string name="item_prayer_guild_cape_desc" formatted="false">祈祷公会等级达到 10 级即可获得，你生效的祝福效果增强 5%</string>
-    <string name="item_mercantile_cape_name">商业披风</string>
+    <string name="item_mercantile_cape_name">商贸披风</string>
     <string name="item_mercantile_cape_desc" formatted="false">贸易等级达到 99 级时授予，商店买卖价格与贸易收益提升 10%</string>
     <string name="item_mercantile_guild_cape_desc" formatted="false">商人公会等级达到 10 级即可获得，商店买卖价格与贸易收益提升 5%</string>
     <string name="item_agility_cape_desc" formatted="false">敏捷等级达到 99 级时授予，每轮行动获取经验 + 10%</string>
     <string name="item_agility_guild_cape_desc" formatted="false">敏捷公会等级达到 10 级即可获得，每轮行动获取经验 + 5%</string>
-    <string name="item_slayer_cape_name">杀手披风</string>
+    <string name="item_slayer_cape_name">讨伐披风</string>
     <string name="item_slayer_cape_desc" formatted="false">讨伐等级达到 99 级时授予，屠戮点数获取量 + 10%</string>
     <string name="item_attack_cape_desc" formatted="false">攻击等级达到 99 级时授予，攻击技能额外经验 + 10%</string>
     <string name="item_strength_cape_desc" formatted="false">力量等级达到 99 级时授予，力量技能额外经验 + 10%</string>

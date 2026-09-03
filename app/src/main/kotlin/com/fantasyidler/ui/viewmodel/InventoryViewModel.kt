@@ -775,10 +775,3 @@ class InventoryViewModel @Inject constructor(
 enum class InventoryCategory {
     WEAPONS, ARMOUR, TOOLS, FOOD, RAW_FOOD, POTIONS, AMMUNITION, ORES, CONSTRUCTION, SEEDS, MATERIALS, OTHER
 }
-
-/** Ordered list of all skills for display (gathering → crafting → combat). */
-val DISPLAY_SKILL_ORDER = Skills.GATHERING + Skills.CRAFTING_SKILLS + Skills.COMBAT
-
-/** Human-readable label for an equip slot key. */
-fun slotDisplayName(context: Context, slot: String): String =
-    GameStrings.slotName(context, slot)

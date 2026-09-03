@@ -204,7 +204,7 @@ private fun ArmoryDetailContent(entry: ArmoryEntry, heirloomXp: Map<String, Long
                 fontWeight = FontWeight.Bold,
             )
             Text(
-                text  = slotLabel(item.slot),
+                text  = GameStrings.slotName(context, item.slot),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -399,35 +399,13 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
 
 @Composable
 private fun buildSlotGroups(entries: List<ArmoryEntry>): List<Pair<String, List<ArmoryEntry>>> {
+    val context = LocalContext.current
     val grouped = linkedMapOf<String, MutableList<ArmoryEntry>>()
     entries.forEach { entry ->
-        val group = slotLabel(entry.item.slot)
+        val group = GameStrings.slotName(context, entry.item.slot)
         grouped.getOrPut(group) { mutableListOf() }.add(entry)
     }
     return grouped.map { it.key to it.value }
-}
-
-@Composable
-private fun slotLabel(slot: String): String = when (slot) {
-    "weapon"      -> stringResource(R.string.profile_weapons)
-    "head"        -> stringResource(R.string.equip_slot_head)
-    "body"        -> stringResource(R.string.equip_slot_body)
-    "legs"        -> stringResource(R.string.equip_slot_legs)
-    "boots"       -> stringResource(R.string.equip_slot_boots)
-    "shield"      -> stringResource(R.string.equip_slot_shield)
-    "cape"        -> stringResource(R.string.equip_slot_cape)
-    "necklace"    -> stringResource(R.string.equip_slot_necklace)
-    "ring"        -> stringResource(R.string.equip_slot_ring)
-    "pickaxe"     -> stringResource(R.string.equip_slot_pickaxe)
-    "axe"         -> stringResource(R.string.equip_slot_axe)
-    "fishing_rod" -> stringResource(R.string.equip_slot_fishing_rod)
-    "hoe"         -> stringResource(R.string.equip_slot_hoe)
-    "frying_pan"  -> stringResource(R.string.equip_slot_frying_pan)
-    "grappling_hook" -> stringResource(R.string.equip_slot_grappling_hook)
-    "hammer"      -> stringResource(R.string.equip_slot_hammer)
-    "tinderbox"   -> stringResource(R.string.equip_slot_tinderbox)
-    "lockpick"    -> stringResource(R.string.equip_slot_lockpick)
-    else          -> slot.replaceFirstChar { it.uppercase() }
 }
 
 @Composable
