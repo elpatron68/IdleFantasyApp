@@ -2,6 +2,7 @@ package com.fantasyidler.ui.screen
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -149,7 +150,7 @@ private fun SpriteThumbnail(
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .clickable(onClick = onClick),
     ) {
-        androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
             // Hair/beard art is generic across races (unlike the body), so its crop
             // window never needs the race-specific yOff shift.
             bodyBmp?.let    { blitSprite(it, yOff = yOff) }
@@ -181,7 +182,7 @@ private fun EyeThumbnail(
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .clickable(onClick = onClick),
     ) {
-        androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
             // Eye art is generic across races (unlike the body), so its crop window
             // never needs the race-specific yOff shift.
             bodyBmp?.let { blitSprite(it, yOff = yOff) }

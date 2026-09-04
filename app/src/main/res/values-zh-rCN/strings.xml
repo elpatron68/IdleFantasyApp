@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">可以收获</string>
     <string name="label_empty">空</string>
     <string name="inventory_sort_quantity">数量</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">武器</string>
     <string name="inventory_cat_armour">护甲</string>
     <string name="inventory_cat_tools">工具</string>
@@ -229,32 +229,32 @@
 
     <!-- ===== Plurals ===== -->
     <plurals name="plural_level_ups">
-        <item quantity="one">%1$d level up</item>
-        <item quantity="other">%1$d level ups</item>
+        <item quantity="one">%1$d 次升级</item>
+        <item quantity="other">%1$d 次升级</item>
     </plurals>
     <plurals name="plural_items">
-        <item quantity="one">%1$d item</item>
-        <item quantity="other">%1$d items</item>
+        <item quantity="one">%1$d 个物品</item>
+        <item quantity="other">%1$d 个物品</item>
     </plurals>
     <plurals name="plural_minutes">
-        <item quantity="one">%1$d minute</item>
-        <item quantity="other">%1$d minutes</item>
+        <item quantity="one">%1$d 分钟</item>
+        <item quantity="other">%1$d 分钟</item>
     </plurals>
     <plurals name="plural_hours">
-        <item quantity="one">%1$d hour</item>
-        <item quantity="other">%1$d hours</item>
+        <item quantity="one">%1$d 小时</item>
+        <item quantity="other">%1$d 小时</item>
     </plurals>
     <plurals name="plural_patches">
         <item quantity="one">%1$d 田地</item>
         <item quantity="other">%1$d 田地</item>
     </plurals>
     <plurals name="plural_kills">
-        <item quantity="one">%1$d kill</item>
-        <item quantity="other">%1$d kills</item>
+        <item quantity="one">%1$d 次击杀</item>
+        <item quantity="other">%1$d 次击杀</item>
     </plurals>
     <plurals name="plural_quests_completed">
-        <item quantity="one">%1$d quest completed</item>
-        <item quantity="other">%1$d quests completed</item>
+        <item quantity="one">%1$d 个任务完成</item>
+        <item quantity="other">%1$d 个任务完成</item>
     </plurals>
 
     <!-- ===== Error messages ===== -->
@@ -475,9 +475,9 @@
     <string name="settings_source_code">源代码</string>
 
     <string name="settings_source_open">打开</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">存档已导出</string>
     <string name="settings_imported_ok">存档导入成功</string>
@@ -533,8 +533,8 @@
     <string name="queue_item_qty_with_output">×%1$d → %2$d 个物品</string>
     <!-- Translator note: %1$d = number of sessions to collect -->
     <plurals name="plural_collect_sessions">
-        <item quantity="one">Collect %1$d Session\'s Rewards</item>
-        <item quantity="other">Collect %1$d Sessions\' Rewards</item>
+        <item quantity="one">领取 %1$d 次训练奖励</item>
+        <item quantity="other">领取 %1$d 次训练奖励</item>
     </plurals>
 
     <!-- ===== CombatScreen ===== -->
@@ -720,6 +720,7 @@
     <string name="quest_legend_title">任务图标说明</string>
     <string name="quest_legend_daily">每日任务</string>
     <string name="quest_legend_weekly">每周任务</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">公会每日</string>
     <string name="quest_legend_guild">公会任务</string>
     <string name="quest_legend_quest">任务</string>
@@ -742,7 +743,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">材料不足</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">效果</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">共 +%1$d 经验</string>
@@ -795,7 +796,7 @@
     <string name="character_race_elf">精灵</string>
     <string name="character_race_dwarf">矮人</string>
     <string name="character_race_orc">兽人</string>
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">侏儒</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -860,11 +861,11 @@
     <string name="worker_journeyman">熟练工</string>
     <string name="worker_master">大师</string>
     <string name="inn_long_laborer_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，0.5倍效率，制作数量不限。他虽慢，但什么都肯干。</string>
-    <string name="inn_apprentice_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，1倍效率。制作、祈祷和制符每次训练最多480件。</string>
-    <string name="inn_journeyman_desc">每次雇佣完成一项任务，领取后遣散。6小时采集，1.5倍效率。制作、祈祷和制符每次训练最多540件。</string>
-    <string name="inn_master_desc">每次雇佣完成一项任务，领取后遣散。4小时采集，2.5倍效率。制作、祈祷和制符每次训练最多600件。</string>
+    <string name="inn_apprentice_desc">每次雇佣完成一项任务，领取后遣散。8小时采集，1倍效率。工艺制作、祈祷和制符每次训练最多480件。</string>
+    <string name="inn_journeyman_desc">每次雇佣完成一项任务，领取后遣散。6小时采集，1.5倍效率。工艺制作、祈祷和制符每次训练最多540件。</string>
+    <string name="inn_master_desc">每次雇佣完成一项任务，领取后遣散。4小时采集，2.5倍效率。工艺制作、祈祷和制符每次训练最多600件。</string>
     <string name="inn_gathering_note">采集：训练时长 × 效率倍率，影响战利品和经验</string>
-    <string name="inn_crafting_note">制作/祈祷/制符：每阶有数量上限；长工无上限</string>
+    <string name="inn_crafting_note">工艺制作/祈祷/制符：每阶有数量上限；长工无上限</string>
     <string name="worker_skills_title">工人：%1$s</string>
     <string name="worker_session_active">工人训练进行中</string>
     <string name="worker_session_complete">工人训练已完成</string>
@@ -990,7 +991,7 @@
     <string name="guild_name_smithing">锻造公会</string>
     <string name="guild_name_cooking">烹饪公会</string>
     <string name="guild_name_fletching">制箭公会</string>
-    <string name="guild_name_crafting">工艺公会</string>
+    <string name="guild_name_crafting">工艺制作公会</string>
     <string name="guild_name_runecrafting">制符公会</string>
     <string name="guild_name_herblore">草药公会</string>
     <string name="guild_name_warriors">战士公会</string>
@@ -1002,7 +1003,7 @@
     <string name="guild_name_construction">建筑公会</string>
     <string name="guild_name_slayer">讨伐公会</string>
     <string name="guild_quest_desc_slayer_task">为 %2$s 完成 %1$d 个讨伐任务。</string>
-    <string name="guild_quest_desc_slayer_kill">在杀手任务期间击败 %1$d 个敌人。</string>
+    <string name="guild_quest_desc_slayer_kill">在讨伐任务期间击败 %1$d 个敌人。</string>
 
     <!-- Mercantile skill -->
     <string name="skill_mercantile">商贸</string>
@@ -1054,13 +1055,13 @@
     <string name="blessing_stone_skin_ii_name">石肤术 II</string>
     <string name="blessing_blessed_focus_iii_name">神圣专注 III</string>
     <string name="blessing_stone_skin_iii_name">石肤术 III</string>
-    <string name="blessing_tithe_blessing_name">什一税祝福</string>
+    <string name="blessing_tithe_blessing_name">什一祝福</string>
     <string name="blessing_stone_skin_iv_name">石肤术 IV</string>
     <string name="blessing_fortune_i_name">财运 I</string>
-    <string name="blessing_tithe_blessing_ii_name">什一税祝福 II</string>
+    <string name="blessing_tithe_blessing_ii_name">什一祝福 II</string>
     <string name="blessing_iron_ward_name">铁壁守护</string>
     <string name="blessing_fortune_ii_name">财运 II</string>
-    <string name="blessing_tithe_blessing_iii_name">什一税祝福 III</string>
+    <string name="blessing_tithe_blessing_iii_name">什一祝福 III</string>
     <string name="blessing_iron_ward_ii_name">铁壁守护 II</string>
     <string name="blessing_fortune_iii_name">财运 III</string>
     <string name="blessing_divine_focus_name">神赐专注</string>
@@ -1715,7 +1716,7 @@
     <string name="armory_stat_cape_boost">增益加成</string>
     <string name="armory_source_carnival">嘉年华奖品商店</string>
     <string name="armory_source_smithing">锻造</string>
-    <string name="armory_source_crafting">工艺</string>
+    <string name="armory_source_crafting">工艺制作</string>
     <string name="armory_source_fletching">制箭</string>
     <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
     <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
@@ -1788,7 +1789,7 @@
     <string name="bonus_coin_return">+%1$d%% 金币回报</string>
     <string name="bonus_tower">塔楼</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% 金币掉落</string>
     <string name="bonus_hp">+%1$d 生命值</string>
     <string name="snackbar_added_to_queue">已加入队列：%1$s。</string>
@@ -2072,7 +2073,7 @@
     <string name="title_master_fletcher_name">制箭大师</string>
     <string name="title_master_fletcher_requirement">完成所有制箭任务</string>
     <string name="title_master_artisan_name">工匠大师</string>
-    <string name="title_master_artisan_requirement">完成所有工艺任务</string>
+    <string name="title_master_artisan_requirement">完成所有工艺制作任务</string>
     <string name="title_runemaster_name">符文大师</string>
     <string name="title_runemaster_requirement">完成所有符文制作任务</string>
     <string name="title_master_herbalist_name">草药大师</string>

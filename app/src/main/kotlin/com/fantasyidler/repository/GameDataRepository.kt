@@ -32,6 +32,8 @@ import com.fantasyidler.data.json.RuneData
 import com.fantasyidler.data.json.SkillData
 import com.fantasyidler.data.json.SmithingRecipe
 import com.fantasyidler.data.json.ConstructionRecipe
+import com.fantasyidler.data.json.HouseTilesData
+import com.fantasyidler.data.json.SeasonalEventData
 import com.fantasyidler.data.json.ThemeData
 import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.SpellData
@@ -145,7 +147,7 @@ class GameDataRepository @Inject constructor(
 
     // ------------------------------------------------------------------ seasonal events
 
-    val seasonalEvents: Map<String, com.fantasyidler.data.json.SeasonalEventData> by lazy {
+    val seasonalEvents: Map<String, SeasonalEventData> by lazy {
         asset("data/seasonal_events.json")
     }
 
@@ -255,7 +257,7 @@ class GameDataRepository @Inject constructor(
         asset("data/buildings.json")
     }
 
-    val houseTiles: com.fantasyidler.data.json.HouseTilesData by lazy {
+    val houseTiles: HouseTilesData by lazy {
         asset("data/house_tiles.json")
     }
 

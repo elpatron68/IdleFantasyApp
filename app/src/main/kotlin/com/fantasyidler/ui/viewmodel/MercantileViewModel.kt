@@ -43,6 +43,7 @@ import kotlinx.serialization.serializer
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.data.model.QuestProgress
 import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
@@ -222,7 +223,7 @@ class MercantileViewModel @Inject constructor(
         _extra.update { it.copy(snackbarMessage = message, snackbarNonce = it.snackbarNonce + 1) }
 
     private fun computeActiveQuests(
-        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        questProgress: List<QuestProgress>,
         flags: PlayerFlags,
         coins: Long,
     ): Map<String, List<QuestIndicator>> {

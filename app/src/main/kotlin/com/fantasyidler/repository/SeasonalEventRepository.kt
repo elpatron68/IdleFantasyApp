@@ -11,10 +11,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.sync.withLock
+import kotlinx.serialization.json.Json
 
 data class SeasonalBountyTaskWithProgress(
     val task: SeasonalBountyTaskData,
-    /** For "turn_in" tasks this is how many of the target the player currently holds (capped at the ask). */
+    /** For "turn_in" tasks this is how many of the target the player currently holds. */
     val progress: Int,
     /** Non-null while this slot is waiting for a new task to rotate in after a claim. */
     val cooldownUntilMs: Long?,
@@ -49,10 +50,24 @@ class SeasonalEventRepository @Inject constructor(
             val task = byId[taskId] ?: return@mapIndexedNotNull null
             SeasonalBountyTaskWithProgress(
                 task            = task,
-                progress        = if (task.type == "turn_in") minOf(inventory[task.target] ?: 0, task.amount)
+                progress        = if (task.type == "turn_in") inventory[task.target] ?: 0
                                   else flags.seasonalBountyProgress[taskId] ?: 0,
                 cooldownUntilMs = flags.seasonalBountySlotCooldownUntil[index.toString()],
             )
+        }
+    }
+
+    /** Returns currently active bounty tasks (excluding slots on cooldown), or empty if no event or bounty pillar is active. */
+    fun getActiveBounties(
+        flags: PlayerFlags,
+        inventory: Map<String, Int> = emptyMap(),
+        now: Long = System.currentTimeMillis(),
+    ): List<SeasonalBountyTaskWithProgress> {
+        val event = activeEvent() ?: return emptyList()
+        if ("bounty" !in event.pillars) return emptyList()
+        return bountyTasksWithProgress(event, flags, inventory).filter { bp ->
+            val cooldown = bp.cooldownUntilMs
+            cooldown == null || now >= cooldown
         }
     }
 
@@ -116,7 +131,7 @@ class SeasonalEventRepository @Inject constructor(
         val byType = event.bountyTasks.groupBy { it.type }
         val validIds = event.bountyTasks.map { it.id }.toSet()
         val skillLevels: Map<String, Int> =
-            kotlinx.serialization.json.Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
+            Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
         val now = System.currentTimeMillis()
 
         val slotsValid = flags.seasonalBountyEventId == event.id &&
@@ -258,7 +273,7 @@ class SeasonalEventRepository @Inject constructor(
             return@withLock RerollResult.UNAVAILABLE
         }
         val skillLevels: Map<String, Int> =
-            kotlinx.serialization.json.Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
+            Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
         val nextTask = pickTask(
             event,
             event.bountyTasks.filterNot { it.id in flags.seasonalBountySlots },

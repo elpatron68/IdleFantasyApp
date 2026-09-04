@@ -35,7 +35,7 @@ import androidx.compose.material.icons.filled.SwitchAccount
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.AccountBalance
-import androidx.compose.material.icons.filled.Assignment
+import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.filled.Celebration
 import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material3.ModalBottomSheet
@@ -650,7 +650,7 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         TownGridCard(Icons.Filled.Star,           stringResource(R.string.church_title),   onClick = onNavigateToChurch,   modifier = Modifier.weight(1f), iconTint = churchTint)
-                        TownGridCard(Icons.Filled.Assignment,     stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
+                        TownGridCard(Icons.AutoMirrored.Filled.Assignment, stringResource(R.string.builder_title),  onClick = onNavigateToBuilder,  modifier = Modifier.weight(1f))
                         TownGridCard(Icons.Filled.Shield,         stringResource(R.string.slayer_title),   onClick = onNavigateToSlayer,   modifier = Modifier.weight(1f))
                     }
                     Row(

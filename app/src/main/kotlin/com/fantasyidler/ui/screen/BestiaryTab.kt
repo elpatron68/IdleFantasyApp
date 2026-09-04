@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -258,7 +259,7 @@ private fun BestiaryRow(entry: BestiaryEntry, onClick: () -> Unit) {
 private fun EnemyDetailContent(
     entry: BestiaryEntry,
     enemy: EnemyData,
-    context: android.content.Context,
+    context: Context,
 ) {
     LazyColumn(
         Modifier
@@ -365,7 +366,7 @@ private fun EnemyDetailContent(
 private fun BossDetailContent(
     entry: BestiaryEntry,
     boss: BossData,
-    context: android.content.Context,
+    context: Context,
 ) {
     LazyColumn(
         Modifier

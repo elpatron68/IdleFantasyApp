@@ -52,7 +52,7 @@ class FarmingRepository @Inject constructor(
     suspend fun plantCrop(patchNumber: Int, crop: CropData, ashKey: String? = null): Boolean {
         val success = playerRepo.withLock {
             val player = playerRepo.getOrCreatePlayer()
-            val inventory: Map<String, Int> = kotlinx.serialization.json.Json.decodeFromString(player.inventory)
+            val inventory: Map<String, Int> = Json.decodeFromString(player.inventory)
             if ((inventory[crop.seedName] ?: 0) < 1) return@withLock false
             if (ashKey != null && (inventory[ashKey] ?: 0) < 1) return@withLock false
             
@@ -154,7 +154,7 @@ class FarmingRepository @Inject constructor(
         val rotationMult  = 1.0 + boostRepo.cropRotationBonusPct(flags, rotated) / 100.0
         val prestigeYield = boostRepo.yieldMultiplier(Skills.FARMING, flags)
 
-        var yield = kotlin.random.Random.nextInt(crop.yieldMin, crop.yieldMax + 1)
+        var yield = Random.nextInt(crop.yieldMin, crop.yieldMax + 1)
         yield = (yield * hoeMult * ashMult * prestigeYield * rotationMult).roundToInt()
         if (capedDouble) yield *= 2
 
@@ -176,7 +176,7 @@ class FarmingRepository @Inject constructor(
         seasonalEventRepo.recordGathering(items)
 
         val farmingPet = gameData.pets.values.firstOrNull { it.boostedSkill == Skills.FARMING }
-        if (farmingPet != null && kotlin.random.Random.nextDouble() < 1.0 / 1000.0) {
+        if (farmingPet != null && Random.nextDouble() < 1.0 / 1000.0) {
             playerRepo.addPetIfNew(farmingPet.id, farmingPet.boostPercent)
         }
 
@@ -188,7 +188,7 @@ class FarmingRepository @Inject constructor(
             }
             
             val inv = playerRepo.getInventoryUnlocked()
-            if (!newFlags.magicBeanPlanted && (inv["magic_bean"] ?: 0) == 0 && kotlin.random.Random.nextInt(100) == 0) {
+            if (!newFlags.magicBeanPlanted && (inv["magic_bean"] ?: 0) == 0 && Random.nextInt(100) == 0) {
                 playerRepo.addItemUnlocked("magic_bean", 1)
             }
             

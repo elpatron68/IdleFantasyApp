@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
+import com.fantasyidler.data.json.PrestigeNodeData
 import com.fantasyidler.data.model.OwnedPet
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
@@ -99,9 +100,9 @@ class AchievementsViewModel @Inject constructor(
         )
 
         val race = PrestigeBoosts.playerRace(flags)
-        fun raceNodes(nodes: List<com.fantasyidler.data.json.PrestigeNodeData>) =
+        fun raceNodes(nodes: List<PrestigeNodeData>) =
             nodes.filter { PrestigeBoosts.isNodeAvailableToRace(it, race) }
-        fun allOwned(skill: String, nodes: List<com.fantasyidler.data.json.PrestigeNodeData>): Boolean {
+        fun allOwned(skill: String, nodes: List<PrestigeNodeData>): Boolean {
             val owned = flags.prestigeNodes[skill].orEmpty().toSet()
             return nodes.isNotEmpty() && nodes.all { it.id in owned }
         }

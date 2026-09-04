@@ -4,6 +4,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import com.fantasyidler.R
 import java.util.Locale
 
 /**
@@ -80,13 +81,13 @@ class ExtensionsTest {
     // The context overload just resolves string resources; the ladder logic under test lives in
     // the lambda-based core, exercised here with the English unit templates.
     private val englishUnits = mapOf(
-        com.fantasyidler.R.string.duration_years   to "y",
-        com.fantasyidler.R.string.duration_months  to "mo",
-        com.fantasyidler.R.string.duration_weeks   to "w",
-        com.fantasyidler.R.string.duration_days    to "d",
-        com.fantasyidler.R.string.duration_hours   to "h",
-        com.fantasyidler.R.string.duration_minutes to "m",
-        com.fantasyidler.R.string.duration_seconds to "s",
+        R.string.duration_years   to "y",
+        R.string.duration_months  to "mo",
+        R.string.duration_weeks   to "w",
+        R.string.duration_days    to "d",
+        R.string.duration_hours   to "h",
+        R.string.duration_minutes to "m",
+        R.string.duration_seconds to "s",
     )
 
     private fun Long.formatDurationEn(): String =

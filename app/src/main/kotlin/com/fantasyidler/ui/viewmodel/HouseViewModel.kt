@@ -10,6 +10,7 @@ import com.fantasyidler.data.model.HouseBlueprint
 import com.fantasyidler.data.model.HouseData
 import com.fantasyidler.data.model.HouseRoom
 import com.fantasyidler.data.model.PlayerFlags
+import com.fantasyidler.data.model.SeasonalBannerEarned
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.GameDataRepository
@@ -56,7 +57,7 @@ data class HouseUiState(
     /** Placement index being nudged with the on-canvas arrow pad, or null. */
     val nudgeIndex: Int? = null,
     /** Seasonal event banners earned by this character (placeable wall trophies). */
-    val earnedBanners: List<com.fantasyidler.data.model.SeasonalBannerEarned> = emptyList(),
+    val earnedBanners: List<SeasonalBannerEarned> = emptyList(),
     /** True while the outdoor-ground picker sheet is open (tap empty ground to open). */
     val groundPickerOpen: Boolean = false,
     /** True while the editor is open; [house] is then the draft layout, not the built house. */

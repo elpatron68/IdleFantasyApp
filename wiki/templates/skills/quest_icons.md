@@ -10,6 +10,7 @@ Each quest category uses a distinct emoji for visual identification.
 |------|--------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | ⏰    | Daily quests             | Complete daily quests for coins. Chance to receive Dwarven gear when missing pieces exist (resetting on each drop).     |
 | 📅   | Weekly quests            | Complete weekly quests for bonus rewards including Divine gear. Resets every Monday at the configured daily reset hour. |
+| 🎯   | Seasonal event bounties  | Complete bounties during active seasonal events to earn event tokens and rewards. Displays the event's theme icon (e.g., ☀️ for Sunspire Solstice, 🎃 for Gloomharvest) with 🎯 as a fallback. |
 | ⚒️   | Guild daily quests       | Complete guild daily quests through the Guild Hall to earn reputation and unlock new tiers.                             |
 | 🏰   | Guild progression quests | Progress through guild step quests to unlock new tiers and gain guild reputation.                                       |
 | 📜   | Main quests              | Progress through the main questline to unlock new mechanics, areas, and features.                                       |
@@ -25,3 +26,4 @@ Each quest category uses a distinct emoji for visual identification.
 - {skills_link} - Main skills documentation with skill icons
 - {quests_link} - Main quest list
 - {guilds_link} - Guild daily and progression quests
+- {seasonal_events_link} - Seasonal events and bounty board

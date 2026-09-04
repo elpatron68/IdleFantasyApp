@@ -27,6 +27,7 @@ import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.withAppLocale
 import com.fantasyidler.util.xpMultiplierBreakdown
 import android.content.Context
+import com.fantasyidler.data.model.QuestProgress
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -172,7 +173,7 @@ class SlayerViewModel @Inject constructor(
 
     /** Retrieve guild daily / daily / weekly quests tied to the Slayer guild, for the "Quests" button. */
     private fun computeSlayerQuests(
-        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        questProgress: List<QuestProgress>,
         flags: PlayerFlags,
     ): List<SheetQuestSummary> {
         val completedIds = questProgress.filter { it.completed }.map { it.questId }.toSet()

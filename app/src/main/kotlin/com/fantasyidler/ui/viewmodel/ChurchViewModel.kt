@@ -12,6 +12,7 @@ import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.BlessingActivateResult
 import com.fantasyidler.repository.BoostRepository
 import com.fantasyidler.repository.ChurchRepository
+import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.blessingPrayerCapeMult
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.TownRepository
@@ -52,7 +53,7 @@ class ChurchViewModel @Inject constructor(
     private val boostRepo: BoostRepository,
     val townRepo: TownRepository,
     private val playerRepo: PlayerRepository,
-    private val gameData: com.fantasyidler.repository.GameDataRepository,
+    private val gameData: GameDataRepository,
     private val churchRepo: ChurchRepository,
     private val json: Json,
     @ApplicationContext private val context: Context,

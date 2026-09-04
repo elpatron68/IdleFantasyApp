@@ -13,13 +13,17 @@ import com.fantasyidler.simulator.PrestigeBoosts
 import com.fantasyidler.simulator.PrestigePoints
 import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.XpTable
+import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import kotlin.math.roundToInt
+import kotlin.random.Random
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -56,7 +60,7 @@ class PlayerRepository @Inject constructor(
     private val boostRepo: BoostRepository,
     private val appDatabase: AppDatabase,
 ) {
-    val playerMutex = kotlinx.coroutines.sync.Mutex()
+    val playerMutex = Mutex()
 
     /**
      * Emits the raw [Player] entity whenever the DB row changes.
@@ -362,8 +366,8 @@ class PlayerRepository @Inject constructor(
         var coins = 0L
         val gems = mutableMapOf<String, Int>()
         repeat(opened) {
-            coins += kotlin.random.Random.nextLong(TREASURE_COIN_MIN, TREASURE_COIN_MAX + 1)
-            if (gemKeys.isNotEmpty() && kotlin.random.Random.nextDouble() < TREASURE_GEM_CHANCE) {
+            coins += Random.nextLong(TREASURE_COIN_MIN, TREASURE_COIN_MAX + 1)
+            if (gemKeys.isNotEmpty() && Random.nextDouble() < TREASURE_GEM_CHANCE) {
                 val gem = gemKeys.random()
                 gems[gem] = (gems[gem] ?: 0) + 1
             }
@@ -461,9 +465,9 @@ class PlayerRepository @Inject constructor(
     }
 
     /** yyyymmdd stamp of the current game day, rolling over at [resetHour] rather than midnight. */
-    fun gameDay(resetHour: Int): Int = java.util.Calendar.getInstance().let {
-        if (it.get(java.util.Calendar.HOUR_OF_DAY) < resetHour) it.add(java.util.Calendar.DAY_OF_YEAR, -1)
-        it.get(java.util.Calendar.YEAR) * 10000 + it.get(java.util.Calendar.MONTH) * 100 + it.get(java.util.Calendar.DAY_OF_MONTH)
+    fun gameDay(resetHour: Int): Int = Calendar.getInstance().let {
+        if (it.get(Calendar.HOUR_OF_DAY) < resetHour) it.add(Calendar.DAY_OF_YEAR, -1)
+        it.get(Calendar.YEAR) * 10000 + it.get(Calendar.MONTH) * 100 + it.get(Calendar.DAY_OF_MONTH)
     }
 
     suspend fun updateFlags(flags: PlayerFlags) = playerMutex.withLock { updateFlagsUnlocked(flags) }
@@ -557,7 +561,7 @@ class PlayerRepository @Inject constructor(
     private suspend fun queueLevelFor(action: QueuedAction): Int {
         val levels = getSkillLevels()
         return when (action.skillName) {
-            "boss", "combat", "tower" -> com.fantasyidler.ui.viewmodel.combatLevelFrom(levels)
+            "boss", "combat", "tower" -> combatLevelFrom(levels)
             "expedition" -> gameData.skillingDungeons[action.activityKey]?.skill?.let { levels[it] } ?: 1
             else -> levels[action.skillName] ?: 1
         }
@@ -1427,7 +1431,7 @@ class PlayerRepository @Inject constructor(
     }
 
     /** Returns a JSON string capturing the full player save including quest progress and sessions. */
-    suspend fun exportSave(sessions: List<com.fantasyidler.data.model.SkillSessionExport> = emptyList()): String {
+    suspend fun exportSave(sessions: List<SkillSessionExport> = emptyList()): String {
         val player = getOrCreatePlayer()
         val export = PlayerExport(
             skillLevels    = player.skillLevels,
@@ -1850,7 +1854,7 @@ fun blessingPrayerCapeMult(
     val equippedCape = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
     return resolveCapeMultiplier(
         Skills.PRAYER, equippedCape, inventoryKeys, flags.townBuildingTiers,
-        com.fantasyidler.simulator.PrestigeBoosts.capeScalingBySkill(gameData.prestigeTrees, flags),
+        PrestigeBoosts.capeScalingBySkill(gameData.prestigeTrees, flags),
         gameData.equipment, flags.ironman,
     )
 }
@@ -1860,8 +1864,8 @@ fun blessingPrayerCapeMult(player: Player, flags: PlayerFlags, gameData: GameDat
     if (flags.ironman) return 1f
     return blessingPrayerCapeMult(
         flags,
-        kotlinx.serialization.json.Json.decodeFromString(player.equipped),
-        kotlinx.serialization.json.Json.decodeFromString<Map<String, Int>>(player.inventory).keys,
+        Json.decodeFromString(player.equipped),
+        Json.decodeFromString<Map<String, Int>>(player.inventory).keys,
         gameData,
     )
 }

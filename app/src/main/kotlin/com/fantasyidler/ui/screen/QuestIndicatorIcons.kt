@@ -20,10 +20,10 @@ private fun superscriptCount(count: Int): String =
 @Composable
 internal fun QuestIndicatorIcons(indicators: List<QuestIndicator>) {
     if (indicators.isEmpty()) return
-    indicators.groupBy { it.category }.entries.sortedBy { it.key }.forEach { (category, list) ->
+    indicators.groupBy { it.category }.entries.sortedBy { it.key }.forEach { (_, list) ->
         val alpha = if (list.any { it.isCompletable }) 1.0f else 0.38f
         Text(
-            text     = " ${category.emoji}${superscriptCount(list.size)}",
+            text     = " ${list.first().emoji}${superscriptCount(list.size)}",
             style    = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.alpha(alpha),
         )

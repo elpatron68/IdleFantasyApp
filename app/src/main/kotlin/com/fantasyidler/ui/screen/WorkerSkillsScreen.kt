@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -68,6 +69,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
+import com.fantasyidler.data.model.SkillSession
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.data.model.WorkerTier
@@ -398,7 +400,7 @@ fun WorkerSkillsScreen(
 
 @Composable
 private fun WorkerActiveSessionBanner(
-    session: com.fantasyidler.data.model.SkillSession,
+    session: SkillSession,
     showEndTime: Boolean = true,
     assignedItems: Map<String, Int> = emptyMap(),
 ) {
@@ -490,7 +492,7 @@ private fun WorkerCraftSkillSheet(
     state: WorkerSkillsUiState,
     viewModel: WorkerSkillsViewModel,
     isQueueFull: Boolean,
-    context: android.content.Context,
+    context: Context,
     onDismiss: () -> Unit,
 ) {
     val allRecipes: List<CraftableRecipe> = when (skillName) {
@@ -646,7 +648,7 @@ private fun workerMeetsLevel(state: WorkerSkillsUiState, recipe: CraftableRecipe
 private fun WorkerCraftRecipeRow(
     recipe: CraftableRecipe,
     state: WorkerSkillsUiState,
-    context: android.content.Context,
+    context: Context,
     onTap: () -> Unit,
 ) {
     val meetsLvl = workerMeetsLevel(state, recipe)
@@ -771,7 +773,7 @@ private fun WorkerCraftQuantityContent(
     recipe: CraftableRecipe,
     state: WorkerSkillsUiState,
     isQueueFull: Boolean,
-    context: android.content.Context,
+    context: Context,
     onSetAsh: ((String?) -> Unit)?,
     onCraft: (Int) -> Unit,
     onBack: () -> Unit,

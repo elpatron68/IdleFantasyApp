@@ -65,14 +65,10 @@ import com.fantasyidler.repository.PrestigeActionResult
 import com.fantasyidler.ui.viewmodel.PrestigeDetailViewModel
 import com.fantasyidler.ui.viewmodel.PrestigeNodeUi
 import com.fantasyidler.ui.viewmodel.PrestigePathUi
-import androidx.compose.ui.graphics.Color
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatDurationMs
 
 private val TIER_NUMERALS = listOf("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X")
-
-// Same success green as the quest/guild checkmarks; "your race" on race locks.
-private val RaceLockGreen = Color(0xFF4CAF50)
 
 private fun nodeDisplayName(context: Context, skill: String, pathKey: String, tier: Int): String =
     "${GameStrings.prestigePathName(context, skill, pathKey)} ${TIER_NUMERALS.getOrElse(tier - 1) { "$tier" }}"
@@ -159,7 +155,7 @@ fun PrestigeDetailScreen(
                             Icons.Filled.Lock,
                             contentDescription = null,
                             modifier = Modifier.size(14.dp),
-                            tint = if (node.raceLocked) MaterialTheme.colorScheme.error else RaceLockGreen,
+                            tint = if (node.raceLocked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.tertiary,
                         )
                         Spacer(Modifier.width(4.dp))
                         Text(
@@ -437,7 +433,7 @@ private fun PathBranch(
                     Icons.Filled.Lock,
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
-                    tint = if (playerRace in racesLock) RaceLockGreen else MaterialTheme.colorScheme.error,
+                    tint = if (playerRace in racesLock) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error,
                 )
                 Spacer(Modifier.width(2.dp))
                 Text(
@@ -456,7 +452,7 @@ private fun PathBranch(
                             Icons.Filled.Lock,
                             contentDescription = null,
                             modifier = Modifier.size(12.dp),
-                            tint = if (playerRace == race) RaceLockGreen else MaterialTheme.colorScheme.error,
+                            tint = if (playerRace == race) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error,
                         )
                         Spacer(Modifier.width(2.dp))
                         Text(

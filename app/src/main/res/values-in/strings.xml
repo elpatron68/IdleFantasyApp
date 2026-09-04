@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">Siap panen</string>
     <string name="label_empty">Kosong</string>
     <string name="inventory_sort_quantity">Kuantitas</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">Senjata</string>
     <string name="inventory_cat_armour">Zirah</string>
     <string name="inventory_cat_tools">Peralatan</string>
@@ -468,9 +468,9 @@
     <string name="settings_source_code">Kode Sumber</string>
 
     <string name="settings_source_open">Buka</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">Simpan yang diekspor</string>
     <string name="settings_imported_ok">Penyimpanan berhasil diimpor.</string>
@@ -726,6 +726,7 @@
     <string name="quest_legend_title">Ikon quest</string>
     <string name="quest_legend_daily">Quest harian</string>
     <string name="quest_legend_weekly">Quest mingguan</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">Harian guild</string>
     <string name="quest_legend_guild">Quest guild</string>
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
@@ -748,7 +749,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Tidak ada material</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">Efek</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP total</string> <!-- untranslated -->
@@ -801,7 +802,7 @@
     <string name="character_race_elf">Elf</string> <!-- untranslated -->
     <string name="character_race_dwarf">Dwarf</string> <!-- untranslated -->
     <string name="character_race_orc">Orc</string> <!-- untranslated -->
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">Gnome</string> <!-- untranslated -->
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1794,7 +1795,7 @@
     <string name="bonus_coin_return">+%1$d%% pengembalian koin</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">Ditambahkan ke antrian: %1$s.</string>

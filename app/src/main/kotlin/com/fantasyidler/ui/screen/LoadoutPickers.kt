@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -53,7 +54,7 @@ internal val ARROW_STRENGTH_BONUS = mapOf(
 internal fun ArrowLoadoutPicker(
     selectedArrowKey: String?,
     inventory: Map<String, Int>,
-    context: android.content.Context,
+    context: Context,
     onArrowSelected: (String?) -> Unit,
 ) {
     val availableArrows = ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
@@ -127,7 +128,7 @@ internal fun SpellLoadoutPicker(
     magicLevel: Int,
     inventory: Map<String, Int>,
     equippedWeapon: EquipmentData?,
-    context: android.content.Context,
+    context: Context,
     onSpellSelected: (SpellData?) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }

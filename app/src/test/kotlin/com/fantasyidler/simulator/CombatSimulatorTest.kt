@@ -14,6 +14,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.random.Random
+import java.io.File
+import kotlinx.serialization.json.Json
 
 /**
  * Tests for the most complex simulator, [CombatSimulator.simulateDungeon], made
@@ -198,8 +200,8 @@ class CombatSimulatorTest {
 
     /** The real raid bosses from the shipped data file, so tuning and tests cannot drift apart. */
     private val raidBosses: List<BossData> by lazy {
-        val json = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
-        val text = java.io.File("src/main/assets/data/raid_bosses.json").readText()
+        val json = Json { ignoreUnknownKeys = true }
+        val text = File("src/main/assets/data/raid_bosses.json").readText()
         json.decodeFromString<Map<String, BossData>>(text).values.filter { it.raid }
     }
 

@@ -1,5 +1,7 @@
 package com.fantasyidler.ui.screen
 
+import android.R as AndroidR
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -85,6 +87,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
+import com.fantasyidler.data.model.DungeonRunStats
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.ui.theme.ScaledSheetContent
@@ -490,7 +493,7 @@ fun CombatScreen(
             },
             dismissButton = {
                 TextButton(onClick = viewModel::dismissNoFoodWarning) {
-                    Text(stringResource(android.R.string.cancel))
+                    Text(stringResource(AndroidR.string.cancel))
                 }
             },
         )
@@ -508,7 +511,7 @@ private fun CombatSelectionList(
     skillLevels: Map<String, Int>,
     survivalRatings: Map<String, CombatSimulator.SurvivalRating> = emptyMap(),
     dungeonRuns: Map<String, Int> = emptyMap(),
-    dungeonLastRunStats: Map<String, com.fantasyidler.data.model.DungeonRunStats> = emptyMap(),
+    dungeonLastRunStats: Map<String, DungeonRunStats> = emptyMap(),
     unlockedDungeons: List<String> = emptyList(),
     towerBestFloor: Int = 0,
     bossKillCounts: Map<String, Int> = emptyMap(),
@@ -522,7 +525,7 @@ private fun CombatSelectionList(
     onTower: () -> Unit = {},
     onOpenMercCamp: () -> Unit = {},
 ) {
-    val combatLvl = combatLevel(skillLevels)
+    val combatLvl = combatLevelFrom(skillLevels)
 
     LazyColumn(modifier.fillMaxSize()) {
         item { CombatSectionHeader(stringResource(R.string.label_dungeons_tab)) }
@@ -606,7 +609,7 @@ private fun CombatGearTab(
     cookingRecipes: Map<String, CookingRecipe>,
     allEquipment: Map<String, EquipmentData>,
     heirloomXp: Map<String, Long>,
-    context: android.content.Context,
+    context: Context,
     activeWeaponSlot: String?,
     foodEatThresholdPct: Int,
     availableSpells: List<SpellData>,
@@ -1129,7 +1132,7 @@ private fun DungeonRow(
     isQueueFull: Boolean,
     survivalRating: CombatSimulator.SurvivalRating? = null,
     runCount: Int = 0,
-    lastRunStats: com.fantasyidler.data.model.DungeonRunStats? = null,
+    lastRunStats: DungeonRunStats? = null,
     loreLockedHint: String? = null,
     onTap: () -> Unit,
 ) {

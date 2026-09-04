@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">Ready to harvest</string>
     <string name="label_empty">Empty</string>
     <string name="inventory_sort_quantity">Quantity</string>
-    <string name="inventory_sort_az" translatable="false">A-Z</string>
+    <string name="inventory_sort_az">A-Z</string>
     <string name="inventory_cat_weapons">Weapons</string>
     <string name="inventory_cat_armour">Armour</string>
     <string name="inventory_cat_tools">Tools</string>
@@ -475,9 +475,9 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_url" translatable="false">github.com/tristinbaker/IdleFantasy</string>
     <string name="settings_source_open">Open</string>
-    <string name="settings_wiki" translatable="false">Wiki</string>
+    <string name="settings_wiki">Wiki</string>
     <string name="settings_wiki_url" translatable="false">idlefantasy.tristinbaker.xyz</string>
-    <string name="settings_discord" translatable="false">Discord</string>
+    <string name="settings_discord">Discord</string>
     <string name="settings_discord_url" translatable="false">discord.gg/vRxtXsBwQU</string>
     <string name="settings_exported_ok">Save exported</string>
     <string name="settings_imported_ok">Save imported successfully</string>
@@ -736,6 +736,7 @@
     <string name="quest_legend_title">Quest icons</string>
     <string name="quest_legend_daily">Daily quest</string>
     <string name="quest_legend_weekly">Weekly quest</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string>
     <string name="quest_legend_guild_daily">Guild daily</string>
     <string name="quest_legend_guild">Guild quest</string>
     <string name="quest_legend_quest">Quest</string>
@@ -758,7 +759,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">No mats</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-    <string name="crafting_produces" translatable="false">= %1$d %2$s</string>
+    <string name="crafting_produces">= %1$d %2$s</string>
     <string name="crafting_effects">Effects</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP total</string>
@@ -811,7 +812,7 @@
     <string name="character_race_elf">Elf</string>
     <string name="character_race_dwarf">Dwarf</string>
     <string name="character_race_orc">Orc</string>
-    <string name="character_race_halfling" translatable="false">Halfling</string>
+    <string name="character_race_halfling">Halfling</string>
     <string name="character_race_gnome">Gnome</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1804,7 +1805,7 @@
     <string name="bonus_coin_return">+%1$d%% coin return</string>
     <string name="bonus_tower">Tower</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string>
-    <string name="bonus_xp" translatable="false">+%1$d%% XP</string>
+    <string name="bonus_xp">+%1$d%% XP</string>
     <string name="bonus_coin_drops">+%1$d%% coin drops</string>
     <string name="bonus_hp">+%1$d HP</string>
     <string name="snackbar_added_to_queue">Added to queue: %1$s.</string>

@@ -1,6 +1,7 @@
 package com.fantasyidler.receiver
 
 import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
@@ -80,7 +81,7 @@ class SessionAlarmTest {
             String::class.java,
             String::class.java,
         ).apply { isAccessible = true }
-        val pi = method.invoke(sessionRepo, sessionId, "Mining") as android.app.PendingIntent
+        val pi = method.invoke(sessionRepo, sessionId, "Mining") as PendingIntent
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, session.endsAt, pi)
 
         assertEquals(1, shadowAm.scheduledAlarms.size)
@@ -112,7 +113,7 @@ class SessionAlarmTest {
             String::class.java,
             String::class.java,
         ).apply { isAccessible = true }
-        val pi = method.invoke(sessionRepo, sessionId, "Mining") as android.app.PendingIntent
+        val pi = method.invoke(sessionRepo, sessionId, "Mining") as PendingIntent
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, session.endsAt, pi)
 
         assertEquals(1, shadowAm.scheduledAlarms.size)

@@ -53,8 +53,11 @@ object GameStrings {
     fun skillingDungeonNote(context: Context, key: String, index: Int, fallback: String): String =
         context.stringByName("skilling_dungeon_${key}_note_${index + 1}") ?: fallback
 
+    // Boss fallback: collect-summary kill lines mix dungeon enemies and boss keys (issue #1675).
     fun enemyName(context: Context, key: String): String =
-        context.stringByName("enemy_${key}_name") ?: key.toTitleCase()
+        context.stringByName("enemy_${key}_name")
+            ?: context.stringByName("boss_${key}_name")
+            ?: key.toTitleCase()
 
     fun bossName(context: Context, key: String): String =
         context.stringByName("boss_${key}_name") ?: key.toTitleCase()

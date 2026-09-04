@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.clickable
@@ -131,7 +132,7 @@ internal fun xpBreakdownText(total: Long, bonus: Long, boostFactor: Long): Strin
 @Composable
 internal fun HomeSessionCard(
     session: SkillSession,
-    context: android.content.Context,
+    context: Context,
     skillXp: Map<String, Long>,
     sessionXpGain: Long,
     showEndTime: Boolean = true,
@@ -339,7 +340,7 @@ internal fun QueueCard(
     queue: List<QueuedAction>,
     maxQueueSize: Int,
     queueEndsAt: Long,
-    context: android.content.Context,
+    context: Context,
     skillXp: Map<String, Long>,
     activeSessionSkill: String,
     activeSessionXpGain: Long,
@@ -632,7 +633,7 @@ internal fun WorkerSessionCard(
     hiredWorker: HiredWorker,
     session: SkillSession?,
     pendingCollect: Boolean,
-    context: android.content.Context,
+    context: Context,
     skillXp: Map<String, Long>,
     sessionXpGain: Long,
     showEndTime: Boolean = true,
@@ -855,8 +856,8 @@ internal fun SummarySection(title: String) {
 internal fun SummaryRow(
     label: String,
     value: String,
-    labelColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
-    valueColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    labelColor: Color = MaterialTheme.colorScheme.onSurface,
+    valueColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     fontWeight: FontWeight = FontWeight.Normal,
 ) {
     Row(
@@ -878,7 +879,7 @@ internal fun SummaryRow(
 internal fun StatInline(
     label: String,
     value: String,
-    valueColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    valueColor: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
@@ -902,7 +903,7 @@ internal fun RecentSessionsSheet(
     bossEmoji: (String) -> String? = { null },
     onDismiss: () -> Unit,
 ) {
-    val context = androidx.compose.ui.platform.LocalContext.current
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxWidth()

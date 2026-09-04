@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.json.BoneData
 import com.fantasyidler.data.model.EquipSlot
+import com.fantasyidler.data.model.OwnedPet
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.repository.BoostRepository
@@ -230,7 +231,7 @@ class BoneAltarViewModel @Inject constructor(
 
     private fun petBoostFor(petsJson: String, skillKey: String): Int {
         val pets = try {
-            json.decodeFromString<List<com.fantasyidler.data.model.OwnedPet>>(petsJson)
+            json.decodeFromString<List<OwnedPet>>(petsJson)
         } catch (_: Exception) {
             return 0
         }

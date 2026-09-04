@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
@@ -40,7 +41,7 @@ private fun rememberSheetSwipeConnection(): NestedScrollConnection = remember {
         override fun onPostScroll(
             consumed: Offset,
             available: Offset,
-            source: androidx.compose.ui.input.nestedscroll.NestedScrollSource,
+            source: NestedScrollSource,
         ): Offset = if (consumed.y != 0f || available.y < 0f) available else Offset.Zero
 
         override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity =

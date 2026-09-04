@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">Prêt à être récolté</string>
     <string name="label_empty">Vide</string>
     <string name="inventory_sort_quantity">Quantité</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">Armes</string>
     <string name="inventory_cat_armour">Armures</string>
     <string name="inventory_cat_tools">Outils</string>
@@ -463,6 +463,7 @@
 
 
 
+
     <string name="settings_lang_system">Système</string>
     <string name="settings_save_data">Sauvegarder les données</string>
     <string name="settings_export">Exporter la sauvegarde</string>
@@ -474,9 +475,9 @@
     <string name="settings_source_code">Code source</string>
 
     <string name="settings_source_open">Ouvrir</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">Sauvegarde exportée</string>
     <string name="settings_imported_ok">Sauvegarde importée avec succès</string>
@@ -498,6 +499,7 @@
     <string name="settings_backup_success">Sauvegarde enregistrée.</string>
     <string name="settings_backup_failed">Échec de la sauvegarde.</string>
     <string name="settings_backup_folder_set">Dossier de sauvegarde défini.</string>
+
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Ville</string>
     <string name="home_town_desc">Visitez le magasin, l\'auberge, les guildes, l\'église, l\'atelier, le mentor et la kermesse</string>
@@ -510,11 +512,11 @@
     <string name="guild_progress_dailies_and_quest">Compléter %1$d/%2$d requêtes quotidiennes &amp; quêtes pour avancer</string>
     <string name="guild_progress_dailies_only">Compléter %1$d/%2$d requêtes quotidiennes pour avancer</string>
     <string name="home_died_message">Vous êtes mort et avez perdu la majorité de vos gains.</string>
-    <string name="home_xp_boost_was_active">Le bonus d’XP ×2 de toutes les compétences était actif</string>
-    <string name="home_xp_boost_active">×2 XP toutes les compétences - %1$s</string>
-    <string name="home_prestige_xp_boost_active">×2 XP %1$s - %2$s</string>
+    <string name="home_xp_boost_was_active">Le bonus d\'XP ×2 de toutes les aptitudes était actif</string>
+    <string name="home_xp_boost_active">XP x2 pour toutes les aptitudes - %1$s</string>
+    <string name="home_prestige_xp_boost_active">XP x2 pour %1$s - %2$s</string>
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
-    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
+    <string name="boosts_show_less">Montrer moins</string>
     <string name="home_loot">Butin</string>
     <string name="home_food_consumed">Nourriture consommée</string>
     <string name="home_bones_buried">Os enterrés</string>
@@ -719,6 +721,7 @@
     <string name="quest_legend_title">Icônes de quêtes</string>
     <string name="quest_legend_daily">Quête quotidienne</string>
     <string name="quest_legend_weekly">Quête hebdomadaire</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
@@ -741,7 +744,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Pas de matériaux</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">Effets</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP au total</string>
@@ -794,7 +797,7 @@
     <string name="character_race_elf">Elfe</string>
     <string name="character_race_dwarf">Nain</string>
     <string name="character_race_orc">Orque</string>
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">Gnome</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1716,8 +1719,8 @@
     <string name="armory_source_smithing">Forge</string>
     <string name="armory_source_crafting">Artisanat</string>
     <string name="armory_source_fletching">Art du bois</string>
-    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
-    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked">%1$s (requiers l\'atout prestigieux %2$s, %3$s seulement)</string>
+    <string name="armory_source_prestige_locked_any">%1$s (requiers l\'atout prestigieux %2$s)</string>
     <string name="armory_source_drop_always">Laché par %1$s (toujours)</string>
     <string name="armory_source_drop_chance">Laché par %1$s (%2$s)</string>
     <string name="armory_source_drop">Laché par %1$s</string>
@@ -1787,7 +1790,7 @@
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% en moins sur le coût d\'amélioration de bâtiments</string>
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% pièces obtenues</string>
     <string name="bonus_hp">+%1$d PV</string>
     <string name="snackbar_added_to_queue">Ajouté à la file d\'attente : %1$s.</string>
@@ -1865,7 +1868,7 @@
     <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string> <!-- untranslated -->
     <string name="merc_hire">Engager</string>
     <string name="merc_dismiss">Virer</string>
-    <string name="merc_hired">%1$s joins your party for 24 hours.</string> <!-- untranslated -->
+    <string name="merc_hired">%1$s rejoins votre groupe pour 24 heures.</string>
     <string name="merc_party_full">Votre groupe est complet.</string>
     <string name="merc_already_hired">%1$s est déjà sous contrat.</string>
     <string name="merc_not_enough_coins">Pas assez de pièces pour engager %1$s.</string>
@@ -1876,7 +1879,7 @@
     <string name="merc_tier_seasoned">Vétéran</string>
     <string name="merc_tier_elite">Champion</string>
     <string name="merc_stats">Atq %1$d  For %2$d  Déf %3$d  PV %4$d</string>
-    <string name="merc_cost_per_day">%1$s coins</string> <!-- untranslated -->
+    <string name="merc_cost_per_day">%1$s pièces</string>
     <string name="merc_bran_the_sellsword_name">Bran l\'Épée-à-Louer</string>
     <string name="merc_wren_the_stray_name">Wren le Vagabond</string>
     <string name="merc_tam_the_grey_name">Tam le Gris</string>
@@ -1936,12 +1939,12 @@
     <string name="seasonal_bounty_board_title">Tableau des primes</string>
     <string name="seasonal_expedition_title">Expédition</string>
     <string name="seasonal_go_to_combat">Aller au combat</string>
-    <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
-    <string name="treasure_open">Open</string> <!-- untranslated -->
-    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
-    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
-    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
-    <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
+    <string name="treasure_open_message">Forcez-le pour des pièces et une chance d\'avoir des gemmes.</string>
+    <string name="treasure_open">Ouvrir</string>
+    <string name="treasure_open_one">En ouvrir 1</string>
+    <string name="treasure_open_all">Tout ouvrir (%1$d)</string>
+    <string name="treasure_open_result">%1$d révèle : +%2$s pièces</string>
+    <string name="treasure_open_result_gems">%1$d révèle : +%2$s pièces et %3$d gemmes</string>
     <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
     <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">Touchez %1$d braises sur %2$d avant qu\'elles ne s\'éteignent !</string>
@@ -2420,5 +2423,5 @@
     <string name="heirloom_desc">Grows with %1$s XP up to Lv. 99. Its power also scales with your %1$s level, reaching full effect at level 85. Stats shown are its full potential.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_heirloom">%1$s is an heirloom and cannot be sold.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = a dungeon or boss name -->
-    <string name="repeat_blocked_level">Your combat level is too low to repeat %1$s.</string> <!-- untranslated -->
+    <string name="repeat_blocked_level">Votre niveau de combat est trop faible pour répéter %1$s.</string>
 </resources>

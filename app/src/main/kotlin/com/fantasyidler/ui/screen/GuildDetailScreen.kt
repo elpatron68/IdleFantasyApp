@@ -363,14 +363,14 @@ private fun GuildQuestRow(
                 Icon(
                     imageVector        = Icons.Filled.CheckCircle,
                     contentDescription = stringResource(R.string.label_completed),
-                    tint               = Color(0xFF4CAF50),
+                    tint               = MaterialTheme.colorScheme.tertiary,
                     modifier           = Modifier.height(18.dp).width(18.dp),
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text       = stringResource(R.string.label_completed),
                     style      = MaterialTheme.typography.labelMedium,
-                    color      = Color(0xFF4CAF50),
+                    color      = MaterialTheme.colorScheme.tertiary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }
@@ -515,14 +515,14 @@ private fun GuildDailyCard(
                     Icon(
                         imageVector        = Icons.Filled.CheckCircle,
                         contentDescription = stringResource(R.string.label_completed),
-                        tint               = Color(0xFF4CAF50),
+                        tint               = MaterialTheme.colorScheme.tertiary,
                         modifier           = Modifier.height(18.dp).width(18.dp),
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
                         text       = stringResource(R.string.label_completed),
                         style      = MaterialTheme.typography.labelMedium,
-                        color      = Color(0xFF4CAF50),
+                        color      = MaterialTheme.colorScheme.tertiary,
                         fontWeight = FontWeight.SemiBold,
                     )
                 }
