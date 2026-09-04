@@ -50,9 +50,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.random.Random
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.data.model.OwnedPet
+import com.fantasyidler.data.model.QuestProgress
 import com.fantasyidler.util.GameStrings
 import dagger.hilt.android.qualifiers.ApplicationContext
 
@@ -107,9 +110,10 @@ data class SkillsUiState(
     val showQuestDots: Boolean = true,
     /** Guild dailies plus daily/weekly quests for each sheet skill, keyed by skill (guild keys match skill keys). */
     val sheetQuests: Map<String, List<SheetQuestSummary>> = emptyMap(),
+    val seasonalEventEmoji: String? = null,
 )
 
-enum class SheetQuestSource { GUILD, DAILY, WEEKLY }
+enum class SheetQuestSource { GUILD, DAILY, WEEKLY, SEASONAL }
 
 data class SheetQuestSummary(
     val questId: String,
@@ -200,6 +204,8 @@ class SkillsViewModel @Inject constructor(
             val inv:      Map<String, Int>     = json.decodeFromString(player.inventory)
             val flags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
             val activeQuests = computeActiveQuests(questProgress, flags, inv)
+            val activeEvent = seasonalEventRepo.activeEvent()
+            val seasonalEmoji = if (activeEvent != null && "bounty" in activeEvent.pillars) activeEvent.iconEmoji else null
             extra.copy(
                 isLoading             = false,
                 skillLevels           = levels,
@@ -243,7 +249,8 @@ class SkillsViewModel @Inject constructor(
                     .mapValues { (_, lists) ->
                         lists.flatten()
                             .filter {
-                                it.category == QuestCategory.DAILY || it.category == QuestCategory.WEEKLY || it.category == QuestCategory.GUILD_DAILY
+                                it.category == QuestCategory.DAILY || it.category == QuestCategory.WEEKLY ||
+                                it.category == QuestCategory.SEASONAL || it.category == QuestCategory.GUILD_DAILY
                             }
                             // "any"-target quests add one indicator per matching activity
                             // (e.g. every buriable bone), so collapse back to one per quest.
@@ -253,7 +260,8 @@ class SkillsViewModel @Inject constructor(
                     .filterValues { it.isNotEmpty() },
                 showSessionEndTime    = flags.showSessionEndTime,
                 showQuestDots         = flags.showQuestDots,
-                sheetQuests           = computeSheetQuests(questProgress, flags, levels),
+                sheetQuests           = computeSheetQuests(questProgress, flags, levels, inv),
+                seasonalEventEmoji    = seasonalEmoji,
             )
         }
     }.flowOn(Dispatchers.Default)
@@ -830,7 +838,7 @@ class SkillsViewModel @Inject constructor(
                 try {
                     val result = simulate()
                     val framesJson = json.encodeToString(
-                        json.serializersModule.serializer<List<com.fantasyidler.data.model.SessionFrame>>(),
+                        json.serializersModule.serializer<List<SessionFrame>>(),
                         result.frames,
                     )
                     sessionRepo.startSession(
@@ -924,7 +932,7 @@ class SkillsViewModel @Inject constructor(
     fun abandonSession() {
         viewModelScope.launch {
             val session = sessionRepo.getActiveSession() ?: return@launch
-            val frames: List<com.fantasyidler.data.model.SessionFrame> = json.decodeFromString(session.frames)
+            val frames: List<SessionFrame> = json.decodeFromString(session.frames)
             if (session.skillName == Skills.MERCANTILE) {
                 val coinCost = gameData.tradeRoutes.firstOrNull { it.id == session.activityKey }?.coinCost?.toLong() ?: 0L
                 if (coinCost > 0) playerRepo.addCoins(coinCost)
@@ -1000,7 +1008,7 @@ class SkillsViewModel @Inject constructor(
 
     private fun computeItemFills(
         itemKey: String,
-        questProgress: Map<String, com.fantasyidler.data.model.QuestProgress>,
+        questProgress: Map<String, QuestProgress>,
         flags: PlayerFlags,
     ): List<QuestFillSuggestion> {
         val fills = mutableListOf<QuestFillSuggestion>()
@@ -1060,7 +1068,7 @@ class SkillsViewModel @Inject constructor(
     }
 
     private fun computePrayerFills(
-        questProgress: Map<String, com.fantasyidler.data.model.QuestProgress>,
+        questProgress: Map<String, QuestProgress>,
         flags: PlayerFlags,
     ): List<QuestFillSuggestion> {
         val fills = mutableListOf<QuestFillSuggestion>()
@@ -1123,9 +1131,10 @@ class SkillsViewModel @Inject constructor(
     )
 
     private fun computeSheetQuests(
-        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        questProgress: List<QuestProgress>,
         flags: PlayerFlags,
         skillLevels: Map<String, Int>,
+        inventory: Map<String, Int> = emptyMap(),
     ): Map<String, List<SheetQuestSummary>> {
         fun meetsLevel(type: String, skill: String, target: String): Boolean =
             (skillLevels[skill] ?: 1) >= sheetQuestLevelRequired(type, skill, target)
@@ -1187,6 +1196,24 @@ class SkillsViewModel @Inject constructor(
                 meetsLevel  = meetsLevel(wq.template.type, skill, wq.template.target),
             )
         }
+        for (bounty in seasonalEventRepo.getActiveBounties(flags, inventory)) {
+            val task = bounty.task
+            val skill = task.skill ?: continue
+            if (skill !in skillGuilds) continue
+            result.getOrPut(skill) { mutableListOf() } += SheetQuestSummary(
+                questId     = task.id,
+                questName   = task.displayName,
+                guild       = skill,
+                type        = task.type,
+                target      = task.target,
+                progress    = bounty.progress,
+                amount      = task.amount,
+                claimed     = false,
+                source      = SheetQuestSource.SEASONAL,
+                description = task.hint,
+                meetsLevel  = meetsLevel(task.type, skill, task.target),
+            )
+        }
         return result
     }
 
@@ -1237,9 +1264,10 @@ class SkillsViewModel @Inject constructor(
      * Craft-guild recipes are gated in CraftingViewModel.queueCraftForDaily instead.
      */
     private fun sheetQuestLevelRequired(type: String, guild: String, target: String): Int = when {
-        type == "gather" && guild == Skills.MINING      -> gameData.ores[target]?.levelRequired
-        type == "gather" && guild == Skills.WOODCUTTING -> gameData.trees.values.firstOrNull { it.logName == target }?.levelRequired
-        type == "gather" && guild == Skills.FISHING     -> gameData.fish[target]?.levelRequired
+        (type == "gather" || type == "turn_in") && guild == Skills.MINING      -> gameData.ores[target]?.levelRequired
+        (type == "gather" || type == "turn_in") && guild == Skills.WOODCUTTING -> gameData.trees.values.firstOrNull { it.logName == target }?.levelRequired
+        (type == "gather" || type == "turn_in") && guild == Skills.FISHING     -> gameData.fish[target]?.levelRequired
+        (type == "gather" || type == "turn_in") && guild == Skills.FARMING     -> gameData.crops[target]?.levelRequired
         type == "pickpocket"                            -> gameData.thievingNpcs[target]?.levelRequired
         type == "sessions" && guild == Skills.AGILITY   -> gameData.agilityCourses[target]?.levelRequired
         type == "craft" && guild == Skills.RUNECRAFTING -> gameData.runes[target]?.levelRequired
@@ -1248,7 +1276,7 @@ class SkillsViewModel @Inject constructor(
     } ?: 1
 
     private fun computeActiveQuests(
-        questProgress: List<com.fantasyidler.data.model.QuestProgress>,
+        questProgress: List<QuestProgress>,
         flags: PlayerFlags,
         inventory: Map<String, Int>,
     ): Map<String, List<QuestIndicator>> {
@@ -1261,7 +1289,7 @@ class SkillsViewModel @Inject constructor(
         val activeGuildDailyIds = flags.guildDailyIds.filter { it !in flags.guildDailyClaimed }
         val completedIds = progressById.entries.filter { it.value.completed }.map { it.key }.toSet()
 
-        fun addIndicator(key: String, skill: String, category: QuestCategory, remaining: Int, questId: String) {
+        fun addIndicator(key: String, skill: String, category: QuestCategory, remaining: Int, questId: String, customEmoji: String? = null) {
             val isCompletable = when (skill) {
                 Skills.RUNECRAFTING -> {
                     val rune = gameData.runes[key]
@@ -1292,7 +1320,7 @@ class SkillsViewModel @Inject constructor(
             // Prefixed by skill: some item keys (e.g. "ashes") are shared between skills
             // (Firemaking byproduct vs. Prayer buriable), and would otherwise leak
             // indicators across their sheets (issue #1014).
-            result.getOrPut("$skill:$key") { mutableListOf() }.add(QuestIndicator(category, isCompletable, questId))
+            result.getOrPut("$skill:$key") { mutableListOf() }.add(QuestIndicator(category, isCompletable, questId, customEmoji))
         }
 
         fun checkAndAdd(questId: String, questType: String, questSkill: String, questTarget: String, questAmount: Int, questProgressVal: Int, category: QuestCategory) {
@@ -1412,13 +1440,32 @@ class SkillsViewModel @Inject constructor(
             checkAndAdd(id, template.type, template.guild, template.target, template.amount, progress, QuestCategory.GUILD_DAILY)
         }
 
+        // Seasonal Event Bounties
+        val eventEmoji = seasonalEventRepo.activeEvent()?.iconEmoji ?: QuestCategory.SEASONAL.emoji
+        for (bounty in seasonalEventRepo.getActiveBounties(flags, inventory)) {
+            val task = bounty.task
+            val remaining = task.amount - bounty.progress
+            if (remaining <= 0) continue
+            val skill = task.skill ?: continue
+            when (task.type) {
+                "gather", "craft" -> {
+                    addIndicator(task.target, skill, QuestCategory.SEASONAL, remaining, task.id, eventEmoji)
+                }
+                "turn_in" -> {
+                    val isCompletable = (inventory[task.target] ?: 0) >= task.amount
+                    result.getOrPut("$skill:${task.target}") { mutableListOf() }
+                        .add(QuestIndicator(QuestCategory.SEASONAL, isCompletable, task.id, eventEmoji))
+                }
+            }
+        }
+
         return result
     }
 
     private fun petBoostFor(petsJson: String, skillKey: String, ironman: Boolean = false): Int {
         if (ironman) return 0
         val pets = try {
-            json.decodeFromString<List<com.fantasyidler.data.model.OwnedPet>>(petsJson)
+            json.decodeFromString<List<OwnedPet>>(petsJson)
         } catch (_: Exception) {
             return 0
         }
@@ -1432,7 +1479,7 @@ class SkillsViewModel @Inject constructor(
         if (saveChance <= 0f) return totalQty
         var toConsume = 0
         for (u in 0 until totalQty) {
-            if (kotlin.random.Random.nextFloat() >= saveChance) toConsume++
+            if (Random.nextFloat() >= saveChance) toConsume++
         }
         return toConsume
     }

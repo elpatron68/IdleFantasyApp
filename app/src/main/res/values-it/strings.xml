@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">Pronta per la raccolta</string>
     <string name="label_empty">Vuota</string>
     <string name="inventory_sort_quantity">Quantità</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">Armi</string>
     <string name="inventory_cat_armour">Armature</string>
     <string name="inventory_cat_tools">Utensili</string>
@@ -162,7 +162,7 @@
     <string name="label_inactive">Inattivo</string>
     <string name="label_boost">Potenziamento</string>
     <string name="label_xp_boost">Potenziamento XP</string>
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string>
+    <string name="label_prestige_xp_boost">Bonus XP Onore</string>
     <string name="label_weapon">Arma</string>
     <string name="label_armour">Armatura</string>
     <string name="label_food">Cibo</string>
@@ -475,9 +475,9 @@
     <string name="settings_source_code">Codice Sorgente</string>
 
     <string name="settings_source_open">Apri</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">Salvataggio esportato</string>
     <string name="settings_imported_ok">Salvataggio importato con successo</string>
@@ -734,6 +734,7 @@
     <string name="quest_legend_title">Icone delle missioni</string>
     <string name="quest_legend_daily">Missione giornaliera</string>
     <string name="quest_legend_weekly">Missione settimanale</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">Giornaliera di gilda</string>
     <string name="quest_legend_guild">Missione di gilda</string>
     <string name="quest_legend_quest">Missione</string>
@@ -756,7 +757,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">No materiale</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">Effetti</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP totali</string>
@@ -809,7 +810,7 @@
     <string name="character_race_elf">Elfo</string>
     <string name="character_race_dwarf">Nano</string>
     <string name="character_race_orc">Orco</string>
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">Gnomo</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -959,7 +960,7 @@
     <string name="quest_kbd_slayer_2_name">Sgozzatore di Draghi Neri Regali II</string>
     <string name="quest_kbd_slayer_3_name">Sgozzatore di Draghi Neri Regali III</string>
     <string name="inn_daily_resets">Si aggiorna quotidianamente alle %1$s</string>
-    <string name="inn_food_heal">+%1$d HP</string>
+    <string name="inn_food_heal">+%1$d PS</string>
     <string name="inn_food_purchased">Cibo acquistato.</string>
     <string name="inn_buy_qty">Quantità</string>
     <string name="inn_buy_total">Totale: %1$s</string>
@@ -1256,7 +1257,7 @@
     <string name="house_sub_table_decor">Centrotavola</string>
     <string name="house_sub_nightstands">Comodini</string>
     <string name="house_sub_wardrobes">Armadi</string>
-    <string name="house_item_tabledecor_silver_cup">Silver Cup</string>
+    <string name="house_item_tabledecor_silver_cup">Tazza d\'Argento</string>
     <string name="house_item_tabledecor_silver_cups">Tazze d\'argento</string>
     <string name="house_item_tabledecor_silver_jug">Brocca d\'argento</string>
     <string name="house_item_tabledecor_silver_narrow_pitcher">Boccale d\'argento</string>
@@ -1605,7 +1606,7 @@
     <string name="carnival_idle_desc_wizard">Lancia incantesimi illusori contro maghi rivali. La tua padronanza della magia influirà sul risultato.</string>
     <string name="carnival_fishing_derby">Gara di pesca</string>
     <string name="carnival_idle_desc_fishing">Pesca il pesce più grande di tutti! Fai pratica per puntare ai premi migliori!</string>
-    <string name="carnival_skill_level">%1$s Lv.%2$d</string>
+    <string name="carnival_skill_level">%1$s Liv. %2$d</string>
     <string name="carnival_ticket_yield">circa %1$d biglietti/sessione</string>
     <string name="carnival_queue">Metti in coda</string>
     <string name="carnival_ring_toss">Lancio degli anelli</string>
@@ -1802,7 +1803,7 @@
     <string name="bonus_coin_return">+%1$d%% ritorno in monete</string>
     <string name="bonus_tower">Torre</string>
     <string name="bonus_builder_discount_detail" formatted="false">Sconto del 0,5% agli edifici per ogni livello</string>
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% monete</string>
     <string name="bonus_hp">+%1$d PS</string>
     <string name="snackbar_added_to_queue">Aggiunto alla coda: %1$s.</string>

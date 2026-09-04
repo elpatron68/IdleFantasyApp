@@ -647,14 +647,14 @@ private fun PlantSheet(
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                androidx.compose.material3.FilterChip(
+                FilterChip(
                     selected = selectedAshKey == null,
                     onClick  = { selectedAshKey = null },
                     label    = { Text(stringResource(R.string.catalyst_none)) },
                 )
                 availableAshes.forEach { ashKey ->
                     val pct = ((FarmingRepository.ashYieldMultiplier(ashKey) - 1f) * 100).toInt()
-                    androidx.compose.material3.FilterChip(
+                    FilterChip(
                         selected = selectedAshKey == ashKey,
                         onClick  = { selectedAshKey = ashKey },
                         label    = { Text("${GameStrings.itemName(context, ashKey)} (+$pct%)") },

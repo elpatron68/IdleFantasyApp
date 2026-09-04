@@ -1,6 +1,6 @@
 package com.fantasyidler.ui.screen
 
-
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -119,7 +119,7 @@ internal fun ThievingSheet(
     hasActiveSession: Boolean,
     isQueueFull: Boolean,
     sessionDurationMs: Long,
-    context: android.content.Context,
+    context: Context,
     activeQuests: Map<String, List<QuestIndicator>> = emptyMap(),
     onSelect: (String) -> Unit,
 ) {

@@ -1,6 +1,7 @@
 package com.fantasyidler.notification
 
 import android.Manifest
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -159,7 +160,7 @@ class SessionNotificationManager @Inject constructor(
         postIfPermitted(NOTIF_ID_BLESSING_EXPIRED, notification)
     }
 
-    private fun postIfPermitted(id: Int, notification: android.app.Notification) {
+    private fun postIfPermitted(id: Int, notification: Notification) {
         if (appInForeground) return
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
             == PackageManager.PERMISSION_GRANTED

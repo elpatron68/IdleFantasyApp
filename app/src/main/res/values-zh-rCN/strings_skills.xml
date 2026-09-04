@@ -23,7 +23,7 @@
     <string name="skill_cooking_desc">将生食材烹饪为食物，在战斗中恢复生命值。</string>
     <string name="skill_fletching_name">制箭</string>
     <string name="skill_fletching_desc">用木材和金属部件制作弓箭。</string>
-    <string name="skill_crafting_name">制作</string>
+    <string name="skill_crafting_name">工艺制作</string>
     <string name="skill_crafting_desc">用珍贵材料制作珠宝及其他手工物品。</string>
     <string name="skill_runecrafting_name">符文制作</string>
     <string name="skill_runecrafting_desc">用符文精华制作魔法符文，用于施放法术。</string>

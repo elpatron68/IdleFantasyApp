@@ -53,6 +53,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.data.json.EquipmentData
+import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.ui.viewmodel.TowerMilestone
 import com.fantasyidler.ui.viewmodel.TowerViewModel
@@ -170,9 +171,9 @@ private fun TowerHeaderCard(
     onWeaponSlotSelected: (String) -> Unit,
     selectedArrowKey:     String?,
     onArrowSelected:      (String?) -> Unit,
-    selectedSpell:        com.fantasyidler.data.json.SpellData?,
-    availableSpells:      List<com.fantasyidler.data.json.SpellData>,
-    onSpellSelected:      (com.fantasyidler.data.json.SpellData?) -> Unit,
+    selectedSpell:        SpellData?,
+    availableSpells:      List<SpellData>,
+    onSpellSelected:      (SpellData?) -> Unit,
     magicLevel:           Int,
     inventory:            Map<String, Int>,
     selectedPotionKey:    String?,

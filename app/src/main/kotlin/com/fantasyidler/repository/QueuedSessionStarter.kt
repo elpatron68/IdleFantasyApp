@@ -213,6 +213,19 @@ class QueuedSessionStarter @Inject constructor(
     }
 
     /**
+     * Catch-up budget charge for a just-inserted offline boss fight: the ACTUAL fight
+     * length read back from its frames, not the nominal full duration. Billing every
+     * fight its whole durationMinutes starved overnight repeat chains to a handful of
+     * fights per night (issue #1664). Clamped to the estimate so the accounting never
+     * exceeds what the entry gate approved.
+     */
+    private suspend fun actualBossChargeMs(estimateMs: Long): Long {
+        val session = sessionRepo.getActiveSession() ?: return estimateMs
+        if (session.skillName != "boss") return estimateMs
+        return (sessionRepo.bossFightEndMs(session) - session.startedAt).coerceIn(1L, estimateMs)
+    }
+
+    /**
      * Pops the next queued action and inserts it as an already-completed session,
      * provided its estimated duration fits within [remainingMs]. A Tower floor blocked
      * on pending collection is skipped and stashed rather than parked at the front,
@@ -260,7 +273,7 @@ class QueuedSessionStarter @Inject constructor(
                     return@withLock try {
                         startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
                         playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(activeBossRepeatIndex = flags.activeBossRepeatIndex + 1))
-                        duration
+                        actualBossChargeMs(duration)
                     } catch (_: Exception) {
                         playerRepo.clearActiveBossRepeatUnlocked()
                         0L
@@ -308,7 +321,7 @@ class QueuedSessionStarter @Inject constructor(
                         if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                         val finalQueue = skippedTowerActions + remaining
                         playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(sessionQueue = finalQueue))
-                        return@withLock duration
+                        return@withLock if (next.skillName == "boss") actualBossChargeMs(duration) else duration
                     } catch (_: TowerPendingCollectionException) {
                         skippedTowerActions += next
                     } catch (_: ActionNoLongerQualifiesException) {

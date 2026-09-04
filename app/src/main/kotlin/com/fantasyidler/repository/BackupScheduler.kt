@@ -2,6 +2,7 @@ package com.fantasyidler.repository
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.provider.DocumentsContract
@@ -184,7 +185,7 @@ class BackupScheduler @Inject constructor(
         return ok
     }
 
-    private fun childDocuments(cr: android.content.ContentResolver, treeUri: Uri, treeDocId: String): List<Pair<String, String>> {
+    private fun childDocuments(cr: ContentResolver, treeUri: Uri, treeDocId: String): List<Pair<String, String>> {
         val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, treeDocId)
         val docs = mutableListOf<Pair<String, String>>()
         cr.query(

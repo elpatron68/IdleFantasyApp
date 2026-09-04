@@ -554,11 +554,11 @@
     <string name="skilling_dungeon_whispering_grove_note_3">Un druido ha inciso un avvertimento nella corteccia: «Il cuore del bosco non è più quello di un tempo. Allontanati.»</string>
     <string name="skilling_dungeon_whispering_grove_note_4">Rami corrotti sbarrano il tuo cammino. La foresta rifiuta la tua presenza.</string>
     <string name="skilling_dungeon_whispering_grove_note_5">Uno spiraglio tra le piante rivela delle rovine. Le Rovine della Foresta Antica ti attendono.</string>
-    <string name="skilling_dungeon_thieves_den_note_1">A crumpled ledger page: names, dates, and numbers. Someone has been tracking payments to a person called the Warden.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_thieves_den_note_2">Scratched into the wall: \'For those who prove themselves — the Sanctum awaits. Ask no questions.\'</string> <!-- untranslated -->
-    <string name="skilling_dungeon_thieves_den_note_3">A torn letter warning a member to stay away from the eastern tunnels. No reason is given.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_thieves_den_note_4">A wax-sealed map fragment. The seal is unfamiliar — a shadow behind a locked door.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_thieves_den_note_5">The last passage opens into a vaulted chamber. At the far end, a reinforced door bears the same seal. The Rogue Sanctum lies beyond.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_thieves_den_note_1">Vecchie pagine contabili: nomi, date, numeri. Qualcuno teneva traccia di una persona con nome in codice \"Guardiano\".</string>
+    <string name="skilling_dungeon_thieves_den_note_2">Qualcuno ha scritto sul muro: «Il Santuario aspetta chi vuole mettersi alla prova. Non fare domande.»</string>
+    <string name="skilling_dungeon_thieves_den_note_3">Una lettera strappata avvisa di stare alla larga dai tunnel orientali. Il motivo non viene riportato.</string>
+    <string name="skilling_dungeon_thieves_den_note_4">Un frammento di mappa con un sigillo ufficiale. Non riconosci il simbolo impresso: un\'ombra dietro una porta sigillata.</string>
+    <string name="skilling_dungeon_thieves_den_note_5">Il passaggio termina in una stanza ben protetta. In fondo, una porta blindata riporta lo stesso sigillo. Il Santuario dei Briganti ti attende oltre la soglia.</string>
     <string name="skilling_dungeon_crumbling_watchtower_note_1">Fresh rope marks on the windowsills. Someone uses this tower regularly.</string> <!-- untranslated -->
     <string name="skilling_dungeon_crumbling_watchtower_note_2">A hidden cache inside a cracked wall: lockpicks, a short blade, and a coded ledger.</string> <!-- untranslated -->
     <string name="skilling_dungeon_crumbling_watchtower_note_3">The ledger is a tally of stolen goods and split payments. The rogues operate out of somewhere beneath the hill.</string> <!-- untranslated -->
@@ -566,7 +566,7 @@
     <string name="skilling_dungeon_crumbling_watchtower_note_5">The trapdoor opens onto a carved stairway going deep into the earth. The Shadow Den waits below.</string> <!-- untranslated -->
     <string name="skilling_dungeon_copper_caverns_note_1">Le pareti della miniera sono solcate da profondi tagli, troppo grandi e profondi per essere di piccone.</string>
     <string name="skilling_dungeon_copper_caverns_note_2">Vecchie attrezzature minerarie, piegate e ormai inutilizzabili. Chiunque stesse lavorando qui è fuggito di corsa.</string>
-    <string name="skilling_dungeon_copper_caverns_note_3">Una nota lasciata da un minatore: “Abbiamo sfondato verso sotto. Il capo ha chiuso il ramo più basso. Non ci ha detto il motivo.”</string>
+    <string name="skilling_dungeon_copper_caverns_note_3">Una nota lasciata da un minatore: «Abbiamo sfondato verso sotto. Il capo ha chiuso il ramo più basso. Non ci ha detto il motivo.»</string>
     <string name="skilling_dungeon_copper_caverns_note_4">Cupi rumori e scosse provengono dalle profondità. Polvere di roccia scende dal soffitto a intervalli regolari. Qualcosa si muove.</string>
     <string name="skilling_dungeon_copper_caverns_note_5">I sigilli non resistono lo scorrere del tempo. Una profonda e vasta caverna ti da il benvenuto: la Miniera Crollata è oltre questo passaggio.</string>
     <string name="skilling_dungeon_shadow_vault_note_1">A dossier on every major merchant in the city. Someone has been compiling this for years.</string> <!-- untranslated -->

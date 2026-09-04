@@ -33,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -51,6 +52,7 @@ import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.json.SpellData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.ui.viewmodel.CombatViewModel.Companion.MAX_DUNGEON_REPEAT_COUNT
+import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.toTitleCase
 
@@ -81,7 +83,7 @@ internal fun DungeonInfoSheet(
     onDismiss: () -> Unit,
 ) {
     val context    = LocalContext.current
-    var tappedEnemyKey by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf<String?>(null) }
+    var tappedEnemyKey by remember { mutableStateOf<String?>(null) }
 
     tappedEnemyKey?.let { enemyKey ->
         val enemy = enemies[enemyKey]
@@ -121,7 +123,7 @@ internal fun DungeonInfoSheet(
             )
         }
     }
-    val combatLvl  = combatLevel(skillLevels)
+    val combatLvl  = combatLevelFrom(skillLevels)
     val canEnter   = combatLvl >= dungeon.recommendedLevel - UNLOCK_TOLERANCE
     val combatStyle = when (equippedWeapon?.combatStyle) {
         "ranged"   -> "ranged"

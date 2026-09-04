@@ -399,10 +399,9 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
 
 @Composable
 private fun buildSlotGroups(entries: List<ArmoryEntry>): List<Pair<String, List<ArmoryEntry>>> {
-    val context = LocalContext.current
     val grouped = linkedMapOf<String, MutableList<ArmoryEntry>>()
     entries.forEach { entry ->
-        val group = GameStrings.slotName(context, entry.item.slot)
+        val group = GameStrings.slotName(LocalContext.current, entry.item.slot)
         grouped.getOrPut(group) { mutableListOf() }.add(entry)
     }
     return grouped.map { it.key to it.value }

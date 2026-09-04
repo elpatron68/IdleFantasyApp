@@ -820,8 +820,8 @@
     <string name="item_construction_guild_cape_name">建筑公会披风</string>
     <string name="item_cooking_cape_name">烹饪披风</string>
     <string name="item_cooking_guild_cape_name">烹饪公会披风</string>
-    <string name="item_crafting_cape_name">工艺披风</string>
-    <string name="item_crafting_guild_cape_name">工艺公会披风</string>
+    <string name="item_crafting_cape_name">工艺制作披风</string>
+    <string name="item_crafting_guild_cape_name">工艺制作公会披风</string>
     <string name="item_deep_iron_pickaxe_name">深铁镐</string>
     <string name="item_defense_cape_name">防御披风</string>
     <string name="item_demon_lord_name">恶魔领主</string>
@@ -1125,8 +1125,8 @@
     <string name="item_cooking_guild_cape_desc" formatted="false">烹饪公会等级达到 10 级即可获得，每轮烹饪食物产出 + 5%</string>
     <string name="item_fletching_cape_desc" formatted="false">制箭等级达到 99 级时授予，每轮制作箭矢产出 + 10%</string>
     <string name="item_fletching_guild_cape_desc" formatted="false">制箭公会等级达到 10 级即可获得，每轮制作箭矢产出 + 5%</string>
-    <string name="item_crafting_cape_desc" formatted="false">制作等级达到 99 级时授予。每轮工艺制作物品产出 + 10%</string>
-    <string name="item_crafting_guild_cape_desc" formatted="false">制作公会等级达到 10 级即可获得。每轮工艺制作物品产出 + 5%</string>
+    <string name="item_crafting_cape_desc" formatted="false">工艺制作等级达到 99 级时授予。每轮工艺制作物品产出 + 10%</string>
+    <string name="item_crafting_guild_cape_desc" formatted="false">工艺制作公会等级达到 10 级即可获得。每轮工艺制作物品产出 + 5%</string>
     <string name="item_firemaking_cape_desc" formatted="false">生火等级达到 99 级时授予，每轮生火灰烬产出 + 10%</string>
     <string name="item_firemaking_guild_cape_desc" formatted="false">生火公会等级达到 10 级即可获得，每轮生火灰烬产出 + 5%</string>
     <string name="item_runecrafting_cape_desc" formatted="false">符文制作等级达到 99 级时授予。每轮制符符文产出 + 10%</string>

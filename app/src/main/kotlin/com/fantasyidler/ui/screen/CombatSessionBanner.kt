@@ -421,7 +421,7 @@ internal fun CombatSessionBanner(
                         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp), color = divColor)
                         val hpPct   = currentPlayerHp * 100 / maxHp
                         val hpColor = when {
-                            hpPct >= 50 -> Color(0xFF4CAF50)
+                            hpPct >= 50 -> MaterialTheme.colorScheme.tertiary
                             hpPct >= 20 -> Color(0xFFFFC107)
                             else        -> MaterialTheme.colorScheme.error
                         }
@@ -444,7 +444,7 @@ internal fun CombatSessionBanner(
                             progress  = { if (maxHp > 0) currentPlayerHp / maxHp.toFloat() else 0f },
                             modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                             color     = hpColor,
-                            trackColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.15f),
+                            trackColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f),
                         )
                         val atkLabel = stringResource(R.string.combat_atk)
                         val strLabel = stringResource(R.string.combat_str)
@@ -489,7 +489,7 @@ internal fun CombatSessionBanner(
                                 val downed    = mercHpNow <= 0
                                 val mercHpPct   = if (mercMaxHp > 0) mercHpNow * 100 / mercMaxHp else 0
                                 val mercHpColor = when {
-                                    mercHpPct >= 50 -> Color(0xFF4CAF50)
+                                    mercHpPct >= 50 -> MaterialTheme.colorScheme.tertiary
                                     mercHpPct >= 20 -> Color(0xFFFFC107)
                                     else            -> MaterialTheme.colorScheme.error
                                 }
@@ -515,7 +515,7 @@ internal fun CombatSessionBanner(
                                     progress  = { if (mercMaxHp > 0) mercHpNow / mercMaxHp.toFloat() else 0f },
                                     modifier  = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
                                     color     = mercHpColor,
-                                    trackColor = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.15f),
+                                    trackColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f),
                                 )
                                 Spacer(Modifier.height(4.dp))
                                 Text(
@@ -655,7 +655,7 @@ internal fun CombatSessionBanner(
                                         Text(
                                             text  = stringResource(R.string.combat_log_heal, entry.heal),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = Color(0xFF4CAF50),
+                                            color = MaterialTheme.colorScheme.tertiary,
                                         )
                                     } else if (entry.isKill) {
                                         Text(
@@ -670,7 +670,7 @@ internal fun CombatSessionBanner(
                                             color = Color(0xFF64B5F6),
                                         )
                                     } else if (entry.isPlayer) {
-                                        val color = if (entry.damage > 0) Color(0xFF4CAF50)
+                                        val color = if (entry.damage > 0) MaterialTheme.colorScheme.tertiary
                                                     else MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.45f)
                                         val text = when {
                                             entry.doubleHit && entry.damage > 0 ->

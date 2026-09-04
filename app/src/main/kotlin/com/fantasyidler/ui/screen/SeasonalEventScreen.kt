@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.AlertDialog
@@ -75,6 +76,7 @@ import com.fantasyidler.ui.viewmodel.SkillsViewModel
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatDurationMs
+import kotlin.random.Random
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -104,7 +106,7 @@ fun SeasonalEventScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = null)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                     }
                 },
             )
@@ -631,7 +633,7 @@ private fun BonfireRhythmGame(
         var localHits = 0
         for (r in 0 until config.rounds) {
             round = r
-            litHole = kotlin.random.Random.nextInt(config.holeCount)
+            litHole = Random.nextInt(config.holeCount)
             var elapsed = 0L
             var hitThisRound = false
             while (elapsed < visibleMs) {
@@ -767,8 +769,8 @@ private fun LanternSequenceGame(
     // Plays the sequence back at the start of every round, then hands control to the player.
     LaunchedEffect(isPlaying, round, showingSequence) {
         if (!isPlaying || !showingSequence) return@LaunchedEffect
-        if (sequence.isEmpty()) sequence.add(kotlin.random.Random.nextInt(config.holeCount))
-        sequence.add(kotlin.random.Random.nextInt(config.holeCount))
+        if (sequence.isEmpty()) sequence.add(Random.nextInt(config.holeCount))
+        sequence.add(Random.nextInt(config.holeCount))
         delay(500L)
         for (index in sequence) {
             litLantern = index

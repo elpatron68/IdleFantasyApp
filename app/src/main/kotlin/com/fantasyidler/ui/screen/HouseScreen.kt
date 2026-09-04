@@ -1,8 +1,11 @@
 package com.fantasyidler.ui.screen
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,7 +18,9 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -73,6 +78,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
@@ -107,11 +113,16 @@ import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.FileProvider
+import com.fantasyidler.data.json.HouseCostTier
+import com.fantasyidler.data.json.HouseTilesData
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.math.abs
 import kotlin.math.floor
 
 // ---------------------------------------------------------------------------
@@ -168,7 +179,7 @@ private fun residentSpot(state: HouseUiState, tileDef: (String) -> HouseTileDef?
             for (cx in room.x until room.x + room.w)
                 for (cy in room.y until room.y + room.h) add(cx to cy)
         }.sortedBy { (cx, cy) ->
-            kotlin.math.abs(cx + 0.5f - centerX) + kotlin.math.abs(cy + 0.5f - centerY)
+            abs(cx + 0.5f - centerX) + abs(cy + 0.5f - centerY)
         }
         for ((cx, cy) in cells) {
             val hx = cx * SUBC
@@ -224,7 +235,7 @@ private fun DrawScope.drawResident(context: Context, state: HouseUiState, cell: 
 private fun shareHouseImage(
     context: Context,
     state: HouseUiState,
-    tiles: com.fantasyidler.data.json.HouseTilesData,
+    tiles: HouseTilesData,
     atlas: ImageBitmap,
     tileDef: (String) -> HouseTileDef?,
 ) {
@@ -234,7 +245,7 @@ private fun shareHouseImage(
     val image = ImageBitmap(w, h)
     CanvasDrawScope().draw(
         Density(1f), LayoutDirection.Ltr,
-        androidx.compose.ui.graphics.Canvas(image),
+        Canvas(image),
         Size(w.toFloat(), h.toFloat()),
     ) {
         drawHouseWorld(state, tiles, atlas, context, tileDef,
@@ -244,15 +255,15 @@ private fun shareHouseImage(
     val dir = File(context.cacheDir, "images").apply { mkdirs() }
     val file = File(dir, "my_house.png")
     FileOutputStream(file).use {
-        image.asAndroidBitmap().compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it)
+        image.asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it)
     }
     val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-    val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+    val intent = Intent(Intent.ACTION_SEND).apply {
         type = "image/png"
-        putExtra(android.content.Intent.EXTRA_STREAM, uri)
-        addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        putExtra(Intent.EXTRA_STREAM, uri)
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
-    context.startActivity(android.content.Intent.createChooser(intent, null))
+    context.startActivity(Intent.createChooser(intent, null))
 }
 
 // ---------------------------------------------------------------------------
@@ -855,7 +866,7 @@ private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: I
                 }
             },
     ) {
-        androidx.compose.foundation.layout.BoxWithConstraints(Modifier.fillMaxSize()) {
+        BoxWithConstraints(Modifier.fillMaxSize()) {
             val cellDp = maxWidth / GRID
             Box(
                 Modifier
@@ -915,7 +926,7 @@ private fun NudgePad(onNudge: (Int, Int) -> Unit, onDone: () -> Unit, modifier: 
 
 /** The player's character standing on a free cell of their largest room (view mode). */
 @Composable
-private fun ResidentOverlay(state: HouseUiState, viewModel: HouseViewModel, cellDp: androidx.compose.ui.unit.Dp) {
+private fun ResidentOverlay(state: HouseUiState, viewModel: HouseViewModel, cellDp: Dp) {
     val spot = residentSpot(state) { viewModel.houseRepo.tileDef(it) } ?: return
     val spriteH = cellDp * 1.8f
     val spriteW = spriteH * (64f / 36f)
@@ -942,7 +953,7 @@ private fun ResidentOverlay(state: HouseUiState, viewModel: HouseViewModel, cell
 /** Draws the whole house world: ground, floors, walls, and every placement. */
 private fun DrawScope.drawHouseWorld(
     state: HouseUiState,
-    tiles: com.fantasyidler.data.json.HouseTilesData,
+    tiles: HouseTilesData,
     atlas: ImageBitmap,
     context: Context,
     tileDef: (String) -> HouseTileDef?,
@@ -1004,7 +1015,7 @@ private fun HouseCanvasContent(
     viewModel: HouseViewModel,
     atlas: ImageBitmap,
     context: Context,
-    tiles: com.fantasyidler.data.json.HouseTilesData,
+    tiles: HouseTilesData,
     ghostCell: Pair<Int, Int>?,
     movingIndex: Int?,
 ) {
@@ -1399,7 +1410,7 @@ private fun HousePalette(state: HouseUiState, viewModel: HouseViewModel, atlas: 
 
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(CATEGORY_ORDER, key = { it }) { cat ->
@@ -1422,7 +1433,7 @@ private fun HousePalette(state: HouseUiState, viewModel: HouseViewModel, atlas: 
         } else {
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(state.earnedBanners, key = { it.bannerIcon ?: it.eventId }) { banner ->
@@ -1456,7 +1467,7 @@ private fun HousePalette(state: HouseUiState, viewModel: HouseViewModel, atlas: 
     if (subSections.isNotEmpty()) {
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(subSections.size + 1, key = { it }) { i ->
@@ -1484,7 +1495,7 @@ private fun HousePalette(state: HouseUiState, viewModel: HouseViewModel, atlas: 
 
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items, key = { it.key }) { (key, def) ->
@@ -1528,8 +1539,8 @@ private fun BannerPaletteCard(icon: String, state: HouseUiState, viewModel: Hous
             modifier = Modifier.padding(8.dp),
         ) {
             if (resId != null) {
-                androidx.compose.foundation.Image(
-                    painter = androidx.compose.ui.res.painterResource(resId),
+                Image(
+                    painter = painterResource(resId),
                     contentDescription = null,
                     modifier = Modifier.height(44.dp),
                 )
@@ -1702,7 +1713,7 @@ private fun RoomSheet(index: Int, state: HouseUiState, viewModel: HouseViewModel
     val perCell = viewModel.houseRepo.expansionCost(index)
     var showDemolishConfirm by remember { mutableStateOf(false) }
     if (showDemolishConfirm) {
-        androidx.compose.material3.AlertDialog(
+        AlertDialog(
             onDismissRequest = { showDemolishConfirm = false },
             title = { Text(stringResource(R.string.house_demolish_confirm_title)) },
             text = { Text(stringResource(R.string.house_demolish_confirm_message)) },
@@ -1852,7 +1863,7 @@ private fun ExpandButton(
     labelRes: Int,
     dir: HouseDirection,
     cells: Int,
-    perCell: com.fantasyidler.data.json.HouseCostTier,
+    perCell: HouseCostTier,
     state: HouseUiState,
     viewModel: HouseViewModel,
     shrink: Boolean,

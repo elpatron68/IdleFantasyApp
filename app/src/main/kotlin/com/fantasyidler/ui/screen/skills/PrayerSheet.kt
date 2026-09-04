@@ -90,6 +90,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.text.style.TextAlign
 import com.fantasyidler.ui.viewmodel.CraftableRecipe
 import com.fantasyidler.ui.viewmodel.CraftingUiState
@@ -250,7 +251,7 @@ internal fun PrayerSheet(
             // ── Quantity picker ──────────────────────────────────────────
             val inventoryMax = inventory[selectedKey] ?: 0
             val maxQty = minOf(inventoryMax, tierMaxQty)
-            var qty by remember(selectedKey) { androidx.compose.runtime.mutableIntStateOf(maxQty.coerceAtLeast(1)) }
+            var qty by remember(selectedKey) { mutableIntStateOf(maxQty.coerceAtLeast(1)) }
             var textValue by remember(selectedKey) { mutableStateOf(maxQty.coerceAtLeast(1).toString()) }
 
             TextButton(

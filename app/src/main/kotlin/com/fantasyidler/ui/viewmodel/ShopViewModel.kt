@@ -27,6 +27,7 @@ import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import android.content.Context
 import com.fantasyidler.R
+import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.withAppLocale
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -699,7 +700,7 @@ class ShopViewModel @Inject constructor(
         fun computeOldEquipmentToSell(
             equipped: Map<String, String?>,
             inventory: Map<String, Int>,
-            allEquip: Map<String, com.fantasyidler.data.json.EquipmentData>,
+            allEquip: Map<String, EquipmentData>,
             keepOneOfEach: Boolean = false,
             reserved: Map<String, Int> = emptyMap(),
             armorLoadouts: Map<String, Map<String, String?>> = emptyMap(),

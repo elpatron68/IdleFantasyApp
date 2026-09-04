@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">収穫可能</string>
     <string name="label_empty">空</string>
     <string name="inventory_sort_quantity">数量</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">武器</string>
     <string name="inventory_cat_armour">防具</string>
     <string name="inventory_cat_tools">道具</string>
@@ -475,9 +475,9 @@
     <string name="settings_source_code">ソースコード</string>
 
     <string name="settings_source_open">開く</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">セーブデータを書き出しました</string>
     <string name="settings_imported_ok">セーブデータの読み込みに成功しました</string>
@@ -720,6 +720,7 @@
     <string name="quest_legend_title">クエストアイコン</string>
     <string name="quest_legend_daily">デイリークエスト</string>
     <string name="quest_legend_weekly">ウィークリークエスト</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">ギルドデイリー</string>
     <string name="quest_legend_guild">ギルドクエスト</string>
     <string name="quest_legend_quest">クエスト</string>
@@ -742,7 +743,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">素材なし</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">効果</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">合計 +%1$d XP</string>
@@ -795,7 +796,7 @@
     <string name="character_race_elf">エルフ</string>
     <string name="character_race_dwarf">ドワーフ</string>
     <string name="character_race_orc">オーク</string>
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">ノーム</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1788,7 +1789,7 @@
     <string name="bonus_coin_return">+%1$d%% コイン獲得</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">キューに追加: %1$s</string>

@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -81,6 +82,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import com.fantasyidler.ui.screen.MercantileSheetContent
 import com.fantasyidler.ui.viewmodel.CraftingViewModel
 import com.fantasyidler.ui.viewmodel.SheetQuestSource
 import com.fantasyidler.ui.viewmodel.SheetQuestSummary
@@ -123,15 +125,17 @@ fun SkillsScreen(
             onDismissRequest = { showLegend = false },
             title = { Text(stringResource(R.string.quest_legend_title)) },
             text  = {
+                val seasonalEmoji = state.seasonalEventEmoji ?: QuestCategory.SEASONAL.emoji
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     listOf(
-                        QuestCategory.DAILY       to R.string.quest_legend_daily,
-                        QuestCategory.WEEKLY      to R.string.quest_legend_weekly,
-                        QuestCategory.GUILD_DAILY to R.string.quest_legend_guild_daily,
-                        QuestCategory.GUILD       to R.string.quest_legend_guild,
-                        QuestCategory.MAIN        to R.string.quest_legend_quest,
-                    ).forEach { (category, labelRes) ->
-                        Text("${category.emoji}  ${stringResource(labelRes)}")
+                        QuestCategory.DAILY.emoji       to R.string.quest_legend_daily,
+                        QuestCategory.WEEKLY.emoji      to R.string.quest_legend_weekly,
+                        seasonalEmoji                   to R.string.quest_legend_seasonal,
+                        QuestCategory.GUILD_DAILY.emoji to R.string.quest_legend_guild_daily,
+                        QuestCategory.GUILD.emoji       to R.string.quest_legend_guild,
+                        QuestCategory.MAIN.emoji        to R.string.quest_legend_quest,
+                    ).forEach { (emoji, labelRes) ->
+                        Text("$emoji  ${stringResource(labelRes)}")
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text("●  ", color = MaterialTheme.colorScheme.primary)
@@ -449,8 +453,8 @@ fun SkillActivitySheet(
                     is SheetState.Thieving -> ThievingSheet(
                         guildDailyButton  = dailyBanner,
                         npcs              = sheet.npcs,
-                        thievingLevel     = state.skillLevels[com.fantasyidler.data.model.Skills.THIEVING] ?: 1,
-                        currentXp         = state.skillXp[com.fantasyidler.data.model.Skills.THIEVING] ?: 0L,
+                        thievingLevel     = state.skillLevels[Skills.THIEVING] ?: 1,
+                        currentXp         = state.skillXp[Skills.THIEVING] ?: 0L,
                         isStarting        = state.startingSession,
                         hasActiveSession  = state.anySessionActive,
                         isQueueFull       = state.queueSize >= state.maxQueueSize,
@@ -511,9 +515,10 @@ private fun GuildDailySheetBanner(
 
     if (showDialog) {
         val sections = listOf(
-            SheetQuestSource.GUILD  to R.string.guild_daily_button,
-            SheetQuestSource.DAILY  to R.string.label_daily,
-            SheetQuestSource.WEEKLY to R.string.label_weekly,
+            SheetQuestSource.GUILD    to R.string.guild_daily_button,
+            SheetQuestSource.DAILY    to R.string.label_daily,
+            SheetQuestSource.WEEKLY   to R.string.label_weekly,
+            SheetQuestSource.SEASONAL to R.string.seasonal_bounty_board_title,
         ).mapNotNull { (source, labelRes) ->
             quests.filter { it.source == source }.takeIf { it.isNotEmpty() }?.let { labelRes to it }
         }
@@ -542,17 +547,21 @@ private fun GuildDailySheetBanner(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f)) {
                                     Text(
-                                        text       = GameStrings.questName(context, quest.questId, quest.questName),
+                                        text       = when (quest.source) {
+                                            SheetQuestSource.SEASONAL -> GameStrings.seasonalBountyName(context, quest.questId, quest.questName)
+                                            else                      -> GameStrings.questName(context, quest.questId, quest.questName)
+                                        },
                                         style      = MaterialTheme.typography.bodyMedium,
                                         fontWeight = FontWeight.SemiBold,
                                     )
                                     Spacer(Modifier.height(2.dp))
                                     Text(
                                         text  = when (quest.source) {
-                                            SheetQuestSource.GUILD  -> localizedQuestDesc(quest.type, quest.target, quest.amount, quest.guild)
-                                            SheetQuestSource.DAILY  -> buildDailyObjective(context, quest.guild, quest.target, quest.amount, quest.description)
-                                            SheetQuestSource.WEEKLY -> GameStrings.questDesc(context, quest.questId)
+                                            SheetQuestSource.GUILD    -> localizedQuestDesc(quest.type, quest.target, quest.amount, quest.guild)
+                                            SheetQuestSource.DAILY    -> buildDailyObjective(context, quest.guild, quest.target, quest.amount, quest.description)
+                                            SheetQuestSource.WEEKLY   -> GameStrings.questDesc(context, quest.questId)
                                                 .takeIf { it.isNotBlank() } ?: quest.description
+                                            SheetQuestSource.SEASONAL -> GameStrings.seasonalBountyHint(context, quest.questId, quest.description)
                                         },
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -639,7 +648,7 @@ private fun GuildDailySheetBanner(
 private fun SkillsTabContent(
     state: SkillsUiState,
     viewModel: SkillsViewModel,
-    context: android.content.Context,
+    context: Context,
     listState: LazyListState = rememberLazyListState(),
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBoneAltar: () -> Unit = {},

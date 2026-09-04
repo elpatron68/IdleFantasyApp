@@ -14,7 +14,7 @@ Combat level acts as an overarching level indicating your combat ability. Access
 
 Combat level is calculated using the below formula with a minimum level of at least 1:
 
-$`Combat\ Level = 0.325 \times (attackLvl + strengthLvl) + 0.25 \times (defenceLvl + hitpointsLvl)`$
+$`Combat\ Level = 0.65 \times max \left(\dfrac{attackLvl + strengthLvl}{2}, rangedLvl, magicLvl \right) + 0.25 \times (defenceLvl + hitpointsLvl)`$
 
 ## Dungeons
 

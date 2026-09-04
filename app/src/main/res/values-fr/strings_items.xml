@@ -475,9 +475,9 @@
     <string name="item_diamond_necklace_name">Collier avec Diamant</string>
     <string name="item_ancient_treasure_name">Ancien Trésor</string>
     <string name="item_seaweed_name">Algue</string>
-    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
+    <string name="item_old_boot_name">Ancienne Botte</string>
     <string name="item_pearl_name">Perle</string>
-    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
+    <string name="item_black_pearl_name">Perle Noire</string>
     <string name="item_nature_rune_name">Rune Naturelle</string>
     <string name="item_herb_name">Herbe</string>
     <string name="item_mahogany_log_name">Bûche d\'Acajou</string>

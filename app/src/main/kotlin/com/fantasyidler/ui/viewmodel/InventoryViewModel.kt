@@ -52,8 +52,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 import com.fantasyidler.R
+import com.fantasyidler.data.model.OwnedPet
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 /** One row on the Profile Banners tab — either an earned banner or a locked placeholder for a known event. */
@@ -184,7 +188,7 @@ class InventoryViewModel @Inject constructor(
             extra
         } else {
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
-            val pets: List<com.fantasyidler.data.model.OwnedPet> = json.decodeFromString(player.pets)
+            val pets: List<OwnedPet> = json.decodeFromString(player.pets)
             val flags: PlayerFlags = json.decodeFromString(player.flags)
             extra.copy(
                 coins       = player.coins,
@@ -253,14 +257,14 @@ class InventoryViewModel @Inject constructor(
      */
     private fun buildSeasonalBannerDisplays(flags: PlayerFlags): List<SeasonalBannerDisplay> {
         val earnedById = flags.seasonalBannersEarned.associateBy { it.eventId }
-        val yearFormat = java.text.SimpleDateFormat("yyyy", java.util.Locale.getDefault())
+        val yearFormat = SimpleDateFormat("yyyy", Locale.getDefault())
         val allIds = gameData.seasonalEvents.keys + earnedById.keys
         return allIds.distinct().mapNotNull { id ->
             val earned = earnedById[id]
             val event = gameData.seasonalEvents[id]
             val eventName = event?.let { GameStrings.seasonalEventName(context, id, it.displayName) }
             val label = when {
-                eventName != null -> "$eventName ${yearFormat.format(java.util.Date(event.startMs))}"
+                eventName != null -> "$eventName ${yearFormat.format(Date(event.startMs))}"
                 earned    != null -> earned.displayText
                 else              -> return@mapNotNull null
             }

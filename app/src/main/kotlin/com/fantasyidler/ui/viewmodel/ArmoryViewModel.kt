@@ -87,7 +87,13 @@ class ArmoryViewModel @Inject constructor(
                 owned  = (inventory[key] ?: 0) > 0 || key in equippedValues || key in flags.seenItemKeys,
                 source = sourceMap[key] ?: item.description.takeIf { it.isNotBlank() } ?: "Unknown source",
             )
-        }.sortedWith(compareBy({ slotSortOrder(it.item.slot) }, { it.item.displayName }))
+        }.sortedWith(
+            // Locale collation over translated names, not the English displayName (issue #1685).
+            compareBy<ArmoryEntry> { slotSortOrder(it.item.slot) }
+                .thenBy(java.text.Collator.getInstance(context.withAppLocale().resources.configuration.locales[0])) {
+                    GameStrings.itemName(context.withAppLocale(), it.key)
+                }
+        )
 
         val filtered = when (filter) {
             ArmoryFilter.ALL         -> allEntries

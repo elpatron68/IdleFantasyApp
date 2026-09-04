@@ -6,32 +6,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -44,78 +32,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
 import com.fantasyidler.data.json.TradeRouteData
-import com.fantasyidler.util.GameStrings
-import com.fantasyidler.ui.viewmodel.MercantileUiState
-import com.fantasyidler.ui.viewmodel.MercantileViewModel
-import com.fantasyidler.ui.viewmodel.xpProgressFraction
-import com.fantasyidler.util.formatCoins
-import com.fantasyidler.util.formatXp
-import androidx.compose.ui.draw.alpha
 import com.fantasyidler.data.model.Skills
 import com.fantasyidler.simulator.MercantilePerks
-import com.fantasyidler.ui.viewmodel.QuestCategory
+import com.fantasyidler.ui.viewmodel.MercantileUiState
+import com.fantasyidler.ui.viewmodel.MercantileViewModel
 import com.fantasyidler.ui.viewmodel.QuestIndicator
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MercantileScreen(
-    onBack: () -> Unit = {},
-    viewModel: MercantileViewModel = hiltViewModel(),
-) {
-    val state by viewModel.uiState.collectAsState()
-
-    AppBannerEffect(state.snackbarMessage, state.snackbarNonce, viewModel::snackbarConsumed)
-
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.skill_mercantile)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
-                    }
-                },
-            )
-        },
-    ) { padding ->
-        if (state.isLoading) {
-            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-            return@Scaffold
-        }
-
-        LazyColumn(Modifier.fillMaxSize().padding(padding)) {
-            item {
-                MercantileStatsHeader(state)
-            }
-            item {
-                Text(
-                    text     = stringResource(R.string.mercantile_routes_label),
-                    style    = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-                )
-            }
-            items(state.tradeRoutes, key = { it.id }) { route ->
-                val questIndicators = state.activeQuests["${Skills.MERCANTILE}:${route.id}"] ?: emptyList()
-                TradeRouteRow(
-                    route           = route,
-                    playerCoins     = state.coins,
-                    coinReturnMult  = state.coinReturnMult,
-                    isStarting      = state.startingSession,
-                    sessionActive   = state.anySessionActive,
-                    queueFull       = state.queueSize >= state.maxQueueSize,
-                    questIndicators = questIndicators,
-                    onStart         = { viewModel.startTradeRoute(route.id) },
-                )
-                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-            }
-            item { Spacer(Modifier.height(16.dp)) }
-        }
-    }
-}
+import com.fantasyidler.util.GameStrings
+import com.fantasyidler.util.formatCoins
+import com.fantasyidler.util.formatXp
 
 // ---------------------------------------------------------------------------
 // Sheet-mode entry point (used when shown inside a ModalBottomSheet)

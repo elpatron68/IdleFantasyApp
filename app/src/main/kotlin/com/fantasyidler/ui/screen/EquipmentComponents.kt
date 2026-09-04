@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,11 +27,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.fantasyidler.R
+import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.simulator.HeirloomStats
 import com.fantasyidler.util.GameStrings
@@ -42,7 +45,7 @@ import com.fantasyidler.util.GameStrings
 @Composable
 internal fun EquipmentTab(
     equipped: Map<String, String?>,
-    context: android.content.Context,
+    context: Context,
     onSlotTap: (String) -> Unit,
     onUnequip: (String) -> Unit,
     onEquipBestTools: () -> Unit = {},
@@ -86,7 +89,7 @@ internal fun FoodRow(
     qty: Int,
     healValue: Int,
     isEquipped: Boolean,
-    context: android.content.Context,
+    context: Context,
     onEquip: () -> Unit,
     onUnequip: () -> Unit,
 ) {
@@ -139,12 +142,12 @@ internal fun EquipSlotRow(
     slotName: String,
     itemKey: String?,
     xpLabel: String? = null,
-    equipment: com.fantasyidler.data.json.EquipmentData? = null,
+    equipment: EquipmentData? = null,
     heirloomXp: Map<String, Long>? = null,
     onTap: () -> Unit,
     onUnequip: () -> Unit,
 ) {
-    val context = androidx.compose.ui.platform.LocalContext.current
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -207,8 +210,8 @@ internal fun EquipSlotRow(
 @Composable
 internal fun EquipPickerSheet(
     slot: String,
-    candidates: List<com.fantasyidler.data.json.EquipmentData>,
-    context: android.content.Context,
+    candidates: List<EquipmentData>,
+    context: Context,
     heirloomXp: Map<String, Long>? = null,
     onEquip: (String) -> Unit,
     onDismiss: () -> Unit,
@@ -287,7 +290,7 @@ internal fun EquipPickerSheet(
     }
 }
 
-internal fun weaponXpLabel(combatStyle: String?, context: android.content.Context): String? = when (combatStyle) {
+internal fun weaponXpLabel(combatStyle: String?, context: Context): String? = when (combatStyle) {
     "attack"   -> context.getString(R.string.profile_stat_atk)
     "strength" -> context.getString(R.string.profile_stat_str)
     "ranged"   -> context.getString(R.string.profile_stat_ranged)
@@ -301,8 +304,8 @@ private val COMBAT_CAPE_SKILLS = setOf(
 )
 
 internal fun buildEquipDetail(
-    item: com.fantasyidler.data.json.EquipmentData,
-    context: android.content.Context,
+    item: EquipmentData,
+    context: Context,
     showReq: Boolean = true,
     /** Pass the player's heirloom XP map to prefix heirloom items with their current level; null hides it. */
     heirloomXp: Map<String, Long>? = null,

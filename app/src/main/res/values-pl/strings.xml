@@ -127,7 +127,7 @@
     <string name="label_ready_to_harvest">Gotowe do zbioru</string>
     <string name="label_empty">Puste</string>
     <string name="inventory_sort_quantity">Ilość</string>
-
+    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
     <string name="inventory_cat_weapons">Broń</string>
     <string name="inventory_cat_armour">Zbroja</string>
     <string name="inventory_cat_tools">Narzędzia</string>
@@ -489,9 +489,9 @@
     <string name="settings_source_code">Kod źródłowy</string>
 
     <string name="settings_source_open">Otwórz</string>
+    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
 
-
-
+    <string name="settings_discord">Discord</string> <!-- untranslated -->
 
     <string name="settings_exported_ok">Zapis wyeksportowany</string>
     <string name="settings_imported_ok">Zapis zaimportowany pomyślnie</string>
@@ -736,6 +736,7 @@
     <string name="quest_legend_title">Ikony zadań</string>
     <string name="quest_legend_daily">Zadanie dzienne</string>
     <string name="quest_legend_weekly">Zadanie tygodniowe</string>
+    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
     <string name="quest_legend_guild_daily">Dzienne gildii</string>
     <string name="quest_legend_guild">Zadanie gildii</string>
     <string name="quest_legend_quest">Zadanie</string>
@@ -758,7 +759,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Brak materiałów</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-
+    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">Efekty</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP łącznie</string>
@@ -811,7 +812,7 @@
     <string name="character_race_elf">Elf</string>
     <string name="character_race_dwarf">Krasnolud</string>
     <string name="character_race_orc">Ork</string>
-
+    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
     <string name="character_race_gnome">Gnom</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1808,7 +1809,7 @@
     <string name="bonus_coin_return">+%1$d%% zwrot monet</string>
     <string name="bonus_tower">Tower</string> <!-- untranslated -->
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
-
+    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
     <string name="bonus_coin_drops">+%1$d%% coin drops</string> <!-- untranslated -->
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">Dodano do kolejki: %1$s.</string>

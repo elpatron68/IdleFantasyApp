@@ -477,7 +477,7 @@ private fun DailyQuestCard(
                 Icon(
                     imageVector        = Icons.Filled.CheckCircle,
                     contentDescription = stringResource(R.string.label_completed),
-                    tint               = Color(0xFF4CAF50),
+                    tint               = MaterialTheme.colorScheme.tertiary,
                     modifier           = Modifier
                         .height(18.dp)
                         .width(18.dp),
@@ -486,7 +486,7 @@ private fun DailyQuestCard(
                 Text(
                     text       = stringResource(R.string.label_completed),
                     style      = MaterialTheme.typography.labelMedium,
-                    color      = Color(0xFF4CAF50),
+                    color      = MaterialTheme.colorScheme.tertiary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }
@@ -580,7 +580,7 @@ private fun QuestRow(
                 Icon(
                     imageVector      = Icons.Filled.CheckCircle,
                     contentDescription = stringResource(R.string.label_completed),
-                    tint             = Color(0xFF4CAF50),
+                    tint             = MaterialTheme.colorScheme.tertiary,
                     modifier         = Modifier
                         .height(18.dp)
                         .width(18.dp),
@@ -589,7 +589,7 @@ private fun QuestRow(
                 Text(
                     text  = stringResource(R.string.label_completed),
                     style = MaterialTheme.typography.labelMedium,
-                    color = Color(0xFF4CAF50),
+                    color = MaterialTheme.colorScheme.tertiary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }
@@ -685,7 +685,7 @@ private fun WeeklyQuestCard(
                 Icon(
                     imageVector        = Icons.Filled.CheckCircle,
                     contentDescription = stringResource(R.string.label_completed),
-                    tint               = Color(0xFF4CAF50),
+                    tint               = MaterialTheme.colorScheme.tertiary,
                     modifier           = Modifier
                         .height(18.dp)
                         .width(18.dp),
@@ -694,7 +694,7 @@ private fun WeeklyQuestCard(
                 Text(
                     text       = stringResource(R.string.label_completed),
                     style      = MaterialTheme.typography.labelMedium,
-                    color      = Color(0xFF4CAF50),
+                    color      = MaterialTheme.colorScheme.tertiary,
                     fontWeight = FontWeight.SemiBold,
                 )
             }

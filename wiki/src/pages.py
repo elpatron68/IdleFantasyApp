@@ -825,6 +825,7 @@ def gen_quest_icons() -> str:
         skills_link=link("skills"),
         guilds_link=link("guilds"),
         quests_link=link("quests"),
+        seasonal_events_link=link("seasonal_events"),
     )
 
 

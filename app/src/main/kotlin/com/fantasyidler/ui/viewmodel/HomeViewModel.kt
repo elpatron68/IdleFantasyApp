@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
+import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.model.DungeonRunStats
 import com.fantasyidler.data.model.HiredWorker
 import com.fantasyidler.data.model.OwnedPet
@@ -30,6 +31,8 @@ import com.fantasyidler.repository.SaveSlotRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.data.model.EquipSlot
+import com.fantasyidler.data.model.Player
+import com.fantasyidler.data.model.RecentSession
 import com.fantasyidler.repository.WorkerQueuedSessionStarter
 import com.fantasyidler.repository.resolveCapeMultiplier
 import com.fantasyidler.repository.blessingPrayerCapeMult
@@ -44,6 +47,7 @@ import com.fantasyidler.util.toTitleCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -191,7 +195,7 @@ data class HomeUiState(
     /** Skill → remaining ms for active post-prestige 48h boosts (earned, so shown for ironmen too). */
     val prestigeBoostsRemainingMs: Map<String, Long> = emptyMap(),
     val ironman: Boolean = false,
-    val recentSessions: List<com.fantasyidler.data.model.RecentSession> = emptyList(),
+    val recentSessions: List<RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
     val showJournalButton: Boolean = true,
     /** Show the top-bar character switch button; hidden with a single character to not confuse new players. */
@@ -273,7 +277,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             while (true) {
                 try { sessionRepo.completeOverdueSessions(queuedSessionStarter, workerStarter) } catch (_: Exception) {}
-                kotlinx.coroutines.delay(1_000L)
+                delay(1_000L)
             }
         }
     }
@@ -465,11 +469,11 @@ class HomeViewModel @Inject constructor(
     private class CollectContext(
         val flags: PlayerFlags,
         val inventory: Map<String, Int>,
-        val equippedCape: com.fantasyidler.data.json.EquipmentData?,
+        val equippedCape: EquipmentData?,
         val capeScalingBySkill: Map<String, Int>,
         val blessingCoinMult: Float,
         val petIds: Set<String>,
-        val player: com.fantasyidler.data.model.Player,
+        val player: Player,
     )
 
     /** Mutable totals accumulated across one collect batch (for the summary popup). */
@@ -602,7 +606,7 @@ class HomeViewModel @Inject constructor(
                     else         -> null
                 } ?: s.activityKey.replace("_", " ").split(" ")
                     .joinToString(" ") { it.replaceFirstChar { c -> c.titlecase() } }
-                com.fantasyidler.data.model.RecentSession(
+                RecentSession(
                     skillName = s.skillName,
                     activityDisplayName = activityDisplay,
                     activityKey = s.activityKey,
@@ -862,6 +866,7 @@ class HomeViewModel @Inject constructor(
                 loot         = loot,
             )
             acc.dailyKills[session.activityKey] = (acc.dailyKills[session.activityKey] ?: 0) + 1
+            acc.combinedKills[session.activityKey] = (acc.combinedKills[session.activityKey] ?: 0) + 1
             playerRepo.recordWeeklyProgress("boss", session.activityKey, 1)
             guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), frames.lastOrNull()?.combatStyle?.ifEmpty { "melee" } ?: "melee")
             seasonalEventRepo.recordCombat(mapOf(session.activityKey to 1))
@@ -1331,6 +1336,7 @@ class HomeViewModel @Inject constructor(
                             }
                             for ((item, qty) in loot) combinedItems[item] = (combinedItems[item] ?: 0) + qty
                             combinedCoins += coins
+                            combinedKills[session.activityKey] = (combinedKills[session.activityKey] ?: 0) + 1
                         }
                     }
                     "combat" -> {
@@ -1700,9 +1706,13 @@ class HomeViewModel @Inject constructor(
 fun combatLevelFrom(levels: Map<String, Int>): Int {
     val atk = levels[Skills.ATTACK]    ?: 1
     val str = levels[Skills.STRENGTH]  ?: 1
+    val ran = levels[Skills.RANGED]    ?: 1
+    val mag = levels[Skills.MAGIC]     ?: 1
     val def = levels[Skills.DEFENSE]   ?: 1
     val hp  = levels[Skills.HITPOINTS] ?: 1
-    return (((atk + str) * 0.325) + (def + hp) * 0.25).toInt().coerceAtLeast(1)
+    // 2.0, not 2: integer division would drop the half level an odd atk+str kept under
+    // the old 0.325 * (atk + str) formula, lowering some melee players' combat level.
+    return (0.65 * maxOf((atk + str) / 2.0, ran.toDouble(), mag.toDouble()) + (def + hp) * 0.25).toInt().coerceAtLeast(1)
 }
 
 // Sums only canonical skills: saves from before v1.1.5 can carry a stale "combat"
