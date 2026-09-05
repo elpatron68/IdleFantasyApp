@@ -57,6 +57,7 @@
     <string name="label_hitpoints">生命值</string>
     <string name="label_inventory">背包</string>
     <string name="label_equipment">装备</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">宠物</string>
     <string name="label_achievements">成就</string>
     <string name="label_locations">地点</string>
@@ -127,7 +128,7 @@
     <string name="label_ready_to_harvest">可以收获</string>
     <string name="label_empty">空</string>
     <string name="inventory_sort_quantity">数量</string>
-    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
+    <string name="inventory_sort_az">A-Z</string>
     <string name="inventory_cat_weapons">武器</string>
     <string name="inventory_cat_armour">护甲</string>
     <string name="inventory_cat_tools">工具</string>
@@ -475,9 +476,9 @@
     <string name="settings_source_code">源代码</string>
 
     <string name="settings_source_open">打开</string>
-    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
+    <string name="settings_wiki">Wiki</string>
 
-    <string name="settings_discord">Discord</string> <!-- untranslated -->
+    <string name="settings_discord">Discord</string>
 
     <string name="settings_exported_ok">存档已导出</string>
     <string name="settings_imported_ok">存档导入成功</string>
@@ -561,11 +562,11 @@
     <string name="combat_log_you_missed">你未命中</string>
     <string name="combat_log_kill">☠ %1$s 被击败</string>
     <string name="combat_log_player_hit">→ 你命中 %1$s：%2$d 伤害</string>
-    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_player_double_hit">→ 双重打击！你连续命中 %1$s 两次：%2$d 伤害</string>
     <string name="combat_log_player_miss">→ 你未命中 %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s 命中你：%2$d 伤害</string>
     <string name="combat_log_enemy_miss">← %1$s 未命中</string>
-    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_ally_hit">→ 你的雇佣兵命中 %1$s：%2$d 伤害</string>
     <string name="combat_log_heal">✚ 你食用了：+%1$d 生命</string>
     <string name="combat_eat_threshold_warning">⚠ 有风险：阈值较低时，一次重击可能在角色进食前将你打到 0 生命值。</string>
     <string name="combat_rec_level">推荐战斗等级</string>
@@ -574,7 +575,7 @@
     <string name="combat_best_arrow">最佳箭矢</string>
     <string name="combat_arrow_auto">自动（使用最佳可用）</string>
     <string name="combat_label_arrow">箭矢</string>
-    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
+    <string name="combat_arrow_ranged_str">+%1$d 远程力量</string>
     <string name="combat_select_loadout">选择装备方案</string>
     <string name="combat_enemies">敌人</string>
     <string name="combat_no_spells">你的魔法等级不足，暂无法术可用。</string>
@@ -582,8 +583,8 @@
     <string name="combat_max_hit">最大伤害</string>
     <string name="combat_you_have_runes">（你有 %1$d %2$s）</string>
     <string name="combat_infinite_runes">（无限 %1$s）</string>
-    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
-    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_locked">需要魔法等级 %1$d</string>
+    <string name="combat_spell_level_met">魔法等级 %1$d</string>
     <string name="combat_no_potion">无药水</string>
     <string name="combat_req_level">所需战斗等级</string>
     <string name="combat_duration">持续时间</string>
@@ -720,7 +721,7 @@
     <string name="quest_legend_title">任务图标说明</string>
     <string name="quest_legend_daily">每日任务</string>
     <string name="quest_legend_weekly">每周任务</string>
-    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
+    <string name="quest_legend_seasonal">季节悬赏</string>
     <string name="quest_legend_guild_daily">公会每日</string>
     <string name="quest_legend_guild">公会任务</string>
     <string name="quest_legend_quest">任务</string>
@@ -743,7 +744,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">材料不足</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
+    <string name="crafting_produces">= %1$d %2$s</string>
     <string name="crafting_effects">效果</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">共 +%1$d 经验</string>
@@ -796,7 +797,7 @@
     <string name="character_race_elf">精灵</string>
     <string name="character_race_dwarf">矮人</string>
     <string name="character_race_orc">兽人</string>
-    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
+    <string name="character_race_halfling">半身人</string>
     <string name="character_race_gnome">侏儒</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -969,13 +970,14 @@
     <string name="guild_no_dailies">完成公会任务以解锁每日请求。</string>
     <string name="guild_dailies_all_done">今天的所有日常任务都完成了。日常重置后再来吧。</string>
     <string name="guild_contribute_inventory">从背包捐献（可用 %1$d）</string>
-    <string name="guild_quest_desc_gather">为%4$s收集%2$d个%1$s%3$s。</string>
-    <string name="guild_quest_desc_kill">使用%2$s战斗击败%1$d个敌人。</string>
-    <string name="guild_quest_desc_prayer">为%2$s掩埋%1$d根骸骨。</string>
-    <string name="guild_quest_desc_sessions">为%3$s完成%1$d次%2$s训练。</string>
-    <string name="guild_quest_desc_trade">为%3$s完成%1$d次%2$s交易。</string>
-    <string name="guild_quest_desc_earn_coins">为%2$s通过贸易路线赚取%1$s金币。</string>
-    <string name="guild_quest_desc_pickpocket">为%3$s扒窃%2$s %1$d次。</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_quest_desc_gather">为 %4$s %1$s %2$d 个 %3$s。</string>
+    <string name="guild_quest_desc_kill">使用 %2$s 战斗击败 %1$d 个敌人。</string>
+    <string name="guild_quest_desc_prayer">为 %2$s 掩埋 %1$d 根骸骨。</string>
+    <string name="guild_quest_desc_sessions">为 %3$s 完成 %1$d 次 %2$s 训练。</string>
+    <string name="guild_quest_desc_trade">为 %3$s 完成 %1$d 次 %2$s 交易。</string>
+    <string name="guild_quest_desc_earn_coins">为 %2$s 通过贸易路线赚取 %1$s 金币。</string>
+    <string name="guild_quest_desc_pickpocket">为 %3$s 扒窃 %2$s %1$d 次。</string>
     <string name="guild_combat_warriors">近战</string>
     <string name="guild_combat_archers">远程</string>
     <string name="guild_combat_mages">魔法</string>
@@ -1013,10 +1015,10 @@
     <string name="mercantile_xp_label">经验：%1$s</string>
     <string name="mercantile_coins_label">金币：%1$s</string>
     <string name="mercantile_perks_title">天赋</string>
-    <string name="mercantile_perk_trading_locked">Shop trading: cheaper buying and better sell prices from level %1$d.</string> <!-- untranslated -->
-    <string name="mercantile_perk_trading">Shop trading: buy prices -%1$d%%, sell prices +%2$d%%.</string> <!-- untranslated -->
-    <string name="mercantile_perk_trading_next">Next boost at level %1$d.</string> <!-- untranslated -->
-    <string name="mercantile_perk_guild">Merchant\'s Guild: exclusive shop goods unlock from level %1$d.</string> <!-- untranslated -->
+    <string name="mercantile_perk_trading_locked">商店交易：%1$d 级起解锁更便宜的购买价与更好的出售价。</string>
+    <string name="mercantile_perk_trading">商店交易：购买价 -%1$d%%，出售价 +%2$d%%。</string>
+    <string name="mercantile_perk_trading_next">在 %1$d 级获得下一次加成。</string>
+    <string name="mercantile_perk_guild">商人公会：%1$d 级起解锁专属商店商品。</string>
     <string name="mercantile_cost_label">费用：%1$s</string>
     <string name="mercantile_return_range">收益：%1$s – %2$s</string>
     <string name="mercantile_dispatch_label">派遣</string>
@@ -1378,12 +1380,12 @@
     <!-- Prestige achievements -->
     <string name="achievement_prestige_first_name">初次重置</string>
     <string name="achievement_prestige_first_desc">首次转生任意技能</string>
-    <string name="achievement_prestige_node_first_name">Branching Out</string> <!-- untranslated -->
-    <string name="achievement_prestige_node_first_desc">Purchase your first prestige tree upgrade</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_name">End of the Line</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_desc">Purchase every upgrade in one prestige path</string> <!-- untranslated -->
-    <string name="achievement_prestige_tree_one_name">Mastered</string> <!-- untranslated -->
-    <string name="achievement_prestige_tree_one_desc">Purchase every upgrade in one skill\'s prestige tree</string> <!-- untranslated -->
+    <string name="achievement_prestige_node_first_name">开枝散叶</string>
+    <string name="achievement_prestige_node_first_desc">购买你的第一个转生树升级</string>
+    <string name="achievement_prestige_path_complete_name">走到尽头</string>
+    <string name="achievement_prestige_path_complete_desc">购买一条转生路径上的全部升级</string>
+    <string name="achievement_prestige_tree_one_name">融会贯通</string>
+    <string name="achievement_prestige_tree_one_desc">购买一项技能转生树中的全部升级</string>
     <string name="achievement_prestige_all_1_name">焕然一新</string>
     <string name="achievement_prestige_all_1_desc">所有技能至少转生一次</string>
     <string name="achievement_prestige_all_3_name">至高转生</string>
@@ -1833,7 +1835,8 @@
     <string name="monument_touch_title">每日触摸</string>
     <string name="monument_touch_btn">触摸纪念碑</string>
     <string name="monument_touched_today">今日已触摸。纪念碑满足地嗡嗡作响。</string>
-    <string name="monument_touch_blessing">祝福降临于你，持续一小时。</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">纪念碑赐予：%1$s</string>
     <string name="monument_contributed">火焰更加明亮了！</string>
     <string name="monument_flame_lit">永恒之火点燃了！宝库守卫在等待。</string>
@@ -2235,7 +2238,7 @@
     <string name="farming_seeds_owned">种子：%1$d  •  持有：%2$d</string>
     <!-- ============ Prestige overhaul (v1.14.0) ============ -->
     <string name="prestige_title">转生</string>
-    <string name="prestige_open_tree">查看分支</string>
+    <string name="prestige_open_tree">查看技能树</string>
     <!-- Translator note: %1$d = unspent prestige points -->
     <string name="prestige_points_available">%1$d 可用点数</string>
     <!-- Translator note: %1$d = lifetime points earned, %2$d = maximum points for this skill -->
@@ -2407,6 +2410,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

@@ -4,6 +4,7 @@ import com.fantasyidler.data.db.dao.QuestProgressDao
 import com.fantasyidler.data.json.GuildDailyTemplate
 import com.fantasyidler.data.json.GuildQuestData
 import com.fantasyidler.data.json.GuildQuestRewards
+import com.fantasyidler.data.model.CombatGuilds
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QuestProgress
 import java.util.Calendar
@@ -13,7 +14,6 @@ import javax.inject.Singleton
 import kotlin.random.Random
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.sync.withLock
-import kotlin.random.nextLong
 
 data class GuildQuestWithProgress(
     val quest: GuildQuestData,
@@ -109,12 +109,6 @@ class GuildRepository @Inject constructor(
             "warriors", "archers", "mages", "slayer", "prayer", "mercantile",
         )
 
-        fun combatStyleToGuild(combatStyle: String): String = when (combatStyle) {
-            "ranged" -> "archers"
-            "magic"  -> "mages"
-            else     -> "warriors"
-        }
-
         val POTION_SUBSTITUTES: Map<String, List<String>> = mapOf(
             "strength_potion"       to listOf("super_strength_potion", "overload_potion"),
             "attack_potion"         to listOf("super_attack_potion",   "overload_potion"),
@@ -193,7 +187,7 @@ class GuildRepository @Inject constructor(
 
     /** Called when a combat session is collected. */
     suspend fun recordGuildCombat(killsByEnemy: Map<String, Int>, combatStyle: String) = playerRepo.playerMutex.withLock {
-        val guild = combatStyleToGuild(combatStyle)
+        val guild = CombatGuilds.guildFor(combatStyle)
         val totalKills = killsByEnemy.values.sum()
         var flags = ensureGuildDailiesRefreshedUnlocked()
         if (totalKills > 0) {

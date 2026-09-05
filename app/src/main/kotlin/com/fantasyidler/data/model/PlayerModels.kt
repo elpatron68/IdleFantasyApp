@@ -680,3 +680,17 @@ object Skills {
     val DEFAULT_LEVELS: Map<String, Int> = ALL.associateWith { 1 }
     val DEFAULT_XP: Map<String, Long> = ALL.associateWith { 0L }
 }
+
+object CombatGuilds {
+    const val WARRIORS = "warriors"
+    const val ARCHERS   = "archers"
+    const val MAGES     = "mages"
+
+    val ALL = listOf(WARRIORS, ARCHERS, MAGES)
+
+    fun guildFor(combatStyle: String): String = when (combatStyle) {
+        "ranged" -> ARCHERS
+        "magic"  -> MAGES
+        else     -> WARRIORS
+    }
+}

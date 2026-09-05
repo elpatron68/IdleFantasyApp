@@ -631,7 +631,7 @@
     <string name="item_runite_lockpick_name">符文开锁器</string>
 
     <!-- ===== Smithing hammers ===== -->
-    <string name="item_bronze_hammer_name">铜锤</string>
+    <string name="item_bronze_hammer_name">青铜锤</string>
     <string name="item_iron_hammer_name">铁锤</string>
     <string name="item_steel_hammer_name">钢锤</string>
     <string name="item_mithril_hammer_name">秘银锤</string>
@@ -639,7 +639,7 @@
     <string name="item_runite_hammer_name">符文锤</string>
 
     <!-- ===== Cooking frying pans ===== -->
-    <string name="item_bronze_frying_pan_name">铜煎锅</string>
+    <string name="item_bronze_frying_pan_name">青铜煎锅</string>
     <string name="item_iron_frying_pan_name">铁煎锅</string>
     <string name="item_steel_frying_pan_name">钢煎锅</string>
     <string name="item_mithril_frying_pan_name">秘银煎锅</string>
@@ -647,7 +647,7 @@
     <string name="item_runite_frying_pan_name">符文煎锅</string>
 
     <!-- ===== Firemaking tinderboxes ===== -->
-    <string name="item_bronze_tinderbox_name">铜火绒盒</string>
+    <string name="item_bronze_tinderbox_name">青铜火绒盒</string>
     <string name="item_iron_tinderbox_name">铁火绒盒</string>
     <string name="item_steel_tinderbox_name">钢火绒盒</string>
     <string name="item_mithril_tinderbox_name">秘银火绒盒</string>
@@ -655,7 +655,7 @@
     <string name="item_runite_tinderbox_name">符文火绒盒</string>
 
     <!-- ===== Agility grappling hooks ===== -->
-    <string name="item_bronze_grappling_hook_name">铜抓钩</string>
+    <string name="item_bronze_grappling_hook_name">青铜抓钩</string>
     <string name="item_iron_grappling_hook_name">铁抓钩</string>
     <string name="item_steel_grappling_hook_name">钢抓钩</string>
     <string name="item_mithril_grappling_hook_name">秘银抓钩</string>
@@ -977,7 +977,7 @@
     <string name="item_sovereign_crown_desc">虚空君主的王冠，散发着黑暗威严。提供无与伦比的防护。</string>
     <string name="item_amulet_of_the_void_name">虚空护符</string>
     <string name="item_amulet_of_the_void_desc">纯虚空精华的吊坠，增强佩戴者所有战斗属性。</string>
-    <string name="item_bronze_longsword_desc">一把铜长剑。</string>
+    <string name="item_bronze_longsword_desc">一把青铜长剑。</string>
     <string name="item_iron_longsword_desc">一把铁长剑。</string>
     <string name="item_shadow_dagger_desc">从暗影巢穴回收的黑色匕首，极其锋利且完美平衡。</string>
     <string name="item_steel_dagger_desc">一把钢匕首。</string>
@@ -1017,13 +1017,13 @@
     <string name="item_void_staff_name">虚空法杖</string>
     <string name="item_void_staff_desc">纯虚空能量的法杖，为所有法术提供无限符文。</string>
     <string name="item_trident_of_the_seas_desc">蕴含深海力量的恐怖三叉戟，从海妖巢穴中获取。</string>
-    <string name="item_bronze_med_helmet_desc">铜制中型头盔。</string>
-    <string name="item_bronze_full_helmet_desc">铜制全罩头盔。</string>
-    <string name="item_bronze_chainbody_desc">铜制锁链甲。</string>
-    <string name="item_bronze_plateskirt_desc">铜制板裙甲。</string>
-    <string name="item_bronze_boots_desc">一双铜靴。</string>
-    <string name="item_bronze_square_shield_desc">铜制方盾。</string>
-    <string name="item_bronze_kiteshield_desc">铜制鸢盾。</string>
+    <string name="item_bronze_med_helmet_desc">青铜制中型头盔。</string>
+    <string name="item_bronze_full_helmet_desc">青铜制全罩头盔。</string>
+    <string name="item_bronze_chainbody_desc">青铜制锁链甲。</string>
+    <string name="item_bronze_plateskirt_desc">青铜制板裙甲。</string>
+    <string name="item_bronze_boots_desc">一双青铜靴。</string>
+    <string name="item_bronze_square_shield_desc">青铜制方盾。</string>
+    <string name="item_bronze_kiteshield_desc">青铜制鸢盾。</string>
     <string name="item_iron_med_helmet_desc">铁制中型头盔。</string>
     <string name="item_iron_full_helmet_desc">铁制全罩头盔。</string>
     <string name="item_iron_chainbody_desc">铁制锁链甲。</string>
@@ -1164,7 +1164,7 @@
     <string name="item_blessed_fishing_rod_desc">用从溺亡神殿回收的浮木制作，受古老海祭祝福。</string>
     <string name="item_dwarven_fishing_rod_desc">矮人制作的钓竿，几乎能自动把鱼拉出水面。</string>
     <string name="item_abyssal_rod_desc">用从深渊废墟回收的虚空丝线编织，鱼儿主动上钩。</string>
-    <string name="item_bronze_hoe_desc">基础铜锄，略微增加收获产量。</string>
+    <string name="item_bronze_hoe_desc">基础青铜锄，略微增加收获产量。</string>
     <string name="item_iron_hoe_desc">铁锄，增加收获产量。</string>
     <string name="item_steel_hoe_desc">钢锄，明显增加收获产量。</string>
     <string name="item_mithril_hoe_desc">秘银锄，大幅增加收获产量。</string>
@@ -1172,7 +1172,7 @@
     <string name="item_runite_hoe_desc">符文锄，最好的农具。</string>
     <string name="item_dwarven_hoe_desc">传说中的矮人锄，使任何作物产量翻倍。</string>
     <string name="item_divine_hoe_desc">受神圣之光祝福的锄，作物在其触碰下茂盛生长。</string>
-    <string name="item_bronze_hammer_desc">锻造用铜锤。</string>
+    <string name="item_bronze_hammer_desc">锻造用青铜锤。</string>
     <string name="item_iron_hammer_desc">锻造用铁锤。</string>
     <string name="item_steel_hammer_desc">锻造用钢锤。</string>
     <string name="item_mithril_hammer_desc">锻造用秘银锤。</string>
@@ -1180,7 +1180,7 @@
     <string name="item_runite_hammer_desc">锻造用符文锤。</string>
     <string name="item_dwarven_hammer_desc">矮人锻造的锤子，每一击都精准有力。</string>
     <string name="item_divine_hammer_desc">受神圣之光触碰的锤子，金属在其意志下弯曲。</string>
-    <string name="item_bronze_tinderbox_desc">生火用铜火绒盒。</string>
+    <string name="item_bronze_tinderbox_desc">生火用青铜火绒盒。</string>
     <string name="item_iron_tinderbox_desc">生火用铁火绒盒。</string>
     <string name="item_steel_tinderbox_desc">生火用钢火绒盒。</string>
     <string name="item_mithril_tinderbox_desc">生火用秘银火绒盒。</string>
@@ -1188,7 +1188,7 @@
     <string name="item_runite_tinderbox_desc">生火用符文火绒盒。</string>
     <string name="item_dwarven_tinderbox_desc">矮人锻造的火绒盒，瞬间点燃熊熊烈焰。</string>
     <string name="item_divine_tinderbox_desc">受神圣之光触碰的火绒盒，最微弱的火花也能点燃。</string>
-    <string name="item_bronze_grappling_hook_desc">敏捷训练用铜抓钩。</string>
+    <string name="item_bronze_grappling_hook_desc">敏捷训练用青铜抓钩。</string>
     <string name="item_iron_grappling_hook_desc">敏捷训练用铁抓钩。</string>
     <string name="item_steel_grappling_hook_desc">敏捷训练用钢抓钩。</string>
     <string name="item_mithril_grappling_hook_desc">敏捷训练用秘银抓钩。</string>
@@ -1198,7 +1198,7 @@
     <string name="item_dwarven_grappling_hook_desc">矮人锻造的抓钩，永不打滑。</string>
     <string name="item_arcane_grappling_hook_desc">嗡嗡作响的奥术抓钩，瞬间将你拉过间隙。</string>
     <string name="item_divine_grappling_hook_desc">受神圣之光触碰的抓钩，无论投向何处都能找到着力点。</string>
-    <string name="item_bronze_frying_pan_desc">烹饪用铜煎锅。</string>
+    <string name="item_bronze_frying_pan_desc">烹饪用青铜煎锅。</string>
     <string name="item_iron_frying_pan_desc">烹饪用铁煎锅。</string>
     <string name="item_steel_frying_pan_desc">烹饪用钢煎锅。</string>
     <string name="item_mithril_frying_pan_desc">烹饪用秘银煎锅。</string>
@@ -1206,7 +1206,7 @@
     <string name="item_runite_frying_pan_desc">烹饪用符文煎锅。</string>
     <string name="item_dwarven_frying_pan_desc">矮人锻造的煎锅，每次都能烹制完美食物。</string>
     <string name="item_divine_frying_pan_desc">受神圣之光触碰的煎锅，从不烧焦任何一餐。</string>
-    <string name="item_bronze_lockpick_desc">盗窃用基础铜撬锁器。</string>
+    <string name="item_bronze_lockpick_desc">盗窃用基础青铜撬锁器。</string>
     <string name="item_iron_lockpick_desc">盗窃用铁撬锁器。</string>
     <string name="item_steel_lockpick_desc">盗窃用钢撬锁器。</string>
     <string name="item_mithril_lockpick_desc">盗窃用秘银撬锁器。</string>

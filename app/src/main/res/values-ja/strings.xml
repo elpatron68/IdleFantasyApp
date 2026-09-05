@@ -57,6 +57,7 @@
     <string name="label_hitpoints">HP</string>
     <string name="label_inventory">インベントリ</string>
     <string name="label_equipment">装備</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">ペット</string>
     <string name="label_achievements">実績</string>
     <string name="label_locations">ロケーション</string>
@@ -969,6 +970,7 @@
     <string name="guild_no_dailies">デイリー依頼を解放するには、ギルドクエストを完了してください。</string>
     <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">インベントリから納品（所持数: %1$d）</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%4$sのために%3$sを%2$d個%1$sする。</string>
     <string name="guild_quest_desc_kill">%2$s戦闘を使用して敵を%1$d体倒す。</string>
     <string name="guild_quest_desc_prayer">%2$sのために骨を%1$d個埋葬する。</string>
@@ -1833,7 +1835,8 @@
     <string name="monument_touch_title">毎日のタッチ</string>
     <string name="monument_touch_btn">記念碑に触れる</string>
     <string name="monument_touched_today">本日は既に触れました。記念碑は満足げに響いています。</string>
-    <string name="monument_touch_blessing">1時間の祝福があなたを包みます。</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">記念碑からの授かり物：%1$s</string>
     <string name="monument_contributed">炎がさらに輝きを増した！</string>
     <string name="monument_flame_lit">永遠の炎が灯った！宝物庫の守護者が待っている。</string>
@@ -2407,6 +2410,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

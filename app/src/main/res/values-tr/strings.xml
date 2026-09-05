@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Sağlık</string>
     <string name="label_inventory">Envanter</string>
     <string name="label_equipment">Ekipman</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Evcil Hayvanlar</string>
     <string name="label_achievements">Başarımlar</string>
     <string name="label_locations">Bölgeler</string>
@@ -983,6 +984,7 @@
     <string name="guild_no_dailies">Günlük isteklerin kilidini açmak için lonca görevlerini tamamlayın.</string>
     <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Envanterden katkıda bulun (%1$d mevcut)</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%4$s için %2$d %3$s %1$s.</string>
     <string name="guild_quest_desc_kill">%2$s dövüşünde %1$d düşmanı yenin.</string>
     <string name="guild_quest_desc_prayer">%2$s için %1$d kemik gömün.</string>
@@ -1847,7 +1849,8 @@
     <string name="monument_touch_title">Günlük Dokunuş</string>
     <string name="monument_touch_btn">Anıta Dokun</string>
     <string name="monument_touched_today">Bugün dokunuldu. Anıt memnun bir şekilde uğulduyor.</string>
-    <string name="monument_touch_blessing">Bir kutsama seni bir saat boyunca sarıyor.</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">Anıt şunları bahşediyor: %1$s</string>
     <string name="monument_contributed">Alev daha parlak yanıyor!</string>
     <string name="monument_flame_lit">Sonsuz Alev yandı! Kasa Muhafızı bekliyor.</string>
@@ -2421,6 +2424,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

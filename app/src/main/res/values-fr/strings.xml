@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Points de vie</string>
     <string name="label_inventory">Inventaire</string>
     <string name="label_equipment">Équipement</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Familiers</string>
     <string name="label_achievements">Réalisations</string>
     <string name="label_locations">Lieux</string>
@@ -970,6 +971,7 @@
     <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les requêtes quotidiennes.</string>
     <string name="guild_dailies_all_done">Toutes les requêtes quotidiennes sont finies. Revenez après la réinitialisation quotidienne.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l\'inventaire (%1$d disponible)</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
     <string name="guild_quest_desc_prayer">Enterrez %1$d os pour la %2$s.</string>
@@ -1834,7 +1836,8 @@
     <string name="monument_touch_title">Toucher quotidien</string>
     <string name="monument_touch_btn">Toucher le Monument</string>
     <string name="monument_touched_today">Déjà touché aujourd\'hui. Le Monument ronronne de contentement.</string>
-    <string name="monument_touch_blessing">Une bénédiction vous enveloppe pendant une heure.</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">Le Monument accorde : %1$s</string>
     <string name="monument_contributed">La flamme brille plus fort !</string>
     <string name="monument_flame_lit">La Flamme Éternelle est allumée ! Le Gardien de la Chambre Forte vous attend.</string>
@@ -2408,6 +2411,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

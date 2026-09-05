@@ -559,11 +559,11 @@
     <string name="skilling_dungeon_thieves_den_note_3">Una lettera strappata avvisa di stare alla larga dai tunnel orientali. Il motivo non viene riportato.</string>
     <string name="skilling_dungeon_thieves_den_note_4">Un frammento di mappa con un sigillo ufficiale. Non riconosci il simbolo impresso: un\'ombra dietro una porta sigillata.</string>
     <string name="skilling_dungeon_thieves_den_note_5">Il passaggio termina in una stanza ben protetta. In fondo, una porta blindata riporta lo stesso sigillo. Il Santuario dei Briganti ti attende oltre la soglia.</string>
-    <string name="skilling_dungeon_crumbling_watchtower_note_1">Fresh rope marks on the windowsills. Someone uses this tower regularly.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_crumbling_watchtower_note_2">A hidden cache inside a cracked wall: lockpicks, a short blade, and a coded ledger.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_crumbling_watchtower_note_3">The ledger is a tally of stolen goods and split payments. The rogues operate out of somewhere beneath the hill.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_crumbling_watchtower_note_4">A trapdoor in the floor, recently oiled, its hinges silent. Worn boot prints surround it.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_crumbling_watchtower_note_5">The trapdoor opens onto a carved stairway going deep into the earth. The Shadow Den waits below.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_crumbling_watchtower_note_1">Trovi recenti tracce di passaggio. Qualcuno sta ancora usando questa torre.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_2">Un deposito nascosto tra le rovine: strumenti vari, un coltello affilato, un diario in codice.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_3">Il libretto contiene rendiconti di merce rubata e divisioni del bottino. I briganti sembrano operare nella zona a valle.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_4">Una botola nel pavimento: i cardini ben oliati si aprono silenziosamente. Impronte di stivali si stagliano nella polvere.</string>
+    <string name="skilling_dungeon_crumbling_watchtower_note_5">La botola conduce a una scala scavata nella roccia, verso le profindità della terra. La Tana delle Ombre ti attende là sotto.</string>
     <string name="skilling_dungeon_copper_caverns_note_1">Le pareti della miniera sono solcate da profondi tagli, troppo grandi e profondi per essere di piccone.</string>
     <string name="skilling_dungeon_copper_caverns_note_2">Vecchie attrezzature minerarie, piegate e ormai inutilizzabili. Chiunque stesse lavorando qui è fuggito di corsa.</string>
     <string name="skilling_dungeon_copper_caverns_note_3">Una nota lasciata da un minatore: «Abbiamo sfondato verso sotto. Il capo ha chiuso il ramo più basso. Non ci ha detto il motivo.»</string>

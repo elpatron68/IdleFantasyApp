@@ -94,7 +94,7 @@
     <string name="equip_slot_weapon_str">Оружие (Сила)</string>
     <string name="equip_slot_weapon_ranged">Оружие (Дальний бой)</string>
     <string name="equip_slot_weapon_magic">Оружие (Магия)</string>
-    <string name="equip_slot_weapon">Weapons</string> <!-- untranslated -->
+    <string name="equip_slot_weapon">Оружие</string>
     <string name="equip_slot_head">Голова</string>
     <string name="equip_slot_body">Туловище</string>
     <string name="equip_slot_legs">Ноги</string>

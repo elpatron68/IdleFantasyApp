@@ -39,7 +39,10 @@ sealed class Screen(
         labelRes     = R.string.nav_skills,
         icon         = Icons.AutoMirrored.Outlined.ShowChart,
         selectedIcon = Icons.AutoMirrored.Filled.ShowChart,
-    )
+    ) {
+        const val openSkillRoute = "skills/open/{openSkill}"
+        fun routeWithSkill(skill: String) = "skills/open/$skill"
+    }
     object Combat : Screen(
         route        = "combat",
         labelRes     = R.string.nav_combat,
@@ -47,6 +50,7 @@ sealed class Screen(
         selectedIcon = Icons.Filled.Shield,
     ) {
         const val gearRoute = "combat/gear"
+        const val dungeonsRoute = "combat/dungeons"
         const val presetDungeonRoute = "combat/preset_dungeon/{dungeonKey}"
         fun presetDungeonRoute(key: String) = "combat/preset_dungeon/$key"
         const val presetBossRoute = "combat/preset_boss/{bossKey}"
