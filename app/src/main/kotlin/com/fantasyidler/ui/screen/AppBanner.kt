@@ -9,10 +9,10 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -43,7 +43,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-data class QueuedBanner(
+// Identity equality on purpose: banners ride a StateFlow, which drops equal values. A data
+// class made two same-text banners "equal", so advancing between them never re-emitted and
+// the display timer never restarted, wedging the banner on screen (issue #1692).
+class QueuedBanner(
     val message: String,
     val actionLabel: String? = null,
     val onAction: (() -> Unit)? = null,
@@ -73,6 +76,16 @@ object AppBannerCenter {
         onAction: (() -> Unit)?,
         onConsumed: () -> Unit = {},
     ) {
+        // Coalesce identical consecutive plain messages: the text is already (about to be) on
+        // screen, and stacking copies just chains display time (issue #1692). The dropped
+        // copy's consumer still runs so callers' message state clears as usual.
+        val tail = pending.lastOrNull() ?: _current.value
+        if (actionLabel == null && onAction == null &&
+            tail?.message == message && tail.actionLabel == null && tail.onAction == null
+        ) {
+            onConsumed()
+            return
+        }
         pending.addLast(QueuedBanner(message, actionLabel, onAction, onConsumed))
         if (_current.value == null) advance()
     }

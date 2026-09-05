@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Здоровье</string>
     <string name="label_inventory">Инвентарь</string>
     <string name="label_equipment">Снаряжение</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Питомцы</string>
     <string name="label_achievements">Достижения</string>
     <string name="label_locations">Локации</string>
@@ -127,7 +128,7 @@
     <string name="label_ready_to_harvest">Готово к сбору</string>
     <string name="label_empty">Пусто</string>
     <string name="inventory_sort_quantity">Количество</string>
-    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
+    <string name="inventory_sort_az">А-Я</string>
     <string name="inventory_cat_weapons">Оружие</string>
     <string name="inventory_cat_armour">Броня</string>
     <string name="inventory_cat_tools">Инструменты</string>
@@ -491,9 +492,9 @@
     <string name="settings_source_code">Исходный код</string>
 
     <string name="settings_source_open">Открыть</string>
-    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
+    <string name="settings_wiki">Вики</string>
 
-    <string name="settings_discord">Discord</string> <!-- untranslated -->
+    <string name="settings_discord">Дискорд</string>
 
     <string name="settings_exported_ok">Сохранение экспортировано</string>
     <string name="settings_imported_ok">Сохранение успешно импортировано</string>
@@ -752,7 +753,7 @@
     <string name="quest_legend_title">Значки заданий</string>
     <string name="quest_legend_daily">Ежедневное задание</string>
     <string name="quest_legend_weekly">Еженедельное задание</string>
-    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
+    <string name="quest_legend_seasonal">Сезонная награда</string>
     <string name="quest_legend_guild_daily">Ежедневное задание гильдии</string>
     <string name="quest_legend_guild">Задание гильдии</string>
     <string name="quest_legend_quest">Задание</string>
@@ -828,7 +829,7 @@
     <string name="character_race_elf">Эльф</string>
     <string name="character_race_dwarf">Дварф</string>
     <string name="character_race_orc">Орк</string>
-    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
+    <string name="character_race_halfling">Полурослик</string>
     <string name="character_race_gnome">Гном</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -1001,6 +1002,7 @@
     <string name="guild_no_dailies">Завершайте задания гильдии, чтобы открывать ежедневные поручения.</string>
     <string name="guild_dailies_all_done">Все ежедневные поручения на сегодняшний день выполнены. Завтра они снова обновятся.</string>
     <string name="guild_contribute_inventory">Передать из инвентаря (%1$d доступно)</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s для %4$s.</string>
     <string name="guild_quest_desc_kill">Победить %1$d врагов в ближнем бою (%2$s).</string>
     <string name="guild_quest_desc_prayer">Захоронить %1$d костей для %2$s.</string>
@@ -1782,8 +1784,8 @@
     <string name="shop_sold_old_equipment">Старое снаряжение продано за %1$s монет</string>
     <string name="shop_bulk_sell_total">Итого</string>
     <string name="shop_bulk_sell_confirm">Продать всё</string>
-    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
-    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">Последние массовые продажи</string>
+    <string name="shop_recent_bulk_sales_empty">Массовых продаж пока не зафиксировано.</string>
     <string name="shop_xp_boost_activated">Бонус XP 2× активирован на %1$d ч!</string>
     <string name="shop_xp_boost_already_active">Бонус XP 2× уже активен.</string>
     <string name="shop_xp_boost_weekly_limit">Не более одного бонуса XP 2× в неделю. Снова доступен после еженедельного сброса.</string>
@@ -1869,7 +1871,8 @@
     <string name="monument_touch_title">Ежедневное прикосновение</string>
     <string name="monument_touch_btn">Прикоснуться к Монументу</string>
     <string name="monument_touched_today">Сегодня уже прикасались. Монумент довольно гудит.</string>
-    <string name="monument_touch_blessing">Благословение окутывает вас на час.</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">Монумент дарует: %1$s</string>
     <string name="monument_contributed">Пламя разгорается ярче!</string>
     <string name="monument_flame_lit">Вечное пламя зажжено! Страж Хранилища ждёт.</string>
@@ -1974,14 +1977,14 @@
     <string name="seasonal_bounty_board_title">Доска заданий</string>
     <string name="seasonal_expedition_title">Экспедиция</string>
     <string name="seasonal_go_to_combat">В бой</string>
-    <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
-    <string name="treasure_open">Open</string> <!-- untranslated -->
-    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
-    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
-    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
-    <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
-    <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
-    <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
+    <string name="treasure_open_message">Взломайте его, чтобы получить монеты и шанс заполучить драгоценные камни.</string>
+    <string name="treasure_open">Открыть</string>
+    <string name="treasure_open_one">Открыть 1</string>
+    <string name="treasure_open_all">Открыть все (%1$d)</string>
+    <string name="treasure_open_result">Открыто %1$d: +%2$s монет</string>
+    <string name="treasure_open_result_gems">Открыто %1$d: +%2$s монет и %3$d камней</string>
+    <string name="seasonal_expedition_token_hint">При каждом запуске предоставляется 1 токен.</string>
+    <string name="seasonal_boss_token_hint">За каждое убийство дается 1 токен, до %1$d в день.</string>
     <string name="seasonal_minigame_hint">Попадите по %1$d из %2$d угольков, пока они не погасли!</string>
     <string name="seasonal_minigame_round">Раунд %1$d / %2$d — Попаданий: %3$d</string>
     <string name="seasonal_minigame_mode_label">Режим</string>
@@ -1993,8 +1996,8 @@
     <string name="seasonal_tap">Нажать!</string>
     <string name="seasonal_claim">Забрать</string>
     <string name="seasonal_bounty_cooldown">Новое задание через %1$dм %2$dс</string>
-    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
-    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll">Повторить награду</string>
+    <string name="seasonal_bounty_reroll_confirm">Обменять эту награду на другую за %1$s монет? Прогресс будет утерян.</string>
     <string name="seasonal_go">Перейти</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Солнцестояние солнечного шпиля</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Участие в событии Солнцестояние солнечного шпиля 2026</string>
@@ -2443,6 +2446,8 @@
     <string name="item_heirloom_frying_pan_desc">Эта закалённая сковорода передавалась из поколения в поколение в семье поваров. Каждое новое блюдо имеет особую пикантность.</string>
     <string name="item_heirloom_lockpick_name">Фамильная отмычка</string>
     <string name="item_heirloom_lockpick_desc">Воровская отмычка, с помощью которой можно открыть бесчисленное множество замков. С каждым разом она становится все более деликатнее.</string>
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Фамильный клинок</string>
     <string name="item_heirloom_blade_desc">Древний клинок, который пробуждается всё больше с каждой битвой, в которой выживает.</string>
     <string name="item_heirloom_greathammer_name">Фамильный великий молот</string>

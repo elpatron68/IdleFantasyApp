@@ -48,6 +48,9 @@ object HeirloomStats {
         Skills.STRENGTH    -> EquipSlot.WEAPON_STR
         Skills.RANGED      -> EquipSlot.WEAPON_RANGED
         Skills.MAGIC       -> EquipSlot.WEAPON_MAGIC
+        // The Midas Band: hitpoints XP flows in every combat session, so a ring heirloom
+        // levels from all combat without colliding with the per-style weapon heirlooms.
+        Skills.HITPOINTS   -> EquipSlot.RING
         else               -> null
     }
 

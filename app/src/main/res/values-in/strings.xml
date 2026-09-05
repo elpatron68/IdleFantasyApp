@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Darah</string>
     <string name="label_inventory">Inventaris</string>
     <string name="label_equipment">Perlengkapan</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Hewan peliharaan</string>
     <string name="label_achievements">Prestasi</string>
     <string name="label_locations">Lokasi</string>
@@ -975,6 +976,7 @@
     <string name="guild_no_dailies">Selesaikan Tugas Serikat untuk membuka permintaan harian.</string>
     <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Kontribusi di inventaris (%1$d tersedia)</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s untuk %4$s.</string>
     <string name="guild_quest_desc_kill">Kalahkan %1$d musuh menggunakan %2$s pertempuran.</string>
     <string name="guild_quest_desc_prayer">Kubur tulang %1$d untuk %2$s.</string>
@@ -1839,7 +1841,8 @@
     <string name="monument_touch_title">Sentuhan Harian</string>
     <string name="monument_touch_btn">Sentuh Monumen</string>
     <string name="monument_touched_today">Sudah disentuh hari ini. Monumen bersenandung puas.</string>
-    <string name="monument_touch_blessing">Berkat menyelimutimu selama satu jam.</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">Monumen memberikan: %1$s</string>
     <string name="monument_contributed">Apinya semakin terang!</string>
     <string name="monument_flame_lit">Api Abadi menyala! Penjaga Brankas menanti.</string>
@@ -2413,6 +2416,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

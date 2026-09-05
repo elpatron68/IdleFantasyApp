@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Hitpoints</string> <!-- untranslated -->
     <string name="label_inventory">Inventorius</string>
     <string name="label_equipment">Įranga</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Augintiniai</string>
     <string name="label_achievements">Pasiekimai</string>
     <string name="label_locations">Vietos</string>
@@ -969,6 +970,7 @@
     <string name="guild_no_dailies">Complete guild quests to unlock daily requests.</string> <!-- untranslated -->
     <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Contribute from inventory (%1$d available)</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s for the %4$s.</string> <!-- untranslated -->
     <string name="guild_quest_desc_kill">Defeat %1$d enemies using %2$s combat.</string> <!-- untranslated -->
     <string name="guild_quest_desc_prayer">Bury %1$d bones for the %2$s.</string> <!-- untranslated -->
@@ -1833,7 +1835,8 @@
     <string name="monument_touch_title">Daily Touch</string> <!-- untranslated -->
     <string name="monument_touch_btn">Touch the Monument</string> <!-- untranslated -->
     <string name="monument_touched_today">Touched today. The Monument hums contentedly.</string> <!-- untranslated -->
-    <string name="monument_touch_blessing">A blessing settles over you for an hour.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">The Monument grants: %1$s</string> <!-- untranslated -->
     <string name="monument_contributed">The flame grows brighter!</string> <!-- untranslated -->
     <string name="monument_flame_lit">The Eternal Flame is lit! The Vault Guardian awaits.</string> <!-- untranslated -->
@@ -2407,6 +2410,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->

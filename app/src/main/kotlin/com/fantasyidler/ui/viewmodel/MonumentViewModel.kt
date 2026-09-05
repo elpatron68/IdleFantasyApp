@@ -87,6 +87,7 @@ class MonumentViewModel @Inject constructor(
         viewModelScope.launch {
             val message = when (val result = monumentRepo.touchMonument()) {
                 is MonumentTouchResult.Blessing -> context.withAppLocale().getString(R.string.monument_touch_blessing)
+                is MonumentTouchResult.BlessingExtended -> context.withAppLocale().getString(R.string.monument_touch_blessing_extended)
                 is MonumentTouchResult.Items    -> context.withAppLocale().getString(
                     R.string.monument_touch_items,
                     result.items.entries.joinToString { (key, qty) -> "$qty× ${GameStrings.itemName(context, key)}" },

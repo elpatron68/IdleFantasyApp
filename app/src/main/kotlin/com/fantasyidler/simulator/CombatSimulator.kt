@@ -113,6 +113,7 @@ object CombatSimulator {
             var enemy    = enemies[enemyKey] ?: continue
             val frameStartEnemyKey = enemyKey
             val frameKillsByEnemy  = mutableMapOf<String, Int>()
+            val frameSpawnsAfterKills = mutableListOf<String>()
 
             // --- Per-enemy combat stats, recomputed on every spawn: each kill rolls a fresh
             // enemy type mid-frame so spawns follow their weights instead of locking one type
@@ -234,6 +235,7 @@ object CombatSimulator {
                     frameXp += xp
                     enemyKey = spawnPool[rnd.nextInt(spawnPool.size)]
                     enemy    = enemies[enemyKey] ?: enemy
+                    frameSpawnsAfterKills += enemyKey
                     refreshCombatStats()
                     enemyHp  = enemy.hp
                 }
@@ -301,6 +303,7 @@ object CombatSimulator {
                     arrowsConsumed = frameArrows,
                     runesConsumed  = if (runeKey != null && frameRunesUsed > 0) mapOf(runeKey to frameRunesUsed * runeCostPerAttack) else emptyMap(),
                     enemyKey       = frameStartEnemyKey,
+                    spawnsAfterKills = frameSpawnsAfterKills,
                     hpAfter      = currentHp.coerceAtLeast(0),
                     playerHits   = framePlayerHits,
                     doubleHitTicks = frameDoubleHitTicks,

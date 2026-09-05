@@ -280,7 +280,9 @@
     "id": "balrog",
     "display_name": "Gothic Ember, Ancient Flame of the Deep",
     "emoji": "🔥",
-    "tags": ["demon"],
+    "tags": [
+      "demon"
+    ],
     "description": "An ancient demon of flame and shadow, awakened from its slumber deep beneath the earth.",
     "combat_level_required": 100,
     "duration_minutes": 120,
@@ -651,6 +653,11 @@
         "item": "race_change_token",
         "chance": 0.004,
         "comment": "1/250 race change token"
+      },
+      {
+        "item": "midas_band",
+        "chance": 0.001,
+        "comment": "1/1000 heirloom ring"
       }
     ],
     "requires_monument": true

@@ -130,8 +130,9 @@ class SeasonalEventRepository @Inject constructor(
         val event = activeEvent() ?: return flags
         val byType = event.bountyTasks.groupBy { it.type }
         val validIds = event.bountyTasks.map { it.id }.toSet()
-        val skillLevels: Map<String, Int> =
-            Json.decodeFromString(playerRepo.getOrCreatePlayer().skillLevels)
+        val player = playerRepo.getOrCreatePlayer()
+        val skillLevels: Map<String, Int> = Json.decodeFromString(player.skillLevels)
+        val inventory:   Map<String, Int> = Json.decodeFromString(player.inventory)
         val now = System.currentTimeMillis()
 
         val slotsValid = flags.seasonalBountyEventId == event.id &&
@@ -180,6 +181,13 @@ class SeasonalEventRepository @Inject constructor(
             for ((index, taskId) in slots.withIndex()) {
                 if (cooldowns.containsKey(index.toString())) continue
                 if ((progress[taskId] ?: 0) > 0) continue
+                // A turn-in tithe tracks no progress; its "progress" is the stockpile in the
+                // player's inventory. A fully stocked one is a claim waiting to happen, so it
+                // must not be re-rolled out from under them (pool-wide rotation made that loss
+                // permanent instead of cycling back to another tithe). Holding merely SOME of
+                // the target does not protect: common items would make the slot squat forever.
+                val current = event.bountyTasks.first { it.id == taskId }
+                if (current.type == "turn_in" && (inventory[current.target] ?: 0) >= current.amount) continue
                 val nextTask = pickTask(event, event.bountyTasks.filterNot { it.id in slots }, skillLevels, excludeId = taskId) ?: continue
                 if (nextTask.id == taskId) continue
                 slots[index] = nextTask.id

@@ -105,6 +105,7 @@ private val NON_COMBAT_PRESTIGE_SKILLS = Skills.GATHERING + Skills.CRAFTING_SKIL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SkillsScreen(
+    openSkill: String? = null,
     onNavigateToSlayer: () -> Unit = {},
     onNavigateToBoneAltar: () -> Unit = {},
     onNavigateToPrestige: (String) -> Unit = {},
@@ -118,6 +119,15 @@ fun SkillsScreen(
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
     AppBannerEffect(craftSnackState.snackbarMessage, craftingViewModel::snackbarConsumed)
+
+    // onSkillTapped reads uiState.value synchronously, so deep-linking here must wait for isLoading to show correct skill level.
+    var openedInitialSkill by remember { mutableStateOf(false) }
+    LaunchedEffect(openSkill, state.isLoading) {
+        if (openSkill != null && !state.isLoading && !openedInitialSkill) {
+            openedInitialSkill = true
+            viewModel.onSkillTapped(openSkill)
+        }
+    }
 
     var showLegend by remember { mutableStateOf(false) }
     if (showLegend) {

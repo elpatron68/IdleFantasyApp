@@ -153,14 +153,6 @@ internal fun CombatSessionBanner(
     }
     val currentFrame = frames.getOrNull(currentFrameIdx)
 
-    val currentEnemyKey: String? = remember(currentFrameIdx) {
-        currentFrame?.enemyKey?.takeIf { it.isNotEmpty() }
-            ?: frames.take(currentFrameIdx + 1)
-                .lastOrNull { it.killsByEnemy.isNotEmpty() }
-                ?.killsByEnemy?.keys?.firstOrNull()
-    }
-    val currentEnemy = currentEnemyKey?.let { enemies[it] }
-
     val isBoss = session.skillName == "boss"
     // Pace by the session's true tick cadence, not the current frame's own hit count: a
     // partial final frame would otherwise stretch its few hits across the whole minute
@@ -174,24 +166,25 @@ internal fun CombatSessionBanner(
     val halfTickInFrame = if (!isDone) ((now - frameStartMs) * 2 / attackSpeedMs).toInt().coerceIn(0, maxTick * 2 + 1) else maxTick * 2 + 1
     val tickInFrame = halfTickInFrame / 2
 
+    // Each kill respawns a random enemy type mid-minute, so the tick-exact enemy, its HP,
+    // and the in-frame kill attribution all come from replaying the recorded spawn chain
+    // instead of pinning the whole minute on the frame's first enemy (issue #1690).
+    val replayState = remember(currentFrameIdx, tickInFrame) {
+        if (isBoss) null else replayFrameAt(frames, currentFrameIdx, tickInFrame, enemies)
+    }
+    val currentEnemyKey: String? = replayState?.enemyKey
+        ?: currentFrame?.enemyKey?.takeIf { it.isNotEmpty() }
+        ?: frames.take(currentFrameIdx + 1)
+            .lastOrNull { it.killsByEnemy.isNotEmpty() }
+            ?.killsByEnemy?.keys?.firstOrNull()
+    val currentEnemy = currentEnemyKey?.let { enemies[it] }
+
     val killsSoFar: Map<String, Int> = remember(currentFrameIdx, tickInFrame) {
         val acc = frames.take(currentFrameIdx).fold(mutableMapOf<String, Int>()) { a, f ->
             f.killsByEnemy.forEach { (k, v) -> a[k] = (a[k] ?: 0) + v }
             a
         }
-        val f = frames.getOrNull(currentFrameIdx)
-        if (f != null && !isBoss) {
-            val enemy = enemies[f.enemyKey]
-            if (enemy != null && f.playerHits.isNotEmpty()) {
-                var hp = enemyHpAtFrameStart(frames, currentFrameIdx, enemies) ?: enemy.hp
-                var kills = 0
-                for (dmg in f.playerHits.take(tickInFrame + 1)) {
-                    hp -= dmg
-                    if (hp <= 0) { kills++; hp = enemy.hp }
-                }
-                if (kills > 0) acc[f.enemyKey] = (acc[f.enemyKey] ?: 0) + kills
-            }
-        }
+        replayState?.killsInFrame?.forEach { (k, v) -> acc[k] = (acc[k] ?: 0) + v }
         acc
     }
 
@@ -298,14 +291,7 @@ internal fun CombatSessionBanner(
                             (currentFrame?.allyHits?.take(tickInFrame + 1)?.sum() ?: 0)
                         (currentBoss.hp - prevDmg - curDmg).coerceAtLeast(0)
                     }
-                    currentEnemy != null && currentFrame?.playerHits?.isNotEmpty() == true -> {
-                        var hp = enemyHpAtFrameStart(frames, currentFrameIdx, enemies) ?: currentEnemy.hp
-                        for (dmg in currentFrame.playerHits.take(tickInFrame + 1)) {
-                            hp -= dmg
-                            if (hp <= 0) hp = currentEnemy.hp
-                        }
-                        hp.coerceAtLeast(0)
-                    }
+                    currentEnemy != null -> replayState?.enemyHp ?: currentEnemy.hp
                     else -> currentEnemy?.hp ?: 0
                 }
 
@@ -314,21 +300,32 @@ internal fun CombatSessionBanner(
                 // tick they actually happened (issue #935).
                 val combatLog = remember(currentFrameIdx, halfTickInFrame) {
                     buildList<CombatLogEntry> {
+                        fun nameOf(key: String) = bosses.firstOrNull { it.id == key }?.let { GameStrings.bossName(context, it.id) }
+                            ?: enemies[key]?.let { GameStrings.enemyName(context, key) } ?: key
+                        fun fullHpOf(key: String) = if (!isBoss) enemies[key]?.hp ?: Int.MAX_VALUE else Int.MAX_VALUE
+                        var key = ""
                         var hp = 0
-                        var prevKey: String? = null
+                        var carried = false
                         for (i in 0..currentFrameIdx) {
                             val f = frames.getOrNull(i) ?: break
-                            val eName = bosses.firstOrNull { it.id == f.enemyKey }?.let { GameStrings.bossName(context, it.id) }
-                                ?: enemies[f.enemyKey]?.let { GameStrings.enemyName(context, f.enemyKey) } ?: f.enemyKey
-                            val enemyHp = if (!isBoss) enemies[f.enemyKey]?.hp ?: Int.MAX_VALUE else Int.MAX_VALUE
-                            if (f.enemyKey != prevKey) hp = enemyHp
-                            prevKey = f.enemyKey
+                            // A mid-minute kill switches to the recorded next spawn, so names,
+                            // kill lines, and HP follow the actual enemy chain (issue #1690).
+                            if (!carried || f.enemyKey != key) { key = f.enemyKey; hp = fullHpOf(key) }
+                            carried = true
+                            var eName = nameOf(key)
+                            var killIdx = 0
                             val lastTick = if (i < currentFrameIdx) maxOf(f.playerHits.size, f.enemyHits.size) - 1 else tickInFrame
                             for (t in 0..lastTick) {
                                 f.playerHits.getOrNull(t)?.let { dmg ->
                                     add(CombatLogEntry(true, dmg, eName, doubleHit = t in f.doubleHitTicks))
                                     hp -= dmg
-                                    if (hp <= 0) { add(CombatLogEntry(false, 0, eName, isKill = true)); hp = enemyHp }
+                                    if (hp <= 0) {
+                                        add(CombatLogEntry(false, 0, eName, isKill = true))
+                                        key = f.spawnsAfterKills.getOrNull(killIdx) ?: key
+                                        killIdx++
+                                        hp = fullHpOf(key)
+                                        eName = nameOf(key)
+                                    }
                                 }
                                 f.allyHits.getOrNull(t)?.takeIf { it > 0 }
                                     ?.let { add(CombatLogEntry(true, it, eName, ally = true)) }
@@ -745,30 +742,55 @@ internal fun CombatSessionBanner(
     }
 }
 
+/** Tick-exact dungeon replay result: the enemy under attack, its remaining HP, and this frame's per-type kills. */
+private data class FrameReplayState(
+    val enemyKey: String,
+    val enemyHp: Int,
+    val killsInFrame: Map<String, Int>,
+)
+
 /**
- * Enemy HP carried into [frameIdx], mirroring the simulator's cross-frame carryover: a
- * partially damaged enemy persists across minute boundaries, resetting only on a kill or
- * when the enemy type changes. Replaying every frame from full HP would show kills later
- * than they happened (issue #935). Null when the frame's enemy starts fresh or is unknown.
+ * Replays player hits through [frameIdx] up to [tickInFrame], following each frame's
+ * recorded spawn chain: the minute starts on [SessionFrame.enemyKey] and every kill
+ * switches to the next entry of [SessionFrame.spawnsAfterKills] at that enemy's full HP
+ * (issue #1690). Enemy HP carries across minute boundaries like the simulator's
+ * carryover: it resets only on a kill or when the enemy type changes (issue #935).
+ * Frames from before the spawn chain existed keep the old same-enemy behavior. Null for
+ * a missing frame or one with no combat enemy.
  */
-private fun enemyHpAtFrameStart(
+private fun replayFrameAt(
     frames: List<SessionFrame>,
     frameIdx: Int,
+    tickInFrame: Int,
     enemies: Map<String, EnemyData>,
-): Int? {
+): FrameReplayState? {
     val frame = frames.getOrNull(frameIdx) ?: return null
-    val full  = enemies[frame.enemyKey]?.hp ?: return null
-    var hp = full
-    var prevKey: String? = null
+    if (frame.enemyKey.isEmpty()) return null
+    var key = ""
+    var hp = 0
+    var carried = false
+    fun resetTo(newKey: String) { key = newKey; hp = enemies[newKey]?.hp ?: Int.MAX_VALUE }
     for (i in 0 until frameIdx) {
-        val f     = frames.getOrNull(i) ?: break
-        val fFull = enemies[f.enemyKey]?.hp ?: continue
-        if (f.enemyKey != prevKey) hp = fFull
+        val f = frames.getOrNull(i) ?: break
+        if (f.enemyKey.isEmpty()) continue
+        if (!carried || f.enemyKey != key) resetTo(f.enemyKey)
+        carried = true
+        var killIdx = 0
         for (dmg in f.playerHits) {
             hp -= dmg
-            if (hp <= 0) hp = fFull
+            if (hp <= 0) { resetTo(f.spawnsAfterKills.getOrNull(killIdx) ?: key); killIdx++ }
         }
-        prevKey = f.enemyKey
     }
-    return if (frame.enemyKey == prevKey) hp else full
+    if (!carried || frame.enemyKey != key) resetTo(frame.enemyKey)
+    val kills = mutableMapOf<String, Int>()
+    var killIdx = 0
+    for (dmg in frame.playerHits.take(tickInFrame + 1)) {
+        hp -= dmg
+        if (hp <= 0) {
+            kills[key] = (kills[key] ?: 0) + 1
+            resetTo(frame.spawnsAfterKills.getOrNull(killIdx) ?: key)
+            killIdx++
+        }
+    }
+    return FrameReplayState(key, hp.coerceAtLeast(0), kills)
 }

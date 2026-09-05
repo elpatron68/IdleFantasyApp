@@ -57,6 +57,7 @@
     <string name="label_hitpoints">Hitpoints</string> <!-- untranslated -->
     <string name="label_inventory">Inventaris</string>
     <string name="label_equipment">Uitrusting</string>
+    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
     <string name="label_pets">Huisdieren</string>
     <string name="label_achievements">Prestaties</string>
     <string name="label_locations">Locaties</string>
@@ -983,6 +984,7 @@
     <string name="guild_no_dailies">Voltooi gildequests om dagelijkse Quests te ontgrendelen.</string>
     <string name="guild_dailies_all_done">All of today\'s daily requests are complete. Come back after the daily reset.</string> <!-- untranslated -->
     <string name="guild_contribute_inventory">Bijdragen vanuit inventaris (%1$d beschikbaar)</string>
+    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s voor het %4$s.</string>
     <string name="guild_quest_desc_kill">Versla %1$d vijanden met %2$s gevecht.</string>
     <string name="guild_quest_desc_prayer">Begraaf %1$d botten voor het %2$s.</string>
@@ -1847,7 +1849,8 @@
     <string name="monument_touch_title">Dagelijkse aanraking</string>
     <string name="monument_touch_btn">Raak het Monument aan</string>
     <string name="monument_touched_today">Vandaag al aangeraakt. Het Monument neuriet tevreden.</string>
-    <string name="monument_touch_blessing">Een zegen daalt een uur lang over je neer.</string>
+    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
     <string name="monument_touch_items">Het Monument schenkt: %1$s</string>
     <string name="monument_contributed">De vlam brandt feller!</string>
     <string name="monument_flame_lit">De Eeuwige Vlam is ontstoken! De Kluisbewaker wacht.</string>
@@ -2421,6 +2424,8 @@
     <string name="item_heirloom_frying_pan_desc">A seasoned pan handed down through a family of cooks. Every meal deepens its seasoning.</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_name">Heirloom Lockpick</string> <!-- untranslated -->
     <string name="item_heirloom_lockpick_desc">A thief\'s pick that has whispered open countless locks. It grows subtler with every job.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
     <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->
