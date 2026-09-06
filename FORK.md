@@ -58,12 +58,12 @@ The fork stays close to upstream through GitHub Actions:
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| **Upstream Sync** | Daily + manual | Attempts to merge upstream `main`; on conflicts opens a GitHub issue instead of failing the scheduled run |
+| **Upstream Sync** | Daily + manual | Attempts to merge upstream `main`; on conflicts writes a workflow summary instead of failing the scheduled run |
 | **Upstream Release** | Push to `main`, every 10 min + manual | When upstream publishes a new GitHub Release, syncs, builds a **signed release APK**, and publishes a matching release on this fork |
 
 Fork-only files (Save Viewer code/strings, CI workflows, `FORK.md`) are listed in `.gitattributes` with `merge=ours` so automatic merges keep the fork side. Save Viewer UI strings live in `save_viewer_strings.xml`, separate from upstream locale files, to reduce translation merge conflicts.
 
-When **Upstream Sync** reports a merge conflict, merge upstream manually (or merge the tracking issue's instructions), resolve any remaining conflicts in shared UI files (`AppBanner.kt`, `HomeScreen.kt`, …), push to `main`, then close the issue.
+When **Upstream Sync** reports a merge conflict, check the workflow run summary on GitHub Actions, merge upstream manually, resolve any remaining conflicts in shared UI files (`AppBanner.kt`, `HomeScreen.kt`, …), push to `main`, then re-run the workflow.
 
 To **manually trigger a release build** (requires repository secrets for the fork signing key):
 
