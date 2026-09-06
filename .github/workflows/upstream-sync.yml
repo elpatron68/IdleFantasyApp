@@ -1,8 +1,8 @@
 # Sync this fork with tristinbaker/IdleFantasy and build a debug APK when upstream moved.
 #
-# Scheduled runs attempt a merge but do NOT fail on conflicts — they open/update a
-# tracking issue instead. Release merges still happen via Upstream Release when a
-# new upstream tag ships. Fork-owned paths use merge=ours (.gitattributes).
+# Scheduled runs attempt a merge but do NOT fail on conflicts — they write a workflow
+# summary instead. Release merges still happen via Upstream Release when a new upstream
+# tag ships. Fork-owned paths use merge=ours (.gitattributes).
 name: Upstream Sync
 
 on:
@@ -23,7 +23,6 @@ concurrency:
 
 permissions:
   contents: write
-  issues: write
   actions: write
 
 env:
@@ -88,25 +87,17 @@ jobs:
           echo "conflicts=${CONFLICTS}" >> "$GITHUB_OUTPUT"
           echo "::warning::Upstream merge conflict in: ${CONFLICTS}"
 
-          TITLE="Upstream sync merge conflict"
-          BODY="$(cat <<EOF
-          Automatic upstream sync could not merge \`${UPSTREAM_REPO}/main\` into this fork.
-
-          **Conflicting files:** ${CONFLICTS}
-
-          Resolve manually (merge upstream, keep fork Save Viewer + CI changes), push to \`main\`, then close this issue.
-
-          Latest failed workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          EOF
-          )"
-
-          EXISTING="$(gh issue list --repo "${{ github.repository }}" --search "in:title \"${TITLE}\" state:open" --json number -q '.[0].number' || true)"
-          if [[ -n "${EXISTING}" ]]; then
-            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
-            echo "Updated issue #${EXISTING}"
-          else
-            gh issue create --repo "${{ github.repository }}" --title "$TITLE" --body "$BODY"
-          fi
+          {
+            echo "## Upstream sync merge conflict"
+            echo
+            echo "Automatic upstream sync could not merge \`${UPSTREAM_REPO}/main\` into this fork."
+            echo
+            echo "**Conflicting files:** ${CONFLICTS}"
+            echo
+            echo "Resolve manually (merge upstream, keep fork Save Viewer + CI changes), push to \`main\`, then re-run this workflow."
+            echo
+            echo "[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          } >> "$GITHUB_STEP_SUMMARY"
 
           FAIL_ON_CONFLICT="${{ github.event_name == 'workflow_dispatch' && inputs.fail_on_conflict }}"
           if [[ "$FAIL_ON_CONFLICT" == "true" ]]; then
