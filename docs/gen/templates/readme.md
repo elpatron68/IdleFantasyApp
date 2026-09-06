@@ -95,7 +95,7 @@ See the [contributors graph](https://github.com/tristinbaker/IdleFantasy/graphs/
 
 ## For developers
 
-**Language:** Kotlin
+**Language:** Kotlin  
 **UI:** Jetpack Compose + Material 3  
 **Database:** Room (SQLite)  
 **Background work:** AlarmManager  

@@ -1,0 +1,14 @@
+# During upstream merges, keep fork-owned files automatically.
+# Requires: git config merge.ours.driver true (set in CI before merging).
+
+FORK.md merge=ours
+.github/workflows/upstream-sync.yml merge=ours
+.github/workflows/upstream-release.yml merge=ours
+.github/workflows/wiki-site.yml merge=ours
+.github/workflows/ci.yml merge=ours
+app/src/main/kotlin/com/fantasyidler/util/SaveViewerClient.kt merge=ours
+app/src/main/kotlin/com/fantasyidler/ui/screen/SaveViewerUploadHandler.kt merge=ours
+app/src/main/res/values/save_viewer_strings.xml merge=ours
+app/src/main/res/values-de/save_viewer_strings.xml merge=ours
+app/src/test/kotlin/com/fantasyidler/util/SaveViewerClientTest.kt merge=ours
+docs/fdroid/metadata/com.tristinbaker.idlefantasy/en-US/full_description.txt merge=ours

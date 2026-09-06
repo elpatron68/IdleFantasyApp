@@ -104,7 +104,7 @@ Fork-specific contributions: see **[FORK.md](FORK.md)**.
 
 ## For developers
 
-**Language:** Kotlin
+**Language:** Kotlin  
 **UI:** Jetpack Compose + Material 3  
 **Database:** Room (SQLite)  
 **Background work:** AlarmManager  
