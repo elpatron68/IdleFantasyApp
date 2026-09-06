@@ -235,17 +235,6 @@ fun AppNavigation(
                     openSkill     = entry.arguments?.getString("openSkill"),
                 )
             }
-            paneComposable(
-                route     = Screen.Skills.openSkillRoute,
-                arguments = listOf(navArgument("openSkill") { type = NavType.StringType }),
-            ) { entry ->
-                SkillsScreen(
-                    openSkill             = entry.arguments?.getString("openSkill"),
-                    onNavigateToSlayer    = { navController.navigate(Screen.Slayer.route) },
-                    onNavigateToBoneAltar = { navController.navigate(Screen.BoneAltar.route) },
-                    onNavigateToPrestige  = { skill -> navController.navigate(Screen.PrestigeDetail.createRoute(skill)) },
-                )
-            }
             paneComposable(Screen.Farming.route) { entry ->
                 FarmingScreen(onBack = { if (navController.currentBackStackEntry == entry) navController.popBackStack() })
             }
