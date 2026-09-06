@@ -83,6 +83,16 @@ class MonumentViewModel @Inject constructor(
         }
     }
 
+    fun debugForceTouchMonument() {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlagsUnlocked()
+            playerRepo.updateFlagsUnlocked(flags.copy(
+                monumentTouchDay        = -1,
+            ))
+            touchMonument()
+        }
+    }
+
     fun touchMonument() {
         viewModelScope.launch {
             val message = when (val result = monumentRepo.touchMonument()) {

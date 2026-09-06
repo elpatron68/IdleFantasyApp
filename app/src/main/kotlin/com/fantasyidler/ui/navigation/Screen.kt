@@ -27,6 +27,7 @@ import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.ShowChart
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.fantasyidler.R
+import com.fantasyidler.ui.screen.CombatTabName
 
 sealed class Screen(
     val route: String,
@@ -49,8 +50,8 @@ sealed class Screen(
         icon         = Icons.Outlined.Shield,
         selectedIcon = Icons.Filled.Shield,
     ) {
-        const val gearRoute = "combat/gear"
-        const val dungeonsRoute = "combat/dungeons"
+        const val openTabRoute = "combat/tab/{tab}"
+        fun startWithTab(tab: CombatTabName) = "combat/tab/${tab.name}"
         const val presetDungeonRoute = "combat/preset_dungeon/{dungeonKey}"
         fun presetDungeonRoute(key: String) = "combat/preset_dungeon/$key"
         const val presetBossRoute = "combat/preset_boss/{bossKey}"

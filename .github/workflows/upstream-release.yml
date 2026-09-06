@@ -126,6 +126,10 @@ jobs:
             echo "Fork versionName $VERSION_NAME != release $EXPECTED — will sync with upstream"
           fi
 
+      - name: Configure fork merge drivers
+        if: steps.skip.outputs.skip != 'true' && steps.needs_sync.outputs.needs_sync == 'true'
+        run: git config --global merge.ours.driver true
+
       - name: Sync fork with upstream
         if: steps.skip.outputs.skip != 'true' && steps.needs_sync.outputs.needs_sync == 'true'
         id: sync

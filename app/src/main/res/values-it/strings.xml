@@ -56,8 +56,8 @@
     <string name="label_prayer">Preghiera</string>
     <string name="label_hitpoints">Salute</string>
     <string name="label_inventory">Inventario</string>
-    <string name="label_equipment">Armamenti</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_equipment">Utensili</string>
+    <string name="label_combat_equipment">Armamenti</string>
     <string name="label_pets">Compagni</string>
     <string name="label_achievements">Obbiettivi</string>
     <string name="label_locations">Dove si trova</string>
@@ -67,7 +67,7 @@
     <string name="label_by_location">Per luogo</string>
     <string name="bestiary_not_encountered">Non ancora incontrato</string>
     <string name="bestiary_qty_header">Q.tà</string>
-    <string name="bestiary_chance_header">Possibilità</string>
+    <string name="bestiary_chance_header">Prob.tà</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
     <string name="achievements_progress_bar">ottenuti</string>
     <string name="bestiary_progress_bar">incontrati</string>
@@ -483,18 +483,6 @@
     <string name="settings_exported_ok">Salvataggio esportato</string>
     <string name="settings_imported_ok">Salvataggio importato con successo</string>
     <string name="settings_imported_fail">Importazione fallita — file non valido</string>
-    <string name="settings_viewer_url">Save Viewer URL</string>
-    <string name="settings_viewer_url_desc">Paste your personal viewer link to upload saves directly</string>
-    <string name="settings_viewer_upload_btn">Send to Save Viewer</string>
-    <string name="settings_viewer_upload_empty">Paste your viewer link first — copy it from the Save Viewer page</string>
-    <string name="settings_viewer_upload_invalid">Invalid viewer URL</string>
-    <string name="settings_viewer_upload_success">Save uploaded</string>
-    <string name="settings_viewer_upload_duplicate">Save already exists in viewer</string>
-    <string name="settings_viewer_upload_network">Network error — check your connection</string>
-    <string name="settings_viewer_upload_not_found">Viewer not found — check the URL</string>
-    <string name="settings_viewer_upload_parse">Could not parse save on the server</string>
-    <string name="settings_viewer_upload_rate_limit">Too many uploads — try again later</string>
-    <string name="settings_viewer_open">Open viewer</string>
     <string name="settings_backup_title">Backup Automatico</string>
     <string name="settings_backup_folder">Cartella di Backup</string>
     <string name="settings_backup_no_folder">Nessuna cartella selezionata</string>
@@ -642,7 +630,7 @@
     <string name="profile_equip_best">Equipaggia Migliori</string>
     <string name="profile_equip_best_tools">Equipaggia Utensili Migliori</string>
     <string name="profile_weapons">Armi</string>
-    <string name="profile_combat_gear">Armamenti da Battaglia</string>
+    <string name="profile_combat_gear">Armamenti</string>
     <string name="profile_view_combat_gear">Controlla Armamenti</string>
     <string name="profile_gathering_tools">Strumenti di Raccolta</string>
     <string name="profile_food_dungeon">Cibo (Dungeon)</string>
@@ -984,7 +972,7 @@
     <string name="guild_no_dailies">Completa missioni della gilda per sbloccare le richieste del giorno.</string>
     <string name="guild_dailies_all_done">Hai completato tutte le richieste giornaliere. Torna dopo l\'orario di ripristino.</string>
     <string name="guild_contribute_inventory">Contribuisci con i tuoi oggetti (%1$d disponibile)</string>
-    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">Vai all\'Abilità</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s per la %4$s.</string>
     <string name="guild_quest_desc_kill">Sconfiggi %1$d nemici in combattimento %2$s.</string>
     <string name="guild_quest_desc_prayer">Seppellisci %1$d ossa per la %2$s.</string>
@@ -1849,8 +1837,8 @@
     <string name="monument_touch_title">Tocco quotidiano</string>
     <string name="monument_touch_btn">Tocca il Monumento</string>
     <string name="monument_touched_today">Hai toccato il monumento. Senti un mormorio di soddisfazione.</string>
-    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
-    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing">Una benedizione scende su di te per due ore.</string>
+    <string name="monument_touch_blessing_extended">Il Monumento estende la tua benedizione per due ore.</string>
     <string name="monument_touch_items">Il Monumento ti ha concesso: %1$s</string>
     <string name="monument_contributed">La fiamma brilla più forte!</string>
     <string name="monument_flame_lit">La Fiamma Eterna è accesa! Il Guardiano del Caveau ti attende.</string>
@@ -2019,7 +2007,7 @@
     <string name="seasonal_minigame_sequence_mode_caption">La luce dura %1$dms, disponibile dopo %2$s</string>
     <string name="seasonal_market_price">%1$s monete</string>
     <string name="seasonal_reward_gloomharvest_2026_25_desc">Borsa di monete (50.000 monete)</string>
-    <string name="seasonal_reward_gloomharvest_2026_60_desc">Anello dello Spettro</string>
+    <string name="seasonal_reward_gloomharvest_2026_60_desc">Anello d\'Osso Spettrale</string>
     <string name="seasonal_reward_gloomharvest_2026_100_desc">Bonus XP di 48 ore gratuito</string>
     <string name="seasonal_reward_gloomharvest_2026_150_desc">Falce del Mietitore</string>
     <string name="seasonal_reward_gloomharvest_2026_200_desc">Borsa di monete (250.000 monete)</string>
@@ -2044,7 +2032,7 @@
     <string name="seasonal_bounty_gloom_shortbows_hint">Frecciaio</string>
     <string name="seasonal_bounty_gloom_feast_name">Cucina pescespada per il banchetto del raccolto</string>
     <string name="seasonal_bounty_gloom_feast_hint">Cucina</string>
-    <string name="seasonal_bounty_gloom_bars_name">Fondi adamantite per le cripte maledette</string>
+    <string name="seasonal_bounty_gloom_bars_name">Fondi adamantio per le cripte maledette</string>
     <string name="seasonal_bounty_gloom_bars_hint">Forgia</string>
     <string name="seasonal_bounty_gloom_runes_name">Incidi Rune della Morte per placare gli spiriti</string>
     <string name="seasonal_bounty_gloom_runes_hint">Incisione di Rune</string>
@@ -2278,7 +2266,7 @@
     <string name="prestige_node_owned">Acquistato</string>
     <string name="prestige_path_auto_label">Guadagnato da onore</string>
     <string name="prestige_node_auto_earned">Guadagnato a onore %1$d.</string>
-    <string name="prestige_node_auto_pending">Disponibile automaticamente a onoore %1$d.</string>
+    <string name="prestige_node_auto_pending">Disponibile automaticamente a onore %1$d.</string>
     <string name="prestige_button_xp_only">Onora per il prossimo rango XP</string>
     <string name="prestige_confirm_message_xp_only">Il tuo livello di %1$s torneà a 1 e sbloccherai il prossimo rango XP. Non potrai più usare armamenti di livello superiore, e le missioni giornaliere di %1$s saranno reimpostate. Otterrai 2x %1$s XP per 48 ore.</string>
     <!-- Translator note: %1$s = list of race names -->
@@ -2424,8 +2412,8 @@
     <string name="item_heirloom_frying_pan_desc">Una padella passata di generazione in generazione. Ogni pietanza preparata ne migliora la fattura.</string>
     <string name="item_heirloom_lockpick_name">Grimaldello Cimelio</string>
     <string name="item_heirloom_lockpick_desc">Infallibile grimaldello che ha aperto innumerevoli serrature. Ogni lavoro lo rende più preciso.</string>
-    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
-    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Fascia di Mida</string>
+    <string name="item_midas_band_desc">Un filo d\'oro del Guardiano del Caveau. Prende energia dalle battaglie in cui sopravvivi.</string>
     <string name="item_heirloom_blade_name">Lama Cimelio</string>
     <string name="item_heirloom_blade_desc">Antica lama dal potere sopito, ogni battaglia ne risveglia un po\' alla volta.</string>
     <string name="item_heirloom_greathammer_name">Martellone Cimelio</string>

@@ -539,11 +539,11 @@
     <string name="skilling_dungeon_sunken_grotto_note_3">Un libretto fradicio e malconcio galleggia verso di te: “Il tempio sotto le acque non è stato abbandonato… sta aspettando.”</string>
     <string name="skilling_dungeon_sunken_grotto_note_4">Un portico pulsante di fioca luce propria si mostra nelle profondità. La corrente ti spinge verso l\'entrata.</string>
     <string name="skilling_dungeon_sunken_grotto_note_5">Il portico si avvicina sempre di più. Il Tempio Sommerso si trova oltre, qualcosa di antico ti osserva dal suo interno.</string>
-    <string name="skilling_dungeon_dwarven_depths_note_1">Ancient rune-carved walls pulse faintly. The dwarves who built this place are long gone.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_dwarven_depths_note_2">A colossal forge stands at the passage end, its fires somehow still burning after centuries.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_dwarven_depths_note_3">Iron golems stand dormant in the alcoves. Their eyes flicker as you mine nearby.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_dwarven_depths_note_4">The forge runes are a warning — something was bound here, and it grows restless.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_dwarven_depths_note_5">The golems rise fully to life. The Ancient Forge awakens — its guardians await those brave enough to enter.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_dwarven_depths_note_1">Mura incise con antiche rune brillano appena. I nani autori di queste gallerie risalgono a tempi immemori.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_2">Una gigantesca fornace si staglia alla fine del tunnel. Le sue fiamme ardono ancora a distanza di secoli.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_3">Golem di ferro stanno immobili nei loro anfratti. I loro occhi luccicano mentre fai scendere il tuo piccone.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_4">Le rune della forgia sono un avvertimento: qualcosa giace in questi luoghi e desidera la libertà.</string>
+    <string name="skilling_dungeon_dwarven_depths_note_5">I golem si risvegliano dal loro sonno. L\'Antica Fucina ha ritrovato tutto il suo vigore; i suoi guardiani aspettano i più temerari.</string>
     <string name="skilling_dungeon_corrupted_canopy_note_1">The trees here bleed shadow where cut. The wood writhes and resists the blade.</string> <!-- untranslated -->
     <string name="skilling_dungeon_corrupted_canopy_note_2">A shadow beast watches from the canopy. It does not attack — it only observes.</string> <!-- untranslated -->
     <string name="skilling_dungeon_corrupted_canopy_note_3">Old sanctum stones are visible through the twisted trunks. Something still lives there.</string> <!-- untranslated -->

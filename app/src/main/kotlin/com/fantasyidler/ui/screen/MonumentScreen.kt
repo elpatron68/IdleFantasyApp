@@ -50,6 +50,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.fantasyidler.BuildConfig
 import com.fantasyidler.R
 import com.fantasyidler.repository.MonumentRepository
 import com.fantasyidler.ui.viewmodel.MonumentViewModel
@@ -162,6 +163,11 @@ fun MonumentScreen(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+                            if (BuildConfig.DEBUG) {
+                                TextButton(onClick = viewModel::debugForceTouchMonument) {
+                                    Text("[Debug] Touch the monument anyway")
+                                }
+                            }
                         } else {
                             Button(onClick = viewModel::touchMonument, modifier = Modifier.fillMaxWidth()) {
                                 Text(stringResource(R.string.monument_touch_btn))

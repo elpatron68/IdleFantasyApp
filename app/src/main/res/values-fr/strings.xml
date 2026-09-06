@@ -57,7 +57,7 @@
     <string name="label_hitpoints">Points de vie</string>
     <string name="label_inventory">Inventaire</string>
     <string name="label_equipment">Équipement</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_combat_equipment">Gear</string>
     <string name="label_pets">Familiers</string>
     <string name="label_achievements">Réalisations</string>
     <string name="label_locations">Lieux</string>
@@ -103,7 +103,7 @@
     <string name="label_coming_soon">À venir</string>
     <string name="label_time_remaining">Temps restant</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
+    <string name="duration_years">%1$dy</string>
     <string name="duration_months">%1$dmo</string>
     <string name="duration_weeks">%1$dS</string>
     <string name="duration_days">%1$dj</string>
@@ -128,7 +128,7 @@
     <string name="label_ready_to_harvest">Prêt à être récolté</string>
     <string name="label_empty">Vide</string>
     <string name="inventory_sort_quantity">Quantité</string>
-    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
+    <string name="inventory_sort_az">A-Z</string>
     <string name="inventory_cat_weapons">Armes</string>
     <string name="inventory_cat_armour">Armures</string>
     <string name="inventory_cat_tools">Outils</string>
@@ -476,9 +476,9 @@
     <string name="settings_source_code">Code source</string>
 
     <string name="settings_source_open">Ouvrir</string>
-    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
+    <string name="settings_wiki">Wiki</string>
 
-    <string name="settings_discord">Discord</string> <!-- untranslated -->
+    <string name="settings_discord">Discord</string>
 
     <string name="settings_exported_ok">Sauvegarde exportée</string>
     <string name="settings_imported_ok">Sauvegarde importée avec succès</string>
@@ -516,7 +516,7 @@
     <string name="home_xp_boost_was_active">Le bonus d\'XP ×2 de toutes les aptitudes était actif</string>
     <string name="home_xp_boost_active">XP x2 pour toutes les aptitudes - %1$s</string>
     <string name="home_prestige_xp_boost_active">XP x2 pour %1$s - %2$s</string>
-    <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
+    <string name="boosts_show_more">+%1$d plus de bonus (appuyer pour afficher)</string>
     <string name="boosts_show_less">Montrer moins</string>
     <string name="home_loot">Butin</string>
     <string name="home_food_consumed">Nourriture consommée</string>
@@ -563,11 +563,11 @@
     <string name="combat_log_you_missed">Vous avez raté</string>
     <string name="combat_log_kill">☠ %1$s vaincu(s)</string>
     <string name="combat_log_player_hit">→ Vous infligez %2$d dégâts à %1$s</string>
-    <string name="combat_log_player_double_hit">→ Double hit! You strike %1$s twice: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_player_double_hit">→ Double coup! Vous frappez %1$s deux fois: %2$d dmg</string>
     <string name="combat_log_player_miss">→ Vous avez raté %1$s</string>
     <string name="combat_log_enemy_hit">← %1$s vous inflige %2$d dégâts</string>
     <string name="combat_log_enemy_miss">← %1$s a raté</string>
-    <string name="combat_log_ally_hit">→ Your mercenaries hit %1$s: %2$d dmg</string> <!-- untranslated -->
+    <string name="combat_log_ally_hit">→ Vos mercenaires infligent %1$s: %2$d dmg</string>
     <string name="combat_log_heal">✚ Vous mangez : +%1$d PV</string>
     <string name="combat_eat_threshold_warning">Risqué : à un seuil bas, un coup violent peut vous faire tomber à 0 PV avant que votre personnage ne mange.</string>
     <string name="combat_rec_level">Niveau de combat recommandé</string>
@@ -576,7 +576,7 @@
     <string name="combat_best_arrow">Meilleure flèche</string>
     <string name="combat_arrow_auto">Auto (meilleure disponible)</string>
     <string name="combat_label_arrow">Flèche</string>
-    <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
+    <string name="combat_arrow_ranged_str">+%1$d Force à distance</string>
     <string name="combat_select_loadout">Choisir l\'équipement</string>
     <string name="combat_enemies">Ennemis</string>
     <string name="combat_no_spells">Aucun sort disponible à votre niveau de magie.</string>
@@ -584,8 +584,8 @@
     <string name="combat_max_hit">dégâts max</string>
     <string name="combat_you_have_runes">(vous avez %1$d %2$s)</string>
     <string name="combat_infinite_runes">(%1$s infinies)</string>
-    <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
-    <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
+    <string name="combat_spell_locked">Nécessite Magie niveau %1$d</string>
+    <string name="combat_spell_level_met">Magie niveau %1$d</string>
     <string name="combat_no_potion">Pas de potion</string>
     <string name="combat_req_level">Niveau de combat requis</string>
     <string name="combat_duration">Durée</string>
@@ -722,7 +722,7 @@
     <string name="quest_legend_title">Icônes de quêtes</string>
     <string name="quest_legend_daily">Quête quotidienne</string>
     <string name="quest_legend_weekly">Quête hebdomadaire</string>
-    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
+    <string name="quest_legend_seasonal">Richesse de saison</string>
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
@@ -745,7 +745,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Pas de matériaux</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
+    <string name="crafting_produces">= %1$d %2$s</string>
     <string name="crafting_effects">Effets</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">+%1$d XP au total</string>
@@ -798,7 +798,7 @@
     <string name="character_race_elf">Elfe</string>
     <string name="character_race_dwarf">Nain</string>
     <string name="character_race_orc">Orque</string>
-    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
+    <string name="character_race_halfling">Halfelin</string>
     <string name="character_race_gnome">Gnome</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -971,7 +971,7 @@
     <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les requêtes quotidiennes.</string>
     <string name="guild_dailies_all_done">Toutes les requêtes quotidiennes sont finies. Revenez après la réinitialisation quotidienne.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l\'inventaire (%1$d disponible)</string>
-    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">Accéder à la compétence</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
     <string name="guild_quest_desc_prayer">Enterrez %1$d os pour la %2$s.</string>
@@ -1749,8 +1749,8 @@
     <string name="shop_sold_old_equipment">Équipement obsolète vendu pour %1$s pièces</string>
     <string name="shop_bulk_sell_total">Total</string>
     <string name="shop_bulk_sell_confirm">Tout vendre</string>
-    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
-    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">Ventes en lot récentes</string>
+    <string name="shop_recent_bulk_sales_empty">Aucune vente en lot n\'a encore été enregistrée.</string>
     <string name="shop_xp_boost_activated">Bonus XP ×2 activé pour %1$dh !</string>
     <string name="shop_xp_boost_already_active">Un bonus XP ×2 est déjà actif.</string>
     <string name="shop_xp_boost_weekly_limit">Limite d\'un bonus XP ×2 par semaine. De nouveau disponible après la réinitialisation hebdomadaire.</string>
@@ -1792,7 +1792,7 @@
     <string name="bonus_coin_return">+%1$d%% retour de pièces</string>
     <string name="bonus_tower">Tour</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% en moins sur le coût d\'amélioration de bâtiments</string>
-    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="bonus_xp">+%1$d%% XP</string>
     <string name="bonus_coin_drops">+%1$d%% pièces obtenues</string>
     <string name="bonus_hp">+%1$d PV</string>
     <string name="snackbar_added_to_queue">Ajouté à la file d\'attente : %1$s.</string>
@@ -1824,7 +1824,7 @@
     <string name="monument_stage_2_reward">Débloque le toucher quotidien du monument</string>
     <string name="monument_stage_3_reward">Les bénédictions durent 6 heures de plus</string>
     <string name="monument_stage_4_reward" formatted="false">+1 emplacement de file, et l\'Oie Dorée s\'installe (+10% de pièces)</string>
-    <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
+    <string name="monument_stage_5_reward">Débloque le boss Gardien du coffre-fort et le titre Protecteur du Royaume</string>
     <string name="monument_built">Construit</string>
     <string name="monument_build_btn">Construire (%1$s)</string>
     <string name="monument_contribute_label">Nourrissez la Flamme Éternelle</string>
@@ -1836,8 +1836,8 @@
     <string name="monument_touch_title">Toucher quotidien</string>
     <string name="monument_touch_btn">Toucher le Monument</string>
     <string name="monument_touched_today">Déjà touché aujourd\'hui. Le Monument ronronne de contentement.</string>
-    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
-    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing">Une bénédiction vous couvre pendant deux heures.</string>
+    <string name="monument_touch_blessing_extended">Le Monument étend votre bénédiction pour deux heures.</string>
     <string name="monument_touch_items">Le Monument accorde : %1$s</string>
     <string name="monument_contributed">La flamme brille plus fort !</string>
     <string name="monument_flame_lit">La Flamme Éternelle est allumée ! Le Gardien de la Chambre Forte vous attend.</string>
