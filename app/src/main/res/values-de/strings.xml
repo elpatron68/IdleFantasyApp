@@ -57,7 +57,7 @@
     <string name="label_hitpoints">Lebenspunkte</string>
     <string name="label_inventory">Inventar</string>
     <string name="label_equipment">Ausrüstung</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_combat_equipment">Ausrüstung</string>
     <string name="label_pets">Haustiere</string>
     <string name="label_achievements">Erfolge</string>
     <string name="label_locations">Orte</string>
@@ -103,7 +103,7 @@
     <string name="label_coming_soon">Bald verfügbar</string>
     <string name="label_time_remaining">Verbleibende Zeit</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
+    <string name="duration_years">%1$dy</string>
     <string name="duration_months">%1$dmo</string>
     <string name="duration_weeks">%1$dw</string>
     <string name="duration_days">%1$dd</string>
@@ -128,7 +128,7 @@
     <string name="label_ready_to_harvest">Bereit für die Ernte</string>
     <string name="label_empty">Leer</string>
     <string name="inventory_sort_quantity">Menge</string>
-    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
+    <string name="inventory_sort_az">A-Z</string>
     <string name="inventory_cat_weapons">Waffen</string>
     <string name="inventory_cat_armour">Rüstung</string>
     <string name="inventory_cat_tools">Werkzeuge</string>
@@ -163,7 +163,7 @@
     <string name="label_inactive">Inaktiv</string>
     <string name="label_boost">Verstärkung</string>
     <string name="label_xp_boost">EP-Verstärkung</string>
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string> <!-- untranslated -->
+    <string name="label_prestige_xp_boost">Prestige EP Boost</string>
     <string name="label_weapon">Waffe</string>
     <string name="label_armour">Rüstung</string>
     <string name="label_food">Essen</string>
@@ -308,8 +308,8 @@
     <string name="settings_profile_layout_tabs">Reiter</string>
     <string name="settings_quest_dots">Quest-Punkte für Fähigkeiten</string>
     <string name="settings_quest_dots_desc">Goldenen Punkt auf Fähigkeiten mit offenen Quests anzeigen.</string>
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_prestige_notifications">Prestige-Benachrichtigungsabzeichen</string>
+    <string name="settings_prestige_notifications_desc">Zeige eine Benachrichtigung, wenn eine Fähigkeit bereit zum Prestige ist.</string>
     <string name="label_switch_character">Charakter wechseln</string>
     <string name="settings_daily_reset_time">Zeit zum Zurücksetzen</string>
     <string name="settings_daily_reset_time_desc">Ortszeit, zu der die täglichen, Gilden- und wöchentlichen Aufgaben zurückgesetzt werden. Eine Änderung dieser Zeit führt niemals zu einem zusätzlichen zurücksetzen.</string>
@@ -476,9 +476,9 @@
     <string name="settings_source_code">Quellcode</string>
 
     <string name="settings_source_open">Öffnen</string>
-    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
+    <string name="settings_wiki">Wiki</string>
 
-    <string name="settings_discord">Discord</string> <!-- untranslated -->
+    <string name="settings_discord">Discord</string>
 
     <string name="settings_exported_ok">Erfolgreich exportiert</string>
     <string name="settings_imported_ok">Erfolgreich importiert</string>
@@ -723,7 +723,7 @@
     <string name="quest_legend_title">Quest-Symbole</string>
     <string name="quest_legend_daily">Tägliche Quest</string>
     <string name="quest_legend_weekly">Wöchentliche Quest</string>
-    <string name="quest_legend_seasonal">Seasonal bounty</string> <!-- untranslated -->
+    <string name="quest_legend_seasonal">Saisonale Herausforderung</string>
     <string name="quest_legend_guild_daily">Gilden-Tagesquest</string>
     <string name="quest_legend_guild">Gildenquest</string>
     <string name="quest_legend_quest">Aufgabe</string>
@@ -746,7 +746,7 @@
     <!-- ===== CraftingScreen ===== -->
     <string name="crafting_no_mats">Mat. fehlt</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
-    <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
+    <string name="crafting_produces">= %1$d %2$s</string>
     <string name="crafting_effects">Effekte</string>
     <!-- Translator note: %1$d = total XP -->
     <string name="crafting_xp_total">insgesamt +%1$d EP</string>
@@ -799,7 +799,7 @@
     <string name="character_race_elf">Elfe</string>
     <string name="character_race_dwarf">Zwerg</string>
     <string name="character_race_orc">Ork</string>
-    <string name="character_race_halfling">Halfling</string> <!-- untranslated -->
+    <string name="character_race_halfling">Halbling</string>
     <string name="character_race_gnome">Gnom</string>
 
     <!-- ===== CharacterCustomizationSheet ===== -->
@@ -972,7 +972,7 @@
     <string name="guild_no_dailies">Schließt Gildenmissionen ab, um Tagesaufgaben freizuschalten. (Oder Ihr habt Eure Tagesaufgaben schon erfüllt.)</string>
     <string name="guild_dailies_all_done">Alle heutigen täglichen Aufgaben sind erledigt. Schau nach dem täglichen Reset wieder vorbei.</string>
     <string name="guild_contribute_inventory">Aus Inventar beisteuern (%1$d verfügbar)</string>
-    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">Zur Fähigkeit</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s für die %4$s.</string>
     <string name="guild_quest_desc_kill">Besiegt %1$d Feinde im %2$s-Kampf.</string>
     <string name="guild_quest_desc_prayer">Vergrabt %1$d Knochen für die %2$s.</string>
@@ -1135,28 +1135,28 @@
     <string name="house_construction_level">Bauen-Level %1$d</string>
     <string name="house_add_room">Raum hinzufügen (%1$s)</string>
     <string name="house_add_room_locked">Raum hinzufügen (Lv %1$d)</string>
-    <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
-    <string name="house_bill_cost">Build cost: %1$s</string> <!-- untranslated -->
+    <string name="house_bill_title">Kaufvertrag</string>
+    <string name="house_bill_cost">Baukosten: %1$s</string>
     <string name="house_bill_no_changes">Keine ausstehenden Änderungen</string>
-    <string name="house_bill_changes_free">Unpurchased changes</string> <!-- untranslated -->
+    <string name="house_bill_changes_free">Nicht gekaufte Änderungen</string>
     <string name="house_bill_open">Rechnung</string>
     <string name="house_bill_new_room">Neuer Raum %1$d</string>
     <string name="house_bill_expand_room">Raum %1$d erweitern (+%2$d Zellen)</string>
-    <string name="house_bill_shrink_credit">Shrink room %1$d credit (%2$d cells)</string> <!-- untranslated -->
+    <string name="house_bill_shrink_credit">Verkleinere Raum %1$d (%2$d Zellen)</string>
     <string name="house_bill_materials_header">Materialen benötigt</string>
-    <string name="house_bill_credit_header">Credited on purchase</string> <!-- untranslated -->
-    <string name="house_bill_xp_total">+%1$s Construction XP on purchase</string> <!-- untranslated -->
-    <string name="house_bill_level_required">Requires Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_bill_credit_header">Beim Kauf gutgeschrieben</string>
+    <string name="house_bill_xp_total">+%1$s Bauen EP beim Kauf</string>
+    <string name="house_bill_level_required">Erfordert Bauen Level %1$d</string>
     <string name="house_bill_coins_total">Gesamt: %1$s Münzen</string>
-    <string name="house_purchase_build">Purchase Build</string> <!-- untranslated -->
+    <string name="house_purchase_build">Kaufe Gebäude</string>
     <string name="house_apply_changes">Änderungen übernehmen</string>
-    <string name="house_purchase_success">Build purchased!</string> <!-- untranslated -->
+    <string name="house_purchase_success">Kauf Erfolgreich!</string>
     <string name="house_changes_applied">Änderungen wurden übernommen.</string>
     <string name="house_discard_build">Verwerfen</string>
     <string name="house_discard_confirm_title">Änderungen verwerfen?</string>
     <string name="house_discard_confirm_message">Alle nicht gekauften Änderungen gehen verloren.</string>
     <string name="house_blueprints">Entwürfe</string>
-    <string name="house_blueprint_slot_empty">Empty slot</string> <!-- untranslated -->
+    <string name="house_blueprint_slot_empty">Leerer Slot</string>
     <string name="house_blueprint_save">Speichern</string>
     <string name="house_blueprint_load">Laden</string>
     <string name="house_blueprint_delete">Löschen</string>
@@ -1165,7 +1165,7 @@
     <string name="house_blueprint_loaded">Der Entwurf wurde in den Editor geladen.</string>
     <string name="house_blueprint_skipped">Entwurf geladen, %1$d Teile existieren nicht mehr und wurden übersprungen.</string>
     <string name="house_blueprint_load_title">Entwurf laden?</string>
-    <string name="house_blueprint_load_message">Your unpurchased changes will be replaced with \"%1$s\".</string> <!-- untranslated -->
+    <string name="house_blueprint_load_message">Nicht gekaufte Veränderungen werden mit \"%1$s\" ersetzt.</string>
     <string name="house_mode_place_item">%1$s platzieren. Ziehe oder tippe auf eine Stelle in deinem Haus.</string>
     <string name="house_mode_place_room">Einen neuen 3x3-Raum platzieren. Er muss an einen bestehenden Raum angrenzen.</string>
     <string name="house_error_level">Dein Bauen-Level ist zu niedrig.</string>
@@ -1228,9 +1228,9 @@
     <string name="house_item_barrel_default">Fässer</string>
     <string name="house_item_barrel_light">Helles Fass</string>
     <string name="house_item_barrel_dark">Dunkles Fass</string>
-    <string name="house_item_barrel_storage_default">Barrel Rack</string> <!-- untranslated -->
-    <string name="house_item_barrel_storage_light">Light Barrel Rack</string> <!-- untranslated -->
-    <string name="house_item_barrel_storage_dark">Dark Barrel Rack</string> <!-- untranslated -->
+    <string name="house_item_barrel_storage_default">Fassregal</string>
+    <string name="house_item_barrel_storage_light">Leichtes Fassregal</string>
+    <string name="house_item_barrel_storage_dark">Dunkles Fassregal</string>
     <string name="house_item_wardrobe_default">Schrank</string>
     <string name="house_item_wardrobe_light">Heller Schrank</string>
     <string name="house_item_wardrobe_dark">Dunkler Schrank</string>
@@ -1317,8 +1317,8 @@
     <string name="house_item_wall_art_dark_starry_night_grass">Sternenwiese (Dunkler Rahmen)</string>
     <string name="house_item_wall_art_dark_starry_night_ocean">Sternenklare Meere (Dunkler Rahmen)</string>
     <string name="house_item_helmet_trophy">Helm-Trophäe</string>
-    <string name="house_item_shield_round">Round Shield Display</string> <!-- untranslated -->
-    <string name="house_item_shield_kite">Kite Shield Display</string> <!-- untranslated -->
+    <string name="house_item_shield_round">Rundschild</string>
+    <string name="house_item_shield_kite">Normannenschild</string>
     <string name="house_item_swords_crossed">Gekreuzte Schwerter</string>
     <string name="house_item_lamp">Wandlaterne</string>
     <string name="slayer_title">Trophäenjagd</string>
@@ -1383,11 +1383,11 @@
     <string name="achievement_prestige_first_name">Erster Neustart</string>
     <string name="achievement_prestige_first_desc">Erhöht das Prestige einer beliebigen Fähigkeit zum ersten Mal</string>
     <string name="achievement_prestige_node_first_name">Branching Out</string> <!-- untranslated -->
-    <string name="achievement_prestige_node_first_desc">Purchase your first prestige tree upgrade</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_name">End of the Line</string> <!-- untranslated -->
-    <string name="achievement_prestige_path_complete_desc">Purchase every upgrade in one prestige path</string> <!-- untranslated -->
+    <string name="achievement_prestige_node_first_desc">Kaufe deine erste Verbesserung in einem Prestige Baum</string>
+    <string name="achievement_prestige_path_complete_name">Am Ende des Pfades</string>
+    <string name="achievement_prestige_path_complete_desc">Kaufe jede Verbesserung in einem Prestige Pfad</string>
     <string name="achievement_prestige_tree_one_name">Gemeistert</string>
-    <string name="achievement_prestige_tree_one_desc">Purchase every upgrade in one skill\'s prestige tree</string> <!-- untranslated -->
+    <string name="achievement_prestige_tree_one_desc">Kaufe jede Verbesserung in dem Prestige Baum einer Fähigkeit</string>
     <string name="achievement_prestige_all_1_name">Tabula Rasa</string>
     <string name="achievement_prestige_all_1_desc">Erhöht das Prestige aller Fähigkeiten mindestens einmal</string>
     <string name="achievement_prestige_all_3_name">Wahres Ansehen</string>
@@ -1722,8 +1722,8 @@
     <string name="armory_source_smithing">Schmieden</string>
     <string name="armory_source_crafting">Handwerk</string>
     <string name="armory_source_fletching">Bogenbau</string>
-    <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
-    <string name="armory_source_prestige_locked_any">%1$s (requires prestige perk %2$s)</string> <!-- untranslated -->
+    <string name="armory_source_prestige_locked">%1$s (erfordert die Prestige Boni %2$s und %3$s)</string>
+    <string name="armory_source_prestige_locked_any">%1$s (erfordert den Prestige Bonus %2$s)</string>
     <string name="armory_source_drop_always">Fallengelassen von %1$s (Immer)</string>
     <string name="armory_source_drop_chance">Fallengelassen von %1$s (%2$s)</string>
     <string name="armory_source_drop">Fallengelassen von %1$s</string>
@@ -1750,8 +1750,8 @@
     <string name="shop_sold_old_equipment">Alte Ausrüstung für %1$s Münzen verkauft</string>
     <string name="shop_bulk_sell_total">Gesamt</string>
     <string name="shop_bulk_sell_confirm">Alles verkaufen</string>
-    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
-    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">Aktuelle Massenverkäufe</string>
+    <string name="shop_recent_bulk_sales_empty">Es wurden bis jetzt noch keine Massenverkäufe registriert.</string>
     <string name="shop_xp_boost_activated">2×-EP-Verstärkung für %1$d Stunden aktiviert!</string>
     <string name="shop_xp_boost_already_active">Eine 2×-EP-Verstärkung ist bereits aktiv.</string>
     <string name="shop_xp_boost_weekly_limit">Nur eine 2×-EP-Verstärkung pro Woche. Nach dem wöchentlichen Reset wieder verfügbar.</string>
@@ -1793,7 +1793,7 @@
     <string name="bonus_coin_return">+%1$d%% Münzrückgabe</string>
     <string name="bonus_tower">Turm</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% günstigere Gebäude-Verbesserungskosten pro Level</string>
-    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="bonus_xp">+%1$d%% EP</string>
     <string name="bonus_coin_drops">+%1$d%% Münzen finden</string>
     <string name="bonus_hp">+%1$d LP</string>
     <string name="snackbar_added_to_queue">Zur Warteschlange hinzugefügt: %1$s.</string>
@@ -1837,8 +1837,8 @@
     <string name="monument_touch_title">Tägliche Berührung</string>
     <string name="monument_touch_btn">Monument berühren</string>
     <string name="monument_touched_today">Heute bereits berührt. Das Monument summt zufrieden.</string>
-    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
-    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing">Ein Segen legt sich über dich für die nächsten zwei Stunden.</string>
+    <string name="monument_touch_blessing_extended">Das Monument verlängert deinen Segen um zwei Stunden.</string>
     <string name="monument_touch_items">Das Monument gewährt: %1$s</string>
     <string name="monument_contributed">Die Flamme lodert heller!</string>
     <string name="monument_flame_lit">Die Ewige Flamme ist entzündet! Der Tresorwächter erwartet euch.</string>
@@ -1862,26 +1862,26 @@
     <!-- ===== Infinite Tower ===== -->
     <!-- Raids and mercenaries -->
     <string name="raid_section_title">Raids</string> <!-- untranslated -->
-    <string name="raid_section_desc">Bosses no lone hero can fell. Hire a mercenary party first.</string> <!-- untranslated -->
-    <string name="raid_party_status">Mercenaries: %1$d/%2$d hired</string> <!-- untranslated -->
-    <string name="raid_party_title">Raid Party</string> <!-- untranslated -->
-    <string name="raid_solo_warning">Raid bosses cannot be beaten alone, even with the best gear. Hire mercenaries before attempting.</string> <!-- untranslated -->
-    <string name="raid_no_mercs">No mercenaries under contract.</string> <!-- untranslated -->
+    <string name="raid_section_desc">Gegner die kein Held alleine bezwingen kann. Heuere zuerst weitere Söldner an.</string>
+    <string name="raid_party_status">Angeheuerte Söldner: %1$d/%2$d</string>
+    <string name="raid_party_title">Raid-Gruppe</string>
+    <string name="raid_solo_warning">Raid-Bosse können selbst mit der besten Ausrüstung nicht alleine bezwungen werden. Heuere zuerst weitere Söldner an.</string>
+    <string name="raid_no_mercs">Keine angeheuerten Söldner.</string>
     <string name="merc_camp_open">Söldner anheuern</string>
     <string name="merc_camp_title">Söldnerlager</string>
-    <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string> <!-- untranslated -->
+    <string name="merc_camp_desc">Verträge halten für 24 Stunden nach dem anheuern. Eine neue Auswahl an Söldnern erscheint jeden Tag.</string>
     <string name="merc_hire">Anheuern</string>
     <string name="merc_dismiss">Abbrechen</string>
-    <string name="merc_hired">%1$s joins your party for 24 hours.</string> <!-- untranslated -->
+    <string name="merc_hired">%1$s tritt deiner Raid-Gruppe für 24 Stunden bei.</string>
     <string name="merc_party_full">Deine Gruppe ist voll.</string>
     <string name="merc_already_hired">%1$s steht bereits unter Vertrag.</string>
     <string name="merc_not_enough_coins">Nicht genügend Münzen, um %1$s anzuheuern.</string>
     <string name="merc_not_available">%1$s ist heute nicht verfügbar.</string>
     <string name="merc_contract_remaining">Vertrag: Noch %1$s übrig</string>
-    <string name="raid_allies_down">Söldern am Boden: %1$d</string>
+    <string name="raid_allies_down">Söldner am Boden: %1$d</string>
     <string name="merc_tier_cheap">Söldner</string>
-    <string name="merc_tier_seasoned">Veteran</string> <!-- untranslated -->
-    <string name="merc_tier_elite">Champion</string> <!-- untranslated -->
+    <string name="merc_tier_seasoned">Veteran</string>
+    <string name="merc_tier_elite">Champion</string>
     <string name="merc_stats">Ang %1$d Stä %2$d Ver %3$d LP %4$d</string>
     <string name="merc_cost_per_day">%1$s Münzen</string>
     <string name="merc_bran_the_sellsword_name">Bran der Söldner</string>
@@ -1912,16 +1912,16 @@
     <string name="tower_milestone_claimed">Eingefordert</string>
     <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
     <string name="tower_milestone_ring">%1$s (Angriff +6, Stärke +6)</string>
-    <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_1pct" formatted="false">+1% Turm EP für alle Fertigkeiten</string>
     <string name="tower_milestone_coins_5k">5 000 Münzen</string>
     <string name="tower_milestone_shield">%1$s (Verteidigung +80)</string>
     <string name="tower_milestone_amulet">%1$s (Angriff +15, Stärke +15, Verteidigung +10, alle Kampfstile)</string>
     <string name="tower_milestone_hp_50">+50 max. LP</string>
-    <string name="tower_milestone_xp_2pct" formatted="false">+2% tower XP all skills</string> <!-- untranslated -->
+    <string name="tower_milestone_xp_2pct" formatted="false">+2% Turm EP für alle Fertigkeiten</string>
     <string name="tower_milestone_coins_25k">25 000 Münzen</string>
     <string name="tower_milestone_helm">%1$s (Verteidigung +82, Stärke +8)</string>
-    <string name="tower_milestone_pet" formatted="false">Tower Pet (5% combat XP)</string> <!-- untranslated -->
-    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% tower coin drops</string> <!-- untranslated -->
+    <string name="tower_milestone_pet" formatted="false">Turm Haustier (5% Kampf EP)</string>
+    <string name="tower_milestone_coin_drops_1pct" formatted="false">+1% Turm Gold</string>
     <string name="tower_milestone_plate">%1$s (Verteidigung +132)</string>
     <string name="tower_milestone_coins_100k">100 000 Münzen</string>
     <string name="tower_milestone_legs_set">%1$s (Verteidigung +125) + %2$s (Verteidigung +58) + %3$s (Verteidigung +125)</string>
@@ -1949,8 +1949,8 @@
     <string name="treasure_open_all">Alle öffnen (%1$d)</string>
     <string name="treasure_open_result">%1$d geöffnet: +%2$s Münzen</string>
     <string name="treasure_open_result_gems">%1$d geöffnet: +%2$s Münzen und %3$d Edelsteine</string>
-    <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
-    <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
+    <string name="seasonal_expedition_token_hint">Jeder Durchlauf gibt 1 Token.</string>
+    <string name="seasonal_boss_token_hint">Jeder kill gibt 1 token, bis hin zu einem maximum von %1$d pro Tag.</string>
     <string name="seasonal_minigame_hint">Trefft %1$d von %2$d Glutfunken, bevor sie verschwinden!</string>
     <string name="seasonal_minigame_round">Runde %1$d / %2$d — Treffer: %3$d</string>
     <string name="seasonal_minigame_mode_label">Modus</string>
@@ -1962,8 +1962,8 @@
     <string name="seasonal_tap">Tippen!</string>
     <string name="seasonal_claim">Einlösen</string>
     <string name="seasonal_bounty_cooldown">Neue Aufgabe in %1$dm %2$ds</string>
-    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
-    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll">Neue Aufgabe</string>
+    <string name="seasonal_bounty_reroll_confirm">Tausche für %1$s Gold diese Aufgabe durch eine andere? Bestehender Fortschritt geht verloren.</string>
     <string name="seasonal_go">Los</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sonnenwende-Sommerturm</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">Teilgenommen an Sonnenwende-Sommerturm 2026</string>
@@ -2113,11 +2113,11 @@
     <string name="settings_credit_banners_subtitle">Kunst von Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Fertigkeitssymbole</string>
 
-    <string name="settings_credit_characters_title">Character Sprites</string> <!-- untranslated -->
+    <string name="settings_credit_characters_title">Charakter Sprites</string>
     <string name="settings_credit_characters_subtitle">Kunst von Pixylac</string>
     <string name="settings_credit_bosses_title">Boss Sprites</string> <!-- untranslated -->
     <string name="settings_credit_bosses_subtitle">Kunst von Meg</string>
-    <string name="settings_credit_house_title">House Interiors</string> <!-- untranslated -->
+    <string name="settings_credit_house_title">Inneneinrichtung</string>
 
     <string name="title_seasonal_champion_of">Champion von %1$s</string>
     <string name="title_seasonal_requirement">Schließt das Saisonereignis %1$s ab</string>
@@ -2239,23 +2239,23 @@
     <string name="farming_crop_picker_stats">Lv. %1$d  •  %2$s  •  %3$d EP/Pflanze</string>
     <string name="farming_seeds_owned">Samen: %1$d  •  In Besitz: %2$d</string>
     <!-- ============ Prestige overhaul (v1.14.0) ============ -->
-    <string name="prestige_title">Prestige</string> <!-- untranslated -->
+    <string name="prestige_title">Prestige</string>
     <string name="prestige_open_tree">Baum ansehen</string>
     <!-- Translator note: %1$d = unspent prestige points -->
     <string name="prestige_points_available">%1$d Punkte verfügbar</string>
     <!-- Translator note: %1$d = lifetime points earned, %2$d = maximum points for this skill -->
-    <string name="prestige_points_lifetime">%1$d of %2$d lifetime points earned</string> <!-- untranslated -->
+    <string name="prestige_points_lifetime">Insgesamt %1$d von %2$d Prestige Punkte gesammelt</string>
     <!-- Translator note: %1$d = points the reset would award right now -->
-    <string name="prestige_button_with_points">Prestige now for +%1$d points</string> <!-- untranslated -->
+    <string name="prestige_button_with_points">Führe jetzt einen Prestige durch um +%1$d Punkte zu erhalten</string>
     <!-- Translator note: %1$d = current skill level -->
-    <string name="prestige_requires_99">Reach level 99 to prestige (currently %1$d).</string> <!-- untranslated -->
-    <string name="prestige_maxed_cap">Maximum prestige reached. Every point this skill can earn is yours.</string> <!-- untranslated -->
+    <string name="prestige_requires_99">Erreiche Level 99 um einen Prestige durchzuführen (aktuell %1$d).</string>
+    <string name="prestige_maxed_cap">Maximales Prestige Level erreicht. Jeder Punkt, den man in dieser Fähigkeit erlangen kann ist deiner.</string>
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
-    <string name="prestige_confirm_message_points">Your %1$s level will reset to 1 and you\'ll earn %2$d prestige points to spend in this skill\'s tree. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
-    <string name="prestige_respec">Reset points</string> <!-- untranslated -->
+    <string name="prestige_confirm_message_points">Dein %1$s Level wird auf 1 zurückgesetzt und du erhältst %2$d Prestige Punkte, welche du in dem Fähigkeiten-Baum ausgeben kannst. Ausrüstung, für die du nicht mehr die Bedingungen erfüllst, wird ausgetauscht, und nicht eingeforderter %1$s Fortschritt täglicher Herausforderungen wird zurückgesetzt. Zusätzlich bekommst du 2x %1$s EP für 48 Stunden, um deinen Fortschritt zu beschleunigen.</string>
+    <string name="prestige_respec">Punkte zurücksetzen</string>
     <!-- Translator note: %1$s = formatted remaining cooldown -->
-    <string name="prestige_respec_available_in">Reset available in %1$s</string> <!-- untranslated -->
-    <string name="prestige_respec_confirm_title">Reset prestige points?</string> <!-- untranslated -->
+    <string name="prestige_respec_available_in">Du kannst deine Punkte erst in %1$s zurücksetzen</string>
+    <string name="prestige_respec_confirm_title">Prestige Punkte zurücksetzen?</string>
     <!-- Translator note: %1$s = skill name -->
     <string name="prestige_respec_confirm_message">All purchased %1$s upgrades will be refunded for their full point cost. You can reset this skill\'s points again in 24 hours.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name -->

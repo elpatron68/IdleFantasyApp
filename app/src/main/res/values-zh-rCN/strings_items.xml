@@ -775,7 +775,7 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="item_abyssal_rod_name">深渊之杖</string>
+    <string name="item_abyssal_rod_name">深渊钓竿</string>
     <string name="item_adamantite_arrow_tip_name">精金箭头</string>
     <string name="item_adamantite_boots_name">精金靴</string>
     <string name="item_adamantite_chainbody_name">精金链甲</string>
@@ -800,7 +800,7 @@
     <string name="item_archers_ring_desc">增加远程精准度。需要商业等级60购买。</string>
     <string name="item_attack_cape_name">攻击披风</string>
     <string name="item_baby_kraken_name">幼年海妖</string>
-    <string name="item_balrog_name">炎魔，乌顿的远古之焰</string>
+    <string name="item_balrog_name">炎魔，深渊的远古之焰</string>
     <string name="item_balrog_whip_name">炎魔之鞭</string>
     <string name="item_balrog_wings_name">炎魔之翼</string>
     <string name="item_beef_name">熟牛肉</string>

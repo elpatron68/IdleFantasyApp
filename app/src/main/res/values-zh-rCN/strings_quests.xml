@@ -484,10 +484,10 @@
     <string name="quest_daily_wc_willow_objective">砍伐70根柳木原木。</string>
     <string name="quest_daily_wc_yew_objective">砍伐25根紫杉原木。</string>
     <string name="quest_daily_wc_magic_objective">砍伐10根魔法原木。</string>
-    <string name="quest_daily_smith_iron_objective">锻造40根铁条。</string>
-    <string name="quest_daily_smith_mithril_objective">锻造15根秘银条。</string>
-    <string name="quest_daily_smith_adamantite_objective">锻造10根精金条。</string>
-    <string name="quest_daily_smith_runite_objective">锻造5根符文条。</string>
+    <string name="quest_daily_smith_iron_objective">锻造40个铁锭。</string>
+    <string name="quest_daily_smith_mithril_objective">锻造15个秘银锭。</string>
+    <string name="quest_daily_smith_adamantite_objective">锻造10个精金锭。</string>
+    <string name="quest_daily_smith_runite_objective">锻造5个符文锭。</string>
     <string name="quest_daily_cook_trout_objective">烹饪100条鳟鱼。</string>
     <string name="quest_daily_cook_salmon_objective">烹饪80条鲑鱼。</string>
     <string name="quest_daily_cook_lobster_objective">烹饪40只龙虾。</string>

@@ -57,7 +57,7 @@
     <string name="label_hitpoints">Здоровье</string>
     <string name="label_inventory">Инвентарь</string>
     <string name="label_equipment">Снаряжение</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_combat_equipment">Боевое снаряжение</string>
     <string name="label_pets">Питомцы</string>
     <string name="label_achievements">Достижения</string>
     <string name="label_locations">Локации</string>
@@ -990,7 +990,7 @@
     <string name="guild_no_dailies">Завершайте задания гильдии, чтобы открывать ежедневные поручения.</string>
     <string name="guild_dailies_all_done">Все ежедневные поручения на сегодняшний день выполнены. Завтра они снова обновятся.</string>
     <string name="guild_contribute_inventory">Передать из инвентаря (%1$d доступно)</string>
-    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">Перейти к навыку</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s для %4$s.</string>
     <string name="guild_quest_desc_kill">Победить %1$d врагов в ближнем бою (%2$s).</string>
     <string name="guild_quest_desc_prayer">Захоронить %1$d костей для %2$s.</string>
@@ -1815,7 +1815,7 @@
     <string name="bonus_coin_return">+%1$d%% возврат монет</string>
     <string name="bonus_tower">Башня</string>
     <string name="bonus_builder_discount_detail" formatted="false">Скидка 0.5% на модернизацию здания каждый уровень</string>
-    <string name="bonus_xp">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="bonus_xp">+%1$d%% опыта</string>
     <string name="bonus_coin_drops">+%1$d%% выпадения монет</string>
     <string name="bonus_hp">+%1$d HP</string> <!-- untranslated -->
     <string name="snackbar_added_to_queue">Добавлено в очередь: %1$s.</string>
@@ -1859,8 +1859,8 @@
     <string name="monument_touch_title">Ежедневное прикосновение</string>
     <string name="monument_touch_btn">Прикоснуться к Монументу</string>
     <string name="monument_touched_today">Сегодня уже прикасались. Монумент довольно гудит.</string>
-    <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
-    <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
+    <string name="monument_touch_blessing">Благословение нисходит на вас в течение двух часов.</string>
+    <string name="monument_touch_blessing_extended">Монумент продлевает ваше благословение на два часа.</string>
     <string name="monument_touch_items">Монумент дарует: %1$s</string>
     <string name="monument_contributed">Пламя разгорается ярче!</string>
     <string name="monument_flame_lit">Вечное пламя зажжено! Страж Хранилища ждёт.</string>
@@ -2434,8 +2434,8 @@
     <string name="item_heirloom_frying_pan_desc">Эта закалённая сковорода передавалась из поколения в поколение в семье поваров. Каждое новое блюдо имеет особую пикантность.</string>
     <string name="item_heirloom_lockpick_name">Фамильная отмычка</string>
     <string name="item_heirloom_lockpick_desc">Воровская отмычка, с помощью которой можно открыть бесчисленное множество замков. С каждым разом она становится все более деликатнее.</string>
-    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
-    <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Лента Мидаса</string>
+    <string name="item_midas_band_desc">Осколок живого золота Хранителя Хранилища. Он впитывает частичку каждого сражения, в котором выживает его владелец.</string>
     <string name="item_heirloom_blade_name">Фамильный клинок</string>
     <string name="item_heirloom_blade_desc">Древний клинок, который пробуждается всё больше с каждой битвой, в которой выживает.</string>
     <string name="item_heirloom_greathammer_name">Фамильный великий молот</string>

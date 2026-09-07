@@ -57,7 +57,7 @@
     <string name="label_hitpoints">生命值</string>
     <string name="label_inventory">背包</string>
     <string name="label_equipment">装备</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_combat_equipment">装备</string>
     <string name="label_pets">宠物</string>
     <string name="label_achievements">成就</string>
     <string name="label_locations">地点</string>
@@ -495,7 +495,7 @@
     <string name="settings_backup_at_5am">凌晨 5:00</string>
     <string name="settings_backup_now">立即备份</string>
     <string name="settings_backup_status">最新备份</string>
-    <string name="settings_backup_never">永不备份</string>
+    <string name="settings_backup_never">从未备份</string>
     <string name="settings_backup_failed_with">备份失败: %1$s</string>
     <string name="settings_backup_success">备份已保存。</string>
     <string name="settings_backup_failed">备份失败。</string>
@@ -814,7 +814,7 @@
     <string name="onboarding_sessions_title">训练</string>
     <string name="onboarding_sessions_desc">点击任意技能即可开始训练。训练会在后台进行，即使关闭应用也能继续。回来收取你的战利品和经验值吧。</string>
     <string name="onboarding_progress_title">逐步成长</string>
-    <string name="onboarding_progress_desc">采矿石来冶炼金属锭，再打造更强的武器和防具。装备更强的装备以挑战更难的副本和Boss。更好的工具能加速采集，更高阶的装备才能解锁低阶装备无法生存的内容。</string>
+    <string name="onboarding_progress_desc">采矿石来冶炼金属锭，再打造更强的武器和防具。装备更强的装备以挑战更难的副本和首领。更好的工具能加速采集，更高阶的装备才能解锁低阶装备无法生存的内容。</string>
     <string name="onboarding_quests_title">任务与宠物</string>
     <string name="onboarding_quests_desc">完成任务可获得经验奖励。训练技能时有几率掉落稀有宠物，提供永久经验加成。</string>
     <string name="onboarding_welcome_desc">一款受经典MMORPG启发的放置RPG。训练技能、挑战副本、打造装备。完全离线，无需账号，没有广告。</string>
@@ -921,7 +921,7 @@
     <string name="achievement_combat_50_desc">战斗等级达到50级</string>
     <string name="achievement_combat_75_name">精英</string>
     <string name="achievement_combat_75_desc">战斗等级达到75级</string>
-    <string name="achievement_combat_99_name">冠军</string>
+    <string name="achievement_combat_99_name">英雄</string>
     <string name="achievement_combat_99_desc">战斗等级达到99级</string>
     <string name="achievement_combat_113_name">满级战斗</string>
     <string name="achievement_combat_113_desc">达到最高战斗等级113级</string>
@@ -970,7 +970,7 @@
     <string name="guild_no_dailies">完成公会任务以解锁每日请求。</string>
     <string name="guild_dailies_all_done">今天的所有日常任务都完成了。日常重置后再来吧。</string>
     <string name="guild_contribute_inventory">从背包捐献（可用 %1$d）</string>
-    <string name="guild_go_to_skill">Go to Skill</string> <!-- untranslated -->
+    <string name="guild_go_to_skill">前往技能页</string>
     <string name="guild_quest_desc_gather">为 %4$s %1$s %2$d 个 %3$s。</string>
     <string name="guild_quest_desc_kill">使用 %2$s 战斗击败 %1$d 个敌人。</string>
     <string name="guild_quest_desc_prayer">为 %2$s 掩埋 %1$d 根骸骨。</string>
@@ -1450,7 +1450,7 @@
     <string name="crafting_tier_silver">白银</string>
     <string name="crafting_tier_steel">钢</string>
     <string name="crafting_tier_willow">柳木</string>
-    <string name="crafting_tier_yew">紫衫木</string>
+    <string name="crafting_tier_yew">紫杉木</string>
 
     <!-- Bone Altar -->
     <string name="bone_altar_title">骨坛</string>
@@ -1510,7 +1510,7 @@
     <string name="town_upgrade_next_label">下一级升级</string>
     <string name="town_upgrade_constr_req">需要建造等级 %1$d</string>
     <string name="town_upgrade_cost">费用：%1$s 金币</string>
-    <string name="town_builder_discount">建筑折扣：%1$d%% off</string>
+    <string name="town_builder_discount">建筑折扣：减免 %1$d%%</string>
     <string name="town_upgrade_materials_header">材料：</string>
     <string name="town_upgrade_btn">升级</string>
     <string name="town_upgrade_success">建筑已升级！</string>
@@ -1672,7 +1672,7 @@
     <string name="farming_bean_climbed">你已爬上豆茎。一条巨蛇的嘶嘶声引起了你的注意……</string>
     <string name="farming_bean_climbed_title">攀爬成功</string>
     <string name="farming_bean_unlock_hint">新地牢已解锁：%1$s。在战斗的地牢列表中查找。</string>
-    <string name="farming_bean_cleared">已清除</string>
+    <string name="farming_bean_cleared">魔法豆已归还至你的背包。</string>
 
     <string name="farming_magic_bean_one_plot">魔法豆只能种在一块田地里</string>
 
@@ -1748,8 +1748,8 @@
     <string name="shop_sold_old_equipment">出售旧装备获得 %1$s 金币</string>
     <string name="shop_bulk_sell_total">合计</string>
     <string name="shop_bulk_sell_confirm">全部出售</string>
-    <string name="shop_recent_bulk_sales">Recent bulk sales</string> <!-- untranslated -->
-    <string name="shop_recent_bulk_sales_empty">No bulk sales recorded yet.</string> <!-- untranslated -->
+    <string name="shop_recent_bulk_sales">近期批量售卖</string>
+    <string name="shop_recent_bulk_sales_empty">暂无批量售卖记录。</string>
     <string name="shop_xp_boost_activated">2倍经验增益已激活，持续 %1$d 小时！</string>
     <string name="shop_xp_boost_already_active">双倍经验加成已在生效中。</string>
     <string name="shop_xp_boost_weekly_limit">每周限购一次双倍经验加成。每周重置后可再次购买。</string>
@@ -1787,7 +1787,7 @@
     <string name="bonus_combined_xp">综合经验</string>
     <string name="bonus_yield">+%1$d%% 产量</string>
     <string name="bonus_boost">提升+%1$d%%</string>
-    <string name="bonus_agility_prestige_detail">威望加成：%1$dm 等级 %2$d 的训练变为 %3$dm</string>
+    <string name="bonus_agility_prestige_detail">转生加成：等级 %2$d 的训练时长由 %1$d 分变为 %3$d 分</string>
     <string name="bonus_coin_return">+%1$d%% 金币回报</string>
     <string name="bonus_tower">塔楼</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
@@ -1849,11 +1849,11 @@
     <string name="item_gilded_platebody_name">镀金板甲</string>
     <string name="item_gilded_kiteshield_name">镀金鸢盾</string>
     <string name="boss_coin_cap_remaining">今日该首领金币掉落剩余：%1$d</string>
-    <string name="boss_coin_cap_spent">已花费金币上限</string>
+    <string name="boss_coin_cap_spent">该首领的金币掉落已减少，持续至明天。</string>
     <string name="bestiary_coin_cap_label">%1$d 次击杀/天后</string>
     <string name="session_note_boss_coin_cap">金币掉落减少（该首领每日上限）</string>
     <string name="guild_daily_button">公会每日</string>
-    <string name="guild_daily_banner_claimable">可领取</string>
+    <string name="guild_daily_banner_claimable">公会每日任务完成！请前往公会大厅领取。</string>
     <string name="guild_daily_banner_claimed">已领取</string>
     <string name="guild_daily_rank_maxed">等级已满</string>
 
@@ -2213,7 +2213,7 @@
     <string name="bestiary_stat_attack">攻击</string>
     <string name="bestiary_stat_strength">力量</string>
     <string name="bestiary_stat_defense">防御</string>
-    <string name="bestiary_stat_atk_defense">攻防</string>
+    <string name="bestiary_stat_atk_defense">攻击防御</string>
     <string name="bestiary_stat_str_defense">力量防御</string>
     <string name="bestiary_stat_rng_defense">远程防御</string>
     <string name="bestiary_stat_mag_defense">魔法防御</string>
