@@ -634,6 +634,10 @@
     <string name="profile_food_dungeon">料理 (ダンジョン)</string>
     <string name="profile_no_food">インベントリに調理済みの料理がありません</string>
     <string name="profile_food_threshold">食事を始めるHP</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">戦闘スタイル</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  HPを %2$d 回復</string>
@@ -1999,6 +2003,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">薄闇の収穫祭 2026 に参加</string>
     <string name="seasonal_minigame_lantern_lights_name">ランタンの灯り</string>
     <string name="seasonal_minigame_sequence_hint">ランタンの光る順番を覚えて、同じ順にタップしてください。ラウンド %1$d / %2$d まで到達するとトークンを獲得！</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">ラウンド %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">よく見て！</string>
     <string name="seasonal_minigame_your_turn">あなたの番！</string>

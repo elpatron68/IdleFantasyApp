@@ -95,6 +95,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fantasyidler.R
@@ -323,20 +324,27 @@ fun HouseScreen(
             return@Scaffold
         }
 
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            if (editing) HouseHeaderRow(state, viewModel)
-            HouseCanvas(state, viewModel, atlas, editing)
-            if (editing) {
-                ModeBanner(state, viewModel)
-                BillBar(state, viewModel)
-                HousePalette(state, viewModel, atlas)
+        BoxWithConstraints(Modifier.fillMaxSize().padding(padding)) {
+            // Cap the canvas by the viewport height: width-driven sizing let it tower past
+            // the fold on landscape tablets, where its drag handlers covered the whole
+            // viewport and swallowed every scroll gesture (issue #1742).
+            val heightBoundWidth = maxHeight * GRID.toFloat() / CANVAS_ROWS
+            val canvasMaxWidth = if (maxWidth < heightBoundWidth) maxWidth else heightBoundWidth
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                if (editing) HouseHeaderRow(state, viewModel)
+                HouseCanvas(state, viewModel, atlas, editing, canvasMaxWidth)
+                if (editing) {
+                    ModeBanner(state, viewModel)
+                    BillBar(state, viewModel)
+                    HousePalette(state, viewModel, atlas)
+                }
+                Spacer(Modifier.height(24.dp))
             }
-            Spacer(Modifier.height(24.dp))
         }
     }
 
@@ -747,7 +755,7 @@ private fun BlueprintSheet(state: HouseUiState, viewModel: HouseViewModel) {
 // ---------------------------------------------------------------------------
 
 @Composable
-private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: ImageBitmap, editing: Boolean) {
+private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: ImageBitmap, editing: Boolean, maxCanvasWidth: Dp) {
     val context = LocalContext.current
     val tiles = viewModel.gameData.houseTiles
     var ghostCell by remember { mutableStateOf<Pair<Int, Int>?>(null) }
@@ -767,6 +775,7 @@ private fun HouseCanvas(state: HouseUiState, viewModel: HouseViewModel, atlas: I
 
     Box(
         modifier = Modifier
+            .widthIn(max = maxCanvasWidth)
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .aspectRatio(GRID.toFloat() / CANVAS_ROWS)

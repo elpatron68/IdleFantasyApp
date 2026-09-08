@@ -314,6 +314,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     blessingDefBonus   = ChurchRepository.defBonus(flags, prayerCapeMult),
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct    = flags.foodEatThresholdPct,
+                    foodEatOrder       = flags.foodEatOrder,
                     blockedRareDrops   = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory) + sessionRepo.pendingHeirloomKeys(),
                 )
                 startSession(slot, action, bossFrames, durationMs, efficiencyMultiplier, levelAtStart)
@@ -370,6 +371,7 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     availableArrows     = availableArrows,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    foodEatOrder        = flags.foodEatOrder,
                 )
                 startSession(slot, action, result.frames, durationMs, efficiencyMultiplier, levelAtStart)
             }

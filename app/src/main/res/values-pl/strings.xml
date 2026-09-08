@@ -650,6 +650,10 @@
     <string name="profile_food_dungeon">Jedzenie (loch)</string>
     <string name="profile_no_food">Brak ugotowanego jedzenia w ekwipunku</string>
     <string name="profile_food_threshold">Zacznij jeść przy</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">Styl walki</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  leczy %2$d HP</string>
@@ -2019,6 +2023,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Udział w wydarzeniu Mroczne Żniwa 2026</string>
     <string name="seasonal_minigame_lantern_lights_name">Światła Latarni</string>
     <string name="seasonal_minigame_sequence_hint">Obserwuj latarnie i powtórz kolejność. Dotrzyj do rundy %1$d z %2$d, by zdobyć żeton!</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">Runda %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Patrz uważnie!</string>
     <string name="seasonal_minigame_your_turn">Twoja kolej!</string>

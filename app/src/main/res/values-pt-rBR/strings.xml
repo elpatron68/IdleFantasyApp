@@ -634,6 +634,10 @@
     <string name="profile_food_dungeon">Comida (Masmorra)</string>
     <string name="profile_no_food">Nenhuma comida cozida no inventário</string>
     <string name="profile_food_threshold">Começar a Comer em</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">Estilo de Combate</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  cura %2$d HP</string>
@@ -1999,6 +2003,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string> <!-- untranslated -->
     <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_hint">Observe as lanternas e repita a ordem. Alcance a rodada %1$d de %2$d para ganhar uma ficha!</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">Rodada %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Observe!</string>
     <string name="seasonal_minigame_your_turn">Sua vez!</string>

@@ -634,6 +634,10 @@
     <string name="profile_food_dungeon">食物（地牢）</string>
     <string name="profile_no_food">背包中没有已烹饪的食物</string>
     <string name="profile_food_threshold">低于此值时进食</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">战斗风格</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  恢复 %2$d 生命</string>
@@ -1999,6 +2003,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">参与了2026暗潮收割活动</string>
     <string name="seasonal_minigame_lantern_lights_name">灯笼之光</string>
     <string name="seasonal_minigame_sequence_hint">观察灯笼，然后重复顺序。达到第 %1$d / %2$d 轮即可获得代币！</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">第 %1$d / %2$d 轮</string>
     <string name="seasonal_minigame_watch">仔细看！</string>
     <string name="seasonal_minigame_your_turn">轮到你了！</string>

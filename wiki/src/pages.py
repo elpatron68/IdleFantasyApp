@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import logging
 import re
-import traceback
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from logging import log
@@ -381,49 +380,6 @@ def get_image_directory() -> dict[Path, str]:
     _IMAGE_DIR = image_directory
     return image_directory
 
-
-def check_wiki_validity():
-    print("Starting wiki validation")
-
-    # Check hierarchy and directory links
-    # Get all pages in the hierarchy
-    pages_in_hierarchy = set()
-    listing_items = [PAGE_HIERARCHY]
-    while len(listing_items) > 0:
-        item = listing_items.pop(0)
-        if isinstance(item, str):
-            pages_in_hierarchy.add(item)
-        else:
-            listing_items += [x for x in item]
-    # Confirm page listing has all pages
-    print("Checking page directory...")
-    for page in pages_in_hierarchy:
-        if page not in PAGE_DIRECTORY:
-            print(f"Critical: Page '{page}' is listed in the hierarchy but not in the directory")
-    # Confirm all directory items are in the hierarchy excluding special pages (e.g. Sidebar/Footer)
-    print("Checking hierarchy...")
-    for page_id, page_info in PAGE_DIRECTORY.items():
-        if page_id not in pages_in_hierarchy and not page_info.url.startswith("_"):
-            print(f"Warning: Page '{page_id}' is listed in the directory but not present in the hierarchy")
-    # Check image icons exist
-    print("Checking images...")
-    for icon in get_image_directory().keys():
-        if not icon.is_file():
-            print(f"Critical: Image '{icon}' is used in the pages but does not exist")
-
-    # Ensure all pages can generate content
-    print("Checking page content...")
-    for page_id, page_info in PAGE_DIRECTORY.items():
-        if page_info.generate is NotImplemented:
-            print(f"Critical: Page '{page_id}' does not contain a method to create content")
-        else:
-            try:
-                page_info.generate()
-            except:
-                print(f"Critical: Creating content for page '{page_id}' failed due to the below error")
-                print(f"\033[91m{traceback.format_exc()}\033[00m")
-
-    print("Validation complete")
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -816,6 +772,7 @@ def gen_skills() -> str:
 
     return get_template("skills/skills").format(
         skills_table=table(["Skill", "Category", "Description"], rows),
+        quest_icon_link=link("quest_icons"),
         prestige_race_tables=gen_prestige_race_tables(),
     )
 

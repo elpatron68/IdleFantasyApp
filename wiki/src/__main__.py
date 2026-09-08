@@ -16,7 +16,8 @@ import tempfile
 from pathlib import Path
 
 from wiki.src import REPO_ROOT, WIKI_ROOT
-from wiki.src.pages import get_pages, check_wiki_validity, get_image_directory
+from wiki.src.pages import get_pages, get_image_directory
+from wiki.src.validation import check_wiki_validity
 from wiki.src.site import get_html_pages
 
 WIKI_REPO  = "git@github.com:tristinbaker/IdleFantasy.wiki.git"

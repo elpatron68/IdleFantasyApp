@@ -653,8 +653,9 @@ private fun BonfireRhythmGame(
 /**
  * A Simon-style memory minigame: each round the lanterns flash a sequence one step longer
  * ([easyMode] slows the flashes in exchange for a longer cooldown), then the player taps it
- * back in order. One wrong tap ends the run — completing [SeasonalMinigameConfig.hitsRequired]
- * rounds (of [SeasonalMinigameConfig.rounds]) is a win either way.
+ * back in order. One wrong tap ends the run — reaching round
+ * [SeasonalMinigameConfig.hitsRequired] (of [SeasonalMinigameConfig.rounds]) is a win either
+ * way, matching the hint text's promise (issue #1734).
  */
 @Composable
 private fun LanternSequenceGame(
@@ -721,7 +722,7 @@ private fun LanternSequenceGame(
                                     }
                                 } else {
                                     isPlaying = false
-                                    onSubmit(round - 1 >= config.hitsRequired)
+                                    onSubmit(round >= config.hitsRequired)
                                 }
                             },
                         contentAlignment = Alignment.Center,

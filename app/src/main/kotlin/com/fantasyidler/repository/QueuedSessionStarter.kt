@@ -213,16 +213,18 @@ class QueuedSessionStarter @Inject constructor(
     }
 
     /**
-     * Catch-up budget charge for a just-inserted offline boss fight: the ACTUAL fight
-     * length read back from its frames, not the nominal full duration. Billing every
-     * fight its whole durationMinutes starved overnight repeat chains to a handful of
-     * fights per night (issue #1664). Clamped to the estimate so the accounting never
+     * Catch-up budget charge for a just-inserted offline session: the ACTUAL length read
+     * back from the inserted row, not the nominal estimate. Billing a boss fight its whole
+     * durationMinutes starved overnight repeat chains (issue #1664), and billing a
+     * tool-boosted craft session its unboosted duration (the estimate ignores frying pan,
+     * tinderbox, and hammer efficiency) pushed the rest of the queue hours late after
+     * offline catch-up (issue #1737). Clamped to the estimate so the accounting never
      * exceeds what the entry gate approved.
      */
-    private suspend fun actualBossChargeMs(estimateMs: Long): Long {
+    private suspend fun actualChargeMs(estimateMs: Long): Long {
         val session = sessionRepo.getActiveSession() ?: return estimateMs
-        if (session.skillName != "boss") return estimateMs
-        return (sessionRepo.bossFightEndMs(session) - session.startedAt).coerceIn(1L, estimateMs)
+        val endMs = if (session.skillName == "boss") sessionRepo.bossFightEndMs(session) else session.endsAt
+        return (endMs - session.startedAt).coerceIn(1L, estimateMs)
     }
 
     /**
@@ -273,7 +275,7 @@ class QueuedSessionStarter @Inject constructor(
                     return@withLock try {
                         startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
                         playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(activeBossRepeatIndex = flags.activeBossRepeatIndex + 1))
-                        actualBossChargeMs(duration)
+                        actualChargeMs(duration)
                     } catch (_: Exception) {
                         playerRepo.clearActiveBossRepeatUnlocked()
                         0L
@@ -321,7 +323,7 @@ class QueuedSessionStarter @Inject constructor(
                         if (next.skillName == "combat") playerRepo.stampDungeonRepeatStartUnlocked(next)
                         val finalQueue = skippedTowerActions + remaining
                         playerRepo.updateFlagsUnlocked(playerRepo.getFlagsUnlocked().copy(sessionQueue = finalQueue))
-                        return@withLock if (next.skillName == "boss") actualBossChargeMs(duration) else duration
+                        return@withLock actualChargeMs(duration)
                     } catch (_: TowerPendingCollectionException) {
                         skippedTowerActions += next
                     } catch (_: ActionNoLongerQualifiesException) {
@@ -769,6 +771,7 @@ class QueuedSessionStarter @Inject constructor(
                     blessingDefBonus   = ChurchRepository.defBonus(flags, prayerCapeMult),
                     attackSpeedSec     = bossWeapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct    = flags.foodEatThresholdPct,
+                    foodEatOrder       = flags.foodEatOrder,
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),
                     // Queued raids use the contracts valid when the session actually starts,
@@ -886,6 +889,7 @@ class QueuedSessionStarter @Inject constructor(
                     availableRunes      = if (queueRuneKey != null) inventory[queueRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    foodEatOrder        = flags.foodEatOrder,
                     chronosMultiplier   = chronosMult,
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),
@@ -972,6 +976,7 @@ class QueuedSessionStarter @Inject constructor(
                     availableRunes      = if (towerRuneKey != null) inventory[towerRuneKey] ?: 0 else Int.MAX_VALUE,
                     attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    foodEatOrder        = flags.foodEatOrder,
                     chronosMultiplier   = chronosMult,
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),

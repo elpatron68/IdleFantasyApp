@@ -813,6 +813,15 @@ class SkillsViewModel @Inject constructor(
                     durationMs       = result.durationMs,
                     skillDisplayName = "Thieving",
                 )
+                _uiState.update {
+                    it.copy(
+                        snackbarMessage = context.withAppLocale().getString(
+                            R.string.skill_added_to_queue_activity,
+                            GameStrings.skillName(context, Skills.THIEVING),
+                            GameStrings.thievingNpcName(context, npcKey),
+                        ),
+                    )
+                }
             } catch (e: Exception) {
                 _uiState.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
@@ -833,6 +842,7 @@ class SkillsViewModel @Inject constructor(
             // loop over startSession instead -- concurrent launches would race the
             // getActiveSession check and start several live sessions.
             var toQueue = count
+            var startedLive = false
             if (sessionRepo.getActiveSession() == null) {
                 _uiState.update { it.copy(startingSession = true) }
                 try {
@@ -849,6 +859,7 @@ class SkillsViewModel @Inject constructor(
                         skillDisplayName = skillName.replaceFirstChar { it.uppercase() },
                     )
                     toQueue -= 1
+                    startedLive = true
                 } catch (e: Exception) {
                     _uiState.update {
                         it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_session_start_failed, e.message ?: ""))
@@ -858,10 +869,24 @@ class SkillsViewModel @Inject constructor(
                     _uiState.update { it.copy(startingSession = false) }
                 }
             }
-            if (toQueue <= 0) return@launch
 
             val displayName  = GameStrings.skillName(context, skillName)
             val actDisplay   = GameStrings.activityName(context, skillName, activityKey)
+
+            if (toQueue <= 0) {
+                if (startedLive) {
+                    _uiState.update {
+                        it.copy(
+                            snackbarMessage = if (activityKey.isNotEmpty())
+                                context.withAppLocale().getString(R.string.skill_added_to_queue_activity, displayName, actDisplay)
+                            else
+                                context.withAppLocale().getString(R.string.slayer_queue_added, displayName),
+                        )
+                    }
+                }
+                return@launch
+            }
+
             val player       = playerRepo.getOrCreatePlayer()
             val gatherLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
             val agility      = gatherLevels[Skills.AGILITY] ?: 1
@@ -909,6 +934,7 @@ class SkillsViewModel @Inject constructor(
                 if (!enqueued) break
                 enqueuedAny = true
             }
+
             if (enqueuedAny) queuedSessionStarter.startNextQueued()
             _uiState.update {
                 it.copy(
@@ -1062,6 +1088,18 @@ class SkillsViewModel @Inject constructor(
             val progress = flags.guildDailyProgress[id] ?: 0
             val remaining = template.amount - progress
             if (remaining > 0) fills += QuestFillSuggestion(context.withAppLocale().getString(R.string.quest_fill_guild), remaining)
+        }
+
+        // Seasonal Event Bounty Board, mirroring CraftingViewModel.computeQuestFills:
+        // without it the rune and log sheets showed no chip for craft bounties (issue #1732).
+        seasonalEventRepo.activeEvent()?.let { event ->
+            for (bounty in seasonalEventRepo.getActiveBounties(flags)) {
+                val task = bounty.task
+                if (task.type != "craft" || task.target != itemKey) continue
+                val remaining = task.amount - bounty.progress
+                if (remaining > 0)
+                    fills += QuestFillSuggestion(GameStrings.seasonalEventName(context, event.id, event.displayName), remaining)
+            }
         }
 
         return fills.sortedBy { it.qty }

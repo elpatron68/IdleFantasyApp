@@ -223,3 +223,43 @@ internal fun SpellLoadoutPicker(
         }
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun FoodOrderPicker(
+    foodEatOrder: String,
+    onFoodOrderChanged: (String) -> Unit,
+) {
+    val options = mapOf(
+        "descending" to R.string.food_order_descending,
+        "ascending" to R.string.food_order_ascending,
+        "least_quantity" to R.string.food_order_least_quantity,
+    )
+    var expanded by remember { mutableStateOf(false) }
+    ExposedDropdownMenuBox(
+        expanded         = expanded,
+        onExpandedChange = { expanded = it },
+    ) {
+        OutlinedTextField(
+            value         = stringResource(options[foodEatOrder] ?: R.string.food_order_descending),
+            onValueChange = {},
+            readOnly      = true,
+            trailingIcon  = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            colors        = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+            singleLine    = true,
+            modifier      = Modifier.menuAnchor().fillMaxWidth(),
+        )
+        ExposedDropdownMenu(
+            expanded         = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            options.forEach { (order, label) ->
+                DropdownMenuItem(
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                    text = { Text(stringResource(label)) },
+                    onClick = { onFoodOrderChanged(order); expanded = false },
+                )
+            }
+        }
+    }
+}

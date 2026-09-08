@@ -628,6 +628,10 @@
     <string name="profile_food_dungeon">Makanan (Penjara Dungeon)</string>
     <string name="profile_no_food">Tidak ada makanan di Inventaris</string>
     <string name="profile_food_threshold">Mulai Makan Saat</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">Gaya Bertarung</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heals %2$d HP</string> <!-- untranslated -->
@@ -1993,6 +1997,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Participated in the Gloomharvest 2026</string> <!-- untranslated -->
     <string name="seasonal_minigame_lantern_lights_name">Lantern Lights</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_hint">Perhatikan lentera, lalu ulangi urutannya. Capai ronde %1$d dari %2$d untuk memenangkan token!</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">Ronde %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Perhatikan!</string>
     <string name="seasonal_minigame_your_turn">Giliranmu!</string>

@@ -136,8 +136,12 @@ class SeasonalEventViewModel @Inject constructor(
     /** [won] is whether the player landed enough hits during the whack-a-mole rounds. */
     fun submitMinigameAttempt(won: Boolean) {
         viewModelScope.launch {
+            // The shared success line ("Perfect timing!") reads as leftover from the whack
+            // game when the event runs the memory game instead (issue #1734).
+            val successRes = if (seasonalEventRepo.activeEvent()?.minigame?.type == "sequence")
+                R.string.seasonal_minigame_sequence_success else R.string.seasonal_minigame_success
             when (seasonalEventRepo.submitMinigameAttempt(won)) {
-                is SeasonalMinigameResult.Success -> _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_minigame_success)) }
+                is SeasonalMinigameResult.Success -> _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(successRes)) }
                 is SeasonalMinigameResult.Failure -> _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.seasonal_minigame_failure)) }
                 is SeasonalMinigameResult.OnCooldown, SeasonalMinigameResult.NoActiveEvent -> {}
             }

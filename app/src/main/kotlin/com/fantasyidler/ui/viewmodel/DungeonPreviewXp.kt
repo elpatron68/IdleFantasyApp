@@ -118,6 +118,7 @@ internal fun estimateDungeonPreviewXp(
         availableRunes      = Int.MAX_VALUE,
         attackSpeedSec      = weapon?.attackSpeed ?: CombatSimulator.BASE_ATTACK_SPEED_SEC,
         eatThresholdPct     = flags.foodEatThresholdPct,
+        foodEatOrder        = flags.foodEatOrder,
         chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
         doubleHitChance     = boostRepo.doubleHitChance(flags),
         secondChance        = boostRepo.secondChanceActive(flags),

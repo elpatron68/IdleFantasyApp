@@ -9,10 +9,10 @@ class WikiLogger:
     def __init__(self):
         self._warned_ids: set[str] = set()
 
-    def warn_by_id(self, warn_id: str, log_message: str) -> None:
+    def warn_by_id(self, warn_id: str, log_message: str, level = logging.WARNING) -> None:
         if warn_id in self._warned_ids:
             return
-        logging.warning(log_message)
+        logging.log(level, log_message)
         self._warned_ids.add(warn_id)
 
 

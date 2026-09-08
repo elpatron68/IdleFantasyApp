@@ -654,6 +654,10 @@
     <string name="profile_food_dungeon">Еда (подземелье)</string>
     <string name="profile_no_food">Нет приготовленной еды в инвентаре</string>
     <string name="profile_food_threshold">Начинать есть при</string>
+    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
+    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
+    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
     <string name="profile_combat_style">Стиль боя</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  лечит %2$d здоровья</string>
@@ -2023,6 +2027,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Участие в событии Мрачная жатва 2026</string>
     <string name="seasonal_minigame_lantern_lights_name">Огни фонарей</string>
     <string name="seasonal_minigame_sequence_hint">Запомните порядок фонарей и повторите его. Дойдите до раунда %1$d из %2$d, чтобы получить жетон!</string>
+    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">Раунд %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Смотрите внимательно!</string>
     <string name="seasonal_minigame_your_turn">Ваш ход!</string>

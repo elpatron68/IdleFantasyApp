@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -99,7 +100,8 @@ fun ArmoryTab(viewModel: ArmoryViewModel = hiltViewModel()) {
             }
         }
 
-        val grouped = buildSlotGroups(state.entries)
+        val groupContext = LocalContext.current
+        val grouped = remember(state.entries) { buildSlotGroups(groupContext, state.entries) }
         val listState = rememberLazyListState()
         LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
             grouped.forEach { (groupName, entries) ->
@@ -397,12 +399,13 @@ private fun armoryStatRows(item: EquipmentData): List<Pair<String, String>> {
     return rows
 }
 
-@Composable
-private fun buildSlotGroups(entries: List<ArmoryEntry>): List<Pair<String, List<ArmoryEntry>>> {
+private fun buildSlotGroups(context: Context, entries: List<ArmoryEntry>): List<Pair<String, List<ArmoryEntry>>> {
+    // Resolve each label once per distinct slot: a per-entry slotName lookup creates a
+    // configuration context every call, which froze the armory list (issue #1710).
+    val labels = entries.map { it.item.slot }.distinct().associateWith { GameStrings.slotName(context, it) }
     val grouped = linkedMapOf<String, MutableList<ArmoryEntry>>()
     entries.forEach { entry ->
-        val group = GameStrings.slotName(LocalContext.current, entry.item.slot)
-        grouped.getOrPut(group) { mutableListOf() }.add(entry)
+        grouped.getOrPut(labels.getValue(entry.item.slot)) { mutableListOf() }.add(entry)
     }
     return grouped.map { it.key to it.value }
 }

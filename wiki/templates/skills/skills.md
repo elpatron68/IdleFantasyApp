@@ -8,7 +8,7 @@ All skills cap at **level 99**.
 
 ## Quest Indicators
 
-Quest indicators appear as small superscripted icons next to skill names showing active quest progress. See [Quest Categories](QuestCategories.md) for documentation of the quest category icons.
+Quest indicators appear as small superscripted icons next to skill names showing active quest progress. See {quest_icon_link} for documentation of the quest category icons.
 
 ## Prestige
 

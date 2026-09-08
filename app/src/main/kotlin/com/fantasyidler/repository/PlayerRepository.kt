@@ -1797,6 +1797,7 @@ class PlayerRepository @Inject constructor(
             hideCompletedQuests       = carrySettingsFrom.hideCompletedQuests,
             shopKeepOneOfEach         = carrySettingsFrom.shopKeepOneOfEach,
             foodEatThresholdPct       = carrySettingsFrom.foodEatThresholdPct,
+            foodEatOrder              = carrySettingsFrom.foodEatOrder,
             dailyResetHour            = carrySettingsFrom.dailyResetHour,
             batteryPromptShown        = carrySettingsFrom.batteryPromptShown,
         )

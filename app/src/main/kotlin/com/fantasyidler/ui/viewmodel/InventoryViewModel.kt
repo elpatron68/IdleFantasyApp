@@ -136,6 +136,7 @@ class InventoryViewModel @Inject constructor(
         val activeWeaponSlot: String? = null,
         /** Global "start eating" threshold as % of max HP. */
         val foodEatThresholdPct: Int = 50,
+        val foodEatOrder: String = "descending",
         /** Heirloom item key -> accumulated item XP. */
         val heirloomXp: Map<String, Long> = emptyMap(),
     ) {
@@ -239,6 +240,7 @@ class InventoryViewModel @Inject constructor(
                 equippedTitle           = flags.equippedTitle,
                 activeWeaponSlot        = flags.activeWeaponSlot,
                 foodEatThresholdPct     = flags.foodEatThresholdPct,
+                foodEatOrder            = flags.foodEatOrder,
                 heirloomXp              = flags.heirloomXp,
                 displayName             = run {
                     val baseName = flags.characterName.ifBlank { context.withAppLocale().getString(R.string.profile_unnamed) }
@@ -538,6 +540,13 @@ class InventoryViewModel @Inject constructor(
         viewModelScope.launch {
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(foodEatThresholdPct = pct.coerceIn(10, 90)))
+        }
+    }
+
+    fun setFoodEatOrder(order: String) {
+        viewModelScope.launch {
+            val flags = playerRepo.getFlags()
+            playerRepo.updateFlags(flags.copy(foodEatOrder = order))
         }
     }
 

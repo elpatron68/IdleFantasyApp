@@ -391,6 +391,7 @@ class TowerViewModel @Inject constructor(
                     runeCostPerAttack   = runeCost,
                     attackSpeedSec      = weaponAttackSpeed,
                     eatThresholdPct     = flags.foodEatThresholdPct,
+                    foodEatOrder        = flags.foodEatOrder,
                     chronosMultiplier   = townRepo.playerSessionDurationMultiplier(flags),
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),

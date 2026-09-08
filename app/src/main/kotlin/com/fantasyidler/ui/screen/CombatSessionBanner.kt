@@ -98,6 +98,7 @@ internal fun CombatSessionBanner(
     defenseBonus: Int,
     equippedFood: Map<String, Int>,
     foodHealValues: Map<String, Int>,
+    foodEatOrder: String,
     showEndTime: Boolean = true,
     repeatIndex: Int = 0,
     repeatTotal: Int = 0,
@@ -125,6 +126,15 @@ internal fun CombatSessionBanner(
                 if (floor != null) context.getString(R.string.tower_floor_label, floor) else session.activityKey
             } else session.activityKey
         }
+
+    // Each GameStrings lookup creates a configuration context, and the log rebuild
+    // resolved a name per kill line every half-tick, stalling kill-heavy sessions
+    // (issue #1727). Resolve each enemy key once per session instead.
+    val enemyNames = remember(session.sessionId) { mutableMapOf<String, String>() }
+    fun enemyDisplayName(key: String): String = enemyNames.getOrPut(key) {
+        bosses.firstOrNull { it.id == key }?.let { GameStrings.bossName(context, it.id) }
+            ?: enemies[key]?.let { GameStrings.enemyName(context, key) } ?: key
+    }
 
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var showAbandonConfirm by remember { mutableStateOf(false) }
@@ -300,8 +310,7 @@ internal fun CombatSessionBanner(
                 // tick they actually happened (issue #935).
                 val combatLog = remember(currentFrameIdx, halfTickInFrame) {
                     buildList<CombatLogEntry> {
-                        fun nameOf(key: String) = bosses.firstOrNull { it.id == key }?.let { GameStrings.bossName(context, it.id) }
-                            ?: enemies[key]?.let { GameStrings.enemyName(context, key) } ?: key
+                        fun nameOf(key: String) = enemyDisplayName(key)
                         fun fullHpOf(key: String) = if (!isBoss) enemies[key]?.hp ?: Int.MAX_VALUE else Int.MAX_VALUE
                         var key = ""
                         var hp = 0
@@ -548,7 +557,14 @@ internal fun CombatSessionBanner(
                                 color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f),
                             )
                             Spacer(Modifier.height(2.dp))
-                            for ((key, startQty) in foodAtStart) {
+                            for ((key, startQty) in foodAtStart.entries.sortedBy {
+                                when (foodEatOrder) {
+                                    "descending" -> -(foodHealValues[it.key] ?: 0)
+                                    "ascending" -> foodHealValues[it.key] ?: 0
+                                    "least_quantity" -> it.value
+                                    else -> 0
+                                }
+                            }) {
                                 val remaining = (startQty - (foodConsumedSoFar[key] ?: 0)).coerceAtLeast(0)
                                 val heal      = foodHealValues[key] ?: 0
                                 val name      = GameStrings.itemName(context, key)
@@ -566,7 +582,14 @@ internal fun CombatSessionBanner(
                                 Spacer(Modifier.height(2.dp))
                                 Text(
                                     text  = foodConsumedSoFar.entries
-                                        .sortedByDescending { it.value }
+                                        .sortedBy {
+                                            when (foodEatOrder) {
+                                                "descending" -> -(foodHealValues[it.key] ?: 0)
+                                                "ascending" -> foodHealValues[it.key] ?: 0
+                                                "least_quantity" -> foodAtStart[it.key] ?: 0
+                                                else -> 0
+                                            }
+                                        }
                                         .joinToString(", ") { (k, v) ->
                                             "$v ${GameStrings.itemName(context, k)}"
                                         }
@@ -584,9 +607,7 @@ internal fun CombatSessionBanner(
                             Text(
                                 text  = killsSoFar.entries
                                     .sortedByDescending { it.value }
-                                    .joinToString(", ") { (k, v) ->
-                                        "$v ${bosses.firstOrNull { it.id == k }?.let { GameStrings.bossName(context, it.id) } ?: enemies[k]?.let { GameStrings.enemyName(context, k) } ?: k}"
-                                    }
+                                    .joinToString(", ") { (k, v) -> "$v ${enemyDisplayName(k)}" }
                                     + " $defeatedSoFar",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSecondaryContainer,

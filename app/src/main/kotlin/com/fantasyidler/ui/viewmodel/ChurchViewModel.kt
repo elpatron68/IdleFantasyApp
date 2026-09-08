@@ -39,7 +39,6 @@ data class ChurchUiState(
     val prayerCapeMult: Float = 1f,
     val totalBoneEquivalent: Int = 0,
     val totalBoneCount: Int = 0,
-    val pendingBlessingKey: String? = null,
     val showDeactivateConfirm: Boolean = false,
     val snackbarMessage: String? = null,
     /** Ironman characters can only use defensive blessings. */
@@ -90,12 +89,6 @@ class ChurchViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ChurchUiState())
 
     fun activateBlessing(key: String) {
-        _extra.update { it.copy(pendingBlessingKey = key) }
-    }
-
-    fun confirmActivate() {
-        val key = _extra.value.pendingBlessingKey ?: return
-        _extra.update { it.copy(pendingBlessingKey = null) }
         viewModelScope.launch {
             when (val result = churchRepo.activateBlessing(key)) {
                 is BlessingActivateResult.Success -> {}
@@ -110,8 +103,6 @@ class ChurchViewModel @Inject constructor(
             }
         }
     }
-
-    fun dismissConfirm() = _extra.update { it.copy(pendingBlessingKey = null) }
 
     fun deactivateBlessing() {
         _extra.update { it.copy(showDeactivateConfirm = true) }

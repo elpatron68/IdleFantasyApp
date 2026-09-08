@@ -49,6 +49,7 @@ object CombatSimulator {
         availableRunes: Int = Int.MAX_VALUE,
         attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
         eatThresholdPct: Int = 50,
+        foodEatOrder: String = "descending",
         chronosMultiplier: Float = 1.0f,
         doubleHitChance: Double = 0.0,
         secondChance: Boolean = false,
@@ -84,7 +85,14 @@ object CombatSimulator {
         val foodSupply = equippedFood.toMutableMap()
         val foodOrder: List<String> = foodHealValues.entries
             .filter { (k, _) -> k in foodSupply }
-            .sortedByDescending { it.value }
+            .sortedBy {
+                when (foodEatOrder) {
+                    "descending" -> -it.value
+                    "ascending" -> it.value
+                    "least_quantity" -> equippedFood[it.key] ?: 0
+                    else -> 0
+                }
+            }
             .map { it.key }
         var totalFoodEaten = 0
 
@@ -412,6 +420,7 @@ object CombatSimulator {
         availableRunes: Int = Int.MAX_VALUE,
         attackSpeedSec: Double = BASE_ATTACK_SPEED_SEC,
         eatThresholdPct: Int = 50,
+        foodEatOrder: String = "descending",
         doubleHitChance: Double = 0.0,
         secondChance: Boolean = false,
         mercenaries: List<MercCombatant> = emptyList(),
@@ -487,7 +496,14 @@ object CombatSimulator {
         val foodSupply = equippedFood.toMutableMap()
         val foodOrder: List<String> = foodHealValues.entries
             .filter { (k, _) -> k in foodSupply }
-            .sortedByDescending { it.value }
+            .sortedBy {
+                when (foodEatOrder) {
+                    "descending" -> -it.value
+                    "ascending" -> it.value
+                    "least_quantity" -> equippedFood[it.key] ?: 0
+                    else -> 0
+                }
+            }
             .map { it.key }
         var totalFoodEaten = 0
         var bossClock = 0.0

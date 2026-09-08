@@ -426,6 +426,10 @@ class ShopViewModel @Inject constructor(
 
     fun confirmBulkSell() {
         val preview = _extra.value.pendingBulkSell ?: return
+        // Close the dialog before the sale, not after: a large sale takes seconds, and
+        // every extra tap on the still-open dialog launched a duplicate run whose lines
+        // re-capped to zero and posted a spurious "sold for 0 gold" snackbar (issue #1718).
+        _extra.update { it.copy(pendingBulkSell = null) }
         viewModelScope.launch {
             // The dialog can sit open while the world changes (a queued session starting
             // swaps gear, issue #1630), so previewed quantities are only an upper bound:
@@ -447,7 +451,6 @@ class ShopViewModel @Inject constructor(
                     bulkSellReceipts = (listOf(receipt) + flags.bulkSellReceipts).take(MAX_BULK_SELL_RECEIPTS)))
             }
             _extra.update { it.copy(
-                pendingBulkSell = null,
                 snackbarMessage = context.withAppLocale().getString(preview.soldMsgRes, coins.toCoinsString()),
             )}
         }

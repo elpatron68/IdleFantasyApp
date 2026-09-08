@@ -223,10 +223,23 @@ class SessionRepository @Inject constructor(
                 try { starter.startNextQueued(backdateMs = catchUpMs.coerceAtLeast(0L)) } catch (_: Exception) {}
             }
         } else if (session != null && session.completed) {
-            // The session already finished but the next queued item never started (e.g. a
-            // transient failure right after markCompleted above). Keep retrying every tick
-            // instead of leaving the queue stuck until the app is force-closed and reopened.
-            try { starter.startNextQueued() } catch (_: Exception) {}
+            // The session already finished but the next queued item never started (e.g. the
+            // process died between the alarm's markCompleted and its startNextQueued, which
+            // aggressive battery savers do). Keep retrying every tick, back-dating by the
+            // time lost since the session ended — an unbackdated start here permanently
+            // pushed the queue's schedule late (issue #1739).
+            if (hasTrustedClock(session)) {
+                val endMs = if (session.skillName == "boss") bossFightEndMs(session) else session.endsAt
+                var catchUpMs = maxOf(0L, now - endMs)
+                while (catchUpMs > 0) {
+                    val used = try { starter.insertNextQueuedAsOffline(catchUpMs) } catch (_: Exception) { 0L }
+                    if (used == 0L) break
+                    catchUpMs -= used
+                }
+                try { starter.startNextQueued(backdateMs = catchUpMs) } catch (_: Exception) {}
+            } else {
+                try { starter.startNextQueued() } catch (_: Exception) {}
+            }
         }
         if (workerStarter != null) {
             for (slot in 1..2) {

@@ -230,6 +230,7 @@ fun CombatScreen(
                             defenseBonus   = state.totalDefenseBonus,
                             equippedFood   = state.equippedFood,
                             foodHealValues = viewModel.foodHealValues,
+                            foodEatOrder   = invState.foodEatOrder,
                             showEndTime    = state.showSessionEndTime,
                             repeatIndex    = if (combatSession.skillName == "boss") state.activeBossRepeatIndex else state.activeDungeonRepeatIndex,
                             repeatTotal    = if (combatSession.skillName == "boss") state.activeBossRepeatTotal else state.activeDungeonRepeatTotal,
@@ -266,6 +267,7 @@ fun CombatScreen(
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
+                            foodEatOrder        = invState.foodEatOrder,
                             availableSpells  = viewModel.availableSpells(),
                             magicLevel       = state.skillLevels[Skills.MAGIC] ?: 1,
                             selectedArrowKey = state.selectedArrowKey,
@@ -279,6 +281,7 @@ fun CombatScreen(
                             onArrowSelected = viewModel::selectArrow,
                             onSpellSelected = viewModel::selectSpell,
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
+                            onFoodOrderChanged     = inventoryVm::setFoodEatOrder,
                         )
                         else -> CombatSkillsTab(
                             skillLevels         = state.skillLevels,
@@ -356,6 +359,7 @@ fun CombatScreen(
                             context        = context,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
+                            foodEatOrder        = invState.foodEatOrder,
                             availableSpells  = viewModel.availableSpells(),
                             magicLevel       = state.skillLevels[Skills.MAGIC] ?: 1,
                             selectedArrowKey = state.selectedArrowKey,
@@ -369,6 +373,7 @@ fun CombatScreen(
                             onArrowSelected = viewModel::selectArrow,
                             onSpellSelected = viewModel::selectSpell,
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
+                            onFoodOrderChanged     = inventoryVm::setFoodEatOrder,
                         )
                         else -> CombatSkillsTab(
                             skillLevels         = state.skillLevels,
@@ -629,6 +634,7 @@ private fun CombatGearTab(
     context: Context,
     activeWeaponSlot: String?,
     foodEatThresholdPct: Int,
+    foodEatOrder: String,
     availableSpells: List<SpellData>,
     magicLevel: Int,
     selectedArrowKey: String?,
@@ -642,12 +648,21 @@ private fun CombatGearTab(
     onArrowSelected: (String?) -> Unit,
     onSpellSelected: (SpellData?) -> Unit,
     onFoodThresholdChanged: (Int) -> Unit,
+    onFoodOrderChanged: (String) -> Unit,
 ) {
     val cookedItemKeys = remember(cookingRecipes) {
         cookingRecipes.values.map { it.cookedItem }.toSet()
     }
-    val foodInInventory = remember(inventory, cookedItemKeys) {
-        inventory.filterKeys { it in cookedItemKeys }.entries.toList()
+    val foodInInventory = remember(inventory, cookedItemKeys, foodHealValues, foodEatOrder) {
+        inventory.filterKeys { it in cookedItemKeys }.entries
+            .sortedBy {
+                when (foodEatOrder) {
+                    "descending" -> -(foodHealValues[it.key] ?: 0)
+                    "ascending" -> foodHealValues[it.key] ?: 0
+                    "least_quantity" -> it.value
+                    else -> 0
+                }
+            }
     }
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -790,6 +805,12 @@ private fun CombatGearTab(
                     color    = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(horizontal = 16.dp),
                 )
+            }
+        }
+        item { SlotSectionHeader(stringResource(R.string.profile_food_order)) }
+        item {
+            Column(Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                FoodOrderPicker(foodEatOrder, onFoodOrderChanged)
             }
         }
         item { Spacer(Modifier.height(16.dp)) }

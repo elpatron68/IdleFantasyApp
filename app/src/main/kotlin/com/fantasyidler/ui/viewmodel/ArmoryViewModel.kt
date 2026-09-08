@@ -68,6 +68,23 @@ class ArmoryViewModel @Inject constructor(
 
     private val sourceMap: Map<String, String> by lazy { buildSourceMap() }
 
+    // Locale collation over translated names, not the English displayName (issue #1685).
+    // Resolved and sorted once per ViewModel: doing this inside the combine lambda froze
+    // the UI for seconds, because the comparator re-resolved every name (each lookup
+    // creating a configuration context) on every comparison, on every emission (issue
+    // #1710). Safe to cache: an in-app language change recreates the activity.
+    private val sortedEquipment: List<Pair<String, EquipmentData>> by lazy {
+        val ctx = context.withAppLocale()
+        val collator = java.text.Collator.getInstance(ctx.resources.configuration.locales[0])
+        val names = gameData.equipment.keys.associateWith { GameStrings.itemName(ctx, it) }
+        gameData.equipment.entries
+            .sortedWith(
+                compareBy<Map.Entry<String, EquipmentData>> { slotSortOrder(it.value.slot) }
+                    .thenBy(collator) { names.getValue(it.key) }
+            )
+            .map { it.key to it.value }
+    }
+
     val uiState: StateFlow<ArmoryUiState> = combine(
         playerRepo.playerFlow,
         _filter,
@@ -80,20 +97,14 @@ class ArmoryViewModel @Inject constructor(
         val equippedValues = equipped.values.filterNotNull().toSet()
         val flags: PlayerFlags = json.decodeFromString(player.flags)
 
-        val allEntries = gameData.equipment.map { (key, item) ->
+        val allEntries = sortedEquipment.map { (key, item) ->
             ArmoryEntry(
                 key    = key,
                 item   = item,
                 owned  = (inventory[key] ?: 0) > 0 || key in equippedValues || key in flags.seenItemKeys,
                 source = sourceMap[key] ?: item.description.takeIf { it.isNotBlank() } ?: "Unknown source",
             )
-        }.sortedWith(
-            // Locale collation over translated names, not the English displayName (issue #1685).
-            compareBy<ArmoryEntry> { slotSortOrder(it.item.slot) }
-                .thenBy(java.text.Collator.getInstance(context.withAppLocale().resources.configuration.locales[0])) {
-                    GameStrings.itemName(context.withAppLocale(), it.key)
-                }
-        )
+        }
 
         val filtered = when (filter) {
             ArmoryFilter.ALL         -> allEntries

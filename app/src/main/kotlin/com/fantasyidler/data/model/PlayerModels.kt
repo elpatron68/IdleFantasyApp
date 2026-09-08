@@ -30,6 +30,7 @@ data class PlayerFlags(
     @SerialName("magic_loadout_spell_name") val magicLoadoutSpellName: String? = null,
     /** Global "start eating" threshold as % of max HP. Default 50 preserves the prior hardcoded behavior. */
     @SerialName("food_eat_threshold_pct") val foodEatThresholdPct: Int = 50,
+    @SerialName("food_eat_order") val foodEatOrder: String = "descending",
     /** Heirloom item key -> accumulated item XP (capped at the level-99 threshold). Never reset by prestige. */
     @SerialName("heirloom_xp") val heirloomXp: Map<String, Long> = emptyMap(),
     /** Session id -> (skill -> heirloom item key) captured at session start, so heirloom XP goes
