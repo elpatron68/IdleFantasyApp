@@ -635,10 +635,10 @@
     <string name="profile_food_dungeon">Nourriture (Donjon)</string>
     <string name="profile_no_food">Aucune nourriture cuite dans l\'inventaire</string>
     <string name="profile_food_threshold">Commencer à manger à</string>
-    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
-    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
+    <string name="profile_food_order">Ordre de consommation</string>
+    <string name="food_order_descending">Priorité à forte valeur de soin</string>
+    <string name="food_order_ascending">Priorité à faible valeur de soin</string>
+    <string name="food_order_least_quantity">Priorité à faible quantité</string>
     <string name="profile_combat_style">Style de combat</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  soigne %2$d PV</string>
@@ -975,7 +975,7 @@
     <string name="guild_no_dailies">Terminez des quêtes de guilde pour débloquer les requêtes quotidiennes.</string>
     <string name="guild_dailies_all_done">Toutes les requêtes quotidiennes sont finies. Revenez après la réinitialisation quotidienne.</string>
     <string name="guild_contribute_inventory">Contribuer depuis l\'inventaire (%1$d disponible)</string>
-    <string name="guild_go_to_skill">Accéder à la compétence</string>
+    <string name="guild_go_to_skill">Aller à l\'aptitude</string>
     <string name="guild_quest_desc_gather">%1$s %2$d %3$s pour la %4$s.</string>
     <string name="guild_quest_desc_kill">Éliminez %1$d ennemis en combat %2$s.</string>
     <string name="guild_quest_desc_prayer">Enterrez %1$d os pour la %2$s.</string>
@@ -1872,7 +1872,7 @@
     <string name="raid_no_mercs">Pas de mercenaires sous contrat.</string>
     <string name="merc_camp_open">Engager des Mercenaires</string>
     <string name="merc_camp_title">Camp de Mercenaires</string>
-    <string name="merc_camp_desc">Contracts last for 24 hours after hiring. A new pool of mercenaries arrives each day.</string> <!-- untranslated -->
+    <string name="merc_camp_desc">Les contrats durent 24 heures après engagement. Une nouvelle poule de mercenaires arrive chaque jour.</string>
     <string name="merc_hire">Engager</string>
     <string name="merc_dismiss">Virer</string>
     <string name="merc_hired">%1$s rejoins votre groupe pour 24 heures.</string>
@@ -1952,8 +1952,8 @@
     <string name="treasure_open_all">Tout ouvrir (%1$d)</string>
     <string name="treasure_open_result">%1$d révèle : +%2$s pièces</string>
     <string name="treasure_open_result_gems">%1$d révèle : +%2$s pièces et %3$d gemmes</string>
-    <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
-    <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
+    <string name="seasonal_expedition_token_hint">Chaque partie donne 1 jeton.</string>
+    <string name="seasonal_boss_token_hint">Chaque tué donne 1 jeton, jusqu\'à %1$d par jour.</string>
     <string name="seasonal_minigame_hint">Touchez %1$d braises sur %2$d avant qu\'elles ne s\'éteignent !</string>
     <string name="seasonal_minigame_round">Manche %1$d / %2$d — Réussites : %3$d</string>
     <string name="seasonal_minigame_mode_label">Mode</string>
@@ -1965,8 +1965,8 @@
     <string name="seasonal_tap">Appuyez !</string>
     <string name="seasonal_claim">Réclamer</string>
     <string name="seasonal_bounty_cooldown">Nouvelle prime dans %1$dm %2$ds</string>
-    <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
-    <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
+    <string name="seasonal_bounty_reroll">Relancer les primes</string>
+    <string name="seasonal_bounty_reroll_confirm">Échanger cette prime avec une autre pour %1$s pièces? Tout progrès sera perdu.</string>
     <string name="seasonal_go">Aller</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Solstice de la Flèche du Soleil</string>
     <string name="seasonal_event_sunspire_solstice_2026_banner">A participé au Solstice de la Flèche du Soleil 2026</string>
@@ -2004,7 +2004,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">A participé à la Sombre Moisson 2026</string>
     <string name="seasonal_minigame_lantern_lights_name">Lumières des Lanternes</string>
     <string name="seasonal_minigame_sequence_hint">Observez les lanternes puis répétez l\'ordre. Atteignez la manche %1$d sur %2$d pour gagner un jeton !</string>
-    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
+    <string name="seasonal_minigame_sequence_success">Bonne mémoire ! +1 jeton.</string>
     <string name="seasonal_minigame_sequence_round">Manche %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Observez bien !</string>
     <string name="seasonal_minigame_your_turn">À vous !</string>
@@ -2430,7 +2430,7 @@
     <!-- Translator note: %1$d = the heirloom item\'s current level (1-99) -->
     <string name="heirloom_level_label">Heirloom Lv. %1$d</string> <!-- untranslated -->
     <!-- Translator note: %1$s = a skill name, used twice -->
-    <string name="heirloom_desc">Grows with %1$s XP up to Lv. 99. Its power also scales with your %1$s level, reaching full effect at level 85. Stats shown are its full potential.</string> <!-- untranslated -->
+    <string name="heirloom_desc">Grandit avec l\'XP de %1$s jusqu\'au Niv. 99. Son pouvoir grandit aussi avec votre niveau de %1$s, arrivant à son plein potentiel au niveau 85. Ses stats correspondent à quand le plein potentiel est exploitable.</string>
     <string name="shop_sell_blocked_heirloom">%1$s is an heirloom and cannot be sold.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = a dungeon or boss name -->
     <string name="repeat_blocked_level">Votre niveau de combat est trop faible pour répéter %1$s.</string>

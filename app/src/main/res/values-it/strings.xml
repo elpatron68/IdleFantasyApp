@@ -636,10 +636,10 @@
     <string name="profile_food_dungeon">Cibo (Dungeon)</string>
     <string name="profile_no_food">Non hai cibo cotto con te</string>
     <string name="profile_food_threshold">Inizia a mangiare al</string>
-    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
-    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
+    <string name="profile_food_order">Priorità Cibo</string>
+    <string name="food_order_descending">Maggior Ripristino Salute</string>
+    <string name="food_order_ascending">Minor Ripristino Salute</string>
+    <string name="food_order_least_quantity">Minor Quantità</string>
     <string name="profile_combat_style">Stile di Combattimento</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  cura %2$d HP</string>
@@ -2005,7 +2005,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Hai partecipato all\'evento Raccolto Oscuro 2026</string>
     <string name="seasonal_minigame_lantern_lights_name">Luci delle Lanterne</string>
     <string name="seasonal_minigame_sequence_hint">Osserva le lanterne e ripeti l\'ordine d\'accensione. Raggiungi il round %1$d su %2$d per vincere un gettone!</string>
-    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
+    <string name="seasonal_minigame_sequence_success">Che memoria! +1 gettone.</string>
     <string name="seasonal_minigame_sequence_round">Round %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Osserva!</string>
     <string name="seasonal_minigame_your_turn">Tocca a te!</string>

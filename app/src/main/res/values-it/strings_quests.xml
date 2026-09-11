@@ -544,11 +544,11 @@
     <string name="skilling_dungeon_dwarven_depths_note_3">Golem di ferro stanno immobili nei loro anfratti. I loro occhi luccicano mentre fai scendere il tuo piccone.</string>
     <string name="skilling_dungeon_dwarven_depths_note_4">Le rune della forgia sono un avvertimento: qualcosa giace in questi luoghi e desidera la libertà.</string>
     <string name="skilling_dungeon_dwarven_depths_note_5">I golem si risvegliano dal loro sonno. L\'Antica Fucina ha ritrovato tutto il suo vigore; i suoi guardiani aspettano i più temerari.</string>
-    <string name="skilling_dungeon_corrupted_canopy_note_1">The trees here bleed shadow where cut. The wood writhes and resists the blade.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_corrupted_canopy_note_2">A shadow beast watches from the canopy. It does not attack — it only observes.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_corrupted_canopy_note_3">Old sanctum stones are visible through the twisted trunks. Something still lives there.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_corrupted_canopy_note_4">The corruption spreads as you work. The canopy hungers for something unnamed.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_corrupted_canopy_note_5">The canopy parts. The Corrupted Sanctum rises from the shadow-wood — its doors open, waiting.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_corrupted_canopy_note_1">Gli alberi emettono oscuri vapori dopo essere stati tagliati. Il legno si distorce e si oppone alla lama.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_2">Una bestia ti osserva tra le ombre. Non dà segni di voler attacare, i suoi occhi indagatori sono penetranti.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_3">Antiche pietre di un tempio sono visibili tra le fronde. Qualcosa le sta usando come rifugio.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_4">Un malessere si diffonde mentre lavori. La foresta è in cerca di qualcosa.</string>
+    <string name="skilling_dungeon_corrupted_canopy_note_5">Le fronde lasciano spazio ad una radura. Il Santuario Corrotto si staglia a contrasto con l\'ombra degli alberi. Le porte sono aperte, in attesa del prossimo esploratore.</string>
     <string name="skilling_dungeon_whispering_grove_note_1">Gli alberi sussurrano in una lingua ormai dimenticata.</string>
     <string name="skilling_dungeon_whispering_grove_note_2">Costruzioni di pietra si mostrano tra le radici. Resti di qualcosa costruito prima che la natura tornasse sovrana.</string>
     <string name="skilling_dungeon_whispering_grove_note_3">Un druido ha inciso un avvertimento nella corteccia: «Il cuore del bosco non è più quello di un tempo. Allontanati.»</string>
