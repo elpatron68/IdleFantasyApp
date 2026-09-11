@@ -569,9 +569,9 @@
     <string name="skilling_dungeon_copper_caverns_note_3">Una nota lasciata da un minatore: «Abbiamo sfondato verso sotto. Il capo ha chiuso il ramo più basso. Non ci ha detto il motivo.»</string>
     <string name="skilling_dungeon_copper_caverns_note_4">Cupi rumori e scosse provengono dalle profondità. Polvere di roccia scende dal soffitto a intervalli regolari. Qualcosa si muove.</string>
     <string name="skilling_dungeon_copper_caverns_note_5">I sigilli non resistono lo scorrere del tempo. Una profonda e vasta caverna ti da il benvenuto: la Miniera Crollata è oltre questo passaggio.</string>
-    <string name="skilling_dungeon_shadow_vault_note_1">A dossier on every major merchant in the city. Someone has been compiling this for years.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_shadow_vault_note_2">A vault door, partially ajar. Inside — crates of stolen weapons, armour, and sealed scroll cases.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_shadow_vault_note_3">One scroll case is different from the others. It bears the seal of the royal treasury. It is empty.</string> <!-- untranslated -->
-    <string name="skilling_dungeon_shadow_vault_note_4">A private journal: \'The Guild of Shadows is not just a guild. It is a government. They have always been watching.\'</string> <!-- untranslated -->
-    <string name="skilling_dungeon_shadow_vault_note_5">The deepest vault is not locked. It is guarded. What waits inside is the Guild\'s greatest secret — and its most dangerous protectors.</string> <!-- untranslated -->
+    <string name="skilling_dungeon_shadow_vault_note_1">Un dossier su tutti i mercanti della città. Qualcuno ci ha lavorato per anni.</string>
+    <string name="skilling_dungeon_shadow_vault_note_2">La porta del caveau è aperta. All\'interno trovi casse con armi e armature rubate, e pergamene magiche sigillate.</string>
+    <string name="skilling_dungeon_shadow_vault_note_3">Un contenitore coglie la tua attenzione: su di esso è inciso il simbolo della tesoreria reale. La scatola è vuota.</string>
+    <string name="skilling_dungeon_shadow_vault_note_4">Una pagina di diario: la Gilda delle Ombre non è solo un\'organizzazione. Ha creato un suo anti-stato. Hanno occhi dappertutto.</string>
+    <string name="skilling_dungeon_shadow_vault_note_5">L\'ultima porta del caveau non è chiusa, ma protetta. All\'interno ti aspettano i segreti più nascosti della gilda, insieme alle loro guardie.</string>
 </resources>

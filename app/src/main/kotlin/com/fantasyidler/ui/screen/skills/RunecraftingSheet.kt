@@ -102,7 +102,7 @@ internal fun RunecraftingSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .verticalScroll(runeScrollState),
+                    .verticalScroll(runeScrollState, flingBehavior = rememberTapFriendlyFlingBehavior()),
             ) {
                 // ── Rune type selection ──────────────────────────────────────
                 Text(
@@ -201,7 +201,7 @@ internal fun RunecraftingSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .verticalScroll(detailScrollState)
+                    .verticalScroll(detailScrollState, flingBehavior = rememberTapFriendlyFlingBehavior())
                     .imePadding(),
             ) {
                 // ── Quantity picker ──────────────────────────────────────────

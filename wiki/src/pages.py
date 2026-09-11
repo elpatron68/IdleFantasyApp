@@ -21,7 +21,7 @@ from wiki.src.game_data import STRINGS, load, title, item_name, house_item_name,
     trade_route_name, thieving_npc_name, quest_name, agility_course_name, town_building_name, quest_desc, title_name, \
     pet_name, boss_name, boss_desc, trade_route_desc, pet_desc, item_desc, dungeon_name, dungeon_desc, expedition_name, \
     expedition_desc, seasonal_event_name, seasonal_reward_desc, prestige_effect_desc, tree_name, merc_name, race_name, \
-    carnival_prize_name, carnival_prize_desc, slot_name
+    carnival_prize_name, carnival_prize_desc, slot_name, blessing_name
 from wiki.src.page_hierarchy import PageHierarchy
 from wiki.src.wiki_logs import LOGGER
 
@@ -898,10 +898,10 @@ def gen_farming() -> str:
     # Ashes tables
     # Todo: Switch to avoid being hardcoded
     ash_rows = []
-    ash_amounts = [("ashes", 1.1), ("oak_ashes", 1.25), ("willow_ashes", 1.35), ("maple_ashes", 1.5), ("yew_ashes", 1.75),
+    ash_amounts = [("ashes", 1.1), ("oak_ashes", 1.2), ("willow_ashes", 1.35), ("maple_ashes", 1.5), ("yew_ashes", 1.75),
                    ("magic_ashes", 2), ("redwood_ashes", 2.5)]
     for ash, bonus in ash_amounts:
-        ash_rows.append([item_name(ash), f"+{int((bonus - 1) * 100)}%"])
+        ash_rows.append([item_name(ash), f"+{round((bonus - 1) * 100)}%"])
 
     magic_bean_note = (
         "Obtaining one requires patience. A lucky harvest may be all it takes. "
@@ -1198,19 +1198,26 @@ def gen_runecrafting() -> str:
 def gen_herblore() -> str:
     recipes = load("recipes/herblore.json")
     assert isinstance(recipes, dict)
+
+    def fmt_effects(effects: dict, enhanced: bool = False) -> str:
+        def val_for(v):
+            return max(int(v * 2), v + 1) if enhanced else v
+        return ", ".join(f"{stat.title()} +{val_for(val)}" for stat, val in effects.items())
+
     rows = sorted(
         [[
             item_name(k),
             r["level_required"],
             fmt_materials(r["materials"]),
-            ", ".join(f"{stat.title()} +{val}" for stat, val in r.get("effects", {}).items()),
+            fmt_effects(r.get("effects", {})),
+            fmt_effects(r.get("effects", {}), enhanced=True),
             r["xp_per_item"],
         ] for k, r in recipes.items()],
         key=lambda r: r[1]
     )
     return get_template("skills/crafting/herblore").format(
         icon=html_image(skill_icon_path("herblore"), "", "text"),
-        potion_table=table(['Potion','Level','Ingredients','Effect','XP'], rows),
+        potion_table=table(['Potion','Level','Ingredients','Effect','Enhanced Effect','XP'], rows),
     )
 
 
@@ -1259,8 +1266,40 @@ def gen_thieving() -> str:
     )
 
 
+_BLESSING_BONE_COST = {1: 10, 10: 20, 20: 35, 30: 55, 40: 80, 50: 110,
+                       60: 145, 70: 185, 80: 230, 90: 265, 99: 300}
+# Todo: Move blessings from ChurchRepository.ALL_BLESSINGS into their own dedicated blessings.json file and reference in the game with gameData and here by loading the json file
+# Keyed by blessing id (matches ChurchRepository.ALL_BLESSINGS); display names come from strings.xml via blessing_name().
+_BLESSINGS = {
+    "XP": [
+        ("blessed_focus", 1, 1.05), ("blessed_focus_ii", 10, 1.10),
+        ("blessed_focus_iii", 20, 1.15), ("tithe_blessing", 30, 1.18),
+        ("tithe_blessing_ii", 40, 1.20), ("tithe_blessing_iii", 50, 1.25),
+        ("divine_focus", 60, 1.28), ("divine_focus_ii", 70, 1.32),
+        ("divine_grace", 80, 1.37), ("divine_grace_ii", 90, 1.43),
+        ("sacred_grace", 99, 1.50),
+    ],
+    "DEFENSE": [
+        ("stone_skin", 1, 2), ("stone_skin_ii", 10, 4), ("stone_skin_iii", 20, 6),
+        ("stone_skin_iv", 30, 9), ("iron_ward", 40, 12), ("iron_ward_ii", 50, 15),
+        ("diamond_skin", 60, 18), ("diamond_skin_ii", 70, 22),
+        ("holy_shield", 80, 26), ("holy_shield_ii", 90, 30), ("aegis", 99, 35),
+    ],
+    "COINS": [
+        ("fortune_i", 30, 0.08), ("fortune_ii", 40, 0.10), ("fortune_iii", 50, 0.13),
+        ("fortune_iv", 60, 0.15), ("fortune_v", 70, 0.18), ("abundance", 80, 0.20),
+        ("abundance_ii", 90, 0.23), ("abundance_iii", 99, 0.25),
+    ],
+}
+
+
+def _blessing_table(kind: str, effect_fmt) -> str:
+    rows = [[blessing_name(bid), level, _BLESSING_BONE_COST[level], effect_fmt(mag)]
+            for bid, level, mag in _BLESSINGS[kind]]
+    return table(["Name", "Prayer Level", "Cost (bones)", "Effect"], rows)
+
+
 def gen_prayer() -> str:
-    # Todo: Add info about bone altar
     bones = load("bones.json")
     assert isinstance(bones, dict)
     rows = sorted(
@@ -1270,7 +1309,11 @@ def gen_prayer() -> str:
     )
     return get_template("skills/support/prayer").format(
         icon=html_image(skill_icon_path("prayer"), "", "text"),
+        church_link=link("buildings", "Church", "church"),
         prayer_table=table(['Bone / Ash','XP Each'], rows),
+        blessing_xp_table=_blessing_table("XP", lambda m: f"+{round((m - 1) * 100)}% XP"),
+        blessing_defense_table=_blessing_table("DEFENSE", lambda m: f"+{m} Defence"),
+        blessing_coins_table=_blessing_table("COINS", lambda m: f"+{round(m * 100)}% coins"),
     )
 
 
@@ -1735,6 +1778,7 @@ def gen_spells() -> str:
     ], key=lambda r: r[1])
     return get_template("combat/spells").format(
         spell_table=table(["Spell", "Magic Level", "Rune", "Runes / Cast", "Max Hit"], rows),
+        void_staff_link=item_link("void_staff"),
         combat_footer=gen_combat_footer(),
     )
 
@@ -2028,11 +2072,12 @@ def gen_carnival() -> str:
         ["Hammer Strike", "Time your swing for a strong hit", "1–2", "6–8"],
         ["Potion Sequence", "Repeat a growing memory sequence of potion colors", "2", "7"],
         ["Item Appraisal", "Pick the more valuable item", "2", "7"],
-        [f"Pick-a-Cup ({link("buildings", "Fairgrounds")} tier 1+)", "Track which cup hides the gem through a shuffle", "4", "7"],
-        [f"Higher or Lower ({link("buildings", "Fairgrounds")} tier 2+)", "Guess higher or lower over several rounds — more correct in a row pays more", "up to 5", "up to 8"],
+        [f"Pick-a-Cup ({link("buildings", "Fairgrounds", "fairgrounds")} tier 1+)", "Track which cup hides the gem through a shuffle", "4", "7"],
+        [f"Higher or Lower ({link("buildings", "Fairgrounds", "fairgrounds")} tier 2+)", "Guess higher or lower over several rounds — more correct in a row pays more", "up to 5", "up to 8"],
     ]
 
     return get_template("town/carnival").format(
+        fairgrounds_link=link("buildings", "Fairgrounds", "fairgrounds"),
         idle_table=table(["Minigame", "Skill Trained"], idle_rows),
         active_table=table(["Minigame", "How to play", "Normal", "Hard"], active_rows),
         prize_table=table(["Prize", "Ticket Cost", "Effect"], prize_rows),

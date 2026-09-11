@@ -83,6 +83,7 @@ import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EquipmentData
 import com.fantasyidler.data.json.SpellData
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
@@ -265,6 +266,9 @@ fun CombatScreen(
                             allEquipment   = invState.resolvedEquipment(inventoryVm.allEquipment),
                             heirloomXp     = invState.heirloomXp,
                             context        = context,
+                            totalAttack    = state.totalAttack,
+                            totalStrength  = state.totalStrength,
+                            totalDefense   = state.totalDefense,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
                             foodEatOrder        = invState.foodEatOrder,
@@ -291,6 +295,7 @@ fun CombatScreen(
                             totalDefenseBonus   = state.totalDefenseBonus,
                             skillPrestigeLevels = state.skillPrestigeLevels,
                             combatPrestigeBonus = state.combatPrestigeBonus,
+                            prestigeMaxedSkills = state.prestigeMaxedSkills,
                             onOpenPrestige      = onNavigateToPrestige,
                         )
                     }
@@ -357,6 +362,9 @@ fun CombatScreen(
                             allEquipment   = invState.resolvedEquipment(inventoryVm.allEquipment),
                             heirloomXp     = invState.heirloomXp,
                             context        = context,
+                            totalAttack    = state.totalAttack,
+                            totalStrength  = state.totalStrength,
+                            totalDefense   = state.totalDefense,
                             activeWeaponSlot    = state.selectedWeaponSlot,
                             foodEatThresholdPct = invState.foodEatThresholdPct,
                             foodEatOrder        = invState.foodEatOrder,
@@ -383,6 +391,7 @@ fun CombatScreen(
                             totalDefenseBonus   = state.totalDefenseBonus,
                             skillPrestigeLevels = state.skillPrestigeLevels,
                             combatPrestigeBonus = state.combatPrestigeBonus,
+                            prestigeMaxedSkills = state.prestigeMaxedSkills,
                             onOpenPrestige      = onNavigateToPrestige,
                         )
                     }
@@ -632,6 +641,9 @@ private fun CombatGearTab(
     allEquipment: Map<String, EquipmentData>,
     heirloomXp: Map<String, Long>,
     context: Context,
+    totalAttack: Int,
+    totalStrength: Int,
+    totalDefense: Int,
     activeWeaponSlot: String?,
     foodEatThresholdPct: Int,
     foodEatOrder: String,
@@ -693,6 +705,16 @@ private fun CombatGearTab(
                     )
                 }
             }
+        }
+        item {
+            Text(
+                text = "${stringResource(R.string.combat_atk)} $totalAttack  " +
+                    "${stringResource(R.string.combat_str)} $totalStrength  " +
+                    "${stringResource(R.string.combat_def)} $totalDefense",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
         }
         // Only the active style's own weapon is shown/selectable here — never another
         // style's weapon, since each style has its own separate weapon slot.
@@ -835,6 +857,7 @@ private fun CombatSkillsTab(
     totalDefenseBonus: Int,
     skillPrestigeLevels: Map<String, Int> = emptyMap(),
     combatPrestigeBonus: Map<String, Int> = emptyMap(),
+    prestigeMaxedSkills: Set<String> = emptySet(),
     onOpenPrestige: (String) -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -879,6 +902,7 @@ private fun CombatSkillsTab(
                 gearBonus     = gearBonus,
                 prestigeLevel = skillPrestigeLevels[key] ?: 0,
                 prestigeBonus = combatPrestigeBonus[key] ?: 0,
+                isPrestigeMaxed = key in prestigeMaxedSkills,
                 onOpenPrestige = onOpenPrestige.let { cb -> { cb(key) } },
                 onClick       = { tappedSkill = key },
             )
@@ -887,6 +911,7 @@ private fun CombatSkillsTab(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun CombatSkillRow(
     skillKey: String,
@@ -895,6 +920,7 @@ private fun CombatSkillRow(
     gearBonus: Int = 0,
     prestigeLevel: Int = 0,
     prestigeBonus: Int = 0,
+    isPrestigeMaxed: Boolean = false,
     onOpenPrestige: (() -> Unit)? = null,
     onClick: () -> Unit = {},
 ) {
@@ -949,29 +975,33 @@ private fun CombatSkillRow(
         }
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Row(
-                modifier              = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                // FlowRow + weight(1f): long localised bonus labels wrap to the next line
+                // instead of being starved into a one-letter-per-line sliver that also
+                // pushed the XP value out of view (issue #1765).
+                FlowRow(
+                    modifier              = Modifier.weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
                     Text(name, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
                     if (gearBonus > 0) {
-                        Spacer(Modifier.width(6.dp))
                         Text(
-                            text  = stringResource(R.string.combat_gear_bonus, gearBonus),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary,
+                            text     = stringResource(R.string.combat_gear_bonus, gearBonus),
+                            style    = MaterialTheme.typography.labelSmall,
+                            color    = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.align(Alignment.CenterVertically),
                         )
                     }
                     if (prestigeBonus > 0) {
-                        Spacer(Modifier.width(6.dp))
                         Text(
-                            text  = stringResource(R.string.combat_prestige_bonus, prestigeBonus),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary,
+                            text     = stringResource(R.string.combat_prestige_bonus, prestigeBonus),
+                            style    = MaterialTheme.typography.labelSmall,
+                            color    = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.align(Alignment.CenterVertically),
                         )
                     }
                 }
+                Spacer(Modifier.width(8.dp))
                 Text(
                     text  = "${xp.formatXp()} ${stringResource(R.string.label_xp)}",
                     style = MaterialTheme.typography.bodySmall,
@@ -998,7 +1028,8 @@ private fun CombatSkillRow(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text  = "★×$prestigeLevel",
+                        text  = if (isPrestigeMaxed) stringResource(R.string.skills_prestige_max, prestigeLevel)
+                                else "★×$prestigeLevel",
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                     )

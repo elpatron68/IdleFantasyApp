@@ -66,6 +66,8 @@
     <string name="label_bosses">Боссы</string>
     <string name="label_by_location">По месту</string>
     <string name="bestiary_not_encountered">Ещё не встречен</string>
+    <string name="bestiary_filter_all">All</string> <!-- untranslated -->
+    <string name="bestiary_filter_missing">Missing</string> <!-- untranslated -->
     <string name="bestiary_qty_header">Количество</string>
     <string name="bestiary_chance_header">Шанс</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
@@ -733,6 +735,9 @@
     <string name="shop_keep_one_toggle">Оставлять по одному предмету</string>
     <string name="shop_search_hint">Искать предметы</string>
     <string name="shop_filter_all">Все</string>
+    <string name="shop_order_default">Default</string> <!-- untranslated -->
+    <string name="shop_order_highest_amount">Quantity</string> <!-- untranslated -->
+    <string name="shop_order_highest_price">Price</string> <!-- untranslated -->
     <string name="shop_sell_blocked_equipped">%1$s предмет надет. Чтобы продать, нужно сначала снять предмет.</string>
     <string name="shop_sell_blocked_reserved">%1$s зарезервирован для задачи в очереди</string>
     <string name="shop_sell_blocked_keep_one">Оставляем последний %1$s (Оставлять по одному предмету включено).</string>
@@ -1714,6 +1719,7 @@
     <string name="armory_how_to_obtain">Как получить</string>
     <string name="armory_no_stats">Нет бонусов характеристик.</string>
     <string name="armory_filter_all">Все</string>
+    <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
     <string name="armory_filter_weapons">Оружие</string>
     <string name="armory_filter_armor">Броня</string>
     <string name="armory_filter_accessories">Аксессуары</string>
@@ -2277,6 +2283,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Достигните 99-го уровня для увеличения престижа (сейчас %1$d).</string>
     <string name="prestige_maxed_cap">Достигнут максимальный уровень престижа. Каждое очко, которое может заработать этот навык, принадлежит вам.</string>
+    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Ваш уровень %1$s будет сброшен до 1, и вы заработаете %2$d очка престижа, которые можно потратить в дереве навыков. Снаряжение, которое больше не соответствует предъявляемым требованиям, будет заменено, а невостребованное ежедневное задание %1$s будет сброшено. Вы также получите 2x %1$s опыта на 48 часов, чтобы ускорить повышение.</string>
     <string name="prestige_respec">Сбросить очки</string>

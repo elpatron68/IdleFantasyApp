@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-enum class ArmoryFilter { ALL, WEAPONS, ARMOR, ACCESSORIES, TOOLS }
+enum class ArmoryFilter { ALL, MISSING, WEAPONS, ARMOR, ACCESSORIES, TOOLS }
 enum class ArmorySort   { DEFAULT, ATTACK, STRENGTH, DEFENSE, REQUIREMENT }
 
 data class ArmoryEntry(
@@ -108,6 +108,7 @@ class ArmoryViewModel @Inject constructor(
 
         val filtered = when (filter) {
             ArmoryFilter.ALL         -> allEntries
+            ArmoryFilter.MISSING     -> allEntries.filter { !it.owned }
             ArmoryFilter.WEAPONS     -> allEntries.filter { it.item.slot == "weapon" }
             ArmoryFilter.ARMOR       -> allEntries.filter { it.item.slot in ARMOR_SLOTS }
             ArmoryFilter.ACCESSORIES -> allEntries.filter { it.item.slot in ACCESSORY_SLOTS }

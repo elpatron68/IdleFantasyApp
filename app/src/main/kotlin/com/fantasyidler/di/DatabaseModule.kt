@@ -2,6 +2,8 @@ package com.fantasyidler.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.fantasyidler.data.db.AppDatabase
 import com.fantasyidler.data.db.MIGRATION_1_2
 import com.fantasyidler.data.db.MIGRATION_2_3
@@ -26,6 +28,17 @@ object DatabaseModule {
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "fantasy_idler.db")
             .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+            .addCallback(object : RoomDatabase.Callback() {
+                // Old versions (pre-1.8.6) could write a session whose frames JSON exceeds
+                // the 2 MB CursorWindow limit; every read of the table then throws
+                // SQLiteBlobTooBigException and the app crash-loops on open (issues #357,
+                // #497, #1746). Legitimate sessions are capped at 60 frames (< 100 KB), so
+                // anything over 1 MB is unreadable garbage. DELETE never materialises the
+                // row into a CursorWindow, so this can remove rows no query could read.
+                override fun onOpen(db: SupportSQLiteDatabase) {
+                    db.execSQL("DELETE FROM skill_sessions WHERE length(data) > 1000000")
+                }
+            })
             .build()
 
     @Provides fun providePlayerDao(db: AppDatabase): PlayerDao = db.playerDao()

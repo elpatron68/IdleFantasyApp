@@ -66,6 +66,8 @@
     <string name="label_bosses">Chefes</string>
     <string name="label_by_location">Por Local</string>
     <string name="bestiary_not_encountered">Ainda não encontrado</string>
+    <string name="bestiary_filter_all">All</string> <!-- untranslated -->
+    <string name="bestiary_filter_missing">Missing</string> <!-- untranslated -->
     <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
     <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
@@ -713,6 +715,9 @@
     <string name="shop_keep_one_toggle">Keep one of each item</string> <!-- untranslated -->
     <string name="shop_search_hint">Search items</string> <!-- untranslated -->
     <string name="shop_filter_all">All</string> <!-- untranslated -->
+    <string name="shop_order_default">Default</string> <!-- untranslated -->
+    <string name="shop_order_highest_amount">Quantity</string> <!-- untranslated -->
+    <string name="shop_order_highest_price">Price</string> <!-- untranslated -->
     <string name="shop_sell_blocked_equipped">%1$s is equipped. Unequip it first to sell.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_reserved">%1$s is reserved for a queued task.</string> <!-- untranslated -->
     <string name="shop_sell_blocked_keep_one">Keeping your last %1$s (Keep one of each item is on).</string> <!-- untranslated -->
@@ -1690,6 +1695,7 @@
     <string name="armory_how_to_obtain">Como obter</string>
     <string name="armory_no_stats">Sem bônus de atributos.</string>
     <string name="armory_filter_all">Todos</string>
+    <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
     <string name="armory_filter_weapons">Armas</string>
     <string name="armory_filter_armor">Armaduras</string>
     <string name="armory_filter_accessories">Acessórios</string>
@@ -2253,6 +2259,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Reach level 99 to prestige (currently %1$d).</string> <!-- untranslated -->
     <string name="prestige_maxed_cap">Maximum prestige reached. Every point this skill can earn is yours.</string> <!-- untranslated -->
+    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Your %1$s level will reset to 1 and you\'ll earn %2$d prestige points to spend in this skill\'s tree. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
     <string name="prestige_respec">Reset points</string> <!-- untranslated -->

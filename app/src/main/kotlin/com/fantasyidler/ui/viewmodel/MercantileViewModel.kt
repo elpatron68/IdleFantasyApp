@@ -168,6 +168,7 @@ class MercantileViewModel @Inject constructor(
                         skillDisplayName    = "Mercantile",
                         estimatedXpGain     = estimatedXpGain,
                         estimatedDurationMs = SkillSimulator.sessionDurationMs(agilityLevel, boostRepo.sessionFloorReductionMin(mercFlags), townRepo.playerSessionDurationMultiplier(mercFlags)),
+                        xpBoostMultAtQueue  = xpQueueMult,
                         coinRefund          = route.coinCost.toLong(),
                     )
                 )

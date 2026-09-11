@@ -83,6 +83,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import com.fantasyidler.ui.screen.skills.AgilitySheet
+import com.fantasyidler.ui.screen.skills.rememberTapFriendlyFlingBehavior
 import com.fantasyidler.ui.screen.skills.ComingSoonSheet
 import com.fantasyidler.ui.screen.skills.CraftSkillSheet
 import com.fantasyidler.ui.screen.skills.FiremakingSheet
@@ -555,7 +556,7 @@ private fun GuildDailySheetBanner(
             onDismissRequest = { showDialog = false },
             title = { Text(stringResource(R.string.nav_quests)) },
             text = {
-                Column(Modifier.verticalScroll(rememberScrollState())) {
+                Column(Modifier.verticalScroll(rememberScrollState(), flingBehavior = rememberTapFriendlyFlingBehavior())) {
                     sections.forEachIndexed { sectionIndex, (labelRes, sectionQuests) ->
                         if (sectionIndex > 0) {
                             Spacer(Modifier.height(12.dp))
@@ -683,7 +684,7 @@ private fun SkillsTabContent(
     onNavigateToBoneAltar: () -> Unit = {},
     onNavigateToPrestige: (String) -> Unit = {},
 ) {
-    LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
+    LazyColumn(state = listState, modifier = Modifier.fillMaxSize(), flingBehavior = rememberTapFriendlyFlingBehavior()) {
         state.activeSession?.let { session ->
             item(key = "active_session") {
                 ActiveSessionBanner(
@@ -730,6 +731,7 @@ private fun SkillsTabContent(
                 toolEfficiency = efficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
+                isPrestigeMaxed = key in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(key) },
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
@@ -754,6 +756,7 @@ private fun SkillsTabContent(
                 toolEfficiency = craftEfficiency,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
+                isPrestigeMaxed = key in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(key) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
@@ -771,6 +774,7 @@ private fun SkillsTabContent(
                 toolEfficiency = if (key == Skills.AGILITY) state.agilityEfficiency else 1.0f,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
+                isPrestigeMaxed = key in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(key) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
@@ -787,6 +791,7 @@ private fun SkillsTabContent(
                 onClick       = onNavigateToSlayer,
                 petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
                 prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
+                isPrestigeMaxed = Skills.SLAYER in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(Skills.SLAYER) },
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
@@ -908,6 +913,7 @@ internal fun SkillRow(
     toolEfficiency: Float = 1.0f,
     petBoostPct: Int = 0,
     prestigeLevel: Int = 0,
+    isPrestigeMaxed: Boolean = false,
     onOpenPrestige: (() -> Unit)? = null,
     cropsReady: Int = 0,
     /** Shows a gold dot when this skill's guild daily is still open and worth doing (guild not maxed). */
@@ -1055,7 +1061,8 @@ internal fun SkillRow(
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         Text(
-                            text  = "★×$prestigeLevel",
+                            text  = if (isPrestigeMaxed) stringResource(R.string.skills_prestige_max, prestigeLevel)
+                                    else "★×$prestigeLevel",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                         )

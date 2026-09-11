@@ -319,7 +319,20 @@ class HomeViewModel @Inject constructor(
             val chronosMult     = townRepo.playerSessionDurationMultiplier(flags)
             val sessionMs       = SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult)
             val perItemMs    = sessionMs / 60
-            val queueStart   = session?.takeIf { !it.completed }?.endsAt ?: System.currentTimeMillis()
+            // A repeat chain only ever has its current run in the DB; the remaining runs
+            // live in the repeat flags, so price them in or the queue ETA covers just the
+            // current run (issue #1750). Priced like the queued-entry sum below.
+            val activeChainRemainMs = session?.takeIf { !it.completed }?.let { s ->
+                when {
+                    s.skillName == "combat" && flags.activeDungeonRepeatSnapshot != null ->
+                        (flags.activeDungeonRepeatTotal - flags.activeDungeonRepeatIndex).coerceAtLeast(0) * sessionMs
+                    s.skillName == "boss" && flags.activeBossRepeatSnapshot != null ->
+                        (flags.activeBossRepeatTotal - flags.activeBossRepeatIndex).coerceAtLeast(0) *
+                            (gameData.bosses[s.activityKey]?.durationMinutes?.toLong() ?: 60L) * perItemMs
+                    else -> 0L
+                }
+            } ?: 0L
+            val queueStart   = (session?.takeIf { !it.completed }?.endsAt ?: System.currentTimeMillis()) + activeChainRemainMs
             // Recomputed live from current agility/gear rather than the frozen value stored at
             // queue time, so the countdown reacts to level-ups and tool swaps (issues #938, #940).
             // Boss fights alone use a fixed wall-clock duration unrelated to agility or gear.
@@ -338,14 +351,18 @@ class HomeViewModel @Inject constructor(
                                    }
                                }
             val innXpMult = townRepo.workerXpMultiplier(flags)
+            val capeMult = blessingPrayerCapeMult(player, flags, gameData)
             val playerXpBoostMult = if (flags.ironman) 1.0
-                else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData))
+                else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, capeMult)
             val sessionXpGain: (SkillSession?) -> Long = { s ->
                 if (s == null || s.skillName in listOf("combat", "boss", "expedition", "farming", "tower", "carnival")) 0L
                 else try {
                     val base = json.decodeFromString<List<SessionFrame>>(s.frames).sumOf { it.xpGain.toLong() }
-                    if (s.isWorkerSession) (base * s.efficiencyMultiplier * innXpMult).toLong()
-                    else (base * playerXpBoostMult).toLong()
+                    // Same multiplier chain collection applies (applySessionResults), so the
+                    // card matches the eventual payout and reacts to boosts live (issue #1748).
+                    val boostMult = boostRepo.xpMultiplier(s.skillName, flags, capeMult)
+                    if (s.isWorkerSession) (base * s.efficiencyMultiplier * innXpMult * boostMult).toLong()
+                    else (base * boostMult).toLong()
                 } catch (_: Exception) { 0L }
             }
             val activeSessionXpGain   = sessionXpGain(session)
@@ -416,7 +433,14 @@ class HomeViewModel @Inject constructor(
                 showSessionEndTime  = flags.showSessionEndTime,
                 equippedTitle       = flags.equippedTitle,
                 titleName           = titleRepo.displayName(context, flags.equippedTitle, flags),
-                sessionQueue        = flags.sessionQueue,
+                // Queue entries baked the boost multiplier valid at enqueue time into their
+                // estimate; swap it for the live one so previews track boosts gained or lost
+                // since (issue #1748). Legacy entries (mult 0) are shown as stored.
+                sessionQueue        = flags.sessionQueue.map { a ->
+                    if (a.xpBoostMultAtQueue > 0.0 && a.estimatedXpGain > 0L)
+                        a.copy(estimatedXpGain = (a.estimatedXpGain * (playerXpBoostMult / a.xpBoostMultAtQueue)).toLong())
+                    else a
+                },
                 maxQueueSize        = playerRepo.maxQueueSize(flags),
                 showWhatsNew        = flags.lastSeenVersionCode < BuildConfig.VERSION_CODE,
                 queueEndsAt         = queueEndsAt,
@@ -430,7 +454,7 @@ class HomeViewModel @Inject constructor(
                 workerQueue         = flags.hiredWorker?.sessionQueue ?: emptyList(),
                 workerQueue2        = flags.hiredWorker2?.sessionQueue ?: emptyList(),
                 activeBlessingKey          = flags.activeBlessingKey,
-                prayerCapeMult             = blessingPrayerCapeMult(player, flags, gameData),
+                prayerCapeMult             = capeMult,
                 activeBlessingRemainingMs  = (flags.activeBlessingExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
                 xpBoostRemainingMs         = if (flags.ironman) 0L else (flags.xpBoostExpiresAt - System.currentTimeMillis()).coerceAtLeast(0L),
                 prestigeBoostsRemainingMs  = flags.prestigeXpBoosts
@@ -1175,6 +1199,7 @@ class HomeViewModel @Inject constructor(
                 estimatedDurationMs = session.endsAt - session.startedAt,
                 estimatedXpGain     = if (session.skillName in listOf("carnival", "expedition", "tower")) 0L
                                       else (rawXpGain * xpQueueMult).toLong(),
+                xpBoostMultAtQueue  = xpQueueMult,
                 weaponSlot          = weaponSlot,
                 equippedSnapshot    = if (isCombat) player.equipped else null,
                 spellName           = flags.activeSpell,
@@ -1536,6 +1561,7 @@ class HomeViewModel @Inject constructor(
     fun workerSummaryConsumed() = _extra.update { it.copy(workerSummary = null) }
 
     fun removeFromQueue(index: Int) {
+        val hasTowerActions = uiState.value.sessionQueue.any { it.skillName == "tower" }
         viewModelScope.launch {
             val action = playerRepo.removeFromQueue(index) ?: return@launch
             if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
@@ -1544,14 +1570,15 @@ class HomeViewModel @Inject constructor(
             if (action.catalystKey != null && action.catalystQty > 0) {
                 playerRepo.addItem(action.catalystKey, action.catalystQty)
             }
-            reconcileTowerQueue()
+            if (hasTowerActions) reconcileTowerQueue()
         }
     }
 
     fun moveQueueItem(fromIndex: Int, toIndex: Int) {
-        viewModelScope.launch { 
-            playerRepo.moveQueueItem(fromIndex, toIndex) 
-            reconcileTowerQueue()
+        val hasTowerActions = uiState.value.sessionQueue.any { it.skillName == "tower" }
+        viewModelScope.launch {
+            playerRepo.moveQueueItem(fromIndex, toIndex)
+            if (hasTowerActions) reconcileTowerQueue()
         }
     }
 

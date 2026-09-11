@@ -452,6 +452,12 @@ data class QueuedAction(
     @SerialName("weapon_slot") val weaponSlot: String? = null,
     /** Total fights/runs requested in one queue entry (e.g. "fight this boss 100 times" or "run this dungeon 24 times"). 1 = no repeat. */
     @SerialName("repeat_count") val repeatCount: Int = 1,
+    /**
+     * XP boost multiplier (purchased 2x × blessing) baked into [estimatedXpGain] at queue
+     * time, so displays can swap it for the live value when boosts change (issue #1748).
+     * 0 = legacy entry with an unknown baked-in multiplier — shown as stored.
+     */
+    @SerialName("xp_boost_mult_at_queue") val xpBoostMultAtQueue: Double = 0.0,
 )
 
 // ---------------------------------------------------------------------------

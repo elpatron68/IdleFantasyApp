@@ -66,6 +66,8 @@
     <string name="label_bosses">Boss</string>
     <string name="label_by_location">Per luogo</string>
     <string name="bestiary_not_encountered">Non ancora incontrato</string>
+    <string name="bestiary_filter_all">Tutto</string>
+    <string name="bestiary_filter_missing">Non Incontrati</string>
     <string name="bestiary_qty_header">Q.tà</string>
     <string name="bestiary_chance_header">Prob.tà</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
@@ -715,6 +717,9 @@
     <string name="shop_keep_one_toggle">Mantieni una copia per ogni oggetto</string>
     <string name="shop_search_hint">Cerca oggetti</string>
     <string name="shop_filter_all">Tutti</string>
+    <string name="shop_order_default">Base</string>
+    <string name="shop_order_highest_amount">Quantità</string>
+    <string name="shop_order_highest_price">Prezzo</string>
     <string name="shop_sell_blocked_equipped">Stai usando %1$s. Non puoi venderlo finché non lo lasci.</string>
     <string name="shop_sell_blocked_reserved">%1$s è di riserva per un\'azione in coda.</string>
     <string name="shop_sell_blocked_keep_one">Una copia di %1$s è rimasta (L\'opzione è abilitata).</string>
@@ -1692,6 +1697,7 @@
     <string name="armory_how_to_obtain">Come ottenere</string>
     <string name="armory_no_stats">Nessun bonus alle statistiche.</string>
     <string name="armory_filter_all">Tutto</string>
+    <string name="armory_filter_missing">Mancante</string>
     <string name="armory_filter_weapons">Armi</string>
     <string name="armory_filter_armor">Armatura</string>
     <string name="armory_filter_accessories">Accessori</string>
@@ -2255,6 +2261,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Raggiungi il livello 99 per onorare (al momento %1$d).</string>
     <string name="prestige_maxed_cap">Raggiunto il massimo onore. Hai ottenuto tutti i punti possibili.</string>
+    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Il livello di %1$s tornerà a 1 e otterrai %2$d punti onore da spendere in talenti. Non potrai più usare armamenti di livello superiore, e le missioni giornaliere di %1$s saranno reimpostate. Otterrai 2x %1$s XP per 48 ore.</string>
     <string name="prestige_respec">Reimposta punti</string>

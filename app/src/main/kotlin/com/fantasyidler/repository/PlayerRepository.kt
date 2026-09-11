@@ -474,7 +474,8 @@ class PlayerRepository @Inject constructor(
 
     suspend fun updateFlagsAtomically(block: (PlayerFlags) -> PlayerFlags) = playerMutex.withLock {
         val current = getFlagsUnlocked()
-        updateFlagsUnlocked(block(current))
+        val updated = block(current)
+        if (updated != current) updateFlagsUnlocked(updated)
     }
 
     /** Stops an in-progress boss repeat run (e.g. on abandon) so it doesn't leave stale "N/M" progress behind. */
@@ -526,8 +527,12 @@ class PlayerRepository @Inject constructor(
     suspend fun <T> withLock(block: suspend () -> T): T = playerMutex.withLock { block() }
 
     internal suspend fun updateFlagsUnlocked(flags: PlayerFlags) {
-        val player = getOrCreatePlayer()
-        playerDao.upsert(player.copy(flags = json.encode<PlayerFlags>(flags)))
+        // Single-column update: replacing the whole row rewrote every JSON blob and made
+        // frequent flag writes (queue reorders especially) visibly laggy (issue #1764).
+        val encoded = json.encode<PlayerFlags>(flags)
+        if (playerDao.updateFlags(encoded) == 0) {
+            playerDao.upsert(getOrCreatePlayer().copy(flags = encoded))
+        }
     }
 
     suspend fun getQueue(): List<QueuedAction> = getFlags().sessionQueue

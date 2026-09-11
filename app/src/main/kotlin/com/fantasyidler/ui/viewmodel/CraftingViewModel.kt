@@ -421,7 +421,12 @@ class CraftingViewModel @Inject constructor(
         val recipe = allRecipes.firstOrNull { it.outputKey == targetKey } ?: return false
         val state  = uiState.value
         val max    = state.maxCraftable(recipe)
-        if ((state.skillLevels[recipe.skillName] ?: 1) < recipe.levelRequired || max <= 0) {
+        if ((state.skillLevels[recipe.skillName] ?: 1) < recipe.levelRequired) {
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(
+                R.string.format_level_requirement, recipe.levelRequired, GameStrings.skillName(context, recipe.skillName))) }
+            return true
+        }
+        if (max <= 0) {
             _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.skill_not_enough_materials)) }
             return true
         }
@@ -457,6 +462,7 @@ class CraftingViewModel @Inject constructor(
                     outputQty           = if (totalOutput != qty) totalOutput else 0,
                     estimatedXpGain     = (qty * recipe.xpPerItem * xpQueueMult * toolEff * (1.0 + queuePetPct / 100.0)).toLong(),
                     estimatedDurationMs = qty.toLong() * perItemMs,
+                    xpBoostMultAtQueue  = xpQueueMult,
                     catalystKey         = ashKey,
                     catalystQty         = ashQtyToConsume,
                 )

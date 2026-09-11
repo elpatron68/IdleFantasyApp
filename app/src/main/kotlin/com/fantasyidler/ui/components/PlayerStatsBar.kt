@@ -130,7 +130,9 @@ fun PlayerStatsBar(
             // fixed-height scroll area cut lines mid-height and its drag spilled into the
             // page scroll on the Home screen (issue #1579).
             var expanded by rememberSaveable { mutableStateOf(false) }
-            val collapsible = boostLines.size > MAX_VISIBLE_BOOST_LINES
+            // Collapse only when it hides at least two lines: the "+N more" toggle occupies
+            // a line itself, so collapsing a single overflow line saved no space (issue #1768).
+            val collapsible = boostLines.size > MAX_VISIBLE_BOOST_LINES + 1
             val visibleLines = if (collapsible && !expanded) boostLines.take(MAX_VISIBLE_BOOST_LINES) else boostLines
             Column(
                 modifier = if (collapsible) Modifier.fillMaxWidth().clickable { expanded = !expanded } else Modifier.fillMaxWidth(),

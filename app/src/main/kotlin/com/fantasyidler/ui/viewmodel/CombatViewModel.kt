@@ -82,6 +82,9 @@ data class CombatUiState(
     val snackbarMessage: String? = null,
     /** Non-null when a new pet was found; drives the pet-found dialog. Consumed by the UI. */
     val petFoundName: String? = null,
+    val totalAttack: Int = 0,
+    val totalStrength: Int = 0,
+    val totalDefense: Int = 0,
     val totalAttackBonus: Int = 0,
     val totalStrengthBonus: Int = 0,
     val totalDefenseBonus: Int = 0,
@@ -98,6 +101,7 @@ data class CombatUiState(
     val combatPrestigeBonus: Map<String, Int> = emptyMap(),
     /** Combat skills at 99+ where another prestige still earns points or an XP tier. */
     val prestigeReadySkills: Set<String> = emptySet(),
+    val prestigeMaxedSkills: Set<String> = emptySet(),
     val ironman: Boolean = false,
     val showPrestigeNotifications: Boolean = true,
     val towerHpBonus: Int = 0,
@@ -261,6 +265,18 @@ class CombatViewModel @Inject constructor(
                 else     -> equippedWeapon?.strengthBonus ?: 0
             }
             val totalDef = armorDef + (equippedWeapon?.defenseBonus  ?: 0)
+            val potionKey = extra.selectedPotionKey ?: flags.activePotionKey
+            val potionBonuses = potionKey?.takeIf { (inventory[it] ?: 0) > 0 }
+                ?.let { boostRepo.boostedPotionEffects(flags, gameData.potionEffects[it] ?: emptyMap()) } ?: emptyMap()
+            fun effectiveLevel(skill: String): Int = (levels[skill] ?: 1) +
+                boostRepo.combatStatBonus(skill, flags, levels[skill] ?: 1) +
+                (potionBonuses[skill] ?: 0)
+            val attackSkill = when (displayStyle) {
+                "ranged" -> Skills.RANGED
+                "magic" -> Skills.MAGIC
+                else -> Skills.ATTACK
+            }
+            val spell = extra.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
             val skillLevels = playerRepo.getSkillLevels()
             extra.copy(
                 isLoading               = false,
@@ -272,6 +288,15 @@ class CombatViewModel @Inject constructor(
                 equippedWeapons         = equippedWeapons,
                 selectedWeaponSlot      = activeWeaponSlot,
                 combatSession           = combatSession,
+                totalAttack             = effectiveLevel(attackSkill) + totalAtk,
+                totalStrength           = when (displayStyle) {
+                    "ranged" -> effectiveLevel(Skills.RANGED) + totalStr
+                    "magic" -> (spell?.maxHit ?: 0) + (equippedWeapon?.magicDamageBonus ?: 0) +
+                        EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 }
+                    else -> effectiveLevel(Skills.STRENGTH) + totalStr
+                },
+                totalDefense            = effectiveLevel(Skills.DEFENSE) + totalDef +
+                    ChurchRepository.defBonus(flags, blessingPrayerCapeMult(flags, equipped, inventory.keys, gameData)),
                 totalAttackBonus        = totalAtk,
                 totalStrengthBonus      = totalStr,
                 totalDefenseBonus       = totalDef,
@@ -291,6 +316,9 @@ class CombatViewModel @Inject constructor(
                 },
                 prestigeReadySkills     = Skills.ALL.filterTo(mutableSetOf()) {
                     (levels[it] ?: 1) >= 99 && PrestigeBoosts.prestigeHasReward(gameData.prestigeTrees, flags, it)
+                },
+                prestigeMaxedSkills     = Skills.ALL.filterTo(mutableSetOf()) {
+                    !PrestigeBoosts.prestigeHasReward(gameData.prestigeTrees, flags, it)
                 },
                 ironman                 = flags.ironman,
                 showPrestigeNotifications = flags.showPrestigeNotifications,

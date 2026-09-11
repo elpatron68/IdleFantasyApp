@@ -223,7 +223,7 @@ internal fun CraftSkillSheet(
                     }
                 }
             }
-            LazyColumn(state = recipeListState, modifier = Modifier.fillMaxWidth()) {
+            LazyColumn(state = recipeListState, modifier = Modifier.fillMaxWidth(), flingBehavior = rememberTapFriendlyFlingBehavior()) {
                 items(recipes, key = { it.key }) { recipe ->
                     CraftRecipeRow(
                         recipe     = recipe,
@@ -403,7 +403,7 @@ private fun CraftQuantityContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState(), flingBehavior = rememberTapFriendlyFlingBehavior())
             .imePadding()
             .padding(horizontal = 24.dp)
             .padding(bottom = 40.dp),

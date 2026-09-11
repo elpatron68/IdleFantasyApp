@@ -66,6 +66,8 @@
     <string name="label_bosses">Endgegner</string>
     <string name="label_by_location">Nach Ort</string>
     <string name="bestiary_not_encountered">Noch nicht angetroffen</string>
+    <string name="bestiary_filter_all">All</string> <!-- untranslated -->
+    <string name="bestiary_filter_missing">Missing</string> <!-- untranslated -->
     <string name="bestiary_qty_header">Menge</string>
     <string name="bestiary_chance_header">Chance</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
@@ -715,6 +717,9 @@
     <string name="shop_keep_one_toggle">Eins von jedem Gegenstand behalten</string>
     <string name="shop_search_hint">Gegenstand suchen</string>
     <string name="shop_filter_all">Alles</string>
+    <string name="shop_order_default">Default</string> <!-- untranslated -->
+    <string name="shop_order_highest_amount">Quantity</string> <!-- untranslated -->
+    <string name="shop_order_highest_price">Price</string> <!-- untranslated -->
     <string name="shop_sell_blocked_equipped">%1$s ist ausgerüstet. Vor dem Verkauf muss es abgelegt werden.</string>
     <string name="shop_sell_blocked_reserved">%1$s ist für Auftrag in Warteschlange reserviert.</string>
     <string name="shop_sell_blocked_keep_one">Den letzten %1$s behalten (Eins von jedem Gegenstand behalten ist aktiv).</string>
@@ -1692,6 +1697,7 @@
     <string name="armory_how_to_obtain">Wie zu erhalten</string>
     <string name="armory_no_stats">Keine Statusboni.</string>
     <string name="armory_filter_all">Alle</string>
+    <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
     <string name="armory_filter_weapons">Waffen</string>
     <string name="armory_filter_armor">Rüstung</string>
     <string name="armory_filter_accessories">Schmuck</string>
@@ -2255,6 +2261,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Erreiche Level 99 um einen Prestige durchzuführen (aktuell %1$d).</string>
     <string name="prestige_maxed_cap">Maximales Prestige Level erreicht. Jeder Punkt, den man in dieser Fähigkeit erlangen kann ist deiner.</string>
+    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Dein %1$s Level wird auf 1 zurückgesetzt und du erhältst %2$d Prestige Punkte, welche du in dem Fähigkeiten-Baum ausgeben kannst. Ausrüstung, für die du nicht mehr die Bedingungen erfüllst, wird ausgetauscht, und nicht eingeforderter %1$s Fortschritt täglicher Herausforderungen wird zurückgesetzt. Zusätzlich bekommst du 2x %1$s EP für 48 Stunden, um deinen Fortschritt zu beschleunigen.</string>
     <string name="prestige_respec">Punkte zurücksetzen</string>

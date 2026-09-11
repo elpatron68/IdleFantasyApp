@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
+enum class BestiaryFilter { ALL, MISSING }
 enum class BestiarySort { ALPHABETICAL, BY_LOCATION }
 
 data class BestiaryEntry(
@@ -34,7 +35,10 @@ data class BestiaryEntry(
 data class BestiaryUiState(
     val enemies: List<BestiaryEntry> = emptyList(),
     val bosses: List<BestiaryEntry> = emptyList(),
+    val filter: BestiaryFilter = BestiaryFilter.ALL,
     val sort: BestiarySort = BestiarySort.ALPHABETICAL,
+    val totalEncountered: Int = 0,
+    val totalCount: Int = 0,
 )
 
 @HiltViewModel
@@ -44,12 +48,14 @@ class BestiaryViewModel @Inject constructor(
     private val json: Json,
 ) : ViewModel() {
 
+    private val _filter = MutableStateFlow(BestiaryFilter.ALL)
     private val _sort = MutableStateFlow(BestiarySort.ALPHABETICAL)
 
     val uiState: StateFlow<BestiaryUiState> = combine(
         playerRepo.playerFlow,
+        _filter,
         _sort,
-    ) { player, sort ->
+    ) { player, filter, sort ->
         val flags: PlayerFlags = if (player != null)
             json.decodeFromString(player.flags) else PlayerFlags()
         val kills = flags.enemyKills
@@ -76,8 +82,22 @@ class BestiaryViewModel @Inject constructor(
                 )
             }.sortedBy { it.key }
 
-        BestiaryUiState(enemies = enemies, bosses = bosses, sort = sort)
+        BestiaryUiState(
+            enemies = when (filter) {
+                BestiaryFilter.ALL -> enemies
+                BestiaryFilter.MISSING -> enemies.filter { !it.encountered }
+            },
+            bosses = when (filter) {
+                BestiaryFilter.ALL -> bosses
+                BestiaryFilter.MISSING -> bosses.filter { !it.encountered }
+            },
+            filter = filter,
+            sort = sort,
+            totalEncountered = enemies.count { it.encountered } + bosses.count { it.encountered },
+            totalCount = enemies.size + bosses.size,
+        )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), BestiaryUiState())
 
+    fun setFilter(filter: BestiaryFilter) { _filter.value = filter }
     fun setSort(sort: BestiarySort) { _sort.value = sort }
 }
