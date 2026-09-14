@@ -57,7 +57,7 @@
     <string name="label_hitpoints">Points de vie</string>
     <string name="label_inventory">Inventaire</string>
     <string name="label_equipment">Équipement</string>
-    <string name="label_combat_equipment">Gear</string>
+    <string name="label_combat_equipment">Équipement</string>
     <string name="label_pets">Familiers</string>
     <string name="label_achievements">Réalisations</string>
     <string name="label_locations">Lieux</string>
@@ -85,19 +85,19 @@
     <string name="label_session_active">Session active</string>
     <string name="label_no_active_session">Aucune session active</string>
     <string name="label_session_complete">Session terminée !</string>
-    <string name="home_sessions_complete_title">%1$d sessions finies !</string>
+    <string name="home_sessions_complete_title">%1$d sessions terminées !</string>
     <string name="home_boss_defeated_title">%1$s vaincu !</string>
     <string name="home_boss_defeated_by_title">Vaincu par %1$s.</string>
     <string name="home_dungeon_died_title">%1$s — Vous êtes mort</string>
     <string name="home_dungeon_complete_title">%1$s finie !</string>
-    <string name="home_expedition_complete_title">%1$s Expédition finie</string>
-    <string name="home_skill_session_complete_title">%1$s Session finie</string>
+    <string name="home_expedition_complete_title">%1$s Expédition terminée</string>
+    <string name="home_skill_session_complete_title">%1$s Session terminée</string>
     <string name="home_bones_buried_row">%1$s enterré(s)</string>
-    <string name="worker_sessions_complete_title">Ouvrier : %1$d sessions finies !</string>
+    <string name="worker_sessions_complete_title">Ouvrier : %1$d sessions terminées !</string>
     <string name="worker_boss_defeated_title">Ouvrier : %1$s vaincu !</string>
     <string name="worker_dungeon_died_title">Ouvrier : %1$s — mort</string>
-    <string name="worker_dungeon_complete_title">Ouvrier : %1$s finie !</string>
-    <string name="worker_skill_complete_title">Ouvrier : %1$s finie</string>
+    <string name="worker_dungeon_complete_title">Ouvrier : %1$s terminée !</string>
+    <string name="worker_skill_complete_title">Ouvrier : %1$s terminée</string>
     <string name="label_training">Entraînement</string>
     <string name="label_gathering_skills">Collecte</string>
     <string name="label_crafting_skills">Fabrication</string>
@@ -112,7 +112,7 @@
     <string name="duration_hours">%1$dh</string>
     <string name="duration_minutes">%1$dm</string>
     <string name="duration_seconds">%1$ds</string>
-    <string name="duration_complete">Finie</string>
+    <string name="duration_complete">Terminée</string>
     <string name="label_session_results">Résultats de la session</string>
     <string name="label_xp_gained">XP gagnés</string>
     <string name="label_items_collected">Articles collectés</string>
@@ -202,6 +202,8 @@
     <string name="format_level_xp">Niveau %1$d — %2$s XP</string>
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s pour atteindre le niveau %2$d</string>
+    <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
+    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s restante(s)</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -490,6 +492,7 @@
     <string name="settings_backup_no_folder">Aucun dossier sélectionné</string>
     <string name="settings_backup_choose">Choisir</string>
     <string name="settings_backup_frequency">Fréquence</string>
+    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
     <string name="settings_backup_off">Désactivé</string>
     <string name="settings_backup_hourly">chaque heure</string>
     <string name="settings_backup_daily">chaque jour</string>
@@ -717,8 +720,8 @@
     <string name="shop_search_hint">Chercher les objets</string>
     <string name="shop_filter_all">Tout</string>
     <string name="shop_order_default">Default</string> <!-- untranslated -->
-    <string name="shop_order_highest_amount">Quantity</string> <!-- untranslated -->
-    <string name="shop_order_highest_price">Price</string> <!-- untranslated -->
+    <string name="shop_order_highest_amount">Quantité</string>
+    <string name="shop_order_highest_price">Prix</string>
     <string name="shop_sell_blocked_equipped">%1$s est équipé. Déséquipez-le d\'abord pour le vendre.</string>
     <string name="shop_sell_blocked_reserved">%1$s est réservé pour une tâche en attente.</string>
     <string name="shop_sell_blocked_keep_one">Gardez votre dernière %1$s (Garder un objet de chaque est activé).</string>
@@ -2050,9 +2053,9 @@
     <string name="seasonal_bounty_gloom_wisps_hint">Disponible uniquement dans le Marais Creux</string>
     <string name="seasonal_bounty_gloom_ghouls_name">Éliminez les Goules des Tombes</string>
     <string name="seasonal_bounty_gloom_ghouls_hint">Disponible uniquement dans le Marais Creux</string>
-    <string name="seasonal_bounty_gloom_husks_name">Abattez les Horreurs de Paille</string>
+    <string name="seasonal_bounty_gloom_husks_name">Abattez les Horreurs Desséchées</string>
     <string name="seasonal_bounty_gloom_husks_hint">Disponible uniquement dans le Marais Creux</string>
-    <string name="seasonal_bounty_gloom_stalkers_name">Traquez les Rôdeurs de l\'Ombre</string>
+    <string name="seasonal_bounty_gloom_stalkers_name">Chassez les Traqueurs des Ombres</string>
     <string name="seasonal_bounty_gloom_stalkers_hint">Disponible uniquement dans le Bois Flétri</string>
     <string name="seasonal_bounty_gloom_wights_name">Renversez les Revenants des Tertres</string>
     <string name="seasonal_bounty_gloom_wights_hint">Disponible uniquement dans le Marais Creux (rare)</string>
@@ -2260,7 +2263,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Atteignez le niveau 99 pour obtenir le prestige (actuellement %1$d).</string>
     <string name="prestige_maxed_cap">Prestige maximum atteint. Vous avez obtenu tous les points que cette aptitude peut rapporter.</string>
-    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
+    <string name="skills_prestige_max">★×%1$d (Max)</string>
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Votre niveau %1$s sera réinitialisé à 1 et vous gagnerez %2$d points de prestige à dépenser dans l\'arbre d\'aptitude correspondant. L\'équipement qui ne répondra plus aux prérequis sera remplacé, et la progression non récupérée des quêtes quotidiennes de %1$s sera réinitialisée. Vous bénéficierez également de 2× l\'XP de %1$s pendant 48 heures pour accélérer votre remontée en niveau.</string>
     <string name="prestige_respec">Réinitialiser les points</string>

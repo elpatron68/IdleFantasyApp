@@ -202,6 +202,8 @@
     <string name="format_level_xp">Seviye %1$d — %2$s XP</string>
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">Seviye %2$d olmak için %1$s XP</string>
+    <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
+    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s kaldı</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -490,6 +492,7 @@
     <string name="settings_backup_no_folder">Klasör seçilmedi</string>
     <string name="settings_backup_choose">Seç</string>
     <string name="settings_backup_frequency">Yedekleme Sıklığı</string>
+    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
     <string name="settings_backup_off">Kapalı</string>
     <string name="settings_backup_hourly">Saatlik</string>
     <string name="settings_backup_daily">Günlük</string>

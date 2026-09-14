@@ -51,10 +51,10 @@
     <string name="enemy_ember_hound_name">Chien de Braise</string>
     <string name="enemy_cinder_colossus_name">Colosse d\'Escarbille</string>
     <string name="enemy_will_o_wisp_name">Feu Follet</string>
-    <string name="enemy_grave_ghoul_name">Goule de Tombe</string>
+    <string name="enemy_grave_ghoul_name">Goule des Tombes</string>
     <string name="enemy_husk_horror_name">Horreur Desséchée</string>
-    <string name="enemy_barrow_wight_name">Créature de Tertre</string>
-    <string name="enemy_shade_stalker_name">Traqueur d\'Ombre</string>
+    <string name="enemy_barrow_wight_name">Revenant des Tertres</string>
+    <string name="enemy_shade_stalker_name">Traqueur des Ombres</string>
     <string name="enemy_bone_colossus_name">Colosse d\'Os</string>
     <string name="enemy_dread_dullahan_name">Dullahan Redoutable</string>
     <string name="enemy_void_stalker_name">Traqueur du Vide</string>
