@@ -202,6 +202,8 @@
     <string name="format_level_xp">مستوى %1$d — %2$s نقاط</string>
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s نقاط للمستوى %2$d</string>
+    <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
+    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s متبقي</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -490,6 +492,7 @@
     <string name="settings_backup_no_folder">No folder selected</string> <!-- untranslated -->
     <string name="settings_backup_choose">Choose</string> <!-- untranslated -->
     <string name="settings_backup_frequency">Frequency</string> <!-- untranslated -->
+    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
     <string name="settings_backup_off">Off</string> <!-- untranslated -->
     <string name="settings_backup_hourly">Hourly</string> <!-- untranslated -->
     <string name="settings_backup_daily">Daily</string> <!-- untranslated -->

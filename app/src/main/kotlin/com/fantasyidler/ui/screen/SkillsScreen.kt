@@ -103,6 +103,7 @@ import com.fantasyidler.ui.viewmodel.SkillsUiState
 import com.fantasyidler.ui.viewmodel.SkillsViewModel
 import com.fantasyidler.ui.viewmodel.xpProgressFraction
 import com.fantasyidler.ui.viewmodel.nextLevelThreshold
+import com.fantasyidler.ui.viewmodel.xpToMaxLevel
 import com.fantasyidler.ui.viewmodel.xpToNextLevel
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.toTitleCase
@@ -294,6 +295,10 @@ fun SkillActivitySheet(
         // sheet (issue #1330). Back press and scrim tap fire onDismissRequest while the sheet
         // is still visible; a swipe-down has already settled hidden and always closes.
         val sheetBackStep = remember { mutableStateOf<(() -> Unit)?>(null) }
+        val onSwipeDismissed = {
+            viewModel.dismissSheet()
+            craftingViewModel.dismissRecipe()
+        }
         ModalBottomSheet(
             onDismissRequest = {
                 val stepBack = sheetBackStep.value
@@ -345,9 +350,9 @@ fun SkillActivitySheet(
                 )
             }
             if (sheet is SheetState.Mercantile || sheet is SheetState.Farming) {
-                ScaledSheetContent { dailyBanner() }
+                ScaledSheetContent(sheetState, onSwipeDismissed) { dailyBanner() }
             }
-            ScaledSheetContent {
+            ScaledSheetContent(sheetState, onSwipeDismissed) {
                 when (sheet) {
                     is SheetState.Mining -> MiningSheet(
                         guildDailyButton = dailyBanner,
@@ -703,9 +708,11 @@ private fun SkillsTabContent(
                         )
                         else          -> GameStrings.itemName(context, session.activityKey)
                     }.takeIf { session.activityKey.isNotEmpty() },
+                    startedAt     = session.startedAt,
                     endsAt        = session.endsAt,
                     completed     = session.completed,
                     showEndTime   = state.showSessionEndTime,
+                    bossDurationMinutes = if (session.skillName == "boss") viewModel.bossDurationMinutes(session.activityKey) else null,
                     onAbandon     = viewModel::abandonSession,
                     onDebugFinish = viewModel::debugFinishSession,
                 )
@@ -808,9 +815,11 @@ private fun SkillsTabContent(
 private fun ActiveSessionBanner(
     skillName: String,
     activityLabel: String?,
+    startedAt: Long,
     endsAt: Long,
     completed: Boolean,
     showEndTime: Boolean = true,
+    bossDurationMinutes: Int? = null,
     onAbandon: () -> Unit,
     onDebugFinish: () -> Unit = {},
 ) {
@@ -855,7 +864,11 @@ private fun ActiveSessionBanner(
             Spacer(Modifier.height(8.dp))
             if (!completed) {
                 Text(
-                    text  = remember(now, showEndTime) { endsAt.toCountdown(context, showEndTime) },
+                    text  = remember(now, showEndTime) {
+                        if (bossDurationMinutes != null)
+                            bossFightCountdown(context, startedAt, endsAt, bossDurationMinutes, now, showEndTime)
+                        else endsAt.toCountdown(context, showEndTime)
+                    },
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
@@ -1010,10 +1023,14 @@ internal fun SkillRow(
                             color = MaterialTheme.colorScheme.primary,
                         )
                     } else {
-                        val xpText = if (xpToNextLevel(xp) > 0L)
-                            "${xp.formatXp()} / ${nextLevelThreshold(xp).formatXp()} XP"
-                        else
-                            "${xp.formatXp()} XP"
+                        val remainingToCap = xpToMaxLevel(xp)
+                        val xpText = when {
+                            remainingToCap in 1 until 100_000L ->
+                                stringResource(R.string.xp_to_99, remainingToCap.formatXp())
+                            xpToNextLevel(xp) > 0L ->
+                                "${xp.formatXp()} / ${nextLevelThreshold(xp).formatXp()} XP"
+                            else -> "${xp.formatXp()} XP"
+                        }
                         Text(
                             text  = xpText,
                             style = MaterialTheme.typography.bodySmall,
