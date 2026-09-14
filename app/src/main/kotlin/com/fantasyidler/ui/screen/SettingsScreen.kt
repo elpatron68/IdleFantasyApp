@@ -87,6 +87,7 @@ fun SettingsScreen(
     val backupFolderUri  by viewModel.backupFolderUri.collectAsState()
     val backupFrequency  by viewModel.backupFrequency.collectAsState()
     val viewerUrl        by viewModel.viewerUrl.collectAsState()
+    val backupCount      by viewModel.backupCount.collectAsState()
     val backupStatus     by viewModel.backupStatus.collectAsState()
     var notificationsEnabled by remember { mutableStateOf(false) }
     var isViewerUploading  by remember { mutableStateOf(false) }
@@ -624,6 +625,42 @@ fun SettingsScreen(
                         }
                     }
                 }
+            )
+
+            SettingsRow(
+                title = stringResource(R.string.settings_backup_count),
+                subtitle = "",
+                trailing = {
+                    var countExpanded by remember { mutableStateOf(false) }
+                    ExposedDropdownMenuBox(
+                        expanded = countExpanded,
+                        onExpandedChange = { countExpanded = it },
+                    ) {
+                        OutlinedTextField(
+                            value = backupCount.toString(),
+                            onValueChange = {},
+                            readOnly = true,
+                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = countExpanded) },
+                            modifier = Modifier.menuAnchor().width(150.dp),
+                            textStyle = MaterialTheme.typography.bodySmall,
+                            singleLine = true,
+                        )
+                        ExposedDropdownMenu(
+                            expanded = countExpanded,
+                            onDismissRequest = { countExpanded = false },
+                        ) {
+                            listOf(1, 3, 5, 10, 30).forEach { count ->
+                                DropdownMenuItem(
+                                    text = { Text(count.toString()) },
+                                    onClick = {
+                                        viewModel.setBackupCount(count)
+                                        countExpanded = false
+                                    },
+                                )
+                            }
+                        }
+                    }
+                },
             )
 
             val statusSubtitle = if (backupStatus.lastBackupAt == 0L) {
