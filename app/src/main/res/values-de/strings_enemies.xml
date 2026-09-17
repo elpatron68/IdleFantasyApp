@@ -4,7 +4,7 @@
     <string name="enemy_giant_rat_name">Riesenratte</string>
     <string name="enemy_goblin_name">Kobold</string>
     <string name="enemy_skeleton_name">Skelett</string>
-    <string name="enemy_zombie_name">Zombie</string> <!-- untranslated -->
+    <string name="enemy_zombie_name">Zombie</string>
     <string name="enemy_bandit_name">Räuber</string>
     <string name="enemy_guard_name">Wache</string>
     <string name="enemy_dark_wizard_name">Dunkler Zauberer</string>
@@ -23,7 +23,7 @@
     <string name="enemy_cow_name">Kuh</string>
     <string name="enemy_fire_giant_name">Feuerriese</string>
     <string name="enemy_ancient_guardian_name">Uralter Wächter</string>
-    <string name="enemy_lich_name">Lich</string> <!-- untranslated -->
+    <string name="enemy_lich_name">Lich</string>
     <string name="enemy_cave_troll_name">Höhlentroll</string>
     <string name="enemy_mine_spider_name">Minenspinne</string>
     <string name="enemy_rock_golem_name">Steingolem</string>

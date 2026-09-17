@@ -10,11 +10,11 @@
     <string name="quest_weekly_runite_miner_name">Tiefenbergmann</string>
     <string name="quest_weekly_runite_miner_desc">Baut diese Woche 150 Runiterz ab.</string>
     <string name="quest_weekly_oak_logger_name">Eichenfäller</string>
-    <string name="quest_weekly_oak_logger_desc">Fällt diese Woche 600 Eichenholzscheite.</string>
+    <string name="quest_weekly_oak_logger_desc">Fällt diese Woche 600 Eichenstämme.</string>
     <string name="quest_weekly_yew_logger_name">Eibenfäller</string>
-    <string name="quest_weekly_yew_logger_desc">Fällt diese Woche 300 Eibenholzscheite.</string>
+    <string name="quest_weekly_yew_logger_desc">Fällt diese Woche 300 Eibenstämme.</string>
     <string name="quest_weekly_magic_logger_name">Arkaner Holzfäller</string>
-    <string name="quest_weekly_magic_logger_desc">Fällt diese Woche 150 Magische Holzscheite.</string>
+    <string name="quest_weekly_magic_logger_desc">Fällt diese Woche 150 Magische Baumstämme.</string>
     <string name="quest_weekly_trout_fisher_name">Flussangler</string>
     <string name="quest_weekly_trout_fisher_desc">Fangt diese Woche 600 Forellen.</string>
     <string name="quest_weekly_swordfish_fisher_name">Tiefseefischer</string>

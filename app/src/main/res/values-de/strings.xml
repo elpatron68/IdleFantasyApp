@@ -203,7 +203,7 @@
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s EP bis Level %2$d</string>
     <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
-    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
+    <string name="xp_to_99">%1$s XP bis 99</string>
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s verbleibend</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -492,7 +492,7 @@
     <string name="settings_backup_no_folder">Kein Verzeichnis ausgewählt</string>
     <string name="settings_backup_choose">Auswählen</string>
     <string name="settings_backup_frequency">Häufigkeit</string>
-    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
+    <string name="settings_backup_count">Anzahl der Backups</string>
     <string name="settings_backup_off">Aus</string>
     <string name="settings_backup_hourly">Stündlich</string>
     <string name="settings_backup_daily">Täglich</string>
@@ -641,10 +641,10 @@
     <string name="profile_food_dungeon">Essen (Verlies)</string>
     <string name="profile_no_food">Keine gekochten Lebensmittel im Inventar</string>
     <string name="profile_food_threshold">Beginnt zu essen bei</string>
-    <string name="profile_food_order">Eating order</string> <!-- untranslated -->
-    <string name="food_order_descending">Highest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_ascending">Lowest Heal Value First</string> <!-- untranslated -->
-    <string name="food_order_least_quantity">Least Quantity First</string> <!-- untranslated -->
+    <string name="profile_food_order">Reihenfolge der Nahrung</string>
+    <string name="food_order_descending">Zuerst höchster Heilwert</string>
+    <string name="food_order_ascending">Zuerst niedrigster Heilwert</string>
+    <string name="food_order_least_quantity">Zuerst niedrigste Menge</string>
     <string name="profile_combat_style">Kampfstil</string>
     <!-- Translator note: %1$d = quantity, %2$d = heal value -->
     <string name="profile_food_desc">×%1$d  •  heilt %2$d LP</string>
@@ -720,7 +720,7 @@
     <string name="shop_keep_one_toggle">Eins von jedem Gegenstand behalten</string>
     <string name="shop_search_hint">Gegenstand suchen</string>
     <string name="shop_filter_all">Alles</string>
-    <string name="shop_order_default">Default</string> <!-- untranslated -->
+    <string name="shop_order_default">Default</string>
     <string name="shop_order_highest_amount">Anzahl</string>
     <string name="shop_order_highest_price">Preis</string>
     <string name="shop_sell_blocked_equipped">%1$s ist ausgerüstet. Vor dem Verkauf muss es abgelegt werden.</string>
@@ -1187,7 +1187,7 @@
     <string name="house_error_max_rooms">Dein Haus hat die maximale Anzahl an Zimmern erreicht.</string>
     <string name="house_error_max_size">Dieser Raum kann nicht größer werden.</string>
     <string name="house_stored_count">Gelagert: %1$d</string>
-    <string name="house_level_short">Lv %1$d</string> <!-- untranslated -->
+    <string name="house_level_short">Lv %1$d</string>
     <string name="house_store_hint">Gelagerte Möbel bleiben unbeschädigt und können später wieder aufgestellt werden.</string>
     <string name="house_store_item">Einlagern</string>
     <string name="house_room_n">Raum %1$d</string>
@@ -1700,7 +1700,7 @@
     <string name="armory_how_to_obtain">Wie zu erhalten</string>
     <string name="armory_no_stats">Keine Statusboni.</string>
     <string name="armory_filter_all">Alle</string>
-    <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
+    <string name="armory_filter_missing">Fehlt noch</string>
     <string name="armory_filter_weapons">Waffen</string>
     <string name="armory_filter_armor">Rüstung</string>
     <string name="armory_filter_accessories">Schmuck</string>
@@ -1983,9 +1983,9 @@
     <string name="seasonal_minigame_bonfire_rhythm_name">Lagerfeuer-Rhythmus</string>
     <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Banner der Sonnenwende-Sommerturm 2026</string>
     <string name="seasonal_bounty_sunspire_firewood_name">Bringt Feuerholz für das Lagerfeuer</string>
-    <string name="seasonal_bounty_sunspire_firewood_hint">Hackt Eichen-Scheite — Holzfällerei</string>
+    <string name="seasonal_bounty_sunspire_firewood_hint">Hackt Eichenstämme — Holzfällerei</string>
     <string name="seasonal_bounty_sunspire_kindling_name">Sammelt Anzündmaterial für das Lagerfeuer</string>
-    <string name="seasonal_bounty_sunspire_kindling_hint">Hackt Weiden-Scheite — Holzfällerei</string>
+    <string name="seasonal_bounty_sunspire_kindling_hint">Hackt Weidenstämme — Holzfällerei</string>
     <string name="seasonal_bounty_sunspire_sunore_name">Grabt nach Gold um den Sonnenturm zu vergolden	</string>
     <string name="seasonal_bounty_sunspire_sunore_hint">Grabt nach Gold — Bergbau</string>
     <string name="seasonal_bounty_sunspire_draughts_name">Braut Stärke-Zaubertrank</string>
@@ -2014,7 +2014,7 @@
     <string name="seasonal_event_gloomharvest_2026_banner">Teilgenommen an der Düsterernte 2026</string>
     <string name="seasonal_minigame_lantern_lights_name">Laternenlichter</string>
     <string name="seasonal_minigame_sequence_hint">Merkt euch die Laternen und tippt sie in der richtigen Reihenfolge an. Erreicht Runde %1$d von %2$d für einen Token!</string>
-    <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
+    <string name="seasonal_minigame_sequence_success">Gut erinnert! +1 Token.</string>
     <string name="seasonal_minigame_sequence_round">Runde %1$d / %2$d</string>
     <string name="seasonal_minigame_watch">Gut aufpassen!</string>
     <string name="seasonal_minigame_your_turn">Ihr seid dran!</string>
@@ -2035,7 +2035,7 @@
     <string name="seasonal_bounty_gloom_corn_name">Holt die Maisernte ein</string>
     <string name="seasonal_bounty_gloom_corn_hint">Baut Mais an (Landwirtschaft)</string>
     <string name="seasonal_bounty_gloom_maples_name">Hackt Ahornholz für die Feuer</string>
-    <string name="seasonal_bounty_gloom_maples_hint">Hackt Ahorn-Scheite (Holzfällerei)</string>
+    <string name="seasonal_bounty_gloom_maples_hint">Hackt Ahornstämme (Holzfällerei)</string>
     <string name="seasonal_bounty_gloom_swordfish_name">Fangt Schwertfische für das Festmahl</string>
     <string name="seasonal_bounty_gloom_swordfish_hint">Fangt rohe Schwertfische (Fischen)</string>
     <string name="seasonal_bounty_gloom_mithril_name">Grabt Mithril, um die Tore zu schützen</string>
@@ -2166,7 +2166,7 @@
     <string name="pet_ember_moth_desc">So lange zu den Flammen hingezogen, dass sie selber eine wurde. Ihre Flügel schimmern in der verbleibenden Hitze.</string>
     <string name="pet_herb_wisp_name">Kräutergeist</string>
     <string name="pet_herb_wisp_desc">Ein aus den Dämpfen tausender gebrauter Tränke geborener Geist. Seine Anwesenheit schärft deinen Verstand.</string>
-    <string name="pet_rune_sprite_name">Rune Sprite</string> <!-- untranslated -->
+    <string name="pet_rune_sprite_name">Runenelfe</string>
     <string name="pet_rune_sprite_desc">Ein kristallieisertes Fragment magischer Energie, das dem Runenherstellungsaltar entfliehen konnte.</string>
     <string name="pet_gem_golem_name">Edelsteingolem</string>
     <string name="pet_gem_golem_desc">Eine kleine, aus Edelsteinscherben und Polierstaub geformte Kreatur. Erhält die Schärfe deiner Werkzeuge.</string>
@@ -2176,7 +2176,7 @@
     <string name="pet_forge_imp_desc">Ein boshafter, in der Schmiede lebender Kobold. Seine hitzegehärtete Haut ist unempfindlich gegen Verbrennungen.</string>
     <string name="pet_coin_drake_name">Münzdrache</string>
     <string name="pet_coin_drake_desc">Ein Drachenküken, das mit einer Diät aus Goldmünzen aufgezogen wurde. Es hat ein unschlagbares Gespür für Profit.</string>
-    <string name="pet_timber_sprite_name">Timber Sprite</string> <!-- untranslated -->
+    <string name="pet_timber_sprite_name">Holzelfe</string>
     <string name="pet_timber_sprite_desc">Ein Holzgeist, der aus Sägemehl und Holz erwacht ist. Er weiß genau, wo jeder Nagel hingehört.</string>
     <string name="pet_juggling_imp_name">Jonglierender Kobold</string>
     <string name="pet_juggling_imp_desc" formatted="false">A verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-EP um 3%.</string>
@@ -2275,15 +2275,15 @@
     <string name="prestige_respec_confirm_message">All purchased %1$s upgrades will be refunded for their full point cost. You can reset this skill\'s points again in 24 hours.</string> <!-- untranslated -->
     <!-- Translator note: %1$s = skill name -->
     <string name="prestige_respec_done">%1$s prestige points refunded.</string> <!-- untranslated -->
-    <string name="prestige_respec_on_cooldown">Points were reset recently. Try again later.</string> <!-- untranslated -->
+    <string name="prestige_respec_on_cooldown">Deine Punkte wurden kürzlich zurückgesetzt. Versuche es später noch einmal.</string>
     <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Kosten: %1$d Punkte</string>
     <string name="prestige_node_owned">Gekauft</string>
-    <string name="prestige_path_auto_label">Earned by prestiging</string> <!-- untranslated -->
-    <string name="prestige_node_auto_earned">Earned at prestige %1$d.</string> <!-- untranslated -->
-    <string name="prestige_node_auto_pending">Unlocks automatically at prestige %1$d.</string> <!-- untranslated -->
-    <string name="prestige_button_xp_only">Prestige now for the next XP tier</string> <!-- untranslated -->
-    <string name="prestige_confirm_message_xp_only">Your %1$s level will reset to 1 and you\'ll unlock the next automatic XP tier. Equipment that no longer meets its requirements will be swapped out, and unclaimed %1$s daily quest progress resets. You\'ll also gain 2x %1$s XP for 48 hours to speed the climb back up.</string> <!-- untranslated -->
+    <string name="prestige_path_auto_label">Verdient durch Erhöhung des Ansehens</string>
+    <string name="prestige_node_auto_earned">Verdient durch Ansehen %1$d.</string>
+    <string name="prestige_node_auto_pending">Automatisch frei bei Ansehen %1$d.</string>
+    <string name="prestige_button_xp_only">Erhöhe dein Ansehen für den nächsten XP Rang.</string>
+    <string name="prestige_confirm_message_xp_only">Dein %1$s Level wird auf 1 gesetzt und der nächste XP Rang wird automatisch geöffnet. Ausrüstung, die nicht mehr passt wird ausgetauscht und  nicht geltend gemachte Fortschritte der %1$s Tagesquest werden zurückgesetzt. Du bekommst auch 2x %1$s XP für 48 Stunden um schneller wieder aufzusteigen.</string>
     <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_only">Nur %1$s</string>
     <!-- Translator note: %1$s = list of race names -->

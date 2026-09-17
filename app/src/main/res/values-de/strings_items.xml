@@ -89,8 +89,8 @@
     <string name="item_raw_lobster_desc">Roher Hummer. Vor dem Verzehr kochen.</string>
     <string name="item_raw_swordfish_name">Roher Schwertfisch</string>
     <string name="item_raw_swordfish_desc">Roher Schwertfisch. Vor dem Verzehr kochen.</string>
-    <string name="item_raw_monkfish_name">Roher Anglerfisch</string>
-    <string name="item_raw_monkfish_desc">Roher Anglerfisch. Vor dem Verzehr kochen.</string>
+    <string name="item_raw_monkfish_name">Roher Seeteufel</string>
+    <string name="item_raw_monkfish_desc">Roher Seeteufel. Vor dem Verzehr kochen.</string>
     <string name="item_raw_shark_name">Roher Hai</string>
     <string name="item_raw_shark_desc">Roher Hai. Vor dem Verzehr kochen.</string>
     <string name="item_raw_sea_turtle_name">Rohe Meeresschildkröte</string>
@@ -117,8 +117,8 @@
     <string name="item_lobster_desc">Gekochter Hummer. Stellt eine beträchtliche Menge LP wieder her.</string>
     <string name="item_swordfish_name">Gekochter Schwertfisch</string>
     <string name="item_swordfish_desc">Gekochter Schwertfisch. Stellt eine beträchtliche Menge LP wieder her.</string>
-    <string name="item_monkfish_name">Gekochter Anglerfisch</string>
-    <string name="item_monkfish_desc">Gekochter Anglerfisch. Stellt eine beträchtliche Menge LP wieder her.</string>
+    <string name="item_monkfish_name">Gekochter Seeteufel</string>
+    <string name="item_monkfish_desc">Gekochter Seeteufel. Stellt eine beträchtliche Menge LP wieder her.</string>
     <string name="item_shark_name">Gekochter Hai</string>
     <string name="item_shark_desc">Gekochter Hai. Stellt eine große Menge LP wieder her.</string>
     <string name="item_sea_turtle_name">Gekochte Meeresschildkröte</string>
@@ -475,9 +475,9 @@
     <string name="item_diamond_necklace_name">Diamantcollier</string>
     <string name="item_ancient_treasure_name">Antiker Schatz</string>
     <string name="item_seaweed_name">Seetang</string>
-    <string name="item_old_boot_name">Old Boot</string> <!-- untranslated -->
+    <string name="item_old_boot_name">Alter Schuh</string>
     <string name="item_pearl_name">Perle</string>
-    <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
+    <string name="item_black_pearl_name">Schwarze Perle</string>
     <string name="item_nature_rune_name">Naturrune</string>
     <string name="item_herb_name">Kraut</string>
     <string name="item_mahogany_log_name">MahagonischeitLog</string>

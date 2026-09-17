@@ -480,10 +480,10 @@
     <string name="quest_daily_fish_lobster_objective">Fangt 60 Hummer.</string>
     <string name="quest_daily_fish_swordfish_objective">Fangt 30 Schwertfisch.</string>
     <string name="quest_daily_fish_shark_objective">Fangt 15 Haie.</string>
-    <string name="quest_daily_wc_oak_objective">Chop 100 oak logs.</string> <!-- untranslated -->
-    <string name="quest_daily_wc_willow_objective">Chop 70 willow logs.</string> <!-- untranslated -->
-    <string name="quest_daily_wc_yew_objective">Chop 25 yew logs.</string> <!-- untranslated -->
-    <string name="quest_daily_wc_magic_objective">Chop 10 magic logs.</string> <!-- untranslated -->
+    <string name="quest_daily_wc_oak_objective">Hacke 100 Eichenstämme.</string>
+    <string name="quest_daily_wc_willow_objective">Hacke 70 Weidenstämme.</string>
+    <string name="quest_daily_wc_yew_objective">Hacke 25 Eibenstämme.</string>
+    <string name="quest_daily_wc_magic_objective">Hacke 10 magische Baumstämme.</string>
     <string name="quest_daily_smith_iron_objective">Schmiedet 40 Eisenbarren.</string>
     <string name="quest_daily_smith_mithril_objective">Schmiedet 15 Mithrilbarren.</string>
     <string name="quest_daily_smith_adamantite_objective">Schmiedet 10 Adamantitbarren.</string>
