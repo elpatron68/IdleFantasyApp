@@ -248,7 +248,15 @@ internal fun EquipPickerSheet(
         } else {
             items(
                 candidates.sortedWith(
-                    compareBy({ it.requirements.values.maxOrNull() ?: 0 }, { it.name })
+                    compareBy(
+                        { it.requirements.values.maxOrNull() ?: 0 },
+                        {
+                            it.attackBonus + it.strengthBonus + it.defenseBonus +
+                                (it.rangedAttackBonus ?: 0) + (it.rangedStrengthBonus ?: 0) +
+                                (it.magicAttackBonus ?: 0) + (it.magicDamageBonus ?: 0)
+                        },
+                        { it.name },
+                    )
                 )
             ) { item ->
                 val xpLabel = weaponXpLabel(item.combatStyle, context).takeIf { item.slot == EquipSlot.WEAPON || EquipSlot.combatStyleForSlot(item.slot) != null }

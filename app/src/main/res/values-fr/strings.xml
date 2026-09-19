@@ -66,8 +66,8 @@
     <string name="label_bosses">Boss</string>
     <string name="label_by_location">Par lieu</string>
     <string name="bestiary_not_encountered">Pas encore rencontré</string>
-    <string name="bestiary_filter_all">All</string> <!-- untranslated -->
-    <string name="bestiary_filter_missing">Missing</string> <!-- untranslated -->
+    <string name="bestiary_filter_all">Tout</string>
+    <string name="bestiary_filter_missing">Manquant</string>
     <string name="bestiary_qty_header">Qté</string>
     <string name="bestiary_chance_header">Chance</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
@@ -203,7 +203,7 @@
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s pour atteindre le niveau %2$d</string>
     <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
-    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
+    <string name="xp_to_99">%1$s XP à 99</string>
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s restante(s)</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -492,7 +492,7 @@
     <string name="settings_backup_no_folder">Aucun dossier sélectionné</string>
     <string name="settings_backup_choose">Choisir</string>
     <string name="settings_backup_frequency">Fréquence</string>
-    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
+    <string name="settings_backup_count">Nombre de sauvegardes</string>
     <string name="settings_backup_off">Désactivé</string>
     <string name="settings_backup_hourly">chaque heure</string>
     <string name="settings_backup_daily">chaque jour</string>
@@ -719,7 +719,7 @@
     <string name="shop_keep_one_toggle">Garder un objet de chaque</string>
     <string name="shop_search_hint">Chercher les objets</string>
     <string name="shop_filter_all">Tout</string>
-    <string name="shop_order_default">Default</string> <!-- untranslated -->
+    <string name="shop_order_default">Par défaut</string>
     <string name="shop_order_highest_amount">Quantité</string>
     <string name="shop_order_highest_price">Prix</string>
     <string name="shop_sell_blocked_equipped">%1$s est équipé. Déséquipez-le d\'abord pour le vendre.</string>
@@ -1699,7 +1699,7 @@
     <string name="armory_how_to_obtain">Comment obtenir</string>
     <string name="armory_no_stats">Aucun bonus de statistiques.</string>
     <string name="armory_filter_all">Tous</string>
-    <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
+    <string name="armory_filter_missing">Manquant</string>
     <string name="armory_filter_weapons">Armes</string>
     <string name="armory_filter_armor">Armure</string>
     <string name="armory_filter_accessories">Accessoires</string>
@@ -2242,7 +2242,10 @@
     <string name="carnival_stat_atk">ATQ +%1$d</string>
     <string name="carnival_stat_str">FOR +%1$d</string>
     <string name="carnival_stat_def">DEF +%1$d</string>
-    <string name="carnival_stat_yield">Rendement</string>
+    <!-- Translator note: %1$s = "${skill name} ", %2$d = percentage bonus -->
+    <string name="carnival_stat_xp">%1$sXP +%2$d%%</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = "${skill name} ", %2$d = percentage bonus -->
+    <string name="carnival_stat_yield">%1$sYield +%2$d%%</string> <!-- untranslated -->
     <string name="carnival_potion_letter_green">V</string>
     <string name="carnival_potion_letter_blue">B</string>
     <string name="carnival_potion_letter_red">R</string>

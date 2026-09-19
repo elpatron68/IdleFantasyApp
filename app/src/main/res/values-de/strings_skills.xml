@@ -60,8 +60,8 @@
     <!-- ===== Tree names ===== -->
     <string name="tree_tree_name">Baum</string>
     <string name="tree_oak_tree_name">Eiche</string>
-    <string name="tree_willow_tree_name">Weidenbaum</string>
-    <string name="tree_maple_tree_name">Ahornbaum</string>
+    <string name="tree_willow_tree_name">Weide</string>
+    <string name="tree_maple_tree_name">Ahorn</string>
     <string name="tree_yew_tree_name">Eibe</string>
     <string name="tree_magic_tree_name">Magischer Baum</string>
     <string name="tree_redwood_tree_name">Mammutbaum</string>

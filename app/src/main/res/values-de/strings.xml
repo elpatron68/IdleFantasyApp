@@ -492,7 +492,7 @@
     <string name="settings_backup_no_folder">Kein Verzeichnis ausgewählt</string>
     <string name="settings_backup_choose">Auswählen</string>
     <string name="settings_backup_frequency">Häufigkeit</string>
-    <string name="settings_backup_count">Anzahl der Backups</string>
+    <string name="settings_backup_count">Anzahl der Sicherungen</string>
     <string name="settings_backup_off">Aus</string>
     <string name="settings_backup_hourly">Stündlich</string>
     <string name="settings_backup_daily">Täglich</string>
@@ -1394,7 +1394,7 @@
     <!-- Prestige achievements -->
     <string name="achievement_prestige_first_name">Erster Neustart</string>
     <string name="achievement_prestige_first_desc">Erhöht das Prestige einer beliebigen Fähigkeit zum ersten Mal</string>
-    <string name="achievement_prestige_node_first_name">Branching Out</string> <!-- untranslated -->
+    <string name="achievement_prestige_node_first_name">Sich verzweigend</string>
     <string name="achievement_prestige_node_first_desc">Kaufe deine erste Verbesserung in einem Prestige Baum</string>
     <string name="achievement_prestige_path_complete_name">Am Ende des Pfades</string>
     <string name="achievement_prestige_path_complete_desc">Kaufe jede Verbesserung in einem Prestige Pfad</string>
@@ -1802,7 +1802,7 @@
     <string name="bonus_combined_xp">EP gesamt</string>
     <string name="bonus_yield">+%1$d%% Ausbeute</string>
     <string name="bonus_boost">+%1$d%% Verstärkung</string>
-    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
+    <string name="bonus_agility_prestige_detail">Wegen Prestige: %1$dm Sitzungen mit Level %2$d werden %3$dm</string>
     <string name="bonus_coin_return">+%1$d%% Münzrückgabe</string>
     <string name="bonus_tower">Turm</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% günstigere Gebäude-Verbesserungskosten pro Level</string>
@@ -1983,9 +1983,9 @@
     <string name="seasonal_minigame_bonfire_rhythm_name">Lagerfeuer-Rhythmus</string>
     <string name="seasonal_reward_sunspire_solstice_2026_100_desc">Banner der Sonnenwende-Sommerturm 2026</string>
     <string name="seasonal_bounty_sunspire_firewood_name">Bringt Feuerholz für das Lagerfeuer</string>
-    <string name="seasonal_bounty_sunspire_firewood_hint">Hackt Eichenstämme — Holzfällerei</string>
+    <string name="seasonal_bounty_sunspire_firewood_hint">Fällt Eichenstämme — Holzfällerei</string>
     <string name="seasonal_bounty_sunspire_kindling_name">Sammelt Anzündmaterial für das Lagerfeuer</string>
-    <string name="seasonal_bounty_sunspire_kindling_hint">Hackt Weidenstämme — Holzfällerei</string>
+    <string name="seasonal_bounty_sunspire_kindling_hint">Fällt Weidenstämme — Holzfällerei</string>
     <string name="seasonal_bounty_sunspire_sunore_name">Grabt nach Gold um den Sonnenturm zu vergolden	</string>
     <string name="seasonal_bounty_sunspire_sunore_hint">Grabt nach Gold — Bergbau</string>
     <string name="seasonal_bounty_sunspire_draughts_name">Braut Stärke-Zaubertrank</string>
@@ -2034,8 +2034,8 @@
     <string name="seasonal_bounty_gloom_pumpkins_hint">Baut Kürbisse an (Landwirtschaft)</string>
     <string name="seasonal_bounty_gloom_corn_name">Holt die Maisernte ein</string>
     <string name="seasonal_bounty_gloom_corn_hint">Baut Mais an (Landwirtschaft)</string>
-    <string name="seasonal_bounty_gloom_maples_name">Hackt Ahornholz für die Feuer</string>
-    <string name="seasonal_bounty_gloom_maples_hint">Hackt Ahornstämme (Holzfällerei)</string>
+    <string name="seasonal_bounty_gloom_maples_name">Hackt Ahornholz für Feuer</string>
+    <string name="seasonal_bounty_gloom_maples_hint">Fällt Ahornstämme (Holzfällerei)</string>
     <string name="seasonal_bounty_gloom_swordfish_name">Fangt Schwertfische für das Festmahl</string>
     <string name="seasonal_bounty_gloom_swordfish_hint">Fangt rohe Schwertfische (Fischen)</string>
     <string name="seasonal_bounty_gloom_mithril_name">Grabt Mithril, um die Tore zu schützen</string>
@@ -2179,7 +2179,7 @@
     <string name="pet_timber_sprite_name">Holzelfe</string>
     <string name="pet_timber_sprite_desc">Ein Holzgeist, der aus Sägemehl und Holz erwacht ist. Er weiß genau, wo jeder Nagel hingehört.</string>
     <string name="pet_juggling_imp_name">Jonglierender Kobold</string>
-    <string name="pet_juggling_imp_desc" formatted="false">A verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-EP um 3%.</string>
+    <string name="pet_juggling_imp_desc" formatted="false">Ein verspielter Kobold, der deine Sorgen wegjongliert. Er erhöht jedes Fähigkeiten-EP um 3%.</string>
     <string name="pet_tower_pet_name">Steinwächter</string>
     <string name="pet_tower_pet_desc">Ein uralter Steingolem, der die Geheimnisse des Turms bewacht. Erhöht Kampf-EP.</string>
     <string name="pet_solstice_sprite_name">Solstice Sprite</string> <!-- untranslated -->
@@ -2243,7 +2243,10 @@
     <string name="carnival_stat_atk">ANG +%1$d</string>
     <string name="carnival_stat_str">STÄ +%1$d</string>
     <string name="carnival_stat_def">VER +%1$d</string>
-    <string name="carnival_stat_yield">Ertrag</string>
+    <!-- Translator note: %1$s = "${skill name} ", %2$d = percentage bonus -->
+    <string name="carnival_stat_xp">%1$sXP +%2$d%%</string> <!-- untranslated -->
+    <!-- Translator note: %1$s = "${skill name} ", %2$d = percentage bonus -->
+    <string name="carnival_stat_yield">%1$sYield +%2$d%%</string> <!-- untranslated -->
     <string name="carnival_potion_letter_green">G</string>
     <string name="carnival_potion_letter_blue">B</string>
     <string name="carnival_potion_letter_red">R</string>
@@ -2264,7 +2267,7 @@
     <!-- Translator note: %1$d = current skill level -->
     <string name="prestige_requires_99">Erreiche Level 99 um einen Prestige durchzuführen (aktuell %1$d).</string>
     <string name="prestige_maxed_cap">Maximales Prestige Level erreicht. Jeder Punkt, den man in dieser Fähigkeit erlangen kann ist deiner.</string>
-    <string name="skills_prestige_max">★×%1$d (Max)</string> <!-- untranslated -->
+    <string name="skills_prestige_max">★×%1$d (Max)</string>
     <!-- Translator note: %1$s = skill name, %2$d = points awarded -->
     <string name="prestige_confirm_message_points">Dein %1$s Level wird auf 1 zurückgesetzt und du erhältst %2$d Prestige Punkte, welche du in dem Fähigkeiten-Baum ausgeben kannst. Ausrüstung, für die du nicht mehr die Bedingungen erfüllst, wird ausgetauscht, und nicht eingeforderter %1$s Fortschritt täglicher Herausforderungen wird zurückgesetzt. Zusätzlich bekommst du 2x %1$s EP für 48 Stunden, um deinen Fortschritt zu beschleunigen.</string>
     <string name="prestige_respec">Punkte zurücksetzen</string>
@@ -2272,9 +2275,9 @@
     <string name="prestige_respec_available_in">Du kannst deine Punkte erst in %1$s zurücksetzen</string>
     <string name="prestige_respec_confirm_title">Prestige Punkte zurücksetzen?</string>
     <!-- Translator note: %1$s = skill name -->
-    <string name="prestige_respec_confirm_message">All purchased %1$s upgrades will be refunded for their full point cost. You can reset this skill\'s points again in 24 hours.</string> <!-- untranslated -->
+    <string name="prestige_respec_confirm_message">Für alle erworbenen %1$s Verbesserungen werden die vollen Punkte zurückerstattet. Die Punkte dieser Fähigkeit können in 24 Stunden wieder zurückgesetzt werden.</string>
     <!-- Translator note: %1$s = skill name -->
-    <string name="prestige_respec_done">%1$s prestige points refunded.</string> <!-- untranslated -->
+    <string name="prestige_respec_done">%1$s Prestige Punkte zurückerstattet.</string>
     <string name="prestige_respec_on_cooldown">Deine Punkte wurden kürzlich zurückgesetzt. Versuche es später noch einmal.</string>
     <!-- Translator note: %1$d = node cost in points -->
     <string name="prestige_node_cost">Kosten: %1$d Punkte</string>
@@ -2288,9 +2291,9 @@
     <string name="prestige_node_race_only">Nur %1$s</string>
     <!-- Translator note: %1$s = list of race names -->
     <string name="prestige_node_race_locked_desc">Nur %1$s Charaktere können diese Verbesserung erlernen.</string>
-    <string name="prestige_node_prereq_locked">Requires the previous tier in this path.</string> <!-- untranslated -->
+    <string name="prestige_node_prereq_locked">Benötigt die vorherige Stufe dieses Pfades.</string>
     <string name="prestige_node_hidden">Schalte zuerst das vorherige Upgrade frei.</string>
-    <string name="character_race_edit_hint">Race changes are made in the appearance editor.</string> <!-- untranslated -->
+    <string name="character_race_edit_hint">Rassenänderungen können im Appearance Editor gemacht werden.</string>
     <string name="prestige_node_not_enough">Nicht genug Punkte</string>
     <!-- Translator note: %1$s = node name -->
     <string name="prestige_node_purchased">%1$s gekauft!</string>
@@ -2308,13 +2311,13 @@
     <!-- Translator note: %1$s = minutes (may be fractional) -->
     <string name="prestige_effect_session_floor_min">Aktivitäten sind auf Stufe 99 um %1$s Minuten kürzer.</string>
     <string name="prestige_effect_cape_scaling">Die Umhang-Boni für diese Fertigkeit werden mit ×%1$d multipliziert.</string>
-    <string name="prestige_effect_bonus_roll_pct">+%1$d%% gem find chance while mining.</string> <!-- untranslated -->
+    <string name="prestige_effect_bonus_roll_pct">+%1$d%% Edelstein Funndchance während des Bergbaus.</string>
     <string name="prestige_effect_coin_pct">+%1$d%% Münzen durch diese Fertigkeit.</string>
     <string name="prestige_effect_crop_rotation_pct">+%1$d%% Ertrag bei Anbau einer anderen Pflanze als bei der letzten Ernte.</string>
     <string name="prestige_effect_crop_rotation_always">Der Fruchtwechselbonus gilt für jede Kultur, ein Fruchtwechsel ist nicht erforderlich.</string>
     <string name="prestige_effect_tool_eff_pct">Werkzeugeffizienz +%1$d%%.</string>
     <string name="prestige_effect_per_level_bonus">+%1$s Werkzeug- oder Kampfbonus pro Stufe dieser Fertigkeit.</string>
-    <string name="prestige_effect_success_chance_pct">Pickpocket success chance +%1$d%%.</string> <!-- untranslated -->
+    <string name="prestige_effect_success_chance_pct">Taschendiebstahl Erfolgschance +%1$d%%.</string>
     <string name="prestige_effect_reclaim_pct">+%1$d%% Chance, verbrauchte Pfeile und Runen nach dem Kampf zurückzubekommen.</string>
     <string name="prestige_effect_heal_pct">Nahrung heilt im Kampf um +%1$d%% mehr.</string>
     <string name="prestige_effect_death_keep_pct">Behalte bei einer Niederlage zusätzlich %1$d%% an EP und Beute.</string>
@@ -2427,7 +2430,7 @@
     <string name="item_heirloom_frying_pan_desc">Eine bewährte Pfanne, die in einer Familie von Köchen von Generation zu Generation weitergegeben wurde. Mit jeder Mahlzeit gewinnt sie an Würze.</string>
     <string name="item_heirloom_lockpick_name">Erbstück-Dietrich</string>
     <string name="item_heirloom_lockpick_desc">Ein Dietrich, der schon unzählige Schlösser leise geöffnet hat. Mit jedem Auftrag wird er noch raffinierter.</string>
-    <string name="item_midas_band_name">Midas Band</string> <!-- untranslated -->
+    <string name="item_midas_band_name">Midas Band</string>
     <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Erbstück-Klinge</string>
     <string name="item_heirloom_blade_desc">Eine uralte Klinge, die mit jedem Kampf, den ihre Linie übersteht, ein wenig mehr zum Leben erwacht.</string>
