@@ -527,6 +527,10 @@ class HomeViewModel @Inject constructor(
 
     fun collectSession() {
         if (_extra.value.isCollecting) return
+        if (saveSlotRepo.switchInProgress) {
+            _extra.update { it.copy(snackbarMessage = context.withAppLocale().getString(R.string.collect_blocked_switching)) }
+            return
+        }
         _extra.update { it.copy(isCollecting = true) }
         viewModelScope.launch(Dispatchers.Default) {
           try {

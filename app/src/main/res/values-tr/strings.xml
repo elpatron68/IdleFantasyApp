@@ -1491,6 +1491,7 @@
     <string name="catalyst_enhanced_output">Güçlendirilmiş iksir üretir</string>
     <string name="catalyst_rune_bonus">Esans başına %1$d rün</string>
     <string name="catalyst_none">Katalizör yok</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">İnşaat</string>
@@ -2214,6 +2215,7 @@
     <string name="save_slot_delete_body">%1$s kalıcı olarak silinsin mi? Bu işlem geri alınamaz.</string>
     <string name="save_slot_delete_btn">Sil</string>
     <string name="save_slot_switch_failed">Karakter değiştirilemedi.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Ironman Modu</string>

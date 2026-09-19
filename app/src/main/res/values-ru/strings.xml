@@ -1509,6 +1509,7 @@
     <string name="catalyst_enhanced_output">Производит усиленное зелье</string>
     <string name="catalyst_rune_bonus">%1$d рун за эссенцию</string>
     <string name="catalyst_none">Без катализатора</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">Строительство</string>
@@ -2236,6 +2237,7 @@
     <string name="save_slot_delete_body">Навсегда удалить %1$s? Это действие нельзя отменить.</string>
     <string name="save_slot_delete_btn">Удалить</string>
     <string name="save_slot_switch_failed">Не удалось сменить персонажа.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Режим «Айронмэн»</string>

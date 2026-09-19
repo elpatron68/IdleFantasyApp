@@ -1489,6 +1489,7 @@
     <string name="catalyst_enhanced_output">強化ポーションを生産</string>
     <string name="catalyst_rune_bonus">エッセンスごとに %1$d 個のルーン</string>
     <string name="catalyst_none">触媒なし</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">建築</string>
@@ -2212,6 +2213,7 @@
     <string name="save_slot_delete_body">%1$sを完全に削除しますか？この操作は元に戻せません。</string>
     <string name="save_slot_delete_btn">削除</string>
     <string name="save_slot_switch_failed">キャラクターを切り替えられませんでした。</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">アイアンマンモード</string>

@@ -1491,6 +1491,7 @@
     <string name="catalyst_enhanced_output">Produziert verbesserten Trank</string>
     <string name="catalyst_rune_bonus">%1$d Runen pro Essenz</string>
     <string name="catalyst_none">Kein Katalysator</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">Bauen</string>
@@ -2214,6 +2215,7 @@
     <string name="save_slot_delete_body">%1$s endgültig löschen? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="save_slot_delete_btn">Löschen</string>
     <string name="save_slot_switch_failed">Charakterwechsel fehlgeschlagen.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Ironman-Modus</string>
