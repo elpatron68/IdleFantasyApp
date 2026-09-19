@@ -1483,6 +1483,7 @@
     <string name="catalyst_enhanced_output">Menghasilkan ramuan yang lebih ampuh</string>
     <string name="catalyst_rune_bonus">%1$d rune per essence</string>
     <string name="catalyst_none">Tidak ada katalis</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">Konstruksi</string>
@@ -2206,6 +2207,7 @@
     <string name="save_slot_delete_body">Hapus %1$s secara permanen? Tindakan ini tidak bisa dibatalkan.</string>
     <string name="save_slot_delete_btn">Hapus</string>
     <string name="save_slot_switch_failed">Tidak dapat mengganti karakter.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Mode Ironman</string>

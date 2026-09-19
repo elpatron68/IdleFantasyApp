@@ -1505,6 +1505,7 @@
     <string name="catalyst_enhanced_output">Produkuje wzmocnioną miksturę</string>
     <string name="catalyst_rune_bonus">%1$d run na esencję</string>
     <string name="catalyst_none">Brak katalizatora</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">Budownictwo</string>
@@ -2232,6 +2233,7 @@
     <string name="save_slot_delete_body">Trwale usunąć %1$s? Tej operacji nie można cofnąć.</string>
     <string name="save_slot_delete_btn">Usuń</string>
     <string name="save_slot_switch_failed">Nie udało się zmienić postaci.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Tryb Ironman</string>

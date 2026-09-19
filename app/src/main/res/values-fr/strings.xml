@@ -1490,6 +1490,7 @@
     <string name="catalyst_enhanced_output">Produit une potion améliorée</string>
     <string name="catalyst_rune_bonus">%1$d runes par essence</string>
     <string name="catalyst_none">Sans catalyseur</string>
+    <string name="skills_rune_output">Produces %1$d runes</string> <!-- untranslated -->
 
     <!-- Construction skill -->
     <string name="skill_construction_name">Construction</string>
@@ -2213,6 +2214,7 @@
     <string name="save_slot_delete_body">Supprimer définitivement %1$s ? Cette action est irréversible.</string>
     <string name="save_slot_delete_btn">Supprimer</string>
     <string name="save_slot_switch_failed">Impossible de changer de personnage.</string>
+    <string name="collect_blocked_switching">Character switch in progress. Please wait and try again.</string> <!-- untranslated -->
 
     <!-- Ironman mode -->
     <string name="character_ironman_title">Mode Ironman</string>
