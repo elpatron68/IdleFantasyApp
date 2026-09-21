@@ -253,12 +253,17 @@ class QueuedSessionStarter @Inject constructor(
                 val player = playerRepo.getOrCreatePlayer()
                 val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
                 val flags: PlayerFlags       = json.decodeFromString(player.flags)
-                val agilityLevel    = if (flags.onElderIsle) 1 else levels[Skills.AGILITY] ?: 1
-                val floorReductionMin = if (flags.onElderIsle) 0.0 else boostRepo.sessionFloorReductionMin(flags)
-                val chronosMult     = if (flags.onElderIsle) 1.0f else townRepo.playerSessionDurationMultiplier(flags)
-                val effectiveSessionMs = if (flags.onElderIsle)
+                // Per-action isle context: use the action's stamped flag so an action
+                // queued on isle keeps its 60-min isle base even when the player has since
+                // sailed back to mainland. The offline path calls estimateDuration with
+                // a per-action sessionMs derived below, once we know which action we're on.
+                fun sessionMsForAction(a: QueuedAction): Long = if (a.isElderSession)
                     SkillSimulator.elderSessionDurationMs(flags.elderSkillLevels[Skills.AGILITY] ?: 1)
-                else SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult)
+                else SkillSimulator.sessionDurationMs(
+                    levels[Skills.AGILITY] ?: 1,
+                    boostRepo.sessionFloorReductionMin(flags),
+                    townRepo.playerSessionDurationMultiplier(flags),
+                )
                 // A boss repeat run (queued as one entry, tracked via PlayerFlags rather than N
                 // separate queue entries) is advanced here one fight at a time, same as the live
                 // (non-offline) chain in startNextQueued() -- returning before ever reaching the
@@ -273,7 +278,7 @@ class QueuedSessionStarter @Inject constructor(
                         return@withLock 0L
                     }
                     val snapshot = flags.activeBossRepeatSnapshot!!
-                    val duration = estimateDuration(snapshot, effectiveSessionMs)
+                    val duration = estimateDuration(snapshot, sessionMsForAction(snapshot))
                     if (duration > remainingMs) return@withLock 0L
                     return@withLock try {
                         startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
@@ -294,7 +299,7 @@ class QueuedSessionStarter @Inject constructor(
                         return@withLock 0L
                     }
                     val snapshot = flags.activeDungeonRepeatSnapshot!!
-                    val duration = estimateDuration(snapshot, effectiveSessionMs)
+                    val duration = estimateDuration(snapshot, sessionMsForAction(snapshot))
                     if (duration > remainingMs) return@withLock 0L
                     return@withLock try {
                         startQueuedAction(snapshot, offline = true, backdateMs = remainingMs)
@@ -315,7 +320,7 @@ class QueuedSessionStarter @Inject constructor(
                 while (maxAttempts-- >= 0) {
                     val next = remaining.firstOrNull() ?: break
                     remaining = remaining.drop(1)
-                    val duration = estimateDuration(next, effectiveSessionMs)
+                    val duration = estimateDuration(next, sessionMsForAction(next))
                     if (duration > remainingMs) return@withLock 0L
                     try {
                         // backdateMs = remainingMs so each fast-forwarded session in the same
@@ -392,10 +397,16 @@ class QueuedSessionStarter @Inject constructor(
         // per-item math they do internally produces the isle-neutral 60-minute base, which
         // `startSession` (and the inline smithing/cooking branches) then shrink to the
         // elder-agility-scaled wall-clock.
-        val agilityLevel    = if (flags.onElderIsle) 1 else levels[Skills.AGILITY] ?: 1
-        val floorReductionMin = if (flags.onElderIsle) 0.0 else boostRepo.sessionFloorReductionMin(flags)
-        val chronosMult     = if (flags.onElderIsle) 1.0f else townRepo.playerSessionDurationMultiplier(flags)
-        val effectiveSessionMs = if (flags.onElderIsle)
+        //
+        // Reads action.isElderSession (stamped at enqueue time) NOT flags.onElderIsle. A
+        // player who queued on isle and sailed home before the session actually fired
+        // otherwise had their queued isle XP routed to mainland (reported bug: Maja's
+        // Coastal Run gave mainland Agility XP instead of elder Agility XP).
+        val isElder         = action.isElderSession
+        val agilityLevel    = if (isElder) 1 else levels[Skills.AGILITY] ?: 1
+        val floorReductionMin = if (isElder) 0.0 else boostRepo.sessionFloorReductionMin(flags)
+        val chronosMult     = if (isElder) 1.0f else townRepo.playerSessionDurationMultiplier(flags)
+        val effectiveSessionMs = if (isElder)
             SkillSimulator.elderSessionDurationMs(flags.elderSkillLevels[Skills.AGILITY] ?: 1)
         else SkillSimulator.sessionDurationMs(agilityLevel, floorReductionMin, chronosMult)
         val equippedCapeData = equipped[EquipSlot.CAPE]?.let { gameData.equipment[it] }
@@ -442,7 +453,7 @@ class QueuedSessionStarter @Inject constructor(
                     chronosMultiplier = chronosMult,
                     gemChanceMult   = boostRepo.bonusRollMultiplier(Skills.MINING, flags),
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             Skills.WOODCUTTING -> {
                 val treeKey  = action.activityKey
@@ -458,7 +469,7 @@ class QueuedSessionStarter @Inject constructor(
                     petDropChance   = petDropChance(Skills.WOODCUTTING),
                     chronosMultiplier = chronosMult,
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             Skills.FISHING -> {
                 val fishKey  = action.activityKey
@@ -476,7 +487,7 @@ class QueuedSessionStarter @Inject constructor(
                     fishingSkillData = gameData.fishingSkillData,
                     chronosMultiplier = chronosMult,
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             Skills.AGILITY -> {
                 val courseKey  = action.activityKey
@@ -485,20 +496,20 @@ class QueuedSessionStarter @Inject constructor(
                 // from the elder pool. Pet boost / grappling-hook efficiency are mainland
                 // concepts and stay zero on isle so bonuses don't leak across (per the
                 // isle bonus-flow rule).
-                val successAgilityLevel = if (flags.onElderIsle) flags.elderSkillLevels[Skills.AGILITY] ?: 1 else agilityLevel
-                val startXpForFrames    = if (flags.onElderIsle) flags.elderSkillXp[Skills.AGILITY] ?: 0L else xpMap[Skills.AGILITY] ?: 0L
+                val successAgilityLevel = if (isElder) flags.elderSkillLevels[Skills.AGILITY] ?: 1 else agilityLevel
+                val startXpForFrames    = if (isElder) flags.elderSkillXp[Skills.AGILITY] ?: 0L else xpMap[Skills.AGILITY] ?: 0L
                 val result     = SkillSimulator.simulateAgility(
                     courseData      = courseData,
                     startXp         = startXpForFrames,
                     agilityLevel    = successAgilityLevel,
                     floorReductionMin = floorReductionMin,
-                    petBoostPct  = if (flags.onElderIsle) 0 else boostRepo.boostedPetPct(Skills.AGILITY, flags, gatheringPetBoost(player.pets, Skills.AGILITY, flags.ironman)),
-                    toolEfficiency = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
-                    petDropKey   = if (flags.onElderIsle) null else petDropKey(Skills.AGILITY),
-                    petDropChance = if (flags.onElderIsle) 0.0 else petDropChance(Skills.AGILITY),
+                    petBoostPct  = if (isElder) 0 else boostRepo.boostedPetPct(Skills.AGILITY, flags, gatheringPetBoost(player.pets, Skills.AGILITY, flags.ironman)),
+                    toolEfficiency = if (isElder) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.GRAPPLING_HOOK], EquipSlot.GRAPPLING_HOOK, courseData.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp),
+                    petDropKey   = if (isElder) null else petDropKey(Skills.AGILITY),
+                    petDropChance = if (isElder) 0.0 else petDropChance(Skills.AGILITY),
                     chronosMultiplier = chronosMult,
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             Skills.THIEVING -> {
                 val npcKey  = action.activityKey
@@ -647,26 +658,26 @@ class QueuedSessionStarter @Inject constructor(
                 // Isle sessions source startXp from the elder pool, and neutralise mainland
                 // tool efficiency / pet boost / heirloom mirror so the frame projection reads
                 // the elder skill's current progress, not mainland level 99.
-                val smithStartXp = if (flags.onElderIsle) flags.elderSkillXp[Skills.SMITHING] ?: 0L else xpMap[Skills.SMITHING] ?: 0L
-                val efficiency = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
+                val smithStartXp = if (isElder) flags.elderSkillXp[Skills.SMITHING] ?: 0L else xpMap[Skills.SMITHING] ?: 0L
+                val efficiency = if (isElder) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.HAMMER], EquipSlot.HAMMER, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                 val frames = buildCraftFrames(smithStartXp, qty, r.xpPerItem, r.outputQuantity, action.activityKey,
                     efficiency = efficiency,
-                    petBoostPct = if (flags.onElderIsle) 0 else boostRepo.boostedPetPct(Skills.SMITHING, flags, gatheringPetBoost(player.pets, Skills.SMITHING, flags.ironman)),
-                    petDropKey = if (flags.onElderIsle) null else petDropKey(Skills.SMITHING),
-                    petDropChance = if (flags.onElderIsle) 0.0 else petDropChance(Skills.SMITHING))
+                    petBoostPct = if (isElder) 0 else boostRepo.boostedPetPct(Skills.SMITHING, flags, gatheringPetBoost(player.pets, Skills.SMITHING, flags.ironman)),
+                    petDropKey = if (isElder) null else petDropKey(Skills.SMITHING),
+                    petDropChance = if (isElder) 0.0 else petDropChance(Skills.SMITHING))
                 val perItemMs = (effectiveSessionMs / 60 / efficiency).toLong()
-                sessionRepo.startSession(Skills.SMITHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart, playerMutexHeld = true, isElderSession = flags.onElderIsle)
+                sessionRepo.startSession(Skills.SMITHING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart, playerMutexHeld = true, isElderSession = isElder)
             }
             Skills.COOKING -> {
                 val r: CookingRecipe = gameData.cookingRecipes[action.activityKey] ?: return
                 val qty = action.qty.takeIf { it > 0 } ?: return
-                val cookStartXp = if (flags.onElderIsle) flags.elderSkillXp[Skills.COOKING] ?: 0L else xpMap[Skills.COOKING] ?: 0L
-                val efficiency = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
+                val cookStartXp = if (isElder) flags.elderSkillXp[Skills.COOKING] ?: 0L else xpMap[Skills.COOKING] ?: 0L
+                val efficiency = if (isElder) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN], EquipSlot.FRYING_PAN, r.levelRequired, skillLevels = levels, heirloomXp = flags.heirloomXp)
                 val frames = buildCraftFrames(cookStartXp, qty, r.xpPerItem, 1, r.cookedItem,
                     efficiency = efficiency,
-                    petBoostPct = if (flags.onElderIsle) 0 else boostRepo.boostedPetPct(Skills.COOKING, flags, gatheringPetBoost(player.pets, Skills.COOKING, flags.ironman)))
+                    petBoostPct = if (isElder) 0 else boostRepo.boostedPetPct(Skills.COOKING, flags, gatheringPetBoost(player.pets, Skills.COOKING, flags.ironman)))
                 val perItemMs = (effectiveSessionMs / 60 / efficiency).toLong()
-                sessionRepo.startSession(Skills.COOKING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart, playerMutexHeld = true, isElderSession = flags.onElderIsle)
+                sessionRepo.startSession(Skills.COOKING, action.activityKey, encodeFrames(frames), qty * perItemMs, action.skillDisplayName, insertAsCompleted = offline, backdateMs = backdateMs, levelAtStart = levelAtStart, playerMutexHeld = true, isElderSession = isElder)
             }
             Skills.FLETCHING -> {
                 val r   = gameData.fletchingRecipes[action.activityKey] ?: return
@@ -840,7 +851,7 @@ class QueuedSessionStarter @Inject constructor(
                     toolEfficiency  = toolEfficiency,
                     chronosMultiplier = chronosMult,
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             "combat" -> {
                 val dungeonKey = action.activityKey
@@ -920,7 +931,7 @@ class QueuedSessionStarter @Inject constructor(
                     doubleHitChance     = boostRepo.doubleHitChance(flags),
                     secondChance        = boostRepo.secondChanceActive(flags),
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
             "tower" -> {
                 // A won floor sitting uncollected no longer blocks the next attempt -- Tower
@@ -1036,7 +1047,7 @@ class QueuedSessionStarter @Inject constructor(
                     tierBonus          = townRepo.idleTicketBonusChance(flags),
                     chronosMultiplier  = chronosMult,
                 )
-                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = flags.onElderIsle, isleSessionMs = effectiveSessionMs)
+                startSession(action, result, offline, backdateMs, levelAtStart, isElderSession = isElder, isleSessionMs = effectiveSessionMs)
             }
         }
     }

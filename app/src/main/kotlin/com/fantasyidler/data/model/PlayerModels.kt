@@ -485,6 +485,15 @@ data class QueuedAction(
      * 0 = legacy entry with an unknown baked-in multiplier — shown as stored.
      */
     @SerialName("xp_boost_mult_at_queue") val xpBoostMultAtQueue: Double = 0.0,
+    /**
+     * Stamped from `flags.onElderIsle` at enqueue time so the isle context stays attached
+     * to the action, even if the player sails back to the mainland before this queued
+     * session actually starts. Without it, a queued isle session that fired after the
+     * player returned to mainland would route XP into the wrong pool (issue: reporter
+     * queued Coastal Run on isle, sailed back, then found the XP had landed on mainland
+     * Agility instead of elder Agility).
+     */
+    @SerialName("is_elder_session") val isElderSession: Boolean = false,
 )
 
 // ---------------------------------------------------------------------------

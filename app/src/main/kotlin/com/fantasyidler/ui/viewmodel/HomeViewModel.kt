@@ -984,6 +984,11 @@ class HomeViewModel @Inject constructor(
             val elderCoins = elderItems.remove("coins")?.toLong() ?: 0L
             if (!grantXp) elderXpPerSkill.clear()
             playerRepo.applyElderMultiSkillResults(elderXpPerSkill, elderItems, elderCoins)
+            // Isle dungeon runs feed the story quest counters (dungeonRuns[key]) even though
+            // mainland questRepo/guildRepo hooks stay walled off, per bonus-flow rule.
+            // Without this the Voyage/Landing/Ascent quests stay at 0 forever.
+            val elderDied = frames.any { it.died }
+            if (!elderDied) playerRepo.incrementDungeonRun(session.activityKey)
             for ((skill, xp) in elderXpPerSkill) acc.combinedXpBySkill[skill] = (acc.combinedXpBySkill[skill] ?: 0L) + xp
             for ((item, qty) in elderItems) acc.combinedItems[item] = (acc.combinedItems[item] ?: 0) + qty
             acc.combinedCoins += elderCoins

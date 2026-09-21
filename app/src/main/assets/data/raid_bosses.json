@@ -1037,8 +1037,7 @@
     "tags": [
       "dragon"
     ],
-    "requires_monument": true,
     "requires_dock": true,
-    "total_level_required": 1500
+    "total_level_required": 0
   }
 }
