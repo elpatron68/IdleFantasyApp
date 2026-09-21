@@ -11,7 +11,6 @@
         }
       },
       "versions": {
-        "599c96fbae877caf33c5d6f0da2896d694acd4d9a38d75f3ad706d0e2bb91500": null,
         "53a86bba33f1eeb8bc3deef8b1b5df790180bb3f20e31151f05b5782a60679fc": {
           "added": 1789989687528,
           "file": {
@@ -60,56 +59,6 @@
           },
           "whatsNew": {
             "en-US": "• Elder Isle: sail from your Dock at Construction 90, defeat the Sea Serpent, and unlock a second region with its own separate skill tracks, dungeons, and story arc\n• Elder skills level on their own XP pool that starts fresh at 1 and stays untouched by mainland prestige, boosts, gear, and pets\n• 12-quest main story chain across 4 acts, auto-completing as you meet each objective; 13 lore fragments unlock in the Lore Master as you progress\n• 8-piece Elder set is the isle's BIS armor, crafted from "
-          }
-        },
-        "8c6cef72167d6ad3992cbd526ea02af991258b9b1aee24439efb4864c3e54109": {
-          "added": 1789831052462,
-          "file": {
-            "name": "/com.tristinbaker.idlefantasy_149005.apk",
-            "sha256": "8c6cef72167d6ad3992cbd526ea02af991258b9b1aee24439efb4864c3e54109",
-            "size": 10659063
-          },
-          "manifest": {
-            "nativecode": [
-              "arm64-v8a",
-              "armeabi-v7a",
-              "x86",
-              "x86_64"
-            ],
-            "versionName": "1.14.14",
-            "versionCode": 149005,
-            "usesSdk": {
-              "minSdkVersion": 26,
-              "targetSdkVersion": 35
-            },
-            "signer": {
-              "sha256": [
-                "99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010"
-              ]
-            },
-            "usesPermission": [
-              {
-                "name": "android.permission.POST_NOTIFICATIONS"
-              },
-              {
-                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
-              },
-              {
-                "name": "android.permission.WAKE_LOCK"
-              },
-              {
-                "name": "android.permission.USE_EXACT_ALARM"
-              },
-              {
-                "name": "android.permission.SCHEDULE_EXACT_ALARM"
-              },
-              {
-                "name": "com.tristinbaker.idlefantasy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-              }
-            ]
-          },
-          "whatsNew": {
-            "en-US": "• The Runecrafting sheet now shows the total runes a session will produce and correctly factors the level and ash catalyst multipliers into the projected XP, so a redwood-ashes run no longer under-reports either\n• Rotating a piece of furniture in the house editor no longer treats it as a new purchase; rotation variants share ownership and storage with the base piece\n• The Herblore potion sheet now lists every ash tier the player owns, dimming ones that don't cover the current quantity with an \"o"
           }
         }
       }
