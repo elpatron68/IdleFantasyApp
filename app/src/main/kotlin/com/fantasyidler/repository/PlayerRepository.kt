@@ -693,8 +693,14 @@ class PlayerRepository @Inject constructor(
     private suspend fun enqueueActionUnlocked(action: QueuedAction): Boolean {
         val flags = getFlags()
         if (flags.sessionQueue.size >= maxQueueSize(flags)) return false
-        updateFlagsUnlocked(flags.copy(
-            sessionQueue = flags.sessionQueue + action.copy(levelAtQueue = queueLevelFor(action))))
+        // Stamp the isle flag at enqueue time so an action queued on isle stays "elder"
+        // even if the player sails back before it starts. QueuedSessionStarter reads
+        // action.isElderSession instead of the live flags value.
+        val stamped = action.copy(
+            levelAtQueue   = queueLevelFor(action),
+            isElderSession = flags.onElderIsle,
+        )
+        updateFlagsUnlocked(flags.copy(sessionQueue = flags.sessionQueue + stamped))
         return true
     }
 
