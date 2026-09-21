@@ -140,6 +140,9 @@ data class CraftingUiState(
     val craftXpMult: Double = 1.0,
     /** Recipe keys gated behind prestige unlock nodes the player does not own. */
     val hiddenRecipeKeys: Set<String> = emptySet(),
+    /** True when the player is currently on Elder Isle. CraftSkillSheet filters the recipe
+     *  list to isle-only entries when this is true. */
+    val onElderIsle: Boolean = false,
 ) {
     /** Returns how many times [recipe] can be crafted given [effectiveInventory]. */
     fun maxCraftable(recipe: CraftableRecipe): Int {
@@ -196,8 +199,13 @@ class CraftingViewModel @Inject constructor(
         if (player == null) {
             extra
         } else {
-            val levels: Map<String, Int> = json.decodeFromString(player.skillLevels)
-            val xp: Map<String, Long> = json.decodeFromString(player.skillXp)
+            val mainlandLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+            val mainlandXp: Map<String, Long> = json.decodeFromString(player.skillXp)
+            val flagsForLevels: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            // On isle, all skill-level and XP reads swap to the elder pool so recipes gate
+            // on elder levels and the Crafting sheet displays elder progress.
+            val levels: Map<String, Int> = if (flagsForLevels.onElderIsle) mainlandLevels.mapValues { flagsForLevels.elderSkillLevels[it.key] ?: 1 } else mainlandLevels
+            val xp: Map<String, Long>    = if (flagsForLevels.onElderIsle) mainlandXp.mapValues { flagsForLevels.elderSkillXp[it.key] ?: 0L }    else mainlandXp
             val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
             val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
             val flags: PlayerFlags = json.decodeFromString(player.flags)
@@ -232,6 +240,7 @@ class CraftingViewModel @Inject constructor(
                 isQueueFull        = flags.sessionQueue.size >= playerRepo.maxQueueSize(flags),
                 craftXpMult        = xpMult,
                 hiddenRecipeKeys   = boostRepo.gatedRecipeKeys - boostRepo.unlockedRecipeKeys(flags),
+                onElderIsle        = flags.onElderIsle,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), CraftingUiState())

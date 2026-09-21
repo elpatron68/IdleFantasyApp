@@ -122,6 +122,9 @@ class InventoryViewModel @Inject constructor(
         val towerHpBonus: Int = 0,
         val skillPrestige: Map<String, Int> = emptyMap(),
         val capeScalingBySkill: Map<String, Int> = emptyMap(),
+        val elderIsleUnlocked: Boolean = false,
+        val elderSkillLevels: Map<String, Int> = emptyMap(),
+        val elderSkillXp: Map<String, Long> = emptyMap(),
         val prestigeUnspentBySkill: Map<String, Int> = emptyMap(),
         val ironmanRaceLocked: Boolean = false,
         val raceChangeTokens: Int = 0,
@@ -141,6 +144,9 @@ class InventoryViewModel @Inject constructor(
         val foodEatOrder: String = "descending",
         /** Heirloom item key -> accumulated item XP. */
         val heirloomXp: Map<String, Long> = emptyMap(),
+        /** True once an ancient_signet has ever entered inventory. Gates the Signet
+         *  armor slot in the gear picker, so it stays hidden for every pre-drop player. */
+        val ancientSignetSeen: Boolean = false,
     ) {
         val totalLevel: Int get() = totalLevelFrom(skillLevels)
 
@@ -200,6 +206,9 @@ class InventoryViewModel @Inject constructor(
                     .associate { it.key to it.value },
                 skillLevels = json.decodeFromString(player.skillLevels),
                 skillXp     = json.decodeFromString(player.skillXp),
+                elderIsleUnlocked = flags.elderIsleUnlocked,
+                elderSkillLevels  = flags.elderSkillLevels,
+                elderSkillXp      = flags.elderSkillXp,
                 equipped    = json.decodeFromString(player.equipped),
                 ownedPetIds = pets.map { it.id }.toSet(),
                 equippedFood          = flags.equippedFood,
@@ -245,6 +254,7 @@ class InventoryViewModel @Inject constructor(
                 foodEatThresholdPct     = flags.foodEatThresholdPct,
                 foodEatOrder            = flags.foodEatOrder,
                 heirloomXp              = flags.heirloomXp,
+                ancientSignetSeen       = "ancient_signet" in flags.seenItemKeys,
                 displayName             = run {
                     val baseName = flags.characterName.ifBlank { context.withAppLocale().getString(R.string.profile_unnamed) }
                     val titleName = titleRepo.displayName(context, flags.equippedTitle, flags)

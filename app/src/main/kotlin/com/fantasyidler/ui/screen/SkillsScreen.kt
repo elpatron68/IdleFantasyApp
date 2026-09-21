@@ -184,7 +184,7 @@ fun SkillsScreen(
         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Top),
         topBar = {
             TopAppBar(
-                title   = { Text(stringResource(R.string.nav_skills)) },
+                title   = { Text(stringResource(if (state.onElderIsle) R.string.elder_isle_skills_title else R.string.nav_skills)) },
                 actions = {
                     // dropUnlessResumed: ignore ghost taps that land on this screen while it is
                     // fading out of a nav transition (issue #1345 — overlaps Home's settings gear)
@@ -202,38 +202,43 @@ fun SkillsScreen(
             return@Scaffold
         }
 
+        // Elder Isle hides the Expeditions tab entirely (mainland-only content). One page instead of two.
+        val pageCount = if (state.onElderIsle) 1 else 2
         var savedPage by rememberSaveable { mutableIntStateOf(0) }
-        val pagerState = rememberPagerState(initialPage = savedPage, pageCount = { 2 })
+        val effectiveInitialPage = savedPage.coerceAtMost(pageCount - 1)
+        val pagerState = rememberPagerState(initialPage = effectiveInitialPage, pageCount = { pageCount })
         LaunchedEffect(Unit) {
-            if (pagerState.currentPage != savedPage) pagerState.scrollToPage(savedPage)
+            if (pagerState.currentPage != effectiveInitialPage) pagerState.scrollToPage(effectiveInitialPage)
         }
         LaunchedEffect(pagerState.currentPage) { savedPage = pagerState.currentPage }
         val scope = rememberCoroutineScope()
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
-            TabRow(selectedTabIndex = pagerState.currentPage) {
-                val prestigeReadyCount = if (!state.showPrestigeNotifications) 0
-                    else NON_COMBAT_PRESTIGE_SKILLS.count { it in state.prestigeReadySkills }
-                Tab(
-                    selected = pagerState.currentPage == 0,
-                    onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
-                    text     = {
-                        Text(
-                            if (prestigeReadyCount > 0)
-                                stringResource(R.string.tab_label_with_count, stringResource(R.string.nav_skills), prestigeReadyCount)
-                            else
-                                stringResource(R.string.nav_skills)
-                        )
-                    },
-                )
-                Tab(
-                    selected = pagerState.currentPage == 1,
-                    onClick  = { scope.launch { pagerState.animateScrollToPage(1) } },
-                    text     = { Text(stringResource(R.string.nav_expeditions)) },
-                )
+            if (!state.onElderIsle) {
+                TabRow(selectedTabIndex = pagerState.currentPage) {
+                    val prestigeReadyCount = if (!state.showPrestigeNotifications) 0
+                        else NON_COMBAT_PRESTIGE_SKILLS.count { it in state.prestigeReadySkills }
+                    Tab(
+                        selected = pagerState.currentPage == 0,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
+                        text     = {
+                            Text(
+                                if (prestigeReadyCount > 0)
+                                    stringResource(R.string.tab_label_with_count, stringResource(R.string.nav_skills), prestigeReadyCount)
+                                else
+                                    stringResource(R.string.nav_skills)
+                            )
+                        },
+                    )
+                    Tab(
+                        selected = pagerState.currentPage == 1,
+                        onClick  = { scope.launch { pagerState.animateScrollToPage(1) } },
+                        text     = { Text(stringResource(R.string.nav_expeditions)) },
+                    )
+                }
             }
             val skillsListState = rememberLazyListState()
             HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-                if (page == 1) {
+                if (page == 1 && !state.onElderIsle) {
                     ExpeditionsScreen(viewModel = expeditionsViewModel, showTitle = false)
                 } else {
                     SkillsTabContent(
@@ -719,8 +724,14 @@ private fun SkillsTabContent(
             }
         }
 
+        // Elder Isle gathering roster: only skills that feed the elder BIS chain or combat
+        // sustain. Mining → ores → bars, Woodcutting → logs, Fishing → food. Farming,
+        // Agility, Thieving are cut on the isle so every listed skill feels useful.
+        val gatheringKeys = if (state.onElderIsle)
+            listOf(Skills.MINING, Skills.FISHING, Skills.WOODCUTTING)
+        else Skills.GATHERING.filter { it != Skills.AGILITY }
         item(key = "header_gathering") { SectionHeader(stringResource(R.string.label_gathering_skills)) }
-        items(Skills.GATHERING.filter { it != Skills.AGILITY }, key = { "gather_$it" }) { key ->
+        items(gatheringKeys, key = { "gather_$it" }) { key ->
             val efficiency = when (key) {
                 Skills.MINING      -> state.miningEfficiency
                 Skills.WOODCUTTING -> state.woodcuttingEfficiency
@@ -746,8 +757,14 @@ private fun SkillsTabContent(
             )
         }
 
+        // Elder crafting roster: Smithing (bars + all elder armor, including the BIS set),
+        // and Cooking (elite food). Crafting/Fletching/Firemaking/Runecrafting/Herblore/
+        // Construction are cut on the isle.
+        val craftingKeys = if (state.onElderIsle)
+            listOf(Skills.SMITHING, Skills.COOKING)
+        else Skills.CRAFTING_SKILLS
         item(key = "header_crafting") { SectionHeader(stringResource(R.string.label_crafting_skills)) }
-        items(Skills.CRAFTING_SKILLS, key = { "craft_$it" }) { key ->
+        items(craftingKeys, key = { "craft_$it" }) { key ->
             val craftEfficiency = when (key) {
                 Skills.SMITHING   -> state.smithingEfficiency
                 Skills.FIREMAKING -> state.firemakingEfficiency
@@ -770,8 +787,13 @@ private fun SkillsTabContent(
             )
         }
 
+        // On isle: Support section contains ONLY Agility (its levels shorten isle sessions
+        // from 60 → 45 min via elderSessionDurationMs). Prayer/Mercantile/Slayer stay
+        // mainland-only. On mainland: full Support + Combat block.
+        val supportKeys = if (state.onElderIsle) listOf(Skills.AGILITY)
+                          else Skills.SUPPORT + listOf(Skills.AGILITY)
         item(key = "header_support") { SectionHeader(stringResource(R.string.label_support_skills)) }
-        items(Skills.SUPPORT + listOf(Skills.AGILITY), key = { "support_$it" }) { key ->
+        items(supportKeys, key = { "support_$it" }) { key ->
             SkillRow(
                 skillKey       = key,
                 level          = state.skillLevels[key] ?: 1,
@@ -779,30 +801,32 @@ private fun SkillsTabContent(
                 isActive       = state.activeSession?.skillName == key && state.activeSession?.completed == false,
                 onClick        = { viewModel.onSkillTapped(key) },
                 toolEfficiency = if (key == Skills.AGILITY) state.agilityEfficiency else 1.0f,
-                petBoostPct    = state.petBoostBySkill[key] ?: 0,
-                prestigeLevel  = state.skillPrestige[key] ?: 0,
-                isPrestigeMaxed = key in state.prestigeMaxedSkills,
+                petBoostPct    = if (state.onElderIsle) 0 else state.petBoostBySkill[key] ?: 0,
+                prestigeLevel  = if (state.onElderIsle) 0 else state.skillPrestige[key] ?: 0,
+                isPrestigeMaxed = !state.onElderIsle && key in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(key) },
-                guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
-                questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
+                guildDailyOpen = !state.onElderIsle && state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                questIndicators = if (state.onElderIsle) emptyList() else state.timedQuestsBySkill[key] ?: emptyList(),
             )
         }
 
-        item(key = "header_combat") { SectionHeader(stringResource(R.string.label_combat)) }
-        item(key = "combat_${Skills.SLAYER}") {
-            SkillRow(
-                skillKey      = Skills.SLAYER,
-                level         = state.skillLevels[Skills.SLAYER] ?: 1,
-                xp            = state.skillXp[Skills.SLAYER] ?: 0L,
-                isActive      = false,
-                onClick       = onNavigateToSlayer,
-                petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
-                prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
-                isPrestigeMaxed = Skills.SLAYER in state.prestigeMaxedSkills,
-                onOpenPrestige = { onNavigateToPrestige(Skills.SLAYER) },
-                guildDailyOpen = state.showQuestDots && state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
-                questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
-            )
+        if (!state.onElderIsle) {
+            item(key = "header_combat") { SectionHeader(stringResource(R.string.label_combat)) }
+            item(key = "combat_${Skills.SLAYER}") {
+                SkillRow(
+                    skillKey      = Skills.SLAYER,
+                    level         = state.skillLevels[Skills.SLAYER] ?: 1,
+                    xp            = state.skillXp[Skills.SLAYER] ?: 0L,
+                    isActive      = false,
+                    onClick       = onNavigateToSlayer,
+                    petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
+                    prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
+                    isPrestigeMaxed = Skills.SLAYER in state.prestigeMaxedSkills,
+                    onOpenPrestige = { onNavigateToPrestige(Skills.SLAYER) },
+                    guildDailyOpen = state.showQuestDots && state.sheetQuests[Skills.SLAYER]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
+                    questIndicators = state.timedQuestsBySkill[Skills.SLAYER] ?: emptyList(),
+                )
+            }
         }
     }
 }

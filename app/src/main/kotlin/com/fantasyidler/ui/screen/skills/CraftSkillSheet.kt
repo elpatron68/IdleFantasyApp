@@ -86,7 +86,21 @@ internal fun CraftSkillSheet(
         Skills.HERBLORE      -> craftingViewModel.herbloreRecipes
         Skills.CONSTRUCTION  -> craftingViewModel.constructionRecipes
         else                 -> craftingViewModel.jewelleryRecipes
-    }.filter { it.key !in craftState.hiddenRecipeKeys }
+    }
+    .filter { it.key !in craftState.hiddenRecipeKeys }
+    // Isle recipes on isle, mainland recipes on mainland — never mixed.
+    .let { list ->
+        val elderAllowlist = when (skillName) {
+            Skills.SMITHING     -> com.fantasyidler.data.model.ElderContent.SMITHING_RECIPES
+            Skills.COOKING      -> com.fantasyidler.data.model.ElderContent.COOKING_RECIPES
+            Skills.FLETCHING    -> com.fantasyidler.data.model.ElderContent.FLETCHING_RECIPES
+            Skills.HERBLORE     -> com.fantasyidler.data.model.ElderContent.HERBLORE_RECIPES
+            Skills.CRAFTING     -> com.fantasyidler.data.model.ElderContent.CRAFTING_RECIPES
+            else                -> emptySet()
+        }
+        if (craftState.onElderIsle) list.filter { it.key in elderAllowlist }
+        else                        list.filter { it.key !in elderAllowlist }
+    }
 
     var onlyCraftable    by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf<String?>(null) }
