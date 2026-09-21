@@ -123,12 +123,12 @@ fun CombatScreen(
     val invState         by inventoryVm.uiState.collectAsState()
     val context           = LocalContext.current
     var showMercCamp     by remember { mutableStateOf(false) }
-    val visibleDungeons   = remember(state.unlockedDungeons, viewModel.dungeonList) {
-        viewModel.dungeonList.filter { !it.loreUnlockOnly || it.name in state.unlockedDungeons }
+    val visibleDungeons   = remember(state.unlockedDungeons, state.onElderIsle) {
+        viewModel.dungeonList(state.onElderIsle).filter { !it.loreUnlockOnly || it.name in state.unlockedDungeons }
     }
     LaunchedEffect(initialDungeonKey, initialBossKey) {
-        initialDungeonKey?.let { key -> viewModel.dungeonList.firstOrNull { it.name == key }?.let(viewModel::selectDungeon) }
-        initialBossKey?.let { key -> viewModel.bossList(state.monumentComplete).firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
+        initialDungeonKey?.let { key -> viewModel.dungeonList(state.onElderIsle).firstOrNull { it.name == key }?.let(viewModel::selectDungeon) }
+        initialBossKey?.let { key -> viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet).firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
     }
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
@@ -223,7 +223,7 @@ fun CombatScreen(
                             dungeons       = visibleDungeons,
                             // Raid bosses included: the banner resolves the boss's name,
                             // emoji, and HP panel from this list.
-                            bosses         = viewModel.bossList(state.monumentComplete) + viewModel.raidBossList(),
+                            bosses         = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet) + (if (state.onElderIsle) emptyList() else viewModel.raidBossList()),
                             hiredMercs     = state.hiredMercs,
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
@@ -243,7 +243,7 @@ fun CombatScreen(
                         )
                         1 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList(state.monumentComplete),
+                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,
@@ -252,13 +252,15 @@ fun CombatScreen(
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
                             isQueueFull         = state.isQueueFull,
-                            raidBosses          = viewModel.raidBossList(),
+                            raidBosses          = (if (state.onElderIsle) emptyList() else viewModel.raidBossList()),
                             hiredMercCount      = state.hiredMercs.size,
                             maxParty            = MercenaryRepository.MAX_PARTY,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
                             onOpenMercCamp      = { showMercCamp = true },
+                            onElderIsle         = state.onElderIsle,
+                            hasFullElderSet     = state.hasFullElderSet,
                         )
                         2 -> CombatGearTab(
                             equipped       = invState.equipped,
@@ -289,6 +291,7 @@ fun CombatScreen(
                             onSpellSelected = viewModel::selectSpell,
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
                             onFoodOrderChanged     = inventoryVm::setFoodEatOrder,
+                            ancientSignetSeen      = invState.ancientSignetSeen,
                         )
                         else -> CombatSkillsTab(
                             skillLevels         = state.skillLevels,
@@ -339,7 +342,7 @@ fun CombatScreen(
                     when (page) {
                         0 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList(state.monumentComplete),
+                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,
@@ -348,13 +351,15 @@ fun CombatScreen(
                             towerBestFloor      = state.towerBestFloor,
                             bossKillCounts      = state.bossKillCounts,
                             isQueueFull         = state.isQueueFull,
-                            raidBosses          = viewModel.raidBossList(),
+                            raidBosses          = (if (state.onElderIsle) emptyList() else viewModel.raidBossList()),
                             hiredMercCount      = state.hiredMercs.size,
                             maxParty            = MercenaryRepository.MAX_PARTY,
                             onDungeon           = viewModel::selectDungeon,
                             onBoss              = viewModel::selectBoss,
                             onTower             = onNavigateToTower,
                             onOpenMercCamp      = { showMercCamp = true },
+                            onElderIsle         = state.onElderIsle,
+                            hasFullElderSet     = state.hasFullElderSet,
                         )
                         1 -> CombatGearTab(
                             equipped       = invState.equipped,
@@ -385,6 +390,7 @@ fun CombatScreen(
                             onSpellSelected = viewModel::selectSpell,
                             onFoodThresholdChanged = inventoryVm::setFoodEatThresholdPct,
                             onFoodOrderChanged     = inventoryVm::setFoodEatOrder,
+                            ancientSignetSeen      = invState.ancientSignetSeen,
                         )
                         else -> CombatSkillsTab(
                             skillLevels         = state.skillLevels,
@@ -558,12 +564,18 @@ private fun CombatSelectionList(
     onBoss: (BossData) -> Unit,
     onTower: () -> Unit = {},
     onOpenMercCamp: () -> Unit = {},
+    onElderIsle: Boolean = false,
+    hasFullElderSet: Boolean = false,
 ) {
     val combatLvl = combatLevelFrom(skillLevels)
 
     LazyColumn(modifier.fillMaxSize()) {
         item { CombatSectionHeader(stringResource(R.string.label_dungeons_tab)) }
-        item { TowerEntryRow(bestFloor = towerBestFloor, isQueueFull = isQueueFull, onTap = onTower) }
+        // Infinite Tower is a mainland-only endgame; the isle Combat tab has its own
+        // dungeons + boss chain and doesn't participate in tower progression.
+        if (!onElderIsle) {
+            item { TowerEntryRow(bestFloor = towerBestFloor, isQueueFull = isQueueFull, onTap = onTower) }
+        }
         items(dungeons) { dungeon ->
             // Lore dungeons need discovery on top of the level gate, not instead of it,
             // or a prestiged player keeps access far below the requirement (issue #1542).
@@ -583,12 +595,18 @@ private fun CombatSelectionList(
         }
         item { CombatSectionHeader(stringResource(R.string.combat_solo_bosses)) }
         items(bosses) { boss ->
+            // Last Elder shows as a "???" row on the isle Combat tab until the full 8-piece
+            // Elder set has been crafted; the row stays visible so the finale has a place in
+            // the list to chase toward.
+            val elderMasked = boss.id == "last_elder" && !hasFullElderSet
             BossRow(
                 boss     = boss,
                 unlocked = combatLvl >= boss.combatLevelRequired,
                 runCount = bossKillCounts[boss.id] ?: 0,
                 onTap    = { onBoss(boss) },
                 isQueueFull = isQueueFull,
+                masked   = elderMasked,
+                maskedDescRes = if (elderMasked) R.string.boss_last_elder_masked_desc else null,
             )
         }
         if (raidBosses.isNotEmpty()) {
@@ -664,7 +682,11 @@ private fun CombatGearTab(
     onSpellSelected: (SpellData?) -> Unit,
     onFoodThresholdChanged: (Int) -> Unit,
     onFoodOrderChanged: (String) -> Unit,
+    ancientSignetSeen: Boolean = false,
 ) {
+    val visibleArmorSlots = remember(ancientSignetSeen) {
+        if (ancientSignetSeen) EquipSlot.ARMOR_SLOTS else EquipSlot.ARMOR_SLOTS - EquipSlot.SIGNET
+    }
     val cookedItemKeys = remember(cookingRecipes) {
         cookingRecipes.values.map { it.cookedItem }.toSet()
     }
@@ -760,7 +782,7 @@ private fun CombatGearTab(
             }
         }
         item { SlotSectionHeader(stringResource(R.string.profile_combat_gear)) }
-        items(EquipSlot.ARMOR_SLOTS) { slot ->
+        items(visibleArmorSlots) { slot ->
             EquipSlotRow(
                 slotName  = GameStrings.slotName(context, slot),
                 itemKey   = equipped[slot],
@@ -1089,14 +1111,17 @@ private fun BossRow(
     unlocked: Boolean,
     isQueueFull: Boolean,
     runCount: Int = 0,
+    masked: Boolean = false,
+    maskedDescRes: Int? = null,
     onTap: () -> Unit,
 ) {
     val context  = LocalContext.current
     val dimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+    val clickable = unlocked && !masked
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(enabled = unlocked, onClick = onTap)
+            .clickable(enabled = clickable, onClick = onTap)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -1104,30 +1129,45 @@ private fun BossRow(
             modifier         = Modifier.size(36.dp),
             contentAlignment = Alignment.Center,
         ) {
-            BossIcon(
-                bossId        = boss.id,
-                modifier      = Modifier
-                    .size(36.dp)
-                    .then(if (unlocked) Modifier else Modifier.alpha(0.38f)),
-                fallbackEmoji = boss.emoji,
-            )
+            if (masked) {
+                // Silhouette-style placeholder so the row keeps a slot without showing
+                // the actual boss art before the player unlocks the encounter.
+                Text(
+                    text  = "?",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = dimColor,
+                )
+            } else {
+                BossIcon(
+                    bossId        = boss.id,
+                    modifier      = Modifier
+                        .size(36.dp)
+                        .then(if (unlocked) Modifier else Modifier.alpha(0.38f)),
+                    fallbackEmoji = boss.emoji,
+                )
+            }
         }
         Spacer(Modifier.width(8.dp))
         Column(Modifier.weight(1f)) {
             Text(
-                text       = GameStrings.bossName(context, boss.id),
+                text       = if (masked) stringResource(R.string.boss_masked_name)
+                             else GameStrings.bossName(context, boss.id),
                 style      = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Medium,
-                color      = if (unlocked) MaterialTheme.colorScheme.onSurface else dimColor,
+                color      = if (unlocked && !masked) MaterialTheme.colorScheme.onSurface else dimColor,
             )
             Text(
-                text     = GameStrings.bossDesc(context, boss.id).takeIf { it.isNotBlank() } ?: boss.description,
+                text     = when {
+                    masked && maskedDescRes != null -> stringResource(maskedDescRes)
+                    else -> GameStrings.bossDesc(context, boss.id).takeIf { it.isNotBlank() } ?: boss.description
+                },
                 style    = MaterialTheme.typography.bodySmall,
-                color    = if (unlocked) MaterialTheme.colorScheme.onSurfaceVariant else dimColor,
-                maxLines = 1,
+                color    = if (unlocked && !masked) MaterialTheme.colorScheme.onSurfaceVariant else dimColor,
+                maxLines = if (masked) 2 else 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            if (runCount > 0) {
+            if (runCount > 0 && !masked) {
                 Text(
                     text  = stringResource(R.string.combat_dungeon_runs, runCount),
                     style = MaterialTheme.typography.labelSmall,
@@ -1138,10 +1178,10 @@ private fun BossRow(
         Spacer(Modifier.width(12.dp))
         Column(horizontalAlignment = Alignment.End) {
             Text(
-                text       = "Lv. ${boss.combatLevelRequired}",
+                text       = if (masked) "Lv. ??" else "Lv. ${boss.combatLevelRequired}",
                 style      = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.SemiBold,
-                color      = if (unlocked) MaterialTheme.colorScheme.primary else dimColor,
+                color      = if (unlocked && !masked) MaterialTheme.colorScheme.primary else dimColor,
             )
             if (isQueueFull) {
                 Text(

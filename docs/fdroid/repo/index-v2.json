@@ -14,7 +14,7 @@
       }
     },
     "address": "https://idlefantasy.tristinbaker.xyz/fdroid/repo",
-    "timestamp": 1788868745941,
+    "timestamp": 1789831092644,
     "categories": {
       "Games": {
         "name": {
@@ -31,7 +31,7 @@
           "Games"
         ],
         "issueTracker": "https://github.com/tristinbaker/IdleFantasy/issues",
-        "lastUpdated": 1788868706554,
+        "lastUpdated": 1789831052462,
         "license": "GPL-3.0-only",
         "sourceCode": "https://github.com/tristinbaker/IdleFantasy",
         "screenshots": {
@@ -140,6 +140,56 @@
         "preferredSigner": "99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010"
       },
       "versions": {
+        "8c6cef72167d6ad3992cbd526ea02af991258b9b1aee24439efb4864c3e54109": {
+          "added": 1789831052462,
+          "file": {
+            "name": "/com.tristinbaker.idlefantasy_149005.apk",
+            "sha256": "8c6cef72167d6ad3992cbd526ea02af991258b9b1aee24439efb4864c3e54109",
+            "size": 10659063
+          },
+          "manifest": {
+            "nativecode": [
+              "arm64-v8a",
+              "armeabi-v7a",
+              "x86",
+              "x86_64"
+            ],
+            "versionName": "1.14.14",
+            "versionCode": 149005,
+            "usesSdk": {
+              "minSdkVersion": 26,
+              "targetSdkVersion": 35
+            },
+            "signer": {
+              "sha256": [
+                "99a980a934cb0149bfbdd5f4358471ffe69302e0467bae4d8574d4feeda34010"
+              ]
+            },
+            "usesPermission": [
+              {
+                "name": "android.permission.POST_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
+              },
+              {
+                "name": "android.permission.WAKE_LOCK"
+              },
+              {
+                "name": "android.permission.USE_EXACT_ALARM"
+              },
+              {
+                "name": "android.permission.SCHEDULE_EXACT_ALARM"
+              },
+              {
+                "name": "com.tristinbaker.idlefantasy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+              }
+            ]
+          },
+          "whatsNew": {
+            "en-US": "• The Runecrafting sheet now shows the total runes a session will produce and correctly factors the level and ash catalyst multipliers into the projected XP, so a redwood-ashes run no longer under-reports either\n• Rotating a piece of furniture in the house editor no longer treats it as a new purchase; rotation variants share ownership and storage with the base piece\n• The Herblore potion sheet now lists every ash tier the player owns, dimming ones that don't cover the current quantity with an \"o"
+          }
+        },
         "83877ff9f65d160a274254ee812a21834d042912599ef8e4ac8fda246110e935": {
           "added": 1788868706554,
           "file": {

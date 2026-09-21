@@ -1013,10 +1013,10 @@
     <string name="item_tower_crossbow_name">Armbrust des Turms</string>
     <string name="item_tower_crossbow_desc">Eine Präzisionsarmbrust aus Turmmetall.</string>
     <string name="item_arcane_staff_desc">Ein Stab, der aus den Arkanen Ruinen geborgen wurde und noch immer vor gebündelter magischer Energie brummt – ein Überbleibsel der Katastrophe, die den Turm darüber zerstört hat.</string>
-    <string name="item_hellfire_staff_desc">A staff wreathed in demonic flame, torn from the Demon Lord\'s grasp.</string> <!-- untranslated -->
+    <string name="item_hellfire_staff_desc">Ein Stab, umhüllt von dämonischen Flammen, der dem Dämonenfürsten aus den Händen gerissen wurde.</string>
     <string name="item_void_staff_name">Stab der Leere</string>
     <string name="item_void_staff_desc">Ein Stab aus reiner Energie der Leere. Gewährt unbegrenzte Runen für alle Zaubersprüche.</string>
-    <string name="item_trident_of_the_seas_desc">A fearsome trident imbued with the power of the deep, taken from the Kraken\'s lair.</string> <!-- untranslated -->
+    <string name="item_trident_of_the_seas_desc">Ein furchterregender Dreizack, der von der Kraft der Tiefsee durchdrungen ist und aus der Höhle des Kraken stammt.</string>
     <string name="item_bronze_med_helmet_desc">Ein bronzener Helm.</string>
     <string name="item_bronze_full_helmet_desc">Ein Vollvisierhelm aus Bronze.</string>
     <string name="item_bronze_chainbody_desc">Ein Kettenhemd aus Bronze.</string>
