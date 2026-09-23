@@ -231,7 +231,7 @@
     <!-- Translator note: %1$d = minutes remaining -->
     <string name="format_minutes_remaining">%1$d minutos restantes</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
-    <string name="format_version">Version %1$s</string> <!-- untranslated -->
+    <string name="format_version">Versión %1$s</string>
 
     <!-- ===== Plurals ===== -->
     <plurals name="plural_level_ups">
@@ -291,14 +291,14 @@
     <string name="onboarding_first_session_hint">Toca cualquier habilidad para empezar.</string>
 
     <!-- ===== Settings ===== -->
-    <string name="settings_title">Settings</string> <!-- untranslated -->
+    <string name="settings_title">Ajustes</string>
     <string name="settings_notifications">Alerta de Progreso</string>
     <string name="settings_notifications_desc">Mostrar una alerta cuando finalice tu sesión.</string>
     <string name="settings_battery_optimization">Optimización de la batería</string>
     <string name="settings_battery_optimization_desc">Desactive la optimización de batería para Idle Fantasy para recibir alertas de sesión oportunas.</string>
     <string name="settings_battery_optimization_btn">Ajustar configuración</string>
     <string name="settings_language">Idioma</string>
-    <string name="settings_about">About</string> <!-- untranslated -->
+    <string name="settings_about">Acerca de</string>
     <string name="settings_open_source_licenses">Open Source Licenses</string> <!-- untranslated -->
 
     <!-- ===== HomeScreen ===== -->
@@ -308,34 +308,34 @@
     <string name="label_no_session_hint">Dirígete a Habilidades o Combate para comenzar a entrenar.</string>
     <string name="label_recent_activity">Actividad Reciente</string>
     <string name="settings_profile_layout">Diseño del perfil</string>
-    <string name="settings_profile_layout_desc">Elige entre barra lateral o pestanas superiores</string>
-    <string name="settings_profile_layout_rail">Barra</string>
-    <string name="settings_profile_layout_tabs">Pestanas</string>
-    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
-    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
+    <string name="settings_profile_layout_desc">Elige entre una barra lateral o pestañas superiores.</string>
+    <string name="settings_profile_layout_rail">Barra lateral</string>
+    <string name="settings_profile_layout_tabs">Pestañas</string>
+    <string name="settings_quest_dots">Puntos de misión en las habilidades</string>
+    <string name="settings_quest_dots_desc">Muestra un punto dorado en las habilidades que tienen una misión abierta.</string>
+    <string name="settings_prestige_notifications">Insignias de prestigio</string>
+    <string name="settings_prestige_notifications_desc">Muestra una insignia en la navegación cuando una habilidad esté lista para el prestigio.</string>
     <string name="label_switch_character">Switch character</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
-    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
-    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
-    <string name="settings_home_screen">Pantalla de Inicio</string>
-    <string name="settings_home_screen_desc">Elige qué se muestra en la pantalla de inicio</string>
+    <string name="settings_daily_reset_time">Hora de reinicio diario</string>
+    <string name="settings_daily_reset_time_desc">Hora local en la que se renuevan las misiones diarias, las diarias del gremio y las semanales. Cambiarla nunca otorga un reinicio adicional.</string>
+    <string name="settings_compact_numbers">Números abreviados</string>
+    <string name="settings_compact_numbers_desc">Abrevia las cantidades grandes de objetos (p. ej. 2,46 M en lugar de 2.461.940).</string>
+    <string name="settings_home_screen">Pantalla de inicio</string>
+    <string name="settings_home_screen_desc">Elige qué se muestra en la pantalla de inicio.</string>
     <string name="settings_recent_activity">Registro de actividad reciente</string>
-    <string name="settings_recent_activity_desc">Mostrar el botón de Actividad Reciente en el encabezado de la pantalla de inicio</string>
-    <string name="settings_journal_button">Botón de Diario</string>
-    <string name="settings_journal_button_desc">Muestra un botón de Diario en la barra superior de la pantalla de inicio para anotar notas</string>
-    <string name="settings_seasonal_events">Eventos de Temporada</string>
-    <string name="settings_seasonal_events_desc">Muestra el banner del Evento de Temporada activo en la pantalla de inicio</string>
-    <string name="settings_collapsible_town_grid">Cuadrícula de Ciudad Colapsable</string>
-    <string name="settings_collapsible_town_grid_desc">Muestra la sección de la Ciudad (Tienda, Posada, Gremio, etc.) como una tarjeta que puedes colapsar en la pantalla de inicio</string>
-    <string name="settings_character_viewer">Visor de Personaje</string>
-    <string name="settings_character_viewer_desc">Muestra el sprite de tu personaje en la pantalla de inicio</string>
-    <string name="settings_stats_bar">Barra de Estadísticas</string>
-    <string name="settings_stats_bar_desc">Muestra el Nivel de Combate, el Nivel Total y las Monedas en la pantalla de inicio</string>
-    <string name="settings_session_end_time">Hora de Finalización</string>
-    <string name="settings_session_end_time_desc">Muestra la hora estimada de finalización junto a los contadores de sesión y cola</string>
+    <string name="settings_recent_activity_desc">Muestra el botón de actividad reciente en el encabezado de la pantalla de inicio.</string>
+    <string name="settings_journal_button">Botón de diario</string>
+    <string name="settings_journal_button_desc">Muestra un botón de diario en la barra superior de la pantalla de inicio para tomar notas.</string>
+    <string name="settings_seasonal_events">Eventos de temporada</string>
+    <string name="settings_seasonal_events_desc">Muestra el banner del evento de temporada activo en la pantalla de inicio.</string>
+    <string name="settings_collapsible_town_grid">Cuadrícula de ciudad colapsable</string>
+    <string name="settings_collapsible_town_grid_desc">Muestra la sección de ciudad (tienda, posada, gremio, etc.) como una tarjeta plegable en la pantalla de inicio.</string>
+    <string name="settings_character_viewer">Visor de personaje</string>
+    <string name="settings_character_viewer_desc">Muestra el sprite de tu personaje en la pantalla de inicio.</string>
+    <string name="settings_stats_bar">Barra de estadísticas</string>
+    <string name="settings_stats_bar_desc">Muestra el nivel de combate, el nivel total y las monedas en la pantalla de inicio.</string>
+    <string name="settings_session_end_time">Hora de finalización</string>
+    <string name="settings_session_end_time_desc">Muestra la hora prevista de finalización junto a las cuentas atrás de sesión y de cola.</string>
     <string name="label_no_sessions_yet">Aún no se han completado sesiones.</string>
 
     <!-- ===== CombatScreen ===== -->
@@ -377,16 +377,16 @@
     <string name="settings_notifications_header">Notificaciones</string>
     <string name="settings_performance_header">Performance</string> <!-- untranslated -->
     <string name="settings_general_header">General</string>
-    <string name="settings_tutorial_title">Tutorial</string> <!-- untranslated -->
-    <string name="settings_tutorial_desc">Mostrar la introducción de nuevo</string>
-    <string name="settings_reopen">Reopen</string> <!-- untranslated -->
-    <string name="settings_changelog_title">What\'s New</string> <!-- untranslated -->
-    <string name="settings_changelog_desc">View the latest update changes</string> <!-- untranslated -->
-    <string name="settings_changelog_btn">View</string> <!-- untranslated -->
-    <string name="settings_foss_desc">Idle Fantasy is free and open source software.</string> <!-- untranslated -->
+    <string name="settings_tutorial_title">Tutorial</string>
+    <string name="settings_tutorial_desc">Mostrar la introducción de nuevo.</string>
+    <string name="settings_reopen">Reabrir</string>
+    <string name="settings_changelog_title">Qué hay de nuevo</string>
+    <string name="settings_changelog_desc">Ver los cambios de la última actualización.</string>
+    <string name="settings_changelog_btn">Ver</string>
+    <string name="settings_foss_desc">Idle Fantasy es software libre y de código abierto.</string>
     <string name="settings_reset_title">Reiniciar progreso</string>
     <string name="settings_reset_desc">Borra todas las habilidades, objetos, misiones y monedas.</string>
-    <string name="settings_reset_btn">Reset</string> <!-- untranslated -->
+    <string name="settings_reset_btn">Reiniciar</string>
     <string name="reset_confirm1_title">Reiniciar todo el progreso?</string>
     <string name="reset_confirm1_body">Esto borrará toda la experiencia de habilidad, los objetos, las monedas y el progreso de las misiones. Esta acción es irreversible.</string>
     <string name="reset_confirm2_title">Está seguro?</string>
@@ -407,23 +407,23 @@
 
     <!-- ===== Settings — appearance / language / save data ===== -->
     <string name="settings_appearance">Apariencia</string>
-    <string name="settings_theme">Theme</string> <!-- untranslated -->
+    <string name="settings_theme">Tema</string>
     <string name="settings_theme_desc">Elige tu combinación de colores preferida</string>
     <string name="settings_theme_dark">Oscuro</string>
     <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
     <string name="settings_theme_light">Light</string> <!-- untranslated -->
     <string name="settings_theme_system">System</string> <!-- untranslated -->
-    <string name="settings_font_size">Font Size</string> <!-- untranslated -->
-    <string name="settings_font_tiny">Tiny</string> <!-- untranslated -->
+    <string name="settings_font_size">Tamaño de fuente</string>
+    <string name="settings_font_tiny">Diminuto</string>
     <string name="settings_font_small">Pequeño</string>
     <string name="settings_font_normal">Normal</string>
-    <string name="settings_font_large">Large</string> <!-- untranslated -->
-    <string name="settings_font_huge">Huge</string> <!-- untranslated -->
+    <string name="settings_font_large">Grande</string>
+    <string name="settings_font_huge">Enorme</string>
     <string name="settings_import_theme">Importar temas</string>
-    <string name="settings_import_theme_desc">Importa temas personalizados desde un archivo</string>
+    <string name="settings_import_theme_desc">Importa temas personalizados desde un archivo.</string>
     <string name="settings_delete_theme_btn">Eliminar tema</string>
-    <string name="settings_theme_imported_ok">Archivo de tema importado correctamente</string>
-    <string name="settings_theme_imported_fail">Error al importar: archivo no válido</string>
+    <string name="settings_theme_imported_ok">Archivo de tema importado correctamente.</string>
+    <string name="settings_theme_imported_fail">Error al importar: archivo no válido.</string>
     <string name="settings_theme_editor">Editor de temas</string>
     <string name="theme_editor_new_btn">Nuevo tema</string>
     <string name="theme_editor_edit_btn">Editar tema</string>
@@ -448,8 +448,8 @@
     <string name="theme_editor_save">Guardar tema</string>
     <string name="theme_editor_export">Exportar</string>
     <string name="theme_editor_saved_ok">Tema guardado y aplicado</string>
-    <string name="theme_editor_exported_ok">Tema exportado</string>
-    <string name="settings_language_desc">Override the app display language</string> <!-- untranslated -->
+    <string name="theme_editor_exported_ok">Tema exportado.</string>
+    <string name="settings_language_desc">Cambia el idioma de la aplicación.</string>
 
 
 
@@ -470,42 +470,42 @@
 
 
 
-    <string name="settings_lang_system">System</string> <!-- untranslated -->
-    <string name="settings_save_data">Save Data</string> <!-- untranslated -->
-    <string name="settings_export">Export Save</string> <!-- untranslated -->
-    <string name="settings_export_desc">Save your progress to a file</string> <!-- untranslated -->
-    <string name="settings_export_btn">Export</string> <!-- untranslated -->
-    <string name="settings_import">Import Save</string> <!-- untranslated -->
-    <string name="settings_import_desc">Restore progress from a file</string> <!-- untranslated -->
-    <string name="settings_import_btn">Import</string> <!-- untranslated -->
-    <string name="settings_source_code">Source Code</string> <!-- untranslated -->
+    <string name="settings_lang_system">Sistema</string>
+    <string name="settings_save_data">Datos guardados</string>
+    <string name="settings_export">Exportar partida</string>
+    <string name="settings_export_desc">Guarda tu progreso en un archivo.</string>
+    <string name="settings_export_btn">Exportar</string>
+    <string name="settings_import">Importar partida</string>
+    <string name="settings_import_desc">Restaura tu progreso desde un archivo.</string>
+    <string name="settings_import_btn">Importar</string>
+    <string name="settings_source_code">Código fuente</string>
 
-    <string name="settings_source_open">Open</string> <!-- untranslated -->
-    <string name="settings_wiki">Wiki</string> <!-- untranslated -->
+    <string name="settings_source_open">Abrir</string>
+    <string name="settings_wiki">Wiki</string>
 
     <string name="settings_discord">Discord</string>
 
-    <string name="settings_exported_ok">Save exported</string> <!-- untranslated -->
-    <string name="settings_imported_ok">Save imported successfully</string> <!-- untranslated -->
-    <string name="settings_imported_fail">Failed to import — invalid file</string> <!-- untranslated -->
-    <string name="settings_backup_title">Automatic Backup</string> <!-- untranslated -->
-    <string name="settings_backup_folder">Backup Folder</string> <!-- untranslated -->
-    <string name="settings_backup_no_folder">No folder selected</string> <!-- untranslated -->
-    <string name="settings_backup_choose">Choose</string> <!-- untranslated -->
+    <string name="settings_exported_ok">Partida exportada.</string>
+    <string name="settings_imported_ok">Partida importada correctamente.</string>
+    <string name="settings_imported_fail">Error al importar: archivo no válido.</string>
+    <string name="settings_backup_title">Copia de seguridad automática</string>
+    <string name="settings_backup_folder">Carpeta de copia de seguridad</string>
+    <string name="settings_backup_no_folder">Ninguna carpeta seleccionada.</string>
+    <string name="settings_backup_choose">Elegir</string>
     <string name="settings_backup_frequency">Frecuencia</string>
-    <string name="settings_backup_count">Number of backups</string> <!-- untranslated -->
-    <string name="settings_backup_off">Off</string> <!-- untranslated -->
-    <string name="settings_backup_hourly">Hourly</string> <!-- untranslated -->
-    <string name="settings_backup_daily">Daily</string> <!-- untranslated -->
-    <string name="settings_backup_weekly">Weekly</string> <!-- untranslated -->
-    <string name="settings_backup_at_5am">at 5:00 AM</string> <!-- untranslated -->
-    <string name="settings_backup_now">Back Up Now</string> <!-- untranslated -->
-    <string name="settings_backup_status">Last Backup</string> <!-- untranslated -->
-    <string name="settings_backup_never">Never backed up</string> <!-- untranslated -->
-    <string name="settings_backup_failed_with">Failed: %1$s</string> <!-- untranslated -->
-    <string name="settings_backup_success">Backup saved.</string> <!-- untranslated -->
-    <string name="settings_backup_failed">Backup failed.</string> <!-- untranslated -->
-    <string name="settings_backup_folder_set">Backup folder set.</string> <!-- untranslated -->
+    <string name="settings_backup_count">Número de copias de seguridad</string>
+    <string name="settings_backup_off">Desactivada</string>
+    <string name="settings_backup_hourly">Cada hora</string>
+    <string name="settings_backup_daily">Diaria</string>
+    <string name="settings_backup_weekly">Semanal</string>
+    <string name="settings_backup_at_5am">a las 5:00</string>
+    <string name="settings_backup_now">Hacer copia ahora</string>
+    <string name="settings_backup_status">Última copia de seguridad</string>
+    <string name="settings_backup_never">Aún sin copia de seguridad.</string>
+    <string name="settings_backup_failed_with">Error: %1$s</string>
+    <string name="settings_backup_success">Copia de seguridad guardada.</string>
+    <string name="settings_backup_failed">No se pudo crear la copia de seguridad.</string>
+    <string name="settings_backup_folder_set">Carpeta de copia de seguridad configurada.</string>
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Ciudad</string>
@@ -1631,10 +1631,10 @@
     <string name="elder_armor_sigil_embed">Embed</string> <!-- untranslated -->
     <string name="elder_armor_sigil_remove">Remove</string> <!-- untranslated -->
     <string name="elder_armor_pick_stone">Pick a sigil stone</string> <!-- untranslated -->
-    <string name="item_mythrite_ore_name">Mythrite Ore</string> <!-- untranslated -->
-    <string name="item_abyssal_ore_name">Abyssal Ore</string> <!-- untranslated -->
-    <string name="item_voidsteel_ore_name">Voidsteel Ore</string> <!-- untranslated -->
-    <string name="item_starforged_ore_name">Starforged Ore</string> <!-- untranslated -->
+    <string name="item_mythrite_ore_name">Mineral de mythrite</string>
+    <string name="item_abyssal_ore_name">Mineral Abisal</string>
+    <string name="item_voidsteel_ore_name">Mineral de voidsteel</string>
+    <string name="item_starforged_ore_name">Mineral Estelar</string>
     <string name="item_mythrite_bar_name">Mythrite Bar</string> <!-- untranslated -->
     <string name="item_abyssal_bar_name">Abyssal Bar</string> <!-- untranslated -->
     <string name="item_voidsteel_bar_name">Voidsteel Bar</string> <!-- untranslated -->
@@ -1704,10 +1704,10 @@
     <string name="item_elder_familiar_name">Elder Familiar</string> <!-- untranslated -->
 
     <!-- Elder Isle: ore descriptions -->
-    <string name="item_mythrite_ore_desc">Silvery isle ore. Smelts into Mythrite Bars, the base metal of the Coastal armor tier.</string> <!-- untranslated -->
-    <string name="item_abyssal_ore_desc">Dark isle ore laced with pressure-cracked veins. Smelts into Abyssal Bars for Grove-tier gear.</string> <!-- untranslated -->
-    <string name="item_voidsteel_ore_desc">Isle ore that hums faintly under pressure. Smelts into Voidsteel Bars for Volcanic-tier gear.</string> <!-- untranslated -->
-    <string name="item_starforged_ore_desc">The isle\'s rarest ore, said to be shed from the seal itself. Smelts into Starforged Bars for the Elder set.</string> <!-- untranslated -->
+    <string name="item_mythrite_ore_desc">Mineral plateado de la isla. Se funde en barras de mythrite, el metal base de la gama Costera de armaduras.</string>
+    <string name="item_abyssal_ore_desc">Mineral oscuro de la isla con vetas agrietadas por la presión. Se funde en barras abisales para el equipo de la gama Bosque.</string>
+    <string name="item_voidsteel_ore_desc">Mineral de la isla que zumba débilmente bajo presión. Se funde en barras de voidsteel para el equipo de la gama Volcánica.</string>
+    <string name="item_starforged_ore_desc">El mineral más raro de la isla, se dice que se desprende del propio sello. Se funde en barras estelares para el conjunto del Anciano.</string>
     <string name="town_chronos_spire_no_bonus">Upgrade to reduce player session durations</string> <!-- untranslated -->
     <string name="town_chronos_spire_active_bonus">%1$d%% reduction to player session durations</string> <!-- untranslated -->
 
@@ -1947,7 +1947,7 @@
     <string name="bonus_combined_xp">XP combinado</string>
     <string name="bonus_yield">+%1$d%% rendimiento</string>
     <string name="bonus_boost">+%1$d%% refuerzo</string>
-    <string name="bonus_agility_prestige_detail">From prestige: %1$dm sessions at level %2$d become %3$dm</string> <!-- untranslated -->
+    <string name="bonus_agility_prestige_detail">Por prestigio: las sesiones de %1$dm en el nivel %2$d pasan a %3$dm</string>
     <string name="bonus_coin_return">+%1$d%% devolución de monedas</string>
     <string name="bonus_tower">Torre</string>
     <string name="bonus_builder_discount_detail" formatted="false">0.5% off building upgrade costs per level</string> <!-- untranslated -->
@@ -2269,7 +2269,7 @@
     <string name="title_master_farmer_name">Maestro Granjero</string>
     <string name="title_master_farmer_requirement">Alcanza el nivel máximo del Gremio de Granjeros</string>
     <string name="settings_art_credits">Créditos artísticos</string>
-    <string name="settings_art_credits_desc">The artists behind the game\'s art</string> <!-- untranslated -->
+    <string name="settings_art_credits_desc">Los artistas detrás del arte del juego.</string>
     <string name="settings_credit_banners_title">Estandartes de temporada</string>
     <string name="settings_credit_banners_subtitle">Arte de Wenrexa</string>
     <string name="settings_credit_skill_icons_title">Iconos de Habilidades</string>
@@ -2531,7 +2531,7 @@
     <string name="prestige_path_rotation">Crop Rotation</string> <!-- untranslated -->
 
     <!-- Prestige path names (skill flavored) -->
-    <string name="prestige_path_mining_yield">Purer Ore</string> <!-- untranslated -->
+    <string name="prestige_path_mining_yield">Mineral Más Puro</string>
     <string name="prestige_path_fishing_yield">More Fish</string> <!-- untranslated -->
     <string name="prestige_path_woodcutting_yield">Sharper Axe</string> <!-- untranslated -->
     <string name="prestige_path_thieving_yield">Faster Picking</string> <!-- untranslated -->
@@ -2578,8 +2578,8 @@
     <string name="race_proficiency_human">Racial bonus: an exclusive XP mastery tier in every skill</string> <!-- untranslated -->
     <string name="race_change_confirm_message">Your race grants race-locked prestige upgrades. Changing race refunds any points spent in other races\' branches, and you can only change race once every 24 hours.</string> <!-- untranslated -->
     <!-- Heirloom items (raid boss rare drops that level up with use) -->
-    <string name="item_heirloom_pickaxe_name">Heirloom Pickaxe</string> <!-- untranslated -->
-    <string name="item_heirloom_pickaxe_desc">A family pickaxe passed down through generations. It remembers every ore its bearers ever broke.</string> <!-- untranslated -->
+    <string name="item_heirloom_pickaxe_name">Pico Heredado</string>
+    <string name="item_heirloom_pickaxe_desc">Un pico familiar transmitido de generación en generación. Recuerda cada mineral que alguna vez rompieron sus portadores.</string>
     <string name="item_heirloom_axe_name">Heirloom Axe</string> <!-- untranslated -->
     <string name="item_heirloom_axe_desc">A woodsman\'s axe worn smooth by a hundred hands. Every felled tree sharpens it a little more.</string> <!-- untranslated -->
     <string name="item_heirloom_fishing_rod_name">Heirloom Fishing Rod</string> <!-- untranslated -->

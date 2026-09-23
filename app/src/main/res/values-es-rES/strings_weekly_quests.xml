@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Weekly quest names and descriptions -->
-    <string name="quest_weekly_iron_miner_name">Iron Prospector</string> <!-- untranslated -->
-    <string name="quest_weekly_iron_miner_desc">Mine 750 iron ore this week.</string> <!-- untranslated -->
-    <string name="quest_weekly_coal_miner_name">Coal Baron</string> <!-- untranslated -->
-    <string name="quest_weekly_coal_miner_desc">Mine 450 coal this week.</string> <!-- untranslated -->
-    <string name="quest_weekly_mithril_miner_name">Mithril Seeker</string> <!-- untranslated -->
-    <string name="quest_weekly_mithril_miner_desc">Mine 300 mithril ore this week.</string> <!-- untranslated -->
-    <string name="quest_weekly_runite_miner_name">Deep Core Miner</string> <!-- untranslated -->
-    <string name="quest_weekly_runite_miner_desc">Mine 150 runite ore this week.</string> <!-- untranslated -->
+    <string name="quest_weekly_iron_miner_name">Prospector de Hierro</string>
+    <string name="quest_weekly_iron_miner_desc">Extrae 750 minerales de hierro esta semana.</string>
+    <string name="quest_weekly_coal_miner_name">Barón del Carbón</string>
+    <string name="quest_weekly_coal_miner_desc">Extrae 450 carbón esta semana.</string>
+    <string name="quest_weekly_mithril_miner_name">Buscador de Mithril</string>
+    <string name="quest_weekly_mithril_miner_desc">Extrae 300 minerales de mithril esta semana.</string>
+    <string name="quest_weekly_runite_miner_name">Minero del Núcleo Profundo</string>
+    <string name="quest_weekly_runite_miner_desc">Extrae 150 minerales de runite esta semana.</string>
     <string name="quest_weekly_oak_logger_name">Oak Harvester</string> <!-- untranslated -->
     <string name="quest_weekly_oak_logger_desc">Chop 600 oak logs this week.</string> <!-- untranslated -->
     <string name="quest_weekly_yew_logger_name">Yew Feller</string> <!-- untranslated -->

@@ -66,10 +66,10 @@
     <string name="tree_magic_tree_name">Albero Magico</string>
     <string name="tree_redwood_tree_name">Sequoia</string>
     <!-- Elder Isle woodcutting targets -->
-    <string name="tree_coastal_pine_name">Coastal Pine</string> <!-- untranslated -->
-    <string name="tree_grove_oak_name">Grove Oak</string> <!-- untranslated -->
-    <string name="tree_abyssal_tree_name">Abyssal Tree</string> <!-- untranslated -->
-    <string name="tree_starwood_tree_name">Starwood Tree</string> <!-- untranslated -->
+    <string name="tree_coastal_pine_name">Pino Costiero</string>
+    <string name="tree_grove_oak_name">Quercia dei Boschi</string>
+    <string name="tree_abyssal_tree_name">Albero Abissale</string>
+    <string name="tree_starwood_tree_name">Stellaviva</string>
 
     <!-- ===== Agility course names and descriptions ===== -->
     <string name="agility_beginner_course_name">Percorso per Principianti</string>

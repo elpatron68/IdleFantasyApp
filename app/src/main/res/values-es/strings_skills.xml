@@ -103,14 +103,14 @@
     <string name="agility_transcendent_course_name">Curso Transcendente</string>
     <string name="agility_transcendent_course_desc">El desafío definitivo de agilidad que trasciende los límites mortales.</string>
     <!-- Elder Isle agility courses (train elder Agility to shorten isle sessions to 45 min at 99) -->
-    <string name="agility_elder_coastal_run_name">Coastal Run</string> <!-- untranslated -->
-    <string name="agility_elder_coastal_run_desc">A jog along the isle\'s wave-scarred beach. Rocks shift underfoot with the tide.</string> <!-- untranslated -->
-    <string name="agility_elder_grove_traverse_name">Grove Traverse</string> <!-- untranslated -->
-    <string name="agility_elder_grove_traverse_desc">A rope-and-ledge circuit through the rune-lit canopy of the Ancient Forest.</string> <!-- untranslated -->
-    <string name="agility_elder_volcano_scramble_name">Volcano Scramble</string> <!-- untranslated -->
-    <string name="agility_elder_volcano_scramble_desc">A climb across the smoking flanks of the peak. The stone remembers being an altar.</string> <!-- untranslated -->
-    <string name="agility_elder_abyssal_ascent_name">Abyssal Ascent</string> <!-- untranslated -->
-    <string name="agility_elder_abyssal_ascent_desc">A vertical route up the pressure-cracked walls of the Abyssal Depths. Few make the top.</string> <!-- untranslated -->
+    <string name="agility_elder_coastal_run_name">Correría Costera</string>
+    <string name="agility_elder_coastal_run_desc">Un trote por la playa marcada por las olas de la isla. Las rocas se mueven bajo tus pies con la marea.</string>
+    <string name="agility_elder_grove_traverse_name">Travesía del Bosquecillo</string>
+    <string name="agility_elder_grove_traverse_desc">Un circuito de cuerdas y repisas por la copa iluminada por runas del Bosque Antiguo.</string>
+    <string name="agility_elder_volcano_scramble_name">Escalada del Volcán</string>
+    <string name="agility_elder_volcano_scramble_desc">Una escalada por los flancos humeantes del pico. La piedra recuerda haber sido un altar.</string>
+    <string name="agility_elder_abyssal_ascent_name">Ascenso Abisal</string>
+    <string name="agility_elder_abyssal_ascent_desc">Una ruta vertical por las paredes agrietadas de las Profundidades Abisales. Pocos llegan a la cima.</string>
 
     <!-- ===== Session skill type labels ===== -->
     <string name="skill_expedition_name">Expedición</string>

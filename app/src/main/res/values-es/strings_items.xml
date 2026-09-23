@@ -17,8 +17,8 @@
     <string name="item_mithril_ore_desc">Un mineral raro con propiedades mágicas.</string>
     <string name="item_adamantite_ore_name">Mineral de adamantita</string>
     <string name="item_adamantite_ore_desc">Mineral extremadamente duro y muy raro.</string>
-    <string name="item_platinum_ore_name">Platinum Ore</string> <!-- untranslated -->
-    <string name="item_platinum_ore_desc">A rare platinum ore used for platinum bars.</string> <!-- untranslated -->
+    <string name="item_platinum_ore_name">Mineral de platino</string>
+    <string name="item_platinum_ore_desc">Un mineral de platino raro utilizado para las barras de platino.</string>
     <string name="item_runite_ore_name">Mineral de runite</string>
     <string name="item_runite_ore_desc">El mineral más raro que se puede extraer, utilizado para los equipos más resistentes.</string>
     <string name="item_rune_essence_name">Esencia rúnica</string>
@@ -337,8 +337,8 @@
     <string name="item_adamantite_pickaxe_desc">Un pico de adamantita extremadamente resistente.</string>
     <string name="item_runite_pickaxe_name">Pico de Runite</string>
     <string name="item_runite_pickaxe_desc">El mejor pico disponible, utilizado por los mineros más experimentados.</string>
-    <string name="item_divine_pickaxe_name">Divine Pickaxe</string> <!-- untranslated -->
-    <string name="item_divine_pickaxe_desc">A pickaxe touched by divine light. Stone parts before it like water.</string> <!-- untranslated -->
+    <string name="item_divine_pickaxe_name">Pico Divino</string>
+    <string name="item_divine_pickaxe_desc">Un pico tocado por la luz divina. La piedra se abre ante él como el agua.</string>
 
     <!-- Tools — axes -->
     <string name="item_bronze_axe_name">Hacha de Bronce</string>
@@ -786,8 +786,8 @@
     <string name="item_adamantite_med_helmet_name">Adamantite Med Helmet</string> <!-- untranslated -->
     <string name="item_adamantite_plateskirt_name">Adamantite Plateskirt</string> <!-- untranslated -->
     <string name="item_adamantite_square_shield_name">Adamantite Square Shield</string> <!-- untranslated -->
-    <string name="item_agility_cape_name">Agility Cape</string> <!-- untranslated -->
-    <string name="item_agility_guild_cape_name">Agility Guild Cape</string> <!-- untranslated -->
+    <string name="item_agility_cape_name">Capa de Agilidad</string>
+    <string name="item_agility_guild_cape_name">Capa del Gremio de Agilidad</string>
     <string name="item_amulet_of_fury_name">Amulet Of Fury</string> <!-- untranslated -->
     <string name="item_amulet_of_fury_desc">A powerful amulet granting bonuses to all combat styles. Requires Mercantile level 80 to purchase.</string> <!-- untranslated -->
     <string name="item_amulet_of_strength_name">Amulet Of Strength</string> <!-- untranslated -->
@@ -822,7 +822,7 @@
     <string name="item_cooking_guild_cape_name">Cooking Guild Cape</string> <!-- untranslated -->
     <string name="item_crafting_cape_name">Crafting Cape</string> <!-- untranslated -->
     <string name="item_crafting_guild_cape_name">Crafting Guild Cape</string> <!-- untranslated -->
-    <string name="item_deep_iron_pickaxe_name">Deep Iron Pickaxe</string> <!-- untranslated -->
+    <string name="item_deep_iron_pickaxe_name">Pico de Hierro Profundo</string>
     <string name="item_defense_cape_name">Defense Cape</string> <!-- untranslated -->
     <string name="item_demon_lord_name">Demon Lord</string> <!-- untranslated -->
     <string name="item_divine_frying_pan_name">Sartén Divina</string>
@@ -845,7 +845,7 @@
     <string name="item_dwarven_helm_name">Dwarven Helm</string> <!-- untranslated -->
     <string name="item_dwarven_hoe_name">Dwarven Hoe</string> <!-- untranslated -->
     <string name="item_dwarven_lockpick_name">Ganzúa Enana</string>
-    <string name="item_dwarven_pickaxe_name">Dwarven Pickaxe</string> <!-- untranslated -->
+    <string name="item_dwarven_pickaxe_name">Pico Enano</string>
     <string name="item_dwarven_platebody_name">Dwarven Platebody</string> <!-- untranslated -->
     <string name="item_dwarven_platelegs_name">Dwarven Platelegs</string> <!-- untranslated -->
     <string name="item_dwarven_scimitar_name">Dwarven Scimitar</string> <!-- untranslated -->
@@ -863,7 +863,7 @@
     <string name="item_flame_heart_amulet_name">Flame Heart Amulet</string> <!-- untranslated -->
     <string name="item_fletching_cape_name">Fletching Cape</string> <!-- untranslated -->
     <string name="item_fletching_guild_cape_name">Fletching Guild Cape</string> <!-- untranslated -->
-    <string name="item_forge_pickaxe_name">Forge Pickaxe</string> <!-- untranslated -->
+    <string name="item_forge_pickaxe_name">Pico de Forja</string>
     <string name="item_hellfire_staff_name">Hellfire Staff</string> <!-- untranslated -->
     <string name="item_herblore_guild_cape_name">Herblore Guild Cape</string> <!-- untranslated -->
     <string name="item_hp_cape_name">Hp Cape</string> <!-- untranslated -->
@@ -889,8 +889,8 @@
     <string name="item_elven_longbow_name">Elven Longbow</string> <!-- untranslated -->
     <string name="item_maple_shortbow_name">Maple Shortbow</string> <!-- untranslated -->
     <string name="item_mercantile_guild_cape_name">Mercantile Guild Cape</string> <!-- untranslated -->
-    <string name="item_mining_cape_name">Mining Cape</string> <!-- untranslated -->
-    <string name="item_mining_guild_cape_name">Mining Guild Cape</string> <!-- untranslated -->
+    <string name="item_mining_cape_name">Capa de Minería</string>
+    <string name="item_mining_guild_cape_name">Capa del Gremio de Minería</string>
     <string name="item_mithril_arrow_tip_name">Mithril Arrow Tips</string> <!-- untranslated -->
     <string name="item_mithril_boots_name">Mithril Boots</string> <!-- untranslated -->
     <string name="item_mithril_chainbody_name">Mithril Chainbody</string> <!-- untranslated -->
@@ -1107,9 +1107,9 @@
     <string name="item_kraken_tentacle_desc">A coiling tentacle ring that channels the Kraken\'s arcane power.</string> <!-- untranslated -->
     <string name="item_tower_cape_name">Tower Cape</string> <!-- untranslated -->
     <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
-    <string name="item_mining_cape_desc" formatted="false">Awarded for reaching level 99 Mining. Grants 10% more ore per session.</string> <!-- untranslated -->
+    <string name="item_mining_cape_desc" formatted="false">Se otorga por alcanzar el nivel 99 de Minería. Otorga un 10% más de mineral por sesión.</string>
     <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
-    <string name="item_mining_guild_cape_desc" formatted="false">Awarded for reaching Mining Guild level 10. Grants 5% more ore per session.</string> <!-- untranslated -->
+    <string name="item_mining_guild_cape_desc" formatted="false">Se otorga por alcanzar el nivel 10 del Gremio de Minería. Otorga un 5% más de mineral por sesión.</string>
     <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
     <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
     <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
@@ -1141,8 +1141,8 @@
     <string name="item_mercantile_cape_name">Mercantile Cape</string> <!-- untranslated -->
     <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
     <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_agility_cape_desc" formatted="false">Awarded for reaching level 99 Agility. Grants 10% more XP per session.</string> <!-- untranslated -->
-    <string name="item_agility_guild_cape_desc" formatted="false">Awarded for reaching Agility Guild level 10. Grants 5% more XP per session.</string> <!-- untranslated -->
+    <string name="item_agility_cape_desc" formatted="false">Se otorga al alcanzar el nivel 99 de Agilidad. Otorga un 10% más de XP por sesión.</string>
+    <string name="item_agility_guild_cape_desc" formatted="false">Se otorga al alcanzar el nivel 10 del Gremio de Agilidad. Otorga un 5% más de XP por sesión.</string>
     <string name="item_slayer_cape_name">Slayer Cape</string> <!-- untranslated -->
     <string name="item_slayer_cape_desc" formatted="false">Awarded for reaching level 99 Slayer. Grants 10% more Slayer points.</string> <!-- untranslated -->
     <string name="item_attack_cape_desc" formatted="false">Awarded for reaching level 99 Attack. Grants 10% bonus Attack XP.</string> <!-- untranslated -->
@@ -1155,9 +1155,9 @@
     <string name="item_mages_guild_cape_desc" formatted="false">Awarded for reaching Mages Guild level 10. Grants 5% bonus Magic XP.</string> <!-- untranslated -->
     <string name="item_slayer_guild_cape_desc" formatted="false">Awarded for reaching Slayers Guild level 10. Grants 5% bonus Slayer XP.</string> <!-- untranslated -->
     <string name="item_hp_cape_desc" formatted="false">Awarded for reaching level 99 HP. Grants 10% bonus Hitpoints XP.</string> <!-- untranslated -->
-    <string name="item_deep_iron_pickaxe_desc">Forged from ore found in the Collapsed Mine\'s deepest shafts. Strikes with uncanny precision.</string> <!-- untranslated -->
-    <string name="item_dwarven_pickaxe_desc">A masterwork dwarven pickaxe. The finest mining tool ever crafted.</string> <!-- untranslated -->
-    <string name="item_forge_pickaxe_desc">Tempered in the flames of the Ancient Forge itself. The rarest and most powerful pickaxe in existence.</string> <!-- untranslated -->
+    <string name="item_deep_iron_pickaxe_desc">Forjado con mineral extraído de los pozos más profundos de la Mina Derrumbada. Golpea con una precisión asombrosa.</string>
+    <string name="item_dwarven_pickaxe_desc">Un pico enano de obra maestra. La mejor herramienta de minería jamás fabricada.</string>
+    <string name="item_forge_pickaxe_desc">Templado en las llamas de la propia Forja Antigua. El pico más raro y poderoso que existe.</string>
     <string name="item_ironwood_axe_desc">Hewn from the ironwood trees that once stood in the Ancient Forest Ruins. Exceptionally durable.</string> <!-- untranslated -->
     <string name="item_dwarven_axe_desc">A legendary dwarven axe. Cuts through any tree with ease.</string> <!-- untranslated -->
     <string name="item_sanctum_axe_desc">Forged in the shadow of the Corrupted Sanctum. Its blade cuts through even magic logs with ease.</string> <!-- untranslated -->

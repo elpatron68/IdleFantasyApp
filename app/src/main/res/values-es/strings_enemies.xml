@@ -25,7 +25,7 @@
     <string name="enemy_ancient_guardian_name">Ancient Guardian</string> <!-- untranslated -->
     <string name="enemy_lich_name">Lich</string> <!-- untranslated -->
     <string name="enemy_cave_troll_name">Cave Troll</string> <!-- untranslated -->
-    <string name="enemy_mine_spider_name">Mine Spider</string> <!-- untranslated -->
+    <string name="enemy_mine_spider_name">Araña de la Mina</string>
     <string name="enemy_rock_golem_name">Rock Golem</string> <!-- untranslated -->
     <string name="enemy_iron_golem_name">Iron Golem</string> <!-- untranslated -->
     <string name="enemy_forge_demon_name">Forge Demon</string> <!-- untranslated -->

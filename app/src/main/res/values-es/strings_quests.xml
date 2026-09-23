@@ -472,10 +472,10 @@
 
     <!-- Daily quest objectives — override the generated verb+item text, whose item names
          read wrong for cooking/fishing (issue #1383: "Cook 20 Cooked Swordfish") -->
-    <string name="quest_daily_mine_iron_objective">Mine 150 iron ore.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_coal_objective">Mine 300 coal.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_mithril_objective">Mine 50 mithril ore.</string> <!-- untranslated -->
-    <string name="quest_daily_mine_runite_objective">Mine 20 runite ore.</string> <!-- untranslated -->
+    <string name="quest_daily_mine_iron_objective">Extrae 150 minerales de hierro.</string>
+    <string name="quest_daily_mine_coal_objective">Extrae 300 de carbón.</string>
+    <string name="quest_daily_mine_mithril_objective">Extrae 50 minerales de mithril.</string>
+    <string name="quest_daily_mine_runite_objective">Extrae 20 minerales de runite.</string>
     <string name="quest_daily_fish_salmon_objective">Catch 120 salmon.</string> <!-- untranslated -->
     <string name="quest_daily_fish_lobster_objective">Catch 60 lobsters.</string> <!-- untranslated -->
     <string name="quest_daily_fish_swordfish_objective">Catch 30 swordfish.</string> <!-- untranslated -->

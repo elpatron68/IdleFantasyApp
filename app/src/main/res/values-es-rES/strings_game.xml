@@ -103,7 +103,7 @@
     <string name="equip_slot_ring">Ring</string> <!-- untranslated -->
     <string name="equip_slot_necklace">Necklace</string> <!-- untranslated -->
     <string name="equip_slot_shield">Shield</string> <!-- untranslated -->
-    <string name="equip_slot_pickaxe">Pickaxe</string> <!-- untranslated -->
+    <string name="equip_slot_pickaxe">Pico</string>
     <string name="equip_slot_axe">Axe</string> <!-- untranslated -->
     <string name="equip_slot_fishing_rod">Fishing Rod</string> <!-- untranslated -->
     <string name="equip_slot_hoe">Hoe</string> <!-- untranslated -->
