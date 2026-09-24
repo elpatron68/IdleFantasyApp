@@ -55,19 +55,19 @@
     <string name="item_diamond_desc">La gema más rara y valiosa.</string>
 
     <!-- ===== Logs ===== -->
-    <string name="item_log_name">Logs</string> <!-- untranslated -->
+    <string name="item_log_name">Troncos</string>
     <string name="item_log_desc">Troncos básicos de árboles normales. Se utilizan para encender fuego y fabricar flechas.</string>
-    <string name="item_oak_log_name">Oak Logs</string> <!-- untranslated -->
+    <string name="item_oak_log_name">Troncos de roble</string>
     <string name="item_oak_log_desc">Troncos de roble.</string>
-    <string name="item_willow_log_name">Willow Logs</string> <!-- untranslated -->
+    <string name="item_willow_log_name">Troncos de sauce</string>
     <string name="item_willow_log_desc">Troncos ligeros de sauce.</string>
-    <string name="item_maple_log_name">Maple Logs</string> <!-- untranslated -->
+    <string name="item_maple_log_name">Troncos de arce</string>
     <string name="item_maple_log_desc">Troncos densos de arces.</string>
-    <string name="item_yew_log_name">Yew Logs</string> <!-- untranslated -->
+    <string name="item_yew_log_name">Troncos de tejo</string>
     <string name="item_yew_log_desc">Troncos de tejos antiguos.</string>
-    <string name="item_magic_log_name">Magic Logs</string> <!-- untranslated -->
+    <string name="item_magic_log_name">Troncos mágicos</string>
     <string name="item_magic_log_desc">Troncos imbuidos de árboles mágicos raros.</string>
-    <string name="item_redwood_log_name">Redwood Logs</string> <!-- untranslated -->
+    <string name="item_redwood_log_name">Troncos de secuoya</string>
     <string name="item_redwood_log_desc">Enormes troncos procedentes de las secuoyas más altas.</string>
 
     <!-- ===== Raw fish ===== -->
@@ -353,8 +353,8 @@
     <string name="item_adamantite_axe_desc">Un hacha de adamantita extremadamente resistente.</string>
     <string name="item_runite_axe_name">Hacha de Runite</string>
     <string name="item_runite_axe_desc">La mejor hacha disponible, utilizada por los leñadores más experimentados.</string>
-    <string name="item_divine_axe_name">Divine Axe</string> <!-- untranslated -->
-    <string name="item_divine_axe_desc">An axe that fells even the oldest trees with a single blow.</string> <!-- untranslated -->
+    <string name="item_divine_axe_name">Hacha Divina</string>
+    <string name="item_divine_axe_desc">Un hacha que derriba hasta los árboles más antiguos de un solo golpe.</string>
 
     <!-- Tools — fishing rods -->
     <string name="item_bronze_fishing_rod_name">Bronze Fishing Rod</string> <!-- untranslated -->
@@ -480,12 +480,12 @@
     <string name="item_black_pearl_name">Black Pearl</string> <!-- untranslated -->
     <string name="item_nature_rune_name">Nature Rune</string> <!-- untranslated -->
     <string name="item_herb_name">Herb</string> <!-- untranslated -->
-    <string name="item_mahogany_log_name">Mahogany Log</string> <!-- untranslated -->
+    <string name="item_mahogany_log_name">Tronco de caoba</string>
     <string name="item_oyster_name">Oyster</string> <!-- untranslated -->
     <string name="item_crab_name">Crab</string> <!-- untranslated -->
     <string name="item_bird_nest_name">Bird Nest</string> <!-- untranslated -->
     <string name="item_tree_seed_name">Tree Seed</string> <!-- untranslated -->
-    <string name="item_teak_log_name">Teak Log</string> <!-- untranslated -->
+    <string name="item_teak_log_name">Tronco de teca</string>
 
     <!-- ===== Miscellaneous drops ===== -->
     <string name="item_ashes_name">Cenizas</string>
@@ -631,12 +631,12 @@
     <string name="item_runite_lockpick_name">Ganzúa de Runite</string>
 
     <!-- ===== Smithing hammers ===== -->
-    <string name="item_bronze_hammer_name">Bronze Hammer</string> <!-- untranslated -->
-    <string name="item_iron_hammer_name">Iron Hammer</string> <!-- untranslated -->
-    <string name="item_steel_hammer_name">Steel Hammer</string> <!-- untranslated -->
-    <string name="item_mithril_hammer_name">Mithril Hammer</string> <!-- untranslated -->
-    <string name="item_adamantite_hammer_name">Adamantite Hammer</string> <!-- untranslated -->
-    <string name="item_runite_hammer_name">Runite Hammer</string> <!-- untranslated -->
+    <string name="item_bronze_hammer_name">Martillo de bronce</string>
+    <string name="item_iron_hammer_name">Martillo de hierro</string>
+    <string name="item_steel_hammer_name">Martillo de acero</string>
+    <string name="item_mithril_hammer_name">Martillo de mithril</string>
+    <string name="item_adamantite_hammer_name">Martillo de adamantita</string>
+    <string name="item_runite_hammer_name">Martillo de runite</string>
 
     <!-- ===== Cooking frying pans ===== -->
     <string name="item_bronze_frying_pan_name">Bronze Frying Pan</string> <!-- untranslated -->
@@ -715,13 +715,13 @@
     <string name="item_maple_plank_name">Tablón de Arce</string>
     <string name="item_yew_plank_name">Tablón de Tejo</string>
     <string name="item_magic_plank_name">Tablón Mágico</string>
-    <string name="item_redwood_plank_name">Redwood Plank</string> <!-- untranslated -->
+    <string name="item_redwood_plank_name">Tablón de Secuoya</string>
     <string name="item_iron_nail_name">Clavo de Hierro</string>
     <string name="item_steel_nail_name">Clavo de Acero</string>
     <string name="item_mithril_nail_name">Clavo de Mithril</string>
-    <string name="item_runite_nail_name">Runite Nail</string> <!-- untranslated -->
+    <string name="item_runite_nail_name">Clavo de Runite</string>
     <string name="item_stone_name">Piedra</string>
-    <string name="item_stone_desc">A block of stone. Used for construction.</string> <!-- untranslated -->
+    <string name="item_stone_desc">Un bloque de piedra. Se usa en construcción.</string>
     <string name="item_carved_stone_name">Piedra Tallada</string>
     <string name="item_stone_block_name">Bloque de Piedra</string>
 
@@ -734,9 +734,9 @@
     <string name="item_maple_dresser_name">Cómoda de Arce</string>
     <string name="item_yew_wardrobe_name">Ropero de Tejo</string>
     <string name="item_magic_throne_name">Trono Mágico</string>
-    <string name="item_redwood_bench_name">Redwood Bench</string> <!-- untranslated -->
-    <string name="item_redwood_bookcase_name">Redwood Bookcase</string> <!-- untranslated -->
-    <string name="item_redwood_grand_bed_name">Redwood Grand Bed</string> <!-- untranslated -->
+    <string name="item_redwood_bench_name">Banco de Secuoya</string>
+    <string name="item_redwood_bookcase_name">Estantería de Secuoya</string>
+    <string name="item_redwood_grand_bed_name">Gran Cama de Secuoya</string>
 
 
     <!-- ===== Seed names ===== -->
@@ -817,7 +817,7 @@
     <string name="item_bronze_plateskirt_name">Bronze Plateskirt</string> <!-- untranslated -->
     <string name="item_bronze_square_shield_name">Bronze Square Shield</string> <!-- untranslated -->
     <string name="item_chicken_name">Pollo cocido</string>
-    <string name="item_construction_guild_cape_name">Construction Guild Cape</string> <!-- untranslated -->
+    <string name="item_construction_guild_cape_name">Capa del Gremio de Constructores</string>
     <string name="item_cooking_cape_name">Cooking Cape</string> <!-- untranslated -->
     <string name="item_cooking_guild_cape_name">Cooking Guild Cape</string> <!-- untranslated -->
     <string name="item_crafting_cape_name">Crafting Cape</string> <!-- untranslated -->
@@ -836,7 +836,7 @@
     <string name="item_dragon_longsword_name">Dragon Longsword</string> <!-- untranslated -->
     <string name="item_dragon_scimitar_name">Dragon Scimitar</string> <!-- untranslated -->
     <string name="item_dragon_whelp_name">Dragon Whelp</string> <!-- untranslated -->
-    <string name="item_dwarven_axe_name">Dwarven Axe</string> <!-- untranslated -->
+    <string name="item_dwarven_axe_name">Hacha Enana</string>
     <string name="item_dwarven_boots_name">Dwarven Boots</string> <!-- untranslated -->
     <string name="item_dwarven_fishing_rod_name">Dwarven Fishing Rod</string> <!-- untranslated -->
     <string name="item_dwarven_frying_pan_name">Sartén Enana</string>
@@ -877,7 +877,7 @@
     <string name="item_iron_med_helmet_name">Iron Med Helmet</string> <!-- untranslated -->
     <string name="item_iron_plateskirt_name">Iron Plateskirt</string> <!-- untranslated -->
     <string name="item_iron_square_shield_name">Iron Square Shield</string> <!-- untranslated -->
-    <string name="item_ironwood_axe_name">Ironwood Axe</string> <!-- untranslated -->
+    <string name="item_ironwood_axe_name">Hacha de Madera Férrea</string>
     <string name="item_king_black_dragon_name">King Black Dragon</string> <!-- untranslated -->
     <string name="item_kraken_name">Kraken</string> <!-- untranslated -->
     <string name="item_kraken_tentacle_name">Kraken Tentacle</string> <!-- untranslated -->
@@ -888,7 +888,7 @@
     <string name="item_elven_shortbow_name">Elven Shortbow</string> <!-- untranslated -->
     <string name="item_elven_longbow_name">Elven Longbow</string> <!-- untranslated -->
     <string name="item_maple_shortbow_name">Maple Shortbow</string> <!-- untranslated -->
-    <string name="item_mercantile_guild_cape_name">Mercantile Guild Cape</string> <!-- untranslated -->
+    <string name="item_mercantile_guild_cape_name">Capa del Gremio Mercantil</string>
     <string name="item_mining_cape_name">Capa de Minería</string>
     <string name="item_mining_guild_cape_name">Capa del Gremio de Minería</string>
     <string name="item_mithril_arrow_tip_name">Mithril Arrow Tips</string> <!-- untranslated -->
@@ -932,7 +932,7 @@
     <string name="item_runite_med_helmet_name">Runite Med Helmet</string> <!-- untranslated -->
     <string name="item_runite_plateskirt_name">Runite Plateskirt</string> <!-- untranslated -->
     <string name="item_runite_square_shield_name">Runite Square Shield</string> <!-- untranslated -->
-    <string name="item_sanctum_axe_name">Sanctum Axe</string> <!-- untranslated -->
+    <string name="item_sanctum_axe_name">Hacha del Santuario</string>
     <string name="item_seers_ring_name">Seers Ring</string> <!-- untranslated -->
     <string name="item_seers_ring_desc">Increases magic accuracy. Requires Mercantile level 60 to purchase.</string> <!-- untranslated -->
     <string name="item_shadow_dagger_name">Shadow Dagger</string> <!-- untranslated -->
@@ -946,8 +946,8 @@
     <string name="item_silver_ruby_necklace_name">Silver Ruby Necklace</string> <!-- untranslated -->
     <string name="item_silver_ruby_ring_name">Silver Ruby Ring</string> <!-- untranslated -->
     <string name="item_slayer_guild_cape_name">Slayer Guild Cape</string> <!-- untranslated -->
-    <string name="item_smithing_cape_name">Smithing Cape</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_name">Smithing Guild Cape</string> <!-- untranslated -->
+    <string name="item_smithing_cape_name">Capa de Herrería</string>
+    <string name="item_smithing_guild_cape_name">Capa del Gremio de Herreros</string>
     <string name="item_steel_arrow_tip_name">Steel Arrow Tips</string> <!-- untranslated -->
     <string name="item_steel_boots_name">Steel Boots</string> <!-- untranslated -->
     <string name="item_steel_chainbody_name">Steel Chainbody</string> <!-- untranslated -->
@@ -967,8 +967,8 @@
     <string name="item_trident_of_the_seas_name">Trident Of The Seas</string> <!-- untranslated -->
     <string name="item_warriors_guild_cape_name">Warriors Guild Cape</string> <!-- untranslated -->
     <string name="item_willow_shortbow_name">Willow Shortbow</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_name">Woodcutting Cape</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_name">Woodcutting Guild Cape</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_name">Capa de Tala de Madera</string>
+    <string name="item_woodcutting_guild_cape_name">Capa del Gremio de Leñadores</string>
     <string name="item_yew_longbow_name">Yew Longbow</string> <!-- untranslated -->
     <string name="item_yew_shortbow_name">Yew Shortbow</string> <!-- untranslated -->
     <string name="item_void_reaver_name">Desgarrador del Vacío</string>
@@ -1108,19 +1108,19 @@
     <string name="item_tower_cape_name">Tower Cape</string> <!-- untranslated -->
     <string name="item_tower_cape_desc">A flowing cape that radiates the tower\'s energy.</string> <!-- untranslated -->
     <string name="item_mining_cape_desc" formatted="false">Se otorga por alcanzar el nivel 99 de Minería. Otorga un 10% más de mineral por sesión.</string>
-    <string name="item_construction_guild_cape_desc" formatted="false">Awarded for reaching Builders Guild level 10. Grants 5% more furniture per session.</string> <!-- untranslated -->
+    <string name="item_construction_guild_cape_desc" formatted="false">Otorgada por alcanzar el nivel 10 en el Gremio de Constructores. Otorga un 5% más de muebles por sesión.</string>
     <string name="item_mining_guild_cape_desc" formatted="false">Se otorga por alcanzar el nivel 10 del Gremio de Minería. Otorga un 5% más de mineral por sesión.</string>
     <string name="item_fishing_cape_desc" formatted="false">Awarded for reaching level 99 Fishing. Grants 10% more fish per session.</string> <!-- untranslated -->
     <string name="item_fishing_guild_cape_desc" formatted="false">Awarded for reaching Fishing Guild level 10. Grants 5% more fish per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_cape_desc" formatted="false">Awarded for reaching level 99 Woodcutting. Grants 10% more logs per session.</string> <!-- untranslated -->
-    <string name="item_woodcutting_guild_cape_desc" formatted="false">Awarded for reaching Woodcutting Guild level 10. Grants 5% more logs per session.</string> <!-- untranslated -->
+    <string name="item_woodcutting_cape_desc" formatted="false">Se otorga por alcanzar el nivel 99 de Tala de Madera. Otorga un 10% más de troncos por sesión.</string>
+    <string name="item_woodcutting_guild_cape_desc" formatted="false">Se otorga por alcanzar el nivel 10 del Gremio de Leñadores. Otorga un 5% más de troncos por sesión.</string>
     <string name="item_farming_cape_desc" formatted="false">Awarded for reaching level 99 Farming. Grants 10% more harvest per session.</string> <!-- untranslated -->
     <string name="item_farming_guild_cape_desc" formatted="false">Awarded for reaching Farming Guild level 10. Grants 5% more harvest per session.</string> <!-- untranslated -->
     <string name="item_thieving_cape_name">Thieving Cape</string> <!-- untranslated -->
     <string name="item_thieving_cape_desc" formatted="false">Awarded for reaching level 99 Thieving. Grants 10% more successful pickpockets per session.</string> <!-- untranslated -->
     <string name="item_thieving_guild_cape_desc" formatted="false">Awarded for reaching Thieves Guild level 10. Grants 5% more successful pickpockets per session.</string> <!-- untranslated -->
-    <string name="item_smithing_cape_desc" formatted="false">Awarded for reaching level 99 Smithing. Grants 10% more items per session.</string> <!-- untranslated -->
-    <string name="item_smithing_guild_cape_desc" formatted="false">Awarded for reaching Smithing Guild level 10. Grants 5% more items per session.</string> <!-- untranslated -->
+    <string name="item_smithing_cape_desc" formatted="false">Otorgada por alcanzar el nivel 99 en Herrería. Otorga un 10% más de objetos por sesión.</string>
+    <string name="item_smithing_guild_cape_desc" formatted="false">Otorgada por alcanzar el nivel 10 en el Gremio de Herreros. Otorga un 5% más de objetos por sesión.</string>
     <string name="item_cooking_cape_desc" formatted="false">Awarded for reaching level 99 Cooking. Grants 10% more food per session.</string> <!-- untranslated -->
     <string name="item_cooking_guild_cape_desc" formatted="false">Awarded for reaching Cooking Guild level 10. Grants 5% more food per session.</string> <!-- untranslated -->
     <string name="item_fletching_cape_desc" formatted="false">Awarded for reaching level 99 Fletching. Grants 10% more arrows per session.</string> <!-- untranslated -->
@@ -1134,13 +1134,13 @@
     <string name="item_herblore_cape_name">Herblore Cape</string> <!-- untranslated -->
     <string name="item_herblore_cape_desc" formatted="false">Awarded for reaching level 99 Herblore. Grants 10% more potions per session.</string> <!-- untranslated -->
     <string name="item_herblore_guild_cape_desc" formatted="false">Awarded for reaching Herblore Guild level 10. Grants 5% more potions per session.</string> <!-- untranslated -->
-    <string name="item_construction_cape_name">Construction Cape</string> <!-- untranslated -->
-    <string name="item_construction_cape_desc" formatted="false">Awarded for reaching level 99 Construction. Grants 10% more items per session.</string> <!-- untranslated -->
+    <string name="item_construction_cape_name">Capa de Construcción</string>
+    <string name="item_construction_cape_desc" formatted="false">Otorgada por alcanzar el nivel 99 en Construcción. Otorga un 10% más de objetos por sesión.</string>
     <string name="item_prayer_cape_desc" formatted="false">Awarded for reaching level 99 Prayer. Strengthens your active blessing by 10%.</string> <!-- untranslated -->
     <string name="item_prayer_guild_cape_desc" formatted="false">Awarded for reaching Prayer Guild level 10. Strengthens your active blessing by 5%.</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_name">Mercantile Cape</string> <!-- untranslated -->
-    <string name="item_mercantile_cape_desc" formatted="false">Awarded for reaching level 99 Mercantile. Grants 10% better shop prices and trade returns.</string> <!-- untranslated -->
-    <string name="item_mercantile_guild_cape_desc" formatted="false">Awarded for reaching Merchants Guild level 10. Grants 5% better shop prices and trade returns.</string> <!-- untranslated -->
+    <string name="item_mercantile_cape_name">Capa de Mercantil</string>
+    <string name="item_mercantile_cape_desc" formatted="false">Se otorga al alcanzar el nivel 99 de Mercantil. Otorga un 10% de mejora en los precios de tienda y en los retornos de comercio.</string>
+    <string name="item_mercantile_guild_cape_desc" formatted="false">Se otorga al alcanzar el nivel 10 del Gremio de Mercaderes. Otorga un 5% de mejora en los precios de tienda y en los retornos de comercio.</string>
     <string name="item_agility_cape_desc" formatted="false">Se otorga al alcanzar el nivel 99 de Agilidad. Otorga un 10% más de XP por sesión.</string>
     <string name="item_agility_guild_cape_desc" formatted="false">Se otorga al alcanzar el nivel 10 del Gremio de Agilidad. Otorga un 5% más de XP por sesión.</string>
     <string name="item_slayer_cape_name">Slayer Cape</string> <!-- untranslated -->
@@ -1158,9 +1158,9 @@
     <string name="item_deep_iron_pickaxe_desc">Forjado con mineral extraído de los pozos más profundos de la Mina Derrumbada. Golpea con una precisión asombrosa.</string>
     <string name="item_dwarven_pickaxe_desc">Un pico enano de obra maestra. La mejor herramienta de minería jamás fabricada.</string>
     <string name="item_forge_pickaxe_desc">Templado en las llamas de la propia Forja Antigua. El pico más raro y poderoso que existe.</string>
-    <string name="item_ironwood_axe_desc">Hewn from the ironwood trees that once stood in the Ancient Forest Ruins. Exceptionally durable.</string> <!-- untranslated -->
-    <string name="item_dwarven_axe_desc">A legendary dwarven axe. Cuts through any tree with ease.</string> <!-- untranslated -->
-    <string name="item_sanctum_axe_desc">Forged in the shadow of the Corrupted Sanctum. Its blade cuts through even magic logs with ease.</string> <!-- untranslated -->
+    <string name="item_ironwood_axe_desc">Tallada de los árboles de madera férrea que una vez se alzaron en las Ruinas del Bosque Antiguo. Excepcionalmente duradera.</string>
+    <string name="item_dwarven_axe_desc">Un hacha enana legendaria. Corta cualquier árbol con facilidad.</string>
+    <string name="item_sanctum_axe_desc">Forjada a la sombra del Santuario Corrupto. Su filo corta hasta los troncos mágicos con facilidad.</string>
     <string name="item_blessed_fishing_rod_desc">Crafted from driftwood recovered from the Drowned Temple, blessed by ancient sea rites.</string> <!-- untranslated -->
     <string name="item_dwarven_fishing_rod_desc">A dwarven-crafted fishing rod. Practically hauls fish out of the water.</string> <!-- untranslated -->
     <string name="item_abyssal_rod_desc">Woven from void-touched filament recovered from the Abyssal Ruins. Fish practically leap onto it.</string> <!-- untranslated -->
@@ -1172,14 +1172,14 @@
     <string name="item_runite_hoe_desc">A runite hoe. The finest farming tool available.</string> <!-- untranslated -->
     <string name="item_dwarven_hoe_desc">A legendary dwarven hoe. Doubles the harvest of any crop.</string> <!-- untranslated -->
     <string name="item_divine_hoe_desc">A hoe blessed by divine light. Crops flourish at its touch.</string> <!-- untranslated -->
-    <string name="item_bronze_hammer_desc">A bronze hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_iron_hammer_desc">An iron hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_steel_hammer_desc">A steel hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_mithril_hammer_desc">A mithril hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_adamantite_hammer_desc">An adamantite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_runite_hammer_desc">A runite hammer for smithing.</string> <!-- untranslated -->
-    <string name="item_dwarven_hammer_desc">A dwarven-forged hammer. Strikes true every time.</string> <!-- untranslated -->
-    <string name="item_divine_hammer_desc">A hammer touched by divine light. Metal bends to its will.</string> <!-- untranslated -->
+    <string name="item_bronze_hammer_desc">Un martillo de bronce para herrería.</string>
+    <string name="item_iron_hammer_desc">Un martillo de hierro para herrería.</string>
+    <string name="item_steel_hammer_desc">Un martillo de acero para herrería.</string>
+    <string name="item_mithril_hammer_desc">Un martillo de mithril para herrería.</string>
+    <string name="item_adamantite_hammer_desc">Un martillo de adamantita para herrería.</string>
+    <string name="item_runite_hammer_desc">Un martillo de runite para herrería.</string>
+    <string name="item_dwarven_hammer_desc">Un martillo forjado por enanos. Siempre acierta.</string>
+    <string name="item_divine_hammer_desc">Un martillo tocado por luz divina. El metal obedece su voluntad.</string>
     <string name="item_bronze_tinderbox_desc">A bronze tinderbox for firemaking.</string> <!-- untranslated -->
     <string name="item_iron_tinderbox_desc">An iron tinderbox for firemaking.</string> <!-- untranslated -->
     <string name="item_steel_tinderbox_desc">A steel tinderbox for firemaking.</string> <!-- untranslated -->

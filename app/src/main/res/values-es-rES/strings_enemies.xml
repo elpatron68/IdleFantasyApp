@@ -57,23 +57,23 @@
     <string name="enemy_shade_stalker_name">Shade Stalker</string> <!-- untranslated -->
     <string name="enemy_bone_colossus_name">Bone Colossus</string> <!-- untranslated -->
     <string name="enemy_dread_dullahan_name">Dread Dullahan</string> <!-- untranslated -->
-    <string name="enemy_void_stalker_name">Void Stalker</string> <!-- untranslated -->
-    <string name="enemy_rift_guardian_name">Rift Guardian</string> <!-- untranslated -->
-    <string name="enemy_chaos_elemental_name">Chaos Elemental</string> <!-- untranslated -->
-    <string name="enemy_frost_giant_name">Frost Giant</string> <!-- untranslated -->
-    <string name="enemy_ice_golem_name">Ice Golem</string> <!-- untranslated -->
-    <string name="enemy_glacial_mage_name">Glacial Mage</string> <!-- untranslated -->
-    <string name="enemy_abyssal_lord_name">Abyssal Lord</string> <!-- untranslated -->
-    <string name="enemy_eternal_sentinel_name">Eternal Sentinel</string> <!-- untranslated -->
-    <string name="enemy_void_archon_name">Void Archon</string> <!-- untranslated -->
-    <string name="enemy_frost_wyvern_name">Frost Wyvern</string> <!-- untranslated -->
-    <string name="enemy_abyssal_guardian_name">Abyssal Guardian</string> <!-- untranslated -->
-    <string name="enemy_shadow_thief_name">Shadow Thief</string> <!-- untranslated -->
-    <string name="enemy_elder_lich_name">Elder Lich</string> <!-- untranslated -->
-    <string name="enemy_assassin_name">Assassin</string> <!-- untranslated -->
-    <string name="enemy_shadow_assassin_name">Shadow Assassin</string> <!-- untranslated -->
-    <string name="enemy_vault_guardian_name">Vault Guardian</string> <!-- untranslated -->
-    <string name="enemy_guild_master_name">Guild Master</string> <!-- untranslated -->
+    <string name="enemy_void_stalker_name">Acechador del Vacío</string>
+    <string name="enemy_rift_guardian_name">Guardián de la Grieta</string>
+    <string name="enemy_chaos_elemental_name">Elemental del Caos</string>
+    <string name="enemy_frost_giant_name">Gigante de Escarcha</string>
+    <string name="enemy_ice_golem_name">Gólem de Hielo</string>
+    <string name="enemy_glacial_mage_name">Mago Glacial</string>
+    <string name="enemy_abyssal_lord_name">Señor Abisal</string>
+    <string name="enemy_eternal_sentinel_name">Centinela Eterno</string>
+    <string name="enemy_void_archon_name">Arconte del Vacío</string>
+    <string name="enemy_frost_wyvern_name">Guiverno de Escarcha</string>
+    <string name="enemy_abyssal_guardian_name">Guardián Abisal</string>
+    <string name="enemy_shadow_thief_name">Ladrón de Sombras</string>
+    <string name="enemy_elder_lich_name">Lich Anciano</string>
+    <string name="enemy_assassin_name">Asesino</string>
+    <string name="enemy_shadow_assassin_name">Asesino de las Sombras</string>
+    <string name="enemy_vault_guardian_name">Guardián de la Bóveda</string>
+    <string name="enemy_guild_master_name">Maestro del Gremio</string>
 
     <!-- ===== Dungeon names and descriptions ===== -->
     <string name="dungeon_imp_cavern_name">Caverna de Imps</string>
@@ -100,12 +100,12 @@
     <string name="dungeon_infernal_stronghold_desc">Una fortaleza de fuego y azufre, gobernada por demonios y sabuesos infernales. El calor por sí solo puede matar a los desprevenidos.</string>
     <string name="dungeon_ancient_temple_name">Templo antiguo</string>
     <string name="dungeon_ancient_temple_desc">Un antiguo templo custodiado por las criaturas más poderosas del reino. Solo los guerreros más poderosos se atreven a entrar.</string>
-    <string name="dungeon_void_rift_name">Void Rift</string> <!-- untranslated -->
-    <string name="dungeon_void_rift_desc">A tear in reality where void creatures spill into the mortal world.</string> <!-- untranslated -->
-    <string name="dungeon_frozen_citadel_name">Frozen Citadel</string> <!-- untranslated -->
-    <string name="dungeon_frozen_citadel_desc">An ancient fortress encased in a glacier, its defenders frozen in eternal vigil.</string> <!-- untranslated -->
-    <string name="dungeon_abyssal_throne_name">Abyssal Throne</string> <!-- untranslated -->
-    <string name="dungeon_abyssal_throne_desc">The deepest point in the known world, ruled by void lords since the dawn of time.</string> <!-- untranslated -->
+    <string name="dungeon_void_rift_name">Grieta del Vacío</string>
+    <string name="dungeon_void_rift_desc">Una brecha en la realidad por donde criaturas del vacío se derraman en el mundo mortal.</string>
+    <string name="dungeon_frozen_citadel_name">Ciudadela Helada</string>
+    <string name="dungeon_frozen_citadel_desc">Una fortaleza ancestral encerrada en un glaciar, con sus defensores congelados en vigilia eterna.</string>
+    <string name="dungeon_abyssal_throne_name">Trono Abisal</string>
+    <string name="dungeon_abyssal_throne_desc">El punto más profundo del mundo conocido, gobernado por señores del vacío desde el amanecer de los tiempos.</string>
 
     <!-- ===== Event dungeon names ===== -->
     <string name="dungeon_sunspire_name">The Sunspire</string> <!-- untranslated -->
@@ -158,10 +158,10 @@
     <string name="dungeon_corrupted_sanctum_desc">Un santuario empapado de sombras en el corazón del dosel corrompido. Sacerdotes oscuros y bestias corruptas custodian un mal ancestral.</string>
     <string name="dungeon_drowned_temple_name">Templo Sumergido</string>
     <string name="dungeon_drowned_temple_desc">Un templo hundido bajo la gruta marina, sus salas llenas de agua y criaturas marinas que lo han convertido en su hogar.</string>
-    <string name="dungeon_rogue_sanctum_name">Rogue Sanctum</string> <!-- untranslated -->
-    <string name="dungeon_rogue_sanctum_desc">The guild\'s inner refuge, accessible only to proven members.</string> <!-- untranslated -->
-    <string name="dungeon_guild_of_shadows_name">Guild of Shadows</string> <!-- untranslated -->
-    <string name="dungeon_guild_of_shadows_desc">The innermost sanctum of the thieves\' guild, guarded by its most elite enforcers.</string> <!-- untranslated -->
+    <string name="dungeon_rogue_sanctum_name">Sancto Pícaro</string>
+    <string name="dungeon_rogue_sanctum_desc">El refugio interior del gremio, accesible solo para miembros probados.</string>
+    <string name="dungeon_guild_of_shadows_name">Gremio de las Sombras</string>
+    <string name="dungeon_guild_of_shadows_desc">El sancto más profundo del gremio de ladrones, guardado por sus ejecutores más peligrosos.</string>
 
     <!-- Elder Isle enemies (two per dungeon) -->
     <string name="enemy_beach_marauder_name">Beach Marauder</string> <!-- untranslated -->

@@ -418,6 +418,7 @@
     <string name="settings_font_small">Small</string>
     <string name="settings_font_normal">Normal</string>
     <string name="settings_font_large">Large</string>
+    <string name="settings_font_very_large">Very Large</string>
     <string name="settings_font_huge">Huge</string>
     <string name="settings_import_theme">Import themes</string>
     <string name="settings_import_theme_desc">Import custom themes from a file</string>
@@ -1437,6 +1438,7 @@
     <string name="trade_route_merchants_quarter_desc">Trade rare commodities in the prestigious merchant district.</string>
     <string name="trade_route_northern_ports_desc">Sail precious cargo to the northern port cities. High risk, high reward.</string>
     <string name="crafting_cat_bar">Bar</string>
+    <string name="crafting_cat_brew">Brew</string>
     <string name="crafting_cat_component">Component</string>
     <string name="crafting_cat_tool">Tool</string>
     <string name="crafting_cat_weapon">Weapon</string>
@@ -1450,6 +1452,7 @@
     <string name="crafting_cat_bow">Bow</string>
     <string name="crafting_cat_plank">Plank</string>
     <string name="crafting_cat_staff">Staff</string>
+    <string name="crafting_cat_super_potion">Super Potion</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantite</string>

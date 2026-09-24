@@ -88,6 +88,7 @@ import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
 import com.fantasyidler.ui.viewmodel.SessionSummary
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
+import com.fantasyidler.data.model.ElderSkills
 import com.fantasyidler.ui.viewmodel.totalLevelFrom
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
@@ -665,7 +666,8 @@ fun HomeScreen(
                     PlayerStatsBar(
                         context                    = context,
                         combatLevel                = combatLevelFrom(state.skillLevels),
-                        totalLevel                 = totalLevelFrom(state.skillLevels),
+                        totalLevel                 = if (state.onElderIsle) state.skillLevels.filterKeys { it in ElderSkills.ALL }.values.sum()
+                                                     else totalLevelFrom(state.skillLevels),
                         coins                      = state.coins,
                         activeBlessingKey          = state.activeBlessingKey,
                         allBlessings               = state.allBlessings,

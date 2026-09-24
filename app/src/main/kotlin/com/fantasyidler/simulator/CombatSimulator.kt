@@ -747,6 +747,7 @@ object CombatSimulator {
             xpAfter      = totalXp,
             items        = items,
             xpBySkill    = xpBySkill,
+            kills        = if (won) 1 else 0,
             killsByEnemy = if (won) mapOf(bossKey to 1) else emptyMap(),
             combatStyle  = combatStyle,
         )

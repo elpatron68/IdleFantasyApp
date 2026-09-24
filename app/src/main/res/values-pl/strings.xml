@@ -432,6 +432,7 @@
     <string name="settings_font_small">Mała</string>
     <string name="settings_font_normal">Normalna</string>
     <string name="settings_font_large">Duża</string>
+    <string name="settings_font_very_large">Very Large</string> <!-- untranslated -->
     <string name="settings_font_huge">Ogromna</string>
     <string name="settings_import_theme">Importuj motywy</string>
     <string name="settings_import_theme_desc">Importuj własne motywy z pliku</string>
@@ -1451,6 +1452,7 @@
     <string name="trade_route_merchants_quarter_desc">Handluj rzadkimi towarami w prestiżowej dzielnicy kupieckiej.</string>
     <string name="trade_route_northern_ports_desc">Przewoź cenny ładunek do miast portowych na północy. Wysokie ryzyko, wysoka nagroda.</string>
     <string name="crafting_cat_bar">Sztabka</string>
+    <string name="crafting_cat_brew">Brew</string> <!-- untranslated -->
     <string name="crafting_cat_component">Komponent</string>
     <string name="crafting_cat_tool">Narzędzie</string>
     <string name="crafting_cat_weapon">Broń</string>
@@ -1464,6 +1466,7 @@
     <string name="crafting_cat_bow">Łuk</string>
     <string name="crafting_cat_plank">Deska</string>
     <string name="crafting_cat_staff">Kostur</string>
+    <string name="crafting_cat_super_potion">Super Potion</string> <!-- untranslated -->
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantyt</string>
