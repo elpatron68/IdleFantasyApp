@@ -503,6 +503,7 @@ data class QueuedAction(
      * Agility instead of elder Agility).
      */
     @SerialName("is_elder_session") val isElderSession: Boolean = false,
+    @SerialName("consumed_materials") val consumedMaterials: Map<String, Int> = emptyMap(),
 )
 
 // ---------------------------------------------------------------------------

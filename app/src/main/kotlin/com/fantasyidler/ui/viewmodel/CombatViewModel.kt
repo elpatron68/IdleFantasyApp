@@ -525,11 +525,13 @@ class CombatViewModel @Inject constructor(
             if (sessionRepo.getActiveSession() != null) {
                 val dungeonName = GameStrings.dungeonName(context, dungeonKey)
                 val player      = playerRepo.getOrCreatePlayer()
-                val queuedLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+                val allLevels: Map<String, Int> = json.decodeFromString(player.skillLevels)
+                val dungeonFlags: PlayerFlags = json.decodeFromString(player.flags)
+                val isIsle = dungeonFlags.onElderIsle
+                val queuedLevels = if (isIsle) allLevels.mapValues { dungeonFlags.elderSkillLevels[it.key] ?: 1 } else allLevels
                 val agility     = queuedLevels[Skills.AGILITY] ?: 1
                 val equipped: Map<String, String?> = json.decodeFromString(player.equipped)
                 val inventory: Map<String, Int> = json.decodeFromString(player.inventory)
-                val dungeonFlags: PlayerFlags = json.decodeFromString(player.flags)
                 val queuedWeaponSlot = _extra.value.selectedWeaponSlot
                     ?: dungeonFlags.activeWeaponSlot
                     ?: EquipSlot.WEAPON_SLOTS.firstOrNull { equipped[it] != null }
@@ -559,7 +561,7 @@ class CombatViewModel @Inject constructor(
                         skillName           = "combat",
                         activityKey         = dungeonKey,
                         skillDisplayName    = dungeonName,
-                        estimatedDurationMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(dungeonFlags), townRepo.playerSessionDurationMultiplier(dungeonFlags)),
+                        estimatedDurationMs = if (isIsle) SkillSimulator.elderSessionDurationMs(agility) else SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(dungeonFlags), townRepo.playerSessionDurationMultiplier(dungeonFlags)),
                         estimatedXpGain     = previewXp,
                         equippedSnapshot    = player.equipped,
                         arrowsKey           = _extra.value.selectedArrowKey ?: dungeonFlags.equippedArrows,
@@ -567,6 +569,7 @@ class CombatViewModel @Inject constructor(
                         potionKey           = queuedPotionKey,
                         weaponSlot          = queuedWeaponSlot,
                         repeatCount         = repeatCount,
+                        isElderSession      = isIsle,
                     )
                 )
                 if (enqueued) queuedSessionStarter.startNextQueued()
@@ -812,6 +815,7 @@ class CombatViewModel @Inject constructor(
                         potionKey           = bossQueuedPotionKey,
                         weaponSlot          = bossWeaponSlot,
                         repeatCount         = repeatCount,
+                        isElderSession      = queuedFlags.onElderIsle,
                     )
                 )
                 if (enqueued) queuedSessionStarter.startNextQueued()

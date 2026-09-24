@@ -273,6 +273,7 @@ fun SettingsScreen(
                         0.85f to stringResource(R.string.settings_font_small),
                         1.0f  to stringResource(R.string.settings_font_normal),
                         1.25f to stringResource(R.string.settings_font_large),
+                        1.35f to stringResource(R.string.settings_font_very_large),
                         1.5f  to stringResource(R.string.settings_font_huge),
                     )
                     val fontLabel = fontOptions.firstOrNull { it.first == fontScale }?.second
