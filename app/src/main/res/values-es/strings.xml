@@ -48,7 +48,7 @@
     <string name="label_level">Nivel</string>
     <string name="label_xp">XP</string> <!-- untranslated -->
     <string name="label_coins">Monedas</string>
-    <string name="label_hp">HP</string> <!-- untranslated -->
+    <string name="label_hp">PS</string>
     <string name="label_attack">Ataque</string>
     <string name="label_strength">Fuerza</string>
     <string name="label_defense">Defensa</string>
@@ -58,7 +58,7 @@
     <string name="label_hitpoints">Vida</string>
     <string name="label_inventory">Inventario</string>
     <string name="label_equipment">Equipamiento</string>
-    <string name="label_combat_equipment">Gear</string> <!-- untranslated -->
+    <string name="label_combat_equipment">Equipamiento</string>
     <string name="label_pets">Mascotas</string>
     <string name="label_achievements">Logros</string>
     <string name="label_locations">Locations</string> <!-- untranslated -->
@@ -68,12 +68,12 @@
     <string name="label_by_location">Por Lugar</string>
     <string name="bestiary_not_encountered">Aún no encontrado</string>
     <string name="bestiary_filter_all">Todos</string>
-    <string name="bestiary_filter_missing">Missing</string> <!-- untranslated -->
-    <string name="bestiary_qty_header">Qty</string> <!-- untranslated -->
-    <string name="bestiary_chance_header">Chance</string> <!-- untranslated -->
+    <string name="bestiary_filter_missing">Sin descubrir</string>
+    <string name="bestiary_qty_header">Cantidad</string>
+    <string name="bestiary_chance_header">Probabilidad</string>
     <string name="label_completion_progress">%1$d / %2$d %3$s</string>
     <string name="achievements_progress_bar">obtenidos</string>
-    <string name="bestiary_progress_bar">encountered</string> <!-- untranslated -->
+    <string name="bestiary_progress_bar">Descubiertos</string>
     <string name="bestiary_always_drops">Siempre cae</string>
     <string name="bestiary_rare_drops">Objetos raros</string>
     <string name="bestiary_common_loot">Botín común</string>
@@ -86,19 +86,19 @@
     <string name="label_session_active">Sesión Activa</string>
     <string name="label_no_active_session">Sin Sesión Activa</string>
     <string name="label_session_complete">Sesión Completa!</string>
-    <string name="home_sessions_complete_title">%1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_title">Defeated %1$s!</string> <!-- untranslated -->
-    <string name="home_boss_defeated_by_title">Defeated by %1$s.</string> <!-- untranslated -->
-    <string name="home_dungeon_died_title">%1$s — You Died</string> <!-- untranslated -->
-    <string name="home_dungeon_complete_title">%1$s Complete!</string> <!-- untranslated -->
-    <string name="home_expedition_complete_title">%1$s Expedition Complete</string> <!-- untranslated -->
-    <string name="home_skill_session_complete_title">%1$s Session Complete</string> <!-- untranslated -->
-    <string name="home_bones_buried_row">%1$s buried</string> <!-- untranslated -->
-    <string name="worker_sessions_complete_title">Worker: %1$d Sessions Complete!</string> <!-- untranslated -->
-    <string name="worker_boss_defeated_title">Worker: Defeated %1$s!</string> <!-- untranslated -->
-    <string name="worker_dungeon_died_title">Worker: %1$s — Died</string> <!-- untranslated -->
-    <string name="worker_dungeon_complete_title">Worker: %1$s Complete!</string> <!-- untranslated -->
-    <string name="worker_skill_complete_title">Worker: %1$s Complete</string> <!-- untranslated -->
+    <string name="home_sessions_complete_title">%1$d Sesiones completadas!</string>
+    <string name="home_boss_defeated_title">Derrotado %1$s!</string>
+    <string name="home_boss_defeated_by_title">Derrotado por %1$s.</string>
+    <string name="home_dungeon_died_title">%1$s — Has muerto</string>
+    <string name="home_dungeon_complete_title">%1$s Completado!</string>
+    <string name="home_expedition_complete_title">%1$s Expedición completada</string>
+    <string name="home_skill_session_complete_title">%1$s Sesión completada</string>
+    <string name="home_bones_buried_row">%1$s enterrado</string>
+    <string name="worker_sessions_complete_title">Trabajador: %1$d Sesiones completadas!</string>
+    <string name="worker_boss_defeated_title">Trabajador: Derrotado %1$s!</string>
+    <string name="worker_dungeon_died_title">Trabajador: %1$s — Muerto</string>
+    <string name="worker_dungeon_complete_title">Trabajador: %1$s Completado!</string>
+    <string name="worker_skill_complete_title">Trabajador: %1$s Completado</string>
     <string name="label_training">Entrenamiento</string>
     <string name="label_gathering_skills">Recolección</string>
     <string name="label_crafting_skills">Habilidades de Artesanía</string>
@@ -106,14 +106,14 @@
     <string name="label_coming_soon">Próximamente</string>
     <string name="label_time_remaining">Tiempo restante</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
-    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
+    <string name="duration_years">%1$da</string>
+    <string name="duration_months">%1$dm</string>
+    <string name="duration_weeks">%1$ds</string>
     <string name="duration_days">%1$dd</string> <!-- untranslated -->
     <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
-    <string name="duration_complete">Complete</string> <!-- untranslated -->
+    <string name="duration_minutes">%1$dmin</string>
+    <string name="duration_seconds">%1$dseg</string>
+    <string name="duration_complete">Completado</string>
     <string name="label_session_results">Resultados de la Sesión</string>
     <string name="label_xp_gained">XP obtenida</string>
     <string name="label_items_collected">Artículos recogidos</string>
@@ -122,7 +122,7 @@
     <string name="label_rewards">Recompensas</string>
     <string name="label_your_level">Tu nivel</string>
     <string name="label_xp_to_next">XP para el siguiente nivel</string>
-    <string name="label_total_xp">Total XP</string> <!-- untranslated -->
+    <string name="label_total_xp">Exp Total</string>
     <string name="label_quantity">Cantidad</string>
     <string name="label_price">Precio</string>
     <string name="label_available">Disponible</string>
@@ -154,7 +154,7 @@
     <string name="label_completed">Completado</string>
     <string name="label_in_progress">En Progreso</string>
     <string name="label_available_quests">Disponible</string>
-    <string name="label_stats">Stats</string> <!-- untranslated -->
+    <string name="label_stats">Estadísticas</string>
     <string name="label_skills">Habilidades</string>
     <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
     <string name="label_shop">Tienda</string>
@@ -188,7 +188,7 @@
     <string name="label_recipe">Receta</string>
     <string name="label_recipes">Recetas</string>
     <string name="label_ingredients">Ingredientes</string>
-    <string name="label_output">Output</string> <!-- untranslated -->
+    <string name="label_output">Salida</string>
     <string name="label_xp_per_action">XP por acción</string>
     <string name="label_unlocked_at">Desbloqueado en el nivel</string>
     <string name="label_kills">Muertes</string>
@@ -204,7 +204,7 @@
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
     <string name="format_xp_to_next">%1$s XP para nivel %2$d</string>
     <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
-    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
+    <string name="xp_to_99">%1$s Exp hasta 99</string>
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
     <string name="format_time_remaining">%1$s restante</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
@@ -218,13 +218,13 @@
     <!-- Translator note: %1$s = formatted XP amount -->
     <string name="format_xp_per_action">%1$s XP por acción</string>
     <!-- Translator note: %1$d = patch number -->
-    <string name="format_patch_number">Patch %1$d</string> <!-- untranslated -->
+    <string name="format_patch_number">Parche %1$d</string>
     <!-- Translator note: %1$d = wins, %2$d = losses -->
     <string name="format_arena_record">%1$d victorias / %2$d losses</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
-    <string name="format_skill_level">%1$s: Level %2$d</string> <!-- untranslated -->
+    <string name="format_skill_level">%1$s: Nivel %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
-    <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
+    <string name="format_xp_boost_percent">+%1$d%% Exp</string>
     <string name="format_coin_boost_percent">+%1$d%% Monedas</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
@@ -256,16 +256,16 @@
     </plurals>
     <plurals name="plural_kills">
         <item quantity="one">%1$d kill</item>
-        <item quantity="other">%1$d kills</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="other">%1$d muertes</item>
+    </plurals>
     <plurals name="plural_quests_completed">
         <item quantity="one">%1$d Misión completada</item>
         <item quantity="other">%1$d Misiones completadas</item>
     </plurals>
 
     <!-- ===== Error messages ===== -->
-    <string name="error_no_player">Could not load player data. Please restart the app.</string> <!-- untranslated -->
-    <string name="error_session_already_active">You already have an active session. Complete or abandon it first.</string> <!-- untranslated -->
+    <string name="error_no_player">No se han podido cargar los datos del jugador. Por favor, reinicia la aplicación.</string>
+    <string name="error_session_already_active">Ya tienes una sesión activa. Complétala o abandónala primero.</string>
     <string name="error_not_enough_coins">No hay suficientes monedas.</string>
     <!-- Translator note: %1$s = item display name -->
     <string name="error_not_enough_items">No es suficiente %1$s.</string>
@@ -279,7 +279,7 @@
     <string name="error_quest_active">Ya tienes una misión activa.</string>
     <string name="error_quest_requirements_not_met">No cumples los requisitos para esta misión.</string>
     <string name="error_dungeon_level_too_low">Tu nivel de combate es demasiado bajo para esta mazmorra.</string>
-    <string name="error_unknown">Something went wrong. Please try again.</string> <!-- untranslated -->
+    <string name="error_unknown">Algo ha fallado. Por favor, inténtalo de nuevo</string>
 
     <!-- ===== Session dialogs ===== -->
     <string name="session_abandon_title">Abandonar sesión?</string>
@@ -315,7 +315,7 @@
     <string name="settings_quest_dots_desc">Muestra un punto dorado en las habilidades que tienen una misión abierta.</string>
     <string name="settings_prestige_notifications">Insignias de prestigio</string>
     <string name="settings_prestige_notifications_desc">Muestra una insignia en la navegación cuando una habilidad esté lista para el prestigio.</string>
-    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
+    <string name="label_switch_character">Cambiar personaje</string>
     <string name="settings_daily_reset_time">Hora de reinicio diario</string>
     <string name="settings_daily_reset_time_desc">Hora local en la que se renuevan las misiones diarias, las diarias del gremio y las semanales. Cambiarla nunca otorga un reinicio adicional.</string>
     <string name="settings_compact_numbers">Números abreviados</string>
@@ -339,7 +339,7 @@
     <string name="label_no_sessions_yet">Aún no se han completado sesiones.</string>
 
     <!-- ===== CombatScreen ===== -->
-    <string name="label_dungeons_tab">Dungeons</string> <!-- untranslated -->
+    <string name="label_dungeons_tab">Mazmorras</string>
     <string name="btn_fight">Luchar!</string>
 
     <!-- ===== SkillsScreen ===== -->
@@ -351,21 +351,21 @@
 
     <!-- ===== QuestsScreen ===== -->
     <string name="label_claim_reward">Reclama tu recompensa</string>
-    <string name="label_daily">Daily</string> <!-- untranslated -->
-    <string name="label_weekly">Weekly</string> <!-- untranslated -->
-    <string name="label_daily_quests">Daily Quests</string> <!-- untranslated -->
-    <string name="label_daily_reset">Resets at %1$s</string> <!-- untranslated -->
-    <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
-    <string name="weekly_bonus_title">Weekly Bonus!</string> <!-- untranslated -->
-    <string name="weekly_bonus_claim">Claim Weekly Bonus</string> <!-- untranslated -->
+    <string name="label_daily">Diaria</string>
+    <string name="label_weekly">Semanal</string>
+    <string name="label_daily_quests">Misiones diarias</string>
+    <string name="label_daily_reset">Reinicia a las %1$s</string>
+    <string name="label_weekly_reset">Reinicia el lunes a las %1$s</string>
+    <string name="weekly_bonus_title">Bonus semanal!</string>
+    <string name="weekly_bonus_claim">Reclamar bonus semanal</string>
     <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
     <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
     <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string> <!-- untranslated -->
     <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string> <!-- untranslated -->
-    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
-    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string> <!-- untranslated -->
+    <string name="label_daily_reward_pity">2.000 monedas (1/%1$d: Equipo enano)</string>
+    <string name="label_daily_reward_complete">2.000 monedas</string>
+    <string name="msg_daily_claimed_coins">Misión diaria completada! +2.000 monedas.</string>
+    <string name="msg_daily_claimed_dwarven">Misión diaria compleda! Has encontrado %1$s!</string>
     <string name="label_hide_completed">Ocultar completadas</string>
 
     <!-- ===== OnboardingScreen ===== -->
@@ -375,7 +375,7 @@
 
     <!-- ===== Settings ===== -->
     <string name="settings_notifications_header">Notificaciones</string>
-    <string name="settings_performance_header">Performance</string> <!-- untranslated -->
+    <string name="settings_performance_header">Rendimiento</string>
     <string name="settings_general_header">General</string>
     <string name="settings_tutorial_title">Tutorial</string>
     <string name="settings_tutorial_desc">Mostrar la introducción de nuevo.</string>
@@ -410,14 +410,15 @@
     <string name="settings_theme">Tema</string>
     <string name="settings_theme_desc">Elige tu combinación de colores preferida</string>
     <string name="settings_theme_dark">Oscuro</string>
-    <string name="settings_theme_midnight">Midnight</string> <!-- untranslated -->
-    <string name="settings_theme_light">Light</string> <!-- untranslated -->
-    <string name="settings_theme_system">System</string> <!-- untranslated -->
+    <string name="settings_theme_midnight">Medianoche</string>
+    <string name="settings_theme_light">Claro</string>
+    <string name="settings_theme_system">Sistema</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_font_tiny">Diminuto</string>
     <string name="settings_font_small">Pequeño</string>
     <string name="settings_font_normal">Normal</string>
     <string name="settings_font_large">Grande</string>
+    <string name="settings_font_very_large">Very Large</string>
     <string name="settings_font_huge">Enorme</string>
     <string name="settings_import_theme">Importar temas</string>
     <string name="settings_import_theme_desc">Importa temas personalizados desde un archivo.</string>
@@ -523,7 +524,7 @@
     <string name="home_xp_boost_active">2× All skills XP - %1$s</string> <!-- untranslated -->
     <string name="home_prestige_xp_boost_active">2× %1$s XP - %2$s</string> <!-- untranslated -->
     <string name="boosts_show_more">+%1$d more boosts (tap to show)</string> <!-- untranslated -->
-    <string name="boosts_show_less">Show less</string> <!-- untranslated -->
+    <string name="boosts_show_less">Mostrar menos</string>
     <string name="home_loot">Botín</string>
     <string name="home_food_consumed">Alimentos consumidos</string>
     <string name="home_bones_buried">Huesos enterrados</string>
@@ -534,7 +535,7 @@
     <!-- Translator note: %1$d = current queue size, %2$d = max queue size (base 3, +1 per Queue Master tier) -->
     <string name="home_up_next">A continuación (%1$d/%2$d)</string>
     <!-- Translator note: %1$s = formatted duration string (e.g. "2h 15m") -->
-    <string name="home_queue_ends_in">Queue ends in %1$s</string> <!-- untranslated -->
+    <string name="home_queue_ends_in">La cola finaliza en %1$s</string>
     <!-- Translator note: %1$d = item quantity (e.g. ×40) -->
 
     <string name="queue_item_qty_with_output">×%1$d → %2$d objetos</string>
@@ -545,17 +546,17 @@
     </plurals>
 
     <!-- ===== CombatScreen ===== -->
-    <string name="combat_level_label">Combat Lvl</string> <!-- untranslated -->
-    <string name="combat_log_label">Combat Log</string> <!-- untranslated -->
-    <string name="combat_solo_bosses">Solo Bosses</string> <!-- untranslated -->
+    <string name="combat_level_label">Nivel de combate</string>
+    <string name="combat_log_label">Historial de combate</string>
+    <string name="combat_solo_bosses">Jefes individuales</string>
     <!-- Translator note: %1$d = number of completed dungeon runs -->
-    <string name="combat_dungeon_runs">%1$d runs</string> <!-- untranslated -->
+    <string name="combat_dungeon_runs">%1$d sesiones</string>
     <!-- Translator note: %1$d = kills, %2$d = food consumed -->
     <string name="combat_last_run">Última: %1$d kills, %2$d comida</string>
     <!-- Translator note: %1$d = kills -->
     <string name="combat_last_run_died">Última: muerto (%1$d kills)</string>
-    <string name="combat_atk">ATK</string> <!-- untranslated -->
-    <string name="combat_str">STR</string> <!-- untranslated -->
+    <string name="combat_atk">ATQ</string>
+    <string name="combat_str">FUE</string>
     <string name="combat_def">DEF</string> <!-- untranslated -->
     <!-- Translator note: %1$d = HP healed -->
     <string name="combat_heals_hp">recupera %1$d HP</string>
@@ -579,8 +580,8 @@
     <string name="combat_your_level">Tu nivel de combate</string>
     <string name="combat_no_strength_bonus">Ninguno (sin bonificación de fuerza)</string>
     <string name="combat_best_arrow">Mejor flecha</string>
-    <string name="combat_arrow_auto">Auto (best available)</string> <!-- untranslated -->
-    <string name="combat_label_arrow">Arrow</string> <!-- untranslated -->
+    <string name="combat_arrow_auto">Auto (mejor disponible)</string>
+    <string name="combat_label_arrow">Fecha</string>
     <string name="combat_arrow_ranged_str">+%1$d Ranged Strength</string> <!-- untranslated -->
     <string name="combat_select_loadout">Seleccionar equipamiento</string>
     <string name="combat_enemies">Enemigos</string>
@@ -702,7 +703,7 @@
     <string name="skills_level_reached">Level %1$d reached!</string> <!-- untranslated -->
     <string name="skills_no_logs">No logs in inventory</string> <!-- untranslated -->
     <!-- Translator note: %1$d = level required, %2$s = XP per log -->
-    <string name="skills_log_desc">Lv. %1$d  •  %2$s XP/log</string> <!-- untranslated -->
+    <string name="skills_log_desc">Lv. %1$d  •  %2$s XP/tronco</string>
     <!-- Translator note: %1$d = level required, %2$s = XP per catch -->
     <string name="skills_fish_desc">Lv. %1$d  •  %2$s XP/catch</string> <!-- untranslated -->
     <!-- Translator note: %1$d = required level, %2$s = skill name, %3$d = player level, %4$s = skill name again -->
@@ -1021,21 +1022,21 @@
     <string name="guild_quest_desc_slayer_kill">Derrota %1$d enemigos durante una tarea de Slayer.</string>
 
     <!-- Mercantile skill -->
-    <string name="skill_mercantile">Mercantile</string> <!-- untranslated -->
+    <string name="skill_mercantile">Mercantil</string>
     <string name="label_support_skills">Apoyo</string>
-    <string name="mercantile_routes_label">Trade Routes</string> <!-- untranslated -->
-    <string name="mercantile_level_label">Level %1$d Mercantile</string> <!-- untranslated -->
-    <string name="mercantile_xp_label">XP: %1$s</string> <!-- untranslated -->
-    <string name="mercantile_coins_label">Coins: %1$s</string> <!-- untranslated -->
-    <string name="mercantile_perks_title">Perks</string> <!-- untranslated -->
-    <string name="mercantile_perk_trading_locked">Shop trading: cheaper buying and better sell prices from level %1$d.</string> <!-- untranslated -->
-    <string name="mercantile_perk_trading">Shop trading: buy prices -%1$d%%, sell prices +%2$d%%.</string> <!-- untranslated -->
-    <string name="mercantile_perk_trading_next">Next boost at level %1$d.</string> <!-- untranslated -->
-    <string name="mercantile_perk_guild">Merchant\'s Guild: exclusive shop goods unlock from level %1$d.</string> <!-- untranslated -->
-    <string name="mercantile_cost_label">Cost: %1$s</string> <!-- untranslated -->
-    <string name="mercantile_return_range">Returns: %1$s – %2$s</string> <!-- untranslated -->
-    <string name="mercantile_dispatch_label">Dispatch</string> <!-- untranslated -->
-    <string name="mercantile_queue_label">Add to Queue</string> <!-- untranslated -->
+    <string name="mercantile_routes_label">Rutas comerciales</string>
+    <string name="mercantile_level_label">Nivel %1$d de Mercantil</string>
+    <string name="mercantile_xp_label">XP: %1$s</string>
+    <string name="mercantile_coins_label">Monedas: %1$s</string>
+    <string name="mercantile_perks_title">Ventajas</string>
+    <string name="mercantile_perk_trading_locked">Comercio en tienda: compra más barata y mejores precios de venta desde el nivel %1$d.</string>
+    <string name="mercantile_perk_trading">Comercio en tienda: precios de compra -%1$d%%, precios de venta +%2$d%%.</string>
+    <string name="mercantile_perk_trading_next">Siguiente mejora en el nivel %1$d.</string>
+    <string name="mercantile_perk_guild">Gremio de Mercaderes: los artículos exclusivos de tienda se desbloquean desde el nivel %1$d.</string>
+    <string name="mercantile_cost_label">Costo: %1$s</string>
+    <string name="mercantile_return_range">Ganancias: %1$s – %2$s</string>
+    <string name="mercantile_dispatch_label">Despachar</string>
+    <string name="mercantile_queue_label">Añadir a la cola</string>
 
     <!-- Church -->
     <string name="church_title">Iglesia</string>
@@ -1143,7 +1144,7 @@
     <string name="house_done">Done</string> <!-- untranslated -->
     <string name="house_share">Share a picture of your house</string> <!-- untranslated -->
     <string name="house_rooms_owned">Rooms: %1$d</string> <!-- untranslated -->
-    <string name="house_construction_level">Construction level %1$d</string> <!-- untranslated -->
+    <string name="house_construction_level">Nivel de construcción %1$d</string>
     <string name="house_add_room">Add room (%1$s)</string> <!-- untranslated -->
     <string name="house_add_room_locked">Add room (Lv %1$d)</string> <!-- untranslated -->
     <string name="house_bill_title">Bill of Sale</string> <!-- untranslated -->
@@ -1435,6 +1436,7 @@
     <string name="trade_route_merchants_quarter_desc">Comercia mercancías raras en el prestigioso barrio de los mercaderes.</string>
     <string name="trade_route_northern_ports_desc">Lleva carga preciosa a las ciudades portuarias del norte. Alto riesgo, alta recompensa.</string>
     <string name="crafting_cat_bar">Lingote</string>
+    <string name="crafting_cat_brew">Brew</string> <!-- untranslated -->
     <string name="crafting_cat_component">Componente</string>
     <string name="crafting_cat_tool">Herramienta</string>
     <string name="crafting_cat_weapon">Arma</string>
@@ -1448,6 +1450,7 @@
     <string name="crafting_cat_bow">Arco</string>
     <string name="crafting_cat_plank">Tablón</string>
     <string name="crafting_cat_staff">Bastón</string>
+    <string name="crafting_cat_super_potion">Super Potion</string> <!-- untranslated -->
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantio</string>
@@ -1458,13 +1461,13 @@
     <string name="crafting_tier_maple">Arce</string>
     <string name="crafting_tier_mithril">Mithril</string> <!-- untranslated -->
     <string name="crafting_tier_oak">Roble</string>
-    <string name="crafting_tier_plank">Plank</string> <!-- untranslated -->
+    <string name="crafting_tier_plank">Tablón</string>
     <string name="crafting_tier_platinum">Platino</string>
-    <string name="crafting_tier_redwood">Redwood</string> <!-- untranslated -->
-    <string name="crafting_tier_runite">Runite</string> <!-- untranslated -->
+    <string name="crafting_tier_redwood">Secuoya</string>
+    <string name="crafting_tier_runite">Runite</string>
     <string name="crafting_tier_silver">Plata</string>
     <string name="crafting_tier_steel">Acero</string>
-    <string name="crafting_tier_stone">Stone</string> <!-- untranslated -->
+    <string name="crafting_tier_stone">Piedra</string>
     <string name="crafting_tier_willow">Sauce</string>
     <string name="crafting_tier_yew">Tejo</string>
 
@@ -1527,7 +1530,7 @@
     <string name="town_upgrade_next_label">Siguiente Mejora</string>
     <string name="town_upgrade_constr_req">Construcción Nv. %1$d requerido</string>
     <string name="town_upgrade_cost">Coste: %1$s monedas</string>
-    <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
+    <string name="town_builder_discount">Descuento del constructor: %1$d%%</string>
     <string name="town_upgrade_materials_header">Materiales:</string>
     <string name="town_upgrade_btn">Mejorar</string>
     <string name="town_upgrade_success">¡Edificio mejorado!</string>
@@ -1635,14 +1638,14 @@
     <string name="item_abyssal_ore_name">Mineral Abisal</string>
     <string name="item_voidsteel_ore_name">Mineral de voidsteel</string>
     <string name="item_starforged_ore_name">Mineral Estelar</string>
-    <string name="item_mythrite_bar_name">Mythrite Bar</string> <!-- untranslated -->
-    <string name="item_abyssal_bar_name">Abyssal Bar</string> <!-- untranslated -->
-    <string name="item_voidsteel_bar_name">Voidsteel Bar</string> <!-- untranslated -->
-    <string name="item_starforged_bar_name">Starforged Bar</string> <!-- untranslated -->
-    <string name="item_coastal_pine_log_name">Coastal Pine Log</string> <!-- untranslated -->
-    <string name="item_grove_oak_log_name">Grove Oak Log</string> <!-- untranslated -->
-    <string name="item_abyssal_log_name">Abyssal Log</string> <!-- untranslated -->
-    <string name="item_starwood_log_name">Starwood Log</string> <!-- untranslated -->
+    <string name="item_mythrite_bar_name">Barra de Mythrite</string>
+    <string name="item_abyssal_bar_name">Barra Abisal</string>
+    <string name="item_voidsteel_bar_name">Barra de Voidsteel</string>
+    <string name="item_starforged_bar_name">Barra Estelar</string>
+    <string name="item_coastal_pine_log_name">Tronco de Pino Costero</string>
+    <string name="item_grove_oak_log_name">Tronco de Roble del Bosque</string>
+    <string name="item_abyssal_log_name">Tronco Abisal</string>
+    <string name="item_starwood_log_name">Tronco Estelar</string>
     <string name="item_raw_tidepool_crab_name">Tidepool Crab (raw)</string> <!-- untranslated -->
     <string name="item_raw_grove_bass_name">Grove Bass (raw)</string> <!-- untranslated -->
     <string name="item_raw_lavafin_name">Lavafin (raw)</string> <!-- untranslated -->
@@ -1657,32 +1660,32 @@
     <string name="item_sacred_wood_name">Sacred Wood</string> <!-- untranslated -->
 
     <!-- Elder Isle: gathering targets (trees) -->
-    <string name="item_coastal_pine_name">Coastal Pine</string> <!-- untranslated -->
-    <string name="item_grove_oak_name">Grove Oak</string> <!-- untranslated -->
-    <string name="item_abyssal_tree_name">Abyssal Tree</string> <!-- untranslated -->
-    <string name="item_starwood_tree_name">Starwood Tree</string> <!-- untranslated -->
+    <string name="item_coastal_pine_name">Pino Costero</string>
+    <string name="item_grove_oak_name">Roble del Bosque</string>
+    <string name="item_abyssal_tree_name">Árbol Abisal</string>
+    <string name="item_starwood_tree_name">Árbol Estelar</string>
 
     <!-- Elder Isle: crafted armor pieces (tier progression Coastal → Grove → Volcanic → Elder) -->
-    <string name="item_coastal_helm_name">Coastal Helm</string> <!-- untranslated -->
-    <string name="item_coastal_platebody_name">Coastal Platebody</string> <!-- untranslated -->
-    <string name="item_coastal_platelegs_name">Coastal Platelegs</string> <!-- untranslated -->
-    <string name="item_coastal_boots_name">Coastal Boots</string> <!-- untranslated -->
-    <string name="item_grove_helm_name">Grove Helm</string> <!-- untranslated -->
-    <string name="item_grove_platebody_name">Grove Platebody</string> <!-- untranslated -->
-    <string name="item_grove_platelegs_name">Grove Platelegs</string> <!-- untranslated -->
-    <string name="item_grove_boots_name">Grove Boots</string> <!-- untranslated -->
-    <string name="item_volcanic_helm_name">Volcanic Helm</string> <!-- untranslated -->
-    <string name="item_volcanic_platebody_name">Volcanic Platebody</string> <!-- untranslated -->
-    <string name="item_volcanic_platelegs_name">Volcanic Platelegs</string> <!-- untranslated -->
-    <string name="item_volcanic_boots_name">Volcanic Boots</string> <!-- untranslated -->
-    <string name="item_elder_helm_name">Elder Helm</string> <!-- untranslated -->
-    <string name="item_elder_platebody_name">Elder Platebody</string> <!-- untranslated -->
-    <string name="item_elder_platelegs_name">Elder Platelegs</string> <!-- untranslated -->
-    <string name="item_elder_boots_name">Elder Boots</string> <!-- untranslated -->
-    <string name="item_elder_cape_name">Elder Cape</string> <!-- untranslated -->
-    <string name="item_elder_shield_name">Elder Shield</string> <!-- untranslated -->
-    <string name="item_elder_signet_ring_name">Elder Signet Ring</string> <!-- untranslated -->
-    <string name="item_elder_amulet_name">Elder Amulet</string> <!-- untranslated -->
+    <string name="item_coastal_helm_name">Yelmo Costero</string>
+    <string name="item_coastal_platebody_name">Armadura Costera</string>
+    <string name="item_coastal_platelegs_name">Grebas Costeras</string>
+    <string name="item_coastal_boots_name">Botas Costeras</string>
+    <string name="item_grove_helm_name">Yelmo del Bosque</string>
+    <string name="item_grove_platebody_name">Armadura del Bosque</string>
+    <string name="item_grove_platelegs_name">Grebas del Bosque</string>
+    <string name="item_grove_boots_name">Botas del Bosque</string>
+    <string name="item_volcanic_helm_name">Yelmo Volcánico</string>
+    <string name="item_volcanic_platebody_name">Armadura Volcánica</string>
+    <string name="item_volcanic_platelegs_name">Grebas Volcánicas</string>
+    <string name="item_volcanic_boots_name">Botas Volcánicas</string>
+    <string name="item_elder_helm_name">Yelmo del Anciano</string>
+    <string name="item_elder_platebody_name">Armadura del Anciano</string>
+    <string name="item_elder_platelegs_name">Grebas del Anciano</string>
+    <string name="item_elder_boots_name">Botas del Anciano</string>
+    <string name="item_elder_cape_name">Capa del Anciano</string>
+    <string name="item_elder_shield_name">Escudo del Anciano</string>
+    <string name="item_elder_signet_ring_name">Sello del Anciano</string>
+    <string name="item_elder_amulet_name">Amuleto del Anciano</string>
     <string name="item_ancient_signet_name">Ancient Signet</string> <!-- untranslated -->
 
     <!-- Elder Isle: sigil stones (four wired, two shipped-but-cosmetic) -->
@@ -2193,8 +2196,8 @@
     <string name="seasonal_bounty_gloom_shortbows_hint">Fletching</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_feast_hint">Cooking</string> <!-- untranslated -->
-    <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string> <!-- untranslated -->
-    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_name">Funde adamantita para el hierro fúnebre</string>
+    <string name="seasonal_bounty_gloom_bars_hint">Herrería</string>
     <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string> <!-- untranslated -->
@@ -2493,7 +2496,7 @@
     <string name="prestige_effect_blessing_cost_pct">Church blessings cost %1$d%% fewer bones.</string> <!-- untranslated -->
     <string name="prestige_effect_potion_bonus_flat">Combat potions grant +%1$d more to their stats.</string> <!-- untranslated -->
     <string name="prestige_effect_input_save_pct">%1$d%% of crafting materials are refunded.</string> <!-- untranslated -->
-    <string name="prestige_effect_builder_discount_pct">Town building upgrades cost %1$d%% less.</string> <!-- untranslated -->
+    <string name="prestige_effect_builder_discount_pct">Las mejoras de edificios del pueblo cuestan %1$d%% menos.</string>
     <string name="prestige_effect_sell_price_pct">Shop sell prices +%1$d%%.</string> <!-- untranslated -->
     <string name="prestige_effect_slayer_points_pct">Slayer task points +%1$d%%.</string> <!-- untranslated -->
     <string name="prestige_effect_double_hit_pct">%1$d%% chance to strike a second melee hit.</string> <!-- untranslated -->
@@ -2504,16 +2507,16 @@
 
     <!-- New distinctive base path names (variety pass) -->
     <string name="prestige_path_fishing_rod">Sturdy Rod</string> <!-- untranslated -->
-    <string name="prestige_path_woodcutting_axe">Honed Edge</string> <!-- untranslated -->
+    <string name="prestige_path_woodcutting_axe">Filo Afilado</string>
     <string name="prestige_path_cooking_hearty">Hearty Meals</string> <!-- untranslated -->
-    <string name="prestige_path_smithing_thrift">Careful Smith</string> <!-- untranslated -->
+    <string name="prestige_path_smithing_thrift">Herrero Cuidadoso</string>
     <string name="prestige_path_crafting_thrift">Steady Hands</string> <!-- untranslated -->
     <string name="prestige_path_herblore_potency">Potent Potions</string> <!-- untranslated -->
     <string name="prestige_path_runecrafting_runethrift">Essence Bond</string> <!-- untranslated -->
     <string name="prestige_path_magic_runethrift">Rune Thrift</string> <!-- untranslated -->
-    <string name="prestige_path_construction_efficient">Efficient Builder</string> <!-- untranslated -->
+    <string name="prestige_path_construction_efficient">Constructor Eficiente</string>
     <string name="prestige_path_prayer_devotion">Devoción</string>
-    <string name="prestige_path_mercantile_trade">Trade Baron</string> <!-- untranslated -->
+    <string name="prestige_path_mercantile_trade">Barón del Comercio</string>
     <string name="prestige_path_slayer_bounty">Bounty Hunter</string> <!-- untranslated -->
     <string name="prestige_path_ranged_quiver">Quiver Care</string> <!-- untranslated -->
     <string name="prestige_path_defense_laststand">Last Stand</string> <!-- untranslated -->
@@ -2533,7 +2536,7 @@
     <!-- Prestige path names (skill flavored) -->
     <string name="prestige_path_mining_yield">Mineral Más Puro</string>
     <string name="prestige_path_fishing_yield">More Fish</string> <!-- untranslated -->
-    <string name="prestige_path_woodcutting_yield">Sharper Axe</string> <!-- untranslated -->
+    <string name="prestige_path_woodcutting_yield">Hacha Más Afilada</string>
     <string name="prestige_path_thieving_yield">Faster Picking</string> <!-- untranslated -->
     <string name="prestige_path_slayer_yield">Hunter\'s Instinct</string> <!-- untranslated -->
     <string name="prestige_path_attack_prowess">Precisión</string>
@@ -2543,21 +2546,21 @@
     <string name="prestige_path_magic_prowess">Attunement</string> <!-- untranslated -->
     <string name="prestige_path_hitpoints_prowess">Vitalidad</string>
     <string name="prestige_path_thieving_coin">Silver Tongue</string> <!-- untranslated -->
-    <string name="prestige_path_mercantile_coin">Haggler</string> <!-- untranslated -->
+    <string name="prestige_path_mercantile_coin">Regateador</string>
 
     <!-- Prestige race branch names -->
     <string name="prestige_path_race_human">Resourceful</string> <!-- untranslated -->
     <string name="prestige_path_thieving_race_elf">Shadow Step</string> <!-- untranslated -->
     <string name="prestige_path_firemaking_race_dwarf">Ember Heart</string> <!-- untranslated -->
     <string name="prestige_path_fishing_race_halfling">Patient Angler</string> <!-- untranslated -->
-    <string name="prestige_path_woodcutting_race_halfling">Forest Kin</string> <!-- untranslated -->
+    <string name="prestige_path_woodcutting_race_halfling">Hijo del Bosque</string>
     <string name="prestige_path_farming_race_halfling">Bountiful Harvest</string> <!-- untranslated -->
     <string name="prestige_path_cooking_race_halfling">Home Cook</string> <!-- untranslated -->
-    <string name="prestige_path_construction_race_halfling">Cozy Builder</string> <!-- untranslated -->
+    <string name="prestige_path_construction_race_halfling">Constructor Acogedor</string>
     <string name="prestige_path_fishing_race_gnome">Clever Lures</string> <!-- untranslated -->
     <string name="prestige_path_fletching_race_gnome">Tinker\'s Touch</string> <!-- untranslated -->
     <string name="prestige_path_firemaking_race_gnome">Spark Wright</string> <!-- untranslated -->
-    <string name="prestige_path_construction_race_gnome">Gadget Works</string> <!-- untranslated -->
+    <string name="prestige_path_construction_race_gnome">Taller de Inventos</string>
     <string name="prestige_path_prayer_race_gnome">Trickster\'s Favor</string> <!-- untranslated -->
     <string name="prestige_path_hitpoints_race_orc">Thick Hide</string> <!-- untranslated -->
 
@@ -2580,14 +2583,14 @@
     <!-- Heirloom items (raid boss rare drops that level up with use) -->
     <string name="item_heirloom_pickaxe_name">Pico Heredado</string>
     <string name="item_heirloom_pickaxe_desc">Un pico familiar transmitido de generación en generación. Recuerda cada mineral que alguna vez rompieron sus portadores.</string>
-    <string name="item_heirloom_axe_name">Heirloom Axe</string> <!-- untranslated -->
-    <string name="item_heirloom_axe_desc">A woodsman\'s axe worn smooth by a hundred hands. Every felled tree sharpens it a little more.</string> <!-- untranslated -->
+    <string name="item_heirloom_axe_name">Hacha Heredada</string>
+    <string name="item_heirloom_axe_desc">Un hacha de leñador pulida por cien manos. Cada árbol talado la afila un poco más.</string>
     <string name="item_heirloom_fishing_rod_name">Heirloom Fishing Rod</string> <!-- untranslated -->
     <string name="item_heirloom_fishing_rod_desc">An old rod that has landed catches beyond counting. It learns the water with every cast.</string> <!-- untranslated -->
     <string name="item_heirloom_hoe_name">Heirloom Hoe</string> <!-- untranslated -->
     <string name="item_heirloom_hoe_desc">A humble hoe that has turned soil for generations. Each harvest leaves it keener than before.</string> <!-- untranslated -->
-    <string name="item_heirloom_hammer_name">Heirloom Hammer</string> <!-- untranslated -->
-    <string name="item_heirloom_hammer_desc">A smith\'s hammer black with the soot of a thousand forges. It grows truer with every strike.</string> <!-- untranslated -->
+    <string name="item_heirloom_hammer_name">Martillo Heredado</string>
+    <string name="item_heirloom_hammer_desc">Un martillo de herrero negro por el hollín de mil forjas. Cada golpe lo hace más certero.</string>
     <string name="item_heirloom_tinderbox_name">Heirloom Tinderbox</string> <!-- untranslated -->
     <string name="item_heirloom_tinderbox_desc">A battered tinderbox that has never failed to spark. Every fire it lights burns a little brighter.</string> <!-- untranslated -->
     <string name="item_heirloom_grappling_hook_name">Heirloom Grappling Hook</string> <!-- untranslated -->
@@ -2600,8 +2603,8 @@
     <string name="item_midas_band_desc">A sliver of the Vault Guardian\'s living gold. It drinks in a little of every battle its wearer survives.</string> <!-- untranslated -->
     <string name="item_heirloom_blade_name">Heirloom Blade</string> <!-- untranslated -->
     <string name="item_heirloom_blade_desc">An ancestral blade that wakes a little more with every battle its line survives.</string> <!-- untranslated -->
-    <string name="item_heirloom_greathammer_name">Heirloom Greathammer</string> <!-- untranslated -->
-    <string name="item_heirloom_greathammer_desc">A colossal warhammer of forgotten make. Each blow it lands adds to its legend.</string> <!-- untranslated -->
+    <string name="item_heirloom_greathammer_name">Gran Martillo Heredado</string>
+    <string name="item_heirloom_greathammer_desc">Un colosal martillo de guerra de forja olvidada. Cada golpe que asesta suma a su leyenda.</string>
     <string name="item_heirloom_longbow_name">Heirloom Longbow</string> <!-- untranslated -->
     <string name="item_heirloom_longbow_desc">A bow strung and restrung across generations of archers. Every arrow teaches it something.</string> <!-- untranslated -->
     <string name="item_heirloom_staff_name">Heirloom Staff</string> <!-- untranslated -->

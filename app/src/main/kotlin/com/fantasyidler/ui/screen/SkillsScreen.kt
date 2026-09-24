@@ -1,7 +1,9 @@
 package com.fantasyidler.ui.screen
 
 import android.content.Context
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -1032,11 +1034,13 @@ internal fun SkillRow(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier          = Modifier.weight(1f, fill = false),
                     ) {
+                        @OptIn(ExperimentalFoundationApi::class)
                         Text(
                             text       = name,
                             style      = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium,
-                            modifier   = Modifier.weight(1f, fill = false),
+                            maxLines   = 1,
+                            modifier   = Modifier.weight(1f, fill = false).basicMarquee(),
                         )
                         QuestIndicatorIcons(questIndicators)
                     }
@@ -1109,7 +1113,7 @@ internal fun SkillRow(
                         )
                         if (onOpenPrestige != null) {
                             Text(
-                                text     = stringResource(R.string.prestige),
+                                text     = stringResource(if (isPrestigeMaxed) R.string.prestige_skill_tree else R.string.prestige),
                                 style    = MaterialTheme.typography.labelSmall,
                                 color    = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier
