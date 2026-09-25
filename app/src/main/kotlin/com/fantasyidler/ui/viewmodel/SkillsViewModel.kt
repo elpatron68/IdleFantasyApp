@@ -1525,6 +1525,9 @@ class SkillsViewModel @Inject constructor(
                         addIndicator("coins", questSkill, category, remaining, questId)
                     }
                 }
+                "slayer_task", "slayer_kill" -> {
+                    addIndicator("any", Skills.SLAYER, category, remaining, questId)
+                }
             }
         }
 
