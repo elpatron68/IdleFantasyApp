@@ -593,6 +593,7 @@
     <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">ポーションなし</string>
+    <string name="label_potion">Potion</string> <!-- untranslated -->
     <string name="combat_req_level">必要戦闘レベル</string>
     <string name="combat_duration">所要時間</string>
     <!-- Translator note: %1$d = minutes -->
@@ -2008,7 +2009,7 @@
     <string name="monument_not_enough_coins">コインが足りません。</string>
     <string name="title_patron_of_the_realm_name">王国の後援者</string>
     <string name="title_patron_of_the_realm_requirement">大記念碑を完成させる</string>
-    <string name="title_isle_champion_name">Isle Champion</string> <!-- untranslated -->
+    <string name="title_isle_champion_name">Champion of the Elder Isle</string> <!-- untranslated -->
     <string name="title_isle_champion_requirement">Defeat the Last Elder on Elder Isle</string> <!-- untranslated -->
     <string name="item_gilded_full_helmet_name">金装飾のフルヘルム</string>
     <string name="item_gilded_platebody_name">金装飾のプレートボディ</string>

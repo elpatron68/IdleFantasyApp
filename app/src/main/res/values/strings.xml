@@ -595,6 +595,7 @@
     <string name="combat_spell_locked">Requires Magic level %1$d</string>
     <string name="combat_spell_level_met">Magic level %1$d</string>
     <string name="combat_no_potion">No Potion</string>
+    <string name="label_potion">Potion</string>
     <string name="combat_req_level">Required combat level</string>
     <string name="combat_duration">Duration</string>
     <!-- Translator note: %1$d = minutes -->

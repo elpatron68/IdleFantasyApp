@@ -595,6 +595,7 @@
     <string name="combat_spell_locked">Requires Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_spell_level_met">Magic level %1$d</string> <!-- untranslated -->
     <string name="combat_no_potion">Geen drank</string>
+    <string name="label_potion">Potion</string> <!-- untranslated -->
     <string name="combat_req_level">Vereist gevechtslevel</string>
     <string name="combat_duration">Duur</string>
     <!-- Translator note: %1$d = minutes -->
@@ -2010,7 +2011,7 @@
     <string name="monument_not_enough_coins">Niet genoeg munten.</string>
     <string name="title_patron_of_the_realm_name">Beschermheer van het Rijk</string>
     <string name="title_patron_of_the_realm_requirement">Voltooi het Grote Monument</string>
-    <string name="title_isle_champion_name">Isle Champion</string> <!-- untranslated -->
+    <string name="title_isle_champion_name">Champion of the Elder Isle</string> <!-- untranslated -->
     <string name="title_isle_champion_requirement">Defeat the Last Elder on Elder Isle</string> <!-- untranslated -->
     <string name="item_gilded_full_helmet_name">Vergulde helm</string>
     <string name="item_gilded_platebody_name">Verguld borstpantser</string>

@@ -95,6 +95,8 @@ class TowerViewModel @Inject constructor(
     private val json: Json,
 ) : ViewModel() {
 
+    val potionEffects: Map<String, Map<String, Int>> = gameData.potionEffects
+
     init {
         // Transient loadout picks belong to the character that made them; without this reset
         // the cached values override the next character's saved loadout after a slot switch.
@@ -333,9 +335,10 @@ class TowerViewModel @Inject constructor(
                 val preferredArrow  = (_extra.value.selectedArrowKey ?: flags.equippedArrows)?.takeIf { (inventory[it] ?: 0) > 0 }
 
                 val potionKey     = _extra.value.selectedPotionKey
+                    ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val potionBonuses = if (potionKey != null && (inventory[potionKey] ?: 0) > 0) {
                     playerRepo.consumeItems(mapOf(potionKey to 1))
-                    gameData.potionEffects[potionKey] ?: emptyMap()
+                    boostRepo.boostedPotionEffects(flags, gameData.potionEffects[potionKey] ?: emptyMap())
                 } else emptyMap()
 
                 val towerHpBonus = flags.towerHpBonus

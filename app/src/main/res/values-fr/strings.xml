@@ -594,6 +594,7 @@
     <string name="combat_spell_locked">Nécessite Magie niveau %1$d</string>
     <string name="combat_spell_level_met">Magie niveau %1$d</string>
     <string name="combat_no_potion">Pas de potion</string>
+    <string name="label_potion">Potion</string> <!-- untranslated -->
     <string name="combat_req_level">Niveau de combat requis</string>
     <string name="combat_duration">Durée</string>
     <!-- Translator note: %1$d = minutes -->
@@ -2009,7 +2010,7 @@
     <string name="monument_not_enough_coins">Pas assez de pièces.</string>
     <string name="title_patron_of_the_realm_name">Mécène du Royaume</string>
     <string name="title_patron_of_the_realm_requirement">Achevez le Grand Monument</string>
-    <string name="title_isle_champion_name">Isle Champion</string> <!-- untranslated -->
+    <string name="title_isle_champion_name">Champion of the Elder Isle</string> <!-- untranslated -->
     <string name="title_isle_champion_requirement">Defeat the Last Elder on Elder Isle</string> <!-- untranslated -->
     <string name="item_gilded_full_helmet_name">Heaume Doré</string>
     <string name="item_gilded_platebody_name">Plastron Doré</string>

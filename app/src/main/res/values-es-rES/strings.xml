@@ -593,6 +593,7 @@
     <string name="combat_spell_locked">Requiere nivel %1$d de Magia</string>
     <string name="combat_spell_level_met">Nivel de Magia %1$d</string>
     <string name="combat_no_potion">Sin poción</string>
+    <string name="label_potion">Potion</string> <!-- untranslated -->
     <string name="combat_req_level">Nivel de combate requerido</string>
     <string name="combat_duration">Duracion</string>
     <!-- Translator note: %1$d = minutes -->

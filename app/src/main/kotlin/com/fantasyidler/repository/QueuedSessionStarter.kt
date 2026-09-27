@@ -824,6 +824,9 @@ class QueuedSessionStarter @Inject constructor(
                     // matching how queued sessions already use the current armor.
                     mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
                     blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory) + sessionRepo.pendingHeirloomKeys(),
+                    potionAttackBonus   = when (combatStyle) { "ranged" -> bossPotionBonuses["ranged"] ?: 0; "magic" -> bossPotionBonuses["magic"] ?: 0; else -> bossPotionBonuses["attack"] ?: 0 },
+                    potionStrengthBonus = when (combatStyle) { "ranged" -> bossPotionBonuses["ranged"] ?: 0; "magic" -> 0; else -> bossPotionBonuses["strength"] ?: 0 },
+                    potionDefenseBonus  = bossPotionBonuses["defense"] ?: 0,
                 )
                 val frameMs        = effectiveSessionMs / 60L
                 val bossDurationMs = boss.durationMinutes * frameMs

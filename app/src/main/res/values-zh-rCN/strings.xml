@@ -593,6 +593,7 @@
     <string name="combat_spell_locked">需要魔法等级 %1$d</string>
     <string name="combat_spell_level_met">魔法等级 %1$d</string>
     <string name="combat_no_potion">无药水</string>
+    <string name="label_potion">Potion</string> <!-- untranslated -->
     <string name="combat_req_level">所需战斗等级</string>
     <string name="combat_duration">持续时间</string>
     <!-- Translator note: %1$d = minutes -->
@@ -2008,7 +2009,7 @@
     <string name="monument_not_enough_coins">金币不足。</string>
     <string name="title_patron_of_the_realm_name">王国守护者</string>
     <string name="title_patron_of_the_realm_requirement">完成大纪念碑</string>
-    <string name="title_isle_champion_name">Isle Champion</string> <!-- untranslated -->
+    <string name="title_isle_champion_name">Champion of the Elder Isle</string> <!-- untranslated -->
     <string name="title_isle_champion_requirement">Defeat the Last Elder on Elder Isle</string> <!-- untranslated -->
     <string name="item_gilded_full_helmet_name">镀金全罩头盔</string>
     <string name="item_gilded_platebody_name">镀金板甲</string>

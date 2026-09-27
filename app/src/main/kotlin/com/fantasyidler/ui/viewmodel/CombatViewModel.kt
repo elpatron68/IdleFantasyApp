@@ -290,12 +290,8 @@ class CombatViewModel @Inject constructor(
                 else     -> equippedWeapon?.strengthBonus ?: 0
             }
             val totalDef = armorDef + (equippedWeapon?.defenseBonus  ?: 0)
-            val potionKey = extra.selectedPotionKey ?: flags.activePotionKey
-            val potionBonuses = potionKey?.takeIf { (inventory[it] ?: 0) > 0 }
-                ?.let { boostRepo.boostedPotionEffects(flags, gameData.potionEffects[it] ?: emptyMap()) } ?: emptyMap()
             fun effectiveLevel(skill: String): Int = (levels[skill] ?: 1) +
-                boostRepo.combatStatBonus(skill, flags, levels[skill] ?: 1) +
-                (potionBonuses[skill] ?: 0)
+                boostRepo.combatStatBonus(skill, flags, levels[skill] ?: 1)
             val attackSkill = when (displayStyle) {
                 "ranged" -> Skills.RANGED
                 "magic" -> Skills.MAGIC
@@ -937,6 +933,9 @@ class CombatViewModel @Inject constructor(
                     secondChance        = boostRepo.secondChanceActive(flags),
                     mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
                     blockedRareDrops    = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory) + sessionRepo.pendingHeirloomKeys(),
+                    potionAttackBonus   = when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> potionBonuses["magic"] ?: 0; else -> potionBonuses["attack"] ?: 0 },
+                    potionStrengthBonus = when (combatStyle) { "ranged" -> potionBonuses["ranged"] ?: 0; "magic" -> 0; else -> potionBonuses["strength"] ?: 0 },
+                    potionDefenseBonus  = potionBonuses["defense"] ?: 0,
                 )
 
                 val framesJson = json.encodeToString(
