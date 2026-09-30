@@ -25,6 +25,7 @@ import com.fantasyidler.repository.FarmingRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.GuildRepository
 import com.fantasyidler.repository.PlayerRepository
+import com.fantasyidler.repository.predictionXpMult
 import com.fantasyidler.repository.DailyQuestRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
@@ -50,6 +51,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.math.roundToInt
 import kotlin.random.Random
 import javax.inject.Inject
 import android.content.Context
@@ -92,6 +94,8 @@ data class SkillsUiState(
     val cookingEfficiency: Float = 1.0f,
     val cropsReadyCount: Int = 0,
     val xpBonusMult: Float = 1.0f,
+    /** Active Church XP blessing percent for skill rows — 0 if none/ironman/isle. */
+    val blessingXpPct: Int = 0,
     val petBoosts: Map<String, Int> = emptyMap(),
     val sessionDurationMs: Long = 0L,
     /** Actual per-log burn duration, tinderbox tier bonus applied. Keyed by log key. */
@@ -244,6 +248,7 @@ class SkillsViewModel @Inject constructor(
                 cookingEfficiency     = if (flags.onElderIsle) 1.0f else gameData.toolEfficiency(equipped[EquipSlot.FRYING_PAN],     EquipSlot.FRYING_PAN,     0, skillLevels = levels, heirloomXp = flags.heirloomXp),
                 xpBonusMult           = if (flags.ironman || flags.onElderIsle) 1.0f
                                         else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0f else 1.0f) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(flags, equipped, inv.keys, gameData), gameData.blessings),
+                blessingXpPct         = blessingXpPercent(flags.ironman, flags.onElderIsle, ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(flags, equipped, inv.keys, gameData), gameData.blessings)),
                 petBoosts             = listOf(Skills.MINING, Skills.WOODCUTTING, Skills.FISHING, Skills.AGILITY)
                     .associateWith { if (flags.ironman || flags.onElderIsle) 0 else petBoostFor(player.pets, it) },
                 sessionDurationMs     = if (flags.onElderIsle)
@@ -522,7 +527,7 @@ class SkillsViewModel @Inject constructor(
             val toolEff = gameData.toolEfficiency(equipped[EquipSlot.TINDERBOX], EquipSlot.TINDERBOX, logData?.levelRequired ?: 0, skillLevels = levels, heirloomXp = flags.heirloomXp)
             val perLogMs = (SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(flags), townRepo.playerSessionDurationMultiplier(flags)) / 60L / toolEff).toLong()
             val logXp = logData?.xpPerLog?.toLong() ?: 0L
-            val xpQueueMult = if (flags.ironman) 1.0 else (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData), gameData.blessings)
+            val xpQueueMult = predictionXpMult(flags.ironman, flags.onElderIsle, (if (flags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(flags, blessingPrayerCapeMult(player, flags, gameData), gameData.blessings))
             val action = QueuedAction(
                 skillName           = Skills.FIREMAKING,
                 activityKey         = logKey,
@@ -583,7 +588,7 @@ class SkillsViewModel @Inject constructor(
                 val perItemMs  = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(rcFlags), townRepo.playerSessionDurationMultiplier(rcFlags)) / 60
                 val ashBon     = catalystKey?.let { ashRuneBonusForKey(it) } ?: 0
                 val mult       = when { rcLevel >= 75 -> 3; rcLevel >= 50 -> 2; else -> 1 } + ashBon
-                val xpQueueMult = if (rcFlags.ironman) 1.0 else (if (rcFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(rcFlags, blessingPrayerCapeMult(player, rcFlags, gameData), gameData.blessings)
+                val xpQueueMult = predictionXpMult(rcFlags.ironman, rcFlags.onElderIsle, (if (rcFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(rcFlags, blessingPrayerCapeMult(player, rcFlags, gameData), gameData.blessings))
                 val ashCost = if (catalystKey != null) (qty + 9) / 10 else 0
                 val saveChance = townRepo.secondaryMaterialSaveChance(rcFlags)
                 val consumedAshCost = if (catalystKey != null) applyQtyPreservation(ashCost, saveChance) else 0
@@ -706,7 +711,7 @@ class SkillsViewModel @Inject constructor(
                 val agility   = (json.decodeFromString<Map<String, Int>>(player.skillLevels))[Skills.AGILITY] ?: 1
                 val prayerFlags = try { json.decodeFromString<PlayerFlags>(player.flags) } catch (_: Exception) { PlayerFlags() }
                 val perBoneMs = SkillSimulator.sessionDurationMs(agility, boostRepo.sessionFloorReductionMin(prayerFlags), townRepo.playerSessionDurationMultiplier(prayerFlags)) / 60
-                val xpQueueMult = if (prayerFlags.ironman) 1.0 else (if (prayerFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(prayerFlags, blessingPrayerCapeMult(player, prayerFlags, gameData), gameData.blessings)
+                val xpQueueMult = predictionXpMult(prayerFlags.ironman, prayerFlags.onElderIsle, (if (prayerFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(prayerFlags, blessingPrayerCapeMult(player, prayerFlags, gameData), gameData.blessings))
                 val enqueued = playerRepo.enqueueAction(
                     QueuedAction(
                         skillName           = Skills.PRAYER,
@@ -823,7 +828,7 @@ class SkillsViewModel @Inject constructor(
                 val petBoostPct = petBoostFor(player.pets, Skills.THIEVING, thievingFlags.ironman)
                 val petBoostedXp = if (petBoostPct > 0) (npc.baseXp * (1.0 + petBoostPct / 100.0)).toInt() else npc.baseXp
                 val expectedXp = 60.0 * (successChance / (2.0 - successChance)) * petBoostedXp
-                val xpQueueMult = if (thievingFlags.ironman) 1.0 else (if (thievingFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(thievingFlags, blessingPrayerCapeMult(player, thievingFlags, gameData), gameData.blessings)
+                val xpQueueMult = predictionXpMult(thievingFlags.ironman, thievingFlags.onElderIsle, (if (thievingFlags.xpBoostExpiresAt > System.currentTimeMillis()) 2.0 else 1.0) * ChurchRepository.xpMultiplier(thievingFlags, blessingPrayerCapeMult(player, thievingFlags, gameData), gameData.blessings))
                 val prestigeMult = 1.0 + boostRepo.prestigeXpPct(Skills.THIEVING, thievingFlags) / 100.0
                 val estimatedXpGain = (expectedXp * xpQueueMult * prestigeMult).toLong()
 
@@ -1622,6 +1627,13 @@ fun xpToNextLevel(xp: Long): Long = XpTable.xpToNextLevel(xp)
 
 /** Total XP required for the next level (absolute threshold). */
 fun nextLevelThreshold(xp: Long): Long = XpTable.nextLevelThreshold(xp)
+
+/**
+ * Blessing XP percent for skill rows: ironman and isle sessions run at base
+ * rates (issue #1941). Mirrors the `xpBonusMult` guard.
+ */
+internal fun blessingXpPercent(isIronman: Boolean, isIsle: Boolean, churchMult: Float): Int =
+    if (isIronman || isIsle) 0 else ((churchMult - 1) * 100).roundToInt()
 
 /** XP still needed to reach level 99 (the level cap), or 0 if already there. */
 fun xpToMaxLevel(xp: Long): Long = (XpTable.xpForLevel(99) - xp).coerceAtLeast(0L)

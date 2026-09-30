@@ -67,6 +67,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -93,6 +94,7 @@ import com.fantasyidler.ui.viewmodel.totalLevelFrom
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import androidx.compose.ui.text.style.TextOverflow
+import com.fantasyidler.util.formatDurationMs
 import kotlinx.coroutines.delay
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ElevatedCard
@@ -274,6 +276,13 @@ fun HomeScreen(
                             color = MaterialTheme.colorScheme.primary,
                         )
                     }
+                    if (summary.coinPetBonus > 0) {
+                        Text(
+                            text  = stringResource(R.string.pet_coin_bonus, summary.coinPetBonus.formatCoins()),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
                     if (summary.foodConsumedLines.isNotEmpty()) {
                         Spacer(Modifier.height(4.dp))
                         SummarySection(stringResource(R.string.home_food_consumed))
@@ -426,6 +435,13 @@ fun HomeScreen(
                     if (summary.coinBlessingBonus > 0) {
                         Text(
                             text  = stringResource(R.string.church_blessing_bonus, summary.coinBlessingBonus.formatCoins()),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                    if (summary.coinPetBonus > 0) {
+                        Text(
+                            text  = stringResource(R.string.pet_coin_bonus, summary.coinPetBonus.formatCoins()),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -683,6 +699,7 @@ fun HomeScreen(
             // ── Town grid (or isle grid) ───────────────────────────────
             val churchTint = if (state.activeBlessingKey.isNotEmpty() && state.activeBlessingRemainingMs > 0)
                 MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+            val monumentTouchDotVisible = state.showMonumentTouchIndicator && state.monumentTouchAvailable
             val townGridRows: @Composable () -> Unit = {
                 if (state.onElderIsle) {
                     // Isle-flavored grid: mirrors mainland town-grid card styling; 4 cards.
@@ -725,7 +742,7 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             TownGridCard(Icons.Filled.Celebration,    stringResource(R.string.carnival_title), onClick = onNavigateToCarnival, modifier = Modifier.weight(1f))
-                            TownGridCard(Icons.Filled.AccountBalance, stringResource(R.string.monument_title), onClick = onNavigateToMonument, modifier = Modifier.weight(1f))
+                            TownGridCard(Icons.Filled.AccountBalance, stringResource(R.string.monument_title), onClick = onNavigateToMonument, modifier = Modifier.weight(1f), showDot = monumentTouchDotVisible)
                             TownGridCard(Icons.Filled.Home,           stringResource(R.string.house_title),    onClick = onNavigateToHouse,    modifier = Modifier.weight(1f))
                         }
                         // Show the Set Sail button as soon as the Dock is built, even before
@@ -858,6 +875,24 @@ fun HomeScreen(
                                 drawStopIndicator = {},
                                 progress = { (event.tokens.toFloat() / event.goal).coerceIn(0f, 1f) },
                                 modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            // Ticks on each minute boundary (the smallest unit shown) so the
+                            // countdown stays current while Home is open.
+                            var eventNowMs by remember { mutableLongStateOf(System.currentTimeMillis()) }
+                            LaunchedEffect(event.endMs) {
+                                while (true) {
+                                    eventNowMs = System.currentTimeMillis()
+                                    delay(60_000L - eventNowMs % 60_000L)
+                                }
+                            }
+                            Text(
+                                text  = stringResource(
+                                    R.string.format_time_remaining,
+                                    (event.endMs - eventNowMs).coerceAtLeast(0).formatDurationMs(LocalContext.current),
+                                ),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
                     }
@@ -1406,6 +1441,7 @@ private fun TownGridCard(
     isLoading: Boolean = false,
     onLongClick: (() -> Unit)? = null,
     contentDesc: String? = null,
+    showDot: Boolean = false,
 ) {
     val interactionModifier = if (onLongClick != null) {
         Modifier.combinedClickable(
@@ -1430,6 +1466,10 @@ private fun TownGridCard(
             } else if (badgeCount > 0) {
                 BadgedBox(badge = { Badge { Text("$badgeCount") } }) {
                     Icon(imageVector = icon, contentDescription = contentDesc, tint = iconTint, modifier = Modifier.size(28.dp))
+                }
+            } else if (showDot) {
+                BadgedBox(badge = { Badge() }) {
+                    Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(28.dp))
                 }
             } else {
                 Icon(imageVector = icon, contentDescription = contentDesc, tint = iconTint, modifier = Modifier.size(28.dp))

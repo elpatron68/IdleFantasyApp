@@ -329,6 +329,8 @@
     <string name="settings_profile_layout_tabs">Вкладки</string>
     <string name="settings_quest_dots">Точки заданий на навыке</string>
     <string name="settings_quest_dots_desc">Показывает золотую точку на навыках, для которых открыто задание</string>
+    <string name="settings_monument_touch_indicator">Monument touch indicator</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator_desc">Show a dot on the Grand Monument on Home when the daily touch is available</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Значки с уведомлением о престиже</string>
     <string name="settings_prestige_notifications_desc">Показывать значок уведомления при навигации, когда навык готов к получению престижа.</string>
     <string name="label_switch_character">Сменить персонажа</string>
@@ -703,6 +705,7 @@
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">Бонус инструмента ×%1$s</string>
     <string name="skills_pet_bonus">+%1$d%% опыта (питомец)</string>
+    <string name="skills_blessing_bonus">+%1$d%% XP (blessing)</string> <!-- untranslated -->
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Уровень %1$d  •  Улов по уровню</string>
     <!-- Translator note: %1$d = prayer level -->
@@ -761,6 +764,7 @@
     <string name="quest_legend_guild_daily">Ежедневное поручение гильдии</string>
     <string name="quest_legend_guild">Задание гильдии</string>
     <string name="quest_legend_quest">Задание</string>
+    <string name="quest_legend_slayer_target">Slayer Task</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Доступно временное задание.</string>
     <string name="quest_legend_notes">Задания с тусклыми значками пока нельзя выполнить (не хватает уровня или материалов). Маленькая надстрочная цифра означает, что несколько заданий этого типа требуют одного и того же.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
@@ -1074,6 +1078,8 @@
     <string name="church_active_chip">Активно</string>
     <string name="church_activate">Активировать</string>
     <string name="church_blessing_bonus">+%1$s от благословения</string>
+    <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
+    <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
     <string name="church_blessing_suffix">от благословения</string>
     <string name="church_effect_xp">×%1$.2f опыта на %2$d ч.</string>
     <string name="church_effect_def">+%1$d защиты на %2$d ч.</string>
@@ -1083,6 +1089,8 @@
     <string name="church_bones_available">У вас имеется костей — %1$d, что равно %2$d для благословений (крупные кости считаются за большее количество)</string>
     <string name="church_not_enough_bones">Недостаточно костей (нужно %1$d)</string>
     <string name="church_already_active">Благословение уже активно</string>
+    <string name="church_blessing_activated">Blessing activated!</string> <!-- untranslated -->
+    <string name="church_blessing_extended">Blessing extended!</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Деактивировать благословение?</string>
     <string name="church_confirm_deactivate_body">Вы уверены, что хотите деактивировать активное благословение? Вы не получите кости обратно.</string>
 
@@ -1391,8 +1399,11 @@
     <string name="slayer_found_in">Где найти: %1$s</string>
     <string name="slayer_requires">Требуется: %1$s</string>
     <string name="slayer_add_dungeon_to_queue">Добавить подземелье в очередь</string>
+    <string name="slayer_add_all_dungeons_to_queue">Add All Dungeons to Queue</string> <!-- untranslated -->
     <string name="slayer_queue_added">Добавлено в очередь: %1$s.</string>
     <string name="slayer_queue_full">Очередь заполнена.</string>
+    <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string> <!-- untranslated -->
+    <string name="slayer_queue_added_partial">Added %1$d of %2$d dungeons to queue.</string> <!-- untranslated -->
     <string name="slayer_foretell_title">Предсказать будущую цель</string>
     <string name="slayer_foretell_desc">Предварительно планируйте предстоящие задания убийцы, платя костьми. Назначение происходит автоматически после выполнения вашей текущей задачи.</string>
     <string name="slayer_foretell_queue_empty">Нет задач в очереди.</string>
@@ -1440,6 +1451,7 @@
     <string name="shop_cat_food">Еда</string>
     <string name="shop_cat_materials">Материалы</string>
     <string name="shop_cat_misc">Разное</string>
+    <string name="shop_cat_capes">Capes</string> <!-- untranslated -->
 
     <string name="crafting_per_craft">×%1$d за изготовление</string>
 

@@ -313,6 +313,8 @@
     <string name="settings_profile_layout_tabs">Tabbladen</string>
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator">Monument touch indicator</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator_desc">Show a dot on the Grand Monument on Home when the daily touch is available</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
     <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
     <string name="label_switch_character">Switch character</string> <!-- untranslated -->
@@ -685,6 +687,7 @@
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">×%1$s Gereedschapsbonus</string>
     <string name="skills_pet_bonus">+%1$d%% XP (pet)</string> <!-- untranslated -->
+    <string name="skills_blessing_bonus">+%1$d%% XP (blessing)</string> <!-- untranslated -->
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Lvl %1$d  •  Level-geschikte vangsten</string>
     <!-- Translator note: %1$d = prayer level -->
@@ -743,6 +746,7 @@
     <string name="quest_legend_guild_daily">Dagelijkse gildequest</string>
     <string name="quest_legend_guild">Gildequest</string>
     <string name="quest_legend_quest">Quest</string> <!-- untranslated -->
+    <string name="quest_legend_slayer_target">Slayer Task</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Gedimde pictogrammen kunnen nog niet voltooid worden (level of materialen ontbreken). Een klein verhoogd cijfer betekent dat meerdere quests van dat type hetzelfde willen.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
@@ -1056,6 +1060,8 @@
     <string name="church_active_chip">Actief</string>
     <string name="church_activate">Activeren</string>
     <string name="church_blessing_bonus">+%1$s van zegen</string>
+    <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
+    <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
     <string name="church_blessing_suffix">van zegen</string>
     <string name="church_effect_xp">×%1$.2f XP voor %2$d uur</string>
     <string name="church_effect_def">+%1$d Verdediging voor %2$d uur</string>
@@ -1065,6 +1071,8 @@
     <string name="church_bones_available">Je hebt %1$d botten (alle soorten), gelijk aan %2$d voor zegeningen (grotere botten tellen meer)</string>
     <string name="church_not_enough_bones">Niet genoeg botten (je hebt %1$d nodig)</string>
     <string name="church_already_active">Er is al een zegen actief</string>
+    <string name="church_blessing_activated">Blessing activated!</string> <!-- untranslated -->
+    <string name="church_blessing_extended">Blessing extended!</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Zegen deactiveren?</string>
     <string name="church_confirm_deactivate_body">Weet je zeker dat je je actieve zegen wilt deactiveren? Je krijgt je botten niet terug.</string>
 
@@ -1373,8 +1381,11 @@
     <string name="slayer_found_in">Gevonden in: %1$s</string>
     <string name="slayer_requires">Vereist: %1$s</string>
     <string name="slayer_add_dungeon_to_queue">Kerker aan wachtrij toevoegen</string>
+    <string name="slayer_add_all_dungeons_to_queue">Add All Dungeons to Queue</string> <!-- untranslated -->
     <string name="slayer_queue_added">Toegevoegd aan wachtrij: %1$s.</string>
     <string name="slayer_queue_full">Wachtrij is vol.</string>
+    <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string> <!-- untranslated -->
+    <string name="slayer_queue_added_partial">Added %1$d of %2$d dungeons to queue.</string> <!-- untranslated -->
     <string name="slayer_foretell_title">Foretell Future Tasks</string> <!-- untranslated -->
     <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string> <!-- untranslated -->
     <string name="slayer_foretell_queue_empty">No tasks queued.</string> <!-- untranslated -->
@@ -1422,6 +1433,7 @@
     <string name="shop_cat_food">Voedsel</string>
     <string name="shop_cat_materials">Materialen</string>
     <string name="shop_cat_misc">Overig</string>
+    <string name="shop_cat_capes">Capes</string> <!-- untranslated -->
 
     <string name="crafting_per_craft">×%1$d per beurt</string>
 

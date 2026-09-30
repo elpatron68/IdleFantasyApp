@@ -104,6 +104,7 @@ data class ShopUiState(
     /** Bulk and manual sells always leave one of each item (collector safety). */
     val keepOneOfEach: Boolean = false,
     val bulkSellReceipts: List<BulkSellReceipt> = emptyList(),
+    val seenItemKeys: Set<String> = emptySet(),
 ) {
     val xpBoostActive: Boolean get() = xpBoostExpiresAt > System.currentTimeMillis()
 }
@@ -152,6 +153,7 @@ class ShopViewModel @Inject constructor(
                 compactNumbers    = flags.compactNumbers,
                 keepOneOfEach     = flags.shopKeepOneOfEach,
                 bulkSellReceipts  = flags.bulkSellReceipts,
+                seenItemKeys      = flags.seenItemKeys,
             )
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ShopUiState())
@@ -233,7 +235,10 @@ class ShopViewModel @Inject constructor(
     // ------------------------------------------------------------------
 
     fun sellPriceFor(itemKey: String): Int {
+        // Buy-back capes are priced as a recovery fee, not market value; using that price
+        // here would let re-awarded skill capes be sold for a third of it.
         val marketPrice = gameData.marketplace.values
+            .filter { it.categoryName != CAPES_CATEGORY }
             .mapNotNull { it.items[itemKey]?.price }
             .firstOrNull()
 
@@ -539,7 +544,7 @@ class ShopViewModel @Inject constructor(
                     key         = entry.key,
                     displayName = entry.displayName,
                     priceEach   = discPrice,
-                    maxQty      = if (isXpBoost) 1 else maxAffordable,
+                    maxQty      = if (isXpBoost || entry.categoryName == CAPES_CATEGORY) 1 else maxAffordable,
                     qty         = 1,
                     isBuy       = true,
                 )
@@ -648,6 +653,13 @@ class ShopViewModel @Inject constructor(
     // Private helpers
     // ------------------------------------------------------------------
 
+    /** Capes entries only appear once earned (ever seen) and no longer owned/equipped — everything else is always eligible. */
+    fun isBuyEntryEligible(entry: ShopEntry, state: ShopUiState): Boolean {
+        if (entry.categoryName != CAPES_CATEGORY) return true
+        val owned = (state.inventory[entry.key] ?: 0) > 0 || entry.key in state.equipped.values
+        return entry.key in state.seenItemKeys && !owned
+    }
+
     fun sellCategoryFor(itemKey: String): String {
         val equip = gameData.equipment[itemKey]
         if (equip != null) {
@@ -677,6 +689,7 @@ class ShopViewModel @Inject constructor(
 
     companion object {
         const val XP_BOOST_KEY = "xp_boost_48h"
+        const val CAPES_CATEGORY = "Capes"
         const val MAX_BULK_SELL_RECEIPTS = 5
 
         /**

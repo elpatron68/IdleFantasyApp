@@ -313,6 +313,8 @@
     <string name="settings_profile_layout_tabs">Sekmeler</string>
     <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
     <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator">Monument touch indicator</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator_desc">Show a dot on the Grand Monument on Home when the daily touch is available</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
     <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
     <string name="label_switch_character">Switch character</string> <!-- untranslated -->
@@ -685,6 +687,7 @@
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">×%1$s araç bonusu</string>
     <string name="skills_pet_bonus">+%1$d%% XP (evcil hayvan)</string>
+    <string name="skills_blessing_bonus">+%1$d%% XP (blessing)</string> <!-- untranslated -->
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Seviye %1$d  •  Seviyeye uygun avlar</string>
     <!-- Translator note: %1$d = prayer level -->
@@ -743,6 +746,7 @@
     <string name="quest_legend_guild_daily">Lonca günlük görevi</string>
     <string name="quest_legend_guild">Lonca görevi</string>
     <string name="quest_legend_quest">Görev</string>
+    <string name="quest_legend_slayer_target">Slayer Task</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Timed quest is available.</string> <!-- untranslated -->
     <string name="quest_legend_notes">Soluk simgeler henüz tamamlanamaz (seviye veya malzeme eksik). Küçük üst simge sayı, aynı hedefi isteyen birden fazla görev olduğunu gösterir.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
@@ -1056,6 +1060,8 @@
     <string name="church_active_chip">Active</string> <!-- untranslated -->
     <string name="church_activate">Activate</string> <!-- untranslated -->
     <string name="church_blessing_bonus">+%1$s from blessing</string> <!-- untranslated -->
+    <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
+    <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
     <string name="church_blessing_suffix">from blessing</string> <!-- untranslated -->
     <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_def">+%1$d Defense for %2$d hours</string> <!-- untranslated -->
@@ -1065,6 +1071,8 @@
     <string name="church_bones_available">%1$d kemiğiniz var (tüm türler), kutsamalar için %2$d değerinde (büyük kemikler daha fazla sayılır)</string>
     <string name="church_not_enough_bones">Not enough bones (need %1$d)</string> <!-- untranslated -->
     <string name="church_already_active">A blessing is already active</string> <!-- untranslated -->
+    <string name="church_blessing_activated">Blessing activated!</string> <!-- untranslated -->
+    <string name="church_blessing_extended">Blessing extended!</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Kutsamayı Devre Dışı Bırak?</string>
     <string name="church_confirm_deactivate_body">Aktif kutsamanızı devre dışı bırakmak istediğinizden emin misiniz? Kemiklerinizi geri alamayacaksınız.</string>
 
@@ -1373,8 +1381,11 @@
     <string name="slayer_found_in">Found in: %1$s</string> <!-- untranslated -->
     <string name="slayer_requires">Requires: %1$s</string> <!-- untranslated -->
     <string name="slayer_add_dungeon_to_queue">Zindanı Kuyruğa Ekle</string>
+    <string name="slayer_add_all_dungeons_to_queue">Add All Dungeons to Queue</string> <!-- untranslated -->
     <string name="slayer_queue_added">Kuyruğa eklendi: %1$s.</string>
     <string name="slayer_queue_full">Kuyruk dolu.</string>
+    <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string> <!-- untranslated -->
+    <string name="slayer_queue_added_partial">Added %1$d of %2$d dungeons to queue.</string> <!-- untranslated -->
     <string name="slayer_foretell_title">Foretell Future Tasks</string> <!-- untranslated -->
     <string name="slayer_foretell_desc">Pre-assign upcoming Slayer tasks by paying bones. They are assigned automatically when your current task is completed.</string> <!-- untranslated -->
     <string name="slayer_foretell_queue_empty">No tasks queued.</string> <!-- untranslated -->
@@ -1422,6 +1433,7 @@
     <string name="shop_cat_food">Yiyecek</string>
     <string name="shop_cat_materials">Malzemeler</string>
     <string name="shop_cat_misc">Diğer</string>
+    <string name="shop_cat_capes">Capes</string> <!-- untranslated -->
 
     <string name="crafting_per_craft">×%1$d üretim başına</string>
 

@@ -709,15 +709,15 @@ object CombatSimulator {
 
         // DPS fallback if the frame cap was hit with neither side dead.
         if (frames.isEmpty() || (frames.last().kills == 0 && currentBossHp > 0 && currentHp > 0)) {
-            val mercDps = mercenaries.indices.sumOf { i ->
+            // Decided from the health left at the cap, not full pools, so damage already
+            // dealt counts (issue #1961). Downed mercenaries add neither HP nor damage.
+            val mercDps = mercenaries.indices.filter { mercHp[it] > 0 }.sumOf { i ->
                 (mercenaries[i].maxHit / 2.0) * mercHitChance[i] / BASE_ATTACK_SPEED_SEC
             }
-            val partyHp   = maxHp + mercenaries.sumOf { it.hpLevel * 10 }
+            val partyHpLeft = currentHp + mercHp.filter { it > 0 }.sum()
             val playerDps = (playerMax / 2.0) * playerHitChance / speed + mercDps
             val bossDps   = (bossMax / 2.0) * bossHitChance / BASE_ATTACK_SPEED_SEC
-            won = if (playerDps > 0 && bossDps > 0) {
-                (boss.hp / playerDps) <= (partyHp / bossDps)
-            } else playerDps >= bossDps
+            won = timeoutWon(currentBossHp, partyHpLeft, playerDps, bossDps)
             val stub = SessionFrame(
                 minute = frames.size, xpGain = 0, xpBefore = 0L, xpAfter = 0L,
                 levelBefore = 0, levelAfter = 0,
@@ -763,6 +763,14 @@ object CombatSimulator {
 
         return frames
     }
+
+    /**
+     * Boss fight that hit its time cap with both sides alive: the party wins if it would
+     * finish the boss's remaining HP no later than the boss finishes the party's.
+     */
+    internal fun timeoutWon(bossHpLeft: Int, partyHpLeft: Int, playerDps: Double, bossDps: Double): Boolean =
+        if (playerDps > 0 && bossDps > 0) (bossHpLeft / playerDps) <= (partyHpLeft / bossDps)
+        else playerDps >= bossDps
 
     /** Ticks per 60-second frame at the base attack speed (one attack every 2.4 s). */
     const val TICKS_PER_FRAME = 25

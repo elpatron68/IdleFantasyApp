@@ -9,6 +9,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -164,6 +166,14 @@ fun SkillsScreen(
                         QuestCategory.MAIN.emoji        to R.string.quest_legend_quest,
                     ).forEach { (emoji, labelRes) ->
                         Text("$emoji  ${stringResource(labelRes)}")
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Image(
+                            painter            = painterResource(R.drawable.skill_slayer),
+                            contentDescription = null,
+                            modifier           = Modifier.size(20.dp),
+                        )
+                        Text("  ${stringResource(R.string.quest_legend_slayer_target)}")
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text("●  ", color = MaterialTheme.colorScheme.primary)
@@ -756,6 +766,7 @@ private fun SkillsTabContent(
                 isPrestigeMaxed = key in state.prestigeMaxedSkills,
                 onOpenPrestige = { onNavigateToPrestige(key) },
                 cropsReady     = if (key == Skills.FARMING) state.cropsReadyCount else 0,
+                blessingXpPct  = state.blessingXpPct,
                 guildDailyOpen = state.showQuestDots && state.sheetQuests[key]?.any { !it.claimed && !(it.source == SheetQuestSource.GUILD && it.guildMaxed) } == true,
                 questIndicators = state.timedQuestsBySkill[key] ?: emptyList(),
             )
@@ -782,6 +793,7 @@ private fun SkillsTabContent(
                 isActive       = state.activeSession?.skillName == key && state.activeSession?.completed == false,
                 onClick        = { viewModel.onSkillTapped(key) },
                 toolEfficiency = craftEfficiency,
+                blessingXpPct  = state.blessingXpPct,
                 petBoostPct    = state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = state.skillPrestige[key] ?: 0,
                 isPrestigeMaxed = key in state.prestigeMaxedSkills,
@@ -805,6 +817,7 @@ private fun SkillsTabContent(
                 isActive       = state.activeSession?.skillName == key && state.activeSession?.completed == false,
                 onClick        = { viewModel.onSkillTapped(key) },
                 toolEfficiency = if (key == Skills.AGILITY) state.agilityEfficiency else 1.0f,
+                blessingXpPct  = state.blessingXpPct,
                 petBoostPct    = if (state.onElderIsle) 0 else state.petBoostBySkill[key] ?: 0,
                 prestigeLevel  = if (state.onElderIsle) 0 else state.skillPrestige[key] ?: 0,
                 isPrestigeMaxed = !state.onElderIsle && key in state.prestigeMaxedSkills,
@@ -824,6 +837,7 @@ private fun SkillsTabContent(
                     isActive      = false,
                     onClick       = onNavigateToSlayer,
                     petBoostPct   = state.petBoostBySkill[Skills.SLAYER] ?: 0,
+                    blessingXpPct = state.blessingXpPct,
                     prestigeLevel = state.skillPrestige[Skills.SLAYER] ?: 0,
                     isPrestigeMaxed = Skills.SLAYER in state.prestigeMaxedSkills,
                     onOpenPrestige = { onNavigateToPrestige(Skills.SLAYER) },
@@ -944,6 +958,7 @@ private fun ActiveSessionBanner(
 // Skill row
 // ---------------------------------------------------------------------------
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun SkillRow(
     skillKey: String,
@@ -955,6 +970,8 @@ internal fun SkillRow(
     petBoostPct: Int = 0,
     prestigeLevel: Int = 0,
     isPrestigeMaxed: Boolean = false,
+    /** Active Church XP blessing percent — 0 if none/ironman/isle. */
+    blessingXpPct: Int = 0,
     onOpenPrestige: (() -> Unit)? = null,
     cropsReady: Int = 0,
     /** Shows a gold dot when this skill's guild daily is still open and worth doing (guild not maxed). */
@@ -1060,23 +1077,35 @@ internal fun SkillRow(
             }
         },
         progress = progress,
-        description = if (toolEfficiency > 1.0f || petBoostPct > 0) {
+        description = if (toolEfficiency > 1.0f || petBoostPct > 0 || blessingXpPct > 0) {
             {
-                Box(Modifier.fillMaxWidth()) {
+                // One bonus line: tool left, blessing middle, pet right. Wraps rather than
+                // overlapping when all three don't fit on narrow screens.
+                FlowRow(
+                    modifier              = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    // Keeps a lone pet bonus right-aligned, where it has always sat.
+                    if (toolEfficiency <= 1.0f && blessingXpPct <= 0) Spacer(Modifier.width(0.dp))
                     if (toolEfficiency > 1.0f) {
                         Text(
-                            text     = stringResource(R.string.skills_tool_bonus, "%.2f".format(toolEfficiency)),
-                            style    = MaterialTheme.typography.labelSmall,
-                            color    = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.align(Alignment.CenterStart),
+                            text  = stringResource(R.string.skills_tool_bonus, "%.2f".format(toolEfficiency)),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                    if (blessingXpPct > 0) {
+                        Text(
+                            text  = stringResource(R.string.skills_blessing_bonus, blessingXpPct),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                     if (petBoostPct > 0) {
                         Text(
-                            text     = stringResource(R.string.skills_pet_bonus, petBoostPct),
-                            style    = MaterialTheme.typography.labelSmall,
-                            color    = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.align(Alignment.CenterEnd),
+                            text  = stringResource(R.string.skills_pet_bonus, petBoostPct),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.tertiary,
                         )
                     }
                 }
