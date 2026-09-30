@@ -15,8 +15,8 @@ android {
         applicationId = "com.tristinbaker.idlefantasy"
         minSdk = 26
         targetSdk = 35
-        versionCode = 155000
-        versionName = "1.15.5"
+        versionCode = 156000
+        versionName = "1.15.6"
 
         // Nightly channel (-PnightlyBuild=N): publishes as <stable>.N with
         // versionCode <stableCode>+N. Requires the thousands versionCode

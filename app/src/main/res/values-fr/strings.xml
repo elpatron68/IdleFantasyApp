@@ -313,6 +313,8 @@
     <string name="settings_profile_layout_tabs">Onglets</string>
     <string name="settings_quest_dots">Point de quête sur aptitudes</string>
     <string name="settings_quest_dots_desc">Montre un point doré sur les aptitudes qui ont une quête possible</string>
+    <string name="settings_monument_touch_indicator">Monument touch indicator</string> <!-- untranslated -->
+    <string name="settings_monument_touch_indicator_desc">Show a dot on the Grand Monument on Home when the daily touch is available</string> <!-- untranslated -->
     <string name="settings_prestige_notifications">Notification de prestige</string>
     <string name="settings_prestige_notifications_desc">Montrer une notification quand une aptitude est prête à prestige.</string>
     <string name="label_switch_character">Changer de personnage</string>
@@ -684,6 +686,7 @@
     <!-- Translator note: %1$s = formatted multiplier (e.g. "1.15") -->
     <string name="skills_tool_bonus">×%1$s de bonus (Outil)</string>
     <string name="skills_pet_bonus">+%1$d%% XP (familier)</string>
+    <string name="skills_blessing_bonus">+%1$d%% XP (blessing)</string> <!-- untranslated -->
     <!-- Translator note: %1$d = fishing level -->
     <string name="skills_fishing_desc">Niv. %1$d  •  Pêche adaptée au niveau</string>
     <!-- Translator note: %1$d = prayer level -->
@@ -742,6 +745,7 @@
     <string name="quest_legend_guild_daily">Quotidienne de guilde</string>
     <string name="quest_legend_guild">Quête de guilde</string>
     <string name="quest_legend_quest">Quête</string>
+    <string name="quest_legend_slayer_target">Slayer Task</string> <!-- untranslated -->
     <string name="quest_legend_gold_dot">Une quête temporaire est disponible.</string>
     <string name="quest_legend_notes">Les icônes estompées ne peuvent pas encore être terminées (niveau ou matériaux manquants). Un petit chiffre en exposant indique que plusieurs quêtes de ce type visent la même chose.</string>
     <!-- Translator note: %1$s = quantity in inventory -->
@@ -1055,6 +1059,8 @@
     <string name="church_active_chip">Actif</string>
     <string name="church_activate">Activer</string>
     <string name="church_blessing_bonus">+%1$s de la bénédiction</string>
+    <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
+    <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
     <string name="church_blessing_suffix">de la bénédiction</string>
     <string name="church_effect_xp">×%1$.2f XP pendant %2$d heures</string>
     <string name="church_effect_def">+%1$d Défense pendant %2$d heures</string>
@@ -1064,6 +1070,8 @@
     <string name="church_bones_available">Vous avez %1$d os (tous types), soit %2$d pour les bénédictions (les os plus gros comptent plus)</string>
     <string name="church_not_enough_bones">Os insuffisants (besoin de %1$d)</string>
     <string name="church_already_active">Une bénédiction est déjà active</string>
+    <string name="church_blessing_activated">Blessing activated!</string> <!-- untranslated -->
+    <string name="church_blessing_extended">Blessing extended!</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Désactiver la bénédiction ?</string>
     <string name="church_confirm_deactivate_body">Es-tu sûr de vouloir désactiver ta bénédiction active ? Tu ne récupéreras pas tes os.</string>
 
@@ -1372,8 +1380,11 @@
     <string name="slayer_found_in">Trouvé dans : %1$s</string>
     <string name="slayer_requires">Nécessite : %1$s</string>
     <string name="slayer_add_dungeon_to_queue">Ajouter le donjon à la file d\'attente</string>
+    <string name="slayer_add_all_dungeons_to_queue">Add All Dungeons to Queue</string> <!-- untranslated -->
     <string name="slayer_queue_added">Ajouté à la file d\'attente : %1$s.</string>
     <string name="slayer_queue_full">La file d\'attente est pleine.</string>
+    <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string> <!-- untranslated -->
+    <string name="slayer_queue_added_partial">Added %1$d of %2$d dungeons to queue.</string> <!-- untranslated -->
     <string name="slayer_foretell_title">Anticiper les tâches futures</string>
     <string name="slayer_foretell_desc">Demandez à l\'avance les prochaines tâches à votre mentor en payant des os. Elles sont attribuées automatiquement lorsque votre tâche actuelle est terminée.</string>
     <string name="slayer_foretell_queue_empty">Aucune tâche en attente.</string>
@@ -1421,6 +1432,7 @@
     <string name="shop_cat_food">Nourriture</string>
     <string name="shop_cat_materials">Matériaux</string>
     <string name="shop_cat_misc">Divers</string>
+    <string name="shop_cat_capes">Capes</string> <!-- untranslated -->
 
     <string name="crafting_per_craft">×%1$d par fabrication</string>
 
