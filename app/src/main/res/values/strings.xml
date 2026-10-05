@@ -474,6 +474,7 @@
     <string name="settings_lang_arabic" translatable="false">العربية</string>
     <string name="settings_lang_catalan" translatable="false">Català</string>
     <string name="settings_lang_ukrainian" translatable="false">Українська</string>
+    <string name="settings_lang_vietnamese" translatable="false">Tiếng Việt</string>
     <string name="settings_lang_system">System</string>
     <string name="settings_save_data">Save Data</string>
     <string name="settings_export">Export Save</string>
@@ -1520,7 +1521,7 @@
 
     <!-- Thieving skill -->
     <string name="skill_thieving_name">Thieving</string>
-    <string name="skill_thieving_desc">Pickpocket NPCs each session. Success chance depends on your level vs the target. Failed attempts stun you for a frame. Higher tiers drop rare items and large coin purses.</string>
+    <string name="skill_thieving_desc">Pickpocket NPCs each session. Success chance depends on your level vs the target. Failed attempts earn nothing that minute. Better lockpicks raise both success chance and XP. Higher tiers drop rare items and large coin purses.</string>
     <string name="thieving_npc_detail">Lv. %1$d • %2$d XP • %3$d%% success</string>
     <string name="thieving_npc_coins">%1$d–%2$d coins per success</string>
 
