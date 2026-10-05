@@ -1107,6 +1107,9 @@ class CombatViewModel @Inject constructor(
                 if (action.coinRefund > 0) playerRepo.addCoins(action.coinRefund)
                 playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)
                     ?.let { playerRepo.addItems(it) }
+                if (action.catalystKey != null && action.catalystQty > 0) {
+                    playerRepo.addItem(action.catalystKey, action.catalystQty)
+                }
             }
             playerRepo.prestigeSkill(skillName)
             // The repository resets flags.activeSpell if it now outlevels the player; drop the

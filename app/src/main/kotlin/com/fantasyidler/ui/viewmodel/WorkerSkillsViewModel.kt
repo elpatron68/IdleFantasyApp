@@ -476,6 +476,7 @@ class WorkerSkillsViewModel @Inject constructor(
                     qty                 = qty,
                     estimatedDurationMs = qty.toLong() * perItemMs,
                     catalystKey         = catalystKey,
+                    catalystQty         = ashCost,
                 )
             )
             if (enqueued) {

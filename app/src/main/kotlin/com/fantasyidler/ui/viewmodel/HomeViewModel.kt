@@ -1786,12 +1786,15 @@ class HomeViewModel @Inject constructor(
                 val qty = frames.sumOf { it.kills }
                 workerMaterialsFor(session.skillName, session.activityKey, qty)
                     ?.let { playerRepo.addItems(it) }
+                if (session.catalystKey != null && session.catalystQty > 0) {
+                    playerRepo.addItem(session.catalystKey, session.catalystQty)
+                }
                 sessionRepo.abandonSession(session.sessionId)
             }
 
             for (action in worker?.sessionQueue ?: emptyList()) {
-                workerMaterialsFor(action.skillName, action.activityKey, action.qty)
-                    ?.let { playerRepo.addItems(it) }
+                val refund = workerRefundMaterials(action, gameData)
+                if (refund.isNotEmpty()) playerRepo.addItems(refund)
             }
 
             worker?.tier?.hireCost?.let { playerRepo.addCoins(it) }
@@ -2064,6 +2067,25 @@ fun playerSessionMaterials(
         Skills.CONSTRUCTION  -> gameData.constructionRecipes[activityKey]?.materials?.mapValues { it.value * qty }
         else                 -> null
     }
+}
+
+/**
+ * Full refund for a dismissed or discarded worker order: primary materials plus catalyst.
+ * Primaries come from [playerSessionMaterials]; the catalyst amount prefers the stored
+ * [QueuedAction.catalystQty] and falls back to the legacy runecrafting cost
+ * ((qty+9)/10) when a catalyst key exists but no quantity was recorded. Queued herblore
+ * orders never paid ashes yet, so with no stored quantity they yield zero catalyst.
+ */
+fun workerRefundMaterials(action: QueuedAction, gameData: GameDataRepository): Map<String, Int> {
+    val merged = playerSessionMaterials(action.skillName, action.activityKey, action.qty, gameData)?.toMutableMap()
+        ?: mutableMapOf()
+    val catalystQty = action.catalystQty.takeIf { it > 0 }
+        ?: if (action.skillName == Skills.RUNECRAFTING && action.catalystKey != null) (action.qty + 9) / 10 else 0
+    val catalystKey = action.catalystKey
+    if (catalystKey != null && catalystQty > 0) {
+        merged[catalystKey] = (merged[catalystKey] ?: 0) + catalystQty
+    }
+    return merged
 }
 
 /** Returns the fraction of consumed ammo/runes a player recoups: 25% at level 1, 75% at level 99. */

@@ -117,6 +117,8 @@ class SessionRepository @Inject constructor(
         levelAtStart: Int = 0,
         weaponSlot: String? = null,
         playerMutexHeld: Boolean = false,
+        catalystKey: String? = null,
+        catalystQty: Int = 0,
     ): SkillSession {
         val now = System.currentTimeMillis()
         val session = SkillSession(
@@ -130,6 +132,8 @@ class SessionRepository @Inject constructor(
             efficiencyMultiplier = efficiencyMultiplier,
             workerSlot           = workerSlot,
             levelAtStart         = levelAtStart,
+            catalystKey          = catalystKey,
+            catalystQty          = catalystQty,
             startElapsedMs       = SystemClock.elapsedRealtime(),
             startBootCount       = currentBootCount(),
         )
