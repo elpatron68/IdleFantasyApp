@@ -1597,7 +1597,7 @@
     <string name="elder_isle_zone_locked">Locked</string> <!-- untranslated -->
     <string name="elder_isle_coming_soon">Elder Isle is barely charted. Return once the isle has been built out.</string> <!-- untranslated -->
     <string name="elder_isle_boss_sea_serpent">Sea Serpent</string> <!-- untranslated -->
-    <string name="elder_isle_set_sail">Set sail for Elder Isle</string> <!-- untranslated -->
+    <string name="elder_isle_set_sail">Mettez le cap sur l\'île d\'Elder</string>
     <string name="elder_isle_return">Return to the mainland</string> <!-- untranslated -->
     <string name="elder_isle_sail_blocked_by_session">Finish your active session before setting sail.</string> <!-- untranslated -->
     <string name="elder_isle_sail_blocked_locked">Elder Isle is not yet unlocked.</string> <!-- untranslated -->

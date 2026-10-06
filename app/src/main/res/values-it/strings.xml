@@ -420,7 +420,7 @@
     <string name="settings_font_small">Piccolo</string>
     <string name="settings_font_normal">Normale</string>
     <string name="settings_font_large">Grande</string>
-    <string name="settings_font_very_large">Very Large</string>
+    <string name="settings_font_very_large">Molto Grande</string>
     <string name="settings_font_huge">Enorme</string>
     <string name="settings_import_theme">Importa temi</string>
     <string name="settings_import_theme_desc">Importa temi personalizzati da un file</string>
@@ -574,14 +574,14 @@
     <string name="combat_log_missed">manca il bersaglio</string>
     <string name="combat_log_you_missed">Hai mancato</string>
     <string name="combat_log_kill">☠ %1$s sconfitto</string>
-    <string name="combat_log_player_hit">→ Hai colpito %1$s: %2$d danno</string>
+    <string name="combat_log_player_hit">→ Hai colpito %1$s: %2$d danni</string>
     <string name="combat_log_player_double_hit">→ Combo! Colpisci %1$s due volte: %2$d danni</string>
     <string name="combat_log_player_miss">→ Hai mancato %1$s</string>
-    <string name="combat_log_enemy_hit">← %1$s ti ha colpito: %2$d danno</string>
+    <string name="combat_log_enemy_hit">← %1$s ti ha colpito: %2$d danni</string>
     <string name="combat_log_enemy_miss">← %1$s manca il bersaglio</string>
     <string name="combat_log_ally_hit">→ I mercenari attaccano %1$s: %2$d danni</string>
     <string name="combat_log_heal">✚ Hai mangiato: +%1$d PS</string>
-    <string name="combat_eat_threshold_warning">Attenzione: a bassi livelli un colpo molto forte può portare alla morte prima di avere tempo di mangiare</string>
+    <string name="combat_eat_threshold_warning">Attenzione: a bassi livelli un attacco potente può portare alla morte prima di avere tempo di mangiare</string>
     <string name="combat_rec_level">Livello di combattimento consigliato</string>
     <string name="combat_your_level">Il tuo livello di combattimento</string>
     <string name="combat_no_strength_bonus">Nessuno (nessun bonus sulla forza)</string>
