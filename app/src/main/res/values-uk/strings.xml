@@ -1538,15 +1538,15 @@
     <!-- Town building upgrade UI -->
     <string name="town_upgrade_section_title">Town Building</string> <!-- untranslated -->
     <string name="town_building_inn_name">Inn</string> <!-- untranslated -->
-    <string name="town_building_guild_hall_name">Guild Hall</string> <!-- untranslated -->
-    <string name="town_building_church_name">Church</string> <!-- untranslated -->
+    <string name="town_building_guild_hall_name">Зал Гільдій</string>
+    <string name="town_building_church_name">Церква</string>
     <string name="town_building_current_tier">Tier %1$d / %2$d</string> <!-- untranslated -->
     <string name="town_building_maxed_label">Fully Upgraded</string> <!-- untranslated -->
     <string name="town_upgrade_next_label">Next Upgrade</string> <!-- untranslated -->
     <string name="town_upgrade_constr_req">Construction Lv. %1$d required</string> <!-- untranslated -->
     <string name="town_upgrade_cost">Cost: %1$s coins</string> <!-- untranslated -->
     <string name="town_builder_discount">Builder\'s discount: %1$d%% off</string> <!-- untranslated -->
-    <string name="town_upgrade_materials_header">Materials:</string> <!-- untranslated -->
+    <string name="town_upgrade_materials_header">Матеріали:</string>
     <string name="town_upgrade_btn">Upgrade</string> <!-- untranslated -->
     <string name="town_upgrade_success">Building upgraded!</string> <!-- untranslated -->
     <string name="town_upgrade_fail_level">Need Construction Lv. %1$d</string> <!-- untranslated -->
@@ -1563,7 +1563,7 @@
     <string name="town_fairgrounds_t1_bonus" formatted="false">Unlocks Pick-a-Cup, cooldowns reduced to 7.5 minutes, +5% idle ticket chance</string> <!-- untranslated -->
     <string name="town_fairgrounds_t2_bonus" formatted="false">Unlocks Higher or Lower, +10% idle ticket chance</string> <!-- untranslated -->
     <string name="town_fairgrounds_t3_bonus" formatted="false">Cooldowns reduced to 5 minutes, +15% idle ticket chance</string> <!-- untranslated -->
-    <string name="town_building_garden_name">Garden</string> <!-- untranslated -->
+    <string name="town_building_garden_name">Сад</string>
     <plurals name="town_garden_bonus">
         <item quantity="zero">No extra farm plots yet</item>
         <item quantity="one">+%1$d extra farm plot</item>
@@ -1762,14 +1762,14 @@
     <string name="carnival_prize_xp_lamp_large_desc">Grants 50,000 XP to a chosen skill.</string> <!-- untranslated -->
     <string name="carnival_ticket_balance">Tickets: %1$d</string> <!-- untranslated -->
     <string name="carnival_idle_tab">Idle Games</string> <!-- untranslated -->
-    <string name="carnival_active_tab">Active Games</string> <!-- untranslated -->
-    <string name="carnival_shop_tab">Prize Shop</string> <!-- untranslated -->
+    <string name="carnival_active_tab">Активні Ігри</string>
+    <string name="carnival_shop_tab">Магазин Призів</string>
     <string name="carnival_idle_hint">Queue a session to earn tickets. A higher relevant skill level means more tickets per session.</string> <!-- untranslated -->
     <string name="carnival_archery_range">Archery Range</string> <!-- untranslated -->
     <string name="carnival_idle_desc_archery">Shoot at moving targets. Ranged level boosts ticket yield.</string> <!-- untranslated -->
     <string name="carnival_strongman_competition">Strongman Competition</string> <!-- untranslated -->
     <string name="carnival_idle_desc_strongman">Lift stones and swing hammers. Strength level boosts ticket yield.</string> <!-- untranslated -->
-    <string name="carnival_wizards_duel">Wizard\'s Duel</string> <!-- untranslated -->
+    <string name="carnival_wizards_duel">Дуель Чаклунів</string>
     <string name="carnival_idle_desc_wizard">Cast illusion spells against rival mages. Magic level boosts ticket yield.</string> <!-- untranslated -->
     <string name="carnival_fishing_derby">Fishing Derby</string> <!-- untranslated -->
     <string name="carnival_idle_desc_fishing">Catch the biggest fish in the carnival pond. Fishing level boosts ticket yield.</string> <!-- untranslated -->
@@ -1858,7 +1858,7 @@
     <!-- ===== Armory Tab ===== -->
     <string name="armory_tab">Armory</string> <!-- untranslated -->
     <string name="tab_bonuses">Бонуси</string>
-    <string name="bonus_none">No active XP bonuses</string> <!-- untranslated -->
+    <string name="bonus_none">Відсутні XP бонуси</string>
     <string name="bonus_all_skills">All skills</string> <!-- untranslated -->
     <string name="bonus_section_boosts">Active Boosts</string> <!-- untranslated -->
     <string name="armory_not_owned">You don\'t own this item.</string> <!-- untranslated -->
@@ -1868,13 +1868,13 @@
     <string name="armory_filter_missing">Missing</string> <!-- untranslated -->
     <string name="armory_filter_weapons">Зброя</string>
     <string name="armory_filter_armor">Броня</string>
-    <string name="armory_filter_accessories">Accessories</string> <!-- untranslated -->
-    <string name="armory_filter_tools">Tools</string> <!-- untranslated -->
+    <string name="armory_filter_accessories">Аксесуари</string>
+    <string name="armory_filter_tools">Інструменти</string>
     <string name="armory_sort_default">За замовчуванням</string>
     <string name="armory_sort_attack">Атака</string>
     <string name="armory_sort_strength">Сила</string>
     <string name="armory_sort_defense">Захист</string>
-    <string name="armory_sort_requirement">Requirement</string> <!-- untranslated -->
+    <string name="armory_sort_requirement">Вимога</string>
     <string name="armory_progress_bar">obtained</string> <!-- untranslated -->
     <string name="armory_stat_mining">Mining Efficiency</string> <!-- untranslated -->
     <string name="armory_stat_woodcutting">Woodcutting Efficiency</string> <!-- untranslated -->
@@ -1893,7 +1893,7 @@
     <string name="armory_stat_magic_atk">Магічна атака</string>
     <string name="armory_stat_magic_dmg">Магічний урон</string>
     <string name="armory_stat_attack_speed">Швидкість атаки</string>
-    <string name="armory_stat_cape">XP Bonus</string> <!-- untranslated -->
+    <string name="armory_stat_cape">XP Бонус</string>
     <string name="armory_stat_cape_yield">Yield Bonus</string> <!-- untranslated -->
     <string name="armory_stat_cape_boost">Boost Bonus</string> <!-- untranslated -->
     <string name="armory_source_carnival">Carnival Prize Shop</string> <!-- untranslated -->
@@ -2001,19 +2001,19 @@
     <string name="monument_stage_5_name">Вічне плам\'я</string>
     <string name="monument_stage_1_reward">+1 farming patch</string> <!-- untranslated -->
     <string name="monument_stage_2_reward">Unlocks the daily monument touch</string> <!-- untranslated -->
-    <string name="monument_stage_3_reward">Church blessings last 6 hours longer</string> <!-- untranslated -->
+    <string name="monument_stage_3_reward">Благословіння церкви триває на 6 годин довше</string>
     <string name="monument_stage_4_reward" formatted="false">+1 action queue slot, and the Golden Goose takes roost (+10% coin drops)</string> <!-- untranslated -->
     <string name="monument_stage_5_reward">Unlocks the Vault Guardian boss and the Patron of the Realm title</string> <!-- untranslated -->
-    <string name="monument_built">Built</string> <!-- untranslated -->
+    <string name="monument_built">Побудовано</string>
     <string name="monument_build_btn">Build (%1$s)</string> <!-- untranslated -->
     <string name="monument_contribute_label">Feed the Eternal Flame</string> <!-- untranslated -->
-    <string name="monument_contribute_all">All</string> <!-- untranslated -->
+    <string name="monument_contribute_all">Все</string>
     <string name="monument_feed_all_confirm_title">Feed everything?</string> <!-- untranslated -->
     <string name="monument_feed_all_confirm_message">Feed all your coins (%1$s) to the Eternal Flame? This cannot be undone.</string> <!-- untranslated -->
     <string name="monument_flame_locked">Build the first four stages to begin funding the flame</string> <!-- untranslated -->
     <string name="monument_flame_complete">The Eternal Flame burns. The town will never forget your name.</string> <!-- untranslated -->
     <string name="monument_touch_title">Daily Touch</string> <!-- untranslated -->
-    <string name="monument_touch_btn">Touch the Monument</string> <!-- untranslated -->
+    <string name="monument_touch_btn">Доторкнутись до Монументу</string>
     <string name="monument_touched_today">Touched today. The Monument hums contentedly.</string> <!-- untranslated -->
     <string name="monument_touch_blessing">A blessing settles over you for two hours.</string> <!-- untranslated -->
     <string name="monument_touch_blessing_extended">The Monument extends your blessing by two hours.</string> <!-- untranslated -->
@@ -2088,8 +2088,8 @@
     <!-- Translator note: %1$d = floor died on, %2$d = floor resuming from (last checkpoint + 1) -->
     <string name="tower_death_reset">You fell on floor %1$d. Resetting to floor %2$d.</string> <!-- untranslated -->
     <string name="tower_not_enough_runes">Not enough %1$s for max potential attacks.</string> <!-- untranslated -->
-    <string name="tower_milestone_claim">Claim</string> <!-- untranslated -->
-    <string name="tower_milestone_claimed">Claimed</string> <!-- untranslated -->
+    <string name="tower_milestone_claim">Зібрати</string>
+    <string name="tower_milestone_claimed">Зібрано</string>
     <!-- Tower milestone reward descriptions; %s placeholders are item display names -->
     <string name="tower_milestone_ring">%1$s (attack +6, strength +6)</string> <!-- untranslated -->
     <string name="tower_milestone_xp_1pct" formatted="false">+1% tower XP all skills</string> <!-- untranslated -->
@@ -2116,35 +2116,35 @@
     <string name="tower_home_collect_hint">Open the Tower screen to collect this run</string> <!-- untranslated -->
 
     <!-- ===== Seasonal Events ===== -->
-    <string name="seasonal_event_title">Seasonal Event</string> <!-- untranslated -->
-    <string name="seasonal_event_none">No event running right now. Check back later!</string> <!-- untranslated -->
+    <string name="seasonal_event_title">Сезонна Подія</string>
+    <string name="seasonal_event_none">Жодна подія не запущена зараз. Перевірте пізніше!</string>
     <string name="seasonal_event_token_progress">%1$d / %2$d tokens</string> <!-- untranslated -->
-    <string name="seasonal_event_complete">Complete!</string> <!-- untranslated -->
+    <string name="seasonal_event_complete">Виконано!</string>
     <string name="seasonal_bounty_board_title">Bounty Board</string> <!-- untranslated -->
     <string name="seasonal_expedition_title">Експедиція</string>
     <string name="seasonal_go_to_combat">Go to Combat</string> <!-- untranslated -->
     <string name="treasure_open_message">Crack it open for coins and a chance at gems.</string> <!-- untranslated -->
-    <string name="treasure_open">Open</string> <!-- untranslated -->
-    <string name="treasure_open_one">Open 1</string> <!-- untranslated -->
-    <string name="treasure_open_all">Open all (%1$d)</string> <!-- untranslated -->
-    <string name="treasure_open_result">Opened %1$d: +%2$s coins</string> <!-- untranslated -->
+    <string name="treasure_open">Відкрити</string>
+    <string name="treasure_open_one">Відкрити 1</string>
+    <string name="treasure_open_all">Відкрити все (%1$d)</string>
+    <string name="treasure_open_result">Відкрито %1$d: +%2$s монет</string>
     <string name="treasure_open_result_gems">Opened %1$d: +%2$s coins and %3$d gems</string> <!-- untranslated -->
     <string name="seasonal_expedition_token_hint">Each run grants 1 token.</string> <!-- untranslated -->
     <string name="seasonal_boss_token_hint">Each kill grants 1 token, up to %1$d per day.</string> <!-- untranslated -->
     <string name="seasonal_minigame_hint">Land %1$d of %2$d embers before they fade out!</string> <!-- untranslated -->
     <string name="seasonal_minigame_round">Round %1$d / %2$d — Hits: %3$d</string> <!-- untranslated -->
-    <string name="seasonal_minigame_mode_label">Mode</string> <!-- untranslated -->
-    <string name="seasonal_minigame_mode_normal">Normal</string> <!-- untranslated -->
-    <string name="seasonal_minigame_mode_easy">Easy</string> <!-- untranslated -->
+    <string name="seasonal_minigame_mode_label">Режим</string>
+    <string name="seasonal_minigame_mode_normal">Нормальний</string>
+    <string name="seasonal_minigame_mode_easy">Простий</string>
     <string name="seasonal_minigame_mode_caption">%1$dms window, %2$s cooldown</string> <!-- untranslated -->
     <string name="seasonal_minigame_success">Perfect timing! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_failure">Missed the mark. Try again after the cooldown.</string> <!-- untranslated -->
     <string name="seasonal_tap">Tap!</string> <!-- untranslated -->
-    <string name="seasonal_claim">Claim</string> <!-- untranslated -->
+    <string name="seasonal_claim">Зібрати</string>
     <string name="seasonal_bounty_cooldown">New bounty in %1$dm %2$ds</string> <!-- untranslated -->
     <string name="seasonal_bounty_reroll">Reroll bounty</string> <!-- untranslated -->
     <string name="seasonal_bounty_reroll_confirm">Swap this bounty for a different one for %1$s coins? Progress on it is lost.</string> <!-- untranslated -->
-    <string name="seasonal_go">Go</string> <!-- untranslated -->
+    <string name="seasonal_go">Вперед</string>
     <string name="seasonal_event_sunspire_solstice_2026_name">Sunspire Solstice</string> <!-- untranslated -->
     <string name="seasonal_event_sunspire_solstice_2026_banner">Participated in the Sunspire Solstice 2026</string> <!-- untranslated -->
     <string name="seasonal_minigame_bonfire_rhythm_name">Bonfire Rhythm</string> <!-- untranslated -->
@@ -2169,12 +2169,12 @@
     <string name="seasonal_bounty_sunspire_colossus_hint">Only found in The Sunspire Expedition — rare</string> <!-- untranslated -->
     <string name="seasonal_rewards_title">Rewards</string> <!-- untranslated -->
     <string name="seasonal_reward_tier_requirement">%1$d tokens</string> <!-- untranslated -->
-    <string name="seasonal_reward_claimed">Claimed</string> <!-- untranslated -->
-    <string name="seasonal_reward_claim_success">Reward claimed!</string> <!-- untranslated -->
-    <string name="seasonal_market_title">Night Market</string> <!-- untranslated -->
-    <string name="seasonal_market_buy">Buy</string> <!-- untranslated -->
-    <string name="seasonal_market_sold_out">Sold out</string> <!-- untranslated -->
-    <string name="seasonal_market_limit_left">%1$d left</string> <!-- untranslated -->
+    <string name="seasonal_reward_claimed">Зібрано</string>
+    <string name="seasonal_reward_claim_success">Нагороду зібрано!</string>
+    <string name="seasonal_market_title">Нічний Ринок</string>
+    <string name="seasonal_market_buy">Придбати</string>
+    <string name="seasonal_market_sold_out">Продано</string>
+    <string name="seasonal_market_limit_left">%1$d залишилось</string>
     <string name="seasonal_market_purchase_success">Purchase complete!</string> <!-- untranslated -->
     <string name="seasonal_donate">Donate</string> <!-- untranslated -->
     <string name="seasonal_event_gloomharvest_2026_name">Gloomharvest</string> <!-- untranslated -->
@@ -2184,9 +2184,9 @@
     <string name="seasonal_minigame_sequence_success">Well remembered! +1 token.</string> <!-- untranslated -->
     <string name="seasonal_minigame_sequence_round">Round %1$d / %2$d</string> <!-- untranslated -->
     <string name="seasonal_minigame_watch">Watch closely!</string> <!-- untranslated -->
-    <string name="seasonal_minigame_your_turn">Your turn!</string> <!-- untranslated -->
+    <string name="seasonal_minigame_your_turn">Ваша черга!</string>
     <string name="seasonal_minigame_sequence_mode_caption">%1$dms per flash, %2$s cooldown</string> <!-- untranslated -->
-    <string name="seasonal_market_price">%1$s coins</string> <!-- untranslated -->
+    <string name="seasonal_market_price">%1$s монет</string>
     <string name="seasonal_reward_gloomharvest_2026_25_desc">Coin purse (50,000 coins)</string> <!-- untranslated -->
     <string name="seasonal_reward_gloomharvest_2026_60_desc">Wraithbone Ring</string> <!-- untranslated -->
     <string name="seasonal_reward_gloomharvest_2026_100_desc">Free 48h XP Boost</string> <!-- untranslated -->
@@ -2236,22 +2236,22 @@
     <string name="item_wraithbone_ring_name">Wraithbone Ring</string> <!-- untranslated -->
     <string name="item_reaper_scythe_name">Reaper\'s Scythe</string> <!-- untranslated -->
     <string name="item_gloomweave_cape_name">Gloomweave Cape</string> <!-- untranslated -->
-    <string name="label_banners">Banners</string> <!-- untranslated -->
-    <string name="label_journal">Journal</string> <!-- untranslated -->
+    <string name="label_banners">Банери</string>
+    <string name="label_journal">Журнал</string>
     <string name="journal_hint">Jot down reminders for next time — what to queue, what you\'re grinding toward.</string> <!-- untranslated -->
     <string name="journal_placeholder">Write a note...</string> <!-- untranslated -->
     <string name="profile_banners_empty">No banners earned yet. Complete a Seasonal Event to earn one!</string> <!-- untranslated -->
     <string name="profile_banners_earned_on" formatted="false">Earned %s</string> <!-- untranslated -->
-    <string name="profile_banners_unobtained">(Unobtained)</string> <!-- untranslated -->
-    <string name="character_title_label">Title</string> <!-- untranslated -->
-    <string name="character_title_none">No Title</string> <!-- untranslated -->
+    <string name="profile_banners_unobtained">(Не отримано)</string>
+    <string name="character_title_label">Титул</string>
+    <string name="character_title_none">Без титулу</string>
     <string name="character_name_with_title">%1$s the %2$s</string> <!-- untranslated -->
-    <string name="title_master_smith_name">Master Smith</string> <!-- untranslated -->
-    <string name="title_master_smith_requirement">Complete all Smithing quests</string> <!-- untranslated -->
-    <string name="title_head_chef_name">Head Chef</string> <!-- untranslated -->
-    <string name="title_head_chef_requirement">Complete all Cooking quests</string> <!-- untranslated -->
-    <string name="title_master_miner_name">Master Miner</string> <!-- untranslated -->
-    <string name="title_master_miner_requirement">Complete all Mining quests</string> <!-- untranslated -->
+    <string name="title_master_smith_name">Майстер Коваль</string>
+    <string name="title_master_smith_requirement">Завершити всі ковальські квести</string>
+    <string name="title_head_chef_name">Головний Шеф</string>
+    <string name="title_head_chef_requirement">Завершити всі квести куховаріння</string>
+    <string name="title_master_miner_name">Майстер Шахтар</string>
+    <string name="title_master_miner_requirement">Завершити всі шахтарські квести</string>
     <string name="title_master_angler_name">Master Angler</string> <!-- untranslated -->
     <string name="title_master_angler_requirement">Complete all Fishing quests</string> <!-- untranslated -->
     <string name="title_master_woodcutter_name">Master Woodcutter</string> <!-- untranslated -->
@@ -2280,8 +2280,8 @@
     <string name="title_warlord_requirement">Reach max level in the Warriors Guild</string> <!-- untranslated -->
     <string name="title_marksman_name">Снайпер</string>
     <string name="title_marksman_requirement">Досягнути максимального рівня у Гільдії Лучників.</string>
-    <string name="title_archmage_name">Archmage</string> <!-- untranslated -->
-    <string name="title_archmage_requirement">Reach max level in the Mages Guild</string> <!-- untranslated -->
+    <string name="title_archmage_name">Архімаг</string>
+    <string name="title_archmage_requirement">Досягнути максимального рівня в Гільдії Магів</string>
     <string name="title_merchant_prince_name">Merchant Prince</string> <!-- untranslated -->
     <string name="title_merchant_prince_requirement">Reach max level in the Mercantile Guild</string> <!-- untranslated -->
     <string name="title_pathfinder_name">Pathfinder</string> <!-- untranslated -->
@@ -2377,7 +2377,7 @@
     <string name="pet_elder_familiar_desc">The Last Elder\'s dying companion, bound now to whoever felled its master. Its eyes still remember.</string> <!-- untranslated -->
 
     <!-- Save slots / character manager -->
-    <string name="settings_characters">Characters</string> <!-- untranslated -->
+    <string name="settings_characters">Персонажі</string>
     <string name="settings_characters_desc">Up to 3 save slots. Create, switch, or delete characters.</string> <!-- untranslated -->
     <string name="save_slots_title">Characters</string> <!-- untranslated -->
     <string name="save_slots_desc">Up to three characters can live on this device. Switching saves your current character automatically; an inactive character\'s sessions are paused until you return.</string> <!-- untranslated -->
