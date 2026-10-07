@@ -1962,7 +1962,7 @@
     <string name="combat_start_anyway">Commencer quand même</string>
     <string name="combat_xp_consolation">XP (consolation)</string>
     <string name="bestiary_loot_item_header">Objet</string>
-    <string name="worker_no_mats">Pas de mat.</string>
+    <string name="worker_no_mats">No materials</string> <!-- untranslated -->
     <string name="bonus_section_skills">Bonus d\'aptitudes</string>
     <string name="bonus_combat_stat_boost">Améliore les stats de combat</string>
     <string name="bonus_combined_xp">XP combiné</string>

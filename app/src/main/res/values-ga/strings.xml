@@ -791,7 +791,7 @@
     <string name="shop_total_amount">%1$s boinn</string>
 
     <!-- ===== CraftingScreen ===== -->
-    <string name="crafting_no_mats">No mats</string> <!-- untranslated -->
+    <string name="crafting_no_mats">No materials</string> <!-- untranslated -->
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
     <string name="crafting_produces">= %1$d %2$s</string> <!-- untranslated -->
     <string name="crafting_effects">Effects</string> <!-- untranslated -->
@@ -1995,7 +1995,7 @@
     <string name="combat_start_anyway">Start anyway</string> <!-- untranslated -->
     <string name="combat_xp_consolation">XP (consolation)</string> <!-- untranslated -->
     <string name="bestiary_loot_item_header">Item</string> <!-- untranslated -->
-    <string name="worker_no_mats">No mats</string> <!-- untranslated -->
+    <string name="worker_no_mats">No materials</string> <!-- untranslated -->
     <string name="bonus_section_skills">Skill Bonuses</string> <!-- untranslated -->
     <string name="bonus_combat_stat_boost">Boosts combat stats</string> <!-- untranslated -->
     <string name="bonus_combined_xp">Combined XP</string> <!-- untranslated -->
