@@ -134,8 +134,14 @@ fun QuestsScreen(
             return@Scaffold
         }
 
+        val tabGroups = if (state.hideCompleted) {
+            TAB_GROUPS.filter { it == "Daily" || it == "Weekly" || !state.questsByGroup[it].isNullOrEmpty() }
+        } else TAB_GROUPS
         var savedPage by rememberSaveable { mutableIntStateOf(0) }
-        val pagerState = rememberPagerState(initialPage = savedPage, pageCount = { TAB_GROUPS.size })
+        val pagerState = rememberPagerState(
+            initialPage = savedPage.coerceAtMost(tabGroups.lastIndex),
+            pageCount   = { tabGroups.size },
+        )
         LaunchedEffect(Unit) {
             if (pagerState.currentPage != savedPage) pagerState.scrollToPage(savedPage)
         }
@@ -148,7 +154,7 @@ fun QuestsScreen(
                 .padding(padding),
         ) {
             ScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 0.dp) {
-                TAB_GROUPS.forEachIndexed { index, group ->
+                tabGroups.forEachIndexed { index, group ->
                     val claimableInGroup = if (group == "Daily") {
                         state.dailyQuests.count { it.progress >= it.template.amount && !it.claimed }
                     } else if (group == "Weekly") {
@@ -172,7 +178,7 @@ fun QuestsScreen(
             }
 
             HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-                val currentGroup = TAB_GROUPS[page]
+                val currentGroup = tabGroups[page]
                 if (currentGroup == "Daily") {
                     DailyQuestsContent(
                         quests         = state.dailyQuests,

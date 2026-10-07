@@ -765,7 +765,7 @@
     <string name="shop_total_amount">%1$s coins</string>
 
     <!-- ===== CraftingScreen ===== -->
-    <string name="crafting_no_mats">No mats</string>
+    <string name="crafting_no_mats">No materials</string>
     <!-- Translator note: %1$d = total quantity, %2$s = item name -->
     <string name="crafting_produces">= %1$d %2$s</string>
     <string name="crafting_effects">Effects</string>
@@ -1963,7 +1963,7 @@
     <string name="combat_start_anyway">Start anyway</string>
     <string name="combat_xp_consolation">XP (consolation)</string>
     <string name="bestiary_loot_item_header">Item</string>
-    <string name="worker_no_mats">No mats</string>
+    <string name="worker_no_mats">No materials</string>
     <string name="bonus_section_skills">Skill Bonuses</string>
     <string name="bonus_combat_stat_boost">Boosts combat stats</string>
     <string name="bonus_combined_xp">Combined XP</string>

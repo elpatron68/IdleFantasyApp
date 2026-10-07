@@ -1961,7 +1961,7 @@
     <string name="combat_start_anyway">Empezar de todas formas</string>
     <string name="combat_xp_consolation">XP (consolación)</string>
     <string name="bestiary_loot_item_header">Objeto</string>
-    <string name="worker_no_mats">Sin mat.</string>
+    <string name="worker_no_mats">No materials</string> <!-- untranslated -->
     <string name="bonus_section_skills">Bonus de Habilidad</string>
     <string name="bonus_combat_stat_boost">Potencia estadísticas de combate</string>
     <string name="bonus_combined_xp">XP combinado</string>
