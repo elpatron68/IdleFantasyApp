@@ -1585,8 +1585,8 @@
     <string name="town_artisans_workshop_active_bonus">%1$d%% Chance, sekundäre Herstellungsmaterialien einzusparen</string>
     <string name="town_building_chronos_spire_name">Chronos-Turm</string>
     <string name="town_building_dock_name">Dock</string>
-    <string name="town_dock_no_bonus">Upgrade to sail to new locations</string> <!-- untranslated -->
-    <string name="town_dock_t1_bonus">Unlocks sailing to the Elder Isle</string> <!-- untranslated -->
+    <string name="town_dock_no_bonus">Verbessert Euch, um zu neuen Landen zu segeln</string>
+    <string name="town_dock_t1_bonus">Schaltet die Segelreise zur Ältesteninsel frei</string>
     <string name="elder_isle_title">Ältere Insel</string>
     <string name="elder_isle_sail_title">Segle zur Älteren Insel</string>
     <string name="elder_isle_zone_beach">Strand &amp; Klippen</string>
@@ -1607,7 +1607,7 @@
     <string name="elder_isle_dock_unlocked_later">Später</string>
     <string name="boss_masked_name">\?\?\?</string>
     <string name="boss_last_elder_masked_desc">Etwas uraltes schlummert in den Tiefen der Insel. Vereine die ältesten um es zu stellen.</string>
-    <string name="elder_isle_welcome_title">Landfall on Elder Isle</string> <!-- untranslated -->
+    <string name="elder_isle_welcome_title">Landung an der Ältesteninsel</string>
     <string name="elder_isle_welcome_body">The salt spray fades and the fog lifts. Ahead: a bone-white shore, a jungle laced with pale runes, and further in, smoke curling from a peak that shouldn\'t be smoking. The old sailors were right. Something ancient still lives here.\n\nYour mainland skills, boosts, and gear stay on the ship. Everything you level or craft on the isle grows a separate track of its own. Elder gear will carry back to the mainland; mainland power will not carry here.\n\nStart with the Skills tab. Head to Mining or Woodcutting to gather isle materials. Then check the Quests tab for your first objective, and open the Lore Master in town whenever a new fragment unlocks.</string> <!-- untranslated -->
     <string name="elder_isle_welcome_cta">Trete an Land</string>
     <string name="elder_isle_stub_skills">Elder skills are being charted. Full skill tracks arrive in a later build.</string> <!-- untranslated -->
@@ -1634,7 +1634,7 @@
     <string name="elder_isle_tab_bosses">Endgegner</string>
     <string name="elder_isle_shop_title">Inselladen</string>
     <string name="elder_isle_shop_buy">Kaufe</string>
-    <string name="elder_isle_shop_soon">Coming later</string> <!-- untranslated -->
+    <string name="elder_isle_shop_soon">Kommt später</string>
     <string name="elder_isle_shop_insufficient">Nicht ausreichend Essenz der Ältesten.</string>
     <string name="elder_isle_shop_purchased">%1$s gekauft.</string>
     <string name="elder_isle_shop_button">Besuche den Inselladen</string>
@@ -1695,23 +1695,23 @@
     <string name="item_volcanic_platebody_name">Vulkanischer Brustpanzer</string>
     <string name="item_volcanic_platelegs_name">Vulkanische Beinschienen</string>
     <string name="item_volcanic_boots_name">Vulkanische Stiefel</string>
-    <string name="item_elder_helm_name">Elder Helm</string> <!-- untranslated -->
-    <string name="item_elder_platebody_name">Elder Platebody</string> <!-- untranslated -->
-    <string name="item_elder_platelegs_name">Elder Platelegs</string> <!-- untranslated -->
-    <string name="item_elder_boots_name">Elder Boots</string> <!-- untranslated -->
-    <string name="item_elder_cape_name">Elder Cape</string> <!-- untranslated -->
-    <string name="item_elder_shield_name">Elder Shield</string> <!-- untranslated -->
-    <string name="item_elder_signet_ring_name">Elder Signet Ring</string> <!-- untranslated -->
-    <string name="item_elder_amulet_name">Elder Amulet</string> <!-- untranslated -->
-    <string name="item_ancient_signet_name">Ancient Signet</string> <!-- untranslated -->
+    <string name="item_elder_helm_name">Ältestenhelm</string>
+    <string name="item_elder_platebody_name">Ältestenplattenpanzer</string>
+    <string name="item_elder_platelegs_name">Ältestenplattenbeinkleider</string>
+    <string name="item_elder_boots_name">Ältestenschuhe</string>
+    <string name="item_elder_cape_name">Ältestenumhang</string>
+    <string name="item_elder_shield_name">Ältestenschild</string>
+    <string name="item_elder_signet_ring_name">Ältestensiegelring</string>
+    <string name="item_elder_amulet_name">Ältestenamulett</string>
+    <string name="item_ancient_signet_name">Ältestensiegel</string>
 
     <!-- Elder Isle: sigil stones (four wired, two shipped-but-cosmetic) -->
-    <string name="item_elder_sapphire_name">Sapphire Sigil Stone</string> <!-- untranslated -->
-    <string name="item_elder_ruby_name">Ruby Sigil Stone</string> <!-- untranslated -->
-    <string name="item_elder_emerald_name">Emerald Sigil Stone</string> <!-- untranslated -->
-    <string name="item_elder_amethyst_name">Amethyst Sigil Stone</string> <!-- untranslated -->
-    <string name="item_elder_topaz_name">Topaz Sigil Stone</string> <!-- untranslated -->
-    <string name="item_elder_diamond_name">Diamond Sigil Stone</string> <!-- untranslated -->
+    <string name="item_elder_sapphire_name">Saphierblauer Siegelstein</string>
+    <string name="item_elder_ruby_name">Rubinroter Siegelstein</string>
+    <string name="item_elder_emerald_name">Smaragdgrüner Siegelstein</string>
+    <string name="item_elder_amethyst_name">Amethystfarbener Siegelstein</string>
+    <string name="item_elder_topaz_name">Topazfarbener Siegelstein</string>
+    <string name="item_elder_diamond_name">Diamantfarbener Siegelstein</string>
 
     <!-- Elder Isle: pet item entries (parallel to pet_* below; used by drop tables and inventory) -->
     <string name="item_tidal_sprite_name">Tidal Sprite</string> <!-- untranslated -->
@@ -1721,7 +1721,7 @@
     <string name="item_ancient_turtle_name">Ancient Turtle</string> <!-- untranslated -->
     <string name="item_cinder_hawk_name">Cinder Hawk</string> <!-- untranslated -->
     <string name="item_deepwater_serpent_name">Tiefwasserschlange</string>
-    <string name="item_elder_familiar_name">Elder Familiar</string> <!-- untranslated -->
+    <string name="item_elder_familiar_name">Ältestenhaustier</string>
 
     <!-- Elder Isle: ore descriptions -->
     <string name="item_mythrite_ore_desc">Silvery isle ore. Smelts into Mythrite Bars, the base metal of the Coastal armor tier.</string> <!-- untranslated -->
@@ -2026,7 +2026,7 @@
     <string name="title_patron_of_the_realm_name">Schirmherr des Reiches</string>
     <string name="title_patron_of_the_realm_requirement">Vollendet das Große Monument</string>
     <string name="title_isle_champion_name">Inselchampion</string>
-    <string name="title_isle_champion_requirement">Defeat the Last Elder on Elder Isle</string> <!-- untranslated -->
+    <string name="title_isle_champion_requirement">Besiege den letzten Ältesten auf der Ältesteninsel</string>
     <string name="item_gilded_full_helmet_name">Vergoldeter Vollvisierhelm</string>
     <string name="item_gilded_platebody_name">Vergoldeter Plattenpanzer</string>
     <string name="item_gilded_kiteshield_name">Vergoldeter Langspitzschild</string>
@@ -2373,7 +2373,7 @@
     <string name="pet_cinder_hawk_desc">A bird of banked embers that circles the volcano and roosts on your shoulder between fights.</string> <!-- untranslated -->
     <string name="pet_deepwater_serpent_name">Tiefwasserschlange</string>
     <string name="pet_deepwater_serpent_desc">Ein kleiner Vetter der Seeschlange, wickelt sich um dein Handgelenk wie ein lebendiger Armreif.</string>
-    <string name="pet_elder_familiar_name">Elder Familiar</string> <!-- untranslated -->
+    <string name="pet_elder_familiar_name">Ältestenhaustier</string>
     <string name="pet_elder_familiar_desc">The Last Elder\'s dying companion, bound now to whoever felled its master. Its eyes still remember.</string> <!-- untranslated -->
 
     <!-- Save slots / character manager -->
