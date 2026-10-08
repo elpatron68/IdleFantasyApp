@@ -2034,6 +2034,7 @@
     <string name="boss_coin_cap_spent">Bu boss\'un altın düşüşleri yarına kadar azaltıldı</string>
     <string name="bestiary_coin_cap_label">Günde %1$d öldürme sonrası</string>
     <string name="session_note_boss_coin_cap">Altın düşüşü azaltıldı (bu boss\'un günlük limiti)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Lonca Günlük Görevleri</string>
     <string name="guild_daily_banner_claimable">Lonca günlük görevi tamamlandı! Ödülünü Guild Hall\'da al</string>
     <string name="guild_daily_banner_claimed">Lonca günlük görevi bugün alındı</string>

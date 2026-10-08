@@ -1627,11 +1627,7 @@
     <string name="boss_masked_name">\?\?\?</string>
     <string name="boss_last_elder_masked_desc">V hlubinách pod ostrovem se probouzí cosi prastarého. Abyste se tomu mohli postavit, sestavte kompletní prastarou výbavu.</string>
     <string name="elder_isle_welcome_title">Vylodění na Prastarém ostrově</string>
-    <string name="elder_isle_welcome_body">Slaná tříšť ustává a mlha se zvedá. Před vámi se rozprostírá bělostné pobřeží, džungle protkaná bledými runami a dál ve vnitrozemí vrchol, z něhož stoupá kouř – ačkoli by neměl. Staří námořníci měli pravdu. Stále tu žije cosi prastarého.
-\n
-\nDovednosti, bonusy i vybavení z pevniny zůstávají na lodi. Vše, co na ostrově získáte nebo vyrobíte, se rozvíjí samostatně. Prastará výbava se s vámi může vrátit na pevninu, ale síla získaná na pevnině vám tady nepomůže.
-\n
-\nZačněte na kartě Dovednosti. V Těžbě nebo Dřevorubectví nasbírejte ostrovní suroviny. Pak se na kartě Úkoly podívejte na svůj první cíl a jakmile se odemkne nová část, navštivte ve městě Mistra příběhů.</string>
+    <string name="elder_isle_welcome_body">Slaná tříšť ustává a mlha se zvedá. Před vámi se rozprostírá bělostné pobřeží, džungle protkaná bledými runami a dál ve vnitrozemí vrchol, z něhož stoupá kouř – ačkoli by neměl. Staří námořníci měli pravdu. Stále tu žije cosi prastarého.\n\n\n\nDovednosti, bonusy i vybavení z pevniny zůstávají na lodi. Vše, co na ostrově získáte nebo vyrobíte, se rozvíjí samostatně. Prastará výbava se s vámi může vrátit na pevninu, ale síla získaná na pevnině vám tady nepomůže.\n\n\n\nZačněte na kartě Dovednosti. V Těžbě nebo Dřevorubectví nasbírejte ostrovní suroviny. Pak se na kartě Úkoly podívejte na svůj první cíl a jakmile se odemkne nová část, navštivte ve městě Mistra příběhů.</string>
     <string name="elder_isle_welcome_cta">Vystoupit na břeh</string>
     <string name="elder_isle_stub_skills">Prastaré dovednosti se teprve připravují. Kompletní postup v dovednostech bude dostupný v některé z příštích verzí.</string>
     <string name="elder_isle_stub_combat">Prastaré výpravy i souboj s Posledním prastarým se teprve připravují. Dorazí v některé z příštích verzí.</string>
@@ -2057,6 +2053,7 @@
     <string name="boss_coin_cap_spent">This boss\'s coin drops are reduced until tomorrow</string> <!-- untranslated -->
     <string name="bestiary_coin_cap_label">After %1$d kills/day</string> <!-- untranslated -->
     <string name="session_note_boss_coin_cap">Coin drop reduced (daily cap for this boss)</string> <!-- untranslated -->
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Denní cechovní úkoly</string>
     <string name="guild_daily_banner_claimable">Denní cechovní úkoly splněny! Vyzvedni si odměnu v cechovní síni.</string>
     <string name="guild_daily_banner_claimed">Guild daily claimed today</string> <!-- untranslated -->

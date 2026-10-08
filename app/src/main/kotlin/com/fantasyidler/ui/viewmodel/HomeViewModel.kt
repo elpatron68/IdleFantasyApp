@@ -602,6 +602,7 @@ class HomeViewModel @Inject constructor(
         var petFoundName: String?   = null
         var bossWon: Boolean?       = null  // set when a session is a boss fight
         var bossCoinsReduced        = false
+        val bossLosses              = mutableMapOf<String, Int>() // bossKey -> lost fights
         val voidedSessionIds        = mutableSetOf<String>()
         val awardedCapes            = mutableListOf<String>()
         var expeditionNoteLines: List<String> = emptyList()
@@ -817,6 +818,7 @@ class HomeViewModel @Inject constructor(
                 coinBlessingBonus = coinBlessingBonus,
                 coinPetBonus      = coinPetBonus,
                 noteLines        = acc.expeditionNoteLines +
+                                     acc.bossLosses.map { (key, count) -> context.withAppLocale().getString(R.string.session_note_boss_defeated_by, GameStrings.bossName(context, key), count) } +
                                      (if (acc.bossCoinsReduced) listOf(context.withAppLocale().getString(R.string.session_note_boss_coin_cap)) else emptyList()),
                 unlockMessage    = acc.expeditionUnlockMessage,
                 rareItems        = rareItemsDisplayNames,
@@ -941,6 +943,7 @@ class HomeViewModel @Inject constructor(
                     acc.petFoundName = GameStrings.petName(context, pd.id)
             }
             acc.bossWon = won
+            if (!won) acc.bossLosses[session.activityKey] = (acc.bossLosses[session.activityKey] ?: 0) + 1
             val bossSkillLvls = playerRepo.getSkillLevels()
             val bossArrowsRec = elderArrows.mapValues { (_, qty) -> (qty * (reclaimChance(bossSkillLvls[Skills.RANGED] ?: 1) + boostRepo.arrowReclaimBonus(ctx.flags)).coerceAtMost(0.95)).toInt() }.filterValues { it > 0 }
             val bossRunesRec  = elderRunes.mapValues  { (_, qty) -> (qty * (reclaimChance(bossSkillLvls[Skills.MAGIC] ?: 1) + boostRepo.runeReclaimBonus(ctx.flags)).coerceAtMost(0.95)).toInt() }.filterValues { it > 0 }
@@ -971,6 +974,7 @@ class HomeViewModel @Inject constructor(
         val frame = frames.lastOrNull() ?: return
         val won = frame.kills > 0 || frame.killsByEnemy.isNotEmpty()
         acc.bossWon = won
+        if (!won) acc.bossLosses[session.activityKey] = (acc.bossLosses[session.activityKey] ?: 0) + 1
         val its   = frame.items.toMutableMap()
         val coins = if (won) {
             val base = its.remove("coins")?.toLong() ?: 0L

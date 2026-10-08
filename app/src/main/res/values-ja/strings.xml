@@ -2034,6 +2034,7 @@
     <string name="boss_coin_cap_spent">このボスのコインドロップは明日まで減少します</string>
     <string name="bestiary_coin_cap_label">1日%1$d回撃破後</string>
     <string name="session_note_boss_coin_cap">コインドロップ減少（このボスの1日上限）</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">ギルドデイリー</string>
     <string name="guild_daily_banner_claimable">ギルドデイリー完了！ギルドホールで受け取ろう</string>
     <string name="guild_daily_banner_claimed">ギルドデイリーは受取済み</string>

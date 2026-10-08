@@ -2026,6 +2026,7 @@
     <string name="boss_coin_cap_spent">Jatuhan koin bos ini dikurangi sampai besok</string>
     <string name="bestiary_coin_cap_label">Setelah %1$d kill/hari</string>
     <string name="session_note_boss_coin_cap">Jatuhan koin dikurangi (batas harian bos ini)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Harian Guild</string>
     <string name="guild_daily_banner_claimable">Harian guild selesai! Klaim di Balai Serikat</string>
     <string name="guild_daily_banner_claimed">Harian guild sudah diklaim hari ini</string>

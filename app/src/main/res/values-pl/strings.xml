@@ -2054,6 +2054,7 @@
     <string name="boss_coin_cap_spent">Łupy monet tego bossa są zmniejszone do jutra</string>
     <string name="bestiary_coin_cap_label">Po %1$d zabójstwach/dzień</string>
     <string name="session_note_boss_coin_cap">Łup monet zmniejszony (dzienny limit tego bossa)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Dzienne gildii</string>
     <string name="guild_daily_banner_claimable">Dzienne gildii ukończone! Odbierz w Sali Gildii</string>
     <string name="guild_daily_banner_claimed">Dzienne gildii odebrane dzisiaj</string>
