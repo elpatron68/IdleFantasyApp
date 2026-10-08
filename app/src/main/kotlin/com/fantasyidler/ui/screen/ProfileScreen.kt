@@ -47,6 +47,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -288,6 +289,8 @@ fun ProfileScreen(
                     1    -> InventoryTab(state.inventory, context, viewModel::categoryFor, viewModel::openAncientTreasures) { showAddItemSheet = true }
                     2    -> EquipmentTab(
                         equipped           = state.equipped,
+                        allEquipment       = state.resolvedEquipment(viewModel.allEquipment),
+                        heirloomXp         = state.heirloomXp,
                         context            = context,
                         onSlotTap          = viewModel::openSlotPicker,
                         onUnequip          = viewModel::unequip,
@@ -1000,6 +1003,7 @@ private fun InventoryTab(
 ) {
     var sortAlpha by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf<InventoryCategory?>(null) }
+    var query by remember { mutableStateOf("") }
     var treasureDialogQty by remember { mutableStateOf<Int?>(null) }
 
     treasureDialogQty?.let { qty ->
@@ -1026,8 +1030,10 @@ private fun InventoryTab(
     }
 
     val allGroups: List<Pair<InventoryCategory, List<Map.Entry<String, Int>>>> =
-        remember(inventory, sortAlpha) {
-            val grouped = inventory.entries.groupBy { categoryFor(it.key) }
+        remember(inventory, sortAlpha, query) {
+            val grouped = inventory.entries
+                .filter { query.isBlank() || GameStrings.itemName(context, it.key).contains(query.trim(), ignoreCase = true) }
+                .groupBy { categoryFor(it.key) }
             InventoryCategory.values().mapNotNull { cat ->
                 val items = grouped[cat] ?: return@mapNotNull null
                 val sorted = if (sortAlpha)
@@ -1049,6 +1055,15 @@ private fun InventoryTab(
                 Text("[Debug] Modify Item Count")
             }
         }
+        OutlinedTextField(
+            value         = query,
+            onValueChange = { query = it },
+            placeholder   = { Text(stringResource(R.string.shop_search_hint)) },
+            singleLine    = true,
+            modifier      = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+        )
         Row(
             modifier              = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -1243,6 +1258,7 @@ private fun AchievementsTab(
     unlockedCount: Int,
     totalCount: Int,
 ) {
+    var onlyMissing by remember { mutableStateOf(false) }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             CompletionProgressBar(
@@ -1251,7 +1267,26 @@ private fun AchievementsTab(
                 label = stringResource(R.string.achievements_progress_bar)
             )
         }
-        byGroup.forEach { (group, achievements) ->
+        item {
+            Row(
+                modifier              = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                FilterChip(
+                    selected = !onlyMissing,
+                    onClick  = { onlyMissing = false },
+                    label    = { Text(stringResource(R.string.bestiary_filter_all), style = MaterialTheme.typography.labelSmall) },
+                )
+                FilterChip(
+                    selected = onlyMissing,
+                    onClick  = { onlyMissing = true },
+                    label    = { Text(stringResource(R.string.bestiary_filter_missing), style = MaterialTheme.typography.labelSmall) },
+                )
+            }
+        }
+        byGroup.forEach { (group, allAchievements) ->
+            val achievements = if (onlyMissing) allAchievements.filter { !it.isUnlocked } else allAchievements
+            if (achievements.isEmpty()) return@forEach
             item(key = "hdr_$group") {
                 val groupLabel = when (group) {
                     "Levelling"  -> stringResource(R.string.achievement_group_levelling)
@@ -1351,6 +1386,13 @@ private fun PetsTab(
         val owned  = visiblePets.values.filter { it.id in ownedPetIds }
         val locked = visiblePets.values.filter { it.id !in ownedPetIds }
 
+        item {
+            CompletionProgressBar(
+                completed = owned.size,
+                total     = visiblePets.size,
+                label     = stringResource(R.string.achievements_progress_bar),
+            )
+        }
         if (owned.isNotEmpty()) {
             item { SlotSectionHeader(stringResource(R.string.profile_pet_collected)) }
             items(owned, key = { it.id }) { pet ->
