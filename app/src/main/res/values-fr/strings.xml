@@ -2035,6 +2035,7 @@
     <string name="boss_coin_cap_spent">Les butins de pièces de ce boss sont réduits jusqu\'à demain</string>
     <string name="bestiary_coin_cap_label">Après %1$d tués/jour</string>
     <string name="session_note_boss_coin_cap">Butin de pièces réduit (limite quotidienne de ce boss)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Quotidiennes de Guilde</string>
     <string name="guild_daily_banner_claimable">Quotidienne de guilde terminée ! Réclamez-la à la guilde</string>
     <string name="guild_daily_banner_claimed">Quotidienne de guilde réclamée aujourd\'hui</string>

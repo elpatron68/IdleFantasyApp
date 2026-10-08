@@ -2036,6 +2036,7 @@
     <string name="boss_coin_cap_spent">This boss\'s coin drops are reduced until tomorrow</string>
     <string name="bestiary_coin_cap_label">After %1$d kills/day</string>
     <string name="session_note_boss_coin_cap">Coin drop reduced (daily cap for this boss)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string>
     <string name="guild_daily_button">Guild Dailies</string>
     <string name="guild_daily_banner_claimable">Guild daily complete! Claim it in the Guild Hall</string>
     <string name="guild_daily_banner_claimed">Guild daily claimed today</string>

@@ -1547,7 +1547,7 @@
 
     <!-- Thieving skill -->
     <string name="skill_thieving_name">Thieving</string> <!-- untranslated -->
-    <string name="skill_thieving_desc">Pickpocket NPCs each session. Success chance depends on your level vs the target. Failed attempts stun you for a frame. Higher tiers drop rare items and large coin purses.</string> <!-- untranslated -->
+    <string name="skill_thieving_desc">Pickpocket NPCs each session. Success chance depends on your level vs the target. Failed attempts earn nothing that minute. Better lockpicks raise both success chance and XP. Higher tiers drop rare items and large coin purses.</string> <!-- untranslated -->
     <string name="thieving_npc_detail">Lv. %1$d • %2$d XP • %3$d%% success</string> <!-- untranslated -->
     <string name="thieving_npc_coins">%1$d–%2$d coins per success</string> <!-- untranslated -->
 
@@ -2068,6 +2068,7 @@
     <string name="boss_coin_cap_spent">This boss\'s coin drops are reduced until tomorrow</string> <!-- untranslated -->
     <string name="bestiary_coin_cap_label">After %1$d kills/day</string> <!-- untranslated -->
     <string name="session_note_boss_coin_cap">Coin drop reduced (daily cap for this boss)</string> <!-- untranslated -->
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Guild Dailies</string> <!-- untranslated -->
     <string name="guild_daily_banner_claimable">Guild daily complete! Claim it in the Guild Hall</string> <!-- untranslated -->
     <string name="guild_daily_banner_claimed">Guild daily claimed today</string> <!-- untranslated -->

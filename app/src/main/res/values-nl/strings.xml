@@ -2036,6 +2036,7 @@
     <string name="boss_coin_cap_spent">Muntdrops van deze baas zijn verminderd tot morgen</string>
     <string name="bestiary_coin_cap_label">Na %1$d kills/dag</string>
     <string name="session_note_boss_coin_cap">Muntdrop verminderd (dagelijkse limiet voor deze baas)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Gildedagtaken</string>
     <string name="guild_daily_banner_claimable">Gildedagtaak voltooid! Claim hem in de Guild Hall</string>
     <string name="guild_daily_banner_claimed">Gildedagtaak vandaag geclaimd</string>

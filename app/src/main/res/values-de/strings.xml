@@ -2036,6 +2036,7 @@
     <string name="boss_coin_cap_spent">Münzbeute dieses Bosses bis morgen reduziert</string>
     <string name="bestiary_coin_cap_label">Nach %1$d Kills/Tag</string>
     <string name="session_note_boss_coin_cap">Münzbeute reduziert (Tageslimit für diesen Boss)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Gildenaufgaben</string>
     <string name="guild_daily_banner_claimable">Gildenaufgabe abgeschlossen! In der Gildenhalle einlösen</string>
     <string name="guild_daily_banner_claimed">Gildenaufgabe heute eingelöst</string>

@@ -2036,6 +2036,7 @@
     <string name="boss_coin_cap_spent">Riceverai meno monete fino a domani</string>
     <string name="bestiary_coin_cap_label">Dopo %1$d uccisioni/giorno</string>
     <string name="session_note_boss_coin_cap">Bottino di monete ridotto (raggiunto il limite di questo boss)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Giornaliere della gilda</string>
     <string name="guild_daily_banner_claimable">Missione giornaliera della gilda completata! Riscattala nella Sala della Gilda</string>
     <string name="guild_daily_banner_claimed">Giornaliera della gilda riscattata oggi</string>

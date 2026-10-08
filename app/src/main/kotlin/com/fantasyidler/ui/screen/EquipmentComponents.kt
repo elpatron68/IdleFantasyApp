@@ -47,6 +47,8 @@ import com.fantasyidler.util.GameStrings
 @Composable
 internal fun EquipmentTab(
     equipped: Map<String, String?>,
+    allEquipment: Map<String, EquipmentData>,
+    heirloomXp: Map<String, Long>,
     context: Context,
     onSlotTap: (String) -> Unit,
     onUnequip: (String) -> Unit,
@@ -77,6 +79,8 @@ internal fun EquipmentTab(
             EquipSlotRow(
                 slotName  = GameStrings.slotName(context, slot),
                 itemKey   = equipped[slot],
+                equipment = allEquipment[equipped[slot]],
+                heirloomXp = heirloomXp,
                 onTap     = { onSlotTap(slot) },
                 onUnequip = { onUnequip(slot) },
             )

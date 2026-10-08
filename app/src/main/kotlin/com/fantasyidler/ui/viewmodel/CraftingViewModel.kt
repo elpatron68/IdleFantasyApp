@@ -338,7 +338,7 @@ class CraftingViewModel @Inject constructor(
             val isPlank = r.itemName == "plank" || r.itemName.endsWith("_plank")
             val isStaff = r.itemName.startsWith("staff_of_")
             // Base items with no material prefix would leak product words into the tier chips
-            val untiered = isPlank || isStaff || r.itemName == "arrow_shaft" || r.itemName == "shortbow"
+            val untiered = isStaff || r.itemName == "arrow_shaft"
             val category = when {
                 isPlank                                               -> "Plank"
                 isStaff                                               -> "Staff"
@@ -361,7 +361,11 @@ class CraftingViewModel @Inject constructor(
                 outputStrengthBonus = r.strengthBonus ?: 0,
                 outputCombatStyle   = gameData.equipment[r.itemName]?.combatStyle,
                 category            = category,
-                tier                = if (untiered) "" else tierFromKey(r.itemName),
+                tier                = when {
+                    untiered                                        -> ""
+                    r.itemName == "plank" || r.itemName == "shortbow" -> "Logs"
+                    else                                            -> tierFromKey(r.itemName)
+                },
             )
         }.sortedBy { it.levelRequired }
     }

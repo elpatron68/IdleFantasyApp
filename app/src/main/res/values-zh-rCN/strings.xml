@@ -2034,6 +2034,7 @@
     <string name="boss_coin_cap_spent">该首领的金币掉落已减少，持续至明天。</string>
     <string name="bestiary_coin_cap_label">%1$d 次击杀/天后</string>
     <string name="session_note_boss_coin_cap">金币掉落减少（该首领每日上限）</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">公会每日</string>
     <string name="guild_daily_banner_claimable">公会每日任务完成！请前往公会大厅领取。</string>
     <string name="guild_daily_banner_claimed">已领取</string>

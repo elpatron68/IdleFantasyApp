@@ -2034,6 +2034,7 @@
     <string name="boss_coin_cap_spent">Os saques de moedas deste chefe estão reduzidos até amanhã</string>
     <string name="bestiary_coin_cap_label">Após %1$d abates/dia</string>
     <string name="session_note_boss_coin_cap">Saque de moedas reduzido (limite diário deste chefe)</string>
+    <string name="session_note_boss_defeated_by">Defeated by %1$s ×%2$d</string> <!-- untranslated -->
     <string name="guild_daily_button">Diárias da guilda</string>
     <string name="guild_daily_banner_claimable">Diária da guilda concluída! Colete no Salão da Guilda</string>
     <string name="guild_daily_banner_claimed">Diária da guilda coletada hoje</string>
