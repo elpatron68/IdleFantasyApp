@@ -598,7 +598,7 @@
     <string name="combat_spell_locked">Nécessite Magie niveau %1$d</string>
     <string name="combat_spell_level_met">Magie niveau %1$d</string>
     <string name="combat_no_potion">Pas de potion</string>
-    <string name="label_potion">Potion</string> <!-- untranslated -->
+    <string name="label_potion">Potion</string>
     <string name="combat_req_level">Niveau de combat requis</string>
     <string name="combat_duration">Durée</string>
     <!-- Translator note: %1$d = minutes -->
@@ -1071,7 +1071,7 @@
     <string name="church_bones_available">Vous avez %1$d os (tous types), soit %2$d pour les bénédictions (les os plus gros comptent plus)</string>
     <string name="church_not_enough_bones">Os insuffisants (besoin de %1$d)</string>
     <string name="church_already_active">Une bénédiction est déjà active</string>
-    <string name="church_blessing_activated">Blessing activated!</string> <!-- untranslated -->
+    <string name="church_blessing_activated">La bénédiction est activée !</string>
     <string name="church_blessing_extended">Blessing extended!</string> <!-- untranslated -->
     <string name="church_confirm_deactivate_title">Désactiver la bénédiction ?</string>
     <string name="church_confirm_deactivate_body">Es-tu sûr de vouloir désactiver ta bénédiction active ? Tu ne récupéreras pas tes os.</string>
@@ -1381,7 +1381,7 @@
     <string name="slayer_found_in">Trouvé dans : %1$s</string>
     <string name="slayer_requires">Nécessite : %1$s</string>
     <string name="slayer_add_dungeon_to_queue">Ajouter le donjon à la file d\'attente</string>
-    <string name="slayer_add_all_dungeons_to_queue">Add All Dungeons to Queue</string> <!-- untranslated -->
+    <string name="slayer_add_all_dungeons_to_queue">Ajouter tous les donjons à la file d\'attente</string>
     <string name="slayer_queue_added">Ajouté à la file d\'attente : %1$s.</string>
     <string name="slayer_queue_full">La file d\'attente est pleine.</string>
     <string name="slayer_queue_added_many">Added %1$d dungeons to queue.</string> <!-- untranslated -->
@@ -1433,7 +1433,7 @@
     <string name="shop_cat_food">Nourriture</string>
     <string name="shop_cat_materials">Matériaux</string>
     <string name="shop_cat_misc">Divers</string>
-    <string name="shop_cat_capes">Capes</string> <!-- untranslated -->
+    <string name="shop_cat_capes">Capes</string>
 
     <string name="crafting_per_craft">×%1$d par fabrication</string>
 
@@ -1452,7 +1452,7 @@
     <string name="trade_route_merchants_quarter_desc">Faites le commerce de marchandises rares dans le prestigieux quartier des marchands.</string>
     <string name="trade_route_northern_ports_desc">Transportez une cargaison précieuse vers les villes portuaires du nord. Le risque est grand, mais la récompense aussi.</string>
     <string name="crafting_cat_bar">Lingot</string>
-    <string name="crafting_cat_brew">Brew</string> <!-- untranslated -->
+    <string name="crafting_cat_brew">Infusion</string>
     <string name="crafting_cat_component">Composant</string>
     <string name="crafting_cat_tool">Outil</string>
     <string name="crafting_cat_weapon">Arme</string>
@@ -1466,7 +1466,7 @@
     <string name="crafting_cat_bow">Arc</string>
     <string name="crafting_cat_plank">Planche</string>
     <string name="crafting_cat_staff">Bâton</string>
-    <string name="crafting_cat_super_potion">Super Potion</string> <!-- untranslated -->
+    <string name="crafting_cat_super_potion">Super Potion</string>
 
     <!-- Crafting tier filter chips -->
     <string name="crafting_tier_adamantite">Adamantite</string>
@@ -1477,13 +1477,13 @@
     <string name="crafting_tier_maple">Érable</string>
     <string name="crafting_tier_mithril">Mithril</string>
     <string name="crafting_tier_oak">Chêne</string>
-    <string name="crafting_tier_plank">Plank</string> <!-- untranslated -->
+    <string name="crafting_tier_plank">Planche</string>
     <string name="crafting_tier_platinum">Platine</string>
-    <string name="crafting_tier_redwood">Redwood</string> <!-- untranslated -->
+    <string name="crafting_tier_redwood">Séquoia</string>
     <string name="crafting_tier_runite">Runite</string>
     <string name="crafting_tier_silver">Argent</string>
     <string name="crafting_tier_steel">Acier</string>
-    <string name="crafting_tier_stone">Stone</string> <!-- untranslated -->
+    <string name="crafting_tier_stone">Pierre</string>
     <string name="crafting_tier_willow">Saule</string>
     <string name="crafting_tier_yew">If</string>
 
@@ -1586,11 +1586,11 @@
     <string name="town_artisans_workshop_active_bonus">%1$d%% chance de préserver des matériaux de fabrication secondaires</string>
     <string name="town_building_chronos_spire_name">Flèche du Chrono</string>
     <string name="town_building_dock_name">Dock</string> <!-- untranslated -->
-    <string name="town_dock_no_bonus">Upgrade to sail to new locations</string> <!-- untranslated -->
-    <string name="town_dock_t1_bonus">Unlocks sailing to the Elder Isle</string> <!-- untranslated -->
-    <string name="elder_isle_title">Elder Isle</string> <!-- untranslated -->
-    <string name="elder_isle_sail_title">Sail to Elder Isle</string> <!-- untranslated -->
-    <string name="elder_isle_zone_beach">Beach &amp; Cliffs</string> <!-- untranslated -->
+    <string name="town_dock_no_bonus">Passez au niveau supérieur pour découvrir de nouvelles destinations</string>
+    <string name="town_dock_t1_bonus">Débloque la navigation vers l\'Île des Anciens</string>
+    <string name="elder_isle_title">Île des Anciens</string>
+    <string name="elder_isle_sail_title">Mettez le cap sur l\'Île des Anciens</string>
+    <string name="elder_isle_zone_beach">Plage et falaises</string>
     <string name="elder_isle_zone_forest">Ancient Forest</string> <!-- untranslated -->
     <string name="elder_isle_zone_volcano">Volcano Peak</string> <!-- untranslated -->
     <string name="elder_isle_zone_abyss">Abyssal Depths</string> <!-- untranslated -->
