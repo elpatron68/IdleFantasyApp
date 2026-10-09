@@ -307,7 +307,7 @@ private fun SaveSlotCard(
                 if (createdAt > 0L) {
                     val age = (System.currentTimeMillis() - createdAt).coerceAtLeast(60_000L)
                     Text(
-                        text  = stringResource(R.string.save_slot_created, age.formatDurationMs(context)),
+                        text  = stringResource(R.string.save_slot_created, age.formatDurationMs(context, maxUnits = 2)),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -329,7 +329,7 @@ private fun SaveSlotCard(
                     )
                 } else {
                     Text(
-                        text  = stringResource(R.string.save_slot_last_played, elapsedSince(slot.lastPlayedAt).formatDurationMs(context)),
+                        text  = stringResource(R.string.save_slot_last_played, elapsedSince(slot.lastPlayedAt).formatDurationMs(context, maxUnits = 2)),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
