@@ -126,18 +126,18 @@
     <string name="quest_prayer_6_objective">Bury 3650 bones</string> <!-- untranslated -->
 
     <!-- Slayer -->
-    <string name="quest_combat_kills_1_name">Monster Hunter I</string> <!-- untranslated -->
-    <string name="quest_combat_kills_1_objective">Defeat 100 enemies</string> <!-- untranslated -->
-    <string name="quest_combat_kills_2_name">Monster Hunter II</string> <!-- untranslated -->
-    <string name="quest_combat_kills_2_objective">Defeat 150 enemies</string> <!-- untranslated -->
-    <string name="quest_combat_kills_3_name">Monster Hunter III</string> <!-- untranslated -->
-    <string name="quest_combat_kills_3_objective">Defeat 200 enemies</string> <!-- untranslated -->
-    <string name="quest_combat_kills_4_name">Monster Hunter IV</string> <!-- untranslated -->
-    <string name="quest_combat_kills_4_objective">Defeat 300 enemies</string> <!-- untranslated -->
-    <string name="quest_combat_kills_5_name">Monster Hunter V</string> <!-- untranslated -->
-    <string name="quest_combat_kills_5_objective">Defeat 450 enemies</string> <!-- untranslated -->
-    <string name="quest_combat_kills_6_name">Monster Hunter VI</string> <!-- untranslated -->
-    <string name="quest_combat_kills_6_objective">Defeat 650 enemies</string> <!-- untranslated -->
+    <string name="quest_combat_kills_1_name">Мисливець За Монстрами I</string>
+    <string name="quest_combat_kills_1_objective">Перемогти 100 ворогів</string>
+    <string name="quest_combat_kills_2_name">Мисливець За Монстрами II</string>
+    <string name="quest_combat_kills_2_objective">Перемогти 150 ворогів</string>
+    <string name="quest_combat_kills_3_name">Мисливець За Монстрами III</string>
+    <string name="quest_combat_kills_3_objective">Перемогти 200 ворогів</string>
+    <string name="quest_combat_kills_4_name">Мисливець За Монстрами IV</string>
+    <string name="quest_combat_kills_4_objective">Перемогти 300 ворогів</string>
+    <string name="quest_combat_kills_5_name">Мисливець За Монстрами V</string>
+    <string name="quest_combat_kills_5_objective">Перемогти 450 ворогів</string>
+    <string name="quest_combat_kills_6_name">Мисливець За Монстрами VI</string>
+    <string name="quest_combat_kills_6_objective">Перемогти 650 ворогів</string>
     <string name="quest_slayer_1_name">Slayer I</string> <!-- untranslated -->
     <string name="quest_slayer_1_objective">Complete 5 Slayer tasks</string> <!-- untranslated -->
     <string name="quest_slayer_2_name">Slayer II</string> <!-- untranslated -->

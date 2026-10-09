@@ -4,7 +4,7 @@
 
 
     <!-- ===== Bottom navigation ===== -->
-    <string name="nav_skills">Skills</string> <!-- untranslated -->
+    <string name="nav_skills">Kĩ năng</string>
     <string name="nav_combat">Chiến đấu</string>
     <string name="nav_home">Trang chủ</string>
     <string name="nav_crafting">Chế tạo</string>
@@ -46,7 +46,7 @@
 
     <!-- ===== Common labels ===== -->
     <string name="label_level">Cấp</string>
-    <string name="label_xp">XP</string> <!-- untranslated -->
+    <string name="label_xp">KN</string>
     <string name="label_coins">Xu</string>
     <string name="label_hp">HP</string> <!-- untranslated -->
     <string name="label_attack">Tấn công</string>
@@ -106,13 +106,13 @@
     <string name="label_coming_soon">Sắp ra mắt</string>
     <string name="label_time_remaining">Thời gian còn lại</string>
     <!-- Translator note: compact duration units; English puts the letter(s) right after the number -->
-    <string name="duration_years">%1$dy</string> <!-- untranslated -->
-    <string name="duration_months">%1$dmo</string> <!-- untranslated -->
-    <string name="duration_weeks">%1$dw</string> <!-- untranslated -->
-    <string name="duration_days">%1$dd</string> <!-- untranslated -->
-    <string name="duration_hours">%1$dh</string> <!-- untranslated -->
-    <string name="duration_minutes">%1$dm</string> <!-- untranslated -->
-    <string name="duration_seconds">%1$ds</string> <!-- untranslated -->
+    <string name="duration_years">%1$d năm</string>
+    <string name="duration_months">%1$d tháng</string>
+    <string name="duration_weeks">%1$d tuần</string>
+    <string name="duration_days">%1$d ngày</string>
+    <string name="duration_hours">%1$d giờ</string>
+    <string name="duration_minutes">%1$d phút</string>
+    <string name="duration_seconds">%1$d giây</string>
     <string name="duration_complete">Hoàn thành</string>
     <string name="label_session_results">Kết quả phiên</string>
     <string name="label_xp_gained">XP nhận được</string>
@@ -131,261 +131,261 @@
     <string name="label_ready_to_harvest">Sẵn sàng thu hoạch</string>
     <string name="label_empty">Trống</string>
     <string name="inventory_sort_quantity">Số lượng</string>
-    <string name="inventory_sort_az">A-Z</string> <!-- untranslated -->
+    <string name="inventory_sort_az">A-Z</string>
     <string name="inventory_cat_weapons">Vũ khí</string>
     <string name="inventory_cat_armour">Giáp</string>
     <string name="inventory_cat_tools">Công cụ</string>
-    <string name="inventory_cat_food">Food</string> <!-- untranslated -->
-    <string name="inventory_cat_potions">Potions</string> <!-- untranslated -->
-    <string name="inventory_cat_materials">Materials</string> <!-- untranslated -->
-    <string name="inventory_cat_other">Other</string> <!-- untranslated -->
-    <string name="inventory_cat_raw_food">Raw Food</string> <!-- untranslated -->
-    <string name="inventory_cat_ammunition">Ammunition</string> <!-- untranslated -->
-    <string name="inventory_cat_ores">Ores &amp; Gems</string> <!-- untranslated -->
-    <string name="inventory_cat_construction">Construction</string> <!-- untranslated -->
-    <string name="inventory_cat_seeds">Seeds &amp; Crops</string> <!-- untranslated -->
-    <string name="inventory_cat_filter_all">All</string> <!-- untranslated -->
-    <string name="label_combat_style">Combat Style</string> <!-- untranslated -->
-    <string name="label_active_spell">Active Spell</string> <!-- untranslated -->
-    <string name="label_drops">Drops</string> <!-- untranslated -->
+    <string name="inventory_cat_food">Thức ăn</string>
+    <string name="inventory_cat_potions">Dược phẩm</string>
+    <string name="inventory_cat_materials">Vật liệu</string>
+    <string name="inventory_cat_other">Khác</string>
+    <string name="inventory_cat_raw_food">Thức ăn sống</string>
+    <string name="inventory_cat_ammunition">Đạn dược</string>
+    <string name="inventory_cat_ores">Quặng &amp; Đá quý</string>
+    <string name="inventory_cat_construction">Xây dựng</string>
+    <string name="inventory_cat_seeds">Hạt giống &amp; Cây trồng</string>
+    <string name="inventory_cat_filter_all">Tất cả</string>
+    <string name="label_combat_style">Phong cách chiến đấu</string>
+    <string name="label_active_spell">Phép thuật đang kích hoạt</string>
+    <string name="label_drops">Vật phẩm rơi</string>
     <string name="label_boss">Boss</string> <!-- untranslated -->
-    <string name="label_dungeon">Dungeon</string> <!-- untranslated -->
-    <string name="label_difficulty">Difficulty</string> <!-- untranslated -->
-    <string name="label_completed">Completed</string> <!-- untranslated -->
-    <string name="label_in_progress">In Progress</string> <!-- untranslated -->
-    <string name="label_available_quests">Available</string> <!-- untranslated -->
-    <string name="label_stats">Stats</string> <!-- untranslated -->
-    <string name="label_skills">Skills</string> <!-- untranslated -->
-    <string name="tab_label_with_count">%1$s (%2$d)</string> <!-- untranslated -->
-    <string name="label_shop">Shop</string> <!-- untranslated -->
-    <string name="label_sell_items">Sell Items</string> <!-- untranslated -->
-    <string name="label_total_level">Total Level</string> <!-- untranslated -->
-    <string name="label_wins">Wins</string> <!-- untranslated -->
-    <string name="label_losses">Losses</string> <!-- untranslated -->
-    <string name="label_active">Active</string> <!-- untranslated -->
-    <string name="label_inactive">Inactive</string> <!-- untranslated -->
-    <string name="label_boost">Boost</string> <!-- untranslated -->
-    <string name="label_xp_boost">XP Boost</string> <!-- untranslated -->
-    <string name="label_prestige_xp_boost">Prestige XP Boost</string> <!-- untranslated -->
-    <string name="label_weapon">Weapon</string> <!-- untranslated -->
-    <string name="label_armour">Armour</string> <!-- untranslated -->
-    <string name="label_food">Food</string> <!-- untranslated -->
-    <string name="label_arrows_consumed">Arrows Consumed</string> <!-- untranslated -->
-    <string name="label_arrows_reclaimed">Arrows Reclaimed</string> <!-- untranslated -->
-    <string name="label_runes_consumed">Runes Consumed</string> <!-- untranslated -->
-    <string name="label_runes_reclaimed">Runes Reclaimed</string> <!-- untranslated -->
-    <string name="label_arrows">Arrows</string> <!-- untranslated -->
+    <string name="label_dungeon">Hầm ngục</string>
+    <string name="label_difficulty">Độ khó</string>
+    <string name="label_completed">Đã hoàn thành</string>
+    <string name="label_in_progress">Đang thực hiện</string>
+    <string name="label_available_quests">Có sẵn</string>
+    <string name="label_stats">Thống kê</string>
+    <string name="label_skills">Kỹ năng</string>
+    <string name="tab_label_with_count">%1$s (%2$d)</string>
+    <string name="label_shop">Cửa hàng</string>
+    <string name="label_sell_items">Bán vật phẩm</string>
+    <string name="label_total_level">Tổng cấp độ</string>
+    <string name="label_wins">Thắng</string>
+    <string name="label_losses">Thua</string>
+    <string name="label_active">Đang hoạt động</string>
+    <string name="label_inactive">Không hoạt động</string>
+    <string name="label_boost">Tăng cường</string>
+    <string name="label_xp_boost">Tăng cường KN</string>
+    <string name="label_prestige_xp_boost">Tăng cường KN Prestige</string>
+    <string name="label_weapon">Vũ khí</string>
+    <string name="label_armour">Giáp</string>
+    <string name="label_food">Thức ăn</string>
+    <string name="label_arrows_consumed">Mũi tên tiêu hao</string>
+    <string name="label_arrows_reclaimed">Mũi tên sử dụng</string>
+    <string name="label_runes_consumed">Runes tiêu hao</string>
+    <string name="label_runes_reclaimed">Runes thu hồi</string>
+    <string name="label_arrows">Mũi tên</string>
     <string name="label_runes">Runes</string> <!-- untranslated -->
-    <string name="label_spell">Spell</string> <!-- untranslated -->
-    <string name="label_none">None</string> <!-- untranslated -->
-    <string name="label_melee">Melee</string> <!-- untranslated -->
-    <string name="label_ranged_style">Ranged</string> <!-- untranslated -->
-    <string name="label_magic_style">Magic</string> <!-- untranslated -->
-    <string name="label_gathering">Gathering</string> <!-- untranslated -->
-    <string name="label_crafting">Crafting</string> <!-- untranslated -->
-    <string name="label_jewellery">Jewelry</string> <!-- untranslated -->
-    <string name="label_combat">Combat</string> <!-- untranslated -->
-    <string name="label_recipe">Recipe</string> <!-- untranslated -->
-    <string name="label_recipes">Recipes</string> <!-- untranslated -->
-    <string name="label_ingredients">Ingredients</string> <!-- untranslated -->
-    <string name="label_output">Output</string> <!-- untranslated -->
-    <string name="label_xp_per_action">XP per action</string> <!-- untranslated -->
-    <string name="label_unlocked_at">Unlocked at level</string> <!-- untranslated -->
-    <string name="label_kills">Kills</string> <!-- untranslated -->
-    <string name="label_personal_best">Personal Best</string> <!-- untranslated -->
-    <string name="label_daily_dig">Daily Dig</string> <!-- untranslated -->
-    <string name="label_dig_depth">Hole Depth</string> <!-- untranslated -->
-    <string name="label_version">Version</string> <!-- untranslated -->
+    <string name="label_spell">Phép thuật</string>
+    <string name="label_none">Không có</string>
+    <string name="label_melee">Cận chiến</string>
+    <string name="label_ranged_style">Tầm xa</string>
+    <string name="label_magic_style">Phép thuật</string>
+    <string name="label_gathering">Thu thập</string>
+    <string name="label_crafting">Chế tạo</string>
+    <string name="label_jewellery">Trang sức</string>
+    <string name="label_combat">Chiến đấu</string>
+    <string name="label_recipe">Công thức</string>
+    <string name="label_recipes">Công thức</string>
+    <string name="label_ingredients">Nguyên liệu</string>
+    <string name="label_output">Sản lượng</string>
+    <string name="label_xp_per_action">KN mỗi hành động</string>
+    <string name="label_unlocked_at">Mở khóa ở cấp</string>
+    <string name="label_kills">Số mạng</string>
+    <string name="label_personal_best">Kỷ lục cá nhân</string>
+    <string name="label_daily_dig">Đào hàng ngày</string>
+    <string name="label_dig_depth">Độ sâu hố</string>
+    <string name="label_version">Phiên bản</string>
 
 
     <!-- ===== Format strings — all use positional args for Weblate ===== -->
     <!-- Translator note: %1$d = level number, %2$s = formatted XP string -->
-    <string name="format_level_xp">Level %1$d — %2$s XP</string> <!-- untranslated -->
+    <string name="format_level_xp">Cấp %1$d — %2$s KN</string>
     <!-- Translator note: %1$s = formatted XP amount, %2$d = target level number -->
-    <string name="format_xp_to_next">%1$s XP to level %2$d</string> <!-- untranslated -->
+    <string name="format_xp_to_next">Còn %1$s KN để đạt cấp %2$d</string>
     <!-- Translator note: %1$s = formatted XP amount remaining to reach the level cap (99) -->
-    <string name="xp_to_99">%1$s XP to 99</string> <!-- untranslated -->
+    <string name="xp_to_99">Còn %1$s KN để đạt cấp 99</string>
     <!-- Translator note: %1$s = time string (e.g. "42m 10s") -->
-    <string name="format_time_remaining">%1$s remaining</string> <!-- untranslated -->
+    <string name="format_time_remaining">Còn %1$s</string>
     <!-- Translator note: %1$s = relative time (e.g. "5m ago") -->
-    <string name="format_started_ago">Started %1$s ago</string> <!-- untranslated -->
+    <string name="format_started_ago">Bắt đầu từ %1$s trước</string>
     <!-- Translator note: %1$s = item display name, %2$d = quantity -->
 
     <!-- Translator note: %1$d = coin amount -->
-    <string name="format_price_coins">%1$d coins</string> <!-- untranslated -->
+    <string name="format_price_coins">%1$d xu</string>
     <!-- Translator note: %1$d = required level, %2$s = skill display name -->
-    <string name="format_level_requirement">Requires level %1$d %2$s</string> <!-- untranslated -->
+    <string name="format_level_requirement">Yêu cầu cấp %1$d %2$s</string>
     <!-- Translator note: %1$s = formatted XP amount -->
-    <string name="format_xp_per_action">%1$s XP per action</string> <!-- untranslated -->
+    <string name="format_xp_per_action">%1$s KN mỗi hành động</string>
     <!-- Translator note: %1$d = patch number -->
-    <string name="format_patch_number">Patch %1$d</string> <!-- untranslated -->
+    <string name="format_patch_number">Ô đất %1$d</string>
     <!-- Translator note: %1$d = wins, %2$d = losses -->
-    <string name="format_arena_record">%1$d wins / %2$d losses</string> <!-- untranslated -->
+    <string name="format_arena_record">%1$d thắng / %2$d thua</string>
     <!-- Translator note: %1$s = skill display name, %2$d = level number -->
-    <string name="format_skill_level">%1$s: Level %2$d</string> <!-- untranslated -->
+    <string name="format_skill_level">%1$s: Cấp %2$d</string>
     <!-- Translator note: %1$d = boost percentage -->
-    <string name="format_xp_boost_percent">+%1$d%% XP</string> <!-- untranslated -->
-    <string name="format_coin_boost_percent">+%1$d%% Coins</string> <!-- untranslated -->
+    <string name="format_xp_boost_percent">+%1$d%% KN</string>
+    <string name="format_coin_boost_percent">+%1$d%% xu</string>
     <!-- Translator note: %1$s = item/resource name, %2$d = quantity drop amount -->
 
     <!-- Translator note: %1$d = minutes remaining -->
-    <string name="format_minutes_remaining">%1$d min remaining</string> <!-- untranslated -->
+    <string name="format_minutes_remaining">Còn %1$d phút</string>
     <!-- Translator note: %1$s = version string (e.g. "0.1.0") -->
-    <string name="format_version">Version %1$s</string> <!-- untranslated -->
+    <string name="format_version">Phiên bản %1$s</string>
 
     <!-- ===== Plurals ===== -->
     <plurals name="plural_level_ups">
-        <item quantity="one">%1$d level up</item>
-        <item quantity="other">%1$d level ups</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d lần lên cấp</item>
+        <item quantity="other">%1$d lần lên cấp</item>
+    </plurals>
     <plurals name="plural_items">
-        <item quantity="one">%1$d item</item>
-        <item quantity="other">%1$d items</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d vật phẩm</item>
+        <item quantity="other">%1$d vật phẩm</item>
+    </plurals>
     <plurals name="plural_minutes">
-        <item quantity="one">%1$d minute</item>
-        <item quantity="other">%1$d minutes</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d phút</item>
+        <item quantity="other">%1$d phút</item>
+    </plurals>
     <plurals name="plural_hours">
-        <item quantity="one">%1$d hour</item>
-        <item quantity="other">%1$d hours</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d giờ</item>
+        <item quantity="other">%1$d giờ</item>
+    </plurals>
     <plurals name="plural_patches">
-        <item quantity="one">%1$d patch</item>
-        <item quantity="other">%1$d patches</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d ô đất</item>
+        <item quantity="other">%1$d ô đất</item>
+    </plurals>
     <plurals name="plural_kills">
-        <item quantity="one">%1$d kill</item>
-        <item quantity="other">%1$d kills</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">%1$d mạng</item>
+        <item quantity="other">%1$d mạng</item>
+    </plurals>
     <plurals name="plural_quests_completed">
-        <item quantity="one">%1$d quest completed</item>
-        <item quantity="other">%1$d quests completed</item>
-    </plurals> <!-- untranslated -->
+        <item quantity="one">Hoàn thành %1$d nhiệm vụ</item>
+        <item quantity="other">Hoàn thành %1$d nhiệm vụ</item>
+    </plurals>
 
     <!-- ===== Error messages ===== -->
-    <string name="error_no_player">Could not load player data. Please restart the app.</string> <!-- untranslated -->
-    <string name="error_session_already_active">You already have an active session. Complete or abandon it first.</string> <!-- untranslated -->
-    <string name="error_not_enough_coins">Not enough coins.</string> <!-- untranslated -->
+    <string name="error_no_player">Không thể tải dữ liệu người chơi. Vui lòng khởi động lại ứng dụng.</string>
+    <string name="error_session_already_active">Bạn đã có một phiên đang diễn ra. Hãy hoàn thành hoặc bỏ phiên đó trước.</string>
+    <string name="error_not_enough_coins">Không đủ xu.</string>
     <!-- Translator note: %1$s = item display name -->
-    <string name="error_not_enough_items">Not enough %1$s.</string> <!-- untranslated -->
+    <string name="error_not_enough_items">Không đủ %1$s.</string>
     <!-- Translator note: %1$s = skill display name -->
-    <string name="error_level_too_low">Your %1$s level is too low.</string> <!-- untranslated -->
+    <string name="error_level_too_low">Cấp %1$s của bạn quá thấp.</string>
     <!-- Translator note: %1$s = item display name -->
-    <string name="error_inventory_required">You need %1$s to do this.</string> <!-- untranslated -->
-    <string name="error_patch_occupied">This patch is already planted.</string> <!-- untranslated -->
-    <string name="error_patch_empty">This patch is empty.</string> <!-- untranslated -->
-    <string name="error_crop_not_ready">This crop is not ready yet.</string> <!-- untranslated -->
-    <string name="error_quest_active">You already have an active quest.</string> <!-- untranslated -->
-    <string name="error_quest_requirements_not_met">You don\'t meet the requirements for this quest.</string> <!-- untranslated -->
-    <string name="error_dungeon_level_too_low">Your combat level is too low for this dungeon.</string> <!-- untranslated -->
-    <string name="error_unknown">Something went wrong. Please try again.</string> <!-- untranslated -->
+    <string name="error_inventory_required">Bạn cần %1$s để thực hiện việc này.</string>
+    <string name="error_patch_occupied">Ô đất này đã được trồng.</string>
+    <string name="error_patch_empty">Ô đất này đang trống</string>
+    <string name="error_crop_not_ready">Cây trồng này chưa sẵn sàng.</string>
+    <string name="error_quest_active">Bạn đã có một nhiệm vụ đang hoạt động</string>
+    <string name="error_quest_requirements_not_met">Bạn không đáp ứng các yêu cầu của nhiệm vụ này.</string>
+    <string name="error_dungeon_level_too_low">Cấp chiến đấu của bạn quá thấp để vào hầm ngục này.</string>
+    <string name="error_unknown">Đã xảy ra lỗi. Vui lòng thử lại.</string>
 
     <!-- ===== Session dialogs ===== -->
-    <string name="session_abandon_title">Abandon Session?</string> <!-- untranslated -->
-    <string name="session_abandon_body">All progress from this session will be lost.</string> <!-- untranslated -->
+    <string name="session_abandon_title">Bỏ phiên?</string>
+    <string name="session_abandon_body">Mọi tiến trình của phiên này sẽ bị mất.</string>
 
     <!-- ===== Onboarding ===== -->
-    <string name="onboarding_welcome_title">Welcome to Idle Fantasy</string> <!-- untranslated -->
-    <string name="onboarding_welcome_body">Start a skill session and watch your character grow. Sessions run for one hour, even when the app is closed.</string> <!-- untranslated -->
-    <string name="onboarding_first_session_hint">Tap any skill to get started.</string> <!-- untranslated -->
+    <string name="onboarding_welcome_title">Chào mừng đến với Idle Fantasy</string>
+    <string name="onboarding_welcome_body">Bắt đầu một phiên kỹ năng và theo dõi nhân vật của bạn phát triển. Các phiên kéo dài một giờ, ngay cả khi ứng dụng đã đóng.</string>
+    <string name="onboarding_first_session_hint">Nhấn vào bất kỳ kỹ năng nào để bắt đầu.</string>
 
     <!-- ===== Settings ===== -->
-    <string name="settings_title">Settings</string> <!-- untranslated -->
-    <string name="settings_notifications">Session Notifications</string> <!-- untranslated -->
-    <string name="settings_notifications_desc">Show an alert when your session completes</string> <!-- untranslated -->
-    <string name="settings_battery_optimization">Battery Optimization</string> <!-- untranslated -->
-    <string name="settings_battery_optimization_desc">Disable battery optimization for Idle Fantasy to receive timely session alerts</string> <!-- untranslated -->
-    <string name="settings_battery_optimization_btn">Adjust Setting</string> <!-- untranslated -->
-    <string name="settings_language">Language</string> <!-- untranslated -->
-    <string name="settings_about">About</string> <!-- untranslated -->
-    <string name="settings_open_source_licenses">Open Source Licenses</string> <!-- untranslated -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_notifications">Thông báo phiên</string>
+    <string name="settings_notifications_desc">Hiển thị thông báo khi phiên của bạn hoàn thành</string>
+    <string name="settings_battery_optimization">Tối ưu hóa pin</string>
+    <string name="settings_battery_optimization_desc">Tắt tính năng tối ưu hóa pin cho Idle Fantasy để nhận thông báo phiên kịp thời</string>
+    <string name="settings_battery_optimization_btn">Điều chỉnh cài đặt</string>
+    <string name="settings_language">Ngôn ngữ</string>
+    <string name="settings_about">Giới thiệu</string>
+    <string name="settings_open_source_licenses">Giấy phép mã nguồn mở</string>
 
     <!-- ===== HomeScreen ===== -->
-    <string name="label_player_stats">Player Stats</string> <!-- untranslated -->
-    <string name="label_combat_level">Combat Level</string> <!-- untranslated -->
-    <string name="label_shop_desc">Buy equipment and sell loot</string> <!-- untranslated -->
-    <string name="label_no_session_hint">Head to Skills or Combat to start training.</string> <!-- untranslated -->
-    <string name="label_recent_activity">Recent Activity</string> <!-- untranslated -->
-    <string name="settings_profile_layout">Profile Layout</string> <!-- untranslated -->
-    <string name="settings_profile_layout_desc">Choose between a sidebar rail or top tabs</string> <!-- untranslated -->
-    <string name="settings_profile_layout_rail">Rail</string> <!-- untranslated -->
-    <string name="settings_profile_layout_tabs">Tabs</string> <!-- untranslated -->
-    <string name="settings_quest_dots">Quest dots on skills</string> <!-- untranslated -->
-    <string name="settings_quest_dots_desc">Show a gold dot on skills that have an open quest</string> <!-- untranslated -->
-    <string name="settings_monument_touch_indicator">Monument touch indicator</string> <!-- untranslated -->
-    <string name="settings_monument_touch_indicator_desc">Show a dot on the Grand Monument on Home when the daily touch is available</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications">Prestige Notification Badges</string> <!-- untranslated -->
-    <string name="settings_prestige_notifications_desc">Show a notification badge on navigation when a skill is ready to prestige</string> <!-- untranslated -->
-    <string name="label_switch_character">Switch character</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time">Daily reset time</string> <!-- untranslated -->
-    <string name="settings_daily_reset_time_desc">Local time when dailies, guild dailies, and weeklies roll over. Changing it never grants an extra reset.</string> <!-- untranslated -->
-    <string name="settings_compact_numbers">Compact Numbers</string> <!-- untranslated -->
-    <string name="settings_compact_numbers_desc">Abbreviate large item quantities (e.g. 2.46M instead of 2,461,940)</string> <!-- untranslated -->
-    <string name="settings_home_screen">Home Screen</string> <!-- untranslated -->
-    <string name="settings_home_screen_desc">Choose what appears on the home screen</string> <!-- untranslated -->
-    <string name="settings_recent_activity">Recent Activity Log</string> <!-- untranslated -->
-    <string name="settings_recent_activity_desc">Show Recent Activity button in the home screen header</string> <!-- untranslated -->
-    <string name="settings_journal_button">Journal Button</string> <!-- untranslated -->
-    <string name="settings_journal_button_desc">Show a Journal button in the home screen\'s top bar for jotting down notes</string> <!-- untranslated -->
-    <string name="settings_seasonal_events">Seasonal Events</string> <!-- untranslated -->
-    <string name="settings_seasonal_events_desc">Show the active Seasonal Event banner on the home screen</string> <!-- untranslated -->
-    <string name="settings_collapsible_town_grid">Collapsible Town Grid</string> <!-- untranslated -->
-    <string name="settings_collapsible_town_grid_desc">Show the Town section (Shop, Inn, Guild, etc.) as a card you can collapse on the home screen</string> <!-- untranslated -->
-    <string name="settings_character_viewer">Character Viewer</string> <!-- untranslated -->
-    <string name="settings_character_viewer_desc">Show your character sprite on the home screen</string> <!-- untranslated -->
-    <string name="settings_stats_bar">Stats Bar</string> <!-- untranslated -->
-    <string name="settings_stats_bar_desc">Show Combat Level, Total Level, and Coins on the home screen</string> <!-- untranslated -->
-    <string name="settings_session_end_time">Session End Time</string> <!-- untranslated -->
-    <string name="settings_session_end_time_desc">Show the predicted completion clock time next to session and queue countdowns</string> <!-- untranslated -->
-    <string name="label_no_sessions_yet">No sessions completed yet.</string> <!-- untranslated -->
+    <string name="label_player_stats">Chỉ số người chơi</string>
+    <string name="label_combat_level">Cấp chiến đấu</string>
+    <string name="label_shop_desc">Mua trang bị và bán vật phẩm rơi</string>
+    <string name="label_no_session_hint">Đi đến Kỹ năng hoặc Chiến đấu để bắt đầu huấn luyện</string>
+    <string name="label_recent_activity">Hoạt động gần đây</string>
+    <string name="settings_profile_layout">Bố cục hồ sơ</string>
+    <string name="settings_profile_layout_desc">Chọn giữa thanh bên hoặc các tab phía trên</string>
+    <string name="settings_profile_layout_rail">Thanh bên</string>
+    <string name="settings_profile_layout_tabs">Tab</string>
+    <string name="settings_quest_dots">Chấm nhiệm vụ trên kỹ năng</string>
+    <string name="settings_quest_dots_desc">Hiển thị chấm vàng trên các kỹ năng có nhiệm vụ đang mở</string>
+    <string name="settings_monument_touch_indicator">Chỉ báo chạm Đài tưởng niệm</string>
+    <string name="settings_monument_touch_indicator_desc">Hiển thị chấm trên Đại Đài tưởng niệm ở Trang chủ khi có thể chạm hàng ngày</string>
+    <string name="settings_prestige_notifications">Huy hiệu thông báo Prestige</string>
+    <string name="settings_prestige_notifications_desc">Hiển thị huy hiệu thông báo trên thanh điều hướng khi một kỹ năng đã sẵn sàng Prestige</string>
+    <string name="label_switch_character">Đổi nhân vật</string>
+    <string name="settings_daily_reset_time">Thời gian đặt lại hàng ngày</string>
+    <string name="settings_daily_reset_time_desc">Giờ địa phương khi nhiệm vụ hàng ngày, nhiệm vụ bang hội hàng ngày và nhiệm vụ hàng tuần được đặt lại. Thay đổi thời gian này không bao giờ được thêm một lần đặt lại.</string>
+    <string name="settings_compact_numbers">Số dạng rút gọn</string>
+    <string name="settings_compact_numbers_desc">Viết gọn số lượng vật phẩm lớn (ví dụ: 2,46M thay vì 2.461.940)</string>
+    <string name="settings_home_screen">Màn hình chính</string>
+    <string name="settings_home_screen_desc">Chọn nội dung hiển thị trên màn hình chính</string>
+    <string name="settings_recent_activity">Nhật ký hoạt động gần đây</string>
+    <string name="settings_recent_activity_desc">Hiển thị nút Hoạt động gần đây trên đầu màn hình chính</string>
+    <string name="settings_journal_button">Nút Nhật ký</string>
+    <string name="settings_journal_button_desc">Hiển thị nút Nhật ký trên thanh trên cùng của màn hình chính để ghi chú</string>
+    <string name="settings_seasonal_events">Sự kiện theo mùa</string>
+    <string name="settings_seasonal_events_desc">Hiển thị banner Sự kiện theo mùa đang diễn ra trên màn hình chính</string>
+    <string name="settings_collapsible_town_grid">Khu vực Thị trấn có thể thu gọn</string>
+    <string name="settings_collapsible_town_grid_desc">Hiển thị khu vực Thị trấn (Cửa hàng, Quán trọ, Bang hội, v.v.) dưới dạng thẻ có thể thu gọn trên màn hình chính</string>
+    <string name="settings_character_viewer">Trình xem nhân vật</string>
+    <string name="settings_character_viewer_desc">Hiển thị hình ảnh nhân vật của bạn trên màn hình chính</string>
+    <string name="settings_stats_bar">Thanh chỉ số</string>
+    <string name="settings_stats_bar_desc">Hiển thị Cấp chiến đấu, Tổng cấp độ và Xu trên màn hình chính</string>
+    <string name="settings_session_end_time">Thời gian kết thúc phiên</string>
+    <string name="settings_session_end_time_desc">Hiển thị thời gian dự kiến hoàn thành bên cạnh bộ đếm ngược của phiên và hàng đợi</string>
+    <string name="label_no_sessions_yet">Chưa hoàn thành phiên nào.</string>
 
     <!-- ===== CombatScreen ===== -->
-    <string name="label_dungeons_tab">Dungeons</string> <!-- untranslated -->
-    <string name="btn_fight">Fight!</string> <!-- untranslated -->
+    <string name="label_dungeons_tab">Hầm ngục</string>
+    <string name="btn_fight">Chiến đấu!</string>
 
     <!-- ===== SkillsScreen ===== -->
-    <string name="btn_back_arrow">← Back</string> <!-- untranslated -->
-    <string name="btn_start_burying">Start Burying</string> <!-- untranslated -->
-    <string name="btn_start_crafting">Start Crafting</string> <!-- untranslated -->
-    <string name="btn_select">Select</string> <!-- untranslated -->
-    <string name="label_special">Special</string> <!-- untranslated -->
+    <string name="btn_back_arrow">← Quay lại</string>
+    <string name="btn_start_burying">Bắt đầu chôn</string>
+    <string name="btn_start_crafting">Bắt đầu chế tạo</string>
+    <string name="btn_select">Chọn</string>
+    <string name="label_special">Đặc biệt</string>
 
     <!-- ===== QuestsScreen ===== -->
-    <string name="label_claim_reward">Claim Reward</string> <!-- untranslated -->
-    <string name="label_daily">Daily</string> <!-- untranslated -->
-    <string name="label_weekly">Weekly</string> <!-- untranslated -->
-    <string name="label_daily_quests">Daily Quests</string> <!-- untranslated -->
-    <string name="label_daily_reset">Resets at %1$s</string> <!-- untranslated -->
-    <string name="label_weekly_reset">Resets Monday at %1$s</string> <!-- untranslated -->
-    <string name="weekly_bonus_title">Weekly Bonus!</string> <!-- untranslated -->
-    <string name="weekly_bonus_claim">Claim Weekly Bonus</string> <!-- untranslated -->
-    <string name="label_daily_info_pity">Each daily quest rewards coins. Every quest also has a 1 in %1$d chance to drop a piece of Dwarven gear you don\'t own yet. Each claim without a drop improves the odds; a drop resets them to 1 in 100.</string> <!-- untranslated -->
-    <string name="label_daily_info_complete">Each daily quest rewards coins. You already own every piece of Dwarven gear!</string> <!-- untranslated -->
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a %1$s chance at a piece of Divine gear.</string> <!-- untranslated -->
-    <string name="label_weekly_info_complete">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins. You already own every piece of Divine gear!</string> <!-- untranslated -->
-    <string name="label_daily_reward_pity">2,000 coins (1/%1$d: Dwarven gear)</string> <!-- untranslated -->
-    <string name="label_daily_reward_complete">2,000 coins</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_coins">Daily quest complete! +2,000 coins.</string> <!-- untranslated -->
-    <string name="msg_daily_claimed_dwarven">Daily quest complete! You found %1$s!</string> <!-- untranslated -->
-    <string name="label_hide_completed">Hide completed</string> <!-- untranslated -->
+    <string name="label_claim_reward">Nhận phần thưởng</string>
+    <string name="label_daily">Hàng ngày</string>
+    <string name="label_weekly">Hàng tuần</string>
+    <string name="label_daily_quests">Nhiệm vụ hàng ngày</string>
+    <string name="label_daily_reset">Đặt lại lúc %1$s</string>
+    <string name="label_weekly_reset">Đặt lại vào thứ Hai lúc %1$s</string>
+    <string name="weekly_bonus_title">Thưởng hàng tuần!</string>
+    <string name="weekly_bonus_claim">Nhận thưởng hàng tuần</string>
+    <string name="label_daily_info_pity">Mỗi nhiệm vụ hàng ngày đều thưởng xu. Mỗi nhiệm vụ cũng có xác suất 1/%1$d rơi ra một món trang bị Người lùn mà bạn chưa sở hữu. Mỗi lần nhận thưởng mà không có vật phẩm rơi sẽ tăng tỷ lệ này; khi có vật phẩm rơi, tỷ lệ sẽ được đặt lại thành 1/100.</string>
+    <string name="label_daily_info_complete">Mỗi nhiệm vụ hàng ngày đều thưởng xu. Bạn đã sở hữu tất cả trang bị Người lùn!</string>
+    <string name="label_weekly_info">Mỗi thử thách hàng tuần thưởng xu dựa trên yêu cầu cấp độ. Hoàn thành cả 5 để nhận phần thưởng thêm: 100.000 xu hoặc %1$s cơ hội nhận một món trang bị Thần thánh.</string>
+    <string name="label_weekly_info_complete">Mỗi thử thách hàng tuần thưởng xu dựa trên yêu cầu cấp độ. Hoàn thành cả 5 để nhận phần thưởng thêm: 100.000 xu. Bạn đã sở hữu tất cả trang bị Thần thánh!</string>
+    <string name="label_daily_reward_pity">2.000 xu (1/%1$d: trang bị Người lùn)</string>
+    <string name="label_daily_reward_complete">2,000 xu</string>
+    <string name="msg_daily_claimed_coins">Hoàn thành nhiệm vụ hàng ngày! +2.000 xu.</string>
+    <string name="msg_daily_claimed_dwarven">Hoàn thành nhiệm vụ hàng ngày! Bạn đã tìm thấy %1$s!</string>
+    <string name="label_hide_completed">Ẩn nhiệm vụ đã hoàn thành</string>
 
     <!-- ===== OnboardingScreen ===== -->
-    <string name="onboarding_lets_go">Let\'s go!</string> <!-- untranslated -->
-    <string name="onboarding_skip">Skip</string> <!-- untranslated -->
-    <string name="onboarding_next">Next</string> <!-- untranslated -->
+    <string name="onboarding_lets_go">Bắt đầu thôi!</string>
+    <string name="onboarding_skip">Bỏ qua</string>
+    <string name="onboarding_next">Tiếp theo</string>
 
     <!-- ===== Settings ===== -->
-    <string name="settings_notifications_header">Notifications</string> <!-- untranslated -->
-    <string name="settings_performance_header">Performance</string> <!-- untranslated -->
-    <string name="settings_general_header">General</string> <!-- untranslated -->
-    <string name="settings_tutorial_title">Tutorial</string> <!-- untranslated -->
-    <string name="settings_tutorial_desc">Show the introduction again</string> <!-- untranslated -->
-    <string name="settings_reopen">Reopen</string> <!-- untranslated -->
-    <string name="settings_changelog_title">What\'s New</string> <!-- untranslated -->
-    <string name="settings_changelog_desc">View the latest update changes</string> <!-- untranslated -->
-    <string name="settings_changelog_btn">View</string> <!-- untranslated -->
-    <string name="settings_foss_desc">Idle Fantasy is free and open source software.</string> <!-- untranslated -->
+    <string name="settings_notifications_header">Thông báo</string>
+    <string name="settings_performance_header">Hiệu năng</string>
+    <string name="settings_general_header">Chung</string>
+    <string name="settings_tutorial_title">Hướng dẫn</string>
+    <string name="settings_tutorial_desc">Hiển thị lại phần giới thiệu</string>
+    <string name="settings_reopen">Mở lại</string>
+    <string name="settings_changelog_title">Có gì mới</string>
+    <string name="settings_changelog_desc">Xem các thay đổi trong bản cập nhật mới nhất</string>
+    <string name="settings_changelog_btn">Xem</string>
+    <string name="settings_foss_desc">Idle Fantasy là phần mềm miễn phí và mã nguồn mở.</string>
     <string name="settings_reset_title">Reset Progression</string> <!-- untranslated -->
     <string name="settings_reset_desc">Erase all skills, items, quests, and coins</string> <!-- untranslated -->
     <string name="settings_reset_btn">Reset</string> <!-- untranslated -->

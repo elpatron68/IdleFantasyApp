@@ -119,11 +119,11 @@ fun Long.toRelativeTime(): String {
  * 365. Seconds are only shown when the whole duration is under an hour. Unit suffixes come from
  * string resources so each locale can abbreviate its own way (issue #1399).
  */
-fun Long.formatDurationMs(context: Context): String =
-    context.withAppLocale().let { ctx -> formatDurationMs { resId, value -> ctx.getString(resId, value) } }
+fun Long.formatDurationMs(context: Context, maxUnits: Int = Int.MAX_VALUE): String =
+    context.withAppLocale().let { ctx -> formatDurationMs(maxUnits) { resId, value -> ctx.getString(resId, value) } }
 
 /** Testable core of [formatDurationMs]; [unitString] renders one unit from its template resource. */
-internal fun Long.formatDurationMs(unitString: (Int, Long) -> String): String {
+internal fun Long.formatDurationMs(maxUnits: Int = Int.MAX_VALUE, unitString: (Int, Long) -> String): String {
     val totalSeconds = this / 1_000
     var rem = totalSeconds / 60
     if (rem == 0L) return unitString(R.string.duration_seconds, totalSeconds)
@@ -144,7 +144,7 @@ internal fun Long.formatDurationMs(unitString: (Int, Long) -> String): String {
         if (hours   > 0) add(unitString(R.string.duration_hours, hours))
         if (minutes > 0) add(unitString(R.string.duration_minutes, minutes))
         if (underAnHour && seconds > 0) add(unitString(R.string.duration_seconds, seconds))
-    }.joinToString(" ")
+    }.take(maxUnits).joinToString(" ")
 }
 
 /**

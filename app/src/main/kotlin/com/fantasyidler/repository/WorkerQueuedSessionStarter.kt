@@ -12,6 +12,7 @@ import com.fantasyidler.simulator.SkillSimulator
 import com.fantasyidler.simulator.ThievingSimulator
 import com.fantasyidler.simulator.XpTable
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
+import com.fantasyidler.ui.viewmodel.workerRefundMaterials
 import com.fantasyidler.util.toolEfficiency
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -51,8 +52,12 @@ class WorkerQueuedSessionStarter @Inject constructor(
                         startQueuedAction(slot, next)
                         return@withLock true
                     } catch (_: ActionNoLongerQualifiesException) {
-                        // Level gate no longer met (post-prestige): discard and try the next
-                        // action instead of requeueing it to block the worker (issue #1605).
+                        // Level gate no longer met (post-prestige): refund prepaid primaries
+                        // plus catalyst before discarding, then try the next action (issue #2013).
+                        next?.let { dropped ->
+                            val refund = workerRefundMaterials(dropped, gameData)
+                            if (refund.isNotEmpty()) playerRepo.addItemsUnlocked(refund)
+                        }
                         next = playerRepo.dequeueNextWorkerActionUnlocked(slot)
                     } catch (_: Exception) {
                         playerRepo.requeueWorkerActionAtFrontUnlocked(slot, next)
@@ -191,7 +196,10 @@ class WorkerQueuedSessionStarter @Inject constructor(
                     leveledUp   = XpTable.levelForXp(xpAfter) > level,
                     kills       = qty,
                 ))
-                startSession(slot, action, frames, durationMs, efficiencyMultiplier, levelAtStart)
+                // Ashes were prepaid at order time; the stored qty is preferred and legacy
+                // actions without it fall back to the order-time cost (issue #2013).
+                val catalystQty = if (action.catalystKey != null) action.catalystQty.takeIf { it > 0 } ?: (qty + 9) / 10 else 0
+                startSession(slot, action, frames, durationMs, efficiencyMultiplier, levelAtStart, action.catalystKey, catalystQty)
             }
             Skills.PRAYER -> {
                 val boneKey     = action.activityKey
@@ -245,7 +253,8 @@ class WorkerQueuedSessionStarter @Inject constructor(
                 val outputKey   = if (catalystKey != null) "enhanced_${action.activityKey}" else action.activityKey
                 if (catalystKey != null) playerRepo.consumeItemsUnlocked(mapOf(catalystKey to qty))
                 val frames = buildCraftFrames(xpMap[Skills.HERBLORE] ?: 0L, qty, r.xpPerItem, r.outputQuantity, outputKey)
-                startSession(slot, action, frames, durationMs, efficiencyMultiplier, levelAtStart)
+                // Record the just-consumed catalyst so dismiss can refund it (issue #2013).
+                startSession(slot, action, frames, durationMs, efficiencyMultiplier, levelAtStart, catalystKey, if (catalystKey != null) qty else 0)
             }
             Skills.CONSTRUCTION -> {
                 val r   = gameData.constructionRecipes[action.activityKey] ?: return
@@ -391,6 +400,8 @@ class WorkerQueuedSessionStarter @Inject constructor(
         durationMs: Long,
         efficiencyMultiplier: Float,
         levelAtStart: Int = 0,
+        catalystKey: String? = null,
+        catalystQty: Int = 0,
     ) {
         sessionRepo.startWorkerSession(
             workerSlot           = slot,
@@ -402,7 +413,10 @@ class WorkerQueuedSessionStarter @Inject constructor(
             efficiencyMultiplier = efficiencyMultiplier,
             levelAtStart         = levelAtStart,
             weaponSlot           = action.weaponSlot,
-         playerMutexHeld = true,)
+            playerMutexHeld = true,
+            catalystKey = catalystKey,
+            catalystQty = catalystQty,
+        )
     }
 
     private fun encodeFrames(frames: List<SessionFrame>): String =

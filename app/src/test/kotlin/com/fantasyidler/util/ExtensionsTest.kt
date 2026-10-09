@@ -118,6 +118,22 @@ class ExtensionsTest {
         assertEquals("1y 1mo 1w 1d 8h 54m", 9680 * hour + 54 * 60_000L)  // years are 365 days
     }
 
+    // Issue #2004 (continuation of #1552): five idle weeks rendered every non-zero
+    // unit ("1mo 1w 1d 4h 12m"), bursting the save-slot card column. Slot ages
+    // show the two most significant units ("1mo 1w"); the uncapped default is unchanged.
+    @Test
+    fun `slot card durations cap at two most significant units`() {
+        val fiveWeeks = (((5L * 7 + 3) * 24 + 4) * 60 + 12) * 60_000L
+        assertEquals(
+            "1mo 1w 1d 4h 12m",
+            fiveWeeks.formatDurationMs(Int.MAX_VALUE) { resId, value -> "$value${englishUnits.getValue(resId)}" },
+        )
+        assertEquals(
+            "1mo 1w",
+            fiveWeeks.formatDurationMs(2) { resId, value -> "$value${englishUnits.getValue(resId)}" },
+        )
+    }
+
     private fun assertEquals(expected: String, ms: Long) =
         assertEquals(expected, ms.formatDurationEn())
 

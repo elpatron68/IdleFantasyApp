@@ -237,7 +237,10 @@ class QueuedSessionStarter @Inject constructor(
                         skippedTowerActions += next
                     } catch (_: ActionNoLongerQualifiesException) {
                         // The player no longer meets the activity's level gate (a prestige
-                        // dropped their level): discard the action and move on (issue #1605).
+                        // dropped their level): refund prepaid materials plus catalyst before
+                        // discarding, then move on (issues #1605, #2013).
+                        if (next.consumedMaterials.isNotEmpty()) playerRepo.addItemsUnlocked(next.consumedMaterials)
+                        if (next.catalystKey != null && next.catalystQty > 0) playerRepo.addItemUnlocked(next.catalystKey, next.catalystQty)
                         droppedAny = true
                     } catch (_: Exception) {
                         // Nothing was ever written to the DB, so the queue is still exactly
@@ -398,9 +401,10 @@ class QueuedSessionStarter @Inject constructor(
                     } catch (_: TowerPendingCollectionException) {
                         skippedTowerActions += next
                     } catch (_: ActionNoLongerQualifiesException) {
-                        // Same as startNextQueued(): the player no longer meets the activity's
-                        // level gate (a prestige dropped their level) — discard and move on
-                        // (issue #1605).
+                        // Same as startNextQueued(): refund prepaid materials plus catalyst
+                        // before discarding (issues #1605, #2013).
+                        if (next.consumedMaterials.isNotEmpty()) playerRepo.addItemsUnlocked(next.consumedMaterials)
+                        if (next.catalystKey != null && next.catalystQty > 0) playerRepo.addItemUnlocked(next.catalystKey, next.catalystQty)
                         droppedAny = true
                     } catch (_: Exception) {
                         // Nothing was ever written to the DB, so the queue is still exactly
