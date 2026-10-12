@@ -163,10 +163,27 @@ object ElderQuests {
             title     = "Face the Last Elder",
             objective = "Defeat the Last Elder at the bottom of the Abyssal Depths.",
             reward    = "The Ancient Signet, the Isle Champion title, and Rowan's truth.",
-            counter   = { it.enemyKills["last_elder"] ?: 0 },
+            // #2058: the kill registers as enemyKills["last_elder"] via recordDailyKills,
+            // but the guaranteed Ancient Signet drop (chance 1.0) landing in inventory is
+            // the sturdier signal — HomeScreen already treats it as lastElderKilled.
+            // Counting the max of both keeps save imports and any kill-map gap working.
+            counter   = { maxOf(it.enemyKills["last_elder"] ?: 0, it.inventory["ancient_signet"] ?: 0) },
             target    = 1,
         ),
     )
+
+    /**
+     * Display progress for a quest row (issue #2039).
+     *
+     * Mainland quests accumulate via QuestRepository.addProgress and never regress.
+     * Isle counters read live inventory, so a validated quest would visually drop to
+     * 0/500 after selling or smelting its objective even though its id stays in
+     * elderQuestsCompleted. A validated quest therefore always displays [target];
+     * only the next open quest shows the live counter.
+     */
+    fun displayProgress(quest: Quest, snapshot: Snapshot, completed: Set<String>): Int =
+        if (quest.id in completed) quest.target
+        else quest.counter(snapshot).coerceAtMost(quest.target)
 
     /**
      * Walks the chain in order and marks quests complete only if every prior quest is
@@ -191,6 +208,19 @@ object ElderQuests {
             }
         }
         return newly
+    }
+
+    /**
+     * #2058: pure title-qualification check, shared by the live grant and the
+     * retroactive repair. True when the final quest is (or just became) complete OR
+     * the kill is visible in the snapshot (kills map or guaranteed signet drop).
+     * The ViewModel grants `isle_champion` whenever this is true and the title is
+     * still missing; Set addition keeps the repair idempotent.
+     */
+    fun qualifiesForIsleChampion(completedAfter: Set<String>, snapshot: Snapshot): Boolean {
+        if ("act4_face_last_elder" in completedAfter) return true
+        val quest = CHAIN.firstOrNull { it.id == "act4_face_last_elder" } ?: return false
+        return quest.counter(snapshot) >= quest.target
     }
 
     /**

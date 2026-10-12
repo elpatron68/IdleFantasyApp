@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.fantasyidler.R
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.MercenaryData
+import com.fantasyidler.repository.isleFramesXp
 import com.fantasyidler.repository.MercenaryRepository
 import com.fantasyidler.repository.MercHireResult
 import com.fantasyidler.data.json.DungeonData
@@ -335,7 +336,7 @@ class CombatViewModel @Inject constructor(
                 "magic" -> Skills.MAGIC
                 else -> Skills.ATTACK
             }
-            val spell = extra.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
+            val spell = resolveSpell(extra.selectedSpell, flags, levels[Skills.MAGIC] ?: 1)
             val skillLevels = playerRepo.getSkillLevels()
             extra.copy(
                 isLoading               = false,
@@ -392,7 +393,7 @@ class CombatViewModel @Inject constructor(
                 towerBestFloor          = flags.towerBestFloor,
                 showSessionEndTime      = flags.showSessionEndTime,
                 bossKillCounts          = flags.enemyKills,
-                selectedSpell           = extra.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] },
+                selectedSpell           = spell,
                 selectedPotionKey       = extra.selectedPotionKey ?: flags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 },
                 activeBossRepeatIndex   = flags.activeBossRepeatIndex,
                 activeBossRepeatTotal   = flags.activeBossRepeatTotal,
@@ -513,6 +514,9 @@ class CombatViewModel @Inject constructor(
         }
     }
 
+    private fun resolveSpell(picked: SpellData?, flags: PlayerFlags, magicLevel: Int): SpellData? =
+        picked?.takeIf { it.magicLevelRequired <= magicLevel } ?: flags.activeSpell?.let { gameData.spells[it] }
+
     fun selectSpell(spell: SpellData?) {
         _extra.update { it.copy(selectedSpell = spell) }
         viewModelScope.launch {
@@ -593,7 +597,7 @@ class CombatViewModel @Inject constructor(
                 // Falls back to the remembered spell/potion the same way the picker's displayed
                 // selection does (see uiState combine block) -- otherwise the picker shows a
                 // remembered choice as selected while starting silently ignores it (issue #1186).
-                val queuedSpell = _extra.value.selectedSpell ?: dungeonFlags.activeSpell?.let { gameData.spells[it] }
+                val queuedSpell = resolveSpell(_extra.value.selectedSpell, dungeonFlags, queuedLevels[Skills.MAGIC] ?: 1)
                 val queuedPotionKey = _extra.value.selectedPotionKey ?: dungeonFlags.activePotionKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val previewXp = estimateDungeonPreviewXp(
                     gameData      = gameData,
@@ -703,7 +707,7 @@ class CombatViewModel @Inject constructor(
 
                 // Magic: validate spell selection and level. Falls back to the remembered spell,
                 // same as the picker's displayed selection (issue #1186).
-                val selectedSpell = _extra.value.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
+                val selectedSpell = resolveSpell(_extra.value.selectedSpell, flags, levels[Skills.MAGIC] ?: 1)
                 if (combatStyle == "magic") {
                     if (selectedSpell == null) {
                         _extra.update {
@@ -738,7 +742,7 @@ class CombatViewModel @Inject constructor(
                     else ARROW_TIERS.filter { (inventory[it] ?: 0) > 0 }
                 val availableArrows = orderedArrowKeys.associateWith { inventory[it] ?: 0 }
 
-                // Runes: determine key and cost for simulator tracking; consumed upfront below
+                // Runes: determine key and cost for simulator tracking; consumed from frames at collect
                 val staffCoversRune = combatStyle == "magic" && selectedSpell != null && (weapon?.infiniteRunes == "all" || weapon?.infiniteRunes == selectedSpell.runeType)
                 val simulatorRuneKey  = if (combatStyle == "magic" && selectedSpell != null && !staffCoversRune) selectedSpell.runeType else null
                 val simulatorRuneCost = selectedSpell?.runeCost ?: 1
@@ -848,10 +852,11 @@ class CombatViewModel @Inject constructor(
                 // Falls back to the remembered spell/potion the same way the picker's displayed
                 // selection does (see uiState combine block) -- otherwise the picker shows a
                 // remembered choice as selected while starting silently ignores it (issue #1186).
-                val bossQueuedSpell = _extra.value.selectedSpell ?: queuedFlags.activeSpell?.let { gameData.spells[it] }
+                val bossMainlandLevels: Map<String, Int> = json.decodeFromString(queuedPlayer.skillLevels)
+                val bossQueuedLevels = if (queuedFlags.onElderIsle) bossMainlandLevels.mapValues { queuedFlags.elderSkillLevels[it.key] ?: 1 } else bossMainlandLevels
+                val bossQueuedSpell = resolveSpell(_extra.value.selectedSpell, queuedFlags, bossQueuedLevels[Skills.MAGIC] ?: 1)
                 val bossQueuedWeapon = queuedEquipped[bossWeaponSlot]?.let { gameData.equipment[it] }
                 val bossQueuedPotionKey = _extra.value.selectedPotionKey ?: queuedFlags.activePotionKey?.takeIf { (queuedInventory[it] ?: 0) > 0 }
-                val bossQueuedLevels: Map<String, Int> = json.decodeFromString(queuedPlayer.skillLevels)
                 val bossPreviewXp = estimateBossPreviewXp(
                     bossKey       = bossKey,
                     weaponSlot    = bossWeaponSlot,
@@ -941,7 +946,7 @@ class CombatViewModel @Inject constructor(
                     EquipSlot.ARMOR_SLOTS.sumOf { equipMap[equipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0)
                 } else 0
                 // Falls back to the remembered spell, same as the picker's displayed selection (issue #1186).
-                val selectedSpell = _extra.value.selectedSpell ?: flags.activeSpell?.let { gameData.spells[it] }
+                val selectedSpell = resolveSpell(_extra.value.selectedSpell, flags, levels[Skills.MAGIC] ?: 1)
                 if (combatStyle == "magic" && selectedSpell == null) {
                     _extra.update { it.copy(snackbarMessage = "Select a spell before entering.", startingSession = false) }
                     return@launch
@@ -1064,7 +1069,7 @@ class CombatViewModel @Inject constructor(
     }
 
     /**
-     * Consumes arrows actually fired so far (frames are pre-simulated, so nothing is deducted
+     * Consumes arrows fired and runes cast so far (frames are pre-simulated, so nothing is deducted
      * until abandon/collect time) and deletes the session. Shared by [abandonSession] and
      * [prestigeSkill] — prestiging a combat skill mid-fight must abandon the same way a manual
      * abandon does, or the fight keeps running against stats that no longer match its frames
@@ -1077,10 +1082,13 @@ class CombatViewModel @Inject constructor(
         val elapsed = System.currentTimeMillis() - session.startedAt
         val framesElapsed = (elapsed / perFrameMs).toInt().coerceIn(0, frames.size)
         val arrowsUsed = mutableMapOf<String, Int>()
+        val runesUsed  = mutableMapOf<String, Int>()
         for (frame in frames.take(framesElapsed)) {
             for ((arrow, qty) in frame.arrowsConsumed) arrowsUsed[arrow] = (arrowsUsed[arrow] ?: 0) + qty
+            for ((rune,  qty) in frame.runesConsumed)  runesUsed[rune]   = (runesUsed[rune] ?: 0) + qty
         }
         if (arrowsUsed.isNotEmpty()) playerRepo.consumeItems(arrowsUsed)
+        if (runesUsed.isNotEmpty())  playerRepo.consumeItems(runesUsed)
         sessionRepo.abandonSession(session.sessionId)
         if (session.skillName == "boss") playerRepo.clearActiveBossRepeat()
         if (session.skillName == "combat") playerRepo.clearActiveDungeonRepeat()
@@ -1367,6 +1375,8 @@ class CombatViewModel @Inject constructor(
             blockedRareDrops   = HeirloomStats.ownedHeirloomKeys(gameData.equipment, inventory),
             mercenaries         = if (boss.raid) mercRepo.combatants(flags) else emptyList(),
         )
+        // The Last Elder pays elder level scaling and Sapphires per combat skill.
+        if (flags.onElderIsle) return isleFramesXp(bossFrames, "boss", flags.elderSkillLevels, flags.embeddedSigils)
         return bossFrames.sumOf { it.xpGain.toLong() }
     }
 }
