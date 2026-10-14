@@ -78,6 +78,18 @@ internal fun isleFramesXp(
     return bySkill.entries.sumOf { (skill, xp) -> (xp * isleXpMult(elderLevels[skill] ?: 1, embeddedSigils)).toLong() }
 }
 
+/**
+ * [qty] scaled by a Sigil Stone multiplier, with the fractional part rolled as the chance of one
+ * extra. Plain rounding made small drops (a single Ancient Sigil or Elder Bone) ignore every
+ * stone, so "+5% per stone" only held on large stacks (issue #2035). Never below [qty].
+ */
+internal fun sigilScaledQty(qty: Int, mult: Double, random: Random = Random.Default): Int {
+    val scaled = qty * mult
+    val whole = scaled.toInt()
+    val extra = if (random.nextDouble() < scaled - whole) 1 else 0
+    return (whole + extra).coerceAtLeast(qty)
+}
+
 enum class XpBoostPurchaseResult { SUCCESS, NOT_ENOUGH_COINS, ALREADY_ACTIVE, WEEKLY_LIMIT_REACHED }
 
 enum class PrestigeActionResult { SUCCESS, NOT_ENOUGH_POINTS, LOCKED, COOLDOWN, INVALID, CANT_AFFORD }
@@ -328,7 +340,7 @@ class PlayerRepository @Inject constructor(
     /**
      * Applies per-item sigil multipliers at collection time. Specific items get their targeted
      * stone's multiplier (essence→amethyst, sigils→topaz, elder bones→diamond); everything else
-     * gets the general loot mult (emerald). Rounding never drops a stack below its base count.
+     * gets the general loot mult (emerald). See [sigilScaledQty] for the rounding.
      */
     private fun scaleLootWithSigils(items: Map<String, Int>, bonuses: SigilBonuses): Map<String, Int> {
         if (bonuses.lootMult == 1.0 && bonuses.essenceMult == 1.0 &&
@@ -340,7 +352,7 @@ class PlayerRepository @Inject constructor(
                 "elder_bone"     -> bonuses.boneMult
                 else             -> bonuses.lootMult
             }
-            if (m == 1.0) qty else (qty * m).roundToInt().coerceAtLeast(qty)
+            if (m == 1.0) qty else sigilScaledQty(qty, m)
         }
     }
 
@@ -1684,6 +1696,16 @@ class PlayerRepository @Inject constructor(
         return json.encode<PlayerExport>(export.copy(sig = saveSignature(export)))
     }
 
+    /**
+     * True when the live character holds quest or farming content: any quest-progress row (rows
+     * are content under deleteAll semantics) or any patch row with a non-null crop (clearAll-aware:
+     * clearAll NULLs rows instead of deleting them, so NULL-crop rows read as empty). Lets the
+     * save-slot recovery probe tell an idle-but-intact character from a mid-reset-wiped one.
+     */
+    suspend fun hasQuestOrPatchContent(): Boolean =
+        questProgressDao.getAllProgress().isNotEmpty() ||
+            farmingPatchDao.getAllPatches().any { it.cropType != null }
+
     /** Result of [importSave]: the applied export, and whether an edited ironman save was demoted. */
     data class ImportedSave(val export: PlayerExport, val ironmanDemoted: Boolean)
 
@@ -1739,7 +1761,7 @@ class PlayerRepository @Inject constructor(
 
     // Finds the end of the root JSON object and drops any trailing garbage.
     // Guards against files that were written twice without truncation.
-    private fun stripJsonGarbage(s: String): String {
+    internal fun stripJsonGarbage(s: String): String {
         var depth = 0
         var inString = false
         var escape = false

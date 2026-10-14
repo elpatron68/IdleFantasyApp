@@ -116,6 +116,7 @@
     <string name="duration_complete">Complete</string> <!-- untranslated -->
     <string name="label_session_results">Результати Сесії</string>
     <string name="label_xp_gained">XP отримано</string>
+    <string name="label_time_elapsed">Time elapsed</string> <!-- untranslated -->
     <string name="label_items_collected">Items collected</string> <!-- untranslated -->
     <string name="label_level_ups">Рівнів піднято</string>
     <string name="label_requirements">Вимоги</string>
@@ -664,7 +665,7 @@
     <string name="profile_stat_wc">WC</string> <!-- untranslated -->
     <string name="profile_stat_fishing">Рибальство</string>
     <string name="profile_stat_farming">Farming</string> <!-- untranslated -->
-    <string name="profile_stat_smithing">Smithing</string> <!-- untranslated -->
+    <string name="profile_stat_smithing">Ковальство</string>
     <string name="profile_stat_firemaking">Firemaking</string> <!-- untranslated -->
     <string name="profile_stat_agility">Спритність</string>
     <string name="profile_stat_cooking">Cooking</string> <!-- untranslated -->
@@ -1011,7 +1012,7 @@
     <string name="guild_name_farming">Гільдія Фермерів</string>
     <string name="guild_name_firemaking">Firemakers Guild</string> <!-- untranslated -->
     <string name="guild_name_agility">Agility Guild</string> <!-- untranslated -->
-    <string name="guild_name_smithing">Smithing Guild</string> <!-- untranslated -->
+    <string name="guild_name_smithing">Гільдія Ковалів</string>
     <string name="guild_name_cooking">Гільдія Кухарів</string>
     <string name="guild_name_fletching">Fletchers Guild</string> <!-- untranslated -->
     <string name="guild_name_crafting">Crafting Guild</string> <!-- untranslated -->
@@ -1047,28 +1048,28 @@
 
     <!-- Church -->
     <string name="church_title">Церква</string>
-    <string name="church_desc">Blessings for XP, defense, and coins</string> <!-- untranslated -->
-    <string name="church_no_active_blessing">No active blessing — visit the Church to pray.</string> <!-- untranslated -->
-    <string name="church_active_label">Active Blessing</string> <!-- untranslated -->
+    <string name="church_desc">Благословіння для ХР, захисту та монет</string>
+    <string name="church_no_active_blessing">Немає активних благословінь - відвідайте Церкву, щоб помолитись.</string>
+    <string name="church_active_label">Активне благословіння</string>
     <string name="church_expires_in">Expires in %1$s</string> <!-- untranslated -->
     <string name="church_blessing_active_fmt">%1$s • %2$s left</string> <!-- untranslated -->
-    <string name="church_section_xp">XP Blessings</string> <!-- untranslated -->
-    <string name="church_section_defense">Defense Blessings</string> <!-- untranslated -->
-    <string name="church_section_coins">Coin Blessings</string> <!-- untranslated -->
+    <string name="church_section_xp">XP Благословіння</string>
+    <string name="church_section_defense">Благословіння Захисту</string>
+    <string name="church_section_coins">Благословіння Монет</string>
     <string name="church_locked_level">Requires Prayer level %1$d</string> <!-- untranslated -->
-    <string name="church_active_chip">Active</string> <!-- untranslated -->
-    <string name="church_activate">Activate</string> <!-- untranslated -->
-    <string name="church_blessing_bonus">+%1$s from blessing</string> <!-- untranslated -->
+    <string name="church_active_chip">Активно</string>
+    <string name="church_activate">Активувати</string>
+    <string name="church_blessing_bonus">+%1$s з благословіння</string>
     <!-- Golden Goose pet coin share, split from the blessing line (issue #1941). Pending Weblate translation. -->
     <string name="pet_coin_bonus">+%1$s from pet</string> <!-- untranslated -->
-    <string name="church_blessing_suffix">from blessing</string> <!-- untranslated -->
+    <string name="church_blessing_suffix">з благословіння</string>
     <string name="church_effect_xp">×%1$.2f XP for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_def">+%1$d Defense for %2$d hours</string> <!-- untranslated -->
     <string name="church_effect_coins">+%1$d%% coin drops for %2$d hours</string> <!-- untranslated -->
     <string name="church_cost_bones">Costs %1$d bones</string> <!-- untranslated -->
-    <string name="church_confirm_title">Activate Blessing?</string> <!-- untranslated -->
+    <string name="church_confirm_title">Активувати Благословіння?</string>
     <string name="church_bones_available">You have %1$d bones on hand — worth %2$d toward blessings (bigger bones count for more)</string> <!-- untranslated -->
-    <string name="church_not_enough_bones">Not enough bones (need %1$d)</string> <!-- untranslated -->
+    <string name="church_not_enough_bones">Недостатньо кісток (необхідно %1$d)</string>
     <string name="church_already_active">Благословіння вже активне</string>
     <string name="church_blessing_activated">Благословіння активоване!</string>
     <string name="church_blessing_extended">Благословіння продовжене!</string>
@@ -1473,7 +1474,7 @@
     <string name="crafting_tier_gold">Золото</string>
     <string name="crafting_tier_iron">Залізо</string>
     <string name="crafting_tier_magic">Магічне</string>
-    <string name="crafting_tier_maple">Maple</string> <!-- untranslated -->
+    <string name="crafting_tier_maple">Клен</string>
     <string name="crafting_tier_mithril">Mithril</string> <!-- untranslated -->
     <string name="crafting_tier_oak">Oak</string> <!-- untranslated -->
     <string name="crafting_tier_plank">Plank</string> <!-- untranslated -->
@@ -1484,7 +1485,7 @@
     <string name="crafting_tier_steel">Сталь</string>
     <string name="crafting_tier_stone">Камінь</string>
     <string name="crafting_tier_willow">Willow</string> <!-- untranslated -->
-    <string name="crafting_tier_yew">Yew</string> <!-- untranslated -->
+    <string name="crafting_tier_yew">Тиса</string>
 
     <!-- Bone Altar -->
     <string name="bone_altar_title">Кістяний Алтар</string>
@@ -1877,10 +1878,10 @@
     <string name="armory_sort_requirement">Вимога</string>
     <string name="armory_progress_bar">obtained</string> <!-- untranslated -->
     <string name="armory_stat_mining">Mining Efficiency</string> <!-- untranslated -->
-    <string name="armory_stat_woodcutting">Woodcutting Efficiency</string> <!-- untranslated -->
-    <string name="armory_stat_fishing">Fishing Efficiency</string> <!-- untranslated -->
+    <string name="armory_stat_woodcutting">Ефективність Лісозаготівлі</string>
+    <string name="armory_stat_fishing">Ефективність Рибальства</string>
     <string name="armory_stat_farming">Farming Efficiency</string> <!-- untranslated -->
-    <string name="armory_stat_smithing">Smithing Efficiency</string> <!-- untranslated -->
+    <string name="armory_stat_smithing">Ефективність Ковальства</string>
     <string name="armory_stat_firemaking">Firemaking Efficiency</string> <!-- untranslated -->
     <string name="armory_stat_agility">Agility Efficiency</string> <!-- untranslated -->
     <string name="armory_stat_cooking">Cooking Efficiency</string> <!-- untranslated -->
@@ -1897,7 +1898,7 @@
     <string name="armory_stat_cape_yield">Yield Bonus</string> <!-- untranslated -->
     <string name="armory_stat_cape_boost">Boost Bonus</string> <!-- untranslated -->
     <string name="armory_source_carnival">Carnival Prize Shop</string> <!-- untranslated -->
-    <string name="armory_source_smithing">Smithing</string> <!-- untranslated -->
+    <string name="armory_source_smithing">Ковальство</string>
     <string name="armory_source_crafting">Crafting</string> <!-- untranslated -->
     <string name="armory_source_fletching">Fletching</string> <!-- untranslated -->
     <string name="armory_source_prestige_locked">%1$s (requires prestige perk %2$s, %3$s only)</string> <!-- untranslated -->
@@ -2202,8 +2203,8 @@
     <string name="seasonal_bounty_gloom_pumpkins_hint">Grow Pumpkins (Farming)</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_corn_name">Bring in the corn harvest</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_corn_hint">Grow Corn (Farming)</string> <!-- untranslated -->
-    <string name="seasonal_bounty_gloom_maples_name">Chop maple wood for the pyres</string> <!-- untranslated -->
-    <string name="seasonal_bounty_gloom_maples_hint">Chop Maple Logs (Woodcutting)</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_maples_name">Зрубати кленові дерева для багаття</string>
+    <string name="seasonal_bounty_gloom_maples_hint">Зрубати Кленові Колоди (Лісозаготівля)</string>
     <string name="seasonal_bounty_gloom_swordfish_name">Land swordfish for the feast</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_swordfish_hint">Fish Raw Swordfish (Fishing)</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_mithril_name">Mine mithril to ward the gates</string> <!-- untranslated -->
@@ -2215,7 +2216,7 @@
     <string name="seasonal_bounty_gloom_feast_name">Cook swordfish for the harvest feast</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_feast_hint">Cooking</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_bars_name">Smelt adamantite for grave-iron</string> <!-- untranslated -->
-    <string name="seasonal_bounty_gloom_bars_hint">Smithing</string> <!-- untranslated -->
+    <string name="seasonal_bounty_gloom_bars_hint">Ковальство</string>
     <string name="seasonal_bounty_gloom_runes_name">Craft Death Runes to quiet the spirits</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_runes_hint">Runecrafting</string> <!-- untranslated -->
     <string name="seasonal_bounty_gloom_wisps_name">Snuff out Will-o\'-Wisps</string> <!-- untranslated -->
@@ -2254,9 +2255,9 @@
     <string name="title_master_miner_name">Майстер Шахтар</string>
     <string name="title_master_miner_requirement">Завершити всі шахтарські квести</string>
     <string name="title_master_angler_name">Master Angler</string> <!-- untranslated -->
-    <string name="title_master_angler_requirement">Complete all Fishing quests</string> <!-- untranslated -->
+    <string name="title_master_angler_requirement">Виконати всі квести Рибальства</string>
     <string name="title_master_woodcutter_name">Master Woodcutter</string> <!-- untranslated -->
-    <string name="title_master_woodcutter_requirement">Complete all Woodcutting quests</string> <!-- untranslated -->
+    <string name="title_master_woodcutter_requirement">Виконати всі квести з Лісозаготівлі</string>
     <string name="title_master_fletcher_name">Master Fletcher</string> <!-- untranslated -->
     <string name="title_master_fletcher_requirement">Complete all Fletching quests</string> <!-- untranslated -->
     <string name="title_master_artisan_name">Master Artisan</string> <!-- untranslated -->
