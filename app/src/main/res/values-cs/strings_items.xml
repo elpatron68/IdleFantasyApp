@@ -315,7 +315,7 @@
     <!-- Slayer gear item names/descs (used by Shop + Slayer screen) -->
     <string name="item_slayer_helm_name">Popravčí přilba</string>
     <string name="item_slayer_helm_desc">Pevná přilba, kterou nosí zkušení popravčí.</string>
-    <string name="item_abyssal_whip_name">Propastný bič</string>
+    <string name="item_abyssal_whip_name">Bič Mořské propasti</string>
     <string name="item_abyssal_whip_desc">Bič vykovaný z energie propasti. Výborný k výcviku síly.</string>
     <string name="item_slayer_platebody_name">Popravčí plátová zbroj</string>
     <string name="item_slayer_platebody_desc">Těžká zbroj vyrytá popravčími runami.</string>
@@ -686,7 +686,7 @@
     <string name="item_super_defense_potion_name">Mocný lektvar obrany</string>
     <string name="item_super_ranging_potion_name">Mocný lektvar střelby</string>
     <string name="item_super_magic_potion_name">Mocný lektvar magie</string>
-    <string name="item_overload_potion_name">Lektvar přetížení</string>
+    <string name="item_overload_potion_name">Všemocný lektvar</string>
 
     <!-- Enhanced potions -->
     <string name="item_enhanced_attack_brew_name">Posílený odvar útoku</string>
@@ -775,7 +775,7 @@
 
 
     <!-- Additional item/boss/food names (English placeholders) -->
-    <string name="item_abyssal_rod_name">Propastný rybářský prut</string>
+    <string name="item_abyssal_rod_name">Rybářský prut Mořské propasti</string>
     <string name="item_adamantite_arrow_tip_name">Adamantitové hroty šípů</string>
     <string name="item_adamantite_boots_name">Adamantitové boty</string>
     <string name="item_adamantite_chainbody_name">Adamantitová kroužková zbroj</string>
@@ -1163,7 +1163,7 @@
     <string name="item_sanctum_axe_desc">Vykována ve stínu Poskvrněné svatyně. Její čepel snadno prosekne i kouzelné klády.</string>
     <string name="item_blessed_fishing_rod_desc">Zhotoven z naplaveného dřeva z Utopeného chrámu, požehnán prastarými mořskými obřady.</string>
     <string name="item_dwarven_fishing_rod_desc">Rybářský prut trpasličí práce. Ryby z vody téměř vytahuje sám.</string>
-    <string name="item_abyssal_rod_desc">Upleten z vláken dotčených prázdnotou, vyzvednutých z Propastných zřícenin. Ryby na něj skoro samy skáčou.</string>
+    <string name="item_abyssal_rod_desc">Upleten z vláken dotčených prázdnotou, vyzvednutých ze zřícenin v Mořské propasti. Ryby na něj skoro samy skáčou.</string>
     <string name="item_bronze_hoe_desc">Prostá motyka pro pěstování.</string>
     <string name="item_iron_hoe_desc">Železná motyka. Zvyšuje výnos sklizně.</string>
     <string name="item_steel_hoe_desc">Ocelová motyka. Znatelně zvyšuje výnos sklizně.</string>
@@ -1293,4 +1293,15 @@
     <string name="item_void_lotus_name">Lotos prázdnoty</string>
     <string name="item_void_lotus_desc">Tajemný lotos používaný v nejvzácnějších směsích. K nákupu vyžaduje 60. úroveň kupectví.</string>
     <string name="crop_magic_bean_name">Kouzelná fazole</string>
+
+    <!-- Seasonal rotation gear -->
+    <string name="item_sunstone_ring_desc">A ring set with a shard of solstice sunlight. Warm to the touch, even in winter.</string> <!-- untranslated -->
+    <string name="item_sunforged_sabre_desc">Forged in the heart of the Sunspire bonfire. Its edge never quite cools.</string> <!-- untranslated -->
+    <string name="item_sunweave_cape_desc">Woven from midsummer light at the Night Market. Only sold during the Sunspire Solstice.</string> <!-- untranslated -->
+    <string name="item_frostbound_ring_desc">A band of ice that never melts. Steadies the bow arm on the coldest nights.</string> <!-- untranslated -->
+    <string name="item_glacial_longbow_desc">Carved from glacier ice that never thaws. Awarded to the Frostfall\'s most tireless defenders.</string> <!-- untranslated -->
+    <string name="item_frostweave_cape_desc">Spun from snowdrift and starlight at the Night Market. Only sold during the Frostfall.</string> <!-- untranslated -->
+    <string name="item_seedheart_ring_desc">A living seed sealed in silver. It hums with the patience of growing things.</string> <!-- untranslated -->
+    <string name="item_bloomwood_staff_desc">A flowering branch from the Wildgrove that never wilts. Spells bloom from its tip.</string> <!-- untranslated -->
+    <string name="item_petalweave_cape_desc">Stitched from a thousand spring petals at the Night Market. Only sold during the Bloomtide.</string> <!-- untranslated -->
 </resources>
