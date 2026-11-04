@@ -770,36 +770,36 @@ fun HomeScreen(
                                 )
                             }
                         }
-                        Row(
-                            modifier              = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            TownGridCard(
-                                icon        = Icons.Filled.CloudUpload,
-                                name        = stringResource(R.string.home_sync_title),
-                                contentDesc = stringResource(R.string.home_sync_content_desc),
-                                onClick     = {
-                                    openSaveViewer(
-                                        viewerUrl            = viewerUrl,
-                                        context              = context,
-                                        onNavigateToSettings = onNavigateToSettings,
-                                    )
-                                },
-                                onLongClick = {
-                                    triggerSaveViewerUpload(
-                                        viewerUrl            = viewerUrl,
-                                        context              = context,
-                                        settingsViewModel    = settingsViewModel,
-                                        onUploadingChange    = { isViewerUploading = it },
-                                        onNavigateToSettings = onNavigateToSettings,
-                                    )
-                                },
-                                modifier    = Modifier.weight(1f),
-                                isLoading   = isViewerUploading,
-                                enabled     = !isViewerUploading,
-                            )
-                        }
                     }
+                }
+                Row(
+                    modifier              = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    TownGridCard(
+                        icon        = Icons.Filled.CloudUpload,
+                        name        = stringResource(R.string.home_sync_title),
+                        contentDesc = stringResource(R.string.home_sync_content_desc),
+                        onClick     = {
+                            openSaveViewer(
+                                viewerUrl            = viewerUrl,
+                                context              = context,
+                                onNavigateToSettings = onNavigateToSettings,
+                            )
+                        },
+                        onLongClick = {
+                            triggerSaveViewerUpload(
+                                viewerUrl            = viewerUrl,
+                                context              = context,
+                                settingsViewModel    = settingsViewModel,
+                                onUploadingChange    = { isViewerUploading = it },
+                                onNavigateToSettings = onNavigateToSettings,
+                            )
+                        },
+                        modifier    = Modifier.weight(1f),
+                        isLoading   = isViewerUploading,
+                        enabled     = !isViewerUploading,
+                    )
                 }
             }
             if (state.collapsibleTownGrid) {
