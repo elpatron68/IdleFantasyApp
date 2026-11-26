@@ -64,6 +64,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -88,6 +89,7 @@ import com.fantasyidler.ui.theme.ScaledSheetContent
 import com.fantasyidler.ui.viewmodel.HomeViewModel
 import com.fantasyidler.ui.viewmodel.SettingsViewModel
 import com.fantasyidler.ui.viewmodel.SessionSummary
+import com.fantasyidler.ui.viewmodel.StoryViewModel
 import com.fantasyidler.ui.viewmodel.combatLevelFrom
 import com.fantasyidler.data.model.ElderSkills
 import com.fantasyidler.ui.viewmodel.totalLevelFrom
@@ -133,6 +135,15 @@ fun HomeScreen(
     val context           = LocalContext.current
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
+
+    // Story notes wait while Home has a dialog of its own up, so a dungeon's completion
+    // note follows the session summary instead of stacking on top of it.
+    val storyVm: StoryViewModel = hiltViewModel()
+    val homeDialogOpen = state.showIsleWelcome || state.petFoundName != null ||
+        state.sessionSummary != null || state.workerSummary != null ||
+        (!state.isLoading && (state.showWhatsNew || !state.characterSetupDone))
+    LaunchedEffect(homeDialogOpen) { storyVm.setHomeDialogOpen(homeDialogOpen) }
+    DisposableEffect(Unit) { onDispose { storyVm.setHomeDialogOpen(false) } }
 
     // First-arrival splash on Elder Isle: brief scene-set + a nudge toward the right
     // first tab. Persists a flag so subsequent landings don't nag.
@@ -693,6 +704,7 @@ fun HomeScreen(
                         totalLevel                 = if (state.onElderIsle) state.skillLevels.filterKeys { it in ElderSkills.ALL }.values.sum()
                                                      else totalLevelFrom(state.skillLevels),
                         coins                      = state.coins,
+                        compactNumbers             = state.compactNumbers,
                         activeBlessingKey          = state.activeBlessingKey,
                         allBlessings               = state.allBlessings,
                         prayerCapeMult             = state.prayerCapeMult,

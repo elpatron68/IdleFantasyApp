@@ -122,6 +122,8 @@
     <string name="boss_king_black_dragon_desc">Legendární tříhlavý drak, jehož se bojí celá říše.</string>
     <string name="boss_demon_lord_name">Pán démonů</string>
     <string name="boss_demon_lord_desc">Prastarý démon z propasti, mistr temné magie.</string>
+    <string name="boss_kurzul_name">Kur’zul</string> <!-- untranslated -->
+    <string name="boss_kurzul_desc">The Orc necromancer who led the first Triptych expedition, waiting at the altar of Kargral’s Temple with a blade of coldflame.</string> <!-- untranslated -->
     <string name="boss_kraken_name">Kraken</string>
     <string name="boss_kraken_desc">Postrach hlubokých moří, obří mořská příšera.</string>
     <string name="boss_balrog_name">Žár temnoty</string>

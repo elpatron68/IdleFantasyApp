@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import com.fantasyidler.ui.theme.LocalTabSwipeEnabled
 import android.R as AndroidR
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -133,10 +134,13 @@ fun CombatScreen(
     }
     LaunchedEffect(initialDungeonKey, initialBossKey) {
         initialDungeonKey?.let { key -> viewModel.dungeonList(state.onElderIsle).firstOrNull { it.name == key }?.let(viewModel::selectDungeon) }
-        initialBossKey?.let { key -> viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet).firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
+        initialBossKey?.let { key -> viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet, state.storyBossUnlocked).firstOrNull { it.id == key }?.let(viewModel::selectBoss) }
     }
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
+    // Gear-tab equips run through InventoryViewModel, so its notices (level requirement,
+    // two-handed vs shield) need surfacing here too.
+    AppBannerEffect(invState.snackbarMessage, inventoryVm::snackbarConsumed)
 
     state.petFoundName?.let { petName ->
         AlertDialog(
@@ -221,14 +225,14 @@ fun CombatScreen(
                         text     = { Text(skillsTabLabel) },
                     )
                 }
-                HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+                HorizontalPager(state = pagerState, modifier = Modifier.weight(1f), userScrollEnabled = LocalTabSwipeEnabled.current) { page ->
                     when (page) {
                         0 -> CombatSessionBanner(
                             session        = combatSession,
                             dungeons       = visibleDungeons,
                             // Raid bosses included: the banner resolves the boss's name,
                             // emoji, and HP panel from this list.
-                            bosses         = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet) + (if (state.onElderIsle) emptyList() else viewModel.raidBossList()),
+                            bosses         = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet, state.storyBossUnlocked) + (if (state.onElderIsle) emptyList() else viewModel.raidBossList()),
                             hiredMercs     = state.hiredMercs,
                             enemies        = viewModel.enemyMap,
                             skillLevels    = state.skillLevels,
@@ -248,7 +252,7 @@ fun CombatScreen(
                         )
                         1 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet),
+                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet, state.storyBossUnlocked),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,
@@ -345,11 +349,11 @@ fun CombatScreen(
                         text     = { Text(skillsTabLabel) },
                     )
                 }
-                HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+                HorizontalPager(state = pagerState, modifier = Modifier.weight(1f), userScrollEnabled = LocalTabSwipeEnabled.current) { page ->
                     when (page) {
                         0 -> CombatSelectionList(
                             dungeons            = visibleDungeons,
-                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet),
+                            bosses              = viewModel.bossList(state.monumentComplete, state.dockBuilt, state.totalLevel, state.onElderIsle, state.hasFullElderSet, state.storyBossUnlocked),
                             skillLevels         = state.skillLevels,
                             survivalRatings     = state.dungeonSurvivalRatings,
                             dungeonRuns         = state.dungeonRuns,

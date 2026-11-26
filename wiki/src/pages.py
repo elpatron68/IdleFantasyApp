@@ -9,7 +9,6 @@ from __future__ import annotations
 import logging
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from logging import log
 from pathlib import Path
 from typing import Callable
@@ -127,6 +126,7 @@ def add_static_pages():
             ("expeditions", PageInfo("Expeditions", "Expeditions.md", gen_expeditions, skill_icon_path("expedition"))),
             ("pets", PageInfo("Pets", "Pets.md", gen_pets)),
             ("quests", PageInfo("Quests", "Quests.md", gen_quests)),
+            ("main_story", PageInfo("Main Story", "MainStory.md", gen_main_story)),
             ("titles", PageInfo("Titles", "Titles.md", gen_titles)),
             ("seasonal_events", PageInfo("Seasonal Events", "SeasonalEvents.md", gen_seasonal_events)),
         ]],
@@ -241,7 +241,6 @@ def add_player_guides():
     PAGE_DIRECTORY.update({f"guide_{k}": PageInfo(t, f"guide_{k}.md", f) for k, (t, f) in guide_to_generator.items()})
     # Add guides to page hierarchy
     PAGE_HIERARCHY.merge([["Guides", True, [f"guide_{x}" for x in guide_to_generator.keys()]]])
-
 
 
 def add_boss_pages():
@@ -1601,7 +1600,7 @@ def gen_bosses() -> str:
                 boss_icon(boss_id, boss.get("emoji", ""), 48),
                 link(boss_id),
                 boss.get("combat_level_required", "—"),
-                boss_desc(boss_id),
+                boss_desc(boss_id) + (f" Unlocked by the {link('main_story')}." if boss.get("requires_story") else ""),
             ]
             for boss_id, boss in sorted(bosses.items(), key=lambda x: x[1].get("combat_level_required", 0))
             if bool(boss.get("raid", False)) == raid
@@ -1647,12 +1646,18 @@ def gen_dungeon(dungeon: dict) -> str:
     ]
     # Create loot rows
     loot_rows = _dungeon_loot_rows(dungeon, enemies)
+    # Rare drops roll on clearing the dungeon itself, not from its enemies (issue #2149)
+    rare_rows = [
+        [item_link(drop["item"]), fmt_pct(drop.get("chance", 0))]
+        for drop in dungeon.get("rare_drops", [])
+    ]
     return get_template("combat/dungeon").format(
         name=dungeon_name(dungeon["name"]),
         recommended_level=dungeon.get("recommended_level", "—"),
         description=dungeon_desc(dungeon["name"]),
         spawn_table=table(["Enemy", "Weight", "Spawn Chance"], spawn_rows) if spawn_rows else "",
         loot_table=table(["Loot", "Dropped By"], loot_rows) if loot_rows else "_No loot._",
+        rare_drops_table=table(["Item", "Chance"], rare_rows) if rare_rows else "_No rare drops._",
         combat_footer=gen_combat_footer(),
     )
 
@@ -2076,19 +2081,14 @@ def gen_carnival() -> str:
     )
 
 
-def get_event_dates(season: str) -> tuple[str, str]:
-    match season:
-        case "winter":
-            return "December 1", "February 28"
-        case "spring":
-            return "March 1", "May 31"
-        case "summer":
-            return "June 1", "August 31"
-        case "autumn":
-            return "September 1", "November 30"
-        case _:
-            LOGGER.warn_by_id("season", f"Season {season} does not exist", logging.WARNING)
-            return "", ""
+# Events are yearly templates keyed to a meteorological season (UTC); SeasonalCalendar.kt
+# stamps out each year's run. Values: (start month day, last day of the season).
+_SEASON_WINDOWS = {
+    "spring": ("March 1", "May 31"),
+    "summer": ("June 1", "August 31"),
+    "autumn": ("September 1", "November 30"),
+    "winter": ("December 1", "the end of February"),
+}
 
 
 def gen_seasonal_events() -> str:
@@ -2100,11 +2100,14 @@ def gen_seasonal_events() -> str:
             [f"{tier['tokens']:,}", seasonal_reward_desc(event_id, tier["tokens"])]
             for tier in event["reward_tiers"]
         ]
-        start_month, end_month = get_event_dates(event["season"])
+        start_date, end_date = _SEASON_WINDOWS[event["season"]]
         sections.append(get_template("miscellaneous/seasonal_event_section").format(
             banner=html_image(icon_path(event["banner_icon"]), "", "text"),
             display_name=seasonal_event_name(event_id),
-            seasonal_period=f"**{start_month} – {end_month}**" if start_month else "",
+            season=event["season"],
+            start_date=start_date,
+            end_date=end_date,
+            first_year=event.get("first_year", 2026),
             reward_table=table(["Tokens Needed", "Reward"], reward_rows),
         ))
 
@@ -2140,6 +2143,64 @@ def gen_quests() -> str:
         sections.append(f"## {skill_name(skill) if skill != "combat" else "Combat"}\n\n{quest_table}")
 
     return get_template("miscellaneous/quests").format(quest_sections="\n\n".join(sections))
+
+
+# Mirrored from MainStory.CHAPTERS in the app: (dungeon, coins, extra reward, required keepsakes)
+_MAIN_STORY_DUNGEON_CHAPTERS = [
+    ("imp_cavern", 1_000, None, []),
+    ("goblin_cave", 2_000, None, []),
+    ("spider_den", 4_000, None, []),
+    ("bandit_camp", 8_000, "keepsake_obsidian_key", []),
+    ("undead_crypt", 16_000, None, []),
+    ("fortress_ruins", 32_000, None, []),
+    ("orc_stronghold", 50_000, None, []),
+    ("volcanic_depths", 75_000, "keepsake_mountain_heart", []),
+    ("dragon_lair", 100_000, "keepsake_dragon_molt", []),
+    ("infernal_stronghold", 150_000, "keepsake_eye_of_chaos", ["keepsake_mountain_heart", "keepsake_dragon_molt"]),
+    ("ancient_temple", 200_000, None, ["keepsake_obsidian_key", "keepsake_eye_of_chaos"]),
+]
+
+
+def gen_main_story() -> str:
+    rows = [
+        [STRINGS.get_string("story_chapter_prologue"), "None, it plays as soon as you begin", "None"],
+        [
+            f"1: {STRINGS.get_string('story_chapter_landfall')}",
+            f"Complete a mining, fishing or woodcutting session, cook shrimp, smelt a bronze bar, and clear the {link('farm')} without dying",
+            f"1,000 coins and the {title_name('duster')} title",
+        ],
+    ]
+    for number, (dungeon_id, coins, grants, needs) in enumerate(_MAIN_STORY_DUNGEON_CHAPTERS, start=2):
+        objective = f"Clear {link(dungeon_id)} without dying"
+        if needs:
+            objective += " while holding the " + " and ".join(item_name(k) for k in needs)
+        reward = f"{coins:,} coins"
+        if grants:
+            reward += f" and the {item_name(grants)}"
+        if dungeon_id == "ancient_temple":
+            reward += f", and unlocks {link('kurzul')}"
+        rows.append([f"{number}: {dungeon_name(dungeon_id)}", objective, reward])
+    rows.append([
+        f"{len(_MAIN_STORY_DUNGEON_CHAPTERS) + 2}: {STRINGS.get_string('story_chapter_kurzul')}",
+        f"Defeat {link('kurzul')}",
+        f"The {title_name('bane_of_kurzul')} title",
+    ])
+
+    keepsake_rows = [
+        [item_name("keepsake_obsidian_key"), f"Finishing the {link('bandit_camp')} chapter", f"Needed, with the Eye of Chaos, for the {link('ancient_temple')} chapter"],
+        [item_name("keepsake_mountain_heart"), f"Finishing the {link('volcanic_depths')} chapter", f"Used up in the {link('infernal_stronghold')} chapter"],
+        [item_name("keepsake_dragon_molt"), f"Finishing the {link('dragon_lair')} chapter", f"Used up in the {link('infernal_stronghold')} chapter"],
+        [item_name("keepsake_eye_of_chaos"), f"Finishing the {link('infernal_stronghold')} chapter", f"Needed, with the Obsidian Key, for the {link('ancient_temple')} chapter"],
+    ]
+    return get_template("miscellaneous/main_story").format(
+        chapter_table=table(["Chapter", "Objective", "Reward"], rows),
+        keepsake_table=table(["Keepsake", "How you get it", "Used for"], keepsake_rows),
+        kurzul_link=link("kurzul"),
+        titles_link=link("titles"),
+        quests_link=link("quests"),
+        duster=title_name("duster"),
+        bane=title_name("bane_of_kurzul"),
+    )
 
 
 def gen_titles() -> str:
@@ -2180,6 +2241,8 @@ def gen_titles() -> str:
     other_rows = [
         ["Godslayer", "Defeat every boss at least once"],
         ["Patron of the Realm", "Complete the Grand Monument"],
+        [title_name("duster"), f"Finish Landfall in the {link('main_story')}"],
+        [title_name("bane_of_kurzul"), f"Defeat {link('kurzul')} to finish the {link('main_story')}"],
     ]
     other_table = table(["Title", "Requirement"], other_rows)
 
@@ -2250,7 +2313,10 @@ def gen_boss(boss: dict) -> str:
         combat_level=boss.get("combat_level_required", "—"),
         hp=f"{hp:,}" if isinstance(hp, int) else hp,
         duration=boss.get("duration_minutes", "—"),
-        description=boss_desc(boss["id"]),
+        description=boss_desc(boss["id"]) + (
+            f"\n\n**Story boss:** only appears once your {link('main_story')} reaches its final chapter, and stays available after you finish it."
+            if boss.get("requires_story") else ""
+        ),
         boss_attack=combat_stats.get("attack_level", 0) + combat_stats.get("attack_bonus", 0),
         defensive_table=table(["Style", "Defence"], defensive_rows),
         boss_link=link("bosses"),

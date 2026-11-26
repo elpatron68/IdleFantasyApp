@@ -18,6 +18,7 @@ import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.repository.QuestRepository
 import com.fantasyidler.repository.SaveSlotRepository
 import com.fantasyidler.repository.SessionRepository
+import com.fantasyidler.repository.StoryRepository
 import com.fantasyidler.repository.ThemeRepository
 import com.fantasyidler.repository.WeeklyQuestRepository
 import com.fantasyidler.util.SaveViewerClient
@@ -56,6 +57,7 @@ class SettingsViewModel @Inject constructor(
     private val dailyQuestRepo: DailyQuestRepository,
     private val weeklyQuestRepo: WeeklyQuestRepository,
     private val guildRepo: GuildRepository,
+    private val storyRepo: StoryRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -154,6 +156,30 @@ class SettingsViewModel @Inject constructor(
         .map { player ->
             if (player == null) return@map true
             try { json.decodeFromString<PlayerFlags>(player.flags).showQuestDots }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
+    val showStoryPopups: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).storyPopups }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
+    val swipeBetweenTabs: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).swipeBetweenTabs }
+            catch (_: Exception) { true }
+        }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
+
+    val showStoryTab: StateFlow<Boolean> = playerRepo.playerFlow
+        .map { player ->
+            if (player == null) return@map true
+            try { json.decodeFromString<PlayerFlags>(player.flags).storyTabVisible }
             catch (_: Exception) { true }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
@@ -265,6 +291,18 @@ class SettingsViewModel @Inject constructor(
             val flags = playerRepo.getFlags()
             playerRepo.updateFlags(flags.copy(showQuestDots = enabled))
         }
+    }
+
+    fun setSwipeBetweenTabs(enabled: Boolean) {
+        viewModelScope.launch { playerRepo.updateFlagsAtomically { it.copy(swipeBetweenTabs = enabled) } }
+    }
+
+    fun setShowStoryTab(enabled: Boolean) {
+        viewModelScope.launch { playerRepo.updateFlagsAtomically { it.copy(storyTabVisible = enabled) } }
+    }
+
+    fun setShowStoryPopups(enabled: Boolean) {
+        viewModelScope.launch { storyRepo.setPopups(enabled) }
     }
 
     fun setShowMonumentTouchIndicator(enabled: Boolean) {

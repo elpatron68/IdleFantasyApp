@@ -328,6 +328,28 @@ fun SettingsScreen(
                     )
                 }
             )
+            val showStoryPopups by viewModel.showStoryPopups.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_story_popups),
+                subtitle = stringResource(R.string.settings_story_popups_desc),
+                trailing = {
+                    Switch(
+                        checked         = showStoryPopups,
+                        onCheckedChange = { viewModel.setShowStoryPopups(it) },
+                    )
+                }
+            )
+            val showStoryTab by viewModel.showStoryTab.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_story_tab),
+                subtitle = stringResource(R.string.settings_story_tab_desc),
+                trailing = {
+                    Switch(
+                        checked         = showStoryTab,
+                        onCheckedChange = { viewModel.setShowStoryTab(it) },
+                    )
+                }
+            )
             val showMonumentTouchIndicator by viewModel.showMonumentTouchIndicator.collectAsState()
             SettingsRow(
                 title    = stringResource(R.string.settings_monument_touch_indicator),
@@ -395,6 +417,17 @@ fun SettingsScreen(
                     },
                 )
             }
+            val swipeBetweenTabs by viewModel.swipeBetweenTabs.collectAsState()
+            SettingsRow(
+                title    = stringResource(R.string.settings_swipe_tabs),
+                subtitle = stringResource(R.string.settings_swipe_tabs_desc),
+                trailing = {
+                    Switch(
+                        checked         = swipeBetweenTabs,
+                        onCheckedChange = { viewModel.setSwipeBetweenTabs(it) },
+                    )
+                }
+            )
             val compactNumbers by viewModel.compactNumbers.collectAsState()
             SettingsRow(
                 title    = stringResource(R.string.settings_compact_numbers),

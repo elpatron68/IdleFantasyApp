@@ -1,5 +1,6 @@
 package com.fantasyidler.ui.screen
 
+import com.fantasyidler.ui.theme.LocalTabSwipeEnabled
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.clickable
@@ -60,13 +61,14 @@ import com.fantasyidler.data.json.QuestData
 import com.fantasyidler.repository.DailyQuestWithProgress
 import com.fantasyidler.ui.viewmodel.QuestWithProgress
 import com.fantasyidler.ui.viewmodel.QuestsViewModel
+import com.fantasyidler.ui.viewmodel.StoryViewModel
 import com.fantasyidler.repository.WeeklyQuestWithProgress
 import com.fantasyidler.util.GameStrings
 import com.fantasyidler.util.formatCoins
 import com.fantasyidler.util.formatXp
 import com.fantasyidler.util.toClockTime
 
-private val TAB_GROUPS = listOf("Daily", "Weekly", "Gathering", "Crafting", "Combat", "Special")
+private val TAB_GROUPS = listOf("Daily", "Weekly", "Story", "Gathering", "Crafting", "Combat", "Special")
 
 @Composable
 private fun tabGroupLabel(group: String): String = when (group) {
@@ -76,11 +78,12 @@ private fun tabGroupLabel(group: String): String = when (group) {
     "Special"   -> stringResource(R.string.label_special)
     "Daily"     -> stringResource(R.string.label_daily)
     "Weekly"    -> stringResource(R.string.label_weekly)
+    "Story"     -> stringResource(R.string.story_tab_label)
     else        -> group
 }
 
 /**
- * Issue #2109: tabs visible when "Hide Completed" is on. Daily/Weekly always stay
+ * Issue #2109: tabs visible when "Hide Completed" is on. Daily/Weekly/Story always stay
  * (they render their own empty state); other groups only while they hold quests.
  * Pure so the JVM suite can pin it without the Compose pager runtime.
  */
@@ -90,7 +93,7 @@ internal fun visibleQuestTabGroups(
     hideCompleted: Boolean,
 ): List<String> =
     if (!hideCompleted) allGroups
-    else allGroups.filter { it == "Daily" || it == "Weekly" || !questsByGroup[it].isNullOrEmpty() }
+    else allGroups.filter { it == "Daily" || it == "Weekly" || it == "Story" || !questsByGroup[it].isNullOrEmpty() }
 
 /**
  * Issue #2109: coerce a possibly-stale pager page into the current tab list.
@@ -105,6 +108,7 @@ internal fun coerceQuestTabPage(currentPage: Int, tabCount: Int): Int =
 fun QuestsScreen(
     viewModel: QuestsViewModel = hiltViewModel(),
     isleLocationVm: com.fantasyidler.ui.viewmodel.ElderIsleLocationViewModel = hiltViewModel(),
+    storyVm: StoryViewModel = hiltViewModel(),
     onNavigateToSkill: (String) -> Unit = {},
 ) {
     val isleState by isleLocationVm.state.collectAsState()
@@ -114,6 +118,7 @@ fun QuestsScreen(
         return
     }
     val state by viewModel.uiState.collectAsState()
+    val storyState by storyVm.state.collectAsState()
 
     AppBannerEffect(state.snackbarMessage, viewModel::snackbarConsumed)
 
@@ -156,6 +161,7 @@ fun QuestsScreen(
         }
 
         val tabGroups = visibleQuestTabGroups(TAB_GROUPS, state.questsByGroup, state.hideCompleted)
+            .filter { it != "Story" || storyState.tabVisible }
         var savedPage by rememberSaveable { mutableIntStateOf(0) }
         val pagerState = rememberPagerState(
             initialPage = savedPage.coerceAtMost(tabGroups.lastIndex),
@@ -185,6 +191,8 @@ fun QuestsScreen(
                         state.dailyQuests.count { it.progress >= it.template.amount && !it.claimed }
                     } else if (group == "Weekly") {
                         state.weeklyQuests.count { it.progress >= it.template.amount && !it.claimed }
+                    } else if (group == "Story") {
+                        storyState.unreadCount
                     } else {
                         (state.questsByGroup[group] ?: emptyList()).count { it.isClaimable }
                     }
@@ -203,7 +211,7 @@ fun QuestsScreen(
                 }
             }
 
-            HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+            HorizontalPager(state = pagerState, modifier = Modifier.weight(1f), userScrollEnabled = LocalTabSwipeEnabled.current) { page ->
                 // Issue #2109: transient frame where the pager still points past the
                 // shrunken list (the LaunchedEffect above corrects it right after).
                 // Skip the frame instead of throwing IndexOutOfBoundsException.
@@ -229,6 +237,8 @@ fun QuestsScreen(
                         onClaimBonus  = { viewModel.claimWeeklyBonus() },
                         onNavigateToSkill = onNavigateToSkill,
                     )
+                } else if (currentGroup == "Story") {
+                    StoryTabContent(storyVm)
                 } else {
                     val quests = state.questsByGroup[currentGroup] ?: emptyList()
                     if (quests.isEmpty()) {

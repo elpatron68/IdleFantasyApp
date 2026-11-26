@@ -34,6 +34,7 @@ import com.fantasyidler.repository.SeasonalEventRepository
 import com.fantasyidler.repository.SessionRepository
 import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.repository.SaveSlotRepository
+import com.fantasyidler.repository.StoryRepository
 import com.fantasyidler.repository.TitleRepository
 import com.fantasyidler.repository.TownRepository
 import com.fantasyidler.data.model.EquipSlot
@@ -270,6 +271,7 @@ data class HomeUiState(
     val ironman: Boolean = false,
     val recentSessions: List<RecentSession> = emptyList(),
     val showRecentActivityLog: Boolean = true,
+    val compactNumbers: Boolean = false,
     val showJournalButton: Boolean = true,
     /** Show the top-bar character switch button; hidden with a single character to not confuse new players. */
     val showCharacterSwitch: Boolean = false,
@@ -335,6 +337,7 @@ class HomeViewModel @Inject constructor(
     private val seasonalEventRepo: SeasonalEventRepository,
     private val titleRepo: TitleRepository,
     private val saveSlotRepo: SaveSlotRepository,
+    private val storyRepo: StoryRepository,
     private val json: Json,
 ) : ViewModel() {
 
@@ -347,7 +350,11 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { playerRepo.awardMissingCapes() }
         viewModelScope.launch { playerRepo.migratePetsFromInventory(gameData.pets) }
         viewModelScope.launch { playerRepo.ensureCharacterCreatedAt() }
-        viewModelScope.launch { guildRepo.migrateLegacyGuildReputation() }
+        viewModelScope.launch {
+            guildRepo.migrateLegacyGuildReputation()
+            // After the migration, so legacy guild rank counts toward the cape backfill.
+            guildRepo.backfillMissingGuildCapes()
+        }
         viewModelScope.launch { playerRepo.migrateLegacyPrestigePointsIfNeeded() }
         // A newly started seasonal event re-shows the banner once, so players who hid
         // it still learn the event exists (issue #1650 follow-up).
@@ -568,6 +575,7 @@ class HomeViewModel @Inject constructor(
                 ironman                    = flags.ironman,
                 recentSessions             = flags.recentSessions,
                 showRecentActivityLog      = flags.showRecentActivityLog,
+                compactNumbers             = flags.compactNumbers,
                 showJournalButton          = flags.showJournalButton,
                 showCharacterSwitch        = saveSlotRepo.hasMultipleCharacters(),
                 showSeasonalEvents         = flags.showSeasonalEvents,
@@ -1086,6 +1094,7 @@ class HomeViewModel @Inject constructor(
             acc.dailyKills[session.activityKey] = (acc.dailyKills[session.activityKey] ?: 0) + 1
             acc.combinedKills[session.activityKey] = (acc.combinedKills[session.activityKey] ?: 0) + 1
             playerRepo.recordWeeklyProgress("boss", session.activityKey, 1)
+            storyRepo.onBossDefeated(session.activityKey)
             guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), frames.lastOrNull()?.combatStyle?.ifEmpty { "melee" } ?: "melee")
             seasonalEventRepo.recordCombat(mapOf(session.activityKey to 1))
             seasonalEventRepo.recordBossDefeat(session.activityKey)
@@ -1224,6 +1233,7 @@ class HomeViewModel @Inject constructor(
                 foodConsumedTotal  = food.values.sum(),
             )
             playerRepo.incrementDungeonRun(session.activityKey)
+            storyRepo.onDungeonCleared(session.activityKey)
             if (kills.isNotEmpty()) {
                 for ((e, k) in kills) acc.dailyKills[e] = (acc.dailyKills[e] ?: 0) + k
                 guildRepo.recordGuildCombat(kills, combatStyle)
@@ -1333,6 +1343,7 @@ class HomeViewModel @Inject constructor(
         val effectiveXp = if (capeMult > 1f && rawRegular.isEmpty()) (totalXp.toDouble() * capeMult).toLong() else totalXp
         val regular     = if (itemMult > 1.0 && rawRegular.isNotEmpty()) rawRegular.mapValues { (_, qty) -> (qty * itemMult).roundToInt().coerceAtLeast(qty) } else rawRegular
         acc.awardedCapes += playerRepo.applySessionResults(session.skillName, effectiveXp, regular, sessionId = session.sessionId)
+        storyRepo.onSessionCollected(session.skillName, session.activityKey, regular)
         when (session.skillName) {
             in COLLECT_GATHERING_SKILLS -> {
                 questRepo.recordGathering(session.skillName, regular)

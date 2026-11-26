@@ -1,5 +1,5 @@
 ## {banner} {display_name}
 
-{seasonal_period}
+**Every {season}: {start_date} – {end_date}** (first run {first_year})
 
 {reward_table}
